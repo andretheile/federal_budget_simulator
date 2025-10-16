@@ -1,0 +1,12 @@
+name: Corporate Tax
+description: Calculates corporate tax revenue.
+model_type: income_stream
+parameters:
+  - name: tax_rate
+    type: float
+    default: 0.15
+  - name: total_corporate_profit
+    type: float
+    default: 100000000000 # 100 billion
+calculation_logic: |
+  return tax_rate * total_corporate_profit

@@ -1,0 +1,9 @@
+name: Long-term Care Insurance
+description: Long-term care insurance benefits
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 15000000000 # 15 billion
+calculation_logic: |
+  return total_spending

@@ -1,0 +1,9 @@
+name: Defense
+description: Defense spending
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 58300000000 # 58.3 billion
+calculation_logic: |
+  return total_spending

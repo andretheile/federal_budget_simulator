@@ -1,0 +1,9 @@
+name: Health Insurance
+description: Government contribution to health insurance
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 40000000000 # 40 billion
+calculation_logic: |
+  return total_spending

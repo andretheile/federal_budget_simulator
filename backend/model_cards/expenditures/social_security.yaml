@@ -1,0 +1,14 @@
+name: Social Security
+description: Social Security, Family, Youth, and Labor Market
+model_type: expenditure
+sub_models:
+  - backend/model_cards/expenditures/social_security/pensions.yaml
+  - backend/model_cards/expenditures/social_security/health_insurance.yaml
+  - backend/model_cards/expenditures/social_security/unemployment_insurance.yaml
+  - backend/model_cards/expenditures/social_security/long_term_care_insurance.yaml
+  - backend/model_cards/expenditures/social_security/family_benefits.yaml
+calculation_logic: |
+  total = 0
+  for model in sub_models:
+    total += model.calculate()
+  return total

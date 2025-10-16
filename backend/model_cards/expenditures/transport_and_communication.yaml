@@ -1,0 +1,9 @@
+name: Transport and Communication
+description: Transport and Communication spending
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 35600000000 # 35.6 billion
+calculation_logic: |
+  return total_spending

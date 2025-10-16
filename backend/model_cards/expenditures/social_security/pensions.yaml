@@ -1,0 +1,9 @@
+name: Pensions
+description: Pension payments
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 120000000000 # 120 billion
+calculation_logic: |
+  return total_spending

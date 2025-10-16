@@ -1,0 +1,9 @@
+name: Family Benefits
+description: Family benefits, including child benefits (Kindergeld)
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 13300000000 # 13.3 billion
+calculation_logic: |
+  return total_spending

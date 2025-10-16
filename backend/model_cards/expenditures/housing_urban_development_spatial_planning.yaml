@@ -1,0 +1,9 @@
+name: Housing, Urban Development, and Spatial Planning
+description: Housing, Urban Development, and Spatial Planning spending
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 4000000000 # 4.0 billion
+calculation_logic: |
+  return total_spending

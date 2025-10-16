@@ -1,0 +1,9 @@
+name: Research, Education, Science, and Culture
+description: Research, Education, Science, and Culture spending
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 30700000000 # 30.7 billion
+calculation_logic: |
+  return total_spending

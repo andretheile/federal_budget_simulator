@@ -1,0 +1,33 @@
+name: Income Tax
+description: Calculates income tax revenue based on a progressive tax system.
+model_type: income_stream
+parameters:
+  - name: tax_brackets
+    type: list
+    default:
+      - {rate: 0.1, min_income: 0}
+      - {rate: 0.2, min_income: 20000}
+      - {rate: 0.3, min_income: 50000}
+      - {rate: 0.4, min_income: 100000}
+data_sources:
+  salary_distribution: backend/data/salary_distribution_germany.json
+calculation_logic: |
+  total_revenue = 0
+  # Create a representative sample of salaries from the distribution
+  salaries = []
+  for bucket in salary_distribution['distribution']:
+      num_people = int(bucket['percentage'] * 10000) # Create a sample of 10,000 people
+      for _ in range(num_people):
+          salaries.append(bucket['min_salary'])
+
+  for salary in salaries:
+      taxable_income = salary
+      tax_due = 0
+      # Note: tax_brackets needs to be sorted by min_income descending for this logic to work
+      for bracket in sorted(tax_brackets, key=lambda x: x['min_income'], reverse=True):
+          if taxable_income > bracket['min_income']:
+              income_in_bracket = taxable_income - bracket['min_income']
+              tax_due += income_in_bracket * bracket['rate']
+              taxable_income = bracket['min_income']
+      total_revenue += tax_due
+  return total_revenue

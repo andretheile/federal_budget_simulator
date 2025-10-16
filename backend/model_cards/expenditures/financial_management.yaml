@@ -1,0 +1,9 @@
+name: Financial Management
+description: Financial Management spending
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 53400000000 # 53.4 billion
+calculation_logic: |
+  return total_spending

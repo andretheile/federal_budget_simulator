@@ -1,0 +1,9 @@
+name: General Services
+description: General Services spending (excluding Defense)
+model_type: expenditure
+parameters:
+  - name: total_spending
+    type: float
+    default: 55700000000 # 55.7 billion
+calculation_logic: |
+  return total_spending

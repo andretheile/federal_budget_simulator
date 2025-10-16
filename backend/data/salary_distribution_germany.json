@@ -1,0 +1,10 @@
+{
+  "distribution": [
+    { "min_salary": 0, "max_salary": 5000, "percentage": 0.12 },
+    { "min_salary": 5000, "max_salary": 20000, "percentage": 0.20 },
+    { "min_salary": 20000, "max_salary": 40000, "percentage": 0.25 },
+    { "min_salary": 40000, "max_salary": 70000, "percentage": 0.28 },
+    { "min_salary": 70000, "max_salary": 250000, "percentage": 0.14 },
+    { "min_salary": 250000, "max_salary": 1000000, "percentage": 0.01 }
+  ]
+}
