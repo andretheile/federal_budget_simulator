@@ -12,6 +12,7 @@ import { formatIssue, formatPath, validatePack, validatePackFiles, type Validati
  *   policies            [0] halve_mp_pay  [1] cut_admin  [2] no_basic_income_non_citizens  [3] wealth_tax
  *                       [4] raise_top_tax_rate  [5] defense_target  [6] family_bonus
  *                       [7] cut_pensions (scale on exp.social.pensions with a shift to exp.social.basic_income)
+ *                       [8] redraw_income_tax (curve param "tariff"; schedule with a curve reform and a points baseline)
  */
 type Loose = any;
 interface Files {
@@ -564,6 +565,223 @@ describe("shift", () => {
     expect(validatePack(testlandFiles()).warnings).toEqual([]);
     const warnings = warningsAfter((f) => delete shift(f).ratio.scale);
     expect(warnings).toEqual([{ file: "policies.json", path: `${AT}.ratio`, message: expect.stringMatching(/param "fallback" is in percent but is used without "scale"/) }]);
+  });
+});
+
+describe("curve params", () => {
+  /** The fixture's curve param: x and y from 0 to 60, 1 to 6 points, default (10, 10), (30, 40). */
+  const tariff = (f: Files): Loose => f.policies.policies[8].params[0];
+  const AT = "$.policies[8].params[0]";
+
+  it("the axes need a range: x.min >= 0, min < max and step > 0", () => {
+    expectOnly((f) => (tariff(f).x.min = -5), "policies.json", `${AT}.x.min`, /-5 is below 0/);
+    // (The points of the curve then fall outside the empty range as well, hence "among others".)
+    expectError((f) => (tariff(f).x.min = 60), "policies.json", `${AT}.x`, /min \(60\) must be below max \(60\)/);
+    expectError((f) => (tariff(f).y.min = 60), "policies.json", `${AT}.y`, /min \(60\) must be below max \(60\)/);
+    expectError((f) => (tariff(f).y.max = -1), "policies.json", `${AT}.y`, /min \(0\) must be below max \(-1\)/);
+    expectOnly((f) => (tariff(f).x.step = 0), "policies.json", `${AT}.x.step`, />0/);
+    expectOnly((f) => (tariff(f).y.step = -1), "policies.json", `${AT}.y.step`, />0/);
+    expectOnly((f) => delete tariff(f).y.max, "policies.json", `${AT}.y.max`, /expected number/);
+  });
+
+  it("x is in currency and y in percent", () => {
+    expectOnly((f) => (tariff(f).x.unit = "percent"), "policies.json", `${AT}.x.unit`, /expected "currency"/);
+    expectOnly((f) => (tariff(f).y.unit = "share"), "policies.json", `${AT}.y.unit`, /expected "percent"/);
+  });
+
+  it("default, baseline, presets and examples lie inside the ranges", () => {
+    expectOnly((f) => (tariff(f).default[1].y = 70), "policies.json", `${AT}.default[1].y`, /70 lies outside \[0, 60\]/);
+    expectOnly((f) => (tariff(f).default[1].x = 61), "policies.json", `${AT}.default[1].x`, /61 lies outside \[0, 60\]/);
+    expectOnly((f) => (tariff(f).baseline[2].y = -1), "policies.json", `${AT}.baseline[2].y`, /-1 lies outside \[0, 60\]/);
+    expectOnly((f) => (tariff(f).presets[0].points[0].y = 99), "policies.json", `${AT}.presets[0].points[0].y`, /99 lies outside/);
+    expectOnly((f) => (tariff(f).presets[1].points[4].x = 400), "policies.json", `${AT}.presets[1].points[4].x`, /400 lies outside/);
+    expectOnly((f) => (tariff(f).examples[1].x = 75), "policies.json", `${AT}.examples[1].x`, /75 lies outside \[0, 60\]/);
+    // A narrower range makes the points that were fine fall outside.
+    expectError((f) => (tariff(f).y.max = 30), "policies.json", `${AT}.default[1].y`, /40 lies outside \[0, 30\]/);
+  });
+
+  it("points are ordered by x; equal x is a step and allowed", () => {
+    expectOnly((f) => tariff(f).default.reverse(), "policies.json", `${AT}.default[1].x`, /points must be ordered by x, but 10 follows 30/);
+    expectOnly((f) => (tariff(f).baseline[1].x = 5), "policies.json", `${AT}.baseline[1].x`, /but 5 follows 10/);
+    expectOnly((f) => (tariff(f).presets[1].points[3].x = 20), "policies.json", `${AT}.presets[1].points[3].x`, /but 20 follows 30/);
+    const files = testlandFiles() as Files;
+    tariff(files).default = [{ x: 10, y: 10 }, { x: 10, y: 20 }, { x: 10, y: 30 }];
+    expect(validatePack(files).ok).toBe(true);
+  });
+
+  it("the number of points stays within minPoints and maxPoints", () => {
+    const many = Array.from({ length: 7 }, (_, i) => ({ x: i, y: i }));
+    expectOnly((f) => (tariff(f).default = many), "policies.json", `${AT}.default`, /7 point\(s\), but the param allows 1 to 6/);
+    expectOnly((f) => (tariff(f).default = []), "policies.json", `${AT}.default`, /0 point\(s\), but the param allows 1 to 6/);
+    expectOnly((f) => (tariff(f).baseline = many), "policies.json", `${AT}.baseline`, /7 point\(s\)/);
+    expectOnly((f) => (tariff(f).presets[0].points = many), "policies.json", `${AT}.presets[0].points`, /7 point\(s\)/);
+    // Raising the minimum to 3 leaves the default (2 points) and the flat-tax preset (1 point) too short.
+    expectError((f) => (tariff(f).minPoints = 3), "policies.json", `${AT}.default`, /2 point\(s\), but the param allows 3 to 6/);
+    expectError((f) => (tariff(f).minPoints = 3), "policies.json", `${AT}.presets[0].points`, /1 point\(s\), but the param allows 3 to 6/);
+    // Without minPoints and maxPoints the limits are 1 and 12.
+    expectOnly(
+      (f) => {
+        delete tariff(f).maxPoints;
+        tariff(f).default = Array.from({ length: 13 }, (_, i) => ({ x: i, y: i }));
+      },
+      "policies.json",
+      `${AT}.default`,
+      /13 point\(s\), but the param allows 1 to 12/,
+    );
+    expectOnly((f) => (tariff(f).minPoints = 7), "policies.json", `${AT}.minPoints`, /minPoints \(7\) is above maxPoints \(6\)/);
+    expectOnly((f) => (tariff(f).minPoints = 1.5), "policies.json", `${AT}.minPoints`, /expected int/);
+    expectOnly((f) => (tariff(f).maxPoints = 0), "policies.json", `${AT}.maxPoints`, />=1/);
+    // minPoints 0 allows an empty curve as a preset.
+    const files = testlandFiles() as Files;
+    tariff(files).minPoints = 0;
+    tariff(files).presets.push({ id: "no_tax", label: { en: "No tax", de: "Keine Steuer" }, points: [] });
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("preset ids are unique within the param", () => {
+    expectOnly((f) => (tariff(f).presets[1].id = "flat_tax"), "policies.json", `${AT}.presets[1].id`, /duplicate preset id "flat_tax" in param "tariff"/);
+    expectOnly((f) => (tariff(f).presets[1].id = "Top Rate"), "policies.json", `${AT}.presets[1].id`, /lower_snake_case/);
+  });
+
+  it("texts need every locale, and sources must exist", () => {
+    expectOnly((f) => delete tariff(f).label.de, "policies.json", `${AT}.label`, /text for locale "de" is missing/);
+    expectOnly((f) => delete tariff(f).presets[1].label.de, "policies.json", `${AT}.presets[1].label`, /locale "de"/);
+    expectOnly((f) => delete tariff(f).examples[0].label.de, "policies.json", `${AT}.examples[0].label`, /locale "de"/);
+    expectOnly((f) => (tariff(f).presets[0].sources = ["nowhere"]), "policies.json", `${AT}.presets[0].sources[0]`, /unknown source "nowhere"/);
+  });
+
+  it("the shape is strict", () => {
+    expectOnly((f) => (tariff(f).snap = true), "policies.json", AT, /Unrecognized key: "snap"/);
+    expectOnly((f) => delete tariff(f).default, "policies.json", `${AT}.default`, /expected array/);
+    expectOnly((f) => (tariff(f).default[0] = { x: "10", y: 10 }), "policies.json", `${AT}.default[0].x`, /expected number, received string/);
+    expectOnly((f) => (tariff(f).default[0] = [10, 10]), "policies.json", `${AT}.default[0]`, /expected object/);
+    expectOnly((f) => (tariff(f).default[0].z = 1), "policies.json", `${AT}.default[0]`, /Unrecognized key: "z"/);
+    expectOnly((f) => (tariff(f).examples[0] = { x: 20 }), "policies.json", `${AT}.examples[0].label`, /expected object/);
+    // baseline, limits, presets and examples are optional.
+    const files = testlandFiles() as Files;
+    for (const key of ["baseline", "minPoints", "maxPoints", "presets", "examples"]) delete tariff(files)[key];
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+});
+
+describe("schedules as curves", () => {
+  /** The fixture's curve effect: reform { curve: { param: "tariff", scale: 0.01 } }, baseline { points, scale: 0.01 }. */
+  const effect = (f: Files): Loose => f.policies.policies[8].effects[0];
+  const AT = "$.policies[8].effects[0]";
+
+  it("a curve schedule refers to a curve param of the same policy", () => {
+    expectOnly((f) => (effect(f).reform.curve.param = "tarif"), "policies.json", `${AT}.reform.curve.param`, /unknown param "tarif" in policy "redraw_income_tax"/);
+    // wealth_tax has number params only.
+    expectOnly(
+      (f) => (f.policies.policies[3].effects[0].reform = { curve: { param: "rate", scale: 0.01 } }),
+      "policies.json",
+      "$.policies[3].effects[0].reform.curve.param",
+      /param "rate" is a number param; a curve param is needed here/,
+    );
+    // The curve param of another policy does not count.
+    expectOnly(
+      (f) => (f.policies.policies[4].effects[0].reform = { curve: { param: "tariff", scale: 0.01 } }),
+      "policies.json",
+      "$.policies[4].effects[0].reform.curve.param",
+      /unknown param "tariff" in policy "raise_top_tax_rate"/,
+    );
+    expectOnly((f) => delete effect(f).reform.curve.param, "policies.json", `${AT}.reform.curve.param`, /expected string/);
+    expectOnly((f) => (effect(f).reform.curve.scal = 0.01), "policies.json", `${AT}.reform.curve`, /Unrecognized key: "scal"/);
+  });
+
+  it("a curve schedule may only be the reform, and fixed points only the baseline", () => {
+    expectOnly((f) => (effect(f).baseline = { curve: { param: "tariff", scale: 0.01 } }), "policies.json", `${AT}.baseline`, /"curve" schedule is only allowed as the reform/);
+    expectOnly((f) => (effect(f).reform = { points: [{ x: 10, y: 20 }], scale: 0.01 }), "policies.json", `${AT}.reform`, /"points" are only allowed in a baseline/);
+    expectOnly((f) => (effect(f).reform.brackets = [{ from: 10, rate: 0.2 }]), "policies.json", `${AT}.reform`, /Unrecognized key: "curve"/);
+    expectOnly((f) => (effect(f).reform = {}), "policies.json", `${AT}.reform.brackets`, /expected array/);
+  });
+
+  it("a curve param cannot stand in for a number or for groups", () => {
+    expectOnly((f) => (effect(f).yield = { param: "tariff" }), "policies.json", `${AT}.yield.param`, /param "tariff" is a curve param; a number param is needed here/);
+    expectOnly(
+      (f) => {
+        f.policies.policies[8].effects.push({ type: "excludeGroups", target: "exp.social.basic_income", breakdown: "citizenship", groups: { param: "tariff" }, quality: "estimate" });
+      },
+      "policies.json",
+      "$.policies[8].effects[1].groups.param",
+      /param "tariff" is a curve param; a groups param is needed here/,
+    );
+  });
+
+  it("a curve param that no schedule uses is reported, like any unused param", () => {
+    const warnings = warningsAfter((f) => (effect(f).reform = { brackets: [{ from: 10, rate: 0.3 }] }));
+    expect(warnings).toEqual([{ file: "policies.json", path: "$.policies[8].params[0]", message: 'param "tariff" is not used by any effect' }]);
+  });
+
+  it("rates of the default curve lie between 0 and 1 after scaling", () => {
+    // Without the scale 10 % is read as a rate of 10.
+    const files = testlandFiles() as Files;
+    delete effect(files).reform.curve.scale;
+    const result = validatePack(files);
+    expect(result.ok ? [] : result.errors).toEqual([
+      { file: "policies.json", path: `${AT}.reform.curve`, message: expect.stringMatching(/point 0 of the default curve gives a rate of 10, which is not between 0 and 1/) },
+    ]);
+    expect(result.warnings).toEqual([
+      { file: "policies.json", path: `${AT}.reform.curve`, message: expect.stringMatching(/curve of param "tariff" is in percent but is used without "scale"/) },
+    ]);
+    // 40 * 0.02 = 0.8 is still a rate; 40 * 0.05 = 2 is not.
+    const stillFine = testlandFiles() as Files;
+    effect(stillFine).reform.curve.scale = 0.02;
+    expect(validatePack(stillFine).ok).toBe(true);
+    expectOnly((f) => (effect(f).reform.curve.scale = 0.05), "policies.json", `${AT}.reform.curve`, /point 1 of the default curve gives a rate of 2,/);
+    expectOnly((f) => (effect(f).reform.curve.scale = -0.01), "policies.json", `${AT}.reform.curve`, /point 0 of the default curve gives a rate of -0.1,/);
+  });
+
+  it("a baseline in points form is ordered, not negative in x, and a rate between 0 and 1", () => {
+    expectOnly((f) => (effect(f).baseline.points[1].x = 5), "policies.json", `${AT}.baseline.points[1].x`, /points must be ordered by x, but 5 follows 10/);
+    expectOnly((f) => (effect(f).baseline.points[0].x = -10), "policies.json", `${AT}.baseline.points[0].x`, /-10 is below 0/);
+    expectOnly((f) => (effect(f).baseline.points[2].y = 140), "policies.json", `${AT}.baseline.points[2].y`, /140 gives a rate of 1.4, which is not between 0 and 1/);
+    expectError((f) => delete effect(f).baseline.scale, "policies.json", `${AT}.baseline.points[0].y`, /20 gives a rate of 20, which is not between 0 and 1/);
+    expectOnly((f) => (effect(f).baseline.points = []), "policies.json", `${AT}.baseline.points`, />=1/);
+    expectOnly((f) => (effect(f).baseline.points[0] = { x: 10 }), "policies.json", `${AT}.baseline.points[0].y`, /expected number/);
+    expectOnly((f) => (effect(f).baseline.scales = 1), "policies.json", `${AT}.baseline`, /Unrecognized key: "scales"/);
+  });
+
+  it("a baseline in points form must yield something, or there is nothing to calibrate to", () => {
+    // Every taxed value lies above the highest income of 50.
+    expectOnly((f) => (effect(f).baseline.points = [{ x: 55, y: 40 }]), "policies.json", `${AT}.baseline`, /baseline schedule yields nothing on distribution "income"/);
+    // A rate of 0 everywhere.
+    expectOnly((f) => (effect(f).baseline.points = [{ x: 0, y: 0 }, { x: 50, y: 0 }]), "policies.json", `${AT}.baseline`, /yields nothing/);
+  });
+
+  it("the two forms can be mixed freely", () => {
+    const brackets = { brackets: [{ from: 10, rate: 0.2 }, { from: 30, rate: 0.4 }] };
+    const points = { points: [{ x: 10, y: 20 }, { x: 30, y: 20 }, { x: 30, y: 40 }], scale: 0.01 };
+    // Curve reform against a bracket baseline, and without any baseline.
+    for (const baseline of [brackets, points, undefined]) {
+      const files = testlandFiles() as Files;
+      if (baseline) effect(files).baseline = baseline;
+      else delete effect(files).baseline;
+      expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+    }
+    // Bracket reform (raise_top_tax_rate) against a points baseline.
+    const files = testlandFiles() as Files;
+    files.policies.policies[4].effects[0].baseline = points;
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+    // Fractions without a scale are fine too.
+    const fractions = testlandFiles() as Files;
+    fractions.policies.policies[4].effects[0].baseline = { points: [{ x: 10, y: 0.2 }, { x: 30, y: 0.2 }, { x: 30, y: 0.4 }] };
+    expect(validatePack(fractions)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("does not integrate over a distribution that is itself broken", () => {
+    // The bins no longer join up; the schedules that use the distribution are not blamed for it.
+    expectOnly((f) => (f.distributions.income.bins[1].from = 11), "distributions/income.json", "$.bins[1].from", /does not continue/);
+    // Bins in the wrong order or without any width: every error is in the distribution's own file.
+    for (const wreck of [
+      (f: Files) => f.distributions.income.bins.reverse(),
+      (f: Files) => f.distributions.income.bins.forEach((bin: Loose) => (bin.to = bin.from)),
+      (f: Files) => f.distributions.income.bins.forEach((bin: Loose) => (bin.count = 0)),
+    ]) {
+      const errors = errorsAfter(wreck);
+      expect(errors.length).toBeGreaterThan(0);
+      expect([...new Set(errors.map((e) => e.file))]).toEqual(["distributions/income.json"]);
+    }
   });
 });
 

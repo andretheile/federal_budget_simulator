@@ -15,6 +15,8 @@
  * - Ids are lower_snake_case. Budget node ids are dotted paths, unique across the whole budget,
  *   starting with `rev.` or `exp.`.
  * - Only leaf nodes carry amounts. Group totals are always derived by summing leaves.
+ * - A marginal-rate schedule is either a list of brackets (steps) or a curve of points with
+ *   linear interpolation between them; see CurveParam for the meaning of the points.
  *
  * The zod schemas in schema.ts mirror these types; validate.ts adds the cross-reference checks.
  */
@@ -196,7 +198,43 @@ export interface GroupsParam {
   default: string[];
 }
 
-export type Param = NumberParam | GroupsParam;
+/** One point of a marginal-rate curve: at value `x` the rate is `y`. */
+export type CurvePoint = { x: number; y: number };
+
+/**
+ * An editable marginal-rate curve, for example an income tax tariff.
+ *
+ * Points are ordered by x, non-decreasing. Two points with the same x form a step, and the later
+ * one applies from x upward. The marginal rate is 0 below the first point, linearly interpolated
+ * between consecutive points, and constant at the last point's value above the last point. What
+ * a unit with value v owes is the integral of the marginal rate from 0 to v.
+ */
+export interface CurveParam {
+  id: string;
+  type: "curve";
+  label: LocalizedText;
+  /** The distributed variable, e.g. taxable income; also the editor's range. min >= 0. */
+  x: { unit: "currency"; min: number; max: number; step: number };
+  /** The rate. */
+  y: { unit: "percent"; min: number; max: number; step: number };
+  /** Value when the policy is first switched on. */
+  default: CurvePoint[];
+  /** Today's curve, for display only. */
+  baseline?: CurvePoint[];
+  /** Fewest points a value may have. Default 1. */
+  minPoints?: number;
+  /** Most points a value may have. Default 12. */
+  maxPoints?: number;
+  presets?: { id: string; label: LocalizedText; points: CurvePoint[]; sources?: SourceId[] }[];
+  /** Example units for "pays today / pays after", e.g. the median income. */
+  examples?: { x: number; label: LocalizedText }[];
+}
+
+export type Param = NumberParam | GroupsParam | CurveParam;
+
+/** Defaults of CurveParam.minPoints and CurveParam.maxPoints. */
+export const CURVE_MIN_POINTS = 1;
+export const CURVE_MAX_POINTS = 12;
 
 export type IndicatorRef = "gdp" | "population" | "households";
 
@@ -280,6 +318,9 @@ export interface ExcludeGroupsEffect extends EffectBase {
  * A marginal-rate schedule integrated over a distribution.
  * With `baseline` the effect is calibrated: delta = current target * (model(reform) / model(baseline) - 1).
  * Without it the effect is absolute: delta = model(reform). Either is multiplied by (yield ?? 1).
+ *
+ * `reform` is a list of brackets or the value of a curve param; `baseline` is a list of brackets
+ * or fixed curve points. The two may be given in different forms.
  */
 export interface ScheduleEffect extends EffectBase {
   type: "schedule";
@@ -291,14 +332,31 @@ export interface ScheduleEffect extends EffectBase {
 
 export type Effect = ScaleEffect | AddEffect | SetEffect | ExcludeGroupsEffect | ScheduleEffect;
 
-/** Marginal rates, ascending `from`. */
-export interface Schedule {
+/** Marginal rates as steps, ascending `from`. */
+export interface BracketSchedule {
   brackets: { from: Value; rate: Value }[];
 }
 
-export interface ConstSchedule {
+/** Marginal rates as the value of a curve param of the same policy. The rate is y * (scale ?? 1). */
+export interface CurveSchedule {
+  curve: { param: string; scale?: number };
+}
+
+/** A reform schedule, in either form. */
+export type Schedule = BracketSchedule | CurveSchedule;
+
+export interface ConstBracketSchedule {
   brackets: { from: number; rate: number }[];
 }
+
+/** Marginal rates as fixed curve points (see CurveParam for their meaning). The rate is y * (scale ?? 1). */
+export interface PointsSchedule {
+  points: CurvePoint[];
+  scale?: number;
+}
+
+/** A baseline schedule, in either form. */
+export type ConstSchedule = ConstBracketSchedule | PointsSchedule;
 
 export interface Catch {
   kind: "legal" | "economic" | "cost_shift" | "practical" | "political";

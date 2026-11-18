@@ -9,18 +9,23 @@
  *             | "L." levelId                            the level filter
  *   value    := number                                  for number params
  *             | groupId ("-" groupId)*  |  "-"          for groups params; "-" alone is the empty selection
+ *             | number ("_" number)*    |  "_"          for curve params: x_y_x_y..., "_" alone is no points
  *   number   := ["-"] digits ["e" ["-"] digits]         integer mantissa and decimal exponent, so no "."
  *
  * Example: wealth_tax.rate.15e-1.threshold.2e6~halve_mp_pay~no_benefits.groups.non_eu-stateless~L.central
+ * A curve: income_tax.tariff.12096_14_68480_42_277826_42_277826_45
  *
  * Ids are lower_snake_case, so they never contain a separator, and "L" can never be a policy id.
+ * Numbers may contain "-" (sign, exponent), which is why the coordinates of a curve are joined
+ * with "_" and not with the "-" that joins group ids.
  */
 import { resolveParams, type ParamValue, type ParamValues, type Scenario } from "./simulate.ts";
-import type { CountryPack, LevelId, Param } from "./types.ts";
+import type { CountryPack, CurvePoint, LevelId, Param } from "./types.ts";
 
 const ITEM_SEPARATOR = "~";
 const TOKEN_SEPARATOR = ".";
 const GROUP_SEPARATOR = "-";
+const POINT_SEPARATOR = "_";
 const LEVEL_MARKER = "L";
 const TOKEN = /^[a-z0-9_]+$/;
 const NUMBER = /^-?\d+(?:e-?\d+)?$/;
@@ -53,8 +58,40 @@ export function decodeNumber(text: string): number {
   return NUMBER.test(text) ? Number(text) : NaN;
 }
 
+/** A list of curve points, as opposed to a list of group ids. An empty list counts as group ids. */
+function isCurve(value: string[] | CurvePoint[]): value is CurvePoint[] {
+  return value.length > 0 && typeof value[0] === "object";
+}
+
+/** x_y_x_y...: every coordinate in the dot-free number notation. */
+function encodeCurve(points: readonly CurvePoint[]): string {
+  if (points.length === 0) return POINT_SEPARATOR;
+  let text = "";
+  for (const point of points) {
+    if (text !== "") text += POINT_SEPARATOR;
+    text += encodeNumber(point.x) + POINT_SEPARATOR + encodeNumber(point.y);
+  }
+  return text;
+}
+
+/** Inverse of encodeCurve. Undefined if the text is not a list of coordinate pairs. */
+function decodeCurve(text: string): CurvePoint[] | undefined {
+  if (text === POINT_SEPARATOR) return [];
+  const numbers = text.split(POINT_SEPARATOR);
+  const points: CurvePoint[] = [];
+  for (let i = 0; i < numbers.length; i += 2) {
+    const x = decodeNumber(numbers[i]);
+    // An odd number of coordinates leaves the last y missing, which is not a number either.
+    const y = decodeNumber(numbers[i + 1] ?? "");
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return undefined;
+    points.push({ x, y });
+  }
+  return points;
+}
+
 function encodeValue(value: ParamValue): string {
   if (typeof value === "number") return encodeNumber(value);
+  if (isCurve(value)) return encodeCurve(value);
   const ids = value.filter((id) => TOKEN.test(id));
   return ids.length === 0 ? GROUP_SEPARATOR : ids.join(GROUP_SEPARATOR);
 }
@@ -62,8 +99,14 @@ function encodeValue(value: ParamValue): string {
 function sameValue(a: ParamValue | undefined, b: ParamValue | undefined): boolean {
   if (Array.isArray(a) && Array.isArray(b)) {
     if (a.length !== b.length) return false;
-    const sorted = [...b].sort();
-    return [...a].sort().every((id, i) => id === sorted[i]);
+    if (isCurve(a) || isCurve(b)) {
+      // Curves: the same points in the same order.
+      const p = a as CurvePoint[];
+      const q = b as CurvePoint[];
+      return isCurve(a) && isCurve(b) && p.every((point, i) => point.x === q[i].x && point.y === q[i].y);
+    }
+    const sorted = [...(b as string[])].sort();
+    return [...(a as string[])].sort().every((id, i) => id === sorted[i]);
   }
   return a === b;
 }
@@ -83,20 +126,21 @@ export function encodeScenario(scenario: Scenario, pack?: CountryPack): string {
     const state = scenario.policies[id];
     if (!state || !state.enabled || !TOKEN.test(id)) continue;
     const policy = pack?.policies.find((candidate) => candidate.id === id);
-    let values: ParamValues;
+    let item = id;
     if (pack && policy) {
       const resolved = resolveParams(pack, policy, state.params);
       const defaults = resolveParams(pack, policy);
-      values = {};
       for (const param of policy.params) {
-        if (!sameValue(resolved[param.id], defaults[param.id])) values[param.id] = resolved[param.id];
+        const value = resolved[param.id];
+        if (sameValue(value, defaults[param.id]) || !TOKEN.test(param.id)) continue;
+        // The param's type decides the notation, so that a curve without points stays a curve.
+        const text = param.type === "curve" ? encodeCurve(value as CurvePoint[]) : encodeValue(value);
+        item += TOKEN_SEPARATOR + param.id + TOKEN_SEPARATOR + text;
       }
     } else {
-      values = state.params ?? {};
-    }
-    let item = id;
-    for (const [paramId, value] of Object.entries(values)) {
-      if (TOKEN.test(paramId)) item += TOKEN_SEPARATOR + paramId + TOKEN_SEPARATOR + encodeValue(value);
+      for (const [paramId, value] of Object.entries(state.params ?? {})) {
+        if (TOKEN.test(paramId)) item += TOKEN_SEPARATOR + paramId + TOKEN_SEPARATOR + encodeValue(value);
+      }
     }
     items.push(item);
   }
@@ -109,6 +153,7 @@ function decodeValue(param: Param, text: string): ParamValue | undefined {
     const n = decodeNumber(text);
     return Number.isFinite(n) ? n : undefined;
   }
+  if (param.type === "curve") return decodeCurve(text);
   return text.split(GROUP_SEPARATOR).filter((id) => id !== "");
 }
 
@@ -144,7 +189,13 @@ export function decodeScenario(encoded: string, pack: CountryPack): Scenario {
     }
     const resolved = resolveParams(pack, policy, given);
     const params: ParamValues = {};
-    for (const id of Object.keys(given)) params[id] = resolved[id];
+    for (const param of policy.params) {
+      if (!Object.hasOwn(given, param.id)) continue;
+      // A curve that was replaced by the default (wrong number of points) is left out like any
+      // other value that cannot be read, instead of being pinned to today's default.
+      if (param.type === "curve" && resolved[param.id] === param.default) continue;
+      params[param.id] = resolved[param.id];
+    }
     scenario.policies[policy.id] = Object.keys(params).length > 0 ? { enabled: true, params } : { enabled: true };
   }
   return scenario;

@@ -1,11 +1,25 @@
 import { describe, expect, it } from "vitest";
-import { simulate, type Scenario } from "./simulate.ts";
-import type { Distribution, DistributionBin, Effect, GroupNode, LeafNode, LevelId, LocalizedText, Policy } from "./types.ts";
+import { curveAffected, curveAverageRate, curveOwed, curveRate, curveTotal, payMoreOrLess, scheduleBands, type ScheduleBand } from "./curve.ts";
+import { resolveParams, scheduleView, simulate, type ParamValue, type Scenario } from "./simulate.ts";
+import type {
+  CurveParam,
+  CurvePoint,
+  Distribution,
+  DistributionBin,
+  Effect,
+  GroupNode,
+  LeafNode,
+  LevelId,
+  LocalizedText,
+  Policy,
+  ScheduleEffect,
+} from "./types.ts";
 import { validatePack } from "./validate.ts";
 
 /**
  * A synthetic pack of realistic size: 300 leaves in 375 nodes, 15 policies with 20 effects
- * (four of them with a shift), 3 distributions of 40 bins each with a Pareto tail.
+ * (four of them with a shift, one with a 12-point curve param), 3 distributions of 40 bins each
+ * with a Pareto tail.
  */
 const t = (en: string): LocalizedText => ({ en });
 const LEVELS: LevelId[] = ["central", "state", "local", "social_security"];
@@ -67,10 +81,46 @@ function policy(id: string, rest: Pick<Policy, "params" | "effects">): Policy {
   return { id, label: t(id), summary: t(id), topic: "other", catches: [], sources: [], ...rest };
 }
 
+/** A 12-point tariff that changes with `i`, the way a curve changes while a point is dragged. */
+function tariffAt(i: number): CurvePoint[] {
+  return Array.from({ length: 12 }, (_, k) => ({
+    x: k < 6 ? 8000 + k * 9000 + ((i * 37) % 4000) : 60000 + (k - 6) * 70000 + ((i * 53) % 30000),
+    y: Math.min(60, 10 + k * 3.5 + ((i * 7 + k * 3) % 5)),
+  }));
+}
+
+const BASELINE_BRACKETS = [10000, 20000, 40000, 80000, 160000, 320000].map((from, k) => ({ from, rate: 0.1 + k * 0.06 }));
+
 function policies(): Policy[] {
   const out: Policy[] = [];
-  // 3 calibrated schedules with six brackets, two of them moved by params
-  for (let i = 0; i < 3; i++) {
+  // 1 calibrated schedule whose reform is a 12-point curve param
+  const tariff: CurveParam = {
+    id: "tariff",
+    type: "curve",
+    label: t("tariff"),
+    x: { unit: "currency", min: 0, max: 600000, step: 100 },
+    y: { unit: "percent", min: 0, max: 60, step: 0.1 },
+    default: tariffAt(0),
+  };
+  out.push(
+    policy("curve_0", {
+      params: [tariff],
+      effects: [
+        {
+          type: "schedule",
+          target: "rev.g0",
+          distribution: "d0",
+          baseline: { brackets: BASELINE_BRACKETS },
+          reform: { curve: { param: "tariff", scale: 0.01 } },
+          yield: 0.85,
+          quality: "estimate",
+          uncertainty: { low: 0.6, high: 1.1 },
+        },
+      ],
+    }),
+  );
+  // 2 calibrated schedules with six brackets, two of them moved by params
+  for (let i = 1; i < 3; i++) {
     out.push(
       policy(`calibrated_${i}`, {
         params: [percent("top", 48, 80), currency("start", 60000, 500000)],
@@ -79,7 +129,7 @@ function policies(): Policy[] {
             type: "schedule",
             target: `rev.g${i}`,
             distribution: `d${i}`,
-            baseline: { brackets: [10000, 20000, 40000, 80000, 160000, 320000].map((from, k) => ({ from, rate: 0.1 + k * 0.06 })) },
+            baseline: { brackets: BASELINE_BRACKETS },
             reform: {
               brackets: [
                 { from: 10000, rate: 0.1 },
@@ -185,9 +235,10 @@ describe("performance", () => {
   const scenario = (i: number): Scenario => {
     const policies: Scenario["policies"] = {};
     for (const p of pack.policies) {
-      const params: Record<string, number | string[]> = {};
+      const params: Record<string, ParamValue> = {};
       for (const param of p.params) {
         if (param.type === "number") params[param.id] = param.min + ((i * 7 + param.id.length) % 100) * 0.01 * (param.max - param.min);
+        else if (param.type === "curve") params[param.id] = tariffAt(i);
         else params[param.id] = AGES.filter((_, k) => (i + k) % 3 === 0);
       }
       policies[p.id] = { enabled: true, params };
@@ -218,5 +269,37 @@ describe("performance", () => {
     console.info(`simulate: ${(average * 1000).toFixed(1)} µs on average over ${runs} runs (375 nodes, 15 policies, 3 x 40 bins)`);
     expect(Number.isFinite(checksum)).toBe(true);
     expect(average).toBeLessThan(1);
+  });
+
+  it("the curve helpers are fast enough to redraw on every pointer move", () => {
+    // Everything a tariff editor shows for one frame: both curves, the model totals, the histogram
+    // behind the curve, who pays more or less, the affected units, and 200 samples each of the
+    // marginal rate, the average rate and what a unit owes for the lines on screen.
+    const curvePolicy = pack.policies.find((p) => p.id === "curve_0")!;
+    const effect = curvePolicy.effects[0] as ScheduleEffect;
+    const curves = Array.from({ length: 100 }, (_, i) => tariffAt(i));
+    const bands: ScheduleBand[] = [];
+    let checksum = 0;
+    const frame = (i: number): void => {
+      const params = resolveParams(pack, curvePolicy, { tariff: curves[i % curves.length] });
+      const view = scheduleView(pack, effect, params);
+      checksum += curveTotal(view.distribution, view.reform) + curveTotal(view.distribution, view.baseline!);
+      checksum += scheduleBands(view.distribution, view.reform, view.baseline, undefined, bands).length;
+      checksum += payMoreOrLess(view.distribution, view.reform, view.baseline).more;
+      checksum += curveAffected(view.distribution, view.reform, view.baseline).units;
+      for (let k = 0; k < 200; k++) {
+        const v = k * 3000;
+        checksum += curveRate(view.reform, v) + curveAverageRate(view.reform, v) + curveOwed(view.baseline!, v);
+      }
+    };
+    for (let i = 0; i < 300; i++) frame(i); // warm-up
+    const runs = 3000;
+    const start = performance.now();
+    for (let i = 0; i < runs; i++) frame(i);
+    const average = (performance.now() - start) / runs;
+    console.info(`curve helpers: ${(average * 1000).toFixed(1)} µs per frame on average over ${runs} frames (40 bins and a tail, 12-point curve, 11-point baseline)`);
+    expect(Number.isFinite(checksum)).toBe(true);
+    expect(bands).toHaveLength(41);
+    expect(average).toBeLessThan(0.3);
   });
 });

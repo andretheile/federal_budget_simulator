@@ -186,3 +186,119 @@ export function affectedUnits(
   }
   return { threshold: null, units: 0, share: 0 };
 }
+
+// ---------------------------------------------------------------------------------------------
+// The distribution as a function: units above a value
+// ---------------------------------------------------------------------------------------------
+
+/**
+ * unitsAbove as a piecewise-linear function of the threshold, prepared once per distribution and
+ * cached by object identity (a distribution must not be changed after its first use).
+ *
+ * Between two consecutive breakpoints the number of units above is linear; above `top` it is the
+ * Pareto tail, or zero. curve.ts integrates rate curves against this.
+ */
+export interface DistributionShape {
+  /** Breakpoints, ascending: the `from` of every bin, its mean if it lies strictly inside, and the last `to`. */
+  readonly xs: Float64Array;
+  /** Units above, just right of xs[i]. */
+  readonly nStart: Float64Array;
+  /** Units above, just left of xs[i + 1]. */
+  readonly nEnd: Float64Array;
+  /** Bin edges, ascending: the `from` of every bin and the `to` of the last. */
+  readonly edges: Float64Array;
+  /** Per edge: the units of all bins that start at or after it, plus the tail. */
+  readonly fromEdge: Float64Array;
+  /** All units. */
+  readonly total: number;
+  /** End of the last bin, which is where the tail starts if there is one. */
+  readonly top: number;
+  /** The tail, if it holds any units. */
+  readonly tail: ParetoTail | undefined;
+}
+
+const shapes = new WeakMap<Distribution, DistributionShape>();
+
+export function distributionShape(dist: Distribution): DistributionShape {
+  const cached = shapes.get(dist);
+  if (cached) return cached;
+
+  const tail = dist.tail && dist.tail.count > 0 ? dist.tail : undefined;
+  const bins = dist.bins;
+  const xs: number[] = [];
+  const nStart: number[] = [];
+  const nEnd: number[] = [];
+  const edges: number[] = [];
+  const fromEdge: number[] = [];
+
+  let total = tail ? tail.count : 0;
+  for (const bin of bins) total += bin.count;
+
+  let above = total; // units in this bin and everything after it
+  for (const bin of bins) {
+    edges.push(bin.from);
+    fromEdge.push(above);
+    const lower = lowerCount(bin);
+    const rest = above - bin.count; // units after this bin
+    if (bin.mean > bin.from) {
+      xs.push(bin.from);
+      nStart.push(above);
+      nEnd.push(above - lower);
+    }
+    if (bin.to > bin.mean) {
+      // If the mean sits on `from`, all units are a point mass there (lower is the whole bin) and
+      // none of them lie above any value inside the bin.
+      xs.push(bin.mean);
+      nStart.push(above - lower);
+      nEnd.push(rest);
+    }
+    above = rest;
+  }
+  const top = bins.length > 0 ? bins[bins.length - 1].to : 0;
+  xs.push(top);
+  edges.push(top);
+  fromEdge.push(above);
+
+  const shape: DistributionShape = {
+    xs: Float64Array.from(xs),
+    nStart: Float64Array.from(nStart),
+    nEnd: Float64Array.from(nEnd),
+    edges: Float64Array.from(edges),
+    fromEdge: Float64Array.from(fromEdge),
+    total,
+    top,
+    tail,
+  };
+  shapes.set(dist, shape);
+  return shape;
+}
+
+/** Index of the last entry of an ascending array that is <= t, or -1. */
+export function lastAtOrBelow(xs: ArrayLike<number>, t: number): number {
+  let lo = 0;
+  let hi = xs.length - 1;
+  let found = -1;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (xs[mid] <= t) {
+      found = mid;
+      lo = mid + 1;
+    } else {
+      hi = mid - 1;
+    }
+  }
+  return found;
+}
+
+/** unitsAbove through the prepared shape: O(log bins) instead of O(bins). */
+export function shapeAbove(shape: DistributionShape, t: number): number {
+  const { xs } = shape;
+  if (t >= shape.top) {
+    const tail = shape.tail;
+    return tail ? tail.count * Math.pow(tail.from / t, tail.alpha) : 0;
+  }
+  const i = lastAtOrBelow(xs, t);
+  if (i < 0) return shape.total;
+  const a = shape.nStart[i];
+  return a + ((shape.nEnd[i] - a) * (t - xs[i])) / (xs[i + 1] - xs[i]);
+}

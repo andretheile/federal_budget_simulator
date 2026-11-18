@@ -58,11 +58,12 @@ function printIssues(title: string, issues: ValidationIssue[]): void {
 
 function printSummary(pack: CountryPack): void {
   const { currency, baseYear } = pack.country;
-  const base = simulate(pack).baseline;
+  const base = simulate(pack);
+  const totals = base.baseline;
   console.log(`  base year ${baseYear}, amounts in ${currency} per year`);
-  console.log(`    revenue      ${amount(base.revenue).padStart(14)}  (${percent(shareOfGdp(pack, base.revenue))} of GDP)`);
-  console.log(`    expenditure  ${amount(base.expenditure).padStart(14)}  (${percent(shareOfGdp(pack, base.expenditure))} of GDP)`);
-  console.log(`    balance      ${amount(base.balance).padStart(14)}  (${percent(shareOfGdp(pack, base.balance))} of GDP)`);
+  console.log(`    revenue      ${amount(totals.revenue).padStart(14)}  (${percent(shareOfGdp(pack, totals.revenue))} of GDP)`);
+  console.log(`    expenditure  ${amount(totals.expenditure).padStart(14)}  (${percent(shareOfGdp(pack, totals.expenditure))} of GDP)`);
+  console.log(`    balance      ${amount(totals.balance).padStart(14)}  (${percent(shareOfGdp(pack, totals.balance))} of GDP)`);
   if (pack.policies.length === 0) {
     console.log("  no policies");
     return;
@@ -78,6 +79,13 @@ function printSummary(pack: CountryPack): void {
         : `  (${amount(result.low.balance, true)} to ${amount(result.high.balance, true)})`;
     console.log(`    ${policy.id.padEnd(width)}  ${amount(result.delta.balance, true).padStart(14)}${range}`);
     for (const warning of result.warnings) console.log(`      warning: ${warning.message}`);
+    // For calibrated schedules: how close the model on the distribution comes to the official amount.
+    for (const effect of result.effects) {
+      const modelled = effect.model?.baseline;
+      const official = base.nodes[effect.target]?.baseline;
+      if (modelled === undefined || !official) continue;
+      console.log(`      model of ${effect.target}: ${amount(modelled)} against ${amount(official)} official (${percent(modelled / official)})`);
+    }
   }
 }
 

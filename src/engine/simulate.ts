@@ -13,12 +13,19 @@
  * `simulate` expects a pack that passed `validatePack`. The pack is indexed once and the index is
  * cached by object identity, so a pack must not be mutated after its first use.
  */
+import { bracketsToCurve, curveAffected, curveTotal, type RateCurve } from "./curve.ts";
 import { affectedUnits, orderBrackets, scheduleTotal, type AffectedUnits, type Bracket } from "./distribution.ts";
 import {
+  CURVE_MAX_POINTS,
+  CURVE_MIN_POINTS,
   LEVEL_IDS,
   type BudgetNode,
+  type ConstSchedule,
   type Country,
   type CountryPack,
+  type CurveParam,
+  type CurvePoint,
+  type Distribution,
   type Effect,
   type LevelId,
   type Policy,
@@ -29,8 +36,11 @@ import {
 
 export type Side = "revenue" | "expenditure";
 
-/** Value of a policy parameter: a number, or the selected group ids of a `groups` param. */
-export type ParamValue = number | string[];
+/**
+ * Value of a policy parameter: a number, the selected group ids of a `groups` param, or the
+ * points of a `curve` param.
+ */
+export type ParamValue = number | string[] | CurvePoint[];
 export type ParamValues = Record<string, ParamValue>;
 
 export interface PolicyState {
@@ -122,6 +132,12 @@ export interface EffectResult {
   clamped: boolean;
   /** `schedule` effects: units above the lowest threshold at which the reform differs from the baseline. */
   affected?: AffectedUnits;
+  /**
+   * `schedule` effects: what the schedules yield on the distribution, before `yield` and before
+   * calibration to the target. Comparing `baseline` with the target's base amount shows how well
+   * the model reproduces the official figure. `baseline` is absent for an effect without one.
+   */
+  model?: { reform: number; baseline?: number };
   /**
    * `excludeGroups` effects: the share of the node's current amount that the selected groups
    * stood for before this effect. It is smaller than their share in the breakdown if an earlier
@@ -323,7 +339,7 @@ export function findNode(pack: CountryPack, id: string): BudgetNode | undefined 
 /**
  * The parameter values a policy runs with: missing or malformed values fall back to the default,
  * numbers are clamped to [min, max], group selections are reduced to ids that exist in the
- * breakdown and put in the breakdown's order.
+ * breakdown and put in the breakdown's order, curves are sorted and clamped (see resolveCurve).
  */
 export function resolveParams(pack: CountryPack, policy: Policy, given?: ParamValues): ParamValues {
   const out: ParamValues = {};
@@ -332,6 +348,8 @@ export function resolveParams(pack: CountryPack, policy: Policy, given?: ParamVa
     if (param.type === "number") {
       const n = typeof value === "number" && Number.isFinite(value) ? value : param.default;
       out[param.id] = Math.min(param.max, Math.max(param.min, n));
+    } else if (param.type === "curve") {
+      out[param.id] = resolveCurve(param, value);
     } else {
       const chosen = new Set<unknown>(Array.isArray(value) ? value : param.default);
       const prep = prepare(pack);
@@ -340,6 +358,43 @@ export function resolveParams(pack: CountryPack, policy: Policy, given?: ParamVa
     }
   }
   return out;
+}
+
+function isPoint(value: unknown): value is CurvePoint {
+  if (typeof value !== "object" || value === null) return false;
+  const { x, y } = value as { x?: unknown; y?: unknown };
+  return typeof x === "number" && typeof y === "number" && Number.isFinite(x) && Number.isFinite(y);
+}
+
+/**
+ * The points a curve param runs with. A value that is not a list of points, or has fewer points
+ * than minPoints or more than maxPoints, is replaced by the default. Otherwise the points are
+ * sorted by x (points with equal x keep their order, which is what makes a step) and clamped
+ * into the x and y ranges. Nothing is snapped to the step sizes.
+ *
+ * A value that is already in order and in range is returned as it is, without copying, so a
+ * caller that resolves on every pointer move allocates nothing. The result must not be changed.
+ */
+export function resolveCurve(param: CurveParam, value: unknown): CurvePoint[] {
+  if (!Array.isArray(value)) return param.default;
+  const count = value.length;
+  if (count < (param.minPoints ?? CURVE_MIN_POINTS) || count > (param.maxPoints ?? CURVE_MAX_POINTS)) return param.default;
+  const { x, y } = param;
+  let fine = true;
+  let previous = -Infinity;
+  for (const point of value) {
+    if (!isPoint(point)) return param.default;
+    if (point.x < previous || point.x < x.min || point.x > x.max || point.y < y.min || point.y > y.max) fine = false;
+    previous = point.x;
+  }
+  if (fine) return value as CurvePoint[];
+  return (value as CurvePoint[])
+    .slice()
+    .sort((a, b) => a.x - b.x)
+    .map((point) => ({
+      x: Math.min(x.max, Math.max(x.min, point.x)),
+      y: Math.min(y.max, Math.max(y.min, point.y)),
+    }));
 }
 
 /**
@@ -356,16 +411,80 @@ export function evaluateValue(value: Value, params: ParamValues, indicators: Cou
   return indicator ? result * indicator.value : NaN;
 }
 
-/** The reform brackets of a schedule effect at the given parameter values, in the order written. */
+/**
+ * The reform brackets of a schedule effect at the given parameter values, in the order written.
+ * Empty if the reform is given as a curve; scheduleView handles both forms.
+ */
 export function evaluateBrackets(
   effect: ScheduleEffect,
   params: ParamValues,
   indicators: Country["indicators"],
 ): Bracket[] {
+  if (!("brackets" in effect.reform)) return [];
   return effect.reform.brackets.map((bracket) => ({
     from: evaluateValue(bracket.from, params, indicators),
     rate: evaluateValue(bracket.rate, params, indicators),
   }));
+}
+
+// ---------------------------------------------------------------------------------------------
+// Schedules as curves
+// ---------------------------------------------------------------------------------------------
+
+/** A schedule effect in calculable form, for the helpers in curve.ts. */
+export interface ScheduleView {
+  distribution: Distribution;
+  /** The reform's marginal rates at the given parameter values. */
+  reform: RateCurve;
+  /** The baseline's marginal rates. Undefined for an effect without a baseline: compare against no tax at all. */
+  baseline: RateCurve | undefined;
+}
+
+const NO_POINTS: readonly CurvePoint[] = Object.freeze([]);
+
+/** Bracket baselines as curves, converted once per pack. */
+const stepCurves = new WeakMap<ConstSchedule, RateCurve>();
+/** What the baseline of an effect yields on the effect's distribution; constant for a pack. */
+const baselineTotals = new WeakMap<ScheduleEffect, number>();
+
+function baselineCurve(baseline: ConstSchedule): RateCurve {
+  if ("points" in baseline) return baseline;
+  let curve = stepCurves.get(baseline);
+  if (!curve) stepCurves.set(baseline, (curve = bracketsToCurve(baseline.brackets)));
+  return curve;
+}
+
+function reformCurve(
+  effect: ScheduleEffect,
+  params: ParamValues,
+  indicators: Country["indicators"],
+): { curve: RateCurve; adjusted: boolean } {
+  const reform = effect.reform;
+  if ("curve" in reform) {
+    const value = params[reform.curve.param];
+    const points = Array.isArray(value) && (value.length === 0 || isPoint(value[0])) ? (value as CurvePoint[]) : NO_POINTS;
+    return { curve: { points, scale: reform.curve.scale }, adjusted: false };
+  }
+  const ordered = orderBrackets(evaluateBrackets(effect, params, indicators));
+  return { curve: bracketsToCurve(ordered.brackets), adjusted: ordered.adjusted };
+}
+
+/**
+ * The two schedules of a schedule effect as curves, whatever form the pack gives them in, plus
+ * the distribution they apply to. `params` are the policy's resolved parameter values
+ * (resolveParams, or PolicyResult.params).
+ *
+ * For a reform that is a curve param this wraps the param's points without copying them, so it
+ * is cheap enough to call on every pointer move.
+ */
+export function scheduleView(pack: CountryPack, effect: ScheduleEffect, params: ParamValues): ScheduleView {
+  const distribution = pack.distributions[effect.distribution];
+  if (!distribution) throw new Error(`Unknown distribution "${effect.distribution}". Validate the pack before using it.`);
+  return {
+    distribution,
+    reform: reformCurve(effect, params, pack.country.indicators).curve,
+    baseline: effect.baseline ? baselineCurve(effect.baseline) : undefined,
+  };
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -629,6 +748,7 @@ function applyEffect(
   let factor: number | undefined;
   let wanted = current;
   let affected: AffectedUnits | undefined;
+  let model: EffectResult["model"];
   let excludedShare: number | undefined;
   let excludedGroups: string[] | undefined;
 
@@ -649,8 +769,10 @@ function applyEffect(
       let left = run.groupWeights.get(key);
       if (!left) run.groupWeights.set(key, (left = new Map(shares)));
 
-      const chosen = Array.isArray(effect.groups) ? effect.groups : params[effect.groups.param];
-      excludedGroups = Array.isArray(chosen) ? [...new Set(chosen)].filter((id) => shares.has(id)) : [];
+      const chosen: unknown = Array.isArray(effect.groups) ? effect.groups : params[effect.groups.param];
+      excludedGroups = Array.isArray(chosen)
+        ? [...new Set<unknown>(chosen)].filter((id): id is string => typeof id === "string" && shares.has(id))
+        : [];
       let all = 0;
       for (const weight of left.values()) all += weight;
       let selected = 0;
@@ -677,28 +799,45 @@ function applyEffect(
     }
     case "schedule": {
       const dist = pack.distributions[effect.distribution] ?? fail(`unknown distribution "${effect.distribution}"`);
-      const ordered = orderBrackets(evaluateBrackets(effect, params, indicators));
-      if (ordered.adjusted) {
+      const baseline = effect.baseline;
+      let reform: number;
+      let basis: number | undefined; // what the baseline yields, if there is one
+      let adjusted: boolean;
+      if ("brackets" in effect.reform && (!baseline || "brackets" in baseline)) {
+        // Brackets on both sides: the step-function code, as before curves existed.
+        const ordered = orderBrackets(evaluateBrackets(effect, params, indicators));
+        adjusted = ordered.adjusted;
+        reform = scheduleTotal(dist, ordered.brackets);
+        if (baseline) basis = scheduleTotal(dist, baseline.brackets);
+        affected = affectedUnits(dist, ordered.brackets, baseline?.brackets);
+      } else {
+        const resolved = reformCurve(effect, params, indicators);
+        adjusted = resolved.adjusted;
+        reform = curveTotal(dist, resolved.curve);
+        const base = baseline ? baselineCurve(baseline) : undefined;
+        if (baseline && base) {
+          basis = baselineTotals.get(effect);
+          if (basis === undefined) baselineTotals.set(effect, (basis = curveTotal(dist, base)));
+        }
+        affected = curveAffected(dist, resolved.curve, base);
+      }
+      if (adjusted) {
         warn(
           "brackets_reordered",
           "Bracket thresholds are not ascending at the current parameter values; a threshold below its predecessor was raised to it.",
         );
       }
-      const reform = scheduleTotal(dist, ordered.brackets);
       let raw: number;
-      if (effect.baseline) {
-        const model = scheduleTotal(dist, effect.baseline.brackets);
-        if (model > 0) {
-          raw = current * (reform / model - 1);
-        } else {
-          raw = 0;
-          warn("baseline_yields_nothing", "The baseline schedule yields nothing on this distribution, so the effect cannot be calibrated.");
-        }
-      } else {
+      if (basis === undefined) {
         raw = reform;
+      } else if (basis > 0) {
+        raw = current * (reform / basis - 1);
+      } else {
+        raw = 0;
+        warn("baseline_yields_nothing", "The baseline schedule yields nothing on this distribution, so the effect cannot be calibrated.");
       }
       wanted = current + raw * (effect.yield === undefined ? 1 : evaluateValue(effect.yield, params, indicators));
-      affected = affectedUnits(dist, ordered.brackets, effect.baseline?.brackets);
+      model = basis === undefined ? { reform } : { reform, baseline: basis };
       break;
     }
   }
@@ -723,6 +862,7 @@ function applyEffect(
     clamped: change.clamped,
   };
   if (affected) result.affected = affected;
+  if (model) result.model = model;
   if (excludedShare !== undefined) result.excludedShare = excludedShare;
   if (excludedGroups) result.excludedGroups = excludedGroups;
 

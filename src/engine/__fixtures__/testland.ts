@@ -21,8 +21,17 @@
  *   cut_pensions                 exp.social.pensions 1600 -> 1440 (10 %); a quarter of
  *                                the 160 shifts to exp.social.basic_income 400 -> 440  balance +120  (40 to 140)
  *
+ *   redraw_income_tax            rev.taxes.income 1500 -> 1625: the tariff as an editable
+ *                                curve, model 120 -> 130                               balance +125  (100 to 150)
+ *
  * cut_pensions moves cost between levels: social insurance saves 120 and the centre 40 on
  * pensions, and the centre pays the 40 that reappear as basic income support.
+ *
+ * redraw_income_tax has a curve param. Today's tariff is 20 % from 10 and 40 % from 30, the same
+ * as the brackets of raise_top_tax_rate, written as curve points. The default curve starts at
+ * 10 % at an income of 10 and rises linearly to 40 % at 30:
+ *   an income of 20 owes 2 today and 1.75 after; an income of 45 owes 10 today and 11 after;
+ *   incomes between 10 and 23 1/3 pay less, incomes above pay more.
  */
 import type { RawPackFiles } from "../validate.ts";
 import type { CountryPack, LocalizedText } from "../types.ts";
@@ -505,6 +514,78 @@ export const testland: CountryPack = {
         },
       ],
       sources: [],
+    },
+    {
+      id: "redraw_income_tax",
+      label: t("Redraw the income tax", "Einkommensteuertarif neu zeichnen"),
+      summary: t(
+        "Set the marginal tax rate for every level of income.",
+        "Den Grenzsteuersatz für jede Einkommenshöhe festlegen.",
+      ),
+      topic: "taxes",
+      params: [
+        {
+          id: "tariff",
+          type: "curve",
+          label: t("Marginal tax rate", "Grenzsteuersatz"),
+          x: { unit: "currency", min: 0, max: 60, step: 1 },
+          y: { unit: "percent", min: 0, max: 60, step: 1 },
+          default: [
+            { x: 10, y: 10 },
+            { x: 30, y: 40 },
+          ],
+          baseline: [
+            { x: 10, y: 20 },
+            { x: 30, y: 20 },
+            { x: 30, y: 40 },
+          ],
+          minPoints: 1,
+          maxPoints: 6,
+          presets: [
+            {
+              id: "flat_tax",
+              label: t("Flat tax of 25 %", "Einheitssteuer von 25 %"),
+              points: [{ x: 10, y: 25 }],
+              sources: ["tax_statistics"],
+            },
+            {
+              id: "higher_top_rate",
+              label: t("50 % on income above 40", "50 % auf Einkommen über 40"),
+              points: [
+                { x: 10, y: 20 },
+                { x: 30, y: 20 },
+                { x: 30, y: 40 },
+                { x: 40, y: 40 },
+                { x: 40, y: 50 },
+              ],
+            },
+          ],
+          examples: [
+            { x: 20, label: t("Typical taxpayer", "Typischer Steuerzahler") },
+            { x: 45, label: t("High earner", "Spitzenverdiener") },
+          ],
+        },
+      ],
+      effects: [
+        {
+          type: "schedule",
+          target: "rev.taxes.income",
+          distribution: "income",
+          baseline: {
+            points: [
+              { x: 10, y: 20 },
+              { x: 30, y: 20 },
+              { x: 30, y: 40 },
+            ],
+            scale: 0.01,
+          },
+          reform: { curve: { param: "tariff", scale: 0.01 } },
+          quality: "estimate",
+          uncertainty: { low: 0.8, high: 1.2 },
+        },
+      ],
+      catches: [],
+      sources: ["tax_statistics"],
     },
   ],
 

@@ -19,6 +19,8 @@ export {
   simulate,
   simulatePolicy,
   resolveParams,
+  resolveCurve,
+  scheduleView,
   evaluateValue,
   evaluateBrackets,
   findNode,
@@ -32,6 +34,7 @@ export {
   type PolicyResult,
   type PolicyState,
   type Scenario,
+  type ScheduleView,
   type ShiftResult,
   type Side,
   type SimulationResult,
@@ -55,3 +58,17 @@ export {
   type AffectedUnits,
   type Bracket,
 } from "./distribution.ts";
+
+export {
+  bracketsToCurve,
+  curveRate,
+  curveOwed,
+  curveAverageRate,
+  curveTotal,
+  curveAffected,
+  scheduleBands,
+  payMoreOrLess,
+  type PayMoreOrLess,
+  type RateCurve,
+  type ScheduleBand,
+} from "./curve.ts";

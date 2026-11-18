@@ -1,10 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { testland, testlandCopy } from "./__fixtures__/testland.ts";
+import { curveOwed, curveTotal, payMoreOrLess, scheduleBands } from "./curve.ts";
 import {
+  evaluateBrackets,
   evaluateValue,
   findNode,
   perCapita,
+  resolveCurve,
   resolveParams,
+  scheduleView,
   shareOfGdp,
   simulate,
   simulatePolicy,
@@ -15,6 +19,8 @@ import {
   LEVEL_IDS,
   type BudgetNode,
   type CountryPack,
+  type CurveParam,
+  type CurvePoint,
   type Effect,
   type ExcludeGroupsEffect,
   type GroupNode,
@@ -22,6 +28,7 @@ import {
   type LevelId,
   type Param,
   type Policy,
+  type ScheduleEffect,
 } from "./types.ts";
 
 /** A scenario with the given policies enabled. A value of `true` means default parameters. */
@@ -721,6 +728,223 @@ describe("shift: part of what an effect removes reappears at another node", () =
   });
 });
 
+describe("curve params and curve schedules", () => {
+  const redraw = testland.policies.find((p) => p.id === "redraw_income_tax")!;
+  const tariff = redraw.params[0] as CurveParam;
+  const effect = redraw.effects[0] as ScheduleEffect;
+  const on = (points?: CurvePoint[], level?: LevelId) =>
+    simulate(testland, enable({ redraw_income_tax: points ? { tariff: points } : true }, level));
+  /** Today's tariff: 20 % from 10, 40 % from 30. */
+  const today: CurvePoint[] = [{ x: 10, y: 20 }, { x: 30, y: 20 }, { x: 30, y: 40 }];
+  const curveParam = (extra: Partial<CurveParam> = {}): CurveParam => ({ ...tariff, ...extra });
+
+  it("calibrated: the curve against a baseline in points form", () => {
+    // model(today) = 120; the default curve (10 % at 10 rising to 40 % at 30) gives 90 + 40 = 130.
+    const result = on();
+    expect(result.nodes["rev.taxes.income"].reform).toBeCloseTo(1625, 9);
+    const p = result.policies[0];
+    expect(p.params).toEqual({ tariff: [{ x: 10, y: 10 }, { x: 30, y: 40 }] });
+    expect(p.delta.revenue).toBeCloseTo(125, 9);
+    expect(p.low.revenue).toBeCloseTo(100, 9);
+    expect(p.high.revenue).toBeCloseTo(150, 9);
+    expect(p.effects[0].affected).toEqual({ threshold: 10, units: 30, share: 0.6 });
+    expect(p.effects[0].model?.reform).toBeCloseTo(130, 10);
+    expect(p.effects[0].model?.baseline).toBeCloseTo(120, 10);
+    expect(result.warnings).toEqual([]);
+  });
+
+  it("follows the points of the curve", () => {
+    // The presets of the fixture: a flat 25 % from 10 gives 0.25 * 500 = 125; a 50 % step above 40 adds 0.1 * 25.
+    const [flat, top] = tariff.presets!;
+    expect(on(flat.points).delta.revenue).toBeCloseTo(1500 * (125 / 120 - 1), 9);
+    expect(on(top.points).delta.revenue).toBeCloseTo(1500 * (122.5 / 120 - 1), 9);
+    expect(on(top.points).policies[0].effects[0].affected).toEqual({ threshold: 40, units: 5, share: 0.1 });
+    // Today's tariff changes nothing and affects nobody.
+    const same = on(today);
+    expect(same.delta.revenue).toBeCloseTo(0, 9);
+    expect(same.policies[0].effects[0].affected).toEqual({ threshold: null, units: 0, share: 0 });
+    // A single point with rate 0: the tax is gone.
+    expect(on([{ x: 0, y: 0 }]).nodes["rev.taxes.income"].reform).toBeCloseTo(0, 9);
+  });
+
+  it("gives the same result whichever form the two schedules are written in", () => {
+    const brackets = { brackets: [{ from: 10, rate: 0.2 }, { from: 30, rate: 0.4 }] };
+    const points = { points: today, scale: 0.01 };
+    const curve = { curve: { param: "tariff", scale: 0.01 } };
+    const steps = { brackets: [{ from: 10, rate: 0.2 }, { from: 30, rate: { param: "top", scale: 0.01 } }] };
+    const top: Param = { id: "top", type: "number", label: { en: "top" }, unit: "percent", min: 0, max: 100, step: 1, default: 50 };
+    const delta = (reform: ScheduleEffect["reform"], baseline: ScheduleEffect["baseline"], params: Param[]) =>
+      run([{ type: "schedule", target: "rev.taxes.income", distribution: "income", reform, baseline, quality: "estimate" }], params).result.delta.revenue;
+
+    // Curve reform against brackets and against points.
+    expect(delta(curve, brackets, [tariff])).toBeCloseTo(125, 9);
+    expect(delta(curve, points, [tariff])).toBeCloseTo(125, 9);
+    // Bracket reform (top rate 50 %: model 130) against brackets and against points.
+    expect(delta(steps, brackets, [top])).toBeCloseTo(125, 9);
+    expect(delta(steps, points, [top])).toBeCloseTo(125, 9);
+  });
+
+  it("absolute: without a baseline the modelled amount itself is added", () => {
+    const { result, policy: p } = run(
+      [{ type: "schedule", target: "rev.taxes.wealth", distribution: "income", reform: { curve: { param: "tariff", scale: 0.01 } }, quality: "estimate" }],
+      [tariff],
+    );
+    expect(result.nodes["rev.taxes.wealth"].reform).toBeCloseTo(130, 9);
+    expect(p.effects[0].model).toEqual({ reform: expect.closeTo(130, 9) });
+    // Without a baseline everyone with a positive rate is affected.
+    expect(p.effects[0].affected).toEqual({ threshold: 10, units: 30, share: 0.6 });
+  });
+
+  it("multiplies by `yield`, calibrated or not", () => {
+    const schedule = (extra: Partial<ScheduleEffect>): Effect => ({
+      type: "schedule",
+      target: "rev.taxes.income",
+      distribution: "income",
+      reform: { curve: { param: "tariff", scale: 0.01 } },
+      quality: "estimate",
+      yield: 0.6,
+      ...extra,
+    });
+    expect(run([schedule({ baseline: { points: today, scale: 0.01 } })], [tariff]).result.delta.revenue).toBeCloseTo(75, 9);
+    expect(run([schedule({ target: "rev.taxes.wealth" })], [tariff]).result.delta.revenue).toBeCloseTo(78, 9);
+  });
+
+  it("is calibrated to the current amount, like brackets", () => {
+    // After the top rate was raised the income tax is 1625; the redrawn tariff applies its 130/120 to that.
+    const result = simulate(testland, enable({ raise_top_tax_rate: true, redraw_income_tax: true }));
+    expect(result.policies[1].effects[0].delta).toBeCloseTo(1625 / 12, 9);
+    expect(result.nodes["rev.taxes.income"].reform).toBeCloseTo(1625 * (130 / 120), 9);
+  });
+
+  it("respects the level filter", () => {
+    expect(on(undefined, "central").delta.revenue).toBeCloseTo(62.5, 9);
+    expect(on(undefined, "social_security").delta.revenue).toBe(0);
+  });
+
+  it("reports the model totals of bracket schedules as well", () => {
+    expect(simulate(testland, enable({ raise_top_tax_rate: true })).policies[0].effects[0].model).toEqual({
+      reform: expect.closeTo(130, 10),
+      baseline: expect.closeTo(120, 10),
+    });
+    // 1 % above 1000 on the wealth tail: 50, before the yield of 0.8.
+    expect(simulate(testland, enable({ wealth_tax: true })).policies[0].effects[0].model).toEqual({ reform: expect.closeTo(50, 10) });
+    expect(simulate(testland, enable({ halve_mp_pay: true })).policies[0].effects[0].model).toBeUndefined();
+  });
+
+  describe("parameter resolution", () => {
+    it("falls back to the default", () => {
+      expect(resolveParams(testland, redraw)).toEqual({ tariff: tariff.default });
+      expect(resolveParams(testland, redraw).tariff).toBe(tariff.default);
+      for (const malformed of [5, "10_20", ["a", "b"], [1, 2], [{ x: 1 }], [{ x: 1, y: "2" }], [{ x: NaN, y: 2 }], [{ x: 1, y: Infinity }], [null], {}, null]) {
+        expect(resolveCurve(tariff, malformed)).toBe(tariff.default);
+      }
+    });
+
+    it("returns a curve that is in order and in range as it is, without copying", () => {
+      const points = [{ x: 0, y: 0 }, { x: 20, y: 30 }, { x: 20, y: 35 }, { x: 60, y: 60 }];
+      expect(resolveCurve(tariff, points)).toBe(points);
+      expect(resolveParams(testland, redraw, { tariff: points }).tariff).toBe(points);
+    });
+
+    it("sorts by x and keeps the order of points with the same x", () => {
+      const value = [{ x: 30, y: 40 }, { x: 10, y: 5 }, { x: 30, y: 45 }, { x: 20, y: 7 }, { x: 30, y: 50 }];
+      expect(resolveCurve(tariff, value)).toEqual([{ x: 10, y: 5 }, { x: 20, y: 7 }, { x: 30, y: 40 }, { x: 30, y: 45 }, { x: 30, y: 50 }]);
+      // The value that was passed in is left alone.
+      expect(value[0]).toEqual({ x: 30, y: 40 });
+    });
+
+    it("clamps into the ranges of both axes and snaps nothing", () => {
+      expect(resolveCurve(tariff, [{ x: -5, y: -1 }, { x: 12.3456, y: 33.3333 }, { x: 99, y: 80 }])).toEqual([
+        { x: 0, y: 0 },
+        { x: 12.3456, y: 33.3333 },
+        { x: 60, y: 60 },
+      ]);
+      // Clamping comes after sorting, so two points pushed onto the same edge keep their order.
+      expect(resolveCurve(tariff, [{ x: 70, y: 10 }, { x: 65, y: 20 }])).toEqual([{ x: 60, y: 20 }, { x: 60, y: 10 }]);
+    });
+
+    it("replaces a curve with too few or too many points by the default", () => {
+      const seven = Array.from({ length: 7 }, (_, i) => ({ x: i, y: i }));
+      expect(resolveCurve(tariff, seven)).toBe(tariff.default); // maxPoints is 6
+      expect(resolveCurve(tariff, seven.slice(0, 6))).toHaveLength(6);
+      expect(resolveCurve(tariff, [])).toBe(tariff.default); // minPoints is 1
+      // The defaults when the pack says nothing: 1 to 12.
+      const open = curveParam({ minPoints: undefined, maxPoints: undefined });
+      const many = Array.from({ length: 13 }, (_, i) => ({ x: i, y: i }));
+      expect(resolveCurve(open, many)).toBe(open.default);
+      expect(resolveCurve(open, many.slice(0, 12))).toHaveLength(12);
+      expect(resolveCurve(open, [])).toBe(open.default);
+      // With minPoints 0 an empty curve is a value of its own: no tax at all.
+      expect(resolveCurve(curveParam({ minPoints: 0 }), [])).toEqual([]);
+    });
+
+    it("is what the simulation runs with", () => {
+      const result = on([{ x: 30, y: 40 }, { x: 10, y: 10 }, { x: 99, y: 99 }]);
+      expect(result.policies[0].params.tariff).toEqual([{ x: 10, y: 10 }, { x: 30, y: 40 }, { x: 60, y: 60 }]);
+      // Up to 30 as the default curve (90), then rising from 40 % to 60 % at 60:
+      //   rate 0.4 + (t - 30) / 150 on [30, 50] times unitsAbove 25 - t/2
+      const top = 0.4 * 100 + (1 / 150) * (10 * 400 / 2 - 0.5 * 8000 / 3);
+      expect(result.policies[0].effects[0].model?.reform).toBeCloseTo(90 + top, 9);
+      // A malformed value runs as the default.
+      expect(simulate(testland, enable({ redraw_income_tax: { tariff: 7 } })).delta.revenue).toBeCloseTo(125, 9);
+    });
+
+    it("an empty curve removes the tax where the pack allows one", () => {
+      const pack = testlandCopy();
+      (pack.policies.find((p) => p.id === "redraw_income_tax")!.params[0] as CurveParam).minPoints = 0;
+      const result = simulate(pack, enable({ redraw_income_tax: { tariff: [] } }));
+      expect(result.nodes["rev.taxes.income"].reform).toBeCloseTo(0, 9);
+      expect(result.policies[0].effects[0].model).toEqual({ reform: 0, baseline: expect.closeTo(120, 10) });
+      expect(result.policies[0].effects[0].affected?.threshold).toBe(10);
+    });
+  });
+
+  describe("scheduleView", () => {
+    it("wraps a curve param without copying and passes a points baseline through", () => {
+      const params = resolveParams(testland, redraw);
+      const view = scheduleView(testland, effect, params);
+      expect(view.distribution).toBe(testland.distributions.income);
+      expect(view.reform.points).toBe(params.tariff);
+      expect(view.reform.scale).toBe(0.01);
+      expect(view.baseline).toBe(effect.baseline);
+      // The model totals of the effect are the totals of these two curves.
+      expect(curveTotal(view.distribution, view.reform)).toBeCloseTo(130, 10);
+      expect(curveTotal(view.distribution, view.baseline!)).toBeCloseTo(120, 10);
+    });
+
+    it("turns brackets into step curves, with the params applied", () => {
+      const raise = testland.policies.find((p) => p.id === "raise_top_tax_rate")!;
+      const brackets = raise.effects[0] as ScheduleEffect;
+      const view = scheduleView(testland, brackets, resolveParams(testland, raise, { top_rate: 55 }));
+      expect(view.reform.points).toEqual([{ x: 10, y: 0.2 }, { x: 30, y: 0.2 }, { x: 30, y: 0.55 }]);
+      expect(view.baseline?.points).toEqual([{ x: 10, y: 0.2 }, { x: 30, y: 0.2 }, { x: 30, y: 0.4 }]);
+      // The baseline is converted once.
+      expect(scheduleView(testland, brackets, resolveParams(testland, raise)).baseline).toBe(view.baseline);
+      // An effect without a baseline has none.
+      const wealth = testland.policies.find((p) => p.id === "wealth_tax")!;
+      const absolute = scheduleView(testland, wealth.effects[0] as ScheduleEffect, resolveParams(testland, wealth));
+      expect(absolute.baseline).toBeUndefined();
+      expect(absolute.reform.points).toEqual([{ x: 1000, y: 0.01 }]);
+      // evaluateBrackets has nothing to say about a curve reform.
+      expect(evaluateBrackets(effect, resolveParams(testland, redraw), testland.country.indicators)).toEqual([]);
+    });
+
+    it("feeds the helpers the UI draws from", () => {
+      const view = scheduleView(testland, effect, resolveParams(testland, redraw));
+      // "An income of 20 pays 2 today and 1.75 after", from the examples of the param.
+      const [typical, high] = tariff.examples!;
+      expect(curveOwed(view.baseline!, typical.x)).toBeCloseTo(2, 12);
+      expect(curveOwed(view.reform, typical.x)).toBeCloseTo(1.75, 12);
+      expect(curveOwed(view.baseline!, high.x)).toBeCloseTo(10, 12);
+      expect(curveOwed(view.reform, high.x)).toBeCloseTo(11, 12);
+      expect(scheduleBands(view.distribution, view.reform, view.baseline).map((band) => band.perUnit)).toEqual([0, expect.closeTo(0, 9), expect.closeTo(1, 9)]);
+      expect(payMoreOrLess(view.distribution, view.reform, view.baseline, 0).less).toBeCloseTo(40 / 3, 9);
+      // The display baseline of the param is today's curve in the same units.
+      expect(curveTotal(view.distribution, { points: tariff.baseline!, scale: 0.01 })).toBeCloseTo(120, 10);
+    });
+  });
+});
+
 describe("effects on group nodes", () => {
   it("scale changes every leaf by the same factor", () => {
     const result = simulate(testland, enable({ cut_admin: { cut: 50 } }));
@@ -834,8 +1058,9 @@ describe("attribution", () => {
       expect(sum(result.policies.map((p) => p.delta[key]))).toBe(result.delta[key]);
       expect(result.reform[key] - result.baseline[key]).toBeCloseTo(result.delta[key], 9);
     }
-    // Hand-checked. Revenue: +40 (wealth tax) + 125 (top rate) = 165.
-    expect(result.delta.revenue).toBeCloseTo(165, 9);
+    // Hand-checked. Revenue: +40 (wealth tax) + 125 (top rate), and the redrawn tariff on top of
+    // the raised top rate: 1625 * (130 / 120 - 1).
+    expect(result.delta.revenue).toBeCloseTo(165 + 1625 / 12, 9);
     // Expenditure: parliament 10 -> 5 -> 4.5; other administration 390 -> 351 -> 357 (the extra 6 comes
     // after the cut); basic income 400 -> 304; defence 200 -> 300; family benefits 200 -> 300.
     expect(result.nodes["exp.admin.other"].reform).toBeCloseTo(357, 9);
@@ -1117,6 +1342,35 @@ describe("purity", () => {
     // Central government pays basic income support, the provinces education.
     expect(simulate(pack, enable({ shifted: true }, "central")).delta.balance).toBeCloseTo(360, 9);
     expect(simulate(pack, enable({ shifted: true }, "state")).delta.balance).toBeCloseTo(-374.4, 9);
+  });
+
+  it("carries nothing from one call to the next for curve params either", () => {
+    const curves: CurvePoint[][] = [
+      [{ x: 10, y: 10 }, { x: 30, y: 40 }],
+      [{ x: 0, y: 5 }, { x: 25, y: 5 }, { x: 25, y: 45 }, { x: 50, y: 55 }],
+      [{ x: 10, y: 25 }],
+      [{ x: 40, y: 50 }, { x: 5, y: 15 }], // out of order: sorted on the way in
+    ];
+    const levels = ["all", "central", "state", "social_security"] as const;
+    const scenario = (points: CurvePoint[], level: (typeof levels)[number]): Scenario => ({
+      policies: { redraw_income_tax: { enabled: true, params: { tariff: points } }, raise_top_tax_rate: { enabled: true } },
+      level,
+    });
+    // On one much-used pack, in two orders, and on a pack that has never been simulated.
+    const first = curves.map((points) => levels.map((level) => simulate(testland, scenario(points, level))));
+    const again = [...curves].reverse().map((points) => [...levels].reverse().map((level) => simulate(testland, scenario(points, level))));
+    curves.forEach((points, i) => {
+      levels.forEach((level, k) => {
+        expect(again[curves.length - 1 - i][levels.length - 1 - k]).toEqual(first[i][k]);
+        expect(simulate(testlandCopy(), scenario(points, level))).toEqual(first[i][k]);
+      });
+      expect(first[i][0].policies.map((p) => p.id)).toEqual(["raise_top_tax_rate", "redraw_income_tax"]);
+    });
+    // The values that were passed in are untouched, and so is the default in the pack.
+    expect(curves[3]).toEqual([{ x: 40, y: 50 }, { x: 5, y: 15 }]);
+    expect(testland.policies.find((p) => p.id === "redraw_income_tax")!.params[0]).toMatchObject({ default: [{ x: 10, y: 10 }, { x: 30, y: 40 }] });
+    // Different curves really give different results.
+    expect(new Set(first.map((row) => row[0].delta.revenue.toFixed(6))).size).toBe(curves.length);
   });
 
   it("carries nothing over on the fixture either, whatever was simulated before", () => {

@@ -7,27 +7,33 @@
  * report under follow-up errors.
  */
 import type { z } from "zod";
+import { curveTotal } from "./curve.ts";
 import { scheduleTotal, totalUnits } from "./distribution.ts";
 import {
   budgetSchema,
   countrySchema,
   distributionSchema,
+  flattenIssues,
   policiesFileSchema,
   sourcesFileSchema,
 } from "./schema.ts";
 import { evaluateBrackets, evaluateValue, type ParamValues } from "./simulate.ts";
-import type {
-  Breakdown,
-  BudgetNode,
-  CountryPack,
-  Distribution,
-  Effect,
-  LevelId,
-  LocalizedText,
-  Param,
-  Policy,
-  SourceId,
-  Value,
+import {
+  CURVE_MAX_POINTS,
+  CURVE_MIN_POINTS,
+  type Breakdown,
+  type BudgetNode,
+  type CountryPack,
+  type CurveParam,
+  type CurvePoint,
+  type Distribution,
+  type Effect,
+  type LevelId,
+  type LocalizedText,
+  type Param,
+  type Policy,
+  type SourceId,
+  type Value,
 } from "./types.ts";
 
 /** The parsed JSON of each file of one pack, before any checking. */
@@ -123,41 +129,6 @@ export function validatePackFiles(texts: Record<string, string>, id?: string): V
   return check(files, errors, warnings, unreadable);
 }
 
-interface RawIssue {
-  code?: string;
-  path: PropertyKey[];
-  message: string;
-  expected?: string;
-  errors?: RawIssue[][];
-}
-
-/**
- * zod reports a failed union as one "Invalid input" issue with the issues of every variant
- * nested inside. Report the variant the author most likely meant: one whose basic type matched,
- * and of those the one with the fewest problems.
- */
-function flattenIssues(issues: readonly RawIssue[], prefix: Path = []): { path: Path; message: string }[] {
-  const out: { path: Path; message: string }[] = [];
-  for (const issue of issues) {
-    const path = [...prefix, ...issue.path];
-    if (issue.code === "invalid_union" && issue.errors && issue.errors.length > 0) {
-      const wrongType = (variant: RawIssue[]): boolean =>
-        variant.some((inner) => inner.code === "invalid_type" && inner.path.length === 0);
-      const plausible = issue.errors.filter((variant) => !wrongType(variant));
-      if (plausible.length > 0) {
-        const best = plausible.reduce((a, b) => (b.length < a.length ? b : a));
-        out.push(...flattenIssues(best, path));
-      } else {
-        const expected = issue.errors.flatMap((variant) => variant.map((inner) => inner.expected ?? ""));
-        out.push({ path, message: `Invalid input: expected ${[...new Set(expected.filter(Boolean))].join(" or ")}` });
-      }
-    } else {
-      out.push({ path, message: issue.message });
-    }
-  }
-  return out;
-}
-
 interface NodeInfo {
   node: BudgetNode;
   isLeaf: boolean;
@@ -206,7 +177,7 @@ function check(
     }
     const result = schema.safeParse(raw);
     if (result.success) return result.data;
-    for (const issue of flattenIssues(result.error.issues as unknown as RawIssue[])) {
+    for (const issue of flattenIssues(result.error.issues)) {
       error(file, issue.path, issue.message);
     }
     return undefined;
@@ -326,8 +297,11 @@ function check(
 
   // --- distributions/*.json ---------------------------------------------------------------------
 
+  /** Distributions whose bins are in order, so that schedules can be integrated over them. */
+  const sound = new Set<string>();
   for (const [name, distribution] of Object.entries(distributions)) {
     const file = distributionFile(name);
+    const before = errors.length;
     if (distribution.id !== name) error(file, ["id"], `is "${distribution.id}" but the file is named "${name}.json"`);
     text(file, ["label"], distribution.label);
     text(file, ["variable"], distribution.variable);
@@ -350,6 +324,7 @@ function check(
       error(file, ["tail", "from"], `${distribution.tail.from} must equal the end of the last bin, ${last.to}`);
     }
     if (!(totalUnits(distribution) > 0)) error(file, ["bins"], "the distribution contains no units");
+    if (errors.length === before) sound.add(name);
   }
 
   // --- policies.json --------------------------------------------------------------------------
@@ -362,6 +337,54 @@ function check(
     const params = new Map<string, Param>();
     const usedParams = new Set<string>();
     const defaults: ParamValues = {};
+
+    const checkCurveParam = (param: CurveParam, path: Path): void => {
+      const { x, y } = param;
+      if (x.min < 0) error(POLICIES, [...path, "x", "min"], `${x.min} is below 0`);
+      if (!(x.min < x.max)) error(POLICIES, [...path, "x"], `min (${x.min}) must be below max (${x.max})`);
+      if (!(y.min < y.max)) error(POLICIES, [...path, "y"], `min (${y.min}) must be below max (${y.max})`);
+      const minPoints = param.minPoints ?? CURVE_MIN_POINTS;
+      const maxPoints = param.maxPoints ?? CURVE_MAX_POINTS;
+      if (minPoints > maxPoints) {
+        error(POLICIES, [...path, "minPoints"], `minPoints (${minPoints}) is above maxPoints (${maxPoints})`);
+      }
+
+      const checkPoints = (points: readonly CurvePoint[], at: Path): void => {
+        if (minPoints <= maxPoints && (points.length < minPoints || points.length > maxPoints)) {
+          error(POLICIES, at, `${points.length} point(s), but the param allows ${minPoints} to ${maxPoints}`);
+        }
+        points.forEach((point, k) => {
+          if (point.x < x.min || point.x > x.max) {
+            error(POLICIES, [...at, k, "x"], `${point.x} lies outside [${x.min}, ${x.max}]`);
+          }
+          if (point.y < y.min || point.y > y.max) {
+            error(POLICIES, [...at, k, "y"], `${point.y} lies outside [${y.min}, ${y.max}]`);
+          }
+          if (k > 0 && point.x < points[k - 1].x) {
+            error(POLICIES, [...at, k, "x"], `points must be ordered by x, but ${point.x} follows ${points[k - 1].x}`);
+          }
+        });
+      };
+
+      checkPoints(param.default, [...path, "default"]);
+      if (param.baseline) checkPoints(param.baseline, [...path, "baseline"]);
+      const presetIds = new Set<string>();
+      param.presets?.forEach((preset, k) => {
+        const at = [...path, "presets", k];
+        if (presetIds.has(preset.id)) error(POLICIES, [...at, "id"], `duplicate preset id "${preset.id}" in param "${param.id}"`);
+        presetIds.add(preset.id);
+        text(POLICIES, [...at, "label"], preset.label);
+        refs(POLICIES, [...at, "sources"], preset.sources);
+        checkPoints(preset.points, [...at, "points"]);
+      });
+      param.examples?.forEach((example, k) => {
+        const at = [...path, "examples", k];
+        text(POLICIES, [...at, "label"], example.label);
+        if (example.x < x.min || example.x > x.max) {
+          error(POLICIES, [...at, "x"], `${example.x} lies outside [${x.min}, ${x.max}]`);
+        }
+      });
+    };
 
     policy.params.forEach((param, i) => {
       const path = [...base, "params", i];
@@ -376,6 +399,12 @@ function check(
           error(POLICIES, [...path, "default"], `${param.default} lies outside [${param.min}, ${param.max}]`);
         }
         defaults[param.id] = Math.min(param.max, Math.max(param.min, param.default));
+        return;
+      }
+
+      if (param.type === "curve") {
+        checkCurveParam(param, path);
+        defaults[param.id] = param.default;
         return;
       }
 
@@ -410,7 +439,7 @@ function check(
         error(POLICIES, [...path, "param"], `unknown param "${value.param}" in policy "${policy.id}"`);
         ok = false;
       } else if (param.type !== "number") {
-        error(POLICIES, [...path, "param"], `param "${value.param}" is a groups param; a number param is needed here`);
+        error(POLICIES, [...path, "param"], `param "${value.param}" is a ${param.type} param; a number param is needed here`);
         ok = false;
       } else if ((param.unit === "percent" || param.unit === "percent_gdp") && value.scale === undefined) {
         // 1 % would be read as 1, that is as 100 %. The range check on rates cannot see that.
@@ -510,7 +539,7 @@ function check(
           if (!param) {
             error(POLICIES, [...path, "groups", "param"], `unknown param "${paramId}" in policy "${policy.id}"`);
           } else if (param.type !== "groups") {
-            error(POLICIES, [...path, "groups", "param"], `param "${paramId}" is a number param; a groups param is needed here`);
+            error(POLICIES, [...path, "groups", "param"], `param "${paramId}" is a ${param.type} param; a groups param is needed here`);
           } else if (known) {
             // The param offers the groups of its own breakdown. The effect reads the shares from the
             // breakdown on its target, so the ids have to exist there as well.
@@ -534,49 +563,103 @@ function check(
         }
 
         case "schedule": {
-          const distribution = own(distributions, effect.distribution);
+          // Only a distribution that passed its own checks is integrated over.
+          const distribution = sound.has(effect.distribution) ? own(distributions, effect.distribution) : undefined;
           if (!distributionNames.has(effect.distribution)) {
             error(POLICIES, [...path, "distribution"], `unknown distribution "${effect.distribution}"`);
           }
           let evaluable = checkValue(effect.yield, [...path, "yield"]);
-          effect.reform.brackets.forEach((bracket, k) => {
-            const at = [...path, "reform", "brackets", k];
-            evaluable = checkValue(bracket.from, [...at, "from"]) && evaluable;
-            evaluable = checkValue(bracket.rate, [...at, "rate"]) && evaluable;
-          });
-          if (evaluable && country) {
-            const brackets = evaluateBrackets(effect, defaults, country.indicators);
-            for (let k = 0; k < brackets.length; k++) {
-              if (k > 0 && !(brackets[k].from > brackets[k - 1].from)) {
+          const reform = effect.reform;
+          if ("curve" in reform) {
+            // The reform is the value of a curve param of this policy.
+            const at = [...path, "reform", "curve"];
+            const paramId = reform.curve.param;
+            usedParams.add(paramId);
+            const param = params.get(paramId);
+            if (!param) {
+              error(POLICIES, [...at, "param"], `unknown param "${paramId}" in policy "${policy.id}"`);
+            } else if (param.type !== "curve") {
+              error(POLICIES, [...at, "param"], `param "${paramId}" is a ${param.type} param; a curve param is needed here`);
+            } else {
+              const scale = reform.curve.scale ?? 1;
+              if (reform.curve.scale === undefined) {
+                warn(POLICIES, at, `the curve of param "${paramId}" is in percent but is used without "scale"; to get a fraction it needs "scale": 0.01`);
+              }
+              const offending = param.default.findIndex((point) => !isFraction(point.y * scale));
+              if (offending >= 0) {
                 error(
                   POLICIES,
-                  [...path, "reform", "brackets", k, "from"],
-                  `thresholds must be ascending at default parameter values, but ${brackets[k].from} follows ${brackets[k - 1].from}`,
+                  at,
+                  `point ${offending} of the default curve gives a rate of ${round(param.default[offending].y * scale)}, which is not between 0 and 1 (a percent curve needs "scale": 0.01)`,
                 );
               }
-              if (!isFraction(brackets[k].rate)) {
-                error(
-                  POLICIES,
-                  [...path, "reform", "brackets", k, "rate"],
-                  `${brackets[k].rate} at default parameter values is not a rate between 0 and 1 (a percent param needs "scale": 0.01)`,
-                );
+            }
+          } else {
+            reform.brackets.forEach((bracket, k) => {
+              const at = [...path, "reform", "brackets", k];
+              evaluable = checkValue(bracket.from, [...at, "from"]) && evaluable;
+              evaluable = checkValue(bracket.rate, [...at, "rate"]) && evaluable;
+            });
+            if (evaluable && country) {
+              const brackets = evaluateBrackets(effect, defaults, country.indicators);
+              for (let k = 0; k < brackets.length; k++) {
+                if (k > 0 && !(brackets[k].from > brackets[k - 1].from)) {
+                  error(
+                    POLICIES,
+                    [...path, "reform", "brackets", k, "from"],
+                    `thresholds must be ascending at default parameter values, but ${brackets[k].from} follows ${brackets[k - 1].from}`,
+                  );
+                }
+                if (!isFraction(brackets[k].rate)) {
+                  error(
+                    POLICIES,
+                    [...path, "reform", "brackets", k, "rate"],
+                    `${brackets[k].rate} at default parameter values is not a rate between 0 and 1 (a percent param needs "scale": 0.01)`,
+                  );
+                }
               }
             }
           }
           if (effect.baseline) {
-            const brackets = effect.baseline.brackets;
-            let ascending = true;
-            for (let k = 1; k < brackets.length; k++) {
-              if (!(brackets[k].from > brackets[k - 1].from)) {
-                ascending = false;
-                error(
-                  POLICIES,
-                  [...path, "baseline", "brackets", k, "from"],
-                  `thresholds must be ascending, but ${brackets[k].from} follows ${brackets[k - 1].from}`,
-                );
+            const baseline = effect.baseline;
+            let usable = true;
+            let model = 0;
+            if ("points" in baseline) {
+              const scale = baseline.scale ?? 1;
+              baseline.points.forEach((point, k) => {
+                const at = [...path, "baseline", "points", k];
+                if (point.x < 0) {
+                  usable = false;
+                  error(POLICIES, [...at, "x"], `${point.x} is below 0`);
+                }
+                if (k > 0 && point.x < baseline.points[k - 1].x) {
+                  usable = false;
+                  error(POLICIES, [...at, "x"], `points must be ordered by x, but ${point.x} follows ${baseline.points[k - 1].x}`);
+                }
+                if (!isFraction(point.y * scale)) {
+                  error(
+                    POLICIES,
+                    [...at, "y"],
+                    `${point.y} gives a rate of ${round(point.y * scale)}, which is not between 0 and 1 (percent needs "scale": 0.01)`,
+                  );
+                }
+              });
+              if (distribution && usable) model = curveTotal(distribution, baseline);
+            } else {
+              const brackets = baseline.brackets;
+              for (let k = 1; k < brackets.length; k++) {
+                if (!(brackets[k].from > brackets[k - 1].from)) {
+                  usable = false;
+                  error(
+                    POLICIES,
+                    [...path, "baseline", "brackets", k, "from"],
+                    `thresholds must be ascending, but ${brackets[k].from} follows ${brackets[k - 1].from}`,
+                  );
+                }
               }
+              if (distribution && usable) model = scheduleTotal(distribution, brackets);
             }
-            if (distribution && ascending && !(scheduleTotal(distribution, brackets) > 0)) {
+            if (distribution && usable && !(model > 0)) {
               error(
                 POLICIES,
                 [...path, "baseline"],

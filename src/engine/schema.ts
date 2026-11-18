@@ -10,8 +10,13 @@ import type {
   Breakdown,
   Budget,
   BudgetNode,
+  BracketSchedule,
   Catch,
+  ConstBracketSchedule,
+  ConstSchedule,
   Country,
+  CurveParam,
+  CurveSchedule,
   Distribution,
   Effect,
   EffectShift,
@@ -19,8 +24,10 @@ import type {
   LeafNode,
   LocalizedText,
   Param,
+  PointsSchedule,
   PoliciesFile,
   Policy,
+  Schedule,
   Source,
   Value,
 } from "./types.ts";
@@ -32,6 +39,76 @@ const NODE_ID_PATTERN = new RegExp(`^(?:rev|exp)(?:\\.${SNAKE})+$`);
 const text = z.string().min(1);
 const year = z.number().int().min(1900).max(2200);
 const share = z.number().min(0).max(1);
+
+type IssuePath = readonly PropertyKey[];
+
+interface RawIssue {
+  code?: string;
+  path: PropertyKey[];
+  message: string;
+  expected?: string;
+  errors?: RawIssue[][];
+}
+
+/**
+ * zod reports a failed union as one "Invalid input" issue with the issues of every variant
+ * nested inside. Report the variant the author most likely meant: one whose basic type matched
+ * and that knows all the keys that are present, and of those the one with the fewest problems.
+ */
+export function flattenIssues(issues: readonly unknown[], prefix: IssuePath = []): { path: IssuePath; message: string }[] {
+  const out: { path: IssuePath; message: string }[] = [];
+  for (const issue of issues as readonly RawIssue[]) {
+    const path = [...prefix, ...issue.path];
+    if (issue.code === "invalid_union" && issue.errors && issue.errors.length > 0) {
+      const wrongType = (variant: RawIssue[]): boolean =>
+        variant.some((inner) => inner.code === "invalid_type" && inner.path.length === 0);
+      // A variant that does not know one of the keys that are present is not the one that was meant.
+      const strangeKeys = (variant: RawIssue[]): boolean =>
+        variant.some((inner) => inner.code === "unrecognized_keys" && inner.path.length === 0);
+      const rightType = issue.errors.filter((variant) => !wrongType(variant));
+      const fitting = rightType.filter((variant) => !strangeKeys(variant));
+      const plausible = fitting.length > 0 ? fitting : rightType;
+      if (plausible.length > 0) {
+        const best = plausible.reduce((a, b) => (b.length < a.length ? b : a));
+        out.push(...flattenIssues(best, path));
+      } else {
+        const expected = issue.errors.flatMap((variant) => variant.map((inner) => inner.expected ?? ""));
+        out.push({ path, message: `Invalid input: expected ${[...new Set(expected.filter(Boolean))].join(" or ")}` });
+      }
+    } else {
+      out.push({ path, message: issue.message });
+    }
+  }
+  return out;
+}
+
+/**
+ * A schema for an object that comes in several forms, told apart by which key is present. This
+ * keeps error messages specific where z.union can only say that nothing matched: the form that
+ * was meant is checked and its problems are reported as they are. `misplaced` names keys of
+ * forms that exist elsewhere in the contract but are not allowed here, with the message to give.
+ */
+function byKey<T>(forms: Record<string, z.ZodType<T>>, misplaced: Record<string, string> = {}): z.ZodType<T> {
+  const keys = Object.keys(forms);
+  return z.unknown().transform((value, ctx): T => {
+    const present = typeof value === "object" && value !== null ? value : {};
+    const key = keys.find((candidate) => candidate in present);
+    if (key === undefined) {
+      for (const [wrong, message] of Object.entries(misplaced)) {
+        if (wrong in present) {
+          ctx.addIssue({ code: "custom", message });
+          return z.NEVER;
+        }
+      }
+    }
+    const result = forms[key ?? keys[0]].safeParse(value);
+    if (result.success) return result.data;
+    for (const issue of flattenIssues(result.error.issues)) {
+      ctx.addIssue({ code: "custom", message: issue.message, path: [...issue.path] });
+    }
+    return z.NEVER;
+  });
+}
 
 export const idSchema = z.string().regex(ID_PATTERN, "must be lower_snake_case (a-z, 0-9 and _)");
 
@@ -160,6 +237,29 @@ export const distributionSchema = z.strictObject({
   note: localizedTextSchema.optional(),
 });
 
+export const curvePointSchema = z.strictObject({ x: z.number(), y: z.number() });
+
+const curvePoints = z.array(curvePointSchema);
+
+const curveAxis = <U extends string>(unit: U) =>
+  z.strictObject({ unit: z.literal(unit), min: z.number(), max: z.number(), step: z.number().positive() });
+
+export const curveParamSchema = z.strictObject({
+  id: idSchema,
+  type: z.literal("curve"),
+  label: localizedTextSchema,
+  x: curveAxis("currency"),
+  y: curveAxis("percent"),
+  default: curvePoints,
+  baseline: curvePoints.optional(),
+  minPoints: z.number().int().min(0).optional(),
+  maxPoints: z.number().int().min(1).optional(),
+  presets: z
+    .array(z.strictObject({ id: idSchema, label: localizedTextSchema, points: curvePoints, sources: sourceIds.optional() }))
+    .optional(),
+  examples: z.array(z.strictObject({ x: z.number(), label: localizedTextSchema })).optional(),
+});
+
 export const paramSchema = z.discriminatedUnion("type", [
   z.strictObject({
     id: idSchema,
@@ -180,6 +280,7 @@ export const paramSchema = z.discriminatedUnion("type", [
     breakdown: z.string(),
     default: z.array(z.string()),
   }),
+  curveParamSchema,
 ]);
 
 export const valueSchema = z.union([
@@ -209,13 +310,34 @@ export const shiftSchema = z.strictObject({
   uncertainty: uncertaintySchema.optional(),
 });
 
-export const scheduleSchema = z.strictObject({
+export const bracketScheduleSchema = z.strictObject({
   brackets: z.array(z.strictObject({ from: valueSchema, rate: valueSchema })).min(1),
 });
 
-export const constScheduleSchema = z.strictObject({
+export const curveScheduleSchema = z.strictObject({
+  curve: z.strictObject({ param: z.string(), scale: z.number().optional() }),
+});
+
+export const constBracketScheduleSchema = z.strictObject({
   brackets: z.array(z.strictObject({ from: z.number(), rate: share })).min(1),
 });
+
+export const pointsScheduleSchema = z.strictObject({
+  points: curvePoints.min(1),
+  scale: z.number().optional(),
+});
+
+/** A reform: brackets, or the value of a curve param. */
+export const scheduleSchema: z.ZodType<Schedule> = byKey<Schedule>(
+  { brackets: bracketScheduleSchema, curve: curveScheduleSchema },
+  { points: 'fixed "points" are only allowed in a baseline; a reform needs "brackets" or "curve"' },
+);
+
+/** A baseline: brackets, or fixed curve points. */
+export const constScheduleSchema: z.ZodType<ConstSchedule> = byKey<ConstSchedule>(
+  { brackets: constBracketScheduleSchema, points: pointsScheduleSchema },
+  { curve: 'a "curve" schedule is only allowed as the reform; a baseline needs "brackets" or "points"' },
+);
 
 export const effectSchema = z.discriminatedUnion("type", [
   z.strictObject({ ...effectBase, type: z.literal("scale"), factor: valueSchema, shift: shiftSchema.optional() }),
@@ -274,7 +396,12 @@ export type SchemaMatchesTypes = [
   Assert<Same<Out<typeof leafNodeSchema>, LeafNode>>,
   Assert<Same<Out<typeof budgetSchema>, Budget>>,
   Assert<Same<Out<typeof distributionSchema>, Distribution>>,
+  Assert<Same<Out<typeof curveParamSchema>, CurveParam>>,
   Assert<Same<Out<typeof paramSchema>, Param>>,
+  Assert<Same<Out<typeof bracketScheduleSchema>, BracketSchedule>>,
+  Assert<Same<Out<typeof curveScheduleSchema>, CurveSchedule>>,
+  Assert<Same<Out<typeof constBracketScheduleSchema>, ConstBracketSchedule>>,
+  Assert<Same<Out<typeof pointsScheduleSchema>, PointsSchedule>>,
   Assert<Same<Out<typeof valueSchema>, Value>>,
   Assert<Same<Out<typeof shiftSchema>, EffectShift>>,
   Assert<Same<Out<typeof effectSchema>, Effect>>,
