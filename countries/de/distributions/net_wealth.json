@@ -1,0 +1,74 @@
+{
+  "id": "net_wealth",
+  "label": {
+    "de": "Nettovermögen der privaten Haushalte",
+    "en": "Net wealth of private households"
+  },
+  "variable": {
+    "de": "Nettovermögen je Haushalt in Euro (Immobilien, Betriebs- und Finanzvermögen abzüglich Schulden; ohne Rentenansprüche)",
+    "en": "net wealth per household in euros (real estate, business and financial assets minus debt; excluding pension entitlements)"
+  },
+  "unit": {
+    "de": "Haushalte",
+    "en": "households"
+  },
+  "year": 2024,
+  "bins": [
+    {
+      "from": -250000,
+      "to": 0,
+      "count": 8271277,
+      "mean": -13214
+    },
+    {
+      "from": 0,
+      "to": 41557,
+      "count": 8271277,
+      "mean": 20443
+    },
+    {
+      "from": 41557,
+      "to": 123806,
+      "count": 4135639,
+      "mean": 84475
+    },
+    {
+      "from": 123806,
+      "to": 241631,
+      "count": 4135639,
+      "mean": 181448
+    },
+    {
+      "from": 241631,
+      "to": 404358,
+      "count": 4135639,
+      "mean": 321774
+    },
+    {
+      "from": 404358,
+      "to": 626884,
+      "count": 4135639,
+      "mean": 508138
+    },
+    {
+      "from": 626884,
+      "to": 1034945,
+      "count": 4135639,
+      "mean": 773380
+    }
+  ],
+  "tail": {
+    "from": 1034945,
+    "count": 4135639,
+    "alpha": 1.6006
+  },
+  "quality": "estimate",
+  "sources": [
+    "ecb_dwa",
+    "diw_wb_29_2020"
+  ],
+  "note": {
+    "de": "Verteilungsbasierte Vermögensbilanz (Distributional Wealth Accounts) von EZB und Bundesbank für Deutschland, 4. Quartal 2024: eine experimentelle Statistik, die Befragungsdaten auf die gesamtwirtschaftlichen Vermögensbestände hochrechnet und die Untererfassung sehr reicher Haushalte korrigiert. Amtlich veröffentlicht sind die Vermögenssummen der unteren Hälfte, der Zehntel 6 bis 10 und der Anteil der reichsten 5 %. Eigene Näherungen: Die Grenzen zwischen den Gruppen sind nicht veröffentlicht und als geometrisches Mittel benachbarter Gruppenmittel gesetzt; die Untergrenze der ersten Gruppe ist gesetzt. Oberhalb des 90. Perzentils (rund 1,03 Mio. Euro je Haushalt) wird eine Pareto-Verteilung verwendet, die die veröffentlichten Summen der reichsten 10 % und 5 % genau trifft. Innerhalb der reichsten 5 % ist die Verteilung damit eine Modellannahme; Auswertungen mit Reichenlisten (DIW) deuten auf eine noch stärkere Konzentration an der Spitze hin. Vermögen je Haushalt, nicht je Person.",
+    "en": "Distributional Wealth Accounts of the ECB and the Bundesbank for Germany, fourth quarter of 2024: an experimental statistic that scales survey data to macroeconomic balance sheets and corrects for the under-coverage of very wealthy households. Officially published are the wealth totals of the bottom half, of deciles 6 to 10 and the share of the top 5%. Own approximations: the thresholds between groups are not published and are set to the geometric mean of neighbouring group means; the lower bound of the first group is set arbitrarily. Above the 90th percentile (about EUR 1.03 million per household) a Pareto distribution is used that exactly reproduces the published totals of the top 10% and the top 5%. The distribution within the top 5% is therefore a modelling assumption; analyses using rich lists (DIW) point to even stronger concentration at the very top. Wealth per household, not per person."
+  }
+}

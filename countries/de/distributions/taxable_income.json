@@ -1,0 +1,157 @@
+{
+  "id": "taxable_income",
+  "label": {
+    "de": "Zu versteuerndes Einkommen je Steuerpflichtigem",
+    "en": "Taxable income per taxpayer"
+  },
+  "variable": {
+    "de": "zu versteuerndes Einkommen pro Jahr in Euro (bei zusammen veranlagten Paaren je Partner die Hälfte)",
+    "en": "taxable income per year in euros (for jointly assessed couples, half per partner)"
+  },
+  "unit": {
+    "de": "Steuerpflichtige Personen (zusammen veranlagte Paare zählen als zwei Personen)",
+    "en": "taxpayers (jointly assessed couples count as two persons)"
+  },
+  "year": 2022,
+  "bins": [
+    {
+      "from": -50000,
+      "to": 0,
+      "count": 772524,
+      "mean": -3164.38
+    },
+    {
+      "from": 0.0,
+      "to": 2500.0,
+      "count": 3080510,
+      "mean": 1075.24
+    },
+    {
+      "from": 2500.0,
+      "to": 5000.0,
+      "count": 2079780,
+      "mean": 3718.52
+    },
+    {
+      "from": 5000.0,
+      "to": 7500.0,
+      "count": 2292483,
+      "mean": 6313.07
+    },
+    {
+      "from": 7500.0,
+      "to": 10348.0,
+      "count": 3857780,
+      "mean": 9032.32
+    },
+    {
+      "from": 10348.0,
+      "to": 12500.0,
+      "count": 3805615,
+      "mean": 11425.82
+    },
+    {
+      "from": 12500.0,
+      "to": 14927.0,
+      "count": 4028822,
+      "mean": 13689.8
+    },
+    {
+      "from": 14927.0,
+      "to": 20000.0,
+      "count": 7285713,
+      "mean": 17409.63
+    },
+    {
+      "from": 20000.0,
+      "to": 25000.0,
+      "count": 6390425,
+      "mean": 22440.32
+    },
+    {
+      "from": 25000.0,
+      "to": 30000.0,
+      "count": 5538760,
+      "mean": 27441.14
+    },
+    {
+      "from": 30000.0,
+      "to": 37500.0,
+      "count": 7650152,
+      "mean": 33582.43
+    },
+    {
+      "from": 37500.0,
+      "to": 50000.0,
+      "count": 5342659,
+      "mean": 42874.54
+    },
+    {
+      "from": 50000.0,
+      "to": 58597.0,
+      "count": 1920680,
+      "mean": 53957.28
+    },
+    {
+      "from": 58597.0,
+      "to": 75000.0,
+      "count": 1897345,
+      "mean": 65611.14
+    },
+    {
+      "from": 75000.0,
+      "to": 100000.0,
+      "count": 1123697,
+      "mean": 85352.55
+    },
+    {
+      "from": 100000.0,
+      "to": 125000.0,
+      "count": 478258,
+      "mean": 111147.59
+    },
+    {
+      "from": 125000.0,
+      "to": 175000.0,
+      "count": 428540,
+      "mean": 146004.74
+    },
+    {
+      "from": 175000.0,
+      "to": 277826.0,
+      "count": 293683,
+      "mean": 215580.36
+    },
+    {
+      "from": 277826.0,
+      "to": 375000.0,
+      "count": 86823,
+      "mean": 318861.19
+    },
+    {
+      "from": 375000.0,
+      "to": 500000.0,
+      "count": 47920,
+      "mean": 429419.93
+    },
+    {
+      "from": 500000.0,
+      "to": 1000000.0,
+      "count": 49413,
+      "mean": 674734.16
+    }
+  ],
+  "tail": {
+    "from": 1000000.0,
+    "count": 24972,
+    "alpha": 1.5491
+  },
+  "quality": "derived",
+  "sources": [
+    "destatis_lest_2022"
+  ],
+  "note": {
+    "de": "Lohn- und Einkommensteuerstatistik 2022, Tabelle 73111-02 (unbeschränkt Steuerpflichtige nach Größenklassen des zu versteuernden Einkommens). Weil der Steuertarif bei zusammen veranlagten Paaren auf das halbe gemeinsame Einkommen angewendet wird (Splitting), wurden Paare als zwei Personen mit je halbem Einkommen gezählt; die halbierten Größenklassen der Splittingtabelle decken sich mit denen der Grundtabelle. Die oberste Klasse (ab 1 Mio. Euro) ist als Pareto-Verteilung dargestellt, deren Mittelwert dem amtlichen Klassenmittel entspricht. Die Untergrenze der Klasse mit negativem Einkommen ist gesetzt. Einkommen des Jahres 2022; Kapitalerträge unter der Abgeltungsteuer sind nicht enthalten.",
+    "en": "Wage and income tax statistics 2022, table 73111-02 (resident taxpayers by size class of taxable income). Because the tax schedule is applied to half the joint income of jointly assessed couples (income splitting), couples were counted as two persons with half the income each; the halved size classes of the splitting table coincide with those of the basic table. The top class (EUR 1 million and above) is represented as a Pareto distribution whose mean equals the official class mean. The lower bound of the class with negative income is set arbitrarily. Incomes of 2022; capital income taxed at the flat withholding rate is not included."
+  }
+}

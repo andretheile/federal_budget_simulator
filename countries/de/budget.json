@@ -1,0 +1,2748 @@
+{
+  "revenue": [
+    {
+      "id": "rev.taxes",
+      "label": {
+        "de": "Steuern",
+        "en": "Taxes"
+      },
+      "code": "D2+D5+D91",
+      "children": [
+        {
+          "id": "rev.taxes.income",
+          "label": {
+            "de": "Steuern auf Einkommen und Gewinne",
+            "en": "Taxes on income and profits"
+          },
+          "code": "D51",
+          "children": [
+            {
+              "id": "rev.taxes.income.personal",
+              "label": {
+                "de": "Lohn- und Einkommensteuer",
+                "en": "Wage and income tax"
+              },
+              "children": [
+                {
+                  "id": "rev.taxes.income.personal.wage_tax",
+                  "label": {
+                    "de": "Lohnsteuer",
+                    "en": "Wage tax"
+                  },
+                  "description": {
+                    "de": "Vom Arbeitgeber einbehaltene Einkommensteuer auf Löhne, Gehälter und Pensionen.",
+                    "en": "Income tax withheld by employers on wages, salaries and civil-service pensions."
+                  },
+                  "code": "D51M",
+                  "amount": 282261305000,
+                  "levels": {
+                    "central": 0.425,
+                    "state": 0.4355,
+                    "local": 0.1395
+                  },
+                  "quality": "derived",
+                  "sources": [
+                    "eurostat_ntl",
+                    "bundeshaushalt_2024",
+                    "eurostat_gov_10a_main",
+                    "gg_art_106",
+                    "gemfinrefg_1"
+                  ],
+                  "note": {
+                    "de": "Volkswirtschaftliche Gesamtrechnungen (286,4 Mrd. Euro) abzüglich des Solidaritätszuschlags zur Lohnsteuer (4,1 Mrd. Euro, Kasse), der gesondert ausgewiesen ist. Höher als die kassenmäßige Lohnsteuer (rund 249 Mrd. Euro, hochgerechnet aus dem Bundesanteil von 105,8 Mrd. Euro), unter anderem weil das Kindergeld dort abgezogen wird. Gesetzliche Aufteilung 42,5 % Bund, 42,5 % Länder, 15 % Gemeinden; der Gemeindeanteil der Stadtstaaten zählt in der Statistik zu den Ländern.",
+                    "en": "National accounts figure (EUR 286.4 billion) minus the solidarity surcharge on wage tax (EUR 4.1 billion, cash), which is shown separately. Higher than cash wage tax (about EUR 249 billion, extrapolated from the federal share of EUR 105.8 billion), among other things because child benefit is deducted there. Statutory split 42.5% federal, 42.5% states, 15% municipalities; the municipal share of the city states counts as state level in the statistics."
+                  }
+                },
+                {
+                  "id": "rev.taxes.income.personal.assessed",
+                  "label": {
+                    "de": "Veranlagte Einkommensteuer",
+                    "en": "Assessed income tax"
+                  },
+                  "description": {
+                    "de": "Einkommensteuer von Selbständigen, Vermietern und anderen, die per Steuerbescheid zahlen, abzüglich Erstattungen an Arbeitnehmer.",
+                    "en": "Income tax of the self-employed, landlords and others who pay by assessment, net of refunds to employees."
+                  },
+                  "code": "D51M",
+                  "amount": 58591413000,
+                  "levels": {
+                    "central": 0.425,
+                    "state": 0.4355,
+                    "local": 0.1395
+                  },
+                  "quality": "derived",
+                  "sources": [
+                    "eurostat_ntl",
+                    "bundeshaushalt_2024",
+                    "eurostat_gov_10a_main",
+                    "gg_art_106",
+                    "gemfinrefg_1"
+                  ],
+                  "note": {
+                    "de": "Volkswirtschaftliche Gesamtrechnungen (62,0 Mrd. Euro) abzüglich des Solidaritätszuschlags zur Einkommensteuer (3,4 Mrd. Euro, Kasse). Aufteilung wie bei der Lohnsteuer.",
+                    "en": "National accounts figure (EUR 62.0 billion) minus the solidarity surcharge on assessed income tax (EUR 3.4 billion, cash). Split as for wage tax."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "rev.taxes.income.capital_income",
+              "label": {
+                "de": "Kapitalertragsteuer und Abgeltungsteuer",
+                "en": "Withholding taxes on dividends, interest and capital gains"
+              },
+              "code": "D51M+D51O",
+              "amount": 50435256000,
+              "levels": {
+                "central": 0.4783,
+                "state": 0.4783,
+                "local": 0.0434
+              },
+              "quality": "derived",
+              "sources": [
+                "eurostat_ntl",
+                "bundeshaushalt_2024",
+                "gemfinrefg_1"
+              ],
+              "note": {
+                "de": "Volkswirtschaftliche Gesamtrechnungen (53,3 Mrd. Euro) abzüglich des Solidaritätszuschlags (2,9 Mrd. Euro, Kasse). Aufteilung nach den gesetzlichen Anteilen (Dividenden: je 50 % Bund und Länder; Zinsen und Veräußerungsgewinne: 44 % Bund, 44 % Länder, 12 % Gemeinden), gewichtet mit dem Kassenaufkommen 2024.",
+                "en": "National accounts figure (EUR 53.3 billion) minus the solidarity surcharge (EUR 2.9 billion, cash). Split by statutory shares (dividends: 50% federal, 50% states; interest and capital gains: 44% federal, 44% states, 12% municipalities), weighted by 2024 cash receipts."
+              }
+            },
+            {
+              "id": "rev.taxes.income.corporate",
+              "label": {
+                "de": "Körperschaftsteuer",
+                "en": "Corporate income tax"
+              },
+              "code": "D51O",
+              "amount": 40483732000,
+              "levels": {
+                "central": 0.5,
+                "state": 0.5
+              },
+              "quality": "derived",
+              "sources": [
+                "eurostat_ntl",
+                "bundeshaushalt_2024",
+                "gg_art_106"
+              ],
+              "note": {
+                "de": "Volkswirtschaftliche Gesamtrechnungen (42,7 Mrd. Euro) abzüglich des Solidaritätszuschlags zur Körperschaftsteuer (2,2 Mrd. Euro, Kasse). Je zur Hälfte Bund und Länder.",
+                "en": "National accounts figure (EUR 42.7 billion) minus the solidarity surcharge on corporate income tax (EUR 2.2 billion, cash). Half federal, half states."
+              }
+            },
+            {
+              "id": "rev.taxes.income.trade_tax",
+              "label": {
+                "de": "Gewerbesteuer",
+                "en": "Local business tax (trade tax)"
+              },
+              "code": "D51M+D51O",
+              "amount": 75261000000,
+              "levels": {
+                "central": 0.0368,
+                "state": 0.1237,
+                "local": 0.8395
+              },
+              "quality": "derived",
+              "sources": [
+                "eurostat_ntl",
+                "eurostat_gov_10a_main",
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Betrag amtlich. Gemeindeanteil aus den Eurostat-Daten zu den Unternehmenssteuern der Gemeinden abgeleitet; Bundesanteil ist die Gewerbesteuerumlage (2,8 Mrd. Euro). Der Länderanteil enthält die Umlage der Länder und die Gewerbesteuer der Stadtstaaten.",
+                "en": "Amount official. Municipal share derived from Eurostat data on municipalities' taxes on corporate income; the federal share is the trade tax levy (EUR 2.8 billion). The state share comprises the states' levy and the trade tax of the city states."
+              }
+            },
+            {
+              "id": "rev.taxes.income.soli",
+              "label": {
+                "de": "Solidaritätszuschlag",
+                "en": "Solidarity surcharge"
+              },
+              "description": {
+                "de": "Zuschlag von 5,5 % auf Einkommen-, Kapitalertrag- und Körperschaftsteuer; seit 2021 zahlen ihn bei der Einkommensteuer nur noch hohe Einkommen.",
+                "en": "Surcharge of 5.5% on income tax, withholding tax and corporate income tax; since 2021 only high earners pay it on income tax."
+              },
+              "amount": 12634294000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Kassenaufkommen des Bundes 2024. In den Volkswirtschaftlichen Gesamtrechnungen ist der Zuschlag in den jeweiligen Steuern enthalten; er wurde dort abgezogen.",
+                "en": "Federal cash receipts 2024. In national accounts the surcharge is included in the respective taxes; it has been deducted there."
+              }
+            },
+            {
+              "id": "rev.taxes.income.other",
+              "label": {
+                "de": "Einkommensteuern von Steuerausländern und Sonstiges",
+                "en": "Income taxes paid by non-residents and other"
+              },
+              "code": "D51E",
+              "amount": 17110000000,
+              "levels": {
+                "central": 0.5,
+                "state": 0.4928,
+                "local": 0.0072
+              },
+              "quality": "derived",
+              "sources": [
+                "eurostat_ntl",
+                "eurostat_gov_10a_main"
+              ],
+              "note": {
+                "de": "Einkommensteuer der übrigen Welt (15,2 Mrd. Euro) und EU-Energiekrisenbeitrag (1,9 Mrd. Euro). Aufteilung auf die Ebenen als Rest aus den Eurostat-Daten zu den Einkommensteuern je Ebene.",
+                "en": "Income tax paid by the rest of the world (EUR 15.2 billion) and the EU energy crisis contribution (EUR 1.9 billion). Split across levels as the remainder from Eurostat data on income taxes by level."
+              }
+            }
+          ]
+        },
+        {
+          "id": "rev.taxes.consumption",
+          "label": {
+            "de": "Steuern auf Konsum, Verbrauch und Umwelt",
+            "en": "Taxes on consumption and the environment"
+          },
+          "code": "D2+D59",
+          "children": [
+            {
+              "id": "rev.taxes.consumption.vat",
+              "label": {
+                "de": "Mehrwertsteuer (Umsatzsteuer)",
+                "en": "Value added tax (VAT)"
+              },
+              "code": "D211",
+              "amount": 298764000000,
+              "levels": {
+                "central": 0.4807,
+                "state": 0.4939,
+                "local": 0.0254
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl",
+                "eurostat_gov_10a_main"
+              ],
+              "note": {
+                "de": "Aufteilung auf die Ebenen laut Eurostat. Der EU-Anteil erscheint als Ausgabe (EU-Beitrag).",
+                "en": "Split across levels as reported by Eurostat. The EU share appears as expenditure (EU contribution)."
+              }
+            },
+            {
+              "id": "rev.taxes.consumption.energy",
+              "label": {
+                "de": "Energiesteuer (Benzin, Diesel, Heizöl, Gas)",
+                "en": "Energy tax (petrol, diesel, heating oil, gas)"
+              },
+              "code": "D214A",
+              "amount": 36579000000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.electricity",
+              "label": {
+                "de": "Stromsteuer",
+                "en": "Electricity tax"
+              },
+              "code": "D214A",
+              "amount": 5671000000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.tobacco",
+              "label": {
+                "de": "Tabaksteuer",
+                "en": "Tobacco tax"
+              },
+              "code": "D214A",
+              "amount": 15786000000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.alcohol_coffee",
+              "label": {
+                "de": "Alkohol-, Bier-, Schaumwein- und Kaffeesteuer",
+                "en": "Taxes on spirits, beer, sparkling wine and coffee"
+              },
+              "code": "D214A",
+              "amount": 3925000000,
+              "levels": {
+                "central": 0.8568,
+                "state": 0.1432
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ],
+              "note": {
+                "de": "Die Biersteuer (0,6 Mrd. Euro) steht den Ländern zu, der Rest dem Bund.",
+                "en": "Beer tax (EUR 0.6 billion) goes to the states, the rest to the federal level."
+              }
+            },
+            {
+              "id": "rev.taxes.consumption.insurance",
+              "label": {
+                "de": "Versicherung- und Feuerschutzsteuer",
+                "en": "Insurance tax and fire protection tax"
+              },
+              "code": "D214G",
+              "amount": 19042000000,
+              "levels": {
+                "central": 0.962,
+                "state": 0.038
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.motor_vehicle",
+              "label": {
+                "de": "Kfz-Steuer",
+                "en": "Motor vehicle tax"
+              },
+              "code": "D29B+D59D",
+              "amount": 9668000000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.air_travel",
+              "label": {
+                "de": "Luftverkehrsteuer",
+                "en": "Air travel tax"
+              },
+              "code": "D214H",
+              "amount": 1877000000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.co2",
+              "label": {
+                "de": "CO2-Preis (nationaler und europäischer Emissionshandel)",
+                "en": "Carbon pricing (national and EU emissions trading)"
+              },
+              "description": {
+                "de": "Erlöse aus der Versteigerung von Emissionsrechten und aus dem nationalen CO2-Preis auf Kraft- und Heizstoffe; fließen in den Klima- und Transformationsfonds des Bundes.",
+                "en": "Proceeds from auctioning emission allowances and from the national carbon price on fuels; they flow into the federal Climate and Transformation Fund."
+              },
+              "code": "D29F",
+              "amount": 18628000000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.gambling",
+              "label": {
+                "de": "Lotterie-, Wett- und Spielbankabgaben",
+                "en": "Lottery, betting and casino taxes"
+              },
+              "code": "D214F",
+              "amount": 3094000000,
+              "levels": {
+                "state": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.broadcasting_fee",
+              "label": {
+                "de": "Rundfunkbeitrag",
+                "en": "Broadcasting fee"
+              },
+              "description": {
+                "de": "Der Rundfunkbeitrag zählt in den Volkswirtschaftlichen Gesamtrechnungen als Steuer, weil ARD, ZDF und Deutschlandradio dort zum Staat (Länderebene) gehören.",
+                "en": "The broadcasting fee counts as a tax in national accounts because the public broadcasters are classified as part of government (state level)."
+              },
+              "code": "D29H+D59F",
+              "amount": 9101000000,
+              "levels": {
+                "state": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.other",
+              "label": {
+                "de": "Sonstige Abgaben (Umlagen im Strompreis, Vergnügung-, Hundesteuer, Gebühren u. a.)",
+                "en": "Other levies (electricity surcharges, entertainment tax, dog tax, fees etc.)"
+              },
+              "amount": 9270000000,
+              "levels": {
+                "central": 0.4775,
+                "state": 0.2687,
+                "local": 0.2538
+              },
+              "quality": "derived",
+              "sources": [
+                "eurostat_ntl",
+                "eurostat_gov_10a_main"
+              ],
+              "note": {
+                "de": "Summe der übrigen Posten der nationalen Steuerliste. Aufteilung auf die Ebenen als Rest aus den Eurostat-Daten je Ebene.",
+                "en": "Sum of the remaining items of the national tax list. Split across levels as the remainder from Eurostat data by level."
+              }
+            }
+          ]
+        },
+        {
+          "id": "rev.taxes.property",
+          "label": {
+            "de": "Steuern auf Vermögen, Erbschaften und Grundbesitz",
+            "en": "Taxes on wealth, inheritance and property"
+          },
+          "children": [
+            {
+              "id": "rev.taxes.property.property_tax",
+              "label": {
+                "de": "Grundsteuer",
+                "en": "Property tax"
+              },
+              "code": "D29A",
+              "amount": 16222000000,
+              "levels": {
+                "state": 0.1,
+                "local": 0.9
+              },
+              "quality": "derived",
+              "sources": [
+                "eurostat_ntl",
+                "eurostat_gov_10a_main"
+              ],
+              "note": {
+                "de": "Betrag amtlich. Gemeindesteuer; rund ein Zehntel entfällt auf die Stadtstaaten, die in der Statistik zu den Ländern zählen (aus Eurostat-Daten je Ebene abgeleitet).",
+                "en": "Amount official. A municipal tax; about one tenth accrues to the city states, which count as state level in the statistics (derived from Eurostat data by level)."
+              }
+            },
+            {
+              "id": "rev.taxes.property.real_estate_transfer",
+              "label": {
+                "de": "Grunderwerbsteuer",
+                "en": "Real estate transfer tax"
+              },
+              "code": "D214B",
+              "amount": 12750000000,
+              "levels": {
+                "state": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl"
+              ]
+            },
+            {
+              "id": "rev.taxes.property.inheritance",
+              "label": {
+                "de": "Erbschaft- und Schenkungsteuer",
+                "en": "Inheritance and gift tax"
+              },
+              "code": "D91A",
+              "amount": 9991000000,
+              "levels": {
+                "state": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl",
+                "eurostat_gov_10a_main"
+              ]
+            },
+            {
+              "id": "rev.taxes.property.wealth_tax",
+              "label": {
+                "de": "Vermögensteuer (wird seit 1997 nicht erhoben)",
+                "en": "Wealth tax (not levied since 1997)"
+              },
+              "description": {
+                "de": "Das Vermögensteuergesetz besteht fort, wird aber seit 1997 nicht mehr angewendet. Das Aufkommen stünde den Ländern zu (Art. 106 Abs. 2 Grundgesetz).",
+                "en": "The Wealth Tax Act still exists but has not been applied since 1997. The revenue would go to the states (Article 106(2) of the Basic Law)."
+              },
+              "code": "D59A",
+              "amount": 0,
+              "levels": {
+                "state": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl",
+                "gg_art_106"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rev.contributions",
+      "label": {
+        "de": "Sozialbeiträge",
+        "en": "Social contributions"
+      },
+      "description": {
+        "de": "Beiträge zur Renten-, Kranken-, Pflege-, Arbeitslosen- und Unfallversicherung. Eurostat weist sie nach Zahlern aus, nicht nach Versicherungszweigen.",
+        "en": "Contributions to pension, health, long-term care, unemployment and accident insurance. Eurostat reports them by payer, not by insurance branch."
+      },
+      "code": "D61",
+      "children": [
+        {
+          "id": "rev.contributions.employers",
+          "label": {
+            "de": "Arbeitgeberbeiträge zur Sozialversicherung",
+            "en": "Employers' social insurance contributions"
+          },
+          "code": "D611",
+          "amount": 302350000000,
+          "levels": {
+            "social_security": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_ntl",
+            "eurostat_gov_10a_main"
+          ]
+        },
+        {
+          "id": "rev.contributions.employees",
+          "label": {
+            "de": "Arbeitnehmerbeiträge zur Sozialversicherung",
+            "en": "Employees' social insurance contributions"
+          },
+          "code": "D613CE",
+          "amount": 280150000000,
+          "levels": {
+            "social_security": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_ntl"
+          ]
+        },
+        {
+          "id": "rev.contributions.self_employed",
+          "label": {
+            "de": "Pflichtbeiträge der Selbständigen",
+            "en": "Compulsory contributions of the self-employed"
+          },
+          "code": "D613CS",
+          "amount": 11809000000,
+          "levels": {
+            "social_security": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_ntl"
+          ]
+        },
+        {
+          "id": "rev.contributions.non_employed",
+          "label": {
+            "de": "Beiträge von Rentnern und Leistungsbeziehern",
+            "en": "Contributions of pensioners and benefit recipients"
+          },
+          "description": {
+            "de": "Vor allem Kranken- und Pflegeversicherungsbeiträge der Rentner sowie Beiträge, die Sozialkassen und Bund für Leistungsbezieher zahlen.",
+            "en": "Mainly health and long-term care contributions of pensioners and contributions paid by social funds and the federal government on behalf of benefit recipients."
+          },
+          "code": "D613CN",
+          "amount": 106054000000,
+          "levels": {
+            "social_security": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_ntl"
+          ]
+        },
+        {
+          "id": "rev.contributions.voluntary",
+          "label": {
+            "de": "Freiwillige Beiträge",
+            "en": "Voluntary contributions"
+          },
+          "code": "D613V",
+          "amount": 8233000000,
+          "levels": {
+            "social_security": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_ntl"
+          ]
+        },
+        {
+          "id": "rev.contributions.imputed",
+          "label": {
+            "de": "Unterstellte Beiträge für Beamtenpensionen",
+            "en": "Imputed contributions for civil servants' pensions"
+          },
+          "description": {
+            "de": "Rechnerische Gegenbuchung für Pensionen und Beihilfen, die der Staat seinen Beamten ohne Beitragszahlung gewährt; kein tatsächlicher Geldfluss.",
+            "en": "Bookkeeping counterpart of pensions and health benefits that government grants its civil servants without contributions; not an actual cash flow."
+          },
+          "code": "D612",
+          "amount": 48153000000,
+          "levels": {
+            "central": 0.1823,
+            "state": 0.6635,
+            "local": 0.1028,
+            "social_security": 0.0514
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_ntl",
+            "eurostat_gov_10a_main"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rev.other",
+      "label": {
+        "de": "Sonstige Einnahmen",
+        "en": "Other revenue"
+      },
+      "children": [
+        {
+          "id": "rev.other.sales",
+          "label": {
+            "de": "Gebühren, Entgelte und Verkäufe",
+            "en": "Fees, charges and sales"
+          },
+          "description": {
+            "de": "Zum Beispiel Lkw-Maut, Kita- und Abwassergebühren, Eintrittsgelder, Verwaltungsgebühren.",
+            "en": "For example the truck toll, day-care and sewage charges, admission fees, administrative fees."
+          },
+          "code": "P11+P12+P131",
+          "amount": 187119000000,
+          "levels": {
+            "central": 0.3225,
+            "state": 0.304,
+            "local": 0.3459,
+            "social_security": 0.0276
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_main"
+          ]
+        },
+        {
+          "id": "rev.other.property_income",
+          "label": {
+            "de": "Zinsen, Dividenden und Pachten",
+            "en": "Interest, dividends and rents"
+          },
+          "code": "D4",
+          "amount": 33652000000,
+          "levels": {
+            "central": 0.4398,
+            "state": 0.2133,
+            "local": 0.2139,
+            "social_security": 0.133
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_main"
+          ]
+        },
+        {
+          "id": "rev.other.transfers",
+          "label": {
+            "de": "Sonstige laufende Übertragungen (u. a. EU-Mittel, Bußgelder)",
+            "en": "Other current transfers (incl. EU funds, fines)"
+          },
+          "code": "D7",
+          "amount": 31463000000,
+          "levels": {
+            "central": 0.1291,
+            "state": 0.4419,
+            "local": 0.3239,
+            "social_security": 0.1051
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_main"
+          ]
+        },
+        {
+          "id": "rev.other.capital_transfers",
+          "label": {
+            "de": "Vermögensübertragungen (u. a. EU-Investitionszuschüsse)",
+            "en": "Capital transfers (incl. EU investment grants)"
+          },
+          "code": "D92+D99",
+          "amount": 11979000000,
+          "levels": {
+            "central": 0.55,
+            "state": 0.2,
+            "local": 0.25
+          },
+          "quality": "estimate",
+          "sources": [
+            "eurostat_gov_10a_main"
+          ],
+          "note": {
+            "de": "Betrag amtlich. Eurostat weist die Aufteilung auf die Ebenen nur einschließlich der Zahlungen zwischen den Ebenen aus; die Anteile sind deshalb geschätzt.",
+            "en": "Amount official. Eurostat reports the split by level only including payments between levels; the shares are therefore estimated."
+          }
+        },
+        {
+          "id": "rev.other.subsidies",
+          "label": {
+            "de": "Empfangene Subventionen",
+            "en": "Subsidies received"
+          },
+          "code": "D39",
+          "amount": 233000000,
+          "levels": {
+            "state": 0.03,
+            "local": 0.97
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_main"
+          ]
+        }
+      ]
+    }
+  ],
+  "expenditure": [
+    {
+      "id": "exp.general",
+      "label": {
+        "de": "Allgemeine Verwaltung, Schulden und Internationales",
+        "en": "General administration, debt and international affairs"
+      },
+      "code": "GF01",
+      "children": [
+        {
+          "id": "exp.general.executive",
+          "label": {
+            "de": "Regierung, Parlamente, Finanzverwaltung und Auswärtiges",
+            "en": "Government, parliaments, tax administration and foreign affairs"
+          },
+          "code": "GF0101",
+          "children": [
+            {
+              "id": "exp.general.executive.eu_contribution",
+              "label": {
+                "de": "EU-Beitrag (Eigenmittel aus Mehrwertsteuer und Wirtschaftsleistung)",
+                "en": "EU contribution (own resources based on VAT and national income)"
+              },
+              "description": {
+                "de": "Deutschlands Zahlungen an den EU-Haushalt aus Mehrwertsteuer- und BNE-Eigenmitteln. Zölle, die Deutschland für die EU erhebt, zählen nicht zu den Staatseinnahmen und sind hier nicht enthalten.",
+                "en": "Germany's payments to the EU budget from VAT-based and GNI-based own resources. Customs duties collected on behalf of the EU are not government revenue and are not included."
+              },
+              "code": "D76",
+              "amount": 27330000000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_gov_10a_main"
+              ],
+              "note": {
+                "de": "Betrag aus der aktuellen Datenlieferung (Oktober 2026); die funktionale Gliederung beruht auf einem etwas älteren Datenstand.",
+                "en": "Amount from the latest data release (October 2026); the breakdown by function is based on a slightly older vintage."
+              }
+            },
+            {
+              "id": "exp.general.executive.bundestag_mp_pay",
+              "label": {
+                "de": "Bundestag: Diäten der Abgeordneten",
+                "en": "Bundestag: MPs' pay"
+              },
+              "description": {
+                "de": "Entschädigungen und Amtszulagen nach § 11 Abgeordnetengesetz, Ist 2024. Ohne Kostenpauschale, Mitarbeiter und Altersversorgung.",
+                "en": "Salaries and office allowances under section 11 of the Members of the Bundestag Act, 2024 actuals. Excludes the expense allowance, staff and pensions."
+              },
+              "amount": 92623000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Kassenwert aus dem Bundeshaushalt (Titel 0212 411 01).",
+                "en": "Cash figure from the federal budget (title 0212 411 01)."
+              }
+            },
+            {
+              "id": "exp.general.executive.bundestag_other",
+              "label": {
+                "de": "Bundestag: übrige Ausgaben",
+                "en": "Bundestag: other spending"
+              },
+              "description": {
+                "de": "Mitarbeiter der Abgeordneten, Fraktionen, Verwaltung, Gebäude, Kostenpauschale, Altersversorgung.",
+                "en": "MPs' staff, parliamentary groups, administration, buildings, expense allowance, pensions."
+              },
+              "amount": 1057773000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "derived",
+              "sources": [
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Einzelplan 02 (1.150,4 Mio. Euro, Ist 2024) abzüglich der Diäten.",
+                "en": "Budget section 02 (EUR 1,150.4 million, 2024 actuals) minus MPs' pay."
+              }
+            },
+            {
+              "id": "exp.general.executive.other",
+              "label": {
+                "de": "Übrige Regierung, Parlamente, Finanzämter, Auswärtiger Dienst",
+                "en": "Other government, parliaments, tax offices, foreign service"
+              },
+              "amount": 60899604000,
+              "levels": {
+                "central": 0.2239,
+                "state": 0.3693,
+                "local": 0.4068
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "eurostat_gov_10a_main",
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Rest der Gruppe nach Abzug von EU-Beitrag und Bundestag; Aufteilung auf die Ebenen geschätzt.",
+                "en": "Remainder of the group after deducting the EU contribution and the Bundestag; split across levels estimated."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.general.foreign_aid",
+          "label": {
+            "de": "Entwicklungshilfe und wirtschaftliche Auslandshilfe",
+            "en": "Development aid and foreign economic aid"
+          },
+          "description": {
+            "de": "Abgrenzung der Staatsausgabenstatistik (COFOG 01.2). Die international gemeldete Entwicklungshilfe (ODA) ist anders abgegrenzt und höher, weil sie zum Beispiel Kosten für Geflüchtete im Inland mitzählt.",
+            "en": "As defined in government expenditure statistics (COFOG 01.2). Official development assistance (ODA) as reported internationally is defined differently and is higher, for example because it counts the cost of refugees in the donor country."
+          },
+          "code": "GF0102",
+          "amount": 21877000000,
+          "levels": {
+            "central": 1.0
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Vollständig dem Bund zugeordnet, der für die Entwicklungszusammenarbeit zuständig ist; kleinere Beiträge der Länder sind nicht gesondert ausgewiesen.",
+            "en": "Amount official (Eurostat). Attributed entirely to the federal level, which is responsible for development cooperation; smaller contributions by the states are not shown separately."
+          }
+        },
+        {
+          "id": "exp.general.general_services",
+          "label": {
+            "de": "Allgemeine Dienste (Personal-, Planungs- und Statistikämter, zentrale Verwaltung)",
+            "en": "General services (personnel, planning and statistical offices, central administration)"
+          },
+          "code": "GF0103",
+          "amount": 66299000000,
+          "levels": {
+            "central": 0.1828,
+            "state": 0.3617,
+            "local": 0.4555
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.general.basic_research",
+          "label": {
+            "de": "Grundlagenforschung",
+            "en": "Basic research"
+          },
+          "code": "GF0104",
+          "amount": 43152000000,
+          "levels": {
+            "central": 0.4637,
+            "state": 0.5363
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.general.rd",
+          "label": {
+            "de": "Forschung zur öffentlichen Verwaltung",
+            "en": "Research on public administration"
+          },
+          "code": "GF0105",
+          "amount": 669000000,
+          "levels": {
+            "central": 0.4143,
+            "state": 0.5857
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.general.other",
+          "label": {
+            "de": "Sonstige allgemeine Verwaltung",
+            "en": "Other general administration"
+          },
+          "code": "GF0106",
+          "amount": 7233000000,
+          "levels": {
+            "central": 0.1378,
+            "state": 0.2921,
+            "local": 0.5363,
+            "social_security": 0.0338
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.general.interest",
+          "label": {
+            "de": "Zinsen auf Staatsschulden",
+            "en": "Interest on public debt"
+          },
+          "code": "GF0107",
+          "amount": 49280000000,
+          "levels": {
+            "central": 0.6897,
+            "state": 0.2251,
+            "local": 0.0787,
+            "social_security": 0.0065
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Aufteilung nach den Zinsausgaben der Ebenen laut Eurostat.",
+            "en": "Split according to each level's interest expenditure as reported by Eurostat."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.defence",
+      "label": {
+        "de": "Verteidigung",
+        "en": "Defence"
+      },
+      "description": {
+        "de": "Abgrenzung der Staatsausgabenstatistik (COFOG). Nach NATO-Definition, die unter anderem Pensionen ehemaliger Soldaten einrechnet, liegen die Verteidigungsausgaben deutlich höher.",
+        "en": "As defined in government expenditure statistics (COFOG). Under the NATO definition, which also counts items such as military pensions, defence spending is considerably higher."
+      },
+      "code": "GF02",
+      "children": [
+        {
+          "id": "exp.defence.military",
+          "label": {
+            "de": "Bundeswehr (militärische Verteidigung)",
+            "en": "Armed forces (military defence)"
+          },
+          "code": "GF0201",
+          "amount": 44898000000,
+          "levels": {
+            "central": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ]
+        },
+        {
+          "id": "exp.defence.civil",
+          "label": {
+            "de": "Zivilschutz",
+            "en": "Civil defence"
+          },
+          "code": "GF0202",
+          "amount": 270000000,
+          "levels": {
+            "central": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ]
+        },
+        {
+          "id": "exp.defence.foreign_military_aid",
+          "label": {
+            "de": "Militärhilfe für andere Staaten (v. a. Ukraine)",
+            "en": "Military aid to other countries (mainly Ukraine)"
+          },
+          "code": "GF0203",
+          "amount": 11771000000,
+          "levels": {
+            "central": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ]
+        },
+        {
+          "id": "exp.defence.rd",
+          "label": {
+            "de": "Wehrforschung",
+            "en": "Defence research"
+          },
+          "code": "GF0204",
+          "amount": 1249000000,
+          "levels": {
+            "central": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ]
+        },
+        {
+          "id": "exp.defence.other",
+          "label": {
+            "de": "Sonstige Verteidigung",
+            "en": "Other defence"
+          },
+          "code": "GF0205",
+          "amount": 395000000,
+          "levels": {
+            "central": 1.0
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.safety",
+      "label": {
+        "de": "Öffentliche Sicherheit und Justiz",
+        "en": "Public order, safety and justice"
+      },
+      "code": "GF03",
+      "children": [
+        {
+          "id": "exp.safety.police",
+          "label": {
+            "de": "Polizei",
+            "en": "Police"
+          },
+          "code": "GF0301",
+          "amount": 32589000000,
+          "levels": {
+            "central": 0.1647,
+            "state": 0.8168,
+            "local": 0.0185
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.safety.fire",
+          "label": {
+            "de": "Feuerwehr",
+            "en": "Fire services"
+          },
+          "code": "GF0302",
+          "amount": 13735000000,
+          "levels": {
+            "central": 0.0177,
+            "state": 0.0899,
+            "local": 0.8924
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.safety.courts",
+          "label": {
+            "de": "Gerichte und Staatsanwaltschaften",
+            "en": "Courts and public prosecutors"
+          },
+          "code": "GF0303",
+          "amount": 16174000000,
+          "levels": {
+            "central": 0.0559,
+            "state": 0.9441
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.safety.prisons",
+          "label": {
+            "de": "Gefängnisse",
+            "en": "Prisons"
+          },
+          "code": "GF0304",
+          "amount": 4263000000,
+          "levels": {
+            "state": 1.0
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Den Ländern zugeordnet, die für den Justizvollzug zuständig sind.",
+            "en": "Amount official (Eurostat). Attributed to the states, which are responsible for the prison system."
+          }
+        },
+        {
+          "id": "exp.safety.rd",
+          "label": {
+            "de": "Forschung zu Sicherheit und Justiz",
+            "en": "Research on safety and justice"
+          },
+          "code": "GF0305",
+          "amount": 57000000,
+          "levels": {
+            "central": 0.4401,
+            "state": 0.5599
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.safety.other",
+          "label": {
+            "de": "Sonstige Sicherheit und Ordnung",
+            "en": "Other public order and safety"
+          },
+          "code": "GF0306",
+          "amount": 3839000000,
+          "levels": {
+            "central": 0.2654,
+            "state": 0.3376,
+            "local": 0.397
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.economy",
+      "label": {
+        "de": "Wirtschaft, Verkehr und Energie",
+        "en": "Economy, transport and energy"
+      },
+      "code": "GF04",
+      "children": [
+        {
+          "id": "exp.economy.general_labour",
+          "label": {
+            "de": "Wirtschafts- und Arbeitsmarktförderung",
+            "en": "Business and labour market support"
+          },
+          "code": "GF0401",
+          "amount": 36701000000,
+          "levels": {
+            "central": 0.4839,
+            "state": 0.192,
+            "local": 0.1394,
+            "social_security": 0.1847
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.economy.agriculture",
+          "label": {
+            "de": "Land- und Forstwirtschaft, Fischerei",
+            "en": "Agriculture, forestry and fishing"
+          },
+          "code": "GF0402",
+          "amount": 9050000000,
+          "levels": {
+            "central": 0.4098,
+            "state": 0.4573,
+            "local": 0.1329
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.economy.energy",
+          "label": {
+            "de": "Energie (u. a. Förderung erneuerbarer Energien, Preisbremsen)",
+            "en": "Energy (incl. support for renewables, price brakes)"
+          },
+          "code": "GF0403",
+          "amount": 30926000000,
+          "levels": {
+            "central": 0.9167,
+            "state": 0.0445,
+            "local": 0.0388
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.economy.industry",
+          "label": {
+            "de": "Bergbau, Industrie und Bau",
+            "en": "Mining, manufacturing and construction"
+          },
+          "code": "GF0404",
+          "amount": 7558000000,
+          "levels": {
+            "central": 0.5067,
+            "state": 0.3619,
+            "local": 0.1314
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.economy.transport",
+          "label": {
+            "de": "Verkehr (Straßen, Schiene, Nahverkehr)",
+            "en": "Transport (roads, rail, local public transport)"
+          },
+          "code": "GF0405",
+          "amount": 115692000000,
+          "levels": {
+            "central": 0.4813,
+            "state": 0.0973,
+            "local": 0.4214
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Die Regionalisierungsmittel des Bundes für den Schienennahverkehr der Länder (12,7 Mrd. Euro) sind dem Bund zugerechnet.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal regionalisation funds for the states' regional rail services (EUR 12.7 billion) are attributed to the federal level."
+          }
+        },
+        {
+          "id": "exp.economy.communication",
+          "label": {
+            "de": "Telekommunikation und Breitband",
+            "en": "Telecommunications and broadband"
+          },
+          "code": "GF0406",
+          "amount": 2127000000,
+          "levels": {
+            "central": 0.801,
+            "state": 0.1341,
+            "local": 0.0649
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.economy.other_industries",
+          "label": {
+            "de": "Handel, Tourismus und sonstige Branchen",
+            "en": "Trade, tourism and other industries"
+          },
+          "code": "GF0407",
+          "amount": 10202000000,
+          "levels": {
+            "central": 0.4867,
+            "state": 0.2608,
+            "local": 0.2525
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.economy.rd",
+          "label": {
+            "de": "Angewandte Forschung für die Wirtschaft",
+            "en": "Applied research for the economy"
+          },
+          "code": "GF0408",
+          "amount": 12388000000,
+          "levels": {
+            "central": 0.7232,
+            "state": 0.2768
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.economy.other",
+          "label": {
+            "de": "Sonstige Wirtschaftsangelegenheiten",
+            "en": "Other economic affairs"
+          },
+          "code": "GF0409",
+          "amount": 9912000000,
+          "levels": {
+            "central": 0.2841,
+            "state": 0.2536,
+            "local": 0.4298,
+            "social_security": 0.0325
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.environment",
+      "label": {
+        "de": "Umweltschutz",
+        "en": "Environmental protection"
+      },
+      "code": "GF05",
+      "children": [
+        {
+          "id": "exp.environment.waste",
+          "label": {
+            "de": "Abfallentsorgung",
+            "en": "Waste management"
+          },
+          "code": "GF0501",
+          "amount": 7300000000,
+          "levels": {
+            "central": 0.0387,
+            "state": 0.0905,
+            "local": 0.8708
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.environment.waste_water",
+          "label": {
+            "de": "Abwasser",
+            "en": "Waste water management"
+          },
+          "code": "GF0502",
+          "amount": 5398000000,
+          "levels": {
+            "central": 0.0258,
+            "state": 0.1034,
+            "local": 0.8708
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.environment.pollution",
+          "label": {
+            "de": "Klima- und Immissionsschutz",
+            "en": "Climate protection and pollution abatement"
+          },
+          "code": "GF0503",
+          "amount": 5417000000,
+          "levels": {
+            "central": 0.526,
+            "state": 0.3162,
+            "local": 0.1578
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.environment.nature",
+          "label": {
+            "de": "Natur- und Landschaftsschutz",
+            "en": "Protection of nature and landscape"
+          },
+          "code": "GF0504",
+          "amount": 2512000000,
+          "levels": {
+            "central": 0.1619,
+            "state": 0.5951,
+            "local": 0.243
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.environment.rd",
+          "label": {
+            "de": "Umweltforschung",
+            "en": "Environmental research"
+          },
+          "code": "GF0505",
+          "amount": 1817000000,
+          "levels": {
+            "central": 0.6995,
+            "state": 0.3005
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.environment.other",
+          "label": {
+            "de": "Sonstiger Umweltschutz",
+            "en": "Other environmental protection"
+          },
+          "code": "GF0506",
+          "amount": 2082000000,
+          "levels": {
+            "central": 0.4206,
+            "state": 0.4216,
+            "local": 0.1578
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.housing",
+      "label": {
+        "de": "Wohnungswesen und kommunale Infrastruktur",
+        "en": "Housing and community amenities"
+      },
+      "code": "GF06",
+      "children": [
+        {
+          "id": "exp.housing.housing_development",
+          "label": {
+            "de": "Wohnungsbauförderung",
+            "en": "Housing development"
+          },
+          "code": "GF0601",
+          "amount": 5882000000,
+          "levels": {
+            "central": 0.3167,
+            "state": 0.4064,
+            "local": 0.2769
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Die Finanzhilfen des Bundes für den sozialen Wohnungsbau (1,7 Mrd. Euro) sind dem Bund zugerechnet.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for social housing (EUR 1.7 billion) are attributed to the federal level."
+          }
+        },
+        {
+          "id": "exp.housing.community_development",
+          "label": {
+            "de": "Stadtentwicklung und Raumplanung",
+            "en": "Urban development and planning"
+          },
+          "code": "GF0602",
+          "amount": 9166000000,
+          "levels": {
+            "central": 0.0225,
+            "state": 0.1916,
+            "local": 0.7859
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.housing.water_supply",
+          "label": {
+            "de": "Wasserversorgung",
+            "en": "Water supply"
+          },
+          "code": "GF0603",
+          "amount": 1593000000,
+          "levels": {
+            "state": 0.113,
+            "local": 0.887
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.housing.street_lighting",
+          "label": {
+            "de": "Straßenbeleuchtung",
+            "en": "Street lighting"
+          },
+          "code": "GF0604",
+          "amount": 484000000,
+          "levels": {
+            "local": 1.0
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Den Gemeinden zugeordnet.",
+            "en": "Amount official (Eurostat). Attributed to the municipalities."
+          }
+        },
+        {
+          "id": "exp.housing.rd",
+          "label": {
+            "de": "Forschung zu Wohnen und Stadtentwicklung",
+            "en": "Research on housing and urban development"
+          },
+          "code": "GF0605",
+          "amount": 243000000,
+          "levels": {
+            "central": 0.2249,
+            "state": 0.6768,
+            "local": 0.0983
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.housing.other",
+          "label": {
+            "de": "Sonstige kommunale Infrastruktur",
+            "en": "Other community amenities"
+          },
+          "code": "GF0606",
+          "amount": 3135000000,
+          "levels": {
+            "central": 0.0367,
+            "state": 0.3862,
+            "local": 0.5771
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.health",
+      "label": {
+        "de": "Gesundheit",
+        "en": "Health"
+      },
+      "code": "GF07",
+      "children": [
+        {
+          "id": "exp.health.medical_products",
+          "label": {
+            "de": "Arzneimittel, Heil- und Hilfsmittel",
+            "en": "Medicines, medical products and appliances"
+          },
+          "code": "GF0701",
+          "amount": 76510000000,
+          "levels": {
+            "central": 0.0578,
+            "state": 0.0074,
+            "local": 0.0046,
+            "social_security": 0.9302
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+          }
+        },
+        {
+          "id": "exp.health.outpatient",
+          "label": {
+            "de": "Ärzte, Zahnärzte und ambulante Behandlung",
+            "en": "Doctors, dentists and outpatient care"
+          },
+          "code": "GF0702",
+          "amount": 98458000000,
+          "levels": {
+            "central": 0.062,
+            "state": 0.0149,
+            "local": 0.0092,
+            "social_security": 0.9139
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+          }
+        },
+        {
+          "id": "exp.health.hospitals",
+          "label": {
+            "de": "Krankenhäuser",
+            "en": "Hospitals"
+          },
+          "code": "GF0703",
+          "amount": 123652000000,
+          "levels": {
+            "central": 0.0587,
+            "state": 0.0605,
+            "local": 0.0282,
+            "social_security": 0.8526
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+          }
+        },
+        {
+          "id": "exp.health.public_health",
+          "label": {
+            "de": "Öffentlicher Gesundheitsdienst und Vorsorge",
+            "en": "Public health services and prevention"
+          },
+          "code": "GF0704",
+          "amount": 3990000000,
+          "levels": {
+            "central": 0.3375,
+            "state": 0.2494,
+            "local": 0.4131
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.health.rd",
+          "label": {
+            "de": "Gesundheitsforschung",
+            "en": "Health research"
+          },
+          "code": "GF0705",
+          "amount": 3712000000,
+          "levels": {
+            "central": 0.5751,
+            "state": 0.4249
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.health.other",
+          "label": {
+            "de": "Verwaltung der Krankenkassen und sonstige Gesundheitsausgaben",
+            "en": "Health insurance administration and other health spending"
+          },
+          "code": "GF0706",
+          "amount": 22932000000,
+          "levels": {
+            "central": 0.1447,
+            "state": 0.0762,
+            "local": 0.0474,
+            "social_security": 0.7317
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.culture",
+      "label": {
+        "de": "Kultur, Sport, Rundfunk und Religion",
+        "en": "Culture, sport, broadcasting and religion"
+      },
+      "code": "GF08",
+      "children": [
+        {
+          "id": "exp.culture.sport",
+          "label": {
+            "de": "Sport und Erholung (Bäder, Sportstätten, Parks)",
+            "en": "Sport and recreation (pools, sports facilities, parks)"
+          },
+          "code": "GF0801",
+          "amount": 12079000000,
+          "levels": {
+            "central": 0.0174,
+            "state": 0.0968,
+            "local": 0.8858
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.culture.culture",
+          "label": {
+            "de": "Kultur (Theater, Museen, Bibliotheken)",
+            "en": "Culture (theatres, museums, libraries)"
+          },
+          "code": "GF0802",
+          "amount": 18077000000,
+          "levels": {
+            "central": 0.0992,
+            "state": 0.3672,
+            "local": 0.5336
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.culture.broadcasting",
+          "label": {
+            "de": "Öffentlich-rechtlicher Rundfunk und Medien",
+            "en": "Public broadcasting and media"
+          },
+          "description": {
+            "de": "ARD, ZDF und Deutschlandradio zählen in der Statistik zum Staat (Länderebene), der Rundfunkbeitrag entsprechend zu den Steuern.",
+            "en": "The public broadcasters ARD, ZDF and Deutschlandradio count as part of government (state level) in the statistics, and the broadcasting fee accordingly counts as a tax."
+          },
+          "code": "GF0803",
+          "amount": 11498000000,
+          "levels": {
+            "central": 0.0365,
+            "state": 0.9635
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.culture.religion",
+          "label": {
+            "de": "Kirchen und Religionsgemeinschaften (Staatsleistungen u. a.)",
+            "en": "Churches and religious communities (state payments etc.)"
+          },
+          "code": "GF0804",
+          "amount": 953000000,
+          "levels": {
+            "central": 0.0345,
+            "state": 0.7181,
+            "local": 0.2474
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.culture.rd",
+          "label": {
+            "de": "Forschung zu Kultur und Medien",
+            "en": "Research on culture and media"
+          },
+          "code": "GF0805",
+          "amount": 2314000000,
+          "levels": {
+            "central": 0.4188,
+            "state": 0.5812
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.culture.other",
+          "label": {
+            "de": "Sonstige Kultur und Freizeit",
+            "en": "Other culture and recreation"
+          },
+          "code": "GF0806",
+          "amount": 1064000000,
+          "levels": {
+            "central": 0.1359,
+            "state": 0.377,
+            "local": 0.4871
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.education",
+      "label": {
+        "de": "Bildung",
+        "en": "Education"
+      },
+      "code": "GF09",
+      "children": [
+        {
+          "id": "exp.education.primary",
+          "label": {
+            "de": "Kitas und Grundschulen",
+            "en": "Day care, pre-schools and primary schools"
+          },
+          "code": "GF0901",
+          "amount": 64651000000,
+          "levels": {
+            "central": 0.006,
+            "state": 0.3986,
+            "local": 0.5954
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.education.secondary",
+          "label": {
+            "de": "Weiterführende Schulen und Berufsschulen",
+            "en": "Secondary and vocational schools"
+          },
+          "code": "GF0902",
+          "amount": 67329000000,
+          "levels": {
+            "central": 0.014,
+            "state": 0.7593,
+            "local": 0.2267
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Das BAföG für Schülerinnen und Schüler (0,5 Mrd. Euro) ist dem Bund zugerechnet.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for school pupils (BAföG, EUR 0.5 billion) are attributed to the federal level."
+          }
+        },
+        {
+          "id": "exp.education.post_secondary",
+          "label": {
+            "de": "Fachschulen und Weiterbildung nach der Schule",
+            "en": "Post-secondary non-tertiary education"
+          },
+          "code": "GF0903",
+          "amount": 2968000000,
+          "levels": {
+            "central": 0.0326,
+            "state": 0.7263,
+            "local": 0.2411
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.education.tertiary",
+          "label": {
+            "de": "Hochschulen",
+            "en": "Universities and colleges"
+          },
+          "code": "GF0904",
+          "amount": 33864000000,
+          "levels": {
+            "central": 0.0937,
+            "state": 0.9063
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Das BAföG für Studierende (1,3 Mrd. Euro) ist dem Bund zugerechnet.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal student grants (BAföG, EUR 1.3 billion) are attributed to the federal level."
+          }
+        },
+        {
+          "id": "exp.education.other_levels",
+          "label": {
+            "de": "Volkshochschulen und sonstige Bildung",
+            "en": "Adult education and other education"
+          },
+          "code": "GF0905",
+          "amount": 3647000000,
+          "levels": {
+            "central": 0.0632,
+            "state": 0.4694,
+            "local": 0.4674
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.education.support_services",
+          "label": {
+            "de": "Schülerbeförderung, Mensen und andere Hilfsdienste",
+            "en": "School transport, canteens and other support services"
+          },
+          "code": "GF0906",
+          "amount": 18541000000,
+          "levels": {
+            "central": 0.0304,
+            "state": 0.4069,
+            "local": 0.5627
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.education.rd",
+          "label": {
+            "de": "Bildungsforschung",
+            "en": "Education research"
+          },
+          "code": "GF0907",
+          "amount": 613000000,
+          "levels": {
+            "central": 0.5022,
+            "state": 0.4978
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.education.other",
+          "label": {
+            "de": "Sonstige Bildungsausgaben",
+            "en": "Other education spending"
+          },
+          "code": "GF0908",
+          "amount": 2971000000,
+          "levels": {
+            "central": 0.1335,
+            "state": 0.496,
+            "local": 0.3705
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.social",
+      "label": {
+        "de": "Soziale Sicherung",
+        "en": "Social protection"
+      },
+      "code": "GF10",
+      "children": [
+        {
+          "id": "exp.social.old_age",
+          "label": {
+            "de": "Alter: Renten und Pensionen",
+            "en": "Old age: pensions"
+          },
+          "code": "GF1002",
+          "children": [
+            {
+              "id": "exp.social.old_age.statutory_pensions",
+              "label": {
+                "de": "Altersrenten der gesetzlichen Rentenversicherung",
+                "en": "Old-age pensions of the statutory pension insurance"
+              },
+              "amount": 287755056000,
+              "levels": {
+                "central": 0.2883,
+                "social_security": 0.7117
+              },
+              "quality": "derived",
+              "sources": [
+                "drv_rv_in_zahlen_2026",
+                "sozialpolitik_aktuell_viii51",
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Rentenausgaben 2024 (360,1 Mrd. Euro) mal Anteil der Altersrenten (79,9 %). Bundesanteil: Zahlungen des Bundes an die Rentenversicherung (116,1 Mrd. Euro) im Verhältnis zu deren Gesamtausgaben (402,8 Mrd. Euro).",
+                "en": "Pension expenditure 2024 (EUR 360.1 billion) times the share of old-age pensions (79.9%). Federal share: federal payments to the pension insurance (EUR 116.1 billion) relative to its total spending (EUR 402.8 billion)."
+              }
+            },
+            {
+              "id": "exp.social.old_age.other",
+              "label": {
+                "de": "Beamtenpensionen, Kranken- und Pflegeleistungen für Ältere und weitere Altersleistungen",
+                "en": "Civil servants' pensions, health and care benefits for the elderly and other old-age benefits"
+              },
+              "amount": 139472944000,
+              "levels": {
+                "central": 0.2202,
+                "state": 0.3127,
+                "local": 0.0843,
+                "social_security": 0.3828
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "drv_rv_in_zahlen_2026",
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Rest der Gruppe „Alter“ nach Abzug der gesetzlichen Altersrenten; Aufteilung auf die Ebenen geschätzt. Dem Bund zugerechnet: der Teil der Bundesmittel für die Rentenversicherung, der nicht auf Renten entfällt (u. a. Krankenversicherung der Rentner), und die Zuschüsse zur Alterssicherung der Landwirte.",
+                "en": "Remainder of the old-age group after deducting statutory old-age pensions; split across levels estimated. Attributed to the federal level: the part of federal funding of the pension insurance not related to pensions (e.g. pensioners' health insurance) and the subsidies to farmers' old-age insurance."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.social.survivors",
+          "label": {
+            "de": "Hinterbliebene: Witwen- und Waisenrenten",
+            "en": "Survivors: widows' and orphans' pensions"
+          },
+          "code": "GF1003",
+          "children": [
+            {
+              "id": "exp.social.survivors.statutory_pensions",
+              "label": {
+                "de": "Hinterbliebenenrenten der gesetzlichen Rentenversicherung",
+                "en": "Survivors' pensions of the statutory pension insurance"
+              },
+              "amount": 48619440000,
+              "levels": {
+                "central": 0.2883,
+                "social_security": 0.7117
+              },
+              "quality": "derived",
+              "sources": [
+                "drv_rv_in_zahlen_2026",
+                "sozialpolitik_aktuell_viii51",
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Rentenausgaben 2024 mal Anteil der Hinterbliebenenrenten (13,5 %); Bundesanteil wie bei den Altersrenten.",
+                "en": "Pension expenditure 2024 times the share of survivors' pensions (13.5%); federal share as for old-age pensions."
+              }
+            },
+            {
+              "id": "exp.social.survivors.other",
+              "label": {
+                "de": "Hinterbliebenenversorgung der Beamten und weitere Leistungen",
+                "en": "Survivors' benefits for civil servants and other benefits"
+              },
+              "amount": 32224560000,
+              "levels": {
+                "central": 0.2242,
+                "state": 0.4686,
+                "local": 0.1158,
+                "social_security": 0.1914
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "drv_rv_in_zahlen_2026"
+              ],
+              "note": {
+                "de": "Rest der Gruppe nach Abzug der gesetzlichen Hinterbliebenenrenten; Aufteilung geschätzt.",
+                "en": "Remainder of the group after deducting statutory survivors' pensions; split estimated."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.social.sickness_disability",
+          "label": {
+            "de": "Krankheit, Pflege und Behinderung",
+            "en": "Sickness, long-term care and disability"
+          },
+          "code": "GF1001",
+          "children": [
+            {
+              "id": "exp.social.sickness_disability.em_pensions",
+              "label": {
+                "de": "Erwerbsminderungsrenten der gesetzlichen Rentenversicherung",
+                "en": "Disability pensions of the statutory pension insurance"
+              },
+              "amount": 23769504000,
+              "levels": {
+                "central": 0.2883,
+                "social_security": 0.7117
+              },
+              "quality": "derived",
+              "sources": [
+                "drv_rv_in_zahlen_2026",
+                "sozialpolitik_aktuell_viii51",
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Rentenausgaben 2024 mal Anteil der Erwerbsminderungsrenten (6,6 %); Bundesanteil wie bei den Altersrenten.",
+                "en": "Pension expenditure 2024 times the share of disability pensions (6.6%); federal share as for old-age pensions."
+              }
+            },
+            {
+              "id": "exp.social.sickness_disability.other",
+              "label": {
+                "de": "Pflegeversicherung, Eingliederungshilfe, Krankengeld, Unfallversicherung",
+                "en": "Long-term care insurance, integration assistance for disabled people, sick pay, accident insurance"
+              },
+              "amount": 120157496000,
+              "levels": {
+                "central": 0.0257,
+                "state": 0.1041,
+                "local": 0.2122,
+                "social_security": 0.658
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "drv_rv_in_zahlen_2026"
+              ],
+              "note": {
+                "de": "Rest der Gruppe nach Abzug der Erwerbsminderungsrenten; Aufteilung geschätzt.",
+                "en": "Remainder of the group after deducting disability pensions; split estimated."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.social.family",
+          "label": {
+            "de": "Familie und Kinder",
+            "en": "Family and children"
+          },
+          "code": "GF1004",
+          "children": [
+            {
+              "id": "exp.social.family.parental_allowance",
+              "label": {
+                "de": "Elterngeld",
+                "en": "Parental allowance"
+              },
+              "amount": 7172430000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Kassenwert aus dem Bundeshaushalt (Titel 1701 681 02, Ist 2024).",
+                "en": "Cash figure from the federal budget (title 1701 681 02, 2024 actuals)."
+              }
+            },
+            {
+              "id": "exp.social.family.other",
+              "label": {
+                "de": "Kindergeld (soweit als Ausgabe gebucht), Kinder- und Jugendhilfe, Unterhaltsvorschuss",
+                "en": "Child benefit (as far as recorded as spending), child and youth welfare, maintenance advances"
+              },
+              "amount": 76590570000,
+              "levels": {
+                "central": 0.1428,
+                "state": 0.2488,
+                "local": 0.6084
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "bundeshaushalt_2024",
+                "ba_kindergeld_2024"
+              ],
+              "note": {
+                "de": "Rest der Gruppe nach Abzug des Elterngelds; Aufteilung geschätzt. Die Geldleistungen der gesamten Gruppe betragen laut Eurostat 38,6 Mrd. Euro, die Familienkasse zahlte 2024 aber 54,5 Mrd. Euro Kindergeld aus: Die Volkswirtschaftlichen Gesamtrechnungen buchen demnach nur einen Teil des Kindergelds als Ausgabe, der Rest wird dort offenbar mit der Lohnsteuer verrechnet.",
+                "en": "Remainder of the group after deducting parental allowance; split estimated. Cash benefits of the whole group amount to EUR 38.6 billion according to Eurostat, whereas the family benefits office paid out EUR 54.5 billion in child benefit in 2024: national accounts thus record only part of child benefit as spending, the rest is evidently netted against wage tax there."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.social.basic_security",
+          "label": {
+            "de": "Arbeitslosigkeit, Grundsicherung, Wohnen und Asyl",
+            "en": "Unemployment, basic income support, housing and asylum"
+          },
+          "description": {
+            "de": "Fasst drei Gruppen der Statistik zusammen (Arbeitslosigkeit, Wohnen, soziale Hilfen), weil sich die einzelnen Leistungen den Gruppen nicht eindeutig zuordnen lassen.",
+            "en": "Combines three groups of the statistics (unemployment, housing, social exclusion) because the individual benefits cannot be assigned unambiguously to one of them."
+          },
+          "code": "GF1005+GF1006+GF1007",
+          "children": [
+            {
+              "id": "exp.social.basic_security.unemployment_benefit",
+              "label": {
+                "de": "Arbeitslosengeld (Arbeitslosenversicherung)",
+                "en": "Unemployment benefit (unemployment insurance)"
+              },
+              "amount": 22160000000,
+              "levels": {
+                "social_security": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "ba_geschaeftsbericht_2024"
+              ],
+              "note": {
+                "de": "Kassenwert der Bundesagentur für Arbeit 2024.",
+                "en": "Cash figure of the Federal Employment Agency for 2024."
+              }
+            },
+            {
+              "id": "exp.social.basic_security.buergergeld",
+              "label": {
+                "de": "Bürgergeld: Regelbedarf, Mehrbedarfe und Sozialbeiträge (seit Juli 2026: Grundsicherungsgeld)",
+                "en": "Citizen's income (Bürgergeld): standard benefit, supplements and social contributions (since July 2026: Grundsicherungsgeld)"
+              },
+              "description": {
+                "de": "Geldleistung der Grundsicherung für Arbeitsuchende (SGB II) ohne Wohnkosten, vollständig vom Bund bezahlt. Verwaltung und Arbeitsförderung der Jobcenter sind nicht enthalten.",
+                "en": "Cash benefit of basic income support for jobseekers (Social Code Book II) without housing costs, paid entirely by the federal government. Job centre administration and employment measures are not included."
+              },
+              "breakdowns": {
+                "nationality": {
+                  "label": {
+                    "de": "Staatsangehörigkeit der Leistungsberechtigten",
+                    "en": "Nationality of recipients"
+                  },
+                  "basis": "spending",
+                  "groups": [
+                    {
+                      "id": "german",
+                      "label": {
+                        "de": "Deutsche",
+                        "en": "German citizens"
+                      },
+                      "share": 0.5261
+                    },
+                    {
+                      "id": "eu",
+                      "label": {
+                        "de": "EU-Bürger",
+                        "en": "EU citizens"
+                      },
+                      "share": 0.0694
+                    },
+                    {
+                      "id": "ukraine",
+                      "label": {
+                        "de": "Ukrainer",
+                        "en": "Ukrainian citizens"
+                      },
+                      "share": 0.1341
+                    },
+                    {
+                      "id": "asylum_origin",
+                      "label": {
+                        "de": "Acht Hauptasylherkunftsländer (Syrien, Afghanistan, Irak, Iran, Eritrea, Somalia, Nigeria, Pakistan)",
+                        "en": "Eight main asylum-origin countries (Syria, Afghanistan, Iraq, Iran, Eritrea, Somalia, Nigeria, Pakistan)"
+                      },
+                      "share": 0.1579
+                    },
+                    {
+                      "id": "other_third",
+                      "label": {
+                        "de": "Sonstige Drittstaaten, Staatenlose und ungeklärt",
+                        "en": "Other non-EU countries, stateless and unknown"
+                      },
+                      "share": 0.1125
+                    }
+                  ],
+                  "quality": "derived",
+                  "sources": [
+                    "bt_drs_21_1069"
+                  ],
+                  "note": {
+                    "de": "Anteile an den Zahlungsansprüchen aller Leistungsberechtigten im SGB II im Jahr 2024 (46,9 Mrd. Euro, Statistik der Bundesagentur für Arbeit). Die Anteile beziehen sich auf alle Leistungsarten zusammen und werden hier unverändert auf diese Teilleistung angewendet. Eingebürgerte zählen als Deutsche.",
+                    "en": "Shares of the payment entitlements of all recipients under Social Code Book II in 2024 (EUR 46.9 billion, Federal Employment Agency statistics). The shares refer to all benefit types together and are applied unchanged to this component. Naturalised persons count as German."
+                  }
+                }
+              },
+              "amount": 29150930000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "bundeshaushalt_2024",
+                "ba_sgb2_zeitreihe",
+                "bundesregierung_neue_grundsicherung"
+              ],
+              "note": {
+                "de": "Kassenwert aus dem Bundeshaushalt (Titel 1101 681 12, Ist 2024).",
+                "en": "Cash figure from the federal budget (title 1101 681 12, 2024 actuals)."
+              }
+            },
+            {
+              "id": "exp.social.basic_security.housing_costs",
+              "label": {
+                "de": "Bürgergeld: Kosten für Unterkunft und Heizung",
+                "en": "Citizen's income: housing and heating costs"
+              },
+              "description": {
+                "de": "Miete und Heizung für Haushalte im Bürgergeld. Die Kommunen zahlen aus, der Bund erstattet einen Teil.",
+                "en": "Rent and heating for households on citizen's income. Municipalities pay, the federal government reimburses part."
+              },
+              "breakdowns": {
+                "nationality": {
+                  "label": {
+                    "de": "Staatsangehörigkeit der Leistungsberechtigten",
+                    "en": "Nationality of recipients"
+                  },
+                  "basis": "spending",
+                  "groups": [
+                    {
+                      "id": "german",
+                      "label": {
+                        "de": "Deutsche",
+                        "en": "German citizens"
+                      },
+                      "share": 0.5261
+                    },
+                    {
+                      "id": "eu",
+                      "label": {
+                        "de": "EU-Bürger",
+                        "en": "EU citizens"
+                      },
+                      "share": 0.0694
+                    },
+                    {
+                      "id": "ukraine",
+                      "label": {
+                        "de": "Ukrainer",
+                        "en": "Ukrainian citizens"
+                      },
+                      "share": 0.1341
+                    },
+                    {
+                      "id": "asylum_origin",
+                      "label": {
+                        "de": "Acht Hauptasylherkunftsländer (Syrien, Afghanistan, Irak, Iran, Eritrea, Somalia, Nigeria, Pakistan)",
+                        "en": "Eight main asylum-origin countries (Syria, Afghanistan, Iraq, Iran, Eritrea, Somalia, Nigeria, Pakistan)"
+                      },
+                      "share": 0.1579
+                    },
+                    {
+                      "id": "other_third",
+                      "label": {
+                        "de": "Sonstige Drittstaaten, Staatenlose und ungeklärt",
+                        "en": "Other non-EU countries, stateless and unknown"
+                      },
+                      "share": 0.1125
+                    }
+                  ],
+                  "quality": "derived",
+                  "sources": [
+                    "bt_drs_21_1069"
+                  ],
+                  "note": {
+                    "de": "Anteile an den Zahlungsansprüchen aller Leistungsberechtigten im SGB II im Jahr 2024 (46,9 Mrd. Euro, Statistik der Bundesagentur für Arbeit). Die Anteile beziehen sich auf alle Leistungsarten zusammen und werden hier unverändert auf diese Teilleistung angewendet. Eingebürgerte zählen als Deutsche.",
+                    "en": "Shares of the payment entitlements of all recipients under Social Code Book II in 2024 (EUR 46.9 billion, Federal Employment Agency statistics). The shares refer to all benefit types together and are applied unchanged to this component. Naturalised persons count as German."
+                  }
+                }
+              },
+              "amount": 17684820000,
+              "levels": {
+                "central": 0.6989,
+                "local": 0.3011
+              },
+              "quality": "derived",
+              "sources": [
+                "ba_sgb2_zeitreihe",
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Zahlungsansprüche laut Bundesagentur für Arbeit (Monatsdurchschnitt 2024 mal 12). Bundesanteil 69,9 %: Bundesbeteiligung 12,36 Mrd. Euro (Ist 2024).",
+                "en": "Payment entitlements according to the Federal Employment Agency (2024 monthly average times 12). Federal share 69.9%: federal contribution of EUR 12.36 billion (2024 actuals)."
+              }
+            },
+            {
+              "id": "exp.social.basic_security.asylum_benefits",
+              "label": {
+                "de": "Asylbewerberleistungen",
+                "en": "Asylum seekers' benefits"
+              },
+              "description": {
+                "de": "Bruttoausgaben nach dem Asylbewerberleistungsgesetz: Unterkunft, Verpflegung, Geldleistungen und Krankenhilfe.",
+                "en": "Gross expenditure under the Asylum Seekers' Benefits Act: accommodation, food, cash benefits and health care."
+              },
+              "amount": 6718465000,
+              "levels": {
+                "state": 0.3749,
+                "local": 0.6251
+              },
+              "quality": "derived",
+              "sources": [
+                "destatis_asylblg_ausgaben"
+              ],
+              "note": {
+                "de": "Betrag amtlich (Destatis, revidiert). Länder und Kommunen tragen die Kosten; die Aufteilung zwischen beiden ist geschätzt, weil sie je nach Land unterschiedlich geregelt ist.",
+                "en": "Amount official (Destatis, revised). States and municipalities bear the cost; the split between the two is estimated because rules differ by state."
+              }
+            },
+            {
+              "id": "exp.social.basic_security.other",
+              "label": {
+                "de": "Arbeitsförderung, Jobcenter-Verwaltung, Sozialhilfe, Grundsicherung im Alter, Wohngeld",
+                "en": "Employment promotion, job centre administration, social assistance, basic security in old age, housing benefit"
+              },
+              "amount": 42043785000,
+              "levels": {
+                "central": 0.5085,
+                "state": 0.0715,
+                "local": 0.0962,
+                "social_security": 0.3238
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "bundeshaushalt_2024",
+                "ba_geschaeftsbericht_2024",
+                "ba_sgb2_zeitreihe",
+                "destatis_asylblg_ausgaben"
+              ],
+              "note": {
+                "de": "Rest der drei Gruppen nach Abzug der einzeln ausgewiesenen Leistungen. Die Einzelwerte sind Kassenzahlen, die Gruppensumme stammt aus den Volkswirtschaftlichen Gesamtrechnungen; der Rest ist deshalb nur näherungsweise richtig. Dem Bund zugerechnet: Erstattung der Grundsicherung im Alter (11,1 Mrd. Euro) und der Bundesanteil am Wohngeld (2,3 Mrd. Euro).",
+                "en": "Remainder of the three groups after deducting the benefits shown separately. The individual items are cash figures, the group total comes from national accounts; the remainder is therefore only approximately right. Attributed to the federal level: reimbursement of basic security in old age (EUR 11.1 billion) and the federal share of housing benefit (EUR 2.3 billion)."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.social.rd",
+          "label": {
+            "de": "Sozialforschung",
+            "en": "Research on social protection"
+          },
+          "code": "GF1008",
+          "amount": 218000000,
+          "levels": {
+            "central": 0.4177,
+            "state": 0.5823
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        },
+        {
+          "id": "exp.social.other",
+          "label": {
+            "de": "Verwaltung der Sozialversicherungen und sonstige soziale Sicherung",
+            "en": "Administration of social insurance and other social protection"
+          },
+          "code": "GF1009",
+          "amount": 29441000000,
+          "levels": {
+            "central": 0.0642,
+            "state": 0.0895,
+            "local": 0.2984,
+            "social_security": 0.5479
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
+            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.revision",
+      "label": {
+        "de": "Noch nicht nach Aufgaben aufgeteilte Datenrevision",
+        "en": "Data revision not yet allocated by function"
+      },
+      "description": {
+        "de": "Die Gesamtausgaben des Staates für 2024 wurden im Herbst 2026 um 7,8 Mrd. Euro nach oben revidiert (vor allem Investitionen). Die Gliederung nach Aufgabenbereichen wurde noch nicht angepasst; die Differenz steht deshalb hier.",
+        "en": "Total government expenditure for 2024 was revised upwards by EUR 7.8 billion in autumn 2026 (mainly investment). The breakdown by function has not been updated yet, so the difference is shown here."
+      },
+      "amount": 7769000000,
+      "levels": {
+        "central": 0.183,
+        "state": 0.3381,
+        "local": 0.4789
+      },
+      "quality": "derived",
+      "sources": [
+        "eurostat_gov_10a_main",
+        "eurostat_gov_10a_exp"
+      ],
+      "note": {
+        "de": "Gesamtausgaben laut aktueller Datenlieferung (2.147,5 Mrd. Euro) minus Summe der Aufgabenbereiche (2.139,7 Mrd. Euro). Aufteilung auf die Ebenen nach der Revision ihrer Ausgaben ohne Transfers.",
+        "en": "Total expenditure in the latest data release (EUR 2,147.5 billion) minus the sum of the functional breakdown (EUR 2,139.7 billion). Split across levels according to the revision of each level's spending excluding transfers."
+      }
+    }
+  ]
+}

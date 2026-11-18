@@ -1,0 +1,343 @@
+{
+  "eurostat_gov_10a_exp": {
+    "title": "General government expenditure by function (COFOG) [gov_10a_exp], Germany",
+    "publisher": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table?lang=en",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Last updated 21 October 2026. Latest year with data: 2024. Retrieved through the dissemination API (geo=DE, unit=MIO_EUR, all sectors and transactions)."
+  },
+  "eurostat_gov_10a_main": {
+    "title": "Government revenue, expenditure and main aggregates [gov_10a_main], Germany",
+    "publisher": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=en",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Last updated 21 October 2026 (autumn 2026 EDP notification). Total revenue 2,028,340, total expenditure 2,147,486, net borrowing 119,146 million euros."
+  },
+  "eurostat_ntl": {
+    "title": "National Tax Lists: individual taxes and social contributions by national classification (ESA 2010), update of 29 October 2026, sheet DE",
+    "publisher": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat/statistics-explained/images/3/3b/National_tax_lists_2025_2026-10-29.xlsx",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Covers general government plus EU institutions; customs duties (5,517 million euros in 2024) go to the EU and are excluded from the pack."
+  },
+  "eurostat_gov_10dd_edpt1": {
+    "title": "Government deficit/surplus, debt and associated data [gov_10dd_edpt1], Germany",
+    "publisher": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=en",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Last updated 21 October 2026."
+  },
+  "eurostat_nama_10_gdp": {
+    "title": "Gross domestic product and main components [nama_10_gdp], Germany, current prices",
+    "publisher": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table?lang=en",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Last updated 11 November 2026."
+  },
+  "eurostat_demo_gind": {
+    "title": "Population change: demographic balance and crude rates [demo_gind], Germany, average population",
+    "publisher": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/demo_gind/default/table?lang=en",
+    "accessed": "2026-11-17",
+    "year": 2024
+  },
+  "eurostat_lfst_hhnhtych": {
+    "title": "Number of private households by household composition [lfst_hhnhtych], Germany",
+    "publisher": "Eurostat",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/lfst_hhnhtych/default/table?lang=en",
+    "accessed": "2026-11-17",
+    "year": 2024
+  },
+  "bundeshaushalt_2024": {
+    "title": "Bundeshaushalt digital: Ist-Werte des Haushaltsjahres 2024 nach Einzelplänen, Kapiteln und Titeln",
+    "publisher": "Bundesministerium der Finanzen",
+    "url": "https://www.bundeshaushalt.de/DE/Bundeshaushalt-digital/bundeshaushalt-digital.html",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Cash actuals (Ist) of the federal budget, data as of July 2025. Titles used are named in the notes of the items concerned."
+  },
+  "drv_rv_in_zahlen_2026": {
+    "title": "Rentenversicherung in Zahlen 2026 (Stand: 25. Juni 2026)",
+    "publisher": "Deutsche Rentenversicherung Bund",
+    "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zahlen.pdf?__blob=publicationFile",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Revenue and expenditure 2024 and 2025 (p. 20), rules of thumb on pension finances (p. 10), pension level time series (p. 27)."
+  },
+  "sozialpolitik_aktuell_viii51": {
+    "title": "Rentenausgaben nach Rentenarten 1960–2024 (Abbildung VIII.51)",
+    "publisher": "Sozialpolitik-aktuell.de, Institut Arbeit und Qualifikation der Universität Duisburg-Essen (Daten: Deutsche Rentenversicherung Bund)",
+    "url": "https://www.sozialpolitik-aktuell.de/files/sozialpolitik-aktuell/_Politikfelder/Alter-Rente/Datensammlung/PDF-Dateien/abbVIII51.pdf",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Shares of old-age, survivors' and disability pensions in pension expenditure of the general pension insurance."
+  },
+  "ba_geschaeftsbericht_2024": {
+    "title": "Geschäftsbericht 2024",
+    "publisher": "Bundesagentur für Arbeit",
+    "url": "https://www.arbeitsagentur.de/ueber-uns/geschaeftsbericht-2024",
+    "accessed": "2026-11-17",
+    "year": 2024
+  },
+  "ba_sgb2_zeitreihe": {
+    "title": "Strukturen der Grundsicherung SGB II (Zeitreihe Monats- und Jahreszahlen ab 2005), Deutschland, Tabelle 6: Zahlungsansprüche von Bedarfsgemeinschaften",
+    "publisher": "Statistik der Bundesagentur für Arbeit",
+    "url": "https://statistik.arbeitsagentur.de/Statistikdaten/Detail/Aktuell/iiia7/zeitreihekreise-zr-gruarb/zr-gruarb-d-0-xlsx.xlsx?__blob=publicationFile&v=1",
+    "accessed": "2026-11-17",
+    "year": 2024
+  },
+  "ba_kindergeld_2024": {
+    "title": "Presseinfo Nr. 38 vom 18.09.2025: Zahlen der Familienkasse zum Weltkindertag",
+    "publisher": "Bundesagentur für Arbeit",
+    "url": "https://www.arbeitsagentur.de/presse/2025-38-weltkindertag",
+    "accessed": "2026-11-18",
+    "year": 2024
+  },
+  "bundesregierung_neue_grundsicherung": {
+    "title": "Bürgergeld wird zur neuen Grundsicherung (Fragen und Antworten)",
+    "publisher": "Presse- und Informationsamt der Bundesregierung",
+    "url": "https://www.bundesregierung.de/breg-de/service/fragen-und-anworten/bundesrat-neue-grundsicherung-2399562",
+    "accessed": "2026-11-17",
+    "year": 2026,
+    "note": "Bundestag 5 March 2026, Bundesrat 27 March 2026, in force in stages from 1 July 2026; the cash benefit is renamed Grundsicherungsgeld."
+  },
+  "destatis_asylblg_ausgaben": {
+    "title": "Asylbewerberleistungen: Bruttoausgaben, Einnahmen und Nettoausgaben im Zeitvergleich",
+    "publisher": "Statistisches Bundesamt (Destatis)",
+    "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Soziales/Asylbewerberleistungen/Tabellen/liste-ausgaben-einnahmen-ew.html",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Table as of 29 July 2026; 2024 figures revised on 24 April 2026."
+  },
+  "destatis_asylblg_2025": {
+    "title": "Asylbewerberleistungen (Themenseite mit Eckzahlen 2025)",
+    "publisher": "Statistisches Bundesamt (Destatis)",
+    "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Soziales/Asylbewerberleistungen/_inhalt.html",
+    "accessed": "2026-11-17",
+    "year": 2025
+  },
+  "bpb_asyl_kosten": {
+    "title": "Asylbedingte Kosten und Ausgaben (Zahlen zu Asyl in Deutschland)",
+    "publisher": "Bundeszentrale für politische Bildung",
+    "url": "https://www.bpb.de/themen/migration-integration/zahlen-zu-asyl/265776/asylbedingte-kosten-und-ausgaben/",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Breakdown of 2024 gross expenditure by type of benefit, citing Destatis."
+  },
+  "bt_drs_21_1069": {
+    "title": "Antwort der Bundesregierung: Entwicklung der Ausgaben im SGB II (Bürgergeld) in den Jahren 2024 und 2025, Drucksache 21/1069 mit Tabellenanhang",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/010/2101069.pdf",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Table 1: payment entitlements 2024 by nationality (Federal Employment Agency statistics, data as of July 2025)."
+  },
+  "bt_drs_21_3539": {
+    "title": "Gesetzentwurf der Bundesregierung: Leistungsrechtsanpassungsgesetz, Drucksache 21/3539 vom 12.01.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/035/2103539.pdf",
+    "accessed": "2026-11-17",
+    "year": 2026,
+    "note": "Section D: budgetary effects for 2026 and 2027."
+  },
+  "gegen_hartz_2026_11": {
+    "title": "Bürgergeld für Ukrainer: Geplante Leistungskürzung gerät ins Stocken (8. November 2026)",
+    "publisher": "gegen-hartz.de",
+    "url": "https://www.gegen-hartz.de/?p=250616",
+    "accessed": "2026-11-17",
+    "year": 2026,
+    "note": "Secondary source (news portal) on the state of the legislative procedure; no official confirmation of the status in November 2026 was found."
+  },
+  "bverfg_2012_asylblg": {
+    "title": "Pressemitteilung Nr. 56/2012: Regelungen zu den Grundleistungen in Form der Geldleistungen nach dem Asylbewerberleistungsgesetz verfassungswidrig (Urteil vom 18. Juli 2012, 1 BvL 10/10)",
+    "publisher": "Bundesverfassungsgericht",
+    "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Pressemitteilungen/DE/2012/bvg12-056.html",
+    "accessed": "2026-11-18",
+    "year": 2012
+  },
+  "eugh_alimanovic": {
+    "title": "Pressemitteilung Nr. 101/15: Urteil in der Rechtssache C-67/14 (Alimanovic)",
+    "publisher": "Gerichtshof der Europäischen Union",
+    "url": "https://curia.europa.eu/jcms/upload/docs/application/pdf/2015-09/cp150101de.pdf",
+    "accessed": "2026-11-18",
+    "year": 2015
+  },
+  "sgb2_7": {
+    "title": "Sozialgesetzbuch Zweites Buch, § 7 Leistungsberechtigte",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/sgb_2/__7.html",
+    "accessed": "2026-11-18"
+  },
+  "bmz_oda": {
+    "title": "ODA-Zahlen: Deutsche Entwicklungsleistungen",
+    "publisher": "Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung",
+    "url": "https://www.bmz.de/de/ministerium/zahlen-fakten/oda-zahlen",
+    "accessed": "2026-11-18",
+    "year": 2025
+  },
+  "correctiv_peru": {
+    "title": "Faktencheck vom 28. Mai 2024 (mit Angaben des BMZ zu Zusagen für Radwege in Peru)",
+    "publisher": "CORRECTIV",
+    "url": "https://correctiv.org/faktencheck/2024/05/28/nein-katrin-goering-eckardt-sagt-nicht-dass-radwege-vor-hochwasser-schuetzen/",
+    "accessed": "2026-11-18",
+    "year": 2024
+  },
+  "bundestag_diaeten_2026": {
+    "title": "Bundestag verzichtet auf Diätenerhöhung 2026 (Textarchiv, 10. Juli 2026)",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://www.bundestag.de/dokumente/textarchiv/2026/kw28-de-abgeordnetengesetz-1192574",
+    "accessed": "2026-11-18",
+    "year": 2026
+  },
+  "gg_art_48": {
+    "title": "Grundgesetz, Artikel 48",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/gg/art_48.html",
+    "accessed": "2026-11-18"
+  },
+  "gg_art_106": {
+    "title": "Grundgesetz, Artikel 106",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/gg/art_106.html",
+    "accessed": "2026-11-18"
+  },
+  "gg_art_115": {
+    "title": "Grundgesetz, Artikel 115",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/gg/art_115.html",
+    "accessed": "2026-11-18"
+  },
+  "gemfinrefg_1": {
+    "title": "Gemeindefinanzreformgesetz, § 1 Gemeindeanteil an der Einkommensteuer",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/gemfinrefg/__1.html",
+    "accessed": "2026-11-18"
+  },
+  "bwahlg_1": {
+    "title": "Bundeswahlgesetz, § 1",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/bwahlg/__1.html",
+    "accessed": "2026-11-18"
+  },
+  "aeuv_311": {
+    "title": "Vertrag über die Arbeitsweise der Europäischen Union, Artikel 311",
+    "publisher": "dejure.org (Text des AEUV)",
+    "url": "https://dejure.org/gesetze/AEUV/311.html",
+    "accessed": "2026-11-18"
+  },
+  "iw_report_34_2024": {
+    "title": "Die EU und das Geld: Wer zahlt, wer bekommt? IW-Report 34/2024",
+    "publisher": "Institut der deutschen Wirtschaft",
+    "url": "https://www.iwkoeln.de/studien/berthold-busch-bjoern-kauder-samina-sultan-wer-zahlt-wer-bekommt.html",
+    "accessed": "2026-11-18",
+    "year": 2023
+  },
+  "ecb_dwa": {
+    "title": "Distributional Wealth Accounts (DWA): net wealth of households, Germany, 2024-Q4",
+    "publisher": "European Central Bank",
+    "url": "https://data.ecb.europa.eu/data/datasets/DWA",
+    "accessed": "2026-11-17",
+    "year": 2024,
+    "note": "Experimental statistics. Retrieved through the ECB data API (series DWA.Q.DE.S14.*.NWA.*)."
+  },
+  "diw_wb_29_2020": {
+    "title": "MillionärInnen unter dem Mikroskop: Datenlücke bei sehr hohen Vermögen geschlossen – Konzentration höher als bisher ausgewiesen. DIW Wochenbericht 29/2020",
+    "publisher": "Deutsches Institut für Wirtschaftsforschung (DIW Berlin)",
+    "url": "https://www.diw.de/documents/publikationen/73/diw_01.c.793783.de/20-29.pdf",
+    "accessed": "2026-11-17",
+    "year": 2019
+  },
+  "diw_kompakt_108": {
+    "title": "Aufkommens- und Verteilungswirkungen einer Wiedererhebung der Vermögensteuer in Deutschland. DIW Politikberatung kompakt 108 (2016)",
+    "publisher": "Deutsches Institut für Wirtschaftsforschung (DIW Berlin)",
+    "url": "https://www.diw.de/documents/publikationen/73/diw_01.c.525161.de/diwkompakt_2016-108.pdf",
+    "accessed": "2026-11-17",
+    "year": 2011,
+    "note": "Microsimulation for 2011: tables 4, 5 and 8."
+  },
+  "bverfg_1995_vermoegensteuer": {
+    "title": "Beschluss vom 22. Juni 1995, 2 BvL 37/91 (BVerfGE 93, 121, Vermögensteuer)",
+    "publisher": "Bundesverfassungsgericht (Volltext: Das Fallrecht, Universität Bern)",
+    "url": "https://www.servat.unibe.ch/dfr/bv093121.html",
+    "accessed": "2026-11-18",
+    "year": 1995
+  },
+  "test_de_steuerreform_2026": {
+    "title": "Steuerreform-Pläne: Welche Steuerentlastungen die Bundesregierung plant (2. Juli 2026)",
+    "publisher": "Stiftung Warentest",
+    "url": "https://www.test.de/Steuerreform-Plaene-Welche-Steuerentlastungen-die-Bundesregierung-plant-6320471-0/",
+    "accessed": "2026-11-18",
+    "year": 2026
+  },
+  "destatis_lest_2022": {
+    "title": "Statistischer Bericht: Lohn- und Einkommensteuer 2022 (Tabelle 73111-02)",
+    "publisher": "Statistisches Bundesamt (Destatis)",
+    "url": "https://www.destatis.de/DE/Themen/Staat/Steuern/Lohnsteuer-Einkommensteuer/Publikationen/Downloads-Lohn-und-Einkommenssteuern/statistischer-bericht-lohn-einkommensteuer-2140710227005.xlsx?__blob=publicationFile&v=2",
+    "accessed": "2026-11-17",
+    "year": 2022
+  },
+  "bt_drs_20_14903": {
+    "title": "Antwort der Bundesregierung: Reformvorhaben und Steueraufkommen bei der Einkommen- und Vermögensbesteuerung, Drucksache 20/14903 vom 05.02.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/20/149/2014903.pdf",
+    "accessed": "2026-11-18",
+    "year": 2025
+  },
+  "bt_drs_21_1600": {
+    "title": "30. Subventionsbericht der Bundesregierung (2023 bis 2026), Drucksache 21/1600 vom 15.09.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/016/2101600.pdf",
+    "accessed": "2026-11-18",
+    "year": 2025,
+    "note": "Annex 2, item 45: relief for business assets under sections 13a to 13c and 28a of the Inheritance Tax Act."
+  },
+  "bverfg_2014_erbst": {
+    "title": "Pressemitteilung Nr. 116/2014: Privilegierung des Betriebsvermögens bei der Erbschaftsteuer in ihrer derzeitigen Ausgestaltung nicht in jeder Hinsicht mit der Verfassung vereinbar (Urteil vom 17. Dezember 2014, 1 BvL 21/12)",
+    "publisher": "Bundesverfassungsgericht",
+    "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Pressemitteilungen/DE/2014/bvg14-116.html",
+    "accessed": "2026-11-18",
+    "year": 2014
+  },
+  "pwc_erbst_hearing_2026": {
+    "title": "Erbschaftsteuer 2026: Erste Eindrücke aus der mündlichen Verhandlung vor dem Bundesverfassungsgericht (13. Oktober 2026)",
+    "publisher": "PwC Deutschland, Blog Steuern & Recht",
+    "url": "https://blogs.pwc.de/de/steuern-und-recht/article/257300/erbschaftsteuer-2026-erste-eindruecke-aus-der-muendlichen-verhandlung-vor-dem-bundesverfassungsgericht/",
+    "accessed": "2026-11-18",
+    "year": 2026,
+    "note": "Secondary source on the hearing in case 1 BvR 804/22; no ruling yet."
+  },
+  "bt_drs_21_8794": {
+    "title": "Antwort der Bundesregierung: Aktuelle Fragen zur Erbschaft- und Schenkungsteuer, Drucksache 21/8794 vom 27.10.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/087/2108794.pdf",
+    "accessed": "2026-11-18",
+    "year": 2025
+  },
+  "nato_defexp_2025": {
+    "title": "Defence Expenditure of NATO Countries (2014-2025)",
+    "publisher": "NATO",
+    "url": "https://nato.int/content/dam/nato/webready/documents/finance/def-exp-2025-en.pdf",
+    "accessed": "2026-11-18",
+    "year": 2024,
+    "note": "Germany 2024: 86,638 million euros at current prices, 2.00% of GDP. No German figure for 2025."
+  },
+  "nato_5_percent": {
+    "title": "Defence expenditures and NATO's 5% commitment (updated 29 June 2026)",
+    "publisher": "NATO",
+    "url": "https://www.nato.int/en/what-we-do/introduction-to-nato/defence-expenditures-and-natos-5-commitment",
+    "accessed": "2026-11-18",
+    "year": 2026
+  },
+  "bundesregierung_rentenpaket_2025": {
+    "title": "Rentenpaket 2025: Damit die Rente stabil, verlässlich und gerecht bleibt",
+    "publisher": "Presse- und Informationsamt der Bundesregierung",
+    "url": "https://www.bundesregierung.de/breg-de/service/newsletter-und-abos/newsletter-verbraucherschutz/rentenpaket-2025-2368678",
+    "accessed": "2026-11-18",
+    "year": 2025
+  }
+}

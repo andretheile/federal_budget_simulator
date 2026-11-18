@@ -1,0 +1,1380 @@
+{
+  "policies": [
+    {
+      "id": "buergergeld_by_nationality",
+      "label": {
+        "de": "Kein Bürgergeld für Ausländer",
+        "en": "No citizen's income for non-citizens"
+      },
+      "summary": {
+        "de": "Schließt die ausgewählten Gruppen ohne deutschen Pass vom Bürgergeld aus (seit Juli 2026: Grundsicherungsgeld). In der Grundeinstellung entfallen Regelbedarf und Wohnkosten ersatzlos, so wie die Forderung lautet. Ohne Ersatzleistungen wäre das verfassungswidrig, weil das Existenzminimum auch für diese Gruppen gesichert werden muss. Der Regler zeigt, was Ersatzleistungen kosten: Realistisch sind rund 100 % der Einsparung; die Bundesregierung rechnet für ukrainische Geflüchtete mit etwa 104 %. Diese Kosten tragen dann Länder und Kommunen statt des Bundes.",
+        "en": "Excludes the selected groups without German citizenship from citizen's income (Bürgergeld; since July 2026: Grundsicherungsgeld). At the default setting, standard benefits and housing costs are dropped without replacement, as the demand is worded. Without replacement benefits that would be unconstitutional, because the subsistence minimum must be secured for these groups too. The slider shows what replacement benefits cost: about 100% of the saving is realistic; for Ukrainian refugees the federal government expects about 104%. These costs then fall on states and municipalities instead of the federal government."
+      },
+      "topic": "migration",
+      "params": [
+        {
+          "id": "groups",
+          "type": "groups",
+          "label": {
+            "de": "Ausgeschlossene Gruppen",
+            "en": "Excluded groups"
+          },
+          "node": "exp.social.basic_security.buergergeld",
+          "breakdown": "nationality",
+          "default": [
+            "eu",
+            "ukraine",
+            "asylum_origin",
+            "other_third"
+          ]
+        },
+        {
+          "id": "fallback",
+          "type": "number",
+          "label": {
+            "de": "Ersatzleistungen in Prozent der Einsparung (0 = ersatzloser Ausschluss, rund 100 = rechtlich gebotener Ersatz)",
+            "en": "Replacement benefits as a percentage of the saving (0 = exclusion without replacement, about 100 = legally required replacement)"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 110,
+          "step": 2,
+          "default": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "excludeGroups",
+          "target": "exp.social.basic_security.buergergeld",
+          "breakdown": "nationality",
+          "groups": {
+            "param": "groups"
+          },
+          "shift": {
+            "to": "exp.social.basic_security.asylum_benefits",
+            "ratio": {
+              "param": "fallback",
+              "scale": 0.01
+            },
+            "uncertainty": {
+              "low": 0.85,
+              "high": 1.1
+            }
+          },
+          "quality": "derived",
+          "sources": [
+            "bt_drs_21_1069",
+            "bundeshaushalt_2024",
+            "bt_drs_21_3539"
+          ],
+          "note": {
+            "de": "Einsparung: Anteil der gewählten Gruppen an den Zahlungsansprüchen 2024 mal Ausgaben des Bundes für das Bürgergeld (29,2 Mrd. Euro). Ersatzleistungen: Der Regler legt fest, welcher Teil dieser Einsparung wieder anfällt. Der Betrag wird bei den Asylbewerberleistungen verbucht, die Länder und Kommunen tragen. Für Menschen aus den Asylherkunftsländern und der Ukraine wären es tatsächlich Asylbewerberleistungen; für EU-Bürger und andere Drittstaatsangehörige käme eher Sozialhilfe in Betracht, die ebenfalls Länder und Kommunen zahlen. Die Rechnung führt beides vereinfachend unter diesem einen Posten. Amtlich geschätzt ist nur das Verhältnis für ukrainische Geflüchtete (862 Mio. Euro Mehrausgaben bei 831 Mio. Euro Einsparungen, rund 104 %); für die anderen Gruppen ist jeder Wert eine Annahme.",
+            "en": "Saving: share of the selected groups in 2024 payment entitlements times federal spending on citizen's income (EUR 29.2 billion). Replacement benefits: the slider sets which part of this saving reappears. The amount is booked under asylum seekers' benefits, which states and municipalities pay. For people from the asylum-origin countries and Ukraine these would indeed be asylum seekers' benefits; for EU citizens and other non-EU nationals social assistance would be the more likely fallback, which is also paid by states and municipalities. The calculation puts both under this one item as a simplification. Only the ratio for Ukrainian refugees is officially estimated (EUR 862 million of additional spending against EUR 831 million of savings, about 104%); for the other groups any value is an assumption."
+          }
+        },
+        {
+          "type": "excludeGroups",
+          "target": "exp.social.basic_security.housing_costs",
+          "breakdown": "nationality",
+          "groups": {
+            "param": "groups"
+          },
+          "shift": {
+            "to": "exp.social.basic_security.asylum_benefits",
+            "ratio": {
+              "param": "fallback",
+              "scale": 0.01
+            },
+            "uncertainty": {
+              "low": 0.85,
+              "high": 1.1
+            }
+          },
+          "quality": "derived",
+          "sources": [
+            "bt_drs_21_1069",
+            "ba_sgb2_zeitreihe",
+            "bt_drs_21_3539"
+          ],
+          "note": {
+            "de": "Gleiche Rechnung für die Kosten der Unterkunft (17,7 Mrd. Euro, rund 70 % Bund, 30 % Kommunen); auch hier wird der Ersatz bei den Asylbewerberleistungen verbucht.",
+            "en": "Same calculation for housing costs (EUR 17.7 billion, about 70% federal, 30% municipal); here too the replacement is booked under asylum seekers' benefits."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "blocker",
+          "text": {
+            "de": "Das Grundrecht auf ein menschenwürdiges Existenzminimum gilt für Deutsche und Ausländer, die sich in Deutschland aufhalten, gleichermaßen; die Leistungshöhe darf nicht aus migrationspolitischen Gründen abgesenkt werden (Bundesverfassungsgericht 2012). Die Grundeinstellung, der Ausschluss ohne Ersatzleistung, wäre deshalb verfassungswidrig.",
+            "en": "The fundamental right to a dignified minimum subsistence applies equally to Germans and to foreign nationals residing in Germany; benefit levels may not be lowered for migration-policy reasons (Federal Constitutional Court 2012). The default setting, exclusion without a replacement benefit, would therefore be unconstitutional."
+          },
+          "sources": [
+            "bverfg_2012_asylblg"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "blocker",
+          "text": {
+            "de": "EU-Bürger, die in Deutschland arbeiten oder ihren Arbeitnehmerstatus behalten, haben nach EU-Recht Anspruch auf Gleichbehandlung bei der Sozialhilfe. Ausgeschlossen werden dürfen nur EU-Bürger, die allein zur Arbeitsuche hier sind oder kein Aufenthaltsrecht haben; das ist bereits geltendes Recht (§ 7 SGB II).",
+            "en": "EU citizens who work in Germany or retain worker status are entitled to equal treatment in social assistance under EU law. Only EU citizens who are here solely to look for work or have no right of residence may be excluded; that is already the law (section 7 of Social Code Book II)."
+          },
+          "sources": [
+            "eugh_alimanovic",
+            "sgb2_7"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Mit Ersatzleistungen auf Existenzniveau bleibt von der Einsparung wenig oder nichts. Entlastet würde vor allem der Bund, der das Bürgergeld überwiegend zahlt (bei allen vier Gruppen um rund 19,7 Mrd. Euro); die Ersatzleistungen müssten Länder und Kommunen tragen. Die Bundesregierung rechnet in ihrem Gesetzentwurf für ukrainische Geflüchtete für 2026 mit 862 Mio. Euro zusätzlichen Asylbewerberleistungen bei 831 Mio. Euro Einsparungen, unter dem Strich also mit Mehrkosten.",
+            "en": "With replacement benefits at subsistence level, little or nothing of the saving remains. The main relief would go to the federal government, which pays most of citizen's income (about EUR 19.7 billion for all four groups); the replacement benefits would have to be borne by states and municipalities. In its bill on Ukrainian refugees the federal government expects EUR 862 million of additional asylum seekers' benefits against EUR 831 million of savings in 2026, that is, a net extra cost."
+          },
+          "sources": [
+            "bt_drs_21_3539"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Statistik unterscheidet nach Staatsangehörigkeit, nicht nach Aufenthaltsstatus oder Aufenthaltsdauer; Eingebürgerte zählen als Deutsche. Die Anteile beziehen sich auf alle Leistungsberechtigten einschließlich Kindern.",
+            "en": "The statistics distinguish by nationality, not by residence status or length of stay; naturalised persons count as German. The shares cover all recipients including children."
+          },
+          "sources": [
+            "bt_drs_21_1069"
+          ]
+        }
+      ],
+      "sources": [
+        "bt_drs_21_1069",
+        "bt_drs_21_3539",
+        "bverfg_2012_asylblg",
+        "bundesregierung_neue_grundsicherung"
+      ]
+    },
+    {
+      "id": "ukrainians_to_asylum_benefits",
+      "label": {
+        "de": "Ukrainer: Asylbewerberleistungen statt Bürgergeld",
+        "en": "Ukrainians: asylum seekers' benefits instead of citizen's income"
+      },
+      "summary": {
+        "de": "Nimmt alle ukrainischen Staatsangehörigen aus dem Bürgergeld (seit Juli 2026: Grundsicherungsgeld) und versorgt sie stattdessen nach dem Asylbewerberleistungsgesetz, wie bis Mai 2022. Die Regierungskoalition plant das nur für Geflüchtete, die nach dem 1. April 2025 eingereist sind.",
+        "en": "Removes all Ukrainian citizens from citizen's income (Bürgergeld; since July 2026: Grundsicherungsgeld) and provides for them under the Asylum Seekers' Benefits Act instead, as was the case until May 2022. The governing coalition plans this only for refugees who arrived after 1 April 2025."
+      },
+      "topic": "migration",
+      "params": [
+        {
+          "id": "fallback",
+          "type": "number",
+          "label": {
+            "de": "Kosten der Asylbewerberleistungen im Verhältnis zur Einsparung",
+            "en": "Cost of asylum seekers' benefits relative to the saving"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "default": 104
+        }
+      ],
+      "effects": [
+        {
+          "type": "excludeGroups",
+          "target": "exp.social.basic_security.buergergeld",
+          "breakdown": "nationality",
+          "groups": [
+            "ukraine"
+          ],
+          "shift": {
+            "to": "exp.social.basic_security.asylum_benefits",
+            "ratio": {
+              "param": "fallback",
+              "scale": 0.01
+            },
+            "uncertainty": {
+              "low": 0.85,
+              "high": 1.1
+            }
+          },
+          "quality": "estimate",
+          "sources": [
+            "bt_drs_21_1069",
+            "bundeshaushalt_2024",
+            "bt_drs_21_3539"
+          ],
+          "note": {
+            "de": "Einsparung: Anteil ukrainischer Staatsangehöriger an den Zahlungsansprüchen 2024 (13,4 %) mal Ausgaben des Bundes für das Bürgergeld. Bei den Asylbewerberleistungen fällt die Einsparung mal dem eingestellten Verhältnis wieder an. Der Standardwert von 104 % stammt aus dem Gesetzentwurf der Bundesregierung für 2026: 862 Mio. Euro Mehrausgaben bei den Asylbewerberleistungen gegenüber 831 Mio. Euro Einsparungen bei Bürgergeld, Grundsicherung im Alter und Sozialhilfe. Der Entwurf betrifft nur nach dem 1. April 2025 Eingereiste; die Übertragung auf alle ist eine Annahme. Ist zugleich die Maßnahme „Kein Bürgergeld für Ausländer“ mit der Gruppe Ukrainer eingeschaltet, wirkt diese Maßnahme nicht zusätzlich.",
+            "en": "Saving: share of Ukrainian citizens in 2024 payment entitlements (13.4%) times federal spending on citizen's income. The saving times the chosen ratio reappears under asylum seekers' benefits. The default of 104% comes from the federal government's bill for 2026: EUR 862 million of additional spending on asylum seekers' benefits against EUR 831 million of savings on citizen's income, basic security in old age and social assistance. The bill covers only those who arrived after 1 April 2025; applying the ratio to everyone is an assumption. If the measure \"No citizen's income for non-citizens\" is switched on with the group Ukrainian citizens at the same time, this measure has no additional effect."
+          }
+        },
+        {
+          "type": "excludeGroups",
+          "target": "exp.social.basic_security.housing_costs",
+          "breakdown": "nationality",
+          "groups": [
+            "ukraine"
+          ],
+          "shift": {
+            "to": "exp.social.basic_security.asylum_benefits",
+            "ratio": {
+              "param": "fallback",
+              "scale": 0.01
+            },
+            "uncertainty": {
+              "low": 0.85,
+              "high": 1.1
+            }
+          },
+          "quality": "estimate",
+          "sources": [
+            "bt_drs_21_1069",
+            "ba_sgb2_zeitreihe",
+            "bt_drs_21_3539"
+          ],
+          "note": {
+            "de": "Gleiche Rechnung für die Kosten der Unterkunft (rund 70 % Bund, 30 % Kommunen).",
+            "en": "Same calculation for housing costs (about 70% federal, 30% municipal)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Bürgergeld zahlt überwiegend der Bund, Asylbewerberleistungen zahlen Länder und Kommunen. Die Bundesregierung rechnet in ihrem Gesetzentwurf für 2026 mit 831 Mio. Euro weniger Ausgaben (davon 759 Mio. Euro beim Bund), aber 862 Mio. Euro mehr Asylbewerberleistungen bei Ländern und Kommunen: unter dem Strich Mehrkosten und eine Verlagerung der Lasten.",
+            "en": "Citizen's income is paid mostly by the federal government, asylum seekers' benefits by states and municipalities. For 2026 the federal government's bill expects EUR 831 million less spending (of which EUR 759 million federal) but EUR 862 million more on asylum seekers' benefits for states and municipalities: a net extra cost and a shift of the burden."
+          },
+          "sources": [
+            "bt_drs_21_3539"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Auch Asylbewerberleistungen müssen das menschenwürdige Existenzminimum decken; es darf nicht aus migrationspolitischen Gründen abgesenkt werden (Bundesverfassungsgericht 2012). Große Einsparungen je Person sind deshalb rechtlich nicht möglich.",
+            "en": "Asylum seekers' benefits, too, must cover a dignified minimum subsistence, which may not be lowered for migration-policy reasons (Federal Constitutional Court 2012). Large savings per person are therefore not legally possible."
+          },
+          "sources": [
+            "bverfg_2012_asylblg"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Der Gesetzentwurf vom Januar 2026 war nach Presseberichten Anfang November 2026 noch nicht verabschiedet; Bund und Länder streiten über den Ausgleich der Mehrkosten.",
+            "en": "According to press reports, the January 2026 bill had not been passed by early November 2026; the federal government and the states disagree on compensation for the extra costs."
+          },
+          "sources": [
+            "gegen_hartz_2026_11",
+            "bt_drs_21_3539"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Bundesregierung nimmt in ihrem Entwurf an, dass die Betroffenen je Person geringere Kosten verursachen als Bezieher von Asylbewerberleistungen im Durchschnitt, unter anderem weil sie Kindergeld beziehen können, arbeiten dürfen und nicht in Gemeinschaftsunterkünften wohnen müssen. Trotzdem übersteigen die erwarteten Mehrausgaben die Einsparungen.",
+            "en": "In its bill the federal government assumes that those affected cause lower costs per person than recipients of asylum seekers' benefits on average, among other things because they can receive child benefit, are allowed to work and need not live in shared accommodation. Even so, the expected additional spending exceeds the savings."
+          },
+          "sources": [
+            "bt_drs_21_3539"
+          ]
+        }
+      ],
+      "sources": [
+        "bt_drs_21_3539",
+        "bt_drs_21_1069",
+        "bverfg_2012_asylblg"
+      ]
+    },
+    {
+      "id": "asylum_benefits_cut",
+      "label": {
+        "de": "Asylbewerberleistungen kürzen",
+        "en": "Cut asylum seekers' benefits"
+      },
+      "summary": {
+        "de": "Senkt die Ausgaben nach dem Asylbewerberleistungsgesetz (Unterkunft, Verpflegung, Geldleistungen, Krankenhilfe) um den eingestellten Anteil.",
+        "en": "Reduces spending under the Asylum Seekers' Benefits Act (accommodation, food, cash benefits, health care) by the chosen share."
+      },
+      "topic": "migration",
+      "params": [
+        {
+          "id": "cut",
+          "type": "number",
+          "label": {
+            "de": "Kürzung",
+            "en": "Cut"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 50,
+          "step": 5,
+          "default": 20,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.social.basic_security.asylum_benefits",
+          "factor": {
+            "param": "cut",
+            "scale": -0.01,
+            "offset": 1
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.0
+          },
+          "sources": [
+            "destatis_asylblg_ausgaben"
+          ],
+          "note": {
+            "de": "Kürzung mal Bruttoausgaben 2024 (6,72 Mrd. Euro). Die untere Grenze nimmt an, dass sich nur die Hälfte rechtlich und praktisch umsetzen lässt.",
+            "en": "Cut times gross expenditure in 2024 (EUR 6.72 billion). The lower bound assumes that only half can be implemented legally and in practice."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "blocker",
+          "text": {
+            "de": "Das Bundesverfassungsgericht hat 2012 die damaligen Geldleistungen für evident unzureichend erklärt: Die Leistungen müssen das Existenzminimum decken und nachvollziehbar berechnet sein; die Menschenwürde ist migrationspolitisch nicht zu relativieren. Pauschale Kürzungen unter dieses Niveau sind unzulässig.",
+            "en": "In 2012 the Federal Constitutional Court declared the cash benefits of the time evidently insufficient: benefits must cover the subsistence minimum and be calculated transparently; human dignity may not be relativised for migration-policy purposes. Across-the-board cuts below that level are not permitted."
+          },
+          "sources": [
+            "bverfg_2012_asylblg"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Der größte Teil sind Grundleistungen (2024: rund 4,4 Mrd. Euro), die vor allem Unterkunft, Verpflegung, Heizung und Kleidung abdecken und oft als Sachleistung erbracht werden; weitere 1,2 Mrd. Euro entfallen auf Leistungen bei Krankheit, Schwangerschaft und Geburt. Diese Kosten sinken kaum durch niedrigere Geldbeträge, sondern vor allem mit der Zahl der Leistungsbezieher.",
+            "en": "The largest part is basic benefits (2024: about EUR 4.4 billion), which mainly cover accommodation, food, heating and clothing and are often provided in kind; a further EUR 1.2 billion goes to benefits in case of illness, pregnancy and birth. These costs hardly fall with lower cash amounts; they depend mainly on the number of recipients."
+          },
+          "sources": [
+            "bpb_asyl_kosten"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Kosten tragen Länder und Kommunen; der Bundeshaushalt würde nicht entlastet.",
+            "en": "The costs are borne by states and municipalities; the federal budget would not be relieved."
+          },
+          "sources": [
+            "destatis_asylblg_ausgaben"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Die Ausgaben sinken bereits: 2025 lagen sie bei 6,2 Mrd. Euro (minus 8,2 %), die Zahl der Bezieher von Regelleistungen fiel zum Jahresende 2025 auf rund 390.000.",
+            "en": "Spending is already falling: in 2025 it was EUR 6.2 billion (down 8.2%), and the number of recipients of standard benefits fell to about 390,000 at the end of 2025."
+          },
+          "sources": [
+            "destatis_asylblg_2025"
+          ]
+        }
+      ],
+      "sources": [
+        "destatis_asylblg_ausgaben",
+        "bverfg_2012_asylblg",
+        "bpb_asyl_kosten"
+      ]
+    },
+    {
+      "id": "development_aid_cut",
+      "label": {
+        "de": "Entwicklungshilfe kürzen",
+        "en": "Cut development aid"
+      },
+      "summary": {
+        "de": "Kürzt die staatlichen Ausgaben für Entwicklungshilfe und wirtschaftliche Auslandshilfe um den eingestellten Anteil.",
+        "en": "Cuts government spending on development aid and foreign economic aid by the chosen share."
+      },
+      "topic": "other",
+      "params": [
+        {
+          "id": "cut",
+          "type": "number",
+          "label": {
+            "de": "Kürzung",
+            "en": "Cut"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 50,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.general.foreign_aid",
+          "factor": {
+            "param": "cut",
+            "scale": -0.01,
+            "offset": 1
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0
+          },
+          "sources": [
+            "eurostat_gov_10a_exp",
+            "bundeshaushalt_2024"
+          ],
+          "note": {
+            "de": "Kürzung mal Ausgaben 2024 laut Staatsausgabenstatistik (21,9 Mrd. Euro). Die untere Grenze berücksichtigt, dass ein Teil rechtlich gebunden ist.",
+            "en": "Cut times 2024 spending according to government expenditure statistics (EUR 21.9 billion). The lower bound reflects that part of it is legally committed."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Ein Teil der Mittel ist durch mehrjährige Zusagen und Mitgliedsbeiträge gebunden: Vom Etat des Entwicklungsministeriums (11,2 Mrd. Euro im Jahr 2024) flossen 2,3 Mrd. Euro an EU, Vereinte Nationen und andere internationale Einrichtungen und 1,2 Mrd. Euro an Entwicklungsbanken.",
+            "en": "Part of the money is tied up in multi-year pledges and membership contributions: of the development ministry's budget (EUR 11.2 billion in 2024), EUR 2.3 billion went to the EU, the United Nations and other international bodies and EUR 1.2 billion to development banks."
+          },
+          "sources": [
+            "bundeshaushalt_2024"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Die oft genannte Entwicklungshilfe-Quote (ODA) ist anders abgegrenzt: 2024 rund 30 Mrd. Euro, davon nur 10,8 Mrd. Euro aus dem Entwicklungsministerium. Rund 17 % der ODA sind Kosten für Geflüchtete in Deutschland, 15 % der deutsche Anteil an EU-Ausgaben, 8,5 % Studienplätze der Länder (Anteile für 2025). Diese Teile ändern sich nicht, wenn der Entwicklungsetat sinkt.",
+            "en": "The often-cited development aid figure (ODA) is defined differently: about EUR 30 billion in 2024, of which only EUR 10.8 billion came from the development ministry. About 17% of ODA is the cost of refugees in Germany, 15% the German share of EU spending and 8.5% university places provided by the states (shares for 2025). These parts do not change when the development budget falls."
+          },
+          "sources": [
+            "bmz_oda"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Der Etat sinkt bereits: von 11,2 Mrd. Euro (2024) auf rund 10,1 Mrd. Euro (2025). Das international zugesagte Ziel von 0,7 % der Wirtschaftsleistung wurde 2025 mit 0,56 % verfehlt.",
+            "en": "The budget is already shrinking: from EUR 11.2 billion (2024) to about EUR 10.1 billion (2025). The internationally pledged target of 0.7% of national income was missed in 2025 at 0.56%."
+          },
+          "sources": [
+            "bmz_oda",
+            "bundeshaushalt_2024"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Einzelne viel zitierte Projekte sind klein: Für Radwege in Peru hat Deutschland 2021 und 2022 zusammen 44 Mio. Euro zugesagt (einmalig, nicht jährlich); die oft genannten 315 Mio. Euro sind laut Entwicklungsministerium falsch.",
+            "en": "Individual much-cited projects are small: Germany pledged a total of EUR 44 million for cycle paths in Peru in 2021 and 2022 (one-off, not per year); the frequently quoted EUR 315 million is wrong according to the development ministry."
+          },
+          "sources": [
+            "correctiv_peru"
+          ]
+        }
+      ],
+      "sources": [
+        "eurostat_gov_10a_exp",
+        "bmz_oda",
+        "bundeshaushalt_2024"
+      ]
+    },
+    {
+      "id": "mp_pay_cut",
+      "label": {
+        "de": "Diäten der Bundestagsabgeordneten halbieren",
+        "en": "Halve the pay of members of the Bundestag"
+      },
+      "summary": {
+        "de": "Kürzt die Abgeordnetenentschädigung (Diäten) der Mitglieder des Bundestags um den eingestellten Anteil.",
+        "en": "Cuts the salaries of members of the Bundestag by the chosen share."
+      },
+      "topic": "state",
+      "params": [
+        {
+          "id": "cut",
+          "type": "number",
+          "label": {
+            "de": "Kürzung",
+            "en": "Cut"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 50,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.general.executive.bundestag_mp_pay",
+          "factor": {
+            "param": "cut",
+            "scale": -0.01,
+            "offset": 1
+          },
+          "quality": "official",
+          "sources": [
+            "bundeshaushalt_2024"
+          ],
+          "note": {
+            "de": "Kürzung mal Ausgaben für Diäten und Amtszulagen im Jahr 2024 (92,6 Mio. Euro).",
+            "en": "Cut times spending on MPs' salaries and office allowances in 2024 (EUR 92.6 million)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Das Grundgesetz gibt Abgeordneten Anspruch auf eine angemessene, ihre Unabhängigkeit sichernde Entschädigung (Art. 48 Abs. 3). Eine Halbierung müsste sich daran messen lassen.",
+            "en": "The Basic Law entitles members to adequate remuneration ensuring their independence (Article 48(3)). Halving it would have to meet that standard."
+          },
+          "sources": [
+            "gg_art_48"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Diäten sind der kleinere Teil der Kosten des Parlaments: Der Bundestag kostete 2024 insgesamt 1,15 Mrd. Euro, davon 280 Mio. Euro für Mitarbeiter der Abgeordneten und 138 Mio. Euro für die Fraktionen. Gemessen an den Staatsausgaben von 2.147 Mrd. Euro sind die Diäten 0,004 %.",
+            "en": "MPs' salaries are the smaller part of the cost of parliament: the Bundestag cost EUR 1.15 billion in total in 2024, of which EUR 280 million for MPs' staff and EUR 138 million for the parliamentary groups. MPs' salaries are 0.004% of government expenditure of EUR 2,147 billion."
+          },
+          "sources": [
+            "bundeshaushalt_2024"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Seit der Wahl 2025 hat der Bundestag 630 Sitze. Die Diät beträgt 11.833,47 Euro im Monat; auf die für Juli 2026 vorgesehene Erhöhung um 4,2 % hat der Bundestag verzichtet. Mit diesen Werten ergeben sich rund 89 Mio. Euro im Jahr.",
+            "en": "Since the 2025 election the Bundestag has 630 seats. The salary is EUR 11,833.47 per month; the Bundestag waived the 4.2% increase scheduled for July 2026. At these values the annual total is about EUR 89 million."
+          },
+          "sources": [
+            "bwahlg_1",
+            "bundestag_diaeten_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "bundeshaushalt_2024",
+        "gg_art_48",
+        "bundestag_diaeten_2026"
+      ]
+    },
+    {
+      "id": "eu_contribution_cap",
+      "label": {
+        "de": "EU-Beitrag kürzen",
+        "en": "Cut the EU contribution"
+      },
+      "summary": {
+        "de": "Setzt Deutschlands Zahlungen an den EU-Haushalt (Eigenmittel aus Mehrwertsteuer und Wirtschaftsleistung) auf den eingestellten Betrag.",
+        "en": "Sets Germany's payments to the EU budget (own resources based on VAT and national income) to the chosen amount."
+      },
+      "topic": "europe",
+      "params": [
+        {
+          "id": "amount",
+          "type": "number",
+          "label": {
+            "de": "EU-Beitrag pro Jahr",
+            "en": "EU contribution per year"
+          },
+          "unit": "currency",
+          "min": 0,
+          "max": 30000000000.0,
+          "step": 1000000000.0,
+          "default": 20000000000.0,
+          "baseline": 27330000000.0
+        }
+      ],
+      "effects": [
+        {
+          "type": "set",
+          "target": "exp.general.executive.eu_contribution",
+          "amount": {
+            "param": "amount"
+          },
+          "quality": "official",
+          "sources": [
+            "eurostat_gov_10a_main"
+          ],
+          "note": {
+            "de": "Ausgangswert 2024: 27,33 Mrd. Euro. Rückflüsse aus dem EU-Haushalt nach Deutschland sind nicht gegengerechnet.",
+            "en": "Starting value 2024: EUR 27.33 billion. Money flowing back from the EU budget to Germany is not netted off."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "blocker",
+          "text": {
+            "de": "Die Höhe der Beiträge folgt aus dem Eigenmittelbeschluss der EU. Er kann nur einstimmig von allen Mitgliedstaaten geändert werden und muss in jedem Staat ratifiziert werden (Art. 311 AEUV). Eine einseitige Kürzung wäre ein Vertragsbruch.",
+            "en": "The level of contributions follows from the EU's own resources decision. It can only be changed unanimously by all member states and must be ratified in each of them (Article 311 TFEU). A unilateral cut would breach the treaties."
+          },
+          "sources": [
+            "aeuv_311"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Ein Teil des Geldes fließt zurück, etwa an Landwirte, Regionen und Forschung. Der Nettobeitrag Deutschlands lag 2023 bei 17,4 Mrd. Euro (206 Euro je Einwohner), also deutlich unter den Bruttozahlungen. Sinkt der EU-Haushalt, sinken auch die Rückflüsse.",
+            "en": "Part of the money flows back, for example to farmers, regions and research. Germany's net contribution was EUR 17.4 billion in 2023 (EUR 206 per inhabitant), well below gross payments. If the EU budget shrinks, so do the return flows."
+          },
+          "sources": [
+            "iw_report_34_2024"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Ändern lässt sich der Beitrag in den Verhandlungen über den nächsten mehrjährigen Finanzrahmen der EU; dort hat Deutschland wie jeder Mitgliedstaat ein Vetorecht.",
+            "en": "The contribution can be changed in the negotiations on the EU's next multiannual financial framework, where Germany, like every member state, has a veto."
+          },
+          "sources": [
+            "aeuv_311"
+          ]
+        }
+      ],
+      "sources": [
+        "eurostat_gov_10a_main",
+        "aeuv_311",
+        "iw_report_34_2024"
+      ]
+    },
+    {
+      "id": "wealth_tax",
+      "label": {
+        "de": "Vermögensteuer wieder erheben",
+        "en": "Reintroduce the wealth tax"
+      },
+      "summary": {
+        "de": "Erhebt jährlich eine Steuer auf das Nettovermögen privater Haushalte oberhalb eines Freibetrags. Freibetrag, Steuersatz und Ausweichreaktionen sind einstellbar.",
+        "en": "Levies an annual tax on the net wealth of private households above an allowance. Allowance, tax rate and avoidance are adjustable."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "allowance",
+          "type": "number",
+          "label": {
+            "de": "Freibetrag je Haushalt",
+            "en": "Allowance per household"
+          },
+          "unit": "currency",
+          "min": 500000,
+          "max": 20000000,
+          "step": 100000,
+          "default": 2000000
+        },
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "de": "Steuersatz",
+            "en": "Tax rate"
+          },
+          "unit": "percent",
+          "min": 0.1,
+          "max": 5,
+          "step": 0.1,
+          "default": 1,
+          "baseline": 0
+        },
+        {
+          "id": "avoidance",
+          "type": "number",
+          "label": {
+            "de": "Aufkommensverlust durch Ausweichreaktionen und Ausnahmen",
+            "en": "Revenue lost to avoidance and exemptions"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 70,
+          "step": 5,
+          "default": 35
+        }
+      ],
+      "effects": [
+        {
+          "type": "schedule",
+          "target": "rev.taxes.property.wealth_tax",
+          "distribution": "net_wealth",
+          "reform": {
+            "brackets": [
+              {
+                "from": {
+                  "param": "allowance"
+                },
+                "rate": {
+                  "param": "rate",
+                  "scale": 0.01
+                }
+              }
+            ]
+          },
+          "yield": {
+            "param": "avoidance",
+            "scale": -0.01,
+            "offset": 1
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.25
+          },
+          "sources": [
+            "ecb_dwa",
+            "diw_kompakt_108",
+            "diw_wb_29_2020"
+          ],
+          "note": {
+            "de": "Steuersatz mal Vermögen oberhalb des Freibetrags laut Vermögensverteilung 2024 (Haushalte), abzüglich des eingestellten Aufkommensverlusts. Der Standardwert von 35 % liegt im Basisszenario der DIW-Studie von 2016 (30 bis 46 % je nach Ausgestaltung, einschließlich geringerer Ertragsteuern). Die Verteilung an der Spitze ist eine Modellannahme; Freibeträge für Betriebsvermögen sind nicht abgebildet.",
+            "en": "Tax rate times wealth above the allowance according to the 2024 wealth distribution (households), minus the chosen revenue loss. The default of 35% lies within the baseline scenario of the 2016 DIW study (30 to 46% depending on design, including lower income taxes). The distribution at the very top is a modelling assumption; allowances for business assets are not modelled."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Die Vermögensteuer wird seit 1997 nicht erhoben, weil das Bundesverfassungsgericht 1995 die ungleiche Bewertung von Grundbesitz (veraltete Einheitswerte) und sonstigem Vermögen beanstandete. Eine Vermögensteuer ist damit nicht verboten, sie muss aber alle Vermögensarten gleichmäßig und aktuell bewerten und sich nach dem Beschluss am erzielbaren Ertrag orientieren.",
+            "en": "The wealth tax has not been levied since 1997 because in 1995 the Federal Constitutional Court objected to the unequal valuation of real estate (outdated assessed values) and other assets. A wealth tax is thus not prohibited, but it must value all asset types equally and at current values and, according to the ruling, be geared to the attainable yield."
+          },
+          "sources": [
+            "bverfg_1995_vermoegensteuer"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Das Aufkommen der Vermögensteuer steht nach dem Grundgesetz allein den Ländern zu (Art. 106 Abs. 2). Der Bundeshaushalt würde nicht direkt entlastet.",
+            "en": "Under the Basic Law, wealth tax revenue goes exclusively to the states (Article 106(2)). The federal budget would not be relieved directly."
+          },
+          "sources": [
+            "gg_art_106"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Betroffene können ausweichen: durch Wegzug, Umschichtung oder niedrigere Bewertung. Das DIW schätzte 2016, dass Anpassungsreaktionen das Aufkommen im Basisszenario um 30 bis 46 % mindern (Spanne aller Szenarien: 12 bis 68 %), einschließlich geringerer Einnahmen aus Ertragsteuern.",
+            "en": "Those affected can respond by moving abroad, restructuring assets or lower valuations. In 2016 DIW estimated that behavioural responses reduce revenue by 30 to 46% in the baseline scenario (range of all scenarios: 12 to 68%), including lower income tax receipts."
+          },
+          "sources": [
+            "diw_kompakt_108"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Immobilien und Unternehmen müssten regelmäßig bewertet werden. Das DIW schätzte die Erhebungskosten 2016 auf 4 bis 8 % des Aufkommens. Die meisten politischen Vorschläge sehen Freibeträge je Person und Sonderregeln für Betriebsvermögen vor; die Rechnung hier nutzt Haushaltsvermögen ohne solche Sonderregeln und liegt deshalb eher hoch.",
+            "en": "Real estate and businesses would have to be valued regularly. In 2016 DIW estimated collection costs at 4 to 8% of revenue. Most political proposals provide for allowances per person and special rules for business assets; the calculation here uses household wealth without such rules and therefore tends to be on the high side."
+          },
+          "sources": [
+            "diw_kompakt_108",
+            "ecb_dwa"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Die Koalition aus CDU/CSU und SPD hat in ihren Steuerplänen vom Sommer 2026 festgehalten, die Vermögensteuer nicht wieder einzuführen.",
+            "en": "In its tax plans of summer 2026 the CDU/CSU and SPD coalition stated that it would not reintroduce the wealth tax."
+          },
+          "sources": [
+            "test_de_steuerreform_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "ecb_dwa",
+        "diw_kompakt_108",
+        "bverfg_1995_vermoegensteuer",
+        "gg_art_106"
+      ]
+    },
+    {
+      "id": "top_income_tax",
+      "label": {
+        "de": "Spitzensteuersatz erhöhen",
+        "en": "Raise the top income tax rate"
+      },
+      "summary": {
+        "de": "Erhöht den Spitzensteuersatz (heute 42 %) und den Reichensteuersatz (heute 45 % ab 277.826 Euro zu versteuerndem Einkommen). Der Tarif unterhalb der Grenze für den Spitzensteuersatz bleibt unverändert.",
+        "en": "Raises the top income tax rate (currently 42%) and the higher rate for very high incomes (currently 45% above EUR 277,826 of taxable income). The schedule below the top-rate threshold stays unchanged."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "top_rate",
+          "type": "number",
+          "label": {
+            "de": "Spitzensteuersatz",
+            "en": "Top rate"
+          },
+          "unit": "percent",
+          "min": 42,
+          "max": 55,
+          "step": 1,
+          "default": 45,
+          "baseline": 42
+        },
+        {
+          "id": "rich_rate",
+          "type": "number",
+          "label": {
+            "de": "Reichensteuersatz (ab 277.826 Euro)",
+            "en": "Higher rate (from EUR 277,826)"
+          },
+          "unit": "percent",
+          "min": 45,
+          "max": 60,
+          "step": 1,
+          "default": 48,
+          "baseline": 45
+        }
+      ],
+      "effects": [
+        {
+          "type": "schedule",
+          "target": "rev.taxes.income.personal",
+          "distribution": "taxable_income",
+          "baseline": {
+            "brackets": [
+              {
+                "from": 0,
+                "rate": 0
+              },
+              {
+                "from": 10348.0,
+                "rate": 0.1649
+              },
+              {
+                "from": 12637.5,
+                "rate": 0.2148
+              },
+              {
+                "from": 14927.0,
+                "rate": 0.2547
+              },
+              {
+                "from": 22205.33,
+                "rate": 0.2848
+              },
+              {
+                "from": 29483.67,
+                "rate": 0.3148
+              },
+              {
+                "from": 36762.0,
+                "rate": 0.3449
+              },
+              {
+                "from": 44040.33,
+                "rate": 0.3749
+              },
+              {
+                "from": 51318.67,
+                "rate": 0.405
+              },
+              {
+                "from": 58597,
+                "rate": 0.42
+              },
+              {
+                "from": 277826,
+                "rate": 0.45
+              }
+            ]
+          },
+          "reform": {
+            "brackets": [
+              {
+                "from": 0,
+                "rate": 0
+              },
+              {
+                "from": 10348.0,
+                "rate": 0.1649
+              },
+              {
+                "from": 12637.5,
+                "rate": 0.2148
+              },
+              {
+                "from": 14927.0,
+                "rate": 0.2547
+              },
+              {
+                "from": 22205.33,
+                "rate": 0.2848
+              },
+              {
+                "from": 29483.67,
+                "rate": 0.3148
+              },
+              {
+                "from": 36762.0,
+                "rate": 0.3449
+              },
+              {
+                "from": 44040.33,
+                "rate": 0.3749
+              },
+              {
+                "from": 51318.67,
+                "rate": 0.405
+              },
+              {
+                "from": 58597,
+                "rate": {
+                  "param": "top_rate",
+                  "scale": 0.01
+                }
+              },
+              {
+                "from": 277826,
+                "rate": {
+                  "param": "rich_rate",
+                  "scale": 0.01
+                }
+              }
+            ]
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.7,
+            "high": 1.25
+          },
+          "sources": [
+            "destatis_lest_2022",
+            "bt_drs_20_14903",
+            "eurostat_ntl"
+          ],
+          "note": {
+            "de": "Der Steuertarif wird auf die Einkommensverteilung der Steuerstatistik 2022 angewendet (Tarif 2022 als Stufenfunktion; er trifft die amtliche tarifliche Einkommensteuer von 373 Mrd. Euro auf 1 % genau). Die relative Änderung wird auf das Aufkommen aus Lohn- und veranlagter Einkommensteuer 2024 übertragen. Statische Rechnung ohne Verhaltensänderungen; die Spanne deckt Ausweichreaktionen (unten) und das seit 2022 gestiegene Einkommensniveau (oben) ab. Zum Vergleich: Die Bundesregierung schätzte 2025 für die Anhebung des Reichensteuersatzes von 45 auf 48 % rund 3 Mrd. Euro, für einen Spitzensteuersatz von 45 % mit angepasstem Tarifverlauf rund 14 Mrd. Euro.",
+            "en": "The tax schedule is applied to the income distribution of the 2022 tax statistics (2022 schedule as a step function; it reproduces official tariff income tax of EUR 373 billion to within 1%). The relative change is transferred to 2024 revenue from wage tax and assessed income tax. Static calculation without behavioural change; the range covers avoidance (low) and the rise in incomes since 2022 (high). For comparison: in 2025 the federal government estimated about EUR 3 billion for raising the higher rate from 45 to 48%, and about EUR 14 billion for a top rate of 45% with an adjusted schedule."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Die Einkommensteuer ist eine Gemeinschaftsteuer: Der Bund erhält 42,5 % des Aufkommens, der Rest geht an Länder und Gemeinden.",
+            "en": "Income tax is a shared tax: the federal government receives 42.5% of the revenue, the rest goes to states and municipalities."
+          },
+          "sources": [
+            "gg_art_106",
+            "gemfinrefg_1"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Rechnung ist statisch. Hohe Einkommen reagieren auf höhere Sätze, etwa durch Gestaltung, weniger Arbeit oder Verlagerung; das mindert das Aufkommen. Betroffen sind auch Personenunternehmen, deren Gewinne der Einkommensteuer unterliegen.",
+            "en": "The calculation is static. High earners respond to higher rates, for example through tax planning, working less or relocating; this reduces revenue. Unincorporated businesses, whose profits are subject to income tax, are also affected."
+          },
+          "sources": [
+            "bt_drs_20_14903"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Wirkung hängt stark vom Tarifverlauf ab. Hier steigt nur der Satz oberhalb der bisherigen Grenze. Passt man die Progressionszone darunter an, zahlen auch mittlere Einkommen mehr; so kommt die Bundesregierung für 45 % auf rund 14 Mrd. Euro.",
+            "en": "The effect depends heavily on the shape of the schedule. Here only the rate above the existing threshold rises. If the progression zone below is adjusted, middle incomes pay more as well; that is how the federal government arrives at about EUR 14 billion for 45%."
+          },
+          "sources": [
+            "bt_drs_20_14903"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Die Koalition hat im Sommer 2026 Steuerpläne ab 2027 vereinbart: 45 % schon ab 250.000 Euro und ein neuer Satz von 47 % ab 280.000 Euro, dafür Entlastungen bei kleinen und mittleren Einkommen (Stand Juli 2026: Koalitionsbeschluss, noch kein Gesetz). Der Spitzensteuersatz von 42 % selbst soll nicht steigen.",
+            "en": "In summer 2026 the coalition agreed tax plans from 2027: 45% already from EUR 250,000 and a new rate of 47% from EUR 280,000, in return for relief for low and middle incomes (as of July 2026: coalition decision, not yet law). The 42% top rate itself is not to rise."
+          },
+          "sources": [
+            "test_de_steuerreform_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "destatis_lest_2022",
+        "bt_drs_20_14903",
+        "test_de_steuerreform_2026"
+      ]
+    },
+    {
+      "id": "inheritance_business_relief",
+      "label": {
+        "de": "Erbschaftsteuer: Verschonung von Betriebsvermögen streichen",
+        "en": "Inheritance tax: end the relief for business assets"
+      },
+      "summary": {
+        "de": "Streicht die Steuervergünstigung für geerbte oder geschenkte Betriebe und Unternehmensanteile ganz oder teilweise.",
+        "en": "Abolishes all or part of the tax relief for inherited or gifted businesses and company shares."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "share",
+          "type": "number",
+          "label": {
+            "de": "Anteil der Verschonung, der gestrichen wird",
+            "en": "Share of the relief abolished"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 100,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.property.inheritance",
+          "amount": {
+            "param": "share",
+            "scale": 88000000.0
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.2
+          },
+          "sources": [
+            "bt_drs_21_1600"
+          ],
+          "note": {
+            "de": "Die Bundesregierung beziffert die Steuermindereinnahmen im Subventionsbericht auf 8,8 Mrd. Euro pro Jahr (Schätzung für 2023 bis 2026). Statische Rechnung; die Spanne berücksichtigt Ausweichreaktionen wie vorgezogene oder gestaltete Übertragungen und die starken Schwankungen von Jahr zu Jahr.",
+            "en": "In its subsidy report the federal government puts the revenue forgone at EUR 8.8 billion per year (estimate for 2023 to 2026). Static calculation; the range reflects avoidance such as transfers brought forward or restructured and the strong year-to-year fluctuations."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Das Bundesverfassungsgericht hat 2014 die damalige Verschonung als unverhältnismäßig beanstandet, soweit sie große Unternehmen ohne Bedürfnisprüfung begünstigte, zugleich aber anerkannt, dass der Gesetzgeber Betriebe zum Erhalt von Arbeitsplätzen begünstigen darf. Die seit 2016 geltenden Regeln stehen erneut in Karlsruhe auf dem Prüfstand: Am 13. Oktober 2026 wurde verhandelt, ein Urteil wird um die Jahreswende 2026/27 erwartet.",
+            "en": "In 2014 the Federal Constitutional Court found the relief of the time disproportionate where it favoured large companies without a needs test, while recognising that the legislature may favour businesses in order to preserve jobs. The rules in force since 2016 are again under review in Karlsruhe: a hearing took place on 13 October 2026 and a ruling is expected around the turn of 2026/27."
+          },
+          "sources": [
+            "bverfg_2014_erbst",
+            "pwc_erbst_hearing_2026"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Die Erbschaftsteuer steht allein den Ländern zu; die Mehreinnahmen kämen nicht dem Bund zugute.",
+            "en": "Inheritance tax goes exclusively to the states; the additional revenue would not benefit the federal government."
+          },
+          "sources": [
+            "bt_drs_21_1600",
+            "gg_art_106"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Vergünstigung soll verhindern, dass Erben Betriebe verkaufen oder Arbeitsplätze abbauen müssen, um die Steuer zu zahlen. Sie betrifft 25.000 bis 30.000 Fälle im Jahr. Ohne sie wären zumindest Stundungsregeln nötig.",
+            "en": "The relief is meant to prevent heirs from having to sell businesses or cut jobs in order to pay the tax. It concerns 25,000 to 30,000 cases a year. Without it, deferral rules would at least be needed."
+          },
+          "sources": [
+            "bt_drs_21_1600"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Das Aufkommen schwankt stark, weil Übertragungen zeitlich gesteuert werden können: Die festgesetzte Erbschaft- und Schenkungsteuer stieg 2025 auf 21,4 Mrd. Euro; allein über die Verschonungsbedarfsprüfung für Großerwerbe wurden 3,7 Mrd. Euro erlassen.",
+            "en": "Revenue fluctuates strongly because transfers can be timed: assessed inheritance and gift tax rose to EUR 21.4 billion in 2025; EUR 3.7 billion was waived through the needs test for large acquisitions alone."
+          },
+          "sources": [
+            "bt_drs_21_8794"
+          ]
+        }
+      ],
+      "sources": [
+        "bt_drs_21_1600",
+        "bverfg_2014_erbst",
+        "pwc_erbst_hearing_2026"
+      ]
+    },
+    {
+      "id": "defence_spending_target",
+      "label": {
+        "de": "Verteidigungsausgaben auf 3,5 % der Wirtschaftsleistung",
+        "en": "Defence spending at 3.5% of GDP"
+      },
+      "summary": {
+        "de": "Setzt die Verteidigungsausgaben nach NATO-Definition auf den eingestellten Anteil am Bruttoinlandsprodukt. Ausgangswert 2024: 2,0 % (86,6 Mrd. Euro).",
+        "en": "Sets defence spending under the NATO definition to the chosen share of gross domestic product. Starting value 2024: 2.0% (EUR 86.6 billion)."
+      },
+      "topic": "defense",
+      "params": [
+        {
+          "id": "target",
+          "type": "number",
+          "label": {
+            "de": "Verteidigungsausgaben nach NATO-Definition",
+            "en": "Defence spending, NATO definition"
+          },
+          "unit": "percent_gdp",
+          "min": 1.0,
+          "max": 5.0,
+          "step": 0.1,
+          "default": 3.5,
+          "baseline": 2.0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.defence",
+          "amount": {
+            "param": "target",
+            "scale": 0.01,
+            "offset": -0.02,
+            "times": "gdp"
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.9,
+            "high": 1.1
+          },
+          "sources": [
+            "nato_defexp_2025",
+            "eurostat_nama_10_gdp"
+          ],
+          "note": {
+            "de": "Differenz zwischen Zielwert und den von der NATO für 2024 gemeldeten 2,0 %, mal Bruttoinlandsprodukt 2024. Der Betrag wird auf den Bereich Verteidigung der Staatsausgabenstatistik aufgeschlagen, der enger abgegrenzt ist (58,6 Mrd. Euro) als die NATO-Definition.",
+            "en": "Difference between the target and the 2.0% reported by NATO for 2024, times 2024 gross domestic product. The amount is added to the defence division of government expenditure statistics, which is defined more narrowly (EUR 58.6 billion) than the NATO definition."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Die NATO-Staaten haben 2025 in Den Haag zugesagt, bis 2035 jährlich 5 % der Wirtschaftsleistung aufzuwenden: mindestens 3,5 % für Verteidigung im engeren Sinn und bis zu 1,5 % für verteidigungsnahe Ausgaben wie Infrastruktur und Zivilschutz. 2029 wird überprüft. Werte unter 2 % verletzen die seit 2014 geltende Zusage.",
+            "en": "In The Hague in 2025 the NATO allies committed to spending 5% of GDP annually by 2035: at least 3.5% on core defence and up to 1.5% on defence-related items such as infrastructure and civil preparedness. A review follows in 2029. Values below 2% breach the commitment in place since 2014."
+          },
+          "sources": [
+            "nato_5_percent"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Das Grundgesetz nimmt Verteidigungs- und bestimmte Sicherheitsausgaben oberhalb von 1 % der Wirtschaftsleistung von der Schuldenbremse aus (Art. 115 Abs. 2). Mehrausgaben können also über Kredite finanziert werden; das erhöht Schulden und künftige Zinsausgaben, die hier nicht mitgerechnet sind.",
+            "en": "The Basic Law exempts defence and certain security spending above 1% of GDP from the debt brake (Article 115(2)). Additional spending can therefore be financed by borrowing; this raises debt and future interest costs, which are not included here."
+          },
+          "sources": [
+            "gg_art_115"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die NATO-Definition ist weiter als der Verteidigungshaushalt: Sie umfasst zum Beispiel Pensionen für ehemalige Soldaten und zivile Beschäftigte. Deshalb liegen die NATO-Ausgaben 2024 (86,6 Mrd. Euro) deutlich über dem Bereich Verteidigung der Staatsausgabenstatistik (58,6 Mrd. Euro).",
+            "en": "The NATO definition is broader than the defence budget: for example, it includes pensions for retired military and civilian personnel. NATO-defined spending in 2024 (EUR 86.6 billion) is therefore well above the defence division of government expenditure statistics (EUR 58.6 billion)."
+          },
+          "sources": [
+            "nato_5_percent",
+            "nato_defexp_2025",
+            "eurostat_gov_10a_exp"
+          ]
+        }
+      ],
+      "sources": [
+        "nato_defexp_2025",
+        "nato_5_percent",
+        "gg_art_115"
+      ]
+    },
+    {
+      "id": "pension_level",
+      "label": {
+        "de": "Rentenniveau auf 53 % anheben",
+        "en": "Raise the pension level to 53%"
+      },
+      "summary": {
+        "de": "Hebt alle Renten der gesetzlichen Rentenversicherung so an, dass das Rentenniveau (Standardrente im Verhältnis zum Durchschnittslohn, netto vor Steuern) den eingestellten Wert erreicht. Ausgangswert: 48 %.",
+        "en": "Raises all pensions of the statutory pension insurance so that the pension level (standard pension relative to the average wage, net before taxes) reaches the chosen value. Starting value: 48%."
+      },
+      "topic": "pensions",
+      "params": [
+        {
+          "id": "level",
+          "type": "number",
+          "label": {
+            "de": "Rentenniveau",
+            "en": "Pension level"
+          },
+          "unit": "percent",
+          "min": 43,
+          "max": 60,
+          "step": 0.5,
+          "default": 53,
+          "baseline": 48
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.social.old_age.statutory_pensions",
+          "factor": {
+            "param": "level",
+            "scale": 0.02083333
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.95,
+            "high": 1.1
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ],
+          "note": {
+            "de": "Rentenausgaben 2024 mal Zielniveau geteilt durch 48. Die obere Grenze berücksichtigt die zusätzlichen Beiträge der Rentenversicherung zur Krankenversicherung der Rentner. Zum Vergleich: Nach den Faustdaten der Rentenversicherung für 2026 kostet ein Prozent höhere Renten einschließlich Krankenversicherung 4,2 Mrd. Euro.",
+            "en": "Pension expenditure 2024 times the target level divided by 48. The upper bound reflects the pension insurance's additional contributions to pensioners' health insurance. For comparison: according to the pension insurance's rules of thumb for 2026, pensions higher by one per cent cost EUR 4.2 billion including health insurance."
+          }
+        },
+        {
+          "type": "scale",
+          "target": "exp.social.survivors.statutory_pensions",
+          "factor": {
+            "param": "level",
+            "scale": 0.02083333
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.95,
+            "high": 1.1
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ],
+          "note": {
+            "de": "Rentenausgaben 2024 mal Zielniveau geteilt durch 48. Die obere Grenze berücksichtigt die zusätzlichen Beiträge der Rentenversicherung zur Krankenversicherung der Rentner. Zum Vergleich: Nach den Faustdaten der Rentenversicherung für 2026 kostet ein Prozent höhere Renten einschließlich Krankenversicherung 4,2 Mrd. Euro.",
+            "en": "Pension expenditure 2024 times the target level divided by 48. The upper bound reflects the pension insurance's additional contributions to pensioners' health insurance. For comparison: according to the pension insurance's rules of thumb for 2026, pensions higher by one per cent cost EUR 4.2 billion including health insurance."
+          }
+        },
+        {
+          "type": "scale",
+          "target": "exp.social.sickness_disability.em_pensions",
+          "factor": {
+            "param": "level",
+            "scale": 0.02083333
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.95,
+            "high": 1.1
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ],
+          "note": {
+            "de": "Rentenausgaben 2024 mal Zielniveau geteilt durch 48. Die obere Grenze berücksichtigt die zusätzlichen Beiträge der Rentenversicherung zur Krankenversicherung der Rentner. Zum Vergleich: Nach den Faustdaten der Rentenversicherung für 2026 kostet ein Prozent höhere Renten einschließlich Krankenversicherung 4,2 Mrd. Euro.",
+            "en": "Pension expenditure 2024 times the target level divided by 48. The upper bound reflects the pension insurance's additional contributions to pensioners' health insurance. For comparison: according to the pension insurance's rules of thumb for 2026, pensions higher by one per cent cost EUR 4.2 billion including health insurance."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Mehrausgaben müssen Beitragszahler oder der Bund tragen. Nach den Faustdaten der Rentenversicherung bringt ein Beitragssatzpunkt 21,1 Mrd. Euro (2026), davon 3,4 Mrd. Euro über den automatisch steigenden Bundeszuschuss. Ein Niveau von 53 % entspräche rechnerisch knapp zwei Beitragssatzpunkten.",
+            "en": "The additional spending has to be borne by contributors or the federal government. According to the pension insurance's rules of thumb, one percentage point of the contribution rate yields EUR 21.1 billion (2026), of which EUR 3.4 billion via the automatically rising federal subsidy. A level of 53% would correspond arithmetically to just under two contribution-rate points."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Rechnung gilt für das Basisjahr 2024 (ein Prozent höhere Renten: 3,6 Mrd. Euro ohne Krankenversicherung). Der Betrag wächst mit jeder Rentenanpassung und jeder zusätzlichen Rente: Für 2026 nennt die Rentenversicherung bereits 4,2 Mrd. Euro je Prozent einschließlich Krankenversicherung der Rentner.",
+            "en": "The calculation applies to the base year 2024 (pensions higher by one per cent: EUR 3.6 billion excluding health insurance). The amount grows with every pension increase and every additional pension: for 2026 the pension insurance already quotes EUR 4.2 billion per per cent including pensioners' health insurance."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Mit dem Rentenpaket 2025 (in Kraft seit 1. Januar 2026) ist ein Rentenniveau von mindestens 48 % bis 2031 gesetzlich festgeschrieben. Ein niedrigeres Niveau erfordert bis dahin eine Gesetzesänderung; ein höheres ist rechtlich möglich, aber eine politische Entscheidung über die Finanzierung.",
+            "en": "The 2025 pensions package (in force since 1 January 2026) fixes a pension level of at least 48% by law until 2031. A lower level requires a change in the law until then; a higher one is legally possible but is a political decision about financing."
+          },
+          "sources": [
+            "bundesregierung_rentenpaket_2025"
+          ]
+        }
+      ],
+      "sources": [
+        "drv_rv_in_zahlen_2026",
+        "bundesregierung_rentenpaket_2025",
+        "sozialpolitik_aktuell_viii51"
+      ]
+    }
+  ]
+}

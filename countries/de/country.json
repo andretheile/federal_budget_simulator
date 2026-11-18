@@ -1,0 +1,73 @@
+{
+  "id": "de",
+  "name": {
+    "de": "Deutschland",
+    "en": "Germany"
+  },
+  "currency": "EUR",
+  "locales": [
+    "de",
+    "en"
+  ],
+  "baseYear": 2024,
+  "levels": {
+    "central": {
+      "name": {
+        "de": "Bund",
+        "en": "Federal government"
+      }
+    },
+    "state": {
+      "name": {
+        "de": "Länder",
+        "en": "States (Länder)"
+      }
+    },
+    "local": {
+      "name": {
+        "de": "Gemeinden",
+        "en": "Municipalities"
+      }
+    },
+    "social_security": {
+      "name": {
+        "de": "Sozialversicherung",
+        "en": "Social insurance"
+      }
+    }
+  },
+  "indicators": {
+    "gdp": {
+      "value": 4386940000000.0,
+      "quality": "official",
+      "sources": [
+        "eurostat_nama_10_gdp"
+      ]
+    },
+    "population": {
+      "value": 83516593,
+      "quality": "official",
+      "sources": [
+        "eurostat_demo_gind"
+      ]
+    },
+    "households": {
+      "value": 41700100,
+      "quality": "official",
+      "sources": [
+        "eurostat_lfst_hhnhtych"
+      ]
+    },
+    "grossDebt": {
+      "value": 2694319500000.0,
+      "quality": "official",
+      "sources": [
+        "eurostat_gov_10dd_edpt1"
+      ]
+    }
+  },
+  "methodology": {
+    "de": "Basisjahr ist 2024, das jüngste Jahr, für das Eurostat die Staatsausgaben nach Aufgabenbereichen (COFOG) veröffentlicht hat. Alle Beträge stammen aus den Volkswirtschaftlichen Gesamtrechnungen für den gesamten Staat (Bund, Länder, Gemeinden, Sozialversicherung), Zahlungen zwischen den Ebenen sind herausgerechnet. Sie weichen deshalb von Haushaltsplänen ab: Der Bundeshaushalt ist nur ein Teil, und Kassenzahlen werden anders abgegrenzt. Einnahmen (2.028,3 Mrd. Euro), Ausgaben (2.147,5 Mrd. Euro) und Defizit (119,1 Mrd. Euro) entsprechen dem Datenstand vom Oktober 2026. Die Gliederung nach Aufgaben beruht auf einem etwas älteren Stand; die Differenz von 7,8 Mrd. Euro ist als eigener Posten ausgewiesen. Einzeln benannte Leistungen wie Bürgergeld oder Diäten sind Kassenzahlen; der jeweilige Rest der Gruppe ist die Differenz zur Gruppensumme. Die Ebenen zeigen, welcher Haushalt eine Ausgabe letztlich trägt. Ausgangspunkt sind die Ausgaben jeder Ebene ohne Zahlungen an andere Ebenen, die Eurostat je Aufgabenbereich (zehn Bereiche) ausweist. Zahlungen an Empfänger außerhalb des Staates wurden der zahlenden Ebene nach eigener Einschätzung zugeordnet. Innerhalb eines Bereichs veröffentlicht Eurostat keine Aufteilung nach Ebenen; sie wurde anhand der Zuständigkeiten geschätzt und rechnerisch so angepasst, dass die Summen je Bereich und Ebene stimmen. Große zweckgebundene Zahlungen sind dem Zahler zugerechnet: die Bundesmittel für Renten- und Krankenversicherung, die Bundesbeteiligung an den Wohnkosten im Bürgergeld, die Erstattung der Grundsicherung im Alter, Wohngeld, Regionalisierungsmittel, BAföG und sozialer Wohnungsbau. Allgemeine Zuweisungen wie der kommunale Finanzausgleich bleiben bei der Ebene, die das Geld ausgibt. Die Stadtstaaten zählen in der Statistik vollständig zu den Ländern. Steuern sind nach den gesetzlichen Anteilen und den Eurostat-Daten je Ebene aufgeteilt. Weil Zahlungen zwischen den Ebenen herausgerechnet oder dem Zahler zugerechnet sind, ergibt die Differenz aus Einnahmen und Ausgaben einer einzelnen Ebene nicht deren Haushaltssaldo. Qualitätsangaben: „amtlich“ heißt, Betrag und Ebene sind direkt einer amtlichen Statistik entnommen; „abgeleitet“ heißt, der Betrag ist amtlich oder aus amtlichen Zahlen berechnet und die Aufteilung auf die Ebenen ist berechnet; „Schätzung“ steht bei Restposten, Modellrechnungen und Studien.",
+    "en": "The base year is 2024, the latest year for which Eurostat has published government expenditure by function (COFOG). All amounts come from national accounts for general government (federal, state, local, social insurance) with payments between levels netted out. They therefore differ from budget plans: the federal budget is only one part, and cash figures follow different definitions. Revenue (EUR 2,028.3 billion), expenditure (EUR 2,147.5 billion) and the deficit (EUR 119.1 billion) correspond to the data release of October 2026. The breakdown by function is based on a slightly older vintage; the difference of EUR 7.8 billion is shown as a separate item. Individually named benefits such as citizen's income or MPs' pay are cash figures; the remainder of the respective group is the difference to the group total. The levels show which budget ultimately bears an expense. The starting point is each level's spending excluding payments to other levels, which Eurostat reports for each of the ten divisions. Payments to recipients outside government were assigned to the paying level by own judgement. Within a division Eurostat publishes no split by level; it was estimated from the allocation of responsibilities and adjusted arithmetically so that the totals per division and level match. Large earmarked payments are attributed to the payer: federal funding of pension and health insurance, the federal share of housing costs under citizen's income, the reimbursement of basic security in old age, housing benefit, regionalisation funds for regional rail, student grants and social housing. General-purpose grants such as municipal fiscal equalisation stay with the level that spends the money. The city states count entirely as state level in the statistics. Taxes are split by statutory shares and Eurostat data by level. Because payments between levels are netted out or attributed to the payer, revenue minus expenditure of a single level does not equal that level's budget balance. Quality labels: \"official\" means amount and level are read directly from an official statistic; \"derived\" means the amount is official or computed from official figures and the split across levels is computed; \"estimate\" marks remainders, model calculations and studies."
+  }
+}
