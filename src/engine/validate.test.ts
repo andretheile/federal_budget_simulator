@@ -646,6 +646,7 @@ describe("curve params", () => {
   it("texts need every locale, and sources must exist", () => {
     expectOnly((f) => delete tariff(f).label.de, "policies.json", `${AT}.label`, /text for locale "de" is missing/);
     expectOnly((f) => delete tariff(f).presets[1].label.de, "policies.json", `${AT}.presets[1].label`, /locale "de"/);
+    expectOnly((f) => delete tariff(f).presets[1].note.de, "policies.json", `${AT}.presets[1].note`, /locale "de"/);
     expectOnly((f) => delete tariff(f).examples[0].label.de, "policies.json", `${AT}.examples[0].label`, /locale "de"/);
     expectOnly((f) => (tariff(f).presets[0].sources = ["nowhere"]), "policies.json", `${AT}.presets[0].sources[0]`, /unknown source "nowhere"/);
   });
@@ -657,10 +658,46 @@ describe("curve params", () => {
     expectOnly((f) => (tariff(f).default[0] = [10, 10]), "policies.json", `${AT}.default[0]`, /expected object/);
     expectOnly((f) => (tariff(f).default[0].z = 1), "policies.json", `${AT}.default[0]`, /Unrecognized key: "z"/);
     expectOnly((f) => (tariff(f).examples[0] = { x: 20 }), "policies.json", `${AT}.examples[0].label`, /expected object/);
-    // baseline, limits, presets and examples are optional.
+    // A preset's note is a text like any other, and optional.
+    expectOnly((f) => (tariff(f).presets[1].note = "Today's tariff below 40."), "policies.json", `${AT}.presets[1].note`, /expected object/);
+    expectOnly((f) => (tariff(f).presets[1].note = { de: "Unter 40 der heutige Tarif." }), "policies.json", `${AT}.presets[1].note.en`, /expected string/);
+    expectOnly((f) => (tariff(f).presets[1].notes = tariff(f).presets[1].note), "policies.json", `${AT}.presets[1]`, /Unrecognized key: "notes"/);
+    // baseline, limits, presets, notes and examples are optional.
     const files = testlandFiles() as Files;
+    delete tariff(files).presets[1].note;
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
     for (const key of ["baseline", "minPoints", "maxPoints", "presets", "examples"]) delete tariff(files)[key];
     expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("the param's baseline is today's curve of the effect that uses it, or a warning says so", () => {
+    // Equal: the fixture as it is, and the same tariff written as brackets in the effect.
+    expect(validatePack(testlandFiles()).warnings).toEqual([]);
+    const brackets = testlandFiles() as Files;
+    brackets.policies.policies[8].effects[0].baseline = { brackets: [{ from: 10, rate: 0.2 }, { from: 30, rate: 0.4 }] };
+    expect(validatePack(brackets)).toMatchObject({ ok: true, warnings: [] });
+    // The param's copy has a higher top rate: still valid, but the two disagree from 30 on.
+    const warning = {
+      file: "policies.json",
+      path: `${AT}.baseline`,
+      message: expect.stringMatching(/the baseline of param "tariff" differs from the calibration baseline of effect 0 \(from 30 on\)/),
+    };
+    expect(warningsAfter((f) => (tariff(f).baseline[2].y = 45))).toEqual([warning]);
+    // The same when the effect's baseline is the one that moved.
+    expect(warningsAfter((f) => (f.policies.policies[8].effects[0].baseline.points[2].y = 45))).toEqual([warning]);
+    // A step written at a different income is a different curve, from the lower of the two incomes.
+    const moved = warningsAfter((f) => {
+      tariff(f).baseline[1].x = 25;
+      tariff(f).baseline[2].x = 25;
+    });
+    expect(moved).toEqual([{ ...warning, message: expect.stringMatching(/\(from 25 on\)/) }]);
+    // Nothing to compare: no copy on the param, or no baseline on the effect (an absolute effect).
+    expect(warningsAfter((f) => delete tariff(f).baseline)).toEqual([]);
+    expect(warningsAfter((f) => delete f.policies.policies[8].effects[0].baseline)).toEqual([]);
+    // A copy that is itself broken is reported as an error, without a warning on top.
+    const broken = testlandFiles() as Files;
+    tariff(broken).baseline[1].x = 5;
+    expect(validatePack(broken).warnings).toEqual([]);
   });
 });
 
@@ -782,6 +819,26 @@ describe("schedules as curves", () => {
       expect(errors.length).toBeGreaterThan(0);
       expect([...new Set(errors.map((e) => e.file))]).toEqual(["distributions/income.json"]);
     }
+  });
+});
+
+describe("number params", () => {
+  it("a display unit on a number param is a text in every locale", () => {
+    // family_bonus has one: "XTS per household".
+    const AT = "$.policies[6].params[0].unitLabel";
+    expectOnly((f) => delete f.policies.policies[6].params[0].unitLabel.de, "policies.json", AT, /text for locale "de" is missing/);
+    expectOnly((f) => (f.policies.policies[6].params[0].unitLabel = "XTS"), "policies.json", AT, /expected object/);
+    expectOnly((f) => (f.policies.policies[6].params[0].unitLabel = { en: "", de: "XTS" }), "policies.json", `${AT}.en`, />=1/);
+    // Only number params have one.
+    expectOnly(
+      (f) => (f.policies.policies[8].params[0].unitLabel = { en: "%", de: "%" }),
+      "policies.json",
+      "$.policies[8].params[0]",
+      /Unrecognized key: "unitLabel"/,
+    );
+    const files = testlandFiles() as Files;
+    delete files.policies.policies[6].params[0].unitLabel;
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
   });
 });
 

@@ -186,6 +186,11 @@ export interface NumberParam {
   default: number;
   /** Today's value, for display only. */
   baseline?: number;
+  /**
+   * A display unit written after the number, e.g. "cents per litre". It replaces the generic
+   * formatting of `unit` on screen; `unit` still says what the value is for validation.
+   */
+  unitLabel?: LocalizedText;
 }
 
 export interface GroupsParam {
@@ -225,7 +230,8 @@ export interface CurveParam {
   minPoints?: number;
   /** Most points a value may have. Default 12. */
   maxPoints?: number;
-  presets?: { id: string; label: LocalizedText; points: CurvePoint[]; sources?: SourceId[] }[];
+  /** Ready-made curves to pick from. `note` is shown with the preset, e.g. what it leaves out. */
+  presets?: { id: string; label: LocalizedText; note?: LocalizedText; points: CurvePoint[]; sources?: SourceId[] }[];
   /** Example units for "pays today / pays after", e.g. the median income. */
   examples?: { x: number; label: LocalizedText }[];
 }

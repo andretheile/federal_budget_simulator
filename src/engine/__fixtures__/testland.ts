@@ -446,6 +446,7 @@ export const testland: CountryPack = {
           max: 10,
           step: 1,
           default: 2,
+          unitLabel: t("XTS per household", "XTS je Haushalt"),
         },
       ],
       effects: [
@@ -551,6 +552,7 @@ export const testland: CountryPack = {
             {
               id: "higher_top_rate",
               label: t("50 % on income above 40", "50 % auf Einkommen über 40"),
+              note: t("Today's tariff below 40.", "Unter 40 der heutige Tarif."),
               points: [
                 { x: 10, y: 20 },
                 { x: 30, y: 20 },

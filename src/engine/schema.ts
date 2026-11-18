@@ -255,7 +255,15 @@ export const curveParamSchema = z.strictObject({
   minPoints: z.number().int().min(0).optional(),
   maxPoints: z.number().int().min(1).optional(),
   presets: z
-    .array(z.strictObject({ id: idSchema, label: localizedTextSchema, points: curvePoints, sources: sourceIds.optional() }))
+    .array(
+      z.strictObject({
+        id: idSchema,
+        label: localizedTextSchema,
+        note: localizedTextSchema.optional(),
+        points: curvePoints,
+        sources: sourceIds.optional(),
+      }),
+    )
     .optional(),
   examples: z.array(z.strictObject({ x: z.number(), label: localizedTextSchema })).optional(),
 });
@@ -271,6 +279,7 @@ export const paramSchema = z.discriminatedUnion("type", [
     step: z.number().positive(),
     default: z.number(),
     baseline: z.number().optional(),
+    unitLabel: localizedTextSchema.optional(),
   }),
   z.strictObject({
     id: idSchema,

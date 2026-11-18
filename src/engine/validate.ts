@@ -7,7 +7,7 @@
  * report under follow-up errors.
  */
 import type { z } from "zod";
-import { curveTotal } from "./curve.ts";
+import { bracketsToCurve, curveAffected, curveTotal } from "./curve.ts";
 import { scheduleTotal, totalUnits } from "./distribution.ts";
 import {
   budgetSchema,
@@ -62,6 +62,18 @@ export type ValidationResult =
 
 /** Allowed deviation from 1 for sums of shares. */
 export const SHARE_TOLERANCE = 0.001;
+
+/** A stand-in for comparing two curves where the effect's own distribution is not usable. */
+const ONE_UNIT: Distribution = {
+  id: "one_unit",
+  label: { en: "one unit" },
+  variable: { en: "value" },
+  unit: { en: "unit" },
+  year: 2000,
+  bins: [{ from: 0, to: 1, count: 1, mean: 0.5 }],
+  quality: "estimate",
+  sources: [],
+};
 
 const COUNTRY = "country.json";
 const BUDGET = "budget.json";
@@ -374,6 +386,7 @@ function check(
         if (presetIds.has(preset.id)) error(POLICIES, [...at, "id"], `duplicate preset id "${preset.id}" in param "${param.id}"`);
         presetIds.add(preset.id);
         text(POLICIES, [...at, "label"], preset.label);
+        text(POLICIES, [...at, "note"], preset.note);
         refs(POLICIES, [...at, "sources"], preset.sources);
         checkPoints(preset.points, [...at, "points"]);
       });
@@ -393,6 +406,7 @@ function check(
       text(POLICIES, [...path, "label"], param.label);
 
       if (param.type === "number") {
+        text(POLICIES, [...path, "unitLabel"], param.unitLabel);
         if (param.min > param.max) {
           error(POLICIES, path, `min (${param.min}) is above max (${param.max})`);
         } else if (param.default < param.min || param.default > param.max) {
@@ -570,6 +584,8 @@ function check(
           }
           let evaluable = checkValue(effect.yield, [...path, "yield"]);
           const reform = effect.reform;
+          /** The curve param the reform is taken from, if it is one. */
+          let curveParam: CurveParam | undefined;
           if ("curve" in reform) {
             // The reform is the value of a curve param of this policy.
             const at = [...path, "reform", "curve"];
@@ -592,6 +608,9 @@ function check(
                   at,
                   `point ${offending} of the default curve gives a rate of ${round(param.default[offending].y * scale)}, which is not between 0 and 1 (a percent curve needs "scale": 0.01)`,
                 );
+              } else {
+                // Its rates make sense, so it can be compared with the baseline below.
+                curveParam = param;
               }
             }
           } else {
@@ -665,6 +684,20 @@ function check(
                 [...path, "baseline"],
                 `the baseline schedule yields nothing on distribution "${effect.distribution}", so the effect cannot be calibrated`,
               );
+            }
+            // The param's own baseline is only shown, the effect's baseline is what the reform is
+            // measured against. Where both exist they should be the same curve.
+            const shown = curveParam?.baseline;
+            if (curveParam && shown && usable && "curve" in reform && shown.every((point, k) => k === 0 || point.x >= shown[k - 1].x)) {
+              const calibration = "points" in baseline ? baseline : bracketsToCurve(baseline.brackets);
+              const differs = curveAffected(distribution ?? ONE_UNIT, { points: shown, scale: reform.curve.scale }, calibration).threshold;
+              if (differs !== null) {
+                warn(
+                  POLICIES,
+                  [...base, "params", policy.params.indexOf(curveParam), "baseline"],
+                  `the baseline of param "${curveParam.id}" differs from the calibration baseline of effect ${policy.effects.indexOf(effect)} (from ${round(differs)} on); today's curve is the effect's baseline, so the param's copy shows something else`,
+                );
+              }
             }
             if (target && target.total === 0) {
               warn(POLICIES, [...path, "target"], `calibrated schedule on "${effect.target}", whose base amount is zero: the effect will always be zero`);
