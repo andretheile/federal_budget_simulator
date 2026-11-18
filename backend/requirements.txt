@@ -4,3 +4,6 @@ jupyter
 pandas
 matplotlib
 seaborn
+pyyaml
+asteval
+pydantic

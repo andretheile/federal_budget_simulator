@@ -39,7 +39,12 @@ def load_model_from_card(card_path: str):
                 self.params['sub_models'] = self.sub_models
 
         def calculate(self):
+            if model_card.model_type in ['progressive_tax', 'flat_tax', 'fixed_cost', 'per_capita']:
+                from .standard_models import get_standard_model
+                model = get_standard_model(model_card.model_type)
+                return model.calculate(self.params)
             aeval = Interpreter(symtable=self.params)
-            return aeval.eval(model_card.calculation_logic)
+            aeval.eval(model_card.calculation_logic)
+            return aeval.symtable.get('result', None)
 
     return DynamicModel, model_card

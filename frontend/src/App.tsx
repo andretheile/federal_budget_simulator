@@ -7,6 +7,7 @@ import 'react-tabs/style/react-tabs.css';
 import TotalRevenue from './components/TotalRevenue';
 import TotalExpenditure from './components/TotalExpenditure';
 import BalanceSheet from './components/BalanceSheet';
+import { ModelEditor } from './components/ModelEditors';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -26,7 +27,7 @@ interface ModelCard {
 
 function App() {
   const [modelCard, setModelCard] = useState<ModelCard | null>(null);
-  const [revenue, setRevenue] = useState<number | null>(null);
+  const [revenueData, setRevenueData] = useState<{ total_revenue: number, revenue_by_bracket: number[], effective_rate: number } | null>(null);
   const [parameters, setParameters] = useState<any>({});
 
   useEffect(() => {
@@ -56,7 +57,7 @@ function App() {
       .then(response => response.json())
       .then(data => {
         console.log('Received revenue data:', data);
-        setRevenue(data.revenue);
+        setRevenueData(data);
       })
       .catch(error => console.error('Error calculating revenue:', error));
   }, [modelCard, parameters]);
@@ -65,11 +66,6 @@ function App() {
     calculateRevenue();
   }, [calculateRevenue]);
 
-  const handleRateChange = (index: number, newRate: number) => {
-    const newTaxBrackets = [...parameters.tax_brackets];
-    newTaxBrackets[index].rate = newRate;
-    setParameters({ ...parameters, tax_brackets: newTaxBrackets });
-  };
 
   const chartData = {
     labels: parameters.tax_brackets?.map((b: any) => `> ${b.min_income}`),
@@ -78,8 +74,47 @@ function App() {
         label: 'Tax Rate',
         data: parameters.tax_brackets?.map((b: any) => b.rate),
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        yAxisID: 'y',
+      },
+      {
+        label: 'Revenue',
+        data: revenueData?.revenue_by_bracket,
+        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+        yAxisID: 'y1',
       },
     ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    interaction: {
+      mode: 'index' as const,
+      intersect: false,
+    },
+    stacked: false,
+    scales: {
+      y: {
+        type: 'linear' as const,
+        display: true,
+        position: 'left' as const,
+        title: {
+          display: true,
+          text: 'Tax Rate',
+        },
+      },
+      y1: {
+        type: 'linear' as const,
+        display: true,
+        position: 'right' as const,
+        grid: {
+          drawOnChartArea: false,
+        },
+        title: {
+          display: true,
+          text: 'Revenue (€)',
+        },
+      },
+    },
   };
 
   return (
@@ -99,21 +134,16 @@ function App() {
               <div>
                 <h2>{modelCard.name}</h2>
                 <p>{modelCard.description}</p>
-                <h3>Calculated Revenue: {revenue ? revenue.toLocaleString() : 'Calculating...'}</h3>
-                <h3>Tax Brackets</h3>
-                {parameters.tax_brackets?.map((bracket: any, index: number) => (
-                  <div key={index}>
-                    <span>Rate for income &gt; {bracket.min_income}: </span>
-                    <input
-                      type="number"
-                      step="0.01"
-                      value={bracket.rate}
-                      onChange={e => handleRateChange(index, parseFloat(e.target.value))}
-                    />
-                  </div>
-                ))}
-                <div style={{ width: '600px', margin: 'auto', marginTop: '20px' }}>
-                  <Bar data={chartData} />
+                <h3>Calculated Revenue: {revenueData ? revenueData.total_revenue.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }) : 'Calculating...'}</h3>
+                <h4>Effective Tax Rate: {revenueData ? (revenueData.effective_rate * 100).toFixed(2) + '%' : '...'}</h4>
+
+                <ModelEditor
+                  modelType={modelCard.model_type}
+                  parameters={parameters}
+                  onParameterChange={(name, value) => setParameters({ ...parameters, [name]: value })}
+                />
+                <div style={{ width: '800px', margin: 'auto', marginTop: '20px' }}>
+                  <Bar data={chartData} options={chartOptions} />
                 </div>
               </div>
             ) : (

@@ -36,9 +36,9 @@ def get_income_tax():
 def calculate_income_tax(request: CalculationRequest):
     print("Received calculation request:", request.parameters)
     income_tax = DynamicIncomeTax(**request.parameters['parameters'])
-    revenue = income_tax.calculate()
-    print("Calculated revenue:", revenue)
-    return {"revenue": revenue}
+    result = income_tax.calculate()
+    print("Calculated result:", result)
+    return result
 
 @app.get("/revenue/summary")
 def get_revenue_summary():

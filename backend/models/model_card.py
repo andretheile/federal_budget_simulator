@@ -13,4 +13,4 @@ class ModelCard(BaseModel):
     parameters: List[ModelParameter] = []
     sub_models: List[str] = []
     data_sources: Dict[str, str] = {}
-    calculation_logic: str
+    calculation_logic: str = "" # Optional if model_type is a standard type
