@@ -5,12 +5,13 @@
  * Nothing in here or below knows a particular country. Which pack is shown comes from the URL,
  * from VITE_DEFAULT_COUNTRY, or is simply the first pack in /countries.
  */
-import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { defaultSelection, layoutBudget, sameSelection, selectionShowing, type Selection } from "./app/budgetModel.ts";
 import { createUi, UiContext } from "./app/ui.ts";
-import { parseHash, sameScenario, scenarioFromHash, stateToHash } from "./app/urlState.ts";
+import { editorFromHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./app/urlState.ts";
 import { About } from "./components/About.tsx";
 import { BudgetView } from "./components/BudgetView.tsx";
+import { CurveEditor, editableCurve } from "./components/CurveEditor.tsx";
 import { Header } from "./components/Header.tsx";
 import { WarningIcon } from "./components/icons.tsx";
 import { PolicyList } from "./components/PolicyList.tsx";
@@ -151,10 +152,15 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
   const [expanded, setExpanded] = useState<ReadonlySet<string>>(() => new Set());
   const [reveal, setReveal] = useState<{ id: string; nonce: number }>();
   const phone = useMediaQuery("(max-width: 719px)");
+  /** The curve editor that is open, if any. It is part of the link, so a shared link opens it too. */
+  const [editor, setEditor] = useState(() => editorFromHash(currentHash(), pack));
+  const editorPolicy = editor ? pack.policies.find((policy) => policy.id === editor.policy) : undefined;
+  // Open only for a curve that a schedule of the measure actually uses.
+  const editing = editor !== undefined && editableCurve(editorPolicy, editor.param) !== undefined;
 
   // --- the URL mirrors scenario and language ---------------------------------------------------
   const showsCountry = !fallback && countries.length > 1;
-  const hash = stateToHash({ scenario, language, country: showsCountry ? pack.country.id : undefined }, pack);
+  const hash = stateToHash({ scenario, language, country: showsCountry ? pack.country.id : undefined, editor }, pack);
   const hashRef = useRef(hash);
   hashRef.current = hash;
   /** The address of exactly this scenario, whether or not the address bar shows it yet. */
@@ -167,19 +173,55 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
   const initialHash = useRef(hash);
   // A bare address stays bare until the visitor changes something; a link is kept in sync from the start.
   const dirty = useRef(currentHash() !== "");
+  // Safari allows replaceState about 100 times in ten seconds and throws after that. Dragging a
+  // point of a curve changes the scenario on every move. So writes draw on a budget: 25 at once,
+  // refilled at 7 a second, which stays below Safari's limit in any ten seconds. When the budget is
+  // spent, the latest state is written as soon as there is room again, within about 150 ms.
+  const writeBudget = useRef({ tokens: 25, at: 0 });
+  const pendingWrite = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => {
     if (!dirty.current && hash === initialHash.current) return;
     dirty.current = true;
-    if (window.location.hash !== hash) window.history.replaceState(window.history.state, "", hash);
+    const write = (): void => {
+      pendingWrite.current = undefined;
+      if (window.location.hash === hashRef.current) return;
+      const now = performance.now();
+      const state = writeBudget.current;
+      state.tokens = Math.min(25, state.tokens + ((now - state.at) * 7) / 1000);
+      state.at = now;
+      if (state.tokens < 1) {
+        pendingWrite.current = setTimeout(write, Math.ceil(((1 - state.tokens) * 1000) / 7));
+        return;
+      }
+      state.tokens -= 1;
+      try {
+        window.history.replaceState(window.history.state, "", hashRef.current);
+      } catch {
+        // Refused all the same: the next change tries again, and Share copies the link anyway.
+      }
+    };
+    // A write that is already waiting will pick up this state too.
+    if (pendingWrite.current === undefined) write();
   }, [hash]);
+  useEffect(() => () => clearTimeout(pendingWrite.current), []);
 
   useEffect(() => {
     const onHashChange = (): void => {
       const fields = parseHash(window.location.hash);
       // Not one of ours (an in-page anchor, say): put the state back and leave it at that.
-      if (fields.country === undefined && fields.language === undefined && fields.scenario === undefined) {
-        if (window.location.hash !== "" && dirty.current)
-          window.history.replaceState(window.history.state, "", hashRef.current);
+      if (
+        fields.country === undefined &&
+        fields.language === undefined &&
+        fields.scenario === undefined &&
+        fields.editor === undefined
+      ) {
+        if (window.location.hash !== "" && dirty.current) {
+          try {
+            window.history.replaceState(window.history.state, "", hashRef.current);
+          } catch {
+            // See above: the browser may refuse for a while.
+          }
+        }
         return;
       }
       if (fields.country && fields.country !== pack.country.id && countries.includes(fields.country)) {
@@ -189,6 +231,10 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
       const next = scenarioFromHash(window.location.hash, pack);
       setScenario((current) => (sameScenario(current, next, pack) ? current : next));
       if (fields.language) setLanguage(pickLanguage(pack.country.locales, { url: fields.language }));
+      const wanted = editorFromHash(window.location.hash, pack);
+      setEditor((current) =>
+        current?.policy === wanted?.policy && current?.param === wanted?.param ? current : wanted,
+      );
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
@@ -216,6 +262,50 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
       };
     });
   }, []);
+
+  /** A change made in the curve editor: it sets the value and switches the measure on, so the scoreboard shows it. */
+  const onEditorParam = useCallback((id: string, param: string, value: ParamValue) => {
+    setScenario((current) => {
+      const previous = current.policies[id] ?? { enabled: false };
+      return {
+        ...current,
+        policies: {
+          ...current.policies,
+          [id]: { ...previous, enabled: true, params: { ...previous.params, [param]: value } },
+        },
+      };
+    });
+  }, []);
+
+  /** Where the keyboard focus was when the editor opened; it goes back there when it closes. */
+  const opener = useRef<HTMLElement | null>(null);
+  /** Whether the editor was opened on this page (and the page went back to where it was), not by the link. */
+  const openedHere = useRef(false);
+  const onEditCurve = useCallback((id: string, param: string) => {
+    // Safari does not focus a button that is clicked; the focus is then on the body, or on the
+    // nearest focusable container (main, tabIndex -1). Only a control counts as the opener.
+    const active = document.activeElement;
+    opener.current = active instanceof HTMLElement && active.tabIndex >= 0 ? active : null;
+    openedHere.current = true;
+    setEditor({ policy: id, param });
+  }, []);
+  const closedPolicy = useRef<string | undefined>(undefined);
+  const onCloseEditor = useCallback(() => {
+    closedPolicy.current = editor?.policy;
+    setEditor(undefined);
+  }, [editor]);
+  useEffect(() => {
+    if (editing || closedPolicy.current === undefined) return;
+    const element = opener.current;
+    const card = document.querySelector<HTMLElement>(`#policy-${closedPolicy.current} .policy__edit`);
+    closedPolicy.current = undefined;
+    opener.current = null;
+    if (element && element.isConnected) element.focus({ preventScroll: true });
+    // The button that opened it is gone or never had the focus: the card's button, where the page
+    // is back at. Opened by a link: the card's button, brought into view.
+    else card?.focus({ preventScroll: openedHere.current });
+    openedHere.current = false;
+  }, [editing]);
 
   const onLevel = useCallback((level: LevelFilter) => {
     setScenario((current) => ({ ...current, level }));
@@ -285,20 +375,28 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
   // Anything to undo: a measure switched on, a setting moved (also on a measure that is off), or a level chosen.
   const canReset = encodeScenario(scenario, pack) !== "" || Object.keys(scenario.policies).length > 0;
 
+  // While the curve editor lies over the page, the page behind it follows at a lower priority: the
+  // scoreboard and the editor update on every move of a point, the hidden page when there is time.
+  const deferredResult = useDeferredValue(result);
+  const deferredScenario = useDeferredValue(scenario);
+  const pageResult = editing ? deferredResult : result;
+  const pageScenario = editing ? deferredScenario : scenario;
+
   const budget = (
-    <BudgetView key="budget" result={result} selection={selection} onSelect={onSelect} highlight={highlight} />
+    <BudgetView key="budget" result={pageResult} selection={selection} onSelect={onSelect} highlight={highlight} />
   );
   const policies = (
     <PolicyList
       key="policies"
-      scenario={scenario}
-      result={result}
+      scenario={pageScenario}
+      result={pageResult}
       expanded={expanded}
       reveal={reveal}
       onToggle={onToggle}
       onParam={onParam}
       onExpand={onExpand}
       onShowNode={onShowNode}
+      onEditCurve={onEditCurve}
     />
   );
 
@@ -308,7 +406,7 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
         {t.app.skipToContent}
       </a>
       {fallback && (
-        <aside className="dev-notice" role="note">
+        <aside className="dev-notice" role="note" inert={editing}>
           <div className="page">
             <p>
               <WarningIcon size={15} />
@@ -344,16 +442,31 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
         canReset={canReset}
         countries={fallback ? [] : countries}
         onCountry={onCountry}
+        inert={editing}
       />
       <Scoreboard result={result} />
-      <main id="main" className="page" tabIndex={-1}>
+      {editing && editor && editorPolicy && (
+        <CurveEditor
+          key={`${editor.policy}.${editor.param}`}
+          policy={editorPolicy}
+          paramId={editor.param}
+          state={scenario.policies[editor.policy]}
+          inScenario={result.policies.find((entry) => entry.id === editor.policy)}
+          level={result.level}
+          baseline={result.baseline}
+          onToggle={onToggle}
+          onChange={onEditorParam}
+          onClose={onCloseEditor}
+        />
+      )}
+      <main id="main" className="page" tabIndex={-1} inert={editing}>
         {/* On a phone the measures come first: they are what the visitor acts on. The order in the
             document follows the order on screen, so keyboard and screen reader agree with the eye. */}
         <div className="workspace">{phone ? [policies, budget] : [budget, policies]}</div>
-        <Waterfall result={result} onShowPolicy={onShowPolicy} />
+        <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />
         <About />
       </main>
-      <footer className="footer">
+      <footer className="footer" inert={editing}>
         <div className="page">
           <p>{t.about.licence}</p>
           <p>

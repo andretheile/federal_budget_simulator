@@ -153,6 +153,82 @@ export interface Messages {
     warningItem(item: string): string;
     none: string;
   };
+  /** The editor for rate curves, and its entry on a measure's card. */
+  curve: {
+    /** Small caption above the preview on the card. */
+    section: string;
+    edit: string;
+    asToday: string;
+    changed: string;
+    preset(label: string): string;
+    topRate(rate: string, from: string): string;
+    /** The notice above the measures when the scenario holds a changed curve. */
+    changedTitle(count: number): string;
+    show(measure: string): string;
+    dialog(measure: string): string;
+    close: string;
+    /** What the curve means, in plain words. `currency` is the name of the currency, e.g. "Euro". */
+    explain(currency: string): string;
+    hint: string;
+    hover(at: string, rate: string, today: string | null, average: string, averageToday: string | null): string;
+    point(name: string, at: string, rate: string, average: string, averageToday: string | null): string;
+    axisRate: string;
+    compressed: string;
+    scaleNote(knee: string, max: string): string;
+    legend: {
+      reform: string;
+      today: string;
+      average: string;
+      distribution: string;
+      examples: string;
+    };
+    pointRole: string;
+    pointName(index: number, count: number): string;
+    keys: string;
+    offHint: string;
+    presets: string;
+    presetSources: string;
+    toToday: string;
+    toDefault: string;
+    undo: string;
+    remove: string;
+    added(name: string): string;
+    removed(name: string): string;
+    tooMany(max: number): string;
+    tooFew(min: number): string;
+    effect: string;
+    pay: string;
+    payMore: string;
+    payLess: string;
+    paySame: string;
+    counted(unit: string, tolerance: string): string;
+    from(amount: string): string;
+    top: string;
+    topNote: string;
+    topToday(rate: string, from: string): string;
+    examples: string;
+    exampleToday: string;
+    exampleAfter: string;
+    exampleChange: string;
+    owes(amount: string, rate: string): string;
+    examplesNote: string;
+    perYear: string;
+    points: string;
+    pointColumn: string;
+    amountColumn(currency: string): string;
+    rateColumn: string;
+    amountField(index: number, currency: string): string;
+    rateField(index: number): string;
+    removeNamed(index: number): string;
+    addAt: string;
+    add: string;
+    addNote: string;
+    clampedTo(value: string): string;
+    otherSettings: string;
+    model: string;
+    modelCalibrated(distribution: string, after: string, today: string, change: string, item: string, amount: string): string;
+    modelAbsolute(distribution: string, after: string, item: string): string;
+  };
   waterfall: {
     title: string;
     intro: string;

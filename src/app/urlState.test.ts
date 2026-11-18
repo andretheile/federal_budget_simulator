@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { testland } from "../engine/__fixtures__/testland.ts";
 import { emptyScenario, simulate, type Scenario } from "../engine/index.ts";
-import { buildHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./urlState.ts";
+import { buildHash, editorFromHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./urlState.ts";
 
 describe("hash fields", () => {
   it("round-trips country, language and scenario", () => {
@@ -25,6 +25,13 @@ describe("hash fields", () => {
 
   it("drops a language or country that could not be one", () => {
     expect(parseHash("#lang=<script>&c=../etc")).toEqual({});
+  });
+
+  it("carries the open curve editor as measure and parameter, and nothing that could not be that", () => {
+    const fields = { language: "de", scenario: "income_tax_schedule", editor: "income_tax_schedule.schedule" };
+    expect(buildHash(fields)).toBe("#lang=de&s=income_tax_schedule&e=income_tax_schedule.schedule");
+    expect(parseHash(buildHash(fields))).toEqual(fields);
+    for (const bad of ["income_tax_schedule", "a.b.c", "A.b", "a.<b>", ".b", "a."]) expect(parseHash(`#e=${bad}`)).toEqual({});
   });
 });
 
@@ -75,6 +82,18 @@ describe("link state", () => {
 
   it("includes the country only when asked to", () => {
     expect(stateToHash({ scenario: emptyScenario(), language: "de", country: "xx" }, testland)).toBe("#c=xx&lang=de");
+  });
+
+  it("opens the curve editor the link names, if the pack has it", () => {
+    const editor = { policy: "redraw_income_tax", param: "tariff" };
+    const hash = stateToHash({ scenario: emptyScenario(), language: "en", editor }, testland);
+    expect(hash).toBe("#lang=en&e=redraw_income_tax.tariff");
+    expect(editorFromHash(hash, testland)).toEqual(editor);
+    // Not a curve parameter, not a parameter of that measure, not a measure.
+    expect(editorFromHash("#e=cut_admin.cut", testland)).toBeUndefined();
+    expect(editorFromHash("#e=redraw_income_tax.cut", testland)).toBeUndefined();
+    expect(editorFromHash("#e=no_such.tariff", testland)).toBeUndefined();
+    expect(editorFromHash("#lang=en", testland)).toBeUndefined();
   });
 
   it("ignores what the pack does not know", () => {

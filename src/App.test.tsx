@@ -5,7 +5,7 @@
  */
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { Simulator } from "./App.tsx";
 import { testland } from "./engine/__fixtures__/testland.ts";
 
@@ -211,12 +211,14 @@ describe("details that depend on the engine of the browser or the size of the sc
   });
 });
 
-describe("a kind of parameter the card has no control for", () => {
-  it("is left at its default: the measure works, and the card promises no setting it cannot offer", () => {
-    // The fixture's income tax measure has one parameter, a rate curve, and the card has no editor for curves.
+describe("a rate curve on a card", () => {
+  it("has no slider in the settings, but its own way into the editor", () => {
+    // The fixture's income tax measure has one parameter, a rate curve. The card counts no
+    // setting for it in its details and offers the editor instead.
     mount("#lang=en");
     const card = "#policy-redraw_income_tax";
     expect(text(`${card} .policy__more`)).toBe("Details: Redraw the income tax");
+    expect(text(`${card} .policy__edit`)).toBe("Edit curve: Redraw the income tax");
     const before = headline();
     click(`${card} [role="switch"]`);
     expect(headline()).not.toBe(before);
@@ -224,6 +226,59 @@ describe("a kind of parameter the card has no control for", () => {
     expect(container.querySelector(`${card} .policy__panel .param`)).toBeNull();
     expect(text(`${card} .policy__panel`)).not.toContain("Settings");
     expect(text(`${card} .policy__panel`)).toContain("Where it shows in the budget");
+  });
+
+  it("shows a display unit of the pack on a slider instead of the generic one", () => {
+    mount("#lang=en");
+    click("#policy-family_bonus .policy__more");
+    const slider = query<HTMLInputElement>("#family_bonus-amount");
+    expect(slider.getAttribute("aria-valuetext")?.replace(/[\u00a0\u202f]/g, " ")).toBe("2 XTS per household");
+    expect(text("#policy-family_bonus .param__value")).toBe("2 XTS per household");
+  });
+});
+
+describe("the address while a value changes fast", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.useRealTimers();
+  });
+
+  it("is written at most a few dozen times in ten seconds, and always ends on the last state", () => {
+    // Safari throws after about 100 calls of replaceState in ten seconds; a drag can change the
+    // scenario a hundred times in a few seconds.
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "performance"] });
+    mount("#lang=en");
+    const replace = vi.spyOn(window.history, "replaceState");
+    const toggle = '#policy-halve_mp_pay [role="switch"]';
+    for (let i = 0; i < 121; i++) click(toggle);
+    expect(replace.mock.calls.length).toBeLessThanOrEqual(25);
+    expect(headline()).toBe("−XTS 395");
+    // The latest state follows within a moment.
+    act(() => void vi.advanceTimersByTime(150));
+    expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay");
+    // Changes that go on, one every 50 ms for ten seconds: the writes stay below Safari's limit.
+    replace.mockClear();
+    for (let i = 0; i < 200; i++) {
+      click(toggle);
+      act(() => void vi.advanceTimersByTime(50));
+    }
+    expect(replace.mock.calls.length).toBeLessThanOrEqual(100);
+    expect(replace.mock.calls.length).toBeGreaterThan(50);
+    act(() => void vi.advanceTimersByTime(150));
+    expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay");
+    // After a pause, writes go straight through again.
+    act(() => void vi.advanceTimersByTime(5_000));
+    click(toggle);
+    expect(window.location.hash).toBe("#lang=en");
+  });
+
+  it("does not take the page down when the browser refuses to write it", () => {
+    mount("#lang=en");
+    vi.spyOn(window.history, "replaceState").mockImplementation(() => {
+      throw new DOMException("Attempt to use history.replaceState() more than 100 times per 10 seconds", "SecurityError");
+    });
+    click('#policy-halve_mp_pay [role="switch"]');
+    expect(headline()).toBe("−XTS 395");
   });
 });
 

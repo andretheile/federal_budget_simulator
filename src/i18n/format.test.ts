@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { NumberParam } from "../engine/index.ts";
-import { createFormatters, decimalsOf } from "./format.ts";
+import { createFormatters, decimalsIn, decimalsOf } from "./format.ts";
 
 const NBSP = " ";
 /** Intl separates number and unit with no-break spaces (sometimes narrow ones); the tests do not care which. */
@@ -113,6 +113,68 @@ describe("counts, parameters and dates", () => {
     expect(plain(de.param(param("years", 1), 67))).toBe("67 Jahre");
     expect(en.param(param("years", 1), 67)).toBe("67 years");
     expect(de.param(param("count", 1), 1200)).toBe("1.200");
+  });
+
+  it("writes a parameter's own display unit instead of the generic one", () => {
+    const cents = (unit: NumberParam["unit"]): NumberParam => ({
+      id: "petrol",
+      type: "number",
+      label: { en: "Energy tax on petrol", de: "Energiesteuer auf Benzin" },
+      unit,
+      min: 35.9,
+      max: 90,
+      step: 0.01,
+      default: 51.41,
+      unitLabel: { en: "c/l", de: "ct/l" },
+    });
+    expect(de.param(cents("count"), 65.45)).toBe(`65,45${NBSP}ct/l`);
+    expect(en.param(cents("count"), 65.45)).toBe(`65.45${NBSP}c/l`);
+    // The decimals still follow the step, and the label replaces even a unit that has its own format.
+    expect(de.param(cents("count"), 90)).toBe(`90,00${NBSP}ct/l`);
+    expect(plain(de.param({ ...cents("percent"), step: 1 }, 42))).toBe("42 ct/l");
+    // A language without a text of its own falls back to English, like every pack text.
+    expect(createFormatters("fr", "EUR").param(cents("count"), 1.5)).toBe(`1,50${NBSP}c/l`);
+  });
+
+  it("writes money exactly where someone will read it off or type it", () => {
+    expect(plain(de.exactMoney(1_000_000))).toBe("1.000.000 €");
+    expect(en.exactMoney(277_825)).toBe("€277,825");
+    expect(plain(de.exactMoney(-1_234.4))).toBe("−1.234 €");
+    expect(plain(de.exactMoney(-0.4))).toBe("0 €");
+    expect(plain(de.exactMoney(123, { signed: true }))).toBe("+123 €");
+    expect(en.exactMoney(-123, { signed: true })).toBe("−€123");
+    expect(en.exactMoney(0.3, { signed: true })).toBe("€0");
+    expect(plain(de.smallMoney(1))).toBe("1 €");
+    expect(plain(createFormatters("en", "XTS").smallMoney(0.001))).toBe("XTS 0.001");
+    expect(de.currencySymbol).toBe("€");
+    expect(de.currencyName).toBe("Euro");
+    expect(en.currencyName).toBe("euro");
+    // A code without a name stays the code.
+    expect(createFormatters("en", "XTS").currencyName).not.toBe("xts");
+  });
+
+  it("reads numbers as each language types them, and forgives the other decimal mark", () => {
+    expect(de.parse("66.760")).toBe(66_760);
+    expect(de.parse("1.000.000")).toBe(1_000_000);
+    expect(de.parse("23,97")).toBe(23.97);
+    expect(de.parse(" 1.234,5 ")).toBe(1234.5);
+    // A dot without three digits after it cannot be a thousands mark: a decimal point.
+    expect(de.parse("23.97")).toBe(23.97);
+    expect(de.parse("−5")).toBe(-5);
+    expect(en.parse("66,760")).toBe(66_760);
+    expect(en.parse("23.97")).toBe(23.97);
+    expect(en.parse("23,5")).toBe(23.5);
+    expect(en.parse("1,000,000")).toBe(1_000_000);
+    for (const nonsense of ["", "-", "abc", "1,2,3.4.5", "12a", "1.2.3"]) expect(Number.isNaN(en.parse(nonsense))).toBe(true);
+    expect(Number.isNaN(de.parse("1,2,3"))).toBe(true);
+  });
+
+  it("knows how many decimals a value needs", () => {
+    expect(decimalsIn(42)).toBe(0);
+    expect(decimalsIn(18.6)).toBe(1);
+    expect(decimalsIn(23.97)).toBe(2);
+    expect(decimalsIn(19.532812)).toBe(2);
+    expect(decimalsIn(0.1 + 0.2)).toBe(1);
   });
 
   it("derives decimals from the step", () => {

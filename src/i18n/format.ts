@@ -7,7 +7,7 @@
  * from `Intl` and the number inside it is replaced by our own.
  */
 import type { NumberParam } from "../engine/index.ts";
-import { hasDictionary, intlLocale, messagesFor, type Messages } from "./index.ts";
+import { baseLanguage, hasDictionary, intlLocale, localize, messagesFor, type Messages } from "./index.ts";
 
 export interface SignOptions {
   /** Write "+" in front of positive values. Zero never gets a sign. */
@@ -32,6 +32,16 @@ export interface Formatters {
   count(value: number): string;
   /** The value of a policy parameter in its unit. */
   param(param: NumberParam, value: number): string;
+  /** Money to the last unit, never compact: "1.000.000 €", "€277,825". For values someone typed or will type. */
+  exactMoney(value: number, options?: SignOptions): string;
+  /** An amount that may be below one unit, which is then written to one significant digit: "0,001 XTS". */
+  smallMoney(value: number): string;
+  /** The currency's symbol as this language writes it: "€". */
+  currencySymbol: string;
+  /** The currency's name for running text: "Euro" in German, "euro" in English. */
+  currencyName: string;
+  /** A number someone typed in this language: "66.760" and "23,97" in German, "66,760" and "23.97" in English. NaN if it is none. */
+  parse(text: string): number;
   /** An ISO date (YYYY-MM-DD). */
   date(iso: string): string;
   /** A language's own name: "Deutsch", "English". */
@@ -212,6 +222,9 @@ export function createFormatters(
 
   const param: Formatters["param"] = (definition, value) => {
     const digits = decimalsOf(definition.step);
+    // The pack's own display unit, such as "ct/l", wins over the generic one; a no-break space keeps the two together.
+    const label = definition.unitLabel ? localize(definition.unitLabel, language) : "";
+    if (label) return `${number(value, { digits })} ${label}`;
     switch (definition.unit) {
       case "percent":
         return percent(value / 100, { digits });
@@ -232,6 +245,53 @@ export function createFormatters(
     }
   };
 
+  const wholeMoney: Formatters["exactMoney"] = (value, options = {}) =>
+    typographicMinus(
+      numberFormat(`exact:${options.signed}`, {
+        style: "currency",
+        currency,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+        signDisplay: sign(options.signed),
+      }).format(Math.round(value) === 0 ? 0 : value),
+    );
+
+  const smallMoney: Formatters["smallMoney"] = (value) =>
+    Math.abs(value) >= 1 || value === 0
+      ? wholeMoney(value)
+      : typographicMinus(numberFormat("small", { style: "currency", currency, maximumSignificantDigits: 1 }).format(value));
+
+  const currencySymbol =
+    numberFormat("symbol", { style: "currency", currency })
+      .formatToParts(0)
+      .find((part) => part.type === "currency")?.value ?? currency;
+
+  let currencyName = currency;
+  try {
+    currencyName = new Intl.DisplayNames([locale], { type: "currency" }).of(currency) ?? currency;
+  } catch {
+    // An engine without display names: the code will do.
+  }
+  // English writes currency names in lower case in running text ("each additional euro"), apart
+  // from a qualifier in front ("US dollar").
+  if (baseLanguage(language) === "en" && currencyName !== currency) currencyName = currencyName.replace(/(\S+)$/, (word) => word.toLowerCase());
+
+  const separators = numberFormat("separators", { useGrouping: true, minimumFractionDigits: 1 }).formatToParts(12345.6);
+  const groupMark = separators.find((part) => part.type === "group")?.value ?? ",";
+  const decimalMark = separators.find((part) => part.type === "decimal")?.value ?? ".";
+  const parse: Formatters["parse"] = (text) => {
+    let s = text.replace(/[\s  ]/g, "").replace(/[−–]/g, "-");
+    if (s === "" || s === "-") return NaN;
+    const groups = s.split(groupMark).length - 1;
+    const decimals = s.split(decimalMark).length - 1;
+    // Only the group mark, but not followed by groups of three digits: it was meant as the decimal
+    // point ("23.97" typed in German). The other way round likewise.
+    if (decimals === 0 && groups === 1 && !/\d\D\d{3}$/.test(s)) s = s.replace(groupMark, decimalMark);
+    else if (groups === 0 && decimals > 1) return NaN;
+    s = s.split(groupMark).join("").replace(decimalMark, ".");
+    return /^-?(\d+\.?\d*|\.\d+)$/.test(s) ? Number(s) : NaN;
+  };
+
   const dateFormat = new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" });
   const date: Formatters["date"] = (iso) => {
     const time = Date.parse(`${iso}T00:00:00Z`);
@@ -247,5 +307,29 @@ export function createFormatters(
     }
   };
 
-  return { language, money, percent, share, number, count, param, date, languageName };
+  return {
+    language,
+    money,
+    percent,
+    share,
+    number,
+    count,
+    param,
+    exactMoney: wholeMoney,
+    smallMoney,
+    currencySymbol,
+    currencyName,
+    parse,
+    date,
+    languageName,
+  };
+}
+
+/** The decimals a value needs to be written exactly, up to `max`: 42 -> 0, 18.6 -> 1, 23.97 -> 2. */
+export function decimalsIn(value: number, max = 2): number {
+  for (let digits = 0; digits < max; digits++) {
+    const scaled = value * 10 ** digits;
+    if (Math.abs(scaled - Math.round(scaled)) < 1e-9 * Math.max(1, Math.abs(scaled))) return digits;
+  }
+  return max;
 }

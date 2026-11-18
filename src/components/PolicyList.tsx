@@ -2,9 +2,11 @@
  * All measures of the pack as cards, with a filter by topic.
  */
 import { useEffect, useMemo, useState } from "react";
+import { curveChanged, curveSettings } from "../app/curveModel.ts";
 import { useUi } from "../app/ui.ts";
-import type { ParamValue, PolicyTopic, Scenario, SimulationResult } from "../engine/index.ts";
+import type { CurvePoint, ParamValue, PolicyTopic, Scenario, SimulationResult } from "../engine/index.ts";
 import { reducedMotion } from "../hooks/useAnimatedNumber.ts";
+import { ChevronRight } from "./icons.tsx";
 import { PolicyCard } from "./PolicyCard.tsx";
 
 export interface PolicyListProps {
@@ -17,6 +19,7 @@ export interface PolicyListProps {
   onParam(id: string, param: string, value: ParamValue): void;
   onExpand(id: string, expanded: boolean): void;
   onShowNode(nodeId: string): void;
+  onEditCurve(id: string, param: string): void;
 }
 
 export function PolicyList({
@@ -28,8 +31,10 @@ export function PolicyList({
   onParam,
   onExpand,
   onShowNode,
+  onEditCurve,
 }: PolicyListProps) {
-  const { pack, t } = useUi();
+  const ui = useUi();
+  const { pack, t } = ui;
   const [topic, setTopic] = useState<PolicyTopic | null>(null);
 
   // Topics in the order they first appear in the pack, with how many measures each has.
@@ -56,6 +61,21 @@ export function PolicyList({
     return out;
   }, [pack, results]);
 
+  // Curves that differ from today's in a measure that is switched on: easy to miss in a long list,
+  // for instance when a link brings them, so they are named above it.
+  const changedCurves = useMemo(
+    () =>
+      pack.policies.flatMap((policy) => {
+        const state = scenario.policies[policy.id];
+        if (!state?.enabled) return [];
+        const params = results.get(policy.id)?.params;
+        return curveSettings(policy)
+          .filter((setting) => params && curveChanged(setting, params[setting.param.id] as CurvePoint[]))
+          .map((setting) => ({ policy, param: setting.param.id }));
+      }),
+    [pack, scenario, results],
+  );
+
   useEffect(() => {
     if (!reveal) return;
     const policy = pack.policies.find((candidate) => candidate.id === reveal.id);
@@ -74,6 +94,22 @@ export function PolicyList({
         <h2 id="policies-title">{t.policies.title}</h2>
         <p>{t.policies.intro}</p>
       </header>
+
+      {changedCurves.length > 0 && (
+        <div className="changed-curves" role="note">
+          <p>{t.curve.changedTitle(changedCurves.length)}</p>
+          <ul>
+            {changedCurves.map(({ policy, param }) => (
+              <li key={`${policy.id}.${param}`}>
+                <button type="button" className="changed-curves__open" onClick={() => onEditCurve(policy.id, param)}>
+                  {t.curve.show(ui.text(policy.label))}
+                  <ChevronRight size={14} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {topics.length > 1 && (
         <div className="filter" role="group" aria-label={t.policies.topic}>
@@ -112,6 +148,7 @@ export function PolicyList({
               onParam={onParam}
               onExpand={onExpand}
               onShowNode={onShowNode}
+              onEditCurve={onEditCurve}
             />
           ))}
         </ul>

@@ -22,6 +22,8 @@ export interface HeaderProps {
   /** Ids of all country packs; the switch is only shown if there is more than one. */
   countries: readonly string[];
   onCountry?(id: string): void;
+  /** Out of reach while a sheet lies over the page. */
+  inert?: boolean;
 }
 
 function countryName(id: string, language: string): string {
@@ -43,6 +45,7 @@ export function Header({
   canReset,
   countries,
   onCountry,
+  inert = false,
 }: HeaderProps) {
   const ui = useUi();
   const { pack, t, fmt, language } = ui;
@@ -84,7 +87,7 @@ export function Header({
   ];
 
   return (
-    <header className="masthead">
+    <header className="masthead" inert={inert}>
       <div className="page masthead__inner">
         <div className="masthead__brand">
           <h1 className="masthead__name">{t.app.name}</h1>

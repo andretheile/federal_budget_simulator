@@ -1,0 +1,1032 @@
+/*
+ * Rate curves: the small preview on a measure's card, the notice above the measures, and the
+ * editor, a sheet that lies over the page below the scoreboard.
+ *
+ * In the chart the edited curve is the one strong line, in ink, with a handle on every point.
+ * Everything that is only there for orientation is grey and thin: today's curve, the grid, the
+ * distribution behind it. Average rates are dashed. No colour carries meaning on its own.
+ */
+
+/* --- On the card ------------------------------------------------------------------------------ */
+.policy__curve {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.policy__curve-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 6px;
+}
+
+.curve-preview {
+  flex: 1 1 170px;
+  min-width: 150px;
+  max-width: 280px;
+  height: 56px;
+  overflow: visible;
+}
+
+.curve-preview path,
+.curve-preview line {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.curve-preview__band {
+  fill: var(--sunken);
+}
+
+.curve-preview__axis {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.curve-preview__today {
+  stroke: var(--ink-3);
+  stroke-width: 1.25;
+}
+
+.curve-preview__line {
+  stroke: var(--ink);
+  stroke-width: 2.25;
+  stroke-linejoin: round;
+}
+
+.policy__curve-text {
+  flex: 1 1 190px;
+  min-width: 0;
+}
+
+.policy__curve-state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.curve-state {
+  padding: 1px 6px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.curve-state--changed {
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+}
+
+.policy__curve-preset {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.policy__edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  margin-top: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 650;
+}
+
+.policy__edit:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* --- Above the measures: curves that differ from today's -------------------------------------- */
+.changed-curves {
+  margin-bottom: 18px;
+  padding: 9px 12px;
+  border-left: 3px solid var(--ink);
+  background: var(--sunken);
+  font-size: 14px;
+}
+
+.changed-curves ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+}
+
+.changed-curves__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: 650;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.changed-curves__open:hover {
+  text-decoration-color: currentColor;
+}
+
+/* --- The sheet -------------------------------------------------------------------------------- */
+/* The page does not scroll under the sheet; the gutter of its scroll bar stays, so nothing shifts. */
+html.has-sheet {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* While the sheet is open the scoreboard keeps room for its second line (the range), so that the
+   sheet does not move down when the first change switches the measure on. */
+@media (min-width: 600px) {
+  html.has-sheet .scoreboard__change {
+    min-height: calc(2 * 1.5em + 2px);
+    align-content: flex-start;
+  }
+}
+
+/* A narrow tablet needs three lines for it. */
+@media (min-width: 600px) and (max-width: 759px) {
+  html.has-sheet .scoreboard__change {
+    min-height: calc(3 * 1.5em + 4px);
+  }
+}
+
+.sheet {
+  position: fixed;
+  top: var(--scoreboard-height);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 25;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--paper);
+}
+
+.sheet__inner {
+  padding-block: 18px 56px;
+}
+
+.sheet__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.sheet__titles {
+  min-width: 0;
+}
+
+.sheet__title {
+  margin-top: 4px;
+  font-family: var(--font-serif);
+  font-size: clamp(23px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* The title takes the focus when the sheet opens, so screen readers start there; it is not a control. */
+.sheet__title:focus,
+.sheet__title:focus-visible {
+  outline: none;
+}
+
+.sheet__subtitle {
+  margin-top: 4px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.sheet__tools {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+
+/* --- The editor ------------------------------------------------------------------------------- */
+.editor__explain {
+  order: 1;
+  max-width: 100ch;
+  margin-top: 14px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.editor__off {
+  padding: 7px 10px;
+  border: 1px dashed var(--ink-3);
+  border-radius: 4px;
+  font-size: 13.5px;
+}
+
+.editor__grid {
+  display: grid;
+  grid-template-areas: "main" "side" "presets";
+  gap: 28px;
+  margin-top: 6px;
+}
+
+/* On a phone the chart comes first and the explanation after it; from a tablet on, above it. */
+.editor__main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.editor__main > * {
+  min-width: 0;
+}
+
+.editor__presets {
+  grid-area: presets;
+}
+
+.editor__side {
+  grid-area: side;
+  display: grid;
+  gap: 20px;
+  align-content: start;
+  min-width: 0;
+}
+
+.editor__block {
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+
+.editor__label,
+.editor__section h3 {
+  margin-bottom: 8px;
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.editor__range,
+.editor__top {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.editor__top strong {
+  font-size: 19px;
+  font-weight: 680;
+  color: var(--ink);
+}
+
+.editor__note {
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.editor__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+
+
+.editor__more {
+  display: grid;
+  gap: 8px 40px;
+  margin-top: 28px;
+}
+
+.editor__section {
+  min-width: 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.editor__section + .editor__section {
+  margin-top: 12px;
+}
+
+.editor__model {
+  max-width: 72ch;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+@media (min-width: 640px) and (max-width: 1079px) {
+  .editor__side {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 32px;
+  }
+}
+
+@media (min-width: 720px) {
+  .editor__explain {
+    order: -1;
+    margin: 8px 0 12px;
+  }
+
+  /* One line of fixed height: what it says changes with every move of the mouse, the chart below must not. */
+  .cchart__readout {
+    height: 1.45em;
+    min-height: 0;
+    margin-bottom: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (min-width: 1080px) {
+  .examples td {
+    white-space: nowrap;
+  }
+
+  .editor__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "main side" "presets side";
+    gap: 28px 44px;
+  }
+
+  .editor__more {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .editor__more > .editor__section + .editor__section {
+    margin-top: 0;
+  }
+}
+
+/* --- The chart -------------------------------------------------------------------------------- */
+.cchart__readout {
+  min-height: 2.9em;
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.cchart__readout.is-reading {
+  color: var(--ink);
+  font-weight: 550;
+}
+
+.cchart__frame {
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.cchart__svg {
+  display: block;
+  overflow: visible;
+}
+
+.cchart__svg text {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  fill: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.cchart__svg path,
+.cchart__svg line {
+  fill: none;
+}
+
+.cchart__band rect {
+  fill: var(--sunken);
+}
+
+.cchart__band text {
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.cchart__svg .cchart__histogram {
+  fill: var(--rule);
+}
+
+.cchart__grid line {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.cchart__grid line.is-base {
+  stroke: var(--rule-strong);
+}
+
+.cchart__svg .cchart__ytitle {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.cchart__xaxis line {
+  stroke: var(--rule-strong);
+}
+
+.cchart__break {
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+}
+
+.cchart__examples line {
+  stroke: var(--rule-strong);
+  stroke-dasharray: 2 3;
+}
+
+.cchart__examples circle {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.25;
+}
+
+.cchart__svg .cchart__examples text {
+  font-size: 10.5px;
+  font-weight: 700;
+  fill: var(--ink-2);
+}
+
+.cchart__today path {
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.cchart__today .cchart__average {
+  stroke-width: 1.25;
+  stroke-dasharray: 4 3;
+}
+
+.cchart__average--reform {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 7 4;
+}
+
+.cchart__line {
+  stroke: var(--ink);
+  stroke-width: 2.75;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.cchart__hover line {
+  stroke: var(--ink-3);
+  stroke-dasharray: 1 2;
+}
+
+.cchart__hover circle {
+  fill: var(--ink);
+}
+
+/* The layer that takes all pointer input. A finger on the chart still scrolls the page up and down;
+   only on a handle does it drag instead. */
+.cchart__layer {
+  position: absolute;
+  inset: 0;
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+
+.cchart__handle {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  touch-action: none;
+  cursor: grab;
+}
+
+.cchart__handle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  margin: -6.5px 0 0 -6.5px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow:
+    0 0 0 2px var(--paper),
+    0 0 0 3.5px var(--ink);
+  transition: transform 0.12s ease;
+}
+
+.cchart__handle:hover::before {
+  transform: scale(1.18);
+}
+
+.cchart__handle:active {
+  cursor: grabbing;
+}
+
+.cchart__handle.is-selected::before {
+  background: var(--paper);
+  box-shadow:
+    inset 0 0 0 3.5px var(--ink),
+    0 0 0 2px var(--paper),
+    0 0 0 4px var(--ink);
+  transform: scale(1.3);
+}
+
+.cchart__handle:focus {
+  outline: none;
+}
+
+.cchart__handle:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+
+@media (pointer: coarse) {
+  .cchart__handle::before {
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+  }
+}
+
+.cchart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.key::before {
+  content: "";
+  flex: none;
+  display: inline-block;
+  width: 20px;
+}
+
+.key--line::before {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.key--average::before {
+  height: 0;
+  border-top: 2px dashed var(--ink);
+}
+
+.key--today::before {
+  height: 2px;
+  background: var(--ink-3);
+}
+
+.key--area::before {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--rule);
+}
+
+.key--example::before {
+  content: "1";
+  width: 16px;
+  height: 16px;
+  border: 1.25px solid var(--ink-2);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 13.5px;
+  text-align: center;
+}
+
+/* The title of the horizontal axis, right under it, where the eye ends up after reading the ticks. */
+.cchart__axis-title {
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-align: right;
+}
+
+.cchart__scale-note {
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+/* --- Who pays more, who pays less ------------------------------------------------------------- */
+.pay {
+  display: grid;
+  gap: 6px;
+}
+
+.pay__row {
+  display: grid;
+  grid-template-columns: 9.5em minmax(0, 1fr);
+  align-items: center;
+  gap: 2px 10px;
+  font-size: 14px;
+}
+
+.pay__row dd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pay__bar {
+  position: relative;
+  flex: 1 1 60px;
+  min-width: 40px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.pay__bar span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.pay__row--same .pay__bar span {
+  background: var(--ink-3);
+}
+
+.pay__value {
+  flex: none;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.pay__value .muted {
+  font-weight: 500;
+}
+
+/* --- Presets ---------------------------------------------------------------------------------- */
+.presets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+  gap: 6px;
+}
+
+.preset {
+  display: grid;
+  gap: 1px;
+  width: 100%;
+  min-height: 38px;
+  padding: 7px 11px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 5px;
+  background: var(--surface);
+  font-size: 13.5px;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.preset:hover {
+  border-color: var(--ink);
+}
+
+.preset[aria-pressed="true"] {
+  border-color: var(--ink);
+  box-shadow: inset 4px 0 0 var(--ink);
+}
+
+.preset__label {
+  font-weight: 600;
+}
+
+.preset__note {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.presets__sources .sources {
+  margin-top: 4px;
+}
+
+/* --- Tables ----------------------------------------------------------------------------------- */
+.examples,
+.points {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.examples th,
+.examples td,
+.points th,
+.points td {
+  padding: 7px 10px 7px 0;
+  border-top: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.examples thead th,
+.points thead th {
+  padding-top: 0;
+  border-top: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+/* Over a column of numbers the heading stands where the numbers end. */
+.points thead th:nth-child(2),
+.points thead th:nth-child(3) {
+  padding-right: 20px;
+  text-align: right;
+}
+
+.examples td:last-child,
+.examples th:last-child {
+  padding-right: 0;
+  text-align: right;
+}
+
+.examples__marker span {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 1.25px solid var(--ink-2);
+  border-radius: 50%;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+
+.examples tbody th {
+  font-weight: 400;
+}
+
+.examples__amount {
+  display: block;
+  font-weight: 650;
+}
+
+.examples__label {
+  display: block;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+
+.examples__change {
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.points {
+  max-width: 520px;
+}
+
+.points tbody th {
+  width: 3em;
+  padding-top: 15px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.points tr.is-selected th {
+  color: var(--ink);
+  box-shadow: inset 3px 0 0 var(--ink);
+  padding-left: 9px;
+}
+
+.points__input,
+.points__field input {
+  width: 100%;
+  height: 36px;
+  padding: 0 9px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  /* Not smaller: below 16px Safari on a phone zooms into a field when it gets the focus. */
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.points__input:hover,
+.points__field input:hover {
+  border-color: var(--ink-3);
+}
+
+.points__input:focus-visible,
+.points__field input:focus-visible {
+  border-color: var(--ink);
+  outline-offset: 1px;
+}
+
+.points td:last-child {
+  width: 44px;
+  padding-right: 0;
+}
+
+.points__remove {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: transparent;
+}
+
+.points__remove:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.points__remove:disabled {
+  color: var(--ink-3);
+  opacity: 0.5;
+  cursor: default;
+}
+
+.points__add {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.points__field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: 11em;
+}
+
+/* --- Small screens ---------------------------------------------------------------------------- */
+@media (max-width: 719px) {
+  .sheet__inner {
+    padding-top: 10px;
+  }
+
+  .sheet__head {
+    gap: 8px 12px;
+    padding-bottom: 10px;
+  }
+
+  .sheet__tools {
+    gap: 12px;
+  }
+
+  .sheet__subtitle {
+    font-size: 14px;
+  }
+
+  /* The examples as stacked rows: the amount and its label, then today, after and the change. */
+  .examples thead {
+    display: none;
+  }
+
+  .examples,
+  .examples tbody {
+    display: block;
+  }
+
+  .examples tr {
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr) auto;
+    gap: 2px 8px;
+    padding: 9px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .examples th,
+  .examples td {
+    padding: 0;
+    border: 0;
+  }
+
+  .examples tbody th {
+    grid-column: 2 / -1;
+  }
+
+  .examples td[data-label] {
+    grid-column: 2 / 3;
+    font-size: 13.5px;
+  }
+
+  .examples td[data-label]::before {
+    content: attr(data-label) ": ";
+    color: var(--ink-3);
+  }
+
+  .examples td.examples__change {
+    grid-column: 3;
+    grid-row: 2 / span 2;
+    align-self: center;
+    text-align: right;
+  }
+
+  .examples td.examples__change::before {
+    display: block;
+  }
+}
+
+/* The header's tools lose their words on a phone; in the sheet they keep them. */
+@media (max-width: 559px) {
+  .sheet .tool {
+    width: auto;
+    padding: 0 11px;
+  }
+
+  .sheet .tool span {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+
+  /* Closing is an icon here; the button keeps its name for assistive technology. */
+  .sheet .sheet__close {
+    width: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .sheet .sheet__close .sheet__close-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .pay__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (forced-colors: active) {
+  .cchart__handle::before {
+    forced-color-adjust: none;
+    background: CanvasText;
+    box-shadow: 0 0 0 2px Canvas;
+  }
+}
