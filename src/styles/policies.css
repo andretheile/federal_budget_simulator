@@ -204,6 +204,11 @@
   color: var(--ink);
 }
 
+.policy__combined-why {
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
 /* A cost shift is one of the things this page exists to show: it gets its own line on the card. */
 .policy__shift {
   display: flex;
@@ -686,7 +691,9 @@
   align-items: baseline;
   gap: 8px;
   max-width: 100%;
-  padding: 0;
+  /* A taller area for the finger (29px instead of 19px) that takes no more room in the layout. */
+  margin: -5px 0;
+  padding: 5px 0;
   border: 0;
   background: none;
   font-size: 14px;

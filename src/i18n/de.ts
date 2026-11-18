@@ -26,7 +26,9 @@ export const de: Messages = {
     share: "Teilen",
     shareHint: "Link zu genau diesem Szenario kopieren",
     copied: "Link kopiert",
-    copyFailed: "Kopieren nicht möglich. Bitte die Adresse aus der Adresszeile kopieren.",
+    copyFailed: "Kopieren war nicht möglich. Hier steht der Link, zum Kopieren von Hand.",
+    linkField: "Link zu diesem Szenario",
+    close: "Schließen",
     reset: "Zurücksetzen",
     resetHint: "Alle Maßnahmen ausschalten und alle Ebenen zeigen",
   },
@@ -190,7 +192,7 @@ export const de: Messages = {
   about: {
     title: "Über die Zahlen",
     staticNote:
-      "Alle Wirkungen sind statische Schätzungen für das erste Jahr. Sie zeigen die unmittelbare Wirkung einer Maßnahme auf den Haushalt eines Jahres, keine Prognose über mehrere Jahre.",
+      "Alle Wirkungen sind statische Schätzungen: die unmittelbare Wirkung einer Maßnahme auf den Haushalt eines einzelnen Jahres, in der Regel des ersten, keine Prognose über mehrere Jahre. Steht die Zahl einer Maßnahme für etwas anderes, sagt die Maßnahme das selbst.",
     methodology: "Methodik",
     noMethodology: "Zu diesem Datensatz liegt kein Methodenhinweis vor.",
     qualityTitle: "Was die Qualitätsangaben bedeuten",

@@ -57,6 +57,9 @@
 }
 
 .about__sources summary {
+  /* A taller area for the finger (31px instead of 23px) that takes no more room in the layout. */
+  margin: -4px 0;
+  padding: 4px 0;
   font-size: 15px;
   font-weight: 650;
   cursor: pointer;

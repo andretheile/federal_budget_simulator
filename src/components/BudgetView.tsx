@@ -5,7 +5,18 @@
  * Every mark shows the simulated value; today's value stays visible as a vertical line wherever
  * a measure has changed something.
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+  type RefObject,
+} from "react";
+import { createPortal } from "react-dom";
 import {
   crumbsOf,
   layoutBudget,
@@ -35,6 +46,8 @@ const SEGMENT_PADDING = 16;
 const SEGMENT_SLACK = 4;
 /** The gap between blocks, as in `.bar__track`. */
 const SEGMENT_GAP = 2;
+/** The space between a bar and the explanation floating above it. */
+const TIP_GAP = 9;
 const SIDES: readonly Side[] = ["revenue", "expenditure"];
 
 const percentOf = (value: number, max: number): string => `${Math.max(0, Math.min(100, (value / max) * 100))}%`;
@@ -102,39 +115,42 @@ export function BudgetView({ result, selection, onSelect, highlight }: BudgetVie
         </p>
       </header>
 
-      <div className="bars">
-        {SIDES.map((side) => {
-          const shorter = gapKind === "deficit" ? "revenue" : "expenditure";
-          const other = side === "revenue" ? "expenditure" : "revenue";
-          return (
-            <StackedBar
-              key={side}
-              side={side}
-              layout={layout}
-              result={result}
-              max={max}
-              noise={noise}
-              selectedKey={selection.side === side ? selectedKey : undefined}
-              wholeSideSelected={selection.side === side && !selection.nodeId && !selection.fold}
-              gap={
-                gapKind && side === shorter
-                  ? { kind: gapKind, to: result.reform[other], amount: Math.abs(balance) }
-                  : undefined
-              }
-              onSelect={onSelect}
-            />
-          );
-        })}
-      </div>
+      {/* The bars and the list below them: on a wide screen this part stays next to the measures. */}
+      <div className="budget__pin">
+        <div className="bars">
+          {SIDES.map((side) => {
+            const shorter = gapKind === "deficit" ? "revenue" : "expenditure";
+            const other = side === "revenue" ? "expenditure" : "revenue";
+            return (
+              <StackedBar
+                key={side}
+                side={side}
+                layout={layout}
+                result={result}
+                max={max}
+                noise={noise}
+                selectedKey={selection.side === side ? selectedKey : undefined}
+                wholeSideSelected={selection.side === side && !selection.nodeId && !selection.fold}
+                gap={
+                  gapKind && side === shorter
+                    ? { kind: gapKind, to: result.reform[other], amount: Math.abs(balance) }
+                    : undefined
+                }
+                onSelect={onSelect}
+              />
+            );
+          })}
+        </div>
 
-      <DetailList
-        layout={layout}
-        result={result}
-        selection={selection}
-        onSelect={onSelect}
-        highlight={highlight}
-        noise={noise}
-      />
+        <DetailList
+          layout={layout}
+          result={result}
+          selection={selection}
+          onSelect={onSelect}
+          highlight={highlight}
+          noise={noise}
+        />
+      </div>
     </section>
   );
 }
@@ -169,7 +185,57 @@ function StackedBar({
   const plot = useRef<HTMLDivElement>(null);
   const plotWidth = useElementWidth(plot);
   const fonts = useFontsLoaded();
-  const [active, setActive] = useState<string | null>(null);
+  /**
+   * The block whose explanation is shown. `held` means a tap opened it: a finger cannot hover, so
+   * the explanation then stays until the next press somewhere else instead of until a pointer leaves.
+   */
+  const [shown, setShown] = useState<{ key: string; held: boolean } | null>(null);
+  const active = shown?.key ?? null;
+  const bar = useRef<HTMLDivElement>(null);
+  /** The kind of pointer that last went down on a block or a legend entry of this bar. */
+  const pointer = useRef("mouse");
+
+  // While an explanation is open: a press anywhere but on a block or legend entry of this bar
+  // closes it, and so does Escape.
+  useEffect(() => {
+    if (active === null) return;
+    const onPointerDown = (event: PointerEvent): void => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (!target || !bar.current?.contains(target) || !target.closest(".seg, .legend__item")) setShown(null);
+    };
+    const onKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === "Escape") setShown(null);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [active]);
+
+  /** A mouse or pen shows the explanation of a block by hovering. A finger cannot hover; see `choose`. */
+  const hover = (key: string) => ({
+    onPointerDown: (event: ReactPointerEvent): void => {
+      pointer.current = event.pointerType;
+    },
+    onPointerEnter: (event: ReactPointerEvent): void => {
+      if (event.pointerType !== "touch") setShown({ key, held: false });
+    },
+    onPointerLeave: (event: ReactPointerEvent): void => {
+      if (event.pointerType !== "touch") setShown((current) => (current?.key === key && !current.held ? null : current));
+    },
+  });
+  /** Keyboard focus on a legend entry shows the explanation of its block for as long as the focus is there. */
+  const focus = (key: string) => ({
+    onFocus: (): void => setShown((current) => (current?.key === key ? current : { key, held: false })),
+    onBlur: (): void => setShown((current) => (current?.key === key ? null : current)),
+  });
+  /** Open a block in the list below. A tap also shows its explanation, which a mouse gets by hovering. */
+  const choose = (segment: Segment): void => {
+    onSelect(selectionOfSegment(pack, segment));
+    if (pointer.current !== "mouse") setShown({ key: segment.key, held: true });
+  };
 
   const total = result.reform[side];
   const baseline = result.baseline[side];
@@ -213,7 +279,7 @@ function StackedBar({
   const activeAt = activeSegment ? (positions.get(activeSegment.key) ?? 0) : 0;
 
   return (
-    <div className={`bar bar--${side}`}>
+    <div className={`bar bar--${side}`} ref={bar}>
       <div className="bar__head">
         <h3 className="bar__title">
           <button
@@ -250,9 +316,8 @@ function StackedBar({
                 key={segment.key}
                 className={`seg cat-${segment.color}${segment.key === selectedKey ? " is-selected" : ""}${segment.key === active ? " is-active" : ""}`}
                 style={{ flexGrow: Math.max(segment.reform, 0) }}
-                onClick={() => onSelect(selectionOfSegment(pack, segment))}
-                onPointerEnter={() => setActive(segment.key)}
-                onPointerLeave={() => setActive((current) => (current === segment.key ? null : current))}
+                onClick={() => choose(segment)}
+                {...hover(segment.key)}
               >
                 {label?.name && <span className="seg__name">{label.name}</span>}
                 {label?.value && <span className="seg__value">{label.value}</span>}
@@ -275,11 +340,7 @@ function StackedBar({
           </div>
         )}
         {activeSegment && (
-          <div
-            className={`tip${activeAt > 0.5 ? " tip--end" : ""}`}
-            style={activeAt > 0.5 ? { right: `${(1 - activeAt) * 100}%` } : { left: `${activeAt * 100}%` }}
-            role="presentation"
-          >
+          <Tip plot={plot} at={activeAt}>
             <span className="tip__value">{fmt.money(activeSegment.reform)}</span>
             <span className="tip__label">
               <span className={`swatch cat-${activeSegment.color}`} aria-hidden="true" />
@@ -298,7 +359,7 @@ function StackedBar({
                 {t.scoreboard.vsToday}
               </span>
             )}
-          </div>
+          </Tip>
         )}
       </div>
 
@@ -312,11 +373,9 @@ function StackedBar({
                 type="button"
                 className={`legend__item${segment.key === active ? " is-active" : ""}`}
                 aria-pressed={segment.key === selectedKey}
-                onClick={() => onSelect(selectionOfSegment(pack, segment))}
-                onPointerEnter={() => setActive(segment.key)}
-                onPointerLeave={() => setActive((current) => (current === segment.key ? null : current))}
-                onFocus={() => setActive(segment.key)}
-                onBlur={() => setActive((current) => (current === segment.key ? null : current))}
+                onClick={() => choose(segment)}
+                {...hover(segment.key)}
+                {...focus(segment.key)}
               >
                 <span className={`swatch cat-${segment.color}`} aria-hidden="true" />
                 <span className="legend__name">{name}</span>
@@ -339,6 +398,54 @@ function StackedBar({
         })}
       </ul>
     </div>
+  );
+}
+
+/**
+ * The explanation of one block, floating above its bar: amount, name, share and change. It is drawn
+ * in a layer of its own above the page, so neither the scoreboard nor a scrolling list can cut it
+ * off, and it follows its bar when the page moves. While that spot of the bar is out of sight
+ * (scrolled away, or under the scoreboard), there is nothing to point at and the tip is hidden.
+ *
+ * It is for the eye only: screen readers get the same figures from the legend entry of the block.
+ */
+function Tip({ plot, at, children }: { plot: RefObject<HTMLDivElement | null>; at: number; children: ReactNode }) {
+  const [place, setPlace] = useState<CSSProperties | null>(null);
+  const end = at > 0.5;
+
+  useLayoutEffect(() => {
+    const element = plot.current;
+    if (!element) return;
+    const update = (): void => {
+      const box = element.getBoundingClientRect();
+      const x = box.left + at * box.width;
+      const onTop =
+        typeof document.elementFromPoint === "function" ? document.elementFromPoint(x, box.top + 1) : element;
+      if (!onTop || !element.contains(onTop)) {
+        setPlace(null);
+        return;
+      }
+      setPlace({
+        top: box.top - TIP_GAP,
+        maxWidth: Math.max(box.width / 2, 170),
+        ...(end ? { right: document.documentElement.clientWidth - x } : { left: x }),
+      });
+    };
+    update();
+    window.addEventListener("scroll", update, { capture: true, passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update, { capture: true });
+      window.removeEventListener("resize", update);
+    };
+  }, [plot, at, end]);
+
+  if (!place) return null;
+  return createPortal(
+    <div className={`tip${end ? " tip--end" : ""}`} style={place} aria-hidden="true">
+      {children}
+    </div>,
+    document.body,
   );
 }
 

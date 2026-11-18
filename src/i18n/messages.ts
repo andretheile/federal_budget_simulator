@@ -32,7 +32,11 @@ export interface Messages {
     share: string;
     shareHint: string;
     copied: string;
+    /** Said when the link could not be copied; the link itself is shown below it. */
     copyFailed: string;
+    /** Name of the field that then holds the link. */
+    linkField: string;
+    close: string;
     reset: string;
     resetHint: string;
   };

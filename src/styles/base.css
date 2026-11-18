@@ -433,19 +433,7 @@ main {
   }
 }
 
-/* On a wide and tall screen the budget stays next to the measures, so a switch shows its effect at once. */
-@media (min-width: 1080px) and (min-height: 720px) {
-  .budget {
-    position: sticky;
-    top: calc(var(--scoreboard-height) + 24px);
-    max-height: calc(100vh - var(--scoreboard-height) - 40px);
-    overflow-y: auto;
-    scrollbar-width: thin;
-    /* Room for focus rings, which the scroll container would otherwise clip. */
-    margin: -6px;
-    padding: 6px;
-  }
-}
+/* How the budget stays next to the measures on a wide and tall screen is at the end of budget.css. */
 
 .footer {
   margin-top: 72px;

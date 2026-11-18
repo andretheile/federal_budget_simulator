@@ -132,6 +132,14 @@ export function InfoIcon(props: IconProps) {
   );
 }
 
+export function CloseIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="m4 4 8 8M12 4l-8 8" />
+    </Icon>
+  );
+}
+
 export function PlusIcon(props: IconProps) {
   return (
     <Icon {...props}>

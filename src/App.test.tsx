@@ -177,3 +177,202 @@ describe("the simulator on Testland", () => {
     ]);
   });
 });
+
+describe("details that depend on the engine of the browser or the size of the screen", () => {
+  it("puts the label of the waterfall's zero line on the side where there is room", () => {
+    // All levels, a deficit: zero is at the right end of the scale, the label stands left of it.
+    mount("#lang=en");
+    expect(query(".wf__zero-label").className).toContain("is-left");
+    act(() => root.unmount());
+
+    // One level, a relief: the scale starts at zero, the label stands right of the line. Centred
+    // on it, half the label would be outside the plot, which on a phone is outside the screen.
+    mount("#lang=en&s=cut_admin~L.central");
+    expect(text('[data-testid="balance-state"]')).toBe("Relief");
+    expect(query<HTMLElement>(".wf__zero-label").style.left).toBe("0%");
+    expect(query(".wf__zero-label").className).toContain("is-right");
+  });
+
+  it("keeps the focus mark on the level bar while it is worked with the arrow keys", () => {
+    mount("#lang=en");
+    const bar = query(".levelbar");
+    const option = query<HTMLInputElement>(".levelbar__option input");
+    expect(bar.classList.contains("is-keyboard")).toBe(false);
+    act(() => option.focus());
+    act(() => void option.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true })));
+    expect(bar.classList.contains("is-keyboard")).toBe(true);
+    // A click with the mouse, or leaving the bar, ends it.
+    act(() => void option.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, pointerType: "mouse" })));
+    expect(bar.classList.contains("is-keyboard")).toBe(false);
+    act(() => void option.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true })));
+    expect(bar.classList.contains("is-keyboard")).toBe(true);
+    act(() => option.blur());
+    expect(bar.classList.contains("is-keyboard")).toBe(false);
+  });
+});
+
+describe("a kind of parameter the card has no control for", () => {
+  it("is left at its default: the measure works, and the card promises no setting it cannot offer", () => {
+    // The fixture's income tax measure has one parameter, a rate curve, and the card has no editor for curves.
+    mount("#lang=en");
+    const card = "#policy-redraw_income_tax";
+    expect(text(`${card} .policy__more`)).toBe("Details: Redraw the income tax");
+    const before = headline();
+    click(`${card} [role="switch"]`);
+    expect(headline()).not.toBe(before);
+    click(`${card} .policy__more`);
+    expect(container.querySelector(`${card} .policy__panel .param`)).toBeNull();
+    expect(text(`${card} .policy__panel`)).not.toContain("Settings");
+    expect(text(`${card} .policy__panel`)).toContain("Where it shows in the budget");
+  });
+});
+
+describe("sharing the link", () => {
+  const share = ".masthead__tools .tool";
+  const press = (selector: string): Promise<void> => act(async () => query(selector).click());
+  const setClipboard = (value: unknown): void => {
+    Object.defineProperty(navigator, "clipboard", { value, configurable: true });
+  };
+  const setExecCommand = (value: unknown): void => {
+    Object.defineProperty(document, "execCommand", { value, configurable: true });
+  };
+
+  afterEach(() => {
+    setClipboard(undefined);
+    setExecCommand(undefined);
+  });
+
+  it("copies the address of the scenario and says so on the button", async () => {
+    const written: string[] = [];
+    setClipboard({ writeText: (value: string) => (written.push(value), Promise.resolve()) });
+    mount("#lang=en&s=halve_mp_pay");
+    await press(share);
+    expect(written).toEqual([`${window.location.origin}/#lang=en&s=halve_mp_pay`]);
+    expect(text(share)).toBe("Link copied");
+    expect(text(".masthead__status")).toBe("Link copied");
+    expect(container.querySelector(".sharebox")).toBeNull();
+  });
+
+  it("falls back to copying a selection where the clipboard is not available or refuses", async () => {
+    const copied: string[] = [];
+    setExecCommand((command: string) => {
+      // What a browser would copy: the selection in the helper field.
+      const field = document.querySelector<HTMLTextAreaElement>("body > textarea")!;
+      if (command === "copy") copied.push(field.value.slice(field.selectionStart, field.selectionEnd));
+      return true;
+    });
+    for (const clipboard of [undefined, { writeText: () => Promise.reject(new Error("not allowed")) }]) {
+      setClipboard(clipboard);
+      mount("#lang=en&s=halve_mp_pay");
+      act(() => query(share).focus());
+      await press(share);
+      expect(copied.pop()).toBe(`${window.location.origin}/#lang=en&s=halve_mp_pay`);
+      expect(text(share)).toBe("Link copied");
+      // The helper field is gone and the keyboard focus is back on the button.
+      expect(document.querySelectorAll("body > textarea")).toHaveLength(0);
+      expect(document.activeElement).toBe(query(share));
+      act(() => root.unmount());
+    }
+    mount();
+  });
+
+  it("hands over the link itself when the browser will not copy at all", async () => {
+    setClipboard({ writeText: () => Promise.reject(new Error("not allowed")) });
+    setExecCommand(() => {
+      throw new Error("blocked");
+    });
+    mount("#lang=en&s=halve_mp_pay");
+    await press(share);
+    // Said for everyone, announced for screen readers, and the link is there, focused and selected.
+    expect(text(".sharebox p")).toContain("Copying did not work");
+    expect(text(".masthead__status")).toContain("Copying did not work");
+    const field = query<HTMLInputElement>(".sharebox input");
+    expect(field.value).toBe(`${window.location.origin}/#lang=en&s=halve_mp_pay`);
+    expect(document.activeElement).toBe(field);
+    expect([field.selectionStart, field.selectionEnd]).toEqual([0, field.value.length]);
+    expect(document.querySelectorAll("body > textarea")).toHaveLength(0);
+
+    // It stays, and keeps up with the scenario, until the visitor closes it.
+    click('#policy-cut_admin [role="switch"]');
+    expect(query<HTMLInputElement>(".sharebox input").value).toBe(window.location.href);
+    expect(window.location.hash).toContain("cut_admin");
+    click(".sharebox__close");
+    expect(container.querySelector(".sharebox")).toBeNull();
+    expect(document.activeElement).toBe(query(share));
+
+    // Escape closes it as well.
+    await press(share);
+    act(
+      () =>
+        void query(".sharebox input").dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })),
+    );
+    expect(container.querySelector(".sharebox")).toBeNull();
+  });
+});
+
+describe("the explanation of a block in the budget bars", () => {
+  /** The floating explanation; it is drawn in a layer of its own, outside the app's container. */
+  const tip = (): string | null => document.querySelector(".tip")?.textContent?.replace(/[  ]/g, " ") ?? null;
+  const pointer = (target: Element, type: string, pointerType: string): void =>
+    act(() => void target.dispatchEvent(new PointerEvent(type, { bubbles: true, pointerType })));
+  /** What a browser sends for a tap: the finger arrives, presses, lifts and is gone again, then the click. */
+  const tap = (target: HTMLElement): void => {
+    for (const type of ["pointerover", "pointerdown", "pointerup", "pointerout"]) pointer(target, type, "touch");
+    act(() => target.click());
+  };
+  const block = (side: string, index: number): HTMLElement =>
+    container.querySelectorAll<HTMLElement>(`.bar--${side} .seg`)[index];
+
+  it("opens on a tap and stays until the next tap elsewhere", () => {
+    mount("#lang=en");
+    expect(tip()).toBeNull();
+    const first = block("expenditure", 0);
+    tap(first);
+    // The tap opens the block in the list, as before, and now also says what the block is.
+    expect(text(".detail__title")).toBe("Social protection");
+    expect(tip()).toContain("Social protection");
+    expect(tip()).toContain("of spending");
+    expect(first.classList.contains("is-active")).toBe(true);
+
+    // Another block: the explanation moves there, and there is only one.
+    tap(block("revenue", 0));
+    expect(document.querySelectorAll(".tip")).toHaveLength(1);
+    expect(tip()).toContain("of revenue");
+
+    // A legend entry works the same way, also where a tap does not focus a button (Safari).
+    const entry = [...container.querySelectorAll<HTMLButtonElement>(".bar--expenditure .legend__item")].find((item) =>
+      item.textContent?.includes("Administration"),
+    )!;
+    tap(entry);
+    expect(tip()).toContain("Administration");
+
+    pointer(query(".masthead__name"), "pointerdown", "touch");
+    expect(tip()).toBeNull();
+  });
+
+  it("follows the mouse without staying after a click", () => {
+    mount("#lang=en");
+    const first = block("expenditure", 0);
+    pointer(first, "pointerover", "mouse");
+    expect(tip()).toContain("Social protection");
+    pointer(first, "pointerdown", "mouse");
+    act(() => first.click());
+    expect(tip()).toContain("Social protection");
+    pointer(first, "pointerout", "mouse");
+    expect(tip()).toBeNull();
+  });
+
+  it("opens on keyboard focus of a legend entry and closes on Escape", () => {
+    mount("#lang=en");
+    const entry = query<HTMLButtonElement>(".bar--revenue .legend__item");
+    act(() => entry.focus());
+    expect(tip()).toContain("of revenue");
+    act(() => void document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })));
+    expect(tip()).toBeNull();
+    act(() => entry.blur());
+    act(() => entry.focus());
+    expect(tip()).toContain("of revenue");
+    act(() => entry.blur());
+    expect(tip()).toBeNull();
+  });
+});

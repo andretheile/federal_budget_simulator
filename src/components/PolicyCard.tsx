@@ -14,6 +14,7 @@ import {
   insightOf,
   movesBetweenLevels,
   noiseLevel,
+  settingsOf,
   shiftOf,
   sortedCatches,
   sourcesOf,
@@ -120,6 +121,7 @@ export const PolicyCard = memo(function PolicyCard({
     Math.abs(inScenario.delta.balance - alone.delta.balance) > Math.max(noise, Math.abs(alone.delta.balance) * 0.005);
   const warnings = warningLines(ui, enabled && inScenario ? inScenario.warnings : alone.warnings, enabledBefore);
   const catches = sortedCatches(policy);
+  const settingCount = settingsOf(policy).length;
   const shifts = whole.effects.flatMap((effect) => {
     const shift = shiftOf(effect);
     return shift && Math.abs(shift.delta) > noise ? [{ effect, shift }] : [];
@@ -173,9 +175,11 @@ export const PolicyCard = memo(function PolicyCard({
                 : t.policies.ofLevel(insight.side, fmt.share(insight.shareOfSide))}
             </p>
           )}
+          {/* The reason is written out, not left to a tooltip: a finger or a keyboard would never see that. */}
           {combined && inScenario && (
-            <p className="policy__combined" title={t.policies.combinedHint}>
-              {t.policies.combined(signed(inScenario.delta.balance))}
+            <p className="policy__combined">
+              {t.policies.combined(signed(inScenario.delta.balance))}{" "}
+              <span className="policy__combined-why">{t.policies.combinedHint}</span>
             </p>
           )}
         </div>
@@ -216,9 +220,7 @@ export const PolicyCard = memo(function PolicyCard({
             aria-controls={panelId}
             onClick={() => onExpand(policy.id, !expanded)}
           >
-            {policy.params.length > 0
-              ? `${t.policies.settingCount(policy.params.length)} · ${t.common.details}`
-              : t.common.details}
+            {settingCount > 0 ? `${t.policies.settingCount(settingCount)} · ${t.common.details}` : t.common.details}
             <span className="visually-hidden">: {label}</span>
             <ChevronDown size={14} />
           </button>
@@ -459,10 +461,11 @@ function PolicyDetails({
 
   return (
     <>
-      {policy.params.length > 0 && (
+      {settingsOf(policy).length > 0 && (
         <section className="policy__section">
           <h4>{t.policies.settings}</h4>
           {!enabled && <p className="policy__hint">{t.policies.previewHint}</p>}
+          {/* A kind of parameter without a control here is left at its default and shows nothing. */}
           {policy.params.map((param) =>
             param.type === "number" ? (
               <NumberControl
@@ -472,14 +475,14 @@ function PolicyDetails({
                 value={params[param.id] as number}
                 onChange={(value) => onParam(policy.id, param.id, value)}
               />
-            ) : (
+            ) : param.type === "groups" ? (
               <GroupsControl
                 key={param.id}
                 param={param}
                 value={params[param.id] as string[]}
                 onChange={(value) => onParam(policy.id, param.id, value)}
               />
-            ),
+            ) : null,
           )}
         </section>
       )}

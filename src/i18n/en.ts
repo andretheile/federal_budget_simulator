@@ -26,7 +26,9 @@ export const en: Messages = {
     share: "Share",
     shareHint: "Copy a link to exactly this scenario",
     copied: "Link copied",
-    copyFailed: "Could not copy. Please copy the address from the address bar.",
+    copyFailed: "Copying did not work. Here is the link, to copy by hand.",
+    linkField: "Link to this scenario",
+    close: "Close",
     reset: "Reset",
     resetHint: "Switch all measures off and show all levels",
   },
@@ -187,7 +189,7 @@ export const en: Messages = {
   about: {
     title: "About the numbers",
     staticNote:
-      "All effects are static estimates for the first year. They show the direct effect of a measure on the budget of one year, not a forecast over several years.",
+      "All effects are static estimates: the direct effect of a measure on the budget of a single year, as a rule the first year, not a forecast over several years. Where a measure's figure stands for something else, the measure says so.",
     methodology: "Method",
     noMethodology: "This data set comes without a method note.",
     qualityTitle: "What the quality labels mean",

@@ -32,6 +32,8 @@
 }
 
 .masthead__tools {
+  /* The box with the link hangs below the tools. */
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -92,6 +94,8 @@
 }
 
 .select select {
+  /* The height is set as well as the minimum: WebKit's own style for select boxes overrides a min-height (with 18px). */
+  height: 36px;
   min-height: 36px;
   padding: 0 28px 0 10px;
   border: 1px solid var(--rule-strong);
@@ -167,7 +171,9 @@
   color: var(--paper);
 }
 
-.levelbar__option input:focus-visible + span {
+/* The second selector is for Safari, which does not count focus moved by the arrow keys as keyboard focus. */
+.levelbar__option input:focus-visible + span,
+.levelbar.is-keyboard .levelbar__option input:focus + span {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
@@ -185,21 +191,57 @@
   white-space: nowrap;
 }
 
-.masthead__status.is-visible {
-  right: var(--gutter);
-  top: 62px;
+/* Copying the link failed: the reason and the link itself, below the tools, until it is closed. */
+.sharebox {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
   z-index: 40;
-  width: auto;
-  height: auto;
-  max-width: 320px;
-  padding: 8px 12px;
+  width: min(380px, calc(100vw - 2 * var(--gutter)));
+  padding: 10px 12px 12px;
   border-radius: 4px;
   background: var(--ink);
   color: var(--paper);
   font-size: 13.5px;
-  white-space: normal;
-  clip-path: none;
+  line-height: 1.4;
   box-shadow: var(--shadow-float);
+}
+
+.sharebox__row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.sharebox input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink);
+  /* Not smaller: below 16px Safari on a phone zooms into a field when it gets the focus. */
+  font-size: 16px;
+}
+
+.sharebox__close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  background: none;
+  color: inherit;
+}
+
+/* On the dark box the focus mark is light. */
+.sharebox :focus-visible {
+  outline-color: var(--paper);
 }
 
 @media (max-width: 899px) {

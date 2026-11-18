@@ -8,7 +8,9 @@ import {
   simulatePolicy,
   type CountryPack,
   type EffectResult,
+  type GroupsParam,
   type LevelId,
+  type NumberParam,
   type ParamValues,
   type Policy,
   type PolicyResult,
@@ -21,6 +23,21 @@ import {
 
 /** Which way an amount moves the balance. */
 export type Direction = "improve" | "worsen" | "neutral";
+
+/** A parameter the card has a control for: a slider or a choice of groups. */
+export type Setting = NumberParam | GroupsParam;
+
+/**
+ * The parameters of a measure that the visitor can set on its card. A pack may carry kinds of
+ * parameter this interface has no control for (yet); those keep their default and are not counted.
+ */
+export function settingsOf(policy: Policy): Setting[] {
+  return policy.params.filter((param): param is Setting => {
+    // Compared as text on purpose: the engine's list of kinds may be longer than what is handled here.
+    const kind: string = param.type;
+    return kind === "number" || kind === "groups";
+  });
+}
 
 /** Differences below this are floating-point noise, whatever the size of the country. */
 export function noiseLevel(baseline: Totals): number {

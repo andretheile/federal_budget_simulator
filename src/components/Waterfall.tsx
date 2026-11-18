@@ -72,6 +72,9 @@ export function Waterfall({ result, onShowPolicy }: { result: SimulationResult; 
   const span = max - min || 1;
   const at = (value: number): number => ((value - min) / span) * 100;
   const zeroAt = at(0);
+  // The label of the zero line stands to the left of the line when that is in the right half, and
+  // to its right when the line is at the left edge, where a centred label would stick out of the plot.
+  const zeroSide = zeroAt > 50 ? " is-left" : zeroAt < 15 ? " is-right" : "";
 
   return (
     <section className="waterfall" aria-labelledby="waterfall-title" id="what-changed">
@@ -154,7 +157,7 @@ export function Waterfall({ result, onShowPolicy }: { result: SimulationResult; 
             <span className="wf__label" />
             <span className="wf__plot">
               <span className="wf__zero" style={{ left: `${zeroAt}%` }} />
-              <span className={`wf__zero-label${zeroAt > 50 ? " is-left" : ""}`} style={{ left: `${zeroAt}%` }}>
+              <span className={`wf__zero-label${zeroSide}`} style={{ left: `${zeroAt}%` }}>
                 {singleLevel ? t.waterfall.zeroLevel : t.waterfall.zero}
               </span>
             </span>

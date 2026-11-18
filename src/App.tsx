@@ -157,6 +157,13 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
   const hash = stateToHash({ scenario, language, country: showsCountry ? pack.country.id : undefined }, pack);
   const hashRef = useRef(hash);
   hashRef.current = hash;
+  /** The address of exactly this scenario, whether or not the address bar shows it yet. */
+  const link =
+    typeof window === "undefined"
+      ? hash
+      : `${window.location.origin}${window.location.pathname}${window.location.search}${hash}`;
+  const linkRef = useRef(link);
+  linkRef.current = link;
   const initialHash = useRef(hash);
   // A bare address stays bare until the visitor changes something; a link is kept in sync from the start.
   const dirty = useRef(currentHash() !== "");
@@ -228,7 +235,7 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
   }, []);
 
   const onShare = useCallback(async (): Promise<boolean> => {
-    const url = `${window.location.origin}${window.location.pathname}${window.location.search}${hashRef.current}`;
+    const url = linkRef.current;
     try {
       await navigator.clipboard.writeText(url);
       return true;
@@ -331,6 +338,7 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
         onLevel={onLevel}
         languages={languages}
         onLanguage={onLanguage}
+        link={link}
         onShare={onShare}
         onReset={onReset}
         canReset={canReset}
@@ -370,20 +378,27 @@ function jumpTo(event: MouseEvent<HTMLAnchorElement>, id: string): void {
   target.focus?.({ preventScroll: true });
 }
 
-/** Copy for browsers without the asynchronous clipboard (or without permission to use it). */
+/**
+ * Copy for browsers without the asynchronous clipboard (or without permission to use it): select
+ * the text in a field nobody sees and ask for the selection to be copied. Whatever happens, the
+ * field is taken away again and the keyboard focus goes back to where it was.
+ */
 function copyWithSelection(text: string): boolean {
+  const focused = document.activeElement;
+  const field = document.createElement("textarea");
   try {
-    const field = document.createElement("textarea");
     field.value = text;
     field.setAttribute("readonly", "");
+    field.setAttribute("aria-hidden", "true");
     field.style.position = "fixed";
     field.style.opacity = "0";
     document.body.appendChild(field);
     field.select();
-    const ok = document.execCommand("copy");
-    field.remove();
-    return ok;
+    return document.execCommand("copy");
   } catch {
     return false;
+  } finally {
+    field.remove();
+    if (focused instanceof HTMLElement && document.activeElement !== focused) focused.focus({ preventScroll: true });
   }
 }

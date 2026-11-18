@@ -6,13 +6,15 @@ import { useEffect, useRef, useState } from "react";
 import { levelsOf } from "../app/policyModel.ts";
 import { useUi } from "../app/ui.ts";
 import type { LevelFilter } from "../engine/index.ts";
-import { Check, LinkIcon, ResetIcon } from "./icons.tsx";
+import { Check, CloseIcon, LinkIcon, ResetIcon } from "./icons.tsx";
 
 export interface HeaderProps {
   level: LevelFilter;
   onLevel(level: LevelFilter): void;
   languages: readonly string[];
   onLanguage(language: string): void;
+  /** The address of exactly this scenario. */
+  link: string;
   /** Copies the link; resolves to whether it worked. */
   onShare(): Promise<boolean>;
   onReset(): void;
@@ -35,6 +37,7 @@ export function Header({
   onLevel,
   languages,
   onLanguage,
+  link,
   onShare,
   onReset,
   canReset,
@@ -45,14 +48,34 @@ export function Header({
   const { pack, t, fmt, language } = ui;
   const levels = levelsOf(pack);
   const [shared, setShared] = useState<"copied" | "failed" | null>(null);
+  /**
+   * Whether the level bar is being worked with the arrow keys. Safari moves the focus from option
+   * to option then without treating it as keyboard focus, so the outline needs this to stay.
+   */
+  const [arrowKeys, setArrowKeys] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   useEffect(() => () => clearTimeout(timer.current), []);
+  const shareButton = useRef<HTMLButtonElement>(null);
+  const linkField = useRef<HTMLInputElement>(null);
 
   const share = async (): Promise<void> => {
     const ok = await onShare();
     setShared(ok ? "copied" : "failed");
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setShared(null), ok ? 2500 : 6000);
+    // "Copied" goes away by itself. The link shown when copying failed stays until the visitor closes it.
+    if (ok) timer.current = setTimeout(() => setShared(null), 2500);
+  };
+
+  // Copying failed: put the link under the visitor's hands, focused and selected.
+  useEffect(() => {
+    if (shared !== "failed") return;
+    linkField.current?.focus();
+    linkField.current?.select();
+  }, [shared]);
+
+  const closeLink = (): void => {
+    setShared(null);
+    shareButton.current?.focus();
   };
 
   const options: { id: LevelFilter; name: string }[] = [
@@ -100,7 +123,13 @@ export function Header({
             </div>
           )}
 
-          <button type="button" className="tool" onClick={() => void share()} title={t.header.shareHint}>
+          <button
+            ref={shareButton}
+            type="button"
+            className="tool"
+            onClick={() => void share()}
+            title={t.header.shareHint}
+          >
             {shared === "copied" ? <Check size={15} /> : <LinkIcon size={15} />}
             <span>{shared === "copied" ? t.header.copied : t.header.share}</span>
           </button>
@@ -108,6 +137,37 @@ export function Header({
             <ResetIcon size={15} />
             <span>{t.header.reset}</span>
           </button>
+
+          {/* The browser would not copy: say so and hand over the link itself, until the visitor closes this. */}
+          {shared === "failed" && (
+            <div
+              className="sharebox"
+              onKeyDown={(event) => {
+                if (event.key === "Escape") closeLink();
+              }}
+            >
+              <p>{t.header.copyFailed}</p>
+              <div className="sharebox__row">
+                <input
+                  ref={linkField}
+                  type="text"
+                  readOnly
+                  value={link}
+                  aria-label={t.header.linkField}
+                  onFocus={(event) => event.currentTarget.select()}
+                />
+                <button
+                  type="button"
+                  className="sharebox__close"
+                  onClick={closeLink}
+                  aria-label={t.header.close}
+                  title={t.header.close}
+                >
+                  <CloseIcon size={15} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -115,7 +175,16 @@ export function Header({
         <p className="masthead__tagline">{t.app.tagline}</p>
         {levels.length > 1 && (
           <>
-            <fieldset className="levelbar">
+            <fieldset
+              className={`levelbar${arrowKeys ? " is-keyboard" : ""}`}
+              onKeyDown={(event) => {
+                if (event.key.startsWith("Arrow")) setArrowKeys(true);
+              }}
+              onPointerDown={() => setArrowKeys(false)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setArrowKeys(false);
+              }}
+            >
               <legend>{t.header.level}</legend>
               <div className="levelbar__options">
                 {options.map((option) => (
@@ -146,8 +215,8 @@ export function Header({
         )}
       </div>
 
-      {/* Success is shown on the button itself; only a failure needs a visible message. Both are announced. */}
-      <p className={`masthead__status${shared === "failed" ? " is-visible" : ""}`} role="status">
+      {/* For screen readers. What is seen: success on the button itself, a failure in the box with the link. */}
+      <p className="masthead__status" role="status">
         {shared === "copied" ? t.header.copied : shared === "failed" ? t.header.copyFailed : ""}
       </p>
     </header>

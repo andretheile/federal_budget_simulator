@@ -217,4 +217,9 @@
   .wf__row--axis .wf__value {
     display: none;
   }
+
+  /* Here the plot runs from edge to edge: a label centred on a zero line at the left edge would be cut off. */
+  .wf__zero-label.is-right {
+    transform: none;
+  }
 }
