@@ -2626,6 +2626,10 @@
             "en": "Energy tax on petrol (cents per litre)"
           },
           "unit": "count",
+          "unitLabel": {
+            "de": "ct/l",
+            "en": "c/l"
+          },
           "min": 35.9,
           "max": 90,
           "step": 0.01,
@@ -2640,6 +2644,10 @@
             "en": "Energy tax on diesel (cents per litre)"
           },
           "unit": "count",
+          "unitLabel": {
+            "de": "ct/l",
+            "en": "c/l"
+          },
           "min": 33,
           "max": 90,
           "step": 0.01,
@@ -2821,6 +2829,10 @@
             "en": "Electricity tax (cents per kilowatt-hour)"
           },
           "unit": "count",
+          "unitLabel": {
+            "de": "ct/kWh",
+            "en": "c/kWh"
+          },
           "min": 0.1,
           "max": 2.05,
           "step": 0.05,
