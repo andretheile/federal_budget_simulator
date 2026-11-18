@@ -832,44 +832,355 @@
       ]
     },
     {
-      "id": "top_income_tax",
+      "id": "income_tax_schedule",
       "label": {
-        "de": "Spitzensteuersatz erhöhen",
-        "en": "Raise the top income tax rate"
+        "de": "Einkommensteuertarif ändern",
+        "en": "Change the income tax schedule"
       },
       "summary": {
-        "de": "Erhöht den Spitzensteuersatz (heute 42 %) und den Reichensteuersatz (heute 45 % ab 277.826 Euro zu versteuerndem Einkommen). Der Tarif unterhalb der Grenze für den Spitzensteuersatz bleibt unverändert.",
-        "en": "Raises the top income tax rate (currently 42%) and the higher rate for very high incomes (currently 45% above EUR 277,826 of taxable income). The schedule below the top-rate threshold stays unchanged."
+        "de": "Legt fest, welcher Steuersatz für jeden zusätzlich verdienten Euro gilt (Grenzsteuersatz), abhängig vom zu versteuernden Einkommen. Die Kurve ist der Einkommensteuertarif: Bis zum ersten Punkt bleibt Einkommen steuerfrei (Grundfreibetrag), zwischen zwei Punkten steigt der Satz gleichmäßig, oberhalb des letzten Punkts bleibt er gleich. Voreingestellt ist der Tarif des Basisjahres 2024; solange kein Punkt bewegt wird, ändert sich nichts. Die Vorlagen zeigen Tarife aus den Wahlprogrammen von 2025. Die Rechnung wendet den alten und den neuen Tarif auf die Einkommensverteilung an und überträgt die relative Änderung auf das Aufkommen aus Lohn- und Einkommensteuer.",
+        "en": "Sets the tax rate that applies to each additional euro earned (marginal rate), depending on taxable income. The curve is the income tax schedule: up to the first point income stays tax-free (basic allowance), between two points the rate rises evenly, above the last point it stays the same. The default is the schedule of the base year 2024; as long as no point is moved, nothing changes. The presets show schedules from the 2025 election programmes. The calculation applies the old and the new schedule to the income distribution and transfers the relative change to revenue from wage tax and assessed income tax."
       },
       "topic": "taxes",
       "params": [
         {
-          "id": "top_rate",
-          "type": "number",
+          "id": "schedule",
+          "type": "curve",
           "label": {
-            "de": "Spitzensteuersatz",
-            "en": "Top rate"
+            "de": "Grenzsteuersatz nach zu versteuerndem Einkommen",
+            "en": "Marginal tax rate by taxable income"
           },
-          "unit": "percent",
-          "min": 42,
-          "max": 55,
-          "step": 1,
-          "default": 45,
-          "baseline": 42
+          "x": {
+            "unit": "currency",
+            "min": 0,
+            "max": 1000000,
+            "step": 100
+          },
+          "y": {
+            "unit": "percent",
+            "min": 0,
+            "max": 80,
+            "step": 0.5
+          },
+          "default": [
+            {
+              "x": 11784,
+              "y": 14
+            },
+            {
+              "x": 17005,
+              "y": 23.97
+            },
+            {
+              "x": 66760,
+              "y": 42
+            },
+            {
+              "x": 277825,
+              "y": 42
+            },
+            {
+              "x": 277825,
+              "y": 45
+            }
+          ],
+          "baseline": [
+            {
+              "x": 11784,
+              "y": 14
+            },
+            {
+              "x": 17005,
+              "y": 23.97
+            },
+            {
+              "x": 66760,
+              "y": 42
+            },
+            {
+              "x": 277825,
+              "y": 42
+            },
+            {
+              "x": 277825,
+              "y": 45
+            }
+          ],
+          "minPoints": 1,
+          "maxPoints": 12,
+          "presets": [
+            {
+              "id": "law_2024",
+              "label": {
+                "de": "Geltender Tarif 2024",
+                "en": "Schedule in force in 2024"
+              },
+              "points": [
+                {
+                  "x": 11784,
+                  "y": 14
+                },
+                {
+                  "x": 17005,
+                  "y": 23.97
+                },
+                {
+                  "x": 66760,
+                  "y": 42
+                },
+                {
+                  "x": 277825,
+                  "y": 42
+                },
+                {
+                  "x": 277825,
+                  "y": 45
+                }
+              ],
+              "sources": [
+                "bt_drs_20_12783"
+              ]
+            },
+            {
+              "id": "top_45_rich_48",
+              "label": {
+                "de": "Spitzensteuersatz 45 %, Reichensteuersatz 48 %",
+                "en": "Top rate 45%, higher rate 48%"
+              },
+              "points": [
+                {
+                  "x": 11784,
+                  "y": 14
+                },
+                {
+                  "x": 17005,
+                  "y": 23.97
+                },
+                {
+                  "x": 66760,
+                  "y": 42
+                },
+                {
+                  "x": 66760,
+                  "y": 45
+                },
+                {
+                  "x": 277825,
+                  "y": 45
+                },
+                {
+                  "x": 277825,
+                  "y": 48
+                }
+              ],
+              "sources": [
+                "bt_drs_20_14903"
+              ]
+            },
+            {
+              "id": "spd_2025",
+              "label": {
+                "de": "SPD (Wahlprogramm 2025)",
+                "en": "SPD (2025 election programme)"
+              },
+              "points": [
+                {
+                  "x": 13230,
+                  "y": 14
+                },
+                {
+                  "x": 18451,
+                  "y": 23.97
+                },
+                {
+                  "x": 77021,
+                  "y": 45
+                },
+                {
+                  "x": 210000,
+                  "y": 45
+                },
+                {
+                  "x": 210000,
+                  "y": 47
+                }
+              ],
+              "sources": [
+                "zew_wahlprogramme_2025"
+              ]
+            },
+            {
+              "id": "cdu_csu_2025",
+              "label": {
+                "de": "CDU/CSU (Wahlprogramm 2025)",
+                "en": "CDU/CSU (2025 election programme)"
+              },
+              "points": [
+                {
+                  "x": 11884,
+                  "y": 14
+                },
+                {
+                  "x": 17005,
+                  "y": 21
+                },
+                {
+                  "x": 80000,
+                  "y": 42
+                },
+                {
+                  "x": 295329,
+                  "y": 42
+                },
+                {
+                  "x": 295329,
+                  "y": 45
+                }
+              ],
+              "sources": [
+                "zew_wahlprogramme_2025"
+              ]
+            },
+            {
+              "id": "fdp_2025",
+              "label": {
+                "de": "FDP (Wahlprogramm 2025)",
+                "en": "FDP (2025 election programme)"
+              },
+              "points": [
+                {
+                  "x": 12784,
+                  "y": 14
+                },
+                {
+                  "x": 96600,
+                  "y": 42
+                },
+                {
+                  "x": 295329,
+                  "y": 42
+                },
+                {
+                  "x": 295329,
+                  "y": 45
+                }
+              ],
+              "sources": [
+                "zew_wahlprogramme_2025"
+              ]
+            },
+            {
+              "id": "afd_2025",
+              "label": {
+                "de": "AfD (Wahlprogramm 2025)",
+                "en": "AfD (2025 election programme)"
+              },
+              "points": [
+                {
+                  "x": 15000,
+                  "y": 14
+                },
+                {
+                  "x": 17005,
+                  "y": 23.97
+                },
+                {
+                  "x": 66760,
+                  "y": 42
+                },
+                {
+                  "x": 277825,
+                  "y": 42
+                },
+                {
+                  "x": 277825,
+                  "y": 45
+                }
+              ],
+              "sources": [
+                "zew_wahlprogramme_2025"
+              ]
+            },
+            {
+              "id": "linke_2025",
+              "label": {
+                "de": "Die Linke (Wahlprogramm 2025)",
+                "en": "Die Linke (2025 election programme)"
+              },
+              "points": [
+                {
+                  "x": 16800,
+                  "y": 14
+                },
+                {
+                  "x": 70000,
+                  "y": 53
+                },
+                {
+                  "x": 260533,
+                  "y": 53
+                },
+                {
+                  "x": 260533,
+                  "y": 60
+                },
+                {
+                  "x": 1000000,
+                  "y": 60
+                },
+                {
+                  "x": 1000000,
+                  "y": 75
+                }
+              ],
+              "sources": [
+                "zew_wahlprogramme_2025"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "x": 24000,
+              "label": {
+                "de": "Mittleres Einkommen (die Hälfte der Steuerpflichtigen liegt darunter)",
+                "en": "Middle income (half of all taxpayers are below)"
+              }
+            },
+            {
+              "x": 58000,
+              "label": {
+                "de": "Hohes Einkommen (90 % liegen darunter)",
+                "en": "High income (90% are below)"
+              }
+            },
+            {
+              "x": 180000,
+              "label": {
+                "de": "Sehr hohes Einkommen (99 % liegen darunter)",
+                "en": "Very high income (99% are below)"
+              }
+            },
+            {
+              "x": 1000000,
+              "label": {
+                "de": "Eine Million Euro (etwa 0,05 % liegen darüber)",
+                "en": "One million euros (about 0.05% are above)"
+              }
+            }
+          ]
         },
         {
-          "id": "rich_rate",
+          "id": "behaviour",
           "type": "number",
           "label": {
-            "de": "Reichensteuersatz (ab 277.826 Euro)",
-            "en": "Higher rate (from EUR 277,826)"
+            "de": "Aufkommensverlust durch Ausweichreaktionen (0 = statische Rechnung)",
+            "en": "Revenue lost to behavioural responses (0 = static calculation)"
           },
           "unit": "percent",
-          "min": 45,
+          "min": 0,
           "max": 60,
-          "step": 1,
-          "default": 48,
-          "baseline": 45
+          "step": 5,
+          "default": 0
         }
       ],
       "effects": [
@@ -878,120 +1189,56 @@
           "target": "rev.taxes.income.personal",
           "distribution": "taxable_income",
           "baseline": {
-            "brackets": [
+            "points": [
               {
-                "from": 0,
-                "rate": 0
+                "x": 11784,
+                "y": 14
               },
               {
-                "from": 10348.0,
-                "rate": 0.1649
+                "x": 17005,
+                "y": 23.97
               },
               {
-                "from": 12637.5,
-                "rate": 0.2148
+                "x": 66760,
+                "y": 42
               },
               {
-                "from": 14927.0,
-                "rate": 0.2547
+                "x": 277825,
+                "y": 42
               },
               {
-                "from": 22205.33,
-                "rate": 0.2848
-              },
-              {
-                "from": 29483.67,
-                "rate": 0.3148
-              },
-              {
-                "from": 36762.0,
-                "rate": 0.3449
-              },
-              {
-                "from": 44040.33,
-                "rate": 0.3749
-              },
-              {
-                "from": 51318.67,
-                "rate": 0.405
-              },
-              {
-                "from": 58597,
-                "rate": 0.42
-              },
-              {
-                "from": 277826,
-                "rate": 0.45
+                "x": 277825,
+                "y": 45
               }
-            ]
+            ],
+            "scale": 0.01
           },
           "reform": {
-            "brackets": [
-              {
-                "from": 0,
-                "rate": 0
-              },
-              {
-                "from": 10348.0,
-                "rate": 0.1649
-              },
-              {
-                "from": 12637.5,
-                "rate": 0.2148
-              },
-              {
-                "from": 14927.0,
-                "rate": 0.2547
-              },
-              {
-                "from": 22205.33,
-                "rate": 0.2848
-              },
-              {
-                "from": 29483.67,
-                "rate": 0.3148
-              },
-              {
-                "from": 36762.0,
-                "rate": 0.3449
-              },
-              {
-                "from": 44040.33,
-                "rate": 0.3749
-              },
-              {
-                "from": 51318.67,
-                "rate": 0.405
-              },
-              {
-                "from": 58597,
-                "rate": {
-                  "param": "top_rate",
-                  "scale": 0.01
-                }
-              },
-              {
-                "from": 277826,
-                "rate": {
-                  "param": "rich_rate",
-                  "scale": 0.01
-                }
-              }
-            ]
+            "curve": {
+              "param": "schedule",
+              "scale": 0.01
+            }
+          },
+          "yield": {
+            "param": "behaviour",
+            "scale": -0.01,
+            "offset": 1
           },
           "quality": "estimate",
           "uncertainty": {
-            "low": 0.7,
-            "high": 1.25
+            "low": 0.9,
+            "high": 1.2
           },
           "sources": [
             "destatis_lest_2022",
+            "drv_rv_in_zeitreihen_2026",
+            "bt_drs_20_12783",
             "bt_drs_20_14903",
             "eurostat_ntl"
           ],
           "note": {
-            "de": "Der Steuertarif wird auf die Einkommensverteilung der Steuerstatistik 2022 angewendet (Tarif 2022 als Stufenfunktion; er trifft die amtliche tarifliche Einkommensteuer von 373 Mrd. Euro auf 1 % genau). Die relative Änderung wird auf das Aufkommen aus Lohn- und veranlagter Einkommensteuer 2024 übertragen. Statische Rechnung ohne Verhaltensänderungen; die Spanne deckt Ausweichreaktionen (unten) und das seit 2022 gestiegene Einkommensniveau (oben) ab. Zum Vergleich: Die Bundesregierung schätzte 2025 für die Anhebung des Reichensteuersatzes von 45 auf 48 % rund 3 Mrd. Euro, für einen Spitzensteuersatz von 45 % mit angepasstem Tarifverlauf rund 14 Mrd. Euro.",
-            "en": "The tax schedule is applied to the income distribution of the 2022 tax statistics (2022 schedule as a step function; it reproduces official tariff income tax of EUR 373 billion to within 1%). The relative change is transferred to 2024 revenue from wage tax and assessed income tax. Static calculation without behavioural change; the range covers avoidance (low) and the rise in incomes since 2022 (high). For comparison: in 2025 the federal government estimated about EUR 3 billion for raising the higher rate from 45 to 48%, and about EUR 14 billion for a top rate of 45% with an adjusted schedule."
+            "de": "Alter und neuer Tarif werden auf die Verteilung der zu versteuernden Einkommen angewendet (Steuerstatistik 2022, Einkommen mit dem Lohnanstieg auf 2024 fortgeschrieben). Zur Kontrolle: Der Tarif 2022 ergibt auf den Einkommen von 2022 rund 369 Mrd. Euro; amtlich waren es 373 Mrd. Euro tarifliche Einkommensteuer. Für 2024 ergibt das Modell 410 Mrd. Euro tarifliche Steuer; das Aufkommen aus Lohn- und veranlagter Einkommensteuer (341 Mrd. Euro) ist anders abgegrenzt, deshalb wird nur die relative Änderung darauf übertragen. Vergleich mit Schätzungen der Bundesregierung für 2025: Reichensteuersatz 48 statt 45 % rund 3 Mrd. Euro (hier 2,8); Spitzensteuersatz erst ab 80.000 Euro rund 9,5 Mrd. Euro weniger (hier 8,6); Spitzensteuersatz 45 % rund 14 Mrd. Euro ohne Angabe des Tarifverlaufs (hier 5,2 Mrd. Euro bei einem Sprung an der bisherigen Grenze, 11,4 Mrd. Euro, wenn die Zone darunter steiler ansteigt).",
+            "en": "The old and the new schedule are applied to the distribution of taxable incomes (2022 tax statistics, incomes uprated to 2024 by wage growth). As a check: the 2022 schedule yields about EUR 369 billion on 2022 incomes; the official figure for tariff income tax was EUR 373 billion. For 2024 the model gives EUR 410 billion of tariff tax; revenue from wage tax and assessed income tax (EUR 341 billion) is defined differently, so only the relative change is transferred to it. Comparison with federal government estimates for 2025: higher rate of 48 instead of 45% about EUR 3 billion (here 2.8); top rate only from EUR 80,000 about EUR 9.5 billion less (here 8.6); top rate of 45% about EUR 14 billion without specifying the shape of the schedule (here EUR 5.2 billion with a jump at the existing threshold, EUR 11.4 billion if the zone below rises more steeply)."
           }
         }
       ],
@@ -1000,8 +1247,8 @@
           "kind": "cost_shift",
           "severity": "major",
           "text": {
-            "de": "Die Einkommensteuer ist eine Gemeinschaftsteuer: Der Bund erhält 42,5 % des Aufkommens, der Rest geht an Länder und Gemeinden.",
-            "en": "Income tax is a shared tax: the federal government receives 42.5% of the revenue, the rest goes to states and municipalities."
+            "de": "Die Einkommensteuer ist eine Gemeinschaftsteuer: Der Bund erhält 42,5 % des Aufkommens, der Rest geht an Länder und Gemeinden. Mehr- und Mindereinnahmen treffen alle drei Ebenen.",
+            "en": "Income tax is a shared tax: the federal government receives 42.5% of the revenue, the rest goes to states and municipalities. Gains and losses affect all three levels."
           },
           "sources": [
             "gg_art_106",
@@ -1009,13 +1256,37 @@
           ]
         },
         {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Das Existenzminimum muss steuerfrei bleiben. Nach der Rechtsprechung des Bundesverfassungsgerichts muss Steuerpflichtigen so viel bleiben, wie sie für ihren notwendigen Lebensunterhalt brauchen; Maßstab ist der Mindestbedarf des Sozialhilferechts. Für 2024 sind das 11.784 Euro. Eine Kurve, die darunter beginnt, wäre deshalb verfassungswidrig.",
+            "en": "The subsistence minimum must remain tax-free. According to the case law of the Federal Constitutional Court, taxpayers must be left with as much as they need for their necessary living expenses; the yardstick is the minimum need recognised in social assistance law. For 2024 that is EUR 11,784. A curve that starts below it would therefore be unconstitutional."
+          },
+          "sources": [
+            "bt_drs_20_12783"
+          ]
+        },
+        {
           "kind": "economic",
           "severity": "major",
           "text": {
-            "de": "Die Rechnung ist statisch. Hohe Einkommen reagieren auf höhere Sätze, etwa durch Gestaltung, weniger Arbeit oder Verlagerung; das mindert das Aufkommen. Betroffen sind auch Personenunternehmen, deren Gewinne der Einkommensteuer unterliegen.",
-            "en": "The calculation is static. High earners respond to higher rates, for example through tax planning, working less or relocating; this reduces revenue. Unincorporated businesses, whose profits are subject to income tax, are also affected."
+            "de": "Die Rechnung ist in der Grundeinstellung statisch, wie die amtlichen Schätzungen. Steuerpflichtige reagieren aber auf höhere Sätze, etwa durch Gestaltung, weniger Arbeit oder Verlagerung. Eine Studie mit deutschen Steuerdaten schätzt, dass das zu versteuernde Einkommen um 0,3 bis 0,4 % sinkt, wenn vom zusätzlich verdienten Euro 1 % weniger bleibt, vor allem in der oberen Hälfte der Verteilung. Für höhere Spitzensätze folgt daraus rechnerisch, dass etwa 40 bis 55 % des statisch berechneten Mehraufkommens wieder verloren gehen; das lässt sich mit dem Regler einstellen. Für einen höheren Grundfreibetrag passt der Regler nicht, weil dieser den Steuersatz auf zusätzliches Einkommen für die meisten nicht ändert.",
+            "en": "At the default setting the calculation is static, like the official estimates. But taxpayers respond to higher rates, for example through tax planning, working less or relocating. A study using German tax data estimates that taxable income falls by 0.3 to 0.4% when 1% less is left of an additional euro earned, mainly in the upper half of the distribution. For higher top rates this implies, in arithmetic terms, that about 40 to 55% of the statically calculated additional revenue is lost again; this can be set with the slider. The slider does not fit a higher basic allowance, because that does not change the tax rate on additional income for most people."
           },
           "sources": [
+            "arqus_132",
+            "destatis_lest_2022"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Die Achse zeigt das zu versteuernde Einkommen, nicht das Bruttoeinkommen. Es ist niedriger, weil Werbungskosten, Versicherungsbeiträge und Freibeträge abgezogen sind; in der Steuerstatistik 2022 macht es im Schnitt 82 % der Einkünfte aus. Ehepaare werden zusammen veranlagt: Der Tarif gilt für die Hälfte ihres gemeinsamen Einkommens, die Steuer wird verdoppelt (Splitting). In der Rechnung zählt deshalb jeder Partner mit dem halben gemeinsamen Einkommen.",
+            "en": "The axis shows taxable income, not gross income. It is lower because work-related expenses, insurance contributions and allowances have been deducted; in the 2022 tax statistics it averages 82% of income. Married couples are assessed jointly: the schedule applies to half their joint income and the tax is doubled (income splitting). In the calculation each partner therefore counts with half the joint income."
+          },
+          "sources": [
+            "destatis_lest_2022",
             "bt_drs_20_14903"
           ]
         },
@@ -1023,11 +1294,25 @@
           "kind": "practical",
           "severity": "minor",
           "text": {
-            "de": "Die Wirkung hängt stark vom Tarifverlauf ab. Hier steigt nur der Satz oberhalb der bisherigen Grenze. Passt man die Progressionszone darunter an, zahlen auch mittlere Einkommen mehr; so kommt die Bundesregierung für 45 % auf rund 14 Mrd. Euro.",
-            "en": "The effect depends heavily on the shape of the schedule. Here only the rate above the existing threshold rises. If the progression zone below is adjusted, middle incomes pay more as well; that is how the federal government arrives at about EUR 14 billion for 45%."
+            "de": "Nicht in der Kurve enthalten: Der Solidaritätszuschlag (5,5 % der Einkommensteuer oberhalb einer Freigrenze, 2024 ab 18.130 Euro Steuer) und die Kirchensteuer kommen hinzu und ändern sich mit der Einkommensteuer; diese Folgewirkung ist nicht mitgerechnet. Kapitalerträge unterliegen meist der Abgeltungsteuer und nicht dem Tarif. Kindergeld, Kinderfreibeträge und andere Abzüge bleiben unverändert.",
+            "en": "Not included in the curve: the solidarity surcharge (5.5% of income tax above an exemption threshold, in 2024 from EUR 18,130 of tax) and church tax come on top and change with income tax; this knock-on effect is not included. Capital income is mostly subject to the flat withholding tax and not to the schedule. Child benefit, child allowances and other deductions remain unchanged."
           },
           "sources": [
-            "bt_drs_20_14903"
+            "solzg_1995",
+            "zew_wahlprogramme_2025",
+            "bt_drs_20_12783",
+            "destatis_lest_2022"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Vorlagen der Parteien folgen der Umsetzung des ZEW, das die Wahlprogramme von 2025 in Werte des Rechtsstands 2024 übersetzt hat. Sie enthalten nur den Tarif, nicht die übrigen Steuerpläne (etwa zum Solidaritätszuschlag oder zu Kinderfreibeträgen). Wo die Quelle den Verlauf zwischen den genannten Eckwerten offenlässt (bei CDU/CSU, AfD und Linke), steigt der Satz hier gleichmäßig. Für Grüne und BSW nennt die Quelle keinen vollständigen Tarif der Parteien selbst; sie fehlen deshalb.",
+            "en": "The party presets follow the implementation by ZEW, which translated the 2025 election programmes into values of 2024 law. They contain only the schedule, not the other tax plans (for instance on the solidarity surcharge or child allowances). Where the source leaves the shape between the stated thresholds open (for CDU/CSU, AfD and Die Linke), the rate rises evenly here. For the Greens and BSW the source gives no complete schedule by the parties themselves; they are therefore missing."
+          },
+          "sources": [
+            "zew_wahlprogramme_2025"
           ]
         },
         {
@@ -1043,9 +1328,11 @@
         }
       ],
       "sources": [
+        "bt_drs_20_12783",
         "destatis_lest_2022",
+        "zew_wahlprogramme_2025",
         "bt_drs_20_14903",
-        "test_de_steuerreform_2026"
+        "arqus_132"
       ]
     },
     {
@@ -1383,25 +1670,11 @@
         "en": "End climate-damaging tax breaks in transport"
       },
       "summary": {
-        "de": "Streicht ganz oder teilweise vier Steuervorteile im Verkehr: den niedrigeren Energiesteuersatz für Diesel, die pauschale Besteuerung privat genutzter Dienstwagen, die Energiesteuerbefreiung von Kerosin auf Inlandsflügen und, in der Grundeinstellung nicht aktiv, die Steuerbefreiungen für Auslandsflüge. Die Beträge für Diesel, Dienstwagen und Auslandsflüge folgen der Abgrenzung des Umweltbundesamts und beziehen sich auf 2018. Die Bundesregierung zählt von den vier Posten nur die Befreiung für Inlandsflüge zu den Subventionen.",
-        "en": "Abolishes all or part of four tax breaks in transport: the lower energy tax rate on diesel, the flat-rate taxation of privately used company cars, the energy tax exemption for kerosene on domestic flights and, not active at the default setting, the tax exemptions for international flights. The amounts for diesel, company cars and international flights follow the definition of the Federal Environment Agency and refer to 2018. Of the four items, the federal government counts only the exemption for domestic flights as a subsidy."
+        "de": "Streicht ganz oder teilweise drei Steuervorteile im Verkehr: die pauschale Besteuerung privat genutzter Dienstwagen, die Energiesteuerbefreiung von Kerosin auf Inlandsflügen und, in der Grundeinstellung nicht aktiv, die Steuerbefreiungen für Auslandsflüge. Die Beträge für Dienstwagen und Auslandsflüge folgen der Abgrenzung des Umweltbundesamts und beziehen sich auf 2018. Die Bundesregierung zählt von den drei Posten nur die Befreiung für Inlandsflüge zu den Subventionen. Der niedrigere Steuersatz für Diesel, den das Umweltbundesamt ebenfalls zu den Steuervorteilen zählt, wird in der Maßnahme zur Spritsteuer eingestellt.",
+        "en": "Abolishes all or part of three tax breaks in transport: the flat-rate taxation of privately used company cars, the energy tax exemption for kerosene on domestic flights and, not active at the default setting, the tax exemptions for international flights. The amounts for company cars and international flights follow the definition of the Federal Environment Agency and refer to 2018. Of the three items, the federal government counts only the exemption for domestic flights as a subsidy. The lower tax rate on diesel, which the agency also counts among the tax breaks, is set in the fuel tax measure."
       },
       "topic": "climate",
       "params": [
-        {
-          "id": "diesel",
-          "type": "number",
-          "label": {
-            "de": "Diesel so hoch besteuern wie Benzin (Anteil des Abstands von 18,41 Cent je Liter)",
-            "en": "Tax diesel at the petrol rate (share of the gap of 18.41 cents per litre)"
-          },
-          "unit": "percent",
-          "min": 0,
-          "max": 100,
-          "step": 10,
-          "default": 100,
-          "baseline": 0
-        },
         {
           "id": "company_car",
           "type": "number",
@@ -1446,26 +1719,6 @@
         }
       ],
       "effects": [
-        {
-          "type": "add",
-          "target": "rev.taxes.consumption.energy",
-          "amount": {
-            "param": "diesel",
-            "scale": 82020000.0
-          },
-          "quality": "estimate",
-          "uncertainty": {
-            "low": 0.6,
-            "high": 1.0
-          },
-          "sources": [
-            "uba_umweltschaedliche_subventionen_2021"
-          ],
-          "note": {
-            "de": "Umweltbundesamt: 8,2 Mrd. Euro im Jahr 2018, wenn Diesel mit dem Benzinsatz von 65,45 statt 47,04 Cent je Liter besteuert würde. Ohne zusätzliche Mehrwertsteuer und ohne Verhaltensänderungen. Die untere Grenze berücksichtigt, dass das Umweltbundesamt im Gegenzug eine niedrigere Kfz-Steuer für Diesel-Pkw vorschlägt und der Dieselverbrauch sinken würde.",
-            "en": "Federal Environment Agency: EUR 8.2 billion in 2018 if diesel were taxed at the petrol rate of 65.45 instead of 47.04 cents per litre. Excluding additional VAT and behavioural change. The lower bound reflects that the agency proposes a lower motor vehicle tax for diesel cars in return and that diesel consumption would fall."
-          }
-        },
         {
           "type": "add",
           "target": "rev.taxes.income.personal.wage_tax",
@@ -1552,8 +1805,8 @@
           "kind": "political",
           "severity": "major",
           "text": {
-            "de": "Was als Subvention gilt, ist umstritten. Das Umweltbundesamt zählt alle vier Posten dazu und kommt für den Verkehr insgesamt auf 30,8 Mrd. Euro (2018). Die Bundesregierung hält in ihrem Subventionsbericht am engeren Begriff des Stabilitätsgesetzes fest. Von den vier Posten führt sie nur die Befreiung für Inlandsflüge auf (402 Mio. Euro im Jahr 2024); im internationalen Luftverkehr würden Steuern auf Kraftstoffe generell nicht erhoben. Der Abstand zwischen Diesel- und Benzinsteuer und die pauschale Dienstwagenbesteuerung erscheinen dort nicht als Subvention, wohl aber der zusätzliche Vorteil für elektrische Dienstwagen.",
-            "en": "What counts as a subsidy is disputed. The Federal Environment Agency includes all four items and arrives at EUR 30.8 billion for transport as a whole (2018). In its Subsidy Report the federal government keeps to the narrower definition of the Stability Act. Of the four items it lists only the exemption for domestic flights (EUR 402 million in 2024); in international air transport, it says, taxes on fuel are generally not levied. The gap between diesel and petrol tax and the flat-rate taxation of company cars do not appear there as subsidies, whereas the additional advantage for electric company cars does."
+            "de": "Was als Subvention gilt, ist umstritten. Das Umweltbundesamt zählt alle drei Posten und den niedrigeren Dieselsteuersatz dazu und kommt für den Verkehr insgesamt auf 30,8 Mrd. Euro (2018). Die Bundesregierung hält in ihrem Subventionsbericht am engeren Begriff des Stabilitätsgesetzes fest. Von den drei Posten führt sie nur die Befreiung für Inlandsflüge auf (402 Mio. Euro im Jahr 2024); im internationalen Luftverkehr würden Steuern auf Kraftstoffe generell nicht erhoben. Die pauschale Dienstwagenbesteuerung erscheint dort nicht als Subvention, wohl aber der zusätzliche Vorteil für elektrische Dienstwagen.",
+            "en": "What counts as a subsidy is disputed. The Federal Environment Agency includes all three items and the lower diesel tax rate and arrives at EUR 30.8 billion for transport as a whole (2018). In its Subsidy Report the federal government keeps to the narrower definition of the Stability Act. Of the three items it lists only the exemption for domestic flights (EUR 402 million in 2024); in international air transport, it says, taxes on fuel are generally not levied. The flat-rate taxation of company cars does not appear there as a subsidy, whereas the additional advantage for electric company cars does."
           },
           "sources": [
             "uba_umweltschaedliche_subventionen_2021",
@@ -1566,17 +1819,6 @@
           "text": {
             "de": "Auslandsflüge kann Deutschland nicht allein besteuern. Die EU-Energiesteuerrichtlinie erlaubt eine Kerosinsteuer nur für Inlandsflüge und für Flüge zwischen Mitgliedstaaten, die das untereinander vereinbaren. Für die Mehrwertsteuer auf grenzüberschreitende Flüge wäre nach Einschätzung des Umweltbundesamts eine Reform der EU-Mehrwertsteuerrichtlinie nötig. Der Regler dafür steht deshalb auf null.",
             "en": "Germany cannot tax international flights on its own. The EU Energy Taxation Directive permits a kerosene tax only on domestic flights and on flights between member states that agree on it bilaterally. VAT on cross-border flights would, in the Federal Environment Agency's assessment, require a reform of the EU VAT Directive. The slider for this is therefore set to zero."
-          },
-          "sources": [
-            "uba_umweltschaedliche_subventionen_2021"
-          ]
-        },
-        {
-          "kind": "economic",
-          "severity": "major",
-          "text": {
-            "de": "Diesel: Der niedrigere Steuersatz sollte ursprünglich den gewerblichen Straßenverkehr im internationalen Wettbewerb schützen; im Gegenzug zahlen Diesel-Pkw eine höhere Kfz-Steuer. Fiele der Vorteil weg, entfiele nach Ansicht des Umweltbundesamts auch der Grund für die höhere Kfz-Steuer, was die Mehreinnahmen schmälert. Höhere Dieselpreise träfen Speditionen, Pendler und Betriebe mit Dieselfahrzeugen.",
-            "en": "Diesel: the lower tax rate was originally meant to protect commercial road transport in international competition; in return, diesel cars pay a higher motor vehicle tax. If the advantage went, the reason for the higher vehicle tax would in the Federal Environment Agency's view go too, which reduces the additional revenue. Higher diesel prices would hit hauliers, commuters and businesses with diesel vehicles."
           },
           "sources": [
             "uba_umweltschaedliche_subventionen_2021"
@@ -1597,8 +1839,8 @@
           "kind": "practical",
           "severity": "minor",
           "text": {
-            "de": "Die Zahlen des Umweltbundesamts stammen aus dem Jahr 2018; eine neuere Ausgabe des Berichts gibt es nicht. Seither ist der Bestand an Diesel-Pkw gesunken, und für elektrische Dienstwagen gelten niedrigere Sätze. Die Beträge sind statisch gerechnet und zeigen, was die Regeln damals kosteten, nicht, was eine Abschaffung heute einbrächte.",
-            "en": "The Federal Environment Agency's figures date from 2018; there is no newer edition of the report. Since then the stock of diesel cars has declined and lower rates apply to electric company cars. The amounts are static and show what the rules cost at the time, not what abolishing them would yield today."
+            "de": "Die Zahlen des Umweltbundesamts stammen aus dem Jahr 2018; eine neuere Ausgabe des Berichts gibt es nicht. Seither gelten für elektrische Dienstwagen niedrigere Sätze. Die Beträge sind statisch gerechnet und zeigen, was die Regeln damals kosteten, nicht, was eine Abschaffung heute einbrächte.",
+            "en": "The Federal Environment Agency's figures date from 2018; there is no newer edition of the report. Since then lower rates have applied to electric company cars. The amounts are static and show what the rules cost at the time, not what abolishing them would yield today."
           },
           "sources": [
             "uba_umweltschaedliche_subventionen_2021"
@@ -1895,6 +2137,1490 @@
         "bertelsmann_diw_rente_2026_summary",
         "boersen_zeitung_rente_2026",
         "sgb6_236b"
+      ]
+    },
+    {
+      "id": "vat_rates",
+      "label": {
+        "de": "Mehrwertsteuer erhöhen oder senken",
+        "en": "Raise or lower value added tax"
+      },
+      "summary": {
+        "de": "Ändert den Regelsatz (heute 19 %) und den ermäßigten Satz (heute 7 %) der Mehrwertsteuer. Die Grundeinstellung zeigt die 2026 diskutierte Erhöhung des Regelsatzes auf 21 %. Ein Punkt beim Regelsatz entspricht rechnerisch rund 14,5 Mrd. Euro, ein Punkt beim ermäßigten Satz rund 3,3 Mrd. Euro. Die Regler bleiben in den Grenzen des EU-Rechts (Regelsatz mindestens 15 %, ermäßigter Satz mindestens 5 %).",
+        "en": "Changes the standard rate (currently 19%) and the reduced rate (currently 7%) of value added tax. The default shows the increase of the standard rate to 21% that was discussed in 2026. One point of the standard rate corresponds arithmetically to about EUR 14.5 billion, one point of the reduced rate to about EUR 3.3 billion. The sliders stay within the limits of EU law (standard rate at least 15%, reduced rate at least 5%)."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "standard",
+          "type": "number",
+          "label": {
+            "de": "Regelsatz",
+            "en": "Standard rate"
+          },
+          "unit": "percent",
+          "min": 15,
+          "max": 25,
+          "step": 0.5,
+          "default": 21,
+          "baseline": 19
+        },
+        {
+          "id": "reduced",
+          "type": "number",
+          "label": {
+            "de": "Ermäßigter Satz",
+            "en": "Reduced rate"
+          },
+          "unit": "percent",
+          "min": 5,
+          "max": 19,
+          "step": 0.5,
+          "default": 7,
+          "baseline": 7
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.vat",
+          "amount": {
+            "param": "standard",
+            "scale": 14520912281,
+            "offset": -275897333333
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0
+          },
+          "sources": [
+            "bt_drs_21_5839",
+            "eurostat_ntl"
+          ],
+          "note": {
+            "de": "Je Prozentpunkt 14,5 Mrd. Euro, abgeleitet: Mehrwertsteueraufkommen 2024 (298,8 Mrd. Euro) abzüglich des Aufkommens zum ermäßigten Satz, geteilt durch 19. Das Aufkommen zum ermäßigten Satz folgt aus den von der Bundesregierung geschätzten Mindereinnahmen von 39,2 Mrd. Euro für den Abstand von zwölf Punkten. Rechnerisch, also bei voller Weitergabe und unverändertem Verbrauch; die untere Grenze der Spanne berücksichtigt Verhaltensänderungen.",
+            "en": "EUR 14.5 billion per percentage point, derived: VAT revenue in 2024 (EUR 298.8 billion) minus revenue at the reduced rate, divided by 19. Revenue at the reduced rate follows from the federal government's estimate of EUR 39.2 billion of revenue forgone for the twelve-point gap. Arithmetical, that is, with full pass-through and unchanged consumption; the lower bound of the range allows for behavioural change."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.vat",
+          "amount": {
+            "param": "reduced",
+            "scale": 3266666667,
+            "offset": -22866666667
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0
+          },
+          "sources": [
+            "bt_drs_21_5839"
+          ],
+          "note": {
+            "de": "Je Prozentpunkt 3,3 Mrd. Euro: die von der Bundesregierung für 2024 geschätzten rechnerischen Mindereinnahmen des ermäßigten Satzes (39,2 Mrd. Euro) geteilt durch den Abstand von zwölf Punkten zum Regelsatz.",
+            "en": "EUR 3.3 billion per percentage point: the federal government's estimate of computational revenue forgone through the reduced rate in 2024 (EUR 39.2 billion) divided by the twelve-point gap to the standard rate."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Das EU-Recht setzt Grenzen: Der Regelsatz muss mindestens 15 % betragen, ermäßigte Sätze mindestens 5 %, und sie dürfen nur für die in der Mehrwertsteuerrichtlinie aufgezählten Waren und Leistungen gelten. Sätze unter 5 % oder ein Nullsatz sind seit 2022 nur für wenige Gruppen erlaubt, darunter Lebensmittel, Arzneimittel, Personenbeförderung, Bücher und Zeitungen. Die Regler hier bleiben innerhalb dieser Grenzen.",
+            "en": "EU law sets limits: the standard rate must be at least 15%, reduced rates at least 5%, and they may apply only to the goods and services listed in the VAT Directive. Rates below 5% or a zero rate have been allowed since 2022 for a few groups only, including food, medicines, passenger transport, books and newspapers. The sliders here stay within these limits."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Mehrwertsteuer belastet niedrige Einkommen stärker, weil ärmere Haushalte einen größeren Teil ihres Einkommens für Konsum ausgeben; das stellt auch die Bundesregierung fest. Beispiel aus dem Gutachten für das Finanzministerium: Würden alle ermäßigten Sätze gestrichen und dafür der Regelsatz aufkommensneutral auf 16,74 % gesenkt, stiege die Belastung des ärmsten Zehntels um 0,66 % des Nettoeinkommens, die des reichsten um 0,05 %.",
+            "en": "VAT weighs more heavily on low incomes because poorer households spend a larger part of their income on consumption; the federal government states this as well. Example from the report for the finance ministry: if all reduced rates were abolished and the standard rate lowered to 16.74% in a revenue-neutral way, the burden on the poorest tenth would rise by 0.66% of net income and that on the richest by 0.05%."
+          },
+          "sources": [
+            "bt_drs_21_5839",
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Wie viel einer Senkung bei den Verbrauchern ankommt, ist offen. In der vom Finanzministerium beauftragten Auswertung der Forschung werden Steuererhöhungen im Mittel vollständig, Senkungen aber nur zu rund 60 % in den Preisen weitergegeben. Bei der befristeten Senkung 2020 lag die Weitergabe bei Lebensmitteln bei 70 bis 90 %; für Restaurants rechnet das Finanzministerium mit nur 20 %. Der Rest bleibt bei den Unternehmen.",
+            "en": "How much of a cut reaches consumers is uncertain. In the review of research commissioned by the finance ministry, tax increases are on average passed on in full, but cuts only to about 60%. In the temporary cut of 2020, pass-through for food was 70 to 90%; for restaurants the finance ministry assumes only 20%. The rest stays with businesses."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Mehrwertsteuer teilen sich Bund, Länder und Gemeinden. Im Basisjahr entfielen laut Eurostat rund 48 % auf den Bund, 49 % auf die Länder und 3 % auf die Gemeinden; jede Änderung trifft alle drei Ebenen.",
+            "en": "VAT is shared between the federal, state and municipal levels. In the base year, according to Eurostat, about 48% went to the federal level, 49% to the states and 3% to the municipalities; any change affects all three levels."
+          },
+          "sources": [
+            "eurostat_gov_10a_main"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Der Koalitionsvertrag sieht außer dem ermäßigten Satz für Speisen in der Gastronomie keine Änderung der Mehrwertsteuersätze vor (Antwort der Bundesregierung vom Mai 2026). Die Maßnahme zu Steuervorteilen im Verkehr enthält einen eigenen Posten für die Mehrwertsteuer auf Auslandsflüge; beide Maßnahmen wirken auf dieselbe Einnahme und addieren sich.",
+            "en": "Apart from the reduced rate for restaurant meals, the coalition agreement provides for no change in VAT rates (federal government's answer of May 2026). The measure on tax breaks in transport contains a separate item for VAT on international flights; both measures act on the same revenue item and add up."
+          },
+          "sources": [
+            "bt_drs_21_5839"
+          ]
+        }
+      ],
+      "sources": [
+        "bt_drs_21_5839",
+        "zew_bmf_umsatzsteuersaetze_2025",
+        "eurostat_ntl"
+      ]
+    },
+    {
+      "id": "vat_food",
+      "label": {
+        "de": "Keine Mehrwertsteuer auf Lebensmittel",
+        "en": "No VAT on food"
+      },
+      "summary": {
+        "de": "Setzt den Mehrwertsteuersatz auf die heute mit 7 % besteuerten Lebensmittel und Leitungswasser auf den eingestellten Wert, in der Grundeinstellung auf null. Ein Wert von 19 % zeigt umgekehrt, was die Abschaffung der Ermäßigung einbrächte.",
+        "en": "Sets the VAT rate on food and tap water currently taxed at 7% to the chosen value, zero at the default setting. Conversely, a value of 19% shows what abolishing the reduction would yield."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "de": "Steuersatz auf Lebensmittel",
+            "en": "Tax rate on food"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 19,
+          "step": 1,
+          "default": 0,
+          "baseline": 7
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.vat",
+          "amount": {
+            "param": "rate",
+            "scale": 2326666667,
+            "offset": -16286666667
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.9,
+            "high": 1.1
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025",
+            "bt_drs_21_5839"
+          ],
+          "note": {
+            "de": "Das Finanzministerium schätzt die Mindereinnahmen durch den ermäßigten Satz auf Nahrungsmittel und Leitungswasser für 2024 auf 27,9 Mrd. Euro (7 statt 19 %), also 2,3 Mrd. Euro je Prozentpunkt. Ein Nullsatz kostet danach rund 16,3 Mrd. Euro; für 2027 nennt die Bundesregierung rund 18 Mrd. Euro. Rechnerisch, bei voller Weitergabe und unverändertem Verbrauch.",
+            "en": "The finance ministry estimates revenue forgone through the reduced rate on food and tap water at EUR 27.9 billion for 2024 (7 instead of 19%), that is EUR 2.3 billion per percentage point. A zero rate accordingly costs about EUR 16.3 billion; for 2027 the federal government gives about EUR 18 billion. Arithmetical, with full pass-through and unchanged consumption."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Ein Nullsatz auf Lebensmittel ist seit der Reform der EU-Mehrwertsteuerrichtlinie von 2022 zulässig; zuvor durften das nur einzelne Staaten. Deutschland könnte ihn durch Bundesgesetz einführen. Weil die Mehrwertsteuer Bund, Ländern und Gemeinden gemeinsam zusteht, träfe der Ausfall alle drei Ebenen.",
+            "en": "A zero rate on food has been permissible since the 2022 reform of the EU VAT Directive; before that only individual member states were allowed to apply one. Germany could introduce it by federal law. Because VAT belongs jointly to the federal, state and municipal levels, the shortfall would affect all three."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025",
+            "gg_art_106"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Entlastung kommt nicht vollständig an: Bei der befristeten Senkung 2020 wurden bei Lebensmitteln 70 bis 90 % weitergegeben. Ärmere Haushalte geben einen deutlich höheren Teil ihres Einkommens für Lebensmittel aus und würden gemessen am Einkommen stärker entlastet; in Euro profitieren Haushalte mit hohen Ausgaben am meisten.",
+            "en": "The relief does not arrive in full: in the temporary cut of 2020, 70 to 90% was passed on for food. Poorer households spend a much larger part of their income on food and would be relieved more relative to income; in euros, households with high spending benefit most."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025",
+            "bt_drs_21_5839"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Nach Warengruppen schätzt die Bundesregierung die Kosten eines Nullsatzes für 2027 auf 2,7 Mrd. Euro bei Brot und Getreideprodukten, 2,6 Mrd. Euro bei Molkereiprodukten und Eiern, 2,0 Mrd. Euro bei Gemüse und Kartoffeln und 1,5 Mrd. Euro bei Obst. Würden auch bisher voll besteuerte Lebensmittel wie Milchersatzprodukte und alkoholfreie Getränke einbezogen, stiegen die Mindereinnahmen auf bis zu 22 Mrd. Euro.",
+            "en": "By product group, the federal government estimates the cost of a zero rate for 2027 at EUR 2.7 billion for bread and cereal products, EUR 2.6 billion for dairy products and eggs, EUR 2.0 billion for vegetables and potatoes and EUR 1.5 billion for fruit. If foods currently taxed at the full rate, such as milk substitutes and soft drinks, were included, the revenue loss would rise to as much as EUR 22 billion."
+          },
+          "sources": [
+            "bt_drs_21_5839"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Mehrwertsteuer teilen sich Bund, Länder und Gemeinden. Im Basisjahr entfielen laut Eurostat rund 48 % auf den Bund, 49 % auf die Länder und 3 % auf die Gemeinden; jede Änderung trifft alle drei Ebenen.",
+            "en": "VAT is shared between the federal, state and municipal levels. In the base year, according to Eurostat, about 48% went to the federal level, 49% to the states and 3% to the municipalities; any change affects all three levels."
+          },
+          "sources": [
+            "eurostat_gov_10a_main"
+          ]
+        }
+      ],
+      "sources": [
+        "bt_drs_21_5839",
+        "zew_bmf_umsatzsteuersaetze_2025"
+      ]
+    },
+    {
+      "id": "vat_reduced_categories",
+      "label": {
+        "de": "Ermäßigte Mehrwertsteuer für Restaurants, Hotels, Kultur und Nahverkehr",
+        "en": "Reduced VAT for restaurants, hotels, culture and public transport"
+      },
+      "summary": {
+        "de": "Stellt für vier Bereiche ein, ob der ermäßigte oder der volle Satz gilt. Die Grundeinstellung bildet das seit Januar 2026 geltende Recht ab: Speisen in Restaurants werden mit 7 % besteuert; im Basisjahr 2024 waren es 19 %, die Maßnahme zeigt also zunächst, was diese Senkung kostet. Hotelübernachtungen, Kultur und Nahverkehr stehen auf dem heutigen Satz von 7 % und lassen sich auf 19 % anheben.",
+        "en": "Sets for four areas whether the reduced or the full rate applies. The default reflects the law in force since January 2026: restaurant meals are taxed at 7%; in the base year 2024 the rate was 19%, so the measure first shows what this cut costs. Hotel stays, culture and public transport are at today's rate of 7% and can be raised to 19%."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "restaurants",
+          "type": "number",
+          "label": {
+            "de": "Speisen in Restaurants (Basisjahr 19 %, seit 2026: 7 %)",
+            "en": "Restaurant meals (base year 19%, since 2026: 7%)"
+          },
+          "unit": "percent",
+          "min": 7,
+          "max": 19,
+          "step": 1,
+          "default": 7,
+          "baseline": 19
+        },
+        {
+          "id": "hotels",
+          "type": "number",
+          "label": {
+            "de": "Hotelübernachtungen",
+            "en": "Hotel stays"
+          },
+          "unit": "percent",
+          "min": 7,
+          "max": 19,
+          "step": 1,
+          "default": 7,
+          "baseline": 7
+        },
+        {
+          "id": "culture",
+          "type": "number",
+          "label": {
+            "de": "Kultur, Bücher und Zeitungen",
+            "en": "Culture, books and newspapers"
+          },
+          "unit": "percent",
+          "min": 7,
+          "max": 19,
+          "step": 1,
+          "default": 7,
+          "baseline": 7
+        },
+        {
+          "id": "transport",
+          "type": "number",
+          "label": {
+            "de": "Nahverkehr und Bahn",
+            "en": "Local public transport and rail"
+          },
+          "unit": "percent",
+          "min": 7,
+          "max": 19,
+          "step": 1,
+          "default": 7,
+          "baseline": 7
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.vat",
+          "amount": {
+            "param": "restaurants",
+            "scale": 283333333,
+            "offset": -5383333333
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.9,
+            "high": 1.1
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025",
+            "bt_drs_21_5839",
+            "bt_drs_21_1600"
+          ],
+          "note": {
+            "de": "Schätzung des Finanzministeriums für 2024: 3,4 Mrd. Euro Mindereinnahmen bei 7 statt 19 % auf Restaurant- und Verpflegungsleistungen ohne Getränke (2026: 3,6 Mrd. Euro). Der ermäßigte Satz galt befristet von Juli 2020 bis Ende 2023 und gilt seit dem 1. Januar 2026 wieder.",
+            "en": "Finance ministry estimate for 2024: EUR 3.4 billion of revenue forgone with 7 instead of 19% on restaurant and catering services excluding beverages (2026: EUR 3.6 billion). The reduced rate applied temporarily from July 2020 to the end of 2023 and has applied again since 1 January 2026."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.vat",
+          "amount": {
+            "param": "hotels",
+            "scale": 149166667,
+            "offset": -1044166667
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0
+          },
+          "sources": [
+            "bt_drs_21_1600",
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ],
+          "note": {
+            "de": "Subventionsbericht: 1,79 Mrd. Euro Mindereinnahmen im Jahr 2024 durch den ermäßigten Satz für Beherbergungsleistungen.",
+            "en": "Subsidy Report: EUR 1.79 billion of revenue forgone in 2024 through the reduced rate for accommodation services."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.vat",
+          "amount": {
+            "param": "culture",
+            "scale": 339166667,
+            "offset": -2374166667
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0
+          },
+          "sources": [
+            "bt_drs_21_1600",
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ],
+          "note": {
+            "de": "Subventionsbericht: 4,07 Mrd. Euro im Jahr 2024 für kulturelle und unterhaltende Leistungen einschließlich Büchern, Zeitungen und Kunstgegenständen.",
+            "en": "Subsidy Report: EUR 4.07 billion in 2024 for cultural and entertainment services including books, newspapers and works of art."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.vat",
+          "amount": {
+            "param": "transport",
+            "scale": 188333333,
+            "offset": -1318333333
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0
+          },
+          "sources": [
+            "bt_drs_21_1600",
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ],
+          "note": {
+            "de": "Subventionsbericht: 2,26 Mrd. Euro im Jahr 2024 für Personenbeförderung im Nahverkehr und im Schienenfernverkehr.",
+            "en": "Subsidy Report: EUR 2.26 billion in 2024 for passenger transport in local traffic and long-distance rail."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Bei Restaurants kommt die Senkung nach der Annahme des Finanzministeriums nur zu rund 20 % bei den Gästen an; der größere Teil bleibt bei den Betrieben. Das vom Ministerium beauftragte Gutachten hält die Ermäßigungen für Restaurants und Hotels für nicht gerechtfertigt; ohne sie und ohne die übrigen Ermäßigungen außer für Lebensmittel könnte der Regelsatz aufkommensneutral auf rund 18,1 % sinken.",
+            "en": "For restaurants, the finance ministry assumes that only about 20% of the cut reaches customers; the larger part stays with the businesses. The report commissioned by the ministry considers the reductions for restaurants and hotels unjustified; without them and without the other reductions except for food, the standard rate could fall to about 18.1% in a revenue-neutral way."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Alle vier Bereiche stehen auf der Liste der EU-Mehrwertsteuerrichtlinie, für die ermäßigte Sätze erlaubt sind. Unter 5 % darf der Satz für Restaurants und Hotels nicht sinken; ein Nullsatz wäre nur für Personenbeförderung, Bücher und Zeitungen zulässig.",
+            "en": "All four areas are on the list in the EU VAT Directive for which reduced rates are allowed. The rate for restaurants and hotels may not fall below 5%; a zero rate would be permissible only for passenger transport, books and newspapers."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Die Bundesregierung bezeichnet die Ermäßigung für Speisen in der Gastronomie im Mai 2026 als umgesetzt und plant laut Koalitionsvertrag keine weiteren Änderungen der Mehrwertsteuersätze. Die Ermäßigung für Kultur hält sie aus bildungs- und kulturpolitischen Gründen für angemessen.",
+            "en": "In May 2026 the federal government describes the reduction for restaurant meals as implemented and, according to the coalition agreement, plans no further changes to VAT rates. It considers the reduction for culture appropriate for reasons of education and cultural policy."
+          },
+          "sources": [
+            "bt_drs_21_5839",
+            "bt_drs_21_1600"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Mehrwertsteuer teilen sich Bund, Länder und Gemeinden. Im Basisjahr entfielen laut Eurostat rund 48 % auf den Bund, 49 % auf die Länder und 3 % auf die Gemeinden; jede Änderung trifft alle drei Ebenen.",
+            "en": "VAT is shared between the federal, state and municipal levels. In the base year, according to Eurostat, about 48% went to the federal level, 49% to the states and 3% to the municipalities; any change affects all three levels."
+          },
+          "sources": [
+            "eurostat_gov_10a_main"
+          ]
+        }
+      ],
+      "sources": [
+        "zew_bmf_umsatzsteuersaetze_2025",
+        "bt_drs_21_1600",
+        "bt_drs_21_5839"
+      ]
+    },
+    {
+      "id": "fuel_tax",
+      "label": {
+        "de": "Spritsteuer ändern (Energiesteuer auf Benzin und Diesel)",
+        "en": "Change the fuel tax (energy tax on petrol and diesel)"
+      },
+      "summary": {
+        "de": "Setzt die Energiesteuer auf Benzin und Diesel auf die eingestellten Sätze. Regulär und im Basisjahr 2024 beträgt sie 65,45 Cent je Liter Benzin und 47,04 Cent je Liter Diesel. Die Grundeinstellung zeigt, was es im Jahr kostet, den Tankrabatt von 2026 dauerhaft zu gewähren: je 14,04 Cent weniger, wie er vom 1. Oktober bis 31. Dezember 2026 gilt (ein erster Tankrabatt galt im Mai und Juni 2026). Höhere Werte bringen Mehreinnahmen, etwa wenn Diesel so hoch besteuert wird wie Benzin. Gerechnet wird mit den 2024 versteuerten Mengen; der Verbrauch ändert sich in der Rechnung nicht.",
+        "en": "Sets the energy tax on petrol and diesel to the chosen rates. Regularly, and in the base year 2024, it is 65.45 cents per litre of petrol and 47.04 cents per litre of diesel. The default shows what it costs per year to grant the 2026 fuel tax cut permanently: 14.04 cents less on each, as in force from 1 October to 31 December 2026 (a first fuel tax cut applied in May and June 2026). Higher values yield additional revenue, for example if diesel is taxed at the petrol rate. The calculation uses the volumes taxed in 2024; consumption does not change in the calculation."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "petrol",
+          "type": "number",
+          "label": {
+            "de": "Energiesteuer auf Benzin (Cent je Liter)",
+            "en": "Energy tax on petrol (cents per litre)"
+          },
+          "unit": "count",
+          "min": 35.9,
+          "max": 90,
+          "step": 0.01,
+          "default": 51.41,
+          "baseline": 65.45
+        },
+        {
+          "id": "diesel",
+          "type": "number",
+          "label": {
+            "de": "Energiesteuer auf Diesel (Cent je Liter)",
+            "en": "Energy tax on diesel (cents per litre)"
+          },
+          "unit": "count",
+          "min": 33,
+          "max": 90,
+          "step": 0.01,
+          "default": 33,
+          "baseline": 47.04
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.energy",
+          "amount": {
+            "param": "petrol",
+            "scale": 233300000.0,
+            "offset": -15269485000
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.15
+          },
+          "sources": [
+            "destatis_energiesteuer",
+            "energiestg_2",
+            "bt_drs_20_1741",
+            "bt_wd_tankrabatt_2026"
+          ],
+          "note": {
+            "de": "Ein Cent je Liter Benzin entspricht 233 Mio. Euro im Jahr. Herleitung: Laut Statistischem Bundesamt wurde Benzin 2025 mit 15,5 Mrd. Euro versteuert, 1,5 % mehr als 2024; geteilt durch den Steuersatz von 65,45 Cent ergibt das für 2024 rund 23,3 Mrd. Liter. Statisch gerechnet. Die Spanne von 15 % nach beiden Seiten deckt Verbrauchsänderungen und Vorratskäufe ab: Für die Senkungen von 2022 und 2026 nannte die Bundesregierung Steuerausfälle, die 2 bis 14 % über dieser Rechnung liegen.",
+            "en": "One cent per litre of petrol corresponds to EUR 233 million a year. Derivation: according to the Federal Statistical Office, petrol was taxed at EUR 15.5 billion in 2025, 1.5% more than in 2024; divided by the rate of 65.45 cents this gives about 23.3 billion litres for 2024. Static calculation. The range of 15% either way covers changes in consumption and stockpiling: for the cuts of 2022 and 2026 the federal government gave revenue losses 2 to 14% above this calculation."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.energy",
+          "amount": {
+            "param": "diesel",
+            "scale": 385300000.0,
+            "offset": -18124512000
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.15
+          },
+          "sources": [
+            "destatis_energiesteuer",
+            "energiestg_2",
+            "bt_drs_20_1741",
+            "bt_wd_tankrabatt_2026"
+          ],
+          "note": {
+            "de": "Ein Cent je Liter Diesel entspricht 385 Mio. Euro im Jahr. Herleitung: Laut Statistischem Bundesamt wurde Diesel 2025 mit 17,8 Mrd. Euro versteuert, 1,8 % weniger als 2024; geteilt durch den Steuersatz von 47,04 Cent ergibt das für 2024 rund 38,5 Mrd. Liter. Statisch gerechnet, Spanne wie beim Benzin.",
+            "en": "One cent per litre of diesel corresponds to EUR 385 million a year. Derivation: according to the Federal Statistical Office, diesel was taxed at EUR 17.8 billion in 2025, 1.8% less than in 2024; divided by the rate of 47.04 cents this gives about 38.5 billion litres for 2024. Static calculation, range as for petrol."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Die EU-Energiesteuerrichtlinie schreibt Mindeststeuersätze vor: 35,9 Cent je Liter Benzin und 33,0 Cent je Liter Diesel. Die Regler enden deshalb dort; noch niedrigere Sätze oder eine Abschaffung der Steuer lässt das EU-Recht nicht zu. Beim Diesel schöpft der Tankrabatt von 2026 den Spielraum bereits vollständig aus, beim Benzin ging nur die Senkung von Juni bis August 2022 bis zum Mindestsatz.",
+            "en": "The EU Energy Taxation Directive prescribes minimum rates: 35.9 cents per litre of petrol and 33.0 cents per litre of diesel. The sliders therefore end there; EU law does not permit lower rates still or abolishing the tax. For diesel the 2026 fuel tax cut already uses the full leeway; for petrol only the cut from June to August 2022 went down to the minimum rate."
+          },
+          "sources": [
+            "bt_drs_20_1741",
+            "bt_wd_tankrabatt_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Ob eine Senkung bei den Autofahrern ankommt, entscheiden Mineralölunternehmen und Tankstellen; eine Pflicht zur Weitergabe gibt es nicht. 2022 wurde die Senkung nach einer Auswertung des RWI im ersten Monat weitgehend weitergegeben; danach überlagerten andere Einflüsse wie das Niedrigwasser des Rheins die Wirkung. Beim ersten Tankrabatt 2026 kamen nach den Wissenschaftlichen Diensten des Bundestags im Schnitt etwa 78 bis 83 % an, rund 3 bis 4 Cent je Liter nicht; Auswertungen von DIW und ifo kommen je nach Zeitraum auf nur rund zwei Drittel.",
+            "en": "Whether a cut reaches drivers is decided by oil companies and filling stations; there is no obligation to pass it on. In 2022, according to an analysis by RWI, the cut was largely passed on in the first month; after that other influences such as low water on the Rhine masked the effect. For the first fuel tax cut of 2026, according to the Bundestag's research services, about 78 to 83% arrived on average, about 3 to 4 cents per litre did not; analyses by DIW and ifo arrive at only about two thirds depending on the period."
+          },
+          "sources": [
+            "bt_wd_tankrabatt_2026",
+            "rwi_tankrabatt_2022"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Zum Vergleich mit der Praxis: Für die drei Monate von Juni bis August 2022 (Benzin 29,55 und Diesel 14,04 Cent weniger) rechnete der Gesetzentwurf mit 3,15 Mrd. Euro weniger Energiesteuer; die Rechnung hier ergibt dafür 3,1 Mrd. Euro. Für Oktober bis Dezember 2026 (je 14,04 Cent weniger) nennt die Bundesregierung 2,485 Mrd. Euro; hier ergeben sich 2,2 Mrd. Euro. Der Tankrabatt ist bis 31. Dezember 2026 befristet. Die Bundesregierung hat angekündigt, bis spätestens 1. Januar 2027 einen Spritpreisdeckel anzustreben (Stand Oktober 2026).",
+            "en": "For comparison with practice: for the three months from June to August 2022 (petrol 29.55 and diesel 14.04 cents less) the bill expected EUR 3.15 billion less energy tax; the calculation here gives EUR 3.1 billion. For October to December 2026 (14.04 cents less on each) the federal government gives EUR 2.485 billion; here the result is EUR 2.2 billion. The fuel tax cut is limited until 31 December 2026. The federal government has announced that it aims for a fuel price cap by 1 January 2027 at the latest (as of October 2026)."
+          },
+          "sources": [
+            "bt_drs_20_1741",
+            "bt_wd_tankrabatt_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Auf die Energiesteuer wird Mehrwertsteuer erhoben: 14,04 Cent weniger Steuer senken den Preis rechnerisch um rund 17 Cent je Liter. Für Oktober bis Dezember 2026 schätzt die Bundesregierung deshalb zusätzlich 293 Mio. Euro weniger Mehrwertsteuer auf Kraftstoffe, erwartet aber Mehreinnahmen in ähnlicher Höhe an anderer Stelle, weil das gesparte Geld anderswo ausgegeben wird. Die Rechnung hier lässt die Mehrwertsteuer deshalb unverändert.",
+            "en": "VAT is charged on the energy tax: 14.04 cents less tax lower the price by about 17 cents per litre in arithmetic terms. For October to December 2026 the federal government therefore estimates an additional EUR 293 million less VAT on fuels, but expects additional revenue of a similar size elsewhere because the money saved is spent on other things. The calculation here therefore leaves VAT unchanged."
+          },
+          "sources": [
+            "bt_wd_tankrabatt_2026",
+            "bt_drs_20_1741"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Energiesteuer steht als Verbrauchsteuer allein dem Bund zu. Eine Senkung belastet nur den Bundeshaushalt, eine Erhöhung entlastet nur ihn; Länder und Gemeinden sind nicht beteiligt.",
+            "en": "As an excise duty, the energy tax accrues to the federal government alone. A cut burdens only the federal budget and an increase relieves only it; states and municipalities have no share."
+          },
+          "sources": [
+            "gg_art_106"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Zum Preis an der Zapfsäule gehört außerdem der nationale CO2-Preis, der auf dieselben Kraftstoffe erhoben wird (2024: 45 Euro je Tonne, 2026: 55 bis 65 Euro). Er ist eine eigene Maßnahme und eine eigene Einnahme des Bundes; wer beide verändert, sieht die Summe beider Wirkungen.",
+            "en": "The pump price also includes the national carbon price, which is levied on the same fuels (2024: EUR 45 per tonne, 2026: EUR 55 to 65). It is a separate measure and a separate federal revenue; changing both shows the sum of both effects."
+          },
+          "sources": [
+            "uba_pm_29_2025",
+            "ihk_behg_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Diesel wird um 18,41 Cent je Liter niedriger besteuert als Benzin. Der gleiche Satz (65,45 Cent) bringt in der Rechnung rund 7,1 Mrd. Euro; das Umweltbundesamt bezifferte den Vorteil für 2018 auf 8,2 Mrd. Euro. Der niedrigere Satz sollte ursprünglich den gewerblichen Straßenverkehr im internationalen Wettbewerb schützen; im Gegenzug zahlen Diesel-Pkw eine höhere Kfz-Steuer. Fiele der Vorteil weg, entfiele nach Ansicht des Umweltbundesamts auch der Grund für die höhere Kfz-Steuer, was die Mehreinnahmen schmälert. Höhere Dieselpreise träfen Speditionen, Pendler und Betriebe mit Dieselfahrzeugen.",
+            "en": "Diesel is taxed 18.41 cents per litre lower than petrol. The same rate (65.45 cents) yields about EUR 7.1 billion in the calculation; the Federal Environment Agency put the advantage at EUR 8.2 billion for 2018. The lower rate was originally meant to protect commercial road transport in international competition; in return, diesel cars pay a higher motor vehicle tax. If the advantage went, the reason for the higher vehicle tax would in the agency's view go too, which reduces the additional revenue. Higher diesel prices would hit hauliers, commuters and businesses with diesel vehicles."
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021",
+            "energiestg_2"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Der Tankrabatt ist umstritten. Befürworter verweisen darauf, dass er schnell wirkt, keinen Antrag braucht und auch Pendler, Handwerk und Speditionen erreicht. Kritiker bemängeln, dass Haushalte mit höherem Einkommen und höherem Verbrauch am meisten profitieren und der Anreiz zum Sparen von Kraftstoff sinkt; sie schlagen stattdessen gezielte Hilfen für besonders belastete Haushalte vor.",
+            "en": "The fuel tax cut is contested. Supporters point out that it works quickly, needs no application and also reaches commuters, tradespeople and hauliers. Critics object that households with higher incomes and higher consumption benefit most and that the incentive to save fuel falls; they propose targeted support for particularly burdened households instead."
+          },
+          "sources": [
+            "bt_wd_tankrabatt_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "energiestg_2",
+        "destatis_energiesteuer",
+        "bt_drs_20_1741",
+        "bt_wd_tankrabatt_2026",
+        "rwi_tankrabatt_2022"
+      ]
+    },
+    {
+      "id": "electricity_tax",
+      "label": {
+        "de": "Stromsteuer für alle senken",
+        "en": "Lower the electricity tax for everyone"
+      },
+      "summary": {
+        "de": "Senkt die Stromsteuer für private Haushalte und alle übrigen Verbraucher, die heute den vollen Satz von 2,05 Cent je Kilowattstunde zahlen, auf den eingestellten Wert, in der Grundeinstellung auf das Mindestmaß der EU von 0,1 Cent. Für das produzierende Gewerbe und die Land- und Forstwirtschaft gilt das Mindestmaß bereits. Die Rechnung senkt die Einnahmen des Basisjahres 2024 im gleichen Verhältnis wie den Steuersatz; der Verbrauch ändert sich in der Rechnung nicht.",
+        "en": "Lowers the electricity tax for private households and all other consumers who today pay the full rate of 2.05 cents per kilowatt-hour to the chosen value, by default to the EU minimum of 0.1 cents. For manufacturing and for agriculture and forestry the minimum already applies. The calculation lowers the revenue of the base year 2024 in the same proportion as the tax rate; consumption does not change in the calculation."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "de": "Stromsteuer (Cent je Kilowattstunde)",
+            "en": "Electricity tax (cents per kilowatt-hour)"
+          },
+          "unit": "count",
+          "min": 0.1,
+          "max": 2.05,
+          "step": 0.05,
+          "default": 0.1,
+          "baseline": 2.05
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "rev.taxes.consumption.electricity",
+          "factor": {
+            "param": "rate",
+            "scale": 0.487805
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.95,
+            "high": 1.15
+          },
+          "sources": [
+            "eurostat_ntl",
+            "bt_drs_21_2469",
+            "bt_drs_21_5320",
+            "bt_drs_21_6332",
+            "cash_online_stromsteuer_2026"
+          ],
+          "note": {
+            "de": "Einnahmen aus der Stromsteuer 2024 (5,67 Mrd. Euro) mal eingestelltem Satz geteilt durch 2,05 Cent. Die Rechnung unterstellt, dass die Einnahmen fast ganz aus Strom zum vollen Satz stammen; das produzierende Gewerbe zahlte schon 2024 nur das Mindestmaß. Beim Mindestmaß ergeben sich 5,4 Mrd. Euro weniger. Zum Vergleich: Für die Koalitionspläne werden rund 5,4 Mrd. Euro im Jahr genannt, Gesetzentwürfe der Opposition von 2026 rechnen mit etwa 6 Mrd. Euro (Grüne) und knapp 6,2 Mrd. Euro (AfD).",
+            "en": "Electricity tax revenue in 2024 (EUR 5.67 billion) times the chosen rate divided by 2.05 cents. The calculation assumes that almost all revenue comes from electricity taxed at the full rate; manufacturing already paid only the minimum in 2024. At the minimum the result is EUR 5.4 billion less. For comparison: about EUR 5.4 billion a year is cited for the coalition's plans; opposition bills of 2026 estimate about EUR 6 billion (Greens) and just under EUR 6.2 billion (AfD)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Der Koalitionsvertrag von CDU/CSU und SPD sagt zu, die Stromsteuer als Sofortmaßnahme für alle auf das europäische Mindestmaß zu senken. Umgesetzt ist das bisher nur für das produzierende Gewerbe und die Land- und Forstwirtschaft, dauerhaft seit 1. Januar 2026. Eine Senkung für alle lehnte die Bundesregierung im Oktober 2025 ab und verwies auf andere Entlastungen (Wegfall der Gasspeicherumlage, niedrigere Netzkosten); sie prüfe, ob und wann weitere Schritte finanziert werden können. Stand 16. November 2026: Der Bundeskanzler hat angekündigt, die Koalition wolle die Steuer 2027 auch für private Haushalte auf das Mindestmaß senken; ein Gesetz gibt es nicht, und die rund 5,4 Mrd. Euro im Jahr sind im Entwurf des Bundeshaushalts 2027 nicht gedeckt.",
+            "en": "The coalition agreement of CDU/CSU and SPD promises to lower the electricity tax to the European minimum for everyone as an immediate measure. So far this has been implemented only for manufacturing and for agriculture and forestry, permanently since 1 January 2026. In October 2025 the federal government rejected a cut for everyone, pointing to other relief (abolition of the gas storage levy, lower grid costs); it said it was examining whether and when further steps could be financed. As of 16 November 2026: the Chancellor has announced that the coalition intends to lower the tax to the minimum for private households as well in 2027; there is no law, and the roughly EUR 5.4 billion a year is not covered in the draft federal budget for 2027."
+          },
+          "sources": [
+            "bt_drs_21_2469",
+            "bt_drs_21_5320",
+            "cash_online_stromsteuer_2026"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Die EU-Energiesteuerrichtlinie schreibt Mindeststeuersätze vor: 0,1 Cent je Kilowattstunde für nichtbetrieblichen und 0,05 Cent für betrieblichen Verbrauch. Der Regler endet deshalb bei 0,1 Cent; ganz abschaffen lässt sich die Steuer nach EU-Recht nicht.",
+            "en": "The EU Energy Taxation Directive prescribes minimum rates: 0.1 cents per kilowatt-hour for non-business and 0.05 cents for business use. The slider therefore ends at 0.1 cents; under EU law the tax cannot be abolished altogether."
+          },
+          "sources": [
+            "bt_drs_21_2469",
+            "bt_drs_21_5320"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Stromsteuer steht allein dem Bund zu. Die Mindereinnahmen träfen nur den Bundeshaushalt; für Länder und Gemeinden ergeben sich keine Auswirkungen.",
+            "en": "The electricity tax accrues to the federal government alone. The revenue loss would affect only the federal budget; there are no effects for states and municipalities."
+          },
+          "sources": [
+            "bt_drs_21_5320",
+            "gg_art_106"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Die Entlastung je Haushalt ist begrenzt: Nach Agenturberichten spart ein durchschnittlicher Haushalt rund 8 Euro im Monat, eine vierköpfige Familie rund 100 Euro im Jahr. Befürworter sehen darin auch einen Anreiz, von Öl und Gas auf Strom umzusteigen, etwa bei Heizung und Auto. Handel, Hotels und andere Dienstleister zahlen bisher ebenfalls den vollen Satz.",
+            "en": "The relief per household is limited: according to news agency reports an average household saves about EUR 8 a month, a family of four about EUR 100 a year. Supporters also see it as an incentive to switch from oil and gas to electricity, for example for heating and cars. Retail, hotels and other service providers also still pay the full rate."
+          },
+          "sources": [
+            "cash_online_stromsteuer_2026",
+            "bt_drs_21_5320",
+            "bt_drs_21_2469"
+          ]
+        }
+      ],
+      "sources": [
+        "eurostat_ntl",
+        "bt_drs_21_2469",
+        "bt_drs_21_5320",
+        "bt_drs_21_6332",
+        "cash_online_stromsteuer_2026"
+      ]
+    },
+    {
+      "id": "pension_insurance_for_all",
+      "label": {
+        "de": "Alle zahlen in die gesetzliche Rente ein",
+        "en": "Everyone pays into the statutory pension insurance"
+      },
+      "summary": {
+        "de": "Bezieht Beamte und andere bisher nicht rentenversicherungspflichtige Arbeitnehmer in die gesetzliche Rentenversicherung ein, und zwar alle auf einmal, so wie die Forderung lautet. Der Betrag gilt für das erste volle Jahr: Die Rentenversicherung erhält zusätzliche Beiträge, der Staat zahlt als Arbeitgeber seinen Anteil, die laufenden Pensionen laufen unverändert weiter. Rentenansprüche, die dadurch entstehen, kosten erst später und sind nicht enthalten. Selbständige und berufsständische Versorgungswerke sind mangels belastbarer Zahlen nicht beziffert.",
+        "en": "Brings civil servants and other employees not yet liable to pension insurance into the statutory pension insurance, all at once, as the demand is worded. The amount is for the first full year: the pension insurance receives additional contributions, the state pays its share as employer, and current civil-service pensions continue unchanged. The pension entitlements this creates cost money only later and are not included. The self-employed and the professional pension schemes are not quantified for lack of reliable figures."
+      },
+      "topic": "pensions",
+      "params": [
+        {
+          "id": "employer_share",
+          "type": "number",
+          "label": {
+            "de": "Anteil des Beitrags, den der Staat als Arbeitgeber trägt (50 = hälftig wie bei Angestellten, 100 = Staat zahlt alles)",
+            "en": "Share of the contribution borne by the state as employer (50 = half as for salaried staff, 100 = the state pays everything)"
+          },
+          "unit": "percent",
+          "min": 50,
+          "max": 100,
+          "step": 5,
+          "default": 50
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.contributions.wages.pension",
+          "amount": 21854519850,
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.05
+          },
+          "sources": [
+            "destatis_lest_2022",
+            "drv_rv_in_zeitreihen_2026",
+            "iw_beamte_rente_2025"
+          ],
+          "note": {
+            "de": "18,6 % der Bruttolöhne der 2,86 Mio. nicht rentenversicherungspflichtigen Arbeitnehmer bis zur Beitragsbemessungsgrenze (Lohnsteuerstatistik 2022: 105,9 Mrd. Euro, Beitrag 19,7 Mrd. Euro), fortgeschrieben mit dem Anstieg der Beitragseinnahmen der Rentenversicherung bis 2024. Die Gruppe besteht überwiegend aus Beamten, Richtern und Soldaten. Zum Vergleich: Das Institut der deutschen Wirtschaft rechnet für 1,9 Mio. Beamte mit knapp 20 Mrd. Euro im Jahr.",
+            "en": "18.6% of the gross wages of the 2.86 million employees not liable to pension insurance up to the contribution ceiling (wage tax statistics 2022: EUR 105.9 billion, contribution EUR 19.7 billion), updated with the growth of the pension insurance's contribution revenue to 2024. The group consists mainly of civil servants, judges and soldiers. For comparison: the German Economic Institute (IW) calculates just under EUR 20 billion a year for 1.9 million civil servants."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.social.old_age.civil_service_contributions",
+          "amount": {
+            "param": "employer_share",
+            "scale": 218545199
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.05
+          },
+          "sources": [
+            "iw_beamte_rente_2025",
+            "destatis_lest_2022",
+            "eurostat_gov_10a_main"
+          ],
+          "note": {
+            "de": "Der Teil des Beitrags, den Bund, Länder und Gemeinden als Arbeitgeber zahlen. Er ist Ausgabe dieser Ebenen und zugleich Einnahme der Rentenversicherung; für den Staat insgesamt hebt er sich auf. Als Verbesserung des gesamtstaatlichen Saldos bleibt nur der Teil, den die Beamten selbst aus ihren Bezügen zahlen.",
+            "en": "The part of the contribution that the federal, state and municipal levels pay as employers. It is spending of these levels and at the same time revenue of the pension insurance; for the state as a whole it cancels out. Only the part that civil servants pay themselves out of their pay remains as an improvement of the general government balance."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Ein dauerhafter Gewinn entsteht nicht. Kurzfristig fließen mehr Beiträge, langfristig müssen aber auch die Renten der einbezogenen Beamten aus dem Umlagesystem gezahlt werden; ihre Altersstruktur ist nach Angaben des Instituts der deutschen Wirtschaft sogar ungünstiger als die der übrigen Beschäftigten. Die strukturellen Probleme der Rentenversicherung löst die Einbeziehung nach dessen Einschätzung nicht.",
+            "en": "There is no lasting gain. In the short term more contributions flow in, but in the long term the pensions of the civil servants included must also be paid from the pay-as-you-go system; according to the German Economic Institute their age structure is even less favourable than that of other employees. In its assessment, inclusion does not solve the structural problems of the pension insurance."
+          },
+          "sources": [
+            "iw_beamte_rente_2025"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Bund, Länder und Gemeinden würden doppelt belastet: Sie zahlen die laufenden Pensionen weiter und zusätzlich Beiträge an die Rentenkasse, je nach Ausgestaltung knapp 10 Mrd. Euro (hälftig) bis knapp 20 Mrd. Euro im Jahr (Staat zahlt alles). Rund zwei Drittel der Beamten sind bei den Ländern beschäftigt. Zahlen Beamte die Hälfte selbst, entspricht das faktisch einer Gehaltskürzung.",
+            "en": "The federal, state and municipal levels would bear a double burden: they continue to pay current pensions and additionally pay contributions to the pension fund, depending on the design just under EUR 10 billion (half) to just under EUR 20 billion a year (the state pays everything). About two thirds of civil servants are employed by the states. If civil servants pay half themselves, this is in effect a pay cut."
+          },
+          "sources": [
+            "iw_beamte_rente_2025",
+            "eurostat_gov_10a_main"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Das Grundgesetz verlangt, das Recht des öffentlichen Dienstes unter Berücksichtigung der hergebrachten Grundsätze des Berufsbeamtentums zu regeln (Art. 33 Abs. 5). Ob bestehenden Beamten die Pensionsversorgung entzogen werden kann, ist rechtlich offen. Die Grundeinstellung, alle auf einmal, ist deshalb die Forderung im Wortlaut, nicht das Wahrscheinliche: Realistisch wäre eine Einbeziehung nur neuer Beamter, bei der die Wirkung über Jahrzehnte anwächst.",
+            "en": "The Basic Law requires civil service law to be regulated with due regard to the traditional principles of the professional civil service (Article 33(5)). Whether existing civil servants can be deprived of their pension provision is legally open. The default, everyone at once, is therefore the demand as worded, not the likely outcome: realistically only new civil servants would be included, with an effect that builds up over decades."
+          },
+          "sources": [
+            "gg_art_33",
+            "iw_beamte_rente_2025"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Nicht enthalten sind Selbständige ohne Pflichtversicherung, die Mitglieder berufsständischer Versorgungswerke und Abgeordnete. Für sie fehlen belastbare Zahlen zu den beitragspflichtigen Einkommen; auch für sie gilt, dass neuen Beiträgen später neue Rentenansprüche gegenüberstehen.",
+            "en": "Not included are self-employed persons without compulsory insurance, members of the professional pension schemes and members of parliament. Reliable figures on their income liable to contributions are lacking; for them, too, new contributions are matched later by new pension entitlements."
+          },
+          "sources": [
+            "destatis_lest_2022"
+          ]
+        }
+      ],
+      "sources": [
+        "iw_beamte_rente_2025",
+        "destatis_lest_2022",
+        "gg_art_33"
+      ]
+    },
+    {
+      "id": "pension_contribution_schedule",
+      "label": {
+        "de": "Rentenbeitrag: Satz und Beitragsbemessungsgrenze ändern",
+        "en": "Pension contribution: change the rate and the ceiling"
+      },
+      "summary": {
+        "de": "Legt fest, welcher Beitragssatz zur gesetzlichen Rentenversicherung auf welchen Teil des Bruttojahreslohns erhoben wird (Arbeitnehmer- und Arbeitgeberanteil zusammen). Voreingestellt ist die Regel von 2024: 18,6 % bis zur Beitragsbemessungsgrenze von 90.600 Euro, darüber nichts; solange kein Punkt bewegt wird, ändert sich nichts. Die Vorlagen heben die Grenze auf oder verdoppeln sie. Die Rechnung wendet die alte und die neue Regel auf die Verteilung der Löhne an und überträgt die relative Änderung auf die Beiträge aus Löhnen. Die höheren Renten, die aus höheren Beiträgen später entstehen, sind nicht enthalten.",
+        "en": "Sets the contribution rate to the statutory pension insurance charged on each part of the gross annual wage (employee and employer share together). The default is the 2024 rule: 18.6% up to the contribution ceiling of EUR 90,600 and nothing above; as long as no point is moved, nothing changes. The presets abolish the ceiling or double it. The calculation applies the old and the new rule to the distribution of wages and transfers the relative change to contributions on wages. The higher pensions that higher contributions later give rise to are not included."
+      },
+      "topic": "pensions",
+      "params": [
+        {
+          "id": "schedule",
+          "type": "curve",
+          "label": {
+            "de": "Beitragssatz nach Bruttojahreslohn",
+            "en": "Contribution rate by gross annual wage"
+          },
+          "x": {
+            "unit": "currency",
+            "min": 0,
+            "max": 300000,
+            "step": 100
+          },
+          "y": {
+            "unit": "percent",
+            "min": 0,
+            "max": 30,
+            "step": 0.1
+          },
+          "default": [
+            {
+              "x": 0,
+              "y": 18.6
+            },
+            {
+              "x": 90600,
+              "y": 18.6
+            },
+            {
+              "x": 90600,
+              "y": 0
+            }
+          ],
+          "baseline": [
+            {
+              "x": 0,
+              "y": 18.6
+            },
+            {
+              "x": 90600,
+              "y": 18.6
+            },
+            {
+              "x": 90600,
+              "y": 0
+            }
+          ],
+          "minPoints": 1,
+          "maxPoints": 12,
+          "presets": [
+            {
+              "id": "law_2024",
+              "label": {
+                "de": "Geltende Regel 2024",
+                "en": "Rule in force in 2024"
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 18.6
+                },
+                {
+                  "x": 90600,
+                  "y": 18.6
+                },
+                {
+                  "x": 90600,
+                  "y": 0
+                }
+              ],
+              "sources": [
+                "drv_rv_in_zahlen_2026"
+              ]
+            },
+            {
+              "id": "double_ceiling",
+              "label": {
+                "de": "Beitragsbemessungsgrenze verdoppeln (181.200 Euro)",
+                "en": "Double the contribution ceiling (EUR 181,200)"
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 18.6
+                },
+                {
+                  "x": 181200,
+                  "y": 18.6
+                },
+                {
+                  "x": 181200,
+                  "y": 0
+                }
+              ]
+            },
+            {
+              "id": "no_ceiling",
+              "label": {
+                "de": "Beitragsbemessungsgrenze aufheben",
+                "en": "Abolish the contribution ceiling"
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 18.6
+                }
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "x": 37500,
+              "label": {
+                "de": "Mittlerer Jahreslohn (die Hälfte der Beschäftigten liegt darunter)",
+                "en": "Median annual wage (half of all employees are below)"
+              }
+            },
+            {
+              "x": 81000,
+              "label": {
+                "de": "Hoher Lohn (90 % liegen darunter)",
+                "en": "High wage (90% are below)"
+              }
+            },
+            {
+              "x": 182000,
+              "label": {
+                "de": "Sehr hoher Lohn (99 % liegen darunter)",
+                "en": "Very high wage (99% are below)"
+              }
+            }
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "type": "schedule",
+          "target": "rev.contributions.wages.pension",
+          "distribution": "gross_earnings",
+          "baseline": {
+            "points": [
+              {
+                "x": 0,
+                "y": 18.6
+              },
+              {
+                "x": 90600,
+                "y": 18.6
+              },
+              {
+                "x": 90600,
+                "y": 0
+              }
+            ],
+            "scale": 0.01
+          },
+          "reform": {
+            "curve": {
+              "param": "schedule",
+              "scale": 0.01
+            }
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.1
+          },
+          "sources": [
+            "destatis_lest_2022",
+            "drv_rv_in_zeitreihen_2026",
+            "drv_rv_in_zahlen_2026"
+          ],
+          "note": {
+            "de": "Die alte und die neue Regel werden auf die Bruttolöhne der rentenversicherungspflichtigen Arbeitnehmer angewendet (Lohnsteuerstatistik 2022, mit dem Durchschnittsentgelt auf 2024 fortgeschrieben). Die Regel von 2024 ergibt im Modell 275 Mrd. Euro, so viel wie der Haushaltsposten; dieser ist allerdings selbst mit derselben Statistik aus den gesamten Beitragseinnahmen der Rentenversicherung abgeleitet. Unabhängig ist der Vergleich für 2022: 248 Mrd. Euro im Modell gegenüber 276 Mrd. Euro gesamten Beitragseinnahmen, die auch Beiträge enthalten, die nicht aus Löhnen stammen. Statisch gerechnet: Löhne und Beschäftigung ändern sich nicht. Eine veröffentlichte Schätzung zum Vergleich wurde nicht gefunden.",
+            "en": "The old and the new rule are applied to the gross wages of employees liable to pension insurance (2022 wage tax statistics, uprated to 2024 with average earnings). The 2024 rule yields EUR 275 billion in the model, as much as the budget item; that item, however, is itself derived with the same statistics from the pension insurance's total contribution revenue. The independent comparison is for 2022: EUR 248 billion in the model against EUR 276 billion of total contribution revenue, which also includes contributions not levied on wages. Static calculation: wages and employment do not change. No published estimate was found for comparison."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Höhere Beiträge begründen höhere Renten: Die Rente richtet sich danach, wie hoch der versicherte Lohn im Verhältnis zum Durchschnittsentgelt war. Wer auf höhere Lohnteile Beiträge zahlt, erwirbt entsprechend mehr Rente. Den Mehreinnahmen von heute stehen deshalb später Mehrausgaben gegenüber; dauerhaft bliebe nur dann mehr in der Kasse, wenn hohe Renten gekappt oder abgeflacht würden, also der bisherige Zusammenhang von Beitrag und Rente aufgegeben würde.",
+            "en": "Higher contributions give rise to higher pensions: a pension depends on how high the insured wage was relative to average earnings. Whoever pays contributions on higher parts of the wage acquires correspondingly more pension. Today's additional revenue is therefore matched by additional spending later; more would remain in the fund permanently only if high pensions were capped or flattened, that is, if the present link between contribution and pension were given up."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Arbeitnehmer und Arbeitgeber tragen den Beitrag je zur Hälfte. Eine höhere oder aufgehobene Grenze verteuert deshalb auch die Arbeit von gut Verdienenden für die Unternehmen (9,3 % auf die bisher beitragsfreien Lohnteile) und senkt deren Nettolohn um ebenso viel. Betroffen wären rund 7,5 % der Beschäftigten, deren Lohn 2024 über 90.600 Euro liegt.",
+            "en": "Employees and employers each bear half of the contribution. A higher or abolished ceiling therefore also makes the labour of high earners more expensive for firms (9.3% on the wage parts so far exempt) and lowers their net pay by the same amount. This would affect about 7.5% of employees, whose wage in 2024 is above EUR 90,600."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "destatis_lest_2022"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Grenze steigt jedes Jahr mit den Löhnen: 2025 auf 96.600 Euro, 2026 auf 101.400 Euro. 2024 galt in Ostdeutschland noch eine niedrigere Grenze (89.400 Euro); die Rechnung verwendet einheitlich den Wert für Westdeutschland. Die Kurve steht in Werten von 2024.",
+            "en": "The ceiling rises every year with wages: to EUR 96,600 in 2025 and EUR 101,400 in 2026. In 2024 a lower ceiling still applied in eastern Germany (EUR 89,400); the calculation uses the western value throughout. The curve is in 2024 values."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "bundesregierung_rechengroessen_2024"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Grundlage sind die Bruttolöhne laut Lohnsteuerbescheinigung, die vom beitragspflichtigen Entgelt etwas abweichen. Beiträge, die für Arbeitslose, Kranke oder Pflegende gezahlt werden, und die Beiträge der Selbständigen sind nicht Teil dieser Rechnung. Die Mehreinnahmen fließen der Rentenversicherung zu, nicht dem Bundeshaushalt.",
+            "en": "The basis is gross wages according to wage tax statements, which differ somewhat from earnings subject to contributions. Contributions paid for unemployed persons, the sick or carers, and the contributions of the self-employed are not part of this calculation. The additional revenue goes to the pension insurance, not to the federal budget."
+          },
+          "sources": [
+            "destatis_lest_2022",
+            "drv_rv_in_zeitreihen_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "drv_rv_in_zahlen_2026",
+        "destatis_lest_2022",
+        "drv_rv_in_zeitreihen_2026",
+        "bundesregierung_rechengroessen_2024"
+      ]
+    },
+    {
+      "id": "health_insurance_for_all",
+      "label": {
+        "de": "Eine Krankenversicherung für alle (Bürgerversicherung)",
+        "en": "One health insurance for everyone (citizens' insurance)"
+      },
+      "summary": {
+        "de": "Alle bisher privat Versicherten, darunter Beamte, Selbständige und Gutverdienende, wären in der gesetzlichen Krankenversicherung. Der Betrag stammt aus einer Simulation des IGES Instituts und beschreibt den Zustand, in dem alle bereits gewechselt sind, kein erstes Jahr und keinen Übergang: Die gesetzlichen Kassen hätten dann jährlich rund 9 Mrd. Euro mehr Beitragseinnahmen als zusätzliche Ausgaben. Der Regler zeigt, was davon bleibt, wenn Ärzten die höheren Honorare für Privatpatienten ersetzt werden.",
+        "en": "All persons currently insured privately, among them civil servants, the self-employed and high earners, would be in statutory health insurance. The amount comes from a simulation by the IGES institute and describes the state in which everyone has already switched, not a first year and not a transition: the statutory funds would then have about EUR 9 billion more contribution revenue per year than additional spending. The slider shows what remains if doctors are compensated for the higher fees paid for private patients."
+      },
+      "topic": "social",
+      "params": [
+        {
+          "id": "fee_compensation",
+          "type": "number",
+          "label": {
+            "de": "Ausgleich der Honorarverluste der Ärzte",
+            "en": "Compensation of doctors' fee losses"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 0,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.contributions.wages.health",
+          "amount": {
+            "param": "fee_compensation",
+            "scale": -60206897,
+            "offset": 9000000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.2
+          },
+          "sources": [
+            "bertelsmann_iges_pkv_2020"
+          ],
+          "note": {
+            "de": "IGES Institut für die Bertelsmann Stiftung (2020): rund 9 Mrd. Euro Überschuss der zusätzlichen Beiträge über die zusätzlichen Ausgaben pro Jahr, verbucht als Saldo bei den Beitragseinnahmen. Mit vollem Ausgleich der Honorarverluste sinkt die Ersparnis je Mitglied von 145 auf 48 Euro; im gleichen Verhältnis ist der Betrag hier gekürzt (auf rund 3 Mrd. Euro). Die Studie beruht auf älteren Daten und ist nicht auf 2024 fortgeschrieben; die Spanne ist entsprechend weit.",
+            "en": "IGES institute for the Bertelsmann Stiftung (2020): about EUR 9 billion per year of additional contributions in excess of additional spending, booked as a net amount under contribution revenue. With full compensation of fee losses the saving per member falls from EUR 145 to EUR 48; the amount here is reduced in the same proportion (to about EUR 3 billion). The study is based on older data and has not been updated to 2024; the range is correspondingly wide."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Die Zahl beschreibt einen gedachten Endzustand. Ein Übergang, bei dem nur neu Versicherte in die gesetzliche Kasse kommen und bestehende Privatverträge weiterlaufen, brächte über Jahrzehnte nur einen Bruchteil. Die Kassen würden den Überschuss zudem eher für niedrigere Beiträge nutzen: Die Studie nennt 0,2 bis 0,6 Beitragssatzpunkte.",
+            "en": "The figure describes an imagined end state. A transition in which only newly insured persons join the statutory funds while existing private contracts continue would yield only a fraction over decades. Moreover, the funds would more likely use the surplus for lower contributions: the study gives 0.2 to 0.6 contribution-rate points."
+          },
+          "sources": [
+            "bertelsmann_iges_pkv_2020"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Das Bundesverfassungsgericht hat 2009 Eingriffe in die private Krankenversicherung (Basistarif, teilweise Mitnahme der Alterungsrückstellungen) gebilligt, dabei aber auf das Nebeneinander von gesetzlicher und privater Versicherung als zwei Säulen, auf die Berufsfreiheit der Versicherer und auf eine Beobachtungspflicht des Gesetzgebers abgestellt. Ob die private Vollversicherung ganz beendet und was aus bestehenden Verträgen und Alterungsrückstellungen werden dürfte, hat das Gericht nicht entschieden; die genannte Studie hat verfassungsrechtliche Fragen ausdrücklich nicht untersucht.",
+            "en": "In 2009 the Federal Constitutional Court upheld interventions in private health insurance (basic tariff, partial portability of ageing reserves), but based its reasoning on the coexistence of statutory and private insurance as two pillars, on the insurers' occupational freedom and on a duty of the legislature to monitor effects. Whether private full cover may be ended altogether, and what would be allowed to happen to existing contracts and ageing reserves, the Court has not decided; the study cited explicitly did not examine constitutional questions."
+          },
+          "sources": [
+            "bverfg_2009_pkv",
+            "bertelsmann_iges_beamte_gkv_2017"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Für Privatpatienten rechnen Ärzte höhere Honorare ab. Fielen sie weg, verlören Praxen Einnahmen; werden die Verluste ausgeglichen, bleibt den Beitragszahlern nach der Studie nur etwa ein Drittel der Ersparnis (48 statt 145 Euro je Mitglied und Jahr). Privat Versicherte verdienen im Schnitt 56 % mehr und sind seltener im Krankenhaus (17 gegenüber 23 % mit mindestens einem Aufenthalt im Jahr); daraus entsteht der Überschuss.",
+            "en": "Doctors charge higher fees for private patients. If these ceased, practices would lose income; if the losses are compensated, contributors keep only about a third of the saving according to the study (EUR 48 instead of EUR 145 per member and year). Privately insured persons earn 56% more on average and are in hospital less often (17 versus 23% with at least one stay per year); this is where the surplus comes from."
+          },
+          "sources": [
+            "bertelsmann_iges_pkv_2020"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Für Beamte zahlt der Staat heute Beihilfe statt eines Arbeitgeberbeitrags (2014: Bund 4,5 Mrd. Euro, Länder 7,4 Mrd. Euro). Eine frühere IGES-Studie rechnete für eine Versicherungspflicht der Beamten mit einer Entlastung der öffentlichen Haushalte um 60 Mrd. Euro bis 2030, weil der Arbeitgeberbeitrag meist niedriger wäre als die Beihilfe; 13 von 16 Ländern würden entlastet. Diese Wirkung auf Bund und Länder ist im Betrag oben nicht enthalten. Die Alterungsrückstellungen privat versicherter Beamter (rund 72 Mrd. Euro) blieben in der Rechnung außen vor.",
+            "en": "For civil servants the state today pays medical allowances (Beihilfe) instead of an employer contribution (2014: federal EUR 4.5 billion, states EUR 7.4 billion). An earlier IGES study calculated that compulsory statutory insurance for civil servants would relieve public budgets by EUR 60 billion by 2030, because the employer contribution would mostly be lower than the allowances; 13 of the 16 states would be relieved. This effect on the federal and state levels is not included in the amount above. The ageing reserves of privately insured civil servants (about EUR 72 billion) were left out of that calculation."
+          },
+          "sources": [
+            "bertelsmann_iges_beamte_gkv_2017"
+          ]
+        }
+      ],
+      "sources": [
+        "bertelsmann_iges_pkv_2020",
+        "bertelsmann_iges_beamte_gkv_2017",
+        "bverfg_2009_pkv"
+      ]
+    },
+    {
+      "id": "health_contribution_schedule",
+      "label": {
+        "de": "Krankenkassenbeitrag: Satz und Beitragsbemessungsgrenze ändern",
+        "en": "Health insurance contribution: change the rate and the ceiling"
+      },
+      "summary": {
+        "de": "Legt fest, welcher Beitragssatz zur gesetzlichen Krankenversicherung auf welchen Teil des Bruttojahreslohns erhoben wird (Arbeitnehmer- und Arbeitgeberanteil zusammen). Voreingestellt ist die Regel von 2024: 16,27 % (allgemeiner Satz von 14,6 % plus durchschnittlicher Zusatzbeitrag von 1,67 %) bis zur Beitragsbemessungsgrenze von 62.100 Euro, darüber nichts; solange kein Punkt bewegt wird, ändert sich nichts. Die Vorlagen heben die Grenze auf das Niveau der Rentenversicherung an oder heben sie auf. Die Rechnung überträgt die relative Änderung auf die Beiträge der Mitglieder aus Löhnen. Sie ist eine Obergrenze, weil ein Teil der gut Verdienenden privat versichert ist.",
+        "en": "Sets the contribution rate to statutory health insurance charged on each part of the gross annual wage (employee and employer share together). The default is the 2024 rule: 16.27% (general rate of 14.6% plus the average additional contribution of 1.67%) up to the contribution ceiling of EUR 62,100 and nothing above; as long as no point is moved, nothing changes. The presets raise the ceiling to the level of the pension insurance or abolish it. The calculation transfers the relative change to members' contributions on wages. It is an upper bound, because some high earners are privately insured."
+      },
+      "topic": "social",
+      "params": [
+        {
+          "id": "schedule",
+          "type": "curve",
+          "label": {
+            "de": "Beitragssatz nach Bruttojahreslohn",
+            "en": "Contribution rate by gross annual wage"
+          },
+          "x": {
+            "unit": "currency",
+            "min": 0,
+            "max": 300000,
+            "step": 100
+          },
+          "y": {
+            "unit": "percent",
+            "min": 0,
+            "max": 30,
+            "step": 0.1
+          },
+          "default": [
+            {
+              "x": 0,
+              "y": 16.27
+            },
+            {
+              "x": 62100,
+              "y": 16.27
+            },
+            {
+              "x": 62100,
+              "y": 0
+            }
+          ],
+          "baseline": [
+            {
+              "x": 0,
+              "y": 16.27
+            },
+            {
+              "x": 62100,
+              "y": 16.27
+            },
+            {
+              "x": 62100,
+              "y": 0
+            }
+          ],
+          "minPoints": 1,
+          "maxPoints": 12,
+          "presets": [
+            {
+              "id": "law_2024",
+              "label": {
+                "de": "Geltende Regel 2024",
+                "en": "Rule in force in 2024"
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 16.27
+                },
+                {
+                  "x": 62100,
+                  "y": 16.27
+                },
+                {
+                  "x": 62100,
+                  "y": 0
+                }
+              ],
+              "sources": [
+                "drv_rv_in_zahlen_2026",
+                "bundesregierung_rechengroessen_2024"
+              ]
+            },
+            {
+              "id": "ceiling_pension_level",
+              "label": {
+                "de": "Grenze wie in der Rentenversicherung (90.600 Euro)",
+                "en": "Ceiling as in the pension insurance (EUR 90,600)"
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 16.27
+                },
+                {
+                  "x": 90600,
+                  "y": 16.27
+                },
+                {
+                  "x": 90600,
+                  "y": 0
+                }
+              ]
+            },
+            {
+              "id": "no_ceiling",
+              "label": {
+                "de": "Beitragsbemessungsgrenze aufheben",
+                "en": "Abolish the contribution ceiling"
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 16.27
+                }
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "x": 37500,
+              "label": {
+                "de": "Mittlerer Jahreslohn (die Hälfte der Beschäftigten liegt darunter)",
+                "en": "Median annual wage (half of all employees are below)"
+              }
+            },
+            {
+              "x": 81000,
+              "label": {
+                "de": "Hoher Lohn (90 % liegen darunter)",
+                "en": "High wage (90% are below)"
+              }
+            },
+            {
+              "x": 182000,
+              "label": {
+                "de": "Sehr hoher Lohn (99 % liegen darunter)",
+                "en": "Very high wage (99% are below)"
+              }
+            }
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "type": "schedule",
+          "target": "rev.contributions.wages.health",
+          "distribution": "gross_earnings",
+          "baseline": {
+            "points": [
+              {
+                "x": 0,
+                "y": 16.27
+              },
+              {
+                "x": 62100,
+                "y": 16.27
+              },
+              {
+                "x": 62100,
+                "y": 0
+              }
+            ],
+            "scale": 0.01
+          },
+          "reform": {
+            "curve": {
+              "param": "schedule",
+              "scale": 0.01
+            }
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0
+          },
+          "sources": [
+            "destatis_lest_2022",
+            "drv_rv_in_zeitreihen_2026",
+            "bmg_kj1_2024",
+            "drv_rv_in_zahlen_2026"
+          ],
+          "note": {
+            "de": "Die alte und die neue Regel werden auf die Bruttolöhne der rentenversicherungspflichtigen Arbeitnehmer angewendet (Lohnsteuerstatistik 2022, auf 2024 fortgeschrieben). Die Regel von 2024 ergibt im Modell 220 Mrd. Euro; die Beiträge der pflichtversicherten und freiwilligen Mitglieder laut Rechnungsergebnissen der Kassen betragen 230 Mrd. Euro. In der Lohnverteilung sind auch privat versicherte Arbeitnehmer enthalten, die keinen Beitrag an die gesetzlichen Kassen zahlen; wie viele es oberhalb der Grenze sind, ließ sich nicht belegen. Die untere Grenze der Spanne (40 % weniger) ist deshalb eine Annahme. Statisch gerechnet; eine veröffentlichte Schätzung zum Vergleich wurde nicht gefunden.",
+            "en": "The old and the new rule are applied to the gross wages of employees liable to pension insurance (2022 wage tax statistics, uprated to 2024). The 2024 rule yields EUR 220 billion in the model; contributions of compulsorily insured and voluntary members according to the funds' accounts amount to EUR 230 billion. The wage distribution also contains privately insured employees, who pay no contribution to the statutory funds; how many of them are above the ceiling could not be sourced. The lower bound of the range (40% less) is therefore an assumption. Static calculation; no published estimate was found for comparison."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Wer mehr als die Versicherungspflichtgrenze verdient (2024: 69.300 Euro), darf sich privat versichern und zahlt dann keinen Beitrag an die gesetzlichen Kassen. Privat Versicherte verdienen im Schnitt deutlich mehr als gesetzlich Versicherte. Die Rechnung behandelt aber alle Arbeitnehmer wie gesetzlich Versicherte und zeigt deshalb eine Obergrenze. Zudem macht eine höhere Beitragsbemessungsgrenze den Wechsel in die private Versicherung attraktiver, solange die Versicherungspflichtgrenze nicht mit angehoben wird.",
+            "en": "Anyone earning more than the compulsory insurance threshold (2024: EUR 69,300) may insure privately and then pays no contribution to the statutory funds. Privately insured persons earn considerably more on average than those in statutory insurance. The calculation, however, treats all employees as statutorily insured and therefore shows an upper bound. Moreover, a higher contribution ceiling makes switching to private insurance more attractive as long as the compulsory insurance threshold is not raised with it."
+          },
+          "sources": [
+            "bundesregierung_rechengroessen_2024",
+            "bertelsmann_iges_pkv_2020"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Arbeitnehmer und Arbeitgeber teilen sich den Beitrag einschließlich des Zusatzbeitrags. Eine höhere Grenze verteuert deshalb die Arbeit von gut Verdienenden für die Unternehmen und senkt deren Nettolohn. Betroffen wären rund 20 % der Beschäftigten, deren Lohn 2024 über 62.100 Euro liegt.",
+            "en": "Employees and employers share the contribution including the additional contribution. A higher ceiling therefore makes the labour of high earners more expensive for firms and lowers their net pay. This would affect about 20% of employees, whose wage in 2024 is above EUR 62,100."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "destatis_lest_2022"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Der Zusatzbeitrag ist je Kasse verschieden; 1,67 % ist der Durchschnitt von 2024. Seither sind die Sätze gestiegen (Durchschnitt 2026: 3,10 %). Die Mehreinnahmen fließen den Krankenkassen zu, nicht dem Bundeshaushalt; sie könnten für niedrigere Beitragssätze genutzt werden. Die Beiträge der Rentner sind nicht Teil dieser Rechnung.",
+            "en": "The additional contribution differs by fund; 1.67% is the 2024 average. Rates have risen since (2026 average: 3.10%). The additional revenue goes to the health insurance funds, not to the federal budget; it could be used for lower contribution rates. Pensioners' contributions are not part of this calculation."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "bmg_kj1_2024"
+          ]
+        }
+      ],
+      "sources": [
+        "drv_rv_in_zahlen_2026",
+        "bundesregierung_rechengroessen_2024",
+        "destatis_lest_2022",
+        "bmg_kj1_2024"
       ]
     }
   ]

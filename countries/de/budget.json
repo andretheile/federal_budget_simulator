@@ -579,36 +579,122 @@
       "code": "D61",
       "children": [
         {
-          "id": "rev.contributions.employers",
+          "id": "rev.contributions.wages",
           "label": {
-            "de": "Arbeitgeberbeiträge zur Sozialversicherung",
-            "en": "Employers' social insurance contributions"
+            "de": "Beiträge auf Löhne und Gehälter (Arbeitgeber und Arbeitnehmer)",
+            "en": "Contributions on wages and salaries (employers and employees)"
           },
-          "code": "D611",
-          "amount": 302350000000,
-          "levels": {
-            "social_security": 1.0
+          "description": {
+            "de": "Pflichtbeiträge von Arbeitgebern und Arbeitnehmern zusammen. Die Gesamtsumme stammt aus den Volkswirtschaftlichen Gesamtrechnungen (Arbeitgeber 302,4 Mrd. Euro, Arbeitnehmer 280,2 Mrd. Euro); die Aufteilung auf Renten- und Krankenversicherung beruht auf den Rechnungsergebnissen der Versicherungen.",
+            "en": "Compulsory contributions of employers and employees together. The total comes from national accounts (employers EUR 302.4 billion, employees EUR 280.2 billion); the split into pension and health insurance is based on the insurers' accounts."
           },
-          "quality": "official",
-          "sources": [
-            "eurostat_ntl",
-            "eurostat_gov_10a_main"
-          ]
-        },
-        {
-          "id": "rev.contributions.employees",
-          "label": {
-            "de": "Arbeitnehmerbeiträge zur Sozialversicherung",
-            "en": "Employees' social insurance contributions"
-          },
-          "code": "D613CE",
-          "amount": 280150000000,
-          "levels": {
-            "social_security": 1.0
-          },
-          "quality": "official",
-          "sources": [
-            "eurostat_ntl"
+          "code": "D611+D613CE",
+          "children": [
+            {
+              "id": "rev.contributions.wages.pension",
+              "label": {
+                "de": "Gesetzliche Rentenversicherung: Beiträge auf Löhne",
+                "en": "Statutory pension insurance: contributions on wages"
+              },
+              "description": {
+                "de": "Beitragssatz 2024: 18,6 % des Bruttolohns bis zur Beitragsbemessungsgrenze von 90.600 Euro im Jahr (Ost: 89.400 Euro), je zur Hälfte von Arbeitgeber und Arbeitnehmer.",
+                "en": "Contribution rate 2024: 18.6% of gross wages up to the contribution ceiling of EUR 90,600 a year (East: EUR 89,400), half each from employer and employee."
+              },
+              "amount": 274848575948,
+              "levels": {
+                "social_security": 1.0
+              },
+              "quality": "estimate",
+              "sources": [
+                "drv_rv_in_zahlen_2026",
+                "drv_rv_in_zeitreihen_2026",
+                "destatis_lest_2022"
+              ],
+              "note": {
+                "de": "Die Rentenversicherung weist für 2024 Beitragseinnahmen von 305,9 Mrd. Euro aus, ohne Aufteilung nach Beitragsarten. Der Anteil der Beiträge auf Löhne (89,8 %) ist geschätzt: 18,6 % der Bruttolöhne bis zur Beitragsbemessungsgrenze laut Lohnsteuerstatistik 2022 (247,6 Mrd. Euro) im Verhältnis zu den Beitragseinnahmen 2022 (275,6 Mrd. Euro). Der Rest sind unter anderem Beiträge des Bundes für Kindererziehungszeiten und Beiträge auf Lohnersatzleistungen.",
+                "en": "The pension insurance reports contribution revenue of EUR 305.9 billion for 2024 without a breakdown by type. The share of contributions on wages (89.8%) is estimated: 18.6% of gross wages up to the contribution ceiling according to the 2022 wage tax statistics (EUR 247.6 billion) relative to contribution revenue in 2022 (EUR 275.6 billion). The rest includes federal contributions for child-raising periods and contributions on wage-replacement benefits."
+              }
+            },
+            {
+              "id": "rev.contributions.wages.health",
+              "label": {
+                "de": "Gesetzliche Krankenversicherung: Beiträge von Beschäftigten und freiwilligen Mitgliedern",
+                "en": "Statutory health insurance: contributions of employees and voluntary members"
+              },
+              "description": {
+                "de": "Beitragssatz 2024: 14,6 % plus durchschnittlich 1,67 % Zusatzbeitrag des Bruttolohns bis zur Beitragsbemessungsgrenze von 62.100 Euro im Jahr, je zur Hälfte von Arbeitgeber und Arbeitnehmer.",
+                "en": "Contribution rate 2024: 14.6% plus an average additional contribution of 1.67% of gross wages up to the contribution ceiling of EUR 62,100 a year, half each from employer and employee."
+              },
+              "children": [
+                {
+                  "id": "rev.contributions.wages.health.compulsory",
+                  "label": {
+                    "de": "Pflichtversicherte Beschäftigte",
+                    "en": "Compulsorily insured employees"
+                  },
+                  "amount": 176532042000,
+                  "levels": {
+                    "social_security": 1.0
+                  },
+                  "quality": "official",
+                  "sources": [
+                    "bmg_kj1_2024",
+                    "bundesregierung_rechengroessen_2024",
+                    "drv_rv_in_zahlen_2026"
+                  ],
+                  "note": {
+                    "de": "Endgültige Rechnungsergebnisse der gesetzlichen Krankenversicherung 2024: Beiträge für versicherungspflichtige Beschäftigte (158,2 Mrd. Euro) und Zusatzbeiträge (18,4 Mrd. Euro). Kassenzahl, keine Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen.",
+                    "en": "Final accounts of statutory health insurance 2024: contributions for compulsorily insured employees (EUR 158.2 billion) and additional contributions (EUR 18.4 billion). Cash figure, not the national accounts definition."
+                  }
+                },
+                {
+                  "id": "rev.contributions.wages.health.voluntary",
+                  "label": {
+                    "de": "Freiwillige Mitglieder und sonstige Beiträge",
+                    "en": "Voluntary members and other contributions"
+                  },
+                  "description": {
+                    "de": "Darunter die Beiträge freiwillig versicherter Beschäftigter mit einem Lohn oberhalb der Versicherungspflichtgrenze (2024: 69.300 Euro) und freiwillig versicherter Selbständiger.",
+                    "en": "Includes the contributions of voluntarily insured employees with wages above the compulsory insurance threshold (2024: EUR 69,300) and of voluntarily insured self-employed persons."
+                  },
+                  "amount": 53323674000,
+                  "levels": {
+                    "social_security": 1.0
+                  },
+                  "quality": "official",
+                  "sources": [
+                    "bmg_kj1_2024",
+                    "bundesregierung_rechengroessen_2024"
+                  ],
+                  "note": {
+                    "de": "Endgültige Rechnungsergebnisse 2024: „Sonstige Beiträge“ (48,0 Mrd. Euro) und „Sonstige Zusatzbeiträge“ (5,3 Mrd. Euro) des Gesundheitsfonds. Die Jahresrechnung weist die freiwilligen Mitglieder nicht gesondert aus; ein Teil dieser Beiträge stammt nicht aus Löhnen.",
+                    "en": "Final accounts 2024: \"other contributions\" (EUR 48.0 billion) and \"other additional contributions\" (EUR 5.3 billion) of the health fund. The accounts do not show voluntary members separately; part of these contributions does not come from wages."
+                  }
+                }
+              ]
+            },
+            {
+              "id": "rev.contributions.wages.other",
+              "label": {
+                "de": "Pflege-, Arbeitslosen- und Unfallversicherung sowie Abgrenzungsunterschiede",
+                "en": "Long-term care, unemployment and accident insurance, and differences in definition"
+              },
+              "amount": 77795708052,
+              "levels": {
+                "social_security": 1.0
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_ntl",
+                "eurostat_gov_10a_main",
+                "drv_rv_in_zahlen_2026",
+                "bmg_kj1_2024"
+              ],
+              "note": {
+                "de": "Rest: Beiträge von Arbeitgebern und Arbeitnehmern laut Volkswirtschaftlichen Gesamtrechnungen (582,5 Mrd. Euro) abzüglich der oben ausgewiesenen Kassenzahlen für Renten- und Krankenversicherung. Wegen der unterschiedlichen Abgrenzung nur näherungsweise richtig.",
+                "en": "Remainder: contributions of employers and employees according to national accounts (EUR 582.5 billion) minus the cash figures for pension and health insurance shown above. Only approximately right because of the different definitions."
+              }
+            }
           ]
         },
         {
@@ -2277,6 +2363,32 @@
               "note": {
                 "de": "Rentenausgaben 2024 (360,1 Mrd. Euro) mal Anteil der Altersrenten (79,9 %). Bundesanteil: Zahlungen des Bundes an die Rentenversicherung (116,1 Mrd. Euro) im Verhältnis zu deren Gesamtausgaben (402,8 Mrd. Euro).",
                 "en": "Pension expenditure 2024 (EUR 360.1 billion) times the share of old-age pensions (79.9%). Federal share: federal payments to the pension insurance (EUR 116.1 billion) relative to its total spending (EUR 402.8 billion)."
+              }
+            },
+            {
+              "id": "exp.social.old_age.civil_service_contributions",
+              "label": {
+                "de": "Rentenbeiträge des Staates für seine Beamten (bisher keine)",
+                "en": "Government pension contributions for its civil servants (none so far)"
+              },
+              "description": {
+                "de": "Beamte sind nicht in der gesetzlichen Rentenversicherung; der Staat zahlt für sie keine Beiträge, sondern später die Pension. Der Posten ist leer und nimmt die Arbeitgeberbeiträge auf, die bei einer Einbeziehung der Beamten anfielen.",
+                "en": "Civil servants are not in the statutory pension insurance; the state pays no contributions for them but pays their pension later. The item is empty and receives the employer contributions that would arise if civil servants were included."
+              },
+              "amount": 0,
+              "levels": {
+                "central": 0.1823,
+                "state": 0.6635,
+                "local": 0.1028,
+                "social_security": 0.0514
+              },
+              "quality": "derived",
+              "sources": [
+                "eurostat_gov_10a_main"
+              ],
+              "note": {
+                "de": "Aufteilung auf die Ebenen nach den unterstellten Sozialbeiträgen für Beamte laut Eurostat (Bund 18 %, Länder 66 %, Gemeinden 10 %, Sozialversicherung 5 %) als Näherung dafür, wo Beamte beschäftigt sind.",
+                "en": "Split across levels by the imputed social contributions for civil servants according to Eurostat (federal 18%, states 66%, municipalities 10%, social insurance 5%) as an approximation of where civil servants are employed."
               }
             },
             {

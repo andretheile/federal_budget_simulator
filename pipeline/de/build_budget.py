@@ -63,6 +63,9 @@ KDU_FED = 12359.620     # bundeshaushalt_2024: title 1101 632 11, federal share 
 ALG1 = 22160.0          # ba_geschaeftsbericht_2024: unemployment benefit 2024
 ASYL = 6718.465         # destatis_asylblg_ausgaben: gross expenditure 2024 (revised 24 April 2026)
 ELTERNGELD = 7172.430   # bundeshaushalt_2024: title 1701 681 02, parental allowance
+# Where civil servants are employed, approximated by the imputed social contributions of each level
+# (eurostat_gov_10a_main: D61REC minus actual contributions, 2024): central, state, local, social security funds.
+CIVIL_SERVICE_LEVELS = (8779.0, 31948.0, 4950.0, 711072.0 - 302350.0 - 406246.0)
 
 
 def L(id, de, en, amount=None, code=None, seed=None, fixed=None, quality=None, sources=None, note=None, desc=None, year=None):
@@ -193,6 +196,12 @@ EXP = [
               amount=P_OLD, fixed=SS, quality="derived", sources=["drv_rv_in_zahlen_2026", "sozialpolitik_aktuell_viii51", "bundeshaushalt_2024"],
               note=("Rentenausgaben 2024 (360,1 Mrd. Euro) mal Anteil der Altersrenten (79,9 %). Bundesanteil: Zahlungen des Bundes an die Rentenversicherung (116,1 Mrd. Euro) im Verhältnis zu deren Gesamtausgaben (402,8 Mrd. Euro).",
                     "Pension expenditure 2024 (EUR 360.1 billion) times the share of old-age pensions (79.9%). Federal share: federal payments to the pension insurance (EUR 116.1 billion) relative to its total spending (EUR 402.8 billion).")),
+            L("exp.social.old_age.civil_service_contributions", "Rentenbeiträge des Staates für seine Beamten (bisher keine)", "Government pension contributions for its civil servants (none so far)",
+              amount=0.0, fixed=CIVIL_SERVICE_LEVELS, quality="derived", sources=["eurostat_gov_10a_main"],
+              desc=("Beamte sind nicht in der gesetzlichen Rentenversicherung; der Staat zahlt für sie keine Beiträge, sondern später die Pension. Der Posten ist leer und nimmt die Arbeitgeberbeiträge auf, die bei einer Einbeziehung der Beamten anfielen.",
+                    "Civil servants are not in the statutory pension insurance; the state pays no contributions for them but pays their pension later. The item is empty and receives the employer contributions that would arise if civil servants were included."),
+              note=("Aufteilung auf die Ebenen nach den unterstellten Sozialbeiträgen für Beamte laut Eurostat (Bund 18 %, Länder 66 %, Gemeinden 10 %, Sozialversicherung 5 %) als Näherung dafür, wo Beamte beschäftigt sind.",
+                    "Split across levels by the imputed social contributions for civil servants according to Eurostat (federal 18%, states 66%, municipalities 10%, social insurance 5%) as an approximation of where civil servants are employed.")),
             L("exp.social.old_age.other", "Beamtenpensionen, Kranken- und Pflegeleistungen für Ältere und weitere Altersleistungen", "Civil servants' pensions, health and care benefits for the elderly and other old-age benefits",
               amount=cof("GF1002") - P_OLD, seed=(0.17, 0.33, 0.08, 0.42), quality="estimate", sources=SRC_EXP + ["drv_rv_in_zahlen_2026", "bundeshaushalt_2024"],
               note=("Rest der Gruppe „Alter“ nach Abzug der gesetzlichen Altersrenten; Aufteilung auf die Ebenen geschätzt.", "Remainder of the old-age group after deducting statutory old-age pensions; split across levels estimated.")),
@@ -279,7 +288,8 @@ for top in EXP:
     for l in lv:
         if l["fixed"] is not None:
             a = [l["amount"] * w for w in l["fixed"]]
-            ALLOC[l["id"]] = a
+            # a leaf with amount zero (a placeholder for spending a measure would create) keeps its weights as shares
+            ALLOC[l["id"]] = a if l["amount"] > 0 else [float(w) for w in l["fixed"]]
             target = [t - x for t, x in zip(target, a)]
         else:
             free.append(l)
@@ -517,6 +527,16 @@ OTHER_CONS_LV = (4426.0, 2491.0, 2353.0, 0)
 
 RSRC = ["eurostat_ntl"]
 
+# ---- contributions on wages by branch (cash figures of the insurers) ---------------------------------------
+# Pension insurance: drv_rv_in_zahlen_2026, p. 20: contribution revenue 2024 (305,905) and 2022 (275,622, from
+# "Rentenversicherung in Zeitreihen"). The accounts do not split contributions by type. Share on wages, estimated:
+# 18.6 % of gross wages up to the 2022 ceiling of 84,600 euros in the wage tax statistics 2022
+# (check_distributions.py prints it: 247.6 bn) divided by contribution revenue 2022. JUDGEMENT: one ratio for both years.
+PENSION_WAGE = 305905.0 * 247.64 / 275.622
+# Health insurance: bmg_kj1_2024 (final accounts 2024), health fund plus insurers:
+KV_COMPULSORY = 157485.088 + 669.422 + 18377.532   # accounts 02000 (BAS + Bund) and 02900: compulsorily insured employees
+KV_OTHER = 48031.199 + 5292.475                    # accounts 02600 and 02907: "other" (voluntary members and others)
+
 
 def RL(id, de, en, amount, lv, quality="official", sources=None, note=None, desc=None, code=None):
     return dict(id=id, de=de, en=en, amount=amount, levels=shares(list(lv)), quality=quality, sources=sources or RSRC, note=note, desc=desc, code=code, fixed=None)
@@ -605,8 +625,34 @@ REV = [
       desc=("Beiträge zur Renten-, Kranken-, Pflege-, Arbeitslosen- und Unfallversicherung. Eurostat weist sie nach Zahlern aus, nicht nach Versicherungszweigen.",
             "Contributions to pension, health, long-term care, unemployment and accident insurance. Eurostat reports them by payer, not by insurance branch."),
       children=[
-        RL("rev.contributions.employers", "Arbeitgeberbeiträge zur Sozialversicherung", "Employers' social insurance contributions", 302350.0, SS, sources=RSRC + ["eurostat_gov_10a_main"], code="D611"),
-        RL("rev.contributions.employees", "Arbeitnehmerbeiträge zur Sozialversicherung", "Employees' social insurance contributions", 280150.0, SS, code="D613CE"),
+        G("rev.contributions.wages", "Beiträge auf Löhne und Gehälter (Arbeitgeber und Arbeitnehmer)", "Contributions on wages and salaries (employers and employees)", code="D611+D613CE",
+          desc=("Pflichtbeiträge von Arbeitgebern und Arbeitnehmern zusammen. Die Gesamtsumme stammt aus den Volkswirtschaftlichen Gesamtrechnungen (Arbeitgeber 302,4 Mrd. Euro, Arbeitnehmer 280,2 Mrd. Euro); die Aufteilung auf Renten- und Krankenversicherung beruht auf den Rechnungsergebnissen der Versicherungen.",
+                "Compulsory contributions of employers and employees together. The total comes from national accounts (employers EUR 302.4 billion, employees EUR 280.2 billion); the split into pension and health insurance is based on the insurers' accounts."),
+          children=[
+            RL("rev.contributions.wages.pension", "Gesetzliche Rentenversicherung: Beiträge auf Löhne", "Statutory pension insurance: contributions on wages", PENSION_WAGE, SS, quality="estimate",
+               sources=["drv_rv_in_zahlen_2026", "drv_rv_in_zeitreihen_2026", "destatis_lest_2022"],
+               desc=("Beitragssatz 2024: 18,6 % des Bruttolohns bis zur Beitragsbemessungsgrenze von 90.600 Euro im Jahr (Ost: 89.400 Euro), je zur Hälfte von Arbeitgeber und Arbeitnehmer.",
+                     "Contribution rate 2024: 18.6% of gross wages up to the contribution ceiling of EUR 90,600 a year (East: EUR 89,400), half each from employer and employee."),
+               note=("Die Rentenversicherung weist für 2024 Beitragseinnahmen von 305,9 Mrd. Euro aus, ohne Aufteilung nach Beitragsarten. Der Anteil der Beiträge auf Löhne (89,8 %) ist geschätzt: 18,6 % der Bruttolöhne bis zur Beitragsbemessungsgrenze laut Lohnsteuerstatistik 2022 (247,6 Mrd. Euro) im Verhältnis zu den Beitragseinnahmen 2022 (275,6 Mrd. Euro). Der Rest sind unter anderem Beiträge des Bundes für Kindererziehungszeiten und Beiträge auf Lohnersatzleistungen.",
+                     "The pension insurance reports contribution revenue of EUR 305.9 billion for 2024 without a breakdown by type. The share of contributions on wages (89.8%) is estimated: 18.6% of gross wages up to the contribution ceiling according to the 2022 wage tax statistics (EUR 247.6 billion) relative to contribution revenue in 2022 (EUR 275.6 billion). The rest includes federal contributions for child-raising periods and contributions on wage-replacement benefits.")),
+            G("rev.contributions.wages.health", "Gesetzliche Krankenversicherung: Beiträge von Beschäftigten und freiwilligen Mitgliedern", "Statutory health insurance: contributions of employees and voluntary members",
+              desc=("Beitragssatz 2024: 14,6 % plus durchschnittlich 1,67 % Zusatzbeitrag des Bruttolohns bis zur Beitragsbemessungsgrenze von 62.100 Euro im Jahr, je zur Hälfte von Arbeitgeber und Arbeitnehmer.",
+                    "Contribution rate 2024: 14.6% plus an average additional contribution of 1.67% of gross wages up to the contribution ceiling of EUR 62,100 a year, half each from employer and employee."),
+              children=[
+                RL("rev.contributions.wages.health.compulsory", "Pflichtversicherte Beschäftigte", "Compulsorily insured employees", KV_COMPULSORY, SS, sources=["bmg_kj1_2024", "bundesregierung_rechengroessen_2024", "drv_rv_in_zahlen_2026"],
+                   note=("Endgültige Rechnungsergebnisse der gesetzlichen Krankenversicherung 2024: Beiträge für versicherungspflichtige Beschäftigte (158,2 Mrd. Euro) und Zusatzbeiträge (18,4 Mrd. Euro). Kassenzahl, keine Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen.",
+                         "Final accounts of statutory health insurance 2024: contributions for compulsorily insured employees (EUR 158.2 billion) and additional contributions (EUR 18.4 billion). Cash figure, not the national accounts definition.")),
+                RL("rev.contributions.wages.health.voluntary", "Freiwillige Mitglieder und sonstige Beiträge", "Voluntary members and other contributions", KV_OTHER, SS, sources=["bmg_kj1_2024", "bundesregierung_rechengroessen_2024"],
+                   desc=("Darunter die Beiträge freiwillig versicherter Beschäftigter mit einem Lohn oberhalb der Versicherungspflichtgrenze (2024: 69.300 Euro) und freiwillig versicherter Selbständiger.",
+                         "Includes the contributions of voluntarily insured employees with wages above the compulsory insurance threshold (2024: EUR 69,300) and of voluntarily insured self-employed persons."),
+                   note=("Endgültige Rechnungsergebnisse 2024: „Sonstige Beiträge“ (48,0 Mrd. Euro) und „Sonstige Zusatzbeiträge“ (5,3 Mrd. Euro) des Gesundheitsfonds. Die Jahresrechnung weist die freiwilligen Mitglieder nicht gesondert aus; ein Teil dieser Beiträge stammt nicht aus Löhnen.",
+                         "Final accounts 2024: \"other contributions\" (EUR 48.0 billion) and \"other additional contributions\" (EUR 5.3 billion) of the health fund. The accounts do not show voluntary members separately; part of these contributions does not come from wages.")),
+              ]),
+            RL("rev.contributions.wages.other", "Pflege-, Arbeitslosen- und Unfallversicherung sowie Abgrenzungsunterschiede", "Long-term care, unemployment and accident insurance, and differences in definition",
+               302350.0 + 280150.0 - PENSION_WAGE - KV_COMPULSORY - KV_OTHER, SS, quality="estimate", sources=RSRC + ["eurostat_gov_10a_main", "drv_rv_in_zahlen_2026", "bmg_kj1_2024"],
+               note=("Rest: Beiträge von Arbeitgebern und Arbeitnehmern laut Volkswirtschaftlichen Gesamtrechnungen (582,5 Mrd. Euro) abzüglich der oben ausgewiesenen Kassenzahlen für Renten- und Krankenversicherung. Wegen der unterschiedlichen Abgrenzung nur näherungsweise richtig.",
+                     "Remainder: contributions of employers and employees according to national accounts (EUR 582.5 billion) minus the cash figures for pension and health insurance shown above. Only approximately right because of the different definitions.")),
+          ]),
         RL("rev.contributions.self_employed", "Pflichtbeiträge der Selbständigen", "Compulsory contributions of the self-employed", 11809.0, SS, code="D613CS"),
         RL("rev.contributions.non_employed", "Beiträge von Rentnern und Leistungsbeziehern", "Contributions of pensioners and benefit recipients", 106054.0, SS, code="D613CN",
            desc=("Vor allem Kranken- und Pflegeversicherungsbeiträge der Rentner sowie Beiträge, die Sozialkassen und Bund für Leistungsbezieher zahlen.", "Mainly health and long-term care contributions of pensioners and contributions paid by social funds and the federal government on behalf of benefit recipients.")),
@@ -662,6 +708,8 @@ if __name__ == "__main__":
         for top in EXP:
             for l in leaves(top):
                 a = ALLOC[l["id"]]
+                if l["amount"] == 0:
+                    continue
                 lvl = [t + x for t, x in zip(lvl, a)]
                 print(f"{l['id']:<52}{l['amount']:>10.0f}  " + " ".join(f"{x / l['amount'] * 100:5.1f}" for x in a))
         print("expenditure borne by level (bn):", [round(t / 1e3, 1) for t in lvl])

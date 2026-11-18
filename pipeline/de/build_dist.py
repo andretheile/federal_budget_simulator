@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-"""Builds countries/de/distributions/taxable_income.json and net_wealth.json.
+"""Builds countries/de/distributions/taxable_income.json, net_wealth.json and gross_earnings.json.
 
     python3 pipeline/de/build_dist.py            diagnostics only
     python3 pipeline/de/build_dist.py --check    rebuild in memory and compare with the existing files
-    python3 pipeline/de/build_dist.py --write    rebuild and replace the two files
+    python3 pipeline/de/build_dist.py --write    rebuild and replace the three files
 
 Inputs (written by fetch_inputs.py):
   .cache/est/csv02.tsv    Destatis wage and income tax statistics 2022, table 73111-02 (sheet csv-73111-02)
+  .cache/est/csv04.tsv    the same statistics, table 73111-04 (sheet csv-73111-04): individual gross wages
   .cache/ecb/dwa_de.csv   ECB Distributional Wealth Accounts, Germany, households, net wealth
+
+The income and earnings statistics are from 2022, the latest year published. Measures compare them with thresholds
+of the base year 2024 (basic allowance, contribution ceilings), so every euro value of these two distributions is
+brought to 2024 with the growth of average earnings (UPRATE below); the numbers of persons stay those of 2022.
 
 What is data and what is judgement is listed in README.md.
 """
@@ -16,6 +21,18 @@ import json, os, re, collections, math, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 S = os.path.join(HERE, ".cache")
 OUT = os.path.normpath(os.path.join(HERE, "..", "..", "countries", "de", "distributions"))
+
+# Average gross earnings of the insured (Durchschnittsentgelt, Anlage 1 SGB VI) from the pension insurance's time
+# series (source drv_rv_in_zeitreihen_2026): 42,053 euros in 2022 and 47,085 euros in 2024, i.e. +12.0 %.
+UPRATE = 47085 / 42053
+
+
+def uprate(bins, tail):
+    """Multiplies every euro value by UPRATE. Bounds are rounded to whole euros (neighbouring bins stay adjacent)."""
+    out = [{"from": round(b["from"] * UPRATE), "to": round(b["to"] * UPRATE), "count": b["count"], "mean": round(b["mean"] * UPRATE, 2)} for b in bins]
+    for a, b in zip(out, out[1:]):
+        assert a["to"] == b["from"] and a["from"] <= a["mean"] <= a["to"], (a, b)
+    return out, dict(tail, **{"from": out[-1]["to"]})
 
 
 def income():
@@ -70,19 +87,20 @@ def income():
     assert tail["from"] == bins[-1]["to"]
     n = sum(b["count"] for b in bins) + tail["count"]
     z = sum(b["count"] * b["mean"] for b in bins) + tail["count"] * tail["from"] * tail["alpha"] / (tail["alpha"] - 1)
-    print("income units", n, "total zvE bn", z / 1e9)
+    print("income units", n, "total zvE bn", z / 1e9, "(2022, before uprating)")
+    bins, tail = uprate(bins, tail)
     return {
         "id": "taxable_income",
         "label": {"de": "Zu versteuerndes Einkommen je Steuerpflichtigem", "en": "Taxable income per taxpayer"},
         "variable": {"de": "zu versteuerndes Einkommen pro Jahr in Euro (bei zusammen veranlagten Paaren je Partner die Hälfte)", "en": "taxable income per year in euros (for jointly assessed couples, half per partner)"},
         "unit": {"de": "Steuerpflichtige Personen (zusammen veranlagte Paare zählen als zwei Personen)", "en": "taxpayers (jointly assessed couples count as two persons)"},
-        "year": 2022,
+        "year": 2024,
         "bins": bins,
         "tail": tail,
-        "quality": "derived",
-        "sources": ["destatis_lest_2022"],
-        "note": {"de": "Lohn- und Einkommensteuerstatistik 2022, Tabelle 73111-02 (unbeschränkt Steuerpflichtige nach Größenklassen des zu versteuernden Einkommens). Weil der Steuertarif bei zusammen veranlagten Paaren auf das halbe gemeinsame Einkommen angewendet wird (Splitting), wurden Paare als zwei Personen mit je halbem Einkommen gezählt; die halbierten Größenklassen der Splittingtabelle decken sich mit denen der Grundtabelle. Die oberste Klasse (ab 1 Mio. Euro) ist als Pareto-Verteilung dargestellt, deren Mittelwert dem amtlichen Klassenmittel entspricht. Die Untergrenze der Klasse mit negativem Einkommen ist gesetzt. Einkommen des Jahres 2022; Kapitalerträge unter der Abgeltungsteuer sind nicht enthalten.",
-                 "en": "Wage and income tax statistics 2022, table 73111-02 (resident taxpayers by size class of taxable income). Because the tax schedule is applied to half the joint income of jointly assessed couples (income splitting), couples were counted as two persons with half the income each; the halved size classes of the splitting table coincide with those of the basic table. The top class (EUR 1 million and above) is represented as a Pareto distribution whose mean equals the official class mean. The lower bound of the class with negative income is set arbitrarily. Incomes of 2022; capital income taxed at the flat withholding rate is not included."},
+        "quality": "estimate",
+        "sources": ["destatis_lest_2022", "drv_rv_in_zeitreihen_2026"],
+        "note": {"de": "Lohn- und Einkommensteuerstatistik 2022, Tabelle 73111-02 (unbeschränkt Steuerpflichtige nach Größenklassen des zu versteuernden Einkommens). Weil der Steuertarif bei zusammen veranlagten Paaren auf das halbe gemeinsame Einkommen angewendet wird (Splitting), wurden Paare als zwei Personen mit je halbem Einkommen gezählt; die halbierten Größenklassen der Splittingtabelle decken sich mit denen der Grundtabelle. Die oberste Klasse (ab 1 Mio. Euro) ist als Pareto-Verteilung dargestellt, deren Mittelwert dem amtlichen Klassenmittel entspricht. Die Untergrenze der Klasse mit negativem Einkommen ist gesetzt. Kapitalerträge unter der Abgeltungsteuer sind nicht enthalten. Die Statistik von 2022 ist die jüngste verfügbare. Damit die Einkommen zu den Tarifgrenzen des Basisjahres 2024 passen, sind alle Eurowerte mit dem Anstieg des Durchschnittsentgelts der Rentenversicherten von 2022 bis 2024 (+12,0 %) fortgeschrieben; die Zahl der Personen ist die von 2022. Die Fortschreibung unterstellt, dass alle Einkommen gleich stark gestiegen sind, und ist deshalb eine Schätzung.",
+                 "en": "Wage and income tax statistics 2022, table 73111-02 (resident taxpayers by size class of taxable income). Because the tax schedule is applied to half the joint income of jointly assessed couples (income splitting), couples were counted as two persons with half the income each; the halved size classes of the splitting table coincide with those of the basic table. The top class (EUR 1 million and above) is represented as a Pareto distribution whose mean equals the official class mean. The lower bound of the class with negative income is set arbitrarily. Capital income taxed at the flat withholding rate is not included. The 2022 statistics are the latest available. So that incomes match the schedule thresholds of the base year 2024, all euro values are uprated with the growth of average earnings of persons insured in the pension insurance from 2022 to 2024 (+12.0%); the number of persons is that of 2022. The uprating assumes that all incomes grew at the same rate and is therefore an estimate."},
     }
 
 
@@ -146,9 +164,51 @@ def wealth():
     }
 
 
+def earnings():
+    # Destatis wage and income tax statistics 2022, table 73111-04: wage tax cases by size class of the individual
+    # gross wage, column group "Rentenversicherungspflichtige Arbeitnehmer" (employees liable to pension insurance).
+    rows = [l.rstrip("\n").split("\t") for l in open(os.path.join(S, "est", "csv04.tsv"), encoding="utf-8")][1:]
+    bins, tail = [], None
+    for r in rows:
+        if len(r) < 9 or r[4] != "Rentenversicherungspflichtige Arbeitnehmer" or r[5] != "Bruttolohn_insgesamt":
+            continue
+        c = r[3].replace(" ", " ")
+        n, total = float(r[7]), float(r[8])
+        m = re.match(r"von ([\d ]+) bis unter ([\d ]+) EUR", c)
+        if m:
+            lo, hi = float(m.group(1).replace(" ", "")), float(m.group(2).replace(" ", ""))
+            if lo == 1:
+                lo = 0.0   # the first class starts at 1 euro
+            bins.append({"from": lo, "to": hi, "count": round(n), "mean": round(total / n, 2)})
+        elif "oder mehr" in c:
+            lo = float(re.match(r"([\d ]+)", c).group(1).replace(" ", ""))
+            mean = total / n
+            tail = {"from": lo, "count": round(n), "alpha": round(mean / (mean - lo), 4)}
+    for a, b in zip(bins, bins[1:]):
+        assert a["to"] == b["from"], (a, b)
+    assert tail["from"] == bins[-1]["to"]
+    n = sum(b["count"] for b in bins) + tail["count"]
+    w = sum(b["count"] * b["mean"] for b in bins) + tail["count"] * tail["from"] * tail["alpha"] / (tail["alpha"] - 1)
+    print("earnings: employees", n, "gross wages bn", w / 1e9, "tail", tail, "(2022, before uprating)")
+    bins, tail = uprate(bins, tail)
+    return {
+        "id": "gross_earnings",
+        "label": {"de": "Bruttojahreslohn der rentenversicherungspflichtigen Arbeitnehmer", "en": "Gross annual wage of employees liable to pension insurance"},
+        "variable": {"de": "Bruttolohn pro Jahr in Euro laut Lohnsteuerbescheinigung", "en": "gross wage per year in euros as shown on the wage tax statement"},
+        "unit": {"de": "Arbeitnehmer (Lohnsteuerfälle mit Rentenversicherungspflicht)", "en": "employees (wage tax cases liable to pension insurance)"},
+        "year": 2024,
+        "bins": bins,
+        "tail": tail,
+        "quality": "derived",
+        "sources": ["destatis_lest_2022", "drv_rv_in_zeitreihen_2026"],
+        "note": {"de": "Lohn- und Einkommensteuerstatistik 2022, Tabelle 73111-04: Lohnsteuerfälle nach Größenklassen des individuellen Bruttolohns, Gruppe der rentenversicherungspflichtigen Arbeitnehmer (2022: 36,5 Mio. Personen, 1.451 Mrd. Euro Bruttolohn). Die Statistik beruht auf den Lohnsteuerbescheinigungen aller Arbeitgeber und ist nach oben nicht gekappt. Nicht enthalten sind Beamte, Versorgungsempfänger und Selbständige. Der Bruttolohn laut Lohnsteuerbescheinigung weicht leicht vom beitragspflichtigen Entgelt ab (zum Beispiel steuerfreie Lohnbestandteile); wer mehrere Beschäftigungen im Jahr hatte, ist mit der Jahressumme erfasst. Die oberste Klasse (ab 1 Mio. Euro) ist als Pareto-Verteilung dargestellt, deren Mittelwert dem amtlichen Klassenmittel entspricht. Die Statistik von 2022 ist die jüngste verfügbare. Damit die Löhne zu den Beitragsbemessungsgrenzen des Basisjahres 2024 passen, sind alle Eurowerte mit dem Anstieg des Durchschnittsentgelts der Rentenversicherten von 2022 (42.053 Euro) bis 2024 (47.085 Euro) fortgeschrieben, also um 12,0 %; die Zahl der Arbeitnehmer ist die von 2022.",
+                 "en": "Wage and income tax statistics 2022, table 73111-04: wage tax cases by size class of the individual gross wage, group of employees liable to pension insurance (2022: 36.5 million persons, EUR 1,451 billion of gross wages). The statistics are based on the wage tax statements of all employers and are not capped at the top. Civil servants, recipients of civil-service pensions and the self-employed are not included. The gross wage on the wage tax statement differs slightly from earnings subject to contributions (for example tax-free wage components); people with several jobs in the year are recorded with their annual total. The top class (EUR 1 million and above) is represented as a Pareto distribution whose mean equals the official class mean. The 2022 statistics are the latest available. So that wages match the contribution ceilings of the base year 2024, all euro values are uprated with the growth of average earnings of persons insured in the pension insurance from 2022 (EUR 42,053) to 2024 (EUR 47,085), i.e. by 12.0%; the number of employees is that of 2022."},
+    }
+
+
 if __name__ == "__main__":
     different = False
-    for dist in (income(), wealth()):
+    for dist in (income(), wealth(), earnings()):
         path = os.path.join(OUT, dist["id"] + ".json")
         text = json.dumps(dist, ensure_ascii=False, indent=2)
         if "--check" in sys.argv:

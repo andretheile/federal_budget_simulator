@@ -1,0 +1,272 @@
+{
+  "id": "gross_earnings",
+  "label": {
+    "de": "Bruttojahreslohn der rentenversicherungspflichtigen Arbeitnehmer",
+    "en": "Gross annual wage of employees liable to pension insurance"
+  },
+  "variable": {
+    "de": "Bruttolohn pro Jahr in Euro laut Lohnsteuerbescheinigung",
+    "en": "gross wage per year in euros as shown on the wage tax statement"
+  },
+  "unit": {
+    "de": "Arbeitnehmer (Lohnsteuerfälle mit Rentenversicherungspflicht)",
+    "en": "employees (wage tax cases liable to pension insurance)"
+  },
+  "year": 2024,
+  "bins": [
+    {
+      "from": 0,
+      "to": 2799,
+      "count": 1066706,
+      "mean": 1402.39
+    },
+    {
+      "from": 2799,
+      "to": 5598,
+      "count": 1206272,
+      "mean": 4200.19
+    },
+    {
+      "from": 5598,
+      "to": 8397,
+      "count": 1091721,
+      "mean": 6962.65
+    },
+    {
+      "from": 8397,
+      "to": 11197,
+      "count": 1065716,
+      "mean": 9820.63
+    },
+    {
+      "from": 11197,
+      "to": 13996,
+      "count": 1247698,
+      "mean": 12627.37
+    },
+    {
+      "from": 13996,
+      "to": 16795,
+      "count": 1348825,
+      "mean": 15425.96
+    },
+    {
+      "from": 16795,
+      "to": 19594,
+      "count": 1427070,
+      "mean": 18190.19
+    },
+    {
+      "from": 19594,
+      "to": 22393,
+      "count": 1317372,
+      "mean": 20988.87
+    },
+    {
+      "from": 22393,
+      "to": 25192,
+      "count": 1389475,
+      "mean": 23821.66
+    },
+    {
+      "from": 25192,
+      "to": 27991,
+      "count": 1530273,
+      "mean": 26611.92
+    },
+    {
+      "from": 27991,
+      "to": 30791,
+      "count": 1615074,
+      "mean": 29393.9
+    },
+    {
+      "from": 30791,
+      "to": 33590,
+      "count": 1641471,
+      "mean": 32184.95
+    },
+    {
+      "from": 33590,
+      "to": 36389,
+      "count": 1663643,
+      "mean": 34971.82
+    },
+    {
+      "from": 36389,
+      "to": 39188,
+      "count": 1617036,
+      "mean": 37775.26
+    },
+    {
+      "from": 39188,
+      "to": 41987,
+      "count": 1617075,
+      "mean": 40586.59
+    },
+    {
+      "from": 41987,
+      "to": 44786,
+      "count": 1566052,
+      "mean": 43368.1
+    },
+    {
+      "from": 44786,
+      "to": 47585,
+      "count": 1489380,
+      "mean": 46183.39
+    },
+    {
+      "from": 47585,
+      "to": 50385,
+      "count": 1358812,
+      "mean": 48954.0
+    },
+    {
+      "from": 50385,
+      "to": 53184,
+      "count": 1196766,
+      "mean": 51746.78
+    },
+    {
+      "from": 53184,
+      "to": 55983,
+      "count": 1042653,
+      "mean": 54550.39
+    },
+    {
+      "from": 55983,
+      "to": 61581,
+      "count": 1746105,
+      "mean": 58650.73
+    },
+    {
+      "from": 61581,
+      "to": 67180,
+      "count": 1345989,
+      "mean": 64245.52
+    },
+    {
+      "from": 67180,
+      "to": 72778,
+      "count": 1057700,
+      "mean": 69854.12
+    },
+    {
+      "from": 72778,
+      "to": 78376,
+      "count": 835475,
+      "mean": 75461.46
+    },
+    {
+      "from": 78376,
+      "to": 83974,
+      "count": 693719,
+      "mean": 81082.01
+    },
+    {
+      "from": 83974,
+      "to": 89573,
+      "count": 550200,
+      "mean": 86678.59
+    },
+    {
+      "from": 89573,
+      "to": 95171,
+      "count": 435593,
+      "mean": 92283.17
+    },
+    {
+      "from": 95171,
+      "to": 100769,
+      "count": 350365,
+      "mean": 97858.55
+    },
+    {
+      "from": 100769,
+      "to": 106368,
+      "count": 291356,
+      "mean": 103464.3
+    },
+    {
+      "from": 106368,
+      "to": 111966,
+      "count": 240111,
+      "mean": 109068.8
+    },
+    {
+      "from": 111966,
+      "to": 125962,
+      "count": 430426,
+      "mean": 118429.6
+    },
+    {
+      "from": 125962,
+      "to": 139957,
+      "count": 281999,
+      "mean": 132508.4
+    },
+    {
+      "from": 139957,
+      "to": 167949,
+      "count": 316986,
+      "mean": 152109.05
+    },
+    {
+      "from": 167949,
+      "to": 195940,
+      "count": 159797,
+      "mean": 180411.21
+    },
+    {
+      "from": 195940,
+      "to": 223932,
+      "count": 90484,
+      "mean": 208698.43
+    },
+    {
+      "from": 223932,
+      "to": 251923,
+      "count": 55864,
+      "mean": 236764.83
+    },
+    {
+      "from": 251923,
+      "to": 279915,
+      "count": 37293,
+      "mean": 265071.39
+    },
+    {
+      "from": 279915,
+      "to": 419872,
+      "count": 76581,
+      "mean": 332579.47
+    },
+    {
+      "from": 419872,
+      "to": 559829,
+      "count": 21191,
+      "mean": 478388.67
+    },
+    {
+      "from": 559829,
+      "to": 1119659,
+      "count": 17276,
+      "mean": 739231.32
+    }
+  ],
+  "tail": {
+    "from": 1119659,
+    "count": 5159,
+    "alpha": 1.8142
+  },
+  "quality": "derived",
+  "sources": [
+    "destatis_lest_2022",
+    "drv_rv_in_zeitreihen_2026"
+  ],
+  "note": {
+    "de": "Lohn- und Einkommensteuerstatistik 2022, Tabelle 73111-04: Lohnsteuerfälle nach Größenklassen des individuellen Bruttolohns, Gruppe der rentenversicherungspflichtigen Arbeitnehmer (2022: 36,5 Mio. Personen, 1.451 Mrd. Euro Bruttolohn). Die Statistik beruht auf den Lohnsteuerbescheinigungen aller Arbeitgeber und ist nach oben nicht gekappt. Nicht enthalten sind Beamte, Versorgungsempfänger und Selbständige. Der Bruttolohn laut Lohnsteuerbescheinigung weicht leicht vom beitragspflichtigen Entgelt ab (zum Beispiel steuerfreie Lohnbestandteile); wer mehrere Beschäftigungen im Jahr hatte, ist mit der Jahressumme erfasst. Die oberste Klasse (ab 1 Mio. Euro) ist als Pareto-Verteilung dargestellt, deren Mittelwert dem amtlichen Klassenmittel entspricht. Die Statistik von 2022 ist die jüngste verfügbare. Damit die Löhne zu den Beitragsbemessungsgrenzen des Basisjahres 2024 passen, sind alle Eurowerte mit dem Anstieg des Durchschnittsentgelts der Rentenversicherten von 2022 (42.053 Euro) bis 2024 (47.085 Euro) fortgeschrieben, also um 12,0 %; die Zahl der Arbeitnehmer ist die von 2022.",
+    "en": "Wage and income tax statistics 2022, table 73111-04: wage tax cases by size class of the individual gross wage, group of employees liable to pension insurance (2022: 36.5 million persons, EUR 1,451 billion of gross wages). The statistics are based on the wage tax statements of all employers and are not capped at the top. Civil servants, recipients of civil-service pensions and the self-employed are not included. The gross wage on the wage tax statement differs slightly from earnings subject to contributions (for example tax-free wage components); people with several jobs in the year are recorded with their annual total. The top class (EUR 1 million and above) is represented as a Pareto distribution whose mean equals the official class mean. The 2022 statistics are the latest available. So that wages match the contribution ceilings of the base year 2024, all euro values are uprated with the growth of average earnings of persons insured in the pension insurance from 2022 (EUR 42,053) to 2024 (EUR 47,085), i.e. by 12.0%; the number of employees is that of 2022."
+  }
+}

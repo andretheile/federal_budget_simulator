@@ -1,9 +1,10 @@
 # Germany: how the budget data is built
 
-These scripts produce three files of the German country pack from official statistics:
+These scripts produce four files of the German country pack from official statistics:
 
 - `countries/de/budget.json` (revenue and expenditure of general government, base year 2024)
 - `countries/de/distributions/taxable_income.json`
+- `countries/de/distributions/gross_earnings.json`
 - `countries/de/distributions/net_wealth.json`
 
 The other pack files (`country.json`, `policies.json`, `sources.json`) are maintained by hand and are not
@@ -16,14 +17,15 @@ Python 3.9 or newer, standard library only. Run from the repository root:
 
 ```
 python3 pipeline/de/build_budget.py --check    # rebuild in memory, compare with budget.json
-python3 pipeline/de/build_dist.py --check      # the same for the two distributions
+python3 pipeline/de/build_dist.py --check      # the same for the three distributions
 python3 pipeline/de/build_budget.py --write    # replace budget.json
-python3 pipeline/de/build_dist.py --write      # replace the two distributions
+python3 pipeline/de/build_dist.py --write      # replace the three distributions
+python3 pipeline/de/check_distributions.py     # plausibility checks, prints only
 npm run validate                               # then check the whole pack
 ```
 
 Without an option both build scripts only print diagnostics: the level shares of every expenditure leaf, the
-totals, the bins. With the cache as delivered, `--check` reports all three files as identical.
+totals, the bins. With the cache as delivered, `--check` reports all four files as identical.
 
 ## Scripts
 
@@ -32,8 +34,8 @@ totals, the bins. With the cache as delivered, `--check` reports all three files
 | `fetch_inputs.py` | Downloads the source files into `.cache/` and writes the text tables the build scripts read. Keeps whatever is already there; `--force` downloads again. |
 | `build_budget.py` | The budget tree: labels, amounts, level shares, notes, the nationality breakdown. Reads the Eurostat COFOG table from the cache; every other figure is a constant in the file with its source next to it. |
 | `levels.py` | The method for level shares (which level of government bears an expense). Used by `build_budget.py`. |
-| `build_dist.py` | The two distributions. |
-| `check_distributions.py` | Plausibility checks: the 2022 income tax schedule applied to the income distribution against the official tax total, and wealth above several thresholds. |
+| `build_dist.py` | The three distributions. Income and earnings come from 2022 statistics and are uprated to 2024 values (see below). |
+| `check_distributions.py` | Plausibility checks: the 2022 income tax schedule on 2022 incomes against the official tax total, the 2024 schedule and selected reforms against government estimates, contributions under the 2022 and 2024 rules, and wealth above several thresholds. It integrates curves of marginal rates the way the engine does. |
 | `es.py` | Eurostat fetcher and table printer, for looking up figures by hand. |
 | `bh.py` | Drill-down through the federal budget on bundeshaushalt.de, for looking up budget titles by hand. |
 | `xlsx.py` | Minimal reader for `.xlsx` files (no dependencies). |
@@ -55,6 +57,9 @@ download will usually not reproduce the pack. The cache also contains the docume
 | `bt/2101069.pdf` | Bundestag printed paper 21/1069 | payment entitlements by nationality |
 | `drv/rv_in_zahlen.pdf`, `drv/abbVIII51.pdf` | pension insurance statistics | pension expenditure and its split by pension type |
 | `est/lest2022.xlsx`, `est/csv02.tsv` | Destatis wage and income tax statistics 2022, table 73111-02 | income distribution |
+| `est/csv04.tsv` | the same workbook, table 73111-04 (wage tax cases by gross wage) | earnings distribution; wage share of pension contributions |
+| `drv/rv_in_zeitreihen.pdf` | pension insurance time series | contribution revenue 2022 and 2024; average earnings 2022 and 2024 (uprating factor) |
+| `gkv/kj1_2024.pdf` | health insurance, final accounts 2024 (KJ 1) | contributions of compulsory and other members |
 | `ecb/dwa_de.csv` | ECB Distributional Wealth Accounts, Germany | wealth distribution |
 
 Figures from PDFs, from the federal budget and from the tax list were read by hand and typed into
@@ -70,7 +75,10 @@ Data, taken as published:
   unemployment benefit, parental allowance, MPs' pay, EU contribution);
 - the split of taxes, sales, property income and current transfers across levels where Eurostat reports
   it by level;
-- counts and totals per income class; wealth totals of the bottom half, deciles 6 to 10 and the top 5 %.
+- counts and totals per income class and per wage class; wealth totals of the bottom half, deciles 6 to 10
+  and the top 5 %;
+- contributions to health insurance from compulsorily insured employees and from other members, as booked
+  in the insurers' accounts.
 
 Arithmetic on published figures:
 
@@ -82,7 +90,11 @@ Arithmetic on published figures:
 - level splits of shared taxes: statutory shares, adjusted to Eurostat's amounts by level because the city
   states count as state government;
 - couples in the income distribution: jointly assessed couples are counted as two persons with half the
-  income each, because the tax schedule is applied that way.
+  income each, because the tax schedule is applied that way;
+- the remainder leaf of contributions on wages: the national-accounts total minus the cash figures for
+  pension and health insurance;
+- the zero-amount leaf "pension contributions of the state for its civil servants": it exists so that a
+  measure can book such contributions; its level shares are the imputed contributions by level.
 
 Judgement, to be reviewed by whoever updates the data:
 
@@ -106,6 +118,15 @@ Judgement, to be reviewed by whoever updates the data:
   the top 5 % is an assumption.
 - **Income distribution**: the top class as a Pareto tail with the published class mean; the lower bound
   of the class with negative income.
+- **Uprating to the base year** (`UPRATE` in `build_dist.py`): the latest income and wage statistics are
+  from 2022, while measures compare them with 2024 thresholds (basic allowance, contribution ceilings).
+  Every euro value of the income and the earnings distribution is therefore multiplied by the growth of
+  average earnings of the insured from 2022 to 2024 (+12.0 %); the numbers of persons stay those of 2022.
+  This assumes that all incomes grew at the same rate. Without it, relief at the bottom of a tax schedule
+  comes out too large and revenue from high incomes too small.
+- **Share of pension contributions that comes from wages** (`PENSION_WAGE` in `build_budget.py`): the
+  insurer's accounts do not split contributions by type. The share is 18.6 % of wages up to the 2022
+  ceiling in the wage statistics, divided by total contributions in 2022, and is applied to 2024.
 
 ## Updating to a new year
 
@@ -121,6 +142,11 @@ Judgement, to be reviewed by whoever updates the data:
    the revision leaf becomes zero and should be removed.
 5. Rebuild, run `npm run validate`, and compare the level totals printed by `build_budget.py` with the
    previous year. Large jumps usually mean a transfer was reclassified.
-6. The measures in `policies.json` refer to node ids, breakdown group ids and amounts from these files. The
-   `baseline` schedule of `top_income_tax` is the income tax schedule of the statistics year as a step
-   function (`schedule_2022` in `check_distributions.py`); a new statistics year needs new steps.
+6. Set `UPRATE` in `build_dist.py` to the growth of average earnings from the statistics year to the new
+   base year (1 if both are the same year), and the schedules and ceilings in `check_distributions.py` to
+   the new years.
+7. The measures in `policies.json` refer to node ids, breakdown group ids and amounts from these files. The
+   curve measures (`income_tax_schedule`, `pension_contribution_schedule`, `health_contribution_schedule`)
+   carry the legal schedule of the base year as `baseline` and as the default of their curve; a new base
+   year needs the new schedule, new presets in that year's values and new example incomes
+   (`check_distributions.py` prints what the baselines yield).

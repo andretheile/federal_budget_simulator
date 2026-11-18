@@ -420,5 +420,173 @@
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/sgb_6/__236b.html",
     "accessed": "2026-11-18"
+  },
+  "bmg_kj1_2024": {
+    "title": "Gesetzliche Krankenversicherung: Endgültige Rechnungsergebnisse 2024 (KJ 1)",
+    "publisher": "Bundesministerium für Gesundheit",
+    "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/GKV/Finanzergebnisse/KJ1_2024_Internetauftritt.pdf",
+    "year": 2024,
+    "note": "Contribution revenue by account: 02000 and 02900 (compulsorily insured employees), 02600 and 02907 (other), 02999 (total 298.2 bn euros including the insurers' own column).",
+    "accessed": "2026-11-18"
+  },
+  "drv_rv_in_zeitreihen_2026": {
+    "title": "Rentenversicherung in Zeitreihen 2026 (DRV-Schriften Band 22), Kapitel 10 Finanzdaten",
+    "publisher": "Deutsche Rentenversicherung Bund",
+    "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zeitreihen.pdf?__blob=publicationFile",
+    "year": 2024,
+    "note": "Revenue of the pension insurance by year; contributions 2022: 275,622, 2024: 305,905 million euros.",
+    "accessed": "2026-11-18"
+  },
+  "bundesregierung_rechengroessen_2024": {
+    "title": "Neue Beitragsbemessungsgrenzen für 2024",
+    "publisher": "Presse- und Informationsamt der Bundesregierung",
+    "url": "https://www.bundesregierung.de/breg-de/aktuelles/beitragsgemessungsgrenzen-2024-2229320",
+    "year": 2024,
+    "accessed": "2026-11-18"
+  },
+  "bt_drs_21_5839": {
+    "title": "Antwort der Bundesregierung: Pläne der Bundesregierung zur Reduzierung bzw. Erhöhung der Umsatzsteuer, Drucksache 21/5839 vom 06.05.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/058/2105839.pdf",
+    "year": 2026,
+    "note": "Computational revenue forgone of the reduced rate by year (2024: 39.2 bn euros), of a zero rate on food (about 18 bn in 2027) and by food category; assumes full pass-through and no behavioural change.",
+    "accessed": "2026-11-18"
+  },
+  "zew_bmf_umsatzsteuersaetze_2025": {
+    "title": "Analyse und Bewertung des Systems der Umsatzsteuersätze unter Berücksichtigung von Wettbewerbs- und Abgrenzungsaspekten. Studie im Auftrag des Bundesministeriums der Finanzen (20. November 2025)",
+    "publisher": "ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung",
+    "url": "https://www.zew.de/fileadmin/FTP/gutachten/BMF_Umsatzsteuersaetze_2026.pdf",
+    "year": 2024,
+    "note": "Tables 3, 5, 8, 10 and 12: revenue forgone per category (finance ministry estimates); section 2.1: EU law; section 2.3.4: pass-through; executive summary: reform options and burden by income decile.",
+    "accessed": "2026-11-18"
+  },
+  "iw_beamte_rente_2025": {
+    "title": "Bas-Vorschlag könnte bis zu 20 Milliarden Euro jährlich kosten (IW-Nachricht, 13. Mai 2025)",
+    "publisher": "Institut der deutschen Wirtschaft",
+    "url": "https://www.iwkoeln.de/presse/iw-nachrichten/bjoern-kauder-ruth-maria-schueler-bas-vorschlag-koennte-bis-zu-20-milliarden-euro-jaehrlich-kosten.html",
+    "year": 2025,
+    "accessed": "2026-11-18"
+  },
+  "bertelsmann_iges_pkv_2020": {
+    "title": "Duales System kostet Mitglieder der gesetzlichen Krankenversicherung bis zu 145 Euro pro Jahr (17. Februar 2020; Studie des IGES Instituts)",
+    "publisher": "Bertelsmann Stiftung",
+    "url": "https://www.bertelsmann-stiftung.de/de/themen/aktuelle-meldungen/2020/februar/duales-system-kostet-mitglieder-der-gesetzlichen-krankenversicherung-bis-zu-145-euro-pro-jahr",
+    "year": 2020,
+    "note": "Simulation of a hypothetical state in which all privately insured persons are in statutory health insurance. Only the publisher's summary was opened, not the full study.",
+    "accessed": "2026-11-18"
+  },
+  "bertelsmann_iges_beamte_gkv_2017": {
+    "title": "Gesetzliche Krankenversicherung für Beamte: Öffentliche Haushalte könnten 60 Milliarden Euro sparen (Pressemitteilung, 10. Januar 2017; Studie des IGES Instituts)",
+    "publisher": "Bertelsmann Stiftung",
+    "url": "https://www.bertelsmann-stiftung.de/de/presse/pressemitteilungen/pressemitteilung/pid/gesetzliche-krankenversicherung-fuer-beamte-oeffentliche-haushalte-koennten-60-milliarden-euro-sparen",
+    "year": 2017,
+    "accessed": "2026-11-18"
+  },
+  "gg_art_33": {
+    "title": "Grundgesetz, Artikel 33",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/gg/art_33.html",
+    "accessed": "2026-11-18"
+  },
+  "bverfg_2009_pkv": {
+    "title": "Pressemitteilung Nr. 59/2009: Verfassungsbeschwerden gegen Vorschriften der Gesundheitsreform zur privaten Krankenversicherung erfolglos (Urteil vom 10. Juni 2009, 1 BvR 706/08)",
+    "publisher": "Bundesverfassungsgericht",
+    "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Pressemitteilungen/DE/2009/bvg09-059.html",
+    "year": 2009,
+    "accessed": "2026-11-18"
+  },
+  "energiestg_2": {
+    "title": "Energiesteuergesetz, § 2 Steuertarif",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/energiestg/__2.html",
+    "note": "Petrol with at most 10 mg/kg sulphur: EUR 654.50 per 1,000 litres; gas oil (diesel): EUR 470.40 per 1,000 litres.",
+    "accessed": "2026-11-18"
+  },
+  "bt_drs_20_1741": {
+    "title": "Entwurf eines Gesetzes zur Änderung des Energiesteuerrechts zur temporären Absenkung der Energiesteuer für Kraftstoffe (Energiesteuersenkungsgesetz), Drucksache 20/1741 vom 10.05.2022",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/20/017/2001741.pdf",
+    "year": 2022,
+    "note": "Minimum rates of the EU Energy Taxation Directive (EUR 359 and 330 per 1,000 litres), revenue per month at regular and minimum rates, revenue forgone of EUR 3.15 billion for June to August 2022, VAT.",
+    "accessed": "2026-11-18"
+  },
+  "bt_wd_tankrabatt_2026": {
+    "title": "Aktueller Begriff Nr. 14/26: Tankrabatt (19. Oktober 2026)",
+    "publisher": "Deutscher Bundestag, Wissenschaftliche Dienste",
+    "url": "https://www.bundestag.de/resource/blob/1225468/tankrabatt.pdf",
+    "year": 2026,
+    "accessed": "2026-11-18"
+  },
+  "destatis_energiesteuer": {
+    "title": "Energiesteuer (Themenseite Verbrauchsteuern; Steuerbeträge für Benzin und Diesel 2025 und Veränderung gegenüber 2024)",
+    "publisher": "Statistisches Bundesamt (Destatis)",
+    "url": "https://www.destatis.de/DE/Themen/Staat/Steuern/Verbrauchsteuern/energiesteuer.html",
+    "year": 2025,
+    "accessed": "2026-11-18"
+  },
+  "rwi_tankrabatt_2022": {
+    "title": "Trockenheit schmälert preisdämpfende Wirkungen des Tankrabatts (Pressemitteilung vom 30. August 2022)",
+    "publisher": "RWI – Leibniz-Institut für Wirtschaftsforschung (über idw – Informationsdienst Wissenschaft)",
+    "url": "https://idw-online.de/de/news800372",
+    "year": 2022,
+    "accessed": "2026-11-18"
+  },
+  "bt_drs_21_2469": {
+    "title": "Entwurf eines Dritten Gesetzes zur Änderung des Energiesteuer- und des Stromsteuergesetzes: Stellungnahme des Bundesrates und Gegenäußerung der Bundesregierung, Drucksache 21/2469 vom 29.10.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/024/2102469.pdf",
+    "year": 2025,
+    "accessed": "2026-11-18"
+  },
+  "bt_drs_21_5320": {
+    "title": "Gesetzentwurf der Fraktion BÜNDNIS 90/DIE GRÜNEN: Entwurf eines Gesetzes zur Änderung des Stromsteuergesetzes und weiterer Vorschriften, Drucksache 21/5320 vom 14.04.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/053/2105320.pdf",
+    "year": 2026,
+    "accessed": "2026-11-18"
+  },
+  "bt_drs_21_6332": {
+    "title": "Gesetzentwurf der Fraktion der AfD: Energie- und Stromsteuersenkungsgesetz, Drucksache 21/6332 vom 09.06.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/063/2106332.pdf",
+    "year": 2026,
+    "accessed": "2026-11-18"
+  },
+  "cash_online_stromsteuer_2026": {
+    "title": "Stromsteuersenkung 2027: Koalition entscheidet über Entlastung für alle (16. November 2026, mit Material von dpa und Reuters)",
+    "publisher": "Cash.Online",
+    "url": "https://www.cash-online.de/a/stromsteuersenkung-2027-koalition-entscheidet-ueber-entlastung-fuer-alle-730659/",
+    "year": 2026,
+    "note": "Published the day before the coalition committee met; the outcome of that meeting could not be verified.",
+    "accessed": "2026-11-18"
+  },
+  "bt_drs_20_12783": {
+    "title": "Gesetzentwurf der Bundesregierung: Entwurf eines Gesetzes zur steuerlichen Freistellung des Existenzminimums 2024, Drucksache 20/12783 vom 09.09.2024",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/20/127/2012783.pdf",
+    "year": 2024,
+    "note": "Section 32a(1) of the Income Tax Act as applicable from the 2024 assessment period; case law of the Federal Constitutional Court on the tax-free subsistence minimum.",
+    "accessed": "2026-11-18"
+  },
+  "zew_wahlprogramme_2025": {
+    "title": "Reformvorschläge der Parteien zur Bundestagswahl 2025: Finanzielle Auswirkungen (ZEW-Gutachten, Januar 2025)",
+    "publisher": "ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung",
+    "url": "https://ftp.zew.de/pub/zew-docs/gutachten/Bundestagswahlprogramme_ZEW_2025.pdf",
+    "year": 2025,
+    "note": "Section 2: how the parties' income tax proposals were implemented, in terms of 2024 law. Only direct effects, no second-round effects.",
+    "accessed": "2026-11-18"
+  },
+  "arqus_132": {
+    "title": "Die Elastizität des zu versteuernden Einkommens in Deutschland: Eine empirische Untersuchung auf Basis des deutschen Taxpayer-Panels (arqus Diskussionsbeitrag Nr. 132, Juni 2012)",
+    "publisher": "arqus – Arbeitskreis Quantitative Steuerlehre",
+    "url": "https://www.ruhr-uni-bochum.de/ubest/downloads/literatur/Tax_Arqus_Beitrag_132.pdf",
+    "year": 2012,
+    "accessed": "2026-11-18"
+  },
+  "solzg_1995": {
+    "title": "Solidaritätszuschlaggesetz 1995, §§ 3 und 4",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/solzg_1995/__4.html",
+    "accessed": "2026-11-18"
   }
 }

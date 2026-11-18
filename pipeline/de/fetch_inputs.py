@@ -11,6 +11,7 @@ and the constants typed into build_budget.py then have to be checked against the
 Read by the build scripts:
   exp_2024_full.tsv        Eurostat gov_10a_exp, Germany, base year          -> levels.py, build_budget.py
   est/csv02.tsv            Destatis wage and income tax statistics, 73111-02  -> build_dist.py
+  est/csv04.tsv            the same statistics, table 73111-04                -> build_dist.py
   ecb/dwa_de.csv           ECB Distributional Wealth Accounts, Germany        -> build_dist.py
 Kept for reference (the constants in build_budget.py were read from them by hand):
   main_2024.tsv            Eurostat gov_10a_main, Germany, base year
@@ -51,6 +52,7 @@ EUROSTAT = {
 SHEETS = {
     "ntl_de.tsv": ("ntl/ntl.xlsx", "DE"),
     "est/csv02.tsv": ("est/lest2022.xlsx", "csv-73111-02"),
+    "est/csv04.tsv": ("est/lest2022.xlsx", "csv-73111-04"),
 }
 
 
