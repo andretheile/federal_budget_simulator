@@ -31,3 +31,6 @@ yarn-error.log*
 
 # databases
 *.sqlite3
+# root project (Vite)
+node_modules/
+dist/

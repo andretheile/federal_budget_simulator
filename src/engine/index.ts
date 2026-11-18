@@ -1,0 +1,57 @@
+/**
+ * Public API of the calculation engine. Pure TypeScript: no React, no DOM, no fetch, no Node APIs.
+ * It knows nothing about any particular country; everything comes from a country pack.
+ */
+export * from "./types.ts";
+
+export {
+  validatePack,
+  validatePackFiles,
+  formatIssue,
+  formatPath,
+  SHARE_TOLERANCE,
+  type RawPackFiles,
+  type ValidationIssue,
+  type ValidationResult,
+} from "./validate.ts";
+
+export {
+  simulate,
+  simulatePolicy,
+  resolveParams,
+  evaluateValue,
+  evaluateBrackets,
+  findNode,
+  shareOfGdp,
+  perCapita,
+  type EffectResult,
+  type LevelFilter,
+  type NodeResult,
+  type ParamValue,
+  type ParamValues,
+  type PolicyResult,
+  type PolicyState,
+  type Scenario,
+  type ShiftResult,
+  type Side,
+  type SimulationResult,
+  type SimulationWarning,
+  type Totals,
+  type WarningCode,
+} from "./simulate.ts";
+
+export { emptyScenario, encodeScenario, decodeScenario, encodeNumber, decodeNumber } from "./scenario.ts";
+
+export {
+  unitsAbove,
+  excessAbove,
+  totalUnits,
+  totalAmount,
+  scheduleTotal,
+  scheduleAmount,
+  marginalRate,
+  orderBrackets,
+  affectedUnits,
+  type AffectedUnits,
+  type Bracket,
+} from "./distribution.ts";
