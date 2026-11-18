@@ -1,0 +1,757 @@
+/*
+ * Measures. A card is a quiet white sheet; switched on, it gets an ink edge. Inside, the figure
+ * is the loudest thing, then the catch.
+ */
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.filter__item {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 17px;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.filter__item:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.filter__item[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.filter__count {
+  margin-left: 3px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.filter__item[aria-pressed="true"] .filter__count {
+  color: inherit;
+}
+
+.policy-list {
+  display: grid;
+  gap: 14px;
+}
+
+.policy {
+  padding: 16px 20px 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.policy.is-on {
+  border-color: var(--ink);
+  box-shadow: inset 5px 0 0 var(--ink);
+}
+
+.policy__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.policy__title {
+  margin-top: 8px;
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+  cursor: pointer;
+}
+
+.policy__summary {
+  margin-top: 5px;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.policy__summary.is-clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.policy__impact {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.policy__figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 8px;
+  margin-top: 1px;
+}
+
+.policy__per {
+  margin-right: 6px;
+}
+
+.policy__amount {
+  font-size: 27px;
+  font-weight: 680;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  /* A stand-alone figure, not a column: proportional digits. */
+  font-variant-numeric: normal;
+}
+
+.policy__amount .icon {
+  width: 13px;
+  height: 13px;
+}
+
+.policy__per {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.policy__direction {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.policy__direction--improve {
+  color: var(--improve);
+}
+
+.policy__direction--worsen {
+  color: var(--worsen);
+}
+
+.policy__direction--neutral {
+  color: var(--ink-2);
+}
+
+.meter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 7px;
+}
+
+.meter__track {
+  position: relative;
+  flex: 0 1 132px;
+  min-width: 56px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+
+.meter__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  min-width: 2px;
+  border-radius: 3px;
+  transition: width 0.35s ease;
+}
+
+.meter--improve .meter__fill {
+  background: var(--improve);
+}
+
+.meter--worsen .meter__fill {
+  background: var(--worsen);
+}
+
+.meter__text,
+.policy__proportion,
+.policy__combined {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.meter__text {
+  white-space: nowrap;
+}
+
+.policy__proportion {
+  margin-top: 3px;
+}
+
+.policy__combined {
+  margin-top: 6px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* A cost shift is one of the things this page exists to show: it gets its own line on the card. */
+.policy__shift {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 9px 11px;
+  border-left: 3px solid var(--ink);
+  background: var(--sunken);
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.policy__shift .icon {
+  margin-top: 3px;
+}
+
+.levels {
+  margin-top: 12px;
+}
+
+.levels ul {
+  margin-top: 4px;
+}
+
+.levels li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 14px;
+  padding: 5px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 14px;
+}
+
+.levels li.is-current .levels__name {
+  font-weight: 650;
+}
+
+.levels__word {
+  margin-left: 4px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.levels--compact ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+}
+
+.levels--compact li {
+  justify-content: flex-start;
+  gap: 0 7px;
+  padding: 0;
+  border: 0;
+  font-size: 13.5px;
+}
+
+.policy__warnings {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 9px 11px;
+  border: 1px dashed var(--ink-3);
+  border-radius: 4px;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.policy__warnings li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.policy__warnings .icon {
+  margin-top: 3px;
+}
+
+.policy__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+  margin-top: 12px;
+}
+
+.policy__catches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 13px;
+}
+
+.policy__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 36px;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 13.5px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.policy__more:hover {
+  text-decoration-color: currentColor;
+}
+
+.policy__more .icon {
+  transition: transform 0.18s ease;
+}
+
+.policy__more[aria-expanded="true"] .icon {
+  transform: rotate(180deg);
+}
+
+.policy__panel {
+  margin-top: 6px;
+}
+
+.policy__section {
+  padding: 16px 0 6px;
+  border-top: 1px solid var(--rule);
+}
+
+.policy__section h4 {
+  margin-bottom: 10px;
+}
+
+.policy__hint {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+/* Sliders. The filled part of the track runs to the knob; a tick below the track marks today's value. */
+.param {
+  min-width: 0;
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+}
+
+.param__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.param__head label,
+.param legend {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.param legend {
+  margin-bottom: 8px;
+}
+
+.param__value {
+  font-size: 15.5px;
+  font-weight: 680;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.param__slider {
+  --knob: 22px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.param__slider input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.param__slider input::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--ink) calc(var(--knob) / 2 + var(--at) * (100% - var(--knob))),
+    var(--rule-strong) calc(var(--knob) / 2 + var(--at) * (100% - var(--knob)))
+  );
+}
+
+.param__slider input::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--rule-strong);
+}
+
+.param__slider input::-moz-range-progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.param__slider input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--knob);
+  height: var(--knob);
+  margin-top: -9px;
+  border: 3px solid var(--surface);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 1.5px var(--ink);
+}
+
+.param__slider input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 3px solid var(--surface);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 1.5px var(--ink);
+}
+
+.param__slider input:focus-visible {
+  outline: none;
+}
+
+.param__slider input:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.param__slider input:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.param__baseline {
+  position: absolute;
+  top: calc(50% + 5px);
+  left: calc(var(--knob) / 2 + var(--base) * (100% - var(--knob)));
+  width: 2px;
+  height: 8px;
+  margin-left: -1px;
+  background: var(--ink-2);
+  pointer-events: none;
+}
+
+.param__scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.param__today {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.param__today::before {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 8px;
+  margin-right: 6px;
+  background: var(--ink-2);
+}
+
+.param__note {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.param__note.muted {
+  color: var(--ink-3);
+}
+
+/* Groups to select: a box with a tick, the name, the group's share. */
+.chips {
+  display: grid;
+  gap: 6px;
+}
+
+.chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  width: 100%;
+  min-height: 40px;
+  padding: 9px 11px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 5px;
+  background: var(--surface);
+  font-size: 13.5px;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.chip:hover {
+  border-color: var(--ink);
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.chip__box {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin-top: 1px;
+  border: 1.5px solid var(--ink-3);
+  border-radius: 3px;
+}
+
+.chip[aria-pressed="true"] .chip__box {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.chip__label {
+  flex: 1;
+  min-width: 0;
+}
+
+.chip__share {
+  flex: none;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+/* Where the estimate lies in its range. */
+.range {
+  position: relative;
+  display: block;
+  max-width: 240px;
+  height: 14px;
+  margin-top: 6px;
+}
+
+.range__zero {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--ink-3);
+}
+
+.range__line {
+  position: absolute;
+  top: 6px;
+  height: 2px;
+  background: var(--ink);
+}
+
+.range__dot {
+  position: absolute;
+  top: 2px;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+/* Catches. Severity is said in words and by weight; a blocker is boxed and inverted. */
+.catches {
+  display: grid;
+  gap: 10px;
+}
+
+.catch {
+  padding: 10px 12px 11px 14px;
+  border-left: 3px solid var(--rule-strong);
+  background: var(--paper);
+}
+
+.catch__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  margin-bottom: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.catch__severity {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.catch__kind {
+  color: var(--ink-3);
+}
+
+.catch__text {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.catch .sources {
+  margin-top: 7px;
+  font-size: 12.5px;
+}
+
+.catch--major {
+  border-left-color: var(--ink-2);
+}
+
+.catch--minor .catch__text {
+  color: var(--ink-2);
+}
+
+.catch--minor .catch__severity {
+  color: var(--ink-2);
+}
+
+.catch--blocker {
+  padding: 12px 13px 13px 14px;
+  border: 2px solid var(--ink);
+  border-left-width: 7px;
+  background: var(--surface);
+}
+
+.catch--blocker .catch__severity {
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.catch--blocker .catch__kind {
+  color: var(--ink);
+}
+
+.catch--blocker .catch__text {
+  font-weight: 500;
+}
+
+/* Budget items a measure changes. */
+.effects {
+  display: grid;
+  gap: 14px;
+}
+
+.effect__node {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.effect__node:hover {
+  text-decoration-color: currentColor;
+}
+
+.effect__line {
+  margin-top: 2px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.effect__line .quality {
+  margin-left: 4px;
+}
+
+.effect__note {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.effect__shift {
+  margin: 8px 0 4px;
+  padding: 9px 11px;
+  border-left: 3px solid var(--ink);
+  background: var(--sunken);
+}
+
+.effect__shift-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 599px) {
+  .policy {
+    padding: 14px 15px 10px;
+  }
+
+  .policy__title {
+    font-size: 19.5px;
+  }
+
+  .policy__amount {
+    font-size: 25px;
+  }
+
+  .facts > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1px;
+  }
+}

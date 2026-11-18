@@ -1,0 +1,136 @@
+/*
+ * Design tokens.
+ *
+ * Neutrals: warm paper and ink. Two signal colours say what a change does to the balance:
+ * a cool blue for "improves" and a burnt orange for "worsens"; they are never the only cue, a
+ * sign, a triangle and words always go with them.
+ *
+ * The categorical palette (--cat-1 ... --cat-8) identifies the top-level budget categories:
+ * 1 to 5 for spending, 6 to 8 for revenue, in that fixed order, plus a neutral grey for the
+ * folded "other" categories. Both sets of eight were checked with the dataviz palette validator
+ * against the page background of their theme: lightness band, chroma floor, colour-blind
+ * separation of neighbours (worst pair 9.9 light, 9.7 dark; target 8) and normal-vision
+ * separation (19.4 light, 15.7 dark; floor 15). Changing a value or the order means running the
+ * validator again. --cat-N-on is the text colour that reaches 4.5:1 on that fill.
+ */
+:root {
+  color-scheme: light dark;
+
+  --font-sans:
+    "Public Sans Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Newsreader Variable", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+
+  --on-fill-dark: #141413;
+  --on-fill-light: #ffffff;
+
+  --paper: #faf9f5;
+  --surface: #ffffff;
+  --sunken: #f0eee7;
+  --ink: #161614;
+  --ink-2: #4a4944;
+  --ink-3: #69675f;
+  --rule: #e3e1d9;
+  --rule-strong: #c9c6bb;
+
+  --improve: #0d6a8c;
+  --worsen: #b3430e;
+
+  --cat-1: #316ca5;
+  --cat-1-on: var(--on-fill-light);
+  --cat-2: #5d9850;
+  --cat-2-on: var(--on-fill-dark);
+  --cat-3: #7a64b3;
+  --cat-3-on: var(--on-fill-light);
+  --cat-4: #d07843;
+  --cat-4-on: var(--on-fill-dark);
+  --cat-5: #14938d;
+  --cat-5-on: var(--on-fill-dark);
+  --cat-6: #c7a344;
+  --cat-6-on: var(--on-fill-dark);
+  --cat-7: #8f4478;
+  --cat-7-on: var(--on-fill-light);
+  --cat-8: #d37b82;
+  --cat-8-on: var(--on-fill-dark);
+  --cat-other: #8f8d86;
+  --cat-other-on: var(--on-fill-dark);
+
+  --shadow-float: 0 10px 24px -14px rgb(22 22 20 / 0.35);
+  --radius: 6px;
+  --page-max: 1320px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --scoreboard-height: 124px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #131312;
+    --surface: #1c1c1a;
+    --sunken: #262624;
+    --ink: #f1efe9;
+    --ink-2: #c5c3ba;
+    --ink-3: #a09e95;
+    --rule: #2e2e2b;
+    --rule-strong: #4a4944;
+
+    --improve: #62b8dc;
+    --worsen: #f0996b;
+
+    --cat-1: #4984bf;
+    --cat-1-on: var(--on-fill-dark);
+    --cat-2: #639e56;
+    --cat-2-on: var(--on-fill-dark);
+    --cat-3: #7b62b8;
+    --cat-3-on: var(--on-fill-light);
+    --cat-4: #cc7b4b;
+    --cat-4-on: var(--on-fill-dark);
+    --cat-5: #209993;
+    --cat-5-on: var(--on-fill-dark);
+    --cat-6: #af923c;
+    --cat-6-on: var(--on-fill-dark);
+    --cat-7: #98518a;
+    --cat-7-on: var(--on-fill-light);
+    --cat-8: #d07879;
+    --cat-8-on: var(--on-fill-dark);
+    --cat-other: #8a8880;
+    --cat-other-on: var(--on-fill-dark);
+
+    --shadow-float: 0 10px 24px -12px rgb(0 0 0 / 0.7);
+  }
+}
+
+.cat-1 {
+  --cat: var(--cat-1);
+  --cat-on: var(--cat-1-on);
+}
+.cat-2 {
+  --cat: var(--cat-2);
+  --cat-on: var(--cat-2-on);
+}
+.cat-3 {
+  --cat: var(--cat-3);
+  --cat-on: var(--cat-3-on);
+}
+.cat-4 {
+  --cat: var(--cat-4);
+  --cat-on: var(--cat-4-on);
+}
+.cat-5 {
+  --cat: var(--cat-5);
+  --cat-on: var(--cat-5-on);
+}
+.cat-6 {
+  --cat: var(--cat-6);
+  --cat-on: var(--cat-6-on);
+}
+.cat-7 {
+  --cat: var(--cat-7);
+  --cat-on: var(--cat-7-on);
+}
+.cat-8 {
+  --cat: var(--cat-8);
+  --cat-on: var(--cat-8-on);
+}
+.cat-other {
+  --cat: var(--cat-other);
+  --cat-on: var(--cat-other-on);
+}

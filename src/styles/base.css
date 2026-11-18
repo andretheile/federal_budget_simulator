@@ -1,0 +1,484 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--scoreboard-height) + 16px);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+main:focus {
+  outline: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.muted {
+  color: var(--ink-3);
+}
+
+.icon {
+  flex: none;
+  display: inline-block;
+  vertical-align: -0.12em;
+}
+
+.loading {
+  padding: 20vh var(--gutter);
+  text-align: center;
+  color: var(--ink-3);
+}
+
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+/* Small upper-case label above a figure or a group of controls. */
+.scoreboard__label,
+.scoreboard__side dt,
+.policy__topic,
+.policy__caption,
+.policy__section h4,
+.levels__title,
+.levelbar legend,
+.levelselect > span {
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Section headings: a rule, a serif headline, one line of explanation. */
+.section-head {
+  margin-bottom: 20px;
+}
+
+.section-head h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(25px, 2.3vw, 31px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.section-head p {
+  margin-top: 6px;
+  max-width: 62ch;
+  font-size: 15px;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* A change: triangle, signed number, colour. */
+.delta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.delta .icon {
+  align-self: center;
+}
+
+.delta--improve {
+  color: var(--improve);
+}
+
+.delta--worsen {
+  color: var(--worsen);
+}
+
+.delta--neutral {
+  color: var(--ink-2);
+}
+
+/* Data quality: three steps, filled from the left. */
+.quality {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.quality__mark {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.quality__mark span {
+  width: 5px;
+  height: 11px;
+  border: 1px solid var(--ink-3);
+  border-radius: 1px;
+}
+
+.quality__mark .is-on {
+  background: var(--ink-2);
+  border-color: var(--ink-2);
+}
+
+.swatch {
+  flex: none;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--cat);
+}
+
+/* On/off switch. The position of the knob, the tick and the word say the state. */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: -9px 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.switch__track {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  border: 1.5px solid var(--ink-3);
+  border-radius: 13px;
+  background: var(--paper);
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  color: var(--ink);
+  transition:
+    transform 0.18s ease,
+    background-color 0.16s ease;
+}
+
+.switch[aria-checked="true"] {
+  color: var(--ink);
+}
+
+.switch[aria-checked="true"] .switch__track {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.switch[aria-checked="true"] .switch__thumb {
+  transform: translateX(20px);
+  background: var(--paper);
+}
+
+/* Lists of sources. */
+.sources {
+  display: grid;
+  gap: 5px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.sources a {
+  text-decoration-color: var(--rule-strong);
+}
+
+.sources a:hover {
+  text-decoration-color: currentColor;
+}
+
+.sources a .icon {
+  margin-left: 4px;
+  color: var(--ink-3);
+}
+
+.sources__meta {
+  color: var(--ink-3);
+}
+
+.sources__note {
+  display: block;
+  color: var(--ink-3);
+}
+
+/* Label and value pairs. */
+.facts {
+  display: grid;
+  gap: 10px;
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 8.5em minmax(0, 1fr);
+  gap: 4px 14px;
+  font-size: 14px;
+}
+
+.facts dt {
+  color: var(--ink-3);
+}
+
+.facts__sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.facts .sources {
+  margin-top: 4px;
+}
+
+/* The severity of a catch as a tag. A blocker is inverted: the heaviest mark on the page. */
+.catch-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.catch-tag--blocker {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.catch-tag--plain {
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-2);
+}
+
+.catch-tag--small {
+  padding: 1px 6px;
+  font-size: 10.5px;
+}
+
+/* Development notice: shown only when the page runs on the test fixture. */
+.dev-notice {
+  padding: 10px 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 14px;
+}
+
+.dev-notice p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+}
+
+.dev-notice .icon {
+  align-self: center;
+}
+
+.dev-notice details {
+  margin-top: 6px;
+  font-size: 12.5px;
+}
+
+.dev-notice ul {
+  margin-top: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+/* Page layout. */
+main {
+  padding-block: 36px 24px;
+}
+
+.workspace {
+  display: grid;
+  gap: 56px;
+}
+
+.budget,
+.policies,
+.waterfall,
+.about,
+.policy,
+.row {
+  scroll-margin-top: calc(var(--scoreboard-height) + 16px);
+}
+
+.waterfall,
+.about {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 2px solid var(--ink);
+}
+
+@media (min-width: 1080px) {
+  .workspace {
+    grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
+    gap: 64px;
+    align-items: start;
+  }
+}
+
+/* On a wide and tall screen the budget stays next to the measures, so a switch shows its effect at once. */
+@media (min-width: 1080px) and (min-height: 720px) {
+  .budget {
+    position: sticky;
+    top: calc(var(--scoreboard-height) + 24px);
+    max-height: calc(100vh - var(--scoreboard-height) - 40px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    /* Room for focus rings, which the scroll container would otherwise clip. */
+    margin: -6px;
+    padding: 6px;
+  }
+}
+
+.footer {
+  margin-top: 72px;
+  padding: 20px 0 40px;
+  border-top: 1px solid var(--rule-strong);
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.footer .page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .seg,
+  .row__fill,
+  .wf__bar,
+  .meter__fill,
+  .swatch {
+    forced-color-adjust: none;
+  }
+}

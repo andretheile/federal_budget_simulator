@@ -1,0 +1,512 @@
+/*
+ * Budget view. Two stacked bars on one scale, a legend under each, then the breakdown list.
+ * Marks follow the house rules: 2px gaps in the page colour between blocks, no outlines, labels
+ * inside a block only where they were measured to fit, text in ink and never in a series colour.
+ */
+.bars {
+  display: grid;
+  gap: 22px;
+}
+
+.bar__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 16px;
+  margin-bottom: 7px;
+}
+
+.bar__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.bar__side {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.bar__side:hover,
+.bar__side[aria-pressed="true"] {
+  text-decoration-color: currentColor;
+}
+
+.bar__total {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.bar__delta {
+  font-size: 13.5px;
+}
+
+.bar__gap-label {
+  font-size: 13.5px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.bar__gap-label--deficit {
+  color: var(--worsen);
+}
+
+.bar__gap-label--surplus {
+  color: var(--improve);
+}
+
+.bar__plot {
+  position: relative;
+  height: 44px;
+}
+
+.bar__track {
+  display: flex;
+  gap: 2px;
+  height: 100%;
+  transition: width 0.35s ease;
+}
+
+.seg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* No padding on the block itself: with padding, flex would no longer size blocks in proportion to their values. */
+  flex-basis: 0;
+  min-width: 0;
+  padding: 0;
+  border-radius: 3px;
+  background: var(--cat);
+  color: var(--cat-on);
+  line-height: 1.25;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    flex-grow 0.35s ease,
+    filter 0.12s ease;
+}
+
+.seg__name,
+.seg__value {
+  display: block;
+  margin-inline: 8px;
+  font-size: 12.5px;
+}
+
+.seg__name {
+  font-weight: 600;
+}
+
+.seg__value {
+  font-weight: 400;
+}
+
+.seg.is-active {
+  filter: brightness(1.1) saturate(1.1);
+}
+
+/* The selected block is marked below the bar, where the list it opens begins. */
+.seg.is-selected::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+/* The space between the two bar ends: the deficit or surplus. Hatched, never a solid block. */
+.bar__gap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-left: 2px;
+  border: 1px dashed var(--gap);
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 4px,
+    color-mix(in srgb, var(--gap) 38%, transparent) 4px 5px
+  );
+  transition:
+    left 0.35s ease,
+    width 0.35s ease;
+  pointer-events: none;
+}
+
+.bar__gap--deficit {
+  --gap: var(--worsen);
+}
+
+.bar__gap--surplus {
+  --gap: var(--improve);
+}
+
+/* Today's total, where a measure has moved the end of a bar. */
+.bar__today {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px var(--paper);
+  transition: left 0.35s ease;
+  pointer-events: none;
+}
+
+.bar__today span {
+  position: absolute;
+  top: 100%;
+  left: 5px;
+  padding-top: 1px;
+  font-size: 11.5px;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.bar__today span.is-left {
+  left: auto;
+  right: 5px;
+}
+
+.bar__plot:has(.bar__today) {
+  margin-bottom: 18px;
+}
+
+.tip {
+  position: absolute;
+  bottom: calc(100% + 9px);
+  z-index: 5;
+  display: grid;
+  gap: 2px;
+  min-width: 150px;
+  max-width: max(50%, 170px);
+  padding: 9px 11px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+  font-size: 12.5px;
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.tip__value {
+  font-size: 15px;
+  font-weight: 680;
+}
+
+.tip__label {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--ink-2);
+}
+
+.tip__meta {
+  color: var(--ink-3);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  margin-top: 12px;
+}
+
+.legend__item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  max-width: 100%;
+  min-height: 28px;
+  padding: 4px 9px 4px 7px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: none;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--ink-2);
+  text-align: left;
+}
+
+.legend__item:hover,
+.legend__item.is-active {
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+.legend__item[aria-pressed="true"] {
+  border-color: var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.legend__delta {
+  font-size: 12px;
+}
+
+/* The breakdown list. */
+.detail {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.crumbs {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  row-gap: 2px;
+}
+
+.crumbs li + li::before {
+  content: "\203A";
+  margin: 0 8px;
+  color: var(--ink-3);
+}
+
+.crumbs ol button {
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 2px;
+}
+
+.crumbs ol button:hover {
+  text-decoration-color: currentColor;
+}
+
+.crumbs li[aria-current] {
+  color: var(--ink);
+}
+
+.crumbs li {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.crumbs__up {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  background: none;
+}
+
+.crumbs__up:hover {
+  border-color: var(--ink);
+}
+
+.detail__head {
+  margin-top: 6px;
+}
+
+.detail__title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.detail__total {
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.detail__description {
+  max-width: 68ch;
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.rows {
+  margin-top: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.row {
+  border-top: 1px solid var(--rule);
+  transition: background-color 0.3s ease;
+}
+
+.row__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7.6rem 18px;
+  grid-template-areas:
+    "label value icon"
+    "bar change icon";
+  align-items: center;
+  gap: 5px 12px;
+  width: 100%;
+  padding: 9px 0 10px;
+  border: 0;
+  background: none;
+  text-align: left;
+}
+
+.row__main:hover .row__label {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.row__label {
+  grid-area: label;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.row__value {
+  grid-area: value;
+  font-size: 14px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.row__bar {
+  grid-area: bar;
+  position: relative;
+  display: block;
+  height: 10px;
+}
+
+.row__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  min-width: 1px;
+  border-radius: 0 4px 4px 0;
+  background: var(--cat);
+  transition: width 0.35s ease;
+}
+
+/* What a measure took away: the stretch between the new value and today's, hatched in the category colour. */
+.row__ghost {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 4px 4px 0;
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cat) 70%, transparent) 0 2px,
+    transparent 2px 5px
+  );
+}
+
+.row__tick {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px var(--paper);
+}
+
+.row__change {
+  grid-area: change;
+  min-height: 1em;
+  font-size: 12.5px;
+  line-height: 1.2;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.row__today {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.row__icon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  color: var(--ink-3);
+}
+
+/* The row a measure card pointed to: tinted, with an ink mark in the margin. */
+.row.is-highlighted {
+  position: relative;
+  background: var(--sunken);
+  box-shadow:
+    -6px 0 0 var(--sunken),
+    6px 0 0 var(--sunken);
+}
+
+.row.is-highlighted::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -6px;
+  width: 3px;
+  background: var(--ink);
+}
+
+.row__details {
+  display: grid;
+  gap: 8px;
+  max-width: 70ch;
+  padding: 2px 0 16px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.row__details .is-current {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.detail__key {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+@media (max-width: 599px) {
+  .bar__plot {
+    height: 40px;
+  }
+
+  .row__main {
+    grid-template-columns: minmax(0, 1fr) 6.9rem 16px;
+    gap: 5px 8px;
+  }
+}
