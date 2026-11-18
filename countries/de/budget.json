@@ -364,13 +364,59 @@
                 "en": "Proceeds from auctioning emission allowances and from the national carbon price on fuels; they flow into the federal Climate and Transformation Fund."
               },
               "code": "D29F",
-              "amount": 18628000000,
-              "levels": {
-                "central": 1.0
-              },
-              "quality": "official",
-              "sources": [
-                "eurostat_ntl"
+              "children": [
+                {
+                  "id": "rev.taxes.consumption.co2.national",
+                  "label": {
+                    "de": "Nationaler CO2-Preis auf Kraft- und Heizstoffe",
+                    "en": "National carbon price on transport and heating fuels"
+                  },
+                  "description": {
+                    "de": "Erlöse aus dem nationalen Brennstoffemissionshandel: Wer Benzin, Diesel, Heizöl oder Erdgas in Verkehr bringt, muss für den CO2-Ausstoß Zertifikate kaufen (2024: 45 Euro je Tonne).",
+                    "en": "Proceeds from national emissions trading for fuels: suppliers of petrol, diesel, heating oil or natural gas have to buy certificates for the resulting CO2 emissions (2024: EUR 45 per tonne)."
+                  },
+                  "code": "D29F",
+                  "amount": 10957000000,
+                  "levels": {
+                    "central": 1.0
+                  },
+                  "quality": "official",
+                  "sources": [
+                    "eurostat_ntl",
+                    "uba_pm_29_2025",
+                    "pv_magazine_emissionshandel_2025"
+                  ],
+                  "note": {
+                    "de": "Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen. Die Deutsche Emissionshandelsstelle weist für 2024 Kasseneinnahmen von rund 13 Mrd. Euro aus, für 2025 rund 16 Mrd. Euro.",
+                    "en": "National accounts definition. The German Emissions Trading Authority reports cash proceeds of about EUR 13 billion for 2024 and about EUR 16 billion for 2025."
+                  }
+                },
+                {
+                  "id": "rev.taxes.consumption.co2.eu_ets",
+                  "label": {
+                    "de": "Europäischer Emissionshandel (Versteigerungserlöse)",
+                    "en": "EU emissions trading (auction proceeds)"
+                  },
+                  "description": {
+                    "de": "Deutschlands Erlöse aus der Versteigerung von Emissionsrechten für Kraftwerke, Industrie und Luftverkehr.",
+                    "en": "Germany's proceeds from auctioning emission allowances for power plants, industry and aviation."
+                  },
+                  "code": "D29F",
+                  "amount": 7671000000,
+                  "levels": {
+                    "central": 1.0
+                  },
+                  "quality": "official",
+                  "sources": [
+                    "eurostat_ntl",
+                    "uba_pm_29_2025",
+                    "pv_magazine_emissionshandel_2025"
+                  ],
+                  "note": {
+                    "de": "Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen. Die Deutsche Emissionshandelsstelle weist für 2024 Versteigerungserlöse von rund 5,5 Mrd. Euro aus.",
+                    "en": "National accounts definition. The German Emissions Trading Authority reports auction proceeds of about EUR 5.5 billion for 2024."
+                  }
+                }
               ]
             },
             {

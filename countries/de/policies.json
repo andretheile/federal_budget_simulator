@@ -1375,6 +1375,527 @@
         "bundesregierung_rentenpaket_2025",
         "sozialpolitik_aktuell_viii51"
       ]
+    },
+    {
+      "id": "transport_tax_breaks",
+      "label": {
+        "de": "Klimaschädliche Steuervorteile im Verkehr streichen",
+        "en": "End climate-damaging tax breaks in transport"
+      },
+      "summary": {
+        "de": "Streicht ganz oder teilweise vier Steuervorteile im Verkehr: den niedrigeren Energiesteuersatz für Diesel, die pauschale Besteuerung privat genutzter Dienstwagen, die Energiesteuerbefreiung von Kerosin auf Inlandsflügen und, in der Grundeinstellung nicht aktiv, die Steuerbefreiungen für Auslandsflüge. Die Beträge für Diesel, Dienstwagen und Auslandsflüge folgen der Abgrenzung des Umweltbundesamts und beziehen sich auf 2018. Die Bundesregierung zählt von den vier Posten nur die Befreiung für Inlandsflüge zu den Subventionen.",
+        "en": "Abolishes all or part of four tax breaks in transport: the lower energy tax rate on diesel, the flat-rate taxation of privately used company cars, the energy tax exemption for kerosene on domestic flights and, not active at the default setting, the tax exemptions for international flights. The amounts for diesel, company cars and international flights follow the definition of the Federal Environment Agency and refer to 2018. Of the four items, the federal government counts only the exemption for domestic flights as a subsidy."
+      },
+      "topic": "climate",
+      "params": [
+        {
+          "id": "diesel",
+          "type": "number",
+          "label": {
+            "de": "Diesel so hoch besteuern wie Benzin (Anteil des Abstands von 18,41 Cent je Liter)",
+            "en": "Tax diesel at the petrol rate (share of the gap of 18.41 cents per litre)"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 100,
+          "baseline": 0
+        },
+        {
+          "id": "company_car",
+          "type": "number",
+          "label": {
+            "de": "Dienstwagen: pauschale Besteuerung der Privatnutzung beenden (Anteil)",
+            "en": "Company cars: end the flat-rate taxation of private use (share)"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 100,
+          "baseline": 0
+        },
+        {
+          "id": "kerosene_domestic",
+          "type": "number",
+          "label": {
+            "de": "Kerosin auf Inlandsflügen besteuern (Anteil)",
+            "en": "Tax kerosene on domestic flights (share)"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 100,
+          "baseline": 0
+        },
+        {
+          "id": "aviation_international",
+          "type": "number",
+          "label": {
+            "de": "Auslandsflüge: Kerosin- und Mehrwertsteuer erheben (Anteil; national allein nicht möglich)",
+            "en": "International flights: levy kerosene tax and VAT (share; not possible by national law alone)"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 0,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.energy",
+          "amount": {
+            "param": "diesel",
+            "scale": 82020000.0
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021"
+          ],
+          "note": {
+            "de": "Umweltbundesamt: 8,2 Mrd. Euro im Jahr 2018, wenn Diesel mit dem Benzinsatz von 65,45 statt 47,04 Cent je Liter besteuert würde. Ohne zusätzliche Mehrwertsteuer und ohne Verhaltensänderungen. Die untere Grenze berücksichtigt, dass das Umweltbundesamt im Gegenzug eine niedrigere Kfz-Steuer für Diesel-Pkw vorschlägt und der Dieselverbrauch sinken würde.",
+            "en": "Federal Environment Agency: EUR 8.2 billion in 2018 if diesel were taxed at the petrol rate of 65.45 instead of 47.04 cents per litre. Excluding additional VAT and behavioural change. The lower bound reflects that the agency proposes a lower motor vehicle tax for diesel cars in return and that diesel consumption would fall."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.income.personal.wage_tax",
+          "amount": {
+            "param": "company_car",
+            "scale": 31000000.0
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.8,
+            "high": 1.7
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021"
+          ],
+          "note": {
+            "de": "Umweltbundesamt: mindestens 3,1 Mrd. Euro im Jahr 2018, gemessen an einer vollen Besteuerung des geldwerten Vorteils. Die dort zitierte Studie nennt je nach angenommenem privaten Nutzungsanteil 3,1 bis 5,3 Mrd. Euro; daran orientiert sich die obere Grenze.",
+            "en": "Federal Environment Agency: at least EUR 3.1 billion in 2018, measured against full taxation of the benefit in kind. The study cited there gives EUR 3.1 to 5.3 billion depending on the assumed share of private use; the upper bound follows that range."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.energy",
+          "amount": {
+            "param": "kerosene_domestic",
+            "scale": 4020000.0
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.7,
+            "high": 1.1
+          },
+          "sources": [
+            "bt_drs_21_1600"
+          ],
+          "note": {
+            "de": "Subventionsbericht der Bundesregierung: Steuermindereinnahmen von 402 Mio. Euro im Jahr 2024 für im inländischen Flugverkehr verwendete Energieerzeugnisse (Schätzung; 2026: 432 Mio. Euro).",
+            "en": "Federal Subsidy Report: revenue forgone of EUR 402 million in 2024 for energy products used in domestic air traffic (estimate; 2026: EUR 432 million)."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.energy",
+          "amount": {
+            "param": "aviation_international",
+            "scale": 77730000.0
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.0
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021"
+          ],
+          "note": {
+            "de": "Umweltbundesamt: 8,36 Mrd. Euro im Jahr 2018 für das gesamte in Deutschland getankte Kerosin der zivilen Luftfahrt zum Benzinsatz, abzüglich der 584 Mio. Euro, die der damalige Subventionsbericht für Inlandsflüge auswies. Statisch; bei einer Steuer würde ein Teil des Verkehrs oder des Tankens ins Ausland ausweichen.",
+            "en": "Federal Environment Agency: EUR 8.36 billion in 2018 for all civil aviation kerosene sold in Germany at the petrol rate, minus the EUR 584 million the Subsidy Report of the time showed for domestic flights. Static; with a tax, part of the traffic or of refuelling would move abroad."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.vat",
+          "amount": {
+            "param": "aviation_international",
+            "scale": 39970000.0
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.0
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021"
+          ],
+          "note": {
+            "de": "Umweltbundesamt: rund 4,0 Mrd. Euro im Jahr 2018 durch die Mehrwertsteuerbefreiung grenzüberschreitender Flüge (Bruttowert, von dem Vorsteuern noch abzuziehen wären).",
+            "en": "Federal Environment Agency: about EUR 4.0 billion in 2018 from the VAT exemption of cross-border flights (gross figure from which input tax would still have to be deducted)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Was als Subvention gilt, ist umstritten. Das Umweltbundesamt zählt alle vier Posten dazu und kommt für den Verkehr insgesamt auf 30,8 Mrd. Euro (2018). Die Bundesregierung hält in ihrem Subventionsbericht am engeren Begriff des Stabilitätsgesetzes fest. Von den vier Posten führt sie nur die Befreiung für Inlandsflüge auf (402 Mio. Euro im Jahr 2024); im internationalen Luftverkehr würden Steuern auf Kraftstoffe generell nicht erhoben. Der Abstand zwischen Diesel- und Benzinsteuer und die pauschale Dienstwagenbesteuerung erscheinen dort nicht als Subvention, wohl aber der zusätzliche Vorteil für elektrische Dienstwagen.",
+            "en": "What counts as a subsidy is disputed. The Federal Environment Agency includes all four items and arrives at EUR 30.8 billion for transport as a whole (2018). In its Subsidy Report the federal government keeps to the narrower definition of the Stability Act. Of the four items it lists only the exemption for domestic flights (EUR 402 million in 2024); in international air transport, it says, taxes on fuel are generally not levied. The gap between diesel and petrol tax and the flat-rate taxation of company cars do not appear there as subsidies, whereas the additional advantage for electric company cars does."
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021",
+            "bt_drs_21_1600"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "blocker",
+          "text": {
+            "de": "Auslandsflüge kann Deutschland nicht allein besteuern. Die EU-Energiesteuerrichtlinie erlaubt eine Kerosinsteuer nur für Inlandsflüge und für Flüge zwischen Mitgliedstaaten, die das untereinander vereinbaren. Für die Mehrwertsteuer auf grenzüberschreitende Flüge wäre nach Einschätzung des Umweltbundesamts eine Reform der EU-Mehrwertsteuerrichtlinie nötig. Der Regler dafür steht deshalb auf null.",
+            "en": "Germany cannot tax international flights on its own. The EU Energy Taxation Directive permits a kerosene tax only on domestic flights and on flights between member states that agree on it bilaterally. VAT on cross-border flights would, in the Federal Environment Agency's assessment, require a reform of the EU VAT Directive. The slider for this is therefore set to zero."
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Diesel: Der niedrigere Steuersatz sollte ursprünglich den gewerblichen Straßenverkehr im internationalen Wettbewerb schützen; im Gegenzug zahlen Diesel-Pkw eine höhere Kfz-Steuer. Fiele der Vorteil weg, entfiele nach Ansicht des Umweltbundesamts auch der Grund für die höhere Kfz-Steuer, was die Mehreinnahmen schmälert. Höhere Dieselpreise träfen Speditionen, Pendler und Betriebe mit Dieselfahrzeugen.",
+            "en": "Diesel: the lower tax rate was originally meant to protect commercial road transport in international competition; in return, diesel cars pay a higher motor vehicle tax. If the advantage went, the reason for the higher vehicle tax would in the Federal Environment Agency's view go too, which reduces the additional revenue. Higher diesel prices would hit hauliers, commuters and businesses with diesel vehicles."
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Dienstwagen: Nach Angaben des Umweltbundesamts werden bei der Ein-Prozent-Regel schätzungsweise nur 40 bis 50 % des tatsächlichen Vorteils versteuert. Firmenwagen haben vor allem Beschäftigte mit höheren Gehältern (40 bis 60 % derjenigen mit mehr als 90.000 Euro Jahresgehalt, 12 % aller Beschäftigten). Die Mehreinnahmen flössen als Lohnsteuer an Bund, Länder und Gemeinden.",
+            "en": "Company cars: according to the Federal Environment Agency, the one per cent rule taxes an estimated 40 to 50% of the actual benefit only. Company cars are held mainly by employees with higher salaries (40 to 60% of those earning more than EUR 90,000 a year, 12% of all employees). The additional revenue would accrue as wage tax to the federal, state and municipal levels."
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Zahlen des Umweltbundesamts stammen aus dem Jahr 2018; eine neuere Ausgabe des Berichts gibt es nicht. Seither ist der Bestand an Diesel-Pkw gesunken, und für elektrische Dienstwagen gelten niedrigere Sätze. Die Beträge sind statisch gerechnet und zeigen, was die Regeln damals kosteten, nicht, was eine Abschaffung heute einbrächte.",
+            "en": "The Federal Environment Agency's figures date from 2018; there is no newer edition of the report. Since then the stock of diesel cars has declined and lower rates apply to electric company cars. The amounts are static and show what the rules cost at the time, not what abolishing them would yield today."
+          },
+          "sources": [
+            "uba_umweltschaedliche_subventionen_2021"
+          ]
+        }
+      ],
+      "sources": [
+        "uba_umweltschaedliche_subventionen_2021",
+        "bt_drs_21_1600"
+      ]
+    },
+    {
+      "id": "national_co2_price",
+      "label": {
+        "de": "CO2-Preis auf Tanken und Heizen abschaffen",
+        "en": "Abolish the carbon price on fuel and heating"
+      },
+      "summary": {
+        "de": "Setzt den nationalen CO2-Preis auf Benzin, Diesel, Heizöl und Erdgas auf den eingestellten Wert, in der Grundeinstellung auf null. Im Basisjahr 2024 betrug er 45 Euro je Tonne, 2026 liegt er zwischen 55 und 65 Euro. Die Rechnung verändert die Einnahmen im gleichen Verhältnis wie den Preis; ein Wert über 45 Euro zeigt entsprechend Mehreinnahmen.",
+        "en": "Sets the national carbon price on petrol, diesel, heating oil and natural gas to the chosen value, zero at the default setting. In the base year 2024 it was EUR 45 per tonne; in 2026 it is between EUR 55 and 65. The calculation changes revenue in the same proportion as the price; a value above EUR 45 accordingly shows additional revenue."
+      },
+      "topic": "climate",
+      "params": [
+        {
+          "id": "price",
+          "type": "number",
+          "label": {
+            "de": "CO2-Preis je Tonne",
+            "en": "Carbon price per tonne"
+          },
+          "unit": "currency",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 0,
+          "baseline": 45
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "rev.taxes.consumption.co2.national",
+          "factor": {
+            "param": "price",
+            "scale": 0.02222222
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 1.0,
+            "high": 1.2
+          },
+          "sources": [
+            "eurostat_ntl",
+            "uba_pm_29_2025",
+            "pv_magazine_emissionshandel_2025"
+          ],
+          "note": {
+            "de": "Einnahmen des Jahres 2024 laut Volkswirtschaftlichen Gesamtrechnungen (10,96 Mrd. Euro) mal eingestelltem Preis geteilt durch 45 Euro. Statisch: Der Verbrauch ändert sich in der Rechnung nicht. Die obere Grenze der Spanne entspricht den Kasseneinnahmen 2024 von rund 13 Mrd. Euro.",
+            "en": "Revenue in 2024 according to national accounts (EUR 10.96 billion) times the chosen price divided by EUR 45. Static: consumption does not change in the calculation. The upper bound of the range corresponds to cash proceeds of about EUR 13 billion in 2024."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "blocker",
+          "text": {
+            "de": "Der nationale CO2-Preis beruht auf deutschem Recht und könnte vom Bundestag abgeschafft werden. Ab 2028 gilt aber der europäische Emissionshandel für Gebäude und Straßenverkehr (ETS 2): Dann müssen die Lieferanten von Kraft- und Heizstoffen in der ganzen EU Zertifikate ersteigern, und er soll das nationale System ablösen. Das ist EU-Recht und lässt sich national nicht abschaffen. Ein Wegfall des nationalen Preises wirkte also nur bis dahin.",
+            "en": "The national carbon price is based on German law and could be abolished by the Bundestag. From 2028, however, EU emissions trading for buildings and road transport (ETS 2) applies: fuel suppliers throughout the EU will then have to buy allowances at auction, and it is set to replace the national system. That is EU law and cannot be abolished nationally. Dropping the national price would therefore have an effect only until then."
+          },
+          "sources": [
+            "eu_ets2",
+            "pv_magazine_emissionshandel_2025"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Erlöse fließen vollständig in den Klima- und Transformationsfonds des Bundes und sind nach Angaben des Umweltbundesamts dessen maßgebliche Finanzierungssäule. Die Klimaschutzvorhaben des Bundes werden ganz überwiegend aus diesem Fonds bezahlt; zu den größten Förderprogrammen des Bundes gehört die Gebäudeförderung mit 14,1 Mrd. Euro im Jahr 2024. Ohne die Einnahmen müssten Programme gekürzt oder anders finanziert werden.",
+            "en": "The proceeds flow entirely into the federal Climate and Transformation Fund and are, according to the Federal Environment Agency, its main funding pillar. The federal government's climate projects are paid for predominantly from this fund; among the largest federal grant programmes is support for energy efficiency in buildings at EUR 14.1 billion in 2024. Without the revenue, programmes would have to be cut or financed differently."
+          },
+          "sources": [
+            "uba_pm_29_2025",
+            "pv_magazine_emissionshandel_2025",
+            "bt_drs_21_1600"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Der Start des ETS 2 wurde auf 2028 verschoben. Nach einer Meldung vom Oktober 2026 hat der Bundestag deshalb beschlossen, den nationalen Preis auch 2027 im Korridor von 55 bis 65 Euro je Tonne zu halten, um einen sprunghaften Anstieg zu vermeiden.",
+            "en": "The start of ETS 2 was postponed to 2028. According to a report of October 2026, the Bundestag therefore decided to keep the national price within the corridor of EUR 55 to 65 per tonne in 2027 as well, in order to avoid a sudden increase."
+          },
+          "sources": [
+            "ihk_behg_2026",
+            "eu_ets2"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Auch im ETS 2 entstehen Einnahmen für die Mitgliedstaaten. Sie müssen nach EU-Recht für Klimaschutz und soziale Maßnahmen verwendet werden; ein Teil fließt über den Klima-Sozialfonds an besonders betroffene Haushalte und Kleinstunternehmen.",
+            "en": "ETS 2 also generates revenue for the member states. Under EU law it must be used for climate action and social measures; part of it goes through the Social Climate Fund to vulnerable households and micro-enterprises."
+          },
+          "sources": [
+            "eu_ets2"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Einnahmen steigen mit dem Preis: 2025 nahm der Bund bei 55 Euro je Tonne rund 16 Mrd. Euro ein, 23 % mehr als 2024. Der Betrag des Basisjahres unterschätzt deshalb, was heute wegfiele.",
+            "en": "Revenue rises with the price: in 2025 the federal government collected about EUR 16 billion at EUR 55 per tonne, 23% more than in 2024. The base-year amount therefore understates what would be lost today."
+          },
+          "sources": [
+            "pv_magazine_emissionshandel_2025"
+          ]
+        }
+      ],
+      "sources": [
+        "eurostat_ntl",
+        "uba_pm_29_2025",
+        "pv_magazine_emissionshandel_2025",
+        "eu_ets2",
+        "ihk_behg_2026"
+      ]
+    },
+    {
+      "id": "early_retirement_45_years",
+      "label": {
+        "de": "„Rente mit 63“ abschaffen",
+        "en": "End the deduction-free early pension after 45 years (\"Rente mit 63\")"
+      },
+      "summary": {
+        "de": "Schafft die abschlagsfreie Altersrente für besonders langjährig Versicherte ab: Wer 45 Beitragsjahre hat, könnte nicht mehr vor der Regelaltersgrenze ohne Abschläge in Rente gehen. Der Betrag ist eine Schätzung der jährlichen Wirkung, sobald die Regel für alle Rentnerjahrgänge gilt, also erst nach Jahrzehnten. Im ersten Jahr wäre die Wirkung nur ein kleiner Bruchteil davon, weil laufende Renten unverändert bleiben und nur neue Renten betroffen wären.",
+        "en": "Abolishes the deduction-free old-age pension for people with especially long contribution records: those with 45 contribution years could no longer retire before the standard retirement age without deductions. The amount is an estimate of the annual effect once the rule applies to all cohorts of pensioners, which takes decades. In the first year the effect would be only a small fraction of it, because pensions already being paid stay unchanged and only new pensions would be affected."
+      },
+      "topic": "pensions",
+      "params": [
+        {
+          "id": "scope",
+          "type": "number",
+          "label": {
+            "de": "Anteil der Berechtigten, für die die Abschlagsfreiheit entfällt",
+            "en": "Share of those eligible who lose the deduction-free option"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 100,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.social.old_age.statutory_pensions",
+          "factor": {
+            "param": "scope",
+            "scale": -0.00029,
+            "offset": 1
+          },
+          "shift": {
+            "to": "exp.social.basic_security.unemployment_benefit",
+            "ratio": 0.0048
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.25
+          },
+          "sources": [
+            "bertelsmann_diw_rente_2026",
+            "bertelsmann_diw_rente_2026_summary",
+            "drv_rv_in_zahlen_2026",
+            "sozialpolitik_aktuell_viii51"
+          ],
+          "note": {
+            "de": "Das DIW Berlin hat für den Geburtsjahrgang 1957 berechnet, dass die Rentenversicherung ohne die abschlagsfreie Rente rund 10,4 Mrd. Euro weniger für diesen Jahrgang ausgegeben hätte, verteilt über dessen gesamte Rentenbezugszeit; das sind 2,9 % der Ausgaben für alle Altersrentner des Jahrgangs. Angenommen ist, dass Betroffene im Schnitt zehn Monate später und dann mit Abschlägen in Rente gehen. Eigene Übertragung auf ein Jahr: Gilt die Regel für alle Jahrgänge, sinken die jährlichen Ausgaben für Altersrenten um denselben Anteil; 2,9 % der Altersrenten des Jahres 2024 sind 8,3 Mrd. Euro. Die obere Grenze der Spanne entspricht den 10,4 Mrd. Euro je Jahrgang, die untere schwächeren Verhaltensänderungen oder Ausnahmen. Die Mehrausgaben der Arbeitslosenversicherung (50 Mio. Euro je Jahrgang) sind anteilig beim Arbeitslosengeld verbucht.",
+            "en": "DIW Berlin calculated for the 1957 birth cohort that without the deduction-free pension the pension insurance would have spent about EUR 10.4 billion less on this cohort, spread over its entire time in retirement; that is 2.9% of spending on all old-age pensioners of the cohort. The assumption is that those affected retire ten months later on average and then with deductions. Own conversion to one year: if the rule applies to all cohorts, annual spending on old-age pensions falls by the same share; 2.9% of old-age pensions in 2024 is EUR 8.3 billion. The upper bound of the range corresponds to the EUR 10.4 billion per cohort, the lower bound to weaker behavioural change or exemptions. The additional spending of unemployment insurance (EUR 50 million per cohort) is booked pro rata under unemployment benefit."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.income.personal",
+          "amount": {
+            "param": "scope",
+            "scale": -3437074
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.25
+          },
+          "sources": [
+            "bertelsmann_diw_rente_2026"
+          ],
+          "note": {
+            "de": "Die Studie nennt für Krankenversicherung, Pflegeversicherung und Einkommensteuer zusammen Mindereinnahmen von rund 860 Mio. Euro je Jahrgang, 8,2 % der Entlastung der Rentenversicherung. Dieser Anteil ist hier je zur Hälfte bei der Lohn- und Einkommensteuer und bei den Sozialbeiträgen der Rentner verbucht; die genaue Aufteilung nennt die Pressemitteilung nicht.",
+            "en": "For health insurance, long-term care insurance and income tax together the study gives lower revenue of about EUR 860 million per cohort, 8.2% of the relief for the pension insurance. This share is booked here half under wage and income tax and half under pensioners' social contributions; the press release does not give the exact split."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.contributions.non_employed",
+          "amount": {
+            "param": "scope",
+            "scale": -3437074
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.25
+          },
+          "sources": [
+            "bertelsmann_diw_rente_2026"
+          ],
+          "note": {
+            "de": "Zweite Hälfte der Mindereinnahmen bei Kranken- und Pflegeversicherung und Einkommensteuer (siehe vorige Wirkung).",
+            "en": "Second half of the lower revenue of health insurance, long-term care insurance and income tax (see the previous effect)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Der gezeigte Betrag ist kein Wert für das erste Jahr. Betroffen wären nur neue Renten, und die Entlastung entsteht bei ihnen nach und nach über jahrzehntelang niedrigere Zahlungen. Erst wenn alle Rentnerjahrgänge unter die neue Regel fallen, wird der volle Jahresbetrag erreicht. Er ist in heutigen Werten gerechnet.",
+            "en": "The amount shown is not a first-year figure. Only new pensions would be affected, and for them the relief arises gradually through lower payments over decades. The full annual amount is reached only when all cohorts of pensioners fall under the new rule. It is expressed in today's values."
+          },
+          "sources": [
+            "bertelsmann_diw_rente_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Das Ergebnis hängt davon ab, wie die Betroffenen reagieren. Die Studie unterstellt, dass sie im Schnitt zehn Monate später und dann mit Abschlägen in Rente gehen; dem Arbeitsmarkt blieben so rund 125.000 Vollzeitkräfte je Jahrgang erhalten. Gegenzurechnen sind Mindereinnahmen bei Kranken- und Pflegeversicherung und Einkommensteuer (860 Mio. Euro) und Mehrausgaben der Arbeitslosenversicherung (50 Mio. Euro); netto bleiben 9,5 Mrd. Euro je Jahrgang.",
+            "en": "The result depends on how those affected respond. The study assumes that they retire ten months later on average and then with deductions; this would keep about 125,000 full-time workers per cohort in the labour market. To be set against this are lower revenues of health insurance, long-term care insurance and income tax (EUR 860 million) and additional spending of unemployment insurance (EUR 50 million); the net figure is EUR 9.5 billion per cohort."
+          },
+          "sources": [
+            "bertelsmann_diw_rente_2026",
+            "bertelsmann_diw_rente_2026_summary"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Die Regelung nutzen jedes Jahr 250.000 bis 280.000 Menschen, fast 30 % aller neuen Altersrenten; Ende 2024 bezogen rund 2,66 Mio. Menschen diese Rente. Eine pauschale Abschaffung träfe Menschen mit eingeschränkter Erwerbsfähigkeit hart, die nicht länger arbeiten können und Abschläge hinnehmen müssten. Die Studie hält deshalb Ausnahmen für Härtefälle für nötig, etwa nach einer Gesundheitsprüfung oder für niedrige Einkommen. Solche Ausnahmen verringern die Einsparung.",
+            "en": "The rule is used by 250,000 to 280,000 people every year, almost 30% of all new old-age pensions; at the end of 2024 about 2.66 million people were drawing this pension. An across-the-board abolition would hit people with reduced earning capacity hard, who cannot work longer and would have to accept deductions. The study therefore considers exemptions for hardship cases necessary, for example after a health assessment or for low incomes. Such exemptions reduce the saving."
+          },
+          "sources": [
+            "bertelsmann_diw_rente_2026",
+            "bertelsmann_diw_rente_2026_summary"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Die Rente ist in § 236b SGB VI geregelt und kann durch Bundesgesetz geändert werden. Die Alterssicherungskommission der Bundesregierung hat die Abschaffung im Juni 2026 empfohlen, der Bundeskanzler hat sie im Oktober 2026 bekräftigt. Angekündigt waren ein Kabinettsbeschluss bis Ende 2026 und der Abschluss des Gesetzgebungsverfahrens im ersten Quartal 2027 (Stand Mitte Oktober 2026); beschlossen ist die Reform damit noch nicht.",
+            "en": "The pension is governed by section 236b of Social Code Book VI and can be changed by federal law. The federal government's pensions commission recommended abolishing it in June 2026, and the Chancellor confirmed this in October 2026. A cabinet decision by the end of 2026 and completion of the legislative process in the first quarter of 2027 were announced (as of mid-October 2026); the reform has thus not been adopted yet."
+          },
+          "sources": [
+            "sgb6_236b",
+            "bt_drs_21_7774",
+            "test_de_rentenreform_2026",
+            "boersen_zeitung_rente_2026"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Der Name führt in die Irre: Die Altersgrenze steigt mit dem Geburtsjahrgang und liegt für 1963 Geborene bei 64 Jahren und 10 Monaten. Ende 2025 wurden 2,89 Mio. solcher Renten gezahlt, im Schnitt 1.696 Euro im Monat.",
+            "en": "The name is misleading: the age limit rises with the year of birth and is 64 years and 10 months for those born in 1963. At the end of 2025, 2.89 million such pensions were being paid, averaging EUR 1,696 per month."
+          },
+          "sources": [
+            "sgb6_236b",
+            "drv_rv_in_zahlen_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "bertelsmann_diw_rente_2026",
+        "bertelsmann_diw_rente_2026_summary",
+        "boersen_zeitung_rente_2026",
+        "sgb6_236b"
+      ]
     }
   ]
 }

@@ -339,5 +339,86 @@
     "url": "https://www.bundesregierung.de/breg-de/service/newsletter-und-abos/newsletter-verbraucherschutz/rentenpaket-2025-2368678",
     "accessed": "2026-11-18",
     "year": 2025
+  },
+  "uba_umweltschaedliche_subventionen_2021": {
+    "title": "Umweltschädliche Subventionen in Deutschland. Aktualisierte Ausgabe 2021 (Texte 143/2021)",
+    "publisher": "Umweltbundesamt",
+    "url": "https://www.umweltbundesamt.de/system/files/medien/479/publikationen/texte_143-2021_umweltschaedliche_subventionen.pdf",
+    "accessed": "2026-11-18",
+    "year": 2018,
+    "note": "Latest edition; figures refer to 2018. Table 2 (transport), sections 2.2.1, 2.2.3, 2.2.8 and 2.2.9."
+  },
+  "uba_pm_29_2025": {
+    "title": "Pressemitteilung Nr. 29/2025 vom 16. Juli 2025 zum Emissionshandel (Erlöse 2024, Klima- und Transformationsfonds)",
+    "publisher": "Umweltbundesamt / Deutsche Emissionshandelsstelle",
+    "url": "https://www.umweltbundesamt.de/node/118293",
+    "accessed": "2026-11-18",
+    "year": 2024
+  },
+  "pv_magazine_emissionshandel_2025": {
+    "title": "Erlöse aus dem Emissionshandel steigen 2025 auf 21 Milliarden Euro (7. Januar 2026)",
+    "publisher": "pv magazine Deutschland (Angaben der Deutschen Emissionshandelsstelle)",
+    "url": "https://www.pv-magazine.de/2026/01/07/erloese-aus-dem-emissionshandel-steigen-2025-auf-21-milliarden-euro/",
+    "accessed": "2026-11-18",
+    "year": 2025,
+    "note": "Secondary source reporting the figures of the German Emissions Trading Authority: national system about 16 bn euros in 2025 (+23 %), EU ETS about 5.4 bn, total 21.4 bn after 18.5 bn in 2024."
+  },
+  "eu_ets2": {
+    "title": "ETS2: buildings, road transport and additional sectors (page updated 2 September 2026)",
+    "publisher": "European Commission, Directorate-General for Climate Action",
+    "url": "https://climate.ec.europa.eu/eu-action/eu-emissions-trading-system-eu-ets/ets2-buildings-road-transport-and-additional-sectors_en",
+    "accessed": "2026-11-18",
+    "year": 2026
+  },
+  "ihk_behg_2026": {
+    "title": "Gesetz für den Handel mit Brennstoffemissionen: Änderungen beschlossen (21. Oktober 2026)",
+    "publisher": "IHK Darmstadt Rhein Main Neckar",
+    "url": "https://www.ihk.de/darmstadt/servicemarken/news/service/aenderungen-am-brennstoffemissionshandelsgesetz-7209170",
+    "accessed": "2026-11-18",
+    "year": 2026,
+    "note": "Secondary source on the 2026 amendment of the Fuel Emissions Trading Act; names the Bundestag decision without a date."
+  },
+  "bertelsmann_diw_rente_2026": {
+    "title": "Pressemitteilung vom 3. Juni 2026: Abschaffung der „Altersrente für besonders langjährig Versicherte“ würde 9,5 Milliarden Euro pro Jahrgang sparen und 125.000 Arbeitskräfte erhalten",
+    "publisher": "Bertelsmann Stiftung (Studie des DIW Berlin)",
+    "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/BSt/Presse/Pressemitteilung_Abschaffung_der_Rente_fuer_besonders_langjaehrige_Versicherte_wuerde_9_5_Milliarden_Euro_pro_Jahrgang_sparen_und_125000_Arbeitskraefte_erhalten_20260603.pdf",
+    "accessed": "2026-11-18",
+    "year": 2026
+  },
+  "bertelsmann_diw_rente_2026_summary": {
+    "title": "Abschaffung der abschlagsfreien Frühverrentung: Analyse der fiskalischen Einsparungen und Beschäftigungseffekte (Zusammenfassung)",
+    "publisher": "Bertelsmann Stiftung (Studie des DIW Berlin: Bach, Geyer, Haan, Harder)",
+    "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/BiW/Abschaffung_der_abschlagsfreien_Fruehverrentung_Zusammenfassung.pdf",
+    "accessed": "2026-11-18",
+    "year": 2026,
+    "note": "Summary sheet with the fiscal effects by branch for the 1957 birth cohort. The full study was not opened."
+  },
+  "test_de_rentenreform_2026": {
+    "title": "Rentenreform 2026: Bundesregierung will gesetzliche Rente grundlegend umbauen (2. Juli 2026)",
+    "publisher": "Stiftung Warentest",
+    "url": "https://www.test.de/Rentenreform-2026-Bundesregierung-will-gesetzliche-Rente-grundlegend-umbauen-6318876-0/",
+    "accessed": "2026-11-18",
+    "year": 2026
+  },
+  "boersen_zeitung_rente_2026": {
+    "title": "Merz: Kabinett soll Rentenreform noch 2026 billigen (13. Oktober 2026)",
+    "publisher": "Börsen-Zeitung",
+    "url": "https://www.boersen-zeitung.de/news/bz-all-rss/konjunktur-politik/merz-kabinett-soll-rentenreform-noch-2026-billigen",
+    "accessed": "2026-11-18",
+    "year": 2026
+  },
+  "bt_drs_21_7774": {
+    "title": "Kleine Anfrage: Entwicklung des Rentenniveaus nach den Vorschlägen der Alterssicherungskommission, Drucksache 21/7774 vom 31.08.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/077/2107774.pdf",
+    "accessed": "2026-11-18",
+    "year": 2026,
+    "note": "Used for the dates of the commission (set up December 2025, report with 33 recommendations on 23 June 2026)."
+  },
+  "sgb6_236b": {
+    "title": "Sozialgesetzbuch Sechstes Buch, § 236b Altersrente für besonders langjährig Versicherte",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/sgb_6/__236b.html",
+    "accessed": "2026-11-18"
   }
 }
