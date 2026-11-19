@@ -7,6 +7,7 @@
  *   policies.json           -> PoliciesFile
  *   sources.json            -> Record<SourceId, Source>
  *   distributions/<id>.json -> Distribution (the file name is the id)
+ *   debt.json               -> DebtFile (optional: the debt and interest projection)
  *
  * Conventions
  * - Money is in plain currency units per year (euros, not millions).
@@ -184,13 +185,22 @@ export interface NumberParam {
   step: number;
   /** Value when the policy is first switched on. */
   default: number;
-  /** Today's value, for display only. */
+  /**
+   * The value in the base year (the law of the base year), for display only. With every number
+   * param at its baseline a measure must change nothing; validation warns if it does.
+   */
   baseline?: number;
   /**
    * A display unit written after the number, e.g. "cents per litre". It replaces the generic
    * formatting of `unit` on screen; `unit` still says what the value is for validation.
    */
   unitLabel?: LocalizedText;
+  /**
+   * "assumption": the param is not something a government decides but an assumption of the
+   * calculation, for example how many people avoid a tax or what replacement benefits cost. The
+   * interface marks it as such. Absent: a political choice. An assumption has no `baseline`.
+   */
+  role?: "assumption";
 }
 
 export interface GroupsParam {
@@ -257,39 +267,73 @@ export interface ParamRef {
  */
 export type Value = number | ParamRef;
 
+/**
+ * Multipliers on an effect's delta for the low and the high estimate. The engine orders the two
+ * ends by their effect on the balance (more revenue is better, more spending is worse), so which
+ * of the two is called low does not matter.
+ */
+export interface Uncertainty {
+  low: number;
+  high: number;
+  /**
+   * Effects of one policy whose uncertainty names the same basis depend on the same uncertain
+   * quantity (for example the same wage sum) and vary together: the engine adds up their effects
+   * on the balance, shifts included, and applies one multiplier to all of them, the one that is
+   * worse for that sum. Without a basis every effect is its own group, as before, and its shift
+   * keeps its own range. Effects with the same basis must have the same `low` and `high`.
+   */
+  basis?: string;
+}
+
 export interface EffectBase {
   /** Budget node id. */
   target: string;
   quality: Quality;
-  /** Multipliers on this effect's delta for the low and the high estimate. Does not apply to a `shift`. */
-  uncertainty?: { low: number; high: number };
+  /**
+   * Multipliers on this effect's delta for the low and the high estimate. Without a `basis` they
+   * do not apply to the effect's `shift`; with one they do (see Uncertainty.basis).
+   */
+  uncertainty?: Uncertainty;
   sources?: SourceId[];
   note?: LocalizedText;
+  /** Part of the change at the target that is passed on to another node; see EffectShift. */
+  shift?: EffectShift;
 }
 
 /**
- * Optional on `scale` and `excludeGroups` effects: part of what the effect removes from its
- * target reappears at another node, for example when people who lose one benefit fall back on
- * another one that a different level of government pays.
+ * Optional on every effect: a stated share of the change at the target is passed on to another
+ * node. Two uses:
+ * - a cost shift: part of what the effect removes reappears elsewhere, for example when people who
+ *   lose one benefit fall back on another one that a different level of government pays;
+ * - a knock-on effect: higher social contributions lower income tax, because employees deduct
+ *   them from their taxable income.
  *
- * removed = target total before the effect - target total after it (after clamping).
- * removed * ratio is then added to `to` like an `add` effect. If the effect increased the target,
- * both are negative.
+ * change = target total after the effect - target total before it (after clamping).
+ * `to` changes by -change * ratio, like an `add` effect: a saving at the target reappears as a cost,
+ * more contributions at the target come with less income tax at `to`.
  */
 export interface EffectShift {
-  /** Budget node id that receives the cost. Not the target, nor a node above or below it. */
+  /** Budget node id that receives the passed-on part. Not the target, nor a node above or below it. */
   to: string;
-  /** Part of the removed amount that reappears at `to`; >= 0, may exceed 1. */
+  /** Share of the target's change that is passed on, with the opposite sign; >= 0, may exceed 1. */
   ratio: Value;
-  /** Multipliers on the shifted amount only, for the low and the high estimate. Default 1 and 1. */
+  /**
+   * Multipliers on the passed-on amount, for the low and the high estimate. Default 1 and 1. With a
+   * `basis` on the effect's own uncertainty they come on top of the effect's multiplier.
+   */
   uncertainty?: { low: number; high: number };
+  /** A few words on what the passed-on part is, shown instead of the generic "cost shift". */
+  label?: LocalizedText;
+  /** Quality of the passed-on part. Default: the effect's quality. */
+  quality?: Quality;
+  sources?: SourceId[];
+  note?: LocalizedText;
 }
 
 /** new = old * factor */
 export interface ScaleEffect extends EffectBase {
   type: "scale";
   factor: Value;
-  shift?: EffectShift;
 }
 
 /** new = old + amount */
@@ -317,7 +361,6 @@ export interface ExcludeGroupsEffect extends EffectBase {
   breakdown: string;
   groups: string[] | { param: string };
   retained?: Value;
-  shift?: EffectShift;
 }
 
 /**
@@ -385,6 +428,142 @@ export interface CountryPack {
   sources: Record<SourceId, Source>;
   /** Keyed by distribution id. */
   distributions: Record<string, Distribution>;
+  /** Content of debt.json. Absent if the pack has none: then there is no debt projection. */
+  debt?: DebtFile;
 }
 
 export const LEVEL_IDS: readonly LevelId[] = ["central", "state", "local", "social_security"];
+
+// ---------------------------------------------------------------------------------------------
+// debt.json: the debt and interest projection (optional)
+// ---------------------------------------------------------------------------------------------
+
+/** A figure of the base year, with its quality and sources. */
+export interface DebtFigure {
+  /** Currency units. Above 0 for the debt stock, at least 0 for interest. */
+  value: number;
+  quality: Quality;
+  /** At least one. */
+  sources: SourceId[];
+  note?: LocalizedText;
+}
+
+/** Interest paid in the base year. */
+export interface DebtInterest extends DebtFigure {
+  /**
+   * The budget node that holds interest spending, if the budget has one: an `exp.` node, leaf or
+   * group. The projection then takes base-year interest from the budget itself, so that the
+   * primary balance plus interest equals the simulated balance exactly, and `value` (the official
+   * interest figure) is only shown. Without a node the projection uses `value`.
+   */
+  node?: string;
+}
+
+/** How fast the debt takes on a new market rate. */
+export interface DebtRefinancing {
+  /** Share of the debt that is refinanced each year, above 0 and at most 1; usually 1 / averageMaturity. */
+  share: number;
+  /** The average residual maturity in years that the share is derived from, for display. */
+  averageMaturity?: number;
+  quality: Quality;
+  /** At least one. */
+  sources: SourceId[];
+  note?: LocalizedText;
+}
+
+/**
+ * The settings of the projection a visitor can change, and the unit each must have:
+ *   market_rate  percent      interest rate on new and refinanced debt
+ *   growth       percent      nominal GDP growth per year
+ *   horizon      years        number of years projected; whole numbers, at least 1
+ *   drift        percent_gdp  change of the primary balance per year, in percentage points of GDP;
+ *                             negative for costs that grow faster than the economy, such as ageing
+ */
+export type DebtAssumptionId = "market_rate" | "growth" | "horizon" | "drift";
+
+export const DEBT_ASSUMPTION_IDS: readonly DebtAssumptionId[] = ["market_rate", "growth", "horizon", "drift"];
+
+export const DEBT_ASSUMPTION_UNITS: Readonly<Record<DebtAssumptionId, ParamUnit>> = {
+  market_rate: "percent",
+  growth: "percent",
+  horizon: "years",
+  drift: "percent_gdp",
+};
+
+/**
+ * One setting of the projection. It is a number param, so the interface can show it with the same
+ * slider as a policy param; `note` and `sources` say where the default comes from.
+ */
+export interface DebtAssumptionParam extends NumberParam {
+  id: DebtAssumptionId;
+  note?: LocalizedText;
+  sources?: SourceId[];
+}
+
+/** A ready-made set of assumptions, e.g. "rates as in the United States". */
+export interface DebtPreset {
+  id: string;
+  label: LocalizedText;
+  note?: LocalizedText;
+  /**
+   * The assumptions the preset sets, in the units of their params and inside their ranges. At
+   * least one. Assumptions it does not name keep their current value.
+   */
+  values: Partial<Record<DebtAssumptionId, number>>;
+  sources?: SourceId[];
+}
+
+/**
+ * A value to compare the projection with: another country, a rule such as the EU's 60 % debt
+ * reference value, or the country itself in another year.
+ */
+export interface DebtReference {
+  id: string;
+  label: LocalizedText;
+  kind: "country" | "threshold" | "history";
+  /** The year the values refer to. Absent for a threshold that holds in every year. */
+  year?: number;
+  /** Gross debt as a fraction of GDP (1.2 is 120 %). */
+  debtRatio?: number;
+  /** Interest payable as a fraction of GDP. At least one of the two ratios is required. */
+  interestRatio?: number;
+  /**
+   * General government total revenue as a fraction of GDP, for the same year and from the same
+   * source as `interestRatio`, which it requires. With it the interest burden can also be shown as
+   * a share of revenue (interestRatio / revenueRatio). Leave it out where the source's revenue is
+   * not comparable with the country's own.
+   */
+  revenueRatio?: number;
+  /** At least one. */
+  sources: SourceId[];
+  note?: LocalizedText;
+}
+
+/**
+ * A budget item the interest bill is compared with, e.g. defence: the interface says in which year
+ * interest overtakes it. Like all spending in the projection, the item keeps its base-year share of
+ * GDP, so the comparison is between interest and the item's share of GDP.
+ */
+export interface DebtComparison {
+  /** An `exp.` node of the budget, leaf or group, other than the interest node. */
+  node: string;
+  /** A shorter name, as it reads after "spending on"; default: the node's label. */
+  label?: LocalizedText;
+}
+
+/** Content of debt.json. */
+export interface DebtFile {
+  /** Gross debt of general government at the end of the base year (for EU countries the Maastricht debt). */
+  stock: DebtFigure;
+  /** Interest paid in the base year (ESA 2010 D.41, payable). */
+  interest: DebtInterest;
+  refinancing: DebtRefinancing;
+  /** Exactly one param per DebtAssumptionId, in the order the interface shows them. */
+  assumptions: DebtAssumptionParam[];
+  presets: DebtPreset[];
+  references: DebtReference[];
+  /** Budget items to compare the interest bill with, in the order the interface lists them. Optional. */
+  comparisons?: DebtComparison[];
+  /** What the projection is and what it leaves out, in plain words; shown with it. */
+  note: LocalizedText;
+}

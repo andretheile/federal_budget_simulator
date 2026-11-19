@@ -4,7 +4,8 @@
  * Validates every country pack under countries/ (or under the given directory). Prints the
  * errors of each invalid pack and exits with status 1 if there are any. For each valid pack it
  * prints the derived totals and what every policy does on its own at default parameters, so a
- * reviewer can judge whether the numbers are plausible.
+ * reviewer can judge whether the numbers are plausible, and for a pack with debt.json the debt
+ * and interest in the base year and 10 and 20 years later at default assumptions.
  *
  * Runs on plain Node (>= 22.18), which strips the TypeScript types itself.
  */
@@ -13,11 +14,14 @@ import { join, relative, resolve, sep } from "node:path";
 import process from "node:process";
 import {
   formatIssue,
+  projectScenario,
+  resolveDebtAssumptions,
   shareOfGdp,
   simulate,
   simulatePolicy,
   validatePackFiles,
   type CountryPack,
+  type DebtLongRun,
   type ValidationIssue,
 } from "../src/engine/index.ts";
 
@@ -46,8 +50,8 @@ function amount(value: number, signed = false): string {
   return `${sign}${abs.toLocaleString("en", { maximumFractionDigits: 2 })}`;
 }
 
-function percent(share: number): string {
-  return `${(share * 100).toFixed(1)} %`;
+function percent(share: number, digits = 1): string {
+  return `${(share * 100).toFixed(digits)} %`;
 }
 
 function printIssues(title: string, issues: ValidationIssue[]): void {
@@ -89,6 +93,37 @@ function printSummary(pack: CountryPack): void {
   }
 }
 
+function longRun(outcome: DebtLongRun): string {
+  if (outcome.kind === "drifts") return "never settles, the primary balance keeps changing";
+  if (outcome.kind === "diverges") return "grows faster than the economy without limit";
+  return outcome.debtRatio === 0 ? "the debt is paid off" : `settles at ${percent(outcome.debtRatio)} of GDP`;
+}
+
+/** Debt and interest in the base year and 10 and 20 years later, at default assumptions and without measures. */
+function printDebtSummary(pack: CountryPack): void {
+  if (!pack.debt) return;
+  const defaults = resolveDebtAssumptions(pack.debt);
+  const projection = projectScenario(pack, { policies: {} }, { horizon: Math.max(defaults.horizon, 20) });
+  if (!projection) return;
+  const { market_rate, growth, drift } = projection.assumptions;
+  const change = drift === 0 ? "no drift of the primary balance" : `primary balance ${drift > 0 ? "+" : ""}${drift} points of GDP a year`;
+  console.log(
+    `  debt projection without measures at default assumptions (market rate ${market_rate} %, growth ${growth} %, ` +
+      `${change}, ${percent(projection.refinancingShare)} of the debt refinanced a year):`,
+  );
+  console.log(`    year            debt   of GDP        interest  of GDP  of revenue`);
+  const { baseline } = projection;
+  for (const year of [baseline.start, ...baseline.years]) {
+    const after = year.year - projection.baseYear;
+    if (after !== 0 && after !== 10 && after !== 20) continue;
+    console.log(
+      `    ${year.year}  ${amount(year.debt).padStart(14)}  ${percent(year.debtRatio).padStart(7)}  ` +
+        `${amount(year.interest).padStart(14)}  ${percent(year.interestRatio, 2).padStart(6)}  ${percent(year.interestToRevenue).padStart(10)}`,
+    );
+  }
+  console.log(`    in the long run the debt ratio ${longRun(baseline.longRun)}`);
+}
+
 function main(): number {
   if (!existsSync(root)) {
     console.log(`${label}/ does not exist: no country packs to validate.`);
@@ -113,6 +148,7 @@ function main(): number {
       console.log(`${label}/${id}: valid`);
       printIssues("warnings", result.warnings);
       printSummary(result.pack);
+      printDebtSummary(result.pack);
     } else {
       invalid++;
       console.log(`${label}/${id}: INVALID, ${result.errors.length} error(s)`);

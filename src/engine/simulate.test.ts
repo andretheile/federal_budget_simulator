@@ -547,6 +547,7 @@ describe("shift: part of what an effect removes reappears at another node", () =
     expect(effect.shift).toEqual({
       target: "exp.social.basic_income",
       side: "expenditure",
+      quality: "estimate", // the effect's, since the shift states none
       delta: expect.closeTo(40, 9),
       low: expect.closeTo(80, 9), // uncertainty 0.5 to 2 on the shifted cost: twice the cost is the bad end
       high: expect.closeTo(20, 9),
@@ -567,7 +568,7 @@ describe("shift: part of what an effect removes reappears at another node", () =
     expect(at({ fallback: 100 }).delta.balance).toBeCloseTo(0, 9);
     expect(at({ cut: 20 }).effects[0].shift?.delta).toBeCloseTo(80, 9);
     // Nothing shifted: the shift is still reported, with zeros.
-    expect(at({ fallback: 0 }).effects[0].shift).toEqual({ target: "exp.social.basic_income", side: "expenditure", delta: 0, low: 0, high: 0, clamped: false });
+    expect(at({ fallback: 0 }).effects[0].shift).toEqual({ target: "exp.social.basic_income", side: "expenditure", quality: "estimate", delta: 0, low: 0, high: 0, clamped: false });
     expect(at({ cut: 0 }).effects[0].shift?.delta).toBe(0);
     expect(at({ cut: 0 }).warnings).toEqual([]);
   });
@@ -575,7 +576,7 @@ describe("shift: part of what an effect removes reappears at another node", () =
   it("is absent on effects without a shift", () => {
     const result = simulate(testland, enable(ALL));
     const withShift = result.policies.flatMap((p) => p.effects.filter((e) => e.shift).map(() => p.id));
-    expect(withShift).toEqual(["cut_pensions"]);
+    expect(withShift).toEqual(["cut_pensions", "insure_civil_servants"]);
     expect("shift" in result.policies[0].effects[0]).toBe(false);
   });
 
@@ -628,7 +629,7 @@ describe("shift: part of what an effect removes reappears at another node", () =
     // 20 % of the saving reappears as revenue; a fifth less to twice as much.
     const { result, policy: p } = run([halveDefense({ to: "rev.other", ratio: 0.2, uncertainty: { low: 0.5, high: 2 } })]);
     expect(result.nodes["rev.other"].reform).toBe(320);
-    expect(p.effects[0].shift).toEqual({ target: "rev.other", side: "revenue", delta: 20, low: 10, high: 40, clamped: false });
+    expect(p.effects[0].shift).toEqual({ target: "rev.other", side: "revenue", quality: "estimate", delta: 20, low: 10, high: 40, clamped: false });
     expect(p.delta).toEqual({ revenue: 20, expenditure: -100, balance: 120 });
     expect(p.low).toEqual({ revenue: 10, expenditure: -100, balance: 110 });
     expect(p.high).toEqual({ revenue: 40, expenditure: -100, balance: 140 });
@@ -669,7 +670,7 @@ describe("shift: part of what an effect removes reappears at another node", () =
     const { result, policy: p } = run([{ type: "scale", target: "exp.education", factor: 2, quality: "estimate", shift: { to: "exp.interest", ratio: 1 } }]);
     expect(result.nodes["exp.interest"].reform).toBe(0);
     expect(p.effects[0].clamped).toBe(false);
-    expect(p.effects[0].shift).toEqual({ target: "exp.interest", side: "expenditure", delta: -100, low: -100, high: -100, clamped: true });
+    expect(p.effects[0].shift).toEqual({ target: "exp.interest", side: "expenditure", quality: "estimate", delta: -100, low: -100, high: -100, clamped: true });
     expect(p.delta.expenditure).toBe(700);
     expect(p.warnings).toHaveLength(1);
     expect(p.warnings[0]).toMatchObject({ code: "clamped", policy: "p", effect: 0, node: "exp.interest" });
@@ -688,7 +689,7 @@ describe("shift: part of what an effect removes reappears at another node", () =
     const { result, policy: p } = run([halveDefense({ to: "exp.health", ratio: { param: "nope" } })]);
     expect(result.nodes["exp.defense"].reform).toBe(100);
     expect(result.nodes["exp.health"].reform).toBe(700);
-    expect(p.effects[0].shift).toEqual({ target: "exp.health", side: "expenditure", delta: 0, low: 0, high: 0, clamped: false });
+    expect(p.effects[0].shift).toEqual({ target: "exp.health", side: "expenditure", quality: "estimate", delta: 0, low: 0, high: 0, clamped: false });
     expect(p.warnings.map((w) => [w.code, w.node])).toEqual([["not_finite", "exp.health"]]);
   });
 
@@ -1059,14 +1060,16 @@ describe("attribution", () => {
       expect(result.reform[key] - result.baseline[key]).toBeCloseTo(result.delta[key], 9);
     }
     // Hand-checked. Revenue: +40 (wealth tax) + 125 (top rate), and the redrawn tariff on top of
-    // the raised top rate: 1625 * (130 / 120 - 1).
-    expect(result.delta.revenue).toBeCloseTo(165 + 1625 / 12, 9);
+    // the raised top rate: 1625 * (130 / 120 - 1). Then the civil servants' contributions (+100) and
+    // the income tax their own half costs (-15).
+    expect(result.delta.revenue).toBeCloseTo(165 + 1625 / 12 + 100 - 15, 9);
     // Expenditure: parliament 10 -> 5 -> 4.5; other administration 390 -> 351 -> 357 (the extra 6 comes
-    // after the cut); basic income 400 -> 304; defence 200 -> 300; family benefits 200 -> 300.
-    expect(result.nodes["exp.admin.other"].reform).toBeCloseTo(357, 9);
-    // The pension cut comes last: 1600 -> 1440, and 40 reappear as basic income support (304 -> 344).
+    // after the cut) -> 407 (the employer's half for civil servants, last of all); basic income
+    // 400 -> 304; defence 200 -> 300; family benefits 200 -> 300.
+    expect(result.nodes["exp.admin.other"].reform).toBeCloseTo(407, 9);
+    // The pension cut comes after them: 1600 -> 1440, and 40 reappear as basic income support (304 -> 344).
     expect(result.nodes["exp.social.basic_income"].reform).toBeCloseTo(344, 9);
-    expect(result.reform.expenditure).toBeCloseTo(4400 - 5 - 39.5 - 96 + 6 + 100 + 100 - 160 + 40, 9);
+    expect(result.reform.expenditure).toBeCloseTo(4400 - 5 - 39.5 - 96 + 6 + 100 + 100 - 160 + 40 + 50, 9);
   });
 
   it("effect deltas add up to the policy delta and each balance is revenue minus expenditure", () => {

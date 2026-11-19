@@ -22,6 +22,9 @@ interface Files {
   policies: { policies: Loose[] };
   sources: Loose;
   distributions: Record<string, Loose>;
+  /** assumptions [0] market_rate [1] growth [2] horizon [3] drift; presets [0] high_rates [1] ageing [2] zero_rates;
+   *  references [0] neighbour (country) [1] treaty_limit (threshold) [2] peak_1995 (history). */
+  debt?: Loose;
 }
 
 function errorsAfter(mutate: (files: Files) => void): ValidationIssue[] {
@@ -178,7 +181,8 @@ describe("ids", () => {
 
   it("node id with the prefix of the other side", () => {
     expectOnly((f) => (f.budget.revenue[2].id = "exp.other"), "budget.json", "$.revenue[2].id", /must start with "rev\."/);
-    expectOnly((f) => (f.budget.expenditure[5].id = "rev.interest"), "budget.json", "$.expenditure[5].id", /must start with "exp\."/);
+    // Not exp.interest: debt.json refers to it, so renaming it would also be an unknown node there.
+    expectOnly((f) => (f.budget.expenditure[1].id = "rev.health"), "budget.json", "$.expenditure[1].id", /must start with "exp\."/);
   });
 
   it("duplicate policy id", () => {
@@ -548,11 +552,12 @@ describe("shift", () => {
     expectOnly((f) => (f.policies.policies[7].effects[0].shift = "exp.health"), "policies.json", AT, /expected object/);
   });
 
-  it("is only allowed on `scale` and `excludeGroups` effects", () => {
-    const add = { to: "exp.health", ratio: 0.5 };
-    // [3] schedule, [5] set, [6] add
+  it("is allowed on every kind of effect", () => {
+    // [3] schedule, [5] set, [6] add: a knock-on of the change, e.g. less income tax on more contributions.
     for (const i of [3, 5, 6]) {
-      expectOnly((f) => (f.policies.policies[i].effects[0].shift = add), "policies.json", `$.policies[${i}].effects[0]`, /Unrecognized key: "shift"/);
+      const files = testlandFiles() as Files;
+      files.policies.policies[i].effects[0].shift = { to: "exp.health", ratio: 0.5 };
+      expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
     }
     // excludeGroups: [2] no_basic_income_non_citizens, first effect
     const files = testlandFiles() as Files;
@@ -891,6 +896,7 @@ describe("validatePackFiles", () => {
       "sources.json": JSON.stringify(files.sources),
       "distributions/income.json": JSON.stringify(files.distributions.income),
       "distributions/wealth.json": JSON.stringify(files.distributions.wealth),
+      "debt.json": JSON.stringify(files.debt),
     };
   };
 
@@ -972,5 +978,217 @@ describe("reporting", () => {
     expect(formatPath([])).toBe("$");
     expect(formatPath(["revenue", 0, "children", 12, "amount"])).toBe("$.revenue[0].children[12].amount");
     expect(formatPath(["breakdowns", "by-age", "x y"])).toBe('$.breakdowns["by-age"]["x y"]');
+  });
+});
+
+describe("debt.json", () => {
+  const DEBT = "debt.json";
+
+  it("is optional: without it the pack is valid and has no debt data", () => {
+    const files = testlandFiles() as Files;
+    delete files.debt;
+    const result = validatePack(files);
+    expect(result).toMatchObject({ ok: true, warnings: [] });
+    expect(result.ok && "debt" in result.pack).toBe(false);
+  });
+
+  it("is read by validatePackFiles like the other files", () => {
+    const files = testlandFiles() as Files;
+    const texts: Record<string, string> = {
+      "country.json": JSON.stringify(files.country),
+      "budget.json": JSON.stringify(files.budget),
+      "policies.json": JSON.stringify(files.policies),
+      "sources.json": JSON.stringify(files.sources),
+      "distributions/income.json": JSON.stringify(files.distributions.income),
+      "distributions/wealth.json": JSON.stringify(files.distributions.wealth),
+      "debt.json": JSON.stringify(files.debt),
+    };
+    const result = validatePackFiles(texts, "xx");
+    expect(result).toEqual({ ok: true, pack: testland, warnings: [] });
+
+    const broken = validatePackFiles({ ...texts, "debt.json": "{ stock: 1 }" }, "xx");
+    expect(broken.ok ? [] : broken.errors).toEqual([{ file: DEBT, path: "$", message: expect.stringMatching(/^not valid JSON: /) }]);
+  });
+
+  it("the shape is strict", () => {
+    expectOnly((f) => (f.debt.extra = 1), DEBT, "$", /Unrecognized key: "extra"/);
+    expectOnly((f) => delete f.debt.note, DEBT, "$.note", /expected object/);
+    expectOnly((f) => (f.debt.stock.value = 0), DEBT, "$.stock.value", /expected number to be >0/);
+    expectOnly((f) => (f.debt.interest.value = -1), DEBT, "$.interest.value", />=0/);
+    expectOnly((f) => (f.debt.stock.sources = []), DEBT, "$.stock.sources", />=1 items/);
+    expectOnly((f) => (f.debt.refinancing.share = 0), DEBT, "$.refinancing.share", />0/);
+    expectOnly((f) => (f.debt.refinancing.share = 1.5), DEBT, "$.refinancing.share", /<=1/);
+    expectOnly((f) => (f.debt.refinancing.averageMaturity = 0), DEBT, "$.refinancing.averageMaturity", />0/);
+    expectOnly((f) => (f.debt.assumptions[0].id = "rate"), DEBT, "$.assumptions[0].id", /expected one of "market_rate"\|"growth"\|"horizon"\|"drift"/);
+    expectOnly((f) => (f.debt.assumptions[0].type = "curve"), DEBT, "$.assumptions[0].type", /expected "number"/);
+    expectOnly((f) => (f.debt.assumptions[0].extra = 1), DEBT, "$.assumptions[0]", /Unrecognized key: "extra"/);
+    expectOnly((f) => (f.debt.presets[0].values = {}), DEBT, "$.presets[0].values", /at least one assumption/);
+    expectOnly((f) => (f.debt.presets[0].values = { market_rate: 1, rate: 1 }), DEBT, "$.presets[0].values", /Unrecognized key: "rate"/);
+    expectOnly((f) => (f.debt.presets[0].values = { market_rate: "1" }), DEBT, "$.presets[0].values.market_rate", /expected number/);
+    expectOnly((f) => (f.debt.references[0].kind = "planet"), DEBT, "$.references[0].kind", /expected one of "country"/);
+    expectOnly((f) => (f.debt.references[0].debtRatio = -0.1), DEBT, "$.references[0].debtRatio", />=0/);
+    expectOnly((f) => (f.debt.references[0].sources = []), DEBT, "$.references[0].sources", />=1 items/);
+  });
+
+  it("a broken debt.json makes the pack invalid without errors in the other files", () => {
+    const files = testlandFiles() as Files;
+    files.debt.stock = "a lot";
+    files.budget.revenue[1].levels = { social_security: 0.9 };
+    const result = validatePack(files);
+    expect(result.ok).toBe(false);
+    expect(result.ok ? [] : result.errors.map((e) => e.file)).toEqual(["budget.json", DEBT]);
+  });
+
+  it("every source must exist", () => {
+    for (const [path, list] of [
+      ["$.stock.sources[0]", (f) => f.debt.stock.sources],
+      ["$.interest.sources[0]", (f) => f.debt.interest.sources],
+      ["$.refinancing.sources[0]", (f) => f.debt.refinancing.sources],
+      ["$.assumptions[0].sources[0]", (f) => f.debt.assumptions[0].sources],
+      ["$.presets[0].sources[0]", (f) => f.debt.presets[0].sources],
+      ["$.references[0].sources[0]", (f) => f.debt.references[0].sources],
+    ] as [string, (f: Files) => string[]][]) {
+      expectOnly((f) => (list(f)[0] = "nowhere"), DEBT, path, /unknown source "nowhere"/);
+    }
+  });
+
+  it("sources cited only in debt.json count as used", () => {
+    const files = testlandFiles() as Files;
+    files.sources.debt_office = { ...files.sources.stats_office };
+    files.debt.refinancing.sources = ["debt_office"];
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("every text needs every locale", () => {
+    for (const [path, get] of [
+      ["$.note", (f) => f.debt.note],
+      ["$.stock.note", (f) => f.debt.stock.note],
+      ["$.interest.note", (f) => f.debt.interest.note],
+      ["$.refinancing.note", (f) => f.debt.refinancing.note],
+      ["$.assumptions[0].label", (f) => f.debt.assumptions[0].label],
+      ["$.assumptions[0].note", (f) => f.debt.assumptions[0].note],
+      ["$.assumptions[3].unitLabel", (f) => f.debt.assumptions[3].unitLabel],
+      ["$.presets[1].label", (f) => f.debt.presets[1].label],
+      ["$.presets[1].note", (f) => f.debt.presets[1].note],
+      ["$.references[0].label", (f) => f.debt.references[0].label],
+      ["$.references[0].note", (f) => f.debt.references[0].note],
+    ] as [string, (f: Files) => Record<string, string>][]) {
+      expectOnly((f) => delete get(f).de, DEBT, path, /text for locale "de" is missing/);
+    }
+  });
+
+  it("the interest node is an existing expenditure node", () => {
+    expectOnly((f) => (f.debt.interest.node = "exp.nope"), DEBT, "$.interest.node", /unknown budget node "exp.nope"/);
+    expectOnly((f) => (f.debt.interest.node = "rev.other"), DEBT, "$.interest.node", /"rev.other" is a revenue node/);
+    // A group will do, and no node at all too.
+    const group = testlandFiles() as Files;
+    group.debt.interest.node = "exp.admin";
+    group.debt.interest.value = 400;
+    expect(validatePack(group)).toMatchObject({ ok: true, warnings: [] });
+    const none = testlandFiles() as Files;
+    delete none.debt.interest.node;
+    expect(validatePack(none)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("warns where two figures for the same thing disagree", () => {
+    // The interest node holds 100; up to 10 % off the official figure is fine.
+    expect(warningsAfter((f) => (f.debt.interest.value = 91))).toEqual([]);
+    expect(warningsAfter((f) => (f.debt.interest.value = 80))).toEqual([
+      { file: DEBT, path: "$.interest.node", message: expect.stringMatching(/base amount of "exp.interest" \(100\) differs from interest.value \(80\)/) },
+    ]);
+    expect(warningsAfter((f) => (f.budget.expenditure[5].amount = 0))).toEqual([
+      { file: DEBT, path: "$.interest.node", message: expect.stringMatching(/zero in the base year/) },
+    ]);
+    expect(warningsAfter((f) => (f.debt.stock.value = 5100))).toEqual([
+      { file: DEBT, path: "$.stock.value", message: "5100 differs from the grossDebt indicator in country.json (5000)" },
+    ]);
+    // Without a grossDebt indicator there is nothing to compare.
+    expect(warningsAfter((f) => delete f.country.indicators.grossDebt)).toEqual([]);
+  });
+
+  it("each assumption exists once, in its unit, with a default inside its range", () => {
+    expectOnly((f) => f.debt.assumptions.pop(), DEBT, "$.assumptions", /assumption "drift" is missing/);
+    const twice = errorsAfter((f) => (f.debt.assumptions[1].id = "market_rate"));
+    expect(twice.map(formatIssue)).toEqual([
+      'debt.json $.assumptions[1].id: duplicate assumption "market_rate"',
+      'debt.json $.assumptions: assumption "growth" is missing',
+    ]);
+    expectOnly((f) => (f.debt.assumptions[1].unit = "percent_gdp"), DEBT, "$.assumptions[1].unit", /"growth" is in percent, not percent_gdp/);
+    expectOnly((f) => (f.debt.assumptions[3].unit = "percent"), DEBT, "$.assumptions[3].unit", /"drift" is in percent_gdp, not percent/);
+    expectOnly((f) => (f.debt.assumptions[0].default = 11), DEBT, "$.assumptions[0].default", /11 lies outside \[-1, 10\]/);
+    expectOnly((f) => (f.debt.assumptions[0].min = 20), DEBT, "$.assumptions[0]", /min \(20\) is above max \(10\)/);
+    // A rate of -100 % or less makes no sense, for growth neither.
+    expectOnly((f) => (f.debt.assumptions[1].min = -100), DEBT, "$.assumptions[1].min", /-100 % is not above -100 %/);
+  });
+
+  it("the horizon is in whole years, at least one", () => {
+    expectOnly((f) => (f.debt.assumptions[2].step = 0.5), DEBT, "$.assumptions[2].step", /0.5 is not a whole number of years/);
+    expectOnly((f) => (f.debt.assumptions[2].default = 30.5), DEBT, "$.assumptions[2].default", /not a whole number/);
+    expectOnly((f) => (f.debt.assumptions[2].min = 0), DEBT, "$.assumptions[2].min", /0 is below 1/);
+  });
+
+  it("presets have unique ids and values inside the ranges", () => {
+    expectOnly((f) => (f.debt.presets[1].id = "high_rates"), DEBT, "$.presets[1].id", /duplicate preset id "high_rates"/);
+    expectOnly((f) => (f.debt.presets[0].values.market_rate = 12), DEBT, "$.presets[0].values.market_rate", /12 lies outside \[-1, 10\]/);
+    expectOnly((f) => (f.debt.presets[1].values.drift = -1), DEBT, "$.presets[1].values.drift", /-1 lies outside \[-0.5, 0.5\]/);
+    expectOnly((f) => (f.debt.presets[0].values.horizon = 10.5), DEBT, "$.presets[0].values.horizon", /not a whole number of years/);
+    expect(validatePack(testlandFiles())).toMatchObject({ ok: true });
+  });
+
+  it("references need a ratio, a year unless they are a threshold, and unique ids", () => {
+    expectOnly(
+      (f) => {
+        delete f.debt.references[0].debtRatio;
+        delete f.debt.references[0].interestRatio;
+      },
+      DEBT,
+      "$.references[0]",
+      /needs "debtRatio", "interestRatio" or both/,
+    );
+    expectOnly((f) => delete f.debt.references[0].year, DEBT, "$.references[0]", /kind "country" needs a "year"/);
+    expectOnly((f) => delete f.debt.references[2].year, DEBT, "$.references[2]", /kind "history" needs a "year"/);
+    expectOnly((f) => (f.debt.references[1].id = "neighbour"), DEBT, "$.references[1].id", /duplicate reference id "neighbour"/);
+    // A threshold with a year is fine.
+    expect(validatePack(((f) => ((f.debt.references[1].year = 1992), f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("warns about ratios that look like percentages", () => {
+    expect(warningsAfter((f) => (f.debt.references[0].debtRatio = 120))).toEqual([
+      { file: DEBT, path: "$.references[0].debtRatio", message: expect.stringMatching(/120 means 12000 % of GDP; ratios are fractions/) },
+    ]);
+    expect(warningsAfter((f) => (f.debt.references[0].interestRatio = 3.5))).toEqual([
+      { file: DEBT, path: "$.references[0].interestRatio", message: expect.stringMatching(/3.5 means 350 % of GDP/) },
+    ]);
+    // Japan's debt of about 2.1 times GDP is no reason to warn.
+    expect(warningsAfter((f) => (f.debt.references[0].debtRatio = 2.14))).toEqual([]);
+  });
+
+  it("a reference's revenue ratio goes with its interest ratio and is a fraction", () => {
+    expectOnly((f) => delete f.debt.references[0].interestRatio, DEBT, "$.references[0].revenueRatio", /"revenueRatio" needs "interestRatio"/);
+    expectOnly((f) => (f.debt.references[0].revenueRatio = 0), DEBT, "$.references[0].revenueRatio", />0/);
+    expect(warningsAfter((f) => (f.debt.references[0].revenueRatio = 35))).toEqual([
+      { file: DEBT, path: "$.references[0].revenueRatio", message: expect.stringMatching(/35 means 3500 % of GDP; ratios are fractions/) },
+    ]);
+    // Optional: a reference without it is fine.
+    expect(validatePack(((f) => (delete f.debt.references[0].revenueRatio, f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("compares interest with spending items that exist, each once, other than interest itself", () => {
+    expectOnly((f) => (f.debt.comparisons[0].node = "exp.nope"), DEBT, "$.comparisons[0].node", /unknown budget node "exp.nope"/);
+    expectOnly((f) => (f.debt.comparisons[0].node = "rev.other"), DEBT, "$.comparisons[0].node", /"rev.other" is a revenue node/);
+    expectOnly((f) => (f.debt.comparisons[0].node = "exp.interest"), DEBT, "$.comparisons[0].node", /the interest node itself/);
+    expectOnly((f) => (f.debt.comparisons[1].node = "exp.admin.parliament"), DEBT, "$.comparisons[1].node", /compared twice/);
+    expectOnly((f) => delete f.debt.comparisons[2].label.de, DEBT, "$.comparisons[2].label", /text for locale "de" is missing/);
+    expectOnly((f) => (f.debt.comparisons[0].extra = 1), DEBT, "$.comparisons[0]", /Unrecognized key: "extra"/);
+    expect(warningsAfter((f) => (f.budget.expenditure[3].amount = 0)).filter((issue) => issue.file === DEBT)).toEqual([
+      { file: DEBT, path: "$.comparisons[1].node", message: expect.stringMatching(/"exp.defense" is zero in the base year/) },
+    ]);
+    // The list is optional, and a group will do.
+    const none = testlandFiles() as Files;
+    delete none.debt.comparisons;
+    expect(validatePack(none)).toMatchObject({ ok: true, warnings: [] });
+    const group = testlandFiles() as Files;
+    group.debt.comparisons = [{ node: "exp.admin" }];
+    expect(validatePack(group)).toMatchObject({ ok: true, warnings: [] });
   });
 });

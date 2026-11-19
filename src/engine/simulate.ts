@@ -100,11 +100,17 @@ export interface ShiftResult {
   /** The node that received the shifted amount (`shift.to`). */
   target: string;
   side: Side;
+  /** `shift.quality`, or the effect's quality if the shift has none. */
+  quality: Quality;
   /** Change of that node caused by the shift, with the level filter applied. */
   delta: number;
-  /** `delta` times the shift's uncertainty multiplier that is worse for the balance. */
+  /**
+   * The shifted amount at the low end of the policy's range: `delta` times the shift's own
+   * multiplier that is worse for the balance, and, if the effect's uncertainty has a basis, times
+   * the multiplier the effect's group uses for its low end as well.
+   */
   low: number;
-  /** `delta` times the shift's uncertainty multiplier that is better for the balance. */
+  /** The same at the high end of the range. */
   high: number;
   /** True if the receiving node was cut off at zero. */
   clamped: boolean;
@@ -124,9 +130,13 @@ export interface EffectResult {
    * A `shift` is not included here; see `shift`.
    */
   delta: number;
-  /** `delta` times one of the uncertainty multipliers: the one that is worse for the balance. */
+  /**
+   * `delta` at the low end of the policy's range: times the uncertainty multiplier that is worse for
+   * the balance. For an effect whose uncertainty has a basis, "worse" is judged on the sum of all
+   * effects with that basis and their shifts, so every member uses the same multiplier.
+   */
   low: number;
-  /** `delta` times the uncertainty multiplier that is better for the balance. */
+  /** `delta` at the high end of the policy's range: times the other multiplier. */
   high: number;
   /** True if the result was cut off at zero. */
   clamped: boolean;
@@ -602,11 +612,11 @@ function addTo(sum: Totals, part: Totals): void {
 function applyPolicy(run: Run, policy: Policy, given: ParamValues | undefined): PolicyResult {
   const params = resolveParams(run.pack, policy, given);
   const warnings: SimulationWarning[] = [];
-  const effects: EffectResult[] = [];
+  const applied = policy.effects.map((effect, index) => applyEffect(run, policy, effect, index, params, warnings));
+  const effects = applied.map((entry) => entry.result);
+  assignRanges(policy, applied);
   const sums = { revenue: [0, 0, 0], expenditure: [0, 0, 0] };
-  policy.effects.forEach((effect, index) => {
-    const result = applyEffect(run, policy, effect, index, params, warnings);
-    effects.push(result);
+  effects.forEach((result) => {
     const sum = sums[result.side];
     sum[0] += result.delta;
     sum[1] += result.low;
@@ -627,6 +637,73 @@ function applyPolicy(run: Run, policy: Policy, given: ParamValues | undefined): 
     effects,
     warnings,
   };
+}
+
+/** A change of a node seen as a change of the balance: more revenue and less spending are positive. */
+function onBalance(amount: number, side: Side): number {
+  return side === "revenue" ? amount : -amount;
+}
+
+/**
+ * Fills in `low` and `high` of every effect and shift of a policy.
+ *
+ * Effects whose uncertainty names the same basis form one group; every other effect is a group of
+ * its own. A group takes the multiplier (low or high) that is worse for the sum of its members'
+ * effects on the balance, shifts of members with a basis included, and gives every member that
+ * multiplier at the low end and the other one at the high end. So effects that depend on the same
+ * uncertain quantity move together, and a group whose members cancel out has no range at all.
+ *
+ * A shift has its own multipliers on top, ordered by the shift's own effect on the balance. If the
+ * effect's uncertainty has a basis, the shift moves with the effect's group as well; without one,
+ * as before, the effect's multipliers apply to the target only.
+ */
+function assignRanges(policy: Policy, applied: Applied[]): void {
+  interface Group {
+    low: number;
+    high: number;
+    balance: number;
+  }
+  const groups = new Map<string, Group>();
+  const keyOf = (index: number): string => {
+    const basis = policy.effects[index].uncertainty?.basis;
+    return basis === undefined ? `#${index}` : `basis:${basis}`;
+  };
+  // The multiplier is chosen on the whole change, not on the part a level filter lets through, so
+  // that the low end is one consistent case and the ranges of the levels add up to the whole.
+  applied.forEach(({ result, whole, wholeShift }) => {
+    const definition = policy.effects[result.index];
+    const key = keyOf(result.index);
+    let group = groups.get(key);
+    if (!group) {
+      group = { low: definition.uncertainty?.low ?? 1, high: definition.uncertainty?.high ?? 1, balance: 0 };
+      groups.set(key, group);
+    }
+    group.balance += onBalance(whole, result.side);
+    if (definition.uncertainty?.basis !== undefined && result.shift) group.balance += onBalance(wholeShift, result.shift.side);
+  });
+  applied.forEach(({ result }) => {
+    const definition = policy.effects[result.index];
+    const group = groups.get(keyOf(result.index))!;
+    const [worse, better] =
+      group.balance * group.low <= group.balance * group.high ? [group.low, group.high] : [group.high, group.low];
+    result.low = result.delta * worse;
+    result.high = result.delta * better;
+    const shift = result.shift;
+    if (!shift) return;
+    const linked = definition.uncertainty?.basis !== undefined;
+    const own = definition.shift?.uncertainty;
+    const [shiftLow] = range(shift.delta * (linked ? worse : 1), shift.side, own);
+    const [, shiftHigh] = range(shift.delta * (linked ? better : 1), shift.side, own);
+    shift.low = shiftLow;
+    shift.high = shiftHigh;
+  });
+}
+
+/** An applied effect: its result, and the change at its target and at its shift's node without the level filter. */
+interface Applied {
+  result: EffectResult;
+  whole: number;
+  wholeShift: number;
 }
 
 /** What happened to one node when an effect, or the shifted part of one, was applied. */
@@ -730,7 +807,7 @@ function applyEffect(
   index: number,
   params: ParamValues,
   warnings: SimulationWarning[],
-): EffectResult {
+): Applied {
   const { pack, prep } = run;
   const indicators = pack.country.indicators;
   const fail = (problem: string): never => {
@@ -849,7 +926,7 @@ function applyEffect(
   if (change.emptyGroup) warn("empty_group", EMPTY_GROUP);
   if (change.clamped) warn("clamped", "The effect would have made the amount negative; it was cut off at zero.");
 
-  const [low, high] = range(change.delta, side, effect.uncertainty);
+  // low and high are set by assignRanges once every effect of the policy has been applied.
   const result: EffectResult = {
     index,
     type: effect.type,
@@ -857,8 +934,8 @@ function applyEffect(
     side,
     quality: effect.quality,
     delta: change.delta,
-    low,
-    high,
+    low: change.delta,
+    high: change.delta,
     clamped: change.clamped,
   };
   if (affected) result.affected = affected;
@@ -866,8 +943,9 @@ function applyEffect(
   if (excludedShare !== undefined) result.excludedShare = excludedShare;
   if (excludedGroups) result.excludedGroups = excludedGroups;
 
-  // Part of what was removed from the target reappears at another node.
-  const shift = effect.type === "scale" || effect.type === "excludeGroups" ? effect.shift : undefined;
+  // A share of the target's change is passed on to another node, with the opposite sign.
+  const shift = effect.shift;
+  let wholeShift = 0;
   if (shift) {
     const to = prep.index.get(shift.to) ?? fail(`unknown node "${shift.to}" to shift to`);
     const shifted = -change.amount * evaluateValue(shift.ratio, params, indicators);
@@ -880,9 +958,16 @@ function applyEffect(
     }
     if (moved.emptyGroup) warn("empty_group", EMPTY_GROUP, shift.to);
     if (moved.clamped) warn("clamped", "The shifted amount would have made the receiving node negative; it was cut off at zero.", shift.to);
-    const toSide = prep.sides[to];
-    const [shiftLow, shiftHigh] = range(moved.delta, toSide, shift.uncertainty);
-    result.shift = { target: shift.to, side: toSide, delta: moved.delta, low: shiftLow, high: shiftHigh, clamped: moved.clamped };
+    result.shift = {
+      target: shift.to,
+      side: prep.sides[to],
+      quality: shift.quality ?? effect.quality,
+      delta: moved.delta,
+      low: moved.delta,
+      high: moved.delta,
+      clamped: moved.clamped,
+    };
+    wholeShift = moved.amount;
   }
-  return result;
+  return { result, whole: change.amount, wholeShift };
 }

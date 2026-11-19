@@ -12,20 +12,25 @@ import { scheduleTotal, totalUnits } from "./distribution.ts";
 import {
   budgetSchema,
   countrySchema,
+  debtFileSchema,
   distributionSchema,
   flattenIssues,
   policiesFileSchema,
   sourcesFileSchema,
 } from "./schema.ts";
-import { evaluateBrackets, evaluateValue, type ParamValues } from "./simulate.ts";
+import { evaluateBrackets, evaluateValue, simulate, simulatePolicy, type ParamValues } from "./simulate.ts";
 import {
   CURVE_MAX_POINTS,
   CURVE_MIN_POINTS,
+  DEBT_ASSUMPTION_IDS,
+  DEBT_ASSUMPTION_UNITS,
   type Breakdown,
   type BudgetNode,
   type CountryPack,
   type CurveParam,
   type CurvePoint,
+  type DebtAssumptionId,
+  type DebtAssumptionParam,
   type Distribution,
   type Effect,
   type LevelId,
@@ -46,6 +51,8 @@ export interface RawPackFiles {
   sources?: unknown;
   /** Keyed by file name without ".json". */
   distributions?: Record<string, unknown>;
+  /** debt.json, which is optional: undefined means the pack has none. */
+  debt?: unknown;
 }
 
 export interface ValidationIssue {
@@ -79,6 +86,7 @@ const COUNTRY = "country.json";
 const BUDGET = "budget.json";
 const POLICIES = "policies.json";
 const SOURCES = "sources.json";
+const DEBT = "debt.json";
 const distributionFile = (id: string): string => `distributions/${id}.json`;
 
 type Path = readonly PropertyKey[];
@@ -114,11 +122,12 @@ export function validatePackFiles(texts: Record<string, string>, id?: string): V
   const errors: ValidationIssue[] = [];
   const warnings: ValidationIssue[] = [];
   const unreadable = new Set<string>();
-  const slots: Record<string, "country" | "budget" | "policies" | "sources"> = {
+  const slots: Record<string, "country" | "budget" | "policies" | "sources" | "debt"> = {
     [COUNTRY]: "country",
     [BUDGET]: "budget",
     [POLICIES]: "policies",
     [SOURCES]: "sources",
+    [DEBT]: "debt",
   };
   for (const [file, text] of Object.entries(texts)) {
     const slot = Object.hasOwn(slots, file) ? slots[file] : undefined;
@@ -166,6 +175,11 @@ function round(n: number): number {
   return Number(n.toPrecision(6));
 }
 
+/** Whether a and b differ by at most `tolerance` of the larger of the two. */
+function near(a: number, b: number, tolerance: number): boolean {
+  return Math.abs(a - b) <= tolerance * Math.max(Math.abs(a), Math.abs(b));
+}
+
 function check(
   files: RawPackFiles,
   errors: ValidationIssue[],
@@ -199,6 +213,7 @@ function check(
   const budget = parse(BUDGET, budgetSchema, files.budget);
   const policiesFile = parse(POLICIES, policiesFileSchema, files.policies);
   const sources = parse(SOURCES, sourcesFileSchema, files.sources);
+  const debt = files.debt === undefined ? undefined : parse(DEBT, debtFileSchema, files.debt);
   const distributions: Record<string, Distribution> = {};
   /** Every distribution that has a file, readable or not, so a broken file is not also reported as a missing reference. */
   const distributionNames = new Set<string>();
@@ -407,6 +422,9 @@ function check(
 
       if (param.type === "number") {
         text(POLICIES, [...path, "unitLabel"], param.unitLabel);
+        if (param.role === "assumption" && param.baseline !== undefined) {
+          warn(POLICIES, [...path, "baseline"], `param "${param.id}" is an assumption, which has no base-year value; drop "baseline" or "role"`);
+        }
         if (param.min > param.max) {
           error(POLICIES, path, `min (${param.min}) is above max (${param.max})`);
         } else if (param.default < param.min || param.default > param.max) {
@@ -473,8 +491,11 @@ function check(
     };
 
     const checkShift = (effect: Effect, path: Path): void => {
-      const shift = effect.type === "scale" || effect.type === "excludeGroups" ? effect.shift : undefined;
+      const shift = effect.shift;
       if (!shift) return;
+      text(POLICIES, [...path, "label"], shift.label);
+      text(POLICIES, [...path, "note"], shift.note);
+      refs(POLICIES, [...path, "sources"], shift.sources);
       if (checkValue(shift.ratio, [...path, "ratio"])) {
         const ratio = atDefaults(shift.ratio);
         if (ratio !== undefined && !(Number.isFinite(ratio) && ratio >= 0)) {
@@ -709,6 +730,33 @@ function check(
     };
 
     policy.effects.forEach((effect, i) => checkEffect(effect, [...base, "effects", i]));
+
+    // Effects that share an uncertainty basis vary with one multiplier, so they must state the same one.
+    const bases = new Map<string, number[]>();
+    policy.effects.forEach((effect, i) => {
+      const basis = effect.uncertainty?.basis;
+      if (basis !== undefined) bases.set(basis, [...(bases.get(basis) ?? []), i]);
+    });
+    for (const [basis, members] of bases) {
+      const first = policy.effects[members[0]].uncertainty!;
+      for (const i of members.slice(1)) {
+        const other = policy.effects[i].uncertainty!;
+        if (other.low !== first.low || other.high !== first.high) {
+          error(
+            POLICIES,
+            [...base, "effects", i, "uncertainty"],
+            `effects with uncertainty basis "${basis}" must have the same low and high; effect ${members[0]} has ${first.low} and ${first.high}`,
+          );
+        }
+      }
+      if (members.length === 1 && !policy.effects[members[0]].shift) {
+        warn(
+          POLICIES,
+          [...base, "effects", members[0], "uncertainty", "basis"],
+          `basis "${basis}" ties nothing together: no other effect of policy "${policy.id}" has it, and the effect has no shift`,
+        );
+      }
+    }
     policy.catches.forEach((item, i) => {
       text(POLICIES, [...base, "catches", i, "text"], item.text);
       refs(POLICIES, [...base, "catches", i, "sources"], item.sources);
@@ -727,10 +775,146 @@ function check(
     });
   }
 
+  // --- debt.json ------------------------------------------------------------------------------
+
+  if (debt) {
+    for (const key of ["stock", "interest", "refinancing"] as const) {
+      text(DEBT, [key, "note"], debt[key].note);
+      refs(DEBT, [key, "sources"], debt[key].sources);
+    }
+    text(DEBT, ["note"], debt.note);
+
+    const grossDebt = country?.indicators.grossDebt;
+    if (grossDebt && !near(grossDebt.value, debt.stock.value, 0.001)) {
+      warn(DEBT, ["stock", "value"], `${debt.stock.value} differs from the grossDebt indicator in country.json (${grossDebt.value})`);
+    }
+
+    const interestNode = debt.interest.node;
+    if (interestNode !== undefined && budget) {
+      const info = nodes.get(interestNode);
+      if (!info) {
+        error(DEBT, ["interest", "node"], `unknown budget node "${interestNode}"`);
+      } else if (!interestNode.startsWith("exp.")) {
+        error(DEBT, ["interest", "node"], `"${interestNode}" is a revenue node; interest is spending, an "exp." node`);
+      } else if (info.total === 0) {
+        warn(DEBT, ["interest", "node"], `"${interestNode}" is zero in the base year, so the projection starts with an average interest rate of 0`);
+      } else if (!near(info.total, debt.interest.value, 0.1)) {
+        warn(
+          DEBT,
+          ["interest", "node"],
+          `the base amount of "${interestNode}" (${info.total}) differs from interest.value (${debt.interest.value}) by more than 10 %; the projection uses the node`,
+        );
+      }
+    }
+
+    const assumptions = new Map<DebtAssumptionId, DebtAssumptionParam>();
+    debt.assumptions.forEach((param, i) => {
+      const path = ["assumptions", i];
+      if (assumptions.has(param.id)) {
+        error(DEBT, [...path, "id"], `duplicate assumption "${param.id}"`);
+        return;
+      }
+      assumptions.set(param.id, param);
+      text(DEBT, [...path, "label"], param.label);
+      text(DEBT, [...path, "unitLabel"], param.unitLabel);
+      text(DEBT, [...path, "note"], param.note);
+      refs(DEBT, [...path, "sources"], param.sources);
+      const unit = DEBT_ASSUMPTION_UNITS[param.id];
+      if (param.unit !== unit) error(DEBT, [...path, "unit"], `"${param.id}" is in ${unit}, not ${param.unit}`);
+      if (param.min > param.max) {
+        error(DEBT, path, `min (${param.min}) is above max (${param.max})`);
+      } else if (param.default < param.min || param.default > param.max) {
+        error(DEBT, [...path, "default"], `${param.default} lies outside [${param.min}, ${param.max}]`);
+      }
+      if (param.id === "horizon") {
+        for (const key of ["min", "max", "step", "default"] as const) {
+          if (!Number.isInteger(param[key])) error(DEBT, [...path, key], `${param[key]} is not a whole number of years`);
+        }
+        if (param.min < 1) error(DEBT, [...path, "min"], `${param.min} is below 1: the projection needs at least one year`);
+      } else if ((param.id === "market_rate" || param.id === "growth") && !(param.min > -100)) {
+        error(DEBT, [...path, "min"], `${param.min} % is not above -100 %`);
+      }
+    });
+    for (const id of DEBT_ASSUMPTION_IDS) {
+      if (!assumptions.has(id)) error(DEBT, ["assumptions"], `assumption "${id}" is missing`);
+    }
+
+    const presetIds = new Set<string>();
+    debt.presets.forEach((preset, i) => {
+      const path = ["presets", i];
+      if (presetIds.has(preset.id)) error(DEBT, [...path, "id"], `duplicate preset id "${preset.id}"`);
+      presetIds.add(preset.id);
+      text(DEBT, [...path, "label"], preset.label);
+      text(DEBT, [...path, "note"], preset.note);
+      refs(DEBT, [...path, "sources"], preset.sources);
+      for (const id of DEBT_ASSUMPTION_IDS) {
+        const value = preset.values[id];
+        const param = assumptions.get(id);
+        // A param whose range is itself broken has already been reported.
+        if (value === undefined || !param || param.min > param.max) continue;
+        if (value < param.min || value > param.max) {
+          error(DEBT, [...path, "values", id], `${value} lies outside [${param.min}, ${param.max}]`);
+        } else if (id === "horizon" && !Number.isInteger(value)) {
+          error(DEBT, [...path, "values", id], `${value} is not a whole number of years`);
+        }
+      }
+    });
+
+    const referenceIds = new Set<string>();
+    debt.references.forEach((reference, i) => {
+      const path = ["references", i];
+      if (referenceIds.has(reference.id)) error(DEBT, [...path, "id"], `duplicate reference id "${reference.id}"`);
+      referenceIds.add(reference.id);
+      text(DEBT, [...path, "label"], reference.label);
+      text(DEBT, [...path, "note"], reference.note);
+      refs(DEBT, [...path, "sources"], reference.sources);
+      if (reference.debtRatio === undefined && reference.interestRatio === undefined) {
+        error(DEBT, path, 'a reference needs "debtRatio", "interestRatio" or both');
+      }
+      if (reference.kind !== "threshold" && reference.year === undefined) {
+        error(DEBT, path, `a reference of kind "${reference.kind}" needs a "year"`);
+      }
+      // Ratios are fractions. A debt of 500 % of GDP or interest of 20 % of GDP is more likely a percentage typed as is.
+      if (reference.debtRatio !== undefined && reference.debtRatio > 5) {
+        warn(DEBT, [...path, "debtRatio"], `${reference.debtRatio} means ${round(reference.debtRatio * 100)} % of GDP; ratios are fractions (1.2 is 120 %)`);
+      }
+      if (reference.interestRatio !== undefined && reference.interestRatio > 0.2) {
+        warn(DEBT, [...path, "interestRatio"], `${reference.interestRatio} means ${round(reference.interestRatio * 100)} % of GDP; ratios are fractions (0.03 is 3 %)`);
+      }
+      // Revenue is only there to turn interest into a share of revenue. (Without any ratio the error above says enough.)
+      if (reference.revenueRatio !== undefined && reference.interestRatio === undefined && reference.debtRatio !== undefined) {
+        error(DEBT, [...path, "revenueRatio"], '"revenueRatio" needs "interestRatio": it only serves to show interest as a share of revenue');
+      }
+      if (reference.revenueRatio !== undefined && reference.revenueRatio > 1) {
+        warn(DEBT, [...path, "revenueRatio"], `${reference.revenueRatio} means ${round(reference.revenueRatio * 100)} % of GDP; ratios are fractions (0.45 is 45 %)`);
+      }
+    });
+
+    // Budget items the interest bill is compared with: spending items that exist, each once, not interest itself.
+    const compared = new Set<string>();
+    (debt.comparisons ?? []).forEach((comparison, i) => {
+      const path = ["comparisons", i];
+      text(DEBT, [...path, "label"], comparison.label);
+      if (compared.has(comparison.node)) error(DEBT, [...path, "node"], `"${comparison.node}" is compared twice`);
+      compared.add(comparison.node);
+      if (!budget) return;
+      const info = nodes.get(comparison.node);
+      if (!info) error(DEBT, [...path, "node"], `unknown budget node "${comparison.node}"`);
+      else if (!comparison.node.startsWith("exp.")) error(DEBT, [...path, "node"], `"${comparison.node}" is a revenue node; interest is compared with spending, an "exp." node`);
+      else if (comparison.node === debt.interest.node) error(DEBT, [...path, "node"], `"${comparison.node}" is the interest node itself`);
+      else if (info.total === 0) warn(DEBT, [...path, "node"], `"${comparison.node}" is zero in the base year, so interest is above it from the start`);
+    });
+  }
+
   // --- result ---------------------------------------------------------------------------------
 
   const complete =
-    country && budget && policiesFile && sources && Object.keys(distributions).length === distributionNames.size;
+    country &&
+    budget &&
+    policiesFile &&
+    sources &&
+    Object.keys(distributions).length === distributionNames.size &&
+    (files.debt === undefined || debt !== undefined);
   if (sources && complete) {
     for (const id of Object.keys(sources)) {
       if (!usedSources.has(id)) warn(SOURCES, [id], `source "${id}" is never referenced`);
@@ -738,11 +922,44 @@ function check(
   }
 
   if (errors.length > 0 || !complete) return { ok: false, errors: sortByFile(errors), warnings: sortByFile(warnings) };
-  return {
-    ok: true,
-    pack: { country, budget, policies: policiesFile.policies, sources, distributions },
-    warnings: sortByFile(warnings),
-  };
+  const pack: CountryPack = { country, budget, policies: policiesFile.policies, sources, distributions };
+  if (debt) pack.debt = debt;
+  for (const issue of nonZeroAtBaseline(pack, warnings)) warnings.push(issue);
+  return { ok: true, pack, warnings: sortByFile(warnings) };
+}
+
+/**
+ * Measures that change the budget although every number param that has a base-year value is set
+ * to it. `baseline` is the law of the base year, so there the measure must do nothing; a remainder
+ * means a rounded constant, a wrong offset or an effect that does not depend on the params. Curve
+ * params go to their own baseline, if they have one; all other params keep their default. Not
+ * checked: a measure without a number param that has a baseline (a curve's baseline is compared
+ * with its effect's calibration baseline elsewhere), and a measure that already has a warning, so
+ * that one problem gives one message.
+ */
+function nonZeroAtBaseline(pack: CountryPack, earlier: readonly ValidationIssue[]): ValidationIssue[] {
+  const base = simulate(pack).baseline;
+  const noise = Math.max(Math.abs(base.revenue), Math.abs(base.expenditure), 1) * 1e-9;
+  const issues: ValidationIssue[] = [];
+  pack.policies.forEach((policy, i) => {
+    const at = formatPath(["policies", i]);
+    const warned = earlier.some((issue) => issue.file === POLICIES && (issue.path === at || issue.path.startsWith(`${at}.`)));
+    if (warned || !policy.params.some((param) => param.type === "number" && param.baseline !== undefined)) return;
+    const params: ParamValues = {};
+    for (const param of policy.params) {
+      if ((param.type === "number" || param.type === "curve") && param.baseline !== undefined) params[param.id] = param.baseline;
+    }
+    const result = simulatePolicy(pack, policy.id, params);
+    const balance = result?.delta.balance ?? 0;
+    if (Math.abs(balance) > noise || Math.abs(result?.delta.revenue ?? 0) > noise || Math.abs(result?.delta.expenditure ?? 0) > noise) {
+      issues.push({
+        file: POLICIES,
+        path: at,
+        message: `with its params at their base-year values ("baseline") policy "${policy.id}" still changes the balance by ${round(balance)} (revenue ${round(result?.delta.revenue ?? 0)}, expenditure ${round(result?.delta.expenditure ?? 0)}); at the base year it should change nothing`,
+      });
+    }
+  });
+  return issues;
 }
 
 /** Group issues by file, in the order a reader would open the files; order within a file is kept. */

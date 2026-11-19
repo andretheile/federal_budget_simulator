@@ -46,6 +46,24 @@ export {
 export { emptyScenario, encodeScenario, decodeScenario, encodeNumber, decodeNumber } from "./scenario.ts";
 
 export {
+  projectDebt,
+  projectScenario,
+  resolveDebtAssumptions,
+  debtAssumptionParam,
+  applyDebtPreset,
+  presetApplies,
+  longRunDebtRatio,
+  firstYearAbove,
+  firstYearBelow,
+  type DebtAssumptions,
+  type DebtLongRun,
+  type DebtMeasure,
+  type DebtPath,
+  type DebtProjection,
+  type DebtYear,
+} from "./debt.ts";
+
+export {
   unitsAbove,
   excessAbove,
   totalUnits,

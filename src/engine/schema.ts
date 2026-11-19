@@ -17,12 +17,14 @@ import type {
   Country,
   CurveParam,
   CurveSchedule,
+  DebtFile,
   Distribution,
   Effect,
   EffectShift,
   GroupNode,
   LeafNode,
   LocalizedText,
+  NumberParam,
   Param,
   PointsSchedule,
   PoliciesFile,
@@ -268,19 +270,22 @@ export const curveParamSchema = z.strictObject({
   examples: z.array(z.strictObject({ x: z.number(), label: localizedTextSchema })).optional(),
 });
 
+export const numberParamSchema = z.strictObject({
+  id: idSchema,
+  type: z.literal("number"),
+  label: localizedTextSchema,
+  unit: z.enum(["percent", "percent_gdp", "currency", "years", "count"]),
+  min: z.number(),
+  max: z.number(),
+  step: z.number().positive(),
+  default: z.number(),
+  baseline: z.number().optional(),
+  unitLabel: localizedTextSchema.optional(),
+  role: z.literal("assumption").optional(),
+});
+
 export const paramSchema = z.discriminatedUnion("type", [
-  z.strictObject({
-    id: idSchema,
-    type: z.literal("number"),
-    label: localizedTextSchema,
-    unit: z.enum(["percent", "percent_gdp", "currency", "years", "count"]),
-    min: z.number(),
-    max: z.number(),
-    step: z.number().positive(),
-    default: z.number(),
-    baseline: z.number().optional(),
-    unitLabel: localizedTextSchema.optional(),
-  }),
+  numberParamSchema,
   z.strictObject({
     id: idSchema,
     type: z.literal("groups"),
@@ -304,20 +309,28 @@ export const valueSchema = z.union([
 
 const uncertaintySchema = z.strictObject({ low: z.number(), high: z.number() });
 
-const effectBase = {
-  target: z.string(),
-  quality: qualitySchema,
-  uncertainty: uncertaintySchema.optional(),
-  sources: sourceIds.optional(),
-  note: localizedTextSchema.optional(),
-};
+/** An effect's own uncertainty may name a basis that ties it to other effects (see types.ts). */
+const effectUncertaintySchema = uncertaintySchema.extend({ basis: idSchema.optional() });
 
-/** Only allowed on `scale` and `excludeGroups` effects; on the others it is an unknown key. */
+/** Allowed on every effect: a share of the target's change passed on to another node. */
 export const shiftSchema = z.strictObject({
   to: z.string(),
   ratio: valueSchema,
   uncertainty: uncertaintySchema.optional(),
+  label: localizedTextSchema.optional(),
+  quality: qualitySchema.optional(),
+  sources: sourceIds.optional(),
+  note: localizedTextSchema.optional(),
 });
+
+const effectBase = {
+  target: z.string(),
+  quality: qualitySchema,
+  uncertainty: effectUncertaintySchema.optional(),
+  sources: sourceIds.optional(),
+  note: localizedTextSchema.optional(),
+  shift: shiftSchema.optional(),
+};
 
 export const bracketScheduleSchema = z.strictObject({
   brackets: z.array(z.strictObject({ from: valueSchema, rate: valueSchema })).min(1),
@@ -349,7 +362,7 @@ export const constScheduleSchema: z.ZodType<ConstSchedule> = byKey<ConstSchedule
 );
 
 export const effectSchema = z.discriminatedUnion("type", [
-  z.strictObject({ ...effectBase, type: z.literal("scale"), factor: valueSchema, shift: shiftSchema.optional() }),
+  z.strictObject({ ...effectBase, type: z.literal("scale"), factor: valueSchema }),
   z.strictObject({ ...effectBase, type: z.literal("add"), amount: valueSchema }),
   z.strictObject({ ...effectBase, type: z.literal("set"), amount: valueSchema }),
   z.strictObject({
@@ -358,7 +371,6 @@ export const effectSchema = z.discriminatedUnion("type", [
     breakdown: z.string(),
     groups: z.union([z.array(z.string()), z.strictObject({ param: z.string() })]),
     retained: valueSchema.optional(),
-    shift: shiftSchema.optional(),
   }),
   z.strictObject({
     ...effectBase,
@@ -390,6 +402,62 @@ export const policySchema = z.strictObject({
 
 export const policiesFileSchema = z.strictObject({ policies: z.array(policySchema) });
 
+// --- debt.json ----------------------------------------------------------------------------------
+
+const debtAssumptionId = z.enum(["market_rate", "growth", "horizon", "drift"]);
+
+export const debtFigureSchema = z.strictObject({
+  value: z.number().min(0),
+  quality: qualitySchema,
+  sources: sourceIds.min(1),
+  note: localizedTextSchema.optional(),
+});
+
+export const debtFileSchema = z.strictObject({
+  stock: debtFigureSchema.extend({ value: z.number().positive() }),
+  interest: debtFigureSchema.extend({ node: z.string().optional() }),
+  refinancing: z.strictObject({
+    share: z.number().gt(0).max(1),
+    averageMaturity: z.number().positive().optional(),
+    quality: qualitySchema,
+    sources: sourceIds.min(1),
+    note: localizedTextSchema.optional(),
+  }),
+  assumptions: z.array(
+    numberParamSchema.extend({
+      id: debtAssumptionId,
+      note: localizedTextSchema.optional(),
+      sources: sourceIds.optional(),
+    }),
+  ),
+  presets: z.array(
+    z.strictObject({
+      id: idSchema,
+      label: localizedTextSchema,
+      note: localizedTextSchema.optional(),
+      values: z
+        .partialRecord(debtAssumptionId, z.number())
+        .refine((values) => Object.keys(values).length > 0, "a preset must set at least one assumption"),
+      sources: sourceIds.optional(),
+    }),
+  ),
+  references: z.array(
+    z.strictObject({
+      id: idSchema,
+      label: localizedTextSchema,
+      kind: z.enum(["country", "threshold", "history"]),
+      year: year.optional(),
+      debtRatio: z.number().min(0).optional(),
+      interestRatio: z.number().min(0).optional(),
+      revenueRatio: z.number().positive().optional(),
+      sources: sourceIds.min(1),
+      note: localizedTextSchema.optional(),
+    }),
+  ),
+  comparisons: z.array(z.strictObject({ node: z.string(), label: localizedTextSchema.optional() })).optional(),
+  note: localizedTextSchema,
+});
+
 // Compile-time check that the schemas and the contract types describe the same data. Mutual
 // assignability catches missing required fields, wrong types and enum members that differ. It
 // cannot see an optional field that is missing from a schema; the Testland fixture uses every
@@ -417,4 +485,6 @@ export type SchemaMatchesTypes = [
   Assert<Same<Out<typeof catchSchema>, Catch>>,
   Assert<Same<Out<typeof policySchema>, Policy>>,
   Assert<Same<Out<typeof policiesFileSchema>, PoliciesFile>>,
+  Assert<Same<Out<typeof numberParamSchema>, NumberParam>>,
+  Assert<Same<Out<typeof debtFileSchema>, DebtFile>>,
 ];

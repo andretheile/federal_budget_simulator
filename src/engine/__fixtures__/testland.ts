@@ -23,15 +23,31 @@
  *
  *   redraw_income_tax            rev.taxes.income 1500 -> 1625: the tariff as an editable
  *                                curve, model 120 -> 130                               balance +125  (100 to 150)
+ *   insure_civil_servants        rev.social_contributions +100, exp.admin.other +50 (the
+ *                                employer's half); 30 % of the employees' half comes back
+ *                                as less income tax: rev.taxes.income -15              balance  +35  (22 to 46.75)
  *
  * cut_pensions moves cost between levels: social insurance saves 120 and the centre 40 on
  * pensions, and the centre pays the 40 that reappear as basic income support.
+ *
+ * insure_civil_servants ties its two effects and the knock-on together with the uncertainty basis
+ * "wages": one multiplier (0.8 or 1.1) applies to all three, the one worse for their sum. At an
+ * employer share of 100 % contributions and spending cancel out exactly and the range is zero.
+ * Its shift is a knock-on on an `add` effect, with its own label, quality, note and range (0.5 to
+ * 1.5 on the tax part): low = 80 - 40 - 15 * 0.8 * 1.5 = 22, high = 110 - 55 - 15 * 1.1 * 0.5 = 46.75.
  *
  * redraw_income_tax has a curve param. Today's tariff is 20 % from 10 and 40 % from 30, the same
  * as the brackets of raise_top_tax_rate, written as curve points. The default curve starts at
  * 10 % at an income of 10 and rises linearly to 40 % at 30:
  *   an income of 20 owes 2 today and 1.75 after; an income of 45 owes 10 today and 11 after;
  *   incomes between 10 and 23 1/3 pay less, incomes above pay more.
+ *
+ * Debt (debt.json): 5000 at the end of 2024, 50 % of GDP. Base-year interest is taken from
+ * exp.interest (100; the official figure, interest.value, is 95), so the debt starts at an average
+ * rate of 2 %. A quarter of it is refinanced each year. The primary balance is -400 + 100 = -300,
+ * -3 % of GDP. Default assumptions: market rate 4 %, growth 3 %, 30 years, no drift. Year 1 at the
+ * defaults: GDP 10300, primary balance -309, interest 5000 * (0.75 * 2 % + 0.25 * 4 %) = 125,
+ * deficit 434, debt 5434.
  */
 import type { RawPackFiles } from "../validate.ts";
 import type { CountryPack, LocalizedText } from "../types.ts";
@@ -54,7 +70,7 @@ export const testland: CountryPack = {
       gdp: { value: 10000, quality: "official", sources: ["stats_office"] },
       population: { value: 100, quality: "official", sources: ["stats_office"], year: 2023 },
       households: { value: 50, quality: "derived", sources: ["stats_office"] },
-      grossDebt: { value: 6000, quality: "official", sources: ["finance_ministry"] },
+      grossDebt: { value: 5000, quality: "official", sources: ["finance_ministry"] },
     },
     methodology: t("All numbers are invented.", "Alle Zahlen sind erfunden."),
   },
@@ -488,6 +504,7 @@ export const testland: CountryPack = {
           max: 100,
           step: 5,
           default: 25,
+          role: "assumption",
         },
       ],
       effects: [
@@ -589,6 +606,54 @@ export const testland: CountryPack = {
       catches: [],
       sources: ["tax_statistics"],
     },
+    {
+      id: "insure_civil_servants",
+      label: t("Civil servants pay into social insurance", "Beamte zahlen in die Sozialversicherung ein"),
+      summary: t(
+        "Civil servants pay contributions, the state pays the employer's part.",
+        "Beamte zahlen Beiträge, der Staat zahlt den Arbeitgeberanteil.",
+      ),
+      topic: "pensions",
+      params: [
+        {
+          id: "employer_share",
+          type: "number",
+          label: t("Part of the contribution the state pays as employer", "Anteil des Beitrags, den der Staat als Arbeitgeber zahlt"),
+          unit: "percent",
+          min: 50,
+          max: 100,
+          step: 5,
+          default: 50,
+        },
+      ],
+      effects: [
+        {
+          type: "add",
+          target: "rev.social_contributions",
+          amount: 100,
+          quality: "estimate",
+          uncertainty: { low: 0.8, high: 1.1, basis: "wages" },
+          shift: {
+            to: "rev.taxes.income",
+            ratio: { param: "employer_share", scale: -0.003, offset: 0.3 },
+            uncertainty: { low: 0.5, high: 1.5 },
+            label: t("Less income tax", "Weniger Einkommensteuer"),
+            quality: "estimate",
+            sources: ["tax_statistics"],
+            note: t("Employees deduct their own part, taxed at 30 %.", "Beschäftigte setzen ihren Teil ab, Steuersatz 30 %."),
+          },
+        },
+        {
+          type: "add",
+          target: "exp.admin.other",
+          amount: { param: "employer_share", scale: 1 },
+          quality: "estimate",
+          uncertainty: { low: 0.8, high: 1.1, basis: "wages" },
+        },
+      ],
+      catches: [],
+      sources: ["tax_statistics"],
+    },
   ],
 
   sources: {
@@ -655,6 +720,134 @@ export const testland: CountryPack = {
       note: t("The tail is fitted to rich lists.", "Die Spitze ist an Reichenlisten angepasst."),
     },
   },
+
+  debt: {
+    stock: {
+      value: 5000,
+      quality: "official",
+      sources: ["finance_ministry"],
+      note: t("Gross debt at the end of the year.", "Bruttoschulden am Jahresende."),
+    },
+    interest: {
+      value: 95,
+      quality: "official",
+      sources: ["finance_ministry"],
+      node: "exp.interest",
+      note: t("The budget item also holds fees of 5.", "Der Haushaltsposten enthält auch Gebühren von 5."),
+    },
+    refinancing: {
+      share: 0.25,
+      averageMaturity: 4,
+      quality: "derived",
+      sources: ["finance_ministry"],
+      note: t("One divided by the average maturity.", "Eins geteilt durch die durchschnittliche Laufzeit."),
+    },
+    assumptions: [
+      {
+        id: "market_rate",
+        type: "number",
+        label: t("Market interest rate", "Marktzins"),
+        unit: "percent",
+        min: -1,
+        max: 10,
+        step: 0.1,
+        default: 4,
+        baseline: 4,
+        note: t("Yield of a ten-year bond.", "Rendite einer zehnjährigen Anleihe."),
+        sources: ["stats_office"],
+      },
+      {
+        id: "growth",
+        type: "number",
+        label: t("Nominal growth", "Nominales Wachstum"),
+        unit: "percent",
+        min: -2,
+        max: 8,
+        step: 0.1,
+        default: 3,
+      },
+      {
+        id: "horizon",
+        type: "number",
+        label: t("Years", "Jahre"),
+        unit: "years",
+        min: 1,
+        max: 50,
+        step: 1,
+        default: 30,
+      },
+      {
+        id: "drift",
+        type: "number",
+        label: t("Yearly change of the primary balance", "Jährliche Änderung des Primärsaldos"),
+        unit: "percent_gdp",
+        min: -0.5,
+        max: 0.5,
+        step: 0.01,
+        default: 0,
+        unitLabel: t("percentage points of GDP per year", "Prozentpunkte des BIP pro Jahr"),
+      },
+    ],
+    presets: [
+      {
+        id: "high_rates",
+        label: t("High rates", "Hohe Zinsen"),
+        values: { market_rate: 8 },
+        sources: ["finance_ministry"],
+      },
+      {
+        id: "ageing",
+        label: t("Ageing", "Alterung"),
+        note: t("Pensions and health grow faster than the economy.", "Renten und Gesundheit wachsen schneller als die Wirtschaft."),
+        values: { growth: 2, drift: -0.1 },
+      },
+      {
+        id: "zero_rates",
+        label: t("Zero rates", "Nullzinsen"),
+        values: { market_rate: 0 },
+      },
+    ],
+    references: [
+      {
+        id: "neighbour",
+        label: t("Neighbouring country", "Nachbarland"),
+        kind: "country",
+        year: 2024,
+        debtRatio: 1.2,
+        interestRatio: 0.035,
+        revenueRatio: 0.35,
+        sources: ["stats_office"],
+        note: t("Same definitions as Testland.", "Gleiche Abgrenzung wie Testland."),
+      },
+      {
+        id: "treaty_limit",
+        label: t("Treaty limit", "Vertragsgrenze"),
+        kind: "threshold",
+        debtRatio: 0.6,
+        sources: ["finance_ministry"],
+      },
+      {
+        id: "peak_1995",
+        label: t("Testland in 1995", "Testland 1995"),
+        kind: "history",
+        year: 1995,
+        interestRatio: 0.04,
+        sources: ["finance_ministry"],
+      },
+    ],
+    // Interest (1 % of GDP) is above parliament (0.1 %) from the start, overtakes family benefits
+    // and defence (2 % each) later and stays below pensions (16 %).
+    comparisons: [
+      { node: "exp.admin.parliament" },
+      { node: "exp.defense" },
+      { node: "exp.social.family", label: t("families", "Familien") },
+      { node: "exp.social.pensions" },
+    ],
+    note: t(
+      "All numbers are invented. A what-if calculation, not a forecast.",
+      "Alle Zahlen sind erfunden. Eine Wenn-dann-Rechnung, keine Prognose.",
+    ),
+  },
 };
 
 /** The fixture as the raw content of its JSON files, freshly copied so a test can break it. */
@@ -667,6 +860,7 @@ export function testlandFiles(): RawPackFiles {
     policies: { policies: copy.policies },
     sources: copy.sources,
     distributions: copy.distributions,
+    debt: copy.debt,
   };
 }
 
