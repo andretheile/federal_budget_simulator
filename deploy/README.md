@@ -11,7 +11,7 @@ server.
 | --- | --- |
 | `deploy.sh` | The one command that publishes: build, upload, start or update the container, check the URL. |
 | `docker-compose.yml` | The nginx container (Compose project `budget`, service `web`) and its Traefik labels. |
-| `nginx.conf` | nginx server configuration: single-page-app fallback, caching, gzip, security headers. |
+| `nginx.conf` | nginx server configuration: single-page-app fallback, caching, gzip, security headers, an access log without personal data. |
 | `placeholder/index.html` | A static "under construction" page that can be published in place of the app. |
 
 On the server everything lives in one directory (default `/home/deploy/budget`):
@@ -55,6 +55,7 @@ From the repository root:
 The script
 
 1. runs `npm run build` and stops if the build fails or `dist/index.html` is missing,
+   then shows in a box whether the build has an imprint and a privacy statement (see below),
 2. uploads `docker-compose.yml`, `nginx.conf` and `.env`, then the contents of `dist/` to `site/`,
 3. runs `docker compose up -d` on the server, which leaves a running, unchanged container alone,
 4. if `nginx.conf` changed: checks it with `nginx -t` inside the container and reloads nginx.
@@ -72,6 +73,67 @@ Settings are environment variables:
 | `SITE_HOST` | `budget.drtheile.com` | public hostname; becomes the Traefik `Host(...)` rule |
 
 Example: `SITE_HOST=budget.example.org DEPLOY_HOST=myserver ./deploy/deploy.sh`
+
+## Imprint and privacy statement
+
+The build takes the operator's details from `site.config.json` in the
+repository root, which git ignores, or from the file that `SITE_CONFIG` names.
+The fields and the three states (no legal pages; legal pages, not indexed;
+legal pages, indexed) are described under "Running your own instance" in the
+main [README](../README.md). The build is in whatever state the working tree is
+in, and `deploy.sh` shows it before it uploads anything:
+
+```text
+################################################################################
+##  Legal pages: NONE. No site config (site.config.json or SITE_CONFIG), so the
+##  site has no imprint and no privacy statement and asks search engines not to
+##  index it.
+################################################################################
+```
+
+It publishes in every state, so read the box. To keep the file outside the
+repository: `SITE_CONFIG=$HOME/budget-site.json ./deploy/deploy.sh`.
+
+The part of the privacy statement about hosting comes from the config, and it
+is only true while this deployment does what the config says:
+
+| The statement says | What makes it true |
+| --- | --- |
+| The server logs time, request, status, size and referrer, but no IP address and no user agent (`serverLog.fields`) | `log_format no_personal_data` in `nginx.conf` |
+| The log is limited to 30 MB (`serverLog.retention`) | `logging` in `docker-compose.yml`: `json-file`, three files of 10 MB |
+| Nothing else on the server logs visitors | Traefik's own configuration on the server, outside this repository: no `accessLog` section (checked on 18 November 2026) |
+| Requests pass through Cloudflare, which asks browsers to report failed requests (`proxy`, `networkErrorReports`) | the proxied DNS record, and the `NEL` and `Report-To` headers that Cloudflare adds to every response |
+| No cookies, no third-party scripts | the app, and Cloudflare as it is set up now: none of its responses sets a cookie and it adds nothing to the HTML |
+
+Change one of these and the config with it. In the Cloudflare dashboard that
+means: Web Analytics or Zaraz would add a script from another host, and bot
+protection or a challenge page sets cookies (`__cf_bm`, `cf_clearance`); the
+statement says nothing about either. If Traefik's access log is ever switched
+on, it must leave out client addresses as well.
+
+The statement names IONOS and Cloudflare as processors (Art. 28 GDPR), which
+assumes a data processing agreement with each of them.
+
+### The access log
+
+nginx writes one line per request to the container's standard output, which
+Docker keeps (`docker compose logs web` in the server directory):
+
+```text
+2026-11-18T21:30:03+00:00 "GET /assets/index-BqfUKBZT.js HTTP/1.1" 200 151080 "https://budget.drtheile.com/"
+```
+
+That is time, request line, status, bytes sent and referrer. The image's own
+format would also log the client address (here always Traefik's address on
+the `proxy` network), the `X-Forwarded-For` header (here a Cloudflare address,
+since Traefik replaces the header of an untrusted sender) and the user agent.
+nginx's error log goes to the same place; it names the client of a failed
+request, which is again Traefik.
+
+Docker keeps at most three files of 10 MB and deletes the oldest when the
+third is full. Lines written before a change of the format stay until they are
+rotated out; `docker compose up -d --force-recreate` starts the container with
+an empty log.
 
 ## Publish the placeholder
 

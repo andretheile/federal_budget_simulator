@@ -13,6 +13,10 @@
 #
 # Needs bash, ssh, rsync and curl (the versions that ship with macOS are enough)
 # and, for the build, npm. See deploy/README.md.
+#
+# Before anything is uploaded, the script says in a box whether the site has its
+# imprint and privacy statement (site.config.json, see the README) and whether
+# search engines may index it. It publishes either way: read the box.
 
 set -euo pipefail
 
@@ -22,6 +26,13 @@ SITE_HOST="${SITE_HOST:-budget.drtheile.com}"
 
 die()  { echo "deploy: $*" >&2; exit 1; }
 step() { printf '\n==> %s\n' "$*"; }
+# A message nobody scrolls past: framed, wrapped to 76 columns.
+banner() {
+  local rule="################################################################################"
+  printf '\n%s\n' "$rule"
+  printf '%s\n' "$*" | fold -s -w 76 | sed -e 's/ *$//' -e 's/^/##  /'
+  printf '%s\n\n' "$rule"
+}
 
 placeholder=0
 dry_run=0
@@ -55,17 +66,27 @@ here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 root="$(dirname "$here")"
 remote="$DEPLOY_HOST:$DEPLOY_DIR"
 
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+
 # --- 1. What to upload ------------------------------------------------------
 
 if [ "$placeholder" = 1 ]; then
   src="$here/placeholder"
+  legal="Legal pages: NONE. The placeholder has no imprint and no privacy statement and asks search engines not to index it."
 else
   command -v npm >/dev/null || die "'npm' is not installed, cannot build the app"
   step "Building the app (npm run build in $root)"
-  (cd "$root" && npm run build) || die "the build failed; nothing was uploaded"
+  # The build says in one line starting with "Legal pages:" whether the site has
+  # its imprint and privacy statement; keep a copy of the output to find it.
+  (cd "$root" && npm run build) 2>&1 | tee "$tmp/build.log" || die "the build failed; nothing was uploaded"
+  legal="$(grep '^Legal pages:' "$tmp/build.log" | tail -n 1 || true)"
   src="$root/dist"
 fi
 [ -f "$src/index.html" ] || die "$src/index.html is missing; nothing was uploaded"
+
+step "Imprint and privacy statement"
+banner "${legal:-Legal pages: UNKNOWN. The build did not say whether the site has an imprint and a privacy statement; read the build output above.}"
 
 # --- 2. Upload ---------------------------------------------------------------
 
@@ -91,8 +112,6 @@ upload() {
 
 # docker compose reads SITE_HOST from a .env file next to docker-compose.yml, so
 # compose commands typed on the server later see the same hostname.
-tmp="$(mktemp -d)"
-trap 'rm -rf "$tmp"' EXIT
 printf '# Written by deploy.sh\nSITE_HOST=%s\n' "$SITE_HOST" > "$tmp/.env"
 
 if [ "$dry_run" = 1 ]; then
