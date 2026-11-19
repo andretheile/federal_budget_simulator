@@ -131,6 +131,17 @@
       "sources": ["bundesbank_yield_10y_monthly", "ameco_2026_11"]
     },
     {
+      "id": "government_plan",
+      "label": { "de": "Wie die Bundesregierung plant", "en": "As the government plans" },
+      "note": {
+        "de": "Bis 2030 folgen Schuldenstand und Wirtschaftswachstum der Projektion der Bundesregierung vom September 2026; danach bleibt der Haushalt ohne Zinsen so, wie ihn die Projektion für 2030 vorsieht, und Zins, Wachstum und Alterung kommen wieder aus den Reglern.",
+        "en": "To 2030 debt and economic growth follow the government's projection of September 2026; after that the budget before interest stays as the projection has it for 2030, and the interest rate, growth and ageing come from the sliders again."
+      },
+      "values": { "market_rate": 3.4, "growth": 2.5, "drift": 0 },
+      "follow": "government_projection_2026_09",
+      "sources": ["bundestag_drs_21_9010"]
+    },
+    {
       "id": "ageing_favourable",
       "label": { "de": "Alterung: günstige Variante des Tragfähigkeitsberichts", "en": "Ageing: favourable variant of the sustainability report" },
       "note": {
@@ -247,8 +258,48 @@
     { "node": "exp.economy.transport", "label": { "de": "Verkehr", "en": "transport" } },
     { "node": "exp.education", "label": { "de": "Bildung", "en": "education" } }
   ],
+  "plans": [
+    {
+      "id": "government_projection_2026_09",
+      "label": { "de": "Projektion der Bundesregierung (Stabilitätsrat, Oktober 2026)", "en": "Government projection (Stability Council, October 2026)" },
+      "scope": "all",
+      "accounts": "national_accounts",
+      "points": [
+        { "year": 2025, "debtRatio": 0.628, "balanceRatio": -0.03, "growth": 0.033 },
+        { "year": 2026, "debtRatio": 0.6575, "balanceRatio": -0.0475, "growth": 0.028 },
+        { "year": 2027, "debtRatio": 0.6875, "balanceRatio": -0.0525, "growth": 0.038 },
+        { "year": 2028, "debtRatio": 0.7225, "balanceRatio": -0.0475, "growth": 0.03 },
+        { "year": 2029, "debtRatio": 0.7525, "balanceRatio": -0.045, "growth": 0.03 },
+        { "year": 2030, "debtRatio": 0.7825, "balanceRatio": -0.045, "growth": 0.03 }
+      ],
+      "quality": "official",
+      "sources": ["bundestag_drs_21_9010"],
+      "note": {
+        "de": "Projektion des Bundesfinanzministeriums für den Staat insgesamt (Bund, Länder, Gemeinden und Sozialversicherung mit ihren Extrahaushalten, Maastricht-Abgrenzung), Rechenstand 3. September 2026, beraten im Stabilitätsrat am 12. Oktober 2026 (Drucksache 21/9010, Tabelle 1, S. 13). Sie beruht auf dem Regierungsentwurf für 2027 und dem Finanzplan bis 2030 vom 6. Juli 2026, der Frühjahrsprojektion vom April 2026 (nominales BIP +2,8 % 2026, +3,8 % 2027, +3,0 % jährlich 2028 bis 2030, nach +3,3 % 2025 laut Statistischem Bundesamt; Tabelle 6, S. 21) und der Steuerschätzung vom Mai 2026; dieselbe Projektion geht in die Haushaltsplanung 2027 an die EU-Kommission ein. Ab 2026 auf Viertelprozentpunkte gerundet. 2025 ist das Ergebnis des Jahres; das Defizit hat das Statistische Bundesamt am 30. September 2026 auf 2,9 % korrigiert, die Projektion rechnet noch mit 3,0 %. Zinsen nennt die Projektion nicht in dieser Abgrenzung. In Zahlungen gerechnet steigen die Zinsausgaben von Bund, Ländern und Gemeinden mit ihren Extrahaushalten, ohne Sozialversicherung, von 52,1 Mrd. Euro 2025 auf 69 Mrd. Euro 2027 und 124 Mrd. Euro 2030 (S. 25). Anders als das Modell enthält die Projektion die Kredite für Verteidigung außerhalb der Schuldenregel und für das Sondervermögen Infrastruktur und Klimaneutralität; das Modell hält den Primärsaldo auf seinem Anteil am BIP von 2024.",
+        "en": "Projection of the Federal Ministry of Finance for the whole state (federal government, Länder, municipalities and social insurance with their off-budget entities, Maastricht definitions), as of 3 September 2026, discussed by the Stability Council on 12 October 2026 (printed paper 21/9010, table 1, page 13). It rests on the draft budget for 2027 and the financial plan to 2030 of 6 July 2026, the spring projection of April 2026 (nominal GDP +2.8 % in 2026, +3.8 % in 2027, +3.0 % a year from 2028 to 2030, after +3.3 % in 2025 according to the Federal Statistical Office; table 6, page 21) and the tax estimate of May 2026; the same projection goes into the draft budgetary plan 2027 for the European Commission. Rounded to quarter percentage points from 2026. 2025 is the outcome of the year; the Federal Statistical Office corrected the deficit to 2.9 % on 30 September 2026, the projection still uses 3.0 %. The projection gives no interest in these definitions. In cash, the interest paid by the federal government, the Länder and the municipalities with their off-budget entities, without social insurance, rises from EUR 52.1 billion in 2025 to EUR 69 billion in 2027 and EUR 124 billion in 2030 (page 25). Unlike the model, the projection includes the borrowing for defence outside the debt brake and for the special fund for infrastructure and climate neutrality; the model keeps the primary balance at its 2024 share of GDP."
+      }
+    },
+    {
+      "id": "federal_budget_interest_plan",
+      "label": { "de": "Zinsausgaben im Bundeshaushalt laut Finanzplan", "en": "Interest in the federal budget according to the financial plan" },
+      "scope": "central",
+      "accounts": "cash",
+      "points": [
+        { "year": 2027, "interest": 41900000000 },
+        { "year": 2028, "interest": 55200000000 },
+        { "year": 2029, "interest": 68100000000 },
+        { "year": 2030, "interest": 80700000000 }
+      ],
+      "quality": "official",
+      "sources": ["bundestag_drs_21_7301"],
+      "note": {
+        "de": "Nur der Kernhaushalt des Bundes, in Zahlungen: veranschlagte Zinsausgaben (Kapitel 3205) im Regierungsentwurf 2027 und im Finanzplan bis 2030 vom 6. Juli 2026 (Drucksache 21/7301, Abschnitt 4.4.1, S. 40). Sie enthalten die Zinsen für die Kredite des Sondervermögens Infrastruktur und Klimaneutralität und, nach dessen geplantem Auslaufen zum 1. Januar 2028, des Sondervermögens Bundeswehr. Nach Ausgabearten gegliedert nennt der Finanzplan je Jahr 0,1 Mrd. Euro weniger und für 2025 ein Ist von 29,9 Mrd. Euro (Tabelle 9, S. 25). Änderungen des Haushaltsausschusses am Haushalt 2027 sind nicht enthalten. Die Zahlen sind nicht mit der Projektion vergleichbar, die den Staat insgesamt in der Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen beschreibt.",
+        "en": "The core federal budget only, in cash: interest spending (chapter 3205) in the draft budget for 2027 and the financial plan to 2030 of 6 July 2026 (printed paper 21/7301, section 4.4.1, page 40). It includes the interest on the borrowing of the special fund for infrastructure and climate neutrality and, after its planned expiry on 1 January 2028, of the special fund for the armed forces. Broken down by type of spending, the plan gives EUR 0.1 billion less each year and an outturn of EUR 29.9 billion for 2025 (table 9, page 25). Changes by the budget committee to the 2027 budget are not included. The figures are not comparable with the projection, which describes the whole state in national accounts."
+      }
+    }
+  ],
   "note": {
-    "de": "Eine Wenn-dann-Rechnung, keine Prognose. Sie zeigt, wohin Schulden und Zinsen liefen, wenn der Haushalt von 2024, verändert um die eingeschalteten Maßnahmen, im Verhältnis zur Wirtschaft so bliebe und die gewählten Annahmen jedes Jahr gälten. Was sie weglässt: Die Schulden wirken nicht zurück. Höhere Schulden treiben den Zins nicht nach oben, und Maßnahmen ändern das Wachstum nicht; in Wirklichkeit können beide geschehen. Jede Maßnahme wirkt vom ersten Jahr an voll und dauerhaft; Übergangsfristen, Befristungen und Reaktionen von Menschen und Unternehmen fehlen. Die Rechnung beginnt mit 2024, also vor der Änderung der Schuldenbremse 2025 (Verteidigungsausgaben über 1 % des BIP ausgenommen, Spielraum für die Länder) und vor dem Sondervermögen Infrastruktur von 500 Mrd. Euro; die seither beschlossene höhere Kreditaufnahme ist nicht enthalten. Einnahmen und Ausgaben ohne Zinsen behalten ihren Anteil am BIP; Kosten, die schneller wachsen, etwa durch die Alterung, kommen nur über die jährliche Veränderung des Primärsaldos hinein. Alle neuen Schulden kosten denselben Marktzins. Die Zinsen werden aus den Schulden berechnet; eine Maßnahme am Posten Zinsen ändert deshalb nur das erste Jahr. Die Schulden können nicht unter null fallen; Überschüsse darüber hinaus werden nicht angespart.",
-    "en": "A what-if calculation, not a forecast. It shows where debt and interest would go if the budget of 2024, changed by the measures switched on, kept its size relative to the economy and the chosen assumptions held every year. What it leaves out: debt has no effect back. Higher debt does not push up the interest rate, and measures do not change growth; in reality both can happen. Every measure works in full and for good from the first year; phase-ins, expiry dates and the reactions of people and firms are missing. The calculation starts from 2024, before the 2025 change to the debt brake (defence spending above 1 % of GDP exempt, room for the Länder) and before the special fund of EUR 500 billion for infrastructure; the higher borrowing decided since then is not included. Revenue and spending other than interest keep their share of GDP; costs that grow faster, for example because of ageing, enter only through the yearly change in the primary balance. All new debt costs the same market rate. Interest is computed from the debt, so a measure on the interest item changes only the first year. Debt cannot fall below zero; surpluses beyond that are not saved."
+    "de": "Eine Wenn-dann-Rechnung, keine Prognose. Sie zeigt, wohin Schulden und Zinsen liefen, wenn der Haushalt von 2024, verändert um die eingeschalteten Maßnahmen, im Verhältnis zur Wirtschaft so bliebe und die gewählten Annahmen jedes Jahr gälten. Was sie weglässt: Die Schulden wirken nicht zurück. Höhere Schulden treiben den Zins nicht nach oben, und Maßnahmen ändern das Wachstum nicht; in Wirklichkeit können beide geschehen. Jede Maßnahme wirkt vom ersten Jahr an voll und dauerhaft; Übergangsfristen, Befristungen und Reaktionen von Menschen und Unternehmen fehlen. Die Rechnung beginnt mit 2024, also vor der Änderung der Schuldenbremse 2025 (Verteidigungsausgaben über 1 % des BIP ausgenommen, Spielraum für die Länder) und vor dem Sondervermögen Infrastruktur von 500 Mrd. Euro; die seither beschlossene höhere Kreditaufnahme ist nicht enthalten, außer in der Vorgabe „Wie die Bundesregierung plant“, die bis 2030 der Projektion der Bundesregierung folgt. Einnahmen und Ausgaben ohne Zinsen behalten ihren Anteil am BIP; Kosten, die schneller wachsen, etwa durch die Alterung, kommen nur über die jährliche Veränderung des Primärsaldos hinein. Alle neuen Schulden kosten denselben Marktzins. Die Zinsen werden aus den Schulden berechnet; eine Maßnahme am Posten Zinsen ändert deshalb nur das erste Jahr. Die Schulden können nicht unter null fallen; Überschüsse darüber hinaus werden nicht angespart.",
+    "en": "A what-if calculation, not a forecast. It shows where debt and interest would go if the budget of 2024, changed by the measures switched on, kept its size relative to the economy and the chosen assumptions held every year. What it leaves out: debt has no effect back. Higher debt does not push up the interest rate, and measures do not change growth; in reality both can happen. Every measure works in full and for good from the first year; phase-ins, expiry dates and the reactions of people and firms are missing. The calculation starts from 2024, before the 2025 change to the debt brake (defence spending above 1 % of GDP exempt, room for the Länder) and before the special fund of EUR 500 billion for infrastructure; the higher borrowing decided since then is not included, except in the preset 'As the government plans', which follows the government's projection to 2030. Revenue and spending other than interest keep their share of GDP; costs that grow faster, for example because of ageing, enter only through the yearly change in the primary balance. All new debt costs the same market rate. Interest is computed from the debt, so a measure on the interest item changes only the first year. Debt cannot fall below zero; surpluses beyond that are not saved."
   }
 }

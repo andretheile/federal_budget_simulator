@@ -98,6 +98,9 @@ Arithmetic on published figures:
 - the zero-amount leaf "replacement benefits for people excluded from citizen's income": it receives the
   benefits that states and municipalities would pay if groups lost citizen's income; its level shares are
   copied from asylum seekers' benefits;
+- the zero-amount leaves "tax on sugar-sweetened drinks" and "tax on plastic packaging": neither tax was
+  levied in 2024; both were debated with the 2027 federal budget. They exist so that a measure can book
+  them, like the wealth tax; as excise duties they are federal (Article 106(1) of the Basic Law);
 - VAT by rate: the revenue at the reduced rate is not published. It is derived from the government's
   estimates of revenue forgone at 7 instead of 19 % (all reduced rates, food, accommodation, culture, local
   transport, and restaurant meals, which were at the standard rate in 2024): revenue forgone / 12 * 7, or

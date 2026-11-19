@@ -532,6 +532,48 @@
               ]
             },
             {
+              "id": "rev.taxes.consumption.sugar_drinks",
+              "label": {
+                "de": "Zuckergetränkesteuer (2024 nicht erhoben)",
+                "en": "Tax on sugar-sweetened drinks (not levied in 2024)"
+              },
+              "description": {
+                "de": "Verbrauchsteuer auf gezuckerte Getränke, Stand November 2026 mit dem Haushaltsbegleitgesetz 2027 ab 1. Januar 2028 geplant. Als Verbrauchsteuer stünde das Aufkommen dem Bund zu (Art. 106 Abs. 1 Grundgesetz).",
+                "en": "Excise duty on sugar-sweetened drinks, planned as of November 2026 from 1 January 2028 with the Budget Accompanying Act 2027. As an excise duty its revenue would go to the federal level (Article 106(1) of the Basic Law)."
+              },
+              "code": "D214A",
+              "amount": 0,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl",
+                "gg_art_106"
+              ]
+            },
+            {
+              "id": "rev.taxes.consumption.plastic_packaging",
+              "label": {
+                "de": "Kunststoffverpackungsteuer (2024 nicht erhoben)",
+                "en": "Tax on plastic packaging (not levied in 2024)"
+              },
+              "description": {
+                "de": "Verbrauchsteuer auf Kunststoff in Verpackungen, 2026 geplant und im November 2026 vorerst nicht beschlossen. Als Verbrauchsteuer stünde das Aufkommen dem Bund zu (Art. 106 Abs. 1 Grundgesetz).",
+                "en": "Excise duty on plastic in packaging, planned in 2026 and, as of November 2026, not adopted for now. As an excise duty its revenue would go to the federal level (Article 106(1) of the Basic Law)."
+              },
+              "code": "D214A",
+              "amount": 0,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl",
+                "gg_art_106"
+              ]
+            },
+            {
               "id": "rev.taxes.consumption.insurance",
               "label": {
                 "de": "Versicherung- und Feuerschutzsteuer",
@@ -1146,11 +1188,12 @@
               },
               "quality": "official",
               "sources": [
-                "eurostat_gov_10a_main"
+                "eurostat_gov_10a_main",
+                "bundeshaushalt_2024"
               ],
               "note": {
-                "de": "Betrag aus der aktuellen Datenlieferung (Oktober 2026); die funktionale Gliederung beruht auf einem etwas älteren Datenstand.",
-                "en": "Amount from the latest data release (October 2026); the breakdown by function is based on a slightly older vintage."
+                "de": "Betrag aus der aktuellen Datenlieferung (Oktober 2026); die funktionale Gliederung beruht auf einem etwas älteren Datenstand. Ob auch die Plastikabgabe an die EU (2024: 1,38 Mrd. Euro, Kasse, Titel 6001 022 03) in diesem Betrag enthalten ist, lässt sich der Statistik nicht sicher entnehmen; der Abgleich mit den Kassenzahlen des Bundes (Mehrwertsteuer- und BNE-Eigenmittel 2024: 25,17 Mrd. Euro) spricht eher dafür.",
+                "en": "Amount from the latest data release (October 2026); the breakdown by function is based on a slightly older vintage. Whether the plastics contribution to the EU (2024: EUR 1.38 billion, cash, title 6001 022 03) is included in this amount cannot be told for certain from the statistics; a comparison with the federal cash figures (VAT- and GNI-based own resources 2024: EUR 25.17 billion) suggests that it is."
               }
             },
             {

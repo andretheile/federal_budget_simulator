@@ -1,0 +1,182 @@
+{
+  "default": "federal_plan_gap_2028",
+  "goals": [
+    {
+      "id": "federal_plan_gap_2028",
+      "label": { "de": "Lücke 2028 im Finanzplan des Bundes", "en": "2028 gap in the federal financial plan" },
+      "description": {
+        "de": "Für 2028 fehlen im Finanzplan des Bundes rund 22 Mrd. Euro, die noch durch keine beschlossene Maßnahme gedeckt sind (haushaltspolitischer Handlungsbedarf). Gemessen wird, wie weit die eingeschalteten Maßnahmen den Bund entlasten.",
+        "en": "For 2028 the federal financial plan lacks about EUR 22 billion that no decided measure covers yet (the 'Handlungsbedarf', the need for action). What is measured is how far the measures switched on relieve the federal government."
+      },
+      "level": "central",
+      "amount": 22000000000,
+      "year": 2028,
+      "quality": "official",
+      "sources": ["bundestag_drs_21_7301", "bundestag_drs_21_9010", "adhoc_dpa_zuckersteuer_2028", "bt_drs_21_7016"],
+      "note": {
+        "de": "Finanzplan des Bundes 2026 bis 2030, von der Bundesregierung am 6. Juli 2026 beschlossen (Drucksache 21/7301 vom 14. August 2026, Abschnitt 3.3, S. 19): Handlungsbedarf rund 22 Mrd. Euro 2028, 39 Mrd. Euro 2029 und 48 Mrd. Euro 2030, verbucht als Globale Minderausgabe; der Finanzplan nennt nur diese gerundeten Werte. Die Lücke von 34 Mrd. Euro, die der vorige Finanzplan für 2027 auswies, schließt der Entwurf für 2027. Nicht enthalten sind die Steuerschätzung vom Oktober 2026 und die Änderungen des Haushaltsausschusses vom 13. November 2026. Zwei spätere Entscheidungen vergrößern die Lücke: Die Steuer auf Kunststoffverpackungen, mit der der Finanzplan in Höhe der EU-Plastikabgabe rechnet (rund 1,6 Mrd. Euro im Jahr), hat die Koalition im November 2026 fallen gelassen; die Kürzung des Zuschusses an den Gesundheitsfonds, die er nach dem Regierungsentwurf ansetzt, hat der Bundestag im Juli 2026 verringert, ab 2028 um rund 450 Mio. Euro im Jahr (Drucksache 21/7016, S. 209). Dazu kommen Einsparungen, die der Finanzplan noch keiner Maßnahme zugeordnet hat; mit ihnen sind es 33½ Mrd. Euro 2028 (Drucksache 21/9010, S. 16). Was der Vergleich überdeckt: Die Wirkung einer Maßnahme ist eine statische Schätzung mit den Beträgen von 2024 in der Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen, in der der Bund seine Extrahaushalte einschließt; der Handlungsbedarf ist eine Kassenzahl für den Kernhaushalt eines späteren Jahres, gemessen an der Schuldenregel. Maßnahmen, die der Finanzplan schon enthält, werden nicht gezählt; bei jeder steht der Grund. Nicht gezählt wird der Posten Verteidigung: Militär, Zivilschutz im engen Sinn, Militärhilfe an andere Staaten und Verteidigungsforschung. Die Ausnahme der Schuldenregel reicht weiter, auf Bevölkerungsschutz, Nachrichtendienste, den Schutz der Informationstechnik und zivile Hilfe für völkerrechtswidrig angegriffene Staaten; Maßnahmen dort werden hier gezählt. Sie gilt nur für den Teil über 1 % des BIP, doch mit Zivil- und Bevölkerungsschutz, Nachrichtendiensten und Informationstechnik (zusammen 9½ Mrd. Euro 2028, Drucksache 21/7301, Tabelle 10, S. 26) liegen die ausgenommenen Ausgaben auch am unteren Ende des Reglers für Verteidigung (1,0 % des BIP) darüber. Das Sondervermögen Infrastruktur und Klimaneutralität wird ebenfalls über Kredite außerhalb der Schuldenregel bezahlt, hat im Haushalt von 2024 aber keinen eigenen Posten; Änderungen etwa beim Verkehr werden deshalb voll gezählt.",
+        "en": "Federal financial plan 2026 to 2030, adopted by the federal government on 6 July 2026 (printed paper 21/7301 of 14 August 2026, section 3.3, page 19): a 'Handlungsbedarf' of about EUR 22 billion in 2028, EUR 39 billion in 2029 and EUR 48 billion in 2030, booked as a global spending cut; the plan gives only these rounded figures. The gap of EUR 34 billion that the previous plan showed for 2027 is closed by the draft for 2027. Not included are the tax estimate of October 2026 and the budget committee's changes of 13 November 2026. Two later decisions widen the gap: the coalition dropped the tax on plastic packaging in November 2026, on which the plan counts at the level of the EU plastics contribution (about EUR 1.6 billion a year); and the Bundestag reduced the cut in the subsidy to the health fund that the plan takes from the government draft, by about EUR 450 million a year from 2028 (printed paper 21/7016, page 209). Besides, the plan counts on savings it has not yet assigned to measures; with them the figure is EUR 33.5 billion in 2028 (printed paper 21/9010, page 16). What the comparison glosses over: the effect of a measure is a static estimate on the amounts of 2024 in national accounts, where the federal government includes its off-budget entities; the Handlungsbedarf is a cash figure for the core budget of a later year, measured against the debt brake. Measures that the plan already contains are not counted; each says why. Not counted is the item defence: the military, civil defence in the narrow sense, military aid to other states and defence research. The exemption in the debt brake reaches further, to civil protection, the intelligence services, the protection of IT systems and civilian aid to states attacked in breach of international law; measures there are counted here. It covers only the part above 1 % of GDP, but with civil protection, the intelligence services and IT protection (together EUR 9.5 billion in 2028, printed paper 21/7301, table 10, page 26) the exempt spending stays above that even at the lower end of the defence slider (1.0 % of GDP). The special fund for infrastructure and climate neutrality is also paid for with borrowing outside the debt brake, but it has no item of its own in the budget of 2024; changes in areas such as transport are therefore counted in full."
+      },
+      "excluded": [
+        {
+          "node": "exp.defence",
+          "reason": {
+            "de": "Seit März 2025 darf der Bund Verteidigungsausgaben über 1 % des BIP mit Krediten außerhalb der Schuldenregel bezahlen, deshalb ändern Mehr- oder Minderausgaben für Verteidigung diese Lücke nicht.",
+            "en": "Since March 2025 the federal government may pay for defence spending above 1 % of GDP with borrowing outside the debt brake, so spending more or less on defence does not change this gap."
+          },
+          "sources": ["gg_art_115", "bundestag_drs_21_7301"]
+        },
+        {
+          "policy": "plastic_packaging_tax",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit der Steuer auf Kunststoffverpackungen (in Höhe der EU-Plastikabgabe, rund 1,6 Mrd. Euro im Jahr); seit die Koalition sie im November 2026 fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer.",
+            "en": "The financial plan already counts on the tax on plastic packaging (at the level of the EU plastics contribution, about EUR 1.6 billion a year); since the coalition dropped it in November 2026, the real gap is larger by that amount."
+          },
+          "sources": ["bundestag_drs_21_7301", "adhoc_dpa_zuckersteuer_2028"]
+        },
+        {
+          "policy": "parental_allowance_reform",
+          "reason": {
+            "de": "Der Finanzplan setzt die Mittel für das Elterngeld bereits mit Blick auf diese Reform niedriger an; die Einsparung verkleinert die Lücke deshalb nicht noch einmal.",
+            "en": "The financial plan already sets the funds for parental allowance lower in view of this reform, so the saving does not narrow the gap a second time."
+          },
+          "sources": ["bundestag_drs_21_7301"]
+        },
+        {
+          "policy": "tobacco_tax",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit den Erhöhungen der Tabaksteuer bis 2030, die weiter gehen als dieser Regler gegenüber 2024; er verkleinert die Lücke deshalb nicht.",
+            "en": "The financial plan already counts on the tobacco tax increases to 2030, which go further than this slider does against 2024, so it does not narrow the gap."
+          },
+          "sources": ["bundestag_drs_21_7301", "bt_drs_21_8605"]
+        },
+        {
+          "policy": "vat_restaurants",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit dem seit 2026 geltenden Satz von 7 % für Speisen in Restaurants; die Maßnahme wird deshalb nicht gezählt.",
+            "en": "The financial plan already counts on the 7 % rate on restaurant meals in force since 2026, so the measure is not counted."
+          },
+          "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
+        }
+      ]
+    },
+    {
+      "id": "federal_plan_gap_2029",
+      "label": { "de": "Lücke 2029 im Finanzplan des Bundes", "en": "2029 gap in the federal financial plan" },
+      "description": {
+        "de": "Für 2029 fehlen im Finanzplan des Bundes rund 39 Mrd. Euro, die noch durch keine beschlossene Maßnahme gedeckt sind (haushaltspolitischer Handlungsbedarf). Gemessen wird, wie weit die eingeschalteten Maßnahmen den Bund entlasten.",
+        "en": "For 2029 the federal financial plan lacks about EUR 39 billion that no decided measure covers yet (the 'Handlungsbedarf', the need for action). What is measured is how far the measures switched on relieve the federal government."
+      },
+      "level": "central",
+      "amount": 39000000000,
+      "year": 2029,
+      "quality": "official",
+      "sources": ["bundestag_drs_21_7301", "bundestag_drs_21_9010", "adhoc_dpa_zuckersteuer_2028", "bt_drs_21_7016"],
+      "note": {
+        "de": "Finanzplan des Bundes 2026 bis 2030, von der Bundesregierung am 6. Juli 2026 beschlossen (Drucksache 21/7301 vom 14. August 2026, Abschnitt 3.3, S. 19): Handlungsbedarf rund 22 Mrd. Euro 2028, 39 Mrd. Euro 2029 und 48 Mrd. Euro 2030, verbucht als Globale Minderausgabe; der Finanzplan nennt nur diese gerundeten Werte. Nicht enthalten sind die Steuerschätzung vom Oktober 2026 und die Änderungen des Haushaltsausschusses vom 13. November 2026. Zwei spätere Entscheidungen vergrößern die Lücke: Die Steuer auf Kunststoffverpackungen, mit der der Finanzplan in Höhe der EU-Plastikabgabe rechnet (rund 1,6 Mrd. Euro im Jahr), hat die Koalition im November 2026 fallen gelassen; die Kürzung des Zuschusses an den Gesundheitsfonds, die er nach dem Regierungsentwurf ansetzt, hat der Bundestag im Juli 2026 verringert, ab 2028 um rund 450 Mio. Euro im Jahr (Drucksache 21/7016, S. 209). Dazu kommen Einsparungen, die der Finanzplan noch keiner Maßnahme zugeordnet hat; mit ihnen sind es 49½ Mrd. Euro 2029 (Drucksache 21/9010, S. 16). Was der Vergleich überdeckt: Die Wirkung einer Maßnahme ist eine statische Schätzung mit den Beträgen von 2024 in der Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen, in der der Bund seine Extrahaushalte einschließt; der Handlungsbedarf ist eine Kassenzahl für den Kernhaushalt eines späteren Jahres, gemessen an der Schuldenregel. Maßnahmen, die der Finanzplan schon enthält, werden nicht gezählt; bei jeder steht der Grund. Nicht gezählt wird der Posten Verteidigung: Militär, Zivilschutz im engen Sinn, Militärhilfe an andere Staaten und Verteidigungsforschung. Die Ausnahme der Schuldenregel reicht weiter, auf Bevölkerungsschutz, Nachrichtendienste, den Schutz der Informationstechnik und zivile Hilfe für völkerrechtswidrig angegriffene Staaten; Maßnahmen dort werden hier gezählt. Sie gilt nur für den Teil über 1 % des BIP, doch mit Zivil- und Bevölkerungsschutz, Nachrichtendiensten und Informationstechnik (zusammen 9½ Mrd. Euro 2028, Drucksache 21/7301, Tabelle 10, S. 26) liegen die ausgenommenen Ausgaben auch am unteren Ende des Reglers für Verteidigung (1,0 % des BIP) darüber. Das Sondervermögen Infrastruktur und Klimaneutralität wird ebenfalls über Kredite außerhalb der Schuldenregel bezahlt, hat im Haushalt von 2024 aber keinen eigenen Posten; Änderungen etwa beim Verkehr werden deshalb voll gezählt.",
+        "en": "Federal financial plan 2026 to 2030, adopted by the federal government on 6 July 2026 (printed paper 21/7301 of 14 August 2026, section 3.3, page 19): a 'Handlungsbedarf' of about EUR 22 billion in 2028, EUR 39 billion in 2029 and EUR 48 billion in 2030, booked as a global spending cut; the plan gives only these rounded figures. Not included are the tax estimate of October 2026 and the budget committee's changes of 13 November 2026. Two later decisions widen the gap: the coalition dropped the tax on plastic packaging in November 2026, on which the plan counts at the level of the EU plastics contribution (about EUR 1.6 billion a year); and the Bundestag reduced the cut in the subsidy to the health fund that the plan takes from the government draft, by about EUR 450 million a year from 2028 (printed paper 21/7016, page 209). Besides, the plan counts on savings it has not yet assigned to measures; with them the figure is EUR 49.5 billion in 2029 (printed paper 21/9010, page 16). What the comparison glosses over: the effect of a measure is a static estimate on the amounts of 2024 in national accounts, where the federal government includes its off-budget entities; the Handlungsbedarf is a cash figure for the core budget of a later year, measured against the debt brake. Measures that the plan already contains are not counted; each says why. Not counted is the item defence: the military, civil defence in the narrow sense, military aid to other states and defence research. The exemption in the debt brake reaches further, to civil protection, the intelligence services, the protection of IT systems and civilian aid to states attacked in breach of international law; measures there are counted here. It covers only the part above 1 % of GDP, but with civil protection, the intelligence services and IT protection (together EUR 9.5 billion in 2028, printed paper 21/7301, table 10, page 26) the exempt spending stays above that even at the lower end of the defence slider (1.0 % of GDP). The special fund for infrastructure and climate neutrality is also paid for with borrowing outside the debt brake, but it has no item of its own in the budget of 2024; changes in areas such as transport are therefore counted in full."
+      },
+      "excluded": [
+        {
+          "node": "exp.defence",
+          "reason": {
+            "de": "Seit März 2025 darf der Bund Verteidigungsausgaben über 1 % des BIP mit Krediten außerhalb der Schuldenregel bezahlen, deshalb ändern Mehr- oder Minderausgaben für Verteidigung diese Lücke nicht.",
+            "en": "Since March 2025 the federal government may pay for defence spending above 1 % of GDP with borrowing outside the debt brake, so spending more or less on defence does not change this gap."
+          },
+          "sources": ["gg_art_115", "bundestag_drs_21_7301"]
+        },
+        {
+          "policy": "plastic_packaging_tax",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit der Steuer auf Kunststoffverpackungen (in Höhe der EU-Plastikabgabe, rund 1,6 Mrd. Euro im Jahr); seit die Koalition sie im November 2026 fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer.",
+            "en": "The financial plan already counts on the tax on plastic packaging (at the level of the EU plastics contribution, about EUR 1.6 billion a year); since the coalition dropped it in November 2026, the real gap is larger by that amount."
+          },
+          "sources": ["bundestag_drs_21_7301", "adhoc_dpa_zuckersteuer_2028"]
+        },
+        {
+          "policy": "parental_allowance_reform",
+          "reason": {
+            "de": "Der Finanzplan setzt die Mittel für das Elterngeld bereits mit Blick auf diese Reform niedriger an; die Einsparung verkleinert die Lücke deshalb nicht noch einmal.",
+            "en": "The financial plan already sets the funds for parental allowance lower in view of this reform, so the saving does not narrow the gap a second time."
+          },
+          "sources": ["bundestag_drs_21_7301"]
+        },
+        {
+          "policy": "tobacco_tax",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit den Erhöhungen der Tabaksteuer bis 2030, die weiter gehen als dieser Regler gegenüber 2024; er verkleinert die Lücke deshalb nicht.",
+            "en": "The financial plan already counts on the tobacco tax increases to 2030, which go further than this slider does against 2024, so it does not narrow the gap."
+          },
+          "sources": ["bundestag_drs_21_7301", "bt_drs_21_8605"]
+        },
+        {
+          "policy": "vat_restaurants",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit dem seit 2026 geltenden Satz von 7 % für Speisen in Restaurants; die Maßnahme wird deshalb nicht gezählt.",
+            "en": "The financial plan already counts on the 7 % rate on restaurant meals in force since 2026, so the measure is not counted."
+          },
+          "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
+        }
+      ]
+    },
+    {
+      "id": "federal_plan_gap_2030",
+      "label": { "de": "Lücke 2030 im Finanzplan des Bundes", "en": "2030 gap in the federal financial plan" },
+      "description": {
+        "de": "Für 2030 fehlen im Finanzplan des Bundes rund 48 Mrd. Euro, die noch durch keine beschlossene Maßnahme gedeckt sind (haushaltspolitischer Handlungsbedarf). Gemessen wird, wie weit die eingeschalteten Maßnahmen den Bund entlasten.",
+        "en": "For 2030 the federal financial plan lacks about EUR 48 billion that no decided measure covers yet (the 'Handlungsbedarf', the need for action). What is measured is how far the measures switched on relieve the federal government."
+      },
+      "level": "central",
+      "amount": 48000000000,
+      "year": 2030,
+      "quality": "official",
+      "sources": ["bundestag_drs_21_7301", "bundestag_drs_21_9010", "adhoc_dpa_zuckersteuer_2028", "bt_drs_21_7016"],
+      "note": {
+        "de": "Finanzplan des Bundes 2026 bis 2030, von der Bundesregierung am 6. Juli 2026 beschlossen (Drucksache 21/7301 vom 14. August 2026, Abschnitt 3.3, S. 19): Handlungsbedarf rund 22 Mrd. Euro 2028, 39 Mrd. Euro 2029 und 48 Mrd. Euro 2030, verbucht als Globale Minderausgabe; der Finanzplan nennt nur diese gerundeten Werte. Nicht enthalten sind die Steuerschätzung vom Oktober 2026 und die Änderungen des Haushaltsausschusses vom 13. November 2026. Zwei spätere Entscheidungen vergrößern die Lücke: Die Steuer auf Kunststoffverpackungen, mit der der Finanzplan in Höhe der EU-Plastikabgabe rechnet (rund 1,6 Mrd. Euro im Jahr), hat die Koalition im November 2026 fallen gelassen; die Kürzung des Zuschusses an den Gesundheitsfonds, die er nach dem Regierungsentwurf ansetzt, hat der Bundestag im Juli 2026 verringert, ab 2028 um rund 450 Mio. Euro im Jahr (Drucksache 21/7016, S. 209). Dazu kommen Einsparungen, die der Finanzplan noch keiner Maßnahme zugeordnet hat; mit ihnen sind es 58 Mrd. Euro 2030 (Drucksache 21/9010, S. 16). Was der Vergleich überdeckt: Die Wirkung einer Maßnahme ist eine statische Schätzung mit den Beträgen von 2024 in der Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen, in der der Bund seine Extrahaushalte einschließt; der Handlungsbedarf ist eine Kassenzahl für den Kernhaushalt eines späteren Jahres, gemessen an der Schuldenregel. Maßnahmen, die der Finanzplan schon enthält, werden nicht gezählt; bei jeder steht der Grund. Nicht gezählt wird der Posten Verteidigung: Militär, Zivilschutz im engen Sinn, Militärhilfe an andere Staaten und Verteidigungsforschung. Die Ausnahme der Schuldenregel reicht weiter, auf Bevölkerungsschutz, Nachrichtendienste, den Schutz der Informationstechnik und zivile Hilfe für völkerrechtswidrig angegriffene Staaten; Maßnahmen dort werden hier gezählt. Sie gilt nur für den Teil über 1 % des BIP, doch mit Zivil- und Bevölkerungsschutz, Nachrichtendiensten und Informationstechnik (zusammen 9½ Mrd. Euro 2028, Drucksache 21/7301, Tabelle 10, S. 26) liegen die ausgenommenen Ausgaben auch am unteren Ende des Reglers für Verteidigung (1,0 % des BIP) darüber. Das Sondervermögen Infrastruktur und Klimaneutralität wird ebenfalls über Kredite außerhalb der Schuldenregel bezahlt, hat im Haushalt von 2024 aber keinen eigenen Posten; Änderungen etwa beim Verkehr werden deshalb voll gezählt.",
+        "en": "Federal financial plan 2026 to 2030, adopted by the federal government on 6 July 2026 (printed paper 21/7301 of 14 August 2026, section 3.3, page 19): a 'Handlungsbedarf' of about EUR 22 billion in 2028, EUR 39 billion in 2029 and EUR 48 billion in 2030, booked as a global spending cut; the plan gives only these rounded figures. Not included are the tax estimate of October 2026 and the budget committee's changes of 13 November 2026. Two later decisions widen the gap: the coalition dropped the tax on plastic packaging in November 2026, on which the plan counts at the level of the EU plastics contribution (about EUR 1.6 billion a year); and the Bundestag reduced the cut in the subsidy to the health fund that the plan takes from the government draft, by about EUR 450 million a year from 2028 (printed paper 21/7016, page 209). Besides, the plan counts on savings it has not yet assigned to measures; with them the figure is EUR 58 billion in 2030 (printed paper 21/9010, page 16). What the comparison glosses over: the effect of a measure is a static estimate on the amounts of 2024 in national accounts, where the federal government includes its off-budget entities; the Handlungsbedarf is a cash figure for the core budget of a later year, measured against the debt brake. Measures that the plan already contains are not counted; each says why. Not counted is the item defence: the military, civil defence in the narrow sense, military aid to other states and defence research. The exemption in the debt brake reaches further, to civil protection, the intelligence services, the protection of IT systems and civilian aid to states attacked in breach of international law; measures there are counted here. It covers only the part above 1 % of GDP, but with civil protection, the intelligence services and IT protection (together EUR 9.5 billion in 2028, printed paper 21/7301, table 10, page 26) the exempt spending stays above that even at the lower end of the defence slider (1.0 % of GDP). The special fund for infrastructure and climate neutrality is also paid for with borrowing outside the debt brake, but it has no item of its own in the budget of 2024; changes in areas such as transport are therefore counted in full."
+      },
+      "excluded": [
+        {
+          "node": "exp.defence",
+          "reason": {
+            "de": "Seit März 2025 darf der Bund Verteidigungsausgaben über 1 % des BIP mit Krediten außerhalb der Schuldenregel bezahlen, deshalb ändern Mehr- oder Minderausgaben für Verteidigung diese Lücke nicht.",
+            "en": "Since March 2025 the federal government may pay for defence spending above 1 % of GDP with borrowing outside the debt brake, so spending more or less on defence does not change this gap."
+          },
+          "sources": ["gg_art_115", "bundestag_drs_21_7301"]
+        },
+        {
+          "policy": "plastic_packaging_tax",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit der Steuer auf Kunststoffverpackungen (in Höhe der EU-Plastikabgabe, rund 1,6 Mrd. Euro im Jahr); seit die Koalition sie im November 2026 fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer.",
+            "en": "The financial plan already counts on the tax on plastic packaging (at the level of the EU plastics contribution, about EUR 1.6 billion a year); since the coalition dropped it in November 2026, the real gap is larger by that amount."
+          },
+          "sources": ["bundestag_drs_21_7301", "adhoc_dpa_zuckersteuer_2028"]
+        },
+        {
+          "policy": "parental_allowance_reform",
+          "reason": {
+            "de": "Der Finanzplan setzt die Mittel für das Elterngeld bereits mit Blick auf diese Reform niedriger an; die Einsparung verkleinert die Lücke deshalb nicht noch einmal.",
+            "en": "The financial plan already sets the funds for parental allowance lower in view of this reform, so the saving does not narrow the gap a second time."
+          },
+          "sources": ["bundestag_drs_21_7301"]
+        },
+        {
+          "policy": "tobacco_tax",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit den Erhöhungen der Tabaksteuer bis 2030, die weiter gehen als dieser Regler gegenüber 2024; er verkleinert die Lücke deshalb nicht.",
+            "en": "The financial plan already counts on the tobacco tax increases to 2030, which go further than this slider does against 2024, so it does not narrow the gap."
+          },
+          "sources": ["bundestag_drs_21_7301", "bt_drs_21_8605"]
+        },
+        {
+          "policy": "vat_restaurants",
+          "reason": {
+            "de": "Der Finanzplan rechnet bereits mit dem seit 2026 geltenden Satz von 7 % für Speisen in Restaurants; die Maßnahme wird deshalb nicht gezählt.",
+            "en": "The financial plan already counts on the 7 % rate on restaurant meals in force since 2026, so the measure is not counted."
+          },
+          "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
+        }
+      ]
+    }
+  ]
+}

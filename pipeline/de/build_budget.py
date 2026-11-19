@@ -88,11 +88,13 @@ EXP = [
     G("exp.general", "Allgemeine Verwaltung, Schulden und Internationales", "General administration, debt and international affairs", code="GF01", children=[
         G("exp.general.executive", "Regierung, Parlamente, Finanzverwaltung und Auswärtiges", "Government, parliaments, tax administration and foreign affairs", code="GF0101", children=[
             L("exp.general.executive.eu_contribution", "EU-Beitrag (Eigenmittel aus Mehrwertsteuer und Wirtschaftsleistung)", "EU contribution (own resources based on VAT and national income)",
-              amount=EU_OWN, fixed=C, quality="official", sources=["eurostat_gov_10a_main"], code="D76",
+              amount=EU_OWN, fixed=C, quality="official", sources=["eurostat_gov_10a_main", "bundeshaushalt_2024"], code="D76",
               desc=("Deutschlands Zahlungen an den EU-Haushalt aus Mehrwertsteuer- und BNE-Eigenmitteln. Zölle, die Deutschland für die EU erhebt, zählen nicht zu den Staatseinnahmen und sind hier nicht enthalten.",
                     "Germany's payments to the EU budget from VAT-based and GNI-based own resources. Customs duties collected on behalf of the EU are not government revenue and are not included."),
-              note=("Betrag aus der aktuellen Datenlieferung (Oktober 2026); die funktionale Gliederung beruht auf einem etwas älteren Datenstand.",
-                    "Amount from the latest data release (October 2026); the breakdown by function is based on a slightly older vintage.")),
+              # bundeshaushalt_2024, actuals of titles 6001 021 01 (VAT, 5,447.8 m), 6001 022 02 (GNI, 19,722.4 m) and
+              # 6001 022 03 (plastics, 1,377.6 m): VAT + GNI 25.17 bn, with plastics 26.55 bn, against D76 of 27.33 bn.
+              note=("Betrag aus der aktuellen Datenlieferung (Oktober 2026); die funktionale Gliederung beruht auf einem etwas älteren Datenstand. Ob auch die Plastikabgabe an die EU (2024: 1,38 Mrd. Euro, Kasse, Titel 6001 022 03) in diesem Betrag enthalten ist, lässt sich der Statistik nicht sicher entnehmen; der Abgleich mit den Kassenzahlen des Bundes (Mehrwertsteuer- und BNE-Eigenmittel 2024: 25,17 Mrd. Euro) spricht eher dafür.",
+                    "Amount from the latest data release (October 2026); the breakdown by function is based on a slightly older vintage. Whether the plastics contribution to the EU (2024: EUR 1.38 billion, cash, title 6001 022 03) is included in this amount cannot be told for certain from the statistics; a comparison with the federal cash figures (VAT- and GNI-based own resources 2024: EUR 25.17 billion) suggests that it is.")),
             L("exp.general.executive.bundestag_mp_pay", "Bundestag: Diäten der Abgeordneten", "Bundestag: MPs' pay",
               amount=MP_PAY, fixed=C, quality="official", sources=["bundeshaushalt_2024"],
               desc=("Entschädigungen und Amtszulagen nach § 11 Abgeordnetengesetz, Ist 2024. Ohne Kostenpauschale, Mitarbeiter und Altersversorgung.",
@@ -660,6 +662,14 @@ REV = [
                    note=("Alkoholsteuer einschließlich Alkopopsteuer (1,99 Mrd. Euro), Kaffeesteuer (1,0 Mrd. Euro), Schaumweinsteuer (0,37 Mrd. Euro) und sonstige Verbrauchsteuern (3 Mio. Euro). Als Verbrauchsteuern stehen sie dem Bund zu (Art. 106 Abs. 1 Grundgesetz).",
                          "Alcohol tax including the tax on alcopops (EUR 1.99 billion), coffee tax (EUR 1.0 billion), sparkling wine tax (EUR 0.37 billion) and other excise duties (EUR 3 million). As excise duties they go to the federal level (Article 106(1) of the Basic Law).")),
             ]),
+            # Zero-amount leaves for two excise duties that did not exist in 2024 and were debated with the 2027 federal
+            # budget, so that a measure can book them at the federal level (like the wealth tax for the states).
+            RL("rev.taxes.consumption.sugar_drinks", "Zuckergetränkesteuer (2024 nicht erhoben)", "Tax on sugar-sweetened drinks (not levied in 2024)", 0.0, C, sources=RSRC + ["gg_art_106"], code="D214A",
+               desc=("Verbrauchsteuer auf gezuckerte Getränke, Stand November 2026 mit dem Haushaltsbegleitgesetz 2027 ab 1. Januar 2028 geplant. Als Verbrauchsteuer stünde das Aufkommen dem Bund zu (Art. 106 Abs. 1 Grundgesetz).",
+                     "Excise duty on sugar-sweetened drinks, planned as of November 2026 from 1 January 2028 with the Budget Accompanying Act 2027. As an excise duty its revenue would go to the federal level (Article 106(1) of the Basic Law).")),
+            RL("rev.taxes.consumption.plastic_packaging", "Kunststoffverpackungsteuer (2024 nicht erhoben)", "Tax on plastic packaging (not levied in 2024)", 0.0, C, sources=RSRC + ["gg_art_106"], code="D214A",
+               desc=("Verbrauchsteuer auf Kunststoff in Verpackungen, 2026 geplant und im November 2026 vorerst nicht beschlossen. Als Verbrauchsteuer stünde das Aufkommen dem Bund zu (Art. 106 Abs. 1 Grundgesetz).",
+                     "Excise duty on plastic in packaging, planned in 2026 and, as of November 2026, not adopted for now. As an excise duty its revenue would go to the federal level (Article 106(1) of the Basic Law).")),
             RL("rev.taxes.consumption.insurance", "Versicherung- und Feuerschutzsteuer", "Insurance tax and fire protection tax", 18318.0 + 724, (18318.0, 724.0, 0, 0), code="D214G"),
             RL("rev.taxes.consumption.motor_vehicle", "Kfz-Steuer", "Motor vehicle tax", 2310.0 + 7358, C, code="D29B+D59D"),
             RL("rev.taxes.consumption.air_travel", "Luftverkehrsteuer", "Air travel tax", 1877.0, C, code="D214H"),

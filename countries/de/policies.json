@@ -679,6 +679,124 @@
       ]
     },
     {
+      "id": "parental_allowance_reform",
+      "label": {
+        "de": "Elterngeld reformieren (Kabinettsentwurf 2026)",
+        "en": "Reform parental allowance (2026 cabinet draft)"
+      },
+      "summary": {
+        "de": "Baut das Elterngeld so um, wie es das Kabinett im November 2026 beschlossen hat: Für jeden Elternteil sind vier Monate reserviert, in denen das Elterngeld 80 % des wegfallenden Einkommens beträgt; sechs weitere Monate können die Eltern frei aufteilen, mit 50 % statt heute in der Regel 65 %. Zusammen bleiben es bis zu 14 Monate, Alleinerziehende erhalten bis zu acht Monate mit 80 %. Der Mindestbetrag steigt von 300 auf 330 Euro, der Höchstbetrag von 1.800 auf 1.900 Euro, der Partnerschaftsbonus entfällt. Die Regeln sollen ab 1. November 2027 gelten. Die Maßnahme zeigt die Einsparung des Bundes bei voller Wirkung, die das Familienministerium für 2030 erwartet: 1,36 Mrd. Euro im Jahr.",
+        "en": "Restructures parental allowance as the cabinet decided in November 2026: four months are reserved for each parent, in which the allowance is 80% of the lost income; the parents can divide six further months freely, at 50% instead of usually 65% today. Together it remains up to 14 months; single parents get up to eight months at 80%. The minimum rises from EUR 300 to 330, the maximum from EUR 1,800 to 1,900, and the partnership bonus is abolished. The rules are to apply from 1 November 2027. The measure shows the federal saving at full effect that the family ministry expects for 2030: EUR 1.36 billion a year."
+      },
+      "topic": "social",
+      "params": [],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.social.family.parental_allowance",
+          "amount": -1360000000,
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.1
+          },
+          "sources": [
+            "bmbfsfj_refe_elterngeld_2026",
+            "bundesregierung_kabinett_elterngeld_2026",
+            "hib_654_2026",
+            "bundeshaushalt_2024"
+          ],
+          "note": {
+            "de": "Entlastung des Bundes laut Referentenentwurf (Stand 10. November 2026): 60 Mio. Euro im Jahr 2027, 535 Mio. Euro 2028, 1.330 Mio. Euro 2029 und 1.360 Mio. Euro 2030 bei voller Wirkung. Darin enthalten sind Mehrkosten von 140 Mio. Euro, weil Einmalzahlungen wie Weihnachtsgeld künftig in die Berechnung eingehen, und 25 Mio. Euro Einsparung durch den Wegfall des Partnerschaftsbonus. Die Rechnung zieht den Betrag für 2030 von den Ausgaben 2024 ab (7,17 Mrd. Euro), das sind rund 19 %; im Entwurf des Haushalts 2027 stehen 7,07 Mrd. Euro. Wie das Ministerium die Einsparung berechnet hat, legt der Entwurf nicht offen. Die Spanne ist eine Annahme: Nehmen mehr Väter ihre vier Monate mit 80 %, als das Ministerium erwartet, fällt die Einsparung kleiner aus (untere Grenze 60 %); die obere Grenze (110 %) lässt Raum dafür, dass weniger Monate mit 50 % genommen werden.",
+            "en": "Federal saving according to the draft bill (as of 10 November 2026): EUR 60 million in 2027, 535 million in 2028, 1,330 million in 2029 and 1,360 million in 2030 at full effect. This includes extra costs of EUR 140 million because one-off payments such as Christmas bonuses will count in the calculation, and EUR 25 million saved by abolishing the partnership bonus. The calculation deducts the 2030 amount from spending in 2024 (EUR 7.17 billion), about 19%; the draft budget 2027 contains EUR 7.07 billion. The draft does not disclose how the ministry calculated the saving. The range is an assumption: if more fathers take their four months at 80% than the ministry expects, the saving is smaller (lower bound 60%); the upper bound (110%) allows for fewer months being taken at 50%."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Die Reform ist noch nicht Gesetz. Das Kabinett hat den Entwurf im Umlaufverfahren beschlossen, wie die Bundesregierung am 13. November 2026 mitteilte; der Bundestag muss noch zustimmen. Die Bundesregierung hatte die Reform in den Eckwerten zum Haushalt 2027 als Sparmaßnahme aufgeführt; im Entwurf des Haushalts 2027 sinkt der Ansatz für das Elterngeld um rund 440 Mio. Euro auf 7,07 Mrd. Euro, nach dem Finanzplan auch wegen weniger Geburten. Bis kurz vor der Bereinigungssitzung verhandelte die Koalition noch über die Aufteilung der Monate zwischen Müttern und Vätern.",
+            "en": "The reform is not law yet. The cabinet adopted the draft by written procedure, as the federal government announced on 13 November 2026; the Bundestag still has to pass it. The federal government had listed the reform as a saving in the key figures for the 2027 budget; in the draft budget 2027 the appropriation for parental allowance falls by about EUR 440 million to 7.07 billion, according to the financial plan also because of fewer births. Until shortly before the final committee session the coalition was still negotiating how the months are divided between mothers and fathers."
+          },
+          "sources": [
+            "bundesregierung_kabinett_elterngeld_2026",
+            "hib_654_2026",
+            "bundestag_drs_21_7301",
+            "adhoc_dpa_zuckersteuer_2028",
+            "bt_drs_21_8495"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Wer verliert und wer gewinnt, hängt davon ab, wie Eltern die Monate aufteilen. Nimmt ein Elternteil die meisten Monate, erhält die Familie nach den ersten vier Monaten 50 % statt heute in der Regel 65 % des Einkommens. Nehmen beide Eltern ihre reservierten Monate, erhalten sie in diesen Monaten mehr als heute; Eltern mit kleinem Einkommen gewinnen zudem durch den höheren Mindestbetrag. Das Ministerium begründet die Reform damit, Väter stärker zu beteiligen und die Verwaltung zu entlasten.",
+            "en": "Who loses and who gains depends on how parents divide the months. If one parent takes most of the months, the family receives 50% instead of usually 65% of income after the first four months. If both parents take their reserved months, they get more than today in those months; parents with low incomes also gain from the higher minimum. The ministry justifies the reform by involving fathers more and relieving the administration."
+          },
+          "sources": [
+            "bmbfsfj_refe_elterngeld_2026",
+            "bundesregierung_kabinett_elterngeld_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Die Einsparung beruht auf Annahmen über das Verhalten der Eltern, die der Entwurf nicht offenlegt. Nehmen mehr Väter ihre reservierten Monate mit 80 %, steigen die Ausgaben; verzichten Eltern wegen der niedrigeren Ersatzrate auf spätere Monate, sinken sie.",
+            "en": "The saving rests on assumptions about parents' behaviour that the draft does not disclose. If more fathers take their reserved months at 80%, spending rises; if parents forgo later months because of the lower replacement rate, it falls."
+          },
+          "sources": [
+            "bmbfsfj_refe_elterngeld_2026"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Das Elterngeld zahlt allein der Bund; die Länder führen es in seinem Auftrag aus. Nach dem Entwurf sparen Länder und Kommunen kein Geld, ihr Verwaltungsaufwand sinkt um rund 6 Mio. Euro im Jahr.",
+            "en": "Parental allowance is paid by the federal government alone; the states administer it on its behalf. According to the draft, states and municipalities save no money, while their administrative costs fall by about EUR 6 million a year."
+          },
+          "sources": [
+            "bmbfsfj_refe_elterngeld_2026"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die volle Einsparung wird erst 2030 erreicht, weil die neuen Regeln ab 1. November 2027 gelten und Elterngeld noch Monate nach der Geburt gezahlt wird: 2027 sind es 60 Mio. Euro, 2028 535 Mio. Euro. Die Familienministerin hat Eltern, die schon ein Kind erwarten, Vertrauensschutz zugesagt.",
+            "en": "The full saving is only reached in 2030, because the new rules apply from 1 November 2027 and parental allowance is paid for months after a birth: EUR 60 million in 2027 and 535 million in 2028. The family minister has promised parents who are already expecting a child that their entitlement is protected."
+          },
+          "sources": [
+            "bmbfsfj_refe_elterngeld_2026",
+            "bt_drs_21_8495"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Der Finanzplan des Bundes bis 2030 rechnet die Reform bereits ein: Er setzt die Mittel für das Elterngeld mit Blick auf die geplante Reform niedriger an und zählt sie zu den Sparmaßnahmen. Gegen die Lücke im Finanzplan wird die Einsparung deshalb nicht gezählt. Welchen Betrag der Finanzplan dafür angesetzt hat, nennt er nicht.",
+            "en": "The federal financial plan to 2030 already includes the reform: it sets the funds for parental allowance lower in view of the planned reform and counts it among the savings measures. The saving is therefore not counted against the gap in the financial plan. The plan does not say what amount it assumed."
+          },
+          "sources": [
+            "bundestag_drs_21_7301"
+          ]
+        }
+      ],
+      "sources": [
+        "bmbfsfj_refe_elterngeld_2026",
+        "bundesregierung_kabinett_elterngeld_2026",
+        "hib_654_2026",
+        "bundestag_drs_21_7301",
+        "adhoc_dpa_zuckersteuer_2028",
+        "bundeshaushalt_2024",
+        "bt_drs_21_8495"
+      ]
+    },
+    {
       "id": "wealth_tax",
       "label": {
         "de": "Vermögensteuer wieder erheben",
@@ -1583,6 +1701,117 @@
       ]
     },
     {
+      "id": "capital_income_flat_tax",
+      "label": {
+        "de": "Abgeltungsteuer erhöhen",
+        "en": "Raise the flat tax on capital income"
+      },
+      "summary": {
+        "de": "Erhöht den Satz der Abgeltungsteuer, die private Anleger seit 2009 pauschal auf Zinsen, Dividenden und Kursgewinne zahlen, von 25 % auf den eingestellten Wert, jeweils zuzüglich Solidaritätszuschlag. Die Grundeinstellung zeigt 30 %, die mittlere von drei Varianten, die der Sachverständigenrat im November 2026 durchgerechnet hat. Finanzminister Klingbeil hat eine höhere Abgeltungsteuer kurz darauf als eine Möglichkeit genannt, die Senkung der Stromsteuer zu bezahlen, ohne einen Satz zu nennen. Die Rechnung beruht auf den Zahlen des Sachverständigenrats nach Ausweichreaktionen; sie gelten für den Bund und sind hier auf alle Ebenen hochgerechnet, denn gut die Hälfte des Aufkommens steht Ländern und Gemeinden zu.",
+        "en": "Raises the rate of the flat tax that private investors have paid on interest, dividends and capital gains since 2009 from 25% to the chosen value, plus the solidarity surcharge in each case. The default shows 30%, the middle of three variants the Council of Economic Experts calculated in November 2026. Shortly afterwards Finance Minister Klingbeil named a higher flat tax as one way to pay for the electricity tax cut, without naming a rate. The calculation rests on the Council's figures after behavioural responses; they are for the federal level and are scaled up here to all levels, because just over half of the revenue goes to the states and municipalities."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "de": "Satz der Abgeltungsteuer",
+            "en": "Flat tax rate on capital income"
+          },
+          "unit": "percent",
+          "min": 25,
+          "max": 35,
+          "step": 1,
+          "default": 30,
+          "baseline": 25
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.income.capital_income",
+          "amount": {
+            "param": "rate",
+            "scale": 511000000,
+            "offset": -12775000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.7,
+            "high": 1.3
+          },
+          "sources": [
+            "svr_jg_2026_27",
+            "gg_art_106",
+            "gemfinrefg_1",
+            "bundeshaushalt_2024"
+          ],
+          "note": {
+            "de": "Je Prozentpunkt 0,51 Mrd. Euro für alle Ebenen, davon 0,24 Mrd. Euro beim Bund. Der Sachverständigenrat schätzt für eine Erhöhung um 3, 5 oder 7 Prozentpunkte Mehreinnahmen des Bundes im Jahr 2027 von etwa 0,8, 1,2 oder 1,7 Mrd. Euro nach Ausweichreaktionen (Jahresgutachten 2026/27, Ziffer 155 und Tabelle 16); er schreibt dafür eine Simulation von Bach und Buslei (2017) mit dem Aufkommen fort. Dass es Zahlen für den Bund sind, sagt der Text ausdrücklich, und die Probe bestätigt es: Bach und Buslei kamen für 2017 auf 0,9, 1,5 und 2,0 Mrd. Euro für alle Ebenen; mit dem Aufkommen bis 2027 fortgeschrieben (von 28,3 auf 60,3 Mrd. Euro, Abgeltungsteuer und Kapitalertragsteuer auf Dividenden zusammen) sind das 1,9, 3,2 und 4,3 Mrd. Euro, wovon knapp die Hälfte dem Bund zusteht. Auch die übrigen Zeilen der Tabelle sind Bundeszahlen: Ein Punkt Mehrwertsteuer steht dort mit 7,5 Mrd. Euro, rund die Hälfte dessen, was er allen Ebenen bringt. Und 2024 brachte allein die Abgeltungsteuer auf Zinsen und Kursgewinne 19,3 Mrd. Euro; 5 Punkte mehr wären darauf rechnerisch 3,9 Mrd. Euro, mit der Elastizität des Rats von 0,6 rund 2,9 Mrd. Euro, Dividenden nicht mitgerechnet. Läsen sich die Zahlen des Rats als Summe aller Ebenen, ergäben 5 Punkte nur 1,2 Mrd. Euro, weniger als die Hälfte davon. Die Rechnung legt eine Gerade durch diese drei Punkte und teilt sie durch den Anteil des Bundes an diesem Posten (47,8 %, nach den gesetzlichen Anteilen: Dividenden je zur Hälfte Bund und Länder, Zinsen und Kursgewinne 44 % Bund, 44 % Länder, 12 % Gemeinden). Bei 30 % ergeben sich 2,56 Mrd. Euro, davon 1,22 Mrd. Euro beim Bund. Die Zahlen gelten für 2027; weil das Aufkommen nach dem Sachverständigenrat seit 2017 stark gestiegen ist (von 28,3 auf geschätzt 60,3 Mrd. Euro im Jahr 2027), dürfte der Betrag für das Basisjahr 2024 etwas niedriger liegen. Über 32 % ist die Gerade fortgeschrieben. Der Solidaritätszuschlag auf die höhere Steuer ist nicht eingerechnet. Die Spanne spiegelt, dass es nach dem Sachverständigenrat bislang keine Statistik zur Kapitalertragsteuer gibt und sich das Mehraufkommen nicht belastbar schätzen lässt.",
+            "en": "EUR 0.51 billion per percentage point for all levels, of which EUR 0.24 billion federal. The Council of Economic Experts estimates that an increase of 3, 5 or 7 percentage points would raise federal revenue in 2027 by about EUR 0.8, 1.2 or 1.7 billion after behavioural responses (Annual Report 2026/27, item 155 and Table 16); for this it updates a simulation by Bach and Buslei (2017) with revenue growth. That these are federal figures is what the text says, and the check confirms it: for 2017 Bach and Buslei found EUR 0.9, 1.5 and 2.0 billion for all levels; updated with revenue to 2027 (from EUR 28.3 to 60.3 billion, flat tax and withholding tax on dividends together) that is EUR 1.9, 3.2 and 4.3 billion, of which just under half goes to the federal level. The table's other rows are federal figures too: one point of VAT appears there with EUR 7.5 billion, about half of what it raises for all levels. And in 2024 the flat tax on interest and capital gains alone raised EUR 19.3 billion; 5 points more would arithmetically add EUR 3.9 billion to that, about EUR 2.9 billion with the Council's elasticity of 0.6, dividends not counted. Read as the sum of all levels, the Council's figures would give only EUR 1.2 billion for 5 points, less than half of that. The calculation fits a straight line through these three points and divides it by the federal share of this item (47.8%, by the statutory shares: dividends half federal, half states; interest and capital gains 44% federal, 44% states, 12% municipalities). At 30% this gives EUR 2.56 billion, of which EUR 1.22 billion federal. The figures are for 2027; because revenue has risen strongly since 2017 according to the Council (from EUR 28.3 billion to an estimated 60.3 billion in 2027), the amount for the base year 2024 would probably be somewhat lower. Above 32% the line is extrapolated. The solidarity surcharge on the higher tax is not included. The range reflects that, according to the Council, there are so far no statistics on capital income tax and the additional revenue cannot be estimated reliably."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Finanzminister Lars Klingbeil (SPD) hat Mitte November 2026 eine höhere Abgeltungsteuer als eine Möglichkeit genannt, die Senkung der Stromsteuer für alle zu bezahlen, ohne einen Satz zu nennen, und erwartet nach eigenen Worten keinen Beifall der Union. Der Koalitionsausschuss vom 17. November bezahlt die Senkung 2027 aus Spielräumen im EEG-Titel des Bundeshaushalts und will, falls diese nicht reichen, ein Maßnahmenpaket beschließen; wie sie ab 2028 bezahlt wird, ist offen.",
+            "en": "In mid-November 2026 Finance Minister Lars Klingbeil (SPD) named a higher flat tax as one way to pay for cutting the electricity tax for everyone, without naming a rate, and said he did not expect applause from the Union. The coalition committee of 17 November pays for the cut in 2027 from room in the EEG title of the federal budget and wants to adopt a package of measures if that is not enough; how it is paid for from 2028 is open."
+          },
+          "sources": [
+            "dpa_klingbeil_abgeltungsteuer_2026",
+            "vdw_bayern_koalitionsausschuss_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Nach dem Sachverständigenrat brächte eine höhere Abgeltungsteuer nur wenig ein und senkte die Anreize, privat zu sparen und fürs Alter vorzusorgen. Treffen würde sie vor allem Haushalte mit hohem Einkommen und Vermögen: Kleinere Kapitalerträge bleiben über den Sparer-Pauschbetrag frei, wer einen niedrigeren persönlichen Steuersatz hat, kann die Günstigerprüfung wählen, und staatlich geförderte Altersvorsorge ist ausgenommen. Ein Ratsmitglied kritisiert in einer abweichenden Meinung, dass die Maßnahme überhaupt in den Katalog aufgenommen wurde.",
+            "en": "According to the Council of Economic Experts a higher flat tax would raise little and would weaken the incentives to save privately and provide for old age. It would mainly affect households with high incomes and wealth: smaller capital income remains free through the saver's allowance, those with a lower personal tax rate can opt for assessment at that rate, and state-subsidised retirement savings are exempt. One council member criticises in a dissenting opinion that the measure was included in the list at all."
+          },
+          "sources": [
+            "svr_jg_2026_27"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Die Abgeltungsteuer teilen sich Bund, Länder und Gemeinden: Zinsen und Kursgewinne zu 44, 44 und 12 %, Dividenden je zur Hälfte zwischen Bund und Ländern. Nur knapp die Hälfte der Mehreinnahmen erreicht den Bundeshaushalt. Der Solidaritätszuschlag auf die höhere Steuer, den die Rechnung nicht enthält, ginge allein an den Bund.",
+            "en": "The flat tax is shared between the federal, state and municipal levels: interest and capital gains at 44, 44 and 12%, dividends half each between the federal level and the states. Only just under half of the additional revenue reaches the federal budget. The solidarity surcharge on the higher tax, which the calculation does not include, would go to the federal level alone."
+          },
+          "sources": [
+            "gg_art_106",
+            "gemfinrefg_1",
+            "svr_jg_2026_27"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Für die Kapitalertragsteuer gibt es nach dem Sachverständigenrat bislang keine Steuerstatistik. Der Sachverständigenrat hält Schätzungen allein aus dem Kassenaufkommen deshalb nicht für belastbar; gemessen daran erscheint das geschätzte Mehraufkommen gering.",
+            "en": "According to the Council of Economic Experts there are so far no tax statistics for capital income tax. The Council of Economic Experts therefore considers estimates based on cash revenue alone unreliable; measured against cash revenue, the estimated additional revenue seems small."
+          },
+          "sources": [
+            "svr_jg_2026_27"
+          ]
+        }
+      ],
+      "sources": [
+        "svr_jg_2026_27",
+        "dpa_klingbeil_abgeltungsteuer_2026",
+        "vdw_bayern_koalitionsausschuss_2026",
+        "gg_art_106",
+        "gemfinrefg_1",
+        "bundeshaushalt_2024"
+      ]
+    },
+    {
       "id": "inheritance_business_relief",
       "label": {
         "de": "Erbschaftsteuer: Verschonung von Betriebsvermögen streichen",
@@ -2182,13 +2411,14 @@
           "kind": "economic",
           "severity": "major",
           "text": {
-            "de": "Die Erlöse fließen vollständig in den Klima- und Transformationsfonds des Bundes und sind nach Angaben des Umweltbundesamts dessen maßgebliche Finanzierungssäule. Die Klimaschutzvorhaben des Bundes werden ganz überwiegend aus diesem Fonds bezahlt; zu den größten Förderprogrammen des Bundes gehört die Gebäudeförderung mit 14,1 Mrd. Euro im Jahr 2024. Ohne die Einnahmen müssten Programme gekürzt oder anders finanziert werden.",
-            "en": "The proceeds flow entirely into the federal Climate and Transformation Fund and are, according to the Federal Environment Agency, its main funding pillar. The federal government's climate projects are paid for predominantly from this fund; among the largest federal grant programmes is support for energy efficiency in buildings at EUR 14.1 billion in 2024. Without the revenue, programmes would have to be cut or financed differently."
+            "de": "Die Erlöse fließen vollständig in den Klima- und Transformationsfonds des Bundes und sind nach Angaben des Umweltbundesamts dessen maßgebliche Finanzierungssäule. Die Klimaschutzvorhaben des Bundes werden ganz überwiegend aus diesem Fonds bezahlt; zu den größten Förderprogrammen des Bundes gehört die Gebäudeförderung mit 14,1 Mrd. Euro im Jahr 2024. Ohne die Einnahmen müssten Programme gekürzt oder anders finanziert werden. Der Fonds ist ein Sondervermögen neben dem Kernhaushalt, auf den sich die Lücke im Finanzplan bezieht: Fehlen ihm Einnahmen, muss er Programme kürzen, Rücklagen auflösen oder mehr Geld aus dem Kernhaushalt oder aus dem Sondervermögen Infrastruktur und Klimaneutralität erhalten, das ihm schon jetzt 10 Mrd. Euro im Jahr zuweist.",
+            "en": "The proceeds flow entirely into the federal Climate and Transformation Fund and are, according to the Federal Environment Agency, its main funding pillar. The federal government's climate projects are paid for predominantly from this fund; among the largest federal grant programmes is support for energy efficiency in buildings at EUR 14.1 billion in 2024. Without the revenue, programmes would have to be cut or financed differently. The fund is a special fund beside the core budget, to which the gap in the financial plan refers: if it lacks revenue, it has to cut programmes, draw on reserves or receive more money from the core budget or from the special fund for infrastructure and climate neutrality, which already allocates EUR 10 billion a year to it."
           },
           "sources": [
             "uba_pm_29_2025",
             "pv_magazine_emissionshandel_2025",
-            "bt_drs_21_1600"
+            "bt_drs_21_1600",
+            "bundestag_drs_21_7301"
           ]
         },
         {
@@ -2231,7 +2461,8 @@
         "uba_pm_29_2025",
         "pv_magazine_emissionshandel_2025",
         "eu_ets2",
-        "ihk_behg_2026"
+        "ihk_behg_2026",
+        "bundestag_drs_21_7301"
       ]
     },
     {
@@ -2424,8 +2655,8 @@
         "en": "Raise or lower value added tax"
       },
       "summary": {
-        "de": "Ändert den Regelsatz (heute 19 %) und den ermäßigten Satz (heute 7 %) der Mehrwertsteuer. Die Grundeinstellung zeigt die 2026 diskutierte Erhöhung des Regelsatzes auf 21 %. Ein Punkt beim Regelsatz entspricht rechnerisch rund 14,5 Mrd. Euro, ein Punkt beim ermäßigten Satz rund 3,3 Mrd. Euro. Die Regler bleiben in den Grenzen des EU-Rechts (Regelsatz mindestens 15 %, ermäßigter Satz mindestens 5 %); der ermäßigte Satz endet bei 15 %, damit er nie über dem Regelsatz liegt. Die Maßnahmen zu Lebensmitteln und zu Restaurants, Hotels, Kultur und Nahverkehr legen die Sätze ihrer Bereiche selbst fest: Sind sie eingeschaltet, gilt dort ihr Satz.",
-        "en": "Changes the standard rate (currently 19%) and the reduced rate (currently 7%) of value added tax. The default shows the increase of the standard rate to 21% that was discussed in 2026. One point of the standard rate corresponds arithmetically to about EUR 14.5 billion, one point of the reduced rate to about EUR 3.3 billion. The sliders stay within the limits of EU law (standard rate at least 15%, reduced rate at least 5%); the reduced rate ends at 15% so that it never exceeds the standard rate. The measures on food and on restaurants, hotels, culture and public transport set the rates of their areas themselves: if they are switched on, their rate applies there."
+        "de": "Ändert den Regelsatz (heute 19 %) und den ermäßigten Satz (heute 7 %) der Mehrwertsteuer. Die Grundeinstellung zeigt die 2026 diskutierte Erhöhung des Regelsatzes auf 21 %. Ein Punkt beim Regelsatz entspricht rechnerisch rund 14,5 Mrd. Euro, ein Punkt beim ermäßigten Satz rund 3,3 Mrd. Euro. Die Regler bleiben in den Grenzen des EU-Rechts (Regelsatz mindestens 15 %, ermäßigter Satz mindestens 5 %); der ermäßigte Satz endet bei 15 %, damit er nie über dem Regelsatz liegt. Die Maßnahmen zu Lebensmitteln, zu Speisen in Restaurants und zu Hotels, Kultur und Nahverkehr legen die Sätze ihrer Bereiche selbst fest: Sind sie eingeschaltet, gilt dort ihr Satz.",
+        "en": "Changes the standard rate (currently 19%) and the reduced rate (currently 7%) of value added tax. The default shows the increase of the standard rate to 21% that was discussed in 2026. One point of the standard rate corresponds arithmetically to about EUR 14.5 billion, one point of the reduced rate to about EUR 3.3 billion. The sliders stay within the limits of EU law (standard rate at least 15%, reduced rate at least 5%); the reduced rate ends at 15% so that it never exceeds the standard rate. The measures on food, on restaurant meals and on hotels, culture and public transport set the rates of their areas themselves: if they are switched on, their rate applies there."
       },
       "topic": "taxes",
       "params": [
@@ -2553,18 +2784,20 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "de": "Der Koalitionsvertrag sieht außer dem ermäßigten Satz für Speisen in der Gastronomie keine Änderung der Mehrwertsteuersätze vor (Antwort der Bundesregierung vom Mai 2026). Die Maßnahme zu Steuervorteilen im Verkehr enthält einen eigenen Posten für die Mehrwertsteuer auf Auslandsflüge; sie wird zum Regelsatz gerechnet und ändert sich mit ihm.",
-            "en": "Apart from the reduced rate for restaurant meals, the coalition agreement provides for no change in VAT rates (federal government's answer of May 2026). The measure on tax breaks in transport contains a separate item for VAT on international flights; it is counted at the standard rate and changes with it."
+            "de": "Der Koalitionsvertrag sieht außer dem ermäßigten Satz für Speisen in der Gastronomie keine Änderung der Mehrwertsteuersätze vor (Antwort der Bundesregierung vom Mai 2026); im Frühjahr 2026 hatte der Bundeskanzler eine Erhöhung des Regelsatzes nicht ausgeschlossen. Vorgeschlagen hat sie im November 2026 der Sachverständigenrat, als eine von mehreren Möglichkeiten, die Lücken im Bundeshaushalt zu schließen: 1, 2 oder 3 Punkte brächten dem Bund 2027 rund 7,5, 15 oder 22,5 Mrd. Euro. Dass eine Fraktion im Bundestag sie fordert, ist mit Stand November 2026 nicht bekannt. Die Maßnahme zu Steuervorteilen im Verkehr enthält einen eigenen Posten für die Mehrwertsteuer auf Auslandsflüge; sie wird zum Regelsatz gerechnet und ändert sich mit ihm.",
+            "en": "Apart from the reduced rate for restaurant meals, the coalition agreement provides for no change in VAT rates (federal government's answer of May 2026); in spring 2026 the Chancellor had not ruled out raising the standard rate. It was proposed in November 2026 by the Council of Economic Experts, as one of several ways to close the gaps in the federal budget: 1, 2 or 3 points would bring the federal level about EUR 7.5, 15 or 22.5 billion in 2027. As of November 2026, no parliamentary group in the Bundestag is known to have called for it. The measure on tax breaks in transport contains a separate item for VAT on international flights; it is counted at the standard rate and changes with it."
           },
           "sources": [
-            "bt_drs_21_5839"
+            "bt_drs_21_5839",
+            "svr_jg_2026_27"
           ]
         }
       ],
       "sources": [
         "bt_drs_21_5839",
         "zew_bmf_umsatzsteuersaetze_2025",
-        "eurostat_ntl"
+        "eurostat_ntl",
+        "svr_jg_2026_27"
       ]
     },
     {
@@ -2671,14 +2904,14 @@
       ]
     },
     {
-      "id": "vat_reduced_categories",
+      "id": "vat_restaurants",
       "label": {
-        "de": "Mehrwertsteuer für Restaurants, Hotels, Kultur und Nahverkehr: ermäßigt oder voll",
-        "en": "VAT on restaurants, hotels, culture and public transport: reduced or full rate"
+        "de": "Mehrwertsteuer auf Speisen in Restaurants",
+        "en": "VAT on restaurant meals"
       },
       "summary": {
-        "de": "Stellt für vier Bereiche ein, ob der ermäßigte oder der volle Satz gilt. Die Grundeinstellung bildet das seit Januar 2026 geltende Recht ab: Speisen in Restaurants werden mit 7 % besteuert; im Basisjahr 2024 waren es 19 %, die Maßnahme zeigt also zunächst, was diese Senkung kostet. Hotelübernachtungen, Kultur und Nahverkehr stehen auf dem heutigen Satz von 7 % und lassen sich auf 19 % anheben. Die Regler reichen vom EU-Mindestsatz für ermäßigte Sätze (5 %) bis zum Regelsatz von 2024 (19 %).",
-        "en": "Sets for four areas whether the reduced or the full rate applies. The default reflects the law in force since January 2026: restaurant meals are taxed at 7%; in the base year 2024 the rate was 19%, so the measure first shows what this cut costs. Hotel stays, culture and public transport are at today's rate of 7% and can be raised to 19%. The sliders run from the EU minimum for reduced rates (5%) to the 2024 standard rate (19%)."
+        "de": "Setzt den Mehrwertsteuersatz für Speisen in Restaurants und Gaststätten, ohne Getränke. Die Grundeinstellung bildet das seit 1. Januar 2026 geltende Recht ab: 7 % statt 19 % im Basisjahr 2024; die Maßnahme zeigt also zunächst, was diese Senkung kostet. Der Regler reicht vom EU-Mindestsatz für ermäßigte Sätze (5 %) bis zum Regelsatz von 2024 (19 %).",
+        "en": "Sets the VAT rate on restaurant and catering meals, without beverages. The default reflects the law in force since 1 January 2026: 7% instead of 19% in the base year 2024, so the measure first shows what this cut costs. The slider runs from the EU minimum for reduced rates (5%) to the 2024 standard rate (19%)."
       },
       "topic": "taxes",
       "params": [
@@ -2695,7 +2928,120 @@
           "step": 1,
           "default": 7,
           "baseline": 19
+        }
+      ],
+      "effects": [
+        {
+          "type": "set",
+          "target": "rev.taxes.consumption.vat.standard.restaurants",
+          "amount": {
+            "param": "restaurants",
+            "scale": 283333333.31578946
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.9,
+            "high": 1.1
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025",
+            "bt_drs_21_5839",
+            "bt_drs_21_1600"
+          ],
+          "note": {
+            "de": "Schätzung des Finanzministeriums für 2024: 3,4 Mrd. Euro Mindereinnahmen bei 7 statt 19 % auf Restaurant- und Verpflegungsleistungen ohne Getränke (2026: 3,6 Mrd. Euro). Der ermäßigte Satz galt befristet von Juli 2020 bis Ende 2023 und gilt seit dem 1. Januar 2026 wieder.",
+            "en": "Finance ministry estimate for 2024: EUR 3.4 billion of revenue forgone with 7 instead of 19% on restaurant and catering services excluding beverages (2026: EUR 3.6 billion). The reduced rate applied temporarily from July 2020 to the end of 2023 and has applied again since 1 January 2026."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Nach der Annahme des Finanzministeriums kommt die Senkung nur zu rund 20 % bei den Gästen an; der größere Teil bleibt bei den Betrieben. Das vom Ministerium beauftragte Gutachten hält die Ermäßigung für Restaurants für nicht gerechtfertigt.",
+            "en": "The finance ministry assumes that only about 20% of the cut reaches customers; the larger part stays with the businesses. The report commissioned by the ministry considers the reduction for restaurants unjustified."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ]
         },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Die Bundesregierung bezeichnet die Ermäßigung im Mai 2026 als umgesetzt und plant laut Koalitionsvertrag keine weiteren Änderungen der Mehrwertsteuersätze. Der Sachverständigenrat empfiehlt im November 2026, sie wieder abzuschaffen, um die Lücken im Bundeshaushalt zu schließen; er beziffert sie für den Bund auf 1,9 Mrd. Euro im Jahr 2026 und zählt sie zu den Steuervergünstigungen, die externe Gutachten als ineffizient bewerten.",
+            "en": "In May 2026 the federal government describes the reduction as implemented and, according to the coalition agreement, plans no further changes to VAT rates. In November 2026 the Council of Economic Experts recommends abolishing it again to close the gaps in the federal budget; it puts its cost to the federal level at EUR 1.9 billion in 2026 and counts it among the tax breaks that external evaluations rate as inefficient."
+          },
+          "sources": [
+            "bt_drs_21_5839",
+            "svr_jg_2026_27"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Speisen in Restaurants stehen auf der Liste der EU-Mehrwertsteuerrichtlinie, für die ermäßigte Sätze erlaubt sind; unter 5 % darf der Satz nicht sinken.",
+            "en": "Restaurant meals are on the list in the EU VAT Directive for which reduced rates are allowed; the rate may not fall below 5%."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Mehrwertsteuer teilen sich Bund, Länder und Gemeinden. Im Basisjahr entfielen laut Eurostat rund 48 % auf den Bund, 49 % auf die Länder und 3 % auf die Gemeinden; jede Änderung trifft alle drei Ebenen.",
+            "en": "VAT is shared between the federal, state and municipal levels. In the base year, according to Eurostat, about 48% went to the federal level, 49% to the states and 3% to the municipalities; any change affects all three levels."
+          },
+          "sources": [
+            "eurostat_gov_10a_main"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Die Maßnahme legt den Satz für Speisen in Restaurants selbst fest. Ist zugleich „Mehrwertsteuer erhöhen oder senken“ eingeschaltet, gilt für diese Speisen der Satz hier; 19 % bleiben dann 19 %, auch wenn dort ein anderer Regelsatz eingestellt ist.",
+            "en": "The measure sets the rate for restaurant meals itself. If \"Raise or lower value added tax\" is switched on as well, the rate here applies to these meals; 19% then stays 19% even if a different standard rate is set there."
+          }
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Der Finanzplan des Bundes bis 2030 rechnet bereits mit dem seit Januar 2026 geltenden Satz von 7 %; die Steuerschätzung vom Mai 2026, auf der er beruht, enthält das Steueränderungsgesetz 2025. Gegen die Lücke im Finanzplan wird die Maßnahme deshalb nicht gezählt, auch nicht bei 19 %, obwohl die Rückkehr zum vollen Satz gegenüber dem Finanzplan Mehreinnahmen brächte.",
+            "en": "The federal financial plan to 2030 already counts on the 7% rate in force since January 2026; the tax estimate of May 2026 on which it rests includes the Tax Amendment Act 2025. The measure is therefore not counted against the gap in the financial plan, not even at 19%, although a return to the full rate would bring additional revenue compared with the plan."
+          },
+          "sources": [
+            "bundestag_drs_21_7301",
+            "svr_jg_2026_27"
+          ]
+        }
+      ],
+      "sources": [
+        "zew_bmf_umsatzsteuersaetze_2025",
+        "bt_drs_21_1600",
+        "bt_drs_21_5839",
+        "eurostat_gov_10a_main",
+        "bundestag_drs_21_7301",
+        "svr_jg_2026_27"
+      ]
+    },
+    {
+      "id": "vat_hotels_culture_transport",
+      "label": {
+        "de": "Mehrwertsteuer für Hotels, Kultur und Nahverkehr: ermäßigt oder voll",
+        "en": "VAT on hotel stays, culture and public transport: reduced or full rate"
+      },
+      "summary": {
+        "de": "Stellt für drei Bereiche ein, ob der ermäßigte Satz von 7 % oder der volle Satz gilt: Hotelübernachtungen, Kultur einschließlich Büchern und Zeitungen sowie Nahverkehr und Bahn. Die Grundeinstellung zeigt den Vorschlag des Sachverständigenrats vom November 2026, den ermäßigten Satz für Hotelübernachtungen abzuschaffen, den externe Gutachten als ineffizient bewerten. Dasselbe schlägt der Rat für kulturelle und unterhaltende Leistungen vor; der zweite Regler umfasst darüber hinaus Bücher und Zeitungen. Die Regler reichen vom EU-Mindestsatz für ermäßigte Sätze (5 %) bis zum Regelsatz von 2024 (19 %).",
+        "en": "Sets for three areas whether the reduced rate of 7% or the full rate applies: hotel stays, culture including books and newspapers, and local public transport and rail. The default shows the proposal of the Council of Economic Experts of November 2026 to abolish the reduced rate for hotel stays, which external evaluations rate as inefficient. The Council proposes the same for cultural and entertainment services; the second slider also covers books and newspapers. The sliders run from the EU minimum for reduced rates (5%) to the 2024 standard rate (19%)."
+      },
+      "topic": "taxes",
+      "params": [
         {
           "id": "hotels",
           "type": "number",
@@ -2707,7 +3053,7 @@
           "min": 5,
           "max": 19,
           "step": 1,
-          "default": 7,
+          "default": 19,
           "baseline": 7
         },
         {
@@ -2740,28 +3086,6 @@
         }
       ],
       "effects": [
-        {
-          "type": "set",
-          "target": "rev.taxes.consumption.vat.standard.restaurants",
-          "amount": {
-            "param": "restaurants",
-            "scale": 283333333.31578946
-          },
-          "quality": "estimate",
-          "uncertainty": {
-            "low": 0.9,
-            "high": 1.1
-          },
-          "sources": [
-            "zew_bmf_umsatzsteuersaetze_2025",
-            "bt_drs_21_5839",
-            "bt_drs_21_1600"
-          ],
-          "note": {
-            "de": "Schätzung des Finanzministeriums für 2024: 3,4 Mrd. Euro Mindereinnahmen bei 7 statt 19 % auf Restaurant- und Verpflegungsleistungen ohne Getränke (2026: 3,6 Mrd. Euro). Der ermäßigte Satz galt befristet von Juli 2020 bis Ende 2023 und gilt seit dem 1. Januar 2026 wieder.",
-            "en": "Finance ministry estimate for 2024: EUR 3.4 billion of revenue forgone with 7 instead of 19% on restaurant and catering services excluding beverages (2026: EUR 3.6 billion). The reduced rate applied temporarily from July 2020 to the end of 2023 and has applied again since 1 January 2026."
-          }
-        },
         {
           "type": "set",
           "target": "rev.taxes.consumption.vat.reduced.hotels",
@@ -2831,19 +3155,8 @@
           "kind": "economic",
           "severity": "major",
           "text": {
-            "de": "Bei Restaurants kommt die Senkung nach der Annahme des Finanzministeriums nur zu rund 20 % bei den Gästen an; der größere Teil bleibt bei den Betrieben. Das vom Ministerium beauftragte Gutachten hält die Ermäßigungen für Restaurants und Hotels für nicht gerechtfertigt; ohne sie und ohne die übrigen Ermäßigungen außer für Lebensmittel könnte der Regelsatz aufkommensneutral auf rund 18,1 % sinken.",
-            "en": "For restaurants, the finance ministry assumes that only about 20% of the cut reaches customers; the larger part stays with the businesses. The report commissioned by the ministry considers the reductions for restaurants and hotels unjustified; without them and without the other reductions except for food, the standard rate could fall to about 18.1% in a revenue-neutral way."
-          },
-          "sources": [
-            "zew_bmf_umsatzsteuersaetze_2025"
-          ]
-        },
-        {
-          "kind": "legal",
-          "severity": "minor",
-          "text": {
-            "de": "Alle vier Bereiche stehen auf der Liste der EU-Mehrwertsteuerrichtlinie, für die ermäßigte Sätze erlaubt sind. Unter 5 % darf der Satz für Restaurants und Hotels nicht sinken; ein Nullsatz wäre nur für Personenbeförderung, Bücher und Zeitungen zulässig.",
-            "en": "All four areas are on the list in the EU VAT Directive for which reduced rates are allowed. The rate for restaurants and hotels may not fall below 5%; a zero rate would be permissible only for passenger transport, books and newspapers."
+            "de": "Das vom Finanzministerium beauftragte Gutachten hält die Ermäßigungen für Hotels und Restaurants für nicht gerechtfertigt; ohne sie und ohne die übrigen Ermäßigungen außer für Lebensmittel könnte der Regelsatz aufkommensneutral auf rund 18,1 % sinken.",
+            "en": "The report commissioned by the finance ministry considers the reductions for hotels and restaurants unjustified; without them and without the other reductions except for food, the standard rate could fall to about 18.1% in a revenue-neutral way."
           },
           "sources": [
             "zew_bmf_umsatzsteuersaetze_2025"
@@ -2853,12 +3166,24 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "de": "Die Bundesregierung bezeichnet die Ermäßigung für Speisen in der Gastronomie im Mai 2026 als umgesetzt und plant laut Koalitionsvertrag keine weiteren Änderungen der Mehrwertsteuersätze. Die Ermäßigung für Kultur hält sie aus bildungs- und kulturpolitischen Gründen für angemessen.",
-            "en": "In May 2026 the federal government describes the reduction for restaurant meals as implemented and, according to the coalition agreement, plans no further changes to VAT rates. It considers the reduction for culture appropriate for reasons of education and cultural policy."
+            "de": "Der Sachverständigenrat empfiehlt im November 2026, die ermäßigten Sätze für Hotelübernachtungen und für kulturelle und unterhaltende Leistungen abzuschaffen, um die Lücken im Bundeshaushalt zu schließen; er beziffert sie für den Bund auf 1,0 und 2,3 Mrd. Euro im Jahr 2026. Die Bundesregierung plant laut Koalitionsvertrag keine Änderung der Mehrwertsteuersätze und hält die Ermäßigung für Kultur aus bildungs- und kulturpolitischen Gründen für angemessen.",
+            "en": "In November 2026 the Council of Economic Experts recommends abolishing the reduced rates for hotel stays and for cultural and entertainment services to close the gaps in the federal budget; it puts their cost to the federal level at EUR 1.0 and 2.3 billion in 2026. According to the coalition agreement the federal government plans no change to VAT rates, and it considers the reduction for culture appropriate for reasons of education and cultural policy."
           },
           "sources": [
+            "svr_jg_2026_27",
             "bt_drs_21_5839",
             "bt_drs_21_1600"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Alle drei Bereiche stehen auf der Liste der EU-Mehrwertsteuerrichtlinie, für die ermäßigte Sätze erlaubt sind. Unter 5 % darf der Satz für Hotels nicht sinken; ein Nullsatz wäre nur für Personenbeförderung, Bücher und Zeitungen zulässig.",
+            "en": "All three areas are on the list in the EU VAT Directive for which reduced rates are allowed. The rate for hotels may not fall below 5%; a zero rate would be permissible only for passenger transport, books and newspapers."
+          },
+          "sources": [
+            "zew_bmf_umsatzsteuersaetze_2025"
           ]
         },
         {
@@ -2876,15 +3201,17 @@
           "kind": "practical",
           "severity": "minor",
           "text": {
-            "de": "Die Maßnahme legt die Sätze der vier Bereiche selbst fest. Ist zugleich „Mehrwertsteuer erhöhen oder senken“ eingeschaltet, gelten für diese Bereiche die Sätze hier; 19 % bleiben dann 19 %, auch wenn dort ein anderer Regelsatz eingestellt ist.",
-            "en": "The measure sets the rates of the four areas itself. If \"Raise or lower value added tax\" is switched on as well, the rates here apply to these areas; 19% then stays 19% even if a different standard rate is set there."
+            "de": "Die Maßnahme legt die Sätze der drei Bereiche selbst fest. Ist zugleich „Mehrwertsteuer erhöhen oder senken“ eingeschaltet, gelten für diese Bereiche die Sätze hier; 19 % bleiben dann 19 %, auch wenn dort ein anderer Regelsatz eingestellt ist.",
+            "en": "The measure sets the rates of the three areas itself. If \"Raise or lower value added tax\" is switched on as well, the rates here apply to these areas; 19% then stays 19% even if a different standard rate is set there."
           }
         }
       ],
       "sources": [
         "zew_bmf_umsatzsteuersaetze_2025",
         "bt_drs_21_1600",
-        "bt_drs_21_5839"
+        "bt_drs_21_5839",
+        "eurostat_gov_10a_main",
+        "svr_jg_2026_27"
       ]
     },
     {
@@ -3152,13 +3479,17 @@
           "kind": "political",
           "severity": "major",
           "text": {
-            "de": "Der Koalitionsvertrag von CDU/CSU und SPD sagt zu, die Stromsteuer als Sofortmaßnahme für alle auf das europäische Mindestmaß zu senken. Umgesetzt ist das bisher nur für das produzierende Gewerbe und die Land- und Forstwirtschaft, dauerhaft seit 1. Januar 2026. Eine Senkung für alle lehnte die Bundesregierung im Oktober 2025 ab und verwies auf andere Entlastungen (Wegfall der Gasspeicherumlage, niedrigere Netzkosten); sie prüfe, ob und wann weitere Schritte finanziert werden können. Stand 16. November 2026: Der Bundeskanzler hat angekündigt, die Koalition wolle die Steuer 2027 auch für private Haushalte auf das Mindestmaß senken; ein Gesetz gibt es nicht, und die rund 5,4 Mrd. Euro im Jahr sind im Entwurf des Bundeshaushalts 2027 nicht gedeckt.",
-            "en": "The coalition agreement of CDU/CSU and SPD promises to lower the electricity tax to the European minimum for everyone as an immediate measure. So far this has been implemented only for manufacturing and for agriculture and forestry, permanently since 1 January 2026. In October 2025 the federal government rejected a cut for everyone, pointing to other relief (abolition of the gas storage levy, lower grid costs); it said it was examining whether and when further steps could be financed. As of 16 November 2026: the Chancellor has announced that the coalition intends to lower the tax to the minimum for private households as well in 2027; there is no law, and the roughly EUR 5.4 billion a year is not covered in the draft federal budget for 2027."
+            "de": "Der Koalitionsvertrag von CDU/CSU und SPD sagt zu, die Stromsteuer als Sofortmaßnahme für alle auf das europäische Mindestmaß zu senken. Umgesetzt war das zunächst nur für das produzierende Gewerbe und die Land- und Forstwirtschaft, dauerhaft seit 1. Januar 2026; eine Senkung für alle lehnte die Bundesregierung im Oktober 2025 mit Verweis auf andere Entlastungen ab. Am 17. November 2026 hat der Koalitionsausschuss beschlossen, die Stromsteuer vom 1. Januar bis 31. Dezember 2027 für alle auf das Mindestmaß zu senken. Bezahlt werden soll das 2027 aus Spielräumen im EEG-Titel des Bundeshaushalts, notfalls mit einem Maßnahmenpaket; über 2027 hinaus gilt die Senkung nur, wenn im Haushalt 2028 eine dauerhafte Gegenfinanzierung gefunden wird. Ein Gesetz gab es am 18. November 2026 noch nicht. Die Rechnung zeigt die Senkung als dauerhaft; im Finanzplan des Bundes bis 2030 ist sie nicht enthalten und vergrößert dort ab 2028 die Lücke. Unionsfraktionschef Thorsten Frei beziffert die Lücke im Haushalt 2028 auf 25 Mrd. Euro, mit der Senkung auf rund 5 Mrd. Euro mehr.",
+            "en": "The coalition agreement of CDU/CSU and SPD promises to lower the electricity tax to the European minimum for everyone as an immediate measure. At first this was implemented only for manufacturing and for agriculture and forestry, permanently since 1 January 2026; in October 2025 the federal government rejected a cut for everyone, pointing to other relief. On 17 November 2026 the coalition committee decided to lower the electricity tax to the minimum for everyone from 1 January to 31 December 2027. In 2027 this is to be paid for from room in the EEG title of the federal budget, if necessary with a package of measures; beyond 2027 the cut applies only if lasting counter-financing is found in the 2028 budget. As of 18 November 2026 there was no law yet. The calculation shows the cut as permanent; it is not included in the federal financial plan to 2030 and widens the gap there from 2028. CDU/CSU group leader Thorsten Frei puts the gap in the 2028 budget at EUR 25 billion, about EUR 5 billion more with the cut."
           },
           "sources": [
             "bt_drs_21_2469",
             "bt_drs_21_5320",
-            "cash_online_stromsteuer_2026"
+            "cash_online_stromsteuer_2026",
+            "vdw_bayern_koalitionsausschuss_2026",
+            "tonline_stromsteuer_2026_11",
+            "tonline_frei_haushalt_2028",
+            "bundestag_drs_21_7301"
           ]
         },
         {
@@ -3204,7 +3535,11 @@
         "bt_drs_21_2469",
         "bt_drs_21_5320",
         "bt_drs_21_6332",
-        "cash_online_stromsteuer_2026"
+        "cash_online_stromsteuer_2026",
+        "vdw_bayern_koalitionsausschuss_2026",
+        "tonline_stromsteuer_2026_11",
+        "tonline_frei_haushalt_2028",
+        "bundestag_drs_21_7301"
       ]
     },
     {
@@ -3354,6 +3689,20 @@
             "bt_drs_21_7859",
             "fkg_bericht_1"
           ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Der Finanzplan des Bundes bis 2030 rechnet bereits mit den beschlossenen Erhöhungen: den letzten Stufen des Gesetzes von 2021 in den Jahren 2025 und 2026 und den Stufen von 2027 bis 2030, die 2027 rund 1,5 Mrd. Euro und 2030 rund 4,5 Mrd. Euro mehr bringen sollen. Der Stückbetrag für Zigaretten steigt dabei von 11,15 Cent im Jahr 2024 auf 18,57 Cent im Jahr 2030; der Regler reicht nur bis 30 % mehr als 2024. Gegen die Lücke im Finanzplan wird die Maßnahme deshalb nicht gezählt.",
+            "en": "The federal financial plan to 2030 already counts on the increases that have been adopted: the last steps of the 2021 law in 2025 and 2026 and the steps from 2027 to 2030, which are to raise about EUR 1.5 billion more in 2027 and EUR 4.5 billion more in 2030. The amount per cigarette rises from 11.15 cents in 2024 to 18.57 cents in 2030; the slider reaches only 30% above 2024. The measure is therefore not counted against the gap in the financial plan."
+          },
+          "sources": [
+            "bundestag_drs_21_7301",
+            "bt_drs_21_8605",
+            "bt_drs_19_30490",
+            "tabstg_2"
+          ]
         }
       ],
       "sources": [
@@ -3366,7 +3715,9 @@
         "bt_drs_21_6150",
         "bt_drs_19_30490",
         "ec_ted_qa_2025",
-        "fkg_bericht_1"
+        "fkg_bericht_1",
+        "bundestag_drs_21_7301",
+        "tabstg_2"
       ]
     },
     {
@@ -3556,13 +3907,14 @@
           "kind": "economic",
           "severity": "major",
           "text": {
-            "de": "Wie viel eine höhere Spirituosensteuer einbringt, ist umstritten. Die Bundesregierung rechnet für 20 % mehr auf Spirituosen, Sekt, Zwischenerzeugnisse und Alkopops mit 455 Mio. Euro im Jahr; das sind 20 % der Einnahmen von 2025, also eine Rechnung, in der niemand weniger kauft. Die Spirituosen- und Sektverbände halten eine Elastizität von −1,9 für realistisch; dann stiege die Alkoholsteuer kaum, und mit der entgangenen Mehrwertsteuer sänken die Einnahmen insgesamt. Die Rechnung hier liegt mit der Elastizität der Modellstudie (−1,2) dazwischen. Ein Teil des Rückgangs kann Ausweichen sein, etwa auf Bier und Wein; solche Wechselwirkungen zwischen den Getränken hat die Studie nicht berücksichtigt.",
-            "en": "How much a higher tax on spirits raises is contested. For 20% more on spirits, sparkling wine, intermediate products and alcopops the federal government expects EUR 455 million a year; that is 20% of 2025 revenue, a calculation in which nobody buys less. The spirits and sparkling wine associations consider an elasticity of −1.9 realistic; the alcohol tax would then hardly rise, and with the VAT forgone total revenue would fall. With the elasticity of the modelling study (−1.2) the calculation here lies in between. Part of the decline may be switching, for example to beer and wine; the study did not account for such interactions between drinks."
+            "de": "Wie viel eine höhere Spirituosensteuer einbringt, ist umstritten. Die Bundesregierung rechnete im Entwurf für 20 % mehr auf Spirituosen, Sekt, Zwischenerzeugnisse und Alkopops mit 455 Mio. Euro im Jahr, nach den Änderungen im Haushaltsausschuss (ohne Sekt, neue Alkopopsteuer) mit 470 Mio. Euro, davon 385 Mio. Euro aus Spirituosen: rund 20 % der Einnahmen von 2025, also eine Rechnung, in der niemand weniger kauft. Die Spirituosen- und Sektverbände halten eine Elastizität von −1,9 für realistisch; dann stiege die Alkoholsteuer kaum, und mit der entgangenen Mehrwertsteuer sänken die Einnahmen insgesamt. Die Rechnung hier liegt mit der Elastizität der Modellstudie (−1,2) dazwischen. Ein Teil des Rückgangs kann Ausweichen sein, etwa auf Bier und Wein; solche Wechselwirkungen zwischen den Getränken hat die Studie nicht berücksichtigt.",
+            "en": "How much a higher tax on spirits raises is contested. For 20% more on spirits, sparkling wine, intermediate products and alcopops the federal government expected EUR 455 million a year in the draft, and after the budget committee's changes (no sparkling wine, new alcopop tax) EUR 470 million, of which EUR 385 million from spirits: about 20% of 2025 revenue, a calculation in which nobody buys less. The spirits and sparkling wine associations consider an elasticity of −1.9 realistic; the alcohol tax would then hardly rise, and with the VAT forgone total revenue would fall. With the elasticity of the modelling study (−1.2) the calculation here lies in between. Part of the decline may be switching, for example to beer and wine; the study did not account for such interactions between drinks."
           },
           "sources": [
             "bt_drs_21_7860",
             "vds_bwsi_spirituosen_2026",
-            "kilian_2022_alkoholsteuer"
+            "kilian_2022_alkoholsteuer",
+            "bt_drs_21_9241"
           ]
         },
         {
@@ -3616,13 +3968,14 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "de": "Die Erhöhung der Alkoholsteuer um 20 % ab 2027 steht im Entwurf des Haushaltsbegleitgesetzes 2027; nach Angaben der Union wäre es die erste seit fast 44 Jahren. Der Finanzausschuss hat am 12. November 2026 zugestimmt, die ebenfalls geplante Erhöhung der Schaumweinsteuer aber mit Blick auf die Lage der Winzer gestrichen; dafür wird die Alkopopsteuer auf Mischgetränke bis 15 % Alkohol ausgeweitet und ihr Satz um 45 % gesenkt. Bier und Wein sind im Entwurf nicht betroffen. Die FinanzKommission Gesundheit hatte im März 2026 empfohlen, die Steuer auf Spirituosen zu erhöhen (0,6 Mrd. Euro im Jahr 2027, 1,2 Mrd. Euro im Jahr 2030) und die Mehreinnahmen den Krankenkassen zuzuführen.",
-            "en": "The 20% increase of the alcohol tax from 2027 is in the draft Budget Accompanying Act 2027; according to CDU/CSU it would be the first in almost 44 years. On 12 November 2026 the finance committee approved it, but dropped the planned increase of the sparkling wine tax in view of the winegrowers' situation; instead the alcopop tax is extended to mixed drinks with up to 15% alcohol and its rate cut by 45%. Beer and wine are not affected by the draft. In March 2026 the Health Finance Commission had recommended raising the tax on spirits (EUR 0.6 billion in 2027, EUR 1.2 billion in 2030) and passing the additional revenue to the health insurance funds."
+            "de": "Die Erhöhung der Alkoholsteuer um 20 % ab 2027 steht im Entwurf des Haushaltsbegleitgesetzes 2027; nach Angaben der Union wäre es die erste seit fast 44 Jahren. Der Finanzausschuss hat am 12. November 2026 zugestimmt, die ebenfalls geplante Erhöhung der Schaumweinsteuer aber mit Blick auf die Lage der Winzer gestrichen; dafür wird die Alkopopsteuer auf Mischgetränke bis 15 % Alkohol ausgeweitet und ihr Satz um 45 % gesenkt. Bier und Wein sind im Entwurf nicht betroffen. Die FinanzKommission Gesundheit hatte im März 2026 empfohlen, die Steuer auf Spirituosen zu erhöhen (0,6 Mrd. Euro im Jahr 2027, 1,2 Mrd. Euro im Jahr 2030) und die Mehreinnahmen den Krankenkassen zuzuführen. Der Haushaltsausschuss hat das Haushaltsbegleitgesetz am 13. November 2026 in der Fassung des Finanzausschusses zur Annahme empfohlen; die Bundesregierung rechnet nun mit 470 Mio. Euro im Jahr, davon 385 Mio. Euro aus der Alkoholsteuer, 80 Mio. Euro aus der Alkopopsteuer und 5 Mio. Euro aus Zwischenerzeugnissen. Die Schlussabstimmung im Bundestag ist für den 27. November 2026 angesetzt.",
+            "en": "The 20% increase of the alcohol tax from 2027 is in the draft Budget Accompanying Act 2027; according to CDU/CSU it would be the first in almost 44 years. On 12 November 2026 the finance committee approved it, but dropped the planned increase of the sparkling wine tax in view of the winegrowers' situation; instead the alcopop tax is extended to mixed drinks with up to 15% alcohol and its rate cut by 45%. Beer and wine are not affected by the draft. In March 2026 the Health Finance Commission had recommended raising the tax on spirits (EUR 0.6 billion in 2027, EUR 1.2 billion in 2030) and passing the additional revenue to the health insurance funds. On 13 November 2026 the budget committee recommended adopting the Budget Accompanying Act in the finance committee's version; the federal government now expects EUR 470 million a year, of which EUR 385 million from the alcohol tax, 80 million from the alcopop tax and 5 million from intermediate products. The final vote in the Bundestag is scheduled for 27 November 2026."
           },
           "sources": [
             "bt_drs_21_7860",
             "hib_935_2026",
-            "fkg_bericht_1"
+            "fkg_bericht_1",
+            "bt_drs_21_9241"
           ]
         },
         {
@@ -3635,6 +3988,18 @@
           "sources": [
             "eurostat_ntl",
             "bt_drs_21_7860"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Der Finanzplan des Bundes bis 2030 rechnet bereits mit der Erhöhung um 20 % auf Spirituosen. Dieser Teil, in der Grundeinstellung rund 0,2 Mrd. Euro, verkleinert die Lücke im Finanzplan nicht noch einmal, wird in der Anzeige der Lücke aber mitgezählt. Neu wären dagegen etwa eine Weinsteuer oder eine höhere Schaumweinsteuer.",
+            "en": "The federal financial plan to 2030 already counts on the 20% increase on spirits. This part, about EUR 0.2 billion at the default setting, does not narrow the gap in the financial plan a second time, but the display of the gap counts it. A wine tax or a higher sparkling wine tax, by contrast, would be new."
+          },
+          "sources": [
+            "bundestag_drs_21_7301",
+            "bt_drs_21_9241"
           ]
         }
       ],
@@ -3649,7 +4014,297 @@
         "eu_alcohol_excise",
         "bierstg_2",
         "vds_bwsi_spirituosen_2026",
-        "fkg_bericht_1"
+        "fkg_bericht_1",
+        "bt_drs_21_9241",
+        "bundestag_drs_21_7301"
+      ]
+    },
+    {
+      "id": "sugar_drinks_tax",
+      "label": {
+        "de": "Zuckergetränkesteuer einführen",
+        "en": "Introduce a tax on sugary drinks"
+      },
+      "summary": {
+        "de": "Erhebt eine Verbrauchsteuer auf Limonaden, Eistees, Energydrinks und andere Getränke mit mindestens 5 Gramm Zucker je 100 Milliliter, gestaffelt nach dem Zuckergehalt. Die Grundeinstellung zeigt die Sätze, die der Haushaltsausschuss am 13. November 2026 in das Haushaltsbegleitgesetz 2027 aufgenommen hat, mit Start am 1. Januar 2028: 25 Cent je Liter ab 5 Gramm, 30 Cent ab 7 Gramm und 35 Cent ab 9 Gramm. Reine Frucht- und Gemüsesäfte, Milch- und Sojagetränke, mit Süßstoffen gesüßte Getränke und alkoholfreie Varianten alkoholischer Getränke bleiben frei. Der Regler ändert alle drei Sätze im gleichen Verhältnis; 100 % entsprechen diesen Sätzen. Das Aufkommen steht allein dem Bund zu.",
+        "en": "Levies an excise duty on soft drinks, iced teas, energy drinks and other beverages with at least 5 grams of sugar per 100 millilitres, graded by sugar content. The default shows the rates the budget committee wrote into the Budget Accompanying Act 2027 on 13 November 2026, starting on 1 January 2028: 25 cents per litre from 5 grams, 30 cents from 7 grams and 35 cents from 9 grams. Pure fruit and vegetable juices, milk and soya drinks, drinks sweetened with sweeteners and alcohol-free versions of alcoholic drinks remain exempt. The slider changes all three rates in the same proportion; 100% corresponds to these rates. The revenue goes to the federal level alone."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rates",
+          "type": "number",
+          "label": {
+            "de": "Höhe der Steuersätze",
+            "en": "Level of the tax rates"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 150,
+          "step": 10,
+          "default": 100,
+          "baseline": 0,
+          "unitLabel": {
+            "de": "% der Sätze für 2028",
+            "en": "% of the 2028 rates"
+          }
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.sugar_drinks",
+          "amount": {
+            "param": "rates",
+            "scale": 11150000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.4,
+            "high": 1.05
+          },
+          "sources": [
+            "bt_drs_21_9241",
+            "bmf_pm_zuckergetraenkesteuer_2026",
+            "wd4_zuckersteuer_2026"
+          ],
+          "note": {
+            "de": "Je Prozentpunkt 11,15 Mio. Euro. Der Bericht des Haushaltsausschusses erwartet für ein volles Jahr 1.115 Mio. Euro im Jahr 2028 (2029: 1.120 Mio., 2030: 1.130 Mio. Euro), ganz beim Bund und unter Berücksichtigung der Entlastungen für kleine Hersteller. Die Rechnung ändert das Aufkommen im gleichen Verhältnis wie die Sätze. Die Zahl gilt für 2028; weil die Steuer je Liter erhoben wird und nicht vom Preis abhängt, ist sie ohne Umrechnung für das Basisjahr 2024 angesetzt. Zum Vergleich: Der Kabinettsentwurf vom Oktober 2026 mit zwei Sätzen (26 Cent ab 5 Gramm, 32 Cent ab 8 Gramm) sollte 925 Mio. Euro im Jahr 2028 bringen. Für dieses britische Modell ging der Gesundheitsausschuss im Juli 2026 von 650 Mio. Euro im Jahr 2027 aus und, weil die Hersteller den Zucker senken, von 450 Mio. Euro ab 2028; daran orientiert sich die untere Grenze der Spanne (40 %). Oberhalb von 100 % ist die gerade Linie eine Annahme: Höhere Sätze dürften mehr Hersteller dazu bringen, den Zucker zu senken.",
+            "en": "EUR 11.15 million per percentage point. The budget committee's report expects EUR 1,115 million for a full year in 2028 (2029: 1,120 million, 2030: 1,130 million), all federal and after the relief for small producers. The calculation changes revenue in the same proportion as the rates. The figure is for 2028; because the tax is levied per litre and does not depend on the price, it is applied to the base year 2024 without conversion. For comparison: the cabinet draft of October 2026 with two rates (26 cents from 5 grams, 32 cents from 8 grams) was to raise EUR 925 million in 2028. For this British model the health committee assumed in July 2026 EUR 650 million in 2027 and, because producers cut sugar, EUR 450 million from 2028; the lower bound of the range (40%) follows that figure. Above 100% the straight line is an assumption: higher rates would probably lead more producers to cut sugar."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Die Steuer kommt später als geplant. Das Kabinett wollte sie ab 1. Juli 2027 mit zwei Sätzen erheben und rechnete für 2027 mit 690 Mio. Euro. Kurz vor der Bereinigungssitzung einigte sich die Koalition darauf, den Start um ein halbes Jahr auf den 1. Januar 2028 zu verschieben und drei Sätze einzuführen. Der Haushaltsausschuss hat die Steuer am 13. November 2026 als neuen Artikel 1 in das Haushaltsbegleitgesetz 2027 eingefügt, mit den Stimmen von CDU/CSU und SPD gegen AfD, Grüne und Linke; die Schlussabstimmung im Bundestag ist für den 27. November 2026 angesetzt. Die AfD will keine neuen Steuern auf Zucker, die Linke lehnt die höheren Preise ab. Die Grünen begrüßen drei Stufen und den späteren Start, halten die erwarteten Einnahmen aber für deutlich überschätzt.",
+            "en": "The tax is coming later than planned. The cabinet wanted to levy it from 1 July 2027 with two rates and expected EUR 690 million for 2027. Shortly before the final committee session the coalition agreed to postpone the start by half a year to 1 January 2028 and to introduce three rates. On 13 November 2026 the budget committee inserted the tax as a new Article 1 into the Budget Accompanying Act 2027, with the votes of CDU/CSU and SPD against AfD, Greens and Left; the final vote in the Bundestag is scheduled for 27 November 2026. The AfD wants no new taxes on sugar, the Left rejects the higher prices. The Greens welcome three rates and the later start but consider the expected revenue clearly overestimated."
+          },
+          "sources": [
+            "bmf_pm_zuckergetraenkesteuer_2026",
+            "adhoc_dpa_zuckersteuer_2028",
+            "bt_drs_21_9241",
+            "hib_935_2026",
+            "bundestag_kw46_haushalt_2027"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Das Geld ist schon verplant. Nach der Begründung im Bericht des Haushaltsausschusses dient die Steuer als Gegenfinanzierung dafür, dass der Bund seinen Zuschuss an den Gesundheitsfonds weniger stark kürzt als ursprünglich vorgesehen; so steht es im GKV-Beitragssatzstabilisierungsgesetz, das der Bundestag am 10. Juli 2026 beschlossen hat. Die Einnahmen stehen nach Art. 106 Abs. 1 Grundgesetz allein dem Bund zu, decken aber eine Ausgabe, die bereits beschlossen ist. Für die Erhebung braucht der Zoll 200 Arbeitskräfte; bis 2029 rechnet der Bericht mit rund 90 Mio. Euro Kosten, die die Rechnung nicht abzieht.",
+            "en": "The money is already spoken for. According to the reasoning in the budget committee's report, the tax counter-finances the federal government cutting its subsidy to the health fund by less than originally planned, as laid down in the GKV contribution stabilisation act passed by the Bundestag on 10 July 2026. Under Article 106(1) of the Basic Law the revenue goes to the federal level alone, but it covers spending that has already been decided. Customs need 200 staff to collect it; up to 2029 the report expects costs of about EUR 90 million, which the calculation does not deduct."
+          },
+          "sources": [
+            "bt_drs_21_9241",
+            "bmf_pm_zuckergetraenkesteuer_2026",
+            "wd4_zuckersteuer_2026",
+            "gg_art_106"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Wie viel hereinkommt, hängt davon ab, wie stark die Hersteller den Zucker senken und die Kunden auf andere Getränke ausweichen. Genau das soll die Steuer bewirken: Die FinanzKommission Gesundheit hat sie vor allem empfohlen, damit Rezepturen geändert werden. Der Gesundheitsausschuss erwartete deshalb im Juli 2026 für das zweistufige Modell mit etwas niedrigeren Sätzen ab 2028 nur 450 Mio. Euro im Jahr, rund 40 % der jetzt angesetzten Summe. Als Verbrauchsteuer belastet sie Haushalte mit kleinen Einkommen gemessen am Einkommen stärker; die Linke lehnte sie im Ausschuss auch deshalb ab.",
+            "en": "How much comes in depends on how far producers cut sugar and customers switch to other drinks. That is exactly what the tax is meant to achieve: the Health Finance Commission recommended it mainly so that recipes change. In July 2026 the health committee therefore expected only EUR 450 million a year from 2028 for the two-rate model with somewhat lower rates, about 40% of the sum now assumed. As an excise duty it weighs more heavily on households with low incomes relative to their income; the Left rejected it in committee partly for this reason."
+          },
+          "sources": [
+            "wd4_zuckersteuer_2026",
+            "bt_drs_21_9241"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Kleine unabhängige Hersteller mit bis zu 70.000 Litern im Jahr sind ausgenommen; Betriebe bis 1 Mio. Liter sollen entlastet werden, sobald die EU-Kommission diese Beihilfe genehmigt. Getränke mit Süßstoffen bleiben steuerfrei; wer auf sie umstellt, senkt das Aufkommen.",
+            "en": "Small independent producers with up to 70,000 litres a year are exempt; businesses up to 1 million litres are to get relief once the European Commission approves this state aid. Drinks with sweeteners remain tax-free; producers who switch to them reduce the revenue."
+          },
+          "sources": [
+            "bmf_pm_zuckergetraenkesteuer_2026",
+            "bt_drs_21_9241"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Nicht in der Zahl enthalten sind mögliche Einsparungen im Gesundheitswesen. Das Finanzministerium beziffert die jährlichen Behandlungskosten durch den Konsum gezuckerter Getränke auf etwa 2,1 Mrd. Euro. Die Steuer soll innerhalb von fünf Jahren nach dem Start ausgewertet werden, auch anhand von Verzehrdaten.",
+            "en": "Possible savings in health care are not included in the figure. The finance ministry puts the annual treatment costs caused by sugary drinks at about EUR 2.1 billion. The tax is to be evaluated within five years of its start, including with consumption data."
+          },
+          "sources": [
+            "bmf_pm_zuckergetraenkesteuer_2026",
+            "bt_drs_21_9241"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Im Finanzplan des Bundes vom August 2026 ist die Steuer nach den Unterlagen nicht eingerechnet: Anders als bei der Steuer auf Kunststoffverpackungen heißt es dort nur, die Regierung habe sich auf sie verständigt, und im Entwurf des GKV-Beitragssatzstabilisierungsgesetzes, den der Finanzplan beim Zuschuss an den Gesundheitsfonds zugrunde legt, stand eine Zuckerabgabe nur nachrichtlich. Gegen die Lücke im Finanzplan wird die Steuer deshalb gezählt. Ebenfalls nicht im Finanzplan ist die geringere Kürzung des Zuschusses an den Gesundheitsfonds, die der Bundestag im Juli 2026 beschlossen hat und die die Steuer bezahlen soll, nach dem Bericht des Gesundheitsausschusses ab 2028 rund 450 Mio. Euro im Jahr; um diesen Betrag ist die tatsächliche Lücke größer.",
+            "en": "According to the documents, the tax is not included in the federal financial plan of August 2026: unlike the tax on plastic packaging, the plan only says the government has agreed on it, and in the draft GKV contribution stabilisation act, on which the plan bases the subsidy to the health fund, a sugar levy was listed only for information. The tax is therefore counted against the gap in the financial plan. Also missing from the plan is the smaller cut in the subsidy to the health fund that the Bundestag decided in July 2026 and that the tax is to pay for, about EUR 450 million a year from 2028 according to the health committee's report; the real gap is larger by that amount."
+          },
+          "sources": [
+            "bundestag_drs_21_7301",
+            "bt_drs_21_7016"
+          ]
+        }
+      ],
+      "sources": [
+        "bt_drs_21_9241",
+        "bmf_pm_zuckergetraenkesteuer_2026",
+        "wd4_zuckersteuer_2026",
+        "adhoc_dpa_zuckersteuer_2028",
+        "hib_935_2026",
+        "bundestag_kw46_haushalt_2027",
+        "gg_art_106",
+        "bundestag_drs_21_7301",
+        "bt_drs_21_7016"
+      ]
+    },
+    {
+      "id": "plastic_packaging_tax",
+      "label": {
+        "de": "Steuer auf Kunststoffverpackungen einführen",
+        "en": "Introduce a tax on plastic packaging"
+      },
+      "summary": {
+        "de": "Erhebt eine Verbrauchsteuer auf Kunststoff in Verpackungen, je Tonne Kunststoff, bezahlt von Herstellern und Importeuren. Die Grundeinstellung zeigt den Entwurf von Finanz- und Umweltministerium vom Herbst 2026: 550 Euro je Tonne ab Juli 2027 für Verpackungen mit mehr als 5 % Kunststoff; Verpackungen aus Recyclingkunststoff sollten auf Antrag befreit werden können. Der Bund wollte damit dauerhaft so viel einnehmen, wie er seit 2021 als Plastikabgabe an die EU zahlt (0,80 Euro je Kilogramm nicht recycelter Kunststoffverpackungsabfälle). Im November 2026 hat die Koalition die Steuer vorerst fallen gelassen; die Maßnahme zeigt, was sie eingebracht hätte. Die Rechnung ändert das Aufkommen im gleichen Verhältnis wie den Satz.",
+        "en": "Levies an excise duty on plastic in packaging, per tonne of plastic, paid by manufacturers and importers. The default shows the draft of the finance and environment ministries of autumn 2026: EUR 550 per tonne from July 2027 for packaging with more than 5% plastic; packaging made of recycled plastic was to be exempted on application. The federal government wanted to raise permanently as much as it has paid to the EU since 2021 as the plastics contribution (EUR 0.80 per kilogram of non-recycled plastic packaging waste). In November 2026 the coalition dropped the tax for now; the measure shows what it would have raised. The calculation changes revenue in the same proportion as the rate."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "de": "Steuer je Tonne Kunststoff in Verpackungen",
+            "en": "Tax per tonne of plastic in packaging"
+          },
+          "unit": "currency",
+          "min": 0,
+          "max": 1000,
+          "step": 10,
+          "default": 550,
+          "baseline": 0,
+          "unitLabel": {
+            "de": "€/t",
+            "en": "€/t"
+          }
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.consumption.plastic_packaging",
+          "amount": {
+            "param": "rate",
+            "scale": 2727272.7
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.75,
+            "high": 1.1
+          },
+          "sources": [
+            "dpa_plastiksteuer_entwurf_2026",
+            "tonline_plastiksteuer_2026",
+            "bundestag_drs_21_7301",
+            "svr_jg_2026_27"
+          ],
+          "note": {
+            "de": "Je Euro Steuersatz 2,73 Mio. Euro. Für den Entwurf mit 550 Euro je Tonne werden ab 2028 rund 1,5 Mrd. Euro im Jahr genannt, für das zweite Halbjahr 2027 805 Mio. Euro. Der Entwurf geht von anfangs rund 3 Mio. Tonnen steuerpflichtigem Kunststoff aus, die mit der Zeit sinken; 3 Mio. Tonnen mal 550 Euro wären 1,65 Mrd. Euro, daran orientiert sich die obere Grenze. Zum Vergleich: Nach dem Finanzplan sollte die Steuer so viel bringen wie die EU-Plastikabgabe, 1,57 Mrd. Euro im Jahr 2028; der Sachverständigenrat setzte sie in seiner Übersicht der Maßnahmen für 2027 mit 1,4 Mrd. Euro an. Die untere Grenze (75 %) nimmt an, dass mehr Verpackungen aus Recyclingkunststoff befreit werden oder die Menge schneller sinkt. Die Zahlen gelten für 2028; weil die Steuer je Tonne erhoben wird und nicht vom Preis abhängt, sind sie ohne Umrechnung für das Basisjahr 2024 angesetzt. Eine veröffentlichte Fassung des Entwurfs war bis zum 19. November 2026 nicht zu finden; die Angaben stammen aus Berichten der Nachrichtenagentur dpa.",
+            "en": "EUR 2.73 million per euro of tax rate. For the draft with EUR 550 per tonne, about EUR 1.5 billion a year from 2028 is cited, and EUR 805 million for the second half of 2027. The draft assumes about 3 million tonnes of taxable plastic at first, falling over time; 3 million tonnes times EUR 550 would be EUR 1.65 billion, which the upper bound follows. For comparison: according to the financial plan the tax was to raise as much as the EU plastics contribution, EUR 1.57 billion in 2028; the Council of Economic Experts put it at EUR 1.4 billion for 2027 in its overview of measures. The lower bound (75%) assumes that more packaging made of recycled plastic is exempted or that the quantity falls faster. The figures are for 2028; because the tax is levied per tonne and does not depend on the price, they are applied to the base year 2024 without conversion. No published version of the draft could be found as of 19 November 2026; the figures come from reports by the dpa news agency."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Die Steuer ist vorerst vom Tisch. Die Bundesregierung hatte sie im Entwurf des Bundeshaushalts 2027 und im Finanzplan bis 2030 bei den Einnahmen eingerechnet; Im Oktober 2026 wurde ein Entwurf von Finanz- und Umweltministerium bekannt, den die Koalitionsfraktionen einbringen sollten. Anfang November erklärte Unionsfraktionschef Thorsten Frei: „Die Plastiksteuer machen wir nicht“, und die Koalition strich sie vor der Bereinigungssitzung. SPD-Fraktionschef Matthias Miersch sieht sie nicht als erledigt an. Damit fehlen Einnahmen, die der Finanzplan eingerechnet hatte; für den Entwurf wurden 805 Mio. Euro im Jahr 2027 und knapp 1,5 Mrd. Euro im Jahr ab 2028 genannt.",
+            "en": "The tax is off the table for now. The federal government had counted it as revenue in the draft federal budget 2027 and in the financial plan to 2030; in October 2026 a draft by the finance and environment ministries became known that the coalition groups were to introduce. In early November CDU/CSU group leader Thorsten Frei declared \"we are not doing the plastic tax\", and the coalition dropped it before the final committee session. SPD group leader Matthias Miersch does not regard it as settled. This removes revenue the financial plan had counted on; for the draft, EUR 805 million in 2027 and just under EUR 1.5 billion a year from 2028 were cited."
+          },
+          "sources": [
+            "bundestag_drs_21_7301",
+            "dpa_plastiksteuer_entwurf_2026",
+            "tonline_plastiksteuer_2026",
+            "adhoc_dpa_zuckersteuer_2028"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Steuerschuldner wären Hersteller und Importeure; ob und wie weit sie die Kosten über die Preise weitergeben, ist offen. Plastics Europe Deutschland nennt den Entwurf ein „nationales Steuerexperiment“ mit offenen Fragen der Umsetzung. Die Deutsche Umwelthilfe begrüßt den Ansatz, will die Steuer aber auf Einwegverpackungen beschränken und auf Papier, Pappe und Metalle ausdehnen, damit nicht auf andere Materialien ausgewichen wird.",
+            "en": "Manufacturers and importers would owe the tax; whether and how far they pass the cost on through prices is open. Plastics Europe Germany calls the draft a \"national tax experiment\" with open questions of implementation. Deutsche Umwelthilfe welcomes the approach but wants the tax limited to single-use packaging and extended to paper, cardboard and metals, so that producers do not switch to other materials."
+          },
+          "sources": [
+            "dpa_plastiksteuer_entwurf_2026"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Die EU-Plastikabgabe ist keine Steuer auf Unternehmen, sondern ein Beitrag des Staates zum EU-Haushalt: 0,80 Euro je Kilogramm nicht recycelter Kunststoffverpackungsabfälle, für Deutschland 1,26 Mrd. Euro im Jahr 2027. Wie ein Staat Verpackungsabfall verringert, bleibt ihm überlassen. Eine nationale Steuer ändert an dieser Zahlung zunächst nichts; sie bringt nur Geld in ähnlicher Höhe herein.",
+            "en": "The EU plastics contribution is not a tax on companies but a contribution of the state to the EU budget: EUR 0.80 per kilogram of non-recycled plastic packaging waste, EUR 1.26 billion for Germany in 2027. How a state reduces packaging waste is up to it. A national tax does not change this payment at first; it only raises a similar amount."
+          },
+          "sources": [
+            "ec_plastics_own_resource",
+            "bundestag_drs_21_7301"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Verpackungen aus Recyclingkunststoff sollten erst befreit werden, wenn eine Rechtsverordnung samt Nachweissystem besteht; einen Termin dafür nennt der Entwurf nach einem Bericht vom Oktober 2026 nicht. Bis dahin würden neuer und recycelter Kunststoff gleich besteuert. Die Unternehmen müssten sich beim Zoll anmelden und monatlich Steuererklärungen abgeben, eine Bagatellgrenze sieht der Entwurf danach nicht vor.",
+            "en": "Packaging made of recycled plastic was to be exempted only once a regulation with a proof system exists; according to a report of October 2026 the draft sets no date for it. Until then new and recycled plastic would be taxed alike. Companies would have to register with customs and file monthly tax returns, and according to the same report the draft has no de minimis threshold."
+          },
+          "sources": [
+            "haufe_plastiksteuer_2026"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Als Verbrauchsteuer stünde das Aufkommen allein dem Bund zu (Art. 106 Abs. 1 Grundgesetz); Länder und Gemeinden wären nicht beteiligt.",
+            "en": "As an excise duty the revenue would go to the federal level alone (Article 106(1) of the Basic Law); states and municipalities would have no share."
+          },
+          "sources": [
+            "gg_art_106",
+            "bundestag_drs_21_7301"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Der Finanzplan des Bundes bis 2030 rechnet bereits mit dieser Steuer, in Höhe der EU-Plastikabgabe (rund 1,6 Mrd. Euro im Jahr 2028 bis 2030). Gegen die Lücke im Finanzplan wird sie deshalb nicht gezählt. Weil die Koalition sie fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer, als der Finanzplan ausweist.",
+            "en": "The federal financial plan to 2030 already counts on this tax, at the level of the EU plastics contribution (about EUR 1.6 billion a year in 2028 to 2030). It is therefore not counted against the gap in the financial plan. Because the coalition has dropped it, the real gap is larger than the plan shows by that amount."
+          },
+          "sources": [
+            "bundestag_drs_21_7301",
+            "adhoc_dpa_zuckersteuer_2028",
+            "tonline_plastiksteuer_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "dpa_plastiksteuer_entwurf_2026",
+        "bundestag_drs_21_7301",
+        "tonline_plastiksteuer_2026",
+        "adhoc_dpa_zuckersteuer_2028",
+        "ec_plastics_own_resource",
+        "haufe_plastiksteuer_2026",
+        "svr_jg_2026_27",
+        "gg_art_106"
       ]
     },
     {
@@ -4472,6 +5127,38 @@
         "bertelsmann_iges_pkv_2020",
         "bertelsmann_iges_beamte_gkv_2017",
         "bverfg_2009_pkv"
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "id": "budget_2027",
+      "label": {
+        "de": "Haushaltsdebatte 2027",
+        "en": "2027 budget debate"
+      },
+      "description": {
+        "de": "Maßnahmen aus dem Streit um den Bundeshaushalt 2027 und die Lücken im Finanzplan bis 2030: beschlossen, verschoben, fallen gelassen oder vorgeschlagen. Stand: November 2026.",
+        "en": "Measures from the dispute over the 2027 federal budget and the gaps in the financial plan to 2030: adopted, postponed, dropped or proposed. As of November 2026."
+      },
+      "policies": [
+        "electricity_tax",
+        "sugar_drinks_tax",
+        "plastic_packaging_tax",
+        "alcohol_taxes",
+        "tobacco_tax",
+        "vat_restaurants",
+        "parental_allowance_reform",
+        "defence_spending_target",
+        "capital_income_flat_tax",
+        "vat_rates"
+      ],
+      "sources": [
+        "bundestag_kw46_haushalt_2027",
+        "bt_drs_21_9241",
+        "bundestag_drs_21_7301",
+        "svr_jg_2026_27",
+        "bt_drs_21_9229"
       ]
     }
   ]
