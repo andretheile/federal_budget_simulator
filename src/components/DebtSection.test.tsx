@@ -294,7 +294,10 @@ describe("a pack without debt data", () => {
     mount("#lang=en&d=r8", pack);
     expect(container.querySelector("#debt")).toBeNull();
     expect(container.querySelector(".debt-teaser")).toBeNull();
-    expect(all(".footer__links a").map((link) => link.textContent)).not.toContain("Debt and interest");
+    expect(all(".footer__links a").map((link) => link.textContent)).toEqual([
+      "About the numbers",
+      "Source code on GitHub (opens in a new tab)",
+    ]);
     // A debt field from another country's link is dropped.
     expect(window.location.hash).toBe("#lang=en");
   });

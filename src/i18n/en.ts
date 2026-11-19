@@ -307,6 +307,7 @@ export const en: Messages = {
     sourcesTitle: (count) => `Sources (${count})`,
     accessed: (date) => `accessed ${date}`,
     licence: "The source code is published under the Apache License 2.0.",
+    sourceCode: "Source code on GitHub",
   },
   units: {
     ofGdp: (value) => `${value} of GDP`,

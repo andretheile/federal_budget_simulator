@@ -286,6 +286,8 @@ export interface Messages {
     sourcesTitle(count: number): string;
     accessed(date: string): string;
     licence: string;
+    /** The footer link to the repository (src/site/project.ts). */
+    sourceCode: string;
   };
   units: {
     ofGdp(value: string): string;

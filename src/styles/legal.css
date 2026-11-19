@@ -93,11 +93,17 @@
   color: var(--ink-3);
 }
 
-/* Footer: "About the numbers", then the legal pages. */
+/* Footer: "About the numbers", the source code, then the legal pages. */
 .footer__links {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 20px;
+}
+
+/* The source code opens elsewhere: marked as the links in the lists of sources. */
+.footer__links .icon {
+  margin-left: 4px;
+  color: var(--ink-3);
 }
 
 .footer__links a[aria-current="page"] {

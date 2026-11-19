@@ -311,6 +311,7 @@ export const de: Messages = {
     sourcesTitle: (count) => `Quellen (${count})`,
     accessed: (date) => `abgerufen am ${date}`,
     licence: "Der Quelltext steht unter der Apache-Lizenz 2.0.",
+    sourceCode: "Quelltext auf GitHub",
   },
   units: {
     ofGdp: (value) => `${value} des BIP`,

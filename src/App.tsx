@@ -19,7 +19,7 @@ import { DebtSection, DebtTeaser, preloadDebt } from "./components/DebtSection.t
 import { CurveEditor, editableCurve, preloadEditor } from "./components/CurveEditor.tsx";
 import { Header } from "./components/Header.tsx";
 import { LegalLinks, LegalPageView } from "./components/Legal.tsx";
-import { WarningIcon } from "./components/icons.tsx";
+import { ExternalIcon, WarningIcon } from "./components/icons.tsx";
 import { PolicyList } from "./components/PolicyList.tsx";
 import { Scoreboard } from "./components/Scoreboard.tsx";
 import { Waterfall } from "./components/Waterfall.tsx";
@@ -39,6 +39,7 @@ import { languagesOf, messagesFor, pickLanguage } from "./i18n/index.ts";
 import { listPackIds, loadPack } from "./packs.ts";
 import type { LegalPage, SiteConfig } from "./site/config.ts";
 import { currentSite } from "./site/current.ts";
+import { REPOSITORY_URL } from "./site/project.ts";
 
 const LANGUAGE_KEY = "budget-simulator:language";
 
@@ -527,6 +528,11 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
               onClick={(event) => (legalPage ? goLegal(event, undefined, "about") : jumpTo(event, "about"))}
             >
               {t.about.title}
+            </a>
+            <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer">
+              {t.about.sourceCode}
+              <ExternalIcon size={12} />
+              <span className="visually-hidden"> ({t.common.externalLink})</span>
             </a>
             {site && <LegalLinks current={legalPage} hrefFor={legalHref} onOpen={goLegal} />}
           </p>

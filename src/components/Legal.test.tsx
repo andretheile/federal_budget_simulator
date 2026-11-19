@@ -10,6 +10,7 @@ import { Simulator } from "../App.tsx";
 import { testland } from "../engine/__fixtures__/testland.ts";
 import exampleText from "../../site.config.example.json?raw";
 import type { SiteConfig } from "../site/config.ts";
+import { REPOSITORY_URL } from "../site/project.ts";
 import { parseSiteConfig } from "../site/schema.ts";
 
 const example = parseSiteConfig(exampleText, "site.config.example.json");
@@ -77,8 +78,13 @@ const historyTo = (address: string): void =>
 describe("without a site config", () => {
   it("has no legal pages and no links to them, and drops p= from the address", () => {
     mount("#lang=de&s=halve_mp_pay&p=imprint", null);
-    // Testland has debt data, so the footer also leads to the debt projection.
-    expect(footerLinks().map((link) => link.textContent)).toEqual(["Schulden und Zinsen", "Über die Zahlen"]);
+    // Testland has debt data, so the footer also leads to the debt projection. The link to the
+    // source code tells a screen reader that it opens a new tab.
+    expect(footerLinks().map((link) => link.textContent)).toEqual([
+      "Schulden und Zinsen",
+      "Über die Zahlen",
+      "Quelltext auf GitHub (öffnet in neuem Tab)",
+    ]);
     expect(container.querySelector(".legal")).toBeNull();
     expect(container.querySelector(".workspace")).not.toBeNull();
     expect(window.location.hash).toBe("#lang=de&s=halve_mp_pay");
@@ -88,7 +94,13 @@ describe("without a site config", () => {
 describe("with a site config", () => {
   it("links to both pages from the footer, with the scenario in the address", () => {
     mount("#lang=de&s=halve_mp_pay", example);
-    expect(footerLinks().map((link) => link.textContent)).toEqual(["Schulden und Zinsen", "Über die Zahlen", "Impressum", "Datenschutz"]);
+    expect(footerLinks().map((link) => link.textContent)).toEqual([
+      "Schulden und Zinsen",
+      "Über die Zahlen",
+      "Quelltext auf GitHub (öffnet in neuem Tab)",
+      "Impressum",
+      "Datenschutz",
+    ]);
     expect(footerLink("Impressum").getAttribute("href")).toBe("#lang=de&s=halve_mp_pay&p=imprint");
     expect(footerLink("Datenschutz").getAttribute("href")).toBe("#lang=de&s=halve_mp_pay&p=privacy");
   });
@@ -170,6 +182,29 @@ describe("with a site config", () => {
     expect(text(".legal h2")).toBe("Privacy policy");
     expect(document.querySelector('[role="dialog"]')).toBeNull();
     expect(window.location.hash).toBe("#lang=en&p=privacy");
+  });
+});
+
+describe("the link to the source code", () => {
+  const name = { de: "Quelltext auf GitHub (öffnet in neuem Tab)", en: "Source code on GitHub (opens in a new tab)" };
+  it.each([
+    { language: "de", where: "without a site config", hash: "#lang=de", site: null },
+    { language: "en", where: "without a site config", hash: "#lang=en", site: null },
+    { language: "de", where: "with a site config", hash: "#lang=de", site: example },
+    { language: "en", where: "with a site config", hash: "#lang=en", site: example },
+    { language: "de", where: "on a legal page", hash: "#lang=de&p=imprint", site: example },
+    { language: "en", where: "on a legal page", hash: "#lang=en&p=privacy", site: example },
+  ] as const)("is in the footer, in $language, $where, and opens in a new tab", ({ language, hash, site }) => {
+    mount(hash, site);
+    expect(container.querySelector(".legal") !== null).toBe(hash.includes("&p="));
+    const link = footerLink(name[language]);
+    expect(link.getAttribute("href")).toBe(REPOSITORY_URL);
+    expect(link.getAttribute("target")).toBe("_blank");
+    expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+    expect(link.querySelector('svg[aria-hidden="true"]')).not.toBeNull();
+    // After "About the numbers", before the legal pages.
+    const names = footerLinks().map((candidate) => candidate.textContent);
+    expect(names.indexOf(name[language])).toBe(names.indexOf(language === "de" ? "Über die Zahlen" : "About the numbers") + 1);
   });
 });
 
