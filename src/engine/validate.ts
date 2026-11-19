@@ -8,6 +8,7 @@
  */
 import type { z } from "zod";
 import { bracketsToCurve, curveAffected, curveTotal } from "./curve.ts";
+import { isComparablePlan, isFollowablePlan } from "./debt.ts";
 import { scheduleTotal, totalUnits } from "./distribution.ts";
 import {
   budgetSchema,
@@ -15,6 +16,7 @@ import {
   debtFileSchema,
   distributionSchema,
   flattenIssues,
+  goalsFileSchema,
   policiesFileSchema,
   sourcesFileSchema,
 } from "./schema.ts";
@@ -53,6 +55,8 @@ export interface RawPackFiles {
   distributions?: Record<string, unknown>;
   /** debt.json, which is optional: undefined means the pack has none. */
   debt?: unknown;
+  /** goals.json, which is optional: undefined means the pack has none. */
+  goals?: unknown;
 }
 
 export interface ValidationIssue {
@@ -87,6 +91,7 @@ const BUDGET = "budget.json";
 const POLICIES = "policies.json";
 const SOURCES = "sources.json";
 const DEBT = "debt.json";
+const GOALS = "goals.json";
 const distributionFile = (id: string): string => `distributions/${id}.json`;
 
 type Path = readonly PropertyKey[];
@@ -122,12 +127,13 @@ export function validatePackFiles(texts: Record<string, string>, id?: string): V
   const errors: ValidationIssue[] = [];
   const warnings: ValidationIssue[] = [];
   const unreadable = new Set<string>();
-  const slots: Record<string, "country" | "budget" | "policies" | "sources" | "debt"> = {
+  const slots: Record<string, "country" | "budget" | "policies" | "sources" | "debt" | "goals"> = {
     [COUNTRY]: "country",
     [BUDGET]: "budget",
     [POLICIES]: "policies",
     [SOURCES]: "sources",
     [DEBT]: "debt",
+    [GOALS]: "goals",
   };
   for (const [file, text] of Object.entries(texts)) {
     const slot = Object.hasOwn(slots, file) ? slots[file] : undefined;
@@ -214,6 +220,7 @@ function check(
   const policiesFile = parse(POLICIES, policiesFileSchema, files.policies);
   const sources = parse(SOURCES, sourcesFileSchema, files.sources);
   const debt = files.debt === undefined ? undefined : parse(DEBT, debtFileSchema, files.debt);
+  const goals = files.goals === undefined ? undefined : parse(GOALS, goalsFileSchema, files.goals);
   const distributions: Record<string, Distribution> = {};
   /** Every distribution that has a file, readable or not, so a broken file is not also reported as a missing reference. */
   const distributionNames = new Set<string>();
@@ -773,6 +780,24 @@ function check(
       seen.add(policy.id);
       checkPolicy(policy, ["policies", i]);
     });
+
+    // Collections: unique ids, and each lists existing policies, each once.
+    const collectionIds = new Set<string>();
+    policiesFile.collections?.forEach((collection, i) => {
+      const path = ["collections", i];
+      if (collectionIds.has(collection.id)) error(POLICIES, [...path, "id"], `duplicate collection id "${collection.id}"`);
+      collectionIds.add(collection.id);
+      text(POLICIES, [...path, "label"], collection.label);
+      text(POLICIES, [...path, "description"], collection.description);
+      refs(POLICIES, [...path, "sources"], collection.sources);
+      collection.policies.forEach((id, k) => {
+        if (collection.policies.indexOf(id) !== k) {
+          error(POLICIES, [...path, "policies", k], `policy "${id}" is listed twice in collection "${collection.id}"`);
+        } else if (!seen.has(id)) {
+          error(POLICIES, [...path, "policies", k], `unknown policy "${id}"`);
+        }
+      });
+    });
   }
 
   // --- debt.json ------------------------------------------------------------------------------
@@ -858,6 +883,24 @@ function check(
           error(DEBT, [...path, "values", id], `${value} is not a whole number of years`);
         }
       }
+      // A preset may follow a plan, if the plan can be followed.
+      if (preset.follow !== undefined) {
+        const plan = debt.plans?.find((candidate) => candidate.id === preset.follow);
+        const at = [...path, "follow"];
+        if (!plan) {
+          error(DEBT, at, `unknown plan "${preset.follow}"`);
+        } else if (!isComparablePlan(plan)) {
+          error(
+            DEBT,
+            at,
+            `plan "${plan.id}" is for ${plan.scope === "all" ? "the whole state" : `level "${plan.scope}"`} in ${plan.accounts} accounts; only a plan for the whole state in national_accounts can be followed`,
+          );
+        } else if (!isFollowablePlan(plan)) {
+          error(DEBT, at, `plan "${plan.id}" cannot be followed: it needs a "debtRatio" in every point, one point for every year without gaps, and a "balanceRatio" in its last point`);
+        } else if (country && !plan.points.some((point) => point.year > country.baseYear)) {
+          warn(DEBT, at, `plan "${plan.id}" has no year after the base year ${country.baseYear}, so following it changes nothing`);
+        }
+      }
     });
 
     const referenceIds = new Set<string>();
@@ -904,6 +947,120 @@ function check(
       else if (comparison.node === debt.interest.node) error(DEBT, [...path, "node"], `"${comparison.node}" is the interest node itself`);
       else if (info.total === 0) warn(DEBT, [...path, "node"], `"${comparison.node}" is zero in the base year, so interest is above it from the start`);
     });
+
+    // Official projections: unique ids, a scope that exists, years in order, a value in every point.
+    const planIds = new Set<string>();
+    (debt.plans ?? []).forEach((plan, i) => {
+      const path = ["plans", i];
+      if (planIds.has(plan.id)) error(DEBT, [...path, "id"], `duplicate plan id "${plan.id}"`);
+      planIds.add(plan.id);
+      text(DEBT, [...path, "label"], plan.label);
+      text(DEBT, [...path, "note"], plan.note);
+      refs(DEBT, [...path, "sources"], plan.sources);
+      if (plan.scope !== "all" && country && !country.levels[plan.scope]) {
+        error(DEBT, [...path, "scope"], `level "${plan.scope}" is not defined in country.json`);
+      }
+      plan.points.forEach((point, k) => {
+        const at = [...path, "points", k];
+        const previous = plan.points[k - 1];
+        if (previous && !(point.year > previous.year)) {
+          error(DEBT, [...at, "year"], `years must be ascending, each once, but ${point.year} follows ${previous.year}`);
+        }
+        const { debtRatio, balanceRatio, interestRatio, interestToRevenue, interest } = point;
+        if ([debtRatio, balanceRatio, interestRatio, interestToRevenue, interest].every((value) => value === undefined)) {
+          error(DEBT, at, 'a point needs at least one of "debtRatio", "balanceRatio", "interestRatio", "interestToRevenue" and "interest"');
+        }
+        // Ratios are fractions; a value far beyond any real one is more likely a percentage typed as is.
+        if (debtRatio !== undefined && debtRatio > 5) {
+          warn(DEBT, [...at, "debtRatio"], `${debtRatio} means ${round(debtRatio * 100)} % of GDP; ratios are fractions (1.2 is 120 %)`);
+        }
+        if (balanceRatio !== undefined && Math.abs(balanceRatio) > 0.5) {
+          warn(DEBT, [...at, "balanceRatio"], `${balanceRatio} means ${round(balanceRatio * 100)} % of GDP; ratios are fractions (-0.03 is -3 %)`);
+        }
+        if (interestRatio !== undefined && interestRatio > 0.2) {
+          warn(DEBT, [...at, "interestRatio"], `${interestRatio} means ${round(interestRatio * 100)} % of GDP; ratios are fractions (0.03 is 3 %)`);
+        }
+        if (interestToRevenue !== undefined && interestToRevenue > 1) {
+          warn(DEBT, [...at, "interestToRevenue"], `${interestToRevenue} means ${round(interestToRevenue * 100)} % of revenue; ratios are fractions (0.05 is 5 %)`);
+        }
+        if (point.growth !== undefined && Math.abs(point.growth) > 0.5) {
+          warn(DEBT, [...at, "growth"], `${point.growth} means ${round(point.growth * 100)} % growth; growth is a fraction (0.03 is 3 %)`);
+        }
+      });
+    });
+  }
+
+  // --- goals.json -----------------------------------------------------------------------------
+
+  if (goals) {
+    const goalIds = new Set<string>();
+    goals.goals.forEach((goal, i) => {
+      const path = ["goals", i];
+      if (goalIds.has(goal.id)) error(GOALS, [...path, "id"], `duplicate goal id "${goal.id}"`);
+      goalIds.add(goal.id);
+      text(GOALS, [...path, "label"], goal.label);
+      text(GOALS, [...path, "description"], goal.description);
+      text(GOALS, [...path, "note"], goal.note);
+      refs(GOALS, [...path, "sources"], goal.sources);
+      if (goal.level !== undefined && country && !country.levels[goal.level]) {
+        error(GOALS, [...path, "level"], `level "${goal.level}" is not defined in country.json`);
+      }
+      if (country && goal.year < country.baseYear) {
+        warn(GOALS, [...path, "year"], `${goal.year} lies before the base year ${country.baseYear}`);
+      }
+
+      // Excluded measures exist and are listed once. Excluded nodes exist, are listed once, none lies
+      // inside another, and no effect of a measure that is not excluded itself changes a group above one.
+      const entries = goal.excluded ?? [];
+      const excludedPolicies = new Set(entries.flatMap((entry) => (entry.policy === undefined ? [] : [entry.policy])));
+      const listed = new Set(entries.flatMap((entry) => (entry.node === undefined ? [] : [entry.node])));
+      const seenNodes = new Set<string>();
+      const seenPolicies = new Set<string>();
+      entries.forEach((exclusion, k) => {
+        const at = [...path, "excluded", k];
+        text(GOALS, [...at, "reason"], exclusion.reason);
+        refs(GOALS, [...at, "sources"], exclusion.sources);
+        const policyId = exclusion.policy;
+        if (policyId !== undefined) {
+          if (seenPolicies.has(policyId)) error(GOALS, [...at, "policy"], `policy "${policyId}" is excluded twice`);
+          else if (policiesFile && !policiesFile.policies.some((policy) => policy.id === policyId)) {
+            error(GOALS, [...at, "policy"], `unknown policy "${policyId}"`);
+          }
+          seenPolicies.add(policyId);
+          return;
+        }
+        const node = exclusion.node;
+        if (node === undefined) return; // the schema has reported it
+        if (seenNodes.has(node)) {
+          error(GOALS, [...at, "node"], `"${node}" is excluded twice`);
+          return;
+        }
+        seenNodes.add(node);
+        if (!budget) return;
+        const info = nodes.get(node);
+        if (!info) {
+          error(GOALS, [...at, "node"], `unknown budget node "${node}"`);
+          return;
+        }
+        const outer = info.ancestors.find((id) => listed.has(id));
+        if (outer !== undefined) error(GOALS, [...at, "node"], `"${node}" lies inside "${outer}", which is excluded already`);
+        policiesFile?.policies.forEach((policy) => {
+          // An excluded measure is left out as a whole, so where its effects land does not matter.
+          if (excludedPolicies.has(policy.id)) return;
+          policy.effects.forEach((effect, e) => {
+            for (const target of [effect.target, effect.shift?.to]) {
+              if (target === undefined || !info.ancestors.includes(target)) continue;
+              error(
+                GOALS,
+                [...at, "node"],
+                `"${node}" lies inside "${target}", which ${target === effect.target ? "" : "the shift of "}effect ${e} of policy "${policy.id}" changes as a whole; the part that falls on "${node}" cannot be told apart, so exclude "${target}", a node that no effect reaches into, or the policy`,
+              );
+            }
+          });
+        });
+      });
+    });
+    if (!goalIds.has(goals.default)) error(GOALS, ["default"], `unknown goal "${goals.default}"`);
   }
 
   // --- result ---------------------------------------------------------------------------------
@@ -914,7 +1071,8 @@ function check(
     policiesFile &&
     sources &&
     Object.keys(distributions).length === distributionNames.size &&
-    (files.debt === undefined || debt !== undefined);
+    (files.debt === undefined || debt !== undefined) &&
+    (files.goals === undefined || goals !== undefined);
   if (sources && complete) {
     for (const id of Object.keys(sources)) {
       if (!usedSources.has(id)) warn(SOURCES, [id], `source "${id}" is never referenced`);
@@ -923,7 +1081,9 @@ function check(
 
   if (errors.length > 0 || !complete) return { ok: false, errors: sortByFile(errors), warnings: sortByFile(warnings) };
   const pack: CountryPack = { country, budget, policies: policiesFile.policies, sources, distributions };
+  if (policiesFile.collections) pack.collections = policiesFile.collections;
   if (debt) pack.debt = debt;
+  if (goals) pack.goals = goals;
   for (const issue of nonZeroAtBaseline(pack, warnings)) warnings.push(issue);
   return { ok: true, pack, warnings: sortByFile(warnings) };
 }

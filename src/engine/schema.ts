@@ -21,6 +21,8 @@ import type {
   Distribution,
   Effect,
   EffectShift,
+  Goal,
+  GoalsFile,
   GroupNode,
   LeafNode,
   LocalizedText,
@@ -29,6 +31,7 @@ import type {
   PointsSchedule,
   PoliciesFile,
   Policy,
+  PolicyCollection,
   Schedule,
   Source,
   Value,
@@ -400,7 +403,18 @@ export const policySchema = z.strictObject({
   sources: sourceIds,
 });
 
-export const policiesFileSchema = z.strictObject({ policies: z.array(policySchema) });
+export const policyCollectionSchema = z.strictObject({
+  id: idSchema,
+  label: localizedTextSchema,
+  description: localizedTextSchema.optional(),
+  policies: z.array(z.string()).min(1),
+  sources: sourceIds.optional(),
+});
+
+export const policiesFileSchema = z.strictObject({
+  policies: z.array(policySchema),
+  collections: z.array(policyCollectionSchema).optional(),
+});
 
 // --- debt.json ----------------------------------------------------------------------------------
 
@@ -431,15 +445,19 @@ export const debtFileSchema = z.strictObject({
     }),
   ),
   presets: z.array(
-    z.strictObject({
-      id: idSchema,
-      label: localizedTextSchema,
-      note: localizedTextSchema.optional(),
-      values: z
-        .partialRecord(debtAssumptionId, z.number())
-        .refine((values) => Object.keys(values).length > 0, "a preset must set at least one assumption"),
-      sources: sourceIds.optional(),
-    }),
+    z
+      .strictObject({
+        id: idSchema,
+        label: localizedTextSchema,
+        note: localizedTextSchema.optional(),
+        values: z.partialRecord(debtAssumptionId, z.number()),
+        follow: z.string().optional(),
+        sources: sourceIds.optional(),
+      })
+      .refine((preset) => Object.keys(preset.values).length > 0 || preset.follow !== undefined, {
+        message: "a preset must set at least one assumption or follow a plan",
+        path: ["values"],
+      }),
   ),
   references: z.array(
     z.strictObject({
@@ -455,7 +473,59 @@ export const debtFileSchema = z.strictObject({
     }),
   ),
   comparisons: z.array(z.strictObject({ node: z.string(), label: localizedTextSchema.optional() })).optional(),
+  plans: z
+    .array(
+      z.strictObject({
+        id: idSchema,
+        label: localizedTextSchema,
+        scope: z.enum(["all", "central", "state", "local", "social_security"]),
+        accounts: z.enum(["national_accounts", "cash"]),
+        points: z
+          .array(
+            z.strictObject({
+              year,
+              debtRatio: z.number().min(0).optional(),
+              balanceRatio: z.number().optional(),
+              interestRatio: z.number().min(0).optional(),
+              interestToRevenue: z.number().min(0).optional(),
+              interest: z.number().min(0).optional(),
+              growth: z.number().gt(-1).optional(),
+            }),
+          )
+          .min(1),
+        quality: qualitySchema,
+        sources: sourceIds.min(1),
+        note: localizedTextSchema,
+      }),
+    )
+    .optional(),
   note: localizedTextSchema,
+});
+
+// --- goals.json ---------------------------------------------------------------------------------
+
+export const goalSchema = z.strictObject({
+  id: idSchema,
+  label: localizedTextSchema,
+  description: localizedTextSchema,
+  level: levelIdSchema.optional(),
+  amount: z.number().positive(),
+  year,
+  quality: qualitySchema,
+  sources: sourceIds.min(1),
+  note: localizedTextSchema,
+  excluded: z
+    .array(
+      z
+        .strictObject({ node: z.string().optional(), policy: z.string().optional(), reason: localizedTextSchema, sources: sourceIds.optional() })
+        .refine((entry) => (entry.node === undefined) !== (entry.policy === undefined), 'an excluded entry needs exactly one of "node" and "policy"'),
+    )
+    .optional(),
+});
+
+export const goalsFileSchema = z.strictObject({
+  default: z.string(),
+  goals: z.array(goalSchema).min(1),
 });
 
 // Compile-time check that the schemas and the contract types describe the same data. Mutual
@@ -484,7 +554,10 @@ export type SchemaMatchesTypes = [
   Assert<Same<Out<typeof effectSchema>, Effect>>,
   Assert<Same<Out<typeof catchSchema>, Catch>>,
   Assert<Same<Out<typeof policySchema>, Policy>>,
+  Assert<Same<Out<typeof policyCollectionSchema>, PolicyCollection>>,
   Assert<Same<Out<typeof policiesFileSchema>, PoliciesFile>>,
   Assert<Same<Out<typeof numberParamSchema>, NumberParam>>,
   Assert<Same<Out<typeof debtFileSchema>, DebtFile>>,
+  Assert<Same<Out<typeof goalSchema>, Goal>>,
+  Assert<Same<Out<typeof goalsFileSchema>, GoalsFile>>,
 ];

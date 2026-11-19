@@ -45,6 +45,8 @@ export {
 
 export { emptyScenario, encodeScenario, decodeScenario, encodeNumber, decodeNumber } from "./scenario.ts";
 
+export { goalProgress, measureGoal, goalLevel, findGoal, defaultGoal, type GoalProgress } from "./goals.ts";
+
 export {
   projectDebt,
   projectScenario,
@@ -52,6 +54,8 @@ export {
   debtAssumptionParam,
   applyDebtPreset,
   presetApplies,
+  isComparablePlan,
+  isFollowablePlan,
   longRunDebtRatio,
   firstYearAbove,
   firstYearBelow,

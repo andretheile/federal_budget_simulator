@@ -19,8 +19,8 @@
  * Numbers may contain "-" (sign, exponent), which is why the coordinates of a curve are joined
  * with "_" and not with the "-" that joins group ids.
  */
-import { resolveParams, type ParamValue, type ParamValues, type Scenario } from "./simulate.ts";
-import type { CountryPack, CurvePoint, LevelId, Param } from "./types.ts";
+import { resolveCurve, resolveParams, type ParamValue, type ParamValues, type Scenario } from "./simulate.ts";
+import type { CountryPack, CurvePoint, LevelId, Param, Policy } from "./types.ts";
 
 const ITEM_SEPARATOR = "~";
 const TOKEN_SEPARATOR = ".";
@@ -148,19 +148,37 @@ export function encodeScenario(scenario: Scenario, pack?: CountryPack): string {
   return items.join(ITEM_SEPARATOR);
 }
 
-function decodeValue(param: Param, text: string): ParamValue | undefined {
+/**
+ * The value of one token, or undefined if the pack cannot use it: a number that is not one, a curve
+ * that is not a list of points or has a number of points the param does not allow, a group
+ * selection whose ids are all unknown (the empty selection, written "-", is a value). Undefined
+ * means the token is ignored and leaves whatever an earlier token set.
+ */
+function decodeValue(pack: CountryPack, policy: Policy, param: Param, text: string): ParamValue | undefined {
   if (param.type === "number") {
     const n = decodeNumber(text);
     return Number.isFinite(n) ? n : undefined;
   }
-  if (param.type === "curve") return decodeCurve(text);
-  return text.split(GROUP_SEPARATOR).filter((id) => id !== "");
+  if (param.type === "curve") {
+    const points = decodeCurve(text);
+    // resolveCurve falls back to the default object itself for a list it cannot use.
+    return points === undefined || resolveCurve(param, points) === param.default ? undefined : points;
+  }
+  const ids = text.split(GROUP_SEPARATOR).filter((id) => id !== "");
+  if (ids.length === 0) return ids;
+  const known = resolveParams(pack, policy, { [param.id]: ids })[param.id];
+  return Array.isArray(known) && known.length > 0 ? ids : undefined;
 }
 
 /**
  * Decode a string written by encodeScenario against the current pack. Anything the pack does not
  * know (policy ids, param ids, group ids, levels) or cannot read is ignored, so links made for an
  * older version of the pack keep working. Values are normalised like in the simulation.
+ *
+ * Items for the same policy add up: a policy is on if any item names it, and each param takes the
+ * last value in the string that can be read, whichever item it is in. A token that cannot be read
+ * leaves what an earlier one set. encodeScenario writes each policy once, but a link may have been
+ * edited by hand or written for an older pack.
  */
 export function decodeScenario(encoded: string, pack: CountryPack): Scenario {
   const scenario = emptyScenario();
@@ -170,6 +188,8 @@ export function decodeScenario(encoded: string, pack: CountryPack): Scenario {
   } catch {
     // Not percent-encoded in a way we can undo; read it as it is.
   }
+  /** What the items set, per policy, in the order the policies first appear. */
+  const read = new Map<Policy, ParamValues>();
   for (const item of text.split(ITEM_SEPARATOR)) {
     const tokens = item.split(TOKEN_SEPARATOR);
     const head = tokens[0];
@@ -180,19 +200,23 @@ export function decodeScenario(encoded: string, pack: CountryPack): Scenario {
     }
     const policy = pack.policies.find((candidate) => candidate.id === head);
     if (!policy) continue;
-    const given: ParamValues = {};
+    let given = read.get(policy);
+    if (!given) read.set(policy, (given = {}));
     for (let i = 1; i + 1 < tokens.length; i += 2) {
       const param = policy.params.find((candidate) => candidate.id === tokens[i]);
       if (!param) continue;
-      const value = decodeValue(param, tokens[i + 1]);
+      const value = decodeValue(pack, policy, param, tokens[i + 1]);
       if (value !== undefined) given[param.id] = value;
     }
+  }
+  for (const [policy, given] of read) {
     const resolved = resolveParams(pack, policy, given);
     const params: ParamValues = {};
     for (const param of policy.params) {
       if (!Object.hasOwn(given, param.id)) continue;
-      // A curve that was replaced by the default (wrong number of points) is left out like any
-      // other value that cannot be read, instead of being pinned to today's default.
+      // A curve that falls back to the default (wrong number of points) is left out like any other
+      // value that cannot be read, instead of being pinned to today's default. decodeValue already
+      // drops such a token; this guards the rule here as well.
       if (param.type === "curve" && resolved[param.id] === param.default) continue;
       params[param.id] = resolved[param.id];
     }

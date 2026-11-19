@@ -6,6 +6,8 @@ import {
   encodeScenario,
   firstYearAbove,
   firstYearBelow,
+  isComparablePlan,
+  isFollowablePlan,
   longRunDebtRatio,
   presetApplies,
   projectDebt,
@@ -464,5 +466,116 @@ describe("search helpers", () => {
     const year = firstYearBelow(surplus, 0.3)!;
     expect(surplus.years.find((record) => record.year === year)!.debtRatio).toBeLessThan(0.3);
     expect(firstYearBelow(surplus, -1)).toBeNull();
+  });
+});
+
+describe("official plans", () => {
+  it("only a whole-state plan in national accounts can be drawn against the projection", () => {
+    const [ministry, centralInterest] = testland.debt!.plans!;
+    expect(isComparablePlan(ministry)).toBe(true);
+    expect(isComparablePlan(centralInterest)).toBe(false);
+    expect(isComparablePlan({ ...ministry, accounts: "cash" })).toBe(false);
+    expect(isComparablePlan({ ...ministry, scope: "central" })).toBe(false);
+  });
+
+  it("change nothing in the projection", () => {
+    const pack = testlandCopy();
+    delete pack.debt!.plans;
+    expect(projectScenario(pack, { policies: {} })).toEqual(projectScenario(testland, { policies: {} }));
+  });
+});
+
+describe("following a plan", () => {
+  // Testland's ministry projection: 52 % of GDP in 2025, 55 % in 2026 with 4 % growth, balance -3.5 % in 2026.
+  const FOLLOW = { follow: "ministry_projection" };
+  const preset = testland.debt!.presets.find((candidate) => candidate.id === "ministry_plan")!;
+
+  it("without follow the projection is what it always was", () => {
+    const plain = projectScenario(testland, ALL)!;
+    expect(plain.followed).toBeUndefined();
+    expect("follow" in plain.assumptions).toBe(false);
+    expect(projectScenario(testland, ALL, { follow: undefined })).toEqual(plain);
+    // A plan that cannot be followed, or none at all, is dropped and changes nothing.
+    for (const follow of ["central_budget_interest", "no_such"]) {
+      const projection = projectScenario(testland, ALL, { follow })!;
+      expect(projection).toEqual(plain);
+    }
+  });
+
+  it("only a whole-state plan in national accounts with a debt ratio every year can be followed", () => {
+    const [ministry, centralInterest] = testland.debt!.plans!;
+    expect(isFollowablePlan(ministry)).toBe(true);
+    expect(isFollowablePlan(centralInterest)).toBe(false);
+    expect(isFollowablePlan({ ...ministry, points: [ministry.points[0], { ...ministry.points[1], year: 2027 }] })).toBe(false);
+    expect(isFollowablePlan({ ...ministry, points: [ministry.points[0], { ...ministry.points[1], balanceRatio: undefined }] })).toBe(false);
+    expect(isFollowablePlan({ ...ministry, points: [{ year: 2025, balanceRatio: -0.04 }, ministry.points[1]] })).toBe(false);
+    expect(resolveDebtAssumptions(testland.debt!, { follow: "central_budget_interest" }).follow).toBeUndefined();
+    expect(resolveDebtAssumptions(testland.debt!, FOLLOW).follow).toBe("ministry_projection");
+  });
+
+  it("the path without measures meets the plan's debt ratio in each of its years, with the plan's growth", () => {
+    const projection = projectScenario(testland, { policies: {} }, FOLLOW)!;
+    const [y2025, y2026] = projection.baseline.years;
+    expect(y2025.debtRatio).toBeCloseTo(0.52, 12);
+    expect(y2026.debtRatio).toBeCloseTo(0.55, 12);
+    // 3 % growth from the assumption in 2025, 4 % from the plan in 2026.
+    expectYear(y2025, { gdp: 10300, debt: 5356, interest: 125, primaryBalance: -231 });
+    expectYear(y2026, { gdp: 10712, debt: 5891.6 });
+    expect(projection.followed).toEqual({ plan: "ministry_projection", until: 2026 });
+  });
+
+  it("after the plan it holds the plan's last balance plus the model's interest, and the drift counts from there", () => {
+    const projection = projectScenario(testland, { policies: {} }, { ...FOLLOW, drift: -0.1 })!;
+    const [, y2026, y2027, y2028] = projection.baseline.years;
+    const held = -0.035 + y2026.interestRatio;
+    expect(y2027.primaryBalanceRatio).toBeCloseTo(held - 0.001, 12);
+    expect(y2028.primaryBalanceRatio).toBeCloseTo(held - 0.002, 12);
+    // Growth after the plan is the assumption's again.
+    expect(y2027.gdp / y2026.gdp).toBeCloseTo(1.03, 12);
+    // The debt at the end of the plan is the plan's whatever the drift.
+    expect(y2026.debtRatio).toBeCloseTo(0.55, 12);
+  });
+
+  it("measures shift the path as they do without a plan", () => {
+    const projection = projectScenario(testland, ALL, FOLLOW)!;
+    const base = projectScenario(testland, ALL)!;
+    // The change of the base year's primary balance, as a share of GDP, applies in every year.
+    const change = base.reform.start.primaryBalanceRatio - base.baseline.start.primaryBalanceRatio;
+    for (const key of ["reform", "reformLow", "reformHigh"] as const) {
+      const own = base[key].start.primaryBalanceRatio - base.baseline.start.primaryBalanceRatio;
+      projection[key].years.forEach((year, i) => {
+        expect(year.primaryBalanceRatio - projection.baseline.years[i].primaryBalanceRatio).toBeCloseTo(own, 12);
+      });
+    }
+    // Only the path without measures meets the plan; the measures of ALL improve the balance, so
+    // the debt stays below it.
+    expect(change).toBeGreaterThan(0);
+    expect(projection.reform.years[1].debtRatio).toBeLessThan(0.55);
+    expect(projection.baseline.years[1].debtRatio).toBeCloseTo(0.55, 12);
+    expect(projection.reform.start).toEqual(base.reform.start);
+  });
+
+  it("the horizon can end inside the plan; the long run still holds the balance after the plan", () => {
+    const short = projectScenario(testland, { policies: {} }, { ...FOLLOW, horizon: 1 })!;
+    expect(short.baseline.years).toHaveLength(1);
+    expect(short.followed).toEqual({ plan: "ministry_projection", until: 2025 });
+    const long = projectScenario(testland, { policies: {} }, { ...FOLLOW, horizon: 30 })!;
+    expect(short.baseline.years[0]).toEqual(long.baseline.years[0]);
+    // At 4 % on new debt and 3 % growth a primary deficit diverges, whether the horizon ends in or after the plan.
+    expect(long.baseline.years[2].primaryBalanceRatio).toBeLessThan(0);
+    expect(short.baseline.longRun).toEqual({ kind: "diverges" });
+    expect(long.baseline.longRun).toEqual({ kind: "diverges" });
+  });
+
+  it("a preset can follow a plan; one without follow stops following", () => {
+    const followed = applyDebtPreset(testland.debt!, resolveDebtAssumptions(testland.debt!), preset);
+    expect(followed.follow).toBe("ministry_projection");
+    expect(presetApplies(preset, followed)).toBe(true);
+    const highRates = testland.debt!.presets[0];
+    expect(presetApplies(highRates, { ...followed, market_rate: 8 })).toBe(false);
+    const after = applyDebtPreset(testland.debt!, followed, highRates);
+    expect(after.follow).toBeUndefined();
+    expect(presetApplies(highRates, after)).toBe(true);
+    expect(presetApplies(preset, after)).toBe(false);
   });
 });

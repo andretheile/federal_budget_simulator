@@ -19,12 +19,18 @@ interface Files {
   id?: string;
   country: Loose;
   budget: Loose;
-  policies: { policies: Loose[] };
+  /** collections [0] budget_debate (wealth_tax, cut_admin, defense_target; with description and sources) [1] savings. */
+  policies: { policies: Loose[]; collections?: Loose[] };
   sources: Loose;
   distributions: Record<string, Loose>;
-  /** assumptions [0] market_rate [1] growth [2] horizon [3] drift; presets [0] high_rates [1] ageing [2] zero_rates;
-   *  references [0] neighbour (country) [1] treaty_limit (threshold) [2] peak_1995 (history). */
+  /** assumptions [0] market_rate [1] growth [2] horizon [3] drift; presets [0] high_rates [1] ageing [2] zero_rates
+   *  [3] ministry_plan (follows plans[0], no values);
+   *  references [0] neighbour (country) [1] treaty_limit (threshold) [2] peak_1995 (history);
+   *  plans [0] ministry_projection (all, national accounts, 2025 and 2026) [1] central_budget_interest (central, cash). */
   debt?: Loose;
+  /** default "central_gap"; goals [0] close_deficit (whole state; excluded [0] node exp.defense [1] policy family_bonus)
+   *  [1] central_gap (central). */
+  goals?: Loose;
 }
 
 function errorsAfter(mutate: (files: Files) => void): ValidationIssue[] {
@@ -64,6 +70,8 @@ describe("a valid pack", () => {
   it("does not need distributions, policies or optional fields", () => {
     const files = testlandFiles() as Files;
     files.policies.policies = [];
+    delete files.policies.collections;
+    files.goals.goals[0].excluded.pop();
     files.distributions = {};
     delete files.country.methodology;
     delete files.country.indicators.households;
@@ -186,7 +194,8 @@ describe("ids", () => {
   });
 
   it("duplicate policy id", () => {
-    expectOnly((f) => (f.policies.policies[1].id = "halve_mp_pay"), "policies.json", "$.policies[1].id", /duplicate policy id "halve_mp_pay"/);
+    // redraw_income_tax, which no collection and no goal lists, so renaming it leaves nothing pointing nowhere.
+    expectOnly((f) => (f.policies.policies[8].id = "halve_mp_pay"), "policies.json", "$.policies[8].id", /duplicate policy id "halve_mp_pay"/);
   });
 
   it("duplicate param id within a policy", () => {
@@ -446,6 +455,8 @@ describe("policies", () => {
   it("`add` or `set` on a group whose leaves are all zero", () => {
     const zeroTaxes = (f: Files, type: string): void => {
       for (const leaf of f.budget.revenue[0].children) leaf.amount = 0;
+      delete f.policies.collections;
+      f.goals.goals[0].excluded.pop();
       f.policies.policies = [
         { id: "p", label: { en: "p", de: "p" }, summary: { en: "p", de: "p" }, topic: "taxes", params: [], effects: [{ type, target: "rev.taxes", amount: 10, quality: "estimate" }], catches: [], sources: [] },
       ];
@@ -524,6 +535,8 @@ describe("shift", () => {
       for (const leaf of f.budget.revenue[0].children) leaf.amount = 0;
       // Without the policies that tax income and wealth, so only the shift is at stake.
       f.policies.policies = [f.policies.policies[7]];
+      delete f.policies.collections;
+      f.goals.goals[0].excluded.pop();
       f.distributions = {};
       f.sources = { finance_ministry: f.sources.finance_ministry, stats_office: f.sources.stats_office };
     };
@@ -897,6 +910,7 @@ describe("validatePackFiles", () => {
       "distributions/income.json": JSON.stringify(files.distributions.income),
       "distributions/wealth.json": JSON.stringify(files.distributions.wealth),
       "debt.json": JSON.stringify(files.debt),
+      "goals.json": JSON.stringify(files.goals),
     };
   };
 
@@ -981,6 +995,61 @@ describe("reporting", () => {
   });
 });
 
+describe("collections in policies.json", () => {
+  const POLICIES = "policies.json";
+
+  it("are optional, and exposed on the pack in file order when present", () => {
+    const files = testlandFiles() as Files;
+    delete files.policies.collections;
+    const without = validatePack(files);
+    expect(without).toMatchObject({ ok: true, warnings: [] });
+    expect(without.ok && "collections" in without.pack).toBe(false);
+
+    const result = validatePack(testlandFiles());
+    expect(result.ok && result.pack.collections?.map((collection) => collection.id)).toEqual(["budget_debate", "savings"]);
+    expect(result.ok && result.pack.collections?.[0].policies).toEqual(["wealth_tax", "cut_admin", "defense_target"]);
+    // An empty list is allowed too.
+    expect(validatePack(((f) => ((f.policies.collections = []), f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("the shape is strict, and a collection is not empty", () => {
+    expectOnly((f) => (f.policies.collections![0].extra = 1), POLICIES, "$.collections[0]", /Unrecognized key: "extra"/);
+    expectOnly((f) => (f.policies.collections![0].policies = []), POLICIES, "$.collections[0].policies", />=1 items/);
+    expectOnly((f) => (f.policies.collections![0].id = "Budget"), POLICIES, "$.collections[0].id", /lower_snake_case/);
+    expectOnly((f) => delete f.policies.collections![1].label, POLICIES, "$.collections[1].label", /expected object/);
+    expectOnly((f) => ((f.policies as Loose).collections = {}), POLICIES, "$.collections", /expected array/);
+  });
+
+  it("ids are unique", () => {
+    expectOnly((f) => (f.policies.collections![1].id = "budget_debate"), POLICIES, "$.collections[1].id", /duplicate collection id "budget_debate"/);
+  });
+
+  it("every listed policy exists and is listed once", () => {
+    expectOnly((f) => (f.policies.collections![0].policies[1] = "no_such"), POLICIES, "$.collections[0].policies[1]", /unknown policy "no_such"/);
+    expectOnly(
+      (f) => f.policies.collections![0].policies.push("wealth_tax"),
+      POLICIES,
+      "$.collections[0].policies[3]",
+      /policy "wealth_tax" is listed twice in collection "budget_debate"/,
+    );
+    // A policy may be in several collections.
+    expect(validatePack(((f) => (f.policies.collections![1].policies.push("wealth_tax"), f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("sources exist and texts have every locale", () => {
+    expectOnly((f) => (f.policies.collections![0].sources[0] = "nowhere"), POLICIES, "$.collections[0].sources[0]", /unknown source "nowhere"/);
+    expectOnly((f) => delete f.policies.collections![0].label.de, POLICIES, "$.collections[0].label", /text for locale "de" is missing/);
+    expectOnly((f) => delete f.policies.collections![0].description.de, POLICIES, "$.collections[0].description", /text for locale "de" is missing/);
+  });
+
+  it("sources cited only by a collection count as used", () => {
+    const files = testlandFiles() as Files;
+    files.sources.debate_record = { ...files.sources.stats_office };
+    files.policies.collections![1].sources = ["debate_record"];
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+});
+
 describe("debt.json", () => {
   const DEBT = "debt.json";
 
@@ -1002,6 +1071,7 @@ describe("debt.json", () => {
       "distributions/income.json": JSON.stringify(files.distributions.income),
       "distributions/wealth.json": JSON.stringify(files.distributions.wealth),
       "debt.json": JSON.stringify(files.debt),
+      "goals.json": JSON.stringify(files.goals),
     };
     const result = validatePackFiles(texts, "xx");
     expect(result).toEqual({ ok: true, pack: testland, warnings: [] });
@@ -1190,5 +1260,264 @@ describe("debt.json", () => {
     const group = testlandFiles() as Files;
     group.debt.comparisons = [{ node: "exp.admin" }];
     expect(validatePack(group)).toMatchObject({ ok: true, warnings: [] });
+  });
+});
+
+describe("plans in debt.json", () => {
+  const DEBT = "debt.json";
+
+  it("are optional", () => {
+    const files = testlandFiles() as Files;
+    delete files.debt.plans;
+    // The preset that follows one has to go with them.
+    files.debt.presets.pop();
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("the shape is strict: a scope, the accounts, points, sources and a note", () => {
+    expectOnly((f) => (f.debt.plans[0].extra = 1), DEBT, "$.plans[0]", /Unrecognized key: "extra"/);
+    expectOnly((f) => delete f.debt.plans[0].scope, DEBT, "$.plans[0].scope", /expected one of "all"\|"central"/);
+    expectOnly((f) => (f.debt.plans[0].scope = "federal"), DEBT, "$.plans[0].scope", /expected one of "all"\|"central"/);
+    expectOnly((f) => (f.debt.plans[0].accounts = "accrual"), DEBT, "$.plans[0].accounts", /expected one of "national_accounts"\|"cash"/);
+    expectOnly((f) => (f.debt.plans[0].points = []), DEBT, "$.plans[0].points", />=1 items/);
+    expectOnly((f) => (f.debt.plans[0].points[0].debtRatio = -0.1), DEBT, "$.plans[0].points[0].debtRatio", />=0/);
+    expectOnly((f) => (f.debt.plans[0].points[0].debt = 1), DEBT, "$.plans[0].points[0]", /Unrecognized key: "debt"/);
+    expectOnly((f) => (f.debt.plans[1].points[0].interest = -1), DEBT, "$.plans[1].points[0].interest", />=0/);
+    expectOnly((f) => (f.debt.plans[0].sources = []), DEBT, "$.plans[0].sources", />=1 items/);
+    expectOnly((f) => delete f.debt.plans[0].note, DEBT, "$.plans[0].note", /expected object/);
+  });
+
+  it("ids are unique, sources exist and texts have every locale", () => {
+    expectOnly((f) => (f.debt.plans[1].id = "ministry_projection"), DEBT, "$.plans[1].id", /duplicate plan id "ministry_projection"/);
+    expectOnly((f) => (f.debt.plans[0].sources[0] = "nowhere"), DEBT, "$.plans[0].sources[0]", /unknown source "nowhere"/);
+    expectOnly((f) => delete f.debt.plans[0].label.de, DEBT, "$.plans[0].label", /text for locale "de" is missing/);
+    expectOnly((f) => delete f.debt.plans[1].note.de, DEBT, "$.plans[1].note", /text for locale "de" is missing/);
+  });
+
+  it("the scope is the whole state or a level the country has", () => {
+    // Testland has no local level.
+    expectOnly((f) => (f.debt.plans[1].scope = "local"), DEBT, "$.plans[1].scope", /level "local" is not defined in country.json/);
+    expect(validatePack(((f) => ((f.debt.plans[1].scope = "state"), f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("years ascend, each once, and every point has a value", () => {
+    // Without the preset that follows the plan, which would then report the plan as not followable too.
+    const unfollowed = (mutate: (f: Files) => void) => (f: Files) => {
+      f.debt.presets.pop();
+      mutate(f);
+    };
+    expectOnly(unfollowed((f) => (f.debt.plans[0].points[1].year = 2025)), DEBT, "$.plans[0].points[1].year", /ascending, each once, but 2025 follows 2025/);
+    expectOnly(unfollowed((f) => (f.debt.plans[0].points[1].year = 2024)), DEBT, "$.plans[0].points[1].year", /but 2024 follows 2025/);
+    expectOnly(unfollowed((f) => (f.debt.plans[0].points[0] = { year: 2025 })), DEBT, "$.plans[0].points[0]", /a point needs at least one of "debtRatio"/);
+  });
+
+  it("growth is a fraction above -1", () => {
+    expectOnly((f) => (f.debt.plans[0].points[1].growth = -1), DEBT, "$.plans[0].points[1].growth", />-1/);
+    expect(warningsAfter((f) => (f.debt.plans[0].points[1].growth = 3))).toEqual([
+      { file: DEBT, path: "$.plans[0].points[1].growth", message: expect.stringMatching(/3 means 300 % growth; growth is a fraction/) },
+    ]);
+  });
+
+  it("warns about ratios that look like percentages", () => {
+    expect(warningsAfter((f) => (f.debt.plans[0].points[0].debtRatio = 62.8))).toEqual([
+      { file: DEBT, path: "$.plans[0].points[0].debtRatio", message: expect.stringMatching(/62.8 means 6280 % of GDP/) },
+    ]);
+    expect(warningsAfter((f) => (f.debt.plans[0].points[0].balanceRatio = -4.5))).toEqual([
+      { file: DEBT, path: "$.plans[0].points[0].balanceRatio", message: expect.stringMatching(/-4.5 means -450 % of GDP/) },
+    ]);
+    expect(warningsAfter((f) => (f.debt.plans[0].points[1].interestRatio = 1.2))).toEqual([
+      { file: DEBT, path: "$.plans[0].points[1].interestRatio", message: expect.stringMatching(/1.2 means 120 % of GDP/) },
+    ]);
+    expect(warningsAfter((f) => (f.debt.plans[0].points[1].interestToRevenue = 3))).toEqual([
+      { file: DEBT, path: "$.plans[0].points[1].interestToRevenue", message: expect.stringMatching(/3 means 300 % of revenue/) },
+    ]);
+  });
+});
+
+describe("goals.json", () => {
+  const GOALS = "goals.json";
+
+  it("is optional: without it the pack is valid and has no goals", () => {
+    const files = testlandFiles() as Files;
+    delete files.goals;
+    const result = validatePack(files);
+    expect(result).toMatchObject({ ok: true, warnings: [] });
+    expect(result.ok && "goals" in result.pack).toBe(false);
+  });
+
+  it("is read by validatePackFiles like the other files", () => {
+    const files = testlandFiles() as Files;
+    const texts: Record<string, string> = {
+      "country.json": JSON.stringify(files.country),
+      "budget.json": JSON.stringify(files.budget),
+      "policies.json": JSON.stringify(files.policies),
+      "sources.json": JSON.stringify(files.sources),
+      "distributions/income.json": JSON.stringify(files.distributions.income),
+      "distributions/wealth.json": JSON.stringify(files.distributions.wealth),
+      "goals.json": JSON.stringify(files.goals),
+    };
+    const result = validatePackFiles(texts, "xx");
+    expect(result.ok && result.pack.goals).toEqual(testland.goals);
+    const broken = validatePackFiles({ ...texts, "goals.json": "{ goals: [] }" }, "xx");
+    expect(broken.ok ? [] : broken.errors).toEqual([{ file: GOALS, path: "$", message: expect.stringMatching(/^not valid JSON: /) }]);
+  });
+
+  it("the shape is strict", () => {
+    expectOnly((f) => (f.goals.extra = 1), GOALS, "$", /Unrecognized key: "extra"/);
+    expectOnly((f) => (f.goals.goals = []), GOALS, "$.goals", />=1 items/);
+    expectOnly((f) => delete f.goals.default, GOALS, "$.default", /expected string/);
+    expectOnly((f) => (f.goals.goals[0].amount = 0), GOALS, "$.goals[0].amount", />0/);
+    expectOnly((f) => (f.goals.goals[0].amount = -5), GOALS, "$.goals[0].amount", />0/);
+    expectOnly((f) => delete f.goals.goals[0].year, GOALS, "$.goals[0].year", /expected number/);
+    expectOnly((f) => (f.goals.goals[1].level = "federal"), GOALS, "$.goals[1].level", /expected one of "central"/);
+    expectOnly((f) => (f.goals.goals[0].sources = []), GOALS, "$.goals[0].sources", />=1 items/);
+    expectOnly((f) => delete f.goals.goals[0].description, GOALS, "$.goals[0].description", /expected object/);
+    expectOnly((f) => delete f.goals.goals[0].note, GOALS, "$.goals[0].note", /expected object/);
+    expectOnly((f) => (f.goals.goals[0].quality = "guess"), GOALS, "$.goals[0].quality", /official/);
+  });
+
+  it("a broken goals.json makes the pack invalid without errors in the other files", () => {
+    const files = testlandFiles() as Files;
+    files.goals.goals = "many";
+    const result = validatePack(files);
+    expect(result.ok ? [] : result.errors.map((e) => e.file)).toEqual([GOALS]);
+  });
+
+  it("ids are unique and the default is one of them", () => {
+    // Renaming the first keeps the default, "central_gap", known.
+    expectOnly((f) => (f.goals.goals[0].id = "central_gap"), GOALS, "$.goals[1].id", /duplicate goal id "central_gap"/);
+    expectOnly((f) => (f.goals.default = "no_such"), GOALS, "$.default", /unknown goal "no_such"/);
+  });
+
+  it("the level exists in country.json", () => {
+    expectOnly((f) => (f.goals.goals[1].level = "local"), GOALS, "$.goals[1].level", /level "local" is not defined in country.json/);
+  });
+
+  it("sources exist, count as used, and texts have every locale", () => {
+    expectOnly((f) => (f.goals.goals[1].sources[0] = "nowhere"), GOALS, "$.goals[1].sources[0]", /unknown source "nowhere"/);
+    for (const key of ["label", "description", "note"]) {
+      expectOnly((f) => delete f.goals.goals[0][key].de, GOALS, `$.goals[0].${key}`, /text for locale "de" is missing/);
+    }
+    const files = testlandFiles() as Files;
+    files.sources.plan = { ...files.sources.stats_office };
+    files.goals.goals[1].sources = ["plan"];
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("warns about a goal for a year before the base year", () => {
+    expect(warningsAfter((f) => (f.goals.goals[0].year = 2020))).toEqual([
+      { file: GOALS, path: "$.goals[0].year", message: "2020 lies before the base year 2024" },
+    ]);
+    // The base year itself is fine.
+    expect(warningsAfter((f) => (f.goals.goals[0].year = 2024))).toEqual([]);
+  });
+});
+
+describe("presets that follow a plan", () => {
+  const DEBT = "debt.json";
+
+  it("need values or a plan to follow", () => {
+    expectOnly((f) => delete f.debt.presets[3].follow, DEBT, "$.presets[3].values", /at least one assumption or follow a plan/);
+    // A preset may follow a plan and set values as well.
+    expect(validatePack(((f) => ((f.debt.presets[3].values = { growth: 2 }), f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("follow a plan that exists and that can be followed", () => {
+    expectOnly((f) => (f.debt.presets[3].follow = "no_such"), DEBT, "$.presets[3].follow", /unknown plan "no_such"/);
+    expectOnly(
+      (f) => (f.debt.presets[3].follow = "central_budget_interest"),
+      DEBT,
+      "$.presets[3].follow",
+      /plan "central_budget_interest" is for level "central" in cash accounts; only a plan for the whole state in national_accounts can be followed/,
+    );
+    expectOnly((f) => (f.debt.plans[0].accounts = "cash"), DEBT, "$.presets[3].follow", /for the whole state in cash accounts/);
+    // Not followable: a point without a debt ratio, a gap between years, no balance at the end.
+    expectOnly((f) => delete f.debt.plans[0].points[0].debtRatio, DEBT, "$.presets[3].follow", /cannot be followed: it needs a "debtRatio" in every point/);
+    expectOnly((f) => (f.debt.plans[0].points[1].year = 2027), DEBT, "$.presets[3].follow", /cannot be followed/);
+    expectOnly((f) => delete f.debt.plans[0].points[1].balanceRatio, DEBT, "$.presets[3].follow", /cannot be followed/);
+  });
+
+  it("warn about a plan that ends before the base year is over", () => {
+    expect(
+      warningsAfter((f) => {
+        f.debt.plans[0].points[0].year = 2023;
+        f.debt.plans[0].points[1].year = 2024;
+      }),
+    ).toEqual([{ file: DEBT, path: "$.presets[3].follow", message: 'plan "ministry_projection" has no year after the base year 2024, so following it changes nothing' }]);
+  });
+});
+
+describe("excluded nodes of a goal", () => {
+  const GOALS = "goals.json";
+
+  it("are optional, and the shape is strict", () => {
+    expect(validatePack(((f) => (delete f.goals.goals[0].excluded, f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+    expectOnly((f) => (f.goals.goals[0].excluded[0].extra = 1), GOALS, "$.goals[0].excluded[0]", /Unrecognized key: "extra"/);
+    expectOnly((f) => delete f.goals.goals[0].excluded[0].reason, GOALS, "$.goals[0].excluded[0].reason", /expected object/);
+  });
+
+  it("exist, once, none inside another", () => {
+    expectOnly((f) => (f.goals.goals[0].excluded[0].node = "exp.nope"), GOALS, "$.goals[0].excluded[0].node", /unknown budget node "exp.nope"/);
+    expectOnly((f) => f.goals.goals[0].excluded.push({ ...f.goals.goals[0].excluded[0] }), GOALS, "$.goals[0].excluded[2].node", /"exp.defense" is excluded twice/);
+    expectOnly(
+      (f) => f.goals.goals[0].excluded.push({ node: "exp.social", reason: { en: "x", de: "x" } }, { node: "exp.social.family", reason: { en: "x", de: "x" } }),
+      GOALS,
+      "$.goals[0].excluded[3].node",
+      /"exp.social.family" lies inside "exp.social", which is excluded already/,
+    );
+    // Two nodes side by side are fine, and so is a revenue node.
+    const files = testlandFiles() as Files;
+    files.goals.goals[0].excluded.push({ node: "exp.health", reason: { en: "x", de: "x" } }, { node: "rev.other", reason: { en: "x", de: "x" } });
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("sources exist and the reason has every locale", () => {
+    expectOnly((f) => (f.goals.goals[0].excluded[0].sources[0] = "nowhere"), GOALS, "$.goals[0].excluded[0].sources[0]", /unknown source "nowhere"/);
+    expectOnly((f) => delete f.goals.goals[0].excluded[0].reason.de, GOALS, "$.goals[0].excluded[0].reason", /text for locale "de" is missing/);
+  });
+
+  it("no effect or shift changes a group above an excluded node as a whole", () => {
+    // cut_admin scales exp.admin, which contains the parliament.
+    expectOnly(
+      (f) => (f.goals.goals[0].excluded[0].node = "exp.admin.parliament"),
+      GOALS,
+      "$.goals[0].excluded[0].node",
+      /"exp.admin.parliament" lies inside "exp.admin", which effect 0 of policy "cut_admin" changes as a whole/,
+    );
+    // A shift to a group above it is the same problem.
+    const errors = errorsAfter((f) => {
+      f.goals.goals[0].excluded[0].node = "exp.social.basic_income";
+      f.policies.policies[7].effects[0].shift.to = "exp.admin";
+      f.goals.goals[0].excluded[0].node = "exp.admin.other";
+    });
+    expect(errors.map(formatIssue)).toContainEqual(
+      expect.stringMatching(/"exp.admin.other" lies inside "exp.admin", which the shift of effect 0 of policy "cut_pensions" changes as a whole/),
+    );
+    // Excluding the group itself, or a node an effect only targets from inside, is fine.
+    expect(validatePack(((f) => ((f.goals.goals[0].excluded[0].node = "exp.admin"), f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+    expect(validatePack(((f) => ((f.goals.goals[0].excluded[0].node = "exp.social"), f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+  });
+});
+
+describe("excluded measures of a goal", () => {
+  const GOALS = "goals.json";
+
+  it("each entry names exactly one of a node and a policy", () => {
+    expectOnly((f) => (f.goals.goals[0].excluded[1].node = "exp.health"), GOALS, "$.goals[0].excluded[1]", /exactly one of "node" and "policy"/);
+    expectOnly((f) => delete f.goals.goals[0].excluded[0].node, GOALS, "$.goals[0].excluded[0]", /exactly one of "node" and "policy"/);
+  });
+
+  it("the policy exists and is listed once", () => {
+    expectOnly((f) => (f.goals.goals[0].excluded[1].policy = "no_such"), GOALS, "$.goals[0].excluded[1].policy", /unknown policy "no_such"/);
+    expectOnly((f) => f.goals.goals[0].excluded.push({ ...f.goals.goals[0].excluded[1] }), GOALS, "$.goals[0].excluded[2].policy", /policy "family_bonus" is excluded twice/);
+    expectOnly((f) => delete f.goals.goals[0].excluded[1].reason.de, GOALS, "$.goals[0].excluded[1].reason", /text for locale "de" is missing/);
+  });
+
+  it("a measure that is excluded may change a group above an excluded node", () => {
+    expectOnly((f) => (f.goals.goals[0].excluded[0].node = "exp.admin.parliament"), GOALS, "$.goals[0].excluded[0].node", /effect 0 of policy "cut_admin"/);
+    const files = testlandFiles() as Files;
+    files.goals.goals[0].excluded[0].node = "exp.admin.parliament";
+    files.goals.goals[0].excluded.push({ policy: "cut_admin", reason: { en: "x", de: "x" } });
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
   });
 });

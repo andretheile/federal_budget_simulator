@@ -5,7 +5,9 @@
  * errors of each invalid pack and exits with status 1 if there are any. For each valid pack it
  * prints the derived totals and what every policy does on its own at default parameters, so a
  * reviewer can judge whether the numbers are plausible, and for a pack with debt.json the debt
- * and interest in the base year and 10 and 20 years later at default assumptions.
+ * and interest in the base year and 10 and 20 years later at default assumptions, set against the
+ * official plans the file lists. It also lists the collections of measures with their joint effect,
+ * and the goals of goals.json.
  *
  * Runs on plain Node (>= 22.18), which strips the TypeScript types itself.
  */
@@ -13,7 +15,10 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, relative, resolve, sep } from "node:path";
 import process from "node:process";
 import {
+  applyDebtPreset,
   formatIssue,
+  goalProgress,
+  isComparablePlan,
   projectScenario,
   resolveDebtAssumptions,
   shareOfGdp,
@@ -22,6 +27,7 @@ import {
   validatePackFiles,
   type CountryPack,
   type DebtLongRun,
+  type DebtPath,
   type ValidationIssue,
 } from "../src/engine/index.ts";
 
@@ -93,6 +99,24 @@ function printSummary(pack: CountryPack): void {
   }
 }
 
+/** Each collection: how many measures it lists and what they do together at default parameters. */
+function printCollections(pack: CountryPack): void {
+  const collections = pack.collections ?? [];
+  if (collections.length === 0) return;
+  console.log("  collections, with the effect of all their measures switched on together at default parameters:");
+  const width = Math.max(...collections.map((collection) => collection.id.length));
+  for (const collection of collections) {
+    const policies = Object.fromEntries(collection.policies.map((id) => [id, { enabled: true }]));
+    const result = simulate(pack, { policies });
+    const range =
+      result.deltaLow.balance === result.deltaHigh.balance
+        ? ""
+        : `  (${amount(result.deltaLow.balance, true)} to ${amount(result.deltaHigh.balance, true)})`;
+    const count = `${collection.policies.length} measure${collection.policies.length === 1 ? "" : "s"}`;
+    console.log(`    ${collection.id.padEnd(width)}  ${count.padStart(12)}  ${amount(result.delta.balance, true).padStart(14)}${range}`);
+  }
+}
+
 function longRun(outcome: DebtLongRun): string {
   if (outcome.kind === "drifts") return "never settles, the primary balance keeps changing";
   if (outcome.kind === "diverges") return "grows faster than the economy without limit";
@@ -122,6 +146,110 @@ function printDebtSummary(pack: CountryPack): void {
     );
   }
   console.log(`    in the long run the debt ratio ${longRun(baseline.longRun)}`);
+  printPlans(pack, baseline);
+  printFollowingPresets(pack, baseline);
+}
+
+/**
+ * Presets that follow a plan: their path without measures, in the plan's years and 10, 20 and 30
+ * years after the base year, beside the path at default assumptions.
+ */
+function printFollowingPresets(pack: CountryPack, defaults: DebtPath): void {
+  const debt = pack.debt;
+  if (!debt) return;
+  for (const preset of debt.presets.filter((candidate) => candidate.follow !== undefined)) {
+    const start = resolveDebtAssumptions(debt);
+    const assumptions = applyDebtPreset(debt, { ...start, horizon: Math.max(start.horizon, 30) }, preset);
+    const projection = projectScenario(pack, { policies: {} }, assumptions);
+    if (!projection) continue;
+    const { market_rate, growth, drift } = projection.assumptions;
+    const until = projection.followed ? `follows plan ${projection.followed.plan} to ${projection.followed.until}` : "follows no plan within the horizon";
+    console.log(`  preset ${preset.id} without measures: ${until}, then market rate ${market_rate} %, growth ${growth} %, drift ${drift} points a year:`);
+    console.log("    year            debt   of GDP        interest  of GDP  of revenue   primary balance   default: debt of GDP");
+    const planYears = new Set(debt.plans?.find((plan) => plan.id === preset.follow)?.points.map((point) => point.year) ?? []);
+    for (const year of [projection.baseline.start, ...projection.baseline.years]) {
+      const after = year.year - projection.baseYear;
+      if (!planYears.has(year.year) && after !== 0 && after !== 10 && after !== 20 && after !== 30) continue;
+      const fallback = [defaults.start, ...defaults.years].find((other) => other.year === year.year);
+      console.log(
+        `    ${year.year}  ${amount(year.debt).padStart(14)}  ${percent(year.debtRatio).padStart(7)}  ` +
+          `${amount(year.interest).padStart(14)}  ${percent(year.interestRatio, 2).padStart(6)}  ${percent(year.interestToRevenue).padStart(10)}  ` +
+          `${percent(year.primaryBalanceRatio, 2).padStart(16)}  ${(fallback ? percent(fallback.debtRatio) : "").padStart(21)}`,
+      );
+    }
+    console.log(`    in the long run the debt ratio ${longRun(projection.baseline.longRun)}`);
+  }
+}
+
+/**
+ * The official projections in debt.json. One that covers the whole state in national accounts is
+ * set against the model's path without measures; any other is listed with its scope.
+ */
+function printPlans(pack: CountryPack, baseline: DebtPath): void {
+  const plans = pack.debt?.plans ?? [];
+  if (plans.length === 0) return;
+  const optional = (value: number | undefined, format: (n: number) => string): string => (value === undefined ? "" : format(value));
+  for (const plan of plans) {
+    const scope = `${plan.scope === "all" ? "whole state" : plan.scope}, ${plan.accounts.replace("_", " ")}`;
+    if (isComparablePlan(plan)) {
+      console.log(`  official plan ${plan.id} (${scope}) against the model at default assumptions without measures:`);
+      console.log("    year   debt: plan    model   balance: plan    model   interest/GDP: plan    model");
+      for (const point of plan.points) {
+        const model = [baseline.start, ...baseline.years].find((year) => year.year === point.year);
+        const pct = (n: number): string => percent(n, 2);
+        console.log(
+          `    ${point.year}  ${optional(point.debtRatio, pct).padStart(11)}  ${optional(model?.debtRatio, pct).padStart(7)}  ` +
+            `${optional(point.balanceRatio, pct).padStart(14)}  ${optional(model?.balanceRatio, pct).padStart(7)}  ` +
+            `${optional(point.interestRatio, pct).padStart(18)}  ${optional(model?.interestRatio, pct).padStart(7)}`,
+        );
+      }
+    } else {
+      console.log(`  official plan ${plan.id} (${scope}), not comparable with the projection:`);
+      for (const point of plan.points) {
+        const parts = [
+          point.debtRatio === undefined ? "" : `debt ${percent(point.debtRatio, 2)} of GDP`,
+          point.balanceRatio === undefined ? "" : `balance ${percent(point.balanceRatio, 2)} of GDP`,
+          point.interest === undefined ? "" : `interest ${amount(point.interest)}`,
+          point.interestRatio === undefined ? "" : `interest ${percent(point.interestRatio, 2)} of GDP`,
+          point.interestToRevenue === undefined ? "" : `interest ${percent(point.interestToRevenue, 1)} of revenue`,
+        ].filter(Boolean);
+        console.log(`    ${point.year}  ${parts.join(", ")}`);
+      }
+    }
+  }
+}
+
+/**
+ * goals.json: each goal with its level, year and amount; the default is marked. For a goal that
+ * leaves something out, what counts and what does not with its excluded measures switched on, and
+ * with every measure switched on, at default parameters.
+ */
+function printGoals(pack: CountryPack): void {
+  const goals = pack.goals;
+  if (!goals) return;
+  console.log("  goals, the improvement of a level's balance each asks for (* is the default):");
+  const width = Math.max(...goals.goals.map((goal) => goal.id.length));
+  /** Within a cent of zero is zero: counted and excluded parts are differences of large sums. */
+  const money = (value: number): string => amount(Math.abs(value) < 0.01 ? 0 : value, true);
+  const on = (ids: readonly string[]) => ({ policies: Object.fromEntries(ids.map((id) => [id, { enabled: true }])) });
+  for (const goal of goals.goals) {
+    const mark = goal.id === goals.default ? "*" : " ";
+    const entries = goal.excluded ?? [];
+    const names = entries.map((entry) => entry.node ?? `measure ${entry.policy}`);
+    const without = names.length === 0 ? "" : `  not counting ${names.join(", ")}`;
+    console.log(`    ${mark} ${goal.id.padEnd(width)}  ${(goal.level ?? "whole state").padEnd(15)}  ${goal.year}  ${amount(goal.amount).padStart(12)}${without}`);
+    if (entries.length === 0) continue;
+    const excludedPolicies = entries.flatMap((entry) => (entry.policy === undefined ? [] : [entry.policy]));
+    const scenarios: [string, readonly string[]][] = [
+      ...(excludedPolicies.length > 0 ? [["with the excluded measures on", excludedPolicies] as [string, readonly string[]]] : []),
+      ["with every measure on", pack.policies.map((policy) => policy.id)],
+    ];
+    for (const [label, ids] of scenarios) {
+      const progress = goalProgress(pack, on(ids), goal);
+      const parts = progress.excluded.map((entry) => `${entry.node ?? entry.policy} ${money(entry.improvement)}`).join(", ");
+      console.log(`        ${label}: counted ${money(progress.improvement)}, not counted ${money(progress.excludedImprovement)} (${parts})`);
+    }
+  }
 }
 
 function main(): number {
@@ -148,6 +276,8 @@ function main(): number {
       console.log(`${label}/${id}: valid`);
       printIssues("warnings", result.warnings);
       printSummary(result.pack);
+      printCollections(result.pack);
+      printGoals(result.pack);
       printDebtSummary(result.pack);
     } else {
       invalid++;

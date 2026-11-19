@@ -386,3 +386,67 @@ describe("curve params", () => {
     expect(encodeScenario(curveOn([{ x: 10, y: 10 }, { x: 30, y: 40 }]))).toBe("redraw_income_tax.tariff.10_10_30_40");
   });
 });
+
+describe("several items for the same policy", () => {
+  const decoded = (text: string) => decodeScenario(text, testland).policies;
+
+  it("add up: a param the pack does not know leaves the valid ones of an earlier item (the reported case)", () => {
+    expect(decoded("cut_admin.cut.20~cut_admin.nope.3")).toEqual({ cut_admin: { enabled: true, params: { cut: 20 } } });
+  });
+
+  it("two valid tokens for the same measure in two items both count", () => {
+    expect(decoded("wealth_tax.rate.2~wealth_tax.threshold.2e3")).toEqual({ wealth_tax: { enabled: true, params: { rate: 2, threshold: 2000 } } });
+  });
+
+  it("of two readable values for the same param the later one wins, in one item or in two", () => {
+    expect(decoded("cut_admin.cut.20~cut_admin.cut.30")).toEqual({ cut_admin: { enabled: true, params: { cut: 30 } } });
+    expect(decoded("cut_admin.cut.20.cut.30")).toEqual({ cut_admin: { enabled: true, params: { cut: 30 } } });
+  });
+
+  it("a valid token after an invalid one counts, and an unreadable value does not replace a valid one", () => {
+    expect(decoded("cut_admin.nope.3~cut_admin.cut.20")).toEqual({ cut_admin: { enabled: true, params: { cut: 20 } } });
+    expect(decoded("wealth_tax.rate.abc~wealth_tax.rate.2")).toEqual({ wealth_tax: { enabled: true, params: { rate: 2 } } });
+    expect(decoded("wealth_tax.rate.2~wealth_tax.rate.abc")).toEqual({ wealth_tax: { enabled: true, params: { rate: 2 } } });
+    expect(decoded("wealth_tax.rate.2.rate.abc")).toEqual({ wealth_tax: { enabled: true, params: { rate: 2 } } });
+  });
+
+  it("an unknown measure between valid ones changes nothing", () => {
+    expect(decoded("cut_admin.cut.20~abolished_policy.rate.5~cut_admin~halve_mp_pay")).toEqual({
+      cut_admin: { enabled: true, params: { cut: 20 } },
+      halve_mp_pay: { enabled: true },
+    });
+  });
+
+  it("an item that only switches a measure on keeps the params of another item, before or after it", () => {
+    expect(decoded("cut_admin~cut_admin.cut.20")).toEqual({ cut_admin: { enabled: true, params: { cut: 20 } } });
+    expect(decoded("cut_admin.cut.20~cut_admin")).toEqual({ cut_admin: { enabled: true, params: { cut: 20 } } });
+  });
+
+  it("curves: an unreadable curve or one with a number of points the param does not allow leaves a valid one", () => {
+    const valid = "redraw_income_tax.tariff.10_20_40_50";
+    const expected = { redraw_income_tax: { enabled: true, params: { tariff: [{ x: 10, y: 20 }, { x: 40, y: 50 }] } } };
+    // Seven points, where the param allows at most six.
+    const tooMany = "redraw_income_tax.tariff.1_1_2_2_3_3_4_4_5_5_6_6_7_7";
+    expect(decoded(`${valid}~${tooMany}`)).toEqual(expected);
+    expect(decoded(`${tooMany}~${valid}`)).toEqual(expected);
+    expect(decoded(`${valid}~redraw_income_tax.tariff.zzz`)).toEqual(expected);
+    expect(decoded(`${valid}~redraw_income_tax.tariff.1_2_3`)).toEqual(expected);
+    // Two valid curves: the later one wins.
+    expect(decoded(`${valid}~redraw_income_tax.tariff.5_5`).redraw_income_tax.params?.tariff).toEqual([{ x: 5, y: 5 }]);
+  });
+
+  it("groups: a selection whose groups are all unknown leaves an earlier one; the empty selection is a value", () => {
+    const id = "no_basic_income_non_citizens";
+    expect(decoded(`${id}.groups.eu~${id}.groups.martians`)).toEqual({ [id]: { enabled: true, params: { groups: ["eu"] } } });
+    expect(decoded(`${id}.groups.eu~${id}.groups.-`)).toEqual({ [id]: { enabled: true, params: { groups: [] } } });
+    // On its own a selection of unknown groups is ignored like any unreadable value, so the default applies.
+    expect(decoded(`${id}.groups.martians`)).toEqual({ [id]: { enabled: true } });
+    // Known and unknown groups in one token: the known ones count.
+    expect(decoded(`${id}.groups.martians-eu`)).toEqual({ [id]: { enabled: true, params: { groups: ["eu"] } } });
+  });
+
+  it("levels: the last level the pack has wins", () => {
+    expect(decodeScenario("L.state~L.municipal", testland).level).toBe("state");
+    expect(decodeScenario("L.state~L.central", testland).level).toBe("central");
+  });
+});

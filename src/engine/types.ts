@@ -4,10 +4,11 @@
  * A country pack is a directory `countries/<id>/` with
  *   country.json            -> Country
  *   budget.json             -> Budget
- *   policies.json           -> PoliciesFile
+ *   policies.json           -> PoliciesFile (the policies, and optional collections of them)
  *   sources.json            -> Record<SourceId, Source>
  *   distributions/<id>.json -> Distribution (the file name is the id)
  *   debt.json               -> DebtFile (optional: the debt and interest projection)
+ *   goals.json              -> GoalsFile (optional: how far a level's balance has to improve)
  *
  * Conventions
  * - Money is in plain currency units per year (euros, not millions).
@@ -414,9 +415,25 @@ export interface Catch {
   sources?: SourceId[];
 }
 
+/**
+ * A named group of measures that the pack chooses, for example the measures debated around one
+ * year's budget. A collection only groups: it changes no measure and is not a scenario. A measure
+ * can be in several collections, or in none.
+ */
+export interface PolicyCollection {
+  id: string;
+  label: LocalizedText;
+  description?: LocalizedText;
+  /** Ids of policies in policies.json, in the order the collection lists them. At least one, each once. */
+  policies: string[];
+  sources?: SourceId[];
+}
+
 /** Content of policies.json. */
 export interface PoliciesFile {
   policies: Policy[];
+  /** Optional named groups of the policies above. */
+  collections?: PolicyCollection[];
 }
 
 /** A validated country pack: the parsed content of all files of one country. */
@@ -425,11 +442,15 @@ export interface CountryPack {
   budget: Budget;
   /** In file order, which is the order policies are applied in. */
   policies: Policy[];
+  /** `collections` of policies.json, in file order. Absent if the file has none. */
+  collections?: PolicyCollection[];
   sources: Record<SourceId, Source>;
   /** Keyed by distribution id. */
   distributions: Record<string, Distribution>;
   /** Content of debt.json. Absent if the pack has none: then there is no debt projection. */
   debt?: DebtFile;
+  /** Content of goals.json. Absent if the pack has none. */
+  goals?: GoalsFile;
 }
 
 export const LEVEL_IDS: readonly LevelId[] = ["central", "state", "local", "social_security"];
@@ -507,9 +528,16 @@ export interface DebtPreset {
   note?: LocalizedText;
   /**
    * The assumptions the preset sets, in the units of their params and inside their ranges. At
-   * least one. Assumptions it does not name keep their current value.
+   * least one, unless the preset follows a plan. Assumptions it does not name keep their current
+   * value.
    */
   values: Partial<Record<DebtAssumptionId, number>>;
+  /**
+   * Id of a plan in `plans` that the projection follows with this preset (see
+   * DebtAssumptions.follow). It must be one that can be followed (isFollowablePlan). A preset
+   * without it stops following a plan.
+   */
+  follow?: string;
   sources?: SourceId[];
 }
 
@@ -551,6 +579,61 @@ export interface DebtComparison {
   label?: LocalizedText;
 }
 
+/**
+ * One year of an official projection. Ratios are fractions (0.6 is 60 %), money is in currency
+ * units. The names are those of the same figures in the projection's DebtYear. At least one value.
+ */
+export interface DebtPlanPoint {
+  year: number;
+  /** Gross debt as a fraction of GDP. */
+  debtRatio?: number;
+  /** Balance (revenue minus spending, negative for a deficit) as a fraction of GDP. */
+  balanceRatio?: number;
+  /** Interest as a fraction of GDP. */
+  interestRatio?: number;
+  /** Interest as a fraction of revenue. */
+  interestToRevenue?: number;
+  /** Interest in currency units. */
+  interest?: number;
+  /**
+   * Nominal GDP growth over the year before, as a fraction (0.03 is 3 %). A projection that follows
+   * the plan grows GDP at this rate in this year instead of the growth assumption.
+   */
+  growth?: number;
+}
+
+/**
+ * Which accounts an official projection follows:
+ *   national_accounts  ESA 2010, like the budget in budget.json and the debt projection
+ *   cash               budget plans and financial statistics: payments in and out of the budgets
+ */
+export type DebtPlanAccounts = "national_accounts" | "cash";
+
+/**
+ * An official projection of the country's own path, for example the government's medium-term
+ * fiscal projection: shown next to the model's path, for display only. It changes nothing in the
+ * model.
+ *
+ * The projection always covers the whole state in national accounts. A plan with `scope` "all" and
+ * `accounts` "national_accounts" describes the same thing and can be drawn against it (see
+ * isComparablePlan); any other plan, such as the interest bill in the central government's cash
+ * budget, is a figure of its own that must be shown with its scope.
+ */
+export interface DebtPlan {
+  id: string;
+  label: LocalizedText;
+  /** Whose finances the figures describe: "all" for the whole state, or one level of government. */
+  scope: LevelId | "all";
+  accounts: DebtPlanAccounts;
+  /** By year, ascending, each year once. At least one. */
+  points: DebtPlanPoint[];
+  quality: Quality;
+  /** At least one. */
+  sources: SourceId[];
+  /** What the figures are, their stand, and how they differ from the model's. */
+  note: LocalizedText;
+}
+
 /** Content of debt.json. */
 export interface DebtFile {
   /** Gross debt of general government at the end of the base year (for EU countries the Maastricht debt). */
@@ -564,6 +647,69 @@ export interface DebtFile {
   references: DebtReference[];
   /** Budget items to compare the interest bill with, in the order the interface lists them. Optional. */
   comparisons?: DebtComparison[];
+  /** Official projections of the country's own path, for display next to the model's. Optional. */
+  plans?: DebtPlan[];
   /** What the projection is and what it leaves out, in plain words; shown with it. */
   note: LocalizedText;
+}
+
+// ---------------------------------------------------------------------------------------------
+// goals.json: targets for the balance (optional)
+// ---------------------------------------------------------------------------------------------
+
+/**
+ * Something whose changes do not count towards a goal, with the reason: a budget node, for example
+ * spending that the rule behind the goal finances outside it, or a measure, for example one that the
+ * plan behind the goal already counts on. Exactly one of `node` and `policy`.
+ */
+export interface GoalExclusion {
+  /** Budget node id, leaf or group. Its changes and those of every node below it are left out. */
+  node?: string;
+  /**
+   * Policy id. Whatever the measure changes at the goal's level, inside the scenario, is left out:
+   * its own result there, the figure the interface shows for it at that level.
+   */
+  policy?: string;
+  /** Why, in a sentence a visitor understands. */
+  reason: LocalizedText;
+  sources?: SourceId[];
+}
+
+/**
+ * A target: the balance of one level of government, or of the whole state, has to improve by
+ * `amount` for `year`, for example to close a gap in the government's financial plan. Measures are
+ * compared with it by how far they improve that balance, the figure the interface shows as the
+ * relief or burden of a level, less the changes on excluded nodes (see goalProgress).
+ */
+export interface Goal {
+  id: string;
+  label: LocalizedText;
+  /** A sentence or two on what the goal is. */
+  description: LocalizedText;
+  /** The level whose balance has to improve; absent for the whole state. Must exist in country.levels. */
+  level?: LevelId;
+  /** How much the balance has to improve, in currency units per year, like budget amounts. Above 0. */
+  amount: number;
+  /** The year the amount refers to. */
+  year: number;
+  quality: Quality;
+  /** At least one. */
+  sources: SourceId[];
+  /** Where the amount comes from, its stand, and what comparing measures with it glosses over. */
+  note: LocalizedText;
+  /**
+   * Nodes and measures whose changes do not count towards the goal. Each node and each measure once,
+   * no node inside another. No effect or shift of a policy that is not excluded itself may target a
+   * group above an excluded node, since the part of its change that falls on the excluded node could
+   * not be told apart.
+   */
+  excluded?: GoalExclusion[];
+}
+
+/** Content of goals.json. */
+export interface GoalsFile {
+  /** Id of the goal shown first. */
+  default: string;
+  /** At least one, in the order the interface lists them. */
+  goals: Goal[];
 }

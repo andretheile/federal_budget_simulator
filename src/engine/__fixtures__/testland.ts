@@ -42,12 +42,29 @@
  *   an income of 20 owes 2 today and 1.75 after; an income of 45 owes 10 today and 11 after;
  *   incomes between 10 and 23 1/3 pay less, incomes above pay more.
  *
+ * Collections (policies.json): "budget_debate" lists wealth_tax, cut_admin and defense_target, in
+ * that order; "savings" lists cut_admin and halve_mp_pay. Together at defaults the first comes to
+ * +40 + 40 - 100 = -20.
+ *
  * Debt (debt.json): 5000 at the end of 2024, 50 % of GDP. Base-year interest is taken from
  * exp.interest (100; the official figure, interest.value, is 95), so the debt starts at an average
  * rate of 2 %. A quarter of it is refinanced each year. The primary balance is -400 + 100 = -300,
  * -3 % of GDP. Default assumptions: market rate 4 %, growth 3 %, 30 years, no drift. Year 1 at the
  * defaults: GDP 10300, primary balance -309, interest 5000 * (0.75 * 2 % + 0.25 * 4 %) = 125,
- * deficit 434, debt 5434.
+ * deficit 434, debt 5434. Two official plans: the ministry's projection for the whole state in
+ * national accounts (2025 and 2026), and the central budget's interest in cash.
+ *
+ * The preset "ministry_plan" follows the ministry's projection: GDP grows by 3 % (the growth
+ * assumption) in 2025 and by 4 % (the plan's) in 2026, to 10712; the path without measures has debt
+ * of 52 % of GDP (5356) in 2025 and 55 % (5891.6) in 2026. In 2025 interest is 125 as above, so the
+ * primary balance that meets the plan is 5000 + 125 - 5356 = -231. After 2026 the primary balance is
+ * the plan's balance of -3.5 % of GDP plus the model's interest of 2026, as a share of GDP.
+ *
+ * Goals (goals.json): "close_deficit", the whole state's balance up by 400 (no level), with changes on
+ * exp.defense and the measure family_bonus left out, and "central_gap", the default: the central government's balance up by 100 in 2027. On its own at
+ * defaults no_basic_income_non_citizens improves the central balance by 96 - 6 * 0.2 = 94.8
+ * (45.6 to 94.8), leaving 5.2 of central_gap; insure_civil_servants burdens it by 17.5: the employer's
+ * part of 50, of which the centre bears a fifth, and half of the 15 less income tax.
  */
 import type { RawPackFiles } from "../validate.ts";
 import type { CountryPack, LocalizedText } from "../types.ts";
@@ -656,6 +673,22 @@ export const testland: CountryPack = {
     },
   ],
 
+  // Measures under one name. Not in pack order, and a policy may be in several collections.
+  collections: [
+    {
+      id: "budget_debate",
+      label: t("Budget debate", "Haushaltsdebatte"),
+      description: t("Measures proposed in the debate on next year's budget.", "Maßnahmen aus der Debatte um den Haushalt des nächsten Jahres."),
+      policies: ["wealth_tax", "cut_admin", "defense_target"],
+      sources: ["finance_ministry"],
+    },
+    {
+      id: "savings",
+      label: t("Savings", "Einsparungen"),
+      policies: ["cut_admin", "halve_mp_pay"],
+    },
+  ],
+
   sources: {
     stats_office: {
       title: "Statistical yearbook",
@@ -806,6 +839,13 @@ export const testland: CountryPack = {
         label: t("Zero rates", "Nullzinsen"),
         values: { market_rate: 0 },
       },
+      {
+        id: "ministry_plan",
+        label: t("As the ministry plans", "Wie das Ministerium plant"),
+        note: t("Follows the ministry's projection to 2026.", "Folgt der Projektion des Ministeriums bis 2026."),
+        values: {},
+        follow: "ministry_projection",
+      },
     ],
     references: [
       {
@@ -843,10 +883,78 @@ export const testland: CountryPack = {
       { node: "exp.social.family", label: t("families", "Familien") },
       { node: "exp.social.pensions" },
     ],
+    // The ministry's own projection, comparable with the model's path, and the interest bill of the
+    // central budget in cash, which is not.
+    plans: [
+      {
+        id: "ministry_projection",
+        label: t("Ministry projection", "Projektion des Ministeriums"),
+        scope: "all",
+        accounts: "national_accounts",
+        points: [
+          { year: 2025, debtRatio: 0.52, balanceRatio: -0.04 },
+          { year: 2026, debtRatio: 0.55, balanceRatio: -0.035, interestRatio: 0.012, interestToRevenue: 0.03, growth: 0.04 },
+        ],
+        quality: "official",
+        sources: ["finance_ministry"],
+        note: t("Rounded to quarter points.", "Auf Viertelpunkte gerundet."),
+      },
+      {
+        id: "central_budget_interest",
+        label: t("Interest in the central budget", "Zinsen im Zentralhaushalt"),
+        scope: "central",
+        accounts: "cash",
+        points: [
+          { year: 2025, interest: 110 },
+          { year: 2026, interest: 120 },
+        ],
+        quality: "official",
+        sources: ["finance_ministry"],
+        note: t("Cash figures of the central budget.", "Kassenzahlen des Zentralhaushalts."),
+      },
+    ],
     note: t(
       "All numbers are invented. A what-if calculation, not a forecast.",
       "Alle Zahlen sind erfunden. Eine Wenn-dann-Rechnung, keine Prognose.",
     ),
+  },
+
+  goals: {
+    default: "central_gap",
+    goals: [
+      {
+        id: "close_deficit",
+        label: t("Close the deficit", "Das Defizit schließen"),
+        description: t("The whole state balances its budget.", "Der Staat gleicht seinen Haushalt aus."),
+        amount: 400,
+        year: 2026,
+        quality: "derived",
+        sources: ["finance_ministry"],
+        note: t("The deficit of the base year.", "Das Defizit des Basisjahres."),
+        excluded: [
+          {
+            node: "exp.defense",
+            reason: t("Defence is paid for outside the deficit rule.", "Verteidigung wird außerhalb der Defizitregel bezahlt."),
+            sources: ["finance_ministry"],
+          },
+          {
+            policy: "family_bonus",
+            reason: t("The plan already counts on it.", "Der Plan rechnet schon damit."),
+          },
+        ],
+      },
+      {
+        id: "central_gap",
+        label: t("Gap in the central budget", "Lücke im Zentralhaushalt"),
+        description: t("The central government's plan lacks 100 in 2027.", "Dem Plan des Zentralstaats fehlen 2027 100."),
+        level: "central",
+        amount: 100,
+        year: 2027,
+        quality: "official",
+        sources: ["finance_ministry"],
+        note: t("A cash figure for a later year.", "Eine Kassenzahl für ein späteres Jahr."),
+      },
+    ],
   },
 };
 
@@ -857,10 +965,11 @@ export function testlandFiles(): RawPackFiles {
     id: copy.country.id,
     country: copy.country,
     budget: copy.budget,
-    policies: { policies: copy.policies },
+    policies: copy.collections ? { policies: copy.policies, collections: copy.collections } : { policies: copy.policies },
     sources: copy.sources,
     distributions: copy.distributions,
     debt: copy.debt,
+    goals: copy.goals,
   };
 }
 
