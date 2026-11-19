@@ -218,22 +218,218 @@
                 "de": "Mehrwertsteuer (Umsatzsteuer)",
                 "en": "Value added tax (VAT)"
               },
-              "code": "D211",
-              "amount": 298764000000,
-              "levels": {
-                "central": 0.4807,
-                "state": 0.4939,
-                "local": 0.0254
+              "description": {
+                "de": "Betrag und Aufteilung auf die Ebenen laut Eurostat (298,8 Mrd. Euro). Der EU-Anteil erscheint als Ausgabe (EU-Beitrag). Die Aufteilung nach Steuersätzen ist aus den geschätzten Mindereinnahmen der ermäßigten Sätze abgeleitet; amtlich wird das Aufkommen nicht nach Sätzen ausgewiesen.",
+                "en": "Amount and split across levels according to Eurostat (EUR 298.8 billion). The EU share appears as expenditure (EU contribution). The split by rate is derived from the estimated revenue forgone through the reduced rates; revenue by rate is not published officially."
               },
-              "quality": "official",
-              "sources": [
-                "eurostat_ntl",
-                "eurostat_gov_10a_main"
-              ],
-              "note": {
-                "de": "Aufteilung auf die Ebenen laut Eurostat. Der EU-Anteil erscheint als Ausgabe (EU-Beitrag).",
-                "en": "Split across levels as reported by Eurostat. The EU share appears as expenditure (EU contribution)."
-              }
+              "code": "D211",
+              "children": [
+                {
+                  "id": "rev.taxes.consumption.vat.standard",
+                  "label": {
+                    "de": "Zum Regelsatz (2024: 19 %)",
+                    "en": "At the standard rate (2024: 19%)"
+                  },
+                  "children": [
+                    {
+                      "id": "rev.taxes.consumption.vat.standard.restaurants",
+                      "label": {
+                        "de": "Speisen in Restaurants und Gaststätten",
+                        "en": "Restaurant and catering meals"
+                      },
+                      "description": {
+                        "de": "Restaurant- und Verpflegungsdienstleistungen ohne Getränke. 2024 zum Regelsatz besteuert, seit 1. Januar 2026 zum ermäßigten Satz von 7 %.",
+                        "en": "Restaurant and catering services without beverages. Taxed at the standard rate in 2024, at the reduced rate of 7% since 1 January 2026."
+                      },
+                      "amount": 5383333333,
+                      "levels": {
+                        "central": 0.4807,
+                        "state": 0.4939,
+                        "local": 0.0254
+                      },
+                      "quality": "derived",
+                      "sources": [
+                        "eurostat_ntl",
+                        "eurostat_gov_10a_main",
+                        "bt_drs_21_5839",
+                        "zew_bmf_umsatzsteuersaetze_2025",
+                        "bt_drs_21_1600"
+                      ],
+                      "note": {
+                        "de": "Rechnerische Mindereinnahmen bei 7 statt 19 % laut Finanzministerium (3,40 Mrd. Euro), geteilt durch 12 und mal 19. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
+                        "en": "Computational revenue forgone at 7 instead of 19% according to the finance ministry (EUR 3.40 billion), divided by 12 and multiplied by 19. Split across levels as for VAT as a whole according to Eurostat."
+                      }
+                    },
+                    {
+                      "id": "rev.taxes.consumption.vat.standard.other",
+                      "label": {
+                        "de": "Übrige Waren und Dienstleistungen",
+                        "en": "Other goods and services"
+                      },
+                      "amount": 270514000000,
+                      "levels": {
+                        "central": 0.4807,
+                        "state": 0.4939,
+                        "local": 0.0254
+                      },
+                      "quality": "derived",
+                      "sources": [
+                        "eurostat_ntl",
+                        "eurostat_gov_10a_main",
+                        "bt_drs_21_5839",
+                        "zew_bmf_umsatzsteuersaetze_2025",
+                        "bt_drs_21_1600"
+                      ],
+                      "note": {
+                        "de": "Mehrwertsteuer insgesamt abzüglich des Aufkommens zum ermäßigten Satz und der Speisen in Restaurants. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
+                        "en": "Total VAT minus revenue at the reduced rate and from restaurant meals. Split across levels as for VAT as a whole according to Eurostat."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "rev.taxes.consumption.vat.reduced",
+                  "label": {
+                    "de": "Zum ermäßigten Satz (7 %)",
+                    "en": "At the reduced rate (7%)"
+                  },
+                  "description": {
+                    "de": "Aufkommen zum ermäßigten Satz, abgeleitet aus den rechnerischen Mindereinnahmen gegenüber dem Regelsatz (39,2 Mrd. Euro im Jahr 2024 laut Bundesregierung): geteilt durch den Abstand von 12 Punkten und mal 7.",
+                    "en": "Revenue at the reduced rate, derived from the computational revenue forgone compared with the standard rate (EUR 39.2 billion in 2024 according to the federal government): divided by the 12-point gap and multiplied by 7."
+                  },
+                  "children": [
+                    {
+                      "id": "rev.taxes.consumption.vat.reduced.food",
+                      "label": {
+                        "de": "Lebensmittel und Leitungswasser",
+                        "en": "Food and tap water"
+                      },
+                      "description": {
+                        "de": "Ermäßigt besteuerte Nahrungsmittel einschließlich Milch, Kaffee, Tee und Speisen zum Mitnehmen, dazu Leitungswasser.",
+                        "en": "Food taxed at the reduced rate, including milk, coffee, tea and take-away food, plus tap water."
+                      },
+                      "amount": 16286666667,
+                      "levels": {
+                        "central": 0.4807,
+                        "state": 0.4939,
+                        "local": 0.0254
+                      },
+                      "quality": "derived",
+                      "sources": [
+                        "eurostat_ntl",
+                        "eurostat_gov_10a_main",
+                        "bt_drs_21_5839",
+                        "zew_bmf_umsatzsteuersaetze_2025",
+                        "bt_drs_21_1600"
+                      ],
+                      "note": {
+                        "de": "Rechnerische Mindereinnahmen laut Finanzministerium (27,92 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
+                        "en": "Computational revenue forgone according to the finance ministry (EUR 27.92 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                      }
+                    },
+                    {
+                      "id": "rev.taxes.consumption.vat.reduced.hotels",
+                      "label": {
+                        "de": "Hotelübernachtungen",
+                        "en": "Hotel stays"
+                      },
+                      "amount": 1044166667,
+                      "levels": {
+                        "central": 0.4807,
+                        "state": 0.4939,
+                        "local": 0.0254
+                      },
+                      "quality": "derived",
+                      "sources": [
+                        "eurostat_ntl",
+                        "eurostat_gov_10a_main",
+                        "bt_drs_21_5839",
+                        "zew_bmf_umsatzsteuersaetze_2025",
+                        "bt_drs_21_1600"
+                      ],
+                      "note": {
+                        "de": "Mindereinnahmen laut Subventionsbericht (1,79 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
+                        "en": "Revenue forgone according to the Subsidy Report (EUR 1.79 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                      }
+                    },
+                    {
+                      "id": "rev.taxes.consumption.vat.reduced.culture",
+                      "label": {
+                        "de": "Kultur, Bücher, Zeitungen und Kunst",
+                        "en": "Culture, books, newspapers and art"
+                      },
+                      "amount": 2371250000,
+                      "levels": {
+                        "central": 0.4807,
+                        "state": 0.4939,
+                        "local": 0.0254
+                      },
+                      "quality": "derived",
+                      "sources": [
+                        "eurostat_ntl",
+                        "eurostat_gov_10a_main",
+                        "bt_drs_21_5839",
+                        "zew_bmf_umsatzsteuersaetze_2025",
+                        "bt_drs_21_1600"
+                      ],
+                      "note": {
+                        "de": "Mindereinnahmen laut Subventionsbericht (4,07 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
+                        "en": "Revenue forgone according to the Subsidy Report (EUR 4.07 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                      }
+                    },
+                    {
+                      "id": "rev.taxes.consumption.vat.reduced.transport",
+                      "label": {
+                        "de": "Nahverkehr und Bahn",
+                        "en": "Local public transport and rail"
+                      },
+                      "amount": 1318333333,
+                      "levels": {
+                        "central": 0.4807,
+                        "state": 0.4939,
+                        "local": 0.0254
+                      },
+                      "quality": "derived",
+                      "sources": [
+                        "eurostat_ntl",
+                        "eurostat_gov_10a_main",
+                        "bt_drs_21_5839",
+                        "zew_bmf_umsatzsteuersaetze_2025",
+                        "bt_drs_21_1600"
+                      ],
+                      "note": {
+                        "de": "Mindereinnahmen laut Subventionsbericht (2,26 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
+                        "en": "Revenue forgone according to the Subsidy Report (EUR 2.26 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                      }
+                    },
+                    {
+                      "id": "rev.taxes.consumption.vat.reduced.other",
+                      "label": {
+                        "de": "Übrige ermäßigt besteuerte Umsätze",
+                        "en": "Other sales at the reduced rate"
+                      },
+                      "amount": 1846250000,
+                      "levels": {
+                        "central": 0.4807,
+                        "state": 0.4939,
+                        "local": 0.0254
+                      },
+                      "quality": "derived",
+                      "sources": [
+                        "eurostat_ntl",
+                        "eurostat_gov_10a_main",
+                        "bt_drs_21_5839",
+                        "zew_bmf_umsatzsteuersaetze_2025",
+                        "bt_drs_21_1600"
+                      ],
+                      "note": {
+                        "de": "Rest: Aufkommen zum ermäßigten Satz insgesamt abzüglich der vier einzeln ausgewiesenen Bereiche. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
+                        "en": "Remainder: revenue at the reduced rate as a whole minus the four areas shown separately. Split across levels as for VAT as a whole according to Eurostat."
+                      }
+                    }
+                  ]
+                }
+              ]
             },
             {
               "id": "rev.taxes.consumption.energy",
@@ -290,19 +486,50 @@
                 "en": "Taxes on spirits, beer, sparkling wine and coffee"
               },
               "code": "D214A",
-              "amount": 3925000000,
-              "levels": {
-                "central": 0.8568,
-                "state": 0.1432
-              },
-              "quality": "official",
-              "sources": [
-                "eurostat_ntl"
-              ],
-              "note": {
-                "de": "Die Biersteuer (0,6 Mrd. Euro) steht den Ländern zu, der Rest dem Bund.",
-                "en": "Beer tax (EUR 0.6 billion) goes to the states, the rest to the federal level."
-              }
+              "children": [
+                {
+                  "id": "rev.taxes.consumption.alcohol_coffee.beer",
+                  "label": {
+                    "de": "Biersteuer",
+                    "en": "Beer tax"
+                  },
+                  "code": "D214A",
+                  "amount": 562000000,
+                  "levels": {
+                    "state": 1.0
+                  },
+                  "quality": "official",
+                  "sources": [
+                    "eurostat_ntl",
+                    "gg_art_106"
+                  ],
+                  "note": {
+                    "de": "Steht den Ländern zu (Art. 106 Abs. 2 Grundgesetz).",
+                    "en": "Goes to the states (Article 106(2) of the Basic Law)."
+                  }
+                },
+                {
+                  "id": "rev.taxes.consumption.alcohol_coffee.spirits_sparkling_coffee",
+                  "label": {
+                    "de": "Alkohol-, Schaumwein- und Kaffeesteuer",
+                    "en": "Taxes on spirits, sparkling wine and coffee"
+                  },
+                  "code": "D214A",
+                  "amount": 3363000000,
+                  "levels": {
+                    "central": 1.0
+                  },
+                  "quality": "official",
+                  "sources": [
+                    "eurostat_ntl",
+                    "gg_art_106"
+                  ],
+                  "note": {
+                    "de": "Alkoholsteuer einschließlich Alkopopsteuer (1,99 Mrd. Euro), Kaffeesteuer (1,0 Mrd. Euro), Schaumweinsteuer (0,37 Mrd. Euro) und sonstige Verbrauchsteuern (3 Mio. Euro). Als Verbrauchsteuern stehen sie dem Bund zu (Art. 106 Abs. 1 Grundgesetz).",
+                    "en": "Alcohol tax including the tax on alcopops (EUR 1.99 billion), coffee tax (EUR 1.0 billion), sparkling wine tax (EUR 0.37 billion) and other excise duties (EUR 3 million). As excise duties they go to the federal level (Article 106(1) of the Basic Law)."
+                  }
+                }
+              ]
             },
             {
               "id": "rev.taxes.consumption.insurance",
@@ -2800,6 +3027,31 @@
               "note": {
                 "de": "Betrag amtlich (Destatis, revidiert). Länder und Kommunen tragen die Kosten; die Aufteilung zwischen beiden ist geschätzt, weil sie je nach Land unterschiedlich geregelt ist.",
                 "en": "Amount official (Destatis, revised). States and municipalities bear the cost; the split between the two is estimated because rules differ by state."
+              }
+            },
+            {
+              "id": "exp.social.basic_security.replacement_benefits",
+              "label": {
+                "de": "Ersatzleistungen für vom Bürgergeld Ausgeschlossene (bisher keine)",
+                "en": "Replacement benefits for people excluded from citizen's income (none so far)"
+              },
+              "description": {
+                "de": "Der Posten ist leer. Er nimmt die Leistungen auf, die Länder und Kommunen zahlen müssten, wenn Gruppen vom Bürgergeld ausgeschlossen würden: Das Existenzminimum muss auch dann gesichert sein, über Sozialhilfe oder Asylbewerberleistungen.",
+                "en": "The item is empty. It receives the benefits that states and municipalities would have to pay if groups were excluded from citizen's income: the subsistence minimum must be secured even then, through social assistance or asylum seekers' benefits."
+              },
+              "amount": 0,
+              "levels": {
+                "state": 0.3749,
+                "local": 0.6251
+              },
+              "quality": "derived",
+              "sources": [
+                "destatis_asylblg_ausgaben",
+                "bverfg_2012_asylblg"
+              ],
+              "note": {
+                "de": "Aufteilung auf die Ebenen wie bei den Asylbewerberleistungen.",
+                "en": "Split across levels as for asylum seekers' benefits."
               }
             },
             {

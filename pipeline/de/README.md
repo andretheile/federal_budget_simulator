@@ -94,7 +94,17 @@ Arithmetic on published figures:
 - the remainder leaf of contributions on wages: the national-accounts total minus the cash figures for
   pension and health insurance;
 - the zero-amount leaf "pension contributions of the state for its civil servants": it exists so that a
-  measure can book such contributions; its level shares are the imputed contributions by level.
+  measure can book such contributions; its level shares are the imputed contributions by level;
+- the zero-amount leaf "replacement benefits for people excluded from citizen's income": it receives the
+  benefits that states and municipalities would pay if groups lost citizen's income; its level shares are
+  copied from asylum seekers' benefits;
+- VAT by rate: the revenue at the reduced rate is not published. It is derived from the government's
+  estimates of revenue forgone at 7 instead of 19 % (all reduced rates, food, accommodation, culture, local
+  transport, and restaurant meals, which were at the standard rate in 2024): revenue forgone / 12 * 7, or
+  * 19 for restaurants. The standard-rate remainder is total VAT minus these. Every VAT leaf has the level
+  shares of VAT as a whole;
+- the alcohol and coffee taxes as two leaves: beer tax (states) and the other excise duties (federal), so
+  that the level shares are the statutory ones instead of a rounded mix.
 
 Judgement, to be reviewed by whoever updates the data:
 
@@ -124,6 +134,9 @@ Judgement, to be reviewed by whoever updates the data:
   average earnings of the insured from 2022 to 2024 (+12.0 %); the numbers of persons stay those of 2022.
   This assumes that all incomes grew at the same rate. Without it, relief at the bottom of a tax schedule
   comes out too large and revenue from high incomes too small.
+- **VAT at 7 % as 7/12 of the revenue forgone** (`VAT_FORGONE` in `build_budget.py`): this assumes that the
+  tax base is the same at 7 and at 19 %, which is how the government's figures are computed (full
+  pass-through, no change in behaviour).
 - **Share of pension contributions that comes from wages** (`PENSION_WAGE` in `build_budget.py`): the
   insurer's accounts do not split contributions by type. The share is 18.6 % of wages up to the 2022
   ceiling in the wage statistics, divided by total contributions in 2022, and is applied to 2024.

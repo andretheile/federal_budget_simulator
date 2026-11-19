@@ -1,0 +1,254 @@
+{
+  "stock": {
+    "value": 2694319500000,
+    "quality": "official",
+    "sources": ["eurostat_gov_10dd_edpt1"],
+    "note": {
+      "de": "Maastricht-Schuldenstand des Staates (Bund, Länder, Gemeinden und Sozialversicherung mit ihren Extrahaushalten) Ende 2024, zum Nennwert und konsolidiert: 2.694,3 Mrd. Euro oder 61,4 % des BIP (Eurostat, Meldung vom Oktober 2026).",
+      "en": "Maastricht debt of general government (federal government, Länder, municipalities and social insurance with their off-budget entities) at the end of 2024, at nominal value and consolidated: EUR 2,694.3 billion or 61.4 % of GDP (Eurostat, notification of October 2026)."
+    }
+  },
+  "interest": {
+    "value": 45920000000,
+    "quality": "official",
+    "sources": ["eurostat_gov_10dd_edpt1", "eurostat_gov_10a_exp"],
+    "node": "exp.general.interest",
+    "note": {
+      "de": "Amtliche Zinsausgaben des Staates 2024 (ESVG 2010, D.41): 45,92 Mrd. Euro oder 1,05 % des BIP. Die Projektion beginnt mit dem Haushaltsposten „Zinsen auf Staatsschulden“ (COFOG 01.7) von 49,28 Mrd. Euro, damit das erste Jahr genau zum Haushalt passt. Dieser Posten enthält neben den Zinsen (45,83 Mrd. Euro, aus einem etwas älteren Datenstand) auch Vorleistungen von 3,24 Mrd. Euro, etwa die Marge der Banken auf Kredite und Gebühren für die Schuldenverwaltung, sowie Vermögenstransfers von 0,21 Mrd. Euro. Die Zinsen der Projektion liegen deshalb rund 7 % über den Zinsen im engen Sinn; der Durchschnittszins auf die Schulden beginnt bei 1,83 % statt 1,70 %.",
+      "en": "Official interest paid by general government in 2024 (ESA 2010, D.41): EUR 45.92 billion or 1.05 % of GDP. The projection starts from the budget item 'Interest on public debt' (COFOG 01.7) of EUR 49.28 billion, so that the first year matches the budget exactly. Besides interest (EUR 45.83 billion, from a slightly older data release) this item holds intermediate consumption of EUR 3.24 billion, such as the banks' margin on loans and fees for managing the debt, and capital transfers of EUR 0.21 billion. Interest in the projection is therefore about 7 % higher than interest in the narrow sense, and the average rate on the debt starts at 1.83 % instead of 1.70 %."
+    }
+  },
+  "refinancing": {
+    "share": 0.123,
+    "averageMaturity": 8.15,
+    "quality": "derived",
+    "sources": ["ecb_gfs_residual_maturity", "ecb_gfs_debt_maturity"],
+    "note": {
+      "de": "Eins geteilt durch die durchschnittliche Restlaufzeit: Die Wertpapierschulden des Staates liefen Ende 2024 im Mittel noch 8,15 Jahre (EZB). Die Zahl umfasst die Anleihen von Bund und Ländern; sie machen 79 % der Schulden aus. Für den Rest, vor allem Kredite der Länder und Gemeinden, gibt es keinen veröffentlichten Durchschnitt; die Rechnung nimmt für ihn dieselbe Laufzeit an. Zum Vergleich: 17,8 % der Schulden waren innerhalb eines Jahres fällig, 48,8 % liefen noch mehr als fünf Jahre (EZB).",
+      "en": "One divided by the average residual maturity: government debt securities had 8.15 years left to run on average at the end of 2024 (ECB). The figure covers the bonds of the federal government and the Länder, which make up 79 % of the debt. For the rest, mainly loans of the Länder and municipalities, no average is published; the calculation assumes the same maturity for it. For comparison: 17.8 % of the debt was due within a year, and 48.8 % had more than five years to run (ECB)."
+    }
+  },
+  "assumptions": [
+    {
+      "id": "market_rate",
+      "type": "number",
+      "label": { "de": "Zins für neue Schulden", "en": "Interest rate on new debt" },
+      "unit": "percent",
+      "min": -1,
+      "max": 10,
+      "step": 0.1,
+      "default": 3.4,
+      "note": {
+        "de": "Vorgabe: Rendite zehnjähriger Bundesanleihen am 18. November 2026, 3,43 % (Bundesbank, Zinsstruktur börsennotierter Bundeswertpapiere). Für alle neuen und umgeschuldeten Kredite gilt dieser Zins. An diesem Tag reichte die Zinskurve von 3,01 % für ein Jahr bis 3,82 % für 30 Jahre. Der Zins reagiert nicht auf die Höhe der Schulden.",
+        "en": "Default: yield of ten-year federal bonds on 18 November 2026, 3.43 % (Bundesbank, yield curve of listed federal securities). All new and refinanced debt pays this rate. On that day the curve ran from 3.01 % for one year to 3.82 % for 30 years. The rate does not react to the level of debt."
+      },
+      "sources": ["bundesbank_yield_curve_daily"]
+    },
+    {
+      "id": "growth",
+      "type": "number",
+      "label": { "de": "Nominales Wirtschaftswachstum pro Jahr", "en": "Nominal economic growth per year" },
+      "unit": "percent",
+      "min": -2,
+      "max": 8,
+      "step": 0.1,
+      "default": 2.5,
+      "note": {
+        "de": "Vorgabe 2,5 %: reales Potenzialwachstum von rund 0,5 % im Jahr, wie es die Europäische Kommission für 2025 bis 2028 schätzt, plus Inflation in Höhe des EZB-Ziels von 2 %, die auch der Tragfähigkeitsbericht annimmt. Kurzfristig erwartet die Kommission mehr: 4,1 % für 2026 und 2027, 3,7 % für 2028 (AMECO, November 2026). Der Tragfähigkeitsbericht rechnet langfristig mit realem Wachstum von 0,4 bis 0,6 % (ungünstig) oder 1,5 bis 1,6 % (günstig).",
+        "en": "Default 2.5 %: real potential growth of about 0.5 % a year, as the European Commission estimates for 2025 to 2028, plus inflation at the ECB's target of 2 %, which the sustainability report also assumes. In the short term the Commission expects more: 4.1 % for 2026 and 2027, 3.7 % for 2028 (AMECO, November 2026). In the long run the sustainability report assumes real growth of 0.4 to 0.6 % (unfavourable) or 1.5 to 1.6 % (favourable)."
+      },
+      "sources": ["ameco_2026_11", "bmf_tragfaehigkeitsbericht_2024"]
+    },
+    {
+      "id": "horizon",
+      "type": "number",
+      "label": { "de": "Zeitraum", "en": "Years ahead" },
+      "unit": "years",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "default": 30,
+      "note": {
+        "de": "Wie viele Jahre nach 2024 berechnet werden.",
+        "en": "How many years after 2024 are calculated."
+      }
+    },
+    {
+      "id": "drift",
+      "type": "number",
+      "label": { "de": "Jährliche Veränderung des Haushalts ohne Zinsen", "en": "Yearly change in the budget before interest" },
+      "unit": "percent_gdp",
+      "min": -0.5,
+      "max": 0.5,
+      "step": 0.01,
+      "default": 0,
+      "note": {
+        "de": "Der Primärsaldo ist der Haushaltssaldo ohne Zinsen. Bei 0 behalten Einnahmen und Ausgaben ihren Anteil am BIP. Ein negativer Wert steht für Kosten, die schneller wachsen als die Wirtschaft, etwa Rente, Gesundheit und Pflege in einer alternden Gesellschaft: −0,1 heißt, der Primärsaldo verschlechtert sich jedes Jahr um 0,1 % des BIP, nach 30 Jahren um 3 %. Die Varianten des Tragfähigkeitsberichts entsprechen etwa −0,07 (günstig) und −0,18 (ungünstig).",
+        "en": "The primary balance is the budget balance before interest. At 0, revenue and spending keep their share of GDP. A negative value stands for costs that grow faster than the economy, such as pensions, health and care in an ageing society: −0.1 means the primary balance worsens by 0.1 % of GDP every year, by 3 % after 30 years. The variants of the sustainability report correspond to about −0.07 (favourable) and −0.18 (unfavourable)."
+      },
+      "sources": ["bmf_tragfaehigkeitsbericht_2024"]
+    }
+  ],
+  "presets": [
+    {
+      "id": "today_germany",
+      "label": { "de": "Heutige Zinsen in Deutschland", "en": "Today's German rates" },
+      "note": {
+        "de": "Zehnjährige Bundesanleihen rentierten am 18. November 2026 mit 3,43 %.",
+        "en": "Ten-year federal bonds yielded 3.43 % on 18 November 2026."
+      },
+      "values": { "market_rate": 3.4 },
+      "sources": ["bundesbank_yield_curve_daily"]
+    },
+    {
+      "id": "united_states",
+      "label": { "de": "Zinsen wie in den USA", "en": "Rates as in the United States" },
+      "note": {
+        "de": "Zehnjährige US-Staatsanleihen rentierten am 18. November 2026 mit 5,07 %. Nur der Zins ändert sich; Schulden, Haushalt und Wachstum bleiben die deutschen.",
+        "en": "Ten-year US Treasury notes yielded 5.07 % on 18 November 2026. Only the rate changes; debt, budget and growth stay Germany's."
+      },
+      "values": { "market_rate": 5.1 },
+      "sources": ["us_treasury_yields_2026_11"]
+    },
+    {
+      "id": "zero_rates",
+      "label": { "de": "Die Nullzinsjahre", "en": "The zero-rate years" },
+      "note": {
+        "de": "Von 2016 bis 2021 rentierten zehnjährige Bundesanleihen im Mittel mit −0,02 %, von 2019 bis 2021 unter null.",
+        "en": "From 2016 to 2021 ten-year federal bonds yielded −0.02 % on average, and below zero from 2019 to 2021."
+      },
+      "values": { "market_rate": 0 },
+      "sources": ["bundesbank_yield_10y_monthly"]
+    },
+    {
+      "id": "nineties",
+      "label": { "de": "Zinsen wie in den 1990er-Jahren", "en": "Rates as in the 1990s" },
+      "note": {
+        "de": "Von 1991 bis 2000 rentierten zehnjährige Bundesanleihen im Mittel mit 6,4 %. 1995 kosteten die Zinsen den deutschen Staat 3,5 % des BIP, so viel wie nie seit der Wiedervereinigung.",
+        "en": "From 1991 to 2000 ten-year federal bonds yielded 6.4 % on average. In 1995 interest cost the German state 3.5 % of GDP, more than in any other year since reunification."
+      },
+      "values": { "market_rate": 6.4 },
+      "sources": ["bundesbank_yield_10y_monthly", "ameco_2026_11"]
+    },
+    {
+      "id": "ageing_favourable",
+      "label": { "de": "Alterung: günstige Variante des Tragfähigkeitsberichts", "en": "Ageing: favourable variant of the sustainability report" },
+      "note": {
+        "de": "Sechster Tragfähigkeitsbericht des Bundesfinanzministeriums (2024), Variante T+: Die alterungsabhängigen Ausgaben steigen von 27,3 % des BIP 2022 auf 30,8 % 2070, um rund 0,07 Punkte im Jahr; reales Wachstum 1,5 % plus 2 % Inflation; 4 % Zins auf neue Schulden. Der Bericht startet 2027 mit einem kleinen Primärüberschuss und kommt 2070 auf Schulden von rund 140 % des BIP; vom Defizit des Jahres 2024 aus ergibt sich mehr.",
+        "en": "Sixth sustainability report of the Federal Ministry of Finance (2024), variant T+: age-related spending rises from 27.3 % of GDP in 2022 to 30.8 % in 2070, by about 0.07 points a year; real growth of 1.5 % plus 2 % inflation; 4 % interest on new debt. The report starts from a small primary surplus in 2027 and arrives at a debt of about 140 % of GDP in 2070; starting from the deficit of 2024 gives more."
+      },
+      "values": { "market_rate": 4, "growth": 3.5, "drift": -0.07 },
+      "sources": ["bmf_tragfaehigkeitsbericht_2024"]
+    },
+    {
+      "id": "ageing_unfavourable",
+      "label": { "de": "Alterung: ungünstige Variante des Tragfähigkeitsberichts", "en": "Ageing: unfavourable variant of the sustainability report" },
+      "note": {
+        "de": "Sechster Tragfähigkeitsbericht des Bundesfinanzministeriums (2024), Variante T−: Die alterungsabhängigen Ausgaben steigen von 27,3 % des BIP 2022 auf 36,1 % 2070, um rund 0,18 Punkte im Jahr; reales Wachstum 0,4 bis 0,6 % plus 2 % Inflation; 4 % Zins auf neue Schulden. Der Bericht kommt 2070 auf Schulden von rund 365 % des BIP; vom Defizit des Jahres 2024 aus ergibt sich mehr.",
+        "en": "Sixth sustainability report of the Federal Ministry of Finance (2024), variant T−: age-related spending rises from 27.3 % of GDP in 2022 to 36.1 % in 2070, by about 0.18 points a year; real growth of 0.4 to 0.6 % plus 2 % inflation; 4 % interest on new debt. The report arrives at a debt of about 365 % of GDP in 2070; starting from the deficit of 2024 gives more."
+      },
+      "values": { "market_rate": 4, "growth": 2.5, "drift": -0.18 },
+      "sources": ["bmf_tragfaehigkeitsbericht_2024"]
+    }
+  ],
+  "references": [
+    {
+      "id": "united_states",
+      "label": { "de": "USA", "en": "United States" },
+      "kind": "country",
+      "year": 2024,
+      "debtRatio": 1.2327,
+      "interestRatio": 0.0471,
+      "revenueRatio": 0.3144,
+      "sources": ["ameco_2026_11"],
+      "note": {
+        "de": "Die Zahlen der USA folgen den amerikanischen Volkswirtschaftlichen Gesamtrechnungen. Sie sind den europäischen ähnlich, aber nicht gleich; so können sie auch Zinsen enthalten, die auf ungedeckte Pensionszusagen staatlicher Arbeitgeber unterstellt werden. Zinsen und Einnahmen stammen aus derselben Rechnung; der Anteil der Zinsen an den Einnahmen fällt deshalb eher zu hoch aus als zu niedrig, verglichen mit der europäischen Abgrenzung.",
+        "en": "The US figures follow the US national accounts. They are similar to the European ones but not the same; for example, they can include interest imputed on unfunded pension promises of public employers. Interest and revenue come from the same accounts; compared with the European definitions, the share of revenue that goes on interest is therefore more likely too high than too low."
+      }
+    },
+    {
+      "id": "italy",
+      "label": { "de": "Italien", "en": "Italy" },
+      "kind": "country",
+      "year": 2024,
+      "debtRatio": 1.3425,
+      "interestRatio": 0.0387,
+      "revenueRatio": 0.469,
+      "sources": ["ameco_2026_11"]
+    },
+    {
+      "id": "france",
+      "label": { "de": "Frankreich", "en": "France" },
+      "kind": "country",
+      "year": 2024,
+      "debtRatio": 1.1263,
+      "interestRatio": 0.0205,
+      "revenueRatio": 0.5123,
+      "sources": ["ameco_2026_11"]
+    },
+    {
+      "id": "japan",
+      "label": { "de": "Japan", "en": "Japan" },
+      "kind": "country",
+      "year": 2024,
+      "debtRatio": 2.1359,
+      "interestRatio": 0.0122,
+      "revenueRatio": 0.3689,
+      "sources": ["ameco_2026_11"],
+      "note": {
+        "de": "Wie bei den USA folgen die Zahlen der eigenen Statistik des Landes.",
+        "en": "As for the United States, the figures follow the country's own statistics."
+      }
+    },
+    {
+      "id": "eu_reference_value",
+      "label": { "de": "EU-Referenzwert für die Staatsschulden", "en": "EU reference value for government debt" },
+      "kind": "threshold",
+      "debtRatio": 0.6,
+      "sources": ["tfeu_protocol_12"],
+      "note": {
+        "de": "Protokoll Nr. 12 über das Verfahren bei einem übermäßigen Defizit, Artikel 1: 60 % des BIP für die Schulden, 3 % für das Defizit.",
+        "en": "Protocol No 12 on the excessive deficit procedure, Article 1: 60 % of GDP for debt, 3 % for the deficit."
+      }
+    },
+    {
+      "id": "germany_1995",
+      "label": { "de": "Deutschland 1995: höchste Zinslast", "en": "Germany in 1995: highest interest burden" },
+      "kind": "history",
+      "year": 1995,
+      "debtRatio": 0.5489,
+      "interestRatio": 0.035,
+      "revenueRatio": 0.458,
+      "sources": ["ameco_2026_11"],
+      "note": {
+        "de": "Höchster Wert seit der Wiedervereinigung; die Reihe beginnt 1991.",
+        "en": "The highest since reunification; the series starts in 1991."
+      }
+    },
+    {
+      "id": "germany_2010",
+      "label": { "de": "Deutschland 2010: höchster Schuldenstand", "en": "Germany in 2010: highest debt" },
+      "kind": "history",
+      "year": 2010,
+      "debtRatio": 0.8103,
+      "interestRatio": 0.0244,
+      "revenueRatio": 0.4371,
+      "sources": ["ameco_2026_11"],
+      "note": {
+        "de": "Höchster Wert seit der Wiedervereinigung, nach der Finanzkrise und der Rettung der Banken.",
+        "en": "The highest since reunification, after the financial crisis and the rescue of the banks."
+      }
+    }
+  ],
+  "comparisons": [
+    { "node": "exp.safety.police", "label": { "de": "Polizei", "en": "the police" } },
+    { "node": "exp.defence", "label": { "de": "Verteidigung", "en": "defence" } },
+    { "node": "exp.social.family", "label": { "de": "Familien und Kinder", "en": "families and children" } },
+    { "node": "exp.economy.transport", "label": { "de": "Verkehr", "en": "transport" } },
+    { "node": "exp.education", "label": { "de": "Bildung", "en": "education" } }
+  ],
+  "note": {
+    "de": "Eine Wenn-dann-Rechnung, keine Prognose. Sie zeigt, wohin Schulden und Zinsen liefen, wenn der Haushalt von 2024, verändert um die eingeschalteten Maßnahmen, im Verhältnis zur Wirtschaft so bliebe und die gewählten Annahmen jedes Jahr gälten. Was sie weglässt: Die Schulden wirken nicht zurück. Höhere Schulden treiben den Zins nicht nach oben, und Maßnahmen ändern das Wachstum nicht; in Wirklichkeit können beide geschehen. Jede Maßnahme wirkt vom ersten Jahr an voll und dauerhaft; Übergangsfristen, Befristungen und Reaktionen von Menschen und Unternehmen fehlen. Die Rechnung beginnt mit 2024, also vor der Änderung der Schuldenbremse 2025 (Verteidigungsausgaben über 1 % des BIP ausgenommen, Spielraum für die Länder) und vor dem Sondervermögen Infrastruktur von 500 Mrd. Euro; die seither beschlossene höhere Kreditaufnahme ist nicht enthalten. Einnahmen und Ausgaben ohne Zinsen behalten ihren Anteil am BIP; Kosten, die schneller wachsen, etwa durch die Alterung, kommen nur über die jährliche Veränderung des Primärsaldos hinein. Alle neuen Schulden kosten denselben Marktzins. Die Zinsen werden aus den Schulden berechnet; eine Maßnahme am Posten Zinsen ändert deshalb nur das erste Jahr. Die Schulden können nicht unter null fallen; Überschüsse darüber hinaus werden nicht angespart.",
+    "en": "A what-if calculation, not a forecast. It shows where debt and interest would go if the budget of 2024, changed by the measures switched on, kept its size relative to the economy and the chosen assumptions held every year. What it leaves out: debt has no effect back. Higher debt does not push up the interest rate, and measures do not change growth; in reality both can happen. Every measure works in full and for good from the first year; phase-ins, expiry dates and the reactions of people and firms are missing. The calculation starts from 2024, before the 2025 change to the debt brake (defence spending above 1 % of GDP exempt, room for the Länder) and before the special fund of EUR 500 billion for infrastructure; the higher borrowing decided since then is not included. Revenue and spending other than interest keep their share of GDP; costs that grow faster, for example because of ageing, enter only through the yearly change in the primary balance. All new debt costs the same market rate. Interest is computed from the debt, so a measure on the interest item changes only the first year. Debt cannot fall below zero; surpluses beyond that are not saved."
+  }
+}

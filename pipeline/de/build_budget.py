@@ -63,6 +63,9 @@ KDU_FED = 12359.620     # bundeshaushalt_2024: title 1101 632 11, federal share 
 ALG1 = 22160.0          # ba_geschaeftsbericht_2024: unemployment benefit 2024
 ASYL = 6718.465         # destatis_asylblg_ausgaben: gross expenditure 2024 (revised 24 April 2026)
 ELTERNGELD = 7172.430   # bundeshaushalt_2024: title 1701 681 02, parental allowance
+# Zero-amount leaf for benefits that would replace citizen's income for excluded groups; its level shares are
+# copied from asylum seekers' benefits after the fit (see below).
+REPLACEMENT = "exp.social.basic_security.replacement_benefits"
 # Where civil servants are employed, approximated by the imputed social contributions of each level
 # (eurostat_gov_10a_main: D61REC minus actual contributions, 2024): central, state, local, social security funds.
 CIVIL_SERVICE_LEVELS = (8779.0, 31948.0, 4950.0, 711072.0 - 302350.0 - 406246.0)
@@ -253,6 +256,11 @@ EXP = [
               desc=("Bruttoausgaben nach dem Asylbewerberleistungsgesetz: Unterkunft, Verpflegung, Geldleistungen und Krankenhilfe.", "Gross expenditure under the Asylum Seekers' Benefits Act: accommodation, food, cash benefits and health care."),
               note=("Betrag amtlich (Destatis, revidiert). Länder und Kommunen tragen die Kosten; die Aufteilung zwischen beiden ist geschätzt, weil sie je nach Land unterschiedlich geregelt ist.",
                     "Amount official (Destatis, revised). States and municipalities bear the cost; the split between the two is estimated because rules differ by state.")),
+            L(REPLACEMENT, "Ersatzleistungen für vom Bürgergeld Ausgeschlossene (bisher keine)", "Replacement benefits for people excluded from citizen's income (none so far)",
+              amount=0.0, fixed=(0, 0.4, 0.6, 0), quality="derived", sources=["destatis_asylblg_ausgaben", "bverfg_2012_asylblg"],
+              desc=("Der Posten ist leer. Er nimmt die Leistungen auf, die Länder und Kommunen zahlen müssten, wenn Gruppen vom Bürgergeld ausgeschlossen würden: Das Existenzminimum muss auch dann gesichert sein, über Sozialhilfe oder Asylbewerberleistungen.",
+                    "The item is empty. It receives the benefits that states and municipalities would have to pay if groups were excluded from citizen's income: the subsistence minimum must be secured even then, through social assistance or asylum seekers' benefits."),
+              note=("Aufteilung auf die Ebenen wie bei den Asylbewerberleistungen.", "Split across levels as for asylum seekers' benefits.")),
             L("exp.social.basic_security.other", "Arbeitsförderung, Jobcenter-Verwaltung, Sozialhilfe, Grundsicherung im Alter, Wohngeld", "Employment promotion, job centre administration, social assistance, basic security in old age, housing benefit",
               amount=cof("GF1005") + cof("GF1006") + cof("GF1007") - ALG1 - BG_CASH - KDU - ASYL, seed=(0.27, 0.13, 0.33, 0.27), quality="estimate",
               sources=SRC_EXP + ["bundeshaushalt_2024", "ba_geschaeftsbericht_2024", "ba_sgb2_zeitreihe", "destatis_asylblg_ausgaben"],
@@ -304,6 +312,9 @@ for top in EXP:
         X = ipf([(l["amount"], l["seed"]) for l in free], target)
         for l, x in zip(free, X):
             ALLOC[l["id"]] = x
+
+# The replacement benefits would be paid by the same levels as asylum seekers' benefits.
+ALLOC[REPLACEMENT] = list(ALLOC["exp.social.basic_security.asylum_benefits"])
 
 
 def move(leaf_id, frm, to, amount, strict=True):
@@ -527,6 +538,39 @@ OTHER_CONS_LV = (4426.0, 2491.0, 2353.0, 0)
 
 RSRC = ["eurostat_ntl"]
 
+# ---- VAT by rate (derived) ------------------------------------------------------------------------------
+# Revenue raised at the reduced rate is not published; what is published is the computational revenue
+# forgone by taxing at 7 instead of 19 % (full pass-through, no change in behaviour). Divided by the 12-point
+# gap and multiplied by 7 that gives the revenue raised at the reduced rate, for the reduced rate as a whole
+# and for the parts the sources name. All figures 2024, million euros:
+#   bt_drs_21_5839, answer to question 4: all reduced rates 39,200 (without the temporary reductions for
+#     restaurants, gas and district heating)
+#   zew_bmf_umsatzsteuersaetze_2025, table 3: food including tap water 27,920
+#   bt_drs_21_1600, annex 2: accommodation (no. 102) 1,790; cultural and entertainment services including
+#     books, newspapers and works of art (no. 101) 4,065; passenger transport in local traffic and
+#     long-distance rail (no. 68) 2,260
+#   zew_bmf_umsatzsteuersaetze_2025, table 8: restaurant and catering services without beverages 3,400. In
+#     2024 they were taxed at the standard rate, so their revenue is 3,400 / 12 * 19.
+# JUDGEMENT: the revenue at 7 % is taken as 7/12 of the revenue forgone, i.e. the same tax base at both rates.
+VAT_TOTAL = 298764.0          # NTL D211, as before
+VAT_FORGONE = dict(reduced=39200.0, food=27920.0, hotels=1790.0, culture=4065.0, transport=2260.0, restaurants=3400.0)
+
+
+def euros(m):
+    return int(round(m * 1e6))
+
+
+VAT_E = {k: euros(v / 12 * (19 if k == "restaurants" else 7)) for k, v in VAT_FORGONE.items()}
+VAT_E["reduced_other"] = VAT_E["reduced"] - VAT_E["food"] - VAT_E["hotels"] - VAT_E["culture"] - VAT_E["transport"]
+VAT_E["standard_other"] = euros(VAT_TOTAL) - VAT_E["reduced"] - VAT_E["restaurants"]
+assert VAT_E["reduced_other"] > 0 and VAT_E["standard_other"] > 0
+VAT_SRC = RSRC + ["eurostat_gov_10a_main", "bt_drs_21_5839", "zew_bmf_umsatzsteuersaetze_2025", "bt_drs_21_1600"]
+VAT_LEVEL_NOTE = ("Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.", "Split across levels as for VAT as a whole according to Eurostat.")
+
+
+def vat_note(de, en):
+    return (de + " " + VAT_LEVEL_NOTE[0], en + " " + VAT_LEVEL_NOTE[1])
+
 # ---- contributions on wages by branch (cash figures of the insurers) ---------------------------------------
 # Pension insurance: drv_rv_in_zahlen_2026, p. 20: contribution revenue 2024 (305,905) and 2022 (275,622, from
 # "Rentenversicherung in Zeitreihen"). The accounts do not split contributions by type. Share on wages, estimated:
@@ -573,13 +617,49 @@ REV = [
                      "Income tax paid by the rest of the world (EUR 15.2 billion) and the EU energy crisis contribution (EUR 1.9 billion). Split across levels as the remainder from Eurostat data on income taxes by level.")),
         ]),
         G("rev.taxes.consumption", "Steuern auf Konsum, Verbrauch und Umwelt", "Taxes on consumption and the environment", code="D2+D59", children=[
-            RL("rev.taxes.consumption.vat", "Mehrwertsteuer (Umsatzsteuer)", "Value added tax (VAT)", 298764.0, VAT, sources=RSRC + ["eurostat_gov_10a_main"], code="D211",
-               note=("Aufteilung auf die Ebenen laut Eurostat. Der EU-Anteil erscheint als Ausgabe (EU-Beitrag).", "Split across levels as reported by Eurostat. The EU share appears as expenditure (EU contribution).")),
+            G("rev.taxes.consumption.vat", "Mehrwertsteuer (Umsatzsteuer)", "Value added tax (VAT)", code="D211",
+              desc=("Betrag und Aufteilung auf die Ebenen laut Eurostat (298,8 Mrd. Euro). Der EU-Anteil erscheint als Ausgabe (EU-Beitrag). Die Aufteilung nach Steuersätzen ist aus den geschätzten Mindereinnahmen der ermäßigten Sätze abgeleitet; amtlich wird das Aufkommen nicht nach Sätzen ausgewiesen.",
+                    "Amount and split across levels according to Eurostat (EUR 298.8 billion). The EU share appears as expenditure (EU contribution). The split by rate is derived from the estimated revenue forgone through the reduced rates; revenue by rate is not published officially."),
+              children=[
+                G("rev.taxes.consumption.vat.standard", "Zum Regelsatz (2024: 19 %)", "At the standard rate (2024: 19%)", children=[
+                    RL("rev.taxes.consumption.vat.standard.restaurants", "Speisen in Restaurants und Gaststätten", "Restaurant and catering meals", VAT_E["restaurants"] / 1e6, VAT, quality="derived", sources=VAT_SRC,
+                       desc=("Restaurant- und Verpflegungsdienstleistungen ohne Getränke. 2024 zum Regelsatz besteuert, seit 1. Januar 2026 zum ermäßigten Satz von 7 %.",
+                             "Restaurant and catering services without beverages. Taxed at the standard rate in 2024, at the reduced rate of 7% since 1 January 2026."),
+                       note=vat_note("Rechnerische Mindereinnahmen bei 7 statt 19 % laut Finanzministerium (3,40 Mrd. Euro), geteilt durch 12 und mal 19.",
+                                     "Computational revenue forgone at 7 instead of 19% according to the finance ministry (EUR 3.40 billion), divided by 12 and multiplied by 19.")),
+                    RL("rev.taxes.consumption.vat.standard.other", "Übrige Waren und Dienstleistungen", "Other goods and services", VAT_E["standard_other"] / 1e6, VAT, quality="derived", sources=VAT_SRC,
+                       note=vat_note("Mehrwertsteuer insgesamt abzüglich des Aufkommens zum ermäßigten Satz und der Speisen in Restaurants.",
+                                     "Total VAT minus revenue at the reduced rate and from restaurant meals.")),
+                ]),
+                G("rev.taxes.consumption.vat.reduced", "Zum ermäßigten Satz (7 %)", "At the reduced rate (7%)",
+                  desc=("Aufkommen zum ermäßigten Satz, abgeleitet aus den rechnerischen Mindereinnahmen gegenüber dem Regelsatz (39,2 Mrd. Euro im Jahr 2024 laut Bundesregierung): geteilt durch den Abstand von 12 Punkten und mal 7.",
+                        "Revenue at the reduced rate, derived from the computational revenue forgone compared with the standard rate (EUR 39.2 billion in 2024 according to the federal government): divided by the 12-point gap and multiplied by 7."),
+                  children=[
+                    RL("rev.taxes.consumption.vat.reduced.food", "Lebensmittel und Leitungswasser", "Food and tap water", VAT_E["food"] / 1e6, VAT, quality="derived", sources=VAT_SRC,
+                       desc=("Ermäßigt besteuerte Nahrungsmittel einschließlich Milch, Kaffee, Tee und Speisen zum Mitnehmen, dazu Leitungswasser.",
+                             "Food taxed at the reduced rate, including milk, coffee, tea and take-away food, plus tap water."),
+                       note=vat_note("Rechnerische Mindereinnahmen laut Finanzministerium (27,92 Mrd. Euro), geteilt durch 12 und mal 7.",
+                                     "Computational revenue forgone according to the finance ministry (EUR 27.92 billion), divided by 12 and multiplied by 7.")),
+                    RL("rev.taxes.consumption.vat.reduced.hotels", "Hotelübernachtungen", "Hotel stays", VAT_E["hotels"] / 1e6, VAT, quality="derived", sources=VAT_SRC,
+                       note=vat_note("Mindereinnahmen laut Subventionsbericht (1,79 Mrd. Euro), geteilt durch 12 und mal 7.", "Revenue forgone according to the Subsidy Report (EUR 1.79 billion), divided by 12 and multiplied by 7.")),
+                    RL("rev.taxes.consumption.vat.reduced.culture", "Kultur, Bücher, Zeitungen und Kunst", "Culture, books, newspapers and art", VAT_E["culture"] / 1e6, VAT, quality="derived", sources=VAT_SRC,
+                       note=vat_note("Mindereinnahmen laut Subventionsbericht (4,07 Mrd. Euro), geteilt durch 12 und mal 7.", "Revenue forgone according to the Subsidy Report (EUR 4.07 billion), divided by 12 and multiplied by 7.")),
+                    RL("rev.taxes.consumption.vat.reduced.transport", "Nahverkehr und Bahn", "Local public transport and rail", VAT_E["transport"] / 1e6, VAT, quality="derived", sources=VAT_SRC,
+                       note=vat_note("Mindereinnahmen laut Subventionsbericht (2,26 Mrd. Euro), geteilt durch 12 und mal 7.", "Revenue forgone according to the Subsidy Report (EUR 2.26 billion), divided by 12 and multiplied by 7.")),
+                    RL("rev.taxes.consumption.vat.reduced.other", "Übrige ermäßigt besteuerte Umsätze", "Other sales at the reduced rate", VAT_E["reduced_other"] / 1e6, VAT, quality="derived", sources=VAT_SRC,
+                       note=vat_note("Rest: Aufkommen zum ermäßigten Satz insgesamt abzüglich der vier einzeln ausgewiesenen Bereiche.", "Remainder: revenue at the reduced rate as a whole minus the four areas shown separately.")),
+                  ]),
+              ]),
             RL("rev.taxes.consumption.energy", "Energiesteuer (Benzin, Diesel, Heizöl, Gas)", "Energy tax (petrol, diesel, heating oil, gas)", 36579.0, C, code="D214A"),
             RL("rev.taxes.consumption.electricity", "Stromsteuer", "Electricity tax", 5671.0, C, code="D214A"),
             RL("rev.taxes.consumption.tobacco", "Tabaksteuer", "Tobacco tax", 15786.0, C, code="D214A"),
-            RL("rev.taxes.consumption.alcohol_coffee", "Alkohol-, Bier-, Schaumwein- und Kaffeesteuer", "Taxes on spirits, beer, sparkling wine and coffee", 1993.0 + 371 + 562 + 996 + 3, (3363.0, 562.0, 0, 0), code="D214A",
-               note=("Die Biersteuer (0,6 Mrd. Euro) steht den Ländern zu, der Rest dem Bund.", "Beer tax (EUR 0.6 billion) goes to the states, the rest to the federal level.")),
+            G("rev.taxes.consumption.alcohol_coffee", "Alkohol-, Bier-, Schaumwein- und Kaffeesteuer", "Taxes on spirits, beer, sparkling wine and coffee", code="D214A", children=[
+                RL("rev.taxes.consumption.alcohol_coffee.beer", "Biersteuer", "Beer tax", 562.0, ST, sources=RSRC + ["gg_art_106"], code="D214A",
+                   note=("Steht den Ländern zu (Art. 106 Abs. 2 Grundgesetz).", "Goes to the states (Article 106(2) of the Basic Law).")),
+                RL("rev.taxes.consumption.alcohol_coffee.spirits_sparkling_coffee", "Alkohol-, Schaumwein- und Kaffeesteuer", "Taxes on spirits, sparkling wine and coffee", 1993.0 + 371 + 996 + 3, C, sources=RSRC + ["gg_art_106"], code="D214A",
+                   note=("Alkoholsteuer einschließlich Alkopopsteuer (1,99 Mrd. Euro), Kaffeesteuer (1,0 Mrd. Euro), Schaumweinsteuer (0,37 Mrd. Euro) und sonstige Verbrauchsteuern (3 Mio. Euro). Als Verbrauchsteuern stehen sie dem Bund zu (Art. 106 Abs. 1 Grundgesetz).",
+                         "Alcohol tax including the tax on alcopops (EUR 1.99 billion), coffee tax (EUR 1.0 billion), sparkling wine tax (EUR 0.37 billion) and other excise duties (EUR 3 million). As excise duties they go to the federal level (Article 106(1) of the Basic Law).")),
+            ]),
             RL("rev.taxes.consumption.insurance", "Versicherung- und Feuerschutzsteuer", "Insurance tax and fire protection tax", 18318.0 + 724, (18318.0, 724.0, 0, 0), code="D214G"),
             RL("rev.taxes.consumption.motor_vehicle", "Kfz-Steuer", "Motor vehicle tax", 2310.0 + 7358, C, code="D29B+D59D"),
             RL("rev.taxes.consumption.air_travel", "Luftverkehrsteuer", "Air travel tax", 1877.0, C, code="D214H"),
