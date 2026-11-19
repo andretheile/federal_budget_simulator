@@ -39,7 +39,7 @@ beforeAll(() => {
 // How the sheet behaves while that part is on its way, or missing, is tested further below.
 beforeAll(async () => {
   await editorModule.load();
-});
+}, 30_000);
 
 beforeEach(() => {
   window.history.replaceState(null, "", "/");

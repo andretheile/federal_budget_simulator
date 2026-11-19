@@ -18,12 +18,17 @@ import { goalDetailsModule } from "./GoalBar.tsx";
 let container: HTMLDivElement;
 let root: Root | undefined;
 
+// The lazily loaded parts are loaded once, here, as the curve editor's tests do: a test then never
+// waits for a dynamic import whose timing is the module loader's. How the details behave while
+// their code is on its way, or cannot be loaded, is tested with each attempt held back by hand
+// ("the details before their code has arrived").
 beforeAll(async () => {
   (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
   HTMLCanvasElement.prototype.getContext = (() => null) as typeof HTMLCanvasElement.prototype.getContext;
   window.scrollTo = (() => {}) as typeof window.scrollTo;
   await editorModule.load();
-});
+  await goalDetailsModule.load();
+}, 30_000);
 
 beforeEach(() => {
   window.history.replaceState(null, "", "/");
@@ -37,6 +42,7 @@ afterEach(() => {
   root = undefined;
   container.remove();
   vi.useRealTimers();
+  vi.restoreAllMocks();
 });
 
 function mount(hash = "#lang=en", pack: CountryPack = testland): void {
@@ -235,9 +241,6 @@ describe("what a goal leaves out", () => {
     expect(text(".goalbar__excluded")).toBe("Not counted: the item “Defence” (−XTS 100) and the measure “Family bonus” (−XTS 100). Why?");
     expect(status()).toBe("Still XTS 400 missing. | What is switched on does not count towards this goal.");
     click(query(".goalbar__why"));
-    await act(async () => {
-      await goalDetailsModule.load();
-    });
     const items = [...container.querySelectorAll(".goaldetails__excluded > li")].map((item) => plain(item.textContent));
     expect(items[0]).toMatch(/^The item “Defence” −XTS 100Defence is paid for outside the deficit rule\./);
     expect(items[1]).toBe("The measure “Family bonus” −XTS 100The plan already counts on it.");
@@ -268,9 +271,6 @@ describe("the details", () => {
     const dialog = query<HTMLDialogElement>("dialog.goaldialog");
     expect(dialog.hasAttribute("open")).toBe(true);
     expect(text(`#${CSS.escape(dialog.getAttribute("aria-labelledby")!)}`)).toBe("Gap in the central budget");
-    await act(async () => {
-      await goalDetailsModule.load();
-    });
     expect(text(".goaldetails__description")).toBe("The central government's plan lacks 100 in 2027.");
     expect([...container.querySelectorAll(".goaldetails__facts dd")].map((dd) => plain(dd.textContent))).toEqual([
       "XTS 100 for 2027",
@@ -282,6 +282,50 @@ describe("the details", () => {
     click(query(".goaldialog__close"));
     expect(container.querySelector("dialog")).toBeNull();
     expect(document.activeElement).toBe(query(".goalbar__more"));
+  });
+});
+
+describe("the details before their code has arrived", () => {
+  /** Each attempt to load the details waits until the test resolves or rejects it, inside act. */
+  function holdBack(): { resolve(): Promise<void>; reject(): Promise<void> }[] {
+    const attempts: { resolve(): Promise<void>; reject(): Promise<void> }[] = [];
+    vi.spyOn(goalDetailsModule, "current").mockReturnValue(undefined);
+    vi.spyOn(goalDetailsModule, "load").mockImplementation(
+      () =>
+        new Promise((resolve, reject) => {
+          attempts.push({
+            resolve: () => act(async () => resolve(await import("./GoalDetails.tsx"))),
+            reject: () => act(async () => reject(new TypeError("Failed to fetch dynamically imported module"))),
+          });
+        }),
+    );
+    return attempts;
+  }
+
+  it("opens the dialog with its title at once, and the details when they have arrived", async () => {
+    const attempts = holdBack();
+    mount("#lang=en&s=no_basic_income_non_citizens");
+    click(query(".goalbar__more"));
+    expect(text(".goaldialog__title")).toBe("Gap in the central budget");
+    expect(text('.goaldialog__pending[role="status"]')).toBe("Loading …");
+    expect(container.querySelector(".goaldetails")).toBeNull();
+    expect(attempts).toHaveLength(1);
+    await attempts[0].resolve();
+    expect(container.querySelector(".goaldialog__pending")).toBeNull();
+    expect(text(".goaldetails__description")).toBe("The central government's plan lacks 100 in 2027.");
+  });
+
+  it("says so when they cannot be loaded, and tries again on request", async () => {
+    const attempts = holdBack();
+    mount("#lang=en&g=close_deficit&s=defense_target~family_bonus");
+    click(query(".goalbar__why"));
+    await attempts[0].reject();
+    expect(text('.goaldialog__pending[role="alert"] p')).toBe("This could not be loaded. Perhaps there is no connection at the moment.");
+    click(query(".goaldialog__button"));
+    expect(attempts).toHaveLength(2);
+    expect(text('.goaldialog__pending[role="status"]')).toBe("Loading …");
+    await attempts[1].resolve();
+    expect([...container.querySelectorAll(".goaldetails__excluded > li")]).toHaveLength(2);
   });
 });
 
@@ -399,9 +443,6 @@ describe("what the other levels bear at the same time", () => {
   it("is set out level by level in the details", async () => {
     mount("#lang=en&s=no_basic_income_non_citizens");
     click(query(".goalbar__more"));
-    await act(async () => {
-      await goalDetailsModule.load();
-    });
     const rows = [...container.querySelectorAll(".goaldetails__levels li")].map((row) => plain(row.textContent));
     expect(rows).toEqual(["Central government+XTS 95Relief", "Provinces−XTS 4.8Burden", "Social insuranceunchanged", "Whole state+XTS 90"]);
     expect(container.querySelector(".goaldetails__levels li.is-goal")?.textContent).toContain("Central government");
@@ -410,15 +451,12 @@ describe("what the other levels bear at the same time", () => {
   it("is not in the details without measures, nor for a whole-state goal", async () => {
     mount("#lang=en");
     click(query(".goalbar__more"));
-    await act(async () => {
-      await goalDetailsModule.load();
-    });
+    // The details are there, without the levels.
+    expect(container.querySelector(".goaldetails")).not.toBeNull();
     expect(container.querySelector(".goaldetails__levels")).toBeNull();
     mount("#lang=en&g=close_deficit&s=no_basic_income_non_citizens");
     click(query(".goalbar__more"));
-    await act(async () => {
-      await goalDetailsModule.load();
-    });
+    expect(container.querySelector(".goaldetails")).not.toBeNull();
     expect(container.querySelector(".goaldetails__levels")).toBeNull();
   });
 });

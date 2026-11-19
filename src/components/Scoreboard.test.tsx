@@ -21,7 +21,7 @@ beforeAll(async () => {
   HTMLCanvasElement.prototype.getContext = (() => null) as typeof HTMLCanvasElement.prototype.getContext;
   window.scrollTo = (() => {}) as typeof window.scrollTo;
   await editorModule.load();
-});
+}, 30_000);
 
 beforeEach(() => {
   container = document.createElement("div");

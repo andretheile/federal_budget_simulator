@@ -9,7 +9,7 @@
  */
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { Simulator } from "../App.tsx";
 import { testland, testlandCopy } from "../engine/__fixtures__/testland.ts";
 import type { CountryPack } from "../engine/index.ts";
@@ -87,15 +87,55 @@ const press = (target: Element, key: string): void =>
   act(() => void target.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true })));
 
 describe("before its code has arrived", () => {
+  // The body's code is loaded once, as for the other tests, so that no test waits for a dynamic
+  // import whose timing is the module loader's; each attempt here is held back by hand instead.
+  beforeAll(async () => {
+    await debtModule.load();
+  }, 30_000);
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  /** Each attempt to load the body waits until the test resolves or rejects it, inside act. */
+  function holdBack(): { resolve(): Promise<void>; reject(): Promise<void> }[] {
+    const attempts: { resolve(): Promise<void>; reject(): Promise<void> }[] = [];
+    vi.spyOn(debtModule, "current").mockReturnValue(undefined);
+    vi.spyOn(debtModule, "load").mockImplementation(
+      () =>
+        new Promise((resolve, reject) => {
+          attempts.push({
+            resolve: () => act(async () => resolve(await import("./DebtBody.tsx"))),
+            reject: () => act(async () => reject(new TypeError("Failed to fetch dynamically imported module"))),
+          });
+        }),
+    );
+    return attempts;
+  }
+
   it("states the result at once and loads the rest when asked", async () => {
+    const attempts = holdBack();
     mount();
     expect(lead()).toContain("15.8% of all its revenue on interest in 2054");
     // jsdom cannot tell when the section comes into view, so the section offers a button.
     expect(container.querySelector(".dchart")).toBeNull();
+    expect(attempts).toHaveLength(0);
     click(button("Show the charts and assumptions"));
-    await act(async () => {
-      await debtModule.load();
-    });
+    expect(text(".debt__loading")).toBe("Loading the charts and assumptions …");
+    expect(attempts).toHaveLength(1);
+    await attempts[0].resolve();
+    expect(container.querySelector(".debt__pending")).toBeNull();
+    expect(all(".dchart")).toHaveLength(2);
+  });
+
+  it("says so when it cannot be loaded, and tries again on request", async () => {
+    const attempts = holdBack();
+    mount();
+    click(button("Show the charts and assumptions"));
+    await attempts[0].reject();
+    expect(text(".debt__pending.is-failed p")).toBe("The charts could not be loaded. Perhaps there is no connection at the moment.");
+    click(button("Try again"));
+    expect(attempts).toHaveLength(2);
+    await attempts[1].resolve();
     expect(all(".dchart")).toHaveLength(2);
   });
 });
@@ -103,7 +143,7 @@ describe("before its code has arrived", () => {
 describe("the section on Testland", () => {
   beforeAll(async () => {
     await debtModule.load();
-  });
+  }, 30_000);
 
   it("opens with a sentence that states the result for the last year, against the base year", () => {
     mount();
@@ -302,7 +342,7 @@ describe("the section on Testland", () => {
 describe("the official plans", () => {
   beforeAll(async () => {
     await debtModule.load();
-  });
+  }, 30_000);
 
   it("draws the comparable plan in every chart it has figures for, and never the cash plan", () => {
     mount();
@@ -419,7 +459,7 @@ describe("a pack that starts from its official plan", () => {
   };
   beforeAll(async () => {
     await debtModule.load();
-  });
+  }, 30_000);
 
   it("follows it by default, everywhere debt figures are shown, with nothing in the address", { timeout: 30_000 }, () => {
     mount("#lang=en", following());
