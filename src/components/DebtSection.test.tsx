@@ -72,6 +72,17 @@ function slide(input: HTMLInputElement, value: number): void {
     input.dispatchEvent(new Event("input", { bubbles: true }));
   });
 }
+/** The starting points: each option's name (with its tag) and whether it is chosen. */
+const radios = (): [string, boolean][] =>
+  all<HTMLLabelElement>(".dstart__option").map((option) => [
+    plain(option.querySelector(".dstart__label")?.textContent),
+    option.querySelector<HTMLInputElement>("input")!.checked,
+  ]);
+function choose(name: string): void {
+  const option = all<HTMLLabelElement>(".dstart__option").find((candidate) => plain(candidate.querySelector(".dstart__label")?.textContent) === name);
+  if (!option) throw new Error(`no starting point "${name}"`);
+  act(() => option.querySelector<HTMLInputElement>("input")!.click());
+}
 const press = (target: Element, key: string): void =>
   act(() => void target.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true })));
 
@@ -316,11 +327,11 @@ describe("the official plans", () => {
     act(() => debt.focus());
     press(debt, "Home");
     press(debt, "ArrowRight");
-    expect(plain(debt.getAttribute("aria-valuetext"))).toMatch(/^2025: [\d.]+% \(XTS [\d,]+\) · official projection 52%$/);
+    expect(plain(debt.getAttribute("aria-valuetext"))).toMatch(/^2025: [\d.]+% \(XTS [\d,]+\) · official plan 52%$/);
     press(debt, "ArrowRight");
-    expect(plain(debt.getAttribute("aria-valuetext"))).toMatch(/ · official projection 55%$/);
+    expect(plain(debt.getAttribute("aria-valuetext"))).toMatch(/ · official plan 55%$/);
     press(debt, "ArrowRight");
-    expect(plain(debt.getAttribute("aria-valuetext"))).not.toContain("official projection");
+    expect(plain(debt.getAttribute("aria-valuetext"))).not.toContain("official plan");
   });
 
   it("sets out both plans apart from the charts: how the comparable one differs, and the scope of the other", () => {
@@ -329,11 +340,12 @@ describe("the official plans", () => {
     expect(plans).toHaveLength(2);
     expect(text(".dplans > h3")).toBe("Official plans");
     expect(plain(plans[0].querySelector(".dplan__name")?.textContent)).toBe("Ministry projection");
+    // Testland starts from its 2024 budget: the sentence contrasts that with the projection.
     expect(plain(plans[0].querySelector(".dplan__intro")?.textContent)).toBe(
-      "With its defaults, the calculation continues the budget of 2024 and arrives at a debt of 55.7% of GDP in 2026 without measures. " +
-        "This projection arrives at 55%: it starts from where things stood when it was published, with what has been decided since 2024. " +
-        "What it calculates differently is set out in its note.",
+      "With the budget of 2024 continued, debt without measures would reach 55.7% of GDP in 2026; this plan arrives at 55%: " +
+        "it includes what has been decided since 2024. What it calculates differently is set out in its note.",
     );
+    expect(plain(plans[0].querySelector(".debt__note")?.textContent)).toBe("Drawn in the charts as a dashed line, with diamonds at the years it gives figures for.");
     const rows = (plan: HTMLElement): string[][] =>
       [...plan.querySelectorAll("tr")].map((row) => [...row.children].map((cell) => plain(cell.textContent)));
     expect(rows(plans[0])).toEqual([
@@ -365,19 +377,21 @@ describe("the official plans", () => {
     );
   });
 
-  it("is followed with its preset: marked where it ends, said in the section, and kept in the address", () => {
+  it("is followed when chosen as the starting point on a pack that starts from its 2024 budget", () => {
     mount("#lang=en&s=halve_mp_pay");
     expect(container.querySelector(".dchart__marker")).toBeNull();
-    expect(container.querySelector(".debt__following")).toBeNull();
-    const preset = button("As the ministry plans");
-    click(preset);
-    expect(preset.getAttribute("aria-pressed")).toBe("true");
+    expect(radios()).toEqual([
+      ["Official plan to 2026", false],
+      ["Continue the 2024 budgetdefault", true],
+    ]);
+    choose("Official plan to 2026");
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&d=fministry_projection");
-    expect(all(".dchart__marker text").map((label) => plain(label.textContent))).toEqual(["continued from 2027", "continued from 2027"]);
-    expect(text(".debt__following")).toBe(
-      "Up to 2026, the calculation without measures follows the official projection “Ministry projection”. After that, the budget before interest keeps the share of economic output it has in 2026.",
+    expect(all(".dchart__marker text").map((label) => plain(label.textContent))).toEqual(["from 2027 by the assumptions", "from 2027 by the assumptions"]);
+    expect(text("#debt .section-head p")).toBe(
+      "A what-if calculation, not a forecast. Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply. " +
+        "With the measures switched on, the path departs from the plan from the first year.",
     );
-    // A slider keeps following the plan; the reset stops it.
+    // A slider keeps the starting point; the reset goes back to the pack's.
     slide(slider("Market interest rate"), 8);
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&d=r8~fministry_projection");
     click(button("Reset assumptions"));
@@ -385,16 +399,128 @@ describe("the official plans", () => {
     expect(container.querySelector(".dchart__marker")).toBeNull();
   });
 
-  it("opens from a link that follows the plan, and old links follow none", () => {
+  it("opens from a link that follows the plan; links without one, or with one that cannot be followed, start from 2024", { timeout: 30_000 }, () => {
     mount("#lang=en&d=fministry_projection");
-    expect(button("As the ministry plans").getAttribute("aria-pressed")).toBe("true");
-    expect(container.querySelector(".debt__following")).not.toBeNull();
+    expect(radios()[0]).toEqual(["Official plan to 2026", true]);
     mount2("#lang=en&d=r8");
-    expect(button("As the ministry plans").getAttribute("aria-pressed")).toBe("false");
-    expect(container.querySelector(".debt__following")).toBeNull();
+    expect(radios()[1]).toEqual(["Continue the 2024 budgetdefault", true]);
     // A plan that cannot be followed is dropped from the address.
     mount2("#lang=en&d=fcentral_budget_interest");
     expect(window.location.hash).toBe("#lang=en");
+  });
+});
+
+describe("a pack that starts from its official plan", () => {
+  // Testland with the ministry's projection as its starting path, as the German pack has the government's.
+  const following = (): CountryPack => {
+    const pack = testlandCopy();
+    pack.debt!.follow = "ministry_projection";
+    return pack;
+  };
+  beforeAll(async () => {
+    await debtModule.load();
+  });
+
+  it("follows it by default, everywhere debt figures are shown, with nothing in the address", { timeout: 30_000 }, () => {
+    mount("#lang=en", following());
+    expect(window.location.hash).toBe("#lang=en");
+    expect(text("#debt .section-head p")).toBe(
+      "A what-if calculation, not a forecast. Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply. " +
+        "Measures that are switched on are added from the first year.",
+    );
+    expect(radios()).toEqual([
+      ["Official plan to 2026default", true],
+      ["Continue the 2024 budget", false],
+    ]);
+    // The projection's path runs through the plan's figures: the plan is its diamonds on that path,
+    // with no line of its own, and the year after which the assumptions take over is marked.
+    const debtChart = all(".dchart")[1];
+    expect(debtChart.querySelectorAll('[data-plan="ministry_projection"] .dchart__plan-point')).toHaveLength(2);
+    expect(debtChart.querySelectorAll('[data-plan="ministry_projection"] .dchart__plan-line')).toHaveLength(0);
+    expect(debtChart.querySelector(".dkey--plan.is-on-path .dchart__plan-line")).toBeNull();
+    expect(all(".dchart__marker")).toHaveLength(2);
+    expect(plain(all(".dplan")[0].querySelector(".dplan__intro")?.textContent)).toMatch(/^The calculation starts from this plan up to 2026\. With the budget of 2024 continued, /);
+    expect(plain(all(".dplan")[0].querySelector(".debt__note")?.textContent)).toBe(
+      "In the charts, the diamonds on the path without measures, which follows its figures up to then.",
+    );
+    // The line near the top and the opening sentence have the followed path's figures.
+    const followedLead = lead();
+    act(() => root.unmount());
+    mount("#lang=en&d=b", following());
+    expect(lead()).not.toBe(followedLead);
+  });
+
+  it("switches to the 2024 budget and back as a starting point of its own, written into the address only when it is not the pack's", () => {
+    mount("#lang=en", following());
+    choose("Continue the 2024 budget");
+    expect(window.location.hash).toBe("#lang=en&d=b");
+    expect(container.querySelector(".dchart__marker")).toBeNull();
+    expect(text("#debt .section-head p")).toBe(
+      "A what-if calculation, not a forecast: how debt and interest would develop if the budget of 2024, with the measures switched on, kept its size relative to the economy.",
+    );
+    // The plan is a dashed line of its own again.
+    expect(all(".dchart")[1].querySelectorAll('[data-plan="ministry_projection"] .dchart__plan-line')).toHaveLength(1);
+    choose("Official plan to 2026default");
+    expect(window.location.hash).toBe("#lang=en");
+  });
+
+  it("keeps the starting point when a preset or a slider changes the assumptions, on either path", { timeout: 30_000 }, () => {
+    mount("#lang=en", following());
+    const high = button("High rates");
+    click(high);
+    expect(high.getAttribute("aria-pressed")).toBe("true");
+    expect(window.location.hash).toBe("#lang=en&d=r8");
+    expect(radios()[0][1]).toBe(true);
+    expect(all(".dchart__marker")).toHaveLength(2);
+    choose("Continue the 2024 budget");
+    expect(window.location.hash).toBe("#lang=en&d=r8~b");
+    // The preset still applies: it is about the rate, not the path.
+    expect(high.getAttribute("aria-pressed")).toBe("true");
+    click(button("Zero rates"));
+    expect(window.location.hash).toBe("#lang=en&d=r0~b");
+    expect(radios()[1][1]).toBe(true);
+    click(button("Reset assumptions"));
+    expect(window.location.hash).toBe("#lang=en");
+    expect(radios()[0][1]).toBe(true);
+  });
+
+  it("says that the path with measures departs from the plan from the first year", () => {
+    mount("#lang=en&s=halve_mp_pay", following());
+    expect(text("#debt .section-head p")).toMatch(/With the measures switched on, the path departs from the plan from the first year\.$/);
+    act(() => root.unmount());
+    mount("#lang=de&s=halve_mp_pay", following());
+    expect(text("#debt .section-head p")).toMatch(/Mit den eingeschalteten Maßnahmen weicht der Pfad vom ersten Jahr an von der Planung ab\.$/);
+  });
+
+  it("reads every form of the address", { timeout: 30_000 }, () => {
+    const opened = (hash: string): { path: boolean[]; hash: string } => {
+      mount(hash, following());
+      const state = { path: radios().map(([, checked]) => checked), hash: window.location.hash };
+      act(() => root.unmount());
+      return state;
+    };
+    // The pack's starting point needs nothing; the other is "b".
+    expect(opened("#lang=en")).toEqual({ path: [true, false], hash: "#lang=en" });
+    expect(opened("#lang=en&d=b")).toEqual({ path: [false, true], hash: "#lang=en&d=b" });
+    // A link that names the pack's own plan follows it, and the address is written again without it.
+    expect(opened("#lang=en&d=fministry_projection")).toEqual({ path: [true, false], hash: "#lang=en" });
+    expect(opened("#lang=en&d=r8~fministry_projection")).toEqual({ path: [true, false], hash: "#lang=en&d=r8" });
+    // A link from before the pack named a starting point, with assumptions only: the pack's starting point.
+    expect(opened("#lang=en&d=r8~y40")).toEqual({ path: [true, false], hash: "#lang=en&d=r8~y40" });
+    // A plan the pack does not have, or one that cannot be followed: the pack's starting point.
+    expect(opened("#lang=en&d=fno_such")).toEqual({ path: [true, false], hash: "#lang=en" });
+    expect(opened("#lang=en&d=fcentral_budget_interest~b")).toEqual({ path: [false, true], hash: "#lang=en&d=b" });
+    root = createRoot(container);
+  });
+
+  it("speaks German", () => {
+    mount("#lang=de", following());
+    expect(radios()).toEqual([
+      ["Amtliche Planung bis 2026Vorgabe", true],
+      ["Haushalt 2024 fortschreiben", false],
+    ]);
+    expect(plain(container.querySelector(".dstart legend")?.textContent)).toBe("Ausgangspunkt");
+    expect(all(".dchart__marker text").map((label) => plain(label.textContent))).toEqual(["ab 2027 nach den Annahmen", "ab 2027 nach den Annahmen"]);
   });
 });
 

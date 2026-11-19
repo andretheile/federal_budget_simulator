@@ -3,6 +3,8 @@ import { testland, testlandCopy } from "./__fixtures__/testland.ts";
 import {
   applyDebtPreset,
   decodeScenario,
+  defaultFollow,
+  followablePlans,
   encodeScenario,
   firstYearAbove,
   firstYearBelow,
@@ -488,7 +490,6 @@ describe("official plans", () => {
 describe("following a plan", () => {
   // Testland's ministry projection: 52 % of GDP in 2025, 55 % in 2026 with 4 % growth, balance -3.5 % in 2026.
   const FOLLOW = { follow: "ministry_projection" };
-  const preset = testland.debt!.presets.find((candidate) => candidate.id === "ministry_plan")!;
 
   it("without follow the projection is what it always was", () => {
     const plain = projectScenario(testland, ALL)!;
@@ -567,15 +568,61 @@ describe("following a plan", () => {
     expect(long.baseline.longRun).toEqual({ kind: "diverges" });
   });
 
-  it("a preset can follow a plan; one without follow stops following", () => {
-    const followed = applyDebtPreset(testland.debt!, resolveDebtAssumptions(testland.debt!), preset);
-    expect(followed.follow).toBe("ministry_projection");
-    expect(presetApplies(preset, followed)).toBe(true);
+  it("presets act on whichever starting path is chosen and leave it alone", () => {
     const highRates = testland.debt!.presets[0];
-    expect(presetApplies(highRates, { ...followed, market_rate: 8 })).toBe(false);
+    const followed = resolveDebtAssumptions(testland.debt!, FOLLOW);
     const after = applyDebtPreset(testland.debt!, followed, highRates);
-    expect(after.follow).toBeUndefined();
+    expect(after).toEqual({ ...followed, market_rate: 8 });
     expect(presetApplies(highRates, after)).toBe(true);
-    expect(presetApplies(preset, after)).toBe(false);
+    expect(presetApplies(highRates, followed)).toBe(false);
+    // On the base year's budget the same preset applies the same way.
+    const plain = applyDebtPreset(testland.debt!, resolveDebtAssumptions(testland.debt!), highRates);
+    expect(plain.follow).toBeUndefined();
+    expect(presetApplies(highRates, plain)).toBe(true);
+  });
+});
+
+describe("the starting path a pack names", () => {
+  // A copy of Testland that starts from the ministry's projection.
+  const pack = testlandCopy();
+  pack.debt!.follow = "ministry_projection";
+  const debt = pack.debt!;
+
+  it("is followed by default, and written out in the resolved assumptions", () => {
+    expect(defaultFollow(debt)).toBe("ministry_projection");
+    expect(defaultFollow(testland.debt!)).toBeUndefined();
+    expect(resolveDebtAssumptions(debt).follow).toBe("ministry_projection");
+    const projection = projectScenario(pack, { policies: {} })!;
+    expect(projection.followed).toEqual({ plan: "ministry_projection", until: 2026 });
+    expect(projection.baseline.years[1].debtRatio).toBeCloseTo(0.55, 12);
+    // The same as following it on a pack that does not name it.
+    expect(projection.baseline).toEqual(projectScenario(testland, { policies: {} }, { follow: "ministry_projection" })!.baseline);
+  });
+
+  it("gives way to the base year's budget when that is chosen: null, written out as null", () => {
+    const base = resolveDebtAssumptions(debt, { follow: null });
+    expect(base.follow).toBeNull();
+    // Resolved again it stays the base year; it does not fall back to the plan.
+    expect(resolveDebtAssumptions(debt, base).follow).toBeNull();
+    const projection = projectScenario(pack, { policies: {} }, { follow: null })!;
+    expect(projection.followed).toBeUndefined();
+    expect(projection.baseline).toEqual(projectScenario(testland, { policies: {} })!.baseline);
+  });
+
+  it("is taken where the plan asked for is unknown or cannot be followed", () => {
+    for (const follow of ["no_such", "central_budget_interest"]) expect(resolveDebtAssumptions(debt, { follow }).follow).toBe("ministry_projection");
+  });
+
+  it("is left alone by presets, either way", () => {
+    const highRates = debt.presets[0];
+    expect(applyDebtPreset(debt, resolveDebtAssumptions(debt), highRates).follow).toBe("ministry_projection");
+    expect(applyDebtPreset(debt, resolveDebtAssumptions(debt, { follow: null }), highRates).follow).toBeNull();
+    expect(applyDebtPreset(debt, {}, highRates).follow).toBe("ministry_projection");
+  });
+
+  it("is the only one for a pack that names none: there null and absent both mean the base year", () => {
+    expect(resolveDebtAssumptions(testland.debt!, { follow: null })).toEqual(resolveDebtAssumptions(testland.debt!));
+    expect("follow" in resolveDebtAssumptions(testland.debt!, { follow: null })).toBe(false);
+    expect(followablePlans(debt).map((plan) => plan.id)).toEqual(["ministry_projection"]);
   });
 });

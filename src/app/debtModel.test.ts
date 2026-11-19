@@ -215,24 +215,40 @@ describe("the years of the table", () => {
 });
 
 describe("the German pack", () => {
-  it("gives the figures the engine's author published, at the defaults and with US rates", async () => {
+  it("starts from the government's projection by default, with the 2024 budget continued as the other path", { timeout: 30_000 }, async () => {
     const result = await loadPack("de");
     if (!result.ok) {
       console.info("countries/de is not valid right now; the German figures are not checked");
       return;
     }
     const pack = result.pack;
-    const at2044 = (v: DebtView) => recordAt(v.projection.reform, 2044)!;
+    const debt = pack.debt!;
+    const at = (v: DebtView, year: number) => recordAt(v.projection.reform, year)!;
     const defaults = view(NONE, undefined, pack);
-    expect(at2044(defaults).interestToRevenue).toBeCloseTo(0.07, 3);
-    expect(at2044(defaults).debtRatio).toBeCloseTo(1.016, 3);
-    const unitedStates = pack.debt!.presets.find((preset) => preset.id === "united_states")!;
-    const us = view(NONE, applyDebtPreset(pack.debt!, resolveDebtAssumptions(pack.debt!), unitedStates), pack);
-    expect(at2044(us).interestToRevenue).toBeCloseTo(0.129, 3);
-    expect(at2044(us).debtRatio).toBeCloseTo(1.259, 3);
-    // Interest overtakes defence within a few years; police it is above already.
+    expect(defaults.projection.followed).toEqual({ plan: "government_projection_2026_09", until: 2030 });
+    // Up to 2030 the path is the projection's: 78.25 % of GDP in 2030.
+    expect(at(defaults, 2030).debtRatio).toBeCloseTo(0.7825, 6);
+    expect(at(defaults, 2044).interestToRevenue).toBeCloseTo(0.084, 3);
+    expect(at(defaults, 2044).debtRatio).toBeCloseTo(1.217, 3);
+    const continued = view(NONE, resolveDebtAssumptions(debt, { follow: null }), pack);
+    expect(continued.projection.followed).toBeUndefined();
+    expect(at(continued, 2044).interestToRevenue).toBeCloseTo(0.07, 3);
+    expect(at(continued, 2044).debtRatio).toBeCloseTo(1.016, 3);
+    // US rates act on whichever path is chosen.
+    const unitedStates = debt.presets.find((preset) => preset.id === "united_states")!;
+    const us = view(NONE, applyDebtPreset(debt, resolveDebtAssumptions(debt), unitedStates), pack);
+    expect(us.projection.followed?.plan).toBe("government_projection_2026_09");
+    expect(at(us, 2044).interestToRevenue).toBeCloseTo(0.135, 3);
+    expect(at(us, 2044).debtRatio).toBeCloseTo(1.315, 3);
+    const usContinued = view(NONE, applyDebtPreset(debt, resolveDebtAssumptions(debt, { follow: null }), unitedStates), pack);
+    expect(at(usContinued, 2044).interestToRevenue).toBeCloseTo(0.129, 3);
+    expect(at(usContinued, 2044).debtRatio).toBeCloseTo(1.259, 3);
+    // Interest is above police already and overtakes defence in 2026 on both paths; on the
+    // projection it overtakes education in 2049, which the 2024 budget continued never does.
     const rows = interestComparisons(pack, defaults);
     expect(rows.find((row) => row.node === "exp.safety.police")?.without.first).toBe(2024);
     expect(rows.find((row) => row.node === "exp.defence")?.without.first).toBe(2026);
+    expect(rows.find((row) => row.node === "exp.education")?.without.first).toBe(2049);
+    expect(interestComparisons(pack, continued).find((row) => row.node === "exp.education")?.without.first).toBeNull();
   });
 });

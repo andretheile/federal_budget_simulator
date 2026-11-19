@@ -155,9 +155,10 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
   const body = useBody(section, eager || !sameDebtAssumptions(assumptions, defaultDebtAssumptions(ui.pack.debt!)));
   const headline = debtHeadline(view, interestComparisons(ui.pack, view));
   const lead = t.debt.lead(leadText(ui, headline));
-  // The calculation follows an official plan in its years (a preset or the address chose it).
+  // Where the calculation starts from: an official plan it follows in its years, or the base year's budget.
   const plan = view.projection.followed && ui.pack.debt?.plans?.find((candidate) => candidate.id === view.projection.followed?.plan);
   const followed = plan && view.projection.followed ? { label: ui.text(plan.label), until: view.projection.followed.until } : undefined;
+  const intro = t.debt.intro({ baseYear: headline.baseYear, plan: followed, measuresOn: view.measuresOn });
 
   // After the visitor changes an assumption, screen readers hear the new result once the slider rests.
   const [announced, setAnnounced] = useState("");
@@ -184,11 +185,10 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
     <section className="debt" id="debt" aria-labelledby="debt-title" ref={section} tabIndex={-1}>
       <header className="section-head">
         <h2 id="debt-title">{t.debt.title}</h2>
-        <p>{t.debt.intro(headline.baseYear)}</p>
+        <p>{intro}</p>
       </header>
       <p className="debt__lead">{lead}</p>
       {level !== "all" && <p className="debt__level">{t.debt.wholeState(ui.levelName(level))}</p>}
-      {followed && <p className="debt__level debt__following">{t.debt.following(followed.label, followed.until)}</p>}
       <p className="visually-hidden" aria-live="polite">
         {announced}
       </p>

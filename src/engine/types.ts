@@ -528,16 +528,10 @@ export interface DebtPreset {
   note?: LocalizedText;
   /**
    * The assumptions the preset sets, in the units of their params and inside their ranges. At
-   * least one, unless the preset follows a plan. Assumptions it does not name keep their current
-   * value.
+   * least one. Assumptions it does not name keep their current value, and so does the starting
+   * path (DebtFile.follow): a preset acts on whichever path is chosen.
    */
   values: Partial<Record<DebtAssumptionId, number>>;
-  /**
-   * Id of a plan in `plans` that the projection follows with this preset (see
-   * DebtAssumptions.follow). It must be one that can be followed (isFollowablePlan). A preset
-   * without it stops following a plan.
-   */
-  follow?: string;
   sources?: SourceId[];
 }
 
@@ -649,6 +643,13 @@ export interface DebtFile {
   comparisons?: DebtComparison[];
   /** Official projections of the country's own path, for display next to the model's. Optional. */
   plans?: DebtPlan[];
+  /**
+   * The starting path: the id of a plan in `plans` that the projection follows unless the visitor
+   * chooses to continue the base year's budget instead. It must be one that can be followed
+   * (isFollowablePlan). Without it the projection continues the base year's budget, and follows a
+   * plan only when one is chosen (DebtAssumptions.follow).
+   */
+  follow?: string;
   /** What the projection is and what it leaves out, in plain words; shown with it. */
   note: LocalizedText;
 }

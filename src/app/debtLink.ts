@@ -1,24 +1,30 @@
 /**
  * The assumptions of the debt projection in the address: only those that differ from their
- * defaults, each as a letter and a number, joined by "~", and the official plan the projection
- * follows, if any, as "f" and the plan's id:
+ * defaults, each as a letter and a number, joined by "~", and the starting path if it is not the
+ * pack's: "b" for the base year's budget continued, or "f" and the id of a plan to follow.
  *
  *   d=r5.1~g3~y40~p-0.07     market rate 5.1 %, growth 3 %, 40 years, drift -0.07 points a year
- *   d=g3~fgov_projection     growth 3 %, following the plan "gov_projection" in its years
+ *   d=g3~b                   growth 3 %, on the base year's budget where the pack follows a plan
+ *   d=fgov_projection        following the plan "gov_projection", where the pack does not
  *
  * Every character is safe in a fragment, so the field needs no escaping. A value that is not a
  * number is ignored, one outside its range is clamped, and every value is put on its slider's
- * steps, so a link always reproduces a state the sliders can show. A plan the pack does not have,
- * or one that cannot be followed, is dropped (resolveDebtAssumptions). Links from before plans
- * could be followed have no "f" and follow none, as they did then.
+ * steps, so a link always reproduces a state the sliders can show.
+ *
+ * Old links: one without "b" or "f" gets the pack's starting path, whatever it was when the link
+ * was made. One with "f" and the plan the pack follows anyway opens on that plan, and the address
+ * is written again without the token. One with a plan the pack does not have, or one that cannot
+ * be followed, gets the pack's starting path (resolveDebtAssumptions).
  */
-import { DEBT_ASSUMPTION_IDS, debtAssumptionParam, resolveDebtAssumptions } from "../engine/index.ts";
+import { DEBT_ASSUMPTION_IDS, debtAssumptionParam, defaultFollow, resolveDebtAssumptions } from "../engine/index.ts";
 import type { DebtAssumptionId, DebtAssumptions, DebtFile } from "../engine/index.ts";
 
 const LETTERS: Readonly<Record<DebtAssumptionId, string>> = { market_rate: "r", growth: "g", horizon: "y", drift: "p" };
 const TOKEN = /^([a-z])(-?\d+(?:\.\d+)?)$/;
-/** The plan the projection follows: "f" and an id of the pack's format (lower_snake_case). */
+/** A plan the projection follows: "f" and an id of the pack's format (lower_snake_case). */
 const FOLLOW = /^f([a-z0-9]+(?:_[a-z0-9]+)*)$/;
+/** The base year's budget continued, where the pack starts from a plan. */
+const BASE = "b";
 
 /** Number of decimals of a step: 0.1 -> 1, 0.01 -> 2, 1 -> 0. */
 function decimals(step: number): number {
@@ -50,7 +56,13 @@ export function encodeDebtAssumptions(debt: DebtFile, values: DebtAssumptions): 
     if (!Number.isFinite(value) || Math.abs(value - debtAssumptionParam(debt, id).default) < 1e-9) continue;
     tokens.push(`${LETTERS[id]}${String(Number(value.toFixed(6)))}`);
   }
-  if (values.follow !== undefined && FOLLOW.test(`f${values.follow}`)) tokens.push(`f${values.follow}`);
+  // The starting path, if it is not the pack's.
+  const pack = defaultFollow(debt) ?? null;
+  const wanted = values.follow === undefined ? pack : values.follow;
+  if (wanted !== pack) {
+    if (wanted === null) tokens.push(BASE);
+    else if (FOLLOW.test(`f${wanted}`)) tokens.push(`f${wanted}`);
+  }
   return tokens.join("~");
 }
 
@@ -58,6 +70,10 @@ export function encodeDebtAssumptions(debt: DebtFile, values: DebtAssumptions): 
 export function decodeDebtAssumptions(debt: DebtFile, text: string | undefined): DebtAssumptions {
   const given: Partial<DebtAssumptions> = {};
   for (const token of (text ?? "").split("~")) {
+    if (token === BASE) {
+      given.follow = null;
+      continue;
+    }
     const follow = FOLLOW.exec(token);
     if (follow) {
       given.follow = follow[1];
@@ -74,7 +90,7 @@ export function decodeDebtAssumptions(debt: DebtFile, text: string | undefined):
   return resolveDebtAssumptions(debt, resolved);
 }
 
-/** The default assumptions of a pack. They follow no plan. */
+/** The default assumptions of a pack, on its starting path. */
 export function defaultDebtAssumptions(debt: DebtFile): DebtAssumptions {
   return resolveDebtAssumptions(debt);
 }

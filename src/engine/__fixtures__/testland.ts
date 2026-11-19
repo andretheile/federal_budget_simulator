@@ -1,6 +1,7 @@
 /**
  * Testland ("xx"): a small synthetic country with round numbers, used by the tests and as the
- * fallback of the smoke page. It uses every optional field of the contract at least once.
+ * fallback of the smoke page. It uses every optional field of the contract at least once, except a
+ * starting plan for the debt projection (see below).
  *
  * Base year totals: revenue 4000, expenditure 4400, balance -400. GDP 10000, 100 inhabitants,
  * 50 households.
@@ -54,11 +55,14 @@
  * deficit 434, debt 5434. Two official plans: the ministry's projection for the whole state in
  * national accounts (2025 and 2026), and the central budget's interest in cash.
  *
- * The preset "ministry_plan" follows the ministry's projection: GDP grows by 3 % (the growth
- * assumption) in 2025 and by 4 % (the plan's) in 2026, to 10712; the path without measures has debt
- * of 52 % of GDP (5356) in 2025 and 55 % (5891.6) in 2026. In 2025 interest is 125 as above, so the
- * primary balance that meets the plan is 5000 + 125 - 5356 = -231. After 2026 the primary balance is
- * the plan's balance of -3.5 % of GDP plus the model's interest of 2026, as a share of GDP.
+ * Testland names no starting plan (debt.json `follow`): its default is the base year's budget, as
+ * for any pack that names none, and the hand-worked figures of the tests rest on it. This is the one
+ * optional field the fixture leaves out; the tests set `follow: "ministry_projection"` on a copy.
+ * Following the ministry's projection (chosen, or as such a copy's default): GDP grows by 3 % (the
+ * growth assumption) in 2025 and by 4 % (the plan's) in 2026, to 10712; the path without measures
+ * has debt of 52 % of GDP (5356) in 2025 and 55 % (5891.6) in 2026. In 2025 interest is 125 as above,
+ * so the primary balance that meets the plan is 5000 + 125 - 5356 = -231. After 2026 the primary
+ * balance is the plan's balance of -3.5 % of GDP plus the model's interest of 2026, as a share of GDP.
  *
  * Goals (goals.json): "close_deficit", the whole state's balance up by 400 (no level), with changes on
  * exp.defense and the measure family_bonus left out, and "central_gap", the default: the central government's balance up by 100 in 2027. On its own at
@@ -838,13 +842,6 @@ export const testland: CountryPack = {
         id: "zero_rates",
         label: t("Zero rates", "Nullzinsen"),
         values: { market_rate: 0 },
-      },
-      {
-        id: "ministry_plan",
-        label: t("As the ministry plans", "Wie das Ministerium plant"),
-        note: t("Follows the ministry's projection to 2026.", "Folgt der Projektion des Ministeriums bis 2026."),
-        values: {},
-        follow: "ministry_projection",
       },
     ],
     references: [

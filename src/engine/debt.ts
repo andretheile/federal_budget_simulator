@@ -28,8 +28,10 @@
  * The projection is always for the whole state: `projectDebt` refuses a result filtered to one level
  * of government, `projectScenario` ignores the scenario's level filter.
  *
- * With `follow` in the assumptions the projection follows an official plan (debt.json `plans`) in
- * the plan's years and continues from its last year with the assumptions; see followPaths.
+ * The starting path is either the base year's budget, as above, or an official plan (debt.json
+ * `plans`) that the projection follows in the plan's years and continues from its last year with
+ * the assumptions; see followPaths. Which one is the pack's choice (debt.json `follow`), and the
+ * visitor can choose the other (DebtAssumptions.follow).
  */
 import { simulate, type Scenario, type SimulationResult, type Totals } from "./simulate.ts";
 import {
@@ -44,15 +46,22 @@ import {
 
 /**
  * Values of the assumptions, keyed by id, in the units of their params (see DebtAssumptionId), and
- * optionally the id of a plan the projection follows.
+ * the starting path.
  *
- * `follow` names a plan in debt.json `plans` that can be followed (isFollowablePlan). In the plan's
- * years the path without measures then reproduces the plan's debt ratio, with the plan's growth
- * where it gives one; after the plan's last year the primary balance is the plan's balance of that
- * year plus the model's interest of that year, as a share of GDP, see followPaths. Absent: no plan is followed, and the projection is exactly what it was before plans
- * could be followed.
+ * `follow` is the starting path:
+ *   a plan id   follow that plan of debt.json `plans` (it must be one that can be followed,
+ *               isFollowablePlan). In the plan's years the path without measures reproduces the
+ *               plan's debt ratio, with the plan's growth where it gives one; after the plan's last
+ *               year the primary balance is the plan's balance of that year plus the model's
+ *               interest of that year, as a share of GDP, see followPaths.
+ *   null        continue the base year's budget: no plan is followed.
+ *   absent      the pack's starting path: debt.json `follow` if it names one, otherwise the base
+ *               year's budget.
+ * resolveDebtAssumptions writes it out: the plan id, or null where the pack names a plan but the
+ * base year is chosen. Only for a pack that names no plan, where the base year is the default,
+ * does it stay absent, so that such a pack's assumptions look as they always did.
  */
-export type DebtAssumptions = Record<DebtAssumptionId, number> & { follow?: string };
+export type DebtAssumptions = Record<DebtAssumptionId, number> & { follow?: string | null };
 
 /** One year of a path. Money in currency units, ratios and rates as fractions. */
 export interface DebtYear {
@@ -139,7 +148,9 @@ export function debtAssumptionParam(debt: DebtFile, id: DebtAssumptionId): DebtA
 /**
  * The assumptions a projection runs with: missing or non-finite values fall back to the default,
  * every value is clamped to its param's [min, max], and the horizon is rounded to whole years.
- * `follow` is kept if it names a plan of the pack that can be followed, and dropped otherwise.
+ * The starting path is the one asked for if it is null or names a plan of the pack that can be
+ * followed; otherwise it is the pack's (defaultFollow). See DebtAssumptions.follow for how it is
+ * written.
  */
 export function resolveDebtAssumptions(debt: DebtFile, given?: Partial<DebtAssumptions>): DebtAssumptions {
   const out = {} as DebtAssumptions;
@@ -150,20 +161,40 @@ export function resolveDebtAssumptions(debt: DebtFile, given?: Partial<DebtAssum
     if (id === "horizon") n = Math.round(n);
     out[id] = Math.min(param.max, Math.max(param.min, n));
   }
-  const follow = given?.follow;
-  if (typeof follow === "string") {
-    const plan = debt.plans?.find((candidate) => candidate.id === follow);
-    if (plan && isFollowablePlan(plan)) out.follow = follow;
-  }
+  const wanted = given?.follow;
+  const follow =
+    wanted === null ? null : typeof wanted === "string" && followable(debt, wanted) ? wanted : (defaultFollow(debt) ?? null);
+  if (follow !== null) out.follow = follow;
+  else if (defaultFollow(debt) !== undefined) out.follow = null;
   return out;
+}
+
+/** Whether the pack has a plan with this id that can be followed. */
+function followable(debt: DebtFile, id: string): boolean {
+  const plan = debt.plans?.find((candidate) => candidate.id === id);
+  return plan !== undefined && isFollowablePlan(plan);
+}
+
+/**
+ * The plan the projection follows unless the visitor chooses the base year: debt.json `follow`,
+ * if it names a plan that can be followed (validation makes sure it does). Undefined if the pack
+ * names none: then the base year's budget is the starting path.
+ */
+export function defaultFollow(debt: DebtFile): string | undefined {
+  return debt.follow !== undefined && followable(debt, debt.follow) ? debt.follow : undefined;
+}
+
+/** The plans of the pack that can be followed: the starting paths there are besides the base year's budget. */
+export function followablePlans(debt: DebtFile): DebtPlan[] {
+  return (debt.plans ?? []).filter(isFollowablePlan);
 }
 
 /**
  * The assumptions after choosing a preset: the preset's values replace the current ones, the rest
- * stay. The preset's `follow` replaces the current one; a preset without it stops following a plan.
+ * stay, and so does the starting path. A preset acts on whichever path is chosen.
  */
 export function applyDebtPreset(debt: DebtFile, current: Partial<DebtAssumptions>, preset: DebtPreset): DebtAssumptions {
-  return resolveDebtAssumptions(debt, { ...current, ...preset.values, follow: preset.follow });
+  return resolveDebtAssumptions(debt, { ...current, ...preset.values });
 }
 
 /**
@@ -191,14 +222,11 @@ export function isFollowablePlan(plan: DebtPlan): boolean {
 }
 
 /**
- * Whether every value the preset sets is the current one and the projection follows the plan the
- * preset follows (or none, if it follows none), e.g. to mark the preset as chosen.
+ * Whether every value the preset sets is the current one, e.g. to mark the preset as chosen. The
+ * starting path plays no part: a preset applies on either.
  */
 export function presetApplies(preset: DebtPreset, assumptions: DebtAssumptions): boolean {
-  return (
-    DEBT_ASSUMPTION_IDS.every((id) => preset.values[id] === undefined || preset.values[id] === assumptions[id]) &&
-    preset.follow === assumptions.follow
-  );
+  return DEBT_ASSUMPTION_IDS.every((id) => preset.values[id] === undefined || preset.values[id] === assumptions[id]);
 }
 
 interface Setup {
@@ -424,7 +452,7 @@ export function projectDebt(pack: CountryPack, result: SimulationResult, given?:
     horizon: assumptions.horizon,
   };
   const keys = ["baseline", "reform", "reformLow", "reformHigh"] as const;
-  const plan = assumptions.follow === undefined ? undefined : debt.plans?.find((candidate) => candidate.id === assumptions.follow);
+  const plan = typeof assumptions.follow === "string" ? debt.plans?.find((candidate) => candidate.id === assumptions.follow) : undefined;
   const followed = plan ? followedPlan(plan, setup.baseYear) : undefined;
   if (followed && followed.first <= setup.horizon) {
     const base = { totals: result.baseline, interest: baseInterest };

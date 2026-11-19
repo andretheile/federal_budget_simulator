@@ -451,11 +451,10 @@ export const debtFileSchema = z.strictObject({
         label: localizedTextSchema,
         note: localizedTextSchema.optional(),
         values: z.partialRecord(debtAssumptionId, z.number()),
-        follow: z.string().optional(),
         sources: sourceIds.optional(),
       })
-      .refine((preset) => Object.keys(preset.values).length > 0 || preset.follow !== undefined, {
-        message: "a preset must set at least one assumption or follow a plan",
+      .refine((preset) => Object.keys(preset.values).length > 0, {
+        message: "a preset must set at least one assumption",
         path: ["values"],
       }),
   ),
@@ -499,6 +498,7 @@ export const debtFileSchema = z.strictObject({
       }),
     )
     .optional(),
+  follow: idSchema.optional(),
   note: localizedTextSchema,
 });
 

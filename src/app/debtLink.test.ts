@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { testland } from "../engine/__fixtures__/testland.ts";
+import { testland, testlandCopy } from "../engine/__fixtures__/testland.ts";
 import { decodeDebtAssumptions, defaultDebtAssumptions, encodeDebtAssumptions, sameDebtAssumptions } from "./debtLink.ts";
 
 // Testland's defaults: market rate 4 %, growth 3 %, 30 years, no drift.
@@ -73,5 +73,41 @@ describe("following an official plan", () => {
     expect(sameDebtAssumptions(defaults, { ...defaults, follow: "ministry_projection" })).toBe(false);
     expect(sameDebtAssumptions({ ...defaults, follow: "ministry_projection" }, { ...defaults, follow: "ministry_projection" })).toBe(true);
     expect(sameDebtAssumptions(defaults, { ...defaults, follow: undefined })).toBe(true);
+  });
+});
+
+describe("the starting path in the address, for a pack that starts from a plan", () => {
+  const pack = testlandCopy();
+  pack.debt!.follow = "ministry_projection";
+  const following = pack.debt!;
+  const start = defaultDebtAssumptions(following);
+
+  it("writes nothing for the pack's own starting path, and b for the base year's budget", () => {
+    expect(start).toEqual({ ...defaults, follow: "ministry_projection" });
+    expect(encodeDebtAssumptions(following, start)).toBe("");
+    expect(encodeDebtAssumptions(following, { ...start, follow: null })).toBe("b");
+    expect(encodeDebtAssumptions(following, { ...start, market_rate: 8, follow: null })).toBe("r8~b");
+    expect(encodeDebtAssumptions(following, { ...start, market_rate: 8 })).toBe("r8");
+  });
+
+  it("reads them back", () => {
+    expect(decodeDebtAssumptions(following, "")).toEqual(start);
+    expect(decodeDebtAssumptions(following, "b")).toEqual({ ...defaults, follow: null });
+    expect(decodeDebtAssumptions(following, "r8~b")).toEqual({ ...defaults, market_rate: 8, follow: null });
+    expect(sameDebtAssumptions(decodeDebtAssumptions(following, "b"), start)).toBe(false);
+  });
+
+  it("takes the old forms: no plan named is the pack's starting path; the pack's own plan named is the same", () => {
+    expect(decodeDebtAssumptions(following, "r8~y40")).toEqual({ ...start, market_rate: 8, horizon: 40 });
+    expect(decodeDebtAssumptions(following, "fministry_projection")).toEqual(start);
+    expect(encodeDebtAssumptions(following, decodeDebtAssumptions(following, "fministry_projection"))).toBe("");
+    // A plan that is not there, or cannot be followed: the pack's starting path.
+    expect(decodeDebtAssumptions(following, "fno_such")).toEqual(start);
+    expect(decodeDebtAssumptions(following, "fcentral_budget_interest")).toEqual(start);
+  });
+
+  it("for a pack that names no plan, b is its own starting path and writes nothing", () => {
+    expect(decodeDebtAssumptions(debt, "b")).toEqual(defaults);
+    expect(encodeDebtAssumptions(debt, { ...defaults, follow: null })).toBe("");
   });
 });

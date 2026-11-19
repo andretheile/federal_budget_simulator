@@ -45,9 +45,9 @@ export function planFields(plan: DebtPlan): (typeof PLAN_FIELDS)[number][] {
 }
 
 /**
- * The last year in which a comparable plan gives the debt ratio, with the plan's value and the
- * projection's at its defaults and without measures: the calculation continues the base year's
- * budget, the plan starts from what has been decided since. Undefined if the plan gives no debt
+ * The last year in which a comparable plan gives the debt ratio, with the plan's value and that of
+ * the base year's budget continued, at the default assumptions and without measures: the plan
+ * starts from what has been decided since the base year, the continuation does not. Undefined if the plan gives no debt
  * ratio, or its year lies beyond the horizon of the defaults.
  */
 export function planAgainstDefaults(
@@ -58,6 +58,7 @@ export function planAgainstDefaults(
 ): { year: number; plan: number; model: number } | undefined {
   const point = [...plan.points].reverse().find((candidate) => candidate.debtRatio !== undefined);
   if (!point || point.debtRatio === undefined || !pack.debt) return undefined;
-  const record = recordAt(projectDebt(pack, whole, { ...defaults, follow: undefined }).baseline, point.year);
+  // The base year's budget continued: no plan followed, whatever the pack's starting path.
+  const record = recordAt(projectDebt(pack, whole, { ...defaults, follow: null }).baseline, point.year);
   return record ? { year: point.year, plan: point.debtRatio, model: record.debtRatio } : undefined;
 }

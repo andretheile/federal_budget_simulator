@@ -38,14 +38,26 @@ export const debtBodyDe: DebtBodyMessages = {
   readoutPart: (label, value) => `${label} ${value}`,
   withAmount: (share, amount) => `${share} (${amount})`,
   offScale: (label, value) => `${label} ${value}\u00a0↑`,
-  planPart: (value) => `amtliche Projektion ${value}`,
-  continued: (fromYear) => `ab ${fromYear} fortgeschrieben`,
+  planPart: (value) => `amtliche Planung ${value}`,
+  continued: (fromYear) => `ab ${fromYear} nach den Annahmen`,
+
+  startTitle: "Ausgangspunkt",
+  startPlan: (until) => `Amtliche Planung bis ${until}`,
+  startPlanNote: (label, until) =>
+    `Bis ${until} folgen Schulden und Wachstum der amtlichen Planung „${label}“, mit dem, was bis zu ihrem Stand beschlossen war; danach gelten die Annahmen.`,
+  startBase: (baseYear) => `Haushalt ${baseYear} fortschreiben`,
+  startBaseNote: (baseYear) =>
+    `Der Haushalt von ${baseYear} behält vom ersten Jahr an seinen Anteil an der Wirtschaftsleistung; was seither beschlossen wurde, fehlt.`,
+  startDefault: "Vorgabe",
 
   plansTitle: "Amtliche Planungen",
-  plansIntro: ({ baseYear, year, plan, model }) =>
-    `Die Rechnung schreibt mit ihren Vorgaben den Haushalt von ${baseYear} fort und kommt ohne Maßnahmen ${year} auf Schulden von ${model} des BIP. ` +
-    `Diese Projektion kommt auf ${plan}: Sie geht vom Stand ihrer Veröffentlichung aus, mit dem, was seit ${baseYear} beschlossen wurde. Was sie anders rechnet, steht in ihrer Anmerkung.`,
-  planInChart: "In den Grafiken gestrichelt, mit Rauten an den Jahren, für die sie Zahlen nennt.",
+  plansIntro: ({ baseYear, year, plan, model, followed }) =>
+    (followed ? `Von dieser Planung geht die Rechnung bis ${year} aus. ` : "") +
+    `Mit dem Haushalt von ${baseYear} fortgeschrieben kämen die Schulden ohne Maßnahmen ${year} auf ${model} des BIP, nach dieser Planung auf ${plan}: Sie enthält, was seit ${baseYear} beschlossen wurde. Was sie anders rechnet, steht in ihrer Anmerkung.`,
+  planInChart: (followed) =>
+    followed
+      ? "In den Grafiken die Rauten auf dem Pfad ohne Maßnahmen, der bis dahin ihren Zahlen folgt."
+      : "In den Grafiken gestrichelt, mit Rauten an den Jahren, für die sie Zahlen nennt.",
   planScope: (level, cash) =>
     `${level === null ? "Gilt für den ganzen Staat" : `Gilt nur für die Ebene „${level}“`}${cash ? " und ist in Zahlungen gerechnet (Kassenzahlen)" : ", in der Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen"}.`,
   planNotComparable:
@@ -61,8 +73,7 @@ export const debtBodyDe: DebtBodyMessages = {
   planCaption: (label) => `Zahlen: ${label}`,
 
   comparisonsTitle: "Wann die Zinsen mehr kosten als …",
-  comparisonsNote:
-    "Jeder Posten behält seinen Anteil an der Wirtschaftsleistung, so wie alle Ausgaben in dieser Rechnung. Beträge für den ganzen Staat.",
+  comparisonsNote: (baseYear) => `Jeder Posten behält seinen Anteil an der Wirtschaftsleistung von ${baseYear}. Beträge für den ganzen Staat.`,
   itemToday: (baseYear, amount, share) => `${baseYear}: ${amount}, ${share} des BIP`,
   itemWith: (amount, share) => `mit den Maßnahmen: ${amount}, ${share} des BIP`,
   crossing: {

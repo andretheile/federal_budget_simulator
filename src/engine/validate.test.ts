@@ -1413,37 +1413,48 @@ describe("goals.json", () => {
   });
 });
 
-describe("presets that follow a plan", () => {
+describe("presets", () => {
   const DEBT = "debt.json";
 
-  it("need values or a plan to follow", () => {
-    expectOnly((f) => delete f.debt.presets[3].follow, DEBT, "$.presets[3].values", /at least one assumption or follow a plan/);
-    // A preset may follow a plan and set values as well.
-    expect(validatePack(((f) => ((f.debt.presets[3].values = { growth: 2 }), f))(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
+  it("set at least one assumption, and nothing else: they do not choose the starting path", () => {
+    expectOnly((f) => (f.debt.presets[0].values = {}), DEBT, "$.presets[0].values", /at least one assumption/);
+    expectOnly((f) => (f.debt.presets[0].follow = "ministry_projection"), DEBT, "$.presets[0]", /Unrecognized key: "follow"/);
+  });
+});
+
+describe("the starting path of the debt projection", () => {
+  const DEBT = "debt.json";
+  const following = (f: Files): Files => ((f.debt.follow = "ministry_projection"), f);
+
+  it("is optional, and may name a plan that can be followed", () => {
+    expect(validatePack(testlandFiles() as Files)).toMatchObject({ ok: true, warnings: [] });
+    expect(validatePack(following(testlandFiles() as Files))).toMatchObject({ ok: true, warnings: [] });
   });
 
-  it("follow a plan that exists and that can be followed", () => {
-    expectOnly((f) => (f.debt.presets[3].follow = "no_such"), DEBT, "$.presets[3].follow", /unknown plan "no_such"/);
+  it("must name a plan that exists and that can be followed", () => {
+    expectOnly((f) => (f.debt.follow = "no_such"), DEBT, "$.follow", /unknown plan "no_such"/);
     expectOnly(
-      (f) => (f.debt.presets[3].follow = "central_budget_interest"),
+      (f) => (f.debt.follow = "central_budget_interest"),
       DEBT,
-      "$.presets[3].follow",
+      "$.follow",
       /plan "central_budget_interest" is for level "central" in cash accounts; only a plan for the whole state in national_accounts can be followed/,
     );
-    expectOnly((f) => (f.debt.plans[0].accounts = "cash"), DEBT, "$.presets[3].follow", /for the whole state in cash accounts/);
+    expectOnly((f) => ((f.debt.plans[0].accounts = "cash"), following(f)), DEBT, "$.follow", /for the whole state in cash accounts/);
     // Not followable: a point without a debt ratio, a gap between years, no balance at the end.
-    expectOnly((f) => delete f.debt.plans[0].points[0].debtRatio, DEBT, "$.presets[3].follow", /cannot be followed: it needs a "debtRatio" in every point/);
-    expectOnly((f) => (f.debt.plans[0].points[1].year = 2027), DEBT, "$.presets[3].follow", /cannot be followed/);
-    expectOnly((f) => delete f.debt.plans[0].points[1].balanceRatio, DEBT, "$.presets[3].follow", /cannot be followed/);
+    expectOnly((f) => (delete f.debt.plans[0].points[0].debtRatio, following(f)), DEBT, "$.follow", /cannot be followed: it needs a "debtRatio" in every point/);
+    expectOnly((f) => ((f.debt.plans[0].points[1].year = 2027), following(f)), DEBT, "$.follow", /cannot be followed/);
+    expectOnly((f) => (delete f.debt.plans[0].points[1].balanceRatio, following(f)), DEBT, "$.follow", /cannot be followed/);
+    expectOnly((f) => (f.debt.follow = "Ministry"), DEBT, "$.follow", /lower_snake_case/);
   });
 
-  it("warn about a plan that ends before the base year is over", () => {
+  it("warns about a plan that ends before the base year is over", () => {
     expect(
       warningsAfter((f) => {
+        following(f);
         f.debt.plans[0].points[0].year = 2023;
         f.debt.plans[0].points[1].year = 2024;
       }),
-    ).toEqual([{ file: DEBT, path: "$.presets[3].follow", message: 'plan "ministry_projection" has no year after the base year 2024, so following it changes nothing' }]);
+    ).toEqual([{ file: DEBT, path: "$.follow", message: 'plan "ministry_projection" has no year after the base year 2024, so following it changes nothing' }]);
   });
 });
 

@@ -38,6 +38,8 @@ import {
   applyDebtPreset,
   DEBT_ASSUMPTION_IDS,
   debtAssumptionParam,
+  defaultFollow,
+  followablePlans,
   LEVEL_IDS,
   presetApplies,
   resolveDebtAssumptions,
@@ -137,11 +139,17 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
   // --- official plans ---------------------------------------------------------------------------
   const comparable = useMemo(() => comparablePlans(pack), [pack]);
   const others = useMemo(() => otherPlans(pack), [pack]);
+  const followed = projection.followed;
+  // A plan the projection follows: its path runs through the plan's figures, so the plan is drawn
+  // as its diamonds on that path, up to where it is followed.
   const plansFor = (measure: PlanMeasure): ChartPlan[] =>
-    comparable.map((plan) => ({ key: plan.id, label: ui.text(plan.label), points: planSeries(plan, measure, baseYear, lastYear) }));
+    comparable.map((plan) => {
+      const onPath = followed?.plan === plan.id;
+      const points = planSeries(plan, measure, baseYear, onPath ? followed.until : lastYear);
+      return { key: plan.id, label: ui.text(plan.label), points, onPath };
+    });
   /** A plan's ratio as the source gives it: 78.25 %, 62.8 %. */
   const planRatio = (fraction: number): string => fmt.percent(fraction, { digits: decimalsIn(fraction * 100, 2) });
-  const followed = projection.followed;
   const marker = followed ? { year: followed.until, label: d.continued(followed.until + 1) } : undefined;
   const defaults = useMemo(() => defaultDebtAssumptions(debt), [debt]);
 
@@ -168,6 +176,24 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
   const interestMeasure: Measure = unit === "revenue" ? "interestToRevenue" : "interestRatio";
   // Other countries' interest in the same unit as the chart: as a share of their revenue, or of their GDP.
   const interestReferences = chartReferences(interestMeasure);
+
+  // --- the starting point: each plan that can be followed, and the base year's budget ---------------
+  const packStart = defaultFollow(debt) ?? null;
+  const currentStart = typeof assumptions.follow === "string" ? assumptions.follow : assumptions.follow === null ? null : packStart;
+  const followable = followablePlans(debt);
+  const starts = [
+    ...followable.map((plan) => {
+      const until = plan.points[plan.points.length - 1].year;
+      return {
+        key: plan.id,
+        follow: plan.id as string | null,
+        // With one plan, a short name and its last year; with several, their own names.
+        label: followable.length === 1 ? d.startPlan(until) : ui.text(plan.label),
+        note: d.startPlanNote(ui.text(plan.label), until),
+      };
+    }),
+    { key: "base", follow: null as string | null, label: d.startBase(baseYear), note: d.startBaseNote(baseYear) },
+  ].map((start) => ({ ...start, chosen: start.follow === currentStart, isDefault: start.follow === packStart }));
 
   // --- assumptions ----------------------------------------------------------------------------
   const set = (key: (typeof DEBT_ASSUMPTION_IDS)[number], value: number): void =>
@@ -266,6 +292,7 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
               <h3 id={`${id}-plans`}>{d.plansTitle}</h3>
               {comparable.map((plan) => {
                 const against = planAgainstDefaults(pack, plan, view.whole, defaults);
+                const isFollowed = followed?.plan === plan.id;
                 return (
                   <div key={plan.id} className="dplan">
                     <h4 className="dplan__name">{ui.text(plan.label)}</h4>
@@ -276,10 +303,11 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
                           year: against.year,
                           plan: planRatio(against.plan),
                           model: pct(against.model),
+                          followed: isFollowed,
                         })}
                       </p>
                     )}
-                    <p className="debt__note">{d.planInChart}</p>
+                    <p className="debt__note">{d.planInChart(isFollowed)}</p>
                     <PlanFigures plan={plan} ratio={planRatio} />
                     <PlanMore plan={plan} label={d.planMore} />
                   </div>
@@ -319,7 +347,7 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
                   </li>
                 ))}
               </ul>
-              <p className="debt__note">{d.comparisonsNote}</p>
+              <p className="debt__note">{d.comparisonsNote(baseYear)}</p>
             </section>
           )}
 
@@ -368,6 +396,29 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
           <p className="dpanel__result" aria-hidden="true">
             {summary}
           </p>
+          {starts.length > 1 && (
+            // Where the calculation starts from: one of two, a choice of its own above the presets.
+            <fieldset className="dstart">
+              <legend className="dpanel__label">{d.startTitle}</legend>
+              <div className="dstart__list">
+                {starts.map((start) => (
+                  <label key={start.key} className={`dstart__option${start.chosen ? " is-chosen" : ""}`}>
+                    <input
+                      type="radio"
+                      name={`${id}-start`}
+                      checked={start.chosen}
+                      onChange={() => onAssumptions(resolveDebtAssumptions(debt, { ...assumptions, follow: start.follow }))}
+                    />
+                    <span className="dstart__label">
+                      {start.label}
+                      {start.isDefault && <span className="dstart__default">{d.startDefault}</span>}
+                    </span>
+                    <span className="dstart__note">{start.note}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          )}
           {debt.presets.length > 0 && (
             <div className="dpresets" role="group" aria-labelledby={`${id}-presets`}>
               <h4 id={`${id}-presets`} className="dpanel__label">

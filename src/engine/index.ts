@@ -56,6 +56,8 @@ export {
   presetApplies,
   isComparablePlan,
   isFollowablePlan,
+  defaultFollow,
+  followablePlans,
   longRunDebtRatio,
   firstYearAbove,
   firstYearBelow,

@@ -1,4 +1,16 @@
-import type { DebtLeadText, DebtMessages } from "./messages.ts";
+import type { DebtIntroFacts, DebtLeadText, DebtMessages } from "./messages.ts";
+
+function intro({ baseYear, plan, measuresOn }: DebtIntroFacts): string {
+  if (!plan) {
+    return `Eine Wenn-dann-Rechnung, keine Prognose: So entwickelten sich Schulden und Zinsen, wenn der Haushalt von ${baseYear} mit den eingeschalteten Maßnahmen im Verhältnis zur Wirtschaft so bliebe.`;
+  }
+  return (
+    `Eine Wenn-dann-Rechnung, keine Prognose. Bis ${plan.until} folgen Schulden und Wachstum der amtlichen Planung „${plan.label}“; danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${plan.until} hat, und es gelten die Annahmen. ` +
+    (measuresOn
+      ? "Mit den eingeschalteten Maßnahmen weicht der Pfad vom ersten Jahr an von der Planung ab."
+      : "Eingeschaltete Maßnahmen kommen vom ersten Jahr an hinzu.")
+  );
+}
 
 function lead(f: DebtLeadText): string {
   const measures = f.interestWithout !== undefined;
@@ -46,13 +58,10 @@ function lead(f: DebtLeadText): string {
 
 export const debtDe: DebtMessages = {
   title: "Wohin das führt: Schulden und Zinsen",
-  intro: (baseYear) =>
-    `Eine Wenn-dann-Rechnung, keine Prognose: So entwickelten sich Schulden und Zinsen, wenn der Haushalt von ${baseYear} mit den eingeschalteten Maßnahmen im Verhältnis zur Wirtschaft so bliebe.`,
+  intro,
   lead,
   wholeState: (level) =>
     `Die Haushaltsansicht oben zeigt nur „${level}“. Diese Rechnung gilt trotzdem für den ganzen Staat, mit allen eingeschalteten Maßnahmen.`,
-  following: (plan, until) =>
-    `Bis ${until} folgt die Rechnung ohne Maßnahmen der amtlichen Projektion „${plan}“. Danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${until} hat.`,
   announce: (year, interest, without) =>
     without === undefined
       ? `Zinsen ${year}: ${interest} aller Einnahmen.`

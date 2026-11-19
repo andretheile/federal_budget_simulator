@@ -1,4 +1,16 @@
-import type { DebtLeadText, DebtMessages } from "./messages.ts";
+import type { DebtIntroFacts, DebtLeadText, DebtMessages } from "./messages.ts";
+
+function intro({ baseYear, plan, measuresOn }: DebtIntroFacts): string {
+  if (!plan) {
+    return `A what-if calculation, not a forecast: how debt and interest would develop if the budget of ${baseYear}, with the measures switched on, kept its size relative to the economy.`;
+  }
+  return (
+    `A what-if calculation, not a forecast. Up to ${plan.until}, debt and growth follow the official plan “${plan.label}”; after that, the budget before interest keeps the share of economic output it has in ${plan.until}, and the assumptions apply. ` +
+    (measuresOn
+      ? "With the measures switched on, the path departs from the plan from the first year."
+      : "Measures that are switched on are added from the first year.")
+  );
+}
 
 function lead(f: DebtLeadText): string {
   const measures = f.interestWithout !== undefined;
@@ -47,13 +59,10 @@ function lead(f: DebtLeadText): string {
 
 export const debtEn: DebtMessages = {
   title: "Where this leads: debt and interest",
-  intro: (baseYear) =>
-    `A what-if calculation, not a forecast: how debt and interest would develop if the budget of ${baseYear}, with the measures switched on, kept its size relative to the economy.`,
+  intro,
   lead,
   wholeState: (level) =>
     `The budget view above shows only “${level}”. This calculation is for the whole state all the same, with all the measures switched on.`,
-  following: (plan, until) =>
-    `Up to ${until}, the calculation without measures follows the official projection “${plan}”. After that, the budget before interest keeps the share of economic output it has in ${until}.`,
   announce: (year, interest, without) =>
     without === undefined
       ? `Interest in ${year}: ${interest} of all revenue.`

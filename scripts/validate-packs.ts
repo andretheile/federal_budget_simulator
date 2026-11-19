@@ -5,8 +5,9 @@
  * errors of each invalid pack and exits with status 1 if there are any. For each valid pack it
  * prints the derived totals and what every policy does on its own at default parameters, so a
  * reviewer can judge whether the numbers are plausible, and for a pack with debt.json the debt
- * and interest in the base year and 10 and 20 years later at default assumptions, set against the
- * official plans the file lists. It also lists the collections of measures with their joint effect,
+ * and interest without measures at default assumptions on the pack's starting path, with the other
+ * starting path beside it (the base year's budget continued, or following a plan), and the
+ * official plans the file lists set against the base year's budget continued. It also lists the collections of measures with their joint effect,
  * and the goals of goals.json.
  *
  * Runs on plain Node (>= 22.18), which strips the TypeScript types itself.
@@ -15,7 +16,8 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, relative, resolve, sep } from "node:path";
 import process from "node:process";
 import {
-  applyDebtPreset,
+  defaultFollow,
+  followablePlans,
   formatIssue,
   goalProgress,
   isComparablePlan,
@@ -123,76 +125,68 @@ function longRun(outcome: DebtLongRun): string {
   return outcome.debtRatio === 0 ? "the debt is paid off" : `settles at ${percent(outcome.debtRatio)} of GDP`;
 }
 
-/** Debt and interest in the base year and 10 and 20 years later, at default assumptions and without measures. */
+/** The starting path in words: following a plan to a year, or the base year's budget continued. */
+function pathName(followed: { plan: string; until: number } | undefined, baseYear: number): string {
+  return followed ? `follows plan ${followed.plan} to ${followed.until}` : `continues the budget of ${baseYear}`;
+}
+
+/**
+ * Debt and interest without measures at default assumptions, on the pack's starting path: the base
+ * year, the years of the plan it follows, and 10, 20 and 30 years after the base year. Beside it the
+ * other starting path: the base year's budget continued where the pack follows a plan, or the
+ * first plan that can be followed where it does not.
+ */
 function printDebtSummary(pack: CountryPack): void {
-  if (!pack.debt) return;
-  const defaults = resolveDebtAssumptions(pack.debt);
-  const projection = projectScenario(pack, { policies: {} }, { horizon: Math.max(defaults.horizon, 20) });
+  const debt = pack.debt;
+  if (!debt) return;
+  const defaults = resolveDebtAssumptions(debt);
+  const horizon = Math.max(defaults.horizon, 30);
+  const projection = projectScenario(pack, { policies: {} }, { ...defaults, horizon });
   if (!projection) return;
+  const followed = defaultFollow(debt);
+  const otherFollow = followed !== undefined ? null : followablePlans(debt)[0]?.id;
+  const other = otherFollow === undefined ? undefined : projectScenario(pack, { policies: {} }, { ...defaults, horizon, follow: otherFollow });
   const { market_rate, growth, drift } = projection.assumptions;
   const change = drift === 0 ? "no drift of the primary balance" : `primary balance ${drift > 0 ? "+" : ""}${drift} points of GDP a year`;
   console.log(
     `  debt projection without measures at default assumptions (market rate ${market_rate} %, growth ${growth} %, ` +
       `${change}, ${percent(projection.refinancingShare)} of the debt refinanced a year):`,
   );
-  console.log(`    year            debt   of GDP        interest  of GDP  of revenue`);
+  console.log(`    starting path: ${pathName(projection.followed, projection.baseYear)}`);
+  if (other) console.log(`    beside it: ${pathName(other.followed, other.baseYear)}`);
+  console.log(`    year            debt   of GDP        interest  of GDP  of revenue${other ? "   beside it: debt of GDP  of revenue" : ""}`);
   const { baseline } = projection;
+  const planYears = new Set(
+    debt.plans?.find((plan) => plan.id === (projection.followed?.plan ?? other?.followed?.plan))?.points.map((point) => point.year) ?? [],
+  );
   for (const year of [baseline.start, ...baseline.years]) {
     const after = year.year - projection.baseYear;
-    if (after !== 0 && after !== 10 && after !== 20) continue;
+    if (!planYears.has(year.year) && after !== 0 && after !== 10 && after !== 20 && after !== 30) continue;
+    const beside = other ? [other.baseline.start, ...other.baseline.years].find((candidate) => candidate.year === year.year) : undefined;
     console.log(
       `    ${year.year}  ${amount(year.debt).padStart(14)}  ${percent(year.debtRatio).padStart(7)}  ` +
-        `${amount(year.interest).padStart(14)}  ${percent(year.interestRatio, 2).padStart(6)}  ${percent(year.interestToRevenue).padStart(10)}`,
+        `${amount(year.interest).padStart(14)}  ${percent(year.interestRatio, 2).padStart(6)}  ${percent(year.interestToRevenue).padStart(10)}` +
+        (beside ? `  ${percent(beside.debtRatio).padStart(22)}  ${percent(beside.interestToRevenue).padStart(10)}` : ""),
     );
   }
-  console.log(`    in the long run the debt ratio ${longRun(baseline.longRun)}`);
-  printPlans(pack, baseline);
-  printFollowingPresets(pack, baseline);
-}
-
-/**
- * Presets that follow a plan: their path without measures, in the plan's years and 10, 20 and 30
- * years after the base year, beside the path at default assumptions.
- */
-function printFollowingPresets(pack: CountryPack, defaults: DebtPath): void {
-  const debt = pack.debt;
-  if (!debt) return;
-  for (const preset of debt.presets.filter((candidate) => candidate.follow !== undefined)) {
-    const start = resolveDebtAssumptions(debt);
-    const assumptions = applyDebtPreset(debt, { ...start, horizon: Math.max(start.horizon, 30) }, preset);
-    const projection = projectScenario(pack, { policies: {} }, assumptions);
-    if (!projection) continue;
-    const { market_rate, growth, drift } = projection.assumptions;
-    const until = projection.followed ? `follows plan ${projection.followed.plan} to ${projection.followed.until}` : "follows no plan within the horizon";
-    console.log(`  preset ${preset.id} without measures: ${until}, then market rate ${market_rate} %, growth ${growth} %, drift ${drift} points a year:`);
-    console.log("    year            debt   of GDP        interest  of GDP  of revenue   primary balance   default: debt of GDP");
-    const planYears = new Set(debt.plans?.find((plan) => plan.id === preset.follow)?.points.map((point) => point.year) ?? []);
-    for (const year of [projection.baseline.start, ...projection.baseline.years]) {
-      const after = year.year - projection.baseYear;
-      if (!planYears.has(year.year) && after !== 0 && after !== 10 && after !== 20 && after !== 30) continue;
-      const fallback = [defaults.start, ...defaults.years].find((other) => other.year === year.year);
-      console.log(
-        `    ${year.year}  ${amount(year.debt).padStart(14)}  ${percent(year.debtRatio).padStart(7)}  ` +
-          `${amount(year.interest).padStart(14)}  ${percent(year.interestRatio, 2).padStart(6)}  ${percent(year.interestToRevenue).padStart(10)}  ` +
-          `${percent(year.primaryBalanceRatio, 2).padStart(16)}  ${(fallback ? percent(fallback.debtRatio) : "").padStart(21)}`,
-      );
-    }
-    console.log(`    in the long run the debt ratio ${longRun(projection.baseline.longRun)}`);
-  }
+  console.log(`    in the long run the debt ratio ${longRun(baseline.longRun)}${other ? `; beside it ${longRun(other.baseline.longRun)}` : ""}`);
+  // The plans against the base year's budget continued: what the plan adds to it.
+  const continued = projection.followed ? other?.baseline : baseline;
+  if (continued) printPlans(pack, continued, projection.baseYear);
 }
 
 /**
  * The official projections in debt.json. One that covers the whole state in national accounts is
- * set against the model's path without measures; any other is listed with its scope.
+ * set against the base year's budget continued, without measures; any other is listed with its scope.
  */
-function printPlans(pack: CountryPack, baseline: DebtPath): void {
+function printPlans(pack: CountryPack, baseline: DebtPath, baseYear: number): void {
   const plans = pack.debt?.plans ?? [];
   if (plans.length === 0) return;
   const optional = (value: number | undefined, format: (n: number) => string): string => (value === undefined ? "" : format(value));
   for (const plan of plans) {
     const scope = `${plan.scope === "all" ? "whole state" : plan.scope}, ${plan.accounts.replace("_", " ")}`;
     if (isComparablePlan(plan)) {
-      console.log(`  official plan ${plan.id} (${scope}) against the model at default assumptions without measures:`);
+      console.log(`  official plan ${plan.id} (${scope}) against the budget of ${baseYear} continued at default assumptions without measures:`);
       console.log("    year   debt: plan    model   balance: plan    model   interest/GDP: plan    model");
       for (const point of plan.points) {
         const model = [baseline.start, ...baseline.years].find((year) => year.year === point.year);

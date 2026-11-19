@@ -36,6 +36,15 @@ export interface DebtLeadText {
   overtakes?: { label: string; since: number };
 }
 
+/** What the section's introduction says the calculation starts from. */
+export interface DebtIntroFacts {
+  baseYear: number;
+  /** The plan the projection follows, by its label, and its last year; absent on the base year's budget. */
+  plan?: { label: string; until: number };
+  /** Whether measures are switched on: then the path with them departs from the plan from the first year. */
+  measuresOn: boolean;
+}
+
 /**
  * What the first page says about the projection: the section's heading and opening sentence, the
  * line near the top that leads to it, its link in the footer, and what stands there while the rest
@@ -43,13 +52,12 @@ export interface DebtLeadText {
  */
 export interface DebtMessages {
   title: string;
-  intro(baseYear: number): string;
+  /** Under the heading: what the calculation is and where it starts from (a plan, or the base year's budget). */
+  intro(facts: DebtIntroFacts): string;
   /** The sentence that opens the section: what share of revenue goes on interest at the end, against today. */
   lead(facts: DebtLeadText): string;
   /** Said when the budget view is filtered to one level; `level` is its name. */
   wholeState(level: string): string;
-  /** Said when the projection follows an official plan up to `until` (a preset or a link chose it). */
-  following(plan: string, until: number): string;
   /** Short version of the lead for screen readers after a change. */
   announce(year: number, interest: string, without: string | undefined): string;
 
@@ -111,8 +119,19 @@ export interface DebtBodyMessages {
   offScale(label: string, value: string): string;
   /** The value of an official projection in the line above a chart. */
   planPart(value: string): string;
-  /** Next to the line where the followed plan ends: the years after it are the calculation's own. */
+  /** Next to the line where the followed plan ends: the years after it are the assumptions'. */
   continued(fromYear: number): string;
+
+  // --- the starting point ---
+  startTitle: string;
+  /** The option of following the pack's one plan, to its last year. */
+  startPlan(until: number): string;
+  startPlanNote(label: string, until: number): string;
+  /** The option of continuing the base year's budget. */
+  startBase(baseYear: number): string;
+  startBaseNote(baseYear: number): string;
+  /** Marks the option that is the pack's own. */
+  startDefault: string;
 
   // --- official plans ---
   plansTitle: string;
@@ -121,9 +140,9 @@ export interface DebtBodyMessages {
    * the calculation continues the base year's budget, the projection starts from what has been
    * decided since. Ratios already formatted.
    */
-  plansIntro(facts: { baseYear: number; year: number; plan: string; model: string }): string;
-  /** Where a comparable projection is drawn. */
-  planInChart: string;
+  plansIntro(facts: { baseYear: number; year: number; plan: string; model: string; followed: boolean }): string;
+  /** Where a comparable projection is drawn: on the path while the projection follows it, dashed otherwise. */
+  planInChart(followed: boolean): string;
   /** Whose finances a plan describes and in which accounts; `level` is null for the whole state. */
   planScope(level: string | null, cash: boolean): string;
   /** Said of a plan that cannot be set against the calculation. */
@@ -136,7 +155,7 @@ export interface DebtBodyMessages {
 
   // --- budget items ---
   comparisonsTitle: string;
-  comparisonsNote: string;
+  comparisonsNote(baseYear: number): string;
   itemToday(baseYear: number, amount: string, share: string): string;
   itemWith(amount: string, share: string): string;
   /** When interest is above the item, base year included. */

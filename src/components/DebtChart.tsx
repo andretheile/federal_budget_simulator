@@ -6,8 +6,9 @@
  *
  * An official plan of the country's own path, where the pack has one that describes the same thing
  * as the projection, is a path of its own: dashed, in a colour no other line has, with a diamond at
- * every year it gives a figure for, and named in the legend. Where the projection follows such a
- * plan up to a year and continues from there, a dashed upright line marks that year.
+ * every year it gives a figure for, and named in the legend. Where the projection follows the plan,
+ * the path without measures runs through the plan's figures: the plan is then its diamonds alone,
+ * set on that line, and a dashed upright line marks the year after which the assumptions take over.
  *
  * The lines are SVG; on top of them lies one HTML element that is the control for the pointer and
  * the keyboard: a slider over the years. Pointing at the chart or moving the slider picks a year,
@@ -44,6 +45,8 @@ export interface ChartPlan {
   label: string;
   /** The plan's values, for the years it gives one, ascending. */
   points: readonly { year: number; value: number }[];
+  /** The projection follows the plan, so its path runs through these points: diamonds only, no line of their own. */
+  onPath?: boolean;
 }
 
 export interface DebtChartProps {
@@ -279,7 +282,7 @@ export function DebtChart(props: DebtChartProps) {
             )}
             {plans.map((plan) => (
               <g key={plan.key} className="dchart__plan" data-plan={plan.key}>
-                {plan.points.length > 1 && (
+                {plan.points.length > 1 && !plan.onPath && (
                   <path className="dchart__plan-line" d={linePath(plan.points.map((point) => ({ x: X(point.year), y: Y(point.value) })))} />
                 )}
                 {plan.points.map((point) => (
@@ -329,9 +332,9 @@ export function DebtChart(props: DebtChartProps) {
         ))}
         {band && <li className="dkey dkey--band">{band.label}</li>}
         {plans.map((plan) => (
-          <li key={plan.key} className="dkey dkey--plan">
+          <li key={plan.key} className={`dkey dkey--plan${plan.onPath ? " is-on-path" : ""}`}>
             <svg className="dkey__plan" width="22" height="12" viewBox="0 0 22 12" aria-hidden="true" focusable="false">
-              <path className="dchart__plan-line" d="M1,6H21" />
+              {!plan.onPath && <path className="dchart__plan-line" d="M1,6H21" />}
               <path className="dchart__plan-point" d={diamond(11, 6, 4)} />
             </svg>
             {plan.label}

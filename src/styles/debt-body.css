@@ -544,6 +544,90 @@
   color: var(--ink-3);
 }
 
+/* The starting point: one of two paths, radio buttons in one box. The presets below act on either. */
+.dstart {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.dstart legend {
+  padding: 0;
+}
+
+.dstart__list {
+  display: grid;
+  border: 1px solid var(--rule-strong);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dstart__option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "dot label"
+    ". note";
+  align-items: baseline;
+  gap: 2px 9px;
+  padding: 9px 12px 10px;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.dstart__option + .dstart__option {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.dstart__option.is-chosen {
+  background: var(--surface);
+  box-shadow: inset 4px 0 0 var(--ink);
+}
+
+.dstart__option input {
+  grid-area: dot;
+  align-self: center;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+
+.dstart__option input:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.dstart__label {
+  grid-area: label;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  font-size: 13.5px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.dstart__default {
+  padding: 0 5px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.dstart__note {
+  grid-area: note;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
 .dpresets__list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));

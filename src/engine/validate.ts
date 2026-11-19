@@ -883,25 +883,26 @@ function check(
           error(DEBT, [...path, "values", id], `${value} is not a whole number of years`);
         }
       }
-      // A preset may follow a plan, if the plan can be followed.
-      if (preset.follow !== undefined) {
-        const plan = debt.plans?.find((candidate) => candidate.id === preset.follow);
-        const at = [...path, "follow"];
-        if (!plan) {
-          error(DEBT, at, `unknown plan "${preset.follow}"`);
-        } else if (!isComparablePlan(plan)) {
-          error(
-            DEBT,
-            at,
-            `plan "${plan.id}" is for ${plan.scope === "all" ? "the whole state" : `level "${plan.scope}"`} in ${plan.accounts} accounts; only a plan for the whole state in national_accounts can be followed`,
-          );
-        } else if (!isFollowablePlan(plan)) {
-          error(DEBT, at, `plan "${plan.id}" cannot be followed: it needs a "debtRatio" in every point, one point for every year without gaps, and a "balanceRatio" in its last point`);
-        } else if (country && !plan.points.some((point) => point.year > country.baseYear)) {
-          warn(DEBT, at, `plan "${plan.id}" has no year after the base year ${country.baseYear}, so following it changes nothing`);
-        }
-      }
     });
+
+    // The starting path: a plan the projection follows unless the visitor chooses the base year.
+    if (debt.follow !== undefined) {
+      const plan = debt.plans?.find((candidate) => candidate.id === debt.follow);
+      const at = ["follow"];
+      if (!plan) {
+        error(DEBT, at, `unknown plan "${debt.follow}"`);
+      } else if (!isComparablePlan(plan)) {
+        error(
+          DEBT,
+          at,
+          `plan "${plan.id}" is for ${plan.scope === "all" ? "the whole state" : `level "${plan.scope}"`} in ${plan.accounts} accounts; only a plan for the whole state in national_accounts can be followed`,
+        );
+      } else if (!isFollowablePlan(plan)) {
+        error(DEBT, at, `plan "${plan.id}" cannot be followed: it needs a "debtRatio" in every point, one point for every year without gaps, and a "balanceRatio" in its last point`);
+      } else if (country && !plan.points.some((point) => point.year > country.baseYear)) {
+        warn(DEBT, at, `plan "${plan.id}" has no year after the base year ${country.baseYear}, so following it changes nothing`);
+      }
+    }
 
     const referenceIds = new Set<string>();
     debt.references.forEach((reference, i) => {
