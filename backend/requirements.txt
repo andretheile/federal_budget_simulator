@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-jupyter
-pandas
-matplotlib
-seaborn
-pyyaml
-asteval
-pydantic
