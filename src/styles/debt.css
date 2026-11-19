@@ -1,0 +1,118 @@
+/*
+ * The debt and interest projection, the parts on the first page: the line near the top that leads
+ * to it, the section's frame with its opening sentence, and what stands there while the charts
+ * load. The charts, the assumptions and the lists are styled in debt-body.css, which comes with
+ * their code.
+ */
+
+/* --- The line near the top -------------------------------------------------------------------- */
+.debt-teaser {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 26px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.debt-teaser a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.debt-teaser a:hover {
+  text-decoration-color: currentColor;
+}
+
+.debt-teaser__figure {
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- The section ------------------------------------------------------------------------------ */
+.debt {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 2px solid var(--ink);
+  scroll-margin-top: calc(var(--scoreboard-height) + 16px);
+}
+
+/* The section takes the focus when a link leads here; it is not a control. */
+.debt:focus {
+  outline: none;
+}
+
+.debt__lead {
+  max-width: 46em;
+  font-family: var(--font-serif);
+  font-size: clamp(19px, 1.75vw, 22.5px);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.debt__level {
+  max-width: 70ch;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--ink);
+  background: var(--sunken);
+  font-size: 14px;
+}
+
+/* While the charts are on their way: room for them, so that what follows does not jump. */
+.debt__pending {
+  min-height: 60vh;
+  padding-top: 24px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+/* Said only if the wait is noticeable. */
+.debt__loading {
+  animation: debt-loading 0.2s ease 0.4s both;
+}
+
+@keyframes debt-loading {
+  from {
+    opacity: 0;
+  }
+}
+
+.debt__pending.is-failed {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 14px;
+}
+
+.debt__pending.is-failed p {
+  max-width: 60ch;
+  padding: 9px 12px;
+  border-left: 3px solid var(--worsen);
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+.debt__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.debt__button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}

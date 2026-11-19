@@ -117,6 +117,41 @@
   font-size: 13px;
 }
 
+/*
+ * Steady (while the curve editor lies below): every figure lies over invisible stand-ins of the
+ * widest it could become, in one grid cell, and keeps their size; the change line likewise lies
+ * over its fullest form. How the band wraps then depends on the width of the window alone.
+ */
+.slot {
+  display: inline-grid;
+  justify-items: start;
+}
+
+.scoreboard__changes {
+  display: grid;
+}
+
+.slot > *,
+.scoreboard__changes > * {
+  grid-area: 1 / 1;
+}
+
+/* What is shown starts at the top of the room kept for it; it is not stretched over it. */
+.scoreboard__changes > * {
+  align-self: start;
+}
+
+.slot__stand-in {
+  visibility: hidden;
+}
+
+/* Digits of equal width: a figure that changes with every move of a point keeps its width. */
+.scoreboard--steady .scoreboard__number,
+.scoreboard--steady .scoreboard__amount,
+.scoreboard--steady .scoreboard__ratios {
+  font-variant-numeric: tabular-nums;
+}
+
 .scoreboard__ratios {
   display: grid;
   gap: 2px;
@@ -146,6 +181,14 @@
   .scoreboard__ratios {
     padding-left: 20px;
     font-size: 13.5px;
+  }
+}
+
+/* A wide but low window (a small laptop): the headline figure also follows the window's height,
+   so the scoreboard leaves more of it to what is below. */
+@media (min-width: 1080px) and (max-height: 859px) {
+  .scoreboard__number {
+    font-size: clamp(34px, min(4.2vw, 6.4vh), 54px);
   }
 }
 

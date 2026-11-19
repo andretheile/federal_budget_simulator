@@ -6,6 +6,7 @@ import { curveChanged, curveSettings } from "../app/curveModel.ts";
 import { useUi } from "../app/ui.ts";
 import type { CurvePoint, ParamValue, PolicyTopic, Scenario, SimulationResult } from "../engine/index.ts";
 import { reducedMotion } from "../hooks/useAnimatedNumber.ts";
+import { preloadEditor } from "./CurveEditor.tsx";
 import { ChevronRight } from "./icons.tsx";
 import { PolicyCard } from "./PolicyCard.tsx";
 
@@ -101,7 +102,13 @@ export function PolicyList({
           <ul>
             {changedCurves.map(({ policy, param }) => (
               <li key={`${policy.id}.${param}`}>
-                <button type="button" className="changed-curves__open" onClick={() => onEditCurve(policy.id, param)}>
+                <button
+                  type="button"
+                  className="changed-curves__open"
+                  onClick={() => onEditCurve(policy.id, param)}
+                  onPointerEnter={preloadEditor}
+                  onFocus={preloadEditor}
+                >
                   {t.curve.show(ui.text(policy.label))}
                   <ChevronRight size={14} />
                 </button>

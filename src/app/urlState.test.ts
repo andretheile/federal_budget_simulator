@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { testland } from "../engine/__fixtures__/testland.ts";
 import { emptyScenario, simulate, type Scenario } from "../engine/index.ts";
-import { buildHash, editorFromHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./urlState.ts";
+import { buildHash, debtFromHash, editorFromHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./urlState.ts";
 
 describe("hash fields", () => {
   it("round-trips country, language and scenario", () => {
@@ -100,5 +100,53 @@ describe("link state", () => {
     const restored = scenarioFromHash("#lang=de&s=no_such_policy~halve_mp_pay~L.moon", testland);
     expect(Object.keys(restored.policies)).toEqual(["halve_mp_pay"]);
     expect(restored.level).toBeUndefined();
+  });
+});
+
+describe("the legal page field p", () => {
+  it("names the imprint or the privacy statement by a stable id, and nothing else", () => {
+    expect(parseHash("#lang=de&p=imprint")).toEqual({ language: "de", page: "imprint" });
+    expect(parseHash("#p=privacy")).toEqual({ page: "privacy" });
+    for (const bad of ["Imprint", "impressum", "about", "", "privacy.x"]) expect(parseHash(`#p=${bad}`)).toEqual({});
+    expect(buildHash({ language: "en", scenario: "halve_mp_pay", page: "privacy" })).toBe("#lang=en&s=halve_mp_pay&p=privacy");
+  });
+
+  it("keeps the scenario next to the page, and leaves the curve editor out while a page is shown", () => {
+    const scenario = scenarioFromHash("#s=halve_mp_pay", testland);
+    const editor = { policy: "redraw_income_tax", param: "tariff" };
+    expect(stateToHash({ scenario, language: "de", editor, page: "imprint" }, testland)).toBe("#lang=de&s=halve_mp_pay&p=imprint");
+    expect(stateToHash({ scenario, language: "de", editor }, testland)).toBe("#lang=de&s=halve_mp_pay&e=redraw_income_tax.tariff");
+    // A link with both opens the page, not the editor.
+    expect(editorFromHash("#lang=en&e=redraw_income_tax.tariff&p=privacy", testland)).toBeUndefined();
+    expect(editorFromHash("#lang=en&e=redraw_income_tax.tariff", testland)).toEqual(editor);
+  });
+});
+
+describe("the debt projection field d", () => {
+  const defaults = { market_rate: 4, growth: 3, horizon: 30, drift: 0 };
+
+  it("is read and written next to the scenario, and nothing that could not be one", () => {
+    expect(parseHash("#lang=de&s=halve_mp_pay&d=r5.1~y40")).toEqual({ language: "de", scenario: "halve_mp_pay", debt: "r5.1~y40" });
+    expect(parseHash("#d=<b>")).toEqual({});
+    expect(buildHash({ language: "en", scenario: "halve_mp_pay", debt: "r5.1", editor: "a.b" })).toBe("#lang=en&s=halve_mp_pay&d=r5.1&e=a.b");
+  });
+
+  it("holds only the assumptions that differ from their defaults: the defaults leave the address as it was", () => {
+    const scenario = scenarioFromHash("#s=halve_mp_pay", testland);
+    expect(stateToHash({ scenario, language: "de", debt: defaults }, testland)).toBe("#lang=de&s=halve_mp_pay");
+    expect(stateToHash({ scenario, language: "de", debt: { ...defaults, market_rate: 8, horizon: 40 } }, testland)).toBe(
+      "#lang=de&s=halve_mp_pay&d=r8~y40",
+    );
+    // The legal page keeps it, like the scenario.
+    expect(stateToHash({ scenario, language: "de", debt: { ...defaults, growth: 2 }, page: "imprint" }, testland)).toBe(
+      "#lang=de&s=halve_mp_pay&d=g2&p=imprint",
+    );
+  });
+
+  it("gives the assumptions back for the pack, with defaults for what is missing; none for a pack without debt data", () => {
+    expect(debtFromHash("#lang=de", testland)).toEqual(defaults);
+    expect(debtFromHash("#d=r8~y40", testland)).toEqual({ ...defaults, market_rate: 8, horizon: 40 });
+    const { debt: _, ...withoutDebt } = testland;
+    expect(debtFromHash("#d=r8", withoutDebt)).toBeUndefined();
   });
 });

@@ -1,3 +1,5 @@
+import { legalEn } from "./legal/en.ts";
+import { debtEn } from "./debt/en.ts";
 import type { Messages } from "./messages.ts";
 
 const plural = (count: number, one: string, many: string): string => `${count} ${count === 1 ? one : many}`;
@@ -38,7 +40,7 @@ export const en: Messages = {
     deficit: "Deficit",
     surplus: "Surplus",
     balanced: "Balanced",
-    today: "Today",
+    baseYear: (year) => String(year),
     simulated: "Simulated",
     perYear: "per year",
     improves: "improves the balance",
@@ -58,19 +60,19 @@ export const en: Messages = {
   scoreboard: {
     label: "Result",
     balanceLabel: (year) => `Balance ${year}`,
-    vsToday: "compared with today",
-    asToday: "As it is today. No measure is switched on.",
+    vsBase: (year) => `compared with ${year}`,
+    asBase: (year) => `As in ${year}. No measure is switched on.`,
     measuresOn: (count) => plural(count, "measure switched on", "measures switched on"),
     ofGdp: (share) => `${share} of GDP`,
     perInhabitant: (amount) => `${amount} per inhabitant`,
     rangeLabel: "Range",
     announce: (balance, state, change) => `Balance ${balance}, ${state}. ${change}`,
-    levelLabel: (level) => `${level}: change compared with today`,
+    levelLabel: (level, year) => `${level}: change compared with ${year}`,
     relief: "Relief",
     burden: "Burden",
     unchanged: "Unchanged",
     noLevelBalance: "No balance is shown for a single level: payments between the levels are netted out of the data.",
-    announceLevel: (level, change, state) => `${level}: ${change} compared with today, ${state}.`,
+    announceLevel: (level, change, state, year) => `${level}: ${change} compared with ${year}, ${state}.`,
   },
   budget: {
     title: (year) => `The budget in ${year}`,
@@ -80,12 +82,12 @@ export const en: Messages = {
     hint: "Select an area to break it down.",
     other: (count) => `Other areas (${count})`,
     gap: (kind, amount) => `${kind === "deficit" ? "Deficit" : "Surplus"} ${amount}`,
-    todayMark: (amount) => `today ${amount}`,
+    baseMark: (amount, year) => `${year}: ${amount}`,
     shareOf: (side, share) => `${share} of ${side === "revenue" ? "revenue" : "spending"}`,
     path: "You are here",
     up: "Up one level",
     breakDown: "break down",
-    key: "Bar: simulated value. Vertical line: today's value.",
+    key: (year) => `Bar: simulated value. Vertical line: value in ${year}.`,
     hiddenZero: (count) =>
       count === 1
         ? "1 item with no share at this level is hidden."
@@ -122,12 +124,18 @@ export const en: Messages = {
     ofAll: (side, share) => `${share} of all ${side === "revenue" ? "revenue" : "spending"}`,
     ofLevel: (side, share) => `${share} of this level’s ${side === "revenue" ? "revenue" : "spending"}`,
     perInhabitant: (amount) => `${amount} per inhabitant`,
-    ofDeficit: (share) => `${share} of today's deficit`,
-    meterLabel: (share) => `Size compared with today's deficit: ${share}`,
+    ofDeficit: (share, year) => `${share} of the ${year} deficit`,
+    meterLabel: (share, year) => `Size compared with the ${year} deficit: ${share}`,
     settings: "Settings",
     settingCount: (count) => plural(count, "setting", "settings"),
     previewHint: "Not switched on. The figures show what this measure would do.",
-    todayValue: (value) => `today: ${value}`,
+    baseValue: (value, year) => `${year}: ${value}`,
+    baseAtEnd: (end, year) => `${end} · ${year}`,
+    toBaseValue: (value, year) => `Set to the ${year} value: ${value}`,
+    changeFromBase: (change, year) => `${change} compared with ${year}`,
+    assumption: "Assumption",
+    typeValue: (label, value) => `${label}: ${value}. Enter a value`,
+    valueField: (label) => `Value for ${label}`,
     selectedShare: (share, basis, item) =>
       `The selected groups account for ${share} of ${basis === "spending" ? "spending" : "recipients"} in “${item}”.`,
     groupShare: "share",
@@ -156,12 +164,21 @@ export const en: Messages = {
     effectSide: (side) => (side === "revenue" ? "revenue" : "spending"),
     byLevel: "By level of government",
     shift: "Cost shift",
-    shiftLine: (amount, to) => `${amount} reappear at “${to}”`,
+    knockOn: "Knock-on effect",
+    shiftLine: (amount, to, side, up) =>
+      side === "expenditure"
+        ? up
+          ? `${amount} reappear as spending on “${to}”`
+          : `${amount} less spending on “${to}”`
+        : up
+          ? `${amount} more revenue from “${to}”`
+          : `${amount} less revenue from “${to}”`,
+    linkedRange: (low, high) => `at the low end of the measure's range ${low}, at its high end ${high}`,
     clampedNote: "cut off at zero",
     warnings: {
       clamped: "An amount cannot fall below zero. The effect was cut off at zero.",
       not_finite: "One effect could not be calculated at these settings and was left out.",
-      empty_group: "This item had already been reduced to zero. The new amount was spread by today's proportions.",
+      empty_group: (year) => `This item had already been reduced to zero. The new amount was spread by its proportions in ${year}.`,
       brackets_reordered:
         "The thresholds overlap at these settings. The lower one was raised to match the one before it.",
       baseline_yields_nothing: "There is no basis for comparison for this effect, so it was counted as zero.",
@@ -177,7 +194,7 @@ export const en: Messages = {
   curve: {
     section: "Curve",
     edit: "Edit curve",
-    asToday: "as today",
+    asBase: (year) => `as in ${year}`,
     changed: "changed",
     preset: (label) => `Preset: ${label}`,
     topRate: (rate, from) => `top rate ${rate} from ${from}`,
@@ -185,20 +202,23 @@ export const en: Messages = {
     show: (measure) => `Show curve: ${measure}`,
     dialog: (measure) => `Edit curve: ${measure}`,
     close: "Close",
+    loading: "Loading the editor…",
+    loadFailed: "The editor could not be loaded. Perhaps there is no internet connection at the moment.",
+    retry: "Try again",
     explain: (currency) =>
       `For every amount along the horizontal axis the curve sets the marginal rate: the rate on each additional ${currency}. It is zero up to the first point, rises or falls evenly between two points and stays the same above the last one. Dashed is the average rate: how much of the whole amount goes in total.`,
     hint: "Drag the points to reshape the curve. Click or tap on the curve to add a point.",
-    hover: (at, rate, today, average, averageToday) =>
-      `At ${at}: marginal rate ${rate}${today ? ` (today ${today})` : ""} · average ${average}${averageToday ? ` (today ${averageToday})` : ""}`,
-    point: (name, at, rate, average, averageToday) =>
-      `${name}: ${at}, marginal rate ${rate} · average there ${average}${averageToday ? ` (today ${averageToday})` : ""}`,
+    hover: (at, rate, base, average, averageBase, year) =>
+      `At ${at}: marginal rate ${rate}${base ? ` (${year}: ${base})` : ""} · average ${average}${averageBase ? ` (${year}: ${averageBase})` : ""}`,
+    point: (name, at, rate, average, averageBase, year) =>
+      `${name}: ${at}, marginal rate ${rate} · average there ${average}${averageBase ? ` (${year}: ${averageBase})` : ""}`,
     axisRate: "Marginal rate",
     compressed: "compressed",
     scaleNote: (knee, max) =>
       `The horizontal axis is even up to ${knee} and compressed above it: the shaded band on the right runs from ${knee} to ${max}.`,
     legend: {
       reform: "Marginal rate with this curve",
-      today: "today",
+      base: (year) => `${year} curve`,
       average: "Average rate",
       distribution: "Distribution (area = number)",
       examples: "Examples, see below",
@@ -209,7 +229,7 @@ export const en: Messages = {
     offHint: "The measure is switched off. Any change here switches it on.",
     presets: "Presets",
     presetSources: "Source of the preset",
-    toToday: "Today's curve",
+    toBase: (year) => `${year} curve`,
     toDefault: "Starting curve",
     undo: "Undo",
     remove: "Remove point",
@@ -226,9 +246,9 @@ export const en: Messages = {
     from: (amount) => `from ${amount}`,
     top: "Top rate",
     topNote: "The marginal rate on the highest amounts, above the last point.",
-    topToday: (rate, from) => `today ${rate} from ${from}`,
+    topBase: (rate, from, year) => `${year}: ${rate} from ${from}`,
     examples: "What individuals pay",
-    exampleToday: "Today",
+    exampleBase: (year) => String(year),
     exampleAfter: "With this curve",
     exampleChange: "Change",
     owes: (amount, rate) => `${amount} (${rate})`,
@@ -247,18 +267,18 @@ export const en: Messages = {
     clampedTo: (value) => `Limited to ${value}: a point cannot overtake its neighbours.`,
     otherSettings: "Other settings",
     model: "How this is calculated",
-    modelCalibrated: (distribution, after, today, change, item, amount) =>
-      `The curve is applied to the distribution “${distribution}”, where it yields ${after} instead of ${today} today (${change}); this relative change is carried over to the budget item “${item}” (${amount}).`,
+    modelCalibrated: (distribution, after, base, change, item, amount, year) =>
+      `The curve is applied to the distribution “${distribution}”, where it yields ${after} instead of ${base} in ${year} (${change}); this relative change is carried over to the budget item “${item}” (${amount}).`,
     modelAbsolute: (distribution, after, item) =>
       `The curve is applied to the distribution “${distribution}”. What it yields there, ${after}, is added to the budget item “${item}”.`,
   },
   waterfall: {
     title: "What changed",
-    intro: "From today's balance, through every measure that is switched on, to the simulated balance.",
+    intro: (year) => `From the ${year} balance, through every measure that is switched on, to the simulated balance.`,
     empty: "No measure is switched on yet. Switch one on to see how far it moves the balance.",
     zero: "0 = balanced",
     introLevel: "How each measure that is switched on relieves or burdens this level.",
-    zeroLevel: "0 = as today",
+    zeroLevel: (year) => `0 = as in ${year}`,
     totalChange: "Total change",
     rangeNote: "Thin lines show the range of each estimate.",
     orderNote:
@@ -299,4 +319,6 @@ export const en: Messages = {
     local: "Local government",
     social_security: "Social security funds",
   },
+  legal: legalEn,
+  debt: debtEn,
 };

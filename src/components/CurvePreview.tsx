@@ -9,6 +9,7 @@ import { chooseScale, toFraction, type XScale } from "../app/curveScale.ts";
 import { useUi } from "../app/ui.ts";
 import type { CurvePoint, Distribution } from "../engine/index.ts";
 import { decimalsIn } from "../i18n/format.ts";
+import { preloadEditor } from "./CurveEditor.tsx";
 import { ChevronRight } from "./icons.tsx";
 
 const WIDTH = 240;
@@ -90,12 +91,13 @@ export function CurveEntry({
         <div className="policy__curve-text">
           <p className="policy__curve-state">
             <span className={`curve-state${changed ? " curve-state--changed" : ""}`}>
-              {changed ? t.curve.changed : t.curve.asToday}
+              {changed ? t.curve.changed : t.curve.asBase(pack.country.baseYear)}
             </span>
             {top && <span>{t.curve.topRate(rate(top.rate), fmt.exactMoney(top.from))}</span>}
           </p>
           {preset && changed && <p className="policy__curve-preset">{t.curve.preset(ui.text(preset.label))}</p>}
-          <button type="button" className="policy__edit" onClick={onEdit}>
+          {/* The editor is a part of the app of its own: a pointer or the focus on the button starts loading it. */}
+          <button type="button" className="policy__edit" onClick={onEdit} onPointerEnter={preloadEditor} onFocus={preloadEditor}>
             {t.curve.edit}
             <span className="visually-hidden">: {policyLabel}</span>
             <ChevronRight size={14} />

@@ -470,3 +470,20 @@ main {
     forced-color-adjust: none;
   }
 }
+
+/* Without JavaScript: the notice that the page needs it, and the imprint the build adds there. */
+noscript {
+  display: block;
+  max-width: 60ch;
+  padding: 16px;
+  line-height: 1.5;
+}
+
+.noscript-imprint h2 {
+  margin: 18px 0 6px;
+  font-size: 18px;
+}
+
+.noscript-imprint p + p {
+  margin-top: 6px;
+}

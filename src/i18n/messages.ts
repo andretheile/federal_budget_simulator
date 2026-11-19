@@ -4,6 +4,8 @@
  * so each language can order and inflect them as it needs.
  */
 import type { Catch, LevelId, PolicyTopic, Quality, WarningCode } from "../engine/index.ts";
+import type { LegalMessages } from "./legal/messages.ts";
+import type { DebtMessages } from "./debt/messages.ts";
 
 export type IndicatorId = "gdp" | "population" | "households" | "grossDebt";
 
@@ -46,7 +48,8 @@ export interface Messages {
     deficit: string;
     surplus: string;
     balanced: string;
-    today: string;
+    /** The base year as a label, where the old wording said "today": the start of the waterfall. */
+    baseYear(year: number): string;
     simulated: string;
     perYear: string;
     improves: string;
@@ -66,19 +69,20 @@ export interface Messages {
   scoreboard: {
     label: string;
     balanceLabel(year: number): string;
-    vsToday: string;
-    asToday: string;
+    /** After a change: against the base year, which is not always today. */
+    vsBase(year: number): string;
+    asBase(year: number): string;
     measuresOn(count: number): string;
     ofGdp(share: string): string;
     perInhabitant(amount: string): string;
     rangeLabel: string;
     announce(balance: string, state: string, change: string): string;
-    levelLabel(level: string): string;
+    levelLabel(level: string, year: number): string;
     relief: string;
     burden: string;
     unchanged: string;
     noLevelBalance: string;
-    announceLevel(level: string, change: string, state: string): string;
+    announceLevel(level: string, change: string, state: string, year: number): string;
   };
   budget: {
     title(year: number): string;
@@ -87,13 +91,14 @@ export interface Messages {
     hint: string;
     other(count: number): string;
     gap(kind: "deficit" | "surplus", amount: string): string;
-    todayMark(amount: string): string;
+    /** The mark for the base-year value of a bar or a row. */
+    baseMark(amount: string, year: number): string;
     shareOf(side: "revenue" | "expenditure", share: string): string;
     path: string;
     up: string;
     /** Said after a row that opens the next level, for screen readers. */
     breakDown: string;
-    key: string;
+    key(year: number): string;
     hiddenZero(count: number): string;
     noItems: string;
     quality: string;
@@ -117,12 +122,25 @@ export interface Messages {
     ofAll(side: "revenue" | "expenditure", share: string): string;
     ofLevel(side: "revenue" | "expenditure", share: string): string;
     perInhabitant(amount: string): string;
-    ofDeficit(share: string): string;
-    meterLabel(share: string): string;
+    ofDeficit(share: string, year: number): string;
+    meterLabel(share: string, year: number): string;
     settings: string;
     settingCount(count: number): string;
     previewHint: string;
-    todayValue(value: string): string;
+    /** A setting's value in the base year, under its slider. */
+    baseValue(value: string, year: number): string;
+    /** The end of a slider's scale where the base-year value lies: "0 % · 2024". */
+    baseAtEnd(end: string, year: number): string;
+    /** Name of the button that sets a slider back to its base-year value. */
+    toBaseValue(value: string, year: number): string;
+    /** How far a setting is from its base-year value, for screen readers. */
+    changeFromBase(change: string, year: number): string;
+    /** The tag before a setting that is an assumption of the calculation, not a political choice. */
+    assumption: string;
+    /** Name of the button that shows a setting's value and turns it into a field. */
+    typeValue(label: string, value: string): string;
+    /** Name of that field. */
+    valueField(label: string): string;
     selectedShare(share: string, basis: "spending" | "recipients", item: string): string;
     /** Said before a group's share, for screen readers. */
     groupShare: string;
@@ -144,10 +162,19 @@ export interface Messages {
     showInBudget(label: string): string;
     effectSide(side: "revenue" | "expenditure"): string;
     byLevel: string;
+    /** Heading of a passed-on part that is a cost reappearing elsewhere, when the pack gives no label. */
     shift: string;
-    shiftLine(amount: string, to: string): string;
+    /** Heading of any other passed-on part (a knock-on effect), when the pack gives no label. */
+    knockOn: string;
+    /** What happens at the other item, by its side and by whether it goes up or down. */
+    shiftLine(amount: string, to: string, side: "revenue" | "expenditure", up: boolean): string;
+    /**
+     * The two ends of an effect that varies together with the measure's other effects: what it is
+     * at the measure's low and at its high end, not a range of its own.
+     */
+    linkedRange(low: string, high: string): string;
     clampedNote: string;
-    warnings: Record<WarningCode, string>;
+    warnings: Record<Exclude<WarningCode, "empty_group">, string> & { empty_group(year: number): string };
     /** The repeated_exclusion warning when the measures that got there first are known. */
     alreadyExcludedBy(measures: string): string;
     warningItem(item: string): string;
@@ -158,7 +185,7 @@ export interface Messages {
     /** Small caption above the preview on the card. */
     section: string;
     edit: string;
-    asToday: string;
+    asBase(year: number): string;
     changed: string;
     preset(label: string): string;
     topRate(rate: string, from: string): string;
@@ -167,17 +194,23 @@ export interface Messages {
     show(measure: string): string;
     dialog(measure: string): string;
     close: string;
+    /** While the inside of the editor is still on its way. */
+    loading: string;
+    /** When the inside of the editor could not be loaded, e.g. offline. */
+    loadFailed: string;
+    retry: string;
     /** What the curve means, in plain words. `currency` is the name of the currency, e.g. "Euro". */
     explain(currency: string): string;
     hint: string;
-    hover(at: string, rate: string, today: string | null, average: string, averageToday: string | null): string;
-    point(name: string, at: string, rate: string, average: string, averageToday: string | null): string;
+    /** `base` and `averageBase`: the base year's rates there, if there is a base-year curve. */
+    hover(at: string, rate: string, base: string | null, average: string, averageBase: string | null, year: number): string;
+    point(name: string, at: string, rate: string, average: string, averageBase: string | null, year: number): string;
     axisRate: string;
     compressed: string;
     scaleNote(knee: string, max: string): string;
     legend: {
       reform: string;
-      today: string;
+      base(year: number): string;
       average: string;
       distribution: string;
       examples: string;
@@ -188,7 +221,7 @@ export interface Messages {
     offHint: string;
     presets: string;
     presetSources: string;
-    toToday: string;
+    toBase(year: number): string;
     toDefault: string;
     undo: string;
     remove: string;
@@ -205,9 +238,9 @@ export interface Messages {
     from(amount: string): string;
     top: string;
     topNote: string;
-    topToday(rate: string, from: string): string;
+    topBase(rate: string, from: string, year: number): string;
     examples: string;
-    exampleToday: string;
+    exampleBase(year: number): string;
     exampleAfter: string;
     exampleChange: string;
     owes(amount: string, rate: string): string;
@@ -226,16 +259,16 @@ export interface Messages {
     clampedTo(value: string): string;
     otherSettings: string;
     model: string;
-    modelCalibrated(distribution: string, after: string, today: string, change: string, item: string, amount: string): string;
+    modelCalibrated(distribution: string, after: string, base: string, change: string, item: string, amount: string, year: number): string;
     modelAbsolute(distribution: string, after: string, item: string): string;
   };
   waterfall: {
     title: string;
-    intro: string;
+    intro(year: number): string;
     empty: string;
     zero: string;
     introLevel: string;
-    zeroLevel: string;
+    zeroLevel(year: number): string;
     totalChange: string;
     rangeNote: string;
     orderNote: string;
@@ -265,4 +298,8 @@ export interface Messages {
     million?: string;
   };
   levelFallback: Record<LevelId, string>;
+  /** Imprint and privacy statement (src/i18n/legal/). */
+  legal: LegalMessages;
+  /** The debt and interest projection (src/i18n/debt/). */
+  debt: DebtMessages;
 }

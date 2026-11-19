@@ -5,10 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
-    <!-- Preview: keeps search engines out until the legal pages (imprint, privacy notice) exist. Remove it then. -->
+    <!-- robots: the build removes this line and the next only if site.config.json says "indexable": true (see vite.config.ts). -->
     <meta name="robots" content="noindex" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>Budget Simulator</title>
+    <!-- The page starts in German (lang="de"); the app sets the title in the active language. -->
+    <title>Haushaltssimulator</title>
   </head>
   <body>
     <div id="root"></div>

@@ -226,6 +226,11 @@
   margin-top: 3px;
 }
 
+/* The pack's own words for what is passed on, on a line above the amount. */
+.policy__shift-label {
+  display: block;
+}
+
 .levels {
   margin-top: 12px;
 }
@@ -354,8 +359,15 @@
   color: var(--ink-3);
 }
 
-/* Sliders. The filled part of the track runs to the knob; a tick below the track marks today's value. */
+/*
+ * Sliders. The browser draws only the knob; the track and its filled stretch are drawn behind it.
+ * With a base-year value the stretch runs from the tick that marks it to the knob, in the colour of
+ * what the move does to the balance: blue and solid improves, orange and hatched worsens (so it is
+ * not said by colour alone), grey changes nothing. Without one it runs from the minimum, in ink.
+ * Positions on the track follow the knob's centre: knob/2 + share * (width - knob).
+ */
 .param {
+  --knob: 22px;
   min-width: 0;
   margin: 0 0 18px;
   padding: 0;
@@ -381,24 +393,163 @@
   margin-bottom: 8px;
 }
 
+/* An assumption of the calculation, not a political choice. */
+.param__tag {
+  display: inline-block;
+  margin-right: 7px;
+  padding: 0 5px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  vertical-align: 1px;
+  color: var(--ink-3);
+}
+
+/* The value, and how far it is from the base year. A click turns it into a field. */
+.param__reading {
+  flex: none;
+  padding: 0 2px;
+  border: 0;
+  border-bottom: 1px dashed transparent;
+  background: none;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: text;
+}
+
+.param__reading:hover {
+  border-bottom-color: var(--rule-strong);
+}
+
 .param__value {
   font-size: 15.5px;
   font-weight: 680;
+}
+
+.param__change {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.param__change--improve {
+  color: var(--improve);
+}
+
+.param__change--worsen {
+  color: var(--worsen);
+}
+
+.param__field {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.param__field input {
+  width: 7.5em;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--ink-3);
+  border-radius: 4px;
+  background: var(--surface);
+  /* Not smaller: below 16px Safari on a phone zooms into a field when it gets the focus. */
+  font-size: 16px;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  text-align: right;
 }
 
 .param__slider {
-  --knob: 22px;
   position: relative;
   display: flex;
   align-items: center;
   height: 32px;
 }
 
+.param__track,
+.param__fill {
+  position: absolute;
+  top: 50%;
+  pointer-events: none;
+}
+
+.param__track {
+  left: 0;
+  right: 0;
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 2px;
+  background: var(--rule-strong);
+}
+
+.param__fill {
+  left: calc(var(--knob) / 2 + var(--from) * (100% - var(--knob)));
+  width: calc((var(--to) - var(--from)) * (100% - var(--knob)));
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 3px;
+}
+
+.param__slider--plain .param__fill,
+.param__slider--assumption .param__fill {
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+/* Filled from the minimum: from the very start of the track, as the browser would. */
+.param__slider.is-from-start .param__fill {
+  left: 0;
+  width: calc(var(--knob) / 2 + var(--to) * (100% - var(--knob)));
+}
+
+/* Where a range without a base-year value spans zero, the fill starts there, at this tick. */
+.param__zero {
+  position: absolute;
+  top: calc(50% - 7px);
+  left: calc(var(--knob) / 2 + var(--zero) * (100% - var(--knob)));
+  width: 2px;
+  height: 14px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: var(--ink-3);
+  pointer-events: none;
+}
+
+.param__slider--improve .param__fill {
+  background: var(--improve);
+}
+
+.param__slider--worsen .param__fill {
+  background: repeating-linear-gradient(135deg, var(--worsen) 0 2.5px, transparent 2.5px 4.5px);
+  box-shadow: inset 0 0 0 1.25px var(--worsen);
+}
+
+.param__slider--neutral .param__fill {
+  background: var(--ink-3);
+}
+
+.param__slider--none .param__fill {
+  display: none;
+}
+
+/* An assumption: a grey fill and a grey knob. */
+.param__slider--assumption .param__fill {
+  background: var(--ink-3);
+}
+
 .param__slider input {
   -webkit-appearance: none;
   appearance: none;
+  position: relative;
   width: 100%;
   height: 32px;
   margin: 0;
@@ -408,24 +559,16 @@
 
 .param__slider input::-webkit-slider-runnable-track {
   height: 4px;
-  border-radius: 2px;
-  background: linear-gradient(
-    to right,
-    var(--ink) calc(var(--knob) / 2 + var(--at) * (100% - var(--knob))),
-    var(--rule-strong) calc(var(--knob) / 2 + var(--at) * (100% - var(--knob)))
-  );
+  background: transparent;
 }
 
 .param__slider input::-moz-range-track {
   height: 4px;
-  border-radius: 2px;
-  background: var(--rule-strong);
+  background: transparent;
 }
 
 .param__slider input::-moz-range-progress {
-  height: 4px;
-  border-radius: 2px;
-  background: var(--ink);
+  background: transparent;
 }
 
 .param__slider input::-webkit-slider-thumb {
@@ -449,6 +592,16 @@
   box-shadow: 0 0 0 1.5px var(--ink);
 }
 
+.param__slider--assumption input::-webkit-slider-thumb {
+  background: var(--ink-3);
+  box-shadow: 0 0 0 1.5px var(--ink-3);
+}
+
+.param__slider--assumption input::-moz-range-thumb {
+  background: var(--ink-3);
+  box-shadow: 0 0 0 1.5px var(--ink-3);
+}
+
 .param__slider input:focus-visible {
   outline: none;
 }
@@ -463,6 +616,7 @@
   outline-offset: 3px;
 }
 
+/* The tick for the base-year value, under the track. */
 .param__baseline {
   position: absolute;
   top: calc(50% + 5px);
@@ -474,27 +628,85 @@
   pointer-events: none;
 }
 
+/*
+ * The scale: the two ends, and the label of the base-year value right under its tick. The label's
+ * edge is a line that continues the tick; the text runs from it towards the middle, or on a line
+ * of its own where the ends leave no room. An end that is the base-year value carries it itself.
+ */
 .param__scale {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  position: relative;
+  min-height: 17px;
   font-size: 12px;
+  line-height: 17px;
   color: var(--ink-3);
   font-variant-numeric: tabular-nums;
 }
 
-.param__today {
-  color: var(--ink-2);
-  font-weight: 600;
+.param__scale.has-own-line {
+  min-height: 36px;
 }
 
-.param__today::before {
-  content: "";
-  display: inline-block;
-  width: 2px;
-  height: 8px;
-  margin-right: 6px;
-  background: var(--ink-2);
+.param__end {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+/* The ends stand where the knob's centre is at either end. */
+.param__end--min {
+  left: calc(var(--knob) / 2 - 1px);
+}
+
+.param__end--max {
+  right: calc(var(--knob) / 2 - 1px);
+}
+
+.param__base,
+.param__end--base {
+  padding: 0 0 0 5px;
+  border: 0;
+  border-left: 2px solid var(--ink-2);
+  background: none;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.param__base {
+  position: absolute;
+  top: 1px;
+  left: calc(var(--knob) / 2 + var(--base) * (100% - var(--knob)) - 1px);
+}
+
+.param__base--before,
+.param__end--max.param__end--base {
+  padding: 0 5px 0 0;
+  border-left: 0;
+  border-right: 2px solid var(--ink-2);
+}
+
+.param__base--before {
+  left: auto;
+  right: calc(100% - (var(--knob) / 2 + var(--base) * (100% - var(--knob))) - 1px);
+}
+
+.param__scale.has-own-line .param__base {
+  top: 19px;
+}
+
+.param__base:hover,
+.param__end--base:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.param__base.is-current,
+.param__end--base.is-current {
+  color: var(--ink);
 }
 
 .param__note {

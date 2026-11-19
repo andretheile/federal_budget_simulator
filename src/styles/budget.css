@@ -220,6 +220,11 @@
   pointer-events: none;
 }
 
+/* Below its bar, where the scoreboard leaves no room above it. */
+.tip--below {
+  transform: none;
+}
+
 .tip__value {
   font-size: 15px;
   font-weight: 680;
@@ -341,10 +346,6 @@
   border-color: var(--ink);
 }
 
-.detail__head {
-  margin-top: 6px;
-}
-
 .detail__title {
   font-family: var(--font-serif);
   font-size: 20px;
@@ -354,7 +355,7 @@
 }
 
 .detail__total {
-  margin-top: 2px;
+  margin-top: 6px;
   font-size: 14px;
 }
 
@@ -566,33 +567,71 @@
   .row {
     scroll-margin-block: 8px;
   }
+
+  /* Where the list is and what it adds up to share a line, if there is room: one line less above the rows. */
+  .detail__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 20px;
+  }
+
+  .detail__top .detail__total {
+    margin-top: 0;
+  }
 }
 
 /*
- * The same on a wide but low window (a small laptop): scoreboard and bars take most of its height,
- * so the bars close up a little, as on a phone, to leave the list about one row more.
+ * The same on a wide but low window (a small laptop, 1280 x 720): the scoreboard and the bars take
+ * most of its height. So everything around the bars and the rows closes up: the space between the
+ * parts, the legend entries (still 24 px targets) and the padding of each row. The bars, their
+ * labels and the text of the rows keep their size. That leaves the list about twice the rows.
  */
 @media (min-width: 1080px) and (min-height: 720px) and (max-height: 859px) {
   .budget__pin {
-    top: calc(var(--scoreboard-height) + 14px);
-    max-height: calc(100vh - var(--scoreboard-height) - 14px);
-    max-height: calc(100dvh - var(--scoreboard-height) - 14px);
+    top: calc(var(--scoreboard-height) + 10px);
+    max-height: calc(100vh - var(--scoreboard-height) - 10px);
+    max-height: calc(100dvh - var(--scoreboard-height) - 10px);
   }
 
   .bars {
-    gap: 14px;
-    padding-bottom: 14px;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  .bar__head {
+    margin-bottom: 5px;
   }
 
   .bar__plot {
     height: 40px;
   }
 
+  .bar__plot:has(.bar__today) {
+    margin-bottom: 16px;
+  }
+
   .legend {
-    margin-top: 8px;
+    margin-top: 6px;
+    row-gap: 0;
+  }
+
+  .legend__item {
+    min-height: 24px;
+    padding-block: 2px;
   }
 
   .detail {
-    padding-top: 10px;
+    padding-top: 8px;
+  }
+
+  .rows {
+    margin-top: 8px;
+  }
+
+  .row__main {
+    padding: 6px 0;
+    row-gap: 3px;
   }
 }

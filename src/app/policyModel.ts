@@ -107,7 +107,7 @@ export function insightOf(pack: CountryPack, alone: PolicyResult, baseline: Tota
 export function sourcesOf(policy: Policy): SourceId[] {
   const ids = [
     ...policy.sources,
-    ...policy.effects.flatMap((effect) => effect.sources ?? []),
+    ...policy.effects.flatMap((effect) => [...(effect.sources ?? []), ...(effect.shift?.sources ?? [])]),
     ...policy.catches.flatMap((item) => item.sources ?? []),
   ];
   return [...new Set(ids)];

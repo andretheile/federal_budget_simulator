@@ -335,7 +335,7 @@ function StackedBar({
         {changed && (
           <div className="bar__today" style={{ left: percentOf(baseline, max) }} aria-hidden="true">
             <span className={baseline / max > 0.5 ? "is-left" : undefined}>
-              {t.budget.todayMark(fmt.money(baseline))}
+              {t.budget.baseMark(fmt.money(baseline), pack.country.baseYear)}
             </span>
           </div>
         )}
@@ -356,7 +356,7 @@ function StackedBar({
                   direction={directionOfNode(side, activeSegment.delta, noise)}
                   text={fmt.money(activeSegment.delta, { signed: true })}
                 />{" "}
-                {t.scoreboard.vsToday}
+                {t.scoreboard.vsBase(pack.country.baseYear)}
               </span>
             )}
           </Tip>
@@ -407,42 +407,74 @@ function StackedBar({
  * off, and it follows its bar when the page moves. While that spot of the bar is out of sight
  * (scrolled away, or under the scoreboard), there is nothing to point at and the tip is hidden.
  *
+ * Nor does it cover the scoreboard: where the scoreboard leaves no room above the bar (the bar
+ * just below it while the page scrolls, or held right under it beside the measures), the tip
+ * stands below the bar instead.
+ *
  * It is for the eye only: screen readers get the same figures from the legend entry of the block.
  */
 function Tip({ plot, at, children }: { plot: RefObject<HTMLDivElement | null>; at: number; children: ReactNode }) {
-  const [place, setPlace] = useState<CSSProperties | null>(null);
+  const [place, setPlace] = useState<{ below: boolean; style: CSSProperties } | null>(null);
+  const tip = useRef<HTMLDivElement>(null);
+  const update = useRef<() => void>(() => undefined);
   const end = at > 0.5;
 
   useLayoutEffect(() => {
     const element = plot.current;
     if (!element) return;
-    const update = (): void => {
+    const same = (a: typeof place, b: typeof place): boolean =>
+      a === b ||
+      (a !== null &&
+        b !== null &&
+        a.below === b.below &&
+        a.style.top === b.style.top &&
+        a.style.left === b.style.left &&
+        a.style.right === b.style.right &&
+        a.style.maxWidth === b.style.maxWidth);
+    const set = (next: typeof place): void => setPlace((current) => (same(current, next) ? current : next));
+    update.current = (): void => {
       const box = element.getBoundingClientRect();
       const x = box.left + at * box.width;
       const onTop =
         typeof document.elementFromPoint === "function" ? document.elementFromPoint(x, box.top + 1) : element;
       if (!onTop || !element.contains(onTop)) {
-        setPlace(null);
+        set(null);
         return;
       }
-      setPlace({
-        top: box.top - TIP_GAP,
-        maxWidth: Math.max(box.width / 2, 170),
-        ...(end ? { right: document.documentElement.clientWidth - x } : { left: x }),
+      // Until the tip is drawn its height is not known; a usual one is assumed, and checked once it is there.
+      const height = tip.current?.offsetHeight || 80;
+      const scoreboard = document.querySelector(".scoreboard__band")?.getBoundingClientRect();
+      const below = scoreboard !== undefined && box.top - TIP_GAP - height < scoreboard.bottom + 2;
+      set({
+        below,
+        style: {
+          top: below ? box.bottom + TIP_GAP : box.top - TIP_GAP,
+          maxWidth: Math.max(box.width / 2, 170),
+          ...(end ? { right: document.documentElement.clientWidth - x } : { left: x }),
+        },
       });
     };
-    update();
-    window.addEventListener("scroll", update, { capture: true, passive: true });
-    window.addEventListener("resize", update);
+    const onChange = (): void => update.current();
+    onChange();
+    window.addEventListener("scroll", onChange, { capture: true, passive: true });
+    window.addEventListener("resize", onChange);
     return () => {
-      window.removeEventListener("scroll", update, { capture: true });
-      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", onChange, { capture: true });
+      window.removeEventListener("resize", onChange);
     };
   }, [plot, at, end]);
 
+  // Drawn, the tip has its real height: whether it fits above the bar is checked again.
+  useLayoutEffect(() => update.current());
+
   if (!place) return null;
   return createPortal(
-    <div className={`tip${end ? " tip--end" : ""}`} style={place} aria-hidden="true">
+    <div
+      ref={tip}
+      className={`tip${end ? " tip--end" : ""}${place.below ? " tip--below" : ""}`}
+      style={place.style}
+      aria-hidden="true"
+    >
       {children}
     </div>,
     document.body,
@@ -500,37 +532,38 @@ function DetailList({ layout, result, selection, onSelect, highlight, noise }: D
 
   return (
     <div className="detail">
-      <nav className="crumbs" aria-label={t.budget.path}>
-        {parent && (
-          <button
-            type="button"
-            className="crumbs__up"
-            onClick={() => onSelect(parent.selection)}
-            aria-label={t.budget.up}
-            title={t.budget.up}
-          >
-            <ArrowLeft />
-          </button>
-        )}
-        <ol>
-          {crumbs.map((crumb, index) => {
-            const last = index === crumbs.length - 1;
-            return (
-              <li key={crumb.kind === "node" ? crumb.id : crumb.kind} aria-current={last ? "location" : undefined}>
-                {last ? (
-                  <h3 className="detail__title">{crumbLabel(crumb)}</h3>
-                ) : (
-                  <button type="button" onClick={() => onSelect(crumb.selection)}>
-                    {crumbLabel(crumb)}
-                  </button>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </nav>
-
-      <div className="detail__head">
+      {/* Where the list is and what it adds up to. Beside the measures, where height is scarce,
+          the two share a line when there is room. */}
+      <div className="detail__top">
+        <nav className="crumbs" aria-label={t.budget.path}>
+          {parent && (
+            <button
+              type="button"
+              className="crumbs__up"
+              onClick={() => onSelect(parent.selection)}
+              aria-label={t.budget.up}
+              title={t.budget.up}
+            >
+              <ArrowLeft />
+            </button>
+          )}
+          <ol>
+            {crumbs.map((crumb, index) => {
+              const last = index === crumbs.length - 1;
+              return (
+                <li key={crumb.kind === "node" ? crumb.id : crumb.kind} aria-current={last ? "location" : undefined}>
+                  {last ? (
+                    <h3 className="detail__title">{crumbLabel(crumb)}</h3>
+                  ) : (
+                    <button type="button" onClick={() => onSelect(crumb.selection)}>
+                      {crumbLabel(crumb)}
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
         <p className="detail__total">
           <strong>{fmt.money(here?.reform ?? 0)}</strong>
           {current.kind !== "side" && sideTotal > 0 && (
@@ -544,12 +577,12 @@ function DetailList({ layout, result, selection, onSelect, highlight, noise }: D
                 direction={directionOfNode(side, here.delta, noise)}
                 text={fmt.money(here.delta, { signed: true })}
               />{" "}
-              <span className="muted">{t.scoreboard.vsToday}</span>
+              <span className="muted">{t.scoreboard.vsBase(pack.country.baseYear)}</span>
             </>
           )}
         </p>
-        {node?.description && <p className="detail__description">{ui.text(node.description)}</p>}
       </div>
+      {node?.description && <p className="detail__description">{ui.text(node.description)}</p>}
 
       {rows.length === 0 ? (
         <p className="muted">{t.budget.noItems}</p>
@@ -569,7 +602,7 @@ function DetailList({ layout, result, selection, onSelect, highlight, noise }: D
           ))}
         </ul>
       )}
-      {anyChanged && <p className="detail__key">{t.budget.key}</p>}
+      {anyChanged && <p className="detail__key">{t.budget.key(pack.country.baseYear)}</p>}
       {hidden > 0 && <p className="detail__key">{t.budget.hiddenZero(hidden)}</p>}
     </div>
   );
@@ -625,7 +658,7 @@ function DetailRow({ row, side, max, noise, highlighted, level, onDrill }: Detai
               direction={directionOfNode(side, row.delta, noise)}
               text={fmt.money(row.delta, { signed: true })}
             />
-            <span className="row__today"> {t.budget.todayMark(fmt.money(row.baseline))}</span>
+            <span className="row__today"> {t.budget.baseMark(fmt.money(row.baseline), ui.pack.country.baseYear)}</span>
           </>
         )}
       </span>

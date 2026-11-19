@@ -7,11 +7,12 @@
  */
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { Simulator } from "../App.tsx";
 import { testland } from "../engine/__fixtures__/testland.ts";
 import { simulate, type CurvePoint } from "../engine/index.ts";
 import { createFormatters } from "../i18n/format.ts";
+import { editorModule } from "./CurveEditor.tsx";
 
 let container: HTMLDivElement;
 let root: Root;
@@ -27,6 +28,13 @@ beforeAll(() => {
     return { x: 0, y: 0, left: 0, top: 0, right: 800, bottom: 400, width: 800, height: 400, toJSON: () => ({}) } as DOMRect;
   };
   window.scrollTo = (() => {}) as typeof window.scrollTo;
+});
+
+// The inside of the editor is a part of the app of its own. Here it is loaded beforehand, so the
+// editor opens at once, as it does in a browser once its code has been fetched ahead of time.
+// How the sheet behaves while that part is on its way, or missing, is tested further below.
+beforeAll(async () => {
+  await editorModule.load();
 });
 
 beforeEach(() => {
@@ -100,9 +108,9 @@ describe("the curve on the card", () => {
     expect(query(".scoreboard").hasAttribute("inert")).toBe(false);
   });
 
-  it("says 'as today' for today's curve, and names a preset", () => {
+  it("says 'as in 2024' for the base year's curve, and names a preset", () => {
     mount("#lang=en&s=redraw_income_tax.tariff.10_20_30_20_30_40");
-    expect(text(`${CARD} .curve-state`)).toBe("as today");
+    expect(text(`${CARD} .curve-state`)).toBe("as in 2024");
     act(() => root.unmount());
     mount("#lang=en&s=redraw_income_tax.tariff.10_25");
     expect(text(`${CARD} .curve-state`)).toBe("changed");
@@ -130,7 +138,7 @@ describe("the editor", () => {
     // The readouts follow: the measure's own effect, and the top rate.
     const alone = simulate(testland, { policies: { redraw_income_tax: { enabled: true, params: { tariff: p([10, 10], [30, 50]) } } } }).delta.balance;
     expect(text(".editor__side .policy__amount")).toBe(en.money(alone, { signed: true }).replace(/[\u00a0\u202f]/g, " "));
-    expect(text(".editor__top")).toBe("50% from XTS 30 · today 40% from XTS 30");
+    expect(text(".editor__top")).toBe("50% from XTS 30 · 2024: 40% from XTS 30");
   });
 
   it("keeps a typed amount between the neighbours and says so", () => {
@@ -248,7 +256,7 @@ describe("the editor", () => {
     expect(rows()).toHaveLength(3);
   });
 
-  it("applies presets, goes back to today's curve and undoes one step", () => {
+  it("applies presets, goes back to the base year's curve and undoes one step", () => {
     mount();
     open();
     const presets = all<HTMLButtonElement>(".preset");
@@ -274,7 +282,7 @@ describe("the editor", () => {
     expect(undo.disabled).toBe(true);
 
     const reset = all<HTMLButtonElement>(".editor__toolbar .tool")[0];
-    expect(reset.textContent).toBe("Today's curve");
+    expect(reset.textContent).toBe("2024 curve");
     click(reset);
     expect(rows()).toEqual([
       ["10", "20"],
@@ -311,7 +319,7 @@ describe("the editor", () => {
     expect(examples[1]).toContain("XTS 11 (24.4%)");
     expect(examples[1]).toContain("+XTS 1");
     expect(text(".editor__model")).toBe(
-      "The curve is applied to the distribution “Taxable income”, where it yields XTS 130 instead of XTS 120 today (+8.3%); this relative change is carried over to the budget item “Income tax” (XTS 1,500).",
+      "The curve is applied to the distribution “Taxable income”, where it yields XTS 130 instead of XTS 120 in 2024 (+8.3%); this relative change is carried over to the budget item “Income tax” (XTS 1,500).",
     );
   });
 
@@ -361,5 +369,159 @@ describe("the editor", () => {
     // Testland's curve measure has no other setting; Germany's has one. Here: the absence.
     mount("#lang=en&e=redraw_income_tax.tariff");
     expect(document.querySelector(".editor .param")).toBeNull();
+  });
+});
+
+describe("two points too close together for a finger", () => {
+  // A step of two percentage points at 30: about 10 px apart on the chart.
+  const STEP = "#lang=en&s=redraw_income_tax.tariff.10_20_30_20_30_22&e=redraw_income_tax.tariff";
+  const coarse = (matches: boolean): void => {
+    window.matchMedia = ((query: string) => ({
+      matches: matches && query === "(pointer: coarse)",
+      media: query,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    })) as unknown as typeof window.matchMedia;
+  };
+  afterEach(() => {
+    delete (window as { matchMedia?: unknown }).matchMedia;
+  });
+
+  const tab = (index: number): HTMLElement => query(`.cchart__tab[data-tab="${index}"]`);
+  const at = (element: HTMLElement) => ({ x: parseFloat(element.style.left), y: parseFloat(element.style.top) });
+  /** A finger on `target`, moved by dy, lifted. */
+  const drag = (target: HTMLElement, from: { x: number; y: number }, dy: number): void => {
+    const layer = query(".cchart__layer");
+    const fire = (element: Element, type: string, y: number): void =>
+      act(() => void element.dispatchEvent(new PointerEvent(type, { bubbles: true, cancelable: true, clientX: from.x, clientY: y, pointerId: 3, pointerType: "touch", isPrimary: true })));
+    fire(target, "pointerdown", from.y);
+    for (let step = 1; step <= 5; step++) fire(layer, "pointermove", from.y + (dy * step) / 5);
+    fire(layer, "pointerup", from.y + dy);
+  };
+  const values = (): string[] => all(".cchart__handle").map((handle) => attr(handle, "aria-valuetext"));
+
+  it("each get a tab on a touch screen, the higher one above, the lower one below", () => {
+    coarse(true);
+    mount(STEP);
+    expect(all(".cchart__tab").map((element) => [element.dataset.tab, element.textContent])).toEqual([
+      ["1", "20%"],
+      ["2", "22%"],
+    ]);
+    const handles = all(".cchart__handle");
+    expect(at(tab(2)).y).toBeLessThan(at(handles[2]).y - 22);
+    expect(at(tab(1)).y).toBeGreaterThan(at(handles[1]).y + 22);
+    // The tabs are for the finger only.
+    expect(tab(1).getAttribute("aria-hidden")).toBe("true");
+    expect(tab(1).hasAttribute("tabindex")).toBe(false);
+  });
+
+  it("moves exactly the point whose tab was dragged", () => {
+    coarse(true);
+    mount(STEP);
+    expect(values()).toEqual(["XTS 10, 20%", "XTS 30, 20%", "XTS 30, 22%"]);
+    // The upper tab, up: the 22 % point rises, the 20 % point stays.
+    drag(tab(2), at(tab(2)), -40);
+    expect(values()[1]).toBe("XTS 30, 20%");
+    expect(Number.parseFloat(values()[2].split(", ")[1])).toBeGreaterThan(27);
+    expect(all(".cchart__handle")[2].classList.contains("is-selected")).toBe(true);
+    // Undo, then the lower tab, down: the 20 % point falls, the 22 % point stays.
+    click(all<HTMLButtonElement>(".editor__toolbar .tool")[1]);
+    expect(values()).toEqual(["XTS 10, 20%", "XTS 30, 20%", "XTS 30, 22%"]);
+    drag(tab(1), at(tab(1)), 40);
+    expect(Number.parseFloat(values()[1].split(", ")[1])).toBeLessThan(15);
+    expect(values()[2]).toBe("XTS 30, 22%");
+    expect(all(".cchart__handle")[1].classList.contains("is-selected")).toBe(true);
+  });
+
+  it("get tabs once a finger has been used, also where the screen does not say it is a touch screen", () => {
+    coarse(false);
+    mount(STEP);
+    expect(all(".cchart__tab")).toHaveLength(0);
+    // A tap somewhere on the chart away from the curve.
+    const layer = query(".cchart__layer");
+    act(() => void layer.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: 400, clientY: 40, pointerType: "touch" })));
+    expect(all(".cchart__tab")).toHaveLength(2);
+  });
+
+  it("get no tabs with a mouse: it can point at either", () => {
+    coarse(false);
+    mount(STEP);
+    const layer = query(".cchart__layer");
+    const upper = at(all(".cchart__handle")[2]);
+    act(() => void layer.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, cancelable: true, clientX: upper.x, clientY: upper.y - 2, pointerId: 1, pointerType: "mouse", button: 0 })));
+    act(() => void layer.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, clientX: upper.x, clientY: upper.y - 2, pointerId: 1, pointerType: "mouse" })));
+    expect(all(".cchart__tab")).toHaveLength(0);
+    expect(all(".cchart__handle")[2].classList.contains("is-selected")).toBe(true);
+  });
+});
+
+describe("the inside of the editor, a part of the app of its own", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  /** The import of the editor's inside, held back until the test lets it arrive or fail. */
+  function holdBack() {
+    const attempts: { resolve(): Promise<void>; reject(): Promise<void> }[] = [];
+    vi.spyOn(editorModule, "current").mockReturnValue(undefined);
+    vi.spyOn(editorModule, "load").mockImplementation(
+      () =>
+        new Promise((resolve, reject) => {
+          attempts.push({
+            resolve: () => act(async () => resolve(await import("./CurveEditorBody.tsx"))),
+            reject: () => act(async () => reject(new TypeError("Failed to fetch dynamically imported module"))),
+          });
+        }),
+    );
+    return attempts;
+  }
+
+  it("shows the sheet with its header at once, and the editor when it has arrived", async () => {
+    const attempts = holdBack();
+    mount("#lang=en&e=redraw_income_tax.tariff");
+    expect(text(".sheet__title")).toBe("Redraw the income tax");
+    expect(query('.sheet [role="switch"]')).toBeTruthy();
+    expect(text('.sheet__pending[role="status"]')).toBe("Loading the editor…");
+    expect(document.querySelector(".cchart")).toBeNull();
+    expect(attempts).toHaveLength(1);
+    await attempts[0].resolve();
+    expect(document.querySelector(".sheet__pending")).toBeNull();
+    expect(all(".cchart__handle")).toHaveLength(2);
+  });
+
+  it("says so when it cannot be loaded, and tries again on request", async () => {
+    const attempts = holdBack();
+    mount("#lang=en&e=redraw_income_tax.tariff");
+    await attempts[0].reject();
+    // Not a blank page: the sheet, its header, a message and a way to try again.
+    expect(text(".sheet__title")).toBe("Redraw the income tax");
+    expect(text('.sheet__pending[role="alert"] p')).toContain("could not be loaded");
+    const retry = query<HTMLButtonElement>(".sheet__pending button");
+    expect(retry.textContent).toBe("Try again");
+    click(retry);
+    // While it tries, the focus waits on the title; the button is gone.
+    expect(attempts).toHaveLength(2);
+    expect(text('.sheet__pending[role="status"]')).toBe("Loading the editor…");
+    expect(document.activeElement).toBe(query(".sheet__title"));
+    await attempts[1].reject();
+    click(".sheet__pending button");
+    await attempts[2].resolve();
+    expect(all(".cchart__handle")).toHaveLength(2);
+    // Escape closes the sheet in every state.
+    press(document.body, "Escape");
+    expect(document.querySelector(".sheet")).toBeNull();
+  });
+
+  it("starts loading ahead of time when the pointer or the focus reaches a button that opens it", () => {
+    const preload = vi.spyOn(editorModule, "preload").mockImplementation(() => undefined);
+    mount("#lang=en&s=redraw_income_tax.tariff.10_25");
+    const button = query(`${CARD} .policy__edit`);
+    act(() => void button.dispatchEvent(new PointerEvent("pointerover", { bubbles: true, pointerType: "mouse" })));
+    expect(preload).toHaveBeenCalledTimes(1);
+    act(() => button.focus());
+    expect(preload).toHaveBeenCalledTimes(2);
+    // The way in from the notice above the measures does the same.
+    act(() => query(".changed-curves__open").focus());
+    expect(preload).toHaveBeenCalledTimes(3);
   });
 });

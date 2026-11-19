@@ -131,7 +131,7 @@ describe("the simulator on Testland", () => {
 
   it("shows the change, not a balance, for a single level of government", () => {
     mount("#lang=en&s=defense_target~L.central");
-    expect(text(".scoreboard__label")).toBe("Central government: change compared with today");
+    expect(text(".scoreboard__label")).toBe("Central government: change compared with 2024");
     expect(headline()).toBe("−XTS 100");
     expect(text('[data-testid="balance-state"]')).toBe("Burden");
     expect(text(".scoreboard__change")).toContain("No balance is shown for a single level");
@@ -245,25 +245,17 @@ describe("the address while a value changes fast", () => {
 
   it("is written at most a few dozen times in ten seconds, and always ends on the last state", () => {
     // Safari throws after about 100 calls of replaceState in ten seconds; a drag can change the
-    // scenario a hundred times in a few seconds.
+    // scenario a hundred times in a few seconds. The budget itself, over ten seconds of changes,
+    // is tested on a clock moved by hand in addressWriter.test.ts; here: that the page uses it.
     vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "performance"] });
     mount("#lang=en");
     const replace = vi.spyOn(window.history, "replaceState");
     const toggle = '#policy-halve_mp_pay [role="switch"]';
-    for (let i = 0; i < 121; i++) click(toggle);
+    // More changes at once than the budget allows (25).
+    for (let i = 0; i < 31; i++) click(toggle);
     expect(replace.mock.calls.length).toBeLessThanOrEqual(25);
     expect(headline()).toBe("−XTS 395");
     // The latest state follows within a moment.
-    act(() => void vi.advanceTimersByTime(150));
-    expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay");
-    // Changes that go on, one every 50 ms for ten seconds: the writes stay below Safari's limit.
-    replace.mockClear();
-    for (let i = 0; i < 200; i++) {
-      click(toggle);
-      act(() => void vi.advanceTimersByTime(50));
-    }
-    expect(replace.mock.calls.length).toBeLessThanOrEqual(100);
-    expect(replace.mock.calls.length).toBeGreaterThan(50);
     act(() => void vi.advanceTimersByTime(150));
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay");
     // After a pause, writes go straight through again.

@@ -1,3 +1,5 @@
+import { legalDe } from "./legal/de.ts";
+import { debtDe } from "./debt/de.ts";
 import type { Messages } from "./messages.ts";
 
 const plural = (count: number, one: string, many: string): string => `${count} ${count === 1 ? one : many}`;
@@ -38,7 +40,7 @@ export const de: Messages = {
     deficit: "Defizit",
     surplus: "Überschuss",
     balanced: "Ausgeglichen",
-    today: "Heute",
+    baseYear: (year) => String(year),
     simulated: "Simuliert",
     perYear: "pro Jahr",
     improves: "verbessert den Saldo",
@@ -58,20 +60,20 @@ export const de: Messages = {
   scoreboard: {
     label: "Ergebnis",
     balanceLabel: (year) => `Saldo ${year}`,
-    vsToday: "gegenüber heute",
-    asToday: "Stand heute. Keine Maßnahme ist eingeschaltet.",
+    vsBase: (year) => `gegenüber ${year}`,
+    asBase: (year) => `Stand ${year}. Keine Maßnahme ist eingeschaltet.`,
     measuresOn: (count) => plural(count, "Maßnahme eingeschaltet", "Maßnahmen eingeschaltet"),
     ofGdp: (share) => `${share} des BIP`,
     perInhabitant: (amount) => `${amount} je Einwohner`,
     rangeLabel: "Spanne",
     announce: (balance, state, change) => `Saldo ${balance}, ${state}. ${change}`,
-    levelLabel: (level) => `${level}: Änderung gegenüber heute`,
+    levelLabel: (level, year) => `${level}: Änderung gegenüber ${year}`,
     relief: "Entlastung",
     burden: "Belastung",
     unchanged: "Unverändert",
     noLevelBalance:
       "Für eine einzelne Ebene wird kein Saldo gezeigt: Zahlungen zwischen den Ebenen sind aus den Daten herausgerechnet.",
-    announceLevel: (level, change, state) => `${level}: ${change} gegenüber heute, ${state}.`,
+    announceLevel: (level, change, state, year) => `${level}: ${change} gegenüber ${year}, ${state}.`,
   },
   budget: {
     title: (year) => `Der Haushalt ${year}`,
@@ -81,12 +83,12 @@ export const de: Messages = {
     hint: "Bereich auswählen, um ihn aufzuschlüsseln.",
     other: (count) => `Weitere Bereiche (${count})`,
     gap: (kind, amount) => `${kind === "deficit" ? "Defizit" : "Überschuss"} ${amount}`,
-    todayMark: (amount) => `heute ${amount}`,
+    baseMark: (amount, year) => `${year}: ${amount}`,
     shareOf: (side, share) => `${share} der ${side === "revenue" ? "Einnahmen" : "Ausgaben"}`,
     path: "Sie sind hier",
     up: "Eine Ebene höher",
     breakDown: "aufschlüsseln",
-    key: "Balken: simulierter Wert. Senkrechter Strich: heutiger Wert.",
+    key: (year) => `Balken: simulierter Wert. Senkrechter Strich: Wert von ${year}.`,
     hiddenZero: (count) =>
       count === 1
         ? "1 Posten ohne Anteil dieser Ebene ist ausgeblendet."
@@ -124,12 +126,18 @@ export const de: Messages = {
     ofAll: (side, share) => `${share} aller ${side === "revenue" ? "Einnahmen" : "Ausgaben"}`,
     ofLevel: (side, share) => `${share} der ${side === "revenue" ? "Einnahmen" : "Ausgaben"} dieser Ebene`,
     perInhabitant: (amount) => `${amount} je Einwohner`,
-    ofDeficit: (share) => `${share} des heutigen Defizits`,
-    meterLabel: (share) => `Größe im Verhältnis zum heutigen Defizit: ${share}`,
+    ofDeficit: (share, year) => `${share} des Defizits von ${year}`,
+    meterLabel: (share, year) => `Größe im Verhältnis zum Defizit von ${year}: ${share}`,
     settings: "Einstellungen",
     settingCount: (count) => plural(count, "Regler", "Regler"),
     previewHint: "Nicht eingeschaltet. Die Zahlen zeigen, was die Maßnahme bewirken würde.",
-    todayValue: (value) => `heute: ${value}`,
+    baseValue: (value, year) => `${year}: ${value}`,
+    baseAtEnd: (end, year) => `${end} · ${year}`,
+    toBaseValue: (value, year) => `Auf den Wert von ${year} setzen: ${value}`,
+    changeFromBase: (change, year) => `${change} gegenüber ${year}`,
+    assumption: "Annahme",
+    typeValue: (label, value) => `${label}: ${value}. Wert eingeben`,
+    valueField: (label) => `Wert für ${label}`,
     selectedShare: (share, basis, item) =>
       `Auf die gewählten Gruppen entfallen ${share} der ${basis === "spending" ? "Ausgaben" : "Empfänger"} im Posten „${item}“.`,
     groupShare: "Anteil",
@@ -158,13 +166,22 @@ export const de: Messages = {
     effectSide: (side) => (side === "revenue" ? "Einnahmen" : "Ausgaben"),
     byLevel: "Nach Staatsebene",
     shift: "Kostenverlagerung",
-    shiftLine: (amount, to) => `${amount} fallen bei „${to}“ wieder an`,
+    knockOn: "Folgewirkung",
+    shiftLine: (amount, to, side, up) =>
+      side === "expenditure"
+        ? up
+          ? `${amount} fallen bei „${to}“ wieder an`
+          : `${amount} weniger Ausgaben bei „${to}“`
+        : up
+          ? `${amount} mehr Einnahmen bei „${to}“`
+          : `${amount} weniger Einnahmen bei „${to}“`,
+    linkedRange: (low, high) => `am unteren Ende der Spanne der Maßnahme ${low}, am oberen ${high}`,
     clampedNote: "bei null abgeschnitten",
     warnings: {
       clamped: "Ein Betrag kann nicht unter null fallen. Die Wirkung wurde bei null abgeschnitten.",
       not_finite: "Eine Wirkung ließ sich mit diesen Einstellungen nicht berechnen und wurde ausgelassen.",
-      empty_group:
-        "Dieser Posten war bereits auf null gesenkt. Der neue Betrag wurde nach den heutigen Anteilen verteilt.",
+      empty_group: (year) =>
+        `Dieser Posten war bereits auf null gesenkt. Der neue Betrag wurde nach den Anteilen von ${year} verteilt.`,
       brackets_reordered:
         "Die Schwellenwerte überschneiden sich bei diesen Einstellungen. Die niedrigere Schwelle wurde auf die vorherige angehoben.",
       baseline_yields_nothing: "Für diese Wirkung fehlt eine Vergleichsbasis. Sie wurde mit null angesetzt.",
@@ -180,7 +197,7 @@ export const de: Messages = {
   curve: {
     section: "Kurve",
     edit: "Kurve bearbeiten",
-    asToday: "wie heute",
+    asBase: (year) => `wie ${year}`,
     changed: "geändert",
     preset: (label) => `Vorlage: ${label}`,
     topRate: (rate, from) => `Spitzensatz ${rate} ab ${from}`,
@@ -188,20 +205,23 @@ export const de: Messages = {
     show: (measure) => `Kurve ansehen: ${measure}`,
     dialog: (measure) => `Kurve bearbeiten: ${measure}`,
     close: "Schließen",
+    loading: "Der Editor wird geladen …",
+    loadFailed: "Der Editor konnte nicht geladen werden. Vielleicht besteht gerade keine Verbindung zum Internet.",
+    retry: "Erneut versuchen",
     explain: (currency) =>
       `Die Kurve legt für jeden Betrag auf der waagerechten Achse den Grenzsatz fest: den Satz auf jeden weiteren ${currency}. Bis zum ersten Punkt ist er null, zwischen zwei Punkten steigt oder fällt er gleichmäßig, über dem letzten bleibt er gleich. Gestrichelt ist der Durchschnittssatz: wie viel vom ganzen Betrag insgesamt abgeht.`,
     hint: "Punkte ziehen, um die Kurve zu ändern. Ein Klick oder Tipp auf die Kurve setzt einen neuen Punkt.",
-    hover: (at, rate, today, average, averageToday) =>
-      `Bei ${at}: Grenzsatz ${rate}${today ? ` (heute ${today})` : ""} · Durchschnitt ${average}${averageToday ? ` (heute ${averageToday})` : ""}`,
-    point: (name, at, rate, average, averageToday) =>
-      `${name}: ${at}, Grenzsatz ${rate} · Durchschnitt dort ${average}${averageToday ? ` (heute ${averageToday})` : ""}`,
+    hover: (at, rate, base, average, averageBase, year) =>
+      `Bei ${at}: Grenzsatz ${rate}${base ? ` (${year}: ${base})` : ""} · Durchschnitt ${average}${averageBase ? ` (${year}: ${averageBase})` : ""}`,
+    point: (name, at, rate, average, averageBase, year) =>
+      `${name}: ${at}, Grenzsatz ${rate} · Durchschnitt dort ${average}${averageBase ? ` (${year}: ${averageBase})` : ""}`,
     axisRate: "Grenzsatz",
     compressed: "gestaucht",
     scaleNote: (knee, max) =>
       `Die waagerechte Achse ist bis ${knee} gleichmäßig eingeteilt, darüber gestaucht: Das getönte Feld rechts reicht von ${knee} bis ${max}.`,
     legend: {
       reform: "Grenzsatz mit dieser Kurve",
-      today: "heute",
+      base: (year) => `Kurve von ${year}`,
       average: "Durchschnittssatz",
       distribution: "Verteilung (Fläche = Anzahl)",
       examples: "Beispiele, siehe unten",
@@ -212,7 +232,7 @@ export const de: Messages = {
     offHint: "Die Maßnahme ist ausgeschaltet. Jede Änderung hier schaltet sie ein.",
     presets: "Vorlagen",
     presetSources: "Quelle der Vorlage",
-    toToday: "Heutige Kurve",
+    toBase: (year) => `Kurve von ${year}`,
     toDefault: "Ausgangskurve",
     undo: "Rückgängig",
     remove: "Punkt entfernen",
@@ -229,9 +249,9 @@ export const de: Messages = {
     from: (amount) => `ab ${amount}`,
     top: "Spitzensatz",
     topNote: "Der Grenzsatz auf die höchsten Beträge, über dem letzten Punkt.",
-    topToday: (rate, from) => `heute ${rate} ab ${from}`,
+    topBase: (rate, from, year) => `${year}: ${rate} ab ${from}`,
     examples: "Was Einzelne zahlen",
-    exampleToday: "Heute",
+    exampleBase: (year) => String(year),
     exampleAfter: "Mit dieser Kurve",
     exampleChange: "Änderung",
     owes: (amount, rate) => `${amount} (${rate})`,
@@ -251,18 +271,18 @@ export const de: Messages = {
     clampedTo: (value) => `Begrenzt auf ${value}: Ein Punkt kann seine Nachbarn nicht überholen.`,
     otherSettings: "Weitere Einstellungen",
     model: "So wird gerechnet",
-    modelCalibrated: (distribution, after, today, change, item, amount) =>
-      `Die Kurve wird auf die Verteilung „${distribution}“ angewendet. Dort ergibt sie ${after} statt heute ${today} (${change}); diese relative Änderung wird auf den Haushaltsposten „${item}“ (${amount}) übertragen.`,
+    modelCalibrated: (distribution, after, base, change, item, amount, year) =>
+      `Die Kurve wird auf die Verteilung „${distribution}“ angewendet. Dort ergibt sie ${after} statt ${base} im Jahr ${year} (${change}); diese relative Änderung wird auf den Haushaltsposten „${item}“ (${amount}) übertragen.`,
     modelAbsolute: (distribution, after, item) =>
       `Die Kurve wird auf die Verteilung „${distribution}“ angewendet. Was sie dort ergibt, ${after}, kommt im Haushaltsposten „${item}“ hinzu.`,
   },
   waterfall: {
     title: "Was sich ändert",
-    intro: "Vom heutigen Saldo über jede eingeschaltete Maßnahme zum simulierten Saldo.",
+    intro: (year) => `Vom Saldo ${year} über jede eingeschaltete Maßnahme zum simulierten Saldo.`,
     empty: "Noch ist keine Maßnahme eingeschaltet. Schalten Sie eine ein, um zu sehen, wie weit sie den Saldo bewegt.",
     zero: "0 = ausgeglichen",
     introLevel: "Wie jede eingeschaltete Maßnahme diese Ebene ent- oder belastet.",
-    zeroLevel: "0 = wie heute",
+    zeroLevel: (year) => `0 = wie ${year}`,
     totalChange: "Änderung insgesamt",
     rangeNote: "Dünne Linien zeigen die Spanne der jeweiligen Schätzung.",
     orderNote:
@@ -303,4 +323,6 @@ export const de: Messages = {
     local: "Kommunale Ebene",
     social_security: "Sozialversicherung",
   },
+  legal: legalDe,
+  debt: debtDe,
 };

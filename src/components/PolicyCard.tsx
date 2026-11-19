@@ -23,6 +23,7 @@ import {
   type LevelEffect,
   type PolicyInsight,
 } from "../app/policyModel.ts";
+import { sliderDirection } from "../app/sliderModel.ts";
 import { useUi, type Ui } from "../app/ui.ts";
 import {
   findNode,
@@ -118,6 +119,8 @@ export const PolicyCard = memo(function PolicyCard({
 
   const noise = noiseLevel(baseline);
   const insight = insightOf(pack, alone, baseline);
+  // Within floating-point noise an effect is zero, and is written as a plain zero.
+  const balanceShown = insight.direction === "neutral" ? 0 : insight.balance;
   const label = ui.text(policy.label);
   const titleId = `policy-${policy.id}-title`;
   const panelId = `policy-${policy.id}-panel`;
@@ -135,9 +138,15 @@ export const PolicyCard = memo(function PolicyCard({
   // Several effects may shift to the same item; the card names each receiving item once.
   const shiftTargets = [...new Set(shifts.map(({ shift }) => shift.target))].map((target) => {
     const parts = shifts.filter(({ shift }) => shift.target === target);
+    const amount = parts.reduce((sum, { shift }) => sum + shift.delta, 0);
+    const side = parts[0].shift.side;
+    // The pack's words for what is passed on, if all parts that land here say the same.
+    const labels = [...new Set(parts.map(({ effect }) => policy.effects[effect.index]?.shift?.label).map((label) => (label ? ui.text(label) : "")))];
     return {
       target,
-      amount: parts.reduce((sum, { shift }) => sum + shift.delta, 0),
+      amount,
+      side,
+      heading: labels.length === 1 && labels[0] ? labels[0] : undefined,
       effects: parts.map(({ effect }) => effect.index),
     };
   });
@@ -163,9 +172,9 @@ export const PolicyCard = memo(function PolicyCard({
           <p className="policy__figure">
             <Delta
               className="policy__amount"
-              amount={insight.balance}
+              amount={balanceShown}
               direction={insight.direction}
-              text={signed(insight.balance)}
+              text={signed(balanceShown)}
             />
             <span className="policy__per">{t.common.perYear}</span>
             <span className={`policy__direction policy__direction--${insight.direction}`}>
@@ -201,12 +210,19 @@ export const PolicyCard = memo(function PolicyCard({
           />
         ))}
 
-        {shiftTargets.map(({ target, amount, effects }) => (
+        {shiftTargets.map(({ target, amount, side, heading, effects }) => (
           <p key={target} className="policy__shift">
             <ShiftIcon size={14} />
             <span>
-              <strong>{t.policies.shift}:</strong>{" "}
-              {t.policies.shiftLine(fmt.money(Math.abs(amount)), ui.text(findNode(pack, target)?.label))}
+              {/* The pack's own words stand on a line of their own; the generic heading leads into the sentence. */}
+              {heading ? (
+                <strong className="policy__shift-label">{heading}</strong>
+              ) : (
+                <>
+                  <strong>{shiftHeading(ui, side, amount)}:</strong>{" "}
+                </>
+              )}
+              {t.policies.shiftLine(fmt.money(Math.abs(amount)), ui.text(findNode(pack, target)?.label), side, amount > 0)}
               {levelNames(ui, shiftBearers(levels, effects))}
             </span>
           </p>
@@ -283,6 +299,7 @@ function warningText(ui: Ui, warning: SimulationWarning, enabledBefore: string):
       .map((policy) => t.common.quote(ui.text(policy.label)));
     if (names.length > 0) return t.policies.alreadyExcludedBy(listOf(ui, names));
   }
+  if (warning.code === "empty_group") return t.policies.warnings.empty_group(pack.country.baseYear);
   return t.policies.warnings[warning.code];
 }
 
@@ -301,6 +318,11 @@ function warningLines(ui: Ui, warnings: SimulationWarning[], enabledBefore: stri
     lines.push({ text, item });
   }
   return lines;
+}
+
+/** The generic heading of a passed-on part: a cost that reappears is a cost shift, anything else a knock-on effect. */
+function shiftHeading(ui: Ui, side: "revenue" | "expenditure", amount: number): string {
+  return side === "expenditure" && amount > 0 ? ui.t.policies.shift : ui.t.policies.knockOn;
 }
 
 /** The levels of government at which the shifted part of the given effects arrives. */
@@ -334,13 +356,13 @@ function levelNames(ui: Ui, ids: LevelId[]): string {
     : "";
 }
 
-/** The size of a measure against today's deficit, as a thin meter with the share in words. */
+/** The size of a measure against the base year's deficit, as a thin meter with the share in words. */
 function Meter({ insight, share }: { insight: PolicyInsight; share: number }) {
-  const { t, fmt } = useUi();
-  const text = t.policies.ofDeficit(fmt.share(share));
+  const { pack, t, fmt } = useUi();
+  const text = t.policies.ofDeficit(fmt.share(share), pack.country.baseYear);
   return (
     <div className={`meter meter--${insight.direction}${share > 1 ? " is-over" : ""}`}>
-      <span className="meter__track" role="img" aria-label={t.policies.meterLabel(fmt.share(share))}>
+      <span className="meter__track" role="img" aria-label={t.policies.meterLabel(fmt.share(share), pack.country.baseYear)}>
         <span className="meter__fill" style={{ width: `${Math.min(1, share) * 100}%` }} />
       </span>
       <span className="meter__text" aria-hidden="true">
@@ -490,6 +512,7 @@ function PolicyDetails({
                 id={`${policy.id}-${param.id}`}
                 param={param}
                 value={params[param.id] as number}
+                direction={sliderDirection(pack, policy, params, param, level, noise, alone.delta.balance)}
                 onChange={(value) => onParam(policy.id, param.id, value)}
               />
             ) : param.type === "groups" ? (
@@ -583,6 +606,11 @@ function PolicyDetails({
             const shift = shiftOf(effect);
             const shiftNode = shift ? findNode(pack, shift.target) : undefined;
             const hasRange = Math.abs(effect.high - effect.low) > noise;
+            // Tied to the measure's other effects: its two ends are the measure's, not its own worst and best case.
+            const linked = definition?.uncertainty?.basis !== undefined;
+            const ends = (low: number, high: number): string =>
+              linked ? t.policies.linkedRange(signed(low), signed(high)) : amountRange(low, high);
+            const zeroed = (amount: number): number => (Math.abs(amount) <= noise ? 0 : amount);
             return (
               <li key={effect.index} className="effect">
                 <button
@@ -596,14 +624,14 @@ function PolicyDetails({
                 </button>
                 <p className="effect__line">
                   <Delta
-                    amount={effect.delta}
+                    amount={zeroed(effect.delta)}
                     direction={directionOfNode(effect.side, effect.delta, noise)}
-                    text={signed(effect.delta)}
+                    text={signed(zeroed(effect.delta))}
                   />{" "}
                   <span className="muted">
                     {t.policies.effectSide(effect.side)}
                     {levelNames(ui, effectBearers(levels, effect.index))}
-                    {hasRange && ` · ${amountRange(effect.low, effect.high)}`}
+                    {hasRange && ` · ${ends(effect.low, effect.high)}`}
                     {effect.clamped && ` · ${t.policies.clampedNote}`}
                   </span>{" "}
                   <QualityBadge quality={effect.quality} />
@@ -612,7 +640,7 @@ function PolicyDetails({
                   <div className="effect__shift">
                     <p className="effect__shift-title">
                       <ShiftIcon size={14} />
-                      {t.policies.shift}
+                      {definition?.shift?.label ? ui.text(definition.shift.label) : shiftHeading(ui, shift.side, shift.delta)}
                     </p>
                     <button
                       type="button"
@@ -632,10 +660,13 @@ function PolicyDetails({
                       <span className="muted">
                         {t.policies.effectSide(shift.side)}
                         {levelNames(ui, shiftBearers(levels, [effect.index]))}
-                        {Math.abs(shift.high - shift.low) > noise && ` · ${amountRange(shift.low, shift.high)}`}
+                        {Math.abs(shift.high - shift.low) > noise && ` · ${ends(shift.low, shift.high)}`}
                         {shift.clamped && ` · ${t.policies.clampedNote}`}
-                      </span>
+                      </span>{" "}
+                      <QualityBadge quality={shift.quality} />
                     </p>
+                    {definition?.shift?.note && <p className="effect__note">{ui.text(definition.shift.note)}</p>}
+                    {definition?.shift?.sources && <SourceList ids={definition.shift.sources} />}
                   </div>
                 )}
                 {definition?.note && <p className="effect__note">{ui.text(definition.note)}</p>}

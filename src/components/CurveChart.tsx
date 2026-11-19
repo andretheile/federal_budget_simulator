@@ -9,13 +9,19 @@
  * from scrolling while a finger drags one. All pointer input goes through the layer that holds
  * the handles: a press near a handle grabs the nearest one, a click or tap near the curve adds a
  * point there, a click elsewhere clears the selection.
+ *
+ * On a touch screen, points that lie too close together for a finger (the two points of a step)
+ * each get a tab with their value, set apart from the crowd (curveTabs.ts). A press on a tab grabs
+ * exactly that point. With a mouse there are no tabs: the pointer is precise enough.
  */
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { curveOutline, dragPoint, nudgePoint, rateAt, snap, type CurveSetting } from "../app/curveModel.ts";
 import { fromFraction, linearTicks, toFraction, xTicks, type XScale } from "../app/curveScale.ts";
+import { tabPlaces } from "../app/curveTabs.ts";
 import { useUi } from "../app/ui.ts";
 import { curveAverageRate, unitsAbove, type CurvePoint, type Distribution } from "../engine/index.ts";
 import { useElementWidth } from "../hooks/useElementWidth.ts";
+import { useMediaQuery } from "../hooks/useMediaQuery.ts";
 import { decimalsIn } from "../i18n/format.ts";
 
 export interface CurveChartProps {
@@ -56,6 +62,8 @@ interface Drag {
 const GRAB = { mouse: 12, other: 24 };
 /** Pixels around the curve where a click or tap adds a point. */
 const NEAR = { mouse: 8, other: 16 };
+/** How far from the edges of the chart the centre of a tab stays. */
+const TAB_MARGIN = { x: 24, y: 14 };
 
 function pathOf(points: readonly { x: number; y: number }[]): string {
   let d = "";
@@ -120,6 +128,11 @@ export function CurveChart({
   const handles = useRef<(HTMLDivElement | null)[]>([]);
   const width = useElementWidth(frame);
   const [hover, setHover] = useState<number | null>(null);
+  // Tabs for crowded points: on a touch screen, or once a finger has been used on this chart.
+  const coarse = useMediaQuery("(pointer: coarse)");
+  const [touched, setTouched] = useState(false);
+  /** The crowd whose tab is being dragged: it keeps its tabs until the finger lifts, however far apart it gets. */
+  const [held, setHeld] = useState<readonly number[] | null>(null);
 
   // --- geometry -------------------------------------------------------------------------------
   const narrow = width < 560;
@@ -183,6 +196,20 @@ export function CurveChart({
   const outlineRef = useRef(outline);
   outlineRef.current = outline;
 
+  const tabs =
+    (coarse || touched) && width > 0
+      ? tabPlaces(
+          points.map((point) => ({ x: X(point.x), y: Y(point.y) })),
+          { keep: held ?? [], bounds: { width, height, marginX: TAB_MARGIN.x, marginY: TAB_MARGIN.y } },
+        )
+      : [];
+  /** A tab says the rate of its point; where its crowd shares one rate, the amount. */
+  const tabLabel = (index: number, group: readonly number[]): string => {
+    const point = points[index];
+    const sameRate = group.some((other) => other !== index && points[other]?.y === point.y);
+    return sameRate ? fmt.money(point.x, { trim: true }) : rate(point.y);
+  };
+
   const yTicks = linearTicks(param.y.min, param.y.max, plotH, narrow ? 34 : 40);
   const ticks = xTicks(scale, plotW, narrow ? 76 : 86);
   const kneeX = scale.knee !== null ? X(scale.knee) : null;
@@ -215,11 +242,15 @@ export function CurveChart({
     pointerKind.current = event.pointerType === "mouse" ? "mouse" : "other";
     swallowClick.current = false;
     if (event.pointerType === "mouse" && event.button !== 0) return;
+    if (event.pointerType !== "mouse" && !touched) setTouched(true);
     const at = local(event);
-    let index = nearestHandle(at, GRAB[pointerKind.current]);
+    // A tab names its point: no guessing which of the crowd was meant.
+    const tab = (event.target as HTMLElement).closest<HTMLElement>("[data-tab]");
+    let index = tab ? Number(tab.dataset.tab) : nearestHandle(at, GRAB[pointerKind.current]);
     const handle = (event.target as HTMLElement).closest<HTMLElement>("[data-handle]");
     if (index < 0 && handle) index = Number(handle.dataset.handle);
-    if (index < 0) return;
+    if (index < 0 || !latest.current[index]) return;
+    if (tab) setHeld(tabs.find((candidate) => candidate.index === index)?.group ?? null);
     // The press belongs to the handle: no text selection, no click, no scrolling.
     event.preventDefault();
     swallowClick.current = true;
@@ -266,6 +297,7 @@ export function CurveChart({
   const endDrag = (event: PointerEvent<HTMLDivElement>): void => {
     if (drag.current && event.pointerId === drag.current.pointerId) {
       drag.current = null;
+      setHeld(null);
       try {
         layer.current?.releasePointerCapture(event.pointerId);
       } catch {
@@ -329,10 +361,10 @@ export function CurveChart({
   ];
   if (hover !== null) {
     const at = snap(hover, param.x);
-    readout = t.curve.hover(fmt.exactMoney(at), rate(rateAt(points, at), 1), today ? rate(rateAt(today, at), 1) : null, ...averages(at));
+    readout = t.curve.hover(fmt.exactMoney(at), rate(rateAt(points, at), 1), today ? rate(rateAt(today, at), 1) : null, ...averages(at), ui.pack.country.baseYear);
   } else if (selected !== null && points[selected]) {
     const point = points[selected];
-    readout = t.curve.point(t.curve.pointName(selected + 1, points.length), fmt.exactMoney(point.x), rate(point.y), ...averages(point.x));
+    readout = t.curve.point(t.curve.pointName(selected + 1, points.length), fmt.exactMoney(point.x), rate(point.y), ...averages(point.x), ui.pack.country.baseYear);
   }
 
   const examples = param.examples ?? [];
@@ -407,6 +439,13 @@ export function CurveChart({
             )}
             <path className="cchart__average cchart__average--reform" d={average(points)} />
             <path className="cchart__line" d={pathOf(outline)} />
+            {tabs.length > 0 && (
+              <g className="cchart__stems">
+                {tabs.map((tab) => (
+                  <line key={tab.index} x1={X(points[tab.index].x)} y1={Y(points[tab.index].y)} x2={tab.x} y2={tab.y} />
+                ))}
+              </g>
+            )}
             {hover !== null && (
               <g className="cchart__hover">
                 <line x1={X(hover)} x2={X(hover)} y1={margin.top} y2={margin.top + plotH} />
@@ -449,6 +488,18 @@ export function CurveChart({
                 onKeyDown={(event) => onKeyDown(event, index)}
               />
             ))}
+          {/* For the finger only; the handles above are the controls for the keyboard and screen readers. */}
+          {tabs.map((tab) => (
+            <div
+              key={`tab-${tab.index}`}
+              data-tab={tab.index}
+              className={`cchart__tab${selected === tab.index ? " is-selected" : ""}`}
+              style={{ left: tab.x, top: tab.y }}
+              aria-hidden="true"
+            >
+              <span>{tabLabel(tab.index, tab.group)}</span>
+            </div>
+          ))}
         </div>
       </div>
     </figure>

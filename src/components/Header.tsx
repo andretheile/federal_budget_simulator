@@ -24,6 +24,11 @@ export interface HeaderProps {
   onCountry?(id: string): void;
   /** Out of reach while a sheet lies over the page. */
   inert?: boolean;
+  /**
+   * An imprint or privacy page is shown instead of the simulator: the header keeps the name and the
+   * language switch; the level filter, sharing and reset act on the simulator and are left out.
+   */
+  legal?: boolean;
 }
 
 function countryName(id: string, language: string): string {
@@ -46,6 +51,7 @@ export function Header({
   countries,
   onCountry,
   inert = false,
+  legal = false,
 }: HeaderProps) {
   const ui = useUi();
   const { pack, t, fmt, language } = ui;
@@ -126,20 +132,24 @@ export function Header({
             </div>
           )}
 
-          <button
-            ref={shareButton}
-            type="button"
-            className="tool"
-            onClick={() => void share()}
-            title={t.header.shareHint}
-          >
-            {shared === "copied" ? <Check size={15} /> : <LinkIcon size={15} />}
-            <span>{shared === "copied" ? t.header.copied : t.header.share}</span>
-          </button>
-          <button type="button" className="tool" onClick={onReset} disabled={!canReset} title={t.header.resetHint}>
-            <ResetIcon size={15} />
-            <span>{t.header.reset}</span>
-          </button>
+          {!legal && (
+            <>
+              <button
+                ref={shareButton}
+                type="button"
+                className="tool"
+                onClick={() => void share()}
+                title={t.header.shareHint}
+              >
+                {shared === "copied" ? <Check size={15} /> : <LinkIcon size={15} />}
+                <span>{shared === "copied" ? t.header.copied : t.header.share}</span>
+              </button>
+              <button type="button" className="tool" onClick={onReset} disabled={!canReset} title={t.header.resetHint}>
+                <ResetIcon size={15} />
+                <span>{t.header.reset}</span>
+              </button>
+            </>
+          )}
 
           {/* The browser would not copy: say so and hand over the link itself, until the visitor closes this. */}
           {shared === "failed" && (
@@ -176,7 +186,7 @@ export function Header({
 
       <div className="page masthead__lower">
         <p className="masthead__tagline">{t.app.tagline}</p>
-        {levels.length > 1 && (
+        {levels.length > 1 && !legal && (
           <>
             <fieldset
               className={`levelbar${arrowKeys ? " is-keyboard" : ""}`}

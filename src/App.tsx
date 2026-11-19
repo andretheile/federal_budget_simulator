@@ -7,12 +7,18 @@
  */
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { defaultSelection, layoutBudget, sameSelection, selectionShowing, type Selection } from "./app/budgetModel.ts";
+import { addressWriter, type AddressWriter } from "./app/addressWriter.ts";
 import { createUi, UiContext } from "./app/ui.ts";
-import { editorFromHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./app/urlState.ts";
+import { debtFromHash, editorFromHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./app/urlState.ts";
+import { sameDebtAssumptions } from "./app/debtLink.ts";
+import { useDebtView } from "./app/debtModel.ts";
+import { useLegalPage } from "./app/legalPage.ts";
 import { About } from "./components/About.tsx";
 import { BudgetView } from "./components/BudgetView.tsx";
-import { CurveEditor, editableCurve } from "./components/CurveEditor.tsx";
+import { DebtSection, DebtTeaser, preloadDebt } from "./components/DebtSection.tsx";
+import { CurveEditor, editableCurve, preloadEditor } from "./components/CurveEditor.tsx";
 import { Header } from "./components/Header.tsx";
+import { LegalLinks, LegalPageView } from "./components/Legal.tsx";
 import { WarningIcon } from "./components/icons.tsx";
 import { PolicyList } from "./components/PolicyList.tsx";
 import { Scoreboard } from "./components/Scoreboard.tsx";
@@ -31,6 +37,8 @@ import {
 import { useMediaQuery } from "./hooks/useMediaQuery.ts";
 import { languagesOf, messagesFor, pickLanguage } from "./i18n/index.ts";
 import { listPackIds, loadPack } from "./packs.ts";
+import type { LegalPage, SiteConfig } from "./site/config.ts";
+import { currentSite } from "./site/current.ts";
 
 const LANGUAGE_KEY = "budget-simulator:language";
 
@@ -83,6 +91,10 @@ function fixtureRequested(): boolean {
 }
 
 async function load(id: string | undefined): Promise<Loaded> {
+  // A link that opens a curve editor: its code is fetched alongside the country's data.
+  if (parseHash(currentHash()).editor) preloadEditor();
+  // A link with assumptions of the debt projection: that section's code too.
+  if (parseHash(currentHash()).debt) preloadDebt();
   const requested = fixtureRequested();
   const result = id === undefined || requested ? undefined : await loadPack(id);
   if (result?.ok) return { pack: result.pack };
@@ -130,9 +142,11 @@ export interface SimulatorProps {
   fallback?: Fallback;
   countries?: readonly string[];
   onCountry?(id: string): void;
+  /** The operator's details for imprint and privacy statement; without them there are no legal pages. Default: the build's. */
+  site?: SiteConfig | null;
 }
 
-export function Simulator({ pack, fallback, countries = [], onCountry }: SimulatorProps) {
+export function Simulator({ pack, fallback, countries = [], onCountry, site = currentSite }: SimulatorProps) {
   const languages = useMemo(() => languagesOf(pack.country.locales), [pack]);
   const [language, setLanguage] = useState(() =>
     pickLanguage(pack.country.locales, {
@@ -142,6 +156,8 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
     }),
   );
   const [scenario, setScenario] = useState<Scenario>(() => scenarioFromHash(currentHash(), pack));
+  /** Assumptions of the debt projection, undefined for a pack without debt data. Part of the link as well. */
+  const [debtAssumptions, setDebtAssumptions] = useState(() => debtFromHash(currentHash(), pack));
   const ui = useMemo(() => createUi(pack, language), [pack, language]);
   const { t } = ui;
   const result = useMemo(() => simulate(pack, scenario), [pack, scenario]);
@@ -158,9 +174,18 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
   // Open only for a curve that a schedule of the measure actually uses.
   const editing = editor !== undefined && editableCurve(editorPolicy, editor.param) !== undefined;
 
+  /** Imprint or privacy statement in place of the simulator (#...&p=imprint); none without a site config. */
+  const { page: legalPage, follow: followLegal, go: goLegal } = useLegalPage(site, currentHash());
+
   // --- the URL mirrors scenario and language ---------------------------------------------------
   const showsCountry = !fallback && countries.length > 1;
-  const hash = stateToHash({ scenario, language, country: showsCountry ? pack.country.id : undefined, editor }, pack);
+  const hash = stateToHash(
+    { scenario, debt: debtAssumptions, language, country: showsCountry ? pack.country.id : undefined, editor, page: legalPage },
+    pack,
+  );
+  /** The address of a legal page, or of the simulator, with this scenario. */
+  const legalHref = (page: LegalPage | undefined): string =>
+    stateToHash({ scenario, debt: debtAssumptions, language, country: showsCountry ? pack.country.id : undefined, page }, pack) || "#";
   const hashRef = useRef(hash);
   hashRef.current = hash;
   /** The address of exactly this scenario, whether or not the address bar shows it yet. */
@@ -173,47 +198,39 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
   const initialHash = useRef(hash);
   // A bare address stays bare until the visitor changes something; a link is kept in sync from the start.
   const dirty = useRef(currentHash() !== "");
-  // Safari allows replaceState about 100 times in ten seconds and throws after that. Dragging a
-  // point of a curve changes the scenario on every move. So writes draw on a budget: 25 at once,
-  // refilled at 7 a second, which stays below Safari's limit in any ten seconds. When the budget is
-  // spent, the latest state is written as soon as there is room again, within about 150 ms.
-  const writeBudget = useRef({ tokens: 25, at: 0 });
-  const pendingWrite = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  useEffect(() => {
-    if (!dirty.current && hash === initialHash.current) return;
-    dirty.current = true;
-    const write = (): void => {
-      pendingWrite.current = undefined;
-      if (window.location.hash === hashRef.current) return;
-      const now = performance.now();
-      const state = writeBudget.current;
-      state.tokens = Math.min(25, state.tokens + ((now - state.at) * 7) / 1000);
-      state.at = now;
-      if (state.tokens < 1) {
-        pendingWrite.current = setTimeout(write, Math.ceil(((1 - state.tokens) * 1000) / 7));
-        return;
-      }
-      state.tokens -= 1;
+  // Writes draw on a budget, so that Safari, which allows replaceState about 100 times in ten
+  // seconds, never refuses while a point of a curve is dragged (see addressWriter.ts).
+  const writer = useRef<AddressWriter | null>(null);
+  writer.current ??= addressWriter({
+    isCurrent: () => window.location.hash === hashRef.current,
+    write: () => {
       try {
         window.history.replaceState(window.history.state, "", hashRef.current);
       } catch {
         // Refused all the same: the next change tries again, and Share copies the link anyway.
       }
-    };
-    // A write that is already waiting will pick up this state too.
-    if (pendingWrite.current === undefined) write();
+    },
+  });
+  useEffect(() => {
+    if (!dirty.current && hash === initialHash.current) return;
+    dirty.current = true;
+    writer.current?.request();
   }, [hash]);
-  useEffect(() => () => clearTimeout(pendingWrite.current), []);
+  useEffect(() => () => writer.current?.dispose(), []);
 
   useEffect(() => {
     const onHashChange = (): void => {
       const fields = parseHash(window.location.hash);
+      // Back to the bare address through the browser's history: the simulator, not a legal page.
+      if (window.location.hash === "") followLegal(undefined);
       // Not one of ours (an in-page anchor, say): put the state back and leave it at that.
       if (
         fields.country === undefined &&
         fields.language === undefined &&
         fields.scenario === undefined &&
-        fields.editor === undefined
+        fields.editor === undefined &&
+        fields.debt === undefined &&
+        fields.page === undefined
       ) {
         if (window.location.hash !== "" && dirty.current) {
           try {
@@ -235,15 +252,20 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
       setEditor((current) =>
         current?.policy === wanted?.policy && current?.param === wanted?.param ? current : wanted,
       );
+      const wantedDebt = debtFromHash(window.location.hash, pack);
+      setDebtAssumptions((current) => (sameDebtAssumptions(current, wantedDebt) ? current : wantedDebt));
+      followLegal(fields.page);
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
-  }, [pack, countries, onCountry]);
+  }, [pack, countries, onCountry, followLegal]);
 
   useEffect(() => {
     document.documentElement.lang = language;
-    document.title = t.app.title(ui.text(pack.country.name), pack.country.baseYear);
-  }, [language, t, ui, pack]);
+    document.title = legalPage
+      ? t.legal.documentTitle(legalPage === "imprint" ? t.legal.imprint : t.legal.privacyTitle, t.app.name)
+      : t.app.title(ui.text(pack.country.name), pack.country.baseYear);
+  }, [language, t, ui, pack, legalPage]);
 
   // --- what the visitor can do -----------------------------------------------------------------
   const onToggle = useCallback((id: string, enabled: boolean) => {
@@ -381,6 +403,8 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
   const deferredScenario = useDeferredValue(scenario);
   const pageResult = editing ? deferredResult : result;
   const pageScenario = editing ? deferredScenario : scenario;
+  /** Where the scenario leads over the coming decades; for the whole state, whatever the level shown. */
+  const debt = useDebtView(pack, pageScenario, pageResult, debtAssumptions);
 
   const budget = (
     <BudgetView key="budget" result={pageResult} selection={selection} onSelect={onSelect} highlight={highlight} />
@@ -443,8 +467,9 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
         countries={fallback ? [] : countries}
         onCountry={onCountry}
         inert={editing}
+        legal={legalPage !== undefined}
       />
-      <Scoreboard result={result} />
+      {!legalPage && <Scoreboard result={result} editing={editing ? editor?.policy : undefined} />}
       {editing && editor && editorPolicy && (
         <CurveEditor
           key={`${editor.policy}.${editor.param}`}
@@ -460,19 +485,50 @@ export function Simulator({ pack, fallback, countries = [], onCountry }: Simulat
         />
       )}
       <main id="main" className="page" tabIndex={-1} inert={editing}>
-        {/* On a phone the measures come first: they are what the visitor acts on. The order in the
-            document follows the order on screen, so keyboard and screen reader agree with the eye. */}
-        <div className="workspace">{phone ? [policies, budget] : [budget, policies]}</div>
-        <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />
-        <About />
+        {legalPage && site ? (
+          <LegalPageView
+            page={legalPage}
+            site={site}
+            backHref={legalHref(undefined)}
+            onBack={(event) => goLegal(event, undefined)}
+            languageKey={LANGUAGE_KEY}
+          />
+        ) : (
+          <>
+            {/* On a phone the measures come first: they are what the visitor acts on. The order in the
+                document follows the order on screen, so keyboard and screen reader agree with the eye. */}
+            <DebtTeaser view={debt} />
+            <div className="workspace">{phone ? [policies, budget] : [budget, policies]}</div>
+            <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />
+            {debt && debtAssumptions && (
+              <DebtSection view={debt} assumptions={debtAssumptions} onAssumptions={setDebtAssumptions} level={pageResult.level} />
+            )}
+            <About />
+          </>
+        )}
       </main>
       <footer className="footer" inert={editing}>
         <div className="page">
           <p>{t.about.licence}</p>
-          <p>
-            <a href="#about" onClick={(event) => jumpTo(event, "about")}>
+          <p className="footer__links">
+            {debt && (
+              <a
+                href={legalPage ? legalHref(undefined) : "#debt"}
+                onClick={(event) => (legalPage ? goLegal(event, undefined, "debt") : jumpTo(event, "debt"))}
+                onPointerEnter={preloadDebt}
+                onFocus={preloadDebt}
+              >
+                {t.debt.footerLink}
+              </a>
+            )}
+            {/* On a legal page "About the numbers" leads back to the simulator, to that section. */}
+            <a
+              href={legalPage ? legalHref(undefined) : "#about"}
+              onClick={(event) => (legalPage ? goLegal(event, undefined, "about") : jumpTo(event, "about"))}
+            >
               {t.about.title}
             </a>
+            {site && <LegalLinks current={legalPage} hrefFor={legalHref} onOpen={goLegal} />}
           </p>
         </div>
       </footer>
