@@ -179,6 +179,83 @@ export interface Messages {
     alreadyExcludedBy(measures: string): string;
     warningItem(item: string): string;
     none: string;
+    /** Name of the filter by collection (the pack's named groups of measures), for screen readers. */
+    collectionFilter: string;
+    /** Said before the badges of the collections a measure belongs to, for screen readers. */
+    partOf: string;
+    /** Switched-on measures that the filters hide; they count all the same. */
+    hiddenOn(count: number): string;
+    showAll: string;
+  };
+  /**
+   * The goal bar under the scoreboard: how far the measures switched on go towards a goal of the
+   * pack, such as the gap in a financial plan. Amounts come in formatted; every figure is the pack's
+   * or the engine's.
+   */
+  goal: {
+    /** The small label before the goal's name. */
+    label: string;
+    /** The same with the goal's year, where only one line is left (a phone, while scrolling). */
+    labelYear(year: number): string;
+    /** The tag of the closed state. */
+    closed: string;
+    /**
+     * The state in one sentence that leads with the figure, then what qualifies it. Where only one
+     * line is left (a phone, while scrolling) the first sentence stands alone.
+     */
+    none(needed: string): string;
+    noneWhy: string;
+    unchanged(needed: string): string;
+    unchangedWhy: string;
+    /** Measures change the level's balance, but only on what the goal leaves out. */
+    uncountedWhy: string;
+    partial(covered: string, remaining: string): string;
+    closedBy(covered: string): string;
+    surplus(surplus: string): string;
+    burden(growth: string, gap: string): string;
+    /** Closed at the cautious end of the range as well. */
+    cautiousAlso: string;
+    /** Closed at the central figure, but not at the cautious end of the range. */
+    cautiousMissing(missing: string): string;
+    /** Only what reaches the goal's level counts; `level` is the pack's name for it. */
+    level(level: string): string;
+    /** The goal is about the whole state. */
+    wholeState: string;
+    /** For a goal of one level: the other levels together are burdened at the same time by `amount`. */
+    othersBurden(amount: string): string;
+    /** The same where the bar has one line; `amount` is signed. */
+    othersShort(amount: string): string;
+    /** The details: what the measures do at each level. */
+    levelsTitle: string;
+    levelsNote: string;
+    /** A budget item the goal leaves out, by its name. */
+    excludedItem(label: string): string;
+    /** A measure the goal leaves out, by its name. */
+    excludedPolicy(label: string): string;
+    /** The line for one thing left out that is not zero: what it is and its signed amount; the reason follows. */
+    excludedOne(what: string, amount: string): string;
+    /** One of several things left out, for excludedMany. */
+    excludedPart(what: string, amount: string): string;
+    /** The line for several things left out, already joined; the reasons are in the details. */
+    excludedMany(items: string): string;
+    /** The button after excludedMany that opens the details with the reasons. */
+    why: string;
+    /** On the card of a measure the goal leaves out; the pack's reason follows. */
+    cardExcluded(goal: string): string;
+    /** The button that opens the description, the note and the sources. */
+    details: string;
+    /** What the screen reader hears after a change. */
+    announce(goal: string, status: string): string;
+    /** The panel with the details. */
+    amount: string;
+    amountValue(amount: string, year: number): string;
+    levelFact: string;
+    wholeStateName: string;
+    excludedTitle: string;
+    noteTitle: string;
+    loading: string;
+    loadFailed: string;
+    retry: string;
   };
   /** The editor for rate curves, and its entry on a measure's card. */
   curve: {

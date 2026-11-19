@@ -66,6 +66,10 @@ export interface PolicyCardProps {
   onShowNode(nodeId: string): void;
   /** Open the editor for one of the measure's curve parameters. */
   onEditCurve(id: string, param: string): void;
+  /** Names of the pack's collections the measure belongs to, shown as badges. */
+  collections?: readonly string[];
+  /** Said when the goal of the bar leaves this measure out: that it does not count, and why. */
+  goalHint?: string;
 }
 
 const SEVERITY_ICON: Record<Catch["severity"], (props: { size?: number }) => ReactNode> = {
@@ -102,6 +106,8 @@ export const PolicyCard = memo(function PolicyCard({
   onExpand,
   onShowNode,
   onEditCurve,
+  collections,
+  goalHint,
 }: PolicyCardProps) {
   const ui = useUi();
   const { pack, t, fmt } = ui;
@@ -157,7 +163,19 @@ export const PolicyCard = memo(function PolicyCard({
     <li className={`policy${enabled ? " is-on" : ""}${expanded ? " is-open" : ""}`} id={`policy-${policy.id}`}>
       <article aria-labelledby={titleId}>
         <div className="policy__top">
-          <p className="policy__topic">{t.policies.topics[policy.topic]}</p>
+          <p className="policy__tags">
+            <span className="policy__topic">{t.policies.topics[policy.topic]}</span>
+            {collections && collections.length > 0 && (
+              <>
+                <span className="visually-hidden">. {t.policies.partOf}: </span>
+                {collections.map((name) => (
+                  <span key={name} className="policy__badge" title={name}>
+                    {name}
+                  </span>
+                ))}
+              </>
+            )}
+          </p>
           <Switch checked={enabled} label={t.policies.switchOn(label)} onChange={(next) => onToggle(policy.id, next)} />
         </div>
         <h3 className="policy__title" id={titleId} onClick={() => onExpand(policy.id, !expanded)}>
@@ -189,6 +207,12 @@ export const PolicyCard = memo(function PolicyCard({
               {level === "all"
                 ? `${t.policies.ofAll(insight.side, fmt.share(insight.shareOfSide))} · ${t.policies.perInhabitant(fmt.money(insight.perInhabitant))}`
                 : t.policies.ofLevel(insight.side, fmt.share(insight.shareOfSide))}
+            </p>
+          )}
+          {goalHint && (
+            <p className="policy__goal">
+              <InfoIcon size={13} />
+              <span>{goalHint}</span>
             </p>
           )}
           {/* The reason is written out, not left to a tooltip: a finger or a keyboard would never see that. */}

@@ -11,6 +11,10 @@
  *   - Debt as a share of GDP, with the threshold and the other countries.
  *   - The path without the measures thin and grey, the one with them strong, the range of the
  *     estimates as a band; one strong line when the measures change nothing.
+ *   - An official plan that describes the same thing as the projection (the whole state in national
+ *     accounts) drawn against it in every chart it has figures for; where the projection follows it,
+ *     the year it ends is marked. Plans of another scope or in other accounts are never drawn: they
+ *     stand apart, with their scope said in words, as a small table.
  */
 import { useId, useMemo, useState } from "react";
 import { defaultDebtAssumptions, sameDebtAssumptions } from "../app/debtLink.ts";
@@ -27,6 +31,8 @@ import {
   type DebtView,
   type ReferenceReach,
 } from "../app/debtModel.ts";
+import { comparablePlans, otherPlans, planAgainstDefaults, planFields, planSeries, type PlanMeasure } from "../app/debtPlans.ts";
+import { paragraphs } from "../app/paragraphs.ts";
 import { useUi } from "../app/ui.ts";
 import {
   applyDebtPreset,
@@ -37,6 +43,7 @@ import {
   resolveDebtAssumptions,
   type DebtAssumptions,
   type DebtPath,
+  type DebtPlan,
   type DebtReference,
   type DebtYear,
 } from "../engine/index.ts";
@@ -44,7 +51,7 @@ import { debtBodyMessages } from "../i18n/debt/body.ts";
 import { decimalsIn } from "../i18n/format.ts";
 import { useMediaQuery } from "../hooks/useMediaQuery.ts";
 import debtStyles from "../styles/debt-body.css?inline";
-import { DebtChart, type ChartLine, type ChartReference } from "./DebtChart.tsx";
+import { DebtChart, type ChartLine, type ChartPlan, type ChartReference } from "./DebtChart.tsx";
 import { ResetIcon } from "./icons.tsx";
 import { NumberControl } from "./ParamControls.tsx";
 import { QualityBadge, SourceList } from "./primitives.tsx";
@@ -127,6 +134,17 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
       return [{ key: reference.id, label: name, offScaleLabel: d.offScale(name, shown), value, threshold: reference.kind === "threshold" }];
     });
 
+  // --- official plans ---------------------------------------------------------------------------
+  const comparable = useMemo(() => comparablePlans(pack), [pack]);
+  const others = useMemo(() => otherPlans(pack), [pack]);
+  const plansFor = (measure: PlanMeasure): ChartPlan[] =>
+    comparable.map((plan) => ({ key: plan.id, label: ui.text(plan.label), points: planSeries(plan, measure, baseYear, lastYear) }));
+  /** A plan's ratio as the source gives it: 78.25 %, 62.8 %. */
+  const planRatio = (fraction: number): string => fmt.percent(fraction, { digits: decimalsIn(fraction * 100, 2) });
+  const followed = projection.followed;
+  const marker = followed ? { year: followed.until, label: d.continued(followed.until + 1) } : undefined;
+  const defaults = useMemo(() => defaultDebtAssumptions(debt), [debt]);
+
   const readoutFor =
     (measure: Measure, amount: "interest" | "debt") =>
     (at: number): string => {
@@ -138,6 +156,11 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
             d.readoutPart(d.legend.with, `${pct(record(reform)[measure])}${spread}`),
           ]
         : [`${d.withAmount(pct(record(reform)[measure]), fmt.money(record(reform)[amount]))}${spread}`];
+      // What an official plan gives for the year pointed at.
+      for (const plan of comparable) {
+        const value = plan.points.find((point) => point.year === at)?.[measure];
+        if (value !== undefined) parts.push(d.planPart(planRatio(value)));
+      }
       return d.readout(at, parts);
     };
 
@@ -201,6 +224,8 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
             lines={linesFor(interestMeasure)}
             band={bandFor(interestMeasure)}
             references={interestReferences}
+            plans={plansFor(interestMeasure)}
+            marker={marker}
             // The other countries are what this chart is compared with: all of them stay in range.
             outlier={Infinity}
             marginLabels={marginLabels}
@@ -220,6 +245,8 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
             lines={linesFor("debtRatio")}
             band={bandFor("debtRatio")}
             references={chartReferences("debtRatio")}
+            plans={plansFor("debtRatio")}
+            marker={marker}
             marginLabels={marginLabels}
             referenceLabel={d.legend.reference}
             tick={tick}
@@ -233,6 +260,44 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
           <p id={keysId} className="visually-hidden">
             {d.keys}
           </p>
+
+          {(comparable.length > 0 || others.length > 0) && (
+            <section className="debt__block dplans" aria-labelledby={`${id}-plans`}>
+              <h3 id={`${id}-plans`}>{d.plansTitle}</h3>
+              {comparable.map((plan) => {
+                const against = planAgainstDefaults(pack, plan, view.whole, defaults);
+                return (
+                  <div key={plan.id} className="dplan">
+                    <h4 className="dplan__name">{ui.text(plan.label)}</h4>
+                    {against && (
+                      <p className="dplan__intro">
+                        {d.plansIntro({
+                          baseYear,
+                          year: against.year,
+                          plan: planRatio(against.plan),
+                          model: pct(against.model),
+                        })}
+                      </p>
+                    )}
+                    <p className="debt__note">{d.planInChart}</p>
+                    <PlanFigures plan={plan} ratio={planRatio} />
+                    <PlanMore plan={plan} label={d.planMore} />
+                  </div>
+                );
+              })}
+              {others.map((plan) => (
+                <div key={plan.id} className="dplan dplan--apart">
+                  <h4 className="dplan__name">{ui.text(plan.label)}</h4>
+                  <p className="dplan__scope">
+                    <strong>{d.planScope(plan.scope === "all" ? null : ui.levelName(plan.scope), plan.accounts === "cash")}</strong>{" "}
+                    {d.planNotComparable}
+                  </p>
+                  <PlanFigures plan={plan} ratio={planRatio} />
+                  <PlanMore plan={plan} label={d.planMore} />
+                </div>
+              ))}
+            </section>
+          )}
 
           {comparisons.length > 0 && (
             <section className="debt__block" aria-labelledby={`${id}-comparisons`}>
@@ -520,5 +585,58 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
         </dl>
       </section>
     </div>
+  );
+}
+
+/** A plan's figures as a small table: a row per year, a column per figure it gives. */
+function PlanFigures({ plan, ratio }: { plan: DebtPlan; ratio(fraction: number): string }) {
+  const ui = useUi();
+  const { fmt, language } = ui;
+  const d = debtBodyMessages(language);
+  const fields = planFields(plan);
+  return (
+    <table className="dplan__table">
+      <caption className="visually-hidden">{d.planCaption(ui.text(plan.label))}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{d.year}</th>
+          {fields.map((field) => (
+            <th key={field} scope="col">
+              {d.planFields[field]}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {plan.points.map((point) => (
+          <tr key={point.year}>
+            <th scope="row">{point.year}</th>
+            {fields.map((field) => {
+              const value = point[field];
+              return <td key={field}>{value === undefined ? "–" : field === "interest" ? fmt.money(value) : ratio(value)}</td>;
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+/** A plan's note, quality and sources, one click away: the note is long. */
+function PlanMore({ plan, label }: { plan: DebtPlan; label: string }) {
+  const ui = useUi();
+  return (
+    <details className="dparam__more dplan__more">
+      <summary>{label}</summary>
+      <div className="dplan__note">
+        {paragraphs(ui.text(plan.note)).map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+      </div>
+      <p className="dplan__quality">
+        <QualityBadge quality={plan.quality} />
+      </p>
+      <SourceList ids={plan.sources} />
+    </details>
   );
 }

@@ -1,0 +1,640 @@
+/*
+ * The goal bar: the last row of the scoreboard's band. The goal and its picker, then the bar, then
+ * the same in words with what it is measured on. The bar: solid blue where the measures close the
+ * gap, hatched orange where they widen it, a thin line for the range of the estimate, a grey tick
+ * at zero and the ink tick of the goal. The words keep the room of their longest form (stand-ins,
+ * see GoalBar.tsx), so the band keeps its height whatever they say.
+ *
+ * And the frame of the dialog with the goal's details; what is inside comes with its code
+ * (goal-details.css).
+ */
+.goalbar {
+  border-top: 1px solid var(--rule);
+}
+
+.goalbar__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "head"
+    "track"
+    "status"
+    "others"
+    "level"
+    "excluded";
+  align-items: center;
+  /* No gaps between the rows: a row that is empty (nothing left out, nobody else burdened) takes
+     no room at all. The rows that are there keep their distance by their own margins. */
+  gap: 0 28px;
+  padding-block: 8px 10px;
+}
+
+.goalbar__head {
+  grid-area: head;
+  display: flex;
+  align-items: center;
+  gap: 4px 10px;
+  min-width: 0;
+}
+
+.goalbar__label {
+  flex: none;
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* "Goal 2028" stands in for the picker where only one line is left. */
+.goalbar__label-year {
+  display: none;
+}
+
+.goalbar__picker {
+  display: flex;
+  min-width: 0;
+}
+
+.goalbar__picker select {
+  /* As the header's selects: WebKit overrides a min-height on its own. */
+  height: 32px;
+  min-height: 32px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0 26px 0 9px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+}
+
+.goalbar__name {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.goalbar__more,
+.goalbar__why {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.goalbar__more {
+  flex: none;
+  min-height: 32px;
+  margin-left: 4px;
+}
+
+.goalbar__more:hover,
+.goalbar__why:hover {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+.goalbar__more .icon {
+  color: var(--ink-3);
+}
+
+/* --- The bar ---------------------------------------------------------------------------------- */
+.goalbar__track {
+  grid-area: track;
+  position: relative;
+  height: 12px;
+  margin-block: 5px;
+  border-radius: 3px;
+  background: var(--sunken);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+.goalbar__fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-width: 2px;
+  border-radius: 3px;
+  transition:
+    left 0.35s ease,
+    width 0.35s ease;
+}
+
+.goalbar__fill--improve {
+  background: var(--improve);
+}
+
+/* Hatched, as the sliders' fill for a change that worsens the balance: not said by colour alone. */
+.goalbar__fill--worsen {
+  background: repeating-linear-gradient(135deg, var(--worsen) 0 2.5px, transparent 2.5px 4.5px);
+  box-shadow: inset 0 0 0 1.25px var(--worsen);
+}
+
+/* The range of the estimate: a thin line with end caps, ringed in the page colour, as in "What changes". */
+.goalbar__range {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px var(--paper);
+  transition:
+    left 0.35s ease,
+    width 0.35s ease;
+}
+
+.goalbar__range::before,
+.goalbar__range::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 10px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px var(--paper);
+}
+
+.goalbar__range::before {
+  left: -1px;
+}
+
+.goalbar__range::after {
+  right: -1px;
+}
+
+.goalbar__zero {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--ink-3);
+  transition: left 0.35s ease;
+}
+
+/* The goal: an ink tick that stands out above and below the bar. */
+.goalbar__goal {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 3px;
+  margin-left: -1.5px;
+  border-radius: 1px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px var(--paper);
+  transition: left 0.35s ease;
+}
+
+/* --- The words -------------------------------------------------------------------------------- */
+/* What is shown lies over the invisible stand-ins in one cell and has the room of the largest. */
+.goalbar__status {
+  grid-area: status;
+  margin-top: 5px;
+  display: grid;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.goalbar__status > * {
+  grid-area: 1 / 1;
+  align-self: start;
+}
+
+.goalbar__stand-in {
+  visibility: hidden;
+}
+
+.goalbar__line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1px 14px;
+  min-width: 0;
+}
+
+.goalbar__main {
+  min-width: 0;
+  font-weight: 620;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.goalbar__extra {
+  font-size: 13px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Closed: a modest tag with a tick, in the colour of what improves the balance. */
+.goalbar__tag {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  align-self: center;
+  /* No taller than a line of the words beside it, so the closed state keeps the band's height. */
+  padding: 0 7px 0 5px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--improve);
+}
+
+/*
+ * What the other levels bear at the same time, for a goal of one level: as weighty as the state
+ * itself, so that "closed" is never read without it, with the burden's triangle and its colour.
+ */
+.goalbar__others {
+  grid-area: others;
+  margin-top: 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  font-size: 13.5px;
+  font-weight: 620;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.goalbar__others .icon {
+  flex: none;
+  align-self: center;
+  color: var(--worsen);
+}
+
+/* The short form, inside the line of words: shown only where the bar has one line. */
+.goalbar__others-chip {
+  display: none;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  align-self: center;
+  padding: 0 6px;
+  border: 1.5px solid var(--worsen);
+  border-radius: 3px;
+  font-size: 11.5px;
+  font-weight: 650;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.goalbar__others-chip .icon {
+  color: var(--worsen);
+}
+
+/* Above the curve editor the band does not change its height: the short form, in the room kept for the words. */
+.goalbar--steady .goalbar__others {
+  display: none;
+}
+
+.goalbar--steady .goalbar__others-chip {
+  display: inline-flex;
+}
+
+/* There the line holds the state and what the other levels bear; the qualifiers wait for the page. */
+.goalbar--steady .goalbar__extra {
+  display: none;
+}
+
+/* What counts, and what the goal leaves out: small, below the words. */
+.goalbar__level,
+.goalbar__excluded {
+  min-width: 0;
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+.goalbar__level {
+  grid-area: level;
+}
+
+.goalbar__excluded {
+  grid-area: excluded;
+  color: var(--ink-2);
+}
+
+.goalbar__why {
+  font-size: inherit;
+}
+
+/* From a tablet on: the goal and its bar on one line, the words below it. */
+@media (min-width: 720px) {
+  .goalbar__inner {
+    grid-template-columns: auto minmax(160px, 1fr);
+    grid-template-areas:
+      "head track"
+      "status status"
+      "others others"
+      "level level"
+      "excluded excluded";
+  }
+
+  .goalbar__picker select {
+    max-width: 30em;
+  }
+}
+
+/* Wide: the words of the state on the left, what they are measured on to the right of them. */
+@media (min-width: 1080px) {
+  .goalbar__inner {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "head track track"
+      "status status level"
+      "others others others"
+      "excluded excluded excluded";
+  }
+
+  .goalbar__status,
+  .goalbar__level {
+    margin-top: 4px;
+  }
+
+  /* One line that keeps its width, so the words beside it always have the same room. */
+  .goalbar__level {
+    white-space: nowrap;
+    text-align: right;
+  }
+}
+
+/* Phone: the picker takes the room left beside its label; the button keeps only its icon. */
+@media (max-width: 599px) {
+  .goalbar__inner {
+    column-gap: 4px;
+    padding-block: 6px 8px;
+  }
+
+  .goalbar__track {
+    margin-top: 9px;
+  }
+
+  .goalbar__status {
+    margin-top: 4px;
+  }
+
+  .goalbar__picker {
+    flex: 1;
+  }
+
+  .goalbar__picker select {
+    width: 100%;
+    /* Not smaller: below 16px Safari on a phone zooms into a field when it gets the focus. */
+    font-size: 16px;
+  }
+
+  .goalbar__more {
+    justify-content: center;
+    min-width: 32px;
+    margin-left: 0;
+  }
+
+  .goalbar__more-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .goalbar__status {
+    font-size: 13px;
+  }
+
+  /*
+   * No stand-ins on a phone: at the top of the page the band only changes when the goal is changed
+   * there, and while it floats it keeps to one line. Room for three lines would be empty most of the time.
+   */
+  .goalbar__stand-in {
+    display: none;
+  }
+
+  .goalbar__extra {
+    font-size: 12px;
+  }
+
+  .goalbar__level,
+  .goalbar__excluded {
+    font-size: 12px;
+  }
+
+  /* Two lines kept for the words, so that only the closed state with its qualifier can add one. */
+  .goalbar__status {
+    min-height: calc(2 * 1.4em);
+  }
+}
+
+/*
+ * Phone, floating over the content (and so while the curve editor is open): one line for the goal
+ * and its bar, one for the state. The rest is there again at the top of the page.
+ */
+@media (max-width: 599px) {
+  .scoreboard.is-stuck .goalbar__inner {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "head track"
+      "status status";
+    column-gap: 12px;
+    padding-block: 4px 6px;
+  }
+
+  .scoreboard.is-stuck .goalbar__label-full,
+  .scoreboard.is-stuck .goalbar__picker,
+  .scoreboard.is-stuck .goalbar__name,
+  .scoreboard.is-stuck .goalbar__more,
+  .scoreboard.is-stuck .goalbar__level,
+  .scoreboard.is-stuck .goalbar__excluded,
+  .scoreboard.is-stuck .goalbar__others,
+  .scoreboard.is-stuck .goalbar__extra {
+    display: none;
+  }
+
+  .scoreboard.is-stuck .goalbar__status {
+    min-height: 0;
+  }
+
+  /* What the other levels bear keeps its place in the one line; the sentence before it gives way. */
+  .scoreboard.is-stuck .goalbar__others-chip {
+    display: inline-flex;
+  }
+
+  /* Closed, and the other levels pay: the tag and the burden are what the line has room for. */
+  .scoreboard.is-stuck .goalbar--closed.has-others .goalbar__main {
+    display: none;
+  }
+
+  .scoreboard.is-stuck .goalbar__label-year {
+    display: inline;
+  }
+
+  .scoreboard.is-stuck .goalbar__track {
+    height: 9px;
+    margin-block: 4px;
+  }
+
+  /* At least a line of text high: the tags beside the words are a pixel lower than it. */
+  .scoreboard.is-stuck .goalbar__line {
+    flex-wrap: nowrap;
+    min-height: 1.4em;
+  }
+
+  .scoreboard.is-stuck .goalbar__main {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (forced-colors: active) {
+  .goalbar__fill,
+  .goalbar__goal,
+  .goalbar__zero,
+  .goalbar__range {
+    forced-color-adjust: none;
+  }
+}
+
+/* --- The dialog with the details ---------------------------------------------------------------- */
+.goaldialog {
+  width: min(700px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(88vh, 960px);
+  max-height: min(88dvh, 960px);
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+  overscroll-behavior: contain;
+}
+
+.goaldialog::backdrop {
+  background: rgb(22 22 20 / 0.45);
+}
+
+.goaldialog__frame {
+  padding: 18px 26px 28px;
+}
+
+.goaldialog__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "kicker close"
+    "title close";
+  align-items: start;
+  column-gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.goaldialog__kicker {
+  grid-area: kicker;
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.goaldialog__title {
+  grid-area: title;
+  margin-top: 3px;
+  font-family: var(--font-serif);
+  font-size: clamp(21px, 2.2vw, 26px);
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.goaldialog__close {
+  grid-area: close;
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.goaldialog__close:hover {
+  border-color: var(--ink);
+}
+
+.goaldialog__pending {
+  min-height: 40vh;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.goaldialog__loading {
+  animation: goal-loading 0.2s ease 0.4s both;
+}
+
+@keyframes goal-loading {
+  from {
+    opacity: 0;
+  }
+}
+
+.goaldialog__pending.is-failed {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 14px;
+  color: var(--ink);
+}
+
+.goaldialog__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+/* Phone: a sheet from the bottom edge, the whole width. */
+@media (max-width: 599px) {
+  .goaldialog {
+    width: 100%;
+    max-height: 92vh;
+    max-height: 92dvh;
+    margin: auto 0 0;
+    border-width: 1px 0 0;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .goaldialog__frame {
+    padding: 14px 16px 28px;
+  }
+}

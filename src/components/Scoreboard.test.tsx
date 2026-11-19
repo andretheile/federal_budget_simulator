@@ -95,3 +95,27 @@ describe("the scoreboard above an open curve editor", () => {
     expect(document.querySelectorAll(".slot, .slot__stand-in, .scoreboard__changes")).toHaveLength(0);
   });
 });
+
+describe("the range of the estimates", () => {
+  // insure_civil_servants ties its effects together: one multiplier for all of them, the end that is
+  // worse for the whole state. At one level that need not be the worse end there. For the central
+  // government both ends (−17 and −15.125) lie above the central figure (−17.5); for the provinces
+  // the low end (−41) lies above the high end (−48.125).
+  const range = (): string => plain(document.querySelector(".scoreboard__range")?.textContent);
+
+  it("at one level spans both ends and the central figure, the lower first", () => {
+    mount("#lang=en&s=insure_civil_servants~L.central");
+    expect(plain(document.querySelector(".scoreboard__number [data-final-value]")?.textContent)).toBe("−XTS 18");
+    expect(range()).toBe("Range −XTS 18 to −XTS 15");
+    act(() => root?.unmount());
+    root = undefined;
+    mount("#lang=en&s=insure_civil_servants~L.state");
+    expect(range()).toBe("Range −XTS 48 to −XTS 41");
+  });
+
+  it("for the whole state is the range of the balance, as before", () => {
+    mount("#lang=en&s=insure_civil_servants");
+    // Balance −400 + 35 = −365, from −400 + 22 to −400 + 46.75.
+    expect(range()).toBe("Range −XTS 378 to −XTS 353");
+  });
+});

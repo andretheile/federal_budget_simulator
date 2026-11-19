@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { testland } from "../engine/__fixtures__/testland.ts";
 import { emptyScenario, simulate, type Scenario } from "../engine/index.ts";
-import { buildHash, debtFromHash, editorFromHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./urlState.ts";
+import {
+  buildHash,
+  collectionFromHash,
+  debtFromHash,
+  editorFromHash,
+  goalFromHash,
+  parseHash,
+  sameScenario,
+  scenarioFromHash,
+  stateToHash,
+} from "./urlState.ts";
 
 describe("hash fields", () => {
   it("round-trips country, language and scenario", () => {
@@ -148,5 +158,73 @@ describe("the debt projection field d", () => {
     expect(debtFromHash("#d=r8~y40", testland)).toEqual({ ...defaults, market_rate: 8, horizon: 40 });
     const { debt: _, ...withoutDebt } = testland;
     expect(debtFromHash("#d=r8", withoutDebt)).toBeUndefined();
+  });
+});
+
+describe("the goal field g and the collection field f", () => {
+  const scenario = scenarioFromHash("#s=halve_mp_pay", testland);
+
+  it("are read and written next to the others, and nothing that could not be an id", () => {
+    expect(parseHash("#lang=de&s=halve_mp_pay&g=close_deficit&f=budget_debate")).toEqual({
+      language: "de",
+      scenario: "halve_mp_pay",
+      goal: "close_deficit",
+      collection: "budget_debate",
+    });
+    for (const bad of ["Close", "a-b", "<b>", "", "a.b", "_a", "a__b"]) {
+      expect(parseHash(`#g=${bad}&f=${bad}`)).toEqual({});
+    }
+    expect(buildHash({ language: "en", scenario: "a", debt: "r5", goal: "g1", collection: "c1", editor: "a.b", page: "imprint" })).toBe(
+      "#lang=en&s=a&d=r5&g=g1&f=c1&e=a.b&p=imprint",
+    );
+  });
+
+  it("holds the goal only when it is not the pack's default, and only one the pack has", () => {
+    expect(stateToHash({ scenario, language: "de", goal: "central_gap" }, testland)).toBe("#lang=de&s=halve_mp_pay");
+    expect(stateToHash({ scenario, language: "de", goal: "close_deficit" }, testland)).toBe("#lang=de&s=halve_mp_pay&g=close_deficit");
+    expect(stateToHash({ scenario, language: "de", goal: "no_such_goal" }, testland)).toBe("#lang=de&s=halve_mp_pay");
+    expect(goalFromHash("#g=close_deficit", testland)).toBe("close_deficit");
+    // The default reads as no choice; an unknown goal is ignored like an unknown measure.
+    expect(goalFromHash("#g=central_gap", testland)).toBeUndefined();
+    expect(goalFromHash("#g=no_such_goal", testland)).toBeUndefined();
+    expect(goalFromHash("#lang=de", testland)).toBeUndefined();
+  });
+
+  it("holds the collection when one is chosen, and only one the pack has", () => {
+    expect(stateToHash({ scenario, language: "en", collection: "budget_debate" }, testland)).toBe("#lang=en&s=halve_mp_pay&f=budget_debate");
+    expect(stateToHash({ scenario, language: "en", collection: "nope" }, testland)).toBe("#lang=en&s=halve_mp_pay");
+    expect(collectionFromHash("#f=savings", testland)).toBe("savings");
+    expect(collectionFromHash("#f=nope", testland)).toBeUndefined();
+  });
+
+  it("round-trips both, and the legal pages keep them like the scenario", () => {
+    const hash = stateToHash({ scenario, language: "de", goal: "close_deficit", collection: "savings" }, testland);
+    expect(goalFromHash(hash, testland)).toBe("close_deficit");
+    expect(collectionFromHash(hash, testland)).toBe("savings");
+    expect(stateToHash({ scenario, language: "de", goal: "close_deficit", collection: "savings", page: "privacy" }, testland)).toBe(
+      "#lang=de&s=halve_mp_pay&g=close_deficit&f=savings&p=privacy",
+    );
+  });
+
+  it("are dropped for a pack without goals or collections", () => {
+    const { goals: _, collections: __, ...bare } = testland;
+    expect(stateToHash({ scenario, language: "de", goal: "close_deficit", collection: "savings" }, bare)).toBe("#lang=de&s=halve_mp_pay");
+    expect(goalFromHash("#g=close_deficit", bare)).toBeUndefined();
+    expect(collectionFromHash("#f=savings", bare)).toBeUndefined();
+  });
+});
+
+describe("following an official plan in the field d", () => {
+  const scenario = scenarioFromHash("#s=halve_mp_pay", testland);
+  const defaults = { market_rate: 4, growth: 3, horizon: 30, drift: 0 };
+
+  it("is written with the other assumptions and read back", () => {
+    const hash = stateToHash({ scenario, language: "de", debt: { ...defaults, market_rate: 8, follow: "ministry_projection" } }, testland);
+    expect(hash).toBe("#lang=de&s=halve_mp_pay&d=r8~fministry_projection");
+    expect(debtFromHash(hash, testland)).toEqual({ ...defaults, market_rate: 8, follow: "ministry_projection" });
+  });
+
+  it("leaves old links as they were", () => {
+    expect(debtFromHash("#lang=de&d=r8~y40", testland)).toEqual({ ...defaults, market_rate: 8, horizon: 40 });
   });
 });

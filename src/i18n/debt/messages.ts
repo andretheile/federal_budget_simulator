@@ -48,6 +48,8 @@ export interface DebtMessages {
   lead(facts: DebtLeadText): string;
   /** Said when the budget view is filtered to one level; `level` is its name. */
   wholeState(level: string): string;
+  /** Said when the projection follows an official plan up to `until` (a preset or a link chose it). */
+  following(plan: string, until: number): string;
   /** Short version of the lead for screen readers after a change. */
   announce(year: number, interest: string, without: string | undefined): string;
 
@@ -107,6 +109,30 @@ export interface DebtBodyMessages {
   withAmount(share: string, amount: string): string;
   /** A reference value above the top of the chart. */
   offScale(label: string, value: string): string;
+  /** The value of an official projection in the line above a chart. */
+  planPart(value: string): string;
+  /** Next to the line where the followed plan ends: the years after it are the calculation's own. */
+  continued(fromYear: number): string;
+
+  // --- official plans ---
+  plansTitle: string;
+  /**
+   * The difference between the calculation at its defaults and a comparable official projection:
+   * the calculation continues the base year's budget, the projection starts from what has been
+   * decided since. Ratios already formatted.
+   */
+  plansIntro(facts: { baseYear: number; year: number; plan: string; model: string }): string;
+  /** Where a comparable projection is drawn. */
+  planInChart: string;
+  /** Whose finances a plan describes and in which accounts; `level` is null for the whole state. */
+  planScope(level: string | null, cash: boolean): string;
+  /** Said of a plan that cannot be set against the calculation. */
+  planNotComparable: string;
+  /** Row names of a plan's figures. */
+  planFields: { debtRatio: string; balanceRatio: string; interestRatio: string; interestToRevenue: string; interest: string };
+  planCaption(label: string): string;
+  /** Summary of the disclosure with a plan's note, quality and sources. */
+  planMore: string;
 
   // --- budget items ---
   comparisonsTitle: string;

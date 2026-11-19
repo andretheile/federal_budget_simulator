@@ -72,9 +72,14 @@ export interface ScoreboardProps {
    * on or off meanwhile is this one.
    */
   editing?: string;
+  /**
+   * What stays in view with the scoreboard, below its figures: the goal bar. It is part of the band,
+   * so the height the band publishes, which the sheet and the sections below go by, includes it.
+   */
+  children?: ReactNode;
 }
 
-export function Scoreboard({ result, editing }: ScoreboardProps) {
+export function Scoreboard({ result, editing, children }: ScoreboardProps) {
   const steady = editing !== undefined;
   const { pack, t, fmt, levelName } = useUi();
   const band = useRef<HTMLDivElement>(null);
@@ -94,8 +99,15 @@ export function Scoreboard({ result, editing }: ScoreboardProps) {
   const enabled = result.policies.length;
   const signedMoney = (value: number): string => fmt.money(value, { signed: true });
 
-  const low = singleLevel ? result.deltaLow.balance : result.reformLow.balance;
-  const high = singleLevel ? result.deltaHigh.balance : result.reformHigh.balance;
+  // The range of the estimates, lower end first, with the central figure inside it. The engine
+  // takes for each measure the end that is worse for the whole state; at one level both ends can
+  // then lie on the same side of the central figure, or the other way round. The span of all three
+  // is what is shown, as in the goal bar.
+  const ends = singleLevel
+    ? [result.deltaLow.balance, result.deltaHigh.balance, change]
+    : [result.reformLow.balance, result.reformHigh.balance, balance];
+  const low = Math.min(...ends);
+  const high = Math.max(...ends);
   const hasRange = Math.abs(high - low) > noise;
   const range = t.common.range(signedMoney(low), signedMoney(high));
 
@@ -332,6 +344,7 @@ export function Scoreboard({ result, editing }: ScoreboardProps) {
               </ul>
             )}
           </div>
+          {children}
         </div>
         <p className="visually-hidden" role="status">
           {announced}

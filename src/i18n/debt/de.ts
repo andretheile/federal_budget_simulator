@@ -51,6 +51,8 @@ export const debtDe: DebtMessages = {
   lead,
   wholeState: (level) =>
     `Die Haushaltsansicht oben zeigt nur „${level}“. Diese Rechnung gilt trotzdem für den ganzen Staat, mit allen eingeschalteten Maßnahmen.`,
+  following: (plan, until) =>
+    `Bis ${until} folgt die Rechnung ohne Maßnahmen der amtlichen Projektion „${plan}“. Danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${until} hat.`,
   announce: (year, interest, without) =>
     without === undefined
       ? `Zinsen ${year}: ${interest} aller Einnahmen.`

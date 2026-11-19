@@ -38,6 +38,27 @@ export const debtBodyDe: DebtBodyMessages = {
   readoutPart: (label, value) => `${label} ${value}`,
   withAmount: (share, amount) => `${share} (${amount})`,
   offScale: (label, value) => `${label} ${value}\u00a0↑`,
+  planPart: (value) => `amtliche Projektion ${value}`,
+  continued: (fromYear) => `ab ${fromYear} fortgeschrieben`,
+
+  plansTitle: "Amtliche Planungen",
+  plansIntro: ({ baseYear, year, plan, model }) =>
+    `Die Rechnung schreibt mit ihren Vorgaben den Haushalt von ${baseYear} fort und kommt ohne Maßnahmen ${year} auf Schulden von ${model} des BIP. ` +
+    `Diese Projektion kommt auf ${plan}: Sie geht vom Stand ihrer Veröffentlichung aus, mit dem, was seit ${baseYear} beschlossen wurde. Was sie anders rechnet, steht in ihrer Anmerkung.`,
+  planInChart: "In den Grafiken gestrichelt, mit Rauten an den Jahren, für die sie Zahlen nennt.",
+  planScope: (level, cash) =>
+    `${level === null ? "Gilt für den ganzen Staat" : `Gilt nur für die Ebene „${level}“`}${cash ? " und ist in Zahlungen gerechnet (Kassenzahlen)" : ", in der Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen"}.`,
+  planNotComparable:
+    "Die Rechnung oben beschreibt den ganzen Staat in der Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen. Mit ihr sind diese Zahlen nicht vergleichbar; deshalb stehen sie nicht in den Grafiken.",
+  planFields: {
+    debtRatio: "Schulden, Anteil am BIP",
+    balanceRatio: "Saldo, Anteil am BIP",
+    interestRatio: "Zinsen, Anteil am BIP",
+    interestToRevenue: "Zinsen, Anteil an allen Einnahmen",
+    interest: "Zinsen",
+  },
+  planMore: "Anmerkung, Datenqualität und Quellen",
+  planCaption: (label) => `Zahlen: ${label}`,
 
   comparisonsTitle: "Wann die Zinsen mehr kosten als …",
   comparisonsNote:

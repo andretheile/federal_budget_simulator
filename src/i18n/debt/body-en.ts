@@ -37,6 +37,27 @@ export const debtBodyEn: DebtBodyMessages = {
   readoutPart: (label, value) => `${label} ${value}`,
   withAmount: (share, amount) => `${share} (${amount})`,
   offScale: (label, value) => `${label} ${value}\u00a0↑`,
+  planPart: (value) => `official projection ${value}`,
+  continued: (fromYear) => `continued from ${fromYear}`,
+
+  plansTitle: "Official plans",
+  plansIntro: ({ baseYear, year, plan, model }) =>
+    `With its defaults, the calculation continues the budget of ${baseYear} and arrives at a debt of ${model} of GDP in ${year} without measures. ` +
+    `This projection arrives at ${plan}: it starts from where things stood when it was published, with what has been decided since ${baseYear}. What it calculates differently is set out in its note.`,
+  planInChart: "Drawn in the charts as a dashed line, with diamonds at the years it gives figures for.",
+  planScope: (level, cash) =>
+    `${level === null ? "Covers the whole state" : `Covers only the level “${level}”`}${cash ? " and is counted in cash" : ", in national accounts"}.`,
+  planNotComparable:
+    "The calculation above describes the whole state in national accounts. These figures cannot be compared with it, so they are not in the charts.",
+  planFields: {
+    debtRatio: "Debt, share of GDP",
+    balanceRatio: "Balance, share of GDP",
+    interestRatio: "Interest, share of GDP",
+    interestToRevenue: "Interest, share of all revenue",
+    interest: "Interest",
+  },
+  planMore: "Note, data quality and sources",
+  planCaption: (label) => `Figures: ${label}`,
 
   comparisonsTitle: "When interest costs more than …",
   comparisonsNote:

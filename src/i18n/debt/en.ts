@@ -52,6 +52,8 @@ export const debtEn: DebtMessages = {
   lead,
   wholeState: (level) =>
     `The budget view above shows only “${level}”. This calculation is for the whole state all the same, with all the measures switched on.`,
+  following: (plan, until) =>
+    `Up to ${until}, the calculation without measures follows the official projection “${plan}”. After that, the budget before interest keeps the share of economic output it has in ${until}.`,
   announce: (year, interest, without) =>
     without === undefined
       ? `Interest in ${year}: ${interest} of all revenue.`

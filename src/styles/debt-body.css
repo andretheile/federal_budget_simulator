@@ -197,6 +197,45 @@
   stroke-width: 2.75;
 }
 
+/* An official plan: its own colour, dashed, a diamond at each of its years, ringed in the page colour. */
+.debt__body {
+  --plan: var(--cat-3);
+}
+
+.dchart__svg .dchart__plan-line,
+.dkey__plan .dchart__plan-line {
+  fill: none;
+  stroke: var(--plan);
+  stroke-width: 2;
+  stroke-dasharray: 5 3;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+
+.dchart__svg .dchart__plan-point,
+.dkey__plan .dchart__plan-point {
+  fill: var(--plan);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+
+/* Where a followed plan ends and the calculation goes on by itself. */
+.dchart__marker line {
+  stroke: var(--ink-2);
+  stroke-width: 1.25;
+  stroke-dasharray: 3 3;
+}
+
+.dchart__svg .dchart__marker text {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ink-2);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
 .dchart__cursor line {
   stroke: var(--ink-3);
   stroke-dasharray: 1 2;
@@ -278,6 +317,116 @@
 .dkey--ref::before {
   height: 0;
   border-top: 2px dotted var(--ink-3);
+}
+
+/* A plan's key is drawn as in the chart, so it needs no box of its own. */
+.dkey--plan::before {
+  display: none;
+}
+
+.dkey__plan {
+  flex: none;
+  overflow: visible;
+}
+
+/* --- Official plans --------------------------------------------------------------------------- */
+.dplans {
+  display: grid;
+  gap: 18px;
+}
+
+.dplans > h3 {
+  margin-bottom: -6px;
+}
+
+.dplan {
+  display: grid;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.dplan__name {
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.dplan__intro {
+  max-width: 72ch;
+  font-size: 14.5px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.dplans .debt__note {
+  margin-top: 0;
+}
+
+/* A plan that cannot be set against the calculation: its scope comes first, on a tinted ground. */
+.dplan__scope {
+  max-width: 72ch;
+  padding: 8px 12px;
+  border-left: 3px solid var(--ink);
+  background: var(--sunken);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.dplan__scope strong {
+  font-weight: 650;
+}
+
+.dplan__table {
+  justify-self: start;
+  width: auto;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dplan__table th,
+.dplan__table td {
+  padding: 4px 18px 4px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.dplan__table th:first-child {
+  text-align: left;
+}
+
+.dplan__table thead th {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+  white-space: normal;
+  vertical-align: bottom;
+}
+
+.dplan__table tbody th {
+  font-weight: 600;
+}
+
+.dplan__table td:last-child,
+.dplan__table th:last-child {
+  padding-right: 0;
+}
+
+.dplan__note {
+  display: grid;
+  gap: 0.6em;
+  max-width: 72ch;
+  margin-top: 8px;
+}
+
+.dplan__more .dplan__note p {
+  margin-top: 0;
+}
+
+.dplan__quality {
+  margin-top: 8px;
 }
 
 /* --- When interest costs more than … ---------------------------------------------------------- */

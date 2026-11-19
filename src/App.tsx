@@ -9,7 +9,17 @@ import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, ty
 import { defaultSelection, layoutBudget, sameSelection, selectionShowing, type Selection } from "./app/budgetModel.ts";
 import { addressWriter, type AddressWriter } from "./app/addressWriter.ts";
 import { createUi, UiContext } from "./app/ui.ts";
-import { debtFromHash, editorFromHash, parseHash, sameScenario, scenarioFromHash, stateToHash } from "./app/urlState.ts";
+import {
+  collectionFromHash,
+  debtFromHash,
+  editorFromHash,
+  goalFromHash,
+  parseHash,
+  sameScenario,
+  scenarioFromHash,
+  stateToHash,
+} from "./app/urlState.ts";
+import { chosenGoal } from "./app/goalModel.ts";
 import { sameDebtAssumptions } from "./app/debtLink.ts";
 import { useDebtView } from "./app/debtModel.ts";
 import { useLegalPage } from "./app/legalPage.ts";
@@ -17,6 +27,7 @@ import { About } from "./components/About.tsx";
 import { BudgetView } from "./components/BudgetView.tsx";
 import { DebtSection, DebtTeaser, preloadDebt } from "./components/DebtSection.tsx";
 import { CurveEditor, editableCurve, preloadEditor } from "./components/CurveEditor.tsx";
+import { GoalBar } from "./components/GoalBar.tsx";
 import { Header } from "./components/Header.tsx";
 import { LegalLinks, LegalPageView } from "./components/Legal.tsx";
 import { ExternalIcon, WarningIcon } from "./components/icons.tsx";
@@ -159,6 +170,11 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
   const [scenario, setScenario] = useState<Scenario>(() => scenarioFromHash(currentHash(), pack));
   /** Assumptions of the debt projection, undefined for a pack without debt data. Part of the link as well. */
   const [debtAssumptions, setDebtAssumptions] = useState(() => debtFromHash(currentHash(), pack));
+  /** The goal the bar under the scoreboard measures against; undefined for the pack's default. In the link when it is not. */
+  const [goalId, setGoalId] = useState(() => goalFromHash(currentHash(), pack));
+  const goal = chosenGoal(pack, goalId);
+  /** The collection the list of measures is narrowed to, if any. In the link as well. */
+  const [collection, setCollection] = useState(() => collectionFromHash(currentHash(), pack));
   const ui = useMemo(() => createUi(pack, language), [pack, language]);
   const { t } = ui;
   const result = useMemo(() => simulate(pack, scenario), [pack, scenario]);
@@ -181,12 +197,24 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
   // --- the URL mirrors scenario and language ---------------------------------------------------
   const showsCountry = !fallback && countries.length > 1;
   const hash = stateToHash(
-    { scenario, debt: debtAssumptions, language, country: showsCountry ? pack.country.id : undefined, editor, page: legalPage },
+    {
+      scenario,
+      debt: debtAssumptions,
+      goal: goalId,
+      collection,
+      language,
+      country: showsCountry ? pack.country.id : undefined,
+      editor,
+      page: legalPage,
+    },
     pack,
   );
   /** The address of a legal page, or of the simulator, with this scenario. */
   const legalHref = (page: LegalPage | undefined): string =>
-    stateToHash({ scenario, debt: debtAssumptions, language, country: showsCountry ? pack.country.id : undefined, page }, pack) || "#";
+    stateToHash(
+      { scenario, debt: debtAssumptions, goal: goalId, collection, language, country: showsCountry ? pack.country.id : undefined, page },
+      pack,
+    ) || "#";
   const hashRef = useRef(hash);
   hashRef.current = hash;
   /** The address of exactly this scenario, whether or not the address bar shows it yet. */
@@ -231,6 +259,8 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
         fields.scenario === undefined &&
         fields.editor === undefined &&
         fields.debt === undefined &&
+        fields.goal === undefined &&
+        fields.collection === undefined &&
         fields.page === undefined
       ) {
         if (window.location.hash !== "" && dirty.current) {
@@ -255,6 +285,8 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
       );
       const wantedDebt = debtFromHash(window.location.hash, pack);
       setDebtAssumptions((current) => (sameDebtAssumptions(current, wantedDebt) ? current : wantedDebt));
+      setGoalId(goalFromHash(window.location.hash, pack));
+      setCollection(collectionFromHash(window.location.hash, pack));
       followLegal(fields.page);
     };
     window.addEventListener("hashchange", onHashChange);
@@ -335,6 +367,8 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
   }, []);
 
   const onReset = useCallback(() => setScenario(emptyScenario()), []);
+
+  const onGoal = useCallback((id: string) => setGoalId(id === pack.goals?.default ? undefined : id), [pack]);
 
   const onLanguage = useCallback((next: string) => {
     setLanguage(next);
@@ -422,6 +456,9 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
       onExpand={onExpand}
       onShowNode={onShowNode}
       onEditCurve={onEditCurve}
+      collection={collection}
+      onCollection={setCollection}
+      goal={goal}
     />
   );
 
@@ -470,7 +507,11 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
         inert={editing}
         legal={legalPage !== undefined}
       />
-      {!legalPage && <Scoreboard result={result} editing={editing ? editor?.policy : undefined} />}
+      {!legalPage && (
+        <Scoreboard result={result} editing={editing ? editor?.policy : undefined}>
+          {goal && <GoalBar goal={goal} scenario={scenario} result={result} onGoal={onGoal} steady={editing} />}
+        </Scoreboard>
+      )}
       {editing && editor && editorPolicy && (
         <CurveEditor
           key={`${editor.policy}.${editor.param}`}

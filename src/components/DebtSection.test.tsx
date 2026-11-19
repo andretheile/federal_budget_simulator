@@ -107,7 +107,8 @@ describe("the section on Testland", () => {
     // One path without measures: one line, no band.
     expect(all(".dchart")[0].querySelectorAll(".dchart__line")).toHaveLength(1);
     expect(container.querySelector(".dchart__band")).toBeNull();
-    expect(all(".dchart__legend")[0].textContent).toBe("without measuresreference value");
+    // The ministry's projection gives interest for 2026, so it is in this chart's legend too.
+    expect(all(".dchart__legend")[0].textContent).toBe("without measuresMinistry projectionreference value");
   });
 
   it("speaks German", () => {
@@ -180,7 +181,7 @@ describe("the section on Testland", () => {
     const [interestChart] = all(".dchart");
     expect(interestChart.querySelectorAll(".dchart__line")).toHaveLength(2);
     expect(interestChart.querySelector(".dchart__band")).not.toBeNull();
-    expect(plain(interestChart.querySelector(".dchart__legend")?.textContent)).toBe("without measureswith the measuresrange of the estimatesreference value");
+    expect(plain(interestChart.querySelector(".dchart__legend")?.textContent)).toBe("without measureswith the measuresrange of the estimatesMinistry projectionreference value");
     // Family benefits as the measure leaves them: 3 % of GDP instead of 2 %.
     const families = all(".dcmp__row").find((row) => row.textContent?.startsWith("Families"))!;
     expect(plain(families.textContent)).toContain("with the measures: XTS 300, 3.0% of GDP");
@@ -203,7 +204,7 @@ describe("the section on Testland", () => {
     // As a share of revenue: the neighbour, whose interest is 3.5 % of GDP on revenue of 35 % of GDP, at 10 %.
     // Testland 1995 gives no revenue, so it has no line here.
     expect([...interestChart.querySelectorAll("[data-reference]")].map((g) => g.getAttribute("data-reference"))).toEqual(["neighbour"]);
-    expect(plain(interestChart.querySelector(".dchart__legend")?.textContent)).toBe("without measuresreference value");
+    expect(plain(interestChart.querySelector(".dchart__legend")?.textContent)).toBe("without measuresMinistry projectionreference value");
     expect(container.querySelector(".debt__main > .debt__note")).toBeNull();
     expect(debtChart.querySelectorAll(".dchart__refs > g")).toHaveLength(2);
     expect(debtChart.querySelector(".is-threshold")).not.toBeNull();
@@ -284,6 +285,116 @@ describe("the section on Testland", () => {
     expect(text(".debt-teaser")).toContain("Interest in 2054: 15.8% of all revenue (2024: 2.5%)");
     const footer = all<HTMLAnchorElement>(".footer__links a").find((link) => link.textContent === "Debt and interest");
     expect(footer?.getAttribute("href")).toBe("#debt");
+  });
+});
+
+describe("the official plans", () => {
+  beforeAll(async () => {
+    await debtModule.load();
+  });
+
+  it("draws the comparable plan in every chart it has figures for, and never the cash plan", () => {
+    mount();
+    const [interestChart, debtChart] = all(".dchart");
+    const debtPlan = debtChart.querySelector('[data-plan="ministry_projection"]')!;
+    // Debt for 2025 and 2026: a dashed path and a diamond for each year.
+    expect(debtPlan.querySelectorAll(".dchart__plan-line")).toHaveLength(1);
+    expect(debtPlan.querySelectorAll(".dchart__plan-point")).toHaveLength(2);
+    // Interest only for 2026: one diamond, no path, in either unit.
+    const interestPlan = interestChart.querySelector('[data-plan="ministry_projection"]')!;
+    expect(interestPlan.querySelectorAll(".dchart__plan-line")).toHaveLength(0);
+    expect(interestPlan.querySelectorAll(".dchart__plan-point")).toHaveLength(1);
+    click(button("Share of GDP"));
+    expect(interestChart.querySelectorAll('[data-plan="ministry_projection"] .dchart__plan-point')).toHaveLength(1);
+    expect(container.querySelector('[data-plan="central_budget_interest"]')).toBeNull();
+    expect(plain(debtChart.querySelector(".dkey--plan")?.textContent)).toBe("Ministry projection");
+  });
+
+  it("reads the plan's figure out with the year that is pointed at", () => {
+    mount();
+    const debt = all('.dchart [role="slider"]')[1];
+    act(() => debt.focus());
+    press(debt, "Home");
+    press(debt, "ArrowRight");
+    expect(plain(debt.getAttribute("aria-valuetext"))).toMatch(/^2025: [\d.]+% \(XTS [\d,]+\) · official projection 52%$/);
+    press(debt, "ArrowRight");
+    expect(plain(debt.getAttribute("aria-valuetext"))).toMatch(/ · official projection 55%$/);
+    press(debt, "ArrowRight");
+    expect(plain(debt.getAttribute("aria-valuetext"))).not.toContain("official projection");
+  });
+
+  it("sets out both plans apart from the charts: how the comparable one differs, and the scope of the other", () => {
+    mount();
+    const plans = all(".dplan");
+    expect(plans).toHaveLength(2);
+    expect(text(".dplans > h3")).toBe("Official plans");
+    expect(plain(plans[0].querySelector(".dplan__name")?.textContent)).toBe("Ministry projection");
+    expect(plain(plans[0].querySelector(".dplan__intro")?.textContent)).toBe(
+      "With its defaults, the calculation continues the budget of 2024 and arrives at a debt of 55.7% of GDP in 2026 without measures. " +
+        "This projection arrives at 55%: it starts from where things stood when it was published, with what has been decided since 2024. " +
+        "What it calculates differently is set out in its note.",
+    );
+    const rows = (plan: HTMLElement): string[][] =>
+      [...plan.querySelectorAll("tr")].map((row) => [...row.children].map((cell) => plain(cell.textContent)));
+    expect(rows(plans[0])).toEqual([
+      ["Year", "Debt, share of GDP", "Balance, share of GDP", "Interest, share of GDP", "Interest, share of all revenue"],
+      ["2025", "52%", "−4%", "–", "–"],
+      ["2026", "55%", "−3.5%", "1.2%", "3%"],
+    ]);
+    expect(plain(plans[1].querySelector(".dplan__scope")?.textContent)).toBe(
+      "Covers only the level “Central government” and is counted in cash. " +
+        "The calculation above describes the whole state in national accounts. These figures cannot be compared with it, so they are not in the charts.",
+    );
+    expect(rows(plans[1])).toEqual([
+      ["Year", "Interest"],
+      ["2025", "XTS 110"],
+      ["2026", "XTS 120"],
+    ]);
+    // Note, quality and sources one click away, as for the assumptions.
+    const more = plans[1].querySelector("details")!;
+    expect(plain(more.querySelector("summary")?.textContent)).toBe("Note, data quality and sources");
+    expect(plain(more.querySelector(".dplan__note")?.textContent)).toBe("Cash figures of the central budget.");
+    expect(more.querySelector(".sources a")?.getAttribute("href")).toBe("https://example.org/accounts");
+  });
+
+  it("speaks German", () => {
+    mount("#lang=de");
+    expect(text(".dplans > h3")).toBe("Amtliche Planungen");
+    expect(plain(all(".dplan")[1].querySelector(".dplan__scope strong")?.textContent)).toBe(
+      "Gilt nur für die Ebene „Zentralstaat“ und ist in Zahlungen gerechnet (Kassenzahlen).",
+    );
+  });
+
+  it("is followed with its preset: marked where it ends, said in the section, and kept in the address", () => {
+    mount("#lang=en&s=halve_mp_pay");
+    expect(container.querySelector(".dchart__marker")).toBeNull();
+    expect(container.querySelector(".debt__following")).toBeNull();
+    const preset = button("As the ministry plans");
+    click(preset);
+    expect(preset.getAttribute("aria-pressed")).toBe("true");
+    expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&d=fministry_projection");
+    expect(all(".dchart__marker text").map((label) => plain(label.textContent))).toEqual(["continued from 2027", "continued from 2027"]);
+    expect(text(".debt__following")).toBe(
+      "Up to 2026, the calculation without measures follows the official projection “Ministry projection”. After that, the budget before interest keeps the share of economic output it has in 2026.",
+    );
+    // A slider keeps following the plan; the reset stops it.
+    slide(slider("Market interest rate"), 8);
+    expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&d=r8~fministry_projection");
+    click(button("Reset assumptions"));
+    expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay");
+    expect(container.querySelector(".dchart__marker")).toBeNull();
+  });
+
+  it("opens from a link that follows the plan, and old links follow none", () => {
+    mount("#lang=en&d=fministry_projection");
+    expect(button("As the ministry plans").getAttribute("aria-pressed")).toBe("true");
+    expect(container.querySelector(".debt__following")).not.toBeNull();
+    mount2("#lang=en&d=r8");
+    expect(button("As the ministry plans").getAttribute("aria-pressed")).toBe("false");
+    expect(container.querySelector(".debt__following")).toBeNull();
+    // A plan that cannot be followed is dropped from the address.
+    mount2("#lang=en&d=fcentral_budget_interest");
+    expect(window.location.hash).toBe("#lang=en");
   });
 });
 

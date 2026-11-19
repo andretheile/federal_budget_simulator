@@ -48,3 +48,30 @@ describe("the debt assumptions in the address", () => {
     expect(sameDebtAssumptions(defaults, undefined)).toBe(false);
   });
 });
+
+describe("following an official plan", () => {
+  it("is written as f and the plan's id, after the numbers, and read back", () => {
+    const following = { ...defaults, follow: "ministry_projection" };
+    expect(encodeDebtAssumptions(debt, following)).toBe("fministry_projection");
+    expect(encodeDebtAssumptions(debt, { ...following, market_rate: 5.1 })).toBe("r5.1~fministry_projection");
+    expect(decodeDebtAssumptions(debt, "r5.1~fministry_projection")).toEqual({ ...defaults, market_rate: 5.1, follow: "ministry_projection" });
+    expect(decodeDebtAssumptions(debt, "fministry_projection~r5.1")).toEqual({ ...defaults, market_rate: 5.1, follow: "ministry_projection" });
+  });
+
+  it("drops a plan the pack does not have, and one that cannot be followed (the cash plan)", () => {
+    expect(decodeDebtAssumptions(debt, "fno_such_plan~y40")).toEqual({ ...defaults, horizon: 40 });
+    expect(decodeDebtAssumptions(debt, "fcentral_budget_interest")).toEqual(defaults);
+    expect(decodeDebtAssumptions(debt, "f")).toEqual(defaults);
+  });
+
+  it("keeps links from before plans could be followed: they follow none", () => {
+    expect(decodeDebtAssumptions(debt, "r8~y40")).toEqual({ ...defaults, market_rate: 8, horizon: 40 });
+    expect(decodeDebtAssumptions(debt, "r8~y40").follow).toBeUndefined();
+  });
+
+  it("counts in the comparison", () => {
+    expect(sameDebtAssumptions(defaults, { ...defaults, follow: "ministry_projection" })).toBe(false);
+    expect(sameDebtAssumptions({ ...defaults, follow: "ministry_projection" }, { ...defaults, follow: "ministry_projection" })).toBe(true);
+    expect(sameDebtAssumptions(defaults, { ...defaults, follow: undefined })).toBe(true);
+  });
+});
