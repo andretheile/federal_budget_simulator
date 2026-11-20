@@ -109,7 +109,7 @@
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ103.xml",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section 106: continuing appropriations available until December 11, 2026, at the latest."
+    "note": "Section 106: continuing appropriations available until December 11, 2026, at the latest. It contains no bar on reductions in force."
   },
   "scotus_24_1287": {
     "title": "Learning Resources, Inc. v. Trump, No. 24-1287, together with Trump v. V.O.S. Selections, Inc., No. 25-250 (decided February 20, 2026), 607 U.S.",
@@ -214,5 +214,101 @@
     "accessed": "2026-11-20",
     "year": 2023,
     "note": "Published October 2026. Table 1.B: 146,669,608 taxpayers with wages of 9,795,581,128 thousand dollars, by size of wage income; Table 1.H: by multiples of the OASDI wage limit."
+  },
+  "omb_objclass_fy2027": {
+    "title": "Object class detail by account, Budget of the U.S. Government, Fiscal Year 2027 (objclass_detail_fy2027.xlsx)",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/objclass_detail_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Obligations by account, object class and direct or reimbursable, in millions of dollars; column PY Amount is the actual of fiscal year 2025. Civilian personnel compensation and benefits (object classes 11.1, 11.3, 11.5 and 12.1) of the executive branch without the Postal Service add up to 383,299 million dollars, the total of Table 5-3 of the Analytical Perspectives; among them the IRS 13,226 million, the Federal Aviation Administration 10,650 million and the Social Security Administration 8,093 million. Advisory and assistance services and other services from non-federal sources (25.1 and 25.2): 460,774 million."
+  },
+  "omb_ap_workforce_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 5 (Management), Tables 5-1 to 5-3: federal civilian employment in the executive branch, total federal employment, personnel pay and benefits",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_5_tables_1-3_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Table 5-1: executive branch civilian full-time equivalents without the Postal Service 2,266,000 in 2025 (actual), 2,143,000 in 2026 and 2,146,000 in 2027 (estimates); by agency. Table 5-3: civilian pay and benefits of the executive branch without the Postal Service 383,299 million dollars in 2025 (pay 288,315, benefits 94,984), 371,886 million in 2026 (pay 269,791, benefits 102,095) and 375,064 million in 2027."
+  },
+  "omb_ap_management_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 5: Management",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_5_management_fy2027.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Page 43: \"approximately 300,000 Federal employees exiting government service in 2025, the largest reduction of the Federal workforce in American history.\""
+  },
+  "bls_ces_federal": {
+    "title": "Current Employment Statistics, series CES9091100001: federal government employment except U.S. Postal Service, seasonally adjusted",
+    "publisher": "U.S. Bureau of Labor Statistics",
+    "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/CES9091100001?startyear=2024&endyear=2026",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Monthly, in thousands; includes the legislative and judicial branches. December 2024: 2,410.8; average of fiscal year 2025 (October 2024 to September 2025): 2,374.3; September 2025: 2,321.5; October 2025: 2,156.8; March 2026: 2,082.7; October 2026 (preliminary): 2,074.8."
+  },
+  "fr_2025_01905": {
+    "title": "Memorandum of January 20, 2025, Hiring Freeze, 90 FR 8247 (January 28, 2025)",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2025-01-28/pdf/2025-01905.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Freeze on filling vacant civilian positions in the executive branch; does not apply to military personnel or to positions related to immigration enforcement, national security or public safety, and is not to adversely impact Social Security, Medicare or veterans' benefits. \"Contracting outside the Federal Government to circumvent the intent of this memorandum is prohibited.\""
+  },
+  "fr_2025_02762": {
+    "title": "Executive Order 14210 of February 11, 2025, Implementing the President's \"Department of Government Efficiency\" Workforce Optimization Initiative, 90 FR 9669",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2025-02-14/pdf/2025-02762.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Section 3(a): agencies to hire no more than one employee for every four that depart; 3(c): prepare large-scale reductions in force, prioritizing functions not mandated by statute; neither applies to functions related to public safety, immigration enforcement or law enforcement. Military personnel excluded."
+  },
+  "fr_2025_19614": {
+    "title": "Executive Order 14356 of October 15, 2025, Ensuring Continued Accountability in Federal Hiring, 90 FR 48387",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2025-10-20/pdf/2025-19614.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "No vacant civilian position may be filled and no new position created except as the order provides: approval by each agency's Strategic Hiring Committee, Annual Staffing Plans; exceptions for immigration enforcement, national security and public safety. Contracting to circumvent the order is prohibited."
+  },
+  "fr_2026_21320": {
+    "title": "Office of Personnel Management, Administrative Leave for Workforce Realignment and Other Purposes, final rule, 91 FR 65924 (October 19, 2026)",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-19/pdf/2026-21320.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Effective November 18, 2026. Page 65926: \"OPM calculates that DRP separations in 2025 represented a workforce reduction of over 6 percent, which contributed to the overall reduction of the Federal workforce of over 12 percent from December 2024 to March 2026\"; the one-time costs of administrative leave in the deferred resignation program \"represent less than 3 percent of total basic payroll\"; from calendar year 2026 such leave is limited to 12 weeks per instance unless OPM and OMB approve more."
+  },
+  "scotus_24a1174": {
+    "title": "Trump v. American Federation of Government Employees, No. 24A1174 (July 8, 2025), order granting a stay, 606 U.S. (preliminary print, orders p. 961)",
+    "publisher": "Supreme Court of the United States",
+    "url": "https://www.supremecourt.gov/opinions/preliminaryprint/606US2PP_Ord.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Stays the district court's injunction against Executive Order 14210 and the OMB-OPM memorandum implementing it, because the government is likely to succeed in arguing that they are lawful; \"We express no view on the legality of any agency RIF and Reorganization Plan.\""
+  },
+  "plaw_119_37": {
+    "title": "Public Law 119-37, Continuing Appropriations, Agriculture, Legislative Branch, Military Construction and Veterans Affairs, and Extensions Act, 2026 (November 12, 2025)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ37.xml",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Section 120: no federal funds for reductions in force from enactment to the end date of the continuing resolution (first January 30, 2026; voluntary separations and retirements excepted); reductions in force taken between October 1, 2025 and enactment have no force or effect, the employees are reinstated with back pay."
+  },
+  "plaw_119_75": {
+    "title": "Public Law 119-75, Consolidated Appropriations Act, 2026 (February 3, 2026)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ75.xml",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Department of Defense Appropriations Act, 2026, section 8045: no funds to convert work done by Defense civilian employees to contractor performance unless a public-private competition shows the contractor to be cheaper by at least the lesser of 10 percent of the personnel-related costs or 10 million dollars."
+  },
+  "irs_p5901": {
+    "title": "Return on Investment: Re-Examining Revenue Estimates for IRS Funding, Publication 5901 (February 2024)",
+    "publisher": "Internal Revenue Service",
+    "url": "https://www.irs.gov/pub/irs-pdf/p5901.pdf",
+    "accessed": "2026-11-20",
+    "year": 2024,
+    "note": "Page 2, from the tax gap projections for tax years 2020 and 2021: of an estimated true tax liability of 4,565 billion dollars a year, revenue from IRS enforcement efforts is 63 billion dollars, 1.4%."
   }
 }

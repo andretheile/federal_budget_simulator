@@ -798,6 +798,1183 @@
         "fr_2026_15274",
         "treasury_mts_2026_09"
       ]
+    },
+    {
+      "id": "federal_workforce_cut",
+      "label": {
+        "en": "Cut the federal civilian workforce",
+        "de": "Zivile Bundesbeschäftigte abbauen"
+      },
+      "summary": {
+        "en": "Cuts the civilian staff of the federal executive branch by the chosen share of positions, set separately for four parts of government; 0 exempts a part. Their pay and benefits came to $383.3 billion in fiscal year 2025: Department of Defense $113.8 billion, health care at Veterans Affairs $66.4 billion, the Departments of Homeland Security and Justice $64.8 billion, all other agencies $138.3 billion. Each cut lands in the budget items where the staff work, according to OMB's data on obligations by object class; 12.8% of it comes back in the item for federal retirement, where the agencies' contributions to the retirement funds are netted out. The amount is the annual saving once the staff are gone, in 2025 values; one-time costs on the way, such as paid leave and severance pay, are not included. Military personnel, the Postal Service, Congress and the courts are not included. The default cuts 12% everywhere: the Office of Personnel Management counts a reduction of the federal workforce of over 12% from December 2024 to March 2026. The 2025 figures still contain most of these staff, because many stayed on the payroll, some on paid leave, until they left: federal employment outside the Postal Service averaged 2.374 million in fiscal year 2025 and was 2.075 million in October 2026, 12.6% less (BLS). The calculation assumes that the people who leave work elsewhere, so that income and payroll taxes are not lost.",
+        "de": "Baut die zivilen Beschäftigten der Exekutive des Bundes um den eingestellten Anteil der Stellen ab, getrennt für vier Teile der Regierung; 0 nimmt einen Teil aus. Ihre Gehälter und Nebenleistungen kosteten im Haushaltsjahr 2025 383,3 Mrd. Dollar: Verteidigungsministerium 113,8 Mrd. Dollar, Gesundheitsversorgung im Veteranenministerium 66,4 Mrd. Dollar, Heimatschutz- und Justizministerium 64,8 Mrd. Dollar, alle übrigen Behörden 138,3 Mrd. Dollar. Jede Kürzung trifft die Haushaltsposten, in denen die Beschäftigten arbeiten, nach den Daten der OMB zu den Mittelbindungen nach Ausgabearten; 12,8 % davon kommen beim Posten für die Pensionen der Bundesbediensteten zurück, wo die Beiträge der Behörden an die Pensionsfonds verrechnet werden. Der Betrag ist die jährliche Ersparnis, sobald die Stellen weg sind, in Werten von 2025; einmalige Kosten auf dem Weg dorthin, etwa bezahlte Freistellung und Abfindungen, sind nicht enthalten. Nicht enthalten sind Soldaten, die Post, der Kongress und die Gerichte. Die Grundeinstellung streicht überall 12 %: Die Personalbehörde des Bundes (Office of Personnel Management) zählt von Dezember 2024 bis März 2026 einen Rückgang der Bundesbeschäftigten um mehr als 12 %. Die Zahlen von 2025 enthalten die meisten dieser Beschäftigten noch, weil viele bis zu ihrem Ausscheiden bezahlt wurden, manche in bezahlter Freistellung: Ohne die Post arbeiteten im Haushaltsjahr 2025 im Schnitt 2,374 Mio. Menschen für den Bund, im Oktober 2026 2,075 Mio., 12,6 % weniger (BLS). Die Rechnung nimmt an, dass die Menschen, die gehen, anderswo arbeiten, sodass Einkommen- und Lohnsummensteuern nicht verloren gehen."
+      },
+      "topic": "state",
+      "params": [
+        {
+          "id": "cut_defense",
+          "type": "number",
+          "label": {
+            "en": "Positions cut: Defense Department civilians",
+            "de": "Stellenabbau: Zivilbeschäftigte des Verteidigungsministeriums"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "default": 12,
+          "baseline": 0
+        },
+        {
+          "id": "cut_veterans_health",
+          "type": "number",
+          "label": {
+            "en": "Positions cut: veterans' health care",
+            "de": "Stellenabbau: Gesundheitsversorgung für Veteranen"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "default": 12,
+          "baseline": 0
+        },
+        {
+          "id": "cut_homeland_justice",
+          "type": "number",
+          "label": {
+            "en": "Positions cut: Homeland Security and Justice",
+            "de": "Stellenabbau: Heimatschutz und Justiz"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "default": 12,
+          "baseline": 0
+        },
+        {
+          "id": "cut_other",
+          "type": "number",
+          "label": {
+            "en": "Positions cut: all other agencies",
+            "de": "Stellenabbau: alle übrigen Behörden"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "default": 12,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.defense.operation_maintenance",
+          "amount": {
+            "param": "cut_defense",
+            "scale": -1053053317
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $105.3 billion. Allocated by the pack: $29.6 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.3 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Verteidigungsministeriums in diesem Posten im Haushaltsjahr 2025: 105,3 Mrd. Dollar. Vom Paket zugeordnet: 29,6 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,3 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.defense.rdte",
+          "amount": {
+            "param": "cut_defense",
+            "scale": -71879157
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $7.2 billion. Allocated by the pack: $2.0 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Verteidigungsministeriums in diesem Posten im Haushaltsjahr 2025: 7,2 Mrd. Dollar. Vom Paket zugeordnet: 2,0 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.defense.other_dod",
+          "amount": {
+            "param": "cut_defense",
+            "scale": -12657527
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $1.3 billion. Allocated by the pack: $0.4 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Verteidigungsministeriums in diesem Posten im Haushaltsjahr 2025: 1,3 Mrd. Dollar. Vom Paket zugeordnet: 0,4 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.veterans.health",
+          "amount": {
+            "param": "cut_veterans_health",
+            "scale": -664420629
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the health care staff of the Department of Veterans Affairs in this item in fiscal year 2025: $66.4 billion. Allocated by the pack: $11.7 billion from accounts spread over several items, split by their outlays. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Gesundheitspersonals des Veteranenministeriums in diesem Posten im Haushaltsjahr 2025: 66,4 Mrd. Dollar. Vom Paket zugeordnet: 11,7 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.justice.cbp",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -151121842
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $15.1 billion. Allocated by the pack: $1.1 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.1 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 15,1 Mrd. Dollar. Vom Paket zugeordnet: 1,1 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,1 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.justice.other_enforcement",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -147815650
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $14.8 billion. Allocated by the pack: $3.0 billion from accounts spread over several items, split by their outlays; $0.9 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 14,8 Mrd. Dollar. Vom Paket zugeordnet: 3,0 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,9 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.transportation.air",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -87414195
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $8.7 billion. Allocated by the pack: $8.0 billion from accounts spread over several items, split by their outlays; $0.6 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.1 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 8,7 Mrd. Dollar. Vom Paket zugeordnet: 8,0 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,6 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,1 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.justice.prisons",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -61087527
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $6.1 billion. Allocated by the pack: $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 6,1 Mrd. Dollar. Vom Paket zugeordnet: 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.defense.related",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -57029063
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $5.7 billion. Allocated by the pack: $5.4 billion from accounts spread over several items, split by their outlays; $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 5,7 Mrd. Dollar. Vom Paket zugeordnet: 5,4 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.justice.ice",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -51446110
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $5.1 billion. Allocated by the pack: $0.4 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 5,1 Mrd. Dollar. Vom Paket zugeordnet: 0,4 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.justice.courts",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -45118239
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $4.5 billion. Allocated by the pack: $0.8 billion from accounts spread over several items, split by their outlays; $0.2 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 4,5 Mrd. Dollar. Vom Paket zugeordnet: 0,8 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,2 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.community.disaster_relief_fund",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -33233918
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $3.3 billion. Allocated by the pack: $0.2 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.9 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 3,3 Mrd. Dollar. Vom Paket zugeordnet: 0,2 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,9 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.transportation.water_other",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": -13993455
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $1.4 billion. Allocated by the pack: $1.3 billion from accounts spread over several items, split by their outlays; $0.1 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 1,4 Mrd. Dollar. Vom Paket zugeordnet: 1,3 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,1 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.general_government.irs",
+          "amount": {
+            "param": "cut_other",
+            "scale": -143928004
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $14.4 billion. Allocated by the pack: $5.4 billion from accounts spread over several items, split by their outlays; $1.7 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.5 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 14,4 Mrd. Dollar. Vom Paket zugeordnet: 5,4 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 1,7 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,5 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.transportation.air",
+          "amount": {
+            "param": "cut_other",
+            "scale": -132520268
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $13.3 billion. Includes $2.1 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 13,3 Mrd. Dollar. Enthält 2,1 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.natural_resources.land",
+          "amount": {
+            "param": "cut_other",
+            "scale": -112162275
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $11.2 billion. Allocated by the pack: $2.0 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 11,2 Mrd. Dollar. Vom Paket zugeordnet: 2,0 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.commerce.commerce",
+          "amount": {
+            "param": "cut_other",
+            "scale": -105451724
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $10.5 billion. Allocated by the pack: $2.9 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 10,5 Mrd. Dollar. Vom Paket zugeordnet: 2,9 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.international.diplomacy",
+          "amount": {
+            "param": "cut_other",
+            "scale": -84352884
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $8.4 billion. Allocated by the pack: $1.0 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.8 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 8,4 Mrd. Dollar. Vom Paket zugeordnet: 1,0 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,8 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.veterans.other",
+          "amount": {
+            "param": "cut_other",
+            "scale": -68802616
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.9 billion. Allocated by the pack: $0.7 billion from accounts spread over several items, split by their outlays. Includes $0.1 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 6,9 Mrd. Dollar. Vom Paket zugeordnet: 0,7 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt. Enthält 0,1 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.health.other_care",
+          "amount": {
+            "param": "cut_other",
+            "scale": -68220790
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.8 billion. Allocated by the pack: $2.8 billion from accounts spread over several items, split by their outlays; $1.5 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 6,8 Mrd. Dollar. Vom Paket zugeordnet: 2,8 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 1,5 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.health.safety",
+          "amount": {
+            "param": "cut_other",
+            "scale": -66883192
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.7 billion. Allocated by the pack: $1.4 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 6,7 Mrd. Dollar. Vom Paket zugeordnet: 1,4 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.natural_resources.other",
+          "amount": {
+            "param": "cut_other",
+            "scale": -57512494
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $5.8 billion. Allocated by the pack: $2.5 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 5,8 Mrd. Dollar. Vom Paket zugeordnet: 2,5 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.general_government.other",
+          "amount": {
+            "param": "cut_other",
+            "scale": -46327772
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.6 billion. Allocated by the pack: $2.6 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,6 Mrd. Dollar. Vom Paket zugeordnet: 2,6 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.social_security.oasi",
+          "amount": {
+            "param": "cut_other",
+            "scale": -45285695
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027",
+            "treasury_mts_2025_09"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.5 billion. Allocated by the pack: $4.5 billion from Social Security's administrative account, split between the two trust funds by their administrative expenses. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,5 Mrd. Dollar. Vom Paket zugeordnet: 4,5 Mrd. Dollar aus dem Verwaltungskonto der Social Security, auf die beiden Fonds nach deren Verwaltungsausgaben aufgeteilt. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.natural_resources.water",
+          "amount": {
+            "param": "cut_other",
+            "scale": -43629193
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.4 billion. Allocated by the pack: $0.6 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,4 Mrd. Dollar. Vom Paket zugeordnet: 0,6 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.health.research",
+          "amount": {
+            "param": "cut_other",
+            "scale": -42743577
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.3 billion. Allocated by the pack: $1.0 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,3 Mrd. Dollar. Vom Paket zugeordnet: 1,0 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.science.space",
+          "amount": {
+            "param": "cut_other",
+            "scale": -41194965
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.1 billion. Includes $0.6 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,1 Mrd. Dollar. Enthält 0,6 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.agriculture.research_services",
+          "amount": {
+            "param": "cut_other",
+            "scale": -38682536
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.9 billion. Allocated by the pack: $0.5 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.7 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 3,9 Mrd. Dollar. Vom Paket zugeordnet: 0,5 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,7 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.social_security.di",
+          "amount": {
+            "param": "cut_other",
+            "scale": -34486724
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027",
+            "treasury_mts_2025_09"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.4 billion. Allocated by the pack: $3.4 billion from Social Security's administrative account, split between the two trust funds by their administrative expenses. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 3,4 Mrd. Dollar. Vom Paket zugeordnet: 3,4 Mrd. Dollar aus dem Verwaltungskonto der Social Security, auf die beiden Fonds nach deren Verwaltungsausgaben aufgeteilt. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.energy.supply",
+          "amount": {
+            "param": "cut_other",
+            "scale": -32398622
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.2 billion. Allocated by the pack: $2.5 billion from accounts spread over several items, split by their outlays; $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 3,2 Mrd. Dollar. Vom Paket zugeordnet: 2,5 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.natural_resources.pollution",
+          "amount": {
+            "param": "cut_other",
+            "scale": -31222011
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.1 billion. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 3,1 Mrd. Dollar. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.natural_resources.recreation",
+          "amount": {
+            "param": "cut_other",
+            "scale": -28672763
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.9 billion. Allocated by the pack: $0.7 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,9 Mrd. Dollar. Vom Paket zugeordnet: 0,7 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.income_security.housing",
+          "amount": {
+            "param": "cut_other",
+            "scale": -27540360
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.8 billion. Allocated by the pack: $1.2 billion from accounts spread over several items, split by their outlays. Includes $1.2 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,8 Mrd. Dollar. Vom Paket zugeordnet: 1,2 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt. Enthält 1,2 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.education.training",
+          "amount": {
+            "param": "cut_other",
+            "scale": -25454943
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.5 billion. Allocated by the pack: $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.5 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,5 Mrd. Dollar. Vom Paket zugeordnet: 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,5 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.defense.atomic_energy",
+          "amount": {
+            "param": "cut_other",
+            "scale": -21622847
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.2 billion. Allocated by the pack: $0.5 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.4 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,2 Mrd. Dollar. Vom Paket zugeordnet: 0,5 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,4 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.justice.other_enforcement",
+          "amount": {
+            "param": "cut_other",
+            "scale": -19817281
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.0 billion. Allocated by the pack: $1.0 billion from accounts spread over several items, split by their outlays; $0.1 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.2 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,0 Mrd. Dollar. Vom Paket zugeordnet: 1,0 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,1 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,2 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.international.aid",
+          "amount": {
+            "param": "cut_other",
+            "scale": -18169430
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.8 billion. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 1,8 Mrd. Dollar. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.education.schools_colleges",
+          "amount": {
+            "param": "cut_other",
+            "scale": -17538825
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.8 billion. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 1,8 Mrd. Dollar. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.energy.other",
+          "amount": {
+            "param": "cut_other",
+            "scale": -14922095
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.5 billion. Allocated by the pack: $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs; $0.1 billion from accounts spread over several items, split by their outlays. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 1,5 Mrd. Dollar. Vom Paket zugeordnet: 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten; 0,1 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.community.development",
+          "amount": {
+            "param": "cut_other",
+            "scale": -13175482
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.3 billion. Allocated by the pack: $0.6 billion from accounts spread over several items, split by their outlays; $0.2 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 1,3 Mrd. Dollar. Vom Paket zugeordnet: 0,6 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,2 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.income_security.federal_retirement",
+          "amount": {
+            "param": "cut_defense",
+            "scale": 146066556
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Less netted out: about 12.8% of the pay and benefits of the Department of Defense ($113.8 billion) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 over the base, the executive branch's part by its share of civilian pay.",
+            "de": "Weniger Verrechnung: etwa 12,8 % der Personalkosten des Verteidigungsministeriums (113,8 Mrd. Dollar) sind Beiträge der Behörden an die Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger abgezogen. Eigene Schätzung: die Behördenbeiträge an die Fonds 2025 im Verhältnis zur Basis, der Anteil der Exekutive nach ihrem Anteil an den zivilen Gehältern."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.income_security.federal_retirement",
+          "amount": {
+            "param": "cut_veterans_health",
+            "scale": 85311609
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Less netted out: about 12.8% of the pay and benefits of the health care staff of the Department of Veterans Affairs ($66.4 billion) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 over the base, the executive branch's part by its share of civilian pay.",
+            "de": "Weniger Verrechnung: etwa 12,8 % der Personalkosten des Gesundheitspersonals des Veteranenministeriums (66,4 Mrd. Dollar) sind Beiträge der Behörden an die Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger abgezogen. Eigene Schätzung: die Behördenbeiträge an die Fonds 2025 im Verhältnis zur Basis, der Anteil der Exekutive nach ihrem Anteil an den zivilen Gehältern."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.income_security.federal_retirement",
+          "amount": {
+            "param": "cut_homeland_justice",
+            "scale": 83236584
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Less netted out: about 12.8% of the pay and benefits of the Departments of Homeland Security and Justice ($64.8 billion) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 over the base, the executive branch's part by its share of civilian pay.",
+            "de": "Weniger Verrechnung: etwa 12,8 % der Personalkosten des Heimatschutz- und des Justizministeriums (64,8 Mrd. Dollar) sind Beiträge der Behörden an die Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger abgezogen. Eigene Schätzung: die Behördenbeiträge an die Fonds 2025 im Verhältnis zur Basis, der Anteil der Exekutive nach ihrem Anteil an den zivilen Gehältern."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.income_security.federal_retirement",
+          "amount": {
+            "param": "cut_other",
+            "scale": 177541167
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0,
+            "basis": "staff"
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Less netted out: about 12.8% of the pay and benefits of the other agencies ($138.3 billion) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 over the base, the executive branch's part by its share of civilian pay.",
+            "de": "Weniger Verrechnung: etwa 12,8 % der Personalkosten der übrigen Behörden (138,3 Mrd. Dollar) sind Beiträge der Behörden an die Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger abgezogen. Eigene Schätzung: die Behördenbeiträge an die Fonds 2025 im Verhältnis zur Basis, der Anteil der Exekutive nach ihrem Anteil an den zivilen Gehältern."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "en": "As of November 2026, a cut of this size has largely happened. A hiring freeze from January 20, 2025, then a limit of one hire for every four departures and an order to prepare large-scale reductions in force (Executive Order 14210, February 11, 2025), and a deferred resignation program reduced the workforce; OMB counts about 300,000 employees who left in 2025. Since October 2025, a vacancy may be filled only with the approval of the agency's strategic hiring committee and under an annual staffing plan (Executive Order 14356 of October 15, 2025). The President's Budget for 2027 counts 2,266,000 full-time equivalents in 2025 and estimates 2,143,000 for 2026 and 2,146,000 for 2027, with cuts of 17% to 24% at Agriculture, Education, Labor and NASA in 2027. It puts the executive branch's civilian pay and benefits at $371.9 billion in 2026, 3.0% less than in 2025: pay falls by 6.4%, benefits rise by 7.5%.",
+            "de": "Stand November 2026 ist ein Abbau dieser Größe weitgehend geschehen. Ein Einstellungsstopp ab dem 20. Januar 2025, danach höchstens eine Einstellung je vier Abgänge und der Auftrag, umfangreiche Personalabbauverfahren vorzubereiten (Executive Order 14210 vom 11. Februar 2025), sowie ein Programm, bei dem Beschäftigte ihren Austritt erklärten und bis dahin freigestellt blieben (deferred resignation), verkleinerten das Personal; die OMB zählt rund 300.000 Beschäftigte, die 2025 gingen. Seit Oktober 2025 darf eine freie Stelle nur mit Zustimmung des Einstellungsausschusses der Behörde und nach einem jährlichen Personalplan besetzt werden (Executive Order 14356 vom 15. Oktober 2025). Der Haushaltsentwurf des Präsidenten für 2027 zählt 2.266.000 Vollzeitäquivalente im Jahr 2025 und schätzt 2.143.000 für 2026 und 2.146.000 für 2027, mit Kürzungen von 17 % bis 24 % in den Ministerien für Landwirtschaft, Bildung und Arbeit und bei der NASA im Jahr 2027. Die zivilen Personalkosten der Exekutive setzt er für 2026 mit 371,9 Mrd. Dollar an, 3,0 % weniger als 2025: Die Gehälter sinken um 6,4 %, die Nebenleistungen steigen um 7,5 %."
+          },
+          "sources": [
+            "fr_2025_01905",
+            "fr_2025_02762",
+            "fr_2025_19614",
+            "omb_ap_management_fy2027",
+            "omb_ap_workforce_fy2027"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "en": "The orders of 2025 spared positions by function, not by agency: immigration enforcement, law enforcement, national security and public safety; the hiring freeze was also not to harm Social Security, Medicare or veterans' benefits. Such work is done in the other agencies too, for example at the Federal Aviation Administration, which runs air traffic control ($10.7 billion of staff costs in 2025), and the Social Security Administration ($8.1 billion); here they can only be cut along with the rest. The real cuts were uneven: from 2025 to 2026, OMB's full-time equivalents fall by 4.5% at Defense, 3.4% at Veterans Affairs, 0.9% at Justice and 25.0% at the Treasury, and by 11.2% in all agencies other than Defense, Veterans Affairs, Homeland Security and Justice together; at Homeland Security they rise by 3.5%. Fewer staff with the same tasks means longer waits unless work is dropped or done differently.",
+            "de": "Die Anordnungen von 2025 nahmen Stellen nach Aufgaben aus, nicht nach Behörden: Einwanderungsdurchsetzung, Strafverfolgung, nationale Sicherheit und öffentliche Sicherheit; der Einstellungsstopp sollte zudem Social Security, Medicare und die Leistungen für Veteranen nicht beeinträchtigen. Solche Arbeit leisten auch die übrigen Behörden, etwa die Luftfahrtbehörde FAA, die die Flugsicherung betreibt (10,7 Mrd. Dollar Personalkosten 2025), und die Sozialversicherungsbehörde (8,1 Mrd. Dollar); hier lassen sie sich nur zusammen mit den anderen kürzen. Der tatsächliche Abbau war ungleich: Von 2025 auf 2026 sinken die Vollzeitäquivalente der OMB im Verteidigungsministerium um 4,5 %, im Veteranenministerium um 3,4 %, im Justizministerium um 0,9 % und im Finanzministerium um 25,0 %, in allen Behörden außer dem Verteidigungs-, Veteranen-, Heimatschutz- und Justizministerium zusammen um 11,2 %; im Heimatschutzministerium steigen sie um 3,5 %. Weniger Personal bei gleichen Aufgaben heißt längere Wartezeiten, wenn nicht Aufgaben wegfallen oder anders erledigt werden."
+          },
+          "sources": [
+            "fr_2025_01905",
+            "fr_2025_02762",
+            "fr_2025_19614",
+            "omb_objclass_fy2027",
+            "omb_ap_workforce_fy2027"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "en": "Part of the work can come back as contracts, overtime or rehired staff. In 2025 the agencies obligated $460.8 billion for advisory and other services from outside the government, more than the $383.3 billion they paid their civilian staff. The hiring freeze and Executive Order 14356 forbid contracting to get around them, and the Defense appropriations for 2026 let work of Defense civilians go to a contractor only after a public-private competition in which the contractor is cheaper by at least 10% of the personnel costs or $10 million (Public Law 119-75, section 8045). The range therefore assumes that 60% to 100% of the pay and benefits of the positions cut is saved (own judgment).",
+            "de": "Ein Teil der Arbeit kann als Auftrag, Überstunden oder Wiedereinstellung zurückkommen. 2025 banden die Behörden 460,8 Mrd. Dollar für Beratung und andere Dienstleistungen von außerhalb des Staates, mehr als die 383,3 Mrd. Dollar, die sie ihrem zivilen Personal zahlten. Der Einstellungsstopp und die Executive Order 14356 verbieten, sie mit Aufträgen zu umgehen, und das Verteidigungshaushaltsgesetz für 2026 erlaubt, Arbeit von Zivilbeschäftigten des Verteidigungsministeriums an einen Auftragnehmer zu geben, nur nach einem öffentlich-privaten Wettbewerb, in dem der Auftragnehmer um mindestens 10 % der Personalkosten oder 10 Mio. Dollar günstiger ist (Public Law 119-75, Section 8045). Die Spanne nimmt deshalb an, dass 60 % bis 100 % der Personalkosten der gestrichenen Stellen gespart werden (eigene Einschätzung)."
+          },
+          "sources": [
+            "omb_objclass_fy2027",
+            "fr_2025_01905",
+            "fr_2025_19614",
+            "plaw_119_75"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "Cutting tax collectors costs revenue, which the calculation does not book. In tax years 2020 and 2021, IRS enforcement brought in about $63 billion a year (IRS); the IRS's staff cost $13.2 billion in 2025. If that revenue fell in step with the staff, a 12% cut at the IRS would save about $1.6 billion a year and lose $7.6 billion. How much is actually lost depends on which work is dropped; the IRS can only be cut together with all other agencies.",
+            "de": "Weniger Steuerprüfer kosten Einnahmen, die die Rechnung nicht bucht. In den Steuerjahren 2020 und 2021 brachte die Durchsetzung der Steuerbehörde IRS rund 63 Mrd. Dollar im Jahr ein (IRS); ihr Personal kostete 2025 13,2 Mrd. Dollar. Fielen diese Einnahmen im gleichen Verhältnis wie das Personal, sparte ein Abbau um 12 % bei der IRS rund 1,6 Mrd. Dollar im Jahr und kostete 7,6 Mrd. Dollar. Wie viel tatsächlich verloren geht, hängt davon ab, welche Arbeit wegfällt; die IRS lässt sich nur zusammen mit allen übrigen Behörden kürzen."
+          },
+          "sources": [
+            "irs_p5901",
+            "omb_objclass_fy2027"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "en": "Agencies can cut staff without a new law: by leaving vacancies open, by buyouts and by reductions in force. On July 8, 2025, the Supreme Court let the order to prepare large-scale reductions in force go ahead while the courts decide on it, without ruling on the agencies' plans (Trump v. American Federation of Government Employees, No. 24A1174). Congress voided the reductions in force begun during the shutdown from October 1, 2025, with back pay, and barred new ones while the continuing resolution of November 12, 2025 was in force (Public Law 119-37, section 120); the continuing resolution for fiscal year 2027 contains no such bar (Public Law 119-103). Tasks that a law assigns must still be done; the order of 2025 put functions not required by law first in line.",
+            "de": "Behörden können Personal ohne neues Gesetz abbauen: indem sie Stellen nicht nachbesetzen, mit Abfindungsangeboten und mit Personalabbauverfahren (reductions in force). Am 8. Juli 2025 ließ der Supreme Court die Anordnung, umfangreiche Personalabbauverfahren vorzubereiten, gelten, während die Gerichte darüber entscheiden, ohne über die Pläne der Behörden zu urteilen (Trump v. American Federation of Government Employees, Nr. 24A1174). Der Kongress hob die während des Shutdowns ab dem 1. Oktober 2025 begonnenen Personalabbauverfahren mit Nachzahlung der Gehälter auf und verbot neue, solange der Übergangshaushalt vom 12. November 2025 galt (Public Law 119-37, Section 120); der Übergangshaushalt für das Haushaltsjahr 2027 enthält kein solches Verbot (Public Law 119-103). Aufgaben, die ein Gesetz zuweist, müssen weiter erledigt werden; die Anordnung von 2025 stellte Aufgaben, die kein Gesetz verlangt, an die erste Stelle des Abbaus."
+          },
+          "sources": [
+            "scotus_24a1174",
+            "fr_2025_02762",
+            "plaw_119_37",
+            "plaw_119_103"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "en": "One-time costs come first and are not in the amount: pay during administrative leave, severance pay, payment for unused annual leave, separation incentives, and unemployment compensation for former federal employees, which their agencies pay for. The Office of Personnel Management (OPM) puts the one-time cost of the paid leave in the 2025 deferred resignation program at less than 3% of total basic payroll; since 2026, such leave is limited to 12 weeks at a time unless OPM and OMB approve more, and OPM's rule on it took effect on November 18, 2026. Employees who retire early draw their pensions sooner. If those who leave find no work, their income and payroll taxes are lost as well; the calculation assumes they work elsewhere.",
+            "de": "Zuerst fallen einmalige Kosten an, die im Betrag nicht enthalten sind: Gehalt während der bezahlten Freistellung, Abfindungen, die Auszahlung nicht genommenen Urlaubs, Prämien für freiwilliges Ausscheiden und Arbeitslosengeld für frühere Bundesbeschäftigte, das ihre Behörden bezahlen. Die Personalbehörde OPM beziffert die einmaligen Kosten der bezahlten Freistellung im Programm von 2025 auf weniger als 3 % der gesamten Grundgehälter; seit 2026 ist eine solche Freistellung auf 12 Wochen am Stück begrenzt, wenn OPM und OMB nicht mehr genehmigen, und die Verordnung der OPM dazu gilt seit dem 18. November 2026. Wer früh in Ruhestand geht, bezieht die Pension früher. Finden die Ausscheidenden keine Arbeit, gehen auch ihre Einkommen- und Lohnsummensteuern verloren; die Rechnung nimmt an, dass sie anderswo arbeiten."
+          },
+          "sources": [
+            "fr_2026_21320"
+          ]
+        }
+      ],
+      "sources": [
+        "omb_objclass_fy2027",
+        "omb_ap_workforce_fy2027",
+        "omb_ap_management_fy2027",
+        "omb_pbd_outlays_fy2027",
+        "fr_2026_21320",
+        "bls_ces_federal"
+      ]
     }
   ]
 }

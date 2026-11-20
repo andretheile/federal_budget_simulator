@@ -4,10 +4,15 @@
     python3 pipeline/us/measures.py            print every figure the measures use, with its source
     python3 pipeline/us/measures.py --check    also compare the constants in policies.json with the recomputed ones;
                                                exit status 1 on a difference
+    python3 pipeline/us/measures.py --write    replace the generated effects in policies.json (see below)
 
 policies.json is written by hand, like the German one; its notes show the arithmetic. This script makes the
 constants in the effects reproducible: where an effect's factor or amount is computed from a source, the
 computation is here, and --check fails if policies.json does not hold the result.
+
+One measure's effects are generated rather than written by hand: those of `federal_workforce_cut`, one per budget
+item and group of agencies, from OMB's object class data (workforce.py). --write puts them into the measure, whose
+other parts (label, summary, params, catches, sources) stay as written; --check compares them in full.
 
 Constants read by hand from documents (not parsed) are marked HAND with the place they were read.
 """
@@ -28,6 +33,16 @@ NATO_US_2025 = 3.22
 TARIFF_IMPORT_LOSS = 0.20
 # HAND: Joint Committee on Taxation, JCX-11-21, Table 1, income and payroll tax offset for 2025.
 JCT_OFFSET_2025 = 0.221
+# HAND: IRS Publication 5901 (February 2024), p. 2: revenue from IRS enforcement, tax years 2020-2021, $ billion a year.
+IRS_ENFORCEMENT_REVENUE = 63e9
+
+
+def workforce():
+    """The module behind `federal_workforce_cut`; importing it builds the budget tree in memory."""
+    if HERE not in sys.path[:1]:
+        sys.path.insert(0, HERE)
+    import workforce as wf
+    return wf
 
 
 def budget_leaf(node_id):
@@ -121,6 +136,14 @@ def figures():
             f["customs_%s_%s" % (name, tag)] = mts("4", date, "Customs Duties", col)
     f["tariff_scale"] = round(f["imports_fy2025"] * 0.01 * (1 - TARIFF_IMPORT_LOSS))
     f["tariff_offset"] = JCT_OFFSET_2025
+    # federal civilian workforce (workforce.py; amounts in dollars, employment in people)
+    wf = workforce()
+    f.update(wf.figures())
+    share = f["wf_retirement_share"]
+    f["wf_saving_per_point"] = f["wf_base"] * 0.01 * (1 - share)
+    f["wf_saving_default_12"] = f["wf_saving_per_point"] * 12
+    f["wf_irs_cut_12"] = f["wf_irs_2025"] * 0.12
+    f["wf_irs_enforcement_12"] = IRS_ENFORCEMENT_REVENUE * 0.12
     return f
 
 
@@ -135,9 +158,38 @@ def expected(f):
     ]
 
 
+def check_generated(policies):
+    """The generated effects of `federal_workforce_cut` against policies.json, in full."""
+    wf = workforce()
+    policy = policies.get(wf.POLICY)
+    if policy is None:
+        return ["%s: missing" % wf.POLICY]
+    want, have = wf.effects(), policy.get("effects", [])
+    problems = []
+    if len(want) != len(have):
+        problems.append("%s: %d effects in policies.json, %d generated (run measures.py --write)" % (wf.POLICY, len(have), len(want)))
+    for i, (a, b) in enumerate(zip(have, want)):
+        if a != b:
+            problems.append("%s effects/%d (%s): differs from the generated effect (run measures.py --write)" % (wf.POLICY, i, b["target"]))
+    return problems
+
+
+def write_generated():
+    wf = workforce()
+    path = os.path.join(PACK, "policies.json")
+    data = json.load(open(path, encoding="utf-8"))
+    policy = next((p for p in data["policies"] if p["id"] == wf.POLICY), None)
+    if policy is None:
+        sys.exit("policies.json has no measure %s; write its card first" % wf.POLICY)
+    policy["effects"] = wf.effects()
+    with open(path, "w", encoding="utf-8") as out:
+        out.write(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+    print("wrote %d effects of %s into %s" % (len(policy["effects"]), wf.POLICY, path))
+
+
 def check(f):
     policies = {p["id"]: p for p in json.load(open(os.path.join(PACK, "policies.json"), encoding="utf-8"))["policies"]}
-    problems = []
+    problems = check_generated(policies)
     for pid, path, want in expected(f):
         node = policies.get(pid)
         try:
@@ -152,9 +204,11 @@ def check(f):
 
 
 if __name__ == "__main__":
+    if "--write" in sys.argv:
+        write_generated()
     f = figures()
     for key, value in f.items():
-        print("%-28s %s" % (key, "{:,.6f}".format(value) if abs(value) < 100 else "{:,.0f}".format(value)))
+        print("%-32s %s" % (key, "{:,.6f}".format(value) if abs(value) < 100 else "{:,.0f}".format(value)))
     if "--check" in sys.argv:
         problems = check(f)
         for p in problems:
