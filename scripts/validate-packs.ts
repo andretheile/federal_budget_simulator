@@ -21,6 +21,8 @@ import {
   formatIssue,
   goalProgress,
   isComparablePlan,
+  measurePhase,
+  measuresFrom,
   projectScenario,
   resolveDebtAssumptions,
   shareOfGdp,
@@ -102,6 +104,35 @@ function printSummary(pack: CountryPack): void {
 }
 
 /** Each collection: how many measures it lists and what they do together at default parameters. */
+/**
+ * When measures act in the debt projection: the first year measures can act, and for each measure
+ * with timing its start and build-up, and the year of its full effect at default settings.
+ */
+function printTiming(pack: CountryPack): void {
+  const timed = pack.policies.filter((policy) => policy.timing);
+  if (!pack.debt?.measuresFrom && timed.length === 0) return;
+  console.log(`  timing in the debt projection: measures act from ${measuresFrom(pack)}, in full unless listed here`);
+  if (timed.length === 0) return;
+  const width = Math.max(...timed.map((policy) => policy.id.length));
+  const describe = (phase: { from?: string; years?: number; yearsPerUnit?: number }, unit?: string): string => {
+    const parts = [phase.from ? `from ${phase.from}` : `from ${measuresFrom(pack)}`];
+    if (phase.years) parts.push(`over ${phase.years} years`);
+    if (phase.yearsPerUnit) parts.push(`${phase.yearsPerUnit} years per unit of ${unit}`);
+    if (!phase.years && !phase.yearsPerUnit) parts.push("at once");
+    return parts.join(", ");
+  };
+  for (const policy of timed) {
+    const timing = policy.timing!;
+    const phase = measurePhase(pack, policy.id)!;
+    const rule = timing.param
+      ? `at or above the baseline of ${timing.param}: ${describe(timing, timing.param)}; below: ${describe(timing.below ?? timing, timing.param)}`
+      : describe(timing);
+    const atDefaults = phase.years === 0 ? `full from ${phase.from}` : `${phase.from} to full in ${phase.full} (${phase.years} years)`;
+    console.log(`    ${policy.id.padEnd(width)}  ${rule}`);
+    console.log(`    ${"".padEnd(width)}  at default settings: ${atDefaults}`);
+  }
+}
+
 function printCollections(pack: CountryPack): void {
   const collections = pack.collections ?? [];
   if (collections.length === 0) return;
@@ -271,6 +302,7 @@ function main(): number {
       printIssues("warnings", result.warnings);
       printSummary(result.pack);
       printCollections(result.pack);
+      printTiming(result.pack);
       printGoals(result.pack);
       printDebtSummary(result.pack);
     } else {

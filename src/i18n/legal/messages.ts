@@ -21,9 +21,16 @@ export interface LegalMessages {
   phone: string;
 
   // --- imprint ---
+  /**
+   * Headings above the operator and the person responsible for the content. The ones that cite a
+   * provision are used only with a postal address, which the provision asks for; without one the
+   * plain headings stand in (see Party in src/site/config.ts).
+   */
   imprintBasis: string;
+  imprintProvider: string;
   contact: string;
   contentResponsible: string;
+  contentResponsiblePlain: string;
 
   // --- privacy statement ---
   controllerTitle: string;
@@ -36,6 +43,8 @@ export interface LegalMessages {
   appStorage(key: string): string;
   appNoThirdParty: string;
   appLinks: string;
+  /** The footer's link to the source code on GitHub: nothing goes there before it is followed. */
+  appRepository: string;
   hostingTitle: string;
   hosting(name: string, address: string): string;
   location(country: string): string;

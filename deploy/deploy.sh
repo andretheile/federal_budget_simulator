@@ -15,8 +15,9 @@
 # and, for the build, npm. See deploy/README.md.
 #
 # Before anything is uploaded, the script says in a box whether the site has its
-# imprint and privacy statement (site.config.json, see the README) and whether
-# search engines may index it. It publishes either way: read the box.
+# imprint and privacy statement (site.config.json, see the README), whether the
+# imprint lacks a postal address, and whether search engines may index it. It
+# publishes either way: read the box.
 
 set -euo pipefail
 

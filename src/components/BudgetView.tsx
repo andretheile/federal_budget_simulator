@@ -107,7 +107,7 @@ export function BudgetView({ result, selection, onSelect, highlight }: BudgetVie
   const selectedKey = segmentKeyOf(layout, selection);
 
   return (
-    <section className="budget" aria-labelledby="budget-title">
+    <section className="budget" id="budget" aria-labelledby="budget-title" tabIndex={-1}>
       <header className="section-head">
         <h2 id="budget-title">{t.budget.title(pack.country.baseYear)}</h2>
         <p>

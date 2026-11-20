@@ -1,0 +1,6 @@
+# Crawling is allowed in every state of the build. Whether a search engine may index the site is
+# decided by the robots tag in index.html, which the build keeps unless the site config says
+# "indexable": true (see "Running your own instance" in the README). A crawler that may not fetch
+# the page cannot see that tag.
+User-agent: *
+Disallow:

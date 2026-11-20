@@ -55,7 +55,8 @@ From the repository root:
 The script
 
 1. runs `npm run build` and stops if the build fails or `dist/index.html` is missing,
-   then shows in a box whether the build has an imprint and a privacy statement (see below),
+   then shows in a box whether the build has an imprint and a privacy statement, with or
+   without a postal address, and whether it may be indexed (see below),
 2. uploads `docker-compose.yml`, `nginx.conf` and `.env`, then the contents of `dist/` to `site/`,
 3. runs `docker compose up -d` on the server, which leaves a running, unchanged container alone,
 4. if `nginx.conf` changed: checks it with `nginx -t` inside the container and reloads nginx.
@@ -88,6 +89,17 @@ in, and `deploy.sh` shows it before it uploads anything:
 ##  Legal pages: NONE. No site config (site.config.json or SITE_CONFIG), so the
 ##  site has no imprint and no privacy statement and asks search engines not to
 ##  index it.
+################################################################################
+```
+
+With a config, the box names the file and says whether search engines may
+index the site. If the imprint has no postal address, it says that too:
+
+```text
+################################################################################
+##  Legal pages: included, from /Users/you/budget-site.json, WITHOUT a postal
+##  address for the operator. The site may be indexed by search engines
+##  ("indexable": true).
 ################################################################################
 ```
 

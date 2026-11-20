@@ -17,6 +17,7 @@ export {
 
 export {
   simulate,
+  simulateWeighted,
   simulatePolicy,
   resolveParams,
   resolveCurve,
@@ -44,6 +45,8 @@ export {
 } from "./simulate.ts";
 
 export { emptyScenario, encodeScenario, decodeScenario, encodeNumber, decodeNumber } from "./scenario.ts";
+
+export { measurePhase, measuresFrom, shareInYear, type MeasurePhase } from "./timing.ts";
 
 export { goalProgress, measureGoal, goalLevel, findGoal, defaultGoal, type GoalProgress } from "./goals.ts";
 

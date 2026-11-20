@@ -227,6 +227,65 @@ describe("the imprint", () => {
     expect(text(".legal section:nth-of-type(3) .legal__lines")).toBe("Erika MustermannMusterstraße 112345 Musterstadt");
     expect(container.querySelector(".legal__addition")).toBeNull();
   });
+
+  it("gives name and contact, and no empty line, when the operator has no postal address", () => {
+    const { address: _, ...nameOnly } = example.operator;
+    const site: SiteConfig = { ...example, operator: nameOnly, contentResponsible: undefined, imprint: undefined };
+    for (const language of ["de", "en"]) {
+      mount(`#lang=${language}&p=imprint`, site);
+      const names = [...container.querySelectorAll(".legal__body section:not(:nth-of-type(2)) .legal__lines")];
+      expect(names.map((lines) => [...lines.children].map((line) => line.textContent))).toEqual([["Erika Mustermann"], ["Erika Mustermann"]]);
+      expect(query<HTMLAnchorElement>('.legal a[href^="mailto:"]').getAttribute("href")).toBe("mailto:kontakt@example.org");
+      expect([...container.querySelectorAll(".legal__body :is(p, span, h3)")].filter((element) => element.textContent?.trim() === "")).toEqual([]);
+      act(() => root?.unmount());
+      root = undefined;
+    }
+  });
+
+  describe("cites § 5 DDG and § 18 Abs. 2 MStV in a heading only above a postal address", () => {
+    const headings = (): string[] => [...container.querySelectorAll(".legal__body h3")].map((heading) => heading.textContent ?? "");
+    const { address: _operatorAddress, ...operatorNameOnly } = example.operator;
+    const { address: _responsibleAddress, ...responsibleNameOnly } = example.contentResponsible!;
+    const cited = {
+      de: { provider: "Angaben gemäß § 5 DDG", responsible: "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV" },
+      en: {
+        provider: "Information pursuant to § 5 DDG (German Digital Services Act)",
+        responsible: "Responsible for the content pursuant to § 18 (2) MStV (German Interstate Media Treaty)",
+      },
+    };
+    const plain = {
+      de: { provider: "Anbieter dieser Website", responsible: "Verantwortlich für den Inhalt" },
+      en: { provider: "Provider of this website", responsible: "Responsible for the content" },
+    };
+    const contact = { de: "Kontakt", en: "Contact" };
+    const cases = [
+      { state: "both with an address", site: { ...example, imprint: undefined }, provider: cited, responsible: cited },
+      {
+        state: "the operator, who is also responsible for the content, without one",
+        site: { ...example, operator: operatorNameOnly, contentResponsible: undefined, imprint: undefined },
+        provider: plain,
+        responsible: plain,
+      },
+      {
+        state: "the operator without one, the person responsible for the content with one",
+        site: { ...example, operator: operatorNameOnly, imprint: undefined },
+        provider: plain,
+        responsible: cited,
+      },
+      {
+        state: "the operator with one, the person responsible for the content without one",
+        site: { ...example, contentResponsible: responsibleNameOnly, imprint: undefined },
+        provider: cited,
+        responsible: plain,
+      },
+    ];
+    for (const { state, site, provider, responsible } of cases) {
+      it.each(["de", "en"] as const)(`${state}, in %s`, (language) => {
+        mount(`#lang=${language}&p=imprint`, site);
+        expect(headings()).toEqual([provider[language].provider, contact[language], responsible[language].responsible]);
+      });
+    }
+  });
 });
 
 describe("the privacy statement", () => {
@@ -238,6 +297,10 @@ describe("the privacy statement", () => {
     expect(page).toContain("Die Schaltfläche „Teilen“ kopiert die Adresse");
     expect(page).toContain("Die Anwendung setzt keine Cookies.");
     expect(page).toContain("Eintrag „budget-simulator:language“");
+    // The link to the source code in the footer: nothing goes to GitHub before it is followed.
+    expect(page).toContain(
+      "Die Fußzeile verlinkt auf den Quelltext der Anwendung bei GitHub: Bevor Sie diesem Link folgen, wird nichts an GitHub übertragen; danach gelten die Datenschutzbestimmungen von GitHub.",
+    );
     // Hosting and the server log, from the config.
     expect(page).toContain("Die Website liegt auf einem Server von Beispiel-Hosting GmbH, Serverweg 2, 12345 Musterstadt, Deutschland.");
     expect(page).toContain("Standort des Servers: Deutschland.");
@@ -267,6 +330,9 @@ describe("the privacy statement", () => {
     const page = text(".legal");
     expect(document.title).toBe("Privacy policy – Budget Simulator");
     expect(page).toContain("The application sets no cookies.");
+    expect(page).toContain(
+      "The footer links to the application’s source code on GitHub: nothing is sent to GitHub before you follow that link, and after that GitHub’s own privacy terms apply.",
+    );
     expect(page).toContain("Server location: Germany.");
     expect(page).toContain("outside the EU and the EEA (United States).");
     expect(page).toContain("A blank line starts a new paragraph.");
@@ -287,5 +353,17 @@ describe("the privacy statement", () => {
     expect(page).toContain("Jeder Eintrag wird nach 14 Tagen gelöscht.");
     expect(page).not.toContain("Auslieferung über");
     expect(container.querySelector(".legal__updated")).toBeNull();
+  });
+
+  it("names the controller by name and e-mail when the operator has no postal address", () => {
+    const { address: _, ...nameOnly } = example.operator;
+    mount("#lang=de&p=privacy", { ...example, operator: nameOnly });
+    const controller = query(".legal__body section:first-of-type");
+    expect([...controller.querySelectorAll(".legal__lines span")].map((line) => line.textContent)).toEqual([
+      "Erika Mustermann",
+      "E-Mail: kontakt@example.org",
+      "Telefon: +49 30 1234567",
+    ]);
+    expect([...container.querySelectorAll(".legal__body :is(p, span, h3)")].filter((element) => element.textContent?.trim() === "")).toEqual([]);
   });
 });

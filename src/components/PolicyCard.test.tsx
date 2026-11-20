@@ -7,7 +7,7 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { Simulator } from "../App.tsx";
-import { testland, testlandCopy } from "../engine/__fixtures__/testland.ts";
+import { testland, testlandCopy, testlandTimed } from "../engine/__fixtures__/testland.ts";
 import type { CountryPack } from "../engine/index.ts";
 
 let container: HTMLDivElement;
@@ -138,5 +138,100 @@ describe("an effect of nothing", () => {
     mount("#lang=en&s=halve_mp_pay", almostNothing());
     expect(text(".scoreboard__change")).toContain("XTS 0 compared with 2024");
     expect(text(".scoreboard__change")).not.toContain("−XTS 0");
+  });
+});
+
+describe("a measure that acts later in the debt projection (Testland with timing)", () => {
+  const timed = testlandTimed();
+  /** The line under the figure, as shown (not its invisible stand-ins). */
+  const line = (id: string): string => text(`#policy-${id} .policy__timing > span:not(.policy__stand-in)`);
+  const slide = (id: string, value: number): void =>
+    act(() => {
+      const slider = query<HTMLInputElement>(`#policy-${id} input[type=range]`);
+      Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")!.set!.call(slider, String(value));
+      slider.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+
+  it("says under the figure that it is the full effect, and when the projection has it", () => {
+    mount("#lang=en", timed);
+    expect(line("cut_admin")).toBe("The figure is the full effect; in the projection of debt and interest from 2026, in full from 2030.");
+    expect(line("wealth_tax")).toBe("The figure is the full effect; in the projection of debt and interest from 2028.");
+    // The amount stays the full yearly effect, as on any other card.
+    expect(text("#policy-cut_admin .policy__amount")).toBe("+XTS 40");
+    // A measure without timing of its own says nothing of the kind.
+    expect(document.querySelector("#policy-halve_mp_pay .policy__timing")).toBeNull();
+    act(() => root?.unmount());
+    mount("#lang=de", timed);
+    expect(line("defense_target")).toBe("Die Zahl ist die volle Wirkung; in der Rechnung zu Schulden und Zinsen ab Juli 2027, voll ab 2030.");
+  });
+
+  it("follows the slider, while the line keeps the room of its longest form", () => {
+    mount("#lang=en", timed);
+    expand("#policy-defense_target");
+    const standIns = (): string[] =>
+      [...document.querySelectorAll("#policy-defense_target .policy__stand-in")].map((element) => plain(element.textContent));
+    const room = standIns();
+    // The lower end, the upper end and the baseline are among them, with the widest digits; hidden from screen readers.
+    expect(room.length).toBeGreaterThanOrEqual(2);
+    expect(room.every((entry) => /^The figure is the full effect; in the projection of debt and interest from /.test(entry))).toBe(true);
+    expect(room.some((entry) => entry.includes("in full from 8888"))).toBe(true);
+    for (const element of document.querySelectorAll("#policy-defense_target .policy__stand-in")) expect(element.getAttribute("aria-hidden")).toBe("true");
+    slide("defense_target", 4);
+    expect(line("defense_target")).toBe("The figure is the full effect; in the projection of debt and interest from July 2027, in full from 2032.");
+    slide("defense_target", 1);
+    expect(line("defense_target")).toBe("The figure is the full effect; in the projection of debt and interest from 2026, in full from 2027.");
+    // The longest forms (the ends of the slider) are kept as room whatever the setting.
+    const longest = (entries: string[]): number => Math.max(...entries.map((entry) => entry.length));
+    expect(longest(standIns())).toBe(longest(room));
+  });
+
+  it("gives the pack's note and sources in the details", () => {
+    mount("#lang=de", timed);
+    expand("#policy-wealth_tax");
+    const section = [...document.querySelectorAll("#policy-wealth_tax .policy__section")].find(
+      (element) => plain(element.querySelector("h4")?.textContent) === "Wann sie wirkt",
+    );
+    expect(section).toBeDefined();
+    expect(plain(section!.querySelector(".policy__timing-detail")?.textContent)).toBe(
+      // The wealth tax's timing has no slider: no "at this setting".
+      "In der Rechnung zu Schulden und Zinsen wirkt die Maßnahme ab 2028.",
+    );
+    expect(plain(section!.querySelector(".policy__timing-note")?.textContent)).toBe("Die erste Veranlagung ist für 2028.");
+    expect(section!.querySelector(".sources")).not.toBeNull();
+  });
+});
+
+describe("a central estimate whose range reaches the other side of zero", () => {
+  /** Halving MPs' pay (+5) with an estimate between −5 and +10. */
+  function crossing(): CountryPack {
+    const pack = testlandCopy();
+    const policy = pack.policies.find((candidate) => candidate.id === "halve_mp_pay")!;
+    for (const effect of policy.effects) effect.uncertainty = { low: -1, high: 2 };
+    return pack;
+  }
+
+  it("says so on the card, with the range, not only in the details", () => {
+    mount("#lang=de", crossing());
+    expect(text("#policy-halve_mp_pay .policy__direction")).toBe("verbessert den Saldo");
+    expect(text("#policy-halve_mp_pay .policy__crosses")).toBe("Spanne −5 XTS bis +10 XTS: Je nach Schätzung kann die Maßnahme den Saldo auch verschlechtern.");
+    act(() => root?.unmount());
+    mount("#lang=en&s=L.central", crossing());
+    expect(text("#policy-halve_mp_pay .policy__crosses")).toBe("Range −XTS 5 to +XTS 10: depending on the estimates, the measure may also burden this level.");
+  });
+
+  it("is not mentioned where the range stays on one side", () => {
+    mount("#lang=en");
+    expect(container.querySelector(".policy__crosses")).toBeNull();
+  });
+});
+
+describe("the timing line at a setting that changes nothing", () => {
+  it("is empty but keeps its room", () => {
+    // The defence target at its baseline of 2 % changes nothing.
+    mount("#lang=en&s=defense_target.share.2", testlandTimed());
+    const timing = query("#policy-defense_target .policy__timing");
+    expect(text("#policy-defense_target .policy__amount")).toBe("XTS 0");
+    expect(timing.querySelector("span:not(.policy__stand-in)")).toBeNull();
+    expect(timing.querySelectorAll(".policy__stand-in").length).toBeGreaterThan(0);
   });
 });

@@ -1,15 +1,17 @@
-import type { DebtIntroFacts, DebtLeadText, DebtMessages } from "./messages.ts";
+import type { DebtIntroFacts, DebtLeadText, DebtMessages, PhaseWords } from "./messages.ts";
 
-function intro({ baseYear, plan, measuresOn }: DebtIntroFacts): string {
+function intro({ baseYear, plan }: DebtIntroFacts): string {
   if (!plan) {
-    return `This is how debt and interest would develop if the budget of ${baseYear}, with the measures switched on, kept its size relative to the economy.`;
+    return `This is how debt and interest would develop if the budget of ${baseYear} kept its size relative to the economy.`;
   }
-  return (
-    `Up to ${plan.until}, debt and growth follow the official plan “${plan.label}”; after that, the budget before interest keeps the share of economic output it has in ${plan.until}, and the assumptions apply. ` +
-    (measuresOn
-      ? "With the measures switched on, the path departs from the plan from the first year."
-      : "Measures that are switched on are added from the first year.")
-  );
+  return `Up to ${plan.until}, debt and growth follow the official plan “${plan.label}”; after that, the budget before interest keeps the share of economic output it has in ${plan.until}, and the assumptions apply.`;
+}
+
+function when({ start, startYear, full, last }: PhaseWords): string {
+  if (last !== undefined && startYear > last) return `from ${start}, after the end of the calculation`;
+  if (full === undefined) return `from ${start}`;
+  if (last !== undefined && full > last) return `from ${start}, in full only from ${full}, after the end of the calculation`;
+  return `from ${start}, in full from ${full}`;
 }
 
 function lead(f: DebtLeadText): string {
@@ -75,11 +77,21 @@ export const debtEn: DebtMessages = {
     debt: (year) => `Debt in ${year}`,
     debtUnit: "of economic output (GDP)",
     withMeasures: "with the measures switched on",
+    withMeasuresBy: (year) => `with the measures switched on, as far as they act by ${year}`,
     noMeasures: "no measure switched on",
     rate: (rate) => `at ${rate} interest on new debt`,
     range: (range) => `${range}, depending on the estimates`,
     without: (value) => `without the measures: ${value}`,
     inYear: (year, value) => `${year}: ${value}`,
+  },
+  timing: {
+    from: (year, measuresOn) =>
+      measuresOn
+        ? `In this calculation measures act from ${year}; until then the path with measures is the path without them.`
+        : `Measures that are switched on act in this calculation from ${year}.`,
+    why: (year) => `Why from ${year}?`,
+    laterTitle: "Acting later or step by step:",
+    when,
   },
   teaserLink: (year) => `Where does this lead? Debt and interest to ${year}`,
   teaserFigure: (year, interest, without, baseYear, today) =>

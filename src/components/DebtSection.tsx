@@ -18,8 +18,10 @@ import { useUi, type Ui } from "../app/ui.ts";
 import type { DebtAssumptions, LevelFilter } from "../engine/index.ts";
 import { decimalsIn } from "../i18n/format.ts";
 import type { DebtLeadText } from "../i18n/debt/messages.ts";
+import { laterPhases, notInFullBy, phaseWords } from "../app/phaseModel.ts";
 import "../styles/debt.css";
 import { ArrowDown, ResetIcon } from "./icons.tsx";
+import { SourceList } from "./primitives.tsx";
 
 /** The charts, assumptions and lists of the section, a part of the app of its own. */
 export const debtModule = lazyModule(() => import("./DebtBody.tsx"));
@@ -65,11 +67,13 @@ export function leadText(ui: Ui, headline: DebtHeadline): DebtLeadText {
  * Interest received instead of paid, or the debt paid off, are said in the sentence only: there is
  * then no figure that would read the same way, and the sentence stands alone at its larger size.
  */
-export function DebtFigures({ facts, measuresOn }: { facts: DebtLeadText; measuresOn: boolean }) {
+export function DebtFigures({ facts, measuresOn, partial = false }: { facts: DebtLeadText; measuresOn: boolean; partial?: boolean }) {
   const { t } = useUi();
   const f = t.debt.figures;
   if (facts.paidOff !== undefined) return null;
-  const condition = `${measuresOn ? f.withMeasures : f.noMeasures}, ${f.rate(facts.rate)}`;
+  // A measure that starts later or builds up may not be in full by the last year: the label says so.
+  const measures = !measuresOn ? f.noMeasures : partial ? f.withMeasuresBy(facts.year) : f.withMeasures;
+  const condition = `${measures}, ${f.rate(facts.rate)}`;
   const tile = (key: string, what: string, value: string, unit: string, notes: (string | false | undefined)[]) => (
     <div key={key} className={`dfig dfig--${key}`}>
       <dt className="dfig__label">
@@ -101,6 +105,47 @@ export function DebtFigures({ facts, measuresOn }: { facts: DebtLeadText; measur
         f.inYear(facts.baseYear, facts.debtToday),
       ])}
     </dl>
+  );
+}
+
+/**
+ * When the measures act in this calculation: from the pack's first year (its reason one click away),
+ * and, for switched-on measures that start later or build up, which and when. A pack's year and
+ * dates are the measures' own; nothing is written here.
+ */
+export function DebtTiming({ view, last }: { view: DebtView; last: number }) {
+  const ui = useUi();
+  const { t, pack, language } = ui;
+  const year = view.projection.measuresFrom;
+  const reason = pack.debt?.measuresFrom;
+  const later = laterPhases(view.projection.phases);
+  return (
+    <div className="debt__timing">
+      <p>{t.debt.timing.from(year, view.measuresOn)}</p>
+      {reason && (
+        <details className="debt__why">
+          <summary>{t.debt.timing.why(year)}</summary>
+          <p>{ui.text(reason.note)}</p>
+          {reason.sources && reason.sources.length > 0 && <SourceList ids={reason.sources} />}
+        </details>
+      )}
+      {later.length > 0 && (
+        <>
+          <p className="debt__later-title">{t.debt.timing.laterTitle}</p>
+          <ul className="debt__later">
+            {later.map((phase) => {
+              const policy = pack.policies.find((candidate) => candidate.id === phase.policy);
+              return (
+                <li key={phase.policy}>
+                  <span className="debt__later-name">{ui.text(policy?.label) || phase.policy}:</span>{" "}
+                  {t.debt.timing.when(phaseWords(phase, language, last))}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+    </div>
   );
 }
 
@@ -208,7 +253,7 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
   // Where the calculation starts from: an official plan it follows in its years, or the base year's budget.
   const plan = view.projection.followed && ui.pack.debt?.plans?.find((candidate) => candidate.id === view.projection.followed?.plan);
   const followed = plan && view.projection.followed ? { label: ui.text(plan.label), until: view.projection.followed.until } : undefined;
-  const intro = t.debt.intro({ baseYear: headline.baseYear, plan: followed, measuresOn: view.measuresOn });
+  const intro = t.debt.intro({ baseYear: headline.baseYear, plan: followed });
 
   // After the visitor changes an assumption, screen readers hear the new result once the slider rests.
   const [announced, setAnnounced] = useState("");
@@ -240,8 +285,9 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
       </header>
       {/* The result, as two figures with their labels, then the sentence that says it in full. Where
           the calculation starts from follows under the charts. */}
-      <DebtFigures facts={facts} measuresOn={view.measuresOn} />
+      <DebtFigures facts={facts} measuresOn={view.measuresOn} partial={notInFullBy(view.projection.phases, headline.year)} />
       <p className={`debt__lead${figures ? "" : " debt__lead--alone"}`}>{lead}</p>
+      <DebtTiming view={view} last={headline.year} />
       {level !== "all" && <p className="debt__level">{t.debt.wholeState(ui.levelName(level))}</p>}
       <p className="visually-hidden" aria-live="polite">
         {announced}

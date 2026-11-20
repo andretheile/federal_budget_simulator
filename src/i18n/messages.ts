@@ -26,6 +26,14 @@ export interface Messages {
     fixture: string;
     errors(count: number): string;
   };
+  /** The row in the floating band that leads to the sections where the page has one column. */
+  nav: {
+    /** Name of the navigation landmark. */
+    label: string;
+    measures: string;
+    budget: string;
+    debt: string;
+  };
   header: {
     level: string;
     allLevels: string;
@@ -122,6 +130,21 @@ export interface Messages {
     aloneLevel(level: string): string;
     combined(amount: string): string;
     combinedHint: string;
+    /**
+     * Under the card's figure for a measure that acts later or builds up in the debt projection:
+     * that the figure is the full effect, and when the projection has it (`when`, from DebtMessages.timing).
+     */
+    timingLine(when: string): string;
+    /**
+     * Under the figure, where the range of the estimate reaches the other side of zero: the range,
+     * and that the measure may also do the opposite. `opposite`: what it then does ("worsen" the
+     * balance or "burden" the level shown, or the reverse), `level`: whether a single level is shown.
+     */
+    rangeCrossesZero(range: string, opposite: "worsen" | "improve", level: boolean): string;
+    /** Heading of the details on when the measure acts. */
+    timingTitle: string;
+    /** The first sentence of those details; `setting`: the timing depends on a slider, so it is said for its current value. */
+    timingDetail(when: string, setting: boolean): string;
     ofAll(side: "revenue" | "expenditure", share: string): string;
     ofLevel(side: "revenue" | "expenditure", share: string): string;
     perInhabitant(amount: string): string;

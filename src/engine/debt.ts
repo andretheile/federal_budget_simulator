@@ -28,12 +28,21 @@
  * The projection is always for the whole state: `projectDebt` refuses a result filtered to one level
  * of government, `projectScenario` ignores the scenario's level filter.
  *
+ * Measures act from the first year measures can act (debt.json `measuresFrom`, by default the
+ * first projection year), each in full unless its `timing` says it starts later or builds up over
+ * years (timing.ts). Where every measure acts in full from the first projection year, the paths
+ * with measures are computed exactly as described above. Otherwise each year's primary balance and
+ * revenue with measures come from the scenario simulated with each measure at its share of that
+ * year (simulateWeighted), so measures that act on the same items interact as they do in full; see
+ * timedEffects.
+ *
  * The starting path is either the base year's budget, as above, or an official plan (debt.json
  * `plans`) that the projection follows in the plan's years and continues from its last year with
  * the assumptions; see followPaths. Which one is the pack's choice (debt.json `follow`), and the
  * visitor can choose the other (DebtAssumptions.follow).
  */
-import { simulate, type Scenario, type SimulationResult, type Totals } from "./simulate.ts";
+import { simulate, simulateWeighted, type Scenario, type SimulationResult, type Totals } from "./simulate.ts";
+import { measurePhase, measuresFrom, shareInYear, type MeasurePhase } from "./timing.ts";
 import {
   DEBT_ASSUMPTION_IDS,
   type CountryPack,
@@ -133,6 +142,17 @@ export interface DebtProjection {
   reformLow: DebtPath;
   /** From the high end of the measures' range (reformHigh.balance): its debt is the lower. */
   reformHigh: DebtPath;
+  /**
+   * The first year in which measures can act (debt.json `measuresFrom`, by default the first
+   * projection year). Before it the paths with measures are the path without them; if it lies
+   * after the first projection year, their base-year record is the observed base year as well.
+   */
+  measuresFrom: number;
+  /**
+   * When each measure that is switched on acts, in pack order: start, years of build-up, the first
+   * year of its full effect, and whether it acts in full from `measuresFrom` (`immediate`).
+   */
+  phases: MeasurePhase[];
 }
 
 /** The numeric fields of DebtYear, for the search helpers. */
@@ -354,7 +374,7 @@ function followPaths(
   setup: Setup,
   plan: Followed,
   base: { totals: Totals; interest: number },
-  scenarios: { totals: Totals; interest: number }[],
+  scenarios: { totals: Totals; interest: number; at?: (t: number) => YearEffect }[],
 ): { paths: Omit<DebtPath, "longRun">[]; held: number[] } {
   const { baseYear, share, market, drift, horizon } = setup;
   const steps = Math.max(horizon, plan.last);
@@ -367,6 +387,7 @@ function followPaths(
     totals: Totals,
     interest: number,
     primaryOf: (t: number, debt: number, due: number) => number,
+    revenueShareOf?: (t: number) => number,
   ): Omit<DebtPath, "longRun"> & { primary: number[] } => {
     const revenueShare = totals.revenue / setup.gdp;
     const start = record(baseYear, setup.gdp, totals.revenue, totals.balance + interest, interest, setup.debt, setup.rate);
@@ -390,7 +411,8 @@ function followPaths(
         rate = paid;
         debt = Math.max(0, debt + deficit);
       }
-      if (t <= horizon) years.push(record(baseYear + t, gdp[t], revenueShare * gdp[t], primaryBalance, due, debt, rate));
+      const revenue = (revenueShareOf ? revenueShareOf(t) : revenueShare) * gdp[t];
+      if (t <= horizon) years.push(record(baseYear + t, gdp[t], revenue, primaryBalance, due, debt, rate));
     }
     return { start, years, primary };
   };
@@ -410,12 +432,111 @@ function followPaths(
   const paths: Omit<DebtPath, "longRun">[] = [];
   const held: number[] = [];
   for (const scenario of scenarios) {
+    // The change once every measure is in full; with timing, each year has its own.
     const change = (scenario.totals.balance + scenario.interest) / setup.gdp - baseShare;
-    const path = run(scenario.totals, scenario.interest, (t) => settled.primary[t] + change * gdp[t]);
+    const at = scenario.at;
+    const path = at
+      ? run(
+          scenario.totals,
+          scenario.interest,
+          (t) => {
+            const effect = at(t);
+            return settled.primary[t] + ((effect.totals.balance + effect.interest) / setup.gdp - baseShare) * gdp[t];
+          },
+          (t) => at(t).totals.revenue / setup.gdp,
+        )
+      : run(scenario.totals, scenario.interest, (t) => settled.primary[t] + change * gdp[t]);
     paths.push({ start: path.start, years: path.years });
     held.push(heldShare + change);
   }
   return { paths, held };
+}
+
+/** One year of a path with measures: the simulated totals and the scenario's interest node in that year. */
+interface YearEffect {
+  totals: Totals;
+  interest: number;
+}
+
+/**
+ * Each year's effect of the measures on the three paths with measures, where some measure starts
+ * later than the first projection year or builds up; undefined where every measure acts in full
+ * from the first projection year, so that the projection is computed exactly as without timing.
+ *
+ * In calendar year y every measure has its share s of its full effect (shareInYear). Where all
+ * shares are 0, the year is the budget without measures; where all are 1, it is `result` itself.
+ * Otherwise the scenario is simulated once more with each measure applied at its share
+ * (simulateWeighted): measures that act on the same items then interact as they do in full, for
+ * example a later measure that scales an item works on what an earlier, half-built-up one left.
+ * Years with the same shares are simulated once. Low and high end come from the same simulation,
+ * with the measures' linked ranges as in full.
+ */
+function timedEffects(
+  pack: CountryPack,
+  result: SimulationResult,
+  phases: readonly MeasurePhase[],
+  interestOf: (result: SimulationResult, path: "reform" | "baseline") => number,
+): { at: Record<"reform" | "reformLow" | "reformHigh", (t: number) => YearEffect>; observedStart: boolean } | undefined {
+  const baseYear = pack.country.baseYear;
+  const earliest = measuresFrom(pack);
+  if (result.policies.length === 0 || (earliest <= baseYear + 1 && phases.every((phase) => phase.immediate))) return undefined;
+  const scenario: Scenario = {
+    policies: Object.fromEntries(result.policies.map((policy) => [policy.id, { enabled: true, params: policy.params }])),
+    level: "all",
+  };
+  const none = { result: undefined, interest: interestOf(result, "baseline") };
+  const cache = new Map<string, { result: SimulationResult | undefined; interest: number }>();
+  const yearOf = (t: number): { result: SimulationResult | undefined; interest: number } => {
+    const shares = phases.map((phase) => shareInYear(phase, baseYear + t));
+    if (shares.every((share) => share === 0)) return none;
+    if (shares.every((share) => share === 1)) return { result, interest: interestOf(result, "reform") };
+    const key = shares.join(",");
+    let entry = cache.get(key);
+    if (!entry) {
+      const simulated = simulateWeighted(pack, scenario, new Map(phases.map((phase, i) => [phase.policy, shares[i]])));
+      entry = { result: simulated, interest: interestOf(simulated, "reform") };
+      cache.set(key, entry);
+    }
+    return entry;
+  };
+  const pick = (key: "reform" | "reformLow" | "reformHigh") => (t: number): YearEffect => {
+    const year = yearOf(t);
+    return { totals: year.result ? year.result[key] : result.baseline, interest: year.interest };
+  };
+  return { at: { reform: pick("reform"), reformLow: pick("reformLow"), reformHigh: pick("reformHigh") }, observedStart: earliest > baseYear + 1 };
+}
+
+/**
+ * A path with measures whose effect changes from year to year, otherwise computed as `path`: the
+ * primary balance and revenue of year t are those of `at(t)` as a share of base-year GDP.
+ */
+function timedPath(setup: Setup, totals: Totals, interest: number, at: (t: number) => YearEffect): Omit<DebtPath, "longRun"> {
+  const { baseYear, share, market, growth, drift, horizon } = setup;
+  const start = record(baseYear, setup.gdp, totals.revenue, totals.balance + interest, interest, setup.debt, setup.rate);
+  start.balance = totals.balance;
+  start.balanceRatio = totals.balance / setup.gdp;
+  const years: DebtYear[] = [];
+  let gdp = setup.gdp;
+  let debt = setup.debt;
+  let rate = setup.rate;
+  for (let t = 1; t <= horizon; t++) {
+    gdp *= 1 + growth;
+    const effect = at(t);
+    const primaryBalance = ((effect.totals.balance + effect.interest) / setup.gdp + drift * t) * gdp;
+    const paid = (1 - share) * rate + share * market;
+    const due = paid * debt;
+    const deficit = due - primaryBalance;
+    if (deficit > 0) {
+      const next = debt + deficit;
+      rate = (due + market * deficit) / next;
+      debt = next;
+    } else {
+      rate = paid;
+      debt = Math.max(0, debt + deficit);
+    }
+    years.push(record(baseYear + t, gdp, (effect.totals.revenue / setup.gdp) * gdp, primaryBalance, due, debt, rate));
+  }
+  return { start, years };
 }
 
 /**
@@ -452,47 +573,57 @@ export function projectDebt(pack: CountryPack, result: SimulationResult, given?:
     horizon: assumptions.horizon,
   };
   const keys = ["baseline", "reform", "reformLow", "reformHigh"] as const;
+  const measureKeys = ["reform", "reformLow", "reformHigh"] as const;
+  const phases = result.policies.flatMap((policy) => measurePhase(pack, policy.id, policy.params) ?? []);
+  const interestOf = (simulated: SimulationResult, key: "reform" | "baseline"): number =>
+    nodeId === undefined ? debt.interest.value : (simulated.nodes[nodeId]?.[key] ?? debt.interest.value);
+  const timed = timedEffects(pack, result, phases, interestOf);
+  const common = { assumptions, baseYear: setup.baseYear, refinancingShare: setup.share, baseInterest, measuresFrom: measuresFrom(pack), phases };
+  /** Where measures can act only later than the first projection year, the base year is the observed one on every path. */
+  const observed = (projection: DebtProjection): DebtProjection => {
+    if (timed?.observedStart) for (const key of measureKeys) projection[key].start = { ...projection.baseline.start };
+    return projection;
+  };
+
   const plan = typeof assumptions.follow === "string" ? debt.plans?.find((candidate) => candidate.id === assumptions.follow) : undefined;
   const followed = plan ? followedPlan(plan, setup.baseYear) : undefined;
   if (followed && followed.first <= setup.horizon) {
     const base = { totals: result.baseline, interest: baseInterest };
     const { paths, held } = followPaths(setup, followed, base, [
       base,
-      { totals: result.reform, interest: scenarioInterest },
-      { totals: result.reformLow, interest: scenarioInterest },
-      { totals: result.reformHigh, interest: scenarioInterest },
+      { totals: result.reform, interest: scenarioInterest, at: timed?.at.reform },
+      { totals: result.reformLow, interest: scenarioInterest, at: timed?.at.reformLow },
+      { totals: result.reformHigh, interest: scenarioInterest, at: timed?.at.reformHigh },
     ]);
     const projection: DebtProjection = {
-      assumptions,
-      baseYear: setup.baseYear,
-      refinancingShare: setup.share,
-      baseInterest,
+      ...common,
       baseline: { ...paths[0], longRun: { kind: "drifts" } },
       reform: { ...paths[1], longRun: { kind: "drifts" } },
       reformLow: { ...paths[2], longRun: { kind: "drifts" } },
       reformHigh: { ...paths[3], longRun: { kind: "drifts" } },
       followed: { plan: followed.id, until: setup.baseYear + Math.min(followed.last, setup.horizon) },
     };
-    // In the long run each path holds the balance it continues with after the plan, even where the
-    // horizon ends inside the plan.
+    // In the long run each path holds the balance it continues with after the plan, with every
+    // measure in full, even where the horizon ends inside the plan or a build-up.
     keys.forEach((key, i) => (projection[key].longRun = longRunDebtRatio(projection, projection[key], held[i])));
-    return projection;
+    return observed(projection);
   }
 
+  const reformPath = (key: (typeof measureKeys)[number]): Omit<DebtPath, "longRun"> =>
+    timed ? timedPath(setup, result[key], scenarioInterest, timed.at[key]) : path(setup, result[key], scenarioInterest);
   const projection: DebtProjection = {
-    assumptions,
-    baseYear: setup.baseYear,
-    refinancingShare: setup.share,
-    baseInterest,
+    ...common,
     baseline: { ...path(setup, result.baseline, baseInterest), longRun: { kind: "drifts" } },
-    reform: { ...path(setup, result.reform, scenarioInterest), longRun: { kind: "drifts" } },
-    reformLow: { ...path(setup, result.reformLow, scenarioInterest), longRun: { kind: "drifts" } },
-    reformHigh: { ...path(setup, result.reformHigh, scenarioInterest), longRun: { kind: "drifts" } },
+    reform: { ...reformPath("reform"), longRun: { kind: "drifts" } },
+    reformLow: { ...reformPath("reformLow"), longRun: { kind: "drifts" } },
+    reformHigh: { ...reformPath("reformHigh"), longRun: { kind: "drifts" } },
   };
   for (const key of keys) {
-    projection[key].longRun = longRunDebtRatio(projection, projection[key]);
+    // With timing, the long run holds every measure in full, also where the horizon ends during a build-up.
+    const full = key !== "baseline" && timed ? (result[key].balance + scenarioInterest) / setup.gdp : undefined;
+    projection[key].longRun = longRunDebtRatio(projection, projection[key], full);
   }
-  return projection;
+  return observed(projection);
 }
 
 /**

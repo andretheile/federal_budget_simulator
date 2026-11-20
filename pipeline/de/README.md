@@ -107,7 +107,16 @@ Arithmetic on published figures:
   * 19 for restaurants. The standard-rate remainder is total VAT minus these. Every VAT leaf has the level
   shares of VAT as a whole;
 - the alcohol and coffee taxes as two leaves: beer tax (states) and the other excise duties (federal), so
-  that the level shares are the statutory ones instead of a rounded mix.
+  that the level shares are the statutory ones instead of a rounded mix;
+- the administration of the social insurance funds as three leaves: compensation of employees (D.1) of the
+  social security funds in health and in social protection, as Eurostat publishes it by subsector and
+  division, and the health insurers' non-staff administrative costs from their accounts (KJ1: gross
+  administrative costs less personal administrative costs and fees to associations, whose staff is already
+  in D.1). They are taken out of health n.e.c. (COFOG 07.6) and social protection n.e.c. (10.9), which
+  shrink by the same amounts, and belong wholly to the social insurance funds, so that a saving in their
+  administration relieves the funds and not, through a node's shares, the federal, state or municipal
+  budgets. Unlike the health benefit items, they carry no pro-rata share of the federal subsidy to health
+  insurance, which is a fixed amount; the other health items carry correspondingly more of it.
 
 Judgement, to be reviewed by whoever updates the data:
 
@@ -122,6 +131,11 @@ Judgement, to be reviewed by whoever updates the data:
 - **Which transfers between levels count as earmarked** and are moved to the payer (the `move(...)` calls):
   federal funding of pension and health insurance, housing costs, basic security in old age, housing
   benefit, regional rail, student grants, social housing. General-purpose grants stay with the spender.
+- **Where the social insurance administration sits.** Eurostat gives the funds' compensation of employees
+  only per division. The leaves assume it lies in health n.e.c. (07.6) and social protection n.e.c. (10.9),
+  the groups with by far the most compensation of employees in those divisions; part of the 10.9 amount may
+  in fact belong to sickness and disability (10.1), for example the accident insurance. The health insurers'
+  non-staff administrative costs are a cash figure assumed to lie in 07.6 as well.
 - **Merging COFOG 10.5, 10.6 and 10.7** into one group, because cash benefits cannot be assigned to
   one of them: housing costs under Bürgergeld alone exceed the cash benefits recorded under 10.6.
 - **Levels of capital-transfer revenue** and of the revision leaf.

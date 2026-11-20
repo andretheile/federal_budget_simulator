@@ -23,16 +23,19 @@ import {
   type LevelEffect,
   type PolicyInsight,
 } from "../app/policyModel.ts";
+import { phaseWords } from "../app/phaseModel.ts";
 import { sliderDirection } from "../app/sliderModel.ts";
 import { useUi, type Ui } from "../app/ui.ts";
 import {
   findNode,
+  measurePhase,
   resolveParams,
   simulatePolicy,
   type Catch,
   type CurvePoint,
   type LevelFilter,
   type LevelId,
+  type MeasurePhase,
   type NumberParam,
   type ParamValue,
   type ParamValues,
@@ -46,6 +49,23 @@ import { CurveEntry } from "./CurvePreview.tsx";
 import { BlockerIcon, ChevronDown, InfoIcon, ShiftIcon, WarningIcon } from "./icons.tsx";
 import { GroupsControl, NumberControl } from "./ParamControls.tsx";
 import { Delta, QualityBadge, SourceList, Switch } from "./primitives.tsx";
+import { widest } from "./Scoreboard.tsx";
+
+/**
+ * Every form the timing line of a card can take as its slider moves (lower end, upper end, baseline,
+ * now), with the widest digits: the line keeps the room of the longest, so it never changes height.
+ */
+function timingVariants(ui: Ui, policy: Policy, params: ParamValues): string[] {
+  const timing = policy.timing;
+  if (!timing) return [];
+  const param = timing.param === undefined ? undefined : policy.params.find((candidate) => candidate.id === timing.param);
+  const values = param?.type === "number" ? [param.min, param.max, param.baseline ?? param.default] : [];
+  const phases = [params, ...values.map((value) => ({ ...params, [param!.id]: value }))].flatMap(
+    (candidate) => measurePhase(ui.pack, policy.id, candidate) ?? [],
+  );
+  const texts = phases.map((phase) => widest(ui.t.policies.timingLine(ui.t.debt.timing.when(phaseWords(phase, ui.language)))));
+  return [...new Set(texts)];
+}
 
 export interface PolicyCardProps {
   policy: Policy;
@@ -116,6 +136,9 @@ export const PolicyCard = memo(function PolicyCard({
   const params = useMemo(() => resolveParams(pack, policy, given), [pack, policy, given]);
   const alone = useMemo(() => simulatePolicy(pack, policy.id, params, level), [pack, policy.id, params, level]);
   const levels = useMemo(() => effectByLevel(pack, policy.id, params), [pack, policy.id, params]);
+  // When the measure acts in the debt projection, for a measure with timing of its own.
+  const phase = useMemo(() => (policy.timing ? measurePhase(pack, policy.id, params) : undefined), [pack, policy, params]);
+  const timingStandIns = useMemo(() => timingVariants(ui, policy, params), [ui, policy, params]);
   // The same measure with no level filter: cost shifts are named with their full amounts.
   const whole = useMemo(
     () => (level === "all" ? alone : simulatePolicy(pack, policy.id, params, "all")),
@@ -199,6 +222,30 @@ export const PolicyCard = memo(function PolicyCard({
               {directionWord(ui, insight.direction, level)}
             </span>
           </p>
+          {/* The figure is the full effect; the debt projection has it later or step by step. The
+              line keeps the room of its longest form, so moving the slider never moves the card. */}
+          {/* A central estimate whose range reaches the other side of zero: said on the card, not
+              only in the details, so "improves" is not read as certain. */}
+          {insight.hasRange && insight.direction !== "neutral" && Math.min(insight.low, insight.high) < -noise && Math.max(insight.low, insight.high) > noise && (
+            <p className="policy__crosses">
+              {t.policies.rangeCrossesZero(
+                t.common.range(signed(Math.min(insight.low, insight.high)), signed(Math.max(insight.low, insight.high))),
+                insight.direction === "improve" ? "worsen" : "improve",
+                level !== "all",
+              )}
+            </p>
+          )}
+          {phase && (
+            <p className="policy__timing">
+              {/* At a setting that changes nothing there is nothing to time; the line keeps its room. */}
+              {insight.direction !== "neutral" && <span>{t.policies.timingLine(t.debt.timing.when(phaseWords(phase, ui.language)))}</span>}
+              {timingStandIns.map((text) => (
+                <span key={text} className="policy__stand-in" aria-hidden="true">
+                  {text}
+                </span>
+              ))}
+            </p>
+          )}
           {level === "all" && insight.shareOfDeficit !== null && insight.direction !== "neutral" && (
             <Meter insight={insight} share={insight.shareOfDeficit} />
           )}
@@ -296,6 +343,7 @@ export const PolicyCard = memo(function PolicyCard({
               enabled={enabled}
               noise={noise}
               catches={catches}
+              phase={phase}
               onParam={onParam}
               onShowNode={onShowNode}
             />
@@ -480,6 +528,8 @@ interface PolicyDetailsProps {
   enabled: boolean;
   noise: number;
   catches: Catch[];
+  /** When the measure acts in the debt projection, if it has timing of its own. */
+  phase?: MeasurePhase;
   onParam(id: string, param: string, value: ParamValue): void;
   onShowNode(nodeId: string): void;
 }
@@ -495,6 +545,7 @@ function PolicyDetails({
   enabled,
   noise,
   catches,
+  phase,
   onParam,
   onShowNode,
 }: PolicyDetailsProps) {
@@ -593,6 +644,15 @@ function PolicyDetails({
         </dl>
         {levels.length > 1 && <LevelSplit levels={levels} noise={noise} current={level} />}
       </section>
+
+      {policy.timing && phase && (
+        <section className="policy__section">
+          <h4>{t.policies.timingTitle}</h4>
+          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui.language)), policy.timing.param !== undefined)}</p>
+          <p className="policy__timing-note">{ui.text(policy.timing.note)}</p>
+          <SourceList ids={policy.timing.sources} />
+        </section>
+      )}
 
       <section className="policy__section">
         <h4>{t.policies.catches}</h4>

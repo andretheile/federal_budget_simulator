@@ -166,7 +166,7 @@ export function PolicyList({
   };
 
   return (
-    <section className="policies" aria-labelledby="policies-title">
+    <section className="policies" id="measures" aria-labelledby="policies-title" tabIndex={-1}>
       <header className="section-head">
         <h2 id="policies-title">{t.policies.title}</h2>
         <p>{t.policies.intro}</p>

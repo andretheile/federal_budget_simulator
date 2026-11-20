@@ -141,6 +141,55 @@
   line-height: 1.45;
 }
 
+/*
+ * When the measures act: the first year for all, its reason one click away, and the switched-on
+ * measures that start later or build up, each with its years.
+ */
+.debt__timing {
+  max-width: 62ch;
+  margin-top: 12px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.debt__why {
+  margin-top: 4px;
+  font-size: 13.5px;
+}
+
+.debt__why summary {
+  width: fit-content;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.debt__why p {
+  margin-top: 4px;
+}
+
+.debt__why .sources {
+  margin-top: 4px;
+}
+
+.debt__later-title {
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.debt__later {
+  margin-top: 2px;
+  padding-left: 1.1em;
+  list-style: disc;
+}
+
+.debt__later-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+
 /* What the calculation is and where it starts from: under the charts (or under the room kept for them). */
 .debt__intro {
   max-width: 62ch;

@@ -36,13 +36,26 @@ export interface DebtLeadText {
   overtakes?: { label: string; since: number };
 }
 
-/** What the section's introduction says the calculation starts from. */
+/** What the section's introduction says the calculation starts from. When measures act is said apart (DebtMessages.timing). */
 export interface DebtIntroFacts {
   baseYear: number;
   /** The plan the projection follows, by its label, and its last year; absent on the base year's budget. */
   plan?: { label: string; until: number };
-  /** Whether measures are switched on: then the path with them departs from the plan from the first year. */
-  measuresOn: boolean;
+}
+
+/**
+ * When a measure acts in the projection, ready to be put into words: its start (a year, or month and
+ * year where it starts within a year), the first year it is in full if it builds up, and the last
+ * year of the calculation, after which nothing is counted.
+ */
+export interface PhaseWords {
+  /** "2032", or "Juli 2027" / "July 2027". */
+  start: string;
+  startYear: number;
+  /** The first whole year in full, if the measure builds up; absent if it is in full at once. */
+  full?: number;
+  /** The last year of the calculation; absent where none applies (on a card). */
+  last?: number;
 }
 
 /**
@@ -71,11 +84,24 @@ export interface DebtMessages {
     debt(year: number): string;
     debtUnit: string;
     withMeasures: string;
+    /** With measures switched on of which at least one is not yet in full in the last year. */
+    withMeasuresBy(year: number): string;
     noMeasures: string;
     rate(rate: string): string;
     range(range: string): string;
     without(value: string): string;
     inYear(year: number, value: string): string;
+  };
+  /** When measures act in the projection: the first year for all of them, and those that act later or build up. */
+  timing: {
+    /** The first year measures can act; with measures switched on, also that the two paths are one before it. */
+    from(year: number, measuresOn: boolean): string;
+    /** The summary that opens the pack's reason for that year. */
+    why(year: number): string;
+    /** Above the list of switched-on measures that start later or build up. */
+    laterTitle: string;
+    /** "ab 2032, voll ab 2059": when one measure acts. */
+    when(phase: PhaseWords): string;
   };
   /** Short version of the lead for screen readers after a change. */
   announce(year: number, interest: string, without: string | undefined): string;

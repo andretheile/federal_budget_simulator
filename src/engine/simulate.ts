@@ -518,6 +518,23 @@ interface Run {
 }
 
 export function simulate(pack: CountryPack, scenario: Scenario = { policies: {} }): SimulationResult {
+  return simulateWeighted(pack, scenario);
+}
+
+/**
+ * simulate, with each policy applied at a share of its change: `shares` maps a policy id to that
+ * share, between 0 and 1; a policy it does not name counts in full, one at 0 is left out as if it
+ * were off. A share w makes each effect do w of what it would do at that moment: a `scale` factor f
+ * becomes 1 + w (f - 1), an `add`, `set` or `schedule` effect moves the node w of the way to its
+ * new amount, and `excludeGroups` removes w of what it would remove. Everything that follows acts
+ * on the state this leaves, so measures interact as they do in full, and a share of 1 is exactly
+ * simulate. The debt projection uses it for measures that come into effect gradually.
+ */
+export function simulateWeighted(
+  pack: CountryPack,
+  scenario: Scenario = { policies: {} },
+  shares?: ReadonlyMap<string, number>,
+): SimulationResult {
   const prep = prepare(pack);
   const level: LevelFilter = scenario.level ?? "all";
   const warnings: SimulationWarning[] = [];
@@ -543,7 +560,9 @@ export function simulate(pack: CountryPack, scenario: Scenario = { policies: {} 
   for (const policy of pack.policies) {
     const state = scenario.policies[policy.id];
     if (!state || !state.enabled) continue;
-    const result = applyPolicy(run, policy, state.params);
+    const share = shares?.get(policy.id) ?? 1;
+    if (!(share > 0)) continue;
+    const result = applyPolicy(run, policy, state.params, Math.min(1, share));
     policies.push(result);
     addTo(delta, result.delta);
     addTo(deltaLow, result.low);
@@ -609,10 +628,10 @@ function addTo(sum: Totals, part: Totals): void {
   sum.balance += part.balance;
 }
 
-function applyPolicy(run: Run, policy: Policy, given: ParamValues | undefined): PolicyResult {
+function applyPolicy(run: Run, policy: Policy, given: ParamValues | undefined, weight = 1): PolicyResult {
   const params = resolveParams(run.pack, policy, given);
   const warnings: SimulationWarning[] = [];
-  const applied = policy.effects.map((effect, index) => applyEffect(run, policy, effect, index, params, warnings));
+  const applied = policy.effects.map((effect, index) => applyEffect(run, policy, effect, index, params, warnings, weight));
   const effects = applied.map((entry) => entry.result);
   assignRanges(policy, applied);
   const sums = { revenue: [0, 0, 0], expenditure: [0, 0, 0] };
@@ -807,6 +826,7 @@ function applyEffect(
   index: number,
   params: ParamValues,
   warnings: SimulationWarning[],
+  weight = 1,
 ): Applied {
   const { pack, prep } = run;
   const indicators = pack.country.indicators;
@@ -860,7 +880,9 @@ function applyEffect(
       }
       // The share of the node's current amount that the selected groups still stand for.
       excludedShare = all > 0 ? selected / all : 0;
-      const retained = effect.retained === undefined ? 0 : evaluateValue(effect.retained, params, indicators);
+      const full = effect.retained === undefined ? 0 : evaluateValue(effect.retained, params, indicators);
+      // At a share w of its change, an effect removes w of what it would remove.
+      const retained = weight === 1 ? full : 1 - weight * (1 - full);
       factor = 1 - excludedShare * (1 - retained);
       if (Number.isFinite(factor)) {
         for (const id of excludedGroups) left.set(id, Math.max(0, (left.get(id) ?? 0) * retained));
@@ -917,6 +939,12 @@ function applyEffect(
       model = basis === undefined ? { reform } : { reform, baseline: basis };
       break;
     }
+  }
+
+  // A share of the change (simulateWeighted); excludeGroups has applied its share above already.
+  if (weight !== 1 && effect.type !== "excludeGroups") {
+    if (factor !== undefined) factor = 1 + weight * (factor - 1);
+    else wanted = current + weight * (wanted - current);
   }
 
   let change = NO_CHANGE;

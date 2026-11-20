@@ -11,7 +11,7 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { Simulator } from "../App.tsx";
-import { testland, testlandCopy } from "../engine/__fixtures__/testland.ts";
+import { testland, testlandCopy, testlandTimed } from "../engine/__fixtures__/testland.ts";
 import type { CountryPack } from "../engine/index.ts";
 import { defaultDebtAssumptions } from "../app/debtLink.ts";
 import { debtHeadline, debtView, interestComparisons } from "../app/debtModel.ts";
@@ -142,6 +142,67 @@ describe("before its code has arrived", () => {
     expect(attempts).toHaveLength(2);
     await attempts[1].resolve();
     expect(all(".dchart")).toHaveLength(2);
+  });
+});
+
+describe("when measures act (Testland with timing)", () => {
+  beforeAll(async () => {
+    await debtModule.load();
+  }, 30_000);
+  const timed = testlandTimed();
+  const later = (): string[] => all("#debt .debt__later li").map((item) => plain(item.textContent));
+
+  it("says from which year measures act, with the pack's reason one click away", () => {
+    mount("#lang=en&s=halve_mp_pay", timed);
+    expect(text("#debt .debt__timing > p")).toBe("In this calculation measures act from 2026; until then the path with measures is the path without them.");
+    const why = query<HTMLDetailsElement>("#debt .debt__why");
+    expect(plain(why.querySelector("summary")?.textContent)).toBe("Why from 2026?");
+    expect(why.open).toBe(false);
+    expect(plain(why.querySelector("p")?.textContent)).toBe("The budget for 2025 is decided.");
+    expect(why.querySelector(".sources")).not.toBeNull();
+    // A measure without timing of its own: nothing more, and the figures speak of all of them.
+    expect(container.querySelector("#debt .debt__later")).toBeNull();
+    expect(text(".dfig--debt .dfig__condition")).toBe("with the measures switched on, at 4% interest on new debt");
+  });
+
+  it("names the switched-on measures that start later or build up, and when", () => {
+    mount("#lang=en&s=halve_mp_pay~cut_admin~wealth_tax~defense_target", timed);
+    expect(text("#debt .debt__later-title")).toBe("Acting later or step by step:");
+    expect(later()).toEqual([
+      "Cut administration: from 2026, in full from 2030",
+      "Wealth tax: from 2028",
+      "Defence spending target: from July 2027, in full from 2030",
+    ]);
+    // All in full well before 2054: the figures need no qualifier.
+    expect(text(".dfig--interest .dfig__condition")).toBe("with the measures switched on, at 4% interest on new debt");
+  });
+
+  it("follows the slider: further from the baseline, longer; below it, quicker", () => {
+    mount("#lang=de&s=defense_target.share.4", timed);
+    expect(later()).toEqual(["Verteidigungsausgaben-Ziel: ab Juli 2027, voll ab 2032"]);
+    act(() => root.unmount());
+    mount("#lang=de&s=defense_target.share.1", timed);
+    expect(later()).toEqual(["Verteidigungsausgaben-Ziel: ab 2026, voll ab 2027"]);
+  });
+
+  it("says what comes after the end of the calculation, and qualifies the figures", () => {
+    // Three years: the calculation ends in 2027.
+    mount("#lang=en&s=cut_admin~wealth_tax~defense_target&d=y3", timed);
+    expect(later()).toEqual([
+      "Cut administration: from 2026, in full only from 2030, after the end of the calculation",
+      "Wealth tax: from 2028, after the end of the calculation",
+      "Defence spending target: from July 2027, in full only from 2030, after the end of the calculation",
+    ]);
+    expect(text(".dfig--interest .dfig__condition")).toBe("with the measures switched on, as far as they act by 2027, at 4% interest on new debt");
+    act(() => root.unmount());
+    mount("#lang=de&s=cut_admin&d=y3", timed);
+    expect(text(".dfig--debt .dfig__condition")).toBe(plain("mit den eingeschalteten Maßnahmen, soweit sie bis 2027 wirken, bei 4 % Zins für neue Schulden"));
+  });
+
+  it("says when measures switched on would act, before any is", () => {
+    mount("#lang=de", timed);
+    expect(text("#debt .debt__timing > p")).toBe("Eingeschaltete Maßnahmen wirken in dieser Rechnung ab 2026.");
+    expect(text(".dfig--debt .dfig__condition")).toBe(plain("keine Maßnahme eingeschaltet, bei 4 % Zins für neue Schulden"));
   });
 });
 
@@ -327,7 +388,7 @@ describe("the section on Testland", () => {
       const caveat = query("#debt .section-head .debt__caveat");
       expect(plain(caveat.textContent)).toBe("Eine Wenn-dann-Rechnung, keine Prognose.");
       expect(caveat.compareDocumentPosition(query(".debt__figures")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-      expect(text("#debt .debt__intro")).toBe("So entwickelten sich Schulden und Zinsen, wenn der Haushalt von 2024 mit den eingeschalteten Maßnahmen im Verhältnis zur Wirtschaft so bliebe.");
+      expect(text("#debt .debt__intro")).toBe("So entwickelten sich Schulden und Zinsen, wenn der Haushalt von 2024 im Verhältnis zur Wirtschaft so bliebe.");
       expect(text("#debt .debt__intro")).not.toContain("Wenn-dann");
     });
   });
@@ -534,8 +595,7 @@ describe("the official plans", () => {
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&d=fministry_projection");
     expect(all(".dchart__marker text").map((label) => plain(label.textContent))).toEqual(["from 2027 by the assumptions", "from 2027 by the assumptions"]);
     expect(text("#debt .debt__intro")).toBe(
-      "Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply. " +
-        "With the measures switched on, the path departs from the plan from the first year.",
+      "Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply.",
     );
     // A slider keeps the starting point; the reset goes back to the pack's.
     slide(slider("Market interest rate"), 8);
@@ -571,8 +631,7 @@ describe("a pack that starts from its official plan", () => {
     mount("#lang=en", following());
     expect(window.location.hash).toBe("#lang=en");
     expect(text("#debt .debt__intro")).toBe(
-      "Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply. " +
-        "Measures that are switched on are added from the first year.",
+      "Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply.",
     );
     expect(radios()).toEqual([
       ["Official plan to 2026default", true],
@@ -602,7 +661,7 @@ describe("a pack that starts from its official plan", () => {
     expect(window.location.hash).toBe("#lang=en&d=b");
     expect(container.querySelector(".dchart__marker")).toBeNull();
     expect(text("#debt .debt__intro")).toBe(
-      "This is how debt and interest would develop if the budget of 2024, with the measures switched on, kept its size relative to the economy.",
+      "This is how debt and interest would develop if the budget of 2024 kept its size relative to the economy.",
     );
     // The plan is a dashed line of its own again.
     expect(all(".dchart")[1].querySelectorAll('[data-plan="ministry_projection"] .dchart__plan-line')).toHaveLength(1);
@@ -630,12 +689,16 @@ describe("a pack that starts from its official plan", () => {
     expect(radios()[0][1]).toBe(true);
   });
 
-  it("says that the path with measures departs from the plan from the first year", () => {
+  it("says from which year measures act, not that they act from the first year", () => {
     mount("#lang=en&s=halve_mp_pay", following());
-    expect(text("#debt .debt__intro")).toMatch(/With the measures switched on, the path departs from the plan from the first year\.$/);
+    // The fixture names no year of its own: measures act from the first year after the base year.
+    expect(text("#debt .debt__timing > p")).toBe("In this calculation measures act from 2025; until then the path with measures is the path without them.");
+    expect(text("#debt")).not.toContain("departs from the plan from the first year");
+    expect(text("#debt")).not.toContain("are added from the first year");
     act(() => root.unmount());
     mount("#lang=de&s=halve_mp_pay", following());
-    expect(text("#debt .debt__intro")).toMatch(/Mit den eingeschalteten Maßnahmen weicht der Pfad vom ersten Jahr an von der Planung ab\.$/);
+    expect(text("#debt .debt__timing > p")).toBe("Maßnahmen wirken in dieser Rechnung ab 2025; bis dahin verläuft der Pfad mit Maßnahmen wie der ohne.");
+    expect(text("#debt")).not.toContain("vom ersten Jahr an von der Planung");
   });
 
   it("reads every form of the address", { timeout: 30_000 }, () => {
