@@ -266,7 +266,7 @@ NIPA_SMI = nipa("M31809") * 1000  # supplementary medical insurance premiums, ne
 
 EXP = [
     G("exp.social_security", "Social Security", "Social Security (gesetzliche Rentenversicherung)", code="650", desc=T(
-        "Alters-, Hinterbliebenen- und Erwerbsminderungsrenten aus den beiden Treuhandfonds der Social Security, finanziert vor allem aus Lohnsummensteuern. Die Fonds stehen gesetzlich außerhalb des Haushalts („off-budget“), zählen aber zum Gesamthaushalt und zu seinem Defizit.",
+        "Alters-, Hinterbliebenen- und Erwerbsminderungsrenten aus den beiden Treuhandfonds der Social Security, finanziert vor allem aus Beiträgen auf Löhne. Die Fonds stehen gesetzlich außerhalb des Haushalts („off-budget“), zählen aber zum Gesamthaushalt und zu seinem Defizit.",
         "Old-age, survivors' and disability benefits paid from the two Social Security trust funds, financed mainly by payroll taxes. By law the trust funds are \"off-budget,\" but they are part of the unified budget and its deficit."), children=[
         L("exp.social_security.oasi", "Old-age and survivors insurance (OASI)", "Alters- und Hinterbliebenenrenten (OASI)",
           rest=["651"], quality="derived", sources=H3, code="651 less 017-00-8007",

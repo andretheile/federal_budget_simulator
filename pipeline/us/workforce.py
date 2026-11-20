@@ -304,8 +304,8 @@ def effects():
             parts = cost.get((item, group), {})
             own = sorted(((parts.get(how, 0), how) for how in ALLOCATED if parts.get(how, 0) >= max(0.05 * v, 50e6)), reverse=True)
             if own:
-                en.append("Allocated by the pack: " + "; ".join("%s from %s" % (_bn(x, "en"), ALLOCATED[how][0]) for x, how in own) + ".")
-                de.append("Vom Paket zugeordnet: " + "; ".join("%s aus %s" % (_bn(x, "de"), ALLOCATED[how][1]) for x, how in own) + ".")
+                en.append("Allocated by this calculation: " + "; ".join("%s from %s" % (_bn(x, "en"), ALLOCATED[how][0]) for x, how in own) + ".")
+                de.append("Von dieser Rechnung zugeordnet: " + "; ".join("%s aus %s" % (_bn(x, "de"), ALLOCATED[how][1]) for x, how in own) + ".")
             extra = moved.get((item, group), 0)
             if extra >= 50e6:
                 en.append("Includes %s of the same group in smaller items, added here." % _bn(extra, "en"))
@@ -331,8 +331,8 @@ def effects():
                 "en": ("Less netted out: about %s of the pay and benefits of %s (%s) are agency contributions to the civil "
                        "service and Foreign Service retirement funds. They stay within the government, and the budget "
                        "subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' "
-                       "agency contributions in 2025 over the base, the executive branch's part by its share of civilian "
-                       "pay." % (_pct(share, "en"), GROUP_NAME[group][0], _bn(v, "en"))),
+                       "agency contributions in 2025 divided by the base, with the executive branch's part taken by its "
+                       "share of civilian pay." % (_pct(share, "en"), GROUP_NAME[group][0], _bn(v, "en"))),
                 "de": ("Weniger Verrechnung: etwa %s der Personalkosten %s (%s) sind Beiträge der Behörden an die "
                        "Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, "
                        "und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger "

@@ -153,7 +153,7 @@
               ],
               "note": {
                 "de": "Betrag amtlich. Gemeindeanteil aus den Eurostat-Daten zu den Unternehmenssteuern der Gemeinden abgeleitet; Bundesanteil ist die Gewerbesteuerumlage (2,8 Mrd. Euro). Der Länderanteil enthält die Umlage der Länder und die Gewerbesteuer der Stadtstaaten.",
-                "en": "Amount official. Municipal share derived from Eurostat data on municipalities' taxes on corporate income; the federal share is the trade tax levy (EUR 2.8 billion). The state share comprises the states' levy and the trade tax of the city states."
+                "en": "Official amount. Municipal share derived from Eurostat data on municipalities' taxes on corporate income; the federal share is the trade tax levy (EUR 2.8 billion). The state share comprises the states' levy and the trade tax of the city states."
               }
             },
             {
@@ -257,7 +257,7 @@
                       ],
                       "note": {
                         "de": "Rechnerische Mindereinnahmen bei 7 statt 19 % laut Finanzministerium (3,40 Mrd. Euro), geteilt durch 12 und mal 19. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
-                        "en": "Computational revenue forgone at 7 instead of 19% according to the finance ministry (EUR 3.40 billion), divided by 12 and multiplied by 19. Split across levels as for VAT as a whole according to Eurostat."
+                        "en": "Notional revenue forgone at 7 instead of 19% according to the finance ministry (EUR 3.40 billion), divided by 12 and multiplied by 19. Split across levels as for VAT as a whole according to Eurostat."
                       }
                     },
                     {
@@ -295,7 +295,7 @@
                   },
                   "description": {
                     "de": "Aufkommen zum ermäßigten Satz, abgeleitet aus den rechnerischen Mindereinnahmen gegenüber dem Regelsatz (39,2 Mrd. Euro im Jahr 2024 laut Bundesregierung): geteilt durch den Abstand von 12 Punkten und mal 7.",
-                    "en": "Revenue at the reduced rate, derived from the computational revenue forgone compared with the standard rate (EUR 39.2 billion in 2024 according to the federal government): divided by the 12-point gap and multiplied by 7."
+                    "en": "Revenue at the reduced rate, derived from the notional revenue forgone compared with the standard rate (EUR 39.2 billion in 2024 according to the federal government): divided by the 12-point gap and multiplied by 7."
                   },
                   "children": [
                     {
@@ -324,7 +324,7 @@
                       ],
                       "note": {
                         "de": "Rechnerische Mindereinnahmen laut Finanzministerium (27,92 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
-                        "en": "Computational revenue forgone according to the finance ministry (EUR 27.92 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                        "en": "Notional revenue forgone according to the finance ministry (EUR 27.92 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
                       }
                     },
                     {
@@ -774,7 +774,7 @@
               ],
               "note": {
                 "de": "Betrag amtlich. Gemeindesteuer; rund ein Zehntel entfällt auf die Stadtstaaten, die in der Statistik zu den Ländern zählen (aus Eurostat-Daten je Ebene abgeleitet).",
-                "en": "Amount official. A municipal tax; about one tenth accrues to the city states, which count as state level in the statistics (derived from Eurostat data by level)."
+                "en": "Official amount. A municipal tax; about one tenth accrues to the city states, which count as state level in the statistics (derived from Eurostat data by level)."
               }
             },
             {
@@ -1131,7 +1131,7 @@
           ],
           "note": {
             "de": "Betrag amtlich. Eurostat weist die Aufteilung auf die Ebenen nur einschließlich der Zahlungen zwischen den Ebenen aus; die Anteile sind deshalb geschätzt.",
-            "en": "Amount official. Eurostat reports the split by level only including payments between levels; the shares are therefore estimated."
+            "en": "Official amount. Eurostat reports the split by level only including payments between levels; the shares are therefore estimated."
           }
         },
         {
@@ -1471,8 +1471,8 @@
                 "en": "Municipalities and districts: central administration"
               },
               "description": {
-                "de": "347.000 Vollzeitstellen, 394.800 Beschäftigte (Juni 2024): Räte und Verwaltungsspitze, Haupt-, Personal- und Finanzverwaltung, IT und Gebäudemanagement der Gemeinden und Kreise. Ohne Sicherheit und Ordnung mit Ordnungsämtern und Feuerwehr, Kitas, Sozial- und Jugendämter.",
-                "en": "347,000 full-time equivalents, 394,800 employees (June 2024): councils and administrative leadership, general, personnel and finance administration, IT and building management of municipalities and districts. Without public safety and order with public-order offices and fire services, day care, social and youth welfare offices."
+                "de": "347.000 Vollzeitstellen, 394.800 Beschäftigte (Juni 2024): Räte und Verwaltungsspitze, Haupt-, Personal- und Finanzverwaltung, IT und Gebäudemanagement der Gemeinden und Kreise. Ohne Sicherheit und Ordnung (Ordnungsämter und Feuerwehr), Kitas, Sozial- und Jugendämter.",
+                "en": "347,000 full-time equivalents, 394,800 employees (June 2024): councils and administrative leadership, general, personnel and finance administration, IT and building management of municipalities and districts. Without public safety and order (public-order offices and fire services), day care, or social and youth welfare offices."
               },
               "breakdowns": {
                 "level": {
@@ -1554,14 +1554,14 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Vollständig dem Bund zugeordnet, der für die Entwicklungszusammenarbeit zuständig ist; kleinere Beiträge der Länder sind nicht gesondert ausgewiesen.",
-            "en": "Amount official (Eurostat). Attributed entirely to the federal level, which is responsible for development cooperation; smaller contributions by the states are not shown separately."
+            "en": "Official amount (Eurostat). Attributed entirely to the federal level, which is responsible for development cooperation; smaller contributions by the states are not shown separately."
           }
         },
         {
           "id": "exp.general.general_services",
           "label": {
-            "de": "Allgemeine Dienste ohne Personal (Personal-, Planungs- und Statistikämter, zentrale Verwaltung)",
-            "en": "General services without staff (personnel, planning and statistical offices, central administration)"
+            "de": "Allgemeine Dienste ohne Personalkosten (Personal-, Planungs- und Statistikämter, zentrale Verwaltung)",
+            "en": "General services excluding staff costs (personnel, planning and statistical offices, central administration)"
           },
           "code": "GF0103",
           "amount": 37469000000,
@@ -1576,7 +1576,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat), abzüglich des ebenfalls amtlichen Arbeitnehmerentgelts dieser Gruppe (28,83 Mrd. Euro), das unter „Personal der allgemeinen Verwaltung“ steht. Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
-            "en": "Amount official (Eurostat), less this group's compensation of employees (EUR 28.83 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
+            "en": "Official amount (Eurostat), less this group's compensation of employees (EUR 28.83 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
           }
         },
         {
@@ -1597,7 +1597,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -1618,14 +1618,14 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
           "id": "exp.general.other",
           "label": {
-            "de": "Sonstige allgemeine Verwaltung ohne Personal",
-            "en": "Other general administration without staff"
+            "de": "Sonstige allgemeine Verwaltung ohne Personalkosten",
+            "en": "Other general administration excluding staff costs"
           },
           "code": "GF0106",
           "amount": 4038000000,
@@ -1641,7 +1641,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat), abzüglich des ebenfalls amtlichen Arbeitnehmerentgelts dieser Gruppe (3,20 Mrd. Euro), das unter „Personal der allgemeinen Verwaltung“ steht. Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
-            "en": "Amount official (Eurostat), less this group's compensation of employees (EUR 3.20 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
+            "en": "Official amount (Eurostat), less this group's compensation of employees (EUR 3.20 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
           }
         },
         {
@@ -1790,7 +1790,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -1812,7 +1812,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -1833,7 +1833,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -1853,7 +1853,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Den Ländern zugeordnet, die für den Justizvollzug zuständig sind.",
-            "en": "Amount official (Eurostat). Attributed to the states, which are responsible for the prison system."
+            "en": "Official amount (Eurostat). Attributed to the states, which are responsible for the prison system."
           }
         },
         {
@@ -1874,7 +1874,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -1896,7 +1896,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         }
       ]
@@ -1929,7 +1929,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -1951,7 +1951,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -1973,7 +1973,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -1995,7 +1995,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2017,7 +2017,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Die Regionalisierungsmittel des Bundes für den Schienennahverkehr der Länder (12,7 Mrd. Euro) sind dem Bund zugerechnet.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal regionalisation funds for the states' regional rail services (EUR 12.7 billion) are attributed to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal regionalisation funds for the states' regional rail services (EUR 12.7 billion) are attributed to the federal level."
           }
         },
         {
@@ -2039,7 +2039,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2061,7 +2061,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2082,7 +2082,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2105,7 +2105,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         }
       ]
@@ -2137,7 +2137,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2159,7 +2159,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2181,7 +2181,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2203,7 +2203,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2224,7 +2224,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2246,7 +2246,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         }
       ]
@@ -2278,7 +2278,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Die Finanzhilfen des Bundes für den sozialen Wohnungsbau (1,7 Mrd. Euro) sind dem Bund zugerechnet.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for social housing (EUR 1.7 billion) are attributed to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for social housing (EUR 1.7 billion) are attributed to the federal level."
           }
         },
         {
@@ -2300,7 +2300,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2321,7 +2321,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2341,7 +2341,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Den Gemeinden zugeordnet.",
-            "en": "Amount official (Eurostat). Attributed to the municipalities."
+            "en": "Official amount (Eurostat). Attributed to the municipalities."
           }
         },
         {
@@ -2363,7 +2363,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2385,7 +2385,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         }
       ]
@@ -2418,7 +2418,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
           }
         },
         {
@@ -2441,7 +2441,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
           }
         },
         {
@@ -2464,7 +2464,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
           }
         },
         {
@@ -2486,7 +2486,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2507,7 +2507,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2579,7 +2579,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat, Arbeitnehmerentgelt D.1 der Sozialversicherung im Bereich Gesundheit). Er ist aus dem Bereich „Gesundheit, sonstiges“ (COFOG 07.6) herausgelöst, für den Eurostat 15,0 Mrd. Euro Arbeitnehmerentgelt aller Ebenen ausweist; die übrigen Gesundheitsbereiche haben zusammen weniger als 2,5 Mrd. Euro. Ganz der Sozialversicherung zugeordnet: Anders als bei den Leistungsausgaben ist der Bundeszuschuss hier nicht anteilig zugerechnet, weil er ein fester Betrag ist und eine Einsparung beim Personal den Kassen bleibt.",
-            "en": "Amount official (Eurostat, compensation of employees D.1 of the social insurance funds in health). It is taken out of health n.e.c. (COFOG 07.6), for which Eurostat shows EUR 15.0 billion of compensation of employees of all levels; the other health groups together have less than EUR 2.5 billion. Attributed entirely to the social insurance funds: unlike for benefit spending, the federal subsidy is not attributed pro rata here, because it is a fixed amount and a saving on staff stays with the funds."
+            "en": "Official amount (Eurostat, compensation of employees D.1 of the social insurance funds in health). It is taken out of health n.e.c. (COFOG 07.6), for which Eurostat shows EUR 15.0 billion of compensation of employees of all levels; the other health groups together have less than EUR 2.5 billion. Attributed entirely to the social insurance funds: unlike for benefit spending, the federal subsidy is not attributed pro rata here, because it is a fixed amount and a saving on staff stays with the funds."
           }
         }
       ]
@@ -2611,7 +2611,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2633,7 +2633,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2658,7 +2658,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2680,7 +2680,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2701,7 +2701,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2723,7 +2723,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         }
       ]
@@ -2755,7 +2755,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2777,7 +2777,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Das BAföG für Schülerinnen und Schüler (0,5 Mrd. Euro) ist dem Bund zugerechnet.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for school pupils (BAföG, EUR 0.5 billion) are attributed to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for school pupils (BAföG, EUR 0.5 billion) are attributed to the federal level."
           }
         },
         {
@@ -2799,7 +2799,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2820,7 +2820,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Das BAföG für Studierende (1,3 Mrd. Euro) ist dem Bund zugerechnet.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal student grants (BAföG, EUR 1.3 billion) are attributed to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal student grants (BAföG, EUR 1.3 billion) are attributed to the federal level."
           }
         },
         {
@@ -2842,7 +2842,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2864,7 +2864,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2885,7 +2885,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -2907,7 +2907,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         }
       ]
@@ -3384,7 +3384,7 @@
               ],
               "note": {
                 "de": "Betrag amtlich (Destatis, revidiert). Länder und Kommunen tragen die Kosten; die Aufteilung zwischen beiden ist geschätzt, weil sie je nach Land unterschiedlich geregelt ist.",
-                "en": "Amount official (Destatis, revised). States and municipalities bear the cost; the split between the two is estimated because rules differ by state."
+                "en": "Official amount (Destatis, revised). States and municipalities bear the cost; the split between the two is estimated because rules differ by state."
               }
             },
             {
@@ -3458,7 +3458,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
           }
         },
         {
@@ -3506,7 +3506,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat, Arbeitnehmerentgelt D.1 der Sozialversicherung im Bereich soziale Sicherung). Angenommen ist, dass er im Bereich „Soziale Sicherung, sonstiges“ (COFOG 10.9) liegt, für den Eurostat 19,1 Mrd. Euro Arbeitnehmerentgelt aller Ebenen ausweist; in den Bereichen Alter (0,8) und Arbeitslosigkeit (0,3 Mrd. Euro) ist kaum Personal gebucht. Ganz der Sozialversicherung zugeordnet; das Personal der Bundesagentur in den Jobcentern bezahlt in der Sache großenteils der Bund über die Erstattung der Verwaltungskosten.",
-            "en": "Amount official (Eurostat, compensation of employees D.1 of the social insurance funds in social protection). It is assumed to lie in social protection n.e.c. (COFOG 10.9), for which Eurostat shows EUR 19.1 billion of compensation of employees of all levels; hardly any staff is booked under old age (0.8) and unemployment (EUR 0.3 billion). Attributed entirely to the social insurance funds; the Employment Agency's staff in the job centres is in substance largely paid for by the federal government through the reimbursement of administrative costs."
+            "en": "Official amount (Eurostat, compensation of employees D.1 of the social insurance funds in social protection). It is assumed to lie in social protection n.e.c. (COFOG 10.9), for which Eurostat shows EUR 19.1 billion of compensation of employees of all levels; hardly any staff is booked under old age (0.8) and unemployment (EUR 0.3 billion). Attributed entirely to the social insurance funds; the Employment Agency's staff in the job centres is in substance largely paid for by the federal government through the reimbursement of administrative costs."
           }
         }
       ]

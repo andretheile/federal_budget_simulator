@@ -1073,7 +1073,63 @@
     "url": "https://www.die-linke.de/fileadmin/user_upload/Wahlprogramm_Langfassung_Linke-BTW25_01.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\""
+    "note": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\" Page 15: 53% pension level; insurance for all people in work including civil servants. Pages 6 and 42: abolish VAT on basic food."
+  },
+  "bt_drs_21_3115": {
+    "title": "Entschließungsantrag der Fraktion Die Linke zu dem Gesetzentwurf der Bundesregierung zur Stabilisierung des Rentenniveaus und zur vollständigen Gleichstellung der Kindererziehungszeiten, Drucksache 21/3115 vom 03.12.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/031/2103115.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Section II, page 2: (1) raise the pension level (Sicherungsniveau vor Steuern) 'in einem Schritt sofort um 10 Prozent auf lebensstandardsichernde 53 Prozent' and stabilise it permanently; (3) convert the statutory pension insurance step by step into an insurance for everyone in work, including members of the Bundestag, managers, the self-employed, freelancers and civil servants, 'der Grundsatz des Vertrauensschutzes ist hierbei zu beachten'. Page 3: about EUR 39.58 bn a year more revenue needed, a contribution rate 2.44 points higher."
+  },
+  "bt_drs_21_135": {
+    "title": "Antrag der Fraktion Die Linke: Mehrwertsteuer auf Grundnahrungsmittel, Hygieneprodukte und auf Bus und Bahn abschaffen, Drucksache 21/135 vom 12.05.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/001/2100135.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Section II, page 2: exempt basic food, hygiene products and bus and rail from VAT with the right to deduct input tax; set up price supervision; define basic food to include milk and meat substitutes and baby food. Page 1: exempting basic food costs about EUR 16 bn a year (citing Handelsblatt)."
+  },
+  "bt_textarchiv_kw37_2025_mwst": {
+    "title": "Mehrwertsteuerbefreiung bei Grundnahrungsmitteln abgelehnt (Textarchiv, 12. September 2025)",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://www.bundestag.de/dokumente/textarchiv/2025/kw37-de-mehrwertsteuer-grundnahrungsmittel-1099354",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "The Bundestag rejected motion 21/135 on 12 September 2025: CDU/CSU, AfD and SPD against, Greens abstaining; committee recommendation 21/1583."
+  },
+  "bt_drs_21_6334": {
+    "title": "Gesetzentwurf der Fraktion der AfD: Entwurf eines Gesetzes zur Aufhebung des Treibhausgas-Emissionshandelsgesetzes und des Brennstoffemissionshandelsgesetzes (CO2-Preis-Abschaffungsgesetz), Drucksache 21/6334 vom 09.06.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/063/2106334.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Section B, page 2: both acts repealed 'vollständig und ersatzlos', ending the national CO2 price and EU emissions trading in Germany. Section D: revenue loss about EUR 21.4 bn a year on 2025 data, of which 16.0 bn from the national price. The environment committee recommended rejection on 24 June 2026 with the votes of all other groups (Drucksache 21/6694)."
+  },
+  "bt_drs_21_6642": {
+    "title": "Antrag der Fraktion der AfD: Einwanderung in das Sozialsystem und Sozialleistungsmissbrauch stoppen, Drucksache 21/6642 vom 23.06.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/066/2106642.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Section II.2, pages 2 f.: after a transition, adult foreigners able to work from the EU and third countries are in principle excluded from SGB II unless they have worked at least ten years (third countries) or five years (EU) in employment subject to social insurance and have German at level B2, third-country nationals also a settlement permit; benefits capped at 12 consecutive months and five years in total; the others referred to return assistance and narrowly limited bridging benefits, as far as the constitution allows. Debated on 25 June 2026 and referred to committee."
+  },
+  "afd_wahlprogramm_2025": {
+    "title": "Zeit für Deutschland. Programm der Alternative für Deutschland für die Wahl zum 21. Deutschen Bundestag",
+    "publisher": "Alternative für Deutschland",
+    "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Adopted in Riesa on 11 and 12 January 2025. Page 57: 'Wir fordern eine ersatzlose Abschaffung der CO₂-Abgaben.' Page 25: foreign nationals to get Bürgergeld only after ten years of employment subject to social insurance without top-up benefits, and for one year at most; Ukrainian refugees moved to asylum seekers' benefits. Page 18: civil-servant status only for sovereign tasks, politicians into the statutory pension insurance."
+  },
+  "bsw_wahlprogramm_2025": {
+    "title": "Unser Land verdient mehr! Wahlprogramm für die Bundestagswahl 2025",
+    "publisher": "Bündnis Sahra Wagenknecht – Vernunft und Gerechtigkeit (BSW)",
+    "url": "https://bsw-vg.de/wp-content/themes/bsw/assets/downloads/BSW%20Wahlprogramm%202025.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Page 10: 'Den CO2-Preis, der alles teurer macht, ohne dass es für die meisten Menschen Alternativen gibt, wollen wir abschaffen.' Page 23: all people in work, including members of the Bundestag and federal ministers, to pay into the statutory pension insurance as in Austria. Page 31: VAT 'auf 0 Prozent für Grundnahrungsmittel wie Fleisch, Getreide, Milchprodukte, sowie Obst und Gemüse'."
   },
   "stuttgarter_nachrichten_rente_2026_11": {
     "title": "Koalitionsausschuss: Keine Einigung bei der Rentenreform (Lukas Böhl, 18. November 2026)",
