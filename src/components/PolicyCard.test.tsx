@@ -193,9 +193,45 @@ describe("a measure that acts later in the debt projection (Testland with timing
     );
     expect(section).toBeDefined();
     expect(plain(section!.querySelector(".policy__timing-detail")?.textContent)).toBe(
-      "In der Rechnung zu Schulden und Zinsen wirkt die Maßnahme bei dieser Einstellung ab 2028.",
+      // The wealth tax's timing has no slider: no "at this setting".
+      "In der Rechnung zu Schulden und Zinsen wirkt die Maßnahme ab 2028.",
     );
     expect(plain(section!.querySelector(".policy__timing-note")?.textContent)).toBe("Die erste Veranlagung ist für 2028.");
     expect(section!.querySelector(".sources")).not.toBeNull();
+  });
+});
+
+describe("a central estimate whose range reaches the other side of zero", () => {
+  /** Halving MPs' pay (+5) with an estimate between −5 and +10. */
+  function crossing(): CountryPack {
+    const pack = testlandCopy();
+    const policy = pack.policies.find((candidate) => candidate.id === "halve_mp_pay")!;
+    for (const effect of policy.effects) effect.uncertainty = { low: -1, high: 2 };
+    return pack;
+  }
+
+  it("says so on the card, with the range, not only in the details", () => {
+    mount("#lang=de", crossing());
+    expect(text("#policy-halve_mp_pay .policy__direction")).toBe("verbessert den Saldo");
+    expect(text("#policy-halve_mp_pay .policy__crosses")).toBe("Spanne −5 XTS bis +10 XTS: Je nach Schätzung kann die Maßnahme den Saldo auch verschlechtern.");
+    act(() => root?.unmount());
+    mount("#lang=en&s=L.central", crossing());
+    expect(text("#policy-halve_mp_pay .policy__crosses")).toBe("Range −XTS 5 to +XTS 10: depending on the estimates, the measure may also burden this level.");
+  });
+
+  it("is not mentioned where the range stays on one side", () => {
+    mount("#lang=en");
+    expect(container.querySelector(".policy__crosses")).toBeNull();
+  });
+});
+
+describe("the timing line at a setting that changes nothing", () => {
+  it("is empty but keeps its room", () => {
+    // The defence target at its baseline of 2 % changes nothing.
+    mount("#lang=en&s=defense_target.share.2", testlandTimed());
+    const timing = query("#policy-defense_target .policy__timing");
+    expect(text("#policy-defense_target .policy__amount")).toBe("XTS 0");
+    expect(timing.querySelector("span:not(.policy__stand-in)")).toBeNull();
+    expect(timing.querySelectorAll(".policy__stand-in").length).toBeGreaterThan(0);
   });
 });

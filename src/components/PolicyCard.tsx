@@ -224,9 +224,21 @@ export const PolicyCard = memo(function PolicyCard({
           </p>
           {/* The figure is the full effect; the debt projection has it later or step by step. The
               line keeps the room of its longest form, so moving the slider never moves the card. */}
+          {/* A central estimate whose range reaches the other side of zero: said on the card, not
+              only in the details, so "improves" is not read as certain. */}
+          {insight.hasRange && insight.direction !== "neutral" && Math.min(insight.low, insight.high) < -noise && Math.max(insight.low, insight.high) > noise && (
+            <p className="policy__crosses">
+              {t.policies.rangeCrossesZero(
+                t.common.range(signed(Math.min(insight.low, insight.high)), signed(Math.max(insight.low, insight.high))),
+                insight.direction === "improve" ? "worsen" : "improve",
+                level !== "all",
+              )}
+            </p>
+          )}
           {phase && (
             <p className="policy__timing">
-              <span>{t.policies.timingLine(t.debt.timing.when(phaseWords(phase, ui.language)))}</span>
+              {/* At a setting that changes nothing there is nothing to time; the line keeps its room. */}
+              {insight.direction !== "neutral" && <span>{t.policies.timingLine(t.debt.timing.when(phaseWords(phase, ui.language)))}</span>}
               {timingStandIns.map((text) => (
                 <span key={text} className="policy__stand-in" aria-hidden="true">
                   {text}
@@ -636,7 +648,7 @@ function PolicyDetails({
       {policy.timing && phase && (
         <section className="policy__section">
           <h4>{t.policies.timingTitle}</h4>
-          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui.language)))}</p>
+          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui.language)), policy.timing.param !== undefined)}</p>
           <p className="policy__timing-note">{ui.text(policy.timing.note)}</p>
           <SourceList ids={policy.timing.sources} />
         </section>

@@ -128,9 +128,13 @@ export const en: Messages = {
     aloneLevel: (level) => `On its own, ${level} only`,
     combined: (amount) => `In this combination: ${amount}`,
     combinedHint: "Other measures that are switched on act on the same budget items.",
+    rangeCrossesZero: (range, opposite, level) =>
+      `Range ${range}: depending on the estimates, the measure may also ${
+        level ? (opposite === "worsen" ? "burden" : "relieve") : opposite === "worsen" ? "worsen" : "improve"
+      } ${level ? "this level" : "the balance"}.`,
     timingLine: (when) => `The figure is the full effect; in the projection of debt and interest ${when}.`,
     timingTitle: "When it takes effect",
-    timingDetail: (when) => `In the projection of debt and interest the measure acts, at this setting, ${when}.`,
+    timingDetail: (when, setting) => `In the projection of debt and interest the measure acts${setting ? ", at this setting," : ""} ${when}.`,
     ofAll: (side, share) => `${share} of all ${side === "revenue" ? "revenue" : "spending"}`,
     ofLevel: (side, share) => `${share} of this level’s ${side === "revenue" ? "revenue" : "spending"}`,
     perInhabitant: (amount) => `${amount} per inhabitant`,

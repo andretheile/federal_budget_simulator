@@ -130,9 +130,13 @@ export const de: Messages = {
     aloneLevel: (level) => `Für sich genommen, nur ${level}`,
     combined: (amount) => `In dieser Kombination: ${amount}`,
     combinedHint: "Andere eingeschaltete Maßnahmen wirken auf dieselben Haushaltsposten.",
+    rangeCrossesZero: (range, opposite, level) =>
+      `Spanne ${range}: Je nach Schätzung kann die Maßnahme ${level ? "diese Ebene" : "den Saldo"} auch ${
+        level ? (opposite === "worsen" ? "belasten" : "entlasten") : opposite === "worsen" ? "verschlechtern" : "verbessern"
+      }.`,
     timingLine: (when) => `Die Zahl ist die volle Wirkung; in der Rechnung zu Schulden und Zinsen ${when}.`,
     timingTitle: "Wann sie wirkt",
-    timingDetail: (when) => `In der Rechnung zu Schulden und Zinsen wirkt die Maßnahme bei dieser Einstellung ${when}.`,
+    timingDetail: (when, setting) => `In der Rechnung zu Schulden und Zinsen wirkt die Maßnahme${setting ? " bei dieser Einstellung" : ""} ${when}.`,
     ofAll: (side, share) => `${share} aller ${side === "revenue" ? "Einnahmen" : "Ausgaben"}`,
     ofLevel: (side, share) => `${share} der ${side === "revenue" ? "Einnahmen" : "Ausgaben"} dieser Ebene`,
     perInhabitant: (amount) => `${amount} je Einwohner`,

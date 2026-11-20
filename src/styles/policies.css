@@ -419,6 +419,14 @@
   visibility: hidden;
 }
 
+/* The range reaches the other side of zero: in the colour of the text, not of either direction. */
+.policy__crosses {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
 .policy__timing-detail {
   font-size: 14px;
   line-height: 1.5;

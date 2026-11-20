@@ -83,6 +83,22 @@ describe("the retirement age in the debt projection", () => {
     expect(plain(container.querySelector(".dfig--debt .dfig__condition")?.textContent)).toMatch(/^mit den eingeschalteten Maßnahmen, bei /);
   });
 
+  it("says in the details when it acts at the slider's setting; a measure without a slider says when it acts", () => {
+    mount("#lang=de&s=retirement_age.age.70~single_health_insurer");
+    act(() => (container.querySelector("#policy-retirement_age .policy__more") as HTMLElement).click());
+    act(() => (container.querySelector("#policy-single_health_insurer .policy__more") as HTMLElement).click());
+    expect(plain(container.querySelector("#policy-retirement_age .policy__timing-detail")?.textContent)).toBe(
+      "In der Rechnung zu Schulden und Zinsen wirkt die Maßnahme bei dieser Einstellung ab 2032, voll ab 2059.",
+    );
+    expect(plain(container.querySelector("#policy-single_health_insurer .policy__timing-detail")?.textContent)).toBe(
+      "In der Rechnung zu Schulden und Zinsen wirkt die Maßnahme ab 2029, voll ab 2032.",
+    );
+    // A central saving whose range includes a loss says so on the card.
+    expect(plain(container.querySelector("#policy-single_health_insurer .policy__crosses")?.textContent)).toMatch(
+      /^Spanne −\d+ Mio\. € bis \+\d+ Mio\. €: Je nach Schätzung kann die Maßnahme den Saldo auch verschlechtern\.$/,
+    );
+  });
+
   it("names the reason for 2027 from the pack", () => {
     mount("#lang=de&s=retirement_age");
     const why = container.querySelector("#debt .debt__why");
