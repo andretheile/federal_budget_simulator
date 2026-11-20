@@ -1,6 +1,6 @@
 /*
- * Measures. A card is a quiet white sheet; switched on, it gets an ink edge. Inside, the figure
- * is the loudest thing, then the catch.
+ * Measures. A card is a quiet white sheet; switched on, it gets an ink edge on the left. Inside,
+ * the figure is the loudest thing, then the catch.
  */
 
 /*
@@ -168,6 +168,44 @@
   color: inherit;
 }
 
+/*
+ * Phone: the topics are one row that scrolls sideways, out to the edges of the screen, instead of
+ * four rows in front of the first card. A chip cut off at the edge and a fade on each side where
+ * there is more (data-start, data-end: PolicyList.tsx) say that it scrolls; the chosen chip is
+ * brought into view. The padding keeps the focus mark of a chip from being cut off.
+ */
+@media (max-width: 599px) {
+  .filter {
+    position: relative;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 4px var(--gutter) 6px;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: thin;
+  }
+
+  .filter__item {
+    flex: none;
+  }
+
+  .filter[data-end="true"] {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+  }
+
+  .filter[data-start="true"] {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 44px);
+    mask-image: linear-gradient(to right, transparent, #000 44px);
+  }
+
+  .filter[data-start="true"][data-end="true"] {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 44px, #000 calc(100% - 44px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 44px, #000 calc(100% - 44px), transparent);
+  }
+}
+
 .policy-list {
   display: grid;
   gap: 14px;
@@ -183,9 +221,11 @@
     box-shadow 0.16s ease;
 }
 
+/* Switched on: a bar of ink down the left edge (a shape, not only a colour) and a darker frame;
+   the switch says "on" in words. Not a full ink frame: with several on, the list would be a stack of them. */
 .policy.is-on {
-  border-color: var(--ink);
-  box-shadow: inset 5px 0 0 var(--ink);
+  border-color: var(--ink-3);
+  box-shadow: inset 4px 0 0 var(--ink);
 }
 
 .policy__top {
@@ -909,9 +949,9 @@
   border-color: var(--ink);
 }
 
+/* Chosen: the ticked box says it; the frame only darkens a little. */
 .chip[aria-pressed="true"] {
-  border-color: var(--ink);
-  box-shadow: inset 0 0 0 1px var(--ink);
+  border-color: var(--ink-3);
 }
 
 .chip__box {
@@ -978,7 +1018,9 @@
   background: var(--ink);
 }
 
-/* Catches. Severity is said in words and by weight; a blocker is boxed and inverted. */
+/* Catches. Severity is said in words and by weight. A blocker is the only one in a frame, with an
+   ink bar on its left (as a card that is on) and its severity as the outlined tag of the card's
+   summary: told apart by shape, not by a block of black. */
 .catches {
   display: grid;
   gap: 10px;
@@ -1035,17 +1077,18 @@
 }
 
 .catch--blocker {
-  padding: 12px 13px 13px 14px;
-  border: 2px solid var(--ink);
-  border-left-width: 7px;
+  padding: 11px 13px 12px 15px;
+  border: 1px solid var(--ink-3);
+  border-left: 0;
+  box-shadow: inset 4px 0 0 var(--ink);
   background: var(--surface);
 }
 
 .catch--blocker .catch__severity {
-  padding: 3px 8px;
+  padding: 1px 7px;
+  border: 1.5px solid var(--ink);
   border-radius: 3px;
-  background: var(--ink);
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .catch--blocker .catch__kind {

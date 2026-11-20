@@ -8,8 +8,11 @@
  * And the frame of the dialog with the goal's details; what is inside comes with its code
  * (goal-details.css).
  */
+/* A strip of its own under the figures: it measures one budget (the goal's level), while the
+   figures above it are for the levels the page shows. */
 .goalbar {
   border-top: 1px solid var(--rule);
+  background: var(--sunken);
 }
 
 .goalbar__inner {
@@ -21,7 +24,10 @@
     "status"
     "others"
     "level"
-    "excluded";
+    "excluded"
+    "spacer";
+  /* The last row is empty: it takes whatever the room of the words keeps to spare (see below). */
+  grid-template-rows: repeat(6, auto) 1fr;
   align-items: center;
   /* No gaps between the rows: a row that is empty (nothing left out, nobody else burdened) takes
      no room at all. The rows that are there keep their distance by their own margins. */
@@ -51,29 +57,86 @@
   display: none;
 }
 
+/* "Ziel · Bund": whose budget the goal is about, in ink, so it reads against "Alle Ebenen" above. */
+.goalbar__scope {
+  color: var(--ink);
+}
+
+/* What a screen reader hears instead, as written, not in capitals. */
+.goalbar__label .visually-hidden {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.goalbar__scope::before {
+  content: "·";
+  margin-inline: 0.45em;
+  color: var(--ink-3);
+}
+
+/*
+ * The picker reads as the goal's title that can be changed, not as a form field like the level
+ * select in the header: no box, an underline and a chevron. It is still the browser's own select.
+ */
 .goalbar__picker {
+  position: relative;
   display: flex;
   min-width: 0;
+  color: var(--ink-2);
+}
+
+.goalbar__picker::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  width: 6px;
+  height: 6px;
+  margin-top: -5px;
+  border-right: 1.6px solid currentColor;
+  border-bottom: 1.6px solid currentColor;
+  transform: rotate(45deg);
+  pointer-events: none;
 }
 
 .goalbar__picker select {
+  -webkit-appearance: none;
+  appearance: none;
   /* As the header's selects: WebKit overrides a min-height on its own. */
   height: 32px;
   min-height: 32px;
   min-width: 0;
   max-width: 100%;
-  padding: 0 26px 0 9px;
-  border: 1px solid var(--rule-strong);
-  border-radius: 4px;
-  background: var(--surface);
-  font-size: 14px;
+  padding: 0 22px 0 0;
+  border: 0;
+  border-radius: 0;
+  /* The underline, just under the text: with the chevron, what says this can be changed. */
+  background: linear-gradient(var(--ink-3), var(--ink-3)) left calc(50% + 0.78em) / calc(100% - 22px) 1px no-repeat;
+  font-size: 15px;
   font-weight: 650;
+  color: var(--ink);
   text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.goalbar__picker select:hover,
+.goalbar__picker select:focus-visible {
+  background-image: linear-gradient(var(--ink), var(--ink));
+  background-size: calc(100% - 22px) 2px;
+}
+
+.goalbar__picker select:focus-visible {
+  outline-offset: 3px;
+}
+
+.goalbar__picker:hover,
+.goalbar__picker:focus-within {
+  color: var(--ink);
 }
 
 .goalbar__name {
   min-width: 0;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 650;
 }
 
@@ -116,7 +179,8 @@
   height: 12px;
   margin-block: 5px;
   border-radius: 3px;
-  background: var(--sunken);
+  /* Lighter than the strip it lies on. */
+  background: var(--paper);
   box-shadow: inset 0 0 0 1px var(--rule-strong);
 }
 
@@ -215,6 +279,25 @@
 
 .goalbar__stand-in {
   visibility: hidden;
+}
+
+/*
+ * The room of the words (GoalBar.tsx): the stand-ins of the longest words, and under them the same
+ * rows as on the bar. It spans those rows and the empty last one, which takes what is left over: the
+ * band keeps its height whatever the words say, and any room to spare lies under the last row.
+ */
+.goalbar__room {
+  grid-column: 1 / -1;
+  grid-row: status-start / spacer-end;
+  align-self: start;
+  min-width: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Two lines kept on a phone, which has no stand-ins (see below). */
+.goalbar__two-lines {
+  display: none;
 }
 
 .goalbar__line {
@@ -338,18 +421,9 @@
   font-size: inherit;
 }
 
-/* From a tablet on: the goal and its bar on one line, the words below it. */
+/* From a tablet on the picker keeps to a sensible width. Below 1080px the goal, its bar and the
+   words each have a line of their own: beside the picker and the link the bar would be a stub. */
 @media (min-width: 720px) {
-  .goalbar__inner {
-    grid-template-columns: auto minmax(160px, 1fr);
-    grid-template-areas:
-      "head track"
-      "status status"
-      "others others"
-      "level level"
-      "excluded excluded";
-  }
-
   .goalbar__picker select {
     max-width: 30em;
   }
@@ -363,7 +437,18 @@
       "head track track"
       "status status level"
       "others others others"
-      "excluded excluded excluded";
+      "excluded excluded excluded"
+      "spacer spacer spacer";
+    grid-template-rows: repeat(4, auto) 1fr;
+  }
+
+  /* The words have a row of their own with what is measured beside them: the room is theirs alone. */
+  .goalbar__room {
+    grid-area: status;
+  }
+
+  .goalbar__room > :not(.goalbar__status) {
+    display: none;
   }
 
   .goalbar__status,
@@ -375,6 +460,34 @@
   .goalbar__level {
     white-space: nowrap;
     text-align: right;
+  }
+
+  /*
+   * Floating over the content: the goal, its picker and the bar, and the state in one line. What
+   * counts, what is left out and the sentence about the other levels are there again at the top of
+   * the page; the short form of the last stays in the line, as on a phone.
+   */
+  .scoreboard.is-stuck .goalbar__inner {
+    grid-template-areas:
+      "head track track"
+      "status status status"
+      "spacer spacer spacer";
+    grid-template-rows: auto auto 1fr;
+    padding-block: 4px 7px;
+  }
+
+  .scoreboard.is-stuck .goalbar__level,
+  .scoreboard.is-stuck .goalbar__excluded,
+  .scoreboard.is-stuck .goalbar__others {
+    display: none;
+  }
+
+  .scoreboard.is-stuck .goalbar__others-chip {
+    display: inline-flex;
+  }
+
+  .scoreboard.is-stuck .goalbar__status {
+    margin-top: 2px;
   }
 }
 
@@ -393,19 +506,41 @@
     margin-top: 4px;
   }
 
-  .goalbar__picker {
-    flex: 1;
+  /* The label and the button on one line, the picker on the next with the whole width: the
+     goal's name is not cut off. */
+  .goalbar__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "label more"
+      "picker picker";
+    column-gap: 8px;
+  }
+
+  .goalbar__label {
+    grid-area: label;
+  }
+
+  .goalbar__picker,
+  .goalbar__name {
+    grid-area: picker;
+    /* As wide as the name, so the chevron stays beside it. */
+    justify-self: start;
+    max-width: 100%;
   }
 
   .goalbar__picker select {
-    width: 100%;
+    height: 30px;
+    min-height: 30px;
     /* Not smaller: below 16px Safari on a phone zooms into a field when it gets the focus. */
     font-size: 16px;
   }
 
   .goalbar__more {
+    grid-area: more;
     justify-content: center;
     min-width: 32px;
+    min-height: 24px;
     margin-left: 0;
   }
 
@@ -424,10 +559,16 @@
 
   /*
    * No stand-ins on a phone: at the top of the page the band only changes when the goal is changed
-   * there, and while it floats it keeps to one line. Room for three lines would be empty most of the time.
+   * there, and while it floats it keeps to one line. Room for three lines would be empty most of the
+   * time. Two lines are kept, so that only the closed state with its qualifier can add one.
    */
-  .goalbar__stand-in {
+  .goalbar__room .goalbar__stand-in {
     display: none;
+  }
+
+  .goalbar__two-lines {
+    display: block;
+    height: calc(2 * 1.4em);
   }
 
   .goalbar__extra {
@@ -439,22 +580,23 @@
     font-size: 12px;
   }
 
-  /* Two lines kept for the words, so that only the closed state with its qualifier can add one. */
-  .goalbar__status {
-    min-height: calc(2 * 1.4em);
-  }
 }
 
 /*
- * Phone, floating over the content (and so while the curve editor is open): one line for the goal
- * and its bar, one for the state. The rest is there again at the top of the page.
+ * Phone and tablet, floating over the content (and so while the curve editor is open): one line for
+ * the goal and its bar, one for the state. The rest is there again at the top of the page.
  */
-@media (max-width: 599px) {
+@media (max-width: 1079px) {
+  .scoreboard.is-stuck .goalbar__head {
+    display: flex;
+  }
+
   .scoreboard.is-stuck .goalbar__inner {
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-areas:
       "head track"
       "status status";
+    grid-template-rows: auto auto;
     column-gap: 12px;
     padding-block: 4px 6px;
   }
@@ -470,8 +612,9 @@
     display: none;
   }
 
-  .scoreboard.is-stuck .goalbar__status {
-    min-height: 0;
+  /* One line, whatever it says: no room is kept. */
+  .scoreboard.is-stuck .goalbar__room {
+    display: none;
   }
 
   /* What the other levels bear keeps its place in the one line; the sentence before it gives way. */
@@ -479,10 +622,6 @@
     display: inline-flex;
   }
 
-  /* Closed, and the other levels pay: the tag and the burden are what the line has room for. */
-  .scoreboard.is-stuck .goalbar--closed.has-others .goalbar__main {
-    display: none;
-  }
 
   .scoreboard.is-stuck .goalbar__label-year {
     display: inline;
@@ -503,6 +642,13 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+}
+
+/* Phone, closed, and the other levels pay: the tag and the burden are what the line has room for. */
+@media (max-width: 599px) {
+  .scoreboard.is-stuck .goalbar--closed.has-others .goalbar__main {
+    display: none;
   }
 }
 

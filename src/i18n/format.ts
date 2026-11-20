@@ -233,11 +233,13 @@ export function createFormatters(
       case "currency":
         return money(value, { trim: true });
       case "years":
+        // A whole number of years without decimals ("67 Jahre"), a part of one with as many as the
+        // step has ("67,5 Jahre"): nobody says "67,0 Jahre". Only this unit drops its zeros.
         return numberFormat(`years:${digits}`, {
           style: "unit",
           unit: "year",
           unitDisplay: "long",
-          minimumFractionDigits: digits,
+          minimumFractionDigits: 0,
           maximumFractionDigits: digits,
         }).format(value);
       case "count":

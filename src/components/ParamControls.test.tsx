@@ -74,11 +74,11 @@ function Harness({ param, start, direction }: { param: NumberParam; start: numbe
   );
 }
 
-function mount(param: NumberParam, start: number, direction?: Direction): void {
+function mount(param: NumberParam, start: number, direction?: Direction, language = "de"): void {
   root = createRoot(container);
   act(() =>
     root.render(
-      <UiContext value={createUi(testland, "de")}>
+      <UiContext value={createUi(testland, language)}>
         <Harness param={param} start={start} direction={direction} />
       </UiContext>,
     ),
@@ -239,6 +239,75 @@ describe("the keys", () => {
     mount(rate, 1);
     expect(key(slider(), "ArrowRight")).toBe(false);
     expect(valueNow()).toBe(1);
+  });
+});
+
+describe("years in steps of half a year", () => {
+  /** Like the retirement age: 65 to 70 years, base year 67. */
+  const age: NumberParam = { id: "age", type: "number", label: { en: "Age", de: "Alter" }, unit: "years", min: 65, max: 70, step: 0.5, default: 67.5, baseline: 67 };
+
+  it("writes whole years without a decimal and half years with one, also the change and the ends", () => {
+    mount(age, 67.5, "improve");
+    expect(text(".param__value")).toBe("67,5 Jahre");
+    expect(text(".param__change").trim()).toBe("(+0,5)");
+    expect([text(".param__end--min"), text(".param__end--max")]).toEqual(["65 Jahre", "70 Jahre"]);
+    slideTo(70);
+    expect(text(".param__value")).toBe("70 Jahre");
+    expect(text(".param__change").trim()).toBe("(+3)");
+    slideTo(67);
+    expect(text(".param__value")).toBe("67 Jahre");
+  });
+
+  it("puts the unit, without a number, beside the field to type into", () => {
+    mount(age, 67.5);
+    act(() => query<HTMLButtonElement>(".param__reading").click());
+    expect(text(".param__field span")).toBe("Jahre");
+  });
+});
+
+describe("a baseline that is not the base year's value", () => {
+  /** The retirement age: 67 is current law's end state, not what applied in 2024. */
+  const age: NumberParam = {
+    id: "age",
+    type: "number",
+    label: { en: "Age", de: "Alter" },
+    unit: "years",
+    min: 65,
+    max: 70,
+    step: 0.5,
+    default: 67.5,
+    baseline: 67,
+    baselineLabel: { en: "Current law", de: "Geltendes Recht" },
+  };
+
+  it("is named by its label wherever the base year would stand: tick, button, and what screen readers hear", () => {
+    mount(age, 70, "improve");
+    const base = query<HTMLButtonElement>(".param__base");
+    expect(text(".param__base")).toBe("Geltendes Recht: 67 Jahre");
+    expect(plain(base.getAttribute("aria-label"))).toBe("Auf „Geltendes Recht“ setzen: 67 Jahre");
+    expect(text(`#${slider().getAttribute("aria-describedby")}`)).toBe("Geltendes Recht: 67 Jahre");
+    expect(plain(slider().getAttribute("aria-valuetext"))).toBe("70 Jahre, +3 gegenüber „Geltendes Recht“, verbessert den Saldo");
+    expect(container.textContent).not.toContain("2024");
+    act(() => base.click());
+    expect(valueNow()).toBe(67);
+  });
+
+  it("speaks English, and names it at the end of the scale too", () => {
+    mount(age, 70, "improve", "en");
+    expect(text(".param__base")).toBe("Current law: 67 years");
+    expect(plain(query(".param__base").getAttribute("aria-label"))).toBe("Set to “Current law”: 67 years");
+    expect(plain(slider().getAttribute("aria-valuetext"))).toBe("70 years, +3 compared with “Current law”, improves the balance");
+    act(() => root.unmount());
+    // The baseline at the end of the scale: the end says it, with the label instead of the year.
+    mount({ ...age, min: 67 }, 70, "improve", "en");
+    expect(text(".param__end--min")).toBe("67 years · Current law");
+  });
+
+  it("without a label is the base year's value, as before", () => {
+    mount({ ...age, baselineLabel: undefined }, 70, "improve");
+    expect(text(".param__base")).toBe("2024: 67 Jahre");
+    expect(plain(query(".param__base").getAttribute("aria-label"))).toBe("Auf den Wert von 2024 setzen: 67 Jahre");
+    expect(plain(slider().getAttribute("aria-valuetext"))).toBe("70 Jahre, +3 gegenüber 2024, verbessert den Saldo");
   });
 });
 

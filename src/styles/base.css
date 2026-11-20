@@ -340,7 +340,8 @@ main:focus {
   margin-top: 4px;
 }
 
-/* The severity of a catch as a tag. A blocker is inverted: the heaviest mark on the page. */
+/* The severity of a catch as a tag. A blocker is framed in ink, with its icon: it stands out from
+   the plain tags without being the darkest thing on a card, above the figure it qualifies. */
 .catch-tag {
   display: inline-flex;
   align-items: center;
@@ -355,8 +356,10 @@ main:focus {
 }
 
 .catch-tag--blocker {
-  background: var(--ink);
-  color: var(--paper);
+  padding: 2px 7px;
+  border: 1.5px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .catch-tag--plain {
@@ -365,7 +368,7 @@ main:focus {
 }
 
 .catch-tag--small {
-  padding: 1px 6px;
+  padding: 0 5px;
   font-size: 10.5px;
 }
 
@@ -406,6 +409,8 @@ main {
 
 .workspace {
   display: grid;
+  /* Not wider than the page, whatever is inside (the topics scroll sideways on a phone). */
+  grid-template-columns: minmax(0, 1fr);
   gap: 56px;
 }
 

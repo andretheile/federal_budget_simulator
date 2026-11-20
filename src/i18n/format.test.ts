@@ -112,6 +112,15 @@ describe("counts, parameters and dates", () => {
     expect(en.param(param("currency", 100_000), 2_000_000)).toBe("€2m");
     expect(plain(de.param(param("years", 1), 67))).toBe("67 Jahre");
     expect(en.param(param("years", 1), 67)).toBe("67 years");
+    // In half years: whole values without a decimal, half values with one.
+    expect(plain(de.param(param("years", 0.5), 67))).toBe("67 Jahre");
+    expect(plain(de.param(param("years", 0.5), 67.5))).toBe("67,5 Jahre");
+    expect(plain(de.param(param("years", 0.5), 65))).toBe("65 Jahre");
+    expect(en.param(param("years", 0.5), 70)).toBe("70 years");
+    expect(en.param(param("years", 0.5), 67.5)).toBe("67.5 years");
+    // Other units keep the decimals of their step.
+    expect(plain(de.param(param("percent", 0.5), 42))).toBe("42,0 %");
+    expect(de.param(param("count", 0.5), 3)).toBe("3,0");
     expect(de.param(param("count", 1), 1200)).toBe("1.200");
   });
 

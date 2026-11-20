@@ -35,6 +35,17 @@
   padding-block: 12px 14px;
 }
 
+/* "Saldo 2024 · Alle Ebenen": the levels the figures cover, as the goal bar names its own. */
+.scoreboard__scope {
+  color: var(--ink-2);
+}
+
+.scoreboard__scope::before {
+  content: "·";
+  margin-inline: 0.45em;
+  color: var(--ink-3);
+}
+
 .scoreboard__hero {
   display: flex;
   flex-wrap: wrap;
@@ -192,6 +203,18 @@
   }
 }
 
+/* From a tablet on, floating over the content: a smaller headline figure and less padding, so the
+   band leaves more of the window to the page. The section keeps its height, so nothing below jumps. */
+@media (min-width: 600px) {
+  .scoreboard.is-stuck .scoreboard__inner {
+    padding-block: 8px 10px;
+  }
+
+  .scoreboard.is-stuck .scoreboard__number {
+    font-size: clamp(30px, 2.8vw, 38px);
+  }
+}
+
 /* Tablet: the ratios move under the two sides. */
 @media (max-width: 859px) {
   .scoreboard__inner {
@@ -277,11 +300,11 @@
     gap: 2px 16px;
   }
 
+  /* Label above figure on both sides alike, whatever their lengths. */
   .scoreboard__side {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0 6px;
+    display: grid;
+    align-content: start;
+    gap: 1px;
   }
 
   .scoreboard__side dt {

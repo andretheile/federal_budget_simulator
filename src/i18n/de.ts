@@ -104,7 +104,8 @@ export const de: Messages = {
     intro:
       "Jede Zahl zeigt, was eine Maßnahme für sich genommen in einem Jahr bewirken würde, bei den aktuellen Einstellungen.",
     topic: "Thema",
-    allTopics: "Alle",
+    allTopics: "Alle Themen",
+    allMeasures: "Alle Maßnahmen",
     topics: {
       migration: "Migration",
       social: "Soziales",
@@ -131,10 +132,10 @@ export const de: Messages = {
     settings: "Einstellungen",
     settingCount: (count) => plural(count, "Regler", "Regler"),
     previewHint: "Nicht eingeschaltet. Die Zahlen zeigen, was die Maßnahme bewirken würde.",
-    baseValue: (value, year) => `${year}: ${value}`,
-    baseAtEnd: (end, year) => `${end} · ${year}`,
-    toBaseValue: (value, year) => `Auf den Wert von ${year} setzen: ${value}`,
-    changeFromBase: (change, year) => `${change} gegenüber ${year}`,
+    baseValue: (value, base) => `${base}: ${value}`,
+    baseAtEnd: (end, base) => `${end} · ${base}`,
+    toBaseValue: (value, base) => (typeof base === "number" ? `Auf den Wert von ${base} setzen: ${value}` : `Auf „${base}“ setzen: ${value}`),
+    changeFromBase: (change, base) => (typeof base === "number" ? `${change} gegenüber ${base}` : `${change} gegenüber „${base}“`),
     assumption: "Annahme",
     typeValue: (label, value) => `${label}: ${value}. Wert eingeben`,
     valueField: (label) => `Wert für ${label}`,
@@ -204,6 +205,7 @@ export const de: Messages = {
   goal: {
     label: "Ziel",
     labelYear: (year) => `Ziel ${year}`,
+    scopedLabel: (level) => (level ? `Ziel, gemessen auf der Ebene „${level}“` : "Ziel, gemessen am Saldo des ganzen Staates"),
     closed: "Geschlossen",
     none: (needed) => `Es fehlen ${needed}.`,
     noneWhy: "Noch ist keine Maßnahme eingeschaltet.",

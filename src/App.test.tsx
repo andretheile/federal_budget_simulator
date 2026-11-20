@@ -6,7 +6,7 @@
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { Simulator } from "./App.tsx";
+import { ONE_COLUMN, Simulator } from "./App.tsx";
 import { testland } from "./engine/__fixtures__/testland.ts";
 
 // Every test here renders the whole page, most of them several times: a fraction of a second on a
@@ -212,6 +212,51 @@ describe("details that depend on the engine of the browser or the size of the sc
     expect(bar.classList.contains("is-keyboard")).toBe(true);
     act(() => option.blur());
     expect(bar.classList.contains("is-keyboard")).toBe(false);
+  });
+
+  describe("the order of measures and budget", () => {
+    /** A window of this width: media queries answered the way the browser would. */
+    function widthOf(width: number): void {
+      const answer = (media: string): boolean => {
+        const max = /max-width:\s*(\d+)px/.exec(media);
+        const min = /min-width:\s*(\d+)px/.exec(media);
+        return (!max || width <= Number(max[1])) && (!min || width >= Number(min[1]));
+      };
+      Object.defineProperty(window, "matchMedia", {
+        configurable: true,
+        value: (media: string) => ({ matches: answer(media), media, addEventListener() {}, removeEventListener() {} }),
+      });
+    }
+    afterEach(() => {
+      delete (window as { matchMedia?: unknown }).matchMedia;
+    });
+    /** The parts of the workspace from top to bottom, and whether the line to the debt section stands before it. */
+    const order = (): { parts: string[]; teaserFirst: boolean } => ({
+      parts: [...query(".workspace").children].map((element) => element.classList[0]),
+      teaserFirst: query(".workspace").previousElementSibling?.classList.contains("debt-teaser") ?? false,
+    });
+
+    it("puts the measures first where the page has one column: on a phone and on a tablet", () => {
+      expect(ONE_COLUMN).toBe("(max-width: 1079px)");
+      for (const width of [390, 768, 1079]) {
+        widthOf(width);
+        mount("#lang=en");
+        // The line to the debt section follows the measures, so the first measure comes sooner.
+        expect(order()).toEqual({ parts: ["policies", "debt-teaser", "budget"], teaserFirst: false });
+        act(() => root.unmount());
+      }
+      mount("#lang=en");
+    });
+
+    it("puts the budget beside the measures, first, where the page has two columns", () => {
+      for (const width of [1080, 1440]) {
+        widthOf(width);
+        mount("#lang=en");
+        expect(order()).toEqual({ parts: ["budget", "policies"], teaserFirst: true });
+        act(() => root.unmount());
+      }
+      mount("#lang=en");
+    });
   });
 });
 

@@ -110,7 +110,10 @@ export interface Messages {
     title: string;
     intro: string;
     topic: string;
+    /** The first chip of the topic row. */
     allTopics: string;
+    /** The first entry of the collection row: every measure of the pack. */
+    allMeasures: string;
     topics: Record<PolicyTopic, string>;
     switchOn(label: string): string;
     on: string;
@@ -127,14 +130,17 @@ export interface Messages {
     settings: string;
     settingCount(count: number): string;
     previewHint: string;
-    /** A setting's value in the base year, under its slider. */
-    baseValue(value: string, year: number): string;
-    /** The end of a slider's scale where the base-year value lies: "0 % · 2024". */
-    baseAtEnd(end: string, year: number): string;
-    /** Name of the button that sets a slider back to its base-year value. */
-    toBaseValue(value: string, year: number): string;
-    /** How far a setting is from its base-year value, for screen readers. */
-    changeFromBase(change: string, year: number): string;
+    /**
+     * A setting's baseline, under its slider. `base` is the base year, or the baseline's own name
+     * where it is not the base year's value (the param's baselineLabel, e.g. "Geltendes Recht").
+     */
+    baseValue(value: string, base: number | string): string;
+    /** The end of a slider's scale where the baseline lies: "0 % · 2024". */
+    baseAtEnd(end: string, base: number | string): string;
+    /** Name of the button that sets a slider back to its baseline. */
+    toBaseValue(value: string, base: number | string): string;
+    /** How far a setting is from its baseline, for screen readers. */
+    changeFromBase(change: string, base: number | string): string;
     /** The tag before a setting that is an assumption of the calculation, not a political choice. */
     assumption: string;
     /** Name of the button that shows a setting's value and turns it into a field. */
@@ -197,6 +203,8 @@ export interface Messages {
     label: string;
     /** The same with the goal's year, where only one line is left (a phone, while scrolling). */
     labelYear(year: number): string;
+    /** What a screen reader hears for the picker's label (seen: "Goal · Federal government"); no level: the whole state. */
+    scopedLabel(level: string | undefined): string;
     /** The tag of the closed state. */
     closed: string;
     /**

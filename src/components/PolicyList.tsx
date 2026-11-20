@@ -4,7 +4,7 @@
  * a collection carries a badge with its name. Measures that are switched on keep counting when a
  * filter hides them; the list says how many that are and shows them all again with one click.
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { curveChanged, curveSettings } from "../app/curveModel.ts";
 import { collectionsByPolicy, listView } from "../app/listModel.ts";
 import { useUi } from "../app/ui.ts";
@@ -32,6 +32,33 @@ export interface PolicyListProps {
   onCollection(id: string | undefined): void;
   /** The goal the bar under the scoreboard measures against: a measure it leaves out says so. */
   goal?: Goal;
+}
+
+/**
+ * Marks a row that scrolls sideways with data-start and data-end where there is more to see, so
+ * the styles can fade that edge. Follows scrolling and changes of size, of the row and of its content.
+ */
+function useScrollEdges(ref: RefObject<HTMLElement | null>, present: boolean): void {
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const update = (): void => {
+      const rest = element.scrollWidth - element.clientWidth - element.scrollLeft;
+      element.dataset.start = String(element.scrollLeft > 1);
+      element.dataset.end = String(rest > 1);
+    };
+    update();
+    element.addEventListener("scroll", update, { passive: true });
+    const observer = typeof ResizeObserver === "function" ? new ResizeObserver(update) : undefined;
+    observer?.observe(element);
+    const mutations = typeof MutationObserver === "function" ? new MutationObserver(update) : undefined;
+    mutations?.observe(element, { childList: true, subtree: true, characterData: true });
+    return () => {
+      element.removeEventListener("scroll", update);
+      observer?.disconnect();
+      mutations?.disconnect();
+    };
+  }, [ref, present]);
 }
 
 export function PolicyList({
@@ -117,6 +144,22 @@ export function PolicyList({
     return () => cancelAnimationFrame(frame);
   }, [reveal, pack]);
 
+  // On a phone the topics are one row that scrolls sideways (policies.css): the chosen one is
+  // brought into view, and the row says on which side there is more.
+  const topicRow = useRef<HTMLDivElement>(null);
+  useScrollEdges(topicRow, topics.length > 1);
+  const topicCount = topics.length;
+  useEffect(() => {
+    const row = topicRow.current;
+    const chosen = row?.querySelector<HTMLElement>('[aria-pressed="true"]');
+    if (!row || !chosen || row.scrollWidth <= row.clientWidth + 1) return;
+    const padding = parseFloat(getComputedStyle(row).scrollPaddingInlineStart) || 0;
+    const start = chosen.offsetLeft - padding;
+    const end = chosen.offsetLeft + chosen.offsetWidth + padding - row.clientWidth;
+    const left = start < row.scrollLeft ? start : end > row.scrollLeft ? end : row.scrollLeft;
+    if (left !== row.scrollLeft) row.scrollTo?.({ left, behavior: reducedMotion() ? "auto" : "smooth" });
+  }, [active, topicCount, collectionId]);
+
   const showAll = (): void => {
     setTopic(null);
     onCollection(undefined);
@@ -154,7 +197,7 @@ export function PolicyList({
       {collections.length > 0 && (
         <div className="collections" role="group" aria-label={t.policies.collectionFilter}>
           <button type="button" className="collections__item" aria-pressed={collection === undefined} onClick={() => onCollection(undefined)}>
-            <span className="collections__name">{t.policies.allTopics}</span>
+            <span className="collections__name">{t.policies.allMeasures}</span>
             <span className="collections__count">{pack.policies.length}</span>
           </button>
           {collections.map((entry) => (
@@ -186,7 +229,7 @@ export function PolicyList({
       )}
 
       {topics.length > 1 && (
-        <div className="filter" role="group" aria-label={t.policies.topic}>
+        <div className="filter" role="group" aria-label={t.policies.topic} ref={topicRow}>
           <button type="button" className="filter__item" aria-pressed={active === null} onClick={() => setTopic(null)}>
             {t.policies.allTopics} <span className="filter__count">{view.pool.length}</span>
           </button>

@@ -183,6 +183,41 @@ describe("the goal bar", () => {
     expect(plain(standIns[4].textContent)).toMatch(/^ClosedXTS 8,888 covered\.XTS 8,888 more than needed\./);
   });
 
+  it("keeps that room under the rows below the words, so anything to spare lies at the bottom", () => {
+    mount("#lang=en&s=no_basic_income_non_citizens");
+    const room = query(".goalbar__room");
+    expect(room.getAttribute("aria-hidden")).toBe("true");
+    // The room is the last row of the bar, after the words and the rows that belong to them.
+    expect(room.parentElement?.lastElementChild).toBe(room);
+    // In it, the stand-ins of the words, then the same rows as on the bar, in the same order: so it is
+    // as tall as the longest words with those rows, and the real rows follow the words directly.
+    expect([...room.children].map((child) => child.className)).toEqual(["goalbar__status", "goalbar__others", "goalbar__level"]);
+    expect(room.querySelectorAll(".goalbar__status > .goalbar__stand-in")).toHaveLength(7);
+    expect(plain(room.querySelector(".goalbar__others")?.textContent)).toBe(text(".goalbar__inner > .goalbar__others"));
+    expect(plain(room.querySelector(".goalbar__level")?.textContent)).toBe(text(".goalbar__inner > .goalbar__level"));
+    // The words on the bar have no stand-ins of their own any more.
+    expect(container.querySelectorAll(".goalbar__inner > .goalbar__status .goalbar__stand-in")).toHaveLength(0);
+    // A line about what is left out is copied too, as text: no second button.
+    mount("#lang=en&g=close_deficit&s=defense_target~family_bonus");
+    expect(plain(query(".goalbar__room .goalbar__excluded").textContent)).toBe(text(".goalbar__inner > .goalbar__excluded"));
+    expect(query(".goalbar__inner > .goalbar__excluded .goalbar__why").tagName).toBe("BUTTON");
+    expect(query(".goalbar__room").querySelector("button")).toBeNull();
+  });
+
+  it("names the picker for screen readers as one phrase: where the goal is measured", () => {
+    mount();
+    const label = query("label.goalbar__label");
+    // Seen: "Goal · Central government"; heard: one sentence fragment instead of two nouns in a row.
+    expect(text("label.goalbar__label .goalbar__scope")).toBe("Central government");
+    const heard = [...label.querySelectorAll("span")].filter((span) => span.getAttribute("aria-hidden") !== "true");
+    expect(heard.map((span) => plain(span.textContent))).toEqual(["Goal, measured at the level “Central government”"]);
+    mount("#lang=de");
+    expect(plain(query("label.goalbar__label .visually-hidden").textContent)).toBe("Ziel, gemessen auf der Ebene „Zentralstaat“");
+    mount("#lang=en&g=close_deficit");
+    expect(text("label.goalbar__label .goalbar__scope")).toBe("Whole state");
+    expect(plain(query("label.goalbar__label .visually-hidden").textContent)).toBe("Goal, measured on the balance of the whole state");
+  });
+
   it("tells screen readers the new state once the visitor has stopped", () => {
     vi.useFakeTimers();
     mount();

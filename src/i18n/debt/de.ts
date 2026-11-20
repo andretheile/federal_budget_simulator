@@ -2,10 +2,10 @@ import type { DebtIntroFacts, DebtLeadText, DebtMessages } from "./messages.ts";
 
 function intro({ baseYear, plan, measuresOn }: DebtIntroFacts): string {
   if (!plan) {
-    return `Eine Wenn-dann-Rechnung, keine Prognose: So entwickelten sich Schulden und Zinsen, wenn der Haushalt von ${baseYear} mit den eingeschalteten Maßnahmen im Verhältnis zur Wirtschaft so bliebe.`;
+    return `So entwickelten sich Schulden und Zinsen, wenn der Haushalt von ${baseYear} mit den eingeschalteten Maßnahmen im Verhältnis zur Wirtschaft so bliebe.`;
   }
   return (
-    `Eine Wenn-dann-Rechnung, keine Prognose. Bis ${plan.until} folgen Schulden und Wachstum der amtlichen Planung „${plan.label}“; danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${plan.until} hat, und es gelten die Annahmen. ` +
+    `Bis ${plan.until} folgen Schulden und Wachstum der amtlichen Planung „${plan.label}“; danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${plan.until} hat, und es gelten die Annahmen. ` +
     (measuresOn
       ? "Mit den eingeschalteten Maßnahmen weicht der Pfad vom ersten Jahr an von der Planung ab."
       : "Eingeschaltete Maßnahmen kommen vom ersten Jahr an hinzu.")
@@ -58,6 +58,7 @@ function lead(f: DebtLeadText): string {
 
 export const debtDe: DebtMessages = {
   title: "Wohin das führt: Schulden und Zinsen",
+  caveat: "Eine Wenn-dann-Rechnung, keine Prognose.",
   intro,
   lead,
   wholeState: (level) =>
@@ -67,6 +68,18 @@ export const debtDe: DebtMessages = {
       ? `Zinsen ${year}: ${interest} aller Einnahmen.`
       : `Zinsen ${year}: ${interest} aller Einnahmen mit den Maßnahmen, ${without} ohne sie.`,
 
+  figures: {
+    interest: (year) => `Zinsen ${year}`,
+    interestUnit: "aller Einnahmen",
+    debt: (year) => `Schulden ${year}`,
+    debtUnit: "der Wirtschaftsleistung (BIP)",
+    withMeasures: "mit den eingeschalteten Maßnahmen",
+    noMeasures: "keine Maßnahme eingeschaltet",
+    rate: (rate) => `bei ${rate} Zins für neue Schulden`,
+    range: (range) => `je nach Schätzung ${range}`,
+    without: (value) => `ohne die Maßnahmen: ${value}`,
+    inYear: (year, value) => `${year}: ${value}`,
+  },
   teaserLink: (year) => `Wohin führt das? Schulden und Zinsen bis ${year}`,
   teaserFigure: (year, interest, without, baseYear, today) =>
     without === undefined

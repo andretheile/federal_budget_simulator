@@ -54,6 +54,9 @@ import { REPOSITORY_URL } from "./site/project.ts";
 
 const LANGUAGE_KEY = "budget-simulator:language";
 
+/** Below this the page has one column (base.css, .workspace): the measures then come before the budget. */
+export const ONE_COLUMN = "(max-width: 1079px)";
+
 /** Why the page shows the test fixture instead of a real country. */
 export interface Fallback {
   /** "invalid": the wanted pack did not validate. "missing": there is no pack. "requested": asked for with ?fixture. */
@@ -184,7 +187,8 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
   const [highlight, setHighlight] = useState<string>();
   const [expanded, setExpanded] = useState<ReadonlySet<string>>(() => new Set());
   const [reveal, setReveal] = useState<{ id: string; nonce: number }>();
-  const phone = useMediaQuery("(max-width: 719px)");
+  /** One column (phone and tablet): the measures come first. */
+  const oneColumn = useMediaQuery(ONE_COLUMN);
   /** The curve editor that is open, if any. It is part of the link, so a shared link opens it too. */
   const [editor, setEditor] = useState(() => editorFromHash(currentHash(), pack));
   const editorPolicy = editor ? pack.policies.find((policy) => policy.id === editor.policy) : undefined;
@@ -537,10 +541,15 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
           />
         ) : (
           <>
-            {/* On a phone the measures come first: they are what the visitor acts on. The order in the
-                document follows the order on screen, so keyboard and screen reader agree with the eye. */}
-            <DebtTeaser view={debt} />
-            <div className="workspace">{phone ? [policies, budget] : [budget, policies]}</div>
+            {/* Where the page has one column (phone and tablet) the measures come first: they are what
+                the visitor acts on, and the first of them should be on the first screen. The line that
+                leads to the debt section then follows them ("where does this lead?"), before the
+                budget. The order in the document follows the order on screen, so keyboard and screen
+                reader agree with the eye. */}
+            {!oneColumn && <DebtTeaser view={debt} />}
+            <div className="workspace">
+              {oneColumn ? [policies, <DebtTeaser key="debt-teaser" view={debt} />, budget] : [budget, policies]}
+            </div>
             <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />
             {debt && debtAssumptions && (
               <DebtSection view={debt} assumptions={debtAssumptions} onAssumptions={setDebtAssumptions} level={pageResult.level} />

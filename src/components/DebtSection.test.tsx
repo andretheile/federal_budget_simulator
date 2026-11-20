@@ -13,7 +13,12 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vite
 import { Simulator } from "../App.tsx";
 import { testland, testlandCopy } from "../engine/__fixtures__/testland.ts";
 import type { CountryPack } from "../engine/index.ts";
-import { debtModule } from "./DebtSection.tsx";
+import { defaultDebtAssumptions } from "../app/debtLink.ts";
+import { debtHeadline, debtView, interestComparisons } from "../app/debtModel.ts";
+import { createUi } from "../app/ui.ts";
+import { debtFromHash, scenarioFromHash } from "../app/urlState.ts";
+import { simulate } from "../engine/index.ts";
+import { debtModule, leadText } from "./DebtSection.tsx";
 
 let container: HTMLDivElement;
 let root: Root;
@@ -226,6 +231,107 @@ describe("the section on Testland", () => {
     expect(button("Zero rates").getAttribute("aria-pressed")).toBe("true");
   });
 
+  describe("the two figures that open it", () => {
+    /** What the model says for this scenario, formatted as the page formats it. */
+    function expected(hash: string, language: "en" | "de") {
+      const scenario = scenarioFromHash(hash, testland);
+      const assumptions = debtFromHash(hash, testland) ?? defaultDebtAssumptions(testland.debt!);
+      const view = debtView(testland, scenario, simulate(testland, scenario), assumptions)!;
+      const ui = createUi(testland, language);
+      return { facts: leadText(ui, debtHeadline(view, interestComparisons(testland, view))), measuresOn: view.measuresOn };
+    }
+    const figure = (key: string) => ({
+      what: text(`.dfig--${key} .dfig__what`),
+      condition: text(`.dfig--${key} .dfig__condition`),
+      value: text(`.dfig--${key} .dfig__value`),
+      notes: all(`.dfig--${key} .dfig__notes span`).map((note) => plain(note.textContent)),
+    });
+
+    it("show the model's values for the last year, as the sentence does, each with its year and condition", () => {
+      const hash = "#lang=en&s=family_bonus~no_basic_income_non_citizens";
+      const { facts } = expected(hash, "en");
+      mount(hash);
+      expect(facts.interestWithout).toBeDefined();
+      expect(figure("interest")).toEqual({
+        what: `Interest in ${facts.year}`,
+        condition: `with the measures switched on, at ${facts.rate} interest on new debt`,
+        value: facts.interest,
+        notes: [`${facts.range}, depending on the estimates`, `without the measures: ${facts.interestWithout}`, `${facts.baseYear}: ${facts.interestToday}`],
+      });
+      expect(figure("debt")).toEqual({
+        what: `Debt in ${facts.year}`,
+        condition: `with the measures switched on, at ${facts.rate} interest on new debt`,
+        value: facts.debt,
+        notes: [`without the measures: ${facts.debtWithout}`, `${facts.baseYear}: ${facts.debtToday}`],
+      });
+      // The sentence below says the same values.
+      for (const value of [facts.interest, facts.interestWithout!, facts.interestToday, facts.debt, facts.debtWithout!, facts.debtToday])
+        expect(lead()).toContain(value);
+      // Each figure is a term with its description, the label first.
+      expect(all(".debt__figures > .dfig").map((element) => [...element.children].map((child) => child.tagName))).toEqual([
+        ["DT", "DD", "DD"],
+        ["DT", "DD", "DD"],
+      ]);
+    });
+
+    it("are left out when the debt is paid off within the horizon: the sentence stands alone, at its larger size", () => {
+      // An improvement of the balance by 0.5 % of GDP a year pays the debt off before the horizon.
+      const hash = "#lang=en&d=p0.5";
+      const { facts } = expected(hash, "en");
+      expect(facts.paidOff).toBeDefined();
+      mount(hash);
+      expect(container.querySelector(".debt__figures")).toBeNull();
+      expect(query(".debt__lead").classList.contains("debt__lead--alone")).toBe(true);
+      expect(lead()).toContain(`the debt would be paid off by ${facts.paidOff}`);
+      // The caveat still comes first.
+      expect(text("#debt .section-head .debt__caveat")).toBe("A what-if calculation, not a forecast.");
+    });
+
+    it("show only the debt when the state would receive interest instead of paying it", () => {
+      // A negative rate on new debt: interest turns into income by the last year.
+      const hash = "#lang=en&d=r-1";
+      const { facts } = expected(hash, "en");
+      expect(facts.negative).toBe(true);
+      expect(facts.paidOff).toBeUndefined();
+      mount(hash);
+      expect(container.querySelector(".dfig--interest")).toBeNull();
+      expect(all(".debt__figures > .dfig").map((element) => element.className)).toEqual(["dfig dfig--debt"]);
+      expect(figure("debt")).toEqual({
+        what: `Debt in ${facts.year}`,
+        condition: `no measure switched on, at ${facts.rate} interest on new debt`,
+        value: facts.debt,
+        notes: [`${facts.baseYear}: ${facts.debtToday}`],
+      });
+      // What is received is said in the sentence, with the same figure as the model.
+      expect(lead()).toContain(`would receive interest in ${facts.year} instead of paying it: ${facts.interest} of its revenue`);
+      expect(query(".debt__lead").classList.contains("debt__lead--alone")).toBe(false);
+    });
+
+    it("say when no measure is switched on, and speak German", () => {
+      const { facts, measuresOn } = expected("#lang=de", "de");
+      mount("#lang=de");
+      expect(measuresOn).toBe(false);
+      // German puts a (no-break) space before "%": compared as the page is read, with plain spaces.
+      expect(figure("interest")).toEqual({
+        what: `Zinsen ${facts.year}`,
+        condition: plain(`keine Maßnahme eingeschaltet, bei ${facts.rate} Zins für neue Schulden`),
+        value: plain(facts.interest),
+        notes: [plain(`${facts.baseYear}: ${facts.interestToday}`)],
+      });
+      expect(figure("debt").value).toBe(plain(facts.debt));
+      expect(figure("debt").what).toBe(`Schulden ${facts.year}`);
+      expect(lead()).toContain(plain(`${facts.interest} aller Einnahmen`));
+      expect(lead()).toContain(plain(`bei ${facts.debt} der Wirtschaftsleistung`));
+      // What kind of calculation it is stands right under the heading, before the figures; where it
+      // starts from follows the charts, without saying the first again.
+      const caveat = query("#debt .section-head .debt__caveat");
+      expect(plain(caveat.textContent)).toBe("Eine Wenn-dann-Rechnung, keine Prognose.");
+      expect(caveat.compareDocumentPosition(query(".debt__figures")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(text("#debt .debt__intro")).toBe("So entwickelten sich Schulden und Zinsen, wenn der Haushalt von 2024 mit den eingeschalteten Maßnahmen im Verhältnis zur Wirtschaft so bliebe.");
+      expect(text("#debt .debt__intro")).not.toContain("Wenn-dann");
+    });
+  });
+
   it("with measures: two paths, the range as a band, and what the measures change", () => {
     mount("#lang=en&s=family_bonus~no_basic_income_non_citizens");
     expect(lead()).toMatch(/with the measures switched on \([\d.]+% to [\d.]+%, depending on the estimates\), and 15.8% without them/);
@@ -427,8 +533,8 @@ describe("the official plans", () => {
     choose("Official plan to 2026");
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&d=fministry_projection");
     expect(all(".dchart__marker text").map((label) => plain(label.textContent))).toEqual(["from 2027 by the assumptions", "from 2027 by the assumptions"]);
-    expect(text("#debt .section-head p")).toBe(
-      "A what-if calculation, not a forecast. Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply. " +
+    expect(text("#debt .debt__intro")).toBe(
+      "Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply. " +
         "With the measures switched on, the path departs from the plan from the first year.",
     );
     // A slider keeps the starting point; the reset goes back to the pack's.
@@ -464,8 +570,8 @@ describe("a pack that starts from its official plan", () => {
   it("follows it by default, everywhere debt figures are shown, with nothing in the address", { timeout: 30_000 }, () => {
     mount("#lang=en", following());
     expect(window.location.hash).toBe("#lang=en");
-    expect(text("#debt .section-head p")).toBe(
-      "A what-if calculation, not a forecast. Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply. " +
+    expect(text("#debt .debt__intro")).toBe(
+      "Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply. " +
         "Measures that are switched on are added from the first year.",
     );
     expect(radios()).toEqual([
@@ -495,8 +601,8 @@ describe("a pack that starts from its official plan", () => {
     choose("Continue the 2024 budget");
     expect(window.location.hash).toBe("#lang=en&d=b");
     expect(container.querySelector(".dchart__marker")).toBeNull();
-    expect(text("#debt .section-head p")).toBe(
-      "A what-if calculation, not a forecast: how debt and interest would develop if the budget of 2024, with the measures switched on, kept its size relative to the economy.",
+    expect(text("#debt .debt__intro")).toBe(
+      "This is how debt and interest would develop if the budget of 2024, with the measures switched on, kept its size relative to the economy.",
     );
     // The plan is a dashed line of its own again.
     expect(all(".dchart")[1].querySelectorAll('[data-plan="ministry_projection"] .dchart__plan-line')).toHaveLength(1);
@@ -526,10 +632,10 @@ describe("a pack that starts from its official plan", () => {
 
   it("says that the path with measures departs from the plan from the first year", () => {
     mount("#lang=en&s=halve_mp_pay", following());
-    expect(text("#debt .section-head p")).toMatch(/With the measures switched on, the path departs from the plan from the first year\.$/);
+    expect(text("#debt .debt__intro")).toMatch(/With the measures switched on, the path departs from the plan from the first year\.$/);
     act(() => root.unmount());
     mount("#lang=de&s=halve_mp_pay", following());
-    expect(text("#debt .section-head p")).toMatch(/Mit den eingeschalteten Maßnahmen weicht der Pfad vom ersten Jahr an von der Planung ab\.$/);
+    expect(text("#debt .debt__intro")).toMatch(/Mit den eingeschalteten Maßnahmen weicht der Pfad vom ersten Jahr an von der Planung ab\.$/);
   });
 
   it("reads every form of the address", { timeout: 30_000 }, () => {

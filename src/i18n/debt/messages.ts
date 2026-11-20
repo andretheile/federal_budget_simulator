@@ -52,12 +52,31 @@ export interface DebtIntroFacts {
  */
 export interface DebtMessages {
   title: string;
-  /** Under the heading: what the calculation is and where it starts from (a plan, or the base year's budget). */
+  /** Right under the heading, before the figures: that this is a what-if calculation, not a forecast. */
+  caveat: string;
+  /** Under the charts: where the calculation starts from (a plan, or the base year's budget). */
   intro(facts: DebtIntroFacts): string;
   /** The sentence that opens the section: what share of revenue goes on interest at the end, against today. */
   lead(facts: DebtLeadText): string;
   /** Said when the budget view is filtered to one level; `level` is its name. */
   wholeState(level: string): string;
+  /**
+   * The two figures above the sentence, each with its own label: what and which year, under which
+   * condition (with the measures switched on or none, at which rate on new debt), and beside it the
+   * value without the measures, the range and the base year's value. The same values as the sentence.
+   */
+  figures: {
+    interest(year: number): string;
+    interestUnit: string;
+    debt(year: number): string;
+    debtUnit: string;
+    withMeasures: string;
+    noMeasures: string;
+    rate(rate: string): string;
+    range(range: string): string;
+    without(value: string): string;
+    inYear(year: number, value: string): string;
+  };
   /** Short version of the lead for screen readers after a change. */
   announce(year: number, interest: string, without: string | undefined): string;
 

@@ -69,6 +69,15 @@ export function ArrowLeft(props: IconProps) {
   );
 }
 
+/** A jump further down the page (not a disclosure, which is the chevron). */
+export function ArrowDown(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M8 3v10m0 0-4-4m4 4 4-4" />
+    </Icon>
+  );
+}
+
 export function Check(props: IconProps) {
   return (
     <Icon {...props} strokeWidth="2">

@@ -2,10 +2,10 @@ import type { DebtIntroFacts, DebtLeadText, DebtMessages } from "./messages.ts";
 
 function intro({ baseYear, plan, measuresOn }: DebtIntroFacts): string {
   if (!plan) {
-    return `A what-if calculation, not a forecast: how debt and interest would develop if the budget of ${baseYear}, with the measures switched on, kept its size relative to the economy.`;
+    return `This is how debt and interest would develop if the budget of ${baseYear}, with the measures switched on, kept its size relative to the economy.`;
   }
   return (
-    `A what-if calculation, not a forecast. Up to ${plan.until}, debt and growth follow the official plan “${plan.label}”; after that, the budget before interest keeps the share of economic output it has in ${plan.until}, and the assumptions apply. ` +
+    `Up to ${plan.until}, debt and growth follow the official plan “${plan.label}”; after that, the budget before interest keeps the share of economic output it has in ${plan.until}, and the assumptions apply. ` +
     (measuresOn
       ? "With the measures switched on, the path departs from the plan from the first year."
       : "Measures that are switched on are added from the first year.")
@@ -59,6 +59,7 @@ function lead(f: DebtLeadText): string {
 
 export const debtEn: DebtMessages = {
   title: "Where this leads: debt and interest",
+  caveat: "A what-if calculation, not a forecast.",
   intro,
   lead,
   wholeState: (level) =>
@@ -68,6 +69,18 @@ export const debtEn: DebtMessages = {
       ? `Interest in ${year}: ${interest} of all revenue.`
       : `Interest in ${year}: ${interest} of all revenue with the measures, ${without} without them.`,
 
+  figures: {
+    interest: (year) => `Interest in ${year}`,
+    interestUnit: "of all revenue",
+    debt: (year) => `Debt in ${year}`,
+    debtUnit: "of economic output (GDP)",
+    withMeasures: "with the measures switched on",
+    noMeasures: "no measure switched on",
+    rate: (rate) => `at ${rate} interest on new debt`,
+    range: (range) => `${range}, depending on the estimates`,
+    without: (value) => `without the measures: ${value}`,
+    inYear: (year, value) => `${year}: ${value}`,
+  },
   teaserLink: (year) => `Where does this lead? Debt and interest to ${year}`,
   teaserFigure: (year, interest, without, baseYear, today) =>
     without === undefined

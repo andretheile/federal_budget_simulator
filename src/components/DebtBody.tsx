@@ -54,7 +54,7 @@ import { decimalsIn } from "../i18n/format.ts";
 import { useMediaQuery } from "../hooks/useMediaQuery.ts";
 import debtStyles from "../styles/debt-body.css?inline";
 import { DebtChart, type ChartLine, type ChartPlan, type ChartReference } from "./DebtChart.tsx";
-import { ResetIcon } from "./icons.tsx";
+import { Check, ResetIcon } from "./icons.tsx";
 import { NumberControl } from "./ParamControls.tsx";
 import { QualityBadge, SourceList } from "./primitives.tsx";
 
@@ -71,6 +71,8 @@ export interface DebtBodyProps {
   view: DebtView;
   assumptions: DebtAssumptions;
   onAssumptions(next: DebtAssumptions): void;
+  /** What the calculation is and where it starts from (DebtSection.tsx): said under the charts. */
+  intro?: string;
 }
 
 type Unit = "revenue" | "gdp";
@@ -83,7 +85,7 @@ function capitalized(text: string, language: string): string {
   return text.charAt(0).toLocaleUpperCase(language) + text.slice(1);
 }
 
-export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
+export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyProps) {
   const ui = useUi();
   const { pack, t, fmt, language } = ui;
   // The section's own texts, which came with this code.
@@ -286,6 +288,7 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
           <p id={keysId} className="visually-hidden">
             {d.keys}
           </p>
+          {intro && <p className="debt__intro">{intro}</p>}
 
           {(comparable.length > 0 || others.length > 0) && (
             <section className="debt__block dplans" aria-labelledby={`${id}-plans`}>
@@ -425,18 +428,23 @@ export function DebtBody({ view, assumptions, onAssumptions }: DebtBodyProps) {
                 {d.presets}
               </h4>
               <ul className="dpresets__list">
-                {debt.presets.map((preset) => (
-                  <li key={preset.id}>
-                    <button
-                      type="button"
-                      className="dpreset"
-                      aria-pressed={presetApplies(preset, assumptions)}
-                      onClick={() => onAssumptions(applyDebtPreset(debt, assumptions, preset))}
-                    >
-                      {ui.text(preset.label)}
-                    </button>
-                  </li>
-                ))}
+                {debt.presets.map((preset) => {
+                  const chosen = presetApplies(preset, assumptions);
+                  return (
+                    <li key={preset.id}>
+                      <button
+                        type="button"
+                        className="dpreset"
+                        aria-pressed={chosen}
+                        onClick={() => onAssumptions(applyDebtPreset(debt, assumptions, preset))}
+                      >
+                        <span>{ui.text(preset.label)}</span>
+                        {/* The chosen one carries a tick: a shape, not only the darker edge. */}
+                        {chosen && <Check size={15} />}
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
               {applied.map((preset) => (
                 <div key={preset.id} className="dpresets__note">

@@ -20,7 +20,7 @@
  * then depends on the width of the window alone, not on the figures.
  */
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { directionOf, directionOfNode, noiseLevel } from "../app/policyModel.ts";
+import { directionOf, directionOfNode, levelsOf, noiseLevel } from "../app/policyModel.ts";
 import { useUi } from "../app/ui.ts";
 import { perCapita, shareOfGdp, type SimulationResult } from "../engine/index.ts";
 import { AnimatedNumber, Delta } from "./primitives.tsx";
@@ -252,9 +252,15 @@ export function Scoreboard({ result, editing, children }: ScoreboardProps) {
           <div className="scoreboard__inner page">
             <div className="scoreboard__main">
               <p className="scoreboard__label">
-                {singleLevel
-                  ? t.scoreboard.levelLabel(levelName(result.level as Exclude<typeof result.level, "all">), pack.country.baseYear)
-                  : t.scoreboard.balanceLabel(pack.country.baseYear)}
+                {singleLevel ? (
+                  t.scoreboard.levelLabel(levelName(result.level as Exclude<typeof result.level, "all">), pack.country.baseYear)
+                ) : (
+                  <>
+                    {t.scoreboard.balanceLabel(pack.country.baseYear)}
+                    {/* Which levels the figure covers, as the goal bar below names its own. */}
+                    {levelsOf(pack).length > 1 && <span className="scoreboard__scope">{t.header.allLevels}</span>}
+                  </>
+                )}
               </p>
               <p className="scoreboard__hero">
                 <Slot steady={steady} standIns={covers.number}>

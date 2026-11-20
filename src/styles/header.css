@@ -245,6 +245,12 @@
 }
 
 @media (max-width: 899px) {
+  /* Name over country, so the tools fit beside them instead of on a line of their own. */
+  .masthead__brand {
+    flex-direction: column;
+    gap: 0;
+  }
+
   .levelbar {
     display: none;
   }
@@ -263,13 +269,35 @@
     font-size: 21px;
   }
 
+  /* The tools beside the name, not on a line of their own, so the first measure comes sooner. Where
+     even that is too narrow, they still wrap under it. */
+  .masthead__inner {
+    align-items: flex-start;
+    column-gap: 10px;
+  }
+
+  .masthead__tools {
+    gap: 6px;
+  }
+
+  .langs button {
+    min-width: 34px;
+    min-height: 32px;
+    padding: 0 8px;
+  }
+
   .masthead__lower {
-    padding-block: 12px 16px;
+    padding-block: 10px 14px;
+  }
+
+  .masthead__tagline {
+    font-size: 17px;
   }
 
   /* Icon-only tools; their names stay available to assistive technology. */
   .tool {
-    width: 36px;
+    width: 34px;
+    min-height: 34px;
     padding: 0;
     justify-content: center;
   }

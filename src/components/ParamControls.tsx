@@ -8,7 +8,9 @@
  * worsens), and the value above says how far it is from the base year. A slider without a base-year
  * value is filled from its minimum, as before, or, where its range spans zero, from zero (a tick
  * marks it), so that neither end reads as the starting point. A slider that sets an assumption of
- * the calculation rather than a political choice says so and is drawn in grey.
+ * the calculation rather than a political choice says so and is drawn in grey. Where the baseline
+ * is not the base year's value but, say, the end state of current law, the param names it
+ * (baselineLabel), and that name stands wherever the base year would ("Geltendes Recht: 67 Jahre").
  *
  * Every value can be reached: dragging snaps to the base-year value and the default, a slider with
  * many positions moves in 1 % and 10 % steps by key, and the value above becomes a field to type in.
@@ -48,6 +50,9 @@ export function NumberControl({
   const ui = useUi();
   const { t, fmt } = ui;
   const year = ui.pack.country.baseYear;
+  // What the baseline is called wherever it is shown: the base year, or its own name where it is not
+  // the base year's value ("Geltendes Recht" for a limit the law already raises later).
+  const baseName: number | string = param.baselineLabel ? ui.text(param.baselineLabel) : year;
   const span = param.max - param.min || 1;
   const at = (amount: number): number => Math.max(0, Math.min(1, (amount - param.min) / span));
   const base = param.baseline;
@@ -59,7 +64,9 @@ export function NumberControl({
   const valueText = fmt.param(param, value);
   const change = changeFromBase(value, param);
   const digits = decimalsOf(param.step);
-  const changeText = change === null ? null : fmt.number(change, { signed: true, digits: Math.max(digits, decimalsOf(change)) });
+  // Years drop the decimals of a whole change, as their value does ("70 Jahre (+3)", "67,5 Jahre (+0,5)").
+  const changeDigits = change === null ? 0 : param.unit === "years" ? decimalsOf(change) : Math.max(digits, decimalsOf(change));
+  const changeText = change === null ? null : fmt.number(change, { signed: true, digits: changeDigits });
   const shownDirection: Direction = change === null ? "neutral" : (direction ?? "neutral");
   const baseText = hasBase ? fmt.param(param, base) : "";
   const atMin = baseOnScale && base === param.min;
@@ -107,7 +114,11 @@ export function NumberControl({
       reading.current?.focus();
     }
   }, [typing]);
-  const unit = fmt.param(param, 0).replace(fmt.number(0, { digits }), "").trim();
+  // The unit beside the field: the value 0 in the unit, without the number. A whole number of years
+  // is written without decimals ("0 Jahre"), every other unit with those of its step ("0,0 %").
+  const zero = fmt.param(param, 0);
+  const zeroDigits = fmt.number(0, { digits });
+  const unit = (zero.includes(zeroDigits) ? zero.replace(zeroDigits, "") : zero.replace(fmt.number(0), "")).trim();
 
   // --- where the base-year label goes --------------------------------------------------------------
   const scale = useRef<HTMLDivElement>(null);
@@ -151,7 +162,7 @@ export function NumberControl({
       type="button"
       className={`${className}${value === base ? " is-current" : ""}`}
       onClick={toBase}
-      aria-label={t.policies.toBaseValue(baseText, year)}
+      aria-label={t.policies.toBaseValue(baseText, baseName)}
     >
       {text}
     </button>
@@ -161,7 +172,7 @@ export function NumberControl({
     shownDirection === "improve" ? t.common.improves : shownDirection === "worsen" ? t.common.worsens : null;
   const spoken = [
     valueText,
-    changeText ? t.policies.changeFromBase(changeText, year) : null,
+    changeText ? t.policies.changeFromBase(changeText, baseName) : null,
     changeText && directionWord && !assumption ? directionWord : null,
   ]
     .filter(Boolean)
@@ -228,15 +239,15 @@ export function NumberControl({
       </div>
       <div className={`param__scale${place.own ? " has-own-line" : ""}`} ref={scale}>
         {atMin ? (
-          baseButton(t.policies.baseAtEnd(fmt.param(param, param.min), year), "param__end param__end--min param__end--base")
+          baseButton(t.policies.baseAtEnd(fmt.param(param, param.min), baseName), "param__end param__end--min param__end--base")
         ) : (
           <span className="param__end param__end--min" aria-hidden="true">
             {fmt.param(param, param.min)}
           </span>
         )}
-        {baseOnScale && !atMin && !atMax && baseButton(t.policies.baseValue(baseText, year), `param__base param__base--${place.side}`)}
+        {baseOnScale && !atMin && !atMax && baseButton(t.policies.baseValue(baseText, baseName), `param__base param__base--${place.side}`)}
         {atMax ? (
-          baseButton(t.policies.baseAtEnd(fmt.param(param, param.max), year), "param__end param__end--max param__end--base")
+          baseButton(t.policies.baseAtEnd(fmt.param(param, param.max), baseName), "param__end param__end--max param__end--base")
         ) : (
           <span className="param__end param__end--max" aria-hidden="true">
             {fmt.param(param, param.max)}
@@ -245,13 +256,13 @@ export function NumberControl({
       </div>
       {hasBase && !baseOnScale && (
         <p className="param__note muted" aria-hidden="true">
-          {t.policies.baseValue(baseText, year)}
+          {t.policies.baseValue(baseText, baseName)}
         </p>
       )}
       {/* What the slider says about the base year to screen readers; the label under the tick is a button. */}
       {hasBase && (
         <span id={baseId} className="visually-hidden">
-          {t.policies.baseValue(baseText, year)}
+          {t.policies.baseValue(baseText, baseName)}
         </span>
       )}
     </div>

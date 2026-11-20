@@ -8,10 +8,12 @@
  * runs at a lower priority than the scoreboard (useDeferredValue); when the page already shows the
  * goal's level, the page's own simulation is used and there is none.
  *
- * From a tablet on, the words keep the room of the longest they can become (invisible stand-ins in
- * the same cell, as the scoreboard does while the curve editor is open), so the band does not
- * change its height when a figure gets longer or the state changes. A phone keeps two lines for
- * them, and one while the band floats (see goal.css). While the editor is open the bar has no
+ * From a tablet on, the words keep the room of the longest they can become (invisible stand-ins, as
+ * the scoreboard does while the curve editor is open), so the band does not change its height when
+ * a figure gets longer or the state changes. A phone keeps two lines for them. The room lies in an
+ * element of its own (goalbar__room) that also holds the rows below the words, so whatever it keeps
+ * to spare ends up under the last row instead of between the state and its qualifiers. While the
+ * band floats, the words have one line (see goal.css). While the editor is open the bar has no
  * controls: the sheet is a modal dialog, and the band above it only reports, in one line.
  *
  * For a goal of one level, the bar also says how much the other levels are burdened at the same
@@ -195,6 +197,23 @@ export function GoalBar({ goal, scenario, result, onGoal, steady }: GoalBarProps
   const label = ui.text(goal.label);
   const pickerId = useId();
   const levelPhrase = goal.level ? t.goal.level(ui.levelName(goal.level)) : t.goal.wholeState;
+  // Whose budget the goal is about, beside its label: the band above it shows all levels together.
+  const scope = goal.level ? ui.levelName(goal.level) : t.goal.wholeStateName;
+  // "Ziel · Bund" as seen; a screen reader hears it as one phrase ("Ziel, gemessen auf der Ebene „Bund“").
+  const labelParts = (
+    <>
+      <span className="goalbar__label-full" aria-hidden="true">
+        {t.goal.label}
+      </span>
+      <span className="goalbar__label-year" aria-hidden="true">
+        {t.goal.labelYear(goal.year)}
+      </span>
+      <span className="goalbar__scope" aria-hidden="true">
+        {scope}
+      </span>
+      <span className="visually-hidden">{t.goal.scopedLabel(goal.level ? ui.levelName(goal.level) : undefined)}</span>
+    </>
+  );
   // What the bar shows, in words: the state, what the other levels bear meanwhile, the qualifiers.
   const valueText = [words.main, ...(others ? [others.sentence] : []), ...words.extras].join(" ");
 
@@ -258,10 +277,7 @@ export function GoalBar({ goal, scenario, result, onGoal, steady }: GoalBarProps
           {goals.length > 1 && !steady ? (
             <>
               <label className="goalbar__label" htmlFor={pickerId}>
-                <span className="goalbar__label-full">{t.goal.label}</span>
-                <span className="goalbar__label-year" aria-hidden="true">
-                  {t.goal.labelYear(goal.year)}
-                </span>
+                {labelParts}
               </label>
               <span className="goalbar__picker">
                 <select id={pickerId} value={goal.id} onChange={(event) => onGoal(event.target.value)}>
@@ -275,12 +291,7 @@ export function GoalBar({ goal, scenario, result, onGoal, steady }: GoalBarProps
             </>
           ) : (
             <>
-              <span className="goalbar__label">
-                <span className="goalbar__label-full">{t.goal.label}</span>
-                <span className="goalbar__label-year" aria-hidden="true">
-                  {t.goal.labelYear(goal.year)}
-                </span>
-              </span>
+              <span className="goalbar__label">{labelParts}</span>
               <span className="goalbar__name">{label}</span>
             </>
           )}
@@ -327,7 +338,6 @@ export function GoalBar({ goal, scenario, result, onGoal, steady }: GoalBarProps
           <span className="goalbar__line">
             <Status closed={view.state === "closed"} main={words.main} extras={words.extras} others={others?.short} />
           </span>
-          {standIns}
         </p>
 
         {/* Said beside the state, not as its cause: what the other levels bear in the same scenario. */}
@@ -354,6 +364,39 @@ export function GoalBar({ goal, scenario, result, onGoal, steady }: GoalBarProps
             ) : null}
           </p>
         )}
+
+        {/*
+          The room the words keep (see goal.css): the longest they can become, and below it the same
+          rows as on the bar. Where the bar has its rows one under the other, this spans them all and
+          an empty last row takes what is left, so any room to spare lies at the bottom of the bar,
+          not between the state and the lines that belong to it. Nobody but the layout sees it.
+        */}
+        <div className="goalbar__room" aria-hidden="true">
+          <p className="goalbar__status">
+            {standIns}
+            <span className="goalbar__two-lines" />
+          </p>
+          {others && (
+            <p className="goalbar__others">
+              <TriangleDown size={11} />
+              <span>{others.sentence}</span>
+            </p>
+          )}
+          <p className="goalbar__level">{levelPhrase}</p>
+          {excluded && (
+            <p className="goalbar__excluded">
+              {excluded.line}
+              {excluded.reason ? (
+                ` ${excluded.reason}`
+              ) : !steady ? (
+                <>
+                  {" "}
+                  <span className="goalbar__why">{t.goal.why}</span>
+                </>
+              ) : null}
+            </p>
+          )}
+        </div>
       </div>
       <p className="visually-hidden" role="status">
         {announced}

@@ -19,7 +19,7 @@ import type { DebtAssumptions, LevelFilter } from "../engine/index.ts";
 import { decimalsIn } from "../i18n/format.ts";
 import type { DebtLeadText } from "../i18n/debt/messages.ts";
 import "../styles/debt.css";
-import { ChevronDown, ResetIcon } from "./icons.tsx";
+import { ArrowDown, ResetIcon } from "./icons.tsx";
 
 /** The charts, assumptions and lists of the section, a part of the app of its own. */
 export const debtModule = lazyModule(() => import("./DebtBody.tsx"));
@@ -56,6 +56,54 @@ export function leadText(ui: Ui, headline: DebtHeadline): DebtLeadText {
   };
 }
 
+/**
+ * The two figures that open the section: interest as a share of revenue and debt as a share of GDP
+ * in the last year, the same values the sentence below states, each labelled with its year and its
+ * condition (with the measures switched on or none, at which rate on new debt) and with the value
+ * without the measures, the range of the estimates and the base year's value beside it.
+ *
+ * Interest received instead of paid, or the debt paid off, are said in the sentence only: there is
+ * then no figure that would read the same way, and the sentence stands alone at its larger size.
+ */
+export function DebtFigures({ facts, measuresOn }: { facts: DebtLeadText; measuresOn: boolean }) {
+  const { t } = useUi();
+  const f = t.debt.figures;
+  if (facts.paidOff !== undefined) return null;
+  const condition = `${measuresOn ? f.withMeasures : f.noMeasures}, ${f.rate(facts.rate)}`;
+  const tile = (key: string, what: string, value: string, unit: string, notes: (string | false | undefined)[]) => (
+    <div key={key} className={`dfig dfig--${key}`}>
+      <dt className="dfig__label">
+        <span className="dfig__what">{what}</span>
+        <span className="dfig__condition">{condition}</span>
+      </dt>
+      <dd className="dfig__figure">
+        <span className="dfig__value">{value}</span> <span className="dfig__unit">{unit}</span>
+      </dd>
+      <dd className="dfig__notes">
+        {notes
+          .filter((note): note is string => Boolean(note))
+          .map((note) => (
+            <span key={note}>{note}</span>
+          ))}
+      </dd>
+    </div>
+  );
+  return (
+    <dl className="debt__figures">
+      {!facts.negative &&
+        tile("interest", f.interest(facts.year), facts.interest, f.interestUnit, [
+          facts.range && f.range(facts.range),
+          facts.interestWithout !== undefined && f.without(facts.interestWithout),
+          f.inYear(facts.baseYear, facts.interestToday),
+        ])}
+      {tile("debt", f.debt(facts.year), facts.debt, f.debtUnit, [
+        facts.debtWithout !== undefined && f.without(facts.debtWithout),
+        f.inYear(facts.baseYear, facts.debtToday),
+      ])}
+    </dl>
+  );
+}
+
 /** Follow an in-page link without touching the fragment of the address, which holds the state. */
 function jumpToSection(event: MouseEvent<HTMLAnchorElement>): void {
   preloadDebt();
@@ -77,7 +125,7 @@ export function DebtTeaser({ view }: { view: DebtView | undefined }) {
     <p className="debt-teaser">
       <a href="#debt" onClick={jumpToSection} onPointerEnter={preloadDebt} onFocus={preloadDebt}>
         <span>{t.debt.teaserLink(headline.year)}</span>
-        <ChevronDown size={14} />
+        <ArrowDown size={14} />
       </a>{" "}
       <span className="debt-teaser__figure">
         {t.debt.teaserFigure(
@@ -154,7 +202,9 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
   // Assumptions of their own, from a link: the visitor came for this section, so its code comes at once.
   const body = useBody(section, eager || !sameDebtAssumptions(assumptions, defaultDebtAssumptions(ui.pack.debt!)));
   const headline = debtHeadline(view, interestComparisons(ui.pack, view));
-  const lead = t.debt.lead(leadText(ui, headline));
+  const facts = leadText(ui, headline);
+  const lead = t.debt.lead(facts);
+  const figures = facts.paidOff === undefined;
   // Where the calculation starts from: an official plan it follows in its years, or the base year's budget.
   const plan = view.projection.followed && ui.pack.debt?.plans?.find((candidate) => candidate.id === view.projection.followed?.plan);
   const followed = plan && view.projection.followed ? { label: ui.text(plan.label), until: view.projection.followed.until } : undefined;
@@ -185,15 +235,19 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
     <section className="debt" id="debt" aria-labelledby="debt-title" ref={section} tabIndex={-1}>
       <header className="section-head">
         <h2 id="debt-title">{t.debt.title}</h2>
-        <p>{intro}</p>
+        {/* Before any figure: what kind of calculation this is. */}
+        <p className="debt__caveat">{t.debt.caveat}</p>
       </header>
-      <p className="debt__lead">{lead}</p>
+      {/* The result, as two figures with their labels, then the sentence that says it in full. Where
+          the calculation starts from follows under the charts. */}
+      <DebtFigures facts={facts} measuresOn={view.measuresOn} />
+      <p className={`debt__lead${figures ? "" : " debt__lead--alone"}`}>{lead}</p>
       {level !== "all" && <p className="debt__level">{t.debt.wholeState(ui.levelName(level))}</p>}
       <p className="visually-hidden" aria-live="polite">
         {announced}
       </p>
       {Body ? (
-        <Body view={view} assumptions={assumptions} onAssumptions={onAssumptions} />
+        <Body view={view} assumptions={assumptions} onAssumptions={onAssumptions} intro={intro} />
       ) : (
         <div className={`debt__pending${body.failed ? " is-failed" : ""}`} role="status">
           {body.failed ? (
@@ -213,6 +267,7 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
           )}
         </div>
       )}
+      {!Body && <p className="debt__intro">{intro}</p>}
     </section>
   );
 }

@@ -65,8 +65,8 @@ describe("the filter by collection", () => {
     mount();
     expect(query(".collections").getAttribute("role")).toBe("group");
     expect(query(".collections").getAttribute("aria-label")).toBe("Choose measures");
-    expect(chips()).toEqual(["All10", "Budget debate3", "Savings2"]);
-    expect(chip("All").getAttribute("aria-pressed")).toBe("true");
+    expect(chips()).toEqual(["All measures10", "Budget debate3", "Savings2"]);
+    expect(chip("All measures").getAttribute("aria-pressed")).toBe("true");
     expect(cards()).toHaveLength(10);
     expect(container.querySelector(".collection-note")).toBeNull();
   });
@@ -80,7 +80,7 @@ describe("the filter by collection", () => {
     expect(plain(query(".collection-note summary").textContent)).toBe("Sources (1)");
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&f=budget_debate");
     // The topics are those of the collection's measures.
-    expect(all(".filter__item").map((item) => plain(item.textContent))).toEqual(["All 3", "Taxes 1", "State and administration 1", "Defence 1"]);
+    expect(all(".filter__item").map((item) => plain(item.textContent))).toEqual(["All topics 3", "Taxes 1", "State and administration 1", "Defence 1"]);
   });
 
   it("a collection without a description and sources has no line about it", () => {
@@ -94,7 +94,7 @@ describe("the filter by collection", () => {
     expect(headline()).toBe("−XTS 495");
     expect(plain(query(".hidden-on").textContent)).toBe("2 measures switched on are hidden by the filter and still count.Show all");
     click(query(".hidden-on__show"));
-    expect(chip("All").getAttribute("aria-pressed")).toBe("true");
+    expect(chip("All measures").getAttribute("aria-pressed")).toBe("true");
     expect(cards()).toHaveLength(10);
     expect(container.querySelector(".hidden-on")).toBeNull();
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay~family_bonus");
@@ -113,7 +113,7 @@ describe("the filter by collection", () => {
     const link = all(".wf__link").find((candidate) => plain(candidate.textContent).includes("MPs"));
     if (!link) throw new Error("no link in the waterfall");
     click(link);
-    expect(chip("All").getAttribute("aria-pressed")).toBe("true");
+    expect(chip("All measures").getAttribute("aria-pressed")).toBe("true");
     expect(cards()).toContain("halve_mp_pay");
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay");
   });
@@ -126,14 +126,111 @@ describe("the filter by collection", () => {
     });
     expect(cards()).toEqual(["wealth_tax", "cut_admin", "defense_target"]);
     mount("#lang=en&f=no_such_collection");
-    expect(chip("All").getAttribute("aria-pressed")).toBe("true");
+    expect(chip("All measures").getAttribute("aria-pressed")).toBe("true");
     expect(window.location.hash).toBe("#lang=en");
   });
 
   it("speaks German", () => {
     mount("#lang=de&s=halve_mp_pay&f=budget_debate");
-    expect(chips()).toEqual(["Alle10", "Haushaltsdebatte3", "Einsparungen2"]);
+    expect(chips()).toEqual(["Alle Maßnahmen10", "Haushaltsdebatte3", "Einsparungen2"]);
     expect(plain(query(".hidden-on").textContent)).toBe("1 eingeschaltete Maßnahme ist ausgeblendet und zählt trotzdem mit.Alle zeigen");
+  });
+});
+
+describe("the two filter rows", () => {
+  it("say what each first entry stands for: all measures, all topics", () => {
+    mount();
+    const firstCollection = plain(all(".collections__item")[0].querySelector(".collections__name")?.textContent);
+    const firstTopic = plain(all(".filter__item")[0].textContent);
+    expect(firstCollection).toBe("All measures");
+    expect(firstTopic).toBe(`All topics ${testland.policies.length}`);
+    mount("#lang=de");
+    expect(plain(all(".collections__item")[0].querySelector(".collections__name")?.textContent)).toBe("Alle Maßnahmen");
+    expect(plain(all(".filter__item")[0].textContent)).toBe(`Alle Themen ${testland.policies.length}`);
+    // Each row is a group with a name of its own for screen readers.
+    expect(query(".collections").getAttribute("aria-label")).toBe("Maßnahmen auswählen");
+    expect(query(".filter").getAttribute("aria-label")).toBe("Thema");
+  });
+
+  describe("the topics as one row that scrolls sideways (a phone)", () => {
+    /** Lays the row out as a phone would: 300 px wide, chips of 100 px one after the other. */
+    function phoneLayout(): () => void {
+      const scrolled: number[] = [];
+      const row = (element: Element): boolean => element.classList.contains("filter");
+      const chipIndex = (element: Element): number => [...(element.parentElement?.children ?? [])].indexOf(element);
+      const descriptors = {
+        scrollWidth: Object.getOwnPropertyDescriptor(Element.prototype, "scrollWidth"),
+        clientWidth: Object.getOwnPropertyDescriptor(Element.prototype, "clientWidth"),
+        offsetLeft: Object.getOwnPropertyDescriptor(HTMLElement.prototype, "offsetLeft"),
+        offsetWidth: Object.getOwnPropertyDescriptor(HTMLElement.prototype, "offsetWidth"),
+        scrollTo: Object.getOwnPropertyDescriptor(Element.prototype, "scrollTo"),
+      };
+      Object.defineProperty(Element.prototype, "scrollWidth", {
+        configurable: true,
+        get(this: Element) {
+          return row(this) ? this.children.length * 100 : 0;
+        },
+      });
+      Object.defineProperty(Element.prototype, "clientWidth", {
+        configurable: true,
+        get(this: Element) {
+          return row(this) ? 300 : 0;
+        },
+      });
+      Object.defineProperty(HTMLElement.prototype, "offsetLeft", {
+        configurable: true,
+        get(this: HTMLElement) {
+          return this.classList.contains("filter__item") ? chipIndex(this) * 100 : 0;
+        },
+      });
+      Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
+        configurable: true,
+        get(this: HTMLElement) {
+          return this.classList.contains("filter__item") ? 100 : 0;
+        },
+      });
+      Object.defineProperty(Element.prototype, "scrollTo", {
+        configurable: true,
+        value(this: Element, options: ScrollToOptions) {
+          scrolled.push(options.left ?? 0);
+          this.scrollLeft = options.left ?? 0;
+          this.dispatchEvent(new Event("scroll"));
+        },
+      });
+      (phoneLayout as unknown as { scrolled: number[] }).scrolled = scrolled;
+      return () => {
+        for (const [name, descriptor] of Object.entries(descriptors)) {
+          const target = name === "offsetLeft" || name === "offsetWidth" ? HTMLElement.prototype : Element.prototype;
+          if (descriptor) Object.defineProperty(target, name, descriptor);
+          else delete (target as unknown as Record<string, unknown>)[name];
+        }
+      };
+    }
+
+    it("brings the chosen topic into view and marks the side where there is more", () => {
+      const restore = phoneLayout();
+      try {
+        mount();
+        const row = query(".filter");
+        const chips = all(".filter__item");
+        expect(chips.length).toBeGreaterThan(3);
+        // At the start: more to the right only.
+        expect([row.dataset.start, row.dataset.end]).toEqual(["false", "true"]);
+        // The last chip, chosen with the keyboard as with a tap: scrolled into view.
+        act(() => chips[chips.length - 1].click());
+        const scrolled = (phoneLayout as unknown as { scrolled: number[] }).scrolled;
+        expect(scrolled.at(-1)).toBe(chips.length * 100 - 300);
+        expect(row.scrollLeft).toBe(chips.length * 100 - 300);
+        expect([row.dataset.start, row.dataset.end]).toEqual(["true", "false"]);
+        // Back to all topics: the row goes back to its start.
+        act(() => all(".filter__item")[0].click());
+        expect(row.scrollLeft).toBe(0);
+        // The chips stay buttons that say whether they are chosen.
+        expect(all(".filter__item").every((chip) => chip.tagName === "BUTTON" && chip.hasAttribute("aria-pressed"))).toBe(true);
+      } finally {
+        restore();
+      }
+    });
   });
 });
 
