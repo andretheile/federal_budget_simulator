@@ -1,5 +1,8 @@
 # Static site behind an existing Traefik (v2) that watches Docker labels.
 # Uploaded and started by deploy.sh; see README.md in this directory.
+#
+# Former host names of the site are redirected by docker-compose.redirect.yml,
+# which deploy.sh adds through COMPOSE_FILE in .env only when there are any.
 
 name: budget
 
@@ -37,7 +40,7 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
       # SITE_HOST comes from the .env file that deploy.sh writes next to this file.
-      - "traefik.http.routers.budget.rule=Host(`${SITE_HOST:-budget.drtheile.com}`)"
+      - "traefik.http.routers.budget.rule=Host(`${SITE_HOST:-fiscal.drtheile.com}`)"
       - "traefik.http.routers.budget.entrypoints=websecure"
       # TLS without a certificate resolver, on purpose. The DNS record is proxied
       # through Cloudflare, and Traefik's resolver "myresolver" uses the TLS-ALPN

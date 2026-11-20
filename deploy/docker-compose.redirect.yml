@@ -1,0 +1,30 @@
+# Former host names of the site: every request to one of them is redirected
+# permanently to the same path and query on SITE_HOST. Read together with
+# docker-compose.yml, and only when deploy.sh has put this file into
+# COMPOSE_FILE in .env, which it does when SITE_FORMER_HOSTS lists at least one
+# name. It also writes SITE_REDIRECT_RULE there, Host(...) for each of them.
+# Without former names this file is not read, and Traefik has no router for
+# them. See "Former host names" in README.md.
+#
+# Router and middlewares carry the prefix "budget-", like the router and the
+# service in docker-compose.yml: the reverse proxy serves other containers, and
+# Traefik keeps the names of all of them in one namespace.
+
+services:
+  web:
+    labels:
+      - "traefik.http.routers.budget-redirect.rule=${SITE_REDIRECT_RULE:?SITE_REDIRECT_RULE is missing from .env; deploy.sh writes it}"
+      - "traefik.http.routers.budget-redirect.entrypoints=websecure"
+      # TLS as for the site's own router (see docker-compose.yml).
+      - "traefik.http.routers.budget-redirect.tls=true"
+      - "traefik.http.routers.budget-redirect.middlewares=budget-redirect-cache,budget-redirect"
+      # A router needs a service; the redirect answers every request, so nginx is never reached.
+      - "traefik.http.routers.budget-redirect.service=budget"
+      # Traefik matches the regex against the whole URL (scheme://host/path?query)
+      # and replaces scheme and host: GET answers 301, other methods 308.
+      - "traefik.http.middlewares.budget-redirect.redirectregex.regex=^https?://[^/]+(.*)$$"
+      - "traefik.http.middlewares.budget-redirect.redirectregex.replacement=https://${SITE_HOST:?SITE_HOST is missing from .env}$${1}"
+      - "traefik.http.middlewares.budget-redirect.redirectregex.permanent=true"
+      # Browsers keep a 301 without a lifetime for good. With one hour, the move
+      # can be taken back: an hour later every browser asks again.
+      - "traefik.http.middlewares.budget-redirect-cache.headers.customresponseheaders.Cache-Control=max-age=3600"

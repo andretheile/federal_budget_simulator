@@ -5,11 +5,20 @@
 #   ./deploy/deploy.sh --placeholder   upload deploy/placeholder/ instead, without building
 #   ./deploy/deploy.sh --dry-run       show what rsync would change; change nothing on the
 #                                      server (can be combined with --placeholder)
+#   ./deploy/deploy.sh --check         only check the public addresses (step 4);
+#                                      build, upload and change nothing
 #
 # Environment variables and their defaults:
 #   DEPLOY_HOST=ionos-deploy         ssh destination (an alias from ~/.ssh/config)
 #   DEPLOY_DIR=/home/deploy/budget   directory on the server
-#   SITE_HOST=budget.drtheile.com    public hostname of the site
+#   SITE_HOST=fiscal.drtheile.com    public hostname of the site
+#   SITE_FORMER_HOSTS=budget.drtheile.com
+#                                    former hostnames, separated by spaces or commas;
+#                                    each redirects permanently to SITE_HOST, keeping
+#                                    path and query. This default holds only while
+#                                    SITE_HOST is fiscal.drtheile.com; for another
+#                                    SITE_HOST it is empty. SITE_FORMER_HOSTS= (set,
+#                                    but empty) means none.
 #
 # Needs bash, ssh, rsync and curl (the versions that ship with macOS are enough)
 # and, for the build, npm. See deploy/README.md.
@@ -26,7 +35,17 @@ set -euo pipefail
 
 DEPLOY_HOST="${DEPLOY_HOST:-ionos-deploy}"
 DEPLOY_DIR="${DEPLOY_DIR:-/home/deploy/budget}"
-SITE_HOST="${SITE_HOST:-budget.drtheile.com}"
+SITE_HOST="${SITE_HOST:-fiscal.drtheile.com}"
+# This instance moved from budget.drtheile.com, which keeps redirecting. The
+# default belongs to this instance's own name only, so that whoever sets
+# SITE_HOST for a site of their own gets no router for a name of ours.
+if [ -z "${SITE_FORMER_HOSTS+set}" ]; then
+  if [ "$SITE_HOST" = fiscal.drtheile.com ]; then
+    SITE_FORMER_HOSTS=budget.drtheile.com
+  else
+    SITE_FORMER_HOSTS=
+  fi
+fi
 
 die()  { echo "deploy: $*" >&2; exit 1; }
 step() { printf '\n==> %s\n' "$*"; }
@@ -40,12 +59,14 @@ banner() {
 
 placeholder=0
 dry_run=0
+check_only=0
 for arg in "$@"; do
   case "$arg" in
     --placeholder) placeholder=1 ;;
     --dry-run)     dry_run=1 ;;
+    --check)       check_only=1 ;;
     -h|--help)     sed -n '2,/^$/p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
-    *)             die "unknown option '$arg' (known: --placeholder, --dry-run, --help)" ;;
+    *)             die "unknown option '$arg' (known: --placeholder, --dry-run, --check, --help)" ;;
   esac
 done
 
@@ -62,6 +83,27 @@ case "$SITE_HOST" in
   ""|*[!A-Za-z0-9.-]*) die "SITE_HOST must be a plain hostname, got '$SITE_HOST'" ;;
 esac
 
+# The former names, checked like SITE_HOST: each becomes a Host(...) in a
+# Traefik rule. (Written for the bash 3.2 of macOS: an empty array counts as
+# unset there, hence the ${former[@]+...} below.)
+lower() { printf '%s' "$1" | tr 'A-Z' 'a-z'; }
+former=()
+read -r -a listed <<< "$(printf '%s' "$SITE_FORMER_HOSTS" | tr ',\t\n' '   ')"
+for host in ${listed[@]+"${listed[@]}"}; do
+  case "$host" in
+    *[!A-Za-z0-9.-]*) die "SITE_FORMER_HOSTS must list plain hostnames, separated by spaces or commas, got '$host'" ;;
+  esac
+  [ "$(lower "$host")" != "$(lower "$SITE_HOST")" ] || die "SITE_FORMER_HOSTS lists '$host', which is SITE_HOST itself"
+  for seen in ${former[@]+"${former[@]}"}; do
+    [ "$(lower "$seen")" != "$(lower "$host")" ] || die "SITE_FORMER_HOSTS lists '$host' twice"
+  done
+  former+=("$host")
+done
+redirect_rule=""
+for host in ${former[@]+"${former[@]}"}; do
+  redirect_rule="${redirect_rule:+$redirect_rule || }Host(\`$host\`)"
+done
+
 for tool in ssh rsync curl; do
   command -v "$tool" >/dev/null || die "'$tool' is not installed"
 done
@@ -72,6 +114,64 @@ remote="$DEPLOY_HOST:$DEPLOY_DIR"
 
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
+
+# --- The check of the public addresses (step 4, and --check) -----------------
+
+# fetch URL: sets $status (000 without an answer) and $location (the Location
+# header, empty without one). Redirects are not followed.
+fetch() {
+  : > "$tmp/headers"
+  status="$(curl -s -o /dev/null -D "$tmp/headers" -w '%{http_code}' --max-time 15 "$1" || true)"
+  location="$(tr -d '\r' < "$tmp/headers" | awk 'tolower($1) == "location:" { print $2; exit }')"
+}
+
+# Traefik takes a moment to route a container that was just created, so each
+# address gets a few tries. SITE_HOST must answer 200.
+check_site() {
+  local url="https://$SITE_HOST/"
+  for _ in 1 2 3 4 5; do
+    fetch "$url"
+    [ "$status" = 200 ] && break
+    sleep 2
+  done
+  echo "$url -> HTTP $status${location:+, Location: $location}"
+  [ "$status" = 200 ] || { echo "   expected HTTP 200" >&2; return 1; }
+}
+
+# check_redirect HOST PATH: a former name must answer with a permanent redirect
+# (301; 308 for methods other than GET) to the same path and query on SITE_HOST.
+check_redirect() {
+  local url="https://$1$2" want="https://$SITE_HOST$2"
+  for _ in 1 2 3 4 5; do
+    fetch "$url"
+    case "$status" in 301|308) [ "$location" = "$want" ] && break ;; esac
+    sleep 2
+  done
+  echo "$url -> HTTP $status${location:+, Location: $location}"
+  case "$status" in
+    301|308) [ "$location" = "$want" ] || { echo "   expected Location: $want" >&2; return 1; } ;;
+    *)       echo "   expected a permanent redirect (301) to $want" >&2; return 1 ;;
+  esac
+}
+
+check_public() {
+  local failed=0 host
+  step "Checking the public addresses"
+  check_site || failed=1
+  # The site's own address, and a path with a query that must arrive unchanged.
+  # The fragment (#...) of a shared link never reaches the server; the browser
+  # keeps it across the redirect.
+  for host in ${former[@]+"${former[@]}"}; do
+    check_redirect "$host" "/" || failed=1
+    check_redirect "$host" "/deploy-check/path?query=kept&t=$(date +%s)" || failed=1
+  done
+  [ "$failed" = 0 ]
+}
+
+if [ "$check_only" = 1 ]; then
+  check_public || die "the public addresses do not answer as configured (see above)"
+  exit 0
+fi
 
 # --- 1. What to upload ------------------------------------------------------
 
@@ -120,9 +220,32 @@ upload() {
   fi
 }
 
-# docker compose reads SITE_HOST from a .env file next to docker-compose.yml, so
-# compose commands typed on the server later see the same hostname.
-printf '# Written by deploy.sh\nSITE_HOST=%s\n' "$SITE_HOST" > "$tmp/.env"
+# docker compose reads its settings from a .env file next to docker-compose.yml,
+# so compose commands typed on the server later see the same configuration.
+# With former names, COMPOSE_FILE adds docker-compose.redirect.yml and
+# SITE_REDIRECT_RULE names them; without, neither is there.
+{
+  echo "# Written by deploy.sh; read by docker compose in this directory."
+  printf 'SITE_HOST=%s\n' "$SITE_HOST"
+  if [ -n "$redirect_rule" ]; then
+    printf 'COMPOSE_FILE=docker-compose.yml:docker-compose.redirect.yml\n'
+    printf "SITE_REDIRECT_RULE='%s'\n" "$redirect_rule"
+  fi
+} > "$tmp/.env"
+
+step "Routing (Traefik labels, from .env)"
+echo "https://$SITE_HOST/  serves the site (router budget)"
+if [ -n "$redirect_rule" ]; then
+  for host in "${former[@]}"; do
+    echo "https://$host/<path>?<query>  redirects permanently (301) to https://$SITE_HOST/<path>?<query> (router budget-redirect)"
+  done
+else
+  echo "No former host names: no redirect, docker-compose.redirect.yml is not used."
+fi
+echo "-- .env"
+sed 's/^/   /' "$tmp/.env"
+echo "If rsync lists .env or a docker-compose file as changed below, docker compose up -d"
+echo "recreates the container: the site is away for a few seconds (see deploy/README.md)."
 
 if [ "$dry_run" = 1 ]; then
   step "Dry run: the server is not changed. Lines below are what rsync would do."
@@ -135,7 +258,7 @@ fi
 # the container only sees changes written into that same file. rsync's default
 # (write a temporary file, then rename it) would leave the container on the old one.
 step "Configuration -> $remote/"
-upload --inplace "$here/docker-compose.yml" "$here/nginx.conf" "$tmp/.env" "$remote/"
+upload --inplace "$here/docker-compose.yml" "$here/docker-compose.redirect.yml" "$here/nginx.conf" "$tmp/.env" "$remote/"
 
 # The live page must never point at files that are not there. rsync sends
 # index.html before the assets directory and, with plain --delete, removes old
@@ -151,7 +274,7 @@ fi
 upload --delete --delete-after "$src/" "$remote/site/"
 
 if [ "$dry_run" = 1 ]; then
-  step "Dry run finished. Skipped: creating the directory, docker compose up, nginx reload, HTTP check."
+  step "Dry run finished. Skipped: creating the directory, docker compose up, nginx reload, check of the public addresses."
   exit 0
 fi
 
@@ -206,16 +329,6 @@ main() {
 main </dev/null
 REMOTE
 
-# --- 4. Check the public URL -------------------------------------------------
+# --- 4. Check the public addresses -------------------------------------------
 
-step "Checking https://$SITE_HOST/"
-status=000
-for _ in 1 2 3 4 5; do
-  status="$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://$SITE_HOST/" || true)"
-  if [ "$status" = 200 ]; then
-    break
-  fi
-  sleep 2
-done
-echo "https://$SITE_HOST/ -> HTTP $status"
-[ "$status" = 200 ] || die "expected HTTP 200. The files are uploaded and the container was started; check Traefik, DNS and the container logs."
+check_public || die "the public addresses do not answer as configured (see above). The files are uploaded and the container was started; check Traefik, DNS and the container logs, and see \"Former host names\" in deploy/README.md for going back."
