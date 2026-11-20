@@ -89,10 +89,12 @@ export function LegalLinks({ current, hrefFor, onOpen }: LegalLinksProps) {
 function Imprint({ site }: { site: SiteConfig }) {
   const { t, language } = useUi();
   const addition = paragraphs(pickNote(site.imprint?.addition, language));
+  const responsible = site.contentResponsible ?? site.operator;
+  // § 5 DDG and § 18 MStV ask for a postal address; a heading cites them only above one.
   return (
     <div className="legal__body">
       <section>
-        <h3>{t.legal.imprintBasis}</h3>
+        <h3>{site.operator.address ? t.legal.imprintBasis : t.legal.imprintProvider}</h3>
         <Address party={site.operator} />
       </section>
       <section>
@@ -100,8 +102,8 @@ function Imprint({ site }: { site: SiteConfig }) {
         <Contact operator={site.operator} />
       </section>
       <section>
-        <h3>{t.legal.contentResponsible}</h3>
-        <Address party={site.contentResponsible ?? site.operator} />
+        <h3>{responsible.address ? t.legal.contentResponsible : t.legal.contentResponsiblePlain}</h3>
+        <Address party={responsible} />
       </section>
       {addition.length > 0 && (
         <section className="legal__addition">
@@ -166,6 +168,7 @@ function Privacy({ site, languageKey }: { site: SiteConfig; languageKey: string 
         <p>{l.appStorage(languageKey)}</p>
         <p>{l.appNoThirdParty}</p>
         <p>{l.appLinks}</p>
+        <p>{l.appRepository}</p>
       </section>
 
       <section>
@@ -232,10 +235,11 @@ function Privacy({ site, languageKey }: { site: SiteConfig; languageKey: string 
 
 // --- pieces ----------------------------------------------------------------------------------
 
+/** Name and postal address, one line each; just the name where the config gives no address. */
 function Address({ party }: { party: Party }) {
   return (
     <p className="legal__lines">
-      {[party.name, ...party.address].map((line, index) => (
+      {[party.name, ...(party.address ?? [])].map((line, index) => (
         <span key={index}>{line}</span>
       ))}
     </p>

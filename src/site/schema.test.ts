@@ -35,6 +35,15 @@ describe("a valid config", () => {
     expect(configProblems(minimal)).toEqual([]);
     expect(siteState(parseSiteConfig(JSON.stringify(minimal), "minimal.json"))).toBe("noindex");
   });
+
+  it("lets the operator and the person responsible for the content leave out their postal address, but not a provider", () => {
+    expect(configProblems(changed((config) => delete config.operator.address))).toEqual([]);
+    expect(configProblems(changed((config) => delete config.contentResponsible.address))).toEqual([]);
+    expect(configProblems(changed((config) => delete config.hosting.address))).toEqual(["hosting.address: is missing"]);
+    expect(configProblems(changed((config) => delete config.proxy.address))).toEqual(["proxy.address: is missing"]);
+    // Leaving it out means leaving out the field; an empty list is a mistake.
+    expect(configProblems(changed((config) => (config.operator.address = [])))).toEqual(["operator.address: needs at least one line"]);
+  });
 });
 
 describe("a config with mistakes", () => {
@@ -110,9 +119,29 @@ describe("the three states of a build", () => {
   });
 
   it("says which one in a line that starts the same way each time", () => {
-    expect(stateLine("none", null)).toMatch(/^Legal pages: NONE\. .*no imprint and no privacy statement/);
-    expect(stateLine("noindex", "site.config.json")).toMatch(/^Legal pages: included, from site\.config\.json\. Search engines are asked not to index/);
-    expect(stateLine("indexable", "/srv/site.json")).toMatch(/^Legal pages: included, from \/srv\/site\.json\. The site may be indexed/);
+    expect(stateLine(null, null)).toMatch(/^Legal pages: NONE\. .*no imprint and no privacy statement/);
+    expect(stateLine(config, "site.config.json")).toMatch(/^Legal pages: included, from site\.config\.json\. Search engines are asked not to index/);
+    expect(stateLine(indexable, "/srv/site.json")).toMatch(/^Legal pages: included, from \/srv\/site\.json\. The site may be indexed/);
+  });
+
+  it("says in the same line when the imprint has no postal address, and for whom", () => {
+    const { address: _operatorAddress, ...nameOnly } = config.operator;
+    const { address: _responsibleAddress, ...responsibleNameOnly } = config.contentResponsible!;
+    // Nobody else named: the operator is also the person responsible for the content.
+    expect(stateLine({ ...indexable, operator: nameOnly, contentResponsible: undefined }, "/srv/site.json")).toBe(
+      'Legal pages: included, from /srv/site.json, WITHOUT a postal address for the operator. The site may be indexed by search engines ("indexable": true).',
+    );
+    expect(stateLine({ ...config, operator: nameOnly, contentResponsible: undefined }, "site.config.json")).toBe(
+      'Legal pages: included, from site.config.json, WITHOUT a postal address for the operator. Search engines are asked not to index the site ("indexable" is not true in the config).',
+    );
+    expect(stateLine({ ...config, contentResponsible: responsibleNameOnly }, "site.config.json")).toMatch(
+      /^Legal pages: included, from site\.config\.json, WITHOUT a postal address for the person responsible for the content\. Search/,
+    );
+    expect(stateLine({ ...config, operator: nameOnly, contentResponsible: responsibleNameOnly }, "site.config.json")).toMatch(
+      /, WITHOUT a postal address for the operator and the person responsible for the content\. /,
+    );
+    // With both addresses the line does not mention them.
+    expect(stateLine(config, "site.config.json")).not.toContain("postal address");
   });
 
   it("keeps the noindex tag in index.html unless the site is indexable", () => {
@@ -158,6 +187,15 @@ describe("the three states of a build", () => {
     expect(html).toContain("A &amp; B &lt;GmbH&gt; &quot;quoted&quot;<br />Weg 1");
     expect(html).toContain('<a href="mailto:a&amp;b@example.org">a&amp;b@example.org</a></p>');
     expect(html).not.toContain("<GmbH>");
+  });
+
+  it("gives just the name and the contact when the operator has no postal address", () => {
+    const { address: _, ...nameOnly } = config.operator;
+    const noscript = /<noscript[\s\S]*?<\/noscript\s*>/.exec(applyNoscriptImprint(indexHtml, { ...config, operator: nameOnly }))![0];
+    expect(noscript).toContain(
+      '<p>Erika Mustermann</p><p>Kontakt <span lang="en">/ Contact</span>: <a href="mailto:kontakt@example.org">kontakt@example.org</a>, +49 30 1234567</p>',
+    );
+    expect(noscript).not.toContain("<br />");
   });
 
   it("refuses an index.html without a <noscript> block when there is a config", () => {

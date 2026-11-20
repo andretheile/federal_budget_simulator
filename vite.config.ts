@@ -38,22 +38,24 @@ function loadSiteConfig(): { config: SiteConfig | null; source: string | null } 
 
 /**
  * Removes the "noindex" tag from index.html for an indexable site, puts the operator's details into
- * its <noscript> block when there is a config, and says which state the build is in.
+ * its <noscript> block when there is a config, and says which state the build is in (and whether
+ * the imprint lacks a postal address).
  */
 function siteConfigPlugin(config: SiteConfig | null, source: string | null, quiet: boolean): Plugin {
-  const state = siteState(config);
+  const indexable = siteState(config) === "indexable";
+  const line = stateLine(config, source);
   let command: "build" | "serve" = "serve";
   return {
     name: "site-config",
     configResolved(resolved) {
       command = resolved.command;
-      if (command === "serve" && !quiet) console.log(`\n  ${stateLine(state, source)}\n`);
+      if (command === "serve" && !quiet) console.log(`\n  ${line}\n`);
     },
     transformIndexHtml(html) {
-      return applyNoscriptImprint(applyRobots(html, state === "indexable"), config);
+      return applyNoscriptImprint(applyRobots(html, indexable), config);
     },
     closeBundle() {
-      if (command === "build") console.log(`\n${stateLine(state, source)}\n`);
+      if (command === "build") console.log(`\n${line}\n`);
     },
   };
 }

@@ -34,9 +34,13 @@ const note = z
   .record(z.string().regex(/^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/, 'must be a language code such as "de" or "en"'), text)
   .refine((value) => Object.keys(value).length > 0, 'needs at least one language, such as { "de": "…" }');
 
-const party = { name: text, address: lines };
+// The operator and the person responsible for the content may leave out their postal address
+// (see Party in ./config.ts); a provider is a company and always has one. An empty list is still
+// an error: leaving the address out means leaving out the field.
+const person = { name: text, address: lines.optional() };
 const provider = {
-  ...party,
+  name: text,
+  address: lines,
   country: countryCode,
   transfer: z.enum(TRANSFERS, 'must be "dpf", "adequacy" or "scc"').optional(),
   privacyPolicy: httpsUrl.optional(),
@@ -79,8 +83,8 @@ const flag = z.boolean("must be true or false");
 // other parts of the file still have problems.
 const schema = z.strictObject({
   indexable: flag.optional(),
-  operator: z.strictObject({ ...party, email, phone: phone.optional() }),
-  contentResponsible: z.strictObject(party).optional(),
+  operator: z.strictObject({ ...person, email, phone: phone.optional() }),
+  contentResponsible: z.strictObject(person).optional(),
   hosting: z.strictObject(provider).superRefine(checkTransfer),
   proxy: z
     .strictObject({ ...provider, networkErrorReports: flag.optional() })
@@ -175,16 +179,31 @@ export function siteState(config: SiteConfig | null): SiteState {
   return config.indexable === true ? "indexable" : "noindex";
 }
 
-/** The line the build prints, and deploy.sh repeats before it uploads. It always starts with "Legal pages:". */
-export function stateLine(state: SiteState, source: string | null): string {
-  switch (state) {
-    case "none":
-      return "Legal pages: NONE. No site config (site.config.json or SITE_CONFIG), so the site has no imprint and no privacy statement and asks search engines not to index it.";
-    case "noindex":
-      return `Legal pages: included, from ${source}. Search engines are asked not to index the site ("indexable" is not true in the config).`;
-    case "indexable":
-      return `Legal pages: included, from ${source}. The site may be indexed by search engines ("indexable": true).`;
+/**
+ * Who the imprint names without a postal address, in words for the build's line; "" if nobody.
+ * The person responsible for the content is the operator unless the config names someone else.
+ */
+export function withoutAddress(config: SiteConfig): string {
+  const who: string[] = [];
+  if (config.operator.address === undefined) who.push("the operator");
+  if (config.contentResponsible && config.contentResponsible.address === undefined) who.push("the person responsible for the content");
+  return who.join(" and ");
+}
+
+/**
+ * The line the build prints, and deploy.sh repeats before it uploads. It always starts with
+ * "Legal pages:", and says so when the imprint has no postal address, so that nobody publishes
+ * that without knowing.
+ */
+export function stateLine(config: SiteConfig | null, source: string | null): string {
+  if (!config) {
+    return "Legal pages: NONE. No site config (site.config.json or SITE_CONFIG), so the site has no imprint and no privacy statement and asks search engines not to index it.";
   }
+  const missing = withoutAddress(config);
+  const pages = `Legal pages: included, from ${source}${missing ? `, WITHOUT a postal address for ${missing}` : ""}.`;
+  return siteState(config) === "indexable"
+    ? `${pages} The site may be indexed by search engines ("indexable": true).`
+    : `${pages} Search engines are asked not to index the site ("indexable" is not true in the config).`;
 }
 
 const ROBOTS_COMMENT = /^[ \t]*<!-- robots:.*-->[ \t]*\r?\n/m;
@@ -214,10 +233,10 @@ function escapeHtml(text: string): string {
 }
 
 /**
- * index.html with the operator's name, address and contact in its <noscript> block, so that a
- * visitor without JavaScript, who sees none of the app's pages, still finds the imprint. Short,
- * with German and English headings. Without a config the page is returned as it is. Throws if
- * index.html has no <noscript> block to put it in.
+ * index.html with the operator's name, address (if given) and contact in its <noscript> block, so
+ * that a visitor without JavaScript, who sees none of the app's pages, still finds the imprint.
+ * Short, with German and English headings. Without a config the page is returned as it is. Throws
+ * if index.html has no <noscript> block to put it in.
  */
 export function applyNoscriptImprint(html: string, config: SiteConfig | null): string {
   if (!config) return html;
@@ -225,7 +244,7 @@ export function applyNoscriptImprint(html: string, config: SiteConfig | null): s
   if (!end) throw new Error("index.html has no <noscript> block; the build cannot add the imprint for visitors without JavaScript.");
   const { operator } = config;
   const email = escapeHtml(operator.email);
-  const lines = [operator.name, ...operator.address].map(escapeHtml).join("<br />");
+  const lines = [operator.name, ...(operator.address ?? [])].map(escapeHtml).join("<br />");
   const contact = [`<a href="mailto:${email}">${email}</a>`, ...(operator.phone ? [escapeHtml(operator.phone)] : [])].join(", ");
   const block =
     `<section class="noscript-imprint"><h2>Impressum <span lang="en">/ Legal notice</span></h2>` +

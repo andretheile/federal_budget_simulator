@@ -10,8 +10,10 @@ export const legalEn: LegalMessages = {
   phone: "Phone",
 
   imprintBasis: "Information pursuant to § 5 DDG (German Digital Services Act)",
+  imprintProvider: "Provider of this website",
   contact: "Contact",
   contentResponsible: "Responsible for the content pursuant to § 18 (2) MStV (German Interstate Media Treaty)",
+  contentResponsiblePlain: "Responsible for the content",
 
   controllerTitle: "Controller",
   controller: "The controller responsible for processing personal data on this website is:",
@@ -26,6 +28,8 @@ export const legalEn: LegalMessages = {
     "The application loads its code, data and fonts from this website itself, not from other providers. It contains no analytics or tracking tools.",
   appLinks:
     "The source references link to pages of other providers. Only when you open such a link does your browser load the other page, and that page’s privacy policy applies. The page you came from is not sent along.",
+  appRepository:
+    "The footer links to the application’s source code on GitHub: nothing is sent to GitHub before you follow that link, and after that GitHub’s own privacy terms apply.",
   hostingTitle: "Hosting and server logs",
   hosting: (name, address) => `The website is hosted on a server of ${name}, ${address}.`,
   location: (country) => `Server location: ${country}.`,
@@ -49,7 +53,7 @@ export const legalEn: LegalMessages = {
     ipAddress: "IP address",
   },
   retentionDays: (days) => (days === 1 ? "Each entry is deleted after one day." : `Each entry is deleted after ${days} days.`),
-  retentionSize: (size) => `It is limited to ${size} MB; when the limit is reached, the oldest entries are deleted.`,
+  retentionSize: (size) => `It is limited to ${size} MB; when the limit is reached, the oldest entries are deleted.`,
   proxyTitle: (name) => `Delivery through ${name}`,
   proxy: (name, address) =>
     `All requests to this website pass through the network of ${name}, ${address}. The service forwards them to the server, keeps copies of files ready and fends off attacks.`,

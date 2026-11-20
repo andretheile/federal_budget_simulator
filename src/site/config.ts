@@ -30,10 +30,16 @@ export type Transfer = (typeof TRANSFERS)[number];
 /** Free text in several languages, keyed by language code: { "de": "…", "en": "…" }. */
 export type LocalizedNote = Record<string, string>;
 
+/** Someone the legal pages name: the operator, the person responsible for the content, a provider. */
 export interface Party {
   name: string;
-  /** Postal address, one entry per line. */
-  address: string[];
+  /**
+   * Postal address, one entry per line. A provider must have one. For the operator and the person
+   * responsible for the content it is optional: German law generally expects one from a site that
+   * is not purely personal, and leaving it out is the operator's decision. The build says when it
+   * is missing (stateLine in ./schema.ts).
+   */
+  address?: string[];
 }
 
 export interface Operator extends Party {
@@ -43,6 +49,7 @@ export interface Operator extends Party {
 
 /** A company that processes the visitors' data for the operator: the hoster, a proxy or CDN. */
 export interface Provider extends Party {
+  address: string[];
   /** ISO 3166-1 alpha-2 code of the country where the provider processes the data (hosting: where the server is). */
   country: string;
   /** Required for a country outside the EU and the EEA, not allowed for one inside. */
@@ -73,7 +80,7 @@ export interface ServerLog {
 export interface SiteConfig {
   /** Let search engines index the site. Default false: the "noindex" tag stays. */
   indexable?: boolean;
-  /** Who runs the site: imprint (§ 5 DDG) and controller in the privacy statement. */
+  /** Who runs the site: imprint (§ 5 DDG, § 18 MStV) and controller in the privacy statement. */
   operator: Operator;
   /** Person responsible for the content under § 18 Abs. 2 MStV. Default: the operator. */
   contentResponsible?: Party;

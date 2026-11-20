@@ -10,8 +10,10 @@ export const legalDe: LegalMessages = {
   phone: "Telefon",
 
   imprintBasis: "Angaben gemäß § 5 DDG",
+  imprintProvider: "Anbieter dieser Website",
   contact: "Kontakt",
   contentResponsible: "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
+  contentResponsiblePlain: "Verantwortlich für den Inhalt",
 
   controllerTitle: "Verantwortlich",
   controller: "Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist:",
@@ -26,6 +28,8 @@ export const legalDe: LegalMessages = {
     "Programmcode, Daten und Schriften lädt die Anwendung von dieser Website selbst, nicht von anderen Anbietern. Sie enthält keine Werkzeuge zur Reichweitenmessung oder zum Tracking.",
   appLinks:
     "Die Quellenangaben verlinken auf Seiten anderer Anbieter. Erst wenn Sie einen solchen Link öffnen, ruft Ihr Browser die fremde Seite auf; für sie gilt deren Datenschutzerklärung. Von welcher Seite Sie kommen, wird dabei nicht mitgeschickt.",
+  appRepository:
+    "Die Fußzeile verlinkt auf den Quelltext der Anwendung bei GitHub: Bevor Sie diesem Link folgen, wird nichts an GitHub übertragen; danach gelten die Datenschutzbestimmungen von GitHub.",
   hostingTitle: "Hosting und Protokolle des Servers",
   hosting: (name, address) => `Die Website liegt auf einem Server von ${name}, ${address}.`,
   location: (country) => `Standort des Servers: ${country}.`,
@@ -50,7 +54,7 @@ export const legalDe: LegalMessages = {
   },
   retentionDays: (days) =>
     days === 1 ? "Jeder Eintrag wird nach einem Tag gelöscht." : `Jeder Eintrag wird nach ${days} Tagen gelöscht.`,
-  retentionSize: (size) => `Es ist auf ${size} MB begrenzt; ist die Grenze erreicht, werden die ältesten Einträge gelöscht.`,
+  retentionSize: (size) => `Es ist auf ${size} MB begrenzt; ist die Grenze erreicht, werden die ältesten Einträge gelöscht.`,
   proxyTitle: (name) => `Auslieferung über ${name}`,
   proxy: (name, address) =>
     `Alle Abrufe dieser Website laufen über das Netzwerk von ${name}, ${address}. Der Dienst leitet sie an den Server weiter, hält Dateien zwischengespeichert bereit und wehrt Angriffe ab.`,
