@@ -5897,23 +5897,24 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "de": "Stand November 2026: Die Alterssicherungskommission hat im Juni 2026 empfohlen, die 16 Träger der Rentenversicherung unter einer Leitung zusammenzuführen und Aufgaben zu bündeln, ohne eine Zahl einzusparender Stellen zu nennen; der Koalitionsausschuss verständigte sich am 1. Juli 2026 darauf, ihre Empfehlungen umzusetzen. Für die Krankenkassen begrenzt das Gesetz die Verwaltungskosten ab 2027 auf den Anstieg der Ausgaben je Versicherten. Die Koalition will das Personal der Bundesverwaltung bis 2029 um 8 % verringern, 2 % im Jahr; im Entwurf des Haushalts 2027 steigt die Zahl der zivilen Stellen des Bundes allerdings um 4.752.",
-            "en": "As of November 2026: in June 2026 the pensions commission recommended bringing the 16 pension insurance carriers under one management and pooling tasks, without naming a number of posts to be saved; on 1 July 2026 the coalition committee agreed to implement its recommendations. For the health insurers the law limits administrative costs from 2027 to the increase in spending per insured person. The coalition wants to reduce federal administrative staff by 8% by 2029, 2% a year; in the draft budget for 2027, however, the number of civilian federal posts rises by 4,752."
+            "de": "Stand November 2026: Die Alterssicherungskommission hat im Juni 2026 empfohlen, die 16 Träger der Rentenversicherung unter einer Leitung zusammenzuführen und Aufgaben zu bündeln, ohne eine Zahl einzusparender Stellen zu nennen; der Koalitionsausschuss verständigte sich am 1. Juli 2026 darauf, ihre Empfehlungen umzusetzen. Für die Krankenkassen begrenzt das Gesetz die Verwaltungskosten ab 2027 auf den Anstieg der Ausgaben je Versicherten. Die Koalition will das Personal der Bundesverwaltung bis 2029 um 8 % verringern, 2 % im Jahr; im Entwurf des Haushalts 2027 steigt die Zahl der zivilen Stellen des Bundes allerdings um 4.752. Der Koalitionsausschuss hat das Ziel am 1. Juli 2026 auf die mittelbare Bundesverwaltung ausgedehnt, soweit der Bund Einfluss auf deren Haushalt hat oder Mittel gibt; ob damit auch Träger der Sozialversicherung gemeint sind, sagt der Beschluss nicht.",
+            "en": "As of November 2026: in June 2026 the pensions commission recommended bringing the 16 pension insurance carriers under one management and pooling tasks, without naming a number of posts to be saved; on 1 July 2026 the coalition committee agreed to implement its recommendations. For the health insurers the law limits administrative costs from 2027 to the increase in spending per insured person. The coalition wants to reduce federal administrative staff by 8% by 2029, 2% a year; in the draft budget for 2027, however, the number of civilian federal posts rises by 4,752. On 1 July 2026 the coalition committee extended the target to indirect federal administration where the federal government influences its budget or provides funds; whether this includes social insurance carriers, the decision does not say."
           },
           "sources": [
             "ask_bericht_2026",
             "bt_drs_21_8817",
             "sgb5_4",
             "koalitionsvertrag_2025",
-            "bundestag_drs_21_7301"
+            "bundestag_drs_21_7301",
+            "koa_2026_07_02"
           ]
         },
         {
           "kind": "practical",
           "severity": "minor",
           "text": {
-            "de": "Nicht enthalten sind die Verwaltungen von Bund, Ländern und Gemeinden. Ihr Personal in der allgemeinen öffentlichen Verwaltung, einschließlich der Grundlagenforschung, kostete 2024 15,0, 30,0 und 26,7 Mrd. Euro; die Posten des Haushalts mischen dort aber die drei Ebenen, sodass eine Kürzung nicht der Ebene zugeordnet werden könnte, die sie beschließt.",
-            "en": "Not included are the administrations of the federal government, the states and the municipalities. Their staff in general public services, including basic research, cost EUR 15.0, 30.0 and 26.7 billion in 2024; the budget items there, however, mix the three levels, so a cut could not be assigned to the level that decides it."
+            "de": "Nicht enthalten sind die Verwaltungen von Bund, Ländern und Gemeinden; für sie gibt es die Maßnahme „Stellen in den Verwaltungen von Bund, Ländern und Gemeinden abbauen“.",
+            "en": "Not included are the administrations of the federal government, the states and the municipalities; they have the measure \"Cut posts in federal, state and municipal administration\"."
           },
           "sources": [
             "eurostat_gov_10a_exp"
@@ -5939,6 +5940,251 @@
           "ba_geschaeftsbericht_2025",
           "koalitionsvertrag_2025",
           "bt_drs_21_8817"
+        ]
+      }
+    },
+    {
+      "id": "administration_staff_cut",
+      "label": {
+        "de": "Stellen in den Verwaltungen von Bund, Ländern und Gemeinden abbauen",
+        "en": "Cut posts in federal, state and municipal administration"
+      },
+      "summary": {
+        "de": "Streicht Stellen in der allgemeinen Verwaltung: in Ministerien, Staatskanzleien, Rathäusern und Kreisverwaltungen und ihren zentralen Diensten, beim Bund auch im Auswärtigen Dienst. Dort arbeiteten im Juni 2024 beim Bund gut 51.000 Menschen auf 48.600 Vollzeitstellen, in den Ländern 166.700 auf 153.600 und in Gemeinden und Kreisen 394.800 auf 347.000; ihr Personal kostete 3,8, 12,2 und 26,6 Mrd. Euro. Nicht erfasst sind Polizei, Ordnungsämter und Feuerwehr, Justiz, Schulen und Hochschulen, Finanzämter und Zoll, die Bundeswehrverwaltung, Fachbehörden wie die Wasserstraßen- und Schifffahrtsverwaltung und die Sozialversicherung, für die es eine eigene Maßnahme gibt. Welche Ebenen kürzen, ist wählbar; der Anteil gilt für jede gewählte Ebene. Beim Bund zählt er die Stellen, die über die Kürzungen der Haushaltsgesetze 2025 bis 2027 hinaus wegfallen, bei Ländern und Gemeinden die gegenüber 2024. Die Grundeinstellung streicht beim Bund weitere 3,5 %, so viel, wie die Bundesregierung für 2028 und 2029 noch plant, um ihr Ziel von 8 % zu erreichen. Der Betrag ist die jährliche Ersparnis an Gehältern und Arbeitgeberbeiträgen, sobald der Abbau abgeschlossen ist, in Werten von 2024; die Pensionen der Beamten sinken erst Jahrzehnte später und sind nicht gerechnet. Gekündigt wird niemand: Stellen fallen weg, wenn Beschäftigte in Ruhestand gehen oder wechseln; gerechnet ist mit 2 Prozentpunkten im Jahr ab 2028. Die Rechnung nimmt an, dass die Menschen, die nicht mehr eingestellt werden, anderswo arbeiten.",
+        "en": "Cuts posts in general administration: in ministries, state chancelleries, town halls and district offices and their central services, and at federal level also in the foreign service. In June 2024 a little over 51,000 people worked there at federal level in 48,600 full-time equivalents, 166,700 in the states in 153,600 and 394,800 in the municipalities and districts in 347,000; their staff cost EUR 3.8, 12.2 and 26.6 billion. Not covered are the police, public-order offices and fire services, the courts, schools and universities, tax offices and customs, the armed forces' civilian administration, specialist agencies such as the waterways and shipping administration, and the social insurance funds, which have a measure of their own. Which levels cut can be chosen; the share applies to each level chosen. At federal level it counts the posts cut beyond the cuts in the budget acts for 2025 to 2027, at state and municipal level those cut against 2024. The default cuts a further 3.5% at federal level, as much as the federal government still plans for 2028 and 2029 to reach its target of 8%. The amount is the annual saving in pay and employer contributions once the cut is complete, in 2024 values; civil servants' pensions fall only decades later and are not counted. Nobody is dismissed: posts disappear when staff retire or leave; the calculation assumes 2 percentage points a year from 2028. It assumes that the people who are no longer hired work elsewhere."
+      },
+      "topic": "state",
+      "params": [
+        {
+          "id": "cut",
+          "type": "number",
+          "label": {
+            "de": "Anteil der Verwaltungsstellen, die wegfallen",
+            "en": "Share of administrative posts cut"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 30,
+          "step": 0.5,
+          "default": 3.5,
+          "baseline": 0,
+          "baselineLabel": {
+            "de": "Geltendes Recht",
+            "en": "Current law"
+          }
+        },
+        {
+          "id": "levels",
+          "type": "groups",
+          "label": {
+            "de": "Ebenen, die Stellen abbauen",
+            "en": "Levels that cut posts"
+          },
+          "node": "exp.general.admin_staff",
+          "breakdown": "level",
+          "default": [
+            "federal"
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "type": "excludeGroups",
+          "target": "exp.general.admin_staff.federal",
+          "breakdown": "level",
+          "groups": {
+            "param": "levels"
+          },
+          "retained": {
+            "param": "cut",
+            "scale": -0.008284,
+            "offset": 1
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.1,
+            "basis": "staff"
+          },
+          "sources": [
+            "eurostat_gov_10a_exp",
+            "destatis_personalstand_2024",
+            "bt_drs_21_5666",
+            "brh_stellenschere_2025"
+          ],
+          "note": {
+            "de": "Bund: Arbeitnehmerentgelt 3,79 Mrd. Euro für 48.600 Vollzeitstellen (eigene Schätzung, siehe Posten), davon 0,65 Mrd. Euro unterstellte Beiträge für die Versorgung der Beamten; sie stehen als Gegenbuchung auch bei den Einnahmen und sinken nicht mit. Eigene Rechnung: Je Prozentpunkt weniger Stellen sinken Gehälter und Arbeitgeberbeiträge um 31,4 Mio. Euro. Die Kürzungen der Haushaltsgesetze 2025 bis 2027, zusammen 4,7 % der Stellen außerhalb der Sicherheitsbehörden, sind nicht enthalten; der Finanzplan beruht schon auf ihnen. Die Spanne reicht von 50 % bis 110 % (eigene Einschätzung): unten, wenn die Vorgabe auf Stellen fällt, die ohnehin unbesetzt sind, oder Arbeit an externe Dienstleister geht; oben, wenn mit dem Personal Büros, Sachkosten und die Beihilfe der Beamten wegfallen.",
+            "en": "Federal: compensation of employees EUR 3.79 billion for 48,600 full-time equivalents (own estimate, see the item), of which EUR 0.65 billion are imputed contributions for civil servants' pensions; they are also booked as revenue and do not fall with the cut. Own calculation: each percentage point fewer posts lowers pay and employer contributions by EUR 31.4 million. The cuts in the budget acts for 2025 to 2027, together 4.7% of posts outside the security authorities, are not included; the financial plan already rests on them. The range runs from 50% to 110% (own judgement): at the bottom if the requirement falls on posts that are vacant anyway, or work goes to external service providers; at the top if offices, other costs and civil servants' medical allowances go with the staff."
+          }
+        },
+        {
+          "type": "excludeGroups",
+          "target": "exp.general.admin_staff.states",
+          "breakdown": "level",
+          "groups": {
+            "param": "levels"
+          },
+          "retained": {
+            "param": "cut",
+            "scale": -0.0086585,
+            "offset": 1
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.1,
+            "basis": "staff"
+          },
+          "sources": [
+            "eurostat_gov_10a_exp",
+            "destatis_personalstand_2024"
+          ],
+          "note": {
+            "de": "Länder: 12,17 Mrd. Euro für 153.600 Vollzeitstellen, davon 1,63 Mrd. Euro unterstellte Beiträge. Eigene Rechnung: je Prozentpunkt 105,4 Mio. Euro. Programme einzelner Länder, etwa in Brandenburg und Nordrhein-Westfalen, sind nicht abgezogen. Spanne wie beim Bund.",
+            "en": "States: EUR 12.17 billion for 153,600 full-time equivalents, of which EUR 1.63 billion imputed contributions. Own calculation: EUR 105.4 million per percentage point. Programmes of individual states, for example in Brandenburg and North Rhine-Westphalia, are not deducted. Range as at federal level."
+          }
+        },
+        {
+          "type": "excludeGroups",
+          "target": "exp.general.admin_staff.municipal",
+          "breakdown": "level",
+          "groups": {
+            "param": "levels"
+          },
+          "retained": {
+            "param": "cut",
+            "scale": -0.0092985,
+            "offset": 1
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.1,
+            "basis": "staff"
+          },
+          "sources": [
+            "eurostat_gov_10a_exp",
+            "destatis_personalstand_2024"
+          ],
+          "note": {
+            "de": "Gemeinden und Kreise: 26,64 Mrd. Euro für 347.000 Vollzeitstellen, davon 1,87 Mrd. Euro unterstellte Beiträge. Eigene Rechnung: je Prozentpunkt 247,7 Mio. Euro. Je Vollzeitstelle sind das 76.800 Euro; aus den durchschnittlichen Bruttobezügen aller kommunalen Beschäftigten ergeben sich überschlägig rund 71.000 Euro, sodass der Posten etwas zu hoch sein kann. Spanne wie beim Bund.",
+            "en": "Municipalities and districts: EUR 26.64 billion for 347,000 full-time equivalents, of which EUR 1.87 billion imputed contributions. Own calculation: EUR 247.7 million per percentage point. That is EUR 76,800 per full-time equivalent; the average gross pay of all municipal staff gives roughly EUR 71,000, so the item may be somewhat too high. Range as at federal level."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Kündigen lässt sich kaum jemand. Beamte sind auf Lebenszeit ernannt; sie besetzen in diesen Verwaltungen beim Bund gut die Hälfte der Vollzeitstellen, in den Ländern 41 % und in den Gemeinden 19 %. Tarifbeschäftigte, die 40 Jahre alt und mehr als 15 Jahre beschäftigt sind, können der Bund, die westdeutschen Länder und Kommunen nur aus wichtigem Grund kündigen (§ 34 Abs. 2 TVöD und TV-L). Für ihre Stelleneinsparung schließt die Bundesregierung Entlassungen aus; es fallen im Wesentlichen die Stellen von Beschäftigten weg, die in Ruhestand gehen.",
+            "en": "Hardly anyone can be dismissed. Civil servants are appointed for life; in these administrations they fill a little over half of the full-time equivalents at federal level, 41% in the states and 19% in the municipalities. Employees under collective agreements who are 40 or older and have been employed for more than 15 years can be dismissed by the federal government and by western German states and municipalities only for good cause (section 34(2) TVöD and TV-L). For its post cuts the federal government rules out dismissals; in essence the posts of staff who retire disappear."
+          },
+          "sources": [
+            "gg_art_33",
+            "tvoed_2025",
+            "tv_l_34",
+            "bt_drs_21_5666",
+            "destatis_personalstand_2024"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Gestrichene Stellen sind nicht immer gesparte Gehälter. Beim Bund war seit 2020 stets mehr als ein Zehntel der Stellen unbesetzt, 2023 über 30.000 (Bundesrechnungshof, 2025). Fällt eine Vorgabe auf solche Stellen, schrumpft nur der Stellenplan, nicht die Ausgabe. Die Rechnung zählt weniger Beschäftigte; das untere Ende der Spanne steht für eine Kürzung, die zur Hälfte leere Stellen trifft oder Arbeit an Dienstleister verlagert.",
+            "en": "Posts struck off are not always pay saved. Since 2020 more than a tenth of federal posts have been vacant, over 30,000 in 2023 (Federal Court of Audit, 2025). If a target falls on such posts, only the establishment plan shrinks, not spending. The calculation counts fewer employees; the low end of the range stands for a cut half of which hits empty posts or shifts work to service providers."
+          },
+          "sources": [
+            "brh_stellenschere_2025"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Die Verwaltungen zahlen Leistungen aus, genehmigen und beraten. Weniger Personal bei gleichen Aufgaben heißt längere Wartezeiten, wenn nicht Digitalisierung oder wegfallende Aufgaben Arbeit abnehmen. Die Bundesregierung verbindet ihre Kürzung deshalb mit Aufgabenkritik, gebündelten Diensten und dem Zusammenlegen von Behörden; welche Aufgaben wegfallen, kann sie nach eigenen Angaben noch nicht genau sagen.",
+            "en": "The administrations pay out benefits, issue permits and give advice. Fewer staff with the same tasks means longer waits unless digitalisation or tasks that disappear take work off them. The federal government therefore links its cut to a review of tasks, shared services and merging agencies; by its own account it cannot yet say exactly which tasks will disappear."
+          },
+          "sources": [
+            "koa_2026_07_02",
+            "bt_drs_21_5666"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Frühere Programme zeigen, was möglich ist. Von 1991 bis 1998 sank die Zahl der Stellen des Bundes von 381.000 auf 315.000, gut 2 % im Jahr, zu 85 % beim Zivilpersonal der Bundeswehr; die Ministerien bauten von 1992 bis 1998 13 % ihrer Stellen ab. Der Abbau baute vor allem den Zuwachs nach der Wiedervereinigung ab. Danach wuchs die Bundesverwaltung wieder, von 2017 bis 2021 um über 30.000 Stellen.",
+            "en": "Earlier programmes show what is possible. From 1991 to 1998 the number of federal posts fell from 381,000 to 315,000, a little over 2% a year, 85% of it among the armed forces' civilian staff; the ministries cut 13% of their posts from 1992 to 1998. The cut mainly reversed the growth after reunification. Afterwards the federal administration grew again, by over 30,000 posts from 2017 to 2021."
+          },
+          "sources": [
+            "bt_drs_13_9980",
+            "brh_stellenschere_2025"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Stand November 2026: Die Koalition will das Personal der Bundesverwaltung bis 2029 um 8 % verringern. Die Haushaltsgesetze sehen dafür Kürzungen um 0,5 % (2025), 2,2 % (2026) und 2 % (2027) der Stellen außerhalb der Sicherheitsbehörden vor; für 2028 und 2029 plant die Bundesregierung 2 und 1,5 %, zusammen rund 8.500 von gut 107.000 Stellen. Der Koalitionsausschuss hat das Ziel am 1. Juli 2026 auf fast alle Bundesbehörden und die mittelbare Bundesverwaltung ausgedehnt; der Haushaltsausschuss hat im November 2026 die Verwaltung bisher ausgenommener Bereiche wie Bundespolizei, Zoll und Verteidigung einbezogen, dort fallen 14 % der Stellen unter die Vorgabe; der Bundestag stimmt am 27. November ab. Zugleich steigt die Zahl der zivilen Stellen des Bundes im Entwurf für 2027 um 4.752, vor allem bei Sicherheitsbehörden. Ob der Finanzplan die Schritte 2028 und 2029 schon einrechnet, sagt er nicht. In den Ländern baut Brandenburg von 2027 bis 2029 5 % der Stellen außerhalb von Polizei, Justiz, Schulen und Finanzverwaltung ab, etwa 700, Nordrhein-Westfalen in fünf Jahren 10 % der Stellen in den Ministerien, knapp 550.",
+            "en": "As of November 2026: the coalition wants to reduce federal administrative staff by 8% by 2029. The budget acts provide for cuts of 0.5% (2025), 2.2% (2026) and 2% (2027) of posts outside the security authorities; for 2028 and 2029 the federal government plans 2 and 1.5%, together about 8,500 of a little over 107,000 posts. On 1 July 2026 the coalition committee extended the target to almost all federal agencies and to indirect federal administration; in November 2026 the budget committee included the administration of areas exempted so far, such as the federal police, customs and defence, where 14% of posts now fall under the requirement; the Bundestag votes on 27 November. At the same time the number of civilian federal posts rises by 4,752 in the 2027 draft, mainly at security authorities. Whether the financial plan already counts the steps for 2028 and 2029, it does not say. Among the states, Brandenburg is cutting 5% of posts outside police, justice, schools and the tax administration from 2027 to 2029, about 700, and North Rhine-Westphalia 10% of posts in its ministries over five years, almost 550."
+          },
+          "sources": [
+            "koalitionsvertrag_2025",
+            "bt_drs_21_5666",
+            "hg_2026_17",
+            "hib_656_2026",
+            "koa_2026_07_02",
+            "hib_947_2026",
+            "bundestag_kw46_haushalt_2027",
+            "bundestag_drs_21_7301",
+            "mdf_bb_pm_13_2026",
+            "land_nrw_pm_haushalt_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Die Pensionen laufen weiter. Gespart werden Gehälter und Arbeitgeberbeiträge; die Versorgung der Beamten im Ruhestand zahlt dieselbe Ebene weiter, und weniger aktive Beamte senken sie erst, wenn diese in Ruhestand gegangen wären, also über Jahrzehnte. Würden Beschäftigte dagegen entlassen und fänden keine neue Arbeit, entfielen Lohnsteuer und Beiträge, und die Arbeitslosenversicherung zahlte Arbeitslosengeld; die Rechnung nimmt an, dass die Menschen, die nicht eingestellt werden, anderswo arbeiten.",
+            "en": "Pensions continue. What is saved is pay and employer contributions; the same level keeps paying the pensions of retired civil servants, and fewer active civil servants lower them only when they would have retired, that is over decades. If staff were dismissed instead and found no new work, wage tax and contributions would be lost and unemployment insurance would pay unemployment benefit; the calculation assumes that the people who are not hired work elsewhere."
+          }
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Über die Stellen der Länder entscheiden ihre Parlamente, über die der Gemeinden und Kreise deren Räte. Bund und Länder sind in ihrer Haushaltswirtschaft voneinander unabhängig, und die Gemeinden regeln ihre Angelegenheiten in eigener Verantwortung; der Bund kann ihnen keinen Stellenabbau vorschreiben. Was Länder und Gemeinden sparen, entlastet ihre Haushalte, nicht den des Bundes.",
+            "en": "The states' posts are decided by their parliaments, those of municipalities and districts by their councils. The federal government and the states are independent of each other in their budgets, and municipalities run their affairs on their own responsibility; the federal government cannot order them to cut posts. What states and municipalities save relieves their budgets, not the federal budget."
+          },
+          "sources": [
+            "gg_art_109",
+            "gg_art_28"
+          ]
+        }
+      ],
+      "sources": [
+        "destatis_personalstand_2024",
+        "eurostat_gov_10a_exp",
+        "bt_drs_21_5666",
+        "koalitionsvertrag_2025",
+        "brh_stellenschere_2025"
+      ],
+      "timing": {
+        "param": "cut",
+        "from": "2028-01-01",
+        "yearsPerUnit": 0.5,
+        "note": {
+          "de": "Zusätzliche Kürzungen beginnen 2028: Die Haushalte für 2027 sind weitgehend aufgestellt, und beim Bund kommt die Vorgabe für 2027 nach Angaben des Finanzministeriums schon einem Einstellungsstopp gleich (Eckwerte, April 2026). Stellen fallen weg, wenn frei werdende nicht nachbesetzt werden. In diesen Verwaltungen waren im Juni 2024 knapp 16 % der Beschäftigten 55 bis 59 und knapp 15 % 60 Jahre und älter; eigene Rechnung: In den nächsten zehn Jahren gehen damit rund 2½ bis 3 % im Jahr in den Ruhestand. Gerechnet ist mit 2 Prozentpunkten im Jahr, so viel, wie die Haushaltsgesetze des Bundes für 2026 und 2027 vorgeben und wie die Ministerien des Bundes von 1992 bis 1998 abbauten. Die Grundeinstellung ist nach knapp zwei Jahren erreicht, 30 % nach 15 Jahren.",
+          "en": "Additional cuts start in 2028: the budgets for 2027 are largely drawn up, and at federal level the requirement for 2027 already amounts to a hiring freeze according to the finance ministry (benchmark figures, April 2026). Posts disappear when vacancies are not refilled. In June 2024 almost 16% of the staff of these administrations were 55 to 59 and almost 15% were 60 or older; own calculation: over the next ten years about 2.5 to 3% a year will therefore retire. The calculation assumes 2 percentage points a year, as much as the federal budget acts for 2026 and 2027 require and as the federal ministries cut from 1992 to 1998. The default is reached after almost two years, 30% after 15."
+        },
+        "sources": [
+          "bmf_eckwerte_2027",
+          "destatis_personalstand_2024",
+          "hg_2026_17",
+          "hib_656_2026",
+          "bt_drs_13_9980"
         ]
       }
     }

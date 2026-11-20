@@ -1245,24 +1245,290 @@
             {
               "id": "exp.general.executive.other",
               "label": {
-                "de": "Übrige Regierung, Parlamente, Finanzämter, Auswärtiger Dienst",
-                "en": "Other government, parliaments, tax offices, foreign service"
+                "de": "Finanzämter, Zoll und übrige Ausgaben von Regierung, Parlamenten und Auswärtigem Dienst",
+                "en": "Tax offices, customs and other spending of government, parliaments and the foreign service"
               },
-              "amount": 60899604000,
+              "description": {
+                "de": "Vor allem das Personal der Finanzverwaltung (Finanzämter der Länder, Zoll und Bundeszentralamt für Steuern) und Sachausgaben von Regierungen, Parlamenten und Auswärtigem Dienst. Ihr übriges Personal steht unter „Personal der allgemeinen Verwaltung“.",
+                "en": "Mainly the staff of the tax administration (the states' tax offices, customs and the Federal Central Tax Office) and non-staff spending of governments, parliaments and the foreign service. Their other staff is under 'Staff of the general administration'."
+              },
+              "amount": 50320085617,
               "levels": {
-                "central": 0.2239,
-                "state": 0.3693,
-                "local": 0.4068
+                "central": 0.2647,
+                "state": 0.4082,
+                "local": 0.3271
               },
               "quality": "estimate",
               "sources": [
                 "eurostat_gov_10a_exp",
                 "eurostat_gov_10a_main",
-                "bundeshaushalt_2024"
+                "bundeshaushalt_2024",
+                "destatis_personalstand_2024"
               ],
               "note": {
-                "de": "Rest der Gruppe nach Abzug von EU-Beitrag und Bundestag; Aufteilung auf die Ebenen geschätzt.",
-                "en": "Remainder of the group after deducting the EU contribution and the Bundestag; split across levels estimated."
+                "de": "Rest der Gruppe nach Abzug von EU-Beitrag, Bundestag und dem Personal der allgemeinen Verwaltung, soweit es hier gebucht ist (eigene Schätzung, siehe dort); Aufteilung auf die Ebenen geschätzt.",
+                "en": "Remainder of the group after deducting the EU contribution, the Bundestag and the staff of the general administration booked here (own estimate, see there); split across levels estimated."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.general.admin_staff",
+          "label": {
+            "de": "Personal der allgemeinen Verwaltung",
+            "en": "Staff of the general administration"
+          },
+          "description": {
+            "de": "Personal in der politischen Führung und zentralen Verwaltung von Bund, Ländern, Gemeinden und Kreisen und im Auswärtigen Dienst: Arbeitnehmerentgelt einschließlich der unterstellten Beiträge für die Versorgung der Beamten. Nicht enthalten sind Finanzverwaltung, Bundestagsverwaltung, Polizei und Ordnungsverwaltung, Justiz, Schulen, Hochschulen, Forschung und die Verwaltung anderer Fachbereiche.",
+            "en": "Staff in the political leadership and central administration of the federal government, the states, the municipalities and districts, and in the foreign service: compensation of employees including the imputed contributions for civil servants' pensions. Not included are the tax administration, the Bundestag administration, police and public-order administration, the courts, schools, universities, research and the administration of other specialist fields."
+          },
+          "breakdowns": {
+            "level": {
+              "label": {
+                "de": "Personal der allgemeinen Verwaltung nach Ebenen",
+                "en": "Staff of the general administration by level"
+              },
+              "basis": "spending",
+              "groups": [
+                {
+                  "id": "federal",
+                  "label": {
+                    "de": "Bund",
+                    "en": "Federal government"
+                  },
+                  "share": 0.0889
+                },
+                {
+                  "id": "states",
+                  "label": {
+                    "de": "Länder",
+                    "en": "States"
+                  },
+                  "share": 0.2858
+                },
+                {
+                  "id": "municipal",
+                  "label": {
+                    "de": "Gemeinden",
+                    "en": "Municipalities"
+                  },
+                  "share": 0.6253
+                }
+              ],
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "eurostat_gov_10a_main",
+                "destatis_personalstand_2024"
+              ],
+              "year": 2024,
+              "note": {
+                "de": "Arbeitnehmerentgelt 2024, eigene Schätzung (siehe die Posten).",
+                "en": "Compensation of employees 2024, own estimate (see the items)."
+              }
+            }
+          },
+          "children": [
+            {
+              "id": "exp.general.admin_staff.federal",
+              "label": {
+                "de": "Bund: Ministerien, zentrale Verwaltung und Auswärtiger Dienst",
+                "en": "Federal: ministries, central administration and foreign service"
+              },
+              "description": {
+                "de": "Rund 48.600 Vollzeitstellen, gut 51.000 Beschäftigte (Juni 2024): Bundeskanzleramt, Ministerien, Bundespräsidialamt, Bundesrat, zentrale Bundesbehörden wie Bundesverwaltungsamt und Statistisches Bundesamt, Auswärtiger Dienst. Ohne Bundestagsverwaltung, Zoll und übrige Finanzverwaltung, Bundespolizei, Bundeswehrverwaltung und Fachbehörden anderer Bereiche.",
+                "en": "About 48,600 full-time equivalents, a little over 51,000 employees (June 2024): Federal Chancellery, ministries, Office of the Federal President, Bundesrat, central federal agencies such as the Federal Office of Administration and the Federal Statistical Office, foreign service. Without the Bundestag administration, customs and the rest of the tax administration, the federal police, the armed forces' civilian administration and specialist agencies of other fields."
+              },
+              "breakdowns": {
+                "level": {
+                  "label": {
+                    "de": "Personal der allgemeinen Verwaltung nach Ebenen",
+                    "en": "Staff of the general administration by level"
+                  },
+                  "basis": "spending",
+                  "groups": [
+                    {
+                      "id": "federal",
+                      "label": {
+                        "de": "Bund",
+                        "en": "Federal government"
+                      },
+                      "share": 1.0
+                    },
+                    {
+                      "id": "states",
+                      "label": {
+                        "de": "Länder",
+                        "en": "States"
+                      },
+                      "share": 0.0
+                    },
+                    {
+                      "id": "municipal",
+                      "label": {
+                        "de": "Gemeinden",
+                        "en": "Municipalities"
+                      },
+                      "share": 0.0
+                    }
+                  ],
+                  "quality": "derived",
+                  "sources": [
+                    "eurostat_gov_10a_exp",
+                    "eurostat_gov_10a_main",
+                    "destatis_personalstand_2024"
+                  ],
+                  "year": 2024
+                }
+              },
+              "amount": 3788639896,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "eurostat_gov_10a_main",
+                "destatis_personalstand_2024",
+                "bt_drs_21_5666"
+              ],
+              "note": {
+                "de": "Eigene Schätzung: Arbeitnehmerentgelt des Bundes in der allgemeinen öffentlichen Verwaltung ohne Forschung und Entwicklungshilfe (8,42 Mrd. Euro), nach Vollzeitstellen der Personalstandstatistik aufgeteilt zwischen politischer Führung, zentraler Verwaltung und Auswärtigem Dienst (51.400 Vollzeitstellen ohne 2.800 Stellen der Bundestagsverwaltung) und Finanzverwaltung (51.400); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 24.200 Euro je Vollzeitstelle. Davon 0,65 Mrd. Euro unterstellte Beiträge.",
+                "en": "Own estimate: federal compensation of employees in general public services without research and development aid (EUR 8.42 billion), split by full-time equivalents of the personnel statistics between political leadership, central administration and foreign service (51,400 full-time equivalents less 2,800 posts of the Bundestag administration) and the tax administration (51,400); civil servants carry the imputed contributions for their pensions, EUR 24,200 per full-time equivalent. Of this, EUR 0.65 billion are imputed contributions."
+              }
+            },
+            {
+              "id": "exp.general.admin_staff.states",
+              "label": {
+                "de": "Länder: Ministerien und zentrale Verwaltung",
+                "en": "States: ministries and central administration"
+              },
+              "description": {
+                "de": "153.600 Vollzeitstellen, 166.700 Beschäftigte (Juni 2024): Staatskanzleien, Ministerien, Landtage, Mittelbehörden wie Regierungspräsidien und zentrale Dienste der Länder. Ohne Finanzämter, Polizei, Justiz, Schulen und Hochschulen.",
+                "en": "153,600 full-time equivalents, 166,700 employees (June 2024): state chancelleries, ministries, state parliaments, intermediate authorities such as regional governments, and the states' central services. Without tax offices, police, courts, schools and universities."
+              },
+              "breakdowns": {
+                "level": {
+                  "label": {
+                    "de": "Personal der allgemeinen Verwaltung nach Ebenen",
+                    "en": "Staff of the general administration by level"
+                  },
+                  "basis": "spending",
+                  "groups": [
+                    {
+                      "id": "federal",
+                      "label": {
+                        "de": "Bund",
+                        "en": "Federal government"
+                      },
+                      "share": 0.0
+                    },
+                    {
+                      "id": "states",
+                      "label": {
+                        "de": "Länder",
+                        "en": "States"
+                      },
+                      "share": 1.0
+                    },
+                    {
+                      "id": "municipal",
+                      "label": {
+                        "de": "Gemeinden",
+                        "en": "Municipalities"
+                      },
+                      "share": 0.0
+                    }
+                  ],
+                  "quality": "derived",
+                  "sources": [
+                    "eurostat_gov_10a_exp",
+                    "eurostat_gov_10a_main",
+                    "destatis_personalstand_2024"
+                  ],
+                  "year": 2024
+                }
+              },
+              "amount": 12174573461,
+              "levels": {
+                "state": 1.0
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "eurostat_gov_10a_main",
+                "destatis_personalstand_2024"
+              ],
+              "note": {
+                "de": "Eigene Schätzung: Arbeitnehmerentgelt der Länder in der allgemeinen öffentlichen Verwaltung ohne Forschung (23,93 Mrd. Euro), nach Vollzeitstellen aufgeteilt zwischen politischer Führung und zentraler Verwaltung (153.600) und Finanzverwaltung (130.200); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 25.800 Euro je Vollzeitstelle. Davon 1,63 Mrd. Euro unterstellte Beiträge.",
+                "en": "Own estimate: the states' compensation of employees in general public services without research (EUR 23.93 billion), split by full-time equivalents between political leadership and central administration (153,600) and the tax administration (130,200); civil servants carry the imputed contributions for their pensions, EUR 25,800 per full-time equivalent. Of this, EUR 1.63 billion are imputed contributions."
+              }
+            },
+            {
+              "id": "exp.general.admin_staff.municipal",
+              "label": {
+                "de": "Gemeinden und Kreise: zentrale Verwaltung",
+                "en": "Municipalities and districts: central administration"
+              },
+              "description": {
+                "de": "347.000 Vollzeitstellen, 394.800 Beschäftigte (Juni 2024): Räte und Verwaltungsspitze, Haupt-, Personal- und Finanzverwaltung, IT und Gebäudemanagement der Gemeinden und Kreise. Ohne Sicherheit und Ordnung mit Ordnungsämtern und Feuerwehr, Kitas, Sozial- und Jugendämter.",
+                "en": "347,000 full-time equivalents, 394,800 employees (June 2024): councils and administrative leadership, general, personnel and finance administration, IT and building management of municipalities and districts. Without public safety and order with public-order offices and fire services, day care, social and youth welfare offices."
+              },
+              "breakdowns": {
+                "level": {
+                  "label": {
+                    "de": "Personal der allgemeinen Verwaltung nach Ebenen",
+                    "en": "Staff of the general administration by level"
+                  },
+                  "basis": "spending",
+                  "groups": [
+                    {
+                      "id": "federal",
+                      "label": {
+                        "de": "Bund",
+                        "en": "Federal government"
+                      },
+                      "share": 0.0
+                    },
+                    {
+                      "id": "states",
+                      "label": {
+                        "de": "Länder",
+                        "en": "States"
+                      },
+                      "share": 0.0
+                    },
+                    {
+                      "id": "municipal",
+                      "label": {
+                        "de": "Gemeinden",
+                        "en": "Municipalities"
+                      },
+                      "share": 1.0
+                    }
+                  ],
+                  "quality": "derived",
+                  "sources": [
+                    "eurostat_gov_10a_exp",
+                    "eurostat_gov_10a_main",
+                    "destatis_personalstand_2024"
+                  ],
+                  "year": 2024
+                }
+              },
+              "amount": 26641305026,
+              "levels": {
+                "local": 1.0
+              },
+              "quality": "estimate",
+              "sources": [
+                "eurostat_gov_10a_exp",
+                "eurostat_gov_10a_main",
+                "destatis_personalstand_2024"
+              ],
+              "note": {
+                "de": "Eigene Schätzung: Arbeitnehmerentgelt der Gemeinden in der allgemeinen öffentlichen Verwaltung (26,68 Mrd. Euro) ohne den Anteil ihrer Finanzverwaltung (500 Vollzeitstellen); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 28.300 Euro je Vollzeitstelle. Davon 1,87 Mrd. Euro unterstellte Beiträge.",
+                "en": "Own estimate: the municipalities' compensation of employees in general public services (EUR 26.68 billion) less the share of their tax administration (500 full-time equivalents); civil servants carry the imputed contributions for their pensions, EUR 28,300 per full-time equivalent. Of this, EUR 1.87 billion are imputed contributions."
               }
             }
           ]
@@ -1294,23 +1560,23 @@
         {
           "id": "exp.general.general_services",
           "label": {
-            "de": "Allgemeine Dienste (Personal-, Planungs- und Statistikämter, zentrale Verwaltung)",
-            "en": "General services (personnel, planning and statistical offices, central administration)"
+            "de": "Allgemeine Dienste ohne Personal (Personal-, Planungs- und Statistikämter, zentrale Verwaltung)",
+            "en": "General services without staff (personnel, planning and statistical offices, central administration)"
           },
           "code": "GF0103",
-          "amount": 66299000000,
+          "amount": 37469000000,
           "levels": {
-            "central": 0.1828,
-            "state": 0.3617,
-            "local": 0.4555
+            "central": 0.22,
+            "state": 0.4072,
+            "local": 0.3728
           },
           "quality": "derived",
           "sources": [
             "eurostat_gov_10a_exp"
           ],
           "note": {
-            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "de": "Betrag amtlich (Eurostat), abzüglich des ebenfalls amtlichen Arbeitnehmerentgelts dieser Gruppe (28,83 Mrd. Euro), das unter „Personal der allgemeinen Verwaltung“ steht. Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
+            "en": "Amount official (Eurostat), less this group's compensation of employees (EUR 28.83 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
           }
         },
         {
@@ -1322,8 +1588,8 @@
           "code": "GF0104",
           "amount": 43152000000,
           "levels": {
-            "central": 0.4637,
-            "state": 0.5363
+            "central": 0.4803,
+            "state": 0.5197
           },
           "quality": "derived",
           "sources": [
@@ -1343,8 +1609,8 @@
           "code": "GF0105",
           "amount": 669000000,
           "levels": {
-            "central": 0.4143,
-            "state": 0.5857
+            "central": 0.4306,
+            "state": 0.5694
           },
           "quality": "derived",
           "sources": [
@@ -1358,24 +1624,24 @@
         {
           "id": "exp.general.other",
           "label": {
-            "de": "Sonstige allgemeine Verwaltung",
-            "en": "Other general administration"
+            "de": "Sonstige allgemeine Verwaltung ohne Personal",
+            "en": "Other general administration without staff"
           },
           "code": "GF0106",
-          "amount": 7233000000,
+          "amount": 4038000000,
           "levels": {
-            "central": 0.1378,
-            "state": 0.2921,
-            "local": 0.5363,
-            "social_security": 0.0338
+            "central": 0.1668,
+            "state": 0.3308,
+            "local": 0.4418,
+            "social_security": 0.0606
           },
           "quality": "derived",
           "sources": [
             "eurostat_gov_10a_exp"
           ],
           "note": {
-            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "de": "Betrag amtlich (Eurostat), abzüglich des ebenfalls amtlichen Arbeitnehmerentgelts dieser Gruppe (3,20 Mrd. Euro), das unter „Personal der allgemeinen Verwaltung“ steht. Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
+            "en": "Amount official (Eurostat), less this group's compensation of employees (EUR 3.20 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
           }
         },
         {

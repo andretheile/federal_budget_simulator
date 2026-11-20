@@ -62,6 +62,46 @@ SS_STAFF_SOCIAL = M[("GF10", "S1314")]["D1"]   # 15,404: pension, accident and u
 # funds' associations (07320, 07321), whose staff is already in compensation of employees.
 GKV_ADMIN_MATERIAL = 15975.499175 - 10796.8 - 392.591010 - 231.331673
 
+# ---- staff of the general administration of the federal government, the states and the municipalities -------
+# eurostat_gov_10a_exp: compensation of employees (D1) in general public services (COFOG 01) by level, 2024.
+# Research (01.4, 01.5) and foreign aid (01.2) are taken out first. Research D1 is split across levels like the
+# research leaves were fitted before this split (central: 46.37 % of basic research, 41.43 % of R&D, the rest
+# state); foreign aid is federal. What is left (central 8,419, state 23,933, local 26,677) is the staff of the
+# general administration including the tax administration.
+_RES_C = M[("GF0104", "S13")]["D1"] * 0.4637 + M[("GF0105", "S13")]["D1"] * 0.4143
+_RES_S = M[("GF0104", "S13")]["D1"] + M[("GF0105", "S13")]["D1"] - _RES_C
+_ADMIN_D1 = (M[("GF01", "S1311")]["D1"] - _RES_C - M[("GF0102", "S13")]["D1"],
+             M[("GF01", "S1312")]["D1"] - _RES_S,
+             M[("GF01", "S1313")]["D1"])
+# destatis_personalstand_2024, table 74111-04: full-time equivalents on 30 June 2024 in thousands, all staff and
+# of them civil servants: inside = political leadership and central administration (federal, state, local) plus
+# foreign affairs (federal); outside = the tax administration (federal including customs, state, local) and the
+# Bundestag administration, which is in "Bundestag: other spending" (bt_drs_21_5666: 2,796.5 posts in chapters
+# 0212 without police, 0213, 0216, 0217 and 0218, of them 1,425 for civil servants; posts stand in for FTE).
+_BT_POSTS, _BT_CIVIL = 2.7965, 1.425
+_FTE = ((42.6 + 8.8 - _BT_POSTS, 25.4 + 2.9 - _BT_CIVIL, 51.4 + _BT_POSTS, 45.3 + _BT_CIVIL),
+        (153.6, 63.4, 130.2, 109.6),
+        (347.0, 66.0, 0.5, 0.0))
+# Civil servants carry imputed contributions for their pensions on top of pay (D.122, the counterpart of revenue
+# D.612). Per civil-servant FTE: the level's imputed contributions (CIVIL_SERVICE_LEVELS below, from
+# eurostat_gov_10a_main) divided by all its civil servants and soldiers (74111-04: 362.9, 1,240.2, 174.8 thousand).
+_IMPUTED_PER_FTE = (8779.0 / 362.9, 31948.0 / 1240.2, 4950.0 / 174.8)
+ADMIN_STAFF = []          # D1 of the leaves, million euros: central, state, local
+ADMIN_STAFF_IMPUTED = []  # of which imputed contributions
+for _d1, (_in, _in_civil, _out, _out_civil), _imp in zip(_ADMIN_D1, _FTE, _IMPUTED_PER_FTE):
+    _cash_per_fte = (_d1 - _imp * (_in_civil + _out_civil)) / (_in + _out)
+    ADMIN_STAFF.append(_cash_per_fte * _in + _imp * _in_civil)
+    ADMIN_STAFF_IMPUTED.append(_imp * _in_civil)
+# The tax administration and the Bundestag administration are assumed to lie in executive and legislative organs,
+# financial and fiscal affairs (01.1); the staff of general services (01.3) and of general public services n.e.c.
+# (01.6) is wholly inside. What the leaves take from 01.1 is therefore the rest.
+ADMIN_STAFF_0103 = M[("GF0103", "S13")]["D1"]
+ADMIN_STAFF_0106 = M[("GF0106", "S13")]["D1"]
+ADMIN_STAFF_0101 = sum(ADMIN_STAFF) - ADMIN_STAFF_0103 - ADMIN_STAFF_0106
+assert 0 < ADMIN_STAFF_0101 < M[("GF0101", "S13")]["D1"], ADMIN_STAFF_0101
+ADMIN_LEVEL_SHARES = [round(x / sum(ADMIN_STAFF), 4) for x in ADMIN_STAFF]
+ADMIN_LEVEL_SHARES[2] = round(1 - ADMIN_LEVEL_SHARES[0] - ADMIN_LEVEL_SHARES[1], 4)
+
 # ---- individually named items (cash figures unless stated) ------------------------------------------------
 EU_OWN = 27330.0        # eurostat_gov_10a_main: D76PAY, VAT- and GNI-based EU own resources, 2024
 MP_PAY = 92.623         # bundeshaushalt_2024: title 0212 411 01, MPs' salaries and office allowances
@@ -113,19 +153,51 @@ EXP = [
               amount=BUNDESTAG - MP_PAY, fixed=C, quality="derived", sources=["bundeshaushalt_2024"],
               desc=("Mitarbeiter der Abgeordneten, Fraktionen, Verwaltung, Gebäude, Kostenpauschale, Altersversorgung.", "MPs' staff, parliamentary groups, administration, buildings, expense allowance, pensions."),
               note=("Einzelplan 02 (1.150,4 Mio. Euro, Ist 2024) abzüglich der Diäten.", "Budget section 02 (EUR 1,150.4 million, 2024 actuals) minus MPs' pay.")),
-            L("exp.general.executive.other", "Übrige Regierung, Parlamente, Finanzämter, Auswärtiger Dienst", "Other government, parliaments, tax offices, foreign service",
-              amount=cof("GF0101") - EU_OWN - BUNDESTAG, seed=(0.30, 0.35, 0.35, 0), quality="estimate",
-              sources=SRC_EXP + ["eurostat_gov_10a_main", "bundeshaushalt_2024"],
-              note=("Rest der Gruppe nach Abzug von EU-Beitrag und Bundestag; Aufteilung auf die Ebenen geschätzt.", "Remainder of the group after deducting the EU contribution and the Bundestag; split across levels estimated.")),
+            L("exp.general.executive.other", "Finanzämter, Zoll und übrige Ausgaben von Regierung, Parlamenten und Auswärtigem Dienst", "Tax offices, customs and other spending of government, parliaments and the foreign service",
+              amount=cof("GF0101") - EU_OWN - BUNDESTAG - ADMIN_STAFF_0101, seed=(0.30, 0.35, 0.35, 0), quality="estimate",
+              sources=SRC_EXP + ["eurostat_gov_10a_main", "bundeshaushalt_2024", "destatis_personalstand_2024"],
+              desc=("Vor allem das Personal der Finanzverwaltung (Finanzämter der Länder, Zoll und Bundeszentralamt für Steuern) und Sachausgaben von Regierungen, Parlamenten und Auswärtigem Dienst. Ihr übriges Personal steht unter „Personal der allgemeinen Verwaltung“.",
+                    "Mainly the staff of the tax administration (the states' tax offices, customs and the Federal Central Tax Office) and non-staff spending of governments, parliaments and the foreign service. Their other staff is under 'Staff of the general administration'."),
+              note=("Rest der Gruppe nach Abzug von EU-Beitrag, Bundestag und dem Personal der allgemeinen Verwaltung, soweit es hier gebucht ist (eigene Schätzung, siehe dort); Aufteilung auf die Ebenen geschätzt.",
+                    "Remainder of the group after deducting the EU contribution, the Bundestag and the staff of the general administration booked here (own estimate, see there); split across levels estimated.")),
         ]),
+        G("exp.general.admin_staff", "Personal der allgemeinen Verwaltung", "Staff of the general administration",
+          desc=("Personal in der politischen Führung und zentralen Verwaltung von Bund, Ländern, Gemeinden und Kreisen und im Auswärtigen Dienst: Arbeitnehmerentgelt einschließlich der unterstellten Beiträge für die Versorgung der Beamten. Nicht enthalten sind Finanzverwaltung, Bundestagsverwaltung, Polizei und Ordnungsverwaltung, Justiz, Schulen, Hochschulen, Forschung und die Verwaltung anderer Fachbereiche.",
+                "Staff in the political leadership and central administration of the federal government, the states, the municipalities and districts, and in the foreign service: compensation of employees including the imputed contributions for civil servants' pensions. Not included are the tax administration, the Bundestag administration, police and public-order administration, the courts, schools, universities, research and the administration of other specialist fields."),
+          children=[
+            L("exp.general.admin_staff.federal", "Bund: Ministerien, zentrale Verwaltung und Auswärtiger Dienst", "Federal: ministries, central administration and foreign service",
+              amount=ADMIN_STAFF[0], fixed=C, quality="estimate", sources=SRC_EXP + ["eurostat_gov_10a_main", "destatis_personalstand_2024", "bt_drs_21_5666"],
+              desc=("Rund 48.600 Vollzeitstellen, gut 51.000 Beschäftigte (Juni 2024): Bundeskanzleramt, Ministerien, Bundespräsidialamt, Bundesrat, zentrale Bundesbehörden wie Bundesverwaltungsamt und Statistisches Bundesamt, Auswärtiger Dienst. Ohne Bundestagsverwaltung, Zoll und übrige Finanzverwaltung, Bundespolizei, Bundeswehrverwaltung und Fachbehörden anderer Bereiche.",
+                    "About 48,600 full-time equivalents, a little over 51,000 employees (June 2024): Federal Chancellery, ministries, Office of the Federal President, Bundesrat, central federal agencies such as the Federal Office of Administration and the Federal Statistical Office, foreign service. Without the Bundestag administration, customs and the rest of the tax administration, the federal police, the armed forces' civilian administration and specialist agencies of other fields."),
+              note=("Eigene Schätzung: Arbeitnehmerentgelt des Bundes in der allgemeinen öffentlichen Verwaltung ohne Forschung und Entwicklungshilfe (8,42 Mrd. Euro), nach Vollzeitstellen der Personalstandstatistik aufgeteilt zwischen politischer Führung, zentraler Verwaltung und Auswärtigem Dienst (51.400 Vollzeitstellen ohne 2.800 Stellen der Bundestagsverwaltung) und Finanzverwaltung (51.400); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 24.200 Euro je Vollzeitstelle. Davon 0,65 Mrd. Euro unterstellte Beiträge.",
+                    "Own estimate: federal compensation of employees in general public services without research and development aid (EUR 8.42 billion), split by full-time equivalents of the personnel statistics between political leadership, central administration and foreign service (51,400 full-time equivalents less 2,800 posts of the Bundestag administration) and the tax administration (51,400); civil servants carry the imputed contributions for their pensions, EUR 24,200 per full-time equivalent. Of this, EUR 0.65 billion are imputed contributions.")),
+            L("exp.general.admin_staff.states", "Länder: Ministerien und zentrale Verwaltung", "States: ministries and central administration",
+              amount=ADMIN_STAFF[1], fixed=ST, quality="estimate", sources=SRC_EXP + ["eurostat_gov_10a_main", "destatis_personalstand_2024"],
+              desc=("153.600 Vollzeitstellen, 166.700 Beschäftigte (Juni 2024): Staatskanzleien, Ministerien, Landtage, Mittelbehörden wie Regierungspräsidien und zentrale Dienste der Länder. Ohne Finanzämter, Polizei, Justiz, Schulen und Hochschulen.",
+                    "153,600 full-time equivalents, 166,700 employees (June 2024): state chancelleries, ministries, state parliaments, intermediate authorities such as regional governments, and the states' central services. Without tax offices, police, courts, schools and universities."),
+              note=("Eigene Schätzung: Arbeitnehmerentgelt der Länder in der allgemeinen öffentlichen Verwaltung ohne Forschung (23,93 Mrd. Euro), nach Vollzeitstellen aufgeteilt zwischen politischer Führung und zentraler Verwaltung (153.600) und Finanzverwaltung (130.200); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 25.800 Euro je Vollzeitstelle. Davon 1,63 Mrd. Euro unterstellte Beiträge.",
+                    "Own estimate: the states' compensation of employees in general public services without research (EUR 23.93 billion), split by full-time equivalents between political leadership and central administration (153,600) and the tax administration (130,200); civil servants carry the imputed contributions for their pensions, EUR 25,800 per full-time equivalent. Of this, EUR 1.63 billion are imputed contributions.")),
+            L("exp.general.admin_staff.municipal", "Gemeinden und Kreise: zentrale Verwaltung", "Municipalities and districts: central administration",
+              amount=ADMIN_STAFF[2], fixed=LO, quality="estimate", sources=SRC_EXP + ["eurostat_gov_10a_main", "destatis_personalstand_2024"],
+              desc=("347.000 Vollzeitstellen, 394.800 Beschäftigte (Juni 2024): Räte und Verwaltungsspitze, Haupt-, Personal- und Finanzverwaltung, IT und Gebäudemanagement der Gemeinden und Kreise. Ohne Sicherheit und Ordnung mit Ordnungsämtern und Feuerwehr, Kitas, Sozial- und Jugendämter.",
+                    "347,000 full-time equivalents, 394,800 employees (June 2024): councils and administrative leadership, general, personnel and finance administration, IT and building management of municipalities and districts. Without public safety and order with public-order offices and fire services, day care, social and youth welfare offices."),
+              note=("Eigene Schätzung: Arbeitnehmerentgelt der Gemeinden in der allgemeinen öffentlichen Verwaltung (26,68 Mrd. Euro) ohne den Anteil ihrer Finanzverwaltung (500 Vollzeitstellen); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 28.300 Euro je Vollzeitstelle. Davon 1,87 Mrd. Euro unterstellte Beiträge.",
+                    "Own estimate: the municipalities' compensation of employees in general public services (EUR 26.68 billion) less the share of their tax administration (500 full-time equivalents); civil servants carry the imputed contributions for their pensions, EUR 28,300 per full-time equivalent. Of this, EUR 1.87 billion are imputed contributions.")),
+          ]),
         CL("exp.general.foreign_aid", "GF0102", "Entwicklungshilfe und wirtschaftliche Auslandshilfe", "Development aid and foreign economic aid", None, fixed=C, quality="derived",
            note=("Betrag amtlich (Eurostat). Vollständig dem Bund zugeordnet, der für die Entwicklungszusammenarbeit zuständig ist; kleinere Beiträge der Länder sind nicht gesondert ausgewiesen.", "Amount official (Eurostat). Attributed entirely to the federal level, which is responsible for development cooperation; smaller contributions by the states are not shown separately."),
            desc=("Abgrenzung der Staatsausgabenstatistik (COFOG 01.2). Die international gemeldete Entwicklungshilfe (ODA) ist anders abgegrenzt und höher, weil sie zum Beispiel Kosten für Geflüchtete im Inland mitzählt.",
                  "As defined in government expenditure statistics (COFOG 01.2). Official development assistance (ODA) as reported internationally is defined differently and is higher, for example because it counts the cost of refugees in the donor country.")),
-        CL("exp.general.general_services", "GF0103", "Allgemeine Dienste (Personal-, Planungs- und Statistikämter, zentrale Verwaltung)", "General services (personnel, planning and statistical offices, central administration)", (0.25, 0.35, 0.40, 0)),
+        L("exp.general.general_services", "Allgemeine Dienste ohne Personal (Personal-, Planungs- und Statistikämter, zentrale Verwaltung)", "General services without staff (personnel, planning and statistical offices, central administration)",
+          amount=cof("GF0103") - ADMIN_STAFF_0103, code="GF0103", seed=(0.25, 0.35, 0.40, 0), sources=SRC_EXP,
+          note=("Betrag amtlich (Eurostat), abzüglich des ebenfalls amtlichen Arbeitnehmerentgelts dieser Gruppe (28,83 Mrd. Euro), das unter „Personal der allgemeinen Verwaltung“ steht. Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
+                "Amount official (Eurostat), less this group's compensation of employees (EUR 28.83 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division.")),
         CL("exp.general.basic_research", "GF0104", "Grundlagenforschung", "Basic research", (0.55, 0.45, 0, 0)),
         CL("exp.general.rd", "GF0105", "Forschung zur öffentlichen Verwaltung", "Research on public administration", (0.5, 0.5, 0, 0)),
-        CL("exp.general.other", "GF0106", "Sonstige allgemeine Verwaltung", "Other general administration", (0.2, 0.3, 0.5, 0.01)),
+        L("exp.general.other", "Sonstige allgemeine Verwaltung ohne Personal", "Other general administration without staff",
+          amount=cof("GF0106") - ADMIN_STAFF_0106, code="GF0106", seed=(0.2, 0.3, 0.5, 0.01), sources=SRC_EXP,
+          note=("Betrag amtlich (Eurostat), abzüglich des ebenfalls amtlichen Arbeitnehmerentgelts dieser Gruppe (3,20 Mrd. Euro), das unter „Personal der allgemeinen Verwaltung“ steht. Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
+                "Amount official (Eurostat), less this group's compensation of employees (EUR 3.20 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division.")),
         CL("exp.general.interest", "GF0107", "Zinsen auf Staatsschulden", "Interest on public debt", None, fixed=INTEREST, quality="official",
            note=("Aufteilung nach den Zinsausgaben der Ebenen laut Eurostat.", "Split according to each level's interest expenditure as reported by Eurostat.")),
     ]),
@@ -507,6 +579,30 @@ def find(nodes, id):
 
 find(EXP, "exp.social.basic_security.buergergeld")["breakdowns"] = {"nationality": NATIONALITY}
 find(EXP, "exp.social.basic_security.housing_costs")["breakdowns"] = {"nationality": NATIONALITY}
+
+# The staff of the general administration by level, as groups that a measure can choose. The group node shows
+# the shares; each leaf carries the same groups with its own level at 1, so that an effect on the leaf acts only
+# when its level is chosen.
+ADMIN_LEVEL_GROUPS = (("federal", "Bund", "Federal government"), ("states", "Länder", "States"), ("municipal", "Gemeinden", "Municipalities"))
+
+
+def admin_levels(shares, quality, note=None):
+    b = {"label": {"de": "Personal der allgemeinen Verwaltung nach Ebenen", "en": "Staff of the general administration by level"},
+         "basis": "spending",
+         "groups": [{"id": k, "label": {"de": de, "en": en}, "share": s} for (k, de, en), s in zip(ADMIN_LEVEL_GROUPS, shares)],
+         "quality": quality,
+         "sources": SRC_EXP + ["eurostat_gov_10a_main", "destatis_personalstand_2024"],
+         "year": 2024}
+    if note:
+        b["note"] = {"de": note[0], "en": note[1]}
+    return {"level": b}
+
+
+find(EXP, "exp.general.admin_staff")["breakdowns"] = admin_levels(
+    ADMIN_LEVEL_SHARES, "estimate",
+    ("Arbeitnehmerentgelt 2024, eigene Schätzung (siehe die Posten).", "Compensation of employees 2024, own estimate (see the items)."))
+for _i, _leaf in enumerate(("federal", "states", "municipal")):
+    find(EXP, "exp.general.admin_staff." + _leaf)["breakdowns"] = admin_levels([1.0 if j == _i else 0.0 for j in range(3)], "derived")
 
 # =====================================================================================================
 # Revision leaf (difference between the COFOG vintage and the latest total)
