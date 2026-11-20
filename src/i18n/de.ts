@@ -12,6 +12,7 @@ export const de: Messages = {
     skipToContent: "Zum Inhalt springen",
     title: (country, year) => `Haushaltssimulator: ${country} ${year}`,
     countryYear: (country, year) => `${country}, Basisjahr ${year}`,
+    countryPeriod: (country, period) => `${country}, ${period}`,
   },
   dev: {
     badge: "Entwicklungsansicht",
@@ -207,6 +208,7 @@ export const de: Messages = {
       `Die gewählten Gruppen sind bereits durch ${measures} vollständig ausgeschlossen. Diese Maßnahme bewirkt für sie nichts zusätzlich.`,
     warningItem: (item) => `Posten: ${item}`,
     none: "Zu diesem Thema gibt es keine Maßnahme.",
+    noneInPack: "Für dieses Land sind noch keine Maßnahmen erfasst. Der Haushalt ist so gezeigt, wie er im Basisjahr war.",
     collectionFilter: "Maßnahmen auswählen",
     partOf: "Gehört zu",
     hiddenOn: (count) =>

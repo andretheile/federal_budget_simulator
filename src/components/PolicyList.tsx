@@ -258,7 +258,7 @@ export function PolicyList({
       )}
 
       {shown.length === 0 ? (
-        <p className="muted">{t.policies.none}</p>
+        <p className="muted">{pack.policies.length === 0 ? t.policies.noneInPack : t.policies.none}</p>
       ) : (
         <ul className="policy-list">
           {shown.map((policy) => (

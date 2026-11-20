@@ -82,6 +82,7 @@ export const testland: CountryPack = {
     currency: "XTS",
     locales: ["en", "de"],
     baseYear: 2024,
+    baseYearLabel: t("budget year 2024 (April 2024 to March 2025)", "Haushaltsjahr 2024 (April 2024 bis März 2025)"),
     levels: {
       central: { name: t("Central government", "Zentralstaat") },
       state: { name: t("Provinces", "Provinzen") },

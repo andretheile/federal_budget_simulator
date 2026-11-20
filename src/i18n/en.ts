@@ -12,6 +12,7 @@ export const en: Messages = {
     skipToContent: "Skip to content",
     title: (country, year) => `Budget Simulator: ${country} ${year}`,
     countryYear: (country, year) => `${country}, base year ${year}`,
+    countryPeriod: (country, period) => `${country}, ${period}`,
   },
   dev: {
     badge: "Development view",
@@ -204,6 +205,7 @@ export const en: Messages = {
       `The selected groups are already excluded completely by ${measures}, so this measure has no additional effect for them.`,
     warningItem: (item) => `Item: ${item}`,
     none: "No measure for this topic.",
+    noneInPack: "No measures have been added for this country yet. The budget is shown as it was in the base year.",
     collectionFilter: "Choose measures",
     partOf: "Part of",
     hiddenOn: (count) =>

@@ -58,6 +58,11 @@ export interface Country {
   /** The first entry is the default locale. */
   locales: string[];
   baseYear: number;
+  /**
+   * How the masthead names the base year where it is not a calendar year, e.g. "fiscal year 2025
+   * (October 2024 to September 2025)". Absent: "base year" and the number.
+   */
+  baseYearLabel?: LocalizedText;
   /** Levels of government that exist in this country, with their local names. */
   levels: Partial<Record<LevelId, { name: LocalizedText }>>;
   indicators: {

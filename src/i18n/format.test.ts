@@ -53,6 +53,18 @@ describe("money", () => {
     expect(en.money(2e6, { trim: true })).toBe("€2m");
   });
 
+  it("writes the US dollar with its bare symbol in both languages", () => {
+    const usd = { en: createFormatters("en", "USD"), de: createFormatters("de", "USD") };
+    expect(usd.en.money(7_011_105e6)).toBe("$7,011.1bn");
+    expect(usd.en.money(-1_774_684e6, { signed: true })).toBe("−$1,774.7bn");
+    expect(usd.en.exactMoney(176_100)).toBe("$176,100");
+    expect(plain(usd.de.money(7_011_105e6))).toBe("7.011,1 Mrd. $");
+    expect(plain(usd.de.money(450e6))).toBe("450 Mio. $");
+    expect(usd.en.currencySymbol).toBe("$");
+    expect(usd.en.currencyName).toBe("US dollar");
+    expect(usd.de.currencyName).toBe("US-Dollar");
+  });
+
   it("works with a currency that has no symbol", () => {
     const xts = createFormatters("en", "XTS");
     expect(plain(xts.money(-400, { signed: true }))).toBe("−XTS 400");

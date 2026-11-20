@@ -17,6 +17,8 @@ export interface Messages {
     skipToContent: string;
     title(country: string, year: number): string;
     countryYear(country: string, year: number): string;
+    /** The country with the pack's own name for its base year, such as a fiscal year. */
+    countryPeriod(country: string, period: string): string;
   };
   dev: {
     badge: string;
@@ -208,6 +210,8 @@ export interface Messages {
     alreadyExcludedBy(measures: string): string;
     warningItem(item: string): string;
     none: string;
+    /** The pack has no measures at all yet. */
+    noneInPack: string;
     /** Name of the filter by collection (the pack's named groups of measures), for screen readers. */
     collectionFilter: string;
     /** Said before the badges of the collections a measure belongs to, for screen readers. */

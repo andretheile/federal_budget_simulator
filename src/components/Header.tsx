@@ -97,7 +97,11 @@ export function Header({
       <div className="page masthead__inner">
         <div className="masthead__brand">
           <h1 className="masthead__name">{t.app.name}</h1>
-          <p className="masthead__country">{t.app.countryYear(ui.text(pack.country.name), pack.country.baseYear)}</p>
+          <p className="masthead__country">
+            {pack.country.baseYearLabel
+              ? t.app.countryPeriod(ui.text(pack.country.name), ui.text(pack.country.baseYearLabel))
+              : t.app.countryYear(ui.text(pack.country.name), pack.country.baseYear)}
+          </p>
         </div>
 
         <div className="masthead__tools">

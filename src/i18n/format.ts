@@ -81,7 +81,9 @@ export function createFormatters(
   messages: Messages = messagesFor(language),
 ): Formatters {
   const locale = intlLocale(language);
-  const base = { numberingSystem: "latn" } as const;
+  // The narrow symbol: "$12.4bn" for the US dollar, where British English would write "US$12.4bn".
+  // Pages show one country's currency at a time, so the bare symbol is not ambiguous.
+  const base = { numberingSystem: "latn", currencyDisplay: "narrowSymbol" } as const;
   const cache = new Map<string, Intl.NumberFormat>();
   const numberFormat = (key: string, options: Intl.NumberFormatOptions): Intl.NumberFormat => {
     let format = cache.get(key);

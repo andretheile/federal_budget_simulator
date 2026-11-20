@@ -155,6 +155,7 @@ export const countrySchema = z.strictObject({
   currency: z.string().regex(/^[A-Z]{3}$/, "must be an ISO 4217 code"),
   locales: z.array(text).min(1),
   baseYear: year,
+  baseYearLabel: localizedTextSchema.optional(),
   levels: z.partialRecord(levelIdSchema, z.strictObject({ name: localizedTextSchema })),
   indicators: z.strictObject({
     gdp: indicatorSchema,

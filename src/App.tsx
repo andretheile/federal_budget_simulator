@@ -552,7 +552,8 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
                 the document follows the order on screen, so keyboard and screen reader agree with the eye. */}
             {!oneColumn && <DebtTeaser view={debt} />}
             <div className="workspace">{oneColumn ? [policies, budget] : [budget, policies]}</div>
-            <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />
+            {/* A pack without measures has nothing to switch on, so there is no change to show. */}
+            {pack.policies.length > 0 && <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />}
             {debt && debtAssumptions && (
               <DebtSection view={debt} assumptions={debtAssumptions} onAssumptions={setDebtAssumptions} level={pageResult.level} />
             )}
