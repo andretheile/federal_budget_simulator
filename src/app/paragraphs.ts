@@ -4,14 +4,23 @@
  * is still long, paragraphs are made of whole sentences, a few hundred characters each.
  *
  * Sentences end where a period, question or exclamation mark follows a word of at least four
- * letters, a year (four digits) or a closing bracket or quote, and the next sentence starts with a
- * capital. That is deliberately cautious: "Mrd. Euro", "S. 16", "6. Juli", "Einzelplan 60. Der",
- * "z. B." and "e.g. The" are never cut, at the price of a few sentence ends that are not used.
- * Nothing is dropped or changed: joined with spaces, the paragraphs give the text back.
+ * letters, a year (four digits), an amount with its unit ("€22bn", "€470m", "€62,100", "104 %",
+ * "12,6 Mrd. €") or a closing bracket or quote, and the next sentence starts with a capital. That is
+ * deliberately cautious: "Mrd. Euro", "S. 16", "6. Juli", "Einzelplan 60. Der", "z. B." and
+ * "e.g. The" are never cut, at the price of a few sentence ends that are not used: an amount counts
+ * only with a currency sign or a percent sign, never as a bare number, which may be a date or an
+ * ordinal. Nothing is dropped or changed: joined with spaces, the paragraphs give the text back.
  */
 
 /** Words of four letters or more that end in a period without ending a sentence. */
 const ABBREVIATIONS = new Set(["abschn", "bspw", "ggfs", "inkl", "insb", "prof", "sept", "ziff", "approx", "corp", "dept", "govt", "incl"]);
+
+/**
+ * An amount with its unit at the end of a text: a currency sign before the number, with an optional
+ * short unit ("€22bn", "€470m", "$1.2tn", "€62,100"), or a percent or currency sign after it ("104 %",
+ * "80%", "12,6 Mrd. €"). No abbreviation ends in one, so a period after it ends a sentence.
+ */
+const AMOUNT = /(?:[€$£]\s?\d[\d.,]*(?:\s?(?:bn|m|tn|k))?|[%€$£])$/u;
 
 /** Where a sentence may end: the end mark and the space after it, before a capital or an opening quote or bracket. */
 const END = /([.!?])(\s+)(?=["„“‚‘«»(]?\p{Lu})/gu;
@@ -24,9 +33,10 @@ export function sentences(text: string): string[] {
     const at = match.index;
     const before = text.slice(start, at);
     const word = /(\p{L}+)$/u.exec(before)?.[1];
-    const closing = /[)\]"”“’»«]$/u.test(before);
+    const closing = /[)\]"'”“’»«]$/u.test(before);
     const year = /(?:^|[^\d.,])\d{4}$/.test(before);
-    const ends = closing || year || (word !== undefined && word.length >= 4 && !ABBREVIATIONS.has(word.toLowerCase()));
+    const amount = AMOUNT.test(before);
+    const ends = closing || year || amount || (word !== undefined && word.length >= 4 && !ABBREVIATIONS.has(word.toLowerCase()));
     if (!ends) continue;
     out.push(text.slice(start, at + 1).trim());
     start = at + match[0].length;

@@ -2,8 +2,9 @@
  * One measure. Collapsed it shows the label, a short summary, the switch and what the measure
  * would do on its own at its current settings, put in proportion. Expanded it adds the pack's
  * explanation, the controls, the estimate (range, data quality, who is affected), the split by
- * level of government, when it acts, why the goal leaves it out (if it does), the catches, the
- * limits of the calculation, the budget items it changes and the sources.
+ * level of government, the catches, the limits of the calculation, why the goal leaves it out (if
+ * it does), when it acts, the budget items it changes and the sources: what stands against the
+ * measure comes right after its figure, what qualifies the figure after that.
  */
 import { memo, useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { colorOf, layoutBudget } from "../app/budgetModel.ts";
@@ -828,27 +829,6 @@ function PolicyDetails({
         {levels.length > 1 && <LevelSplit levels={levels} noise={noise} current={level} />}
       </section>
 
-      {policy.timing && phase && (
-        <section className="policy__section">
-          <h4>{t.policies.timingTitle}</h4>
-          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui.language)), policy.timing.param !== undefined)}</p>
-          <p className="policy__timing-note">{ui.text(policy.timing.note)}</p>
-          <SourceList ids={policy.timing.sources} />
-        </section>
-      )}
-
-      {goalHint && (
-        <section className="policy__section">
-          <h4 ref={goalHeading} tabIndex={-1}>
-            {t.policies.goalTitle}
-          </h4>
-          <p className="policy__goal-detail">
-            {goalHint.statement} {goalHint.full}
-          </p>
-          {goalHint.sources && <SourceList ids={goalHint.sources} />}
-        </section>
-      )}
-
       <section className="policy__section">
         <h4>{t.policies.catches}</h4>
         {catches.length === 0 ? (
@@ -887,6 +867,27 @@ function PolicyDetails({
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {goalHint && (
+        <section className="policy__section">
+          <h4 ref={goalHeading} tabIndex={-1}>
+            {t.policies.goalTitle}
+          </h4>
+          <p className="policy__goal-detail">
+            {goalHint.statement} {goalHint.full}
+          </p>
+          {goalHint.sources && <SourceList ids={goalHint.sources} />}
+        </section>
+      )}
+
+      {policy.timing && phase && (
+        <section className="policy__section">
+          <h4>{t.policies.timingTitle}</h4>
+          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui.language)), policy.timing.param !== undefined)}</p>
+          <p className="policy__timing-note">{ui.text(policy.timing.note)}</p>
+          <SourceList ids={policy.timing.sources} />
         </section>
       )}
 

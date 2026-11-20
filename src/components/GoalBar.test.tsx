@@ -330,10 +330,9 @@ describe("what a goal leaves out", () => {
       "Does not count towards the goal “Close the deficit”. The plan already counts on it: the bonus was passed with the last budget, and the plan's figures for 2026 include it in full.",
     );
     expect(document.activeElement).toBe(section!.querySelector("h4"));
-    // The goal's section stands after the estimate and before the catches.
+    // What stands against the measure comes first, after the estimate; the goal's section follows the catches.
     const headings = [...container.querySelectorAll(`${card} .policy__section > h4`)].map((heading) => plain(heading.textContent));
-    expect(headings.indexOf("The goal")).toBeGreaterThan(headings.indexOf("The estimate"));
-    expect(headings.indexOf("The goal")).toBeLessThan(headings.indexOf("The catch"));
+    expect(headings.slice(0, 4)).toEqual(["Settings", "The estimate", "The catch", "The goal"]);
     // Clicked again on the open card, the focus goes there once more; closed, the section is gone.
     act(() => (document.activeElement as HTMLElement).blur());
     click(more);

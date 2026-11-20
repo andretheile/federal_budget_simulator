@@ -989,6 +989,14 @@
   top: 19px;
 }
 
+/* Too long for either side of its tick (a long label on a phone): centred under the tick on a line of
+   its own, kept inside the scale (the script sets `left`); the tick on the track marks the value. */
+.param__base--center {
+  right: auto;
+  padding: 0;
+  border: 0;
+}
+
 .param__base:hover,
 .param__end--base:hover {
   color: var(--ink);

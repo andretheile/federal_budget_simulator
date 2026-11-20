@@ -114,6 +114,34 @@ const key = (target: Element, name: string): boolean => {
 };
 
 describe("the base-year value", () => {
+  it("stands centred under its tick on a line of its own, inside the scale, where it fits on neither side", () => {
+    // Like the US defence share on a phone in German: a label of 217 px on a scale of 326, its tick at 41 %.
+    const share: NumberParam = { id: "share", type: "number", label: { en: "Share", de: "Anteil" }, unit: "percent_gdp", min: 2, max: 5, step: 0.01, default: 3.5, baseline: 3.22 };
+    const box = (left: number, width: number): DOMRect => ({ left, right: left + width, width, top: 0, bottom: 15, height: 15, x: left, y: 0, toJSON: () => ({}) }) as DOMRect;
+    const original = Element.prototype.getBoundingClientRect;
+    Element.prototype.getBoundingClientRect = function (this: Element): DOMRect {
+      const name = this.className.toString();
+      if (name.includes("param__scale")) return box(0, 326);
+      if (name.includes("param__end--min")) return box(10, 87);
+      if (name.includes("param__end--max")) return box(239, 87);
+      if (name.includes("param__base")) return box(0, name.includes("param__base--center") ? 210 : 217);
+      return original.call(this);
+    };
+    try {
+      mount(share, 3.5);
+      const base = query<HTMLButtonElement>(".param__base");
+      expect(base.className).toContain("param__base--center");
+      expect(query(".param__scale").className).toContain("has-own-line");
+      // Centred under the tick (11 + 0.41 × 304 = 134.6 px), and so from 26 px to 243 px: inside the scale.
+      expect(base.style.left).toBe("26px");
+      // Still the button that sets the slider back.
+      act(() => base.click());
+      expect(reported).toEqual([3.22]);
+    } finally {
+      Element.prototype.getBoundingClientRect = original;
+    }
+  });
+
   it("stands under its tick as a button that sets the slider back to it", () => {
     mount(petrol, 51.41, "worsen");
     const base = query<HTMLButtonElement>(".param__base");
