@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { curveAffected, curveAverageRate, curveOwed, curveRate, curveTotal, payMoreOrLess, scheduleBands, type ScheduleBand } from "./curve.ts";
+import { testland } from "./__fixtures__/testland.ts";
+import { projectDebt } from "./debt.ts";
 import { resolveParams, scheduleView, simulate, type ParamValue, type Scenario } from "./simulate.ts";
 import type {
   CurveParam,
@@ -312,5 +314,26 @@ describe("performance", () => {
     expect(Number.isFinite(checksum)).toBe(true);
     expect(bands).toHaveLength(41);
     expect(average).toBeLessThan(0.3);
+  });
+
+  it("projects measures that build up over years fast enough to redraw on every slider move", () => {
+    // The worst case: every policy builds up over a different number of years (5 to 47), so every
+    // year of a 50-year horizon needs a simulation of its own, with all 15 policies at their shares.
+    const timed = JSON.parse(JSON.stringify(pack)) as typeof pack;
+    const debt = JSON.parse(JSON.stringify(testland.debt)) as NonNullable<typeof testland.debt>;
+    debt.stock.value = 2.4e12;
+    debt.interest = { value: 5e10, quality: "official", sources: ["s"] };
+    debt.measuresFrom = { year: 2026, note: t("next year") };
+    delete debt.plans;
+    timed.debt = debt;
+    timed.policies.forEach((policy, i) => (policy.timing = { years: 5 + 3 * i, note: t("build-up"), sources: ["s"] }));
+    const results = Array.from({ length: 20 }, (_, i) => simulate(timed, { ...scenario(i), level: "all" }));
+    for (let i = 0; i < 20; i++) projectDebt(timed, results[i], { horizon: 50 }); // warm-up
+    let checksum = 0;
+    // 100 projections, in ten batches of 10.
+    const average = averageOfQuickestBatch(10, 10, (i) => void (checksum += projectDebt(timed, results[i % results.length], { horizon: 50 }).reform.years[49].debt));
+    console.info(`projection with build-ups: ${average.toFixed(2)} ms on average in the quickest of 10 batches of 10 (50 years, 15 policies building up)`);
+    expect(Number.isFinite(checksum)).toBe(true);
+    expect(average).toBeLessThan(25);
   });
 });

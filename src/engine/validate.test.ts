@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { testland, testlandFiles } from "./__fixtures__/testland.ts";
+import { testland, testlandFiles, testlandTimed, testlandTimedFiles } from "./__fixtures__/testland.ts";
 import { formatIssue, formatPath, validatePack, validatePackFiles, type ValidationIssue } from "./validate.ts";
 
 /**
@@ -1547,5 +1547,108 @@ describe("excluded measures of a goal", () => {
     files.goals.goals[0].excluded[0].node = "exp.admin.parliament";
     files.goals.goals[0].excluded.push({ policy: "cut_admin", reason: { en: "x", de: "x" } });
     expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+});
+
+describe("timing", () => {
+  const POLICIES = "policies.json";
+  const DEBT = "debt.json";
+  /** Testland with timing; policies [1] cut_admin (4 years), [3] wealth_tax (from 2028), [5] defense_target (param share, below). */
+  const timedErrors = (mutate: (files: Files) => void): ValidationIssue[] => {
+    const files = testlandTimedFiles() as Files;
+    mutate(files);
+    const result = validatePack(files);
+    return result.ok ? [] : result.errors;
+  };
+  const timedWarnings = (mutate: (files: Files) => void): ValidationIssue[] => {
+    const files = testlandTimedFiles() as Files;
+    mutate(files);
+    return validatePack(files).warnings;
+  };
+  const only = (mutate: (files: Files) => void, file: string, path: string, message: RegExp): void => {
+    const errors = timedErrors(mutate);
+    expect(errors.map(formatIssue)).toHaveLength(1);
+    expect(errors[0]).toEqual({ file, path, message: expect.stringMatching(message) });
+  };
+
+  it("the timed fixture is valid as it is, typed, without warnings", () => {
+    expect(validatePack(testlandTimedFiles())).toEqual({ ok: true, pack: testlandTimed(), warnings: [] });
+  });
+
+  it("the shape is strict", () => {
+    only((f) => (f.policies.policies[1].timing.extra = 1), POLICIES, "$.policies[1].timing", /Unrecognized key: "extra"/);
+    only((f) => (f.policies.policies[1].timing.years = -1), POLICIES, "$.policies[1].timing.years", />=0/);
+    only((f) => (f.policies.policies[3].timing.from = "2028"), POLICIES, "$.policies[3].timing.from", /ISO date/);
+    only((f) => (f.policies.policies[5].timing.below.yearsPerUnit = -2), POLICIES, "$.policies[5].timing.below.yearsPerUnit", />=0/);
+    only((f) => (f.policies.policies[1].timing.sources = []), POLICIES, "$.policies[1].timing.sources", />=1 items/);
+    only((f) => delete f.policies.policies[1].timing.note, POLICIES, "$.policies[1].timing.note", /expected object/);
+    only((f) => (f.debt.measuresFrom.extra = 1), DEBT, "$.measuresFrom", /Unrecognized key: "extra"/);
+    only((f) => (f.debt.measuresFrom.year = 2026.5), DEBT, "$.measuresFrom.year", /expected int/);
+  });
+
+  it("the param it depends on is a number param of the policy with a baseline", () => {
+    only((f) => (f.policies.policies[5].timing.param = "nope"), POLICIES, "$.policies[5].timing.param", /unknown param "nope" in policy "defense_target"/);
+    only(
+      (f) => {
+        f.policies.policies[1].timing.param = "cut";
+      },
+      POLICIES,
+      "$.policies[1].timing.param",
+      /param "cut" has no baseline/,
+    );
+    only(
+      (f) => {
+        f.policies.policies[2].timing = { param: "groups", note: { en: "x", de: "x" }, sources: ["stats_office"], years: 1 };
+      },
+      POLICIES,
+      "$.policies[2].timing.param",
+      /"groups" is a groups param; timing needs a number param/,
+    );
+  });
+
+  it("years per unit and a phase below the baseline need that param", () => {
+    only(
+      (f) => {
+        f.policies.policies[1].timing.yearsPerUnit = 1;
+      },
+      POLICIES,
+      "$.policies[1].timing.yearsPerUnit",
+      /"yearsPerUnit" needs "param"/,
+    );
+    only(
+      (f) => {
+        f.policies.policies[1].timing.below = { years: 1 };
+      },
+      POLICIES,
+      "$.policies[1].timing.below",
+      /"below" needs "param"/,
+    );
+  });
+
+  it("sources exist and the note has every locale", () => {
+    only((f) => (f.policies.policies[1].timing.sources[0] = "nowhere"), POLICIES, "$.policies[1].timing.sources[0]", /unknown source "nowhere"/);
+    only((f) => delete f.policies.policies[1].timing.note.de, POLICIES, "$.policies[1].timing.note", /text for locale "de" is missing/);
+    only((f) => (f.debt.measuresFrom.sources[0] = "nowhere"), DEBT, "$.measuresFrom.sources[0]", /unknown source "nowhere"/);
+    only((f) => delete f.debt.measuresFrom.note.de, DEBT, "$.measuresFrom.note", /text for locale "de" is missing/);
+  });
+
+  it("the first year measures can act lies after the base year", () => {
+    only((f) => (f.debt.measuresFrom.year = 2024), DEBT, "$.measuresFrom.year", /2024 is not after the base year 2024/);
+    // The first projection year is allowed: then it changes nothing.
+    expect(timedErrors((f) => (f.debt.measuresFrom.year = 2025))).toEqual([]);
+  });
+
+  it("warns about a timing that changes nothing, and a start in the base year or before", () => {
+    expect(timedWarnings((f) => (f.policies.policies[1].timing = { note: { en: "x", de: "x" }, sources: ["stats_office"] }))).toEqual([
+      { file: POLICIES, path: "$.policies[1].timing", message: expect.stringMatching(/no start date and no build-up/) },
+    ]);
+    expect(timedWarnings((f) => (f.policies.policies[3].timing.from = "2024-06-01"))).toEqual([
+      { file: POLICIES, path: "$.policies[3].timing.from", message: expect.stringMatching(/2024-06-01 lies in the base year 2024 or before it/) },
+    ]);
+  });
+
+  it("is optional everywhere: the main fixture has none", () => {
+    expect(testland.debt?.measuresFrom).toBeUndefined();
+    expect(testland.policies.some((policy) => policy.timing)).toBe(false);
   });
 });

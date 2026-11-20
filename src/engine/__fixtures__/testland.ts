@@ -974,3 +974,50 @@ export function testlandFiles(): RawPackFiles {
 export function testlandCopy(): CountryPack {
   return JSON.parse(JSON.stringify(testland)) as CountryPack;
 }
+
+/**
+ * Testland with timing: the first year measures can act is 2026 (the base year is 2024), and three
+ * measures come into effect later or gradually. The main fixture leaves timing out, so that its
+ * projections stay those of measures that act in full from the first projection year.
+ *
+ *   cut_admin       builds up linearly over 4 years from 1 January 2026: 12.5 %, 37.5 %, 62.5 %
+ *                   and 87.5 % of the saving of 40 in 2026 to 2029, all of it from 2030
+ *   wealth_tax      from 1 January 2028, at once
+ *   defense_target  from 1 July 2027, two years per percentage point of GDP above the baseline of
+ *                   2 %; below the baseline (a cut) over one year from 2026. At the default of 3 %:
+ *                   two years from mid-2027, full from 2030
+ */
+export function testlandTimed(): CountryPack {
+  const pack = testlandCopy();
+  pack.debt!.measuresFrom = {
+    year: 2026,
+    note: t("The budget for 2025 is decided.", "Der Haushalt für 2025 ist beschlossen."),
+    sources: ["finance_ministry"],
+  };
+  const policy = (id: string) => pack.policies.find((candidate) => candidate.id === id)!;
+  policy("cut_admin").timing = {
+    years: 4,
+    note: t("Posts are cut as people retire.", "Stellen fallen weg, wenn Beschäftigte in den Ruhestand gehen."),
+    sources: ["finance_ministry"],
+  };
+  policy("wealth_tax").timing = {
+    from: "2028-01-01",
+    note: t("The first assessment is for 2028.", "Die erste Veranlagung ist für 2028."),
+    sources: ["wealth_survey"],
+  };
+  policy("defense_target").timing = {
+    param: "share",
+    from: "2027-07-01",
+    yearsPerUnit: 2,
+    below: { years: 1 },
+    note: t("Procurement takes time; cuts are quicker.", "Beschaffung braucht Zeit; Kürzungen gehen schneller."),
+    sources: ["finance_ministry"],
+  };
+  return pack;
+}
+
+/** testlandTimed as the raw content of its JSON files. */
+export function testlandTimedFiles(): RawPackFiles {
+  const copy = testlandTimed();
+  return { ...testlandFiles(), policies: { policies: copy.policies, collections: copy.collections }, debt: copy.debt };
+}

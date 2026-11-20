@@ -794,7 +794,19 @@
         "adhoc_dpa_zuckersteuer_2028",
         "bundeshaushalt_2024",
         "bt_drs_21_8495"
-      ]
+      ],
+      "timing": {
+        "from": "2027-11-01",
+        "years": 1.5,
+        "note": {
+          "de": "Die neuen Regeln gelten ab 1. November 2027, und Elterngeld wird für die Monate nach der Geburt gezahlt. Der Referentenentwurf erwartet für den Bund Einsparungen von 60 Mio. Euro 2027, 535 Mio. Euro 2028, 1.330 Mio. Euro 2029 und die volle Wirkung von 1.360 Mio. Euro 2030 (Abschnitt D). Die Rechnung lässt die Wirkung vom 1. November 2027 an über 18 Monate gleichmäßig wachsen; das ergibt etwa 13, 605, 1.310 und 1.360 Mio. Euro.",
+          "en": "The new rules apply from 1 November 2027, and parental allowance is paid for the months after a birth. The draft bill expects federal savings of EUR 60 million in 2027, 535 million in 2028, 1,330 million in 2029 and the full effect of 1,360 million in 2030 (section D). The calculation lets the effect grow evenly over 18 months from 1 November 2027; that gives about EUR 13, 605, 1,310 and 1,360 million."
+        },
+        "sources": [
+          "bmbfsfj_refe_elterngeld_2026",
+          "bundesregierung_kabinett_elterngeld_2026"
+        ]
+      }
     },
     {
       "id": "wealth_tax",
@@ -2646,7 +2658,18 @@
         "bertelsmann_diw_rente_2026_summary",
         "boersen_zeitung_rente_2026",
         "sgb6_236b"
-      ]
+      ],
+      "timing": {
+        "years": 20,
+        "note": {
+          "de": "Die Alterssicherungskommission empfiehlt die Abschaffung zum frühestmöglichen Zeitpunkt unter Wahrung des Vertrauensschutzes, nennt aber kein Jahr (Bericht, S. 25); die Projektion lässt sie im ersten Jahr beginnen, in dem Maßnahmen wirken. Die Ersparnis wächst mit jedem Jahrgang, der neu in Rente geht: Nach der Kommission spart jeder Jahrgang etwa 430 Mio. Euro je Jahr seines Rentenbezugs. Voll ist sie, wenn alle Rentner unter die neue Regel fallen, nach etwa einer durchschnittlichen Rentenbezugsdauer: 20,7 Jahre bei den 2025 weggefallenen Renten (Rentenversicherung in Zahlen 2026, S. 66); die Lebenserwartung bei Rentenbeginn beträgt nach der Kommission rund 20 Jahre (S. 22). Die Rechnung lässt die Wirkung deshalb über 20 Jahre gleichmäßig wachsen.",
+          "en": "The pensions commission recommends abolition at the earliest possible date with protection of legitimate expectations, but names no year (report, p. 25); the projection lets it begin in the first year in which measures act. The saving grows with each cohort that newly retires: according to the commission, each cohort saves about EUR 430 million per year of its time in retirement. It is full once all pensioners fall under the new rule, after about one average duration of pension receipt: 20.7 years for the pensions that ended in 2025 (Rentenversicherung in Zahlen 2026, p. 66); life expectancy at retirement is about 20 years according to the commission (p. 22). The calculation therefore lets the effect grow evenly over 20 years."
+        },
+        "sources": [
+          "ask_bericht_2026",
+          "drv_rv_in_zahlen_2026"
+        ]
+      }
     },
     {
       "id": "retirement_age",
@@ -3043,7 +3066,23 @@
         "svr_jg_2023_24",
         "linke_wahlprogramm_2025",
         "diw_wb_2026_27_fratzscher"
-      ]
+      ],
+      "timing": {
+        "param": "age",
+        "from": "2032-01-01",
+        "yearsPerUnit": 9,
+        "below": {},
+        "note": {
+          "de": "Eine höhere Altersgrenze wirkt in der Projektion ab 2032: Die Alterssicherungskommission hält einen Vorlauf von mindestens fünf Jahren für nötig und schlägt die Anhebung ab 2032 vor, wenn der Jahrgang 1965 die 67 erreicht (Bericht, S. 23). Die Grenze steigt dann so schnell wie bei der Anhebung auf 67 nach geltendem Recht: um einen Monat je Geburtsjahrgang bis 66, danach um zwei Monate, zwei Jahre über 18 Jahrgänge (Drucksache 16/3794, S. 28; § 235 SGB VI), also neun Jahre je Jahr Altersgrenze. Die Wirkung wächst gleichmäßig mit der Grenze: 67,5 Jahre sind Mitte 2036 erreicht, 70 Jahre Ende 2058. Die Kommission selbst koppelt die Grenze an die Lebenserwartung und käme langsamer voran: 67,5 Jahre erst 2041, danach etwa ein halbes Jahr je Jahrzehnt, 70 Jahre also erst um 2091. Wer 70 Jahre früher will, wie DIW-Präsident Fratzscher, nennt kein Tempo; die Rechnung nimmt das Tempo, das der Gesetzgeber schon einmal beschlossen hat. Eine niedrigere Grenze wirkt ab 2027 sofort voll; für eine Verzögerung gibt es keinen Anhaltspunkt.",
+          "en": "A higher age limit acts in the projection from 2032: the pensions commission considers a lead time of at least five years necessary and proposes the increase from 2032, when the 1965 cohort reaches 67 (report, p. 23). The limit then rises as fast as the increase to 67 under current law: by one month per birth cohort up to 66, then by two months, two years over 18 cohorts (printed paper 16/3794, p. 28; § 235 Social Code Book VI), that is nine years per year of age. The effect grows evenly with the limit: 67.5 years is reached in mid-2036, 70 years at the end of 2058. The commission itself links the limit to life expectancy and would be slower: 67.5 years only in 2041, then about half a year per decade, so 70 years only around 2091. Those who want 70 sooner, such as DIW president Fratzscher, name no pace; the calculation takes the pace the legislature has adopted once before. A lower limit acts in full at once from 2027; nothing indicates a delay."
+        },
+        "sources": [
+          "ask_bericht_2026",
+          "bt_drs_16_3794",
+          "sgb6_235",
+          "diw_wb_2026_27_fratzscher"
+        ]
+      }
     },
     {
       "id": "vat_rates",
@@ -4560,7 +4599,18 @@
         "gg_art_106",
         "bundestag_drs_21_7301",
         "bt_drs_21_7016"
-      ]
+      ],
+      "timing": {
+        "from": "2028-01-01",
+        "note": {
+          "de": "Der Haushaltsausschuss hat den Beginn auf den 1. Januar 2028 verschoben (Beschlussempfehlung zum Haushaltsbegleitgesetz 2027, S. 10); vorher bringt die Steuer nichts, danach von Anfang an das volle Jahresaufkommen.",
+          "en": "The budget committee moved the start to 1 January 2028 (recommendation on the Budget Accompanying Act 2027, p. 10); before that the tax raises nothing, and from then on the full annual amount."
+        },
+        "sources": [
+          "bt_drs_21_9241",
+          "adhoc_dpa_zuckersteuer_2028"
+        ]
+      }
     },
     {
       "id": "plastic_packaging_tax",
@@ -4702,7 +4752,18 @@
         "haufe_plastiksteuer_2026",
         "svr_jg_2026_27",
         "gg_art_106"
-      ]
+      ],
+      "timing": {
+        "from": "2027-07-01",
+        "note": {
+          "de": "Der Entwurf sah die Steuer ab Juli 2027 vor; für das zweite Halbjahr 2027 wurden 805 Mio. Euro genannt, ab 2028 knapp 1,5 Mrd. Euro im Jahr. Die Rechnung lässt sie am 1. Juli 2027 beginnen, 2027 also mit gut der Hälfte des Jahresbetrags.",
+          "en": "The draft provided for the tax from July 2027; EUR 805 million was cited for the second half of 2027 and just under EUR 1.5 billion a year from 2028. The calculation lets it begin on 1 July 2027, so 2027 has a little over half of the annual amount."
+        },
+        "sources": [
+          "dpa_plastiksteuer_entwurf_2026",
+          "tonline_plastiksteuer_2026"
+        ]
+      }
     },
     {
       "id": "pension_contribution_schedule",

@@ -172,6 +172,52 @@ export interface Policy {
   effects: Effect[];
   catches: Catch[];
   sources: SourceId[];
+  /**
+   * When the measure acts in the debt projection and how its effect builds up to the full amount
+   * its effects describe. Absent: in full from the first year measures can act (debt.json
+   * `measuresFrom`). The budget view of the base year is not affected.
+   */
+  timing?: PolicyTiming;
+}
+
+/**
+ * One way a measure comes into effect: from a date, rising linearly to its full effect over a
+ * number of years. The full effect is what the measure's effects describe, a steady state.
+ */
+export interface TimingPhase {
+  /**
+   * The first day the measure acts, as an ISO date (YYYY-MM-DD). A date before the first year
+   * measures can act (debt.json `measuresFrom`) counts as the start of that year. Absent: the start
+   * of that year.
+   */
+  from?: string;
+  /** Years from `from` until the effect is full, rising linearly. Absent or 0: full at once. */
+  years?: number;
+  /**
+   * Further years per unit of distance between the timing's param and its baseline, for a change
+   * that cannot happen at once, such as a retirement age that rises by months per birth cohort.
+   * Needs PolicyTiming.param.
+   */
+  yearsPerUnit?: number;
+}
+
+/**
+ * The timing of a measure in the debt projection. The phase fields at the top apply to every
+ * setting, or, with `param` and `below`, to settings at or above the param's baseline.
+ */
+export interface PolicyTiming extends TimingPhase {
+  /**
+   * A number param of the policy with a `baseline`. Its distance from the baseline is the unit of
+   * `yearsPerUnit`, and its direction chooses between the phase at the top (at or above the
+   * baseline) and `below`.
+   */
+  param?: string;
+  /** The phase when `param` is below its baseline. Needs `param`. Absent: the phase at the top. */
+  below?: TimingPhase;
+  /** Where the dates and durations come from, in plain words. */
+  note: LocalizedText;
+  /** At least one. */
+  sources: SourceId[];
 }
 
 export type ParamUnit = "percent" | "percent_gdp" | "currency" | "years" | "count";
@@ -634,6 +680,14 @@ export interface DebtPlan {
   note: LocalizedText;
 }
 
+/** The first year in which measures can act in the projection, and why that year. */
+export interface DebtMeasuresFrom {
+  /** A calendar year after the base year. */
+  year: number;
+  note: LocalizedText;
+  sources?: SourceId[];
+}
+
 /** Content of debt.json. */
 export interface DebtFile {
   /** Gross debt of general government at the end of the base year (for EU countries the Maastricht debt). */
@@ -649,6 +703,11 @@ export interface DebtFile {
   comparisons?: DebtComparison[];
   /** Official projections of the country's own path, for display next to the model's. Optional. */
   plans?: DebtPlan[];
+  /**
+   * The first year in which measures can act in the projection: before it, the path with measures is
+   * the path without them. Absent: the year after the base year, the first projection year.
+   */
+  measuresFrom?: DebtMeasuresFrom;
   /**
    * The starting path: the id of a plan in `plans` that the projection follows unless the visitor
    * chooses to continue the base year's budget instead. It must be one that can be followed

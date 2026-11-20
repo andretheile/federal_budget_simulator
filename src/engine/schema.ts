@@ -32,8 +32,10 @@ import type {
   PoliciesFile,
   Policy,
   PolicyCollection,
+  PolicyTiming,
   Schedule,
   Source,
+  TimingPhase,
   Value,
 } from "./types.ts";
 
@@ -393,6 +395,19 @@ export const catchSchema = z.strictObject({
   sources: sourceIds.optional(),
 });
 
+export const timingPhaseSchema = z.strictObject({
+  from: z.iso.date("must be an ISO date (YYYY-MM-DD)").optional(),
+  years: z.number().min(0).optional(),
+  yearsPerUnit: z.number().min(0).optional(),
+});
+
+export const policyTimingSchema = timingPhaseSchema.extend({
+  param: z.string().optional(),
+  below: timingPhaseSchema.optional(),
+  note: localizedTextSchema,
+  sources: sourceIds.min(1),
+});
+
 export const policySchema = z.strictObject({
   id: idSchema,
   label: localizedTextSchema,
@@ -402,6 +417,7 @@ export const policySchema = z.strictObject({
   effects: z.array(effectSchema).min(1),
   catches: z.array(catchSchema),
   sources: sourceIds,
+  timing: policyTimingSchema.optional(),
 });
 
 export const policyCollectionSchema = z.strictObject({
@@ -499,6 +515,7 @@ export const debtFileSchema = z.strictObject({
       }),
     )
     .optional(),
+  measuresFrom: z.strictObject({ year, note: localizedTextSchema, sources: sourceIds.optional() }).optional(),
   follow: idSchema.optional(),
   note: localizedTextSchema,
 });
@@ -555,6 +572,8 @@ export type SchemaMatchesTypes = [
   Assert<Same<Out<typeof effectSchema>, Effect>>,
   Assert<Same<Out<typeof catchSchema>, Catch>>,
   Assert<Same<Out<typeof policySchema>, Policy>>,
+  Assert<Same<Out<typeof timingPhaseSchema>, TimingPhase>>,
+  Assert<Same<Out<typeof policyTimingSchema>, PolicyTiming>>,
   Assert<Same<Out<typeof policyCollectionSchema>, PolicyCollection>>,
   Assert<Same<Out<typeof policiesFileSchema>, PoliciesFile>>,
   Assert<Same<Out<typeof numberParamSchema>, NumberParam>>,

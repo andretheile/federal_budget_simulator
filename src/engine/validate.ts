@@ -775,6 +775,39 @@ function check(
     policy.params.forEach((param, i) => {
       if (!usedParams.has(param.id)) warn(POLICIES, [...base, "params", i], `param "${param.id}" is not used by any effect`);
     });
+
+    // Timing: a param it depends on is a number param with a baseline; only then can it scale or choose.
+    const timing = policy.timing;
+    if (timing) {
+      const at = [...base, "timing"];
+      text(POLICIES, [...at, "note"], timing.note);
+      refs(POLICIES, [...at, "sources"], timing.sources);
+      if (timing.param !== undefined) {
+        const param = params.get(timing.param);
+        if (!param) error(POLICIES, [...at, "param"], `unknown param "${timing.param}" in policy "${policy.id}"`);
+        else if (param.type !== "number") error(POLICIES, [...at, "param"], `param "${timing.param}" is a ${param.type} param; timing needs a number param`);
+        else if (param.baseline === undefined) {
+          error(POLICIES, [...at, "param"], `param "${timing.param}" has no baseline, which timing measures the distance and direction from`);
+        }
+      } else {
+        if (timing.yearsPerUnit !== undefined) error(POLICIES, [...at, "yearsPerUnit"], '"yearsPerUnit" needs "param": the distance of which param?');
+        if (timing.below !== undefined) error(POLICIES, [...at, "below"], '"below" needs "param": below the baseline of which param?');
+      }
+      if (timing.below?.yearsPerUnit !== undefined && timing.param === undefined) {
+        error(POLICIES, [...at, "below", "yearsPerUnit"], '"yearsPerUnit" needs "param": the distance of which param?');
+      }
+      const phases = [timing, ...(timing.below ? [timing.below] : [])];
+      if (!timing.below && phases.every((phase) => phase.from === undefined && !phase.years && !phase.yearsPerUnit)) {
+        warn(POLICIES, at, "the timing has no start date and no build-up, so the measure acts in full from the first year measures can act, as without timing");
+      }
+      if (country) {
+        for (const [phase, path] of [[timing, at], [timing.below, [...at, "below"]]] as const) {
+          if (phase?.from !== undefined && Number(phase.from.slice(0, 4)) <= country.baseYear) {
+            warn(POLICIES, [...path, "from"], `${phase.from} lies in the base year ${country.baseYear} or before it; measures act in the projection only after the base year`);
+          }
+        }
+      }
+    }
   };
 
   if (policiesFile) {
@@ -812,6 +845,13 @@ function check(
       refs(DEBT, [key, "sources"], debt[key].sources);
     }
     text(DEBT, ["note"], debt.note);
+    if (debt.measuresFrom) {
+      text(DEBT, ["measuresFrom", "note"], debt.measuresFrom.note);
+      refs(DEBT, ["measuresFrom", "sources"], debt.measuresFrom.sources);
+      if (country && !(debt.measuresFrom.year > country.baseYear)) {
+        error(DEBT, ["measuresFrom", "year"], `${debt.measuresFrom.year} is not after the base year ${country.baseYear}; the projection's first year is ${country.baseYear + 1}`);
+      }
+    }
 
     const grossDebt = country?.indicators.grossDebt;
     if (grossDebt && !near(grossDebt.value, debt.stock.value, 0.001)) {
