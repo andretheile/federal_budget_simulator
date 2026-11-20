@@ -24,6 +24,7 @@
             "de": "Seit März 2025 darf der Bund Verteidigungsausgaben über 1 % des BIP mit Krediten außerhalb der Schuldenregel bezahlen, deshalb ändern Mehr- oder Minderausgaben für Verteidigung diese Lücke nicht.",
             "en": "Since March 2025 the federal government may pay for defence spending above 1% of GDP with borrowing outside the debt brake, so spending more or less on defence does not change this gap."
           },
+          "reasonShort": { "de": "Verteidigungsausgaben über 1 % des BIP sind seit 2025 von der Schuldenregel ausgenommen.", "en": "Defence spending above 1% of GDP has been exempt from the debt brake since 2025." },
           "sources": ["gg_art_115", "bundestag_drs_21_7301"]
         },
         {
@@ -32,6 +33,7 @@
             "de": "Der Finanzplan rechnet bereits mit der Steuer auf Kunststoffverpackungen (in Höhe der EU-Plastikabgabe, rund 1,6 Mrd. Euro im Jahr); seit die Koalition sie im November 2026 fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer.",
             "en": "The financial plan already counts on the tax on plastic packaging (at the level of the EU plastics contribution, about EUR 1.6 billion a year); since the coalition dropped it in November 2026, the real gap is larger by that amount."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit dieser Steuer; ohne sie ist die Lücke größer.", "en": "The financial plan already counts on this tax; without it the gap is larger." },
           "sources": ["bundestag_drs_21_7301", "adhoc_dpa_zuckersteuer_2028"]
         },
         {
@@ -40,6 +42,7 @@
             "de": "Der Finanzplan setzt die Mittel für das Elterngeld bereits mit Blick auf diese Reform niedriger an; die Einsparung verkleinert die Lücke deshalb nicht noch einmal.",
             "en": "The financial plan already sets the funds for parental allowance lower in view of this reform, so the saving does not narrow the gap a second time."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet diese Einsparung schon ein.", "en": "The financial plan already counts on this saving." },
           "sources": ["bundestag_drs_21_7301"]
         },
         {
@@ -48,6 +51,7 @@
             "de": "Der Finanzplan rechnet bereits mit den Erhöhungen der Tabaksteuer bis 2030, und die gehen gegenüber 2024 weiter, als dieser Regler reicht. Die Maßnahme verkleinert die Lücke deshalb nicht.",
             "en": "The financial plan already counts on the tobacco tax increases to 2030, which go further above 2024 than this slider reaches, so the measure does not narrow the gap."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit höheren Tabaksteuern bis 2030.", "en": "The financial plan already counts on higher tobacco taxes to 2030." },
           "sources": ["bundestag_drs_21_7301", "bt_drs_21_8605"]
         },
         {
@@ -56,6 +60,7 @@
             "de": "Der Finanzplan rechnet bereits mit dem seit 2026 geltenden Satz von 7 % für Speisen in Restaurants; die Maßnahme wird deshalb nicht gezählt.",
             "en": "The financial plan already counts on the 7% rate on restaurant meals in force since 2026, so the measure is not counted."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit dem Satz von 7 % für Speisen.", "en": "The financial plan already counts on the 7% rate for restaurant meals." },
           "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
         },
         {
@@ -64,6 +69,7 @@
             "de": "Der Betrag ist die dauerhafte Wirkung gegenüber 67 Jahren, der Grenze, die erst ab 2031 für alle gilt. Was in den Jahren des Finanzplans im Bundeshaushalt ankäme, zeigt er weder für eine Anhebung noch für eine Senkung. Eine Anhebung begänne nach dem Vorschlag der Alterssicherungskommission frühestens 2032, nach den Planjahren, und verkleinert die Lücke nicht. Eine Senkung könnte schneller wirken, brächte in den Planjahren aber einen anderen Betrag als den gezeigten; auch sie wird deshalb nicht gezählt.",
             "en": "The amount is the lasting effect compared with a limit of 67, which applies to everyone only from 2031. It does not show what would reach the federal budget in the years of the financial plan, either for an increase or for a reduction. Under the pensions commission's proposal an increase would begin in 2032 at the earliest, after the plan years, and does not narrow the gap. A reduction could take effect sooner, but would bring a different amount in the plan years from the one shown; it is therefore not counted either."
           },
+          "reasonShort": { "de": "Der Betrag ist eine Dauerwirkung, nicht die Wirkung in den Jahren des Finanzplans.", "en": "The amount is a lasting effect, not the effect in the years of the financial plan." },
           "sources": ["ask_bericht_2026", "sgb6_235", "bundestag_drs_21_7301"]
         }
       ]
@@ -91,6 +97,7 @@
             "de": "Seit März 2025 darf der Bund Verteidigungsausgaben über 1 % des BIP mit Krediten außerhalb der Schuldenregel bezahlen, deshalb ändern Mehr- oder Minderausgaben für Verteidigung diese Lücke nicht.",
             "en": "Since March 2025 the federal government may pay for defence spending above 1% of GDP with borrowing outside the debt brake, so spending more or less on defence does not change this gap."
           },
+          "reasonShort": { "de": "Verteidigungsausgaben über 1 % des BIP sind seit 2025 von der Schuldenregel ausgenommen.", "en": "Defence spending above 1% of GDP has been exempt from the debt brake since 2025." },
           "sources": ["gg_art_115", "bundestag_drs_21_7301"]
         },
         {
@@ -99,6 +106,7 @@
             "de": "Der Finanzplan rechnet bereits mit der Steuer auf Kunststoffverpackungen (in Höhe der EU-Plastikabgabe, rund 1,6 Mrd. Euro im Jahr); seit die Koalition sie im November 2026 fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer.",
             "en": "The financial plan already counts on the tax on plastic packaging (at the level of the EU plastics contribution, about EUR 1.6 billion a year); since the coalition dropped it in November 2026, the real gap is larger by that amount."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit dieser Steuer; ohne sie ist die Lücke größer.", "en": "The financial plan already counts on this tax; without it the gap is larger." },
           "sources": ["bundestag_drs_21_7301", "adhoc_dpa_zuckersteuer_2028"]
         },
         {
@@ -107,6 +115,7 @@
             "de": "Der Finanzplan setzt die Mittel für das Elterngeld bereits mit Blick auf diese Reform niedriger an; die Einsparung verkleinert die Lücke deshalb nicht noch einmal.",
             "en": "The financial plan already sets the funds for parental allowance lower in view of this reform, so the saving does not narrow the gap a second time."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet diese Einsparung schon ein.", "en": "The financial plan already counts on this saving." },
           "sources": ["bundestag_drs_21_7301"]
         },
         {
@@ -115,6 +124,7 @@
             "de": "Der Finanzplan rechnet bereits mit den Erhöhungen der Tabaksteuer bis 2030, und die gehen gegenüber 2024 weiter, als dieser Regler reicht. Die Maßnahme verkleinert die Lücke deshalb nicht.",
             "en": "The financial plan already counts on the tobacco tax increases to 2030, which go further above 2024 than this slider reaches, so the measure does not narrow the gap."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit höheren Tabaksteuern bis 2030.", "en": "The financial plan already counts on higher tobacco taxes to 2030." },
           "sources": ["bundestag_drs_21_7301", "bt_drs_21_8605"]
         },
         {
@@ -123,6 +133,7 @@
             "de": "Der Finanzplan rechnet bereits mit dem seit 2026 geltenden Satz von 7 % für Speisen in Restaurants; die Maßnahme wird deshalb nicht gezählt.",
             "en": "The financial plan already counts on the 7% rate on restaurant meals in force since 2026, so the measure is not counted."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit dem Satz von 7 % für Speisen.", "en": "The financial plan already counts on the 7% rate for restaurant meals." },
           "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
         },
         {
@@ -131,6 +142,7 @@
             "de": "Der Betrag ist die dauerhafte Wirkung gegenüber 67 Jahren, der Grenze, die erst ab 2031 für alle gilt. Was in den Jahren des Finanzplans im Bundeshaushalt ankäme, zeigt er weder für eine Anhebung noch für eine Senkung. Eine Anhebung begänne nach dem Vorschlag der Alterssicherungskommission frühestens 2032, nach den Planjahren, und verkleinert die Lücke nicht. Eine Senkung könnte schneller wirken, brächte in den Planjahren aber einen anderen Betrag als den gezeigten; auch sie wird deshalb nicht gezählt.",
             "en": "The amount is the lasting effect compared with a limit of 67, which applies to everyone only from 2031. It does not show what would reach the federal budget in the years of the financial plan, either for an increase or for a reduction. Under the pensions commission's proposal an increase would begin in 2032 at the earliest, after the plan years, and does not narrow the gap. A reduction could take effect sooner, but would bring a different amount in the plan years from the one shown; it is therefore not counted either."
           },
+          "reasonShort": { "de": "Der Betrag ist eine Dauerwirkung, nicht die Wirkung in den Jahren des Finanzplans.", "en": "The amount is a lasting effect, not the effect in the years of the financial plan." },
           "sources": ["ask_bericht_2026", "sgb6_235", "bundestag_drs_21_7301"]
         }
       ]
@@ -158,6 +170,7 @@
             "de": "Seit März 2025 darf der Bund Verteidigungsausgaben über 1 % des BIP mit Krediten außerhalb der Schuldenregel bezahlen, deshalb ändern Mehr- oder Minderausgaben für Verteidigung diese Lücke nicht.",
             "en": "Since March 2025 the federal government may pay for defence spending above 1% of GDP with borrowing outside the debt brake, so spending more or less on defence does not change this gap."
           },
+          "reasonShort": { "de": "Verteidigungsausgaben über 1 % des BIP sind seit 2025 von der Schuldenregel ausgenommen.", "en": "Defence spending above 1% of GDP has been exempt from the debt brake since 2025." },
           "sources": ["gg_art_115", "bundestag_drs_21_7301"]
         },
         {
@@ -166,6 +179,7 @@
             "de": "Der Finanzplan rechnet bereits mit der Steuer auf Kunststoffverpackungen (in Höhe der EU-Plastikabgabe, rund 1,6 Mrd. Euro im Jahr); seit die Koalition sie im November 2026 fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer.",
             "en": "The financial plan already counts on the tax on plastic packaging (at the level of the EU plastics contribution, about EUR 1.6 billion a year); since the coalition dropped it in November 2026, the real gap is larger by that amount."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit dieser Steuer; ohne sie ist die Lücke größer.", "en": "The financial plan already counts on this tax; without it the gap is larger." },
           "sources": ["bundestag_drs_21_7301", "adhoc_dpa_zuckersteuer_2028"]
         },
         {
@@ -174,6 +188,7 @@
             "de": "Der Finanzplan setzt die Mittel für das Elterngeld bereits mit Blick auf diese Reform niedriger an; die Einsparung verkleinert die Lücke deshalb nicht noch einmal.",
             "en": "The financial plan already sets the funds for parental allowance lower in view of this reform, so the saving does not narrow the gap a second time."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet diese Einsparung schon ein.", "en": "The financial plan already counts on this saving." },
           "sources": ["bundestag_drs_21_7301"]
         },
         {
@@ -182,6 +197,7 @@
             "de": "Der Finanzplan rechnet bereits mit den Erhöhungen der Tabaksteuer bis 2030, und die gehen gegenüber 2024 weiter, als dieser Regler reicht. Die Maßnahme verkleinert die Lücke deshalb nicht.",
             "en": "The financial plan already counts on the tobacco tax increases to 2030, which go further above 2024 than this slider reaches, so the measure does not narrow the gap."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit höheren Tabaksteuern bis 2030.", "en": "The financial plan already counts on higher tobacco taxes to 2030." },
           "sources": ["bundestag_drs_21_7301", "bt_drs_21_8605"]
         },
         {
@@ -190,6 +206,7 @@
             "de": "Der Finanzplan rechnet bereits mit dem seit 2026 geltenden Satz von 7 % für Speisen in Restaurants; die Maßnahme wird deshalb nicht gezählt.",
             "en": "The financial plan already counts on the 7% rate on restaurant meals in force since 2026, so the measure is not counted."
           },
+          "reasonShort": { "de": "Der Finanzplan rechnet schon mit dem Satz von 7 % für Speisen.", "en": "The financial plan already counts on the 7% rate for restaurant meals." },
           "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
         },
         {
@@ -198,6 +215,7 @@
             "de": "Der Betrag ist die dauerhafte Wirkung gegenüber 67 Jahren, der Grenze, die erst ab 2031 für alle gilt. Was in den Jahren des Finanzplans im Bundeshaushalt ankäme, zeigt er weder für eine Anhebung noch für eine Senkung. Eine Anhebung begänne nach dem Vorschlag der Alterssicherungskommission frühestens 2032, nach den Planjahren, und verkleinert die Lücke nicht. Eine Senkung könnte schneller wirken, brächte in den Planjahren aber einen anderen Betrag als den gezeigten; auch sie wird deshalb nicht gezählt.",
             "en": "The amount is the lasting effect compared with a limit of 67, which applies to everyone only from 2031. It does not show what would reach the federal budget in the years of the financial plan, either for an increase or for a reduction. Under the pensions commission's proposal an increase would begin in 2032 at the earliest, after the plan years, and does not narrow the gap. A reduction could take effect sooner, but would bring a different amount in the plan years from the one shown; it is therefore not counted either."
           },
+          "reasonShort": { "de": "Der Betrag ist eine Dauerwirkung, nicht die Wirkung in den Jahren des Finanzplans.", "en": "The amount is a lasting effect, not the effect in the years of the financial plan." },
           "sources": ["ask_bericht_2026", "sgb6_235", "bundestag_drs_21_7301"]
         }
       ]

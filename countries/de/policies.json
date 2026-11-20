@@ -7,8 +7,12 @@
         "en": "No citizen's income for non-citizens"
       },
       "summary": {
-        "de": "Schließt die ausgewählten Gruppen ohne deutschen Pass vom Bürgergeld aus (seit Juli 2026: Grundsicherungsgeld). In der Grundeinstellung entfallen Regelbedarf und Wohnkosten für alle vier Gruppen ersatzlos. Das geht über die Forderung der AfD hinaus: Sie will erwerbsfähige Erwachsene ohne deutschen Pass nach einer Übergangszeit grundsätzlich ausschließen, außer wenn sie zehn Jahre (aus Drittstaaten) oder fünf Jahre (aus der EU) sozialversicherungspflichtig gearbeitet haben und Deutsch auf Niveau B2 sprechen, und die übrigen auf Rückkehrhilfen und eng begrenzte Überbrückungsleistungen verweisen (Antrag im Bundestag vom Juni 2026). Ein Ausschluss ohne Ersatzleistungen wäre verfassungswidrig, weil das Existenzminimum auch für diese Gruppen gesichert werden muss. Der Regler zeigt, was Ersatzleistungen kosten: Realistisch sind rund 100 % der Einsparung; die Bundesregierung rechnet für ukrainische Geflüchtete mit etwa 104 %. Diese Kosten tragen dann Länder und Kommunen statt des Bundes.",
-        "en": "Excludes the selected groups without German citizenship from citizen's income (Bürgergeld; since July 2026: Grundsicherungsgeld). At the default setting, standard benefits and housing costs are dropped without replacement for all four groups. That goes beyond the AfD's demand: after a transition it wants to exclude adults without German citizenship who are able to work, unless they have worked ten years (third countries) or five years (EU) in employment subject to social insurance and speak German at level B2, and to refer the others to return assistance and narrowly limited bridging benefits (motion in the Bundestag of June 2026). Exclusion without replacement benefits would be unconstitutional, because the subsistence minimum must be secured for these groups too. The slider shows what replacement benefits cost: about 100% of the saving is realistic; for Ukrainian refugees the federal government expects about 104%. These costs then fall on states and municipalities instead of the federal government."
+        "de": "Schließt Gruppen ohne deutschen Pass vom Bürgergeld aus. Die Grundeinstellung streicht allen vier Gruppen Regelbedarf und Wohnkosten ersatzlos und geht damit über die Forderung der AfD hinaus.",
+        "en": "Excludes groups without German citizenship from citizen's income. The default drops standard benefits and housing costs for all four groups without replacement, going beyond the AfD's demand."
+      },
+      "explanation": {
+        "de": "Das Bürgergeld heißt seit Juli 2026 Grundsicherungsgeld. Die AfD will erwerbsfähige Erwachsene ohne deutschen Pass nach einer Übergangszeit grundsätzlich ausschließen, außer wenn sie zehn Jahre (aus Drittstaaten) oder fünf Jahre (aus der EU) sozialversicherungspflichtig gearbeitet haben und Deutsch auf Niveau B2 sprechen; die übrigen will sie auf Rückkehrhilfen und eng begrenzte Überbrückungsleistungen verweisen (Antrag im Bundestag vom Juni 2026).\n\nEin Ausschluss ohne Ersatzleistungen wäre verfassungswidrig, weil das Existenzminimum auch für diese Gruppen gesichert werden muss. Der Regler für die Ersatzleistungen zeigt, was sie kosten: Realistisch sind rund 100 % der Einsparung; die Bundesregierung rechnet für ukrainische Geflüchtete mit etwa 104 %. Diese Kosten tragen dann Länder und Kommunen statt des Bundes.",
+        "en": "Citizen's income (Bürgergeld) has been called Grundsicherungsgeld since July 2026. The AfD wants, after a transition, to exclude adults without German citizenship who are able to work, unless they have worked ten years (third countries) or five years (EU) in employment subject to social insurance and speak German at level B2, and to refer the others to return assistance and narrowly limited bridging benefits (motion in the Bundestag of June 2026).\n\nExclusion without replacement benefits would be unconstitutional, because the subsistence minimum must be secured for these groups too. The slider for replacement benefits shows what they cost: about 100% of the saving is realistic; for Ukrainian refugees the federal government expects about 104%. These costs then fall on states and municipalities instead of the federal government."
       },
       "topic": "migration",
       "params": [
@@ -137,10 +141,10 @@
           "sources": [
             "bt_drs_21_3539"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Die Statistik unterscheidet nach Staatsangehörigkeit, nicht nach Aufenthaltsstatus oder Aufenthaltsdauer; Eingebürgerte zählen als Deutsche. Die Anteile beziehen sich auf alle Leistungsberechtigten einschließlich Kindern.",
             "en": "The statistics distinguish by nationality, not by residence status or length of stay; naturalised persons count as German. The shares cover all recipients including children."
@@ -165,8 +169,12 @@
         "en": "Ukrainians: asylum seekers' benefits instead of citizen's income"
       },
       "summary": {
-        "de": "Nimmt alle ukrainischen Staatsangehörigen aus dem Bürgergeld (seit Juli 2026: Grundsicherungsgeld) und versorgt sie stattdessen nach dem Asylbewerberleistungsgesetz, wie bis Mai 2022. Die Regierungskoalition plant das nur für Geflüchtete, die nach dem 1. April 2025 eingereist sind.",
-        "en": "Removes all Ukrainian citizens from citizen's income (Bürgergeld; since July 2026: Grundsicherungsgeld) and provides for them under the Asylum Seekers' Benefits Act instead, as was the case until May 2022. The governing coalition plans this only for refugees who arrived after 1 April 2025."
+        "de": "Versorgt alle ukrainischen Staatsangehörigen nach dem Asylbewerberleistungsgesetz statt mit Bürgergeld, wie bis Mai 2022. Die Koalition plant das nur für nach dem 1. April 2025 Eingereiste.",
+        "en": "Provides for all Ukrainian citizens under the Asylum Seekers' Benefits Act instead of citizen's income, as until May 2022. The coalition plans this only for those who arrived after 1 April 2025."
+      },
+      "explanation": {
+        "de": "Das Bürgergeld heißt seit Juli 2026 Grundsicherungsgeld. Die Regierungskoalition will nur Geflüchtete umstellen, die nach dem 1. April 2025 eingereist sind; die Maßnahme nimmt alle aus dem Bürgergeld. Der Regler legt fest, wie viel der Einsparung bei den Asylbewerberleistungen wieder anfällt.",
+        "en": "Citizen's income (Bürgergeld) has been called Grundsicherungsgeld since July 2026. The governing coalition wants to move only refugees who arrived after 1 April 2025; the measure removes all of them from citizen's income. The slider sets how much of the saving reappears under asylum seekers' benefits."
       },
       "topic": "migration",
       "params": [
@@ -305,8 +313,8 @@
         "en": "Cut asylum seekers' benefits"
       },
       "summary": {
-        "de": "Senkt die Ausgaben nach dem Asylbewerberleistungsgesetz (Unterkunft, Verpflegung, Geldleistungen, Krankenhilfe) um den eingestellten Anteil.",
-        "en": "Reduces spending under the Asylum Seekers' Benefits Act (accommodation, food, cash benefits, health care) by the chosen share."
+        "de": "Senkt die Ausgaben nach dem Asylbewerberleistungsgesetz (Unterkunft, Verpflegung, Geldleistungen, Krankenhilfe) um den eingestellten Anteil, in der Grundeinstellung um 20 %.",
+        "en": "Reduces spending under the Asylum Seekers' Benefits Act (accommodation, food, cash benefits, health care) by the chosen share, 20% at the default setting."
       },
       "topic": "migration",
       "params": [
@@ -407,8 +415,8 @@
         "en": "Cut development aid"
       },
       "summary": {
-        "de": "Kürzt die staatlichen Ausgaben für Entwicklungshilfe und wirtschaftliche Auslandshilfe um den eingestellten Anteil.",
-        "en": "Cuts government spending on development aid and foreign economic aid by the chosen share."
+        "de": "Kürzt die staatlichen Ausgaben für Entwicklungshilfe und wirtschaftliche Auslandshilfe um den eingestellten Anteil, in der Grundeinstellung um die Hälfte.",
+        "en": "Cuts government spending on development aid and foreign economic aid by the chosen share, by half at the default setting."
       },
       "topic": "other",
       "params": [
@@ -599,8 +607,8 @@
         "en": "Cut the EU contribution"
       },
       "summary": {
-        "de": "Kürzt Deutschlands Zahlungen an den EU-Haushalt (Eigenmittel aus Mehrwertsteuer und Wirtschaftsleistung, 2024: 27,33 Mrd. Euro) um den eingestellten Anteil.",
-        "en": "Cuts Germany's payments to the EU budget (own resources based on VAT and national income, 2024: EUR 27.33 billion) by the chosen share."
+        "de": "Kürzt Deutschlands Zahlungen an den EU-Haushalt (Eigenmittel aus Mehrwertsteuer und Wirtschaftsleistung, 2024: 27,33 Mrd. Euro) um den eingestellten Anteil, in der Grundeinstellung um ein Viertel.",
+        "en": "Cuts Germany's payments to the EU budget (own resources based on VAT and national income, 2024: EUR 27.33 billion) by the chosen share, by a quarter at the default setting."
       },
       "topic": "europe",
       "params": [
@@ -686,8 +694,12 @@
         "en": "Reform parental allowance (2026 cabinet draft)"
       },
       "summary": {
-        "de": "Baut das Elterngeld so um, wie es das Kabinett im November 2026 beschlossen hat: Für jeden Elternteil sind vier Monate reserviert, in denen das Elterngeld 80 % des wegfallenden Einkommens beträgt; sechs weitere Monate können die Eltern frei aufteilen, mit 50 % statt heute in der Regel 65 %. Zusammen bleiben es bis zu 14 Monate, Alleinerziehende erhalten bis zu acht Monate mit 80 %. Der Mindestbetrag steigt von 300 auf 330 Euro, der Höchstbetrag von 1.800 auf 1.900 Euro, der Partnerschaftsbonus entfällt. Die Regeln sollen ab 1. November 2027 gelten. Die Maßnahme zeigt die Einsparung des Bundes bei voller Wirkung, die das Familienministerium für 2030 erwartet: 1,36 Mrd. Euro im Jahr.",
-        "en": "Restructures parental allowance as the cabinet decided in November 2026: four months are reserved for each parent, in which the allowance is 80% of the lost income; the parents can divide six further months freely, at 50% instead of usually 65% today. In total there are still up to 14 months; single parents get up to eight months at 80%. The minimum rises from EUR 300 to 330, the maximum from EUR 1,800 to 1,900, and the partnership bonus is abolished. The rules are to apply from 1 November 2027. The measure shows the federal saving at full effect that the family ministry expects for 2030: EUR 1.36 billion a year."
+        "de": "Baut das Elterngeld so um, wie es das Kabinett im November 2026 beschlossen hat, ab 1. November 2027. Gezeigt ist die Einsparung des Bundes bei voller Wirkung 2030: 1,36 Mrd. Euro im Jahr.",
+        "en": "Restructures parental allowance as the cabinet decided in November 2026, from 1 November 2027. It shows the federal saving at full effect in 2030: EUR 1.36 billion a year."
+      },
+      "explanation": {
+        "de": "Für jeden Elternteil sind vier Monate reserviert, in denen das Elterngeld 80 % des wegfallenden Einkommens beträgt; sechs weitere Monate können die Eltern frei aufteilen, mit 50 % statt heute in der Regel 65 %. Zusammen bleiben es bis zu 14 Monate, Alleinerziehende erhalten bis zu acht Monate mit 80 %. Der Mindestbetrag steigt von 300 auf 330 Euro, der Höchstbetrag von 1.800 auf 1.900 Euro, der Partnerschaftsbonus entfällt.\n\nDie Einsparung von 1,36 Mrd. Euro im Jahr erwartet das Familienministerium für 2030, wenn die neuen Regeln voll wirken.",
+        "en": "Four months are reserved for each parent, in which the allowance is 80% of the lost income; the parents can divide six further months freely, at 50% instead of usually 65% today. In total there are still up to 14 months; single parents get up to eight months at 80%. The minimum rises from EUR 300 to 330, the maximum from EUR 1,800 to 1,900, and the partnership bonus is abolished.\n\nThe family ministry expects the saving of EUR 1.36 billion a year for 2030, when the new rules take full effect."
       },
       "topic": "social",
       "params": [],
@@ -767,23 +779,23 @@
           "kind": "practical",
           "severity": "minor",
           "text": {
+            "de": "Der Finanzplan des Bundes bis 2030 rechnet die Reform bereits ein: Er setzt die Mittel für das Elterngeld mit Blick auf die geplante Reform niedriger an und zählt sie zu den Sparmaßnahmen. Für das Ziel „Lücke im Finanzplan“ zählt die Einsparung deshalb nicht. Welchen Betrag der Finanzplan dafür angesetzt hat, nennt er nicht.",
+            "en": "The federal financial plan to 2030 already includes the reform: it sets the funds for parental allowance lower in view of the planned reform and counts it among the savings measures. The saving therefore does not count towards closing the gap in the financial plan. The plan does not say what amount it assumed."
+          },
+          "sources": [
+            "bundestag_drs_21_7301"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
             "de": "Die volle Einsparung wird erst 2030 erreicht, weil die neuen Regeln ab 1. November 2027 gelten und Elterngeld noch Monate nach der Geburt gezahlt wird: 2027 sind es 60 Mio. Euro, 2028 535 Mio. Euro. Die Familienministerin hat Eltern, die schon ein Kind erwarten, Vertrauensschutz zugesagt.",
             "en": "The full saving is only reached in 2030, because the new rules apply from 1 November 2027 and parental allowance is paid for months after a birth: EUR 60 million in 2027 and 535 million in 2028. The family minister has promised parents who are already expecting a child that their entitlement is protected."
           },
           "sources": [
             "bmbfsfj_refe_elterngeld_2026",
             "bt_drs_21_8495"
-          ]
-        },
-        {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
-            "de": "Der Finanzplan des Bundes bis 2030 rechnet die Reform bereits ein: Er setzt die Mittel für das Elterngeld mit Blick auf die geplante Reform niedriger an und zählt sie zu den Sparmaßnahmen. Für das Ziel „Lücke im Finanzplan“ zählt die Einsparung deshalb nicht. Welchen Betrag der Finanzplan dafür angesetzt hat, nennt er nicht.",
-            "en": "The federal financial plan to 2030 already includes the reform: it sets the funds for parental allowance lower in view of the planned reform and counts it among the savings measures. The saving therefore does not count towards closing the gap in the financial plan. The plan does not say what amount it assumed."
-          },
-          "sources": [
-            "bundestag_drs_21_7301"
           ]
         }
       ],
@@ -816,8 +828,12 @@
         "en": "Reintroduce the wealth tax"
       },
       "summary": {
-        "de": "Erhebt jährlich eine Steuer auf das Nettovermögen privater Haushalte oberhalb eines Freibetrags. Freibetrag, Steuersatz und Ausweichreaktionen sind einstellbar.",
-        "en": "Levies an annual tax on the net wealth of private households above an allowance. Allowance, tax rate and avoidance are adjustable."
+        "de": "Erhebt jährlich eine Steuer auf das Nettovermögen privater Haushalte oberhalb eines Freibetrags, in der Grundeinstellung 1 % auf Vermögen über 2 Mio. Euro je Haushalt.",
+        "en": "Levies an annual tax on the net wealth of private households above an allowance, at the default setting 1% on wealth above EUR 2 million per household."
+      },
+      "explanation": {
+        "de": "Freibetrag, Steuersatz und Ausweichreaktionen sind einstellbar. Die Grundeinstellung rechnet damit, dass Ausweichreaktionen und Ausnahmen 35 % des Aufkommens kosten.",
+        "en": "Allowance, tax rate and avoidance are adjustable. The default assumes that avoidance and exemptions cost 35% of the revenue."
       },
       "topic": "taxes",
       "params": [
@@ -974,8 +990,12 @@
         "en": "Change the income tax schedule"
       },
       "summary": {
-        "de": "Legt fest, welcher Steuersatz für jeden zusätzlich verdienten Euro gilt (Grenzsteuersatz), abhängig vom zu versteuernden Einkommen. Die Kurve ist der Einkommensteuertarif: Bis zum ersten Punkt bleibt Einkommen steuerfrei (Grundfreibetrag), zwischen zwei Punkten steigt der Satz gleichmäßig, oberhalb des letzten Punkts bleibt er gleich. Voreingestellt ist der Tarif des Basisjahres 2024; solange kein Punkt bewegt wird, ändert sich nichts. Die Vorlagen zeigen Tarife aus den Wahlprogrammen von 2025. Die Rechnung wendet den alten und den neuen Tarif auf die Einkommensverteilung an und überträgt die relative Änderung auf das Aufkommen aus Lohn- und Einkommensteuer.",
-        "en": "Sets the tax rate that applies to each additional euro earned (marginal rate), depending on taxable income. The curve is the income tax schedule: up to the first point income stays tax-free (basic allowance), between two points the rate rises evenly, above the last point it stays the same. The default is the schedule of the base year 2024; as long as no point is moved, nothing changes. The presets show schedules from the 2025 election programmes. The calculation applies the old and the new schedule to the income distribution and transfers the relative change to revenue from wage tax and assessed income tax."
+        "de": "Ändert den Einkommensteuertarif: welcher Steuersatz für jeden zusätzlich verdienten Euro gilt. Voreingestellt ist der Tarif von 2024; die Vorlagen zeigen Tarife aus den Wahlprogrammen von 2025.",
+        "en": "Changes the income tax schedule: the rate that applies to each additional euro earned. The default is the 2024 schedule; the presets show schedules from the 2025 election programmes."
+      },
+      "explanation": {
+        "de": "Die Kurve zeigt diesen Grenzsteuersatz abhängig vom zu versteuernden Einkommen. Bis zum ersten Punkt bleibt Einkommen steuerfrei (Grundfreibetrag), zwischen zwei Punkten steigt der Satz gleichmäßig, oberhalb des letzten Punkts bleibt er gleich. Voreingestellt ist der Tarif des Basisjahres 2024; solange kein Punkt bewegt wird, ändert sich nichts.\n\nDie Rechnung wendet den alten und den neuen Tarif auf die Einkommensverteilung an und überträgt die relative Änderung auf das Aufkommen aus Lohn- und Einkommensteuer.",
+        "en": "The curve shows this marginal rate depending on taxable income. Up to the first point income stays tax-free (basic allowance), between two points the rate rises evenly, and above the last point it stays the same. The default is the schedule of the base year 2024; as long as no point is moved, nothing changes.\n\nThe calculation applies the old and the new schedule to the income distribution and transfers the relative change to revenue from wage tax and assessed income tax."
       },
       "topic": "taxes",
       "params": [
@@ -1460,8 +1480,19 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "major",
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Die Koalition hat im Sommer 2026 Steuerpläne ab 2027 vereinbart: 45 % schon ab 250.000 Euro und ein neuer Satz von 47 % ab 280.000 Euro, dafür Entlastungen bei kleinen und mittleren Einkommen (Stand Juli 2026: Koalitionsbeschluss, noch kein Gesetz). Der Spitzensteuersatz von 42 % selbst soll nicht steigen.",
+            "en": "In summer 2026 the coalition agreed tax plans from 2027: 45% already from EUR 250,000 and a new rate of 47% from EUR 280,000, in return for relief for low and middle incomes (as of July 2026: coalition decision, not yet law). The 42% top rate itself is not to rise."
+          },
+          "sources": [
+            "test_de_steuerreform_2026"
+          ]
+        }
+      ],
+      "limits": [
+        {
           "text": {
             "de": "Die Achse zeigt das zu versteuernde Einkommen, nicht das Bruttoeinkommen. Es ist niedriger, weil Werbungskosten, Versicherungsbeiträge und Freibeträge abgezogen sind; in der Steuerstatistik 2022 macht es im Schnitt 82 % der Einkünfte aus. Ehepaare werden zusammen veranlagt: Der Tarif gilt für die Hälfte ihres gemeinsamen Einkommens, die Steuer wird verdoppelt (Splitting). In der Rechnung zählt deshalb jeder Partner mit dem halben gemeinsamen Einkommen.",
             "en": "The axis shows taxable income, not gross income. It is lower because work-related expenses, insurance contributions and allowances have been deducted; in the 2022 tax statistics it averages 82% of income. Married couples are assessed jointly: the schedule applies to half their joint income and the tax is doubled (income splitting). In the calculation each partner therefore counts with half the joint income."
@@ -1472,8 +1503,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Nicht in der Kurve enthalten: Der Solidaritätszuschlag (5,5 % der Einkommensteuer oberhalb einer Freigrenze, 2024 ab 18.130 Euro Steuer) und die Kirchensteuer kommen hinzu und ändern sich mit der Einkommensteuer; diese Folgewirkung ist nicht mitgerechnet. Den Solidaritätszuschlag selbst ändert die eigene Maßnahme dazu. Kapitalerträge unterliegen meist der Abgeltungsteuer und nicht dem Tarif. Kindergeld, Kinderfreibeträge und andere Abzüge bleiben unverändert.",
             "en": "Not included in the curve: the solidarity surcharge (5.5% of income tax above an exemption threshold, in 2024 from EUR 18,130 of tax) and church tax come on top and change with income tax; this knock-on effect is not included. The surcharge itself is changed by its own measure. Capital income is mostly subject to the flat withholding tax and not to the schedule. Child benefit, child allowances and other deductions remain unchanged."
@@ -1486,25 +1515,12 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Die Vorlagen der Parteien folgen der Umsetzung des ZEW, das die Wahlprogramme von 2025 in Werte des Rechtsstands 2024 übersetzt hat. Sie enthalten nur den Tarif, nicht die übrigen Steuerpläne (etwa zum Solidaritätszuschlag oder zu Kinderfreibeträgen). Wo die Quelle den Verlauf zwischen den genannten Eckwerten offenlässt (bei CDU/CSU, AfD, Linke und Grünen), steigt der Satz hier gleichmäßig. Die Grünen nennen in ihrem Programm selbst keinen Tarif; ihre Vorlage zeigt eine Annahme des ZEW. Für das BSW fehlt eine Vorlage: Auch das ZEW nennt für seine Umsetzung nur den Grundfreibetrag (16.600 Euro) und den Beginn des Spitzensteuersatzes (56.630 Euro), nicht den Verlauf dazwischen, und eine gleichmäßig steigende Kurve würde anders als dort fast alle Einkommen entlasten.",
             "en": "The party presets follow the implementation by ZEW, which translated the 2025 election programmes into values of 2024 law. They contain only the schedule, not the other tax plans (for instance on the solidarity surcharge or child allowances). Where the source leaves the shape between the stated thresholds open (for CDU/CSU, AfD, Die Linke and the Greens), the rate rises evenly here. The Greens give no schedule in their programme themselves; their preset shows an assumption by ZEW. There is no preset for BSW: ZEW too gives for its implementation only the basic allowance (EUR 16,600) and the start of the top rate (EUR 56,630), not the shape in between, and an evenly rising curve would, unlike there, relieve almost all incomes."
           },
           "sources": [
             "zew_wahlprogramme_2025"
-          ]
-        },
-        {
-          "kind": "political",
-          "severity": "minor",
-          "text": {
-            "de": "Die Koalition hat im Sommer 2026 Steuerpläne ab 2027 vereinbart: 45 % schon ab 250.000 Euro und ein neuer Satz von 47 % ab 280.000 Euro, dafür Entlastungen bei kleinen und mittleren Einkommen (Stand Juli 2026: Koalitionsbeschluss, noch kein Gesetz). Der Spitzensteuersatz von 42 % selbst soll nicht steigen.",
-            "en": "In summer 2026 the coalition agreed tax plans from 2027: 45% already from EUR 250,000 and a new rate of 47% from EUR 280,000, in return for relief for low and middle incomes (as of July 2026: coalition decision, not yet law). The 42% top rate itself is not to rise."
-          },
-          "sources": [
-            "test_de_steuerreform_2026"
           ]
         }
       ],
@@ -1523,8 +1539,12 @@
         "en": "Abolish or change the solidarity surcharge"
       },
       "summary": {
-        "de": "Setzt den Solidaritätszuschlag für drei Gruppen von Zahlern auf die eingestellten Sätze. Heute beträgt er 5,5 % der Steuer. Bei der Lohn- und Einkommensteuer zahlen ihn seit 2021 nur noch die rund 10 % der früheren Zahler mit den höchsten Einkommen, auf Kapitalerträge und auf die Körperschaftsteuer von Unternehmen gibt es dagegen keine Freigrenze. Die Grundeinstellung zeigt die Abschaffung, die CDU/CSU, FDP und AfD 2025 in ihren Wahlprogrammen gefordert haben: Dem Bund fehlen dann 12,6 Mrd. Euro im Jahr. Mit den Reglern lassen sich auch die anderen Positionen einstellen: den Zuschlag nur für Anleger und Unternehmen behalten (erster Regler auf 0, dritter auf 5,5 %), nur für hohe Einkommen (erster Regler auf 5,5 %, dritter auf 0), ihn wie bis 2020 wieder für alle erheben (alle drei auf 5,5 %) oder einen höheren Satz, etwa für Verteidigung.",
-        "en": "Sets the solidarity surcharge to the chosen rates for three groups of payers. Today it is 5.5% of the tax. On wage and income tax, since 2021 only the roughly 10% of former payers with the highest incomes pay it, whereas there is no exemption threshold on capital income or on companies' corporate income tax. The default shows abolition, as demanded by CDU/CSU, FDP and AfD in their 2025 election programmes: the federal government then lacks EUR 12.6 billion a year. The sliders also allow the other positions: keeping the surcharge only for investors and companies (first slider at 0, third at 5.5%), only for high incomes (first slider at 5.5%, third at 0), levying it on everyone again as until 2020 (all three at 5.5%) or a higher rate, for example for defence."
+        "de": "Setzt den Solidaritätszuschlag für drei Gruppen von Zahlern fest. Die Grundeinstellung zeigt die Abschaffung, die CDU/CSU, FDP und AfD 2025 forderten: Dem Bund fehlen dann 12,6 Mrd. Euro im Jahr.",
+        "en": "Sets the solidarity surcharge for three groups of payers. The default shows abolition, as CDU/CSU, FDP and AfD demanded in 2025: the federal government then lacks EUR 12.6 billion a year."
+      },
+      "explanation": {
+        "de": "Heute beträgt der Zuschlag 5,5 % der Steuer. Bei der Lohn- und Einkommensteuer zahlen ihn seit 2021 nur noch die rund 10 % der früheren Zahler mit den höchsten Einkommen; auf Kapitalerträge und auf die Körperschaftsteuer von Unternehmen gibt es keine Freigrenze. Die Abschaffung forderten CDU/CSU, FDP und AfD in ihren Wahlprogrammen.\n\nMit den Reglern lassen sich auch die anderen Positionen einstellen: den Zuschlag nur für Anleger und Unternehmen behalten (erster Regler auf 0, dritter auf 5,5 %), nur für hohe Einkommen (erster Regler auf 5,5 %, dritter auf 0), ihn wie bis 2020 wieder für alle erheben (alle drei auf 5,5 %) oder einen höheren Satz, etwa für Verteidigung.",
+        "en": "Today the surcharge is 5.5% of the tax. On wage and income tax, since 2021 only the roughly 10% of former payers with the highest incomes pay it; on capital income and on companies' corporate income tax there is no exemption threshold. CDU/CSU, FDP and AfD demanded abolition in their election programmes.\n\nThe sliders also allow the other positions: keeping the surcharge only for investors and companies (first slider at 0, third at 5.5%), only for high incomes (first slider at 5.5%, third at 0), levying it on everyone again as until 2020 (all three at 5.5%) or a higher rate, for example for defence."
       },
       "topic": "taxes",
       "params": [
@@ -1680,17 +1700,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
-            "de": "Der Soli ist ein Zuschlag auf die Einkommensteuer. Wer mit der Maßnahme zum Einkommensteuertarif die Steuer ändert, änderte in Wirklichkeit auch das Aufkommen des Soli. Die Rechnung hier berücksichtigt das nicht: Beide Maßnahmen gehen vom Aufkommen 2024 aus und wirken unabhängig voneinander.",
-            "en": "The solidarity surcharge is a surcharge on income tax. Changing the tax with the income tax schedule measure would in reality also change surcharge revenue. The calculation here does not include this: both measures start from 2024 revenue and act independently of each other."
-          },
-          "sources": [
-            "solzg_1995"
-          ]
-        },
-        {
           "kind": "political",
           "severity": "minor",
           "text": {
@@ -1700,6 +1709,17 @@
           "sources": [
             "zew_wahlprogramme_2025",
             "svr_jg_2026_27"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Der Soli ist ein Zuschlag auf die Einkommensteuer. Wer mit der Maßnahme zum Einkommensteuertarif die Steuer ändert, änderte in Wirklichkeit auch das Aufkommen des Soli. Die Rechnung hier berücksichtigt das nicht: Beide Maßnahmen gehen vom Aufkommen 2024 aus und wirken unabhängig voneinander.",
+            "en": "The solidarity surcharge is a surcharge on income tax. Changing the tax with the income tax schedule measure would in reality also change surcharge revenue. The calculation here does not include this: both measures start from 2024 revenue and act independently of each other."
+          },
+          "sources": [
+            "solzg_1995"
           ]
         }
       ],
@@ -1720,8 +1740,12 @@
         "en": "Raise the flat tax on capital income"
       },
       "summary": {
-        "de": "Erhöht den Satz der Abgeltungsteuer, die private Anleger seit 2009 pauschal auf Zinsen, Dividenden und Kursgewinne zahlen, von 25 % auf den eingestellten Wert, jeweils zuzüglich Solidaritätszuschlag. Die Grundeinstellung zeigt 30 %, die mittlere von drei Varianten, die der Sachverständigenrat im November 2026 durchgerechnet hat. Finanzminister Klingbeil hat kurz darauf eine höhere Abgeltungsteuer als eine Möglichkeit ins Spiel gebracht, die Senkung der Stromsteuer zu bezahlen; einen Satz nannte er nicht. Die Rechnung beruht auf den Zahlen des Sachverständigenrats nach Ausweichreaktionen; sie gelten für den Bund und sind hier auf alle Ebenen hochgerechnet, denn gut die Hälfte des Aufkommens steht Ländern und Gemeinden zu.",
-        "en": "Raises the rate of the flat tax that private investors have paid on interest, dividends and capital gains since 2009 from 25% to the chosen value, plus the solidarity surcharge in each case. The default shows 30%, the middle of three variants the Council of Economic Experts calculated in November 2026. Shortly afterwards Finance Minister Klingbeil floated a higher flat tax as one way to pay for the electricity tax cut, without giving a rate. The calculation rests on the Council's figures after behavioural responses; they are for the federal level and are scaled up here to all levels, because just over half of the revenue goes to the states and municipalities."
+        "de": "Erhöht die Abgeltungsteuer auf Zinsen, Dividenden und Kursgewinne von 25 % auf den eingestellten Satz. Die Grundeinstellung zeigt 30 %, die mittlere von drei Varianten des Sachverständigenrats.",
+        "en": "Raises the flat tax on interest, dividends and capital gains from 25% to the chosen rate. The default shows 30%, the middle of three variants calculated by the Council of Economic Experts."
+      },
+      "explanation": {
+        "de": "Private Anleger zahlen die Abgeltungsteuer seit 2009 pauschal, jeweils zuzüglich Solidaritätszuschlag. Der Sachverständigenrat hat die drei Varianten im November 2026 durchgerechnet. Kurz darauf hat Finanzminister Klingbeil eine höhere Abgeltungsteuer als eine Möglichkeit ins Spiel gebracht, die Senkung der Stromsteuer zu bezahlen; einen Satz nannte er nicht.\n\nDie Rechnung beruht auf den Zahlen des Sachverständigenrats nach Ausweichreaktionen. Sie gelten für den Bund und sind hier auf alle Ebenen hochgerechnet, denn gut die Hälfte des Aufkommens steht Ländern und Gemeinden zu.",
+        "en": "Private investors have paid the flat tax since 2009, plus the solidarity surcharge in each case. The Council of Economic Experts calculated the three variants in November 2026. Shortly afterwards Finance Minister Klingbeil floated a higher flat tax as one way to pay for the electricity tax cut, without giving a rate.\n\nThe calculation rests on the Council's figures after behavioural responses. They are for the federal level and are scaled up here to all levels, because just over half of the revenue goes to the states and municipalities."
       },
       "topic": "taxes",
       "params": [
@@ -1802,10 +1826,10 @@
             "gemfinrefg_1",
             "svr_jg_2026_27"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Für die Kapitalertragsteuer gibt es nach dem Sachverständigenrat bislang keine Steuerstatistik; Schätzungen allein aus dem Kassenaufkommen hält er deshalb nicht für belastbar. Gemessen am Kassenaufkommen erscheint das geschätzte Mehraufkommen gering.",
             "en": "According to the Council of Economic Experts there are so far no tax statistics for capital income tax, so it considers estimates based on cash revenue alone unreliable. Measured against cash revenue, the estimated additional revenue seems small."
@@ -1831,8 +1855,8 @@
         "en": "Inheritance tax: end the relief for business assets"
       },
       "summary": {
-        "de": "Streicht die Steuervergünstigung für geerbte oder geschenkte Betriebe und Unternehmensanteile ganz oder teilweise.",
-        "en": "Abolishes all or part of the tax relief for inherited or gifted businesses and company shares."
+        "de": "Streicht die Steuervergünstigung für geerbte oder geschenkte Betriebe und Unternehmensanteile ganz oder teilweise, in der Grundeinstellung ganz.",
+        "en": "Abolishes all or part of the tax relief for inherited or gifted businesses and company shares, all of it at the default setting."
       },
       "topic": "taxes",
       "params": [
@@ -1934,8 +1958,8 @@
         "en": "Set defence spending"
       },
       "summary": {
-        "de": "Setzt die Verteidigungsausgaben nach NATO-Definition auf den eingestellten Anteil am Bruttoinlandsprodukt. Ausgangswert 2024: 2,0 % (86,6 Mrd. Euro). Die Grundeinstellung zeigt das NATO-Ziel von 3,5 % für Verteidigung im engeren Sinn.",
-        "en": "Sets defence spending under the NATO definition to the chosen share of gross domestic product. Starting value 2024: 2.0% (EUR 86.6 billion). The default shows the NATO target of 3.5% for core defence."
+        "de": "Setzt die Verteidigungsausgaben nach NATO-Definition auf einen Anteil am BIP; 2024 waren es 2,0 % (86,6 Mrd. Euro). Die Grundeinstellung zeigt das NATO-Ziel von 3,5 % für Verteidigung im engeren Sinn.",
+        "en": "Sets defence spending under the NATO definition to a share of GDP; in 2024 it was 2.0% (EUR 86.6 billion). The default shows the NATO target of 3.5% for core defence."
       },
       "topic": "defense",
       "params": [
@@ -2001,10 +2025,10 @@
           "sources": [
             "gg_art_115"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Die NATO-Definition ist weiter als der Verteidigungshaushalt: Sie umfasst zum Beispiel Pensionen für ehemalige Soldaten und zivile Beschäftigte. Deshalb liegen die NATO-Ausgaben 2024 (86,6 Mrd. Euro) deutlich über dem Bereich Verteidigung der Staatsausgabenstatistik (58,6 Mrd. Euro).",
             "en": "The NATO definition is broader than the defence budget: for example, it includes pensions for retired military and civilian personnel. NATO-defined spending in 2024 (EUR 86.6 billion) is therefore well above the defence division of government expenditure statistics (EUR 58.6 billion)."
@@ -2029,8 +2053,12 @@
         "en": "Change the pension level"
       },
       "summary": {
-        "de": "Hebt alle Renten der gesetzlichen Rentenversicherung so an, dass das Rentenniveau (Standardrente im Verhältnis zum Durchschnittslohn, netto vor Steuern) den eingestellten Wert erreicht. Ausgangswert: 48 %. Die Grundeinstellung zeigt die Forderung der Linken, es in einem Schritt auf 53 % anzuheben (Antrag im Bundestag vom Dezember 2025).",
-        "en": "Raises all pensions of the statutory pension insurance so that the pension level (standard pension relative to the average wage, net before taxes) reaches the chosen value. Starting value: 48%. The default shows Die Linke's demand to raise it to 53% in one step (motion in the Bundestag of December 2025)."
+        "de": "Hebt die gesetzlichen Renten an, bis das Rentenniveau (Ausgangswert 48 %) den eingestellten Wert erreicht. Die Grundeinstellung zeigt die Forderung der Linken, es in einem Schritt auf 53 % anzuheben.",
+        "en": "Raises all statutory pensions so that the pension level (starting value 48%) reaches the chosen value. The default shows Die Linke's demand to raise it to 53% in one step."
+      },
+      "explanation": {
+        "de": "Das Rentenniveau ist die Standardrente der gesetzlichen Rentenversicherung im Verhältnis zum Durchschnittslohn, netto vor Steuern. Die Linke hat ihre Forderung im Dezember 2025 mit einem Antrag im Bundestag gestellt.",
+        "en": "The pension level is the standard pension of the statutory pension insurance relative to the average wage, net before taxes. Die Linke made its demand in a motion in the Bundestag in December 2025."
       },
       "topic": "pensions",
       "params": [
@@ -2124,17 +2152,6 @@
           ]
         },
         {
-          "kind": "economic",
-          "severity": "major",
-          "text": {
-            "de": "Die Rechnung gilt für das Basisjahr 2024 (ein Prozent höhere Renten: 3,6 Mrd. Euro ohne Krankenversicherung). Der Betrag wächst mit jeder Rentenanpassung und jeder zusätzlichen Rente: Für 2026 nennt die Rentenversicherung bereits 4,2 Mrd. Euro je Prozent einschließlich Krankenversicherung der Rentner.",
-            "en": "The calculation applies to the base year 2024 (pensions higher by one per cent: EUR 3.6 billion excluding health insurance). The amount grows with every pension increase and every additional pension: for 2026 the pension insurance already quotes EUR 4.2 billion per per cent including pensioners' health insurance."
-          },
-          "sources": [
-            "drv_rv_in_zahlen_2026"
-          ]
-        },
-        {
           "kind": "legal",
           "severity": "minor",
           "text": {
@@ -2144,10 +2161,19 @@
           "sources": [
             "bundesregierung_rentenpaket_2025"
           ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Rechnung gilt für das Basisjahr 2024 (ein Prozent höhere Renten: 3,6 Mrd. Euro ohne Krankenversicherung). Der Betrag wächst mit jeder Rentenanpassung und jeder zusätzlichen Rente: Für 2026 nennt die Rentenversicherung bereits 4,2 Mrd. Euro je Prozent einschließlich Krankenversicherung der Rentner.",
+            "en": "The calculation applies to the base year 2024 (pensions higher by one per cent: EUR 3.6 billion excluding health insurance). The amount grows with every pension increase and every additional pension: for 2026 the pension insurance already quotes EUR 4.2 billion per per cent including pensioners' health insurance."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ]
         },
         {
-          "kind": "cost_shift",
-          "severity": "minor",
           "text": {
             "de": "Die Rechnung verteilt Mehr- oder Minderausgaben für Renten im selben Verhältnis auf Bund und Rentenversicherung wie die Rentenausgaben von 2024: 29 % Bund, so viel wie der Anteil der Bundesmittel an den Ausgaben der Rentenversicherung. Tatsächlich folgen die Bundeszuschüsse nicht den Rentenausgaben, sondern den Löhnen und dem Beitragssatz; nach den Faustdaten der Rentenversicherung käme von einem höheren Beitragssatz rund 16 % über den Bundeszuschuss. Der Bund trüge also eher weniger, die Beitragszahler mehr, als die Aufteilung zeigt.",
             "en": "The calculation splits higher or lower pension spending between the federal government and the pension insurance in the same ratio as pension spending in 2024: 29% federal, the share of federal funds in the pension insurance's spending. In fact the federal subsidies do not follow pension spending but wages and the contribution rate; according to the pension insurance's rules of thumb about 16% of a higher contribution rate would come via the federal subsidy. The federal government would thus bear rather less, and contributors rather more, than the split shows."
@@ -2172,8 +2198,12 @@
         "en": "End climate-damaging tax breaks in transport"
       },
       "summary": {
-        "de": "Streicht ganz oder teilweise drei Steuervorteile im Verkehr: die pauschale Besteuerung privat genutzter Dienstwagen, die Energiesteuerbefreiung von Kerosin auf Inlandsflügen und, in der Grundeinstellung nicht aktiv, die Steuerbefreiungen für Auslandsflüge. Die Beträge für Dienstwagen und Auslandsflüge folgen der Abgrenzung des Umweltbundesamts und beziehen sich auf 2018. Die Bundesregierung zählt von den drei Posten nur die Befreiung für Inlandsflüge zu den Subventionen. Der niedrigere Steuersatz für Diesel, den das Umweltbundesamt ebenfalls zu den Steuervorteilen zählt, wird in der Maßnahme zur Spritsteuer eingestellt.",
-        "en": "Abolishes all or part of three tax breaks in transport: the flat-rate taxation of privately used company cars, the energy tax exemption for kerosene on domestic flights and, not active at the default setting, the tax exemptions for international flights. The amounts for company cars and international flights follow the definition of the Federal Environment Agency and refer to 2018. Of the three items, the federal government counts only the exemption for domestic flights as a subsidy. The lower tax rate on diesel, which the agency also counts among the tax breaks, is set in the fuel tax measure."
+        "de": "Streicht ganz oder teilweise drei Steuervorteile im Verkehr. Die Grundeinstellung streicht den Vorteil der pauschalen Dienstwagenbesteuerung und die Steuerbefreiung von Kerosin auf Inlandsflügen.",
+        "en": "Abolishes all or part of three tax breaks in transport. The default removes the advantage of flat-rate company car taxation and the tax exemption for kerosene on domestic flights."
+      },
+      "explanation": {
+        "de": "Die drei Vorteile sind die pauschale Besteuerung privat genutzter Dienstwagen, die Energiesteuerbefreiung von Kerosin auf Inlandsflügen und die Steuerbefreiungen für Auslandsflüge; der Regler für Auslandsflüge ist in der Grundeinstellung nicht aktiv. Die Beträge für Dienstwagen und Auslandsflüge folgen der Abgrenzung des Umweltbundesamts und beziehen sich auf 2018. Die Bundesregierung zählt von den drei Posten nur die Befreiung für Inlandsflüge zu den Subventionen.\n\nDer niedrigere Steuersatz für Diesel, den das Umweltbundesamt ebenfalls zu den Steuervorteilen zählt, wird in der Maßnahme zur Spritsteuer eingestellt.",
+        "en": "The three tax breaks are the flat-rate taxation of privately used company cars, the energy tax exemption for kerosene on domestic flights and the tax exemptions for international flights; the slider for international flights is not active at the default setting. The amounts for company cars and international flights follow the definition of the Federal Environment Agency and refer to 2018. Of the three items, the federal government counts only the exemption for domestic flights as a subsidy.\n\nThe lower tax rate on diesel, which the agency also counts among the tax breaks, is set in the fuel tax measure."
       },
       "topic": "climate",
       "params": [
@@ -2336,10 +2366,10 @@
           "sources": [
             "uba_umweltschaedliche_subventionen_2021"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Die Zahlen des Umweltbundesamts stammen aus dem Jahr 2018; eine neuere Ausgabe des Berichts gibt es nicht. Seither gelten für elektrische Dienstwagen niedrigere Sätze. Die Beträge sind statisch gerechnet und zeigen, was die Regeln damals kosteten, nicht, was eine Abschaffung heute einbrächte.",
             "en": "The Federal Environment Agency's figures date from 2018; there is no newer edition of the report. Since then lower rates have applied to electric company cars. The amounts are static and show what the rules cost at the time, not what abolishing them would yield today."
@@ -2361,8 +2391,12 @@
         "en": "Change the carbon price on fuel and heating"
       },
       "summary": {
-        "de": "Setzt den nationalen CO2-Preis auf Benzin, Diesel, Heizöl und Erdgas auf den eingestellten Wert. Die Grundeinstellung von null zeigt die Forderung der AfD, ihn ersatzlos abzuschaffen; ihr Gesetzentwurf vom Juni 2026 will zugleich den europäischen Emissionshandel in Deutschland beenden. Auch das BSW forderte 2025 in seinem Wahlprogramm, den CO2-Preis abzuschaffen. Im Basisjahr 2024 betrug er 45 Euro je Tonne, 2026 liegt er zwischen 55 und 65 Euro. Die Rechnung verändert die Einnahmen im gleichen Verhältnis wie den Preis; ein Wert über 45 Euro zeigt entsprechend Mehreinnahmen.",
-        "en": "Sets the national carbon price on petrol, diesel, heating oil and natural gas to the chosen value. The default of zero shows the AfD's demand to abolish it without replacement; its bill of June 2026 would at the same time end EU emissions trading in Germany. The BSW also called for abolishing the carbon price in its 2025 election programme. In the base year 2024 it was EUR 45 per tonne; in 2026 it is between EUR 55 and 65. The calculation changes revenue in the same proportion as the price; a value above EUR 45 accordingly shows additional revenue."
+        "de": "Setzt den nationalen CO2-Preis auf Benzin, Diesel, Heizöl und Erdgas fest. Die Grundeinstellung von null zeigt die Forderung von AfD und BSW, ihn abzuschaffen.",
+        "en": "Sets the national carbon price on petrol, diesel, heating oil and natural gas. The default of zero shows the demand of the AfD and the BSW to abolish it."
+      },
+      "explanation": {
+        "de": "Die AfD will den Preis mit einem Gesetzentwurf vom Juni 2026 ersatzlos abschaffen und zugleich den europäischen Emissionshandel in Deutschland beenden; das BSW forderte 2025 in seinem Wahlprogramm, den CO2-Preis abzuschaffen. Im Basisjahr 2024 betrug er 45 Euro je Tonne, 2026 liegt er zwischen 55 und 65 Euro.\n\nDie Rechnung verändert die Einnahmen im gleichen Verhältnis wie den Preis; ein Wert über 45 Euro zeigt entsprechend Mehreinnahmen.",
+        "en": "In a bill of June 2026 the AfD wants to abolish the price without replacement and at the same time end EU emissions trading in Germany; the BSW called for abolishing the carbon price in its 2025 election programme. In the base year 2024 the price was EUR 45 per tonne; in 2026 it is between EUR 55 and 65.\n\nThe calculation changes revenue in the same proportion as the price; a value above EUR 45 accordingly shows additional revenue."
       },
       "topic": "climate",
       "params": [
@@ -2458,10 +2492,10 @@
           "sources": [
             "eu_ets2"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Die Einnahmen steigen mit dem Preis: 2025 nahm der Bund bei 55 Euro je Tonne rund 16 Mrd. Euro ein, 23 % mehr als 2024. Der Betrag des Basisjahres unterschätzt deshalb, was heute wegfiele.",
             "en": "Revenue rises with the price: in 2025 the federal government collected about EUR 16 billion at EUR 55 per tonne, 23% more than in 2024. The base-year amount therefore understates what would be lost today."
@@ -2490,8 +2524,12 @@
         "en": "End or restrict the deduction-free early pension after 45 years (\"Rente mit 63\")"
       },
       "summary": {
-        "de": "Schafft die abschlagsfreie Altersrente für besonders langjährig Versicherte ab: Wer 45 Beitragsjahre hat, könnte nicht mehr vor der Regelaltersgrenze ohne Abschläge in Rente gehen. Der Betrag ist eine Schätzung der jährlichen Wirkung, sobald die Regel für alle Rentnerjahrgänge gilt, also erst nach Jahrzehnten. Im ersten Jahr wäre die Wirkung nur ein kleiner Bruchteil davon, weil laufende Renten unverändert bleiben und nur neue Renten betroffen wären.",
-        "en": "Abolishes the deduction-free old-age pension for people with especially long contribution records: those with 45 contribution years could no longer retire before the standard retirement age without deductions. The amount is an estimate of the annual effect once the rule applies to all cohorts of pensioners, which takes decades. In the first year the effect would be only a small fraction of it, because pensions already being paid stay unchanged and only new pensions would be affected."
+        "de": "Schafft die abschlagsfreie Rente nach 45 Beitragsjahren ab, in der Grundeinstellung für alle Berechtigten: Sie könnten nicht mehr vor der Regelaltersgrenze ohne Abschläge in Rente gehen.",
+        "en": "Abolishes the deduction-free pension after 45 contribution years, at the default setting for everyone eligible: they could no longer retire before the standard retirement age without deductions."
+      },
+      "explanation": {
+        "de": "Gemeint ist die Altersrente für besonders langjährig Versicherte. Der Betrag ist eine Schätzung der jährlichen Wirkung, sobald die Regel für alle Rentnerjahrgänge gilt, also erst nach Jahrzehnten. Im ersten Jahr wäre die Wirkung nur ein kleiner Bruchteil davon, weil laufende Renten unverändert bleiben und nur neue Renten betroffen wären.",
+        "en": "This is the old-age pension for people with especially long contribution records. The amount is an estimate of the annual effect once the rule applies to all cohorts of pensioners, which takes decades. In the first year the effect would be only a small fraction of it, because pensions already being paid stay unchanged and only new pensions would be affected."
       },
       "topic": "pensions",
       "params": [
@@ -2590,29 +2628,6 @@
           "kind": "practical",
           "severity": "major",
           "text": {
-            "de": "Der gezeigte Betrag ist kein Wert für das erste Jahr. Betroffen wären nur neue Renten, und die Entlastung entsteht bei ihnen nach und nach über jahrzehntelang niedrigere Zahlungen. Erst wenn alle Rentnerjahrgänge unter die neue Regel fallen, wird der volle Jahresbetrag erreicht. Er ist in heutigen Werten gerechnet.",
-            "en": "The amount shown is not a first-year figure. Only new pensions would be affected, and for them the relief arises gradually through lower payments over decades. The full annual amount is reached only when all cohorts of pensioners fall under the new rule. It is expressed in today's values."
-          },
-          "sources": [
-            "bertelsmann_diw_rente_2026"
-          ]
-        },
-        {
-          "kind": "economic",
-          "severity": "major",
-          "text": {
-            "de": "Das Ergebnis hängt davon ab, wie die Betroffenen reagieren. Die Studie unterstellt, dass sie im Schnitt zehn Monate später und dann mit Abschlägen in Rente gehen; dem Arbeitsmarkt blieben so rund 125.000 Vollzeitkräfte je Jahrgang erhalten. Gegenzurechnen sind Mindereinnahmen bei Kranken- und Pflegeversicherung und Einkommensteuer (860 Mio. Euro) und Mehrausgaben der Arbeitslosenversicherung (50 Mio. Euro); netto bleiben 9,5 Mrd. Euro je Jahrgang.",
-            "en": "The result depends on how those affected respond. The study assumes that they retire ten months later on average and then with deductions; this would keep about 125,000 full-time workers per cohort in the labour market. To be set against this are lower revenues of health insurance, long-term care insurance and income tax (EUR 860 million) and additional spending of unemployment insurance (EUR 50 million); the net figure is EUR 9.5 billion per cohort."
-          },
-          "sources": [
-            "bertelsmann_diw_rente_2026",
-            "bertelsmann_diw_rente_2026_summary"
-          ]
-        },
-        {
-          "kind": "practical",
-          "severity": "major",
-          "text": {
             "de": "Die Regelung nutzen jedes Jahr 250.000 bis 280.000 Menschen, fast 30 % aller neuen Altersrenten; Ende 2024 bezogen rund 2,66 Mio. Menschen diese Rente. Eine pauschale Abschaffung träfe Menschen mit eingeschränkter Erwerbsfähigkeit hart, die nicht länger arbeiten können und Abschläge hinnehmen müssten. Die Studie hält deshalb Ausnahmen für Härtefälle für nötig, etwa nach einer Gesundheitsprüfung oder für niedrige Einkommen. Solche Ausnahmen verringern die Einsparung.",
             "en": "The rule is used by 250,000 to 280,000 people every year, almost 30% of all new old-age pensions; at the end of 2024 about 2.66 million people were drawing this pension. An across-the-board abolition would hit people with reduced earning capacity hard, who cannot work longer and would have to accept deductions. The study therefore considers exemptions for hardship cases necessary, for example after a health assessment or for low incomes. Such exemptions reduce the saving."
           },
@@ -2646,10 +2661,29 @@
             "sgb6_236b",
             "drv_rv_in_zahlen_2026"
           ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Der gezeigte Betrag ist kein Wert für das erste Jahr. Betroffen wären nur neue Renten, und die Entlastung entsteht bei ihnen nach und nach über jahrzehntelang niedrigere Zahlungen. Erst wenn alle Rentnerjahrgänge unter die neue Regel fallen, wird der volle Jahresbetrag erreicht. Er ist in heutigen Werten gerechnet.",
+            "en": "The amount shown is not a first-year figure. Only new pensions would be affected, and for them the relief arises gradually through lower payments over decades. The full annual amount is reached only when all cohorts of pensioners fall under the new rule. It is expressed in today's values."
+          },
+          "sources": [
+            "bertelsmann_diw_rente_2026"
+          ]
         },
         {
-          "kind": "cost_shift",
-          "severity": "minor",
+          "text": {
+            "de": "Das Ergebnis hängt davon ab, wie die Betroffenen reagieren. Die Studie unterstellt, dass sie im Schnitt zehn Monate später und dann mit Abschlägen in Rente gehen; dem Arbeitsmarkt blieben so rund 125.000 Vollzeitkräfte je Jahrgang erhalten. Gegenzurechnen sind Mindereinnahmen bei Kranken- und Pflegeversicherung und Einkommensteuer (860 Mio. Euro) und Mehrausgaben der Arbeitslosenversicherung (50 Mio. Euro); netto bleiben 9,5 Mrd. Euro je Jahrgang.",
+            "en": "The result depends on how those affected respond. The study assumes that they retire ten months later on average and then with deductions; this would keep about 125,000 full-time workers per cohort in the labour market. To be set against this are lower revenues of health insurance, long-term care insurance and income tax (EUR 860 million) and additional spending of unemployment insurance (EUR 50 million); the net figure is EUR 9.5 billion per cohort."
+          },
+          "sources": [
+            "bertelsmann_diw_rente_2026",
+            "bertelsmann_diw_rente_2026_summary"
+          ]
+        },
+        {
           "text": {
             "de": "Die Rechnung verteilt Mehr- oder Minderausgaben für Renten im selben Verhältnis auf Bund und Rentenversicherung wie die Rentenausgaben von 2024: 29 % Bund, so viel wie der Anteil der Bundesmittel an den Ausgaben der Rentenversicherung. Tatsächlich folgen die Bundeszuschüsse nicht den Rentenausgaben, sondern den Löhnen und dem Beitragssatz; nach den Faustdaten der Rentenversicherung käme von einem höheren Beitragssatz rund 16 % über den Bundeszuschuss. Der Bund trüge also eher weniger, die Beitragszahler mehr, als die Aufteilung zeigt.",
             "en": "The calculation splits higher or lower pension spending between the federal government and the pension insurance in the same ratio as pension spending in 2024: 29% federal, the share of federal funds in the pension insurance's spending. In fact the federal subsidies do not follow pension spending but wages and the contribution rate; according to the pension insurance's rules of thumb about 16% of a higher contribution rate would come via the federal subsidy. The federal government would thus bear rather less, and contributors rather more, than the split shows."
@@ -2684,8 +2718,12 @@
         "en": "Change the retirement age"
       },
       "summary": {
-        "de": "Verschiebt die Regelaltersgrenze, ab der die gesetzliche Altersrente ohne Abschläge beginnt, und mit ihr alle früheren Altersgrenzen um dieselbe Zahl von Jahren, wie es die Alterssicherungskommission der Bundesregierung vorschlägt. Ausgangswert: 67 Jahre, die Grenze für alle ab 1964 Geborenen. Die Grundeinstellung zeigt die Empfehlung der Kommission vom Juni 2026: 67,5 Jahre, die sich bis 2041 aus der Kopplung an die Lebenserwartung ergäben. Die Linke fordert in ihrem Wahlprogramm von 2025 eine Grenze von 65 Jahren; DIW-Präsident Marcel Fratzscher hat sich im Juni 2026 für eine „faire Rente mit 70“ ausgesprochen, die früher kommt, als die Kommission vorschlägt. Der Betrag ist eine Schätzung der jährlichen Wirkung, sobald die neue Grenze für alle Rentnerjahrgänge gilt, in Werten von 2024: weniger Rentenzahlungen, mehr Beiträge und Lohnsteuer von denen, die länger arbeiten, aber auch mehr Erwerbsminderungsrenten, Arbeitslosengeld und Bürgergeld. Eine Anhebung käme frühestens ab 2032 und in kleinen Schritten; in den ersten Jahren wäre die Wirkung nur ein kleiner Bruchteil davon.",
-        "en": "Moves the standard retirement age (Regelaltersgrenze), from which the statutory old-age pension is paid without deductions, and with it all earlier age limits by the same number of years, as the federal government's pensions commission proposes. Starting value: 67 years, the limit for everyone born in 1964 or later. The default shows the commission's recommendation of June 2026: 67.5 years, the limit that linking it to life expectancy would produce by 2041. Die Linke calls for a limit of 65 years in its 2025 election programme; DIW president Marcel Fratzscher argued in June 2026 for a \"fair retirement at 70\" that comes sooner than the commission proposes. The amount is an estimate of the annual effect once the new limit applies to all cohorts of pensioners, in 2024 values: less pension spending, more contributions and wage tax from those who work longer, but also more disability pensions, unemployment benefit and citizen's income. An increase would start in 2032 at the earliest and in small steps; in the first years the effect would be only a small fraction of that amount."
+        "de": "Verschiebt die Regelaltersgrenze (Ausgangswert 67 Jahre) und mit ihr alle früheren Altersgrenzen. Die Grundeinstellung zeigt die Empfehlung der Alterssicherungskommission vom Juni 2026: 67,5 Jahre.",
+        "en": "Moves the standard retirement age (starting value 67) and with it all earlier age limits. The default shows the pensions commission's recommendation of June 2026: 67.5 years."
+      },
+      "explanation": {
+        "de": "Ab der Regelaltersgrenze beginnt die gesetzliche Altersrente ohne Abschläge; 67 Jahre gelten für alle ab 1964 Geborenen. Alle früheren Altersgrenzen verschieben sich um dieselbe Zahl von Jahren, wie es die Alterssicherungskommission der Bundesregierung vorschlägt. Die 67,5 Jahre ergäben sich nach ihrer Empfehlung bis 2041 aus der Kopplung an die Lebenserwartung. Die Linke fordert in ihrem Wahlprogramm von 2025 eine Grenze von 65 Jahren; DIW-Präsident Marcel Fratzscher hat sich im Juni 2026 für eine „faire Rente mit 70“ ausgesprochen, die früher kommt, als die Kommission vorschlägt.\n\nDer Betrag ist eine Schätzung der jährlichen Wirkung, sobald die neue Grenze für alle Rentnerjahrgänge gilt, in Werten von 2024: weniger Rentenzahlungen, mehr Beiträge und Lohnsteuer von denen, die länger arbeiten, aber auch mehr Erwerbsminderungsrenten, Arbeitslosengeld und Bürgergeld. Eine Anhebung käme frühestens ab 2032 und in kleinen Schritten; in den ersten Jahren wäre die Wirkung nur ein kleiner Bruchteil davon.",
+        "en": "The standard retirement age (Regelaltersgrenze) is the age from which the statutory old-age pension is paid without deductions; 67 applies to everyone born in 1964 or later. All earlier age limits move by the same number of years, as the federal government's pensions commission proposes. According to its recommendation, linking the limit to life expectancy would produce the 67.5 years by 2041. Die Linke calls for a limit of 65 years in its 2025 election programme; DIW president Marcel Fratzscher argued in June 2026 for a \"fair retirement at 70\" that comes sooner than the commission proposes.\n\nThe amount is an estimate of the annual effect once the new limit applies to all cohorts of pensioners, in 2024 values: less pension spending, more contributions and wage tax from those who work longer, but also more disability pensions, unemployment benefit and citizen's income. An increase would start in 2032 at the earliest and in small steps; in the first years the effect would be only a small fraction of that amount."
       },
       "topic": "pensions",
       "params": [
@@ -2963,19 +3001,6 @@
       ],
       "catches": [
         {
-          "kind": "practical",
-          "severity": "major",
-          "text": {
-            "de": "Der gezeigte Betrag ist kein Wert für die nächsten Jahre. Er gilt, sobald die neue Grenze für alle Jahrgänge gilt. Die Alterssicherungskommission hält mindestens fünf Jahre Vorlauf für nötig und schlägt kleine Schritte ab 2032 vor: 67,5 Jahre erst 2041, danach etwa ein halbes Jahr je Jahrzehnt. Nach diesem Vorschlag wirkt eine Anhebung bis 2031 gar nicht. Gerechnet ist der Unterschied zu 67 Jahren, der Grenze nach geltendem Recht ab 2031; 2024 lag sie noch bei 66 Jahren. Die Kommission erwartet von einem halben Jahr späteren Renteneintritt einen um 0,35 bis 0,5 Punkte niedrigeren Beitragssatz und ein um 0,3 bis 0,5 Punkte höheres Rentenniveau; für die Rentenversicherung auf Beträge von 2024 umgerechnet ist das mehr, als diese Rechnung ergibt, während die Modellrechnung des Sachverständigenrats von 2023 etwas weniger ergibt. Der Sachverständigenrat schätzt die Entlastung des Bundes durch das ganze Rentenpaket der Kommission, zu dem die höhere Altersgrenze gehört, auf weniger als 1 Mrd. Euro im Jahr 2030, 5,4 Mrd. Euro 2035 und 9,6 Mrd. Euro 2040. Die zusätzlichen Renten aus längeren Beitragszeiten bauen sich erst über rund zwei Jahrzehnte auf; bis dahin ist die Entlastung etwas größer als gezeigt.",
-            "en": "The amount shown is not a figure for the coming years. It applies once the new limit applies to all cohorts. The pensions commission considers a lead time of at least five years necessary and proposes small steps from 2032: 67.5 years only in 2041, then about half a year per decade. Under this proposal an increase has no effect at all until 2031. The calculation shows the difference from 67 years, the limit under current law from 2031; in 2024 it was still 66. The commission expects retiring half a year later to lower the contribution rate by 0.35 to 0.5 points and raise the pension level by 0.3 to 0.5 points; converted to 2024 amounts for the pension insurance that is more than this calculation gives, while the Council of Economic Experts' projection of 2023 gives somewhat less. The German Council of Economic Experts estimates the relief for the federal budget from the commission's whole pension package, which includes the higher age limit, at less than EUR 1 billion in 2030, EUR 5.4 billion in 2035 and EUR 9.6 billion in 2040. The additional pensions from longer contribution periods build up only over about two decades; until then the relief is somewhat larger than shown."
-          },
-          "sources": [
-            "ask_bericht_2026",
-            "svr_jg_2026_27",
-            "svr_jg_2023_24"
-          ]
-        },
-        {
           "kind": "economic",
           "severity": "major",
           "text": {
@@ -2987,30 +3012,6 @@
             "svr_jg_2023_24",
             "ask_bericht_2026",
             "bt_drs_21_8388"
-          ]
-        },
-        {
-          "kind": "economic",
-          "severity": "major",
-          "text": {
-            "de": "Die Rechnung nimmt an, dass alle, die vor der Rente beschäftigt waren, das zusätzliche Jahr weiterarbeiten, und alle anderen in ihrem bisherigen Status bleiben, wie es eine Studie für die Anhebung der Altersgrenze für Frauen gezeigt hat. Schaffen deutlich weniger das zusätzliche Jahr, fallen Beiträge und Lohnsteuer niedriger und die Ausgaben für Arbeitslosengeld, Bürgergeld und Erwerbsminderungsrenten höher aus. Bei 69 oder 70 Jahren dürfte das häufiger sein als bei 68: Der Regler rechnet mit einer geraden Linie und überschätzt dort eher die Entlastung.",
-            "en": "The calculation assumes that everyone who was employed before retirement keeps working for the extra year and all others stay in their status, as a study of the increase in the age limit for women found. If clearly fewer manage the extra year, contributions and wage tax are lower and spending on unemployment benefit, citizen's income and disability pensions higher. At 69 or 70 this is likely to be more frequent than at 68: the slider calculates along a straight line and there rather overstates the relief."
-          },
-          "sources": [
-            "diw_bertelsmann_fruehrente_64_2026"
-          ]
-        },
-        {
-          "kind": "practical",
-          "severity": "major",
-          "text": {
-            "de": "Gerechnet ist, dass alle Altersgrenzen mitwandern, auch die für die Rente mit Abschlägen (heute 63), für schwerbehinderte Menschen und für 45 Beitragsjahre, wie es die Kommission empfiehlt. Bei der Anhebung von 65 auf 67 war das anders: Die Grenze von 63 Jahren für langjährig Versicherte blieb, wer früher ging, bekam höhere Abschläge, und mit 45 Beitragsjahren blieb es bei 65 Jahren (§ 236b SGB VI). Stiege nur die Regelaltersgrenze, wäre die Einsparung bei den Renten nach eigener Schätzung etwa ein Drittel kleiner und entstünde über Jahrzehnte. Die damaligen Koalitionsfraktionen erwarteten 2006 von der Anhebung um zwei Jahre eine Beitragssatzentlastung, die bis 2030 auf 0,5 Prozentpunkte steigt.",
-            "en": "The calculation assumes that all age limits move along, including those for the pension with deductions (63 today), for severely disabled people and for 45 contribution years, as the commission recommends. The increase from 65 to 67 was different: the limit of 63 for people with long insurance records stayed, those who retired earlier got higher deductions, and with 45 contribution years the limit stayed at 65 (section 236b of Social Code Book VI). If only the standard age rose, the saving on pensions would be about a third smaller by own estimate and would arise over decades. In 2006 the then coalition groups expected the increase by two years to relieve the contribution rate by an amount rising to 0.5 percentage points by 2030."
-          },
-          "sources": [
-            "ask_bericht_2026",
-            "sgb6_236b",
-            "bt_drs_16_3794"
           ]
         },
         {
@@ -3028,10 +3029,41 @@
             "bt_drs_21_8388",
             "bt_drs_21_2165"
           ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Der gezeigte Betrag ist kein Wert für die nächsten Jahre. Er gilt, sobald die neue Grenze für alle Jahrgänge gilt. Die Alterssicherungskommission hält mindestens fünf Jahre Vorlauf für nötig und schlägt kleine Schritte ab 2032 vor: 67,5 Jahre erst 2041, danach etwa ein halbes Jahr je Jahrzehnt. Nach diesem Vorschlag wirkt eine Anhebung bis 2031 gar nicht. Gerechnet ist der Unterschied zu 67 Jahren, der Grenze nach geltendem Recht ab 2031; 2024 lag sie noch bei 66 Jahren. Die Kommission erwartet von einem halben Jahr späteren Renteneintritt einen um 0,35 bis 0,5 Punkte niedrigeren Beitragssatz und ein um 0,3 bis 0,5 Punkte höheres Rentenniveau; für die Rentenversicherung auf Beträge von 2024 umgerechnet ist das mehr, als diese Rechnung ergibt, während die Modellrechnung des Sachverständigenrats von 2023 etwas weniger ergibt. Der Sachverständigenrat schätzt die Entlastung des Bundes durch das ganze Rentenpaket der Kommission, zu dem die höhere Altersgrenze gehört, auf weniger als 1 Mrd. Euro im Jahr 2030, 5,4 Mrd. Euro 2035 und 9,6 Mrd. Euro 2040. Die zusätzlichen Renten aus längeren Beitragszeiten bauen sich erst über rund zwei Jahrzehnte auf; bis dahin ist die Entlastung etwas größer als gezeigt.",
+            "en": "The amount shown is not a figure for the coming years. It applies once the new limit applies to all cohorts. The pensions commission considers a lead time of at least five years necessary and proposes small steps from 2032: 67.5 years only in 2041, then about half a year per decade. Under this proposal an increase has no effect at all until 2031. The calculation shows the difference from 67 years, the limit under current law from 2031; in 2024 it was still 66. The commission expects retiring half a year later to lower the contribution rate by 0.35 to 0.5 points and raise the pension level by 0.3 to 0.5 points; converted to 2024 amounts for the pension insurance that is more than this calculation gives, while the Council of Economic Experts' projection of 2023 gives somewhat less. The German Council of Economic Experts estimates the relief for the federal budget from the commission's whole pension package, which includes the higher age limit, at less than EUR 1 billion in 2030, EUR 5.4 billion in 2035 and EUR 9.6 billion in 2040. The additional pensions from longer contribution periods build up only over about two decades; until then the relief is somewhat larger than shown."
+          },
+          "sources": [
+            "ask_bericht_2026",
+            "svr_jg_2026_27",
+            "svr_jg_2023_24"
+          ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
+          "text": {
+            "de": "Die Rechnung nimmt an, dass alle, die vor der Rente beschäftigt waren, das zusätzliche Jahr weiterarbeiten, und alle anderen in ihrem bisherigen Status bleiben, wie es eine Studie für die Anhebung der Altersgrenze für Frauen gezeigt hat. Schaffen deutlich weniger das zusätzliche Jahr, fallen Beiträge und Lohnsteuer niedriger und die Ausgaben für Arbeitslosengeld, Bürgergeld und Erwerbsminderungsrenten höher aus. Bei 69 oder 70 Jahren dürfte das häufiger sein als bei 68: Der Regler rechnet mit einer geraden Linie und überschätzt dort eher die Entlastung.",
+            "en": "The calculation assumes that everyone who was employed before retirement keeps working for the extra year and all others stay in their status, as a study of the increase in the age limit for women found. If clearly fewer manage the extra year, contributions and wage tax are lower and spending on unemployment benefit, citizen's income and disability pensions higher. At 69 or 70 this is likely to be more frequent than at 68: the slider calculates along a straight line and there rather overstates the relief."
+          },
+          "sources": [
+            "diw_bertelsmann_fruehrente_64_2026"
+          ]
+        },
+        {
+          "text": {
+            "de": "Gerechnet ist, dass alle Altersgrenzen mitwandern, auch die für die Rente mit Abschlägen (heute 63), für schwerbehinderte Menschen und für 45 Beitragsjahre, wie es die Kommission empfiehlt. Bei der Anhebung von 65 auf 67 war das anders: Die Grenze von 63 Jahren für langjährig Versicherte blieb, wer früher ging, bekam höhere Abschläge, und mit 45 Beitragsjahren blieb es bei 65 Jahren (§ 236b SGB VI). Stiege nur die Regelaltersgrenze, wäre die Einsparung bei den Renten nach eigener Schätzung etwa ein Drittel kleiner und entstünde über Jahrzehnte. Die damaligen Koalitionsfraktionen erwarteten 2006 von der Anhebung um zwei Jahre eine Beitragssatzentlastung, die bis 2030 auf 0,5 Prozentpunkte steigt.",
+            "en": "The calculation assumes that all age limits move along, including those for the pension with deductions (63 today), for severely disabled people and for 45 contribution years, as the commission recommends. The increase from 65 to 67 was different: the limit of 63 for people with long insurance records stayed, those who retired earlier got higher deductions, and with 45 contribution years the limit stayed at 65 (section 236b of Social Code Book VI). If only the standard age rose, the saving on pensions would be about a third smaller by own estimate and would arise over decades. In 2006 the then coalition groups expected the increase by two years to relieve the contribution rate by an amount rising to 0.5 percentage points by 2030."
+          },
+          "sources": [
+            "ask_bericht_2026",
+            "sgb6_236b",
+            "bt_drs_16_3794"
+          ]
+        },
+        {
           "text": {
             "de": "Für eine Senkung gilt dieselbe Rechnung umgekehrt: Alle Altersgrenzen sinken mit, Renten beginnen früher. Die Linke verbindet ihre Forderung nach 65 Jahren mit einer abschlagsfreien Rente ab 60 nach 40 Beitragsjahren; das ist nicht enthalten und kostete zusätzlich. Weil man neben einer vorgezogenen Altersrente unbegrenzt hinzuverdienen darf, würden manche trotz Rente weiterarbeiten: Beiträge und Lohnsteuer fielen dann weniger, als die Rechnung zeigt, die Rentenausgaben dagegen fast voll an.",
             "en": "For a reduction the same calculation applies in reverse: all age limits fall along with it, and pensions start earlier. Die Linke combines its demand for 65 years with a deduction-free pension from 60 after 40 contribution years; that is not included and would cost extra. Because there is no limit on earnings alongside an early old-age pension, some would keep working despite drawing a pension: contributions and wage tax would then fall by less than the calculation shows, while pension spending would arise almost in full."
@@ -3042,8 +3074,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Zusammen mit anderen Rentenmaßnahmen zählt die Rechnung nichts doppelt, aber die Wirkungen addieren sich nicht genau. Zusammen mit der Abschaffung der „Rente mit 63“ wirkt die höhere Altersgrenze auf schon gekürzte Altersrenten und spart dadurch etwas weniger; mit einem höheren Rentenniveau spart ein Jahr weniger Rente entsprechend mehr. Nicht enthalten ist die Übertragung auf Beamte, die die Kommission empfiehlt; sie entlastete vor allem die Länder bei den Pensionen.",
             "en": "Combined with other pension measures, the calculation counts nothing twice, but the effects do not add up exactly. Together with ending the \"Rente mit 63\" the higher age limit acts on old-age pensions that are already reduced and therefore saves somewhat less; with a higher pension level, a year less of pension saves correspondingly more. Not included is the transfer to civil servants that the commission recommends; it would relieve mainly the states, which pay most civil service pensions."
@@ -3053,8 +3083,6 @@
           ]
         },
         {
-          "kind": "cost_shift",
-          "severity": "minor",
           "text": {
             "de": "Die Rechnung verteilt Mehr- oder Minderausgaben für Renten im selben Verhältnis auf Bund und Rentenversicherung wie die Rentenausgaben von 2024: 29 % Bund, so viel wie der Anteil der Bundesmittel an den Ausgaben der Rentenversicherung. Tatsächlich folgen die Bundeszuschüsse nicht den Rentenausgaben, sondern den Löhnen und dem Beitragssatz; nach den Faustdaten der Rentenversicherung käme von einem niedrigeren Beitragssatz rund 16 % beim Bund an. Die zusätzlichen Beiträge fließen ganz an die Sozialversicherungen.",
             "en": "The calculation splits higher or lower pension spending between the federal government and the pension insurance in the same ratio as pension spending in 2024: 29% federal, the share of federal funds in the pension insurance's spending. In fact the federal subsidies do not follow pension spending but wages and the contribution rate; according to the pension insurance's rules of thumb about 16% of a lower contribution rate would reach the federal government. The additional contributions go entirely to the social insurance funds."
@@ -3097,8 +3125,12 @@
         "en": "Raise or lower value added tax"
       },
       "summary": {
-        "de": "Ändert den Regelsatz (heute 19 %) und den ermäßigten Satz (heute 7 %) der Mehrwertsteuer. Die Grundeinstellung zeigt die 2026 diskutierte Erhöhung des Regelsatzes auf 21 %. Ein Punkt beim Regelsatz entspricht rechnerisch rund 14,5 Mrd. Euro, ein Punkt beim ermäßigten Satz rund 3,3 Mrd. Euro. Die Regler bleiben in den Grenzen des EU-Rechts (Regelsatz mindestens 15 %, ermäßigter Satz mindestens 5 %); der ermäßigte Satz endet bei 15 %, damit er nie über dem Regelsatz liegt. Die Maßnahmen zu Lebensmitteln, zu Speisen in Restaurants und zu Hotels, Kultur und Nahverkehr legen die Sätze ihrer Bereiche selbst fest: Sind sie eingeschaltet, gilt dort ihr Satz.",
-        "en": "Changes the standard rate (currently 19%) and the reduced rate (currently 7%) of value added tax. The default shows the increase of the standard rate to 21% that was discussed in 2026. One point of the standard rate corresponds arithmetically to about EUR 14.5 billion, one point of the reduced rate to about EUR 3.3 billion. The sliders stay within the limits of EU law (standard rate at least 15%, reduced rate at least 5%); the reduced rate ends at 15% so that it never exceeds the standard rate. The measures on food, on restaurant meals and on hotels, culture and public transport set the rates of their areas themselves: if they are switched on, their rate applies there."
+        "de": "Ändert den Regelsatz (heute 19 %) und den ermäßigten Satz (heute 7 %) der Mehrwertsteuer. Die Grundeinstellung zeigt die 2026 diskutierte Erhöhung des Regelsatzes auf 21 %.",
+        "en": "Changes the standard rate (currently 19%) and the reduced rate (currently 7%) of VAT. The default shows the increase of the standard rate to 21% that was discussed in 2026."
+      },
+      "explanation": {
+        "de": "Ein Punkt beim Regelsatz entspricht rechnerisch rund 14,5 Mrd. Euro, ein Punkt beim ermäßigten Satz rund 3,3 Mrd. Euro. Die Regler bleiben in den Grenzen des EU-Rechts (Regelsatz mindestens 15 %, ermäßigter Satz mindestens 5 %); der ermäßigte Satz endet bei 15 %, damit er nie über dem Regelsatz liegt.\n\nDie Maßnahmen zu Lebensmitteln, zu Speisen in Restaurants und zu Hotels, Kultur und Nahverkehr legen die Sätze ihrer Bereiche selbst fest: Sind sie eingeschaltet, gilt dort ihr Satz.",
+        "en": "One point of the standard rate corresponds arithmetically to about EUR 14.5 billion, one point of the reduced rate to about EUR 3.3 billion. The sliders stay within the limits of EU law (standard rate at least 15%, reduced rate at least 5%); the reduced rate ends at 15% so that it never exceeds the standard rate.\n\nThe measures on food, on restaurant meals and on hotels, culture and public transport set the rates of their areas themselves: if they are switched on, their rate applies there."
       },
       "topic": "taxes",
       "params": [
@@ -3249,8 +3281,12 @@
         "en": "Change VAT on food"
       },
       "summary": {
-        "de": "Setzt den Mehrwertsteuersatz auf die heute mit 7 % besteuerten Lebensmittel und Leitungswasser auf den eingestellten Wert. Die Grundeinstellung von null zeigt die Forderung der Linken, Grundnahrungsmittel von der Mehrwertsteuer zu befreien; der Bundestag lehnte ihren Antrag im September 2025 ab. Auch das BSW forderte 2025 einen Satz von null für Grundnahrungsmittel. Ein Wert von 19 % zeigt umgekehrt, was die Abschaffung der Ermäßigung einbrächte.",
-        "en": "Sets the VAT rate on food and tap water, currently taxed at 7%, to the chosen value. The default of zero shows Die Linke's demand to exempt basic food from VAT; the Bundestag rejected its motion in September 2025. The BSW also called for a zero rate on basic food in 2025. Conversely, a value of 19% shows what abolishing the reduction would yield."
+        "de": "Setzt den Mehrwertsteuersatz auf Lebensmittel und Leitungswasser, heute 7 %. Die Grundeinstellung von null zeigt die Forderung der Linken und des BSW, Grundnahrungsmittel steuerfrei zu stellen.",
+        "en": "Sets the VAT rate on food and tap water, currently 7%. The default of zero shows the demand of Die Linke and the BSW to exempt basic food from VAT."
+      },
+      "explanation": {
+        "de": "Die Linke forderte, Grundnahrungsmittel von der Mehrwertsteuer zu befreien; der Bundestag lehnte ihren Antrag im September 2025 ab. Auch das BSW forderte 2025 einen Satz von null für Grundnahrungsmittel. Ein Wert von 19 % zeigt umgekehrt, was die Abschaffung der Ermäßigung einbrächte.",
+        "en": "Die Linke called for exempting basic food from VAT; the Bundestag rejected its motion in September 2025. The BSW also called for a zero rate on basic food in 2025. Conversely, a value of 19% shows what abolishing the reduction would yield."
       },
       "topic": "taxes",
       "params": [
@@ -3356,8 +3392,12 @@
         "en": "VAT on restaurant meals"
       },
       "summary": {
-        "de": "Setzt den Mehrwertsteuersatz für Speisen in Restaurants und Gaststätten, ohne Getränke. Die Grundeinstellung bildet das seit 1. Januar 2026 geltende Recht ab: 7 % statt 19 % im Basisjahr 2024; die Maßnahme zeigt also zunächst, was diese Senkung kostet. Der Regler reicht vom EU-Mindestsatz für ermäßigte Sätze (5 %) bis zum Regelsatz von 2024 (19 %).",
-        "en": "Sets the VAT rate on restaurant and catering meals, without beverages. The default reflects the law in force since 1 January 2026: 7% instead of 19% in the base year 2024, so the measure first shows what this cut costs. The slider runs from the EU minimum for reduced rates (5%) to the 2024 standard rate (19%)."
+        "de": "Setzt den Mehrwertsteuersatz für Speisen in Restaurants, ohne Getränke. Die Grundeinstellung zeigt das seit 1. Januar 2026 geltende Recht, 7 % statt 19 % im Jahr 2024, also was diese Senkung kostet.",
+        "en": "Sets the VAT rate on restaurant meals, without beverages. The default reflects the law in force since 1 January 2026, 7% instead of 19% in 2024, and so shows what this cut costs."
+      },
+      "explanation": {
+        "de": "Gemeint sind Speisen in Restaurants und Gaststätten; 2024, im Basisjahr, galt der Regelsatz. Der Regler reicht vom EU-Mindestsatz für ermäßigte Sätze (5 %) bis zum Regelsatz von 2024 (19 %).",
+        "en": "This covers restaurant and catering meals; in 2024, the base year, the standard rate applied. The slider runs from the EU minimum for reduced rates (5%) to the 2024 standard rate (19%)."
       },
       "topic": "taxes",
       "params": [
@@ -3450,14 +3490,6 @@
           "kind": "practical",
           "severity": "minor",
           "text": {
-            "de": "Die Maßnahme legt den Satz für Speisen in Restaurants selbst fest. Ist zugleich „Mehrwertsteuer erhöhen oder senken“ eingeschaltet, gilt für diese Speisen der Satz hier; 19 % bleiben dann 19 %, auch wenn dort ein anderer Regelsatz eingestellt ist.",
-            "en": "The measure sets the rate for restaurant meals itself. If \"Raise or lower value added tax\" is switched on as well, the rate here applies to these meals; 19% then stays 19% even if a different standard rate is set there."
-          }
-        },
-        {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
             "de": "Der Finanzplan des Bundes bis 2030 rechnet bereits mit dem seit Januar 2026 geltenden Satz von 7 %; die Steuerschätzung vom Mai 2026, auf der er beruht, enthält das Steueränderungsgesetz 2025. Für das Ziel „Lücke im Finanzplan“ zählt die Maßnahme deshalb nicht, auch nicht bei 19 %, obwohl die Rückkehr zum vollen Satz gegenüber dem Finanzplan Mehreinnahmen brächte.",
             "en": "The federal financial plan to 2030 already counts on the 7% rate in force since January 2026; the tax estimate of May 2026 on which it rests includes the Tax Amendment Act 2025. The measure therefore does not count towards closing the gap in the financial plan, not even at 19%, although a return to the full rate would bring additional revenue compared with the plan."
           },
@@ -3465,6 +3497,14 @@
             "bundestag_drs_21_7301",
             "svr_jg_2026_27"
           ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Maßnahme legt den Satz für Speisen in Restaurants selbst fest. Ist zugleich „Mehrwertsteuer erhöhen oder senken“ eingeschaltet, gilt für diese Speisen der Satz hier; 19 % bleiben dann 19 %, auch wenn dort ein anderer Regelsatz eingestellt ist.",
+            "en": "The measure sets the rate for restaurant meals itself. If \"Raise or lower value added tax\" is switched on as well, the rate here applies to these meals; 19% then stays 19% even if a different standard rate is set there."
+          }
         }
       ],
       "sources": [
@@ -3483,8 +3523,12 @@
         "en": "VAT on hotel stays, culture and public transport: reduced or full rate"
       },
       "summary": {
-        "de": "Stellt für drei Bereiche ein, ob der ermäßigte Satz von 7 % oder der volle Satz gilt: Hotelübernachtungen, Kultur einschließlich Büchern und Zeitungen sowie Nahverkehr und Bahn. Die Grundeinstellung zeigt den Vorschlag des Sachverständigenrats vom November 2026, den ermäßigten Satz für Hotelübernachtungen abzuschaffen, den externe Gutachten als ineffizient bewerten. Dasselbe schlägt der Rat für kulturelle und unterhaltende Leistungen vor; der zweite Regler umfasst darüber hinaus Bücher und Zeitungen. Die Regler reichen vom EU-Mindestsatz für ermäßigte Sätze (5 %) bis zum Regelsatz von 2024 (19 %).",
-        "en": "Sets for three areas whether the reduced rate of 7% or the full rate applies: hotel stays, culture including books and newspapers, and local public transport and rail. The default shows the proposal of the Council of Economic Experts of November 2026 to abolish the reduced rate for hotel stays, which external evaluations rate as inefficient. The Council proposes the same for cultural and entertainment services; the second slider also covers books and newspapers. The sliders run from the EU minimum for reduced rates (5%) to the 2024 standard rate (19%)."
+        "de": "Legt den Mehrwertsteuersatz für Hotels, Kultur und Nahverkehr fest. Die Grundeinstellung zeigt den Vorschlag des Sachverständigenrats vom November 2026, den ermäßigten Satz für Hotels abzuschaffen.",
+        "en": "Sets the VAT rate for hotel stays, culture and public transport. The default shows the Council of Economic Experts' proposal of November 2026 to abolish the reduced rate for hotels."
+      },
+      "explanation": {
+        "de": "In allen drei Bereichen gilt heute der ermäßigte Satz von 7 %. Der zweite Regler umfasst Kultur einschließlich Büchern und Zeitungen, der dritte Nahverkehr und Bahn. Den ermäßigten Satz für Hotelübernachtungen bewerten externe Gutachten als ineffizient. Dasselbe wie für Hotels schlägt der Sachverständigenrat für kulturelle und unterhaltende Leistungen vor; der Regler für Kultur umfasst darüber hinaus Bücher und Zeitungen. Die Regler reichen vom EU-Mindestsatz für ermäßigte Sätze (5 %) bis zum Regelsatz von 2024 (19 %).",
+        "en": "In all three areas the reduced rate of 7% applies today. The second slider covers culture including books and newspapers, the third local public transport and rail. External evaluations rate the reduced rate for hotel stays as inefficient. The Council proposes the same as for hotels for cultural and entertainment services; the culture slider also covers books and newspapers. The sliders run from the EU minimum for reduced rates (5%) to the 2024 standard rate (19%)."
       },
       "topic": "taxes",
       "params": [
@@ -3642,10 +3686,10 @@
           "sources": [
             "eurostat_gov_10a_main"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Die Maßnahme legt die Sätze der drei Bereiche selbst fest. Ist zugleich „Mehrwertsteuer erhöhen oder senken“ eingeschaltet, gelten für diese Bereiche die Sätze hier; 19 % bleiben dann 19 %, auch wenn dort ein anderer Regelsatz eingestellt ist.",
             "en": "The measure sets the rates of the three areas itself. If \"Raise or lower value added tax\" is switched on as well, the rates here apply to these areas; 19% then stays 19% even if a different standard rate is set there."
@@ -3667,8 +3711,12 @@
         "en": "Change the fuel tax (energy tax on petrol and diesel)"
       },
       "summary": {
-        "de": "Setzt die Energiesteuer auf Benzin und Diesel auf die eingestellten Sätze. Regulär und im Basisjahr 2024 beträgt sie 65,45 Cent je Liter Benzin und 47,04 Cent je Liter Diesel. Die Grundeinstellung zeigt, was es im Jahr kostet, den Tankrabatt von 2026 dauerhaft zu gewähren: je 14,04 Cent weniger, wie er vom 1. Oktober bis 31. Dezember 2026 gilt (ein erster Tankrabatt galt im Mai und Juni 2026). Höhere Werte bringen Mehreinnahmen, etwa wenn Diesel so hoch besteuert wird wie Benzin. Gerechnet wird mit den 2024 versteuerten Mengen; der Verbrauch bleibt unverändert.",
-        "en": "Sets the energy tax on petrol and diesel to the chosen rates. The regular rate, also in the base year 2024, is 65.45 cents per litre of petrol and 47.04 cents per litre of diesel. The default shows what it costs per year to grant the 2026 fuel tax cut permanently: 14.04 cents less on each, as in force from 1 October to 31 December 2026 (a first fuel tax cut applied in May and June 2026). Higher values yield additional revenue, for example if diesel is taxed at the petrol rate. The calculation uses the volumes taxed in 2024 and leaves consumption unchanged."
+        "de": "Setzt die Energiesteuer auf Benzin und Diesel fest. Die Grundeinstellung zeigt, was es im Jahr kostet, den Tankrabatt von 2026 dauerhaft zu gewähren: 14,04 Cent weniger je Liter.",
+        "en": "Sets the energy tax on petrol and diesel. The default shows what it costs per year to grant the 2026 fuel tax cut permanently: 14.04 cents less per litre."
+      },
+      "explanation": {
+        "de": "Regulär und im Basisjahr 2024 beträgt die Steuer 65,45 Cent je Liter Benzin und 47,04 Cent je Liter Diesel. Der Tankrabatt senkt beide Sätze um je 14,04 Cent, wie er vom 1. Oktober bis 31. Dezember 2026 gilt; ein erster Tankrabatt galt im Mai und Juni 2026. Höhere Werte bringen Mehreinnahmen, etwa wenn Diesel so hoch besteuert wird wie Benzin.\n\nGerechnet wird mit den 2024 versteuerten Mengen; der Verbrauch bleibt unverändert.",
+        "en": "The regular rate, also in the base year 2024, is 65.45 cents per litre of petrol and 47.04 cents per litre of diesel. The fuel tax cut lowers each by 14.04 cents, as in force from 1 October to 31 December 2026; a first fuel tax cut applied in May and June 2026. Higher values yield additional revenue, for example if diesel is taxed at the petrol rate.\n\nThe calculation uses the volumes taxed in 2024 and leaves consumption unchanged."
       },
       "topic": "taxes",
       "params": [
@@ -3785,30 +3833,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
-            "de": "Zum Abgleich mit den amtlichen Schätzungen: Für die drei Monate von Juni bis August 2022 (Benzin 29,55 und Diesel 14,04 Cent weniger) rechnete der Gesetzentwurf mit 3,15 Mrd. Euro weniger Energiesteuer; die Rechnung hier ergibt dafür 3,1 Mrd. Euro. Für Oktober bis Dezember 2026 (je 14,04 Cent weniger) nennt die Bundesregierung 2,485 Mrd. Euro; hier ergeben sich 2,2 Mrd. Euro. Der Tankrabatt ist bis 31. Dezember 2026 befristet. Die Bundesregierung hat angekündigt, bis spätestens 1. Januar 2027 einen Spritpreisdeckel anzustreben (Stand Oktober 2026).",
-            "en": "As a check against the official estimates: for the three months from June to August 2022 (petrol 29.55 and diesel 14.04 cents less) the bill expected EUR 3.15 billion less energy tax; the calculation here gives EUR 3.1 billion. For October to December 2026 (14.04 cents less on each) the federal government gives EUR 2.485 billion; here the result is EUR 2.2 billion. The fuel tax cut runs until 31 December 2026. The federal government has announced that it aims for a fuel price cap by 1 January 2027 at the latest (as of October 2026)."
-          },
-          "sources": [
-            "bt_drs_20_1741",
-            "bt_wd_tankrabatt_2026"
-          ]
-        },
-        {
-          "kind": "economic",
-          "severity": "minor",
-          "text": {
-            "de": "Auf die Energiesteuer wird Mehrwertsteuer erhoben: 14,04 Cent weniger Steuer senken den Preis rechnerisch um rund 17 Cent je Liter. Für Oktober bis Dezember 2026 schätzt die Bundesregierung deshalb zusätzlich 293 Mio. Euro weniger Mehrwertsteuer auf Kraftstoffe, erwartet aber Mehreinnahmen in ähnlicher Höhe an anderer Stelle, weil das gesparte Geld anderswo ausgegeben wird. Die Rechnung hier lässt die Mehrwertsteuer deshalb unverändert.",
-            "en": "VAT is charged on the energy tax: 14.04 cents less tax lower the price by about 17 cents per litre in arithmetic terms. For October to December 2026 the federal government therefore estimates an additional EUR 293 million less VAT on fuels, but expects additional revenue of a similar size elsewhere because the money saved is spent on other things. The calculation here therefore leaves VAT unchanged."
-          },
-          "sources": [
-            "bt_wd_tankrabatt_2026",
-            "bt_drs_20_1741"
-          ]
-        },
-        {
           "kind": "cost_shift",
           "severity": "minor",
           "text": {
@@ -3817,18 +3841,6 @@
           },
           "sources": [
             "gg_art_106"
-          ]
-        },
-        {
-          "kind": "economic",
-          "severity": "minor",
-          "text": {
-            "de": "Zum Preis an der Zapfsäule gehört außerdem der nationale CO2-Preis, der auf dieselben Kraftstoffe erhoben wird (2024: 45 Euro je Tonne, 2026: 55 bis 65 Euro). Er ist eine eigene Maßnahme und eine eigene Einnahme des Bundes; wer beide verändert, sieht die Summe beider Wirkungen.",
-            "en": "The pump price also includes the national carbon price, which is levied on the same fuels (2024: EUR 45 per tonne, 2026: EUR 55 to 65). It is a separate measure and a separate federal revenue; changing both shows the sum of both effects."
-          },
-          "sources": [
-            "uba_pm_29_2025",
-            "ihk_behg_2026"
           ]
         },
         {
@@ -3855,6 +3867,38 @@
           ]
         }
       ],
+      "limits": [
+        {
+          "text": {
+            "de": "Zum Abgleich mit den amtlichen Schätzungen: Für die drei Monate von Juni bis August 2022 (Benzin 29,55 und Diesel 14,04 Cent weniger) rechnete der Gesetzentwurf mit 3,15 Mrd. Euro weniger Energiesteuer; die Rechnung hier ergibt dafür 3,1 Mrd. Euro. Für Oktober bis Dezember 2026 (je 14,04 Cent weniger) nennt die Bundesregierung 2,485 Mrd. Euro; hier ergeben sich 2,2 Mrd. Euro. Der Tankrabatt ist bis 31. Dezember 2026 befristet. Die Bundesregierung hat angekündigt, bis spätestens 1. Januar 2027 einen Spritpreisdeckel anzustreben (Stand Oktober 2026).",
+            "en": "As a check against the official estimates: for the three months from June to August 2022 (petrol 29.55 and diesel 14.04 cents less) the bill expected EUR 3.15 billion less energy tax; the calculation here gives EUR 3.1 billion. For October to December 2026 (14.04 cents less on each) the federal government gives EUR 2.485 billion; here the result is EUR 2.2 billion. The fuel tax cut runs until 31 December 2026. The federal government has announced that it aims for a fuel price cap by 1 January 2027 at the latest (as of October 2026)."
+          },
+          "sources": [
+            "bt_drs_20_1741",
+            "bt_wd_tankrabatt_2026"
+          ]
+        },
+        {
+          "text": {
+            "de": "Auf die Energiesteuer wird Mehrwertsteuer erhoben: 14,04 Cent weniger Steuer senken den Preis rechnerisch um rund 17 Cent je Liter. Für Oktober bis Dezember 2026 schätzt die Bundesregierung deshalb zusätzlich 293 Mio. Euro weniger Mehrwertsteuer auf Kraftstoffe, erwartet aber Mehreinnahmen in ähnlicher Höhe an anderer Stelle, weil das gesparte Geld anderswo ausgegeben wird. Die Rechnung hier lässt die Mehrwertsteuer deshalb unverändert.",
+            "en": "VAT is charged on the energy tax: 14.04 cents less tax lower the price by about 17 cents per litre in arithmetic terms. For October to December 2026 the federal government therefore estimates an additional EUR 293 million less VAT on fuels, but expects additional revenue of a similar size elsewhere because the money saved is spent on other things. The calculation here therefore leaves VAT unchanged."
+          },
+          "sources": [
+            "bt_wd_tankrabatt_2026",
+            "bt_drs_20_1741"
+          ]
+        },
+        {
+          "text": {
+            "de": "Zum Preis an der Zapfsäule gehört außerdem der nationale CO2-Preis, der auf dieselben Kraftstoffe erhoben wird (2024: 45 Euro je Tonne, 2026: 55 bis 65 Euro). Er ist eine eigene Maßnahme und eine eigene Einnahme des Bundes; wer beide verändert, sieht die Summe beider Wirkungen.",
+            "en": "The pump price also includes the national carbon price, which is levied on the same fuels (2024: EUR 45 per tonne, 2026: EUR 55 to 65). It is a separate measure and a separate federal revenue; changing both shows the sum of both effects."
+          },
+          "sources": [
+            "uba_pm_29_2025",
+            "ihk_behg_2026"
+          ]
+        }
+      ],
       "sources": [
         "energiestg_2",
         "destatis_energiesteuer",
@@ -3870,8 +3914,12 @@
         "en": "Lower the electricity tax for everyone"
       },
       "summary": {
-        "de": "Senkt die Stromsteuer auf den eingestellten Wert, in der Grundeinstellung auf das Mindestmaß der EU von 0,1 Cent je Kilowattstunde. Das gilt für private Haushalte und alle übrigen Verbraucher, die heute den vollen Satz von 2,05 Cent zahlen; für das produzierende Gewerbe und die Land- und Forstwirtschaft gilt das Mindestmaß bereits. Die Rechnung senkt die Einnahmen des Basisjahres 2024 im gleichen Verhältnis wie den Steuersatz und lässt den Verbrauch unverändert.",
-        "en": "Lowers the electricity tax to the chosen value, by default to the EU minimum of 0.1 cents per kilowatt-hour. This applies to private households and all other consumers who today pay the full rate of 2.05 cents; for manufacturing and for agriculture and forestry the minimum already applies. The calculation lowers the revenue of the base year 2024 in the same proportion as the tax rate and leaves consumption unchanged."
+        "de": "Senkt die Stromsteuer für alle, die heute den vollen Satz von 2,05 Cent je Kilowattstunde zahlen. Die Grundeinstellung senkt sie auf das Mindestmaß der EU von 0,1 Cent.",
+        "en": "Lowers the electricity tax for everyone who today pays the full rate of 2.05 cents per kilowatt-hour. The default lowers it to the EU minimum of 0.1 cents."
+      },
+      "explanation": {
+        "de": "Den vollen Satz zahlen private Haushalte und alle übrigen Verbraucher; für das produzierende Gewerbe und die Land- und Forstwirtschaft gilt das Mindestmaß bereits. Die Rechnung senkt die Einnahmen des Basisjahres 2024 im gleichen Verhältnis wie den Steuersatz und lässt den Verbrauch unverändert.",
+        "en": "The full rate is paid by private households and all other consumers; for manufacturing and for agriculture and forestry the minimum already applies. The calculation lowers the revenue of the base year 2024 in the same proportion as the tax rate and leaves consumption unchanged."
       },
       "topic": "taxes",
       "params": [
@@ -3995,8 +4043,12 @@
         "en": "Change the tobacco tax"
       },
       "summary": {
-        "de": "Ändert die Tabaksteuer auf alle Tabakwaren (Zigaretten, Feinschnitt, erhitzten Tabak, Liquids für E-Zigaretten und übrige) um den eingestellten Prozentsatz gegenüber 2024. Die Grundeinstellung zeigt die Forderung des Deutschen Krebsforschungszentrums (DKFZ), die Tabaksteuer jedes Jahr um 10 % zu erhöhen, hier für ein Jahr. 10 % entsprechen bei Zigaretten rund 1,9 Cent je Stück oder 38 Cent je Schachtel mit 20 Stück; 2024 betrug die Steuer im Schnitt 18,8 Cent je Zigarette. Die Rechnung berücksichtigt, dass bei höheren Preisen weniger versteuert wird, weil weniger geraucht, im Ausland gekauft oder auf billigere Produkte ausgewichen wird. Sie setzt deshalb nur rund 62 % des Mehraufkommens an, das sich ohne diese Reaktionen ergäbe.",
-        "en": "Changes the tobacco tax on all tobacco products (cigarettes, fine-cut tobacco, heated tobacco, e-cigarette liquids and others) by the chosen percentage compared with 2024. The default shows the demand of the German Cancer Research Center (DKFZ) to raise the tobacco tax by 10% every year, here for one year. For cigarettes, 10% corresponds to about 1.9 cents each or 38 cents per pack of 20; in 2024 the tax averaged 18.8 cents per cigarette. The calculation takes into account that less is taxed when prices are higher, because people smoke less, buy abroad or switch to cheaper products. It therefore counts only about 62% of the additional revenue there would be without these responses."
+        "de": "Ändert die Tabaksteuer gegenüber 2024. Die Grundeinstellung zeigt die Forderung des Deutschen Krebsforschungszentrums (DKFZ), sie jedes Jahr um 10 % zu erhöhen, hier für ein Jahr.",
+        "en": "Changes the tobacco tax compared with 2024. The default shows the demand of the German Cancer Research Center (DKFZ) to raise it by 10% every year, here for one year."
+      },
+      "explanation": {
+        "de": "Die Änderung gilt für alle Tabakwaren: Zigaretten, Feinschnitt, erhitzten Tabak, Liquids für E-Zigaretten und übrige. 10 % entsprechen bei Zigaretten rund 1,9 Cent je Stück oder 38 Cent je Schachtel mit 20 Stück; 2024 betrug die Steuer im Schnitt 18,8 Cent je Zigarette.\n\nDie Rechnung berücksichtigt, dass bei höheren Preisen weniger versteuert wird, weil weniger geraucht, im Ausland gekauft oder auf billigere Produkte ausgewichen wird. Sie setzt deshalb nur rund 62 % des Mehraufkommens an, das sich ohne diese Reaktionen ergäbe.",
+        "en": "The change applies to all tobacco products: cigarettes, fine-cut tobacco, heated tobacco, e-cigarette liquids and others. For cigarettes, 10% corresponds to about 1.9 cents each or 38 cents per pack of 20; in 2024 the tax averaged 18.8 cents per cigarette.\n\nThe calculation takes into account that less is taxed when prices are higher, because people smoke less, buy abroad or switch to cheaper products. It therefore counts only about 62% of the additional revenue there would be without these responses."
       },
       "topic": "taxes",
       "params": [
@@ -4098,32 +4150,6 @@
           ]
         },
         {
-          "kind": "economic",
-          "severity": "minor",
-          "text": {
-            "de": "Nicht in der Zahl enthalten sind die Folgen für die Gesundheit. Rauchen verursacht nach Angaben der Bundesregierung jährlich mindestens 97 Mrd. Euro Kosten, davon rund 30 Mrd. Euro für die Behandlung. Die FinanzKommission Gesundheit erwartet von der von ihr empfohlenen Erhöhung, dass der Zigarettenkonsum um etwa ein Fünftel sinkt, jährlich rund 3.500 Krebserkrankungen weniger auftreten und die Krankenkassen mittelfristig rund 630 Mio. Euro im Jahr sparen. Nach einer vom DKFZ zitierten Studie ließen sich mit zehn Erhöhungen um je 10 % über 30 Jahre 8,5 % der durch Rauchen bedingten Krebserkrankungen bei Männern und 7,3 % bei Frauen vermeiden.",
-            "en": "The health effects are not included in the figure. According to the federal government, smoking causes costs of at least EUR 97 billion a year, of which about EUR 30 billion for treatment. The Health Finance Commission expects the increase it recommends to cut cigarette consumption by about a fifth, to prevent about 3,500 cancer cases a year and to save the health insurance funds about EUR 630 million a year in the medium term. According to a study cited by DKFZ, ten increases of 10% each would avoid, over 30 years, 8.5% of smoking-related cancers in men and 7.3% in women."
-          },
-          "sources": [
-            "bt_drs_21_8482",
-            "dkfz_pb_tabaksteuer_2026"
-          ]
-        },
-        {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
-            "de": "Die Maßnahme erhöht alle Tabakwaren um denselben Prozentsatz. Feinschnitt trägt aber je vergleichbarer Zigarette nur rund 38 % der Steuer einer Fabrikzigarette; das DKFZ fordert, alle Tabakprodukte gleich zu besteuern, damit niemand auf billigere ausweicht. Außerdem verschieben Erhöhungen Einnahmen zwischen den Jahren: Vor einer Erhöhung beziehen die Hersteller Steuerzeichen früher, im Dezember 2024 lagen die Einnahmen deshalb 26 % über dem Vorjahresmonat.",
-            "en": "The measure raises all tobacco products by the same percentage. Fine-cut tobacco, however, carries only about 38% of the tax on a factory-made cigarette per comparable cigarette; DKFZ calls for taxing all tobacco products equally so that nobody switches to cheaper ones. Increases also shift revenue between years: manufacturers buy tax stamps earlier before an increase, so revenue in December 2024 was 26% above the same month a year earlier."
-          },
-          "sources": [
-            "bt_drs_21_8482",
-            "dkfz_pb_tabaksteuer_2026",
-            "bmf_mb_2025_01_steuereinnahmen",
-            "destatis_tabak_2024"
-          ]
-        },
-        {
           "kind": "cost_shift",
           "severity": "minor",
           "text": {
@@ -4151,6 +4177,30 @@
           ]
         }
       ],
+      "limits": [
+        {
+          "text": {
+            "de": "Nicht in der Zahl enthalten sind die Folgen für die Gesundheit. Rauchen verursacht nach Angaben der Bundesregierung jährlich mindestens 97 Mrd. Euro Kosten, davon rund 30 Mrd. Euro für die Behandlung. Die FinanzKommission Gesundheit erwartet von der von ihr empfohlenen Erhöhung, dass der Zigarettenkonsum um etwa ein Fünftel sinkt, jährlich rund 3.500 Krebserkrankungen weniger auftreten und die Krankenkassen mittelfristig rund 630 Mio. Euro im Jahr sparen. Nach einer vom DKFZ zitierten Studie ließen sich mit zehn Erhöhungen um je 10 % über 30 Jahre 8,5 % der durch Rauchen bedingten Krebserkrankungen bei Männern und 7,3 % bei Frauen vermeiden.",
+            "en": "The health effects are not included in the figure. According to the federal government, smoking causes costs of at least EUR 97 billion a year, of which about EUR 30 billion for treatment. The Health Finance Commission expects the increase it recommends to cut cigarette consumption by about a fifth, to prevent about 3,500 cancer cases a year and to save the health insurance funds about EUR 630 million a year in the medium term. According to a study cited by DKFZ, ten increases of 10% each would avoid, over 30 years, 8.5% of smoking-related cancers in men and 7.3% in women."
+          },
+          "sources": [
+            "bt_drs_21_8482",
+            "dkfz_pb_tabaksteuer_2026"
+          ]
+        },
+        {
+          "text": {
+            "de": "Die Maßnahme erhöht alle Tabakwaren um denselben Prozentsatz. Feinschnitt trägt aber je vergleichbarer Zigarette nur rund 38 % der Steuer einer Fabrikzigarette; das DKFZ fordert, alle Tabakprodukte gleich zu besteuern, damit niemand auf billigere ausweicht. Außerdem verschieben Erhöhungen Einnahmen zwischen den Jahren: Vor einer Erhöhung beziehen die Hersteller Steuerzeichen früher, im Dezember 2024 lagen die Einnahmen deshalb 26 % über dem Vorjahresmonat.",
+            "en": "The measure raises all tobacco products by the same percentage. Fine-cut tobacco, however, carries only about 38% of the tax on a factory-made cigarette per comparable cigarette; DKFZ calls for taxing all tobacco products equally so that nobody switches to cheaper ones. Increases also shift revenue between years: manufacturers buy tax stamps earlier before an increase, so revenue in December 2024 was 26% above the same month a year earlier."
+          },
+          "sources": [
+            "bt_drs_21_8482",
+            "dkfz_pb_tabaksteuer_2026",
+            "bmf_mb_2025_01_steuereinnahmen",
+            "destatis_tabak_2024"
+          ]
+        }
+      ],
       "sources": [
         "eurostat_ntl",
         "dkfz_pb_tabaksteuer_2026",
@@ -4173,8 +4223,12 @@
         "en": "Change the taxes on alcohol (spirits, beer, sparkling wine, wine)"
       },
       "summary": {
-        "de": "Setzt die Steuern auf Spirituosen, Bier und Schaumwein auf die eingestellten Sätze und kann eine Steuer auf Wein einführen, den Deutschland bisher nicht besteuert. Die Grundeinstellung zeigt die Erhöhung der Alkoholsteuer auf Spirituosen um 20 % von 13,03 auf 15,64 Euro je Liter reinen Alkohols, die die Bundesregierung ab 2027 plant und die FinanzKommission Gesundheit empfohlen hat. Eine 0,7-Liter-Flasche mit 40 % Alkohol trägt damit 4,38 statt 3,65 Euro Steuer. Die Rechnung berücksichtigt, dass bei höheren Preisen weniger getrunken und versteuert wird. Die Kaffeesteuer, die im Haushalt mit der Alkohol- und der Schaumweinsteuer in einem Posten steht, bleibt unverändert.",
-        "en": "Sets the taxes on spirits, beer and sparkling wine to the chosen rates and can introduce a tax on wine, which Germany has not taxed so far. The default shows the 20% increase of the alcohol tax on spirits from EUR 13.03 to 15.64 per litre of pure alcohol that the federal government plans from 2027 and that the Health Finance Commission recommended. A 0.7-litre bottle at 40% alcohol then carries EUR 4.38 instead of 3.65 in tax. The calculation takes into account that less is drunk and taxed when prices are higher. The coffee tax, which shares a budget item with the alcohol and sparkling wine taxes, remains unchanged."
+        "de": "Setzt die Steuern auf Spirituosen, Bier und Schaumwein fest und kann Wein besteuern. Die Grundeinstellung zeigt die ab 2027 geplante Erhöhung der Steuer auf Spirituosen um 20 %.",
+        "en": "Sets the taxes on spirits, beer and sparkling wine and can tax wine. The default shows the 20% increase of the tax on spirits planned from 2027."
+      },
+      "explanation": {
+        "de": "Wein besteuert Deutschland bisher nicht. Die Erhöhung der Alkoholsteuer auf Spirituosen um 20 %, von 13,03 auf 15,64 Euro je Liter reinen Alkohols, plant die Bundesregierung ab 2027; die FinanzKommission Gesundheit hat sie empfohlen. Eine 0,7-Liter-Flasche mit 40 % Alkohol trägt damit 4,38 statt 3,65 Euro Steuer.\n\nDie Rechnung berücksichtigt, dass bei höheren Preisen weniger getrunken und versteuert wird. Die Kaffeesteuer, die im Haushalt mit der Alkohol- und der Schaumweinsteuer in einem Posten steht, bleibt unverändert.",
+        "en": "Germany has not taxed wine so far. The federal government plans the 20% increase of the alcohol tax on spirits, from EUR 13.03 to 15.64 per litre of pure alcohol, from 2027; the Health Finance Commission recommended it. A 0.7-litre bottle at 40% alcohol then carries EUR 4.38 instead of 3.65 in tax.\n\nThe calculation takes into account that less is drunk and taxed when prices are higher. The coffee tax, which shares a budget item with the alcohol and sparkling wine taxes, remains unchanged."
       },
       "topic": "taxes",
       "params": [
@@ -4400,17 +4454,6 @@
           ]
         },
         {
-          "kind": "economic",
-          "severity": "minor",
-          "text": {
-            "de": "Nicht in der Zahl enthalten sind die Folgen für die Gesundheit. Nach der Modellstudie hätten um 20 % höhere Steuern auf Bier, Wein und Spirituosen im Jahr 2019 rund 40.000 alkoholbedingte Erkrankungen und Verletzungen und rund 560 Todesfälle vermieden, eine Verdopplung rund 200.000 Erkrankungen und 2.800 Todesfälle. Deutschland hat danach eine der niedrigsten Alkoholsteuern in Europa.",
-            "en": "The health effects are not included in the figure. According to the modelling study, taxes on beer, wine and spirits 20% higher would have avoided about 40,000 alcohol-related illnesses and injuries and about 560 deaths in 2019, and doubling them about 200,000 illnesses and 2,800 deaths. According to the study, Germany has one of the lowest alcohol taxes in Europe."
-          },
-          "sources": [
-            "kilian_2022_alkoholsteuer"
-          ]
-        },
-        {
           "kind": "political",
           "severity": "minor",
           "text": {
@@ -4428,24 +4471,33 @@
           "kind": "practical",
           "severity": "minor",
           "text": {
-            "de": "Der Haushaltsposten enthält auch die Kaffeesteuer (2024: 1,0 Mrd. Euro). Die Maßnahme addiert nur die berechneten Änderungen der Steuern auf Spirituosen, Bier, Schaumwein und Wein; die Kaffeesteuer bleibt unverändert. Zwischenerzeugnisse wie Sherry oder Portwein haben eine eigene, kleine Steuer, die die Maßnahme ebenfalls nicht ändert.",
-            "en": "The budget item also contains the coffee tax (2024: EUR 1.0 billion). The measure adds only the calculated changes in the taxes on spirits, beer, sparkling wine and wine; the coffee tax remains unchanged. Intermediate products such as sherry or port have a separate, small tax, which the measure does not change either."
-          },
-          "sources": [
-            "eurostat_ntl",
-            "bt_drs_21_7860"
-          ]
-        },
-        {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
             "de": "Der Finanzplan des Bundes bis 2030 rechnet bereits mit der Erhöhung um 20 % auf Spirituosen. Dieser Teil, in der Grundeinstellung rund 0,2 Mrd. Euro, verkleinert die Lücke im Finanzplan nicht noch einmal, wird in der Anzeige der Lücke aber mitgezählt. Neu wären dagegen etwa eine Weinsteuer oder eine höhere Schaumweinsteuer.",
             "en": "The federal financial plan to 2030 already counts on the 20% increase on spirits. This part, about EUR 0.2 billion at the default setting, does not narrow the gap in the financial plan a second time, but the display of the gap counts it. A wine tax or a higher sparkling wine tax, by contrast, would be new."
           },
           "sources": [
             "bundestag_drs_21_7301",
             "bt_drs_21_9241"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Nicht in der Zahl enthalten sind die Folgen für die Gesundheit. Nach der Modellstudie hätten um 20 % höhere Steuern auf Bier, Wein und Spirituosen im Jahr 2019 rund 40.000 alkoholbedingte Erkrankungen und Verletzungen und rund 560 Todesfälle vermieden, eine Verdopplung rund 200.000 Erkrankungen und 2.800 Todesfälle. Deutschland hat danach eine der niedrigsten Alkoholsteuern in Europa.",
+            "en": "The health effects are not included in the figure. According to the modelling study, taxes on beer, wine and spirits 20% higher would have avoided about 40,000 alcohol-related illnesses and injuries and about 560 deaths in 2019, and doubling them about 200,000 illnesses and 2,800 deaths. According to the study, Germany has one of the lowest alcohol taxes in Europe."
+          },
+          "sources": [
+            "kilian_2022_alkoholsteuer"
+          ]
+        },
+        {
+          "text": {
+            "de": "Der Haushaltsposten enthält auch die Kaffeesteuer (2024: 1,0 Mrd. Euro). Die Maßnahme addiert nur die berechneten Änderungen der Steuern auf Spirituosen, Bier, Schaumwein und Wein; die Kaffeesteuer bleibt unverändert. Zwischenerzeugnisse wie Sherry oder Portwein haben eine eigene, kleine Steuer, die die Maßnahme ebenfalls nicht ändert.",
+            "en": "The budget item also contains the coffee tax (2024: EUR 1.0 billion). The measure adds only the calculated changes in the taxes on spirits, beer, sparkling wine and wine; the coffee tax remains unchanged. Intermediate products such as sherry or port have a separate, small tax, which the measure does not change either."
+          },
+          "sources": [
+            "eurostat_ntl",
+            "bt_drs_21_7860"
           ]
         }
       ],
@@ -4472,8 +4524,12 @@
         "en": "Introduce a tax on sugary drinks"
       },
       "summary": {
-        "de": "Erhebt eine Verbrauchsteuer auf Limonaden, Eistees, Energydrinks und andere Getränke mit mindestens 5 Gramm Zucker je 100 Milliliter, gestaffelt nach dem Zuckergehalt. Die Grundeinstellung zeigt die Sätze, die der Haushaltsausschuss am 13. November 2026 in das Haushaltsbegleitgesetz 2027 aufgenommen hat, mit Start am 1. Januar 2028: 25 Cent je Liter ab 5 Gramm, 30 Cent ab 7 Gramm und 35 Cent ab 9 Gramm. Reine Frucht- und Gemüsesäfte, Milch- und Sojagetränke, mit Süßstoffen gesüßte Getränke und alkoholfreie Varianten alkoholischer Getränke bleiben frei. Der Regler ändert alle drei Sätze im gleichen Verhältnis; 100 % entsprechen diesen Sätzen. Das Aufkommen steht allein dem Bund zu.",
-        "en": "Levies an excise duty on soft drinks, iced teas, energy drinks and other beverages with at least 5 grams of sugar per 100 millilitres, graded by sugar content. The default shows the rates the budget committee wrote into the Budget Accompanying Act 2027 on 13 November 2026, starting on 1 January 2028: 25 cents per litre from 5 grams, 30 cents from 7 grams and 35 cents from 9 grams. Pure fruit and vegetable juices, milk and soya drinks, drinks with non-sugar sweeteners and alcohol-free versions of alcoholic drinks remain exempt. The slider changes all three rates in the same proportion; 100% corresponds to these rates. The revenue goes to the federal level alone."
+        "de": "Erhebt eine Steuer auf Getränke mit mindestens 5 Gramm Zucker je 100 Milliliter. Die Grundeinstellung zeigt die Sätze, die der Haushaltsausschuss am 13. November 2026 beschlossen hat, ab 2028.",
+        "en": "Levies a tax on drinks with at least 5 grams of sugar per 100 millilitres. The default shows the rates the budget committee decided on 13 November 2026, from 2028."
+      },
+      "explanation": {
+        "de": "Betroffen sind Limonaden, Eistees, Energydrinks und andere Getränke, gestaffelt nach dem Zuckergehalt. Der Haushaltsausschuss hat die Steuer in das Haushaltsbegleitgesetz 2027 aufgenommen, mit Start am 1. Januar 2028: 25 Cent je Liter ab 5 Gramm, 30 Cent ab 7 Gramm und 35 Cent ab 9 Gramm. Reine Frucht- und Gemüsesäfte, Milch- und Sojagetränke, mit Süßstoffen gesüßte Getränke und alkoholfreie Varianten alkoholischer Getränke bleiben frei.\n\nDer Regler ändert alle drei Sätze im gleichen Verhältnis; 100 % entsprechen diesen Sätzen. Das Aufkommen steht allein dem Bund zu.",
+        "en": "The tax covers soft drinks, iced teas, energy drinks and other beverages, graded by sugar content. The budget committee wrote it into the Budget Accompanying Act 2027, starting on 1 January 2028: 25 cents per litre from 5 grams, 30 cents from 7 grams and 35 cents from 9 grams. Pure fruit and vegetable juices, milk and soya drinks, drinks with non-sugar sweeteners and alcohol-free versions of alcoholic drinks remain exempt.\n\nThe slider changes all three rates in the same proportion; 100% corresponds to these rates. The revenue goes to the federal level alone."
       },
       "topic": "taxes",
       "params": [
@@ -4575,18 +4631,6 @@
           ]
         },
         {
-          "kind": "economic",
-          "severity": "minor",
-          "text": {
-            "de": "Nicht in der Zahl enthalten sind mögliche Einsparungen im Gesundheitswesen. Das Finanzministerium beziffert die jährlichen Behandlungskosten durch den Konsum gezuckerter Getränke auf etwa 2,1 Mrd. Euro. Die Steuer soll innerhalb von fünf Jahren nach dem Start ausgewertet werden, auch anhand von Verzehrdaten.",
-            "en": "Possible savings in health care are not included in the figure. The finance ministry puts the annual treatment costs caused by sugary drinks at about EUR 2.1 billion. The tax is to be evaluated within five years of its start, including with consumption data."
-          },
-          "sources": [
-            "bmf_pm_zuckergetraenkesteuer_2026",
-            "bt_drs_21_9241"
-          ]
-        },
-        {
           "kind": "practical",
           "severity": "minor",
           "text": {
@@ -4596,6 +4640,18 @@
           "sources": [
             "bundestag_drs_21_7301",
             "bt_drs_21_7016"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Nicht in der Zahl enthalten sind mögliche Einsparungen im Gesundheitswesen. Das Finanzministerium beziffert die jährlichen Behandlungskosten durch den Konsum gezuckerter Getränke auf etwa 2,1 Mrd. Euro. Die Steuer soll innerhalb von fünf Jahren nach dem Start ausgewertet werden, auch anhand von Verzehrdaten.",
+            "en": "Possible savings in health care are not included in the figure. The finance ministry puts the annual treatment costs caused by sugary drinks at about EUR 2.1 billion. The tax is to be evaluated within five years of its start, including with consumption data."
+          },
+          "sources": [
+            "bmf_pm_zuckergetraenkesteuer_2026",
+            "bt_drs_21_9241"
           ]
         }
       ],
@@ -4629,8 +4685,12 @@
         "en": "Introduce a tax on plastic packaging"
       },
       "summary": {
-        "de": "Erhebt eine Verbrauchsteuer auf Kunststoff in Verpackungen, je Tonne Kunststoff, bezahlt von Herstellern und Importeuren. Die Grundeinstellung zeigt den Entwurf von Finanz- und Umweltministerium vom Herbst 2026: 550 Euro je Tonne ab Juli 2027 für Verpackungen mit mehr als 5 % Kunststoff; Verpackungen aus Recyclingkunststoff sollten auf Antrag befreit werden können. Der Bund wollte damit dauerhaft so viel einnehmen, wie er seit 2021 als Plastikabgabe an die EU zahlt (0,80 Euro je Kilogramm nicht recycelter Kunststoffverpackungsabfälle). Im November 2026 hat die Koalition die Steuer vorerst fallen gelassen; die Maßnahme zeigt, was sie eingebracht hätte. Die Rechnung ändert das Aufkommen im gleichen Verhältnis wie den Satz.",
-        "en": "Levies an excise duty on plastic in packaging, per tonne of plastic, paid by manufacturers and importers. The default shows the draft of the finance and environment ministries of autumn 2026: EUR 550 per tonne from July 2027 for packaging with more than 5% plastic; packaging made of recycled plastic was to be exempted on application. The federal government wanted the tax to bring in, permanently, as much as it has paid to the EU as the plastics contribution since 2021 (EUR 0.80 per kilogram of non-recycled plastic packaging waste). In November 2026 the coalition dropped the tax for now; the measure shows what it would have raised. The calculation changes revenue in the same proportion as the rate."
+        "de": "Erhebt eine Steuer auf Kunststoff in Verpackungen. Die Grundeinstellung zeigt den Entwurf vom Herbst 2026, 550 Euro je Tonne, den die Koalition im November vorerst fallen gelassen hat.",
+        "en": "Levies a tax on plastic in packaging. The default shows the draft of autumn 2026, EUR 550 per tonne, which the coalition dropped for now in November."
+      },
+      "explanation": {
+        "de": "Die Steuer würde je Tonne Kunststoff erhoben und von Herstellern und Importeuren bezahlt. Der Entwurf von Finanz- und Umweltministerium sah 550 Euro je Tonne ab Juli 2027 vor, für Verpackungen mit mehr als 5 % Kunststoff; Verpackungen aus Recyclingkunststoff sollten auf Antrag befreit werden können. Der Bund wollte damit dauerhaft so viel einnehmen, wie er seit 2021 als Plastikabgabe an die EU zahlt (0,80 Euro je Kilogramm nicht recycelter Kunststoffverpackungsabfälle). Im November 2026 hat die Koalition die Steuer vorerst fallen gelassen; die Maßnahme zeigt, was sie eingebracht hätte.\n\nDie Rechnung ändert das Aufkommen im gleichen Verhältnis wie den Satz.",
+        "en": "The tax would be levied per tonne of plastic and paid by manufacturers and importers. The draft of the finance and environment ministries provided for EUR 550 per tonne from July 2027 for packaging with more than 5% plastic; packaging made of recycled plastic was to be exempted on application. The federal government wanted the tax to bring in, permanently, as much as it has paid to the EU as the plastics contribution since 2021 (EUR 0.80 per kilogram of non-recycled plastic packaging waste). In November 2026 the coalition dropped the tax for now; the measure shows what it would have raised.\n\nThe calculation changes revenue in the same proportion as the rate."
       },
       "topic": "taxes",
       "params": [
@@ -4782,8 +4842,12 @@
         "en": "Pension contribution: change the rate and the ceiling"
       },
       "summary": {
-        "de": "Legt fest, welcher Beitragssatz zur gesetzlichen Rentenversicherung auf welchen Teil des Bruttojahreslohns erhoben wird (Arbeitnehmer- und Arbeitgeberanteil zusammen). Voreingestellt ist die Regel von 2024: 18,6 % bis zur Beitragsbemessungsgrenze von 90.600 Euro, darüber nichts; solange kein Punkt bewegt wird, ändert sich nichts. Die Vorlagen heben die Grenze auf oder verdoppeln sie. Die Rechnung wendet die alte und die neue Regel auf die Verteilung der Löhne an und überträgt die relative Änderung auf die Beiträge aus Löhnen. Die höheren Renten, die aus höheren Beiträgen später entstehen, sind nicht enthalten. Weil Arbeitnehmer ihre Beiträge von der Steuer absetzen, ändert sich zugleich die Lohnsteuer in die entgegengesetzte Richtung; das ist eingerechnet.",
-        "en": "Sets the contribution rate to the statutory pension insurance charged on each part of the gross annual wage (employee and employer share together). The default is the 2024 rule: 18.6% up to the contribution ceiling of EUR 90,600 and nothing above; as long as no point is moved, nothing changes. The presets abolish the ceiling or double it. The calculation applies the old and the new rule to the distribution of wages and transfers the relative change to contributions on wages. The higher pensions that higher contributions later give rise to are not included. Because employees deduct their contributions from taxable income, wage tax moves the other way at the same time; this is included."
+        "de": "Ändert Beitragssatz und Beitragsbemessungsgrenze der Rentenversicherung. Voreingestellt ist die Regel von 2024, 18,6 % bis 90.600 Euro im Jahr; die Vorlagen heben die Grenze auf oder verdoppeln sie.",
+        "en": "Changes the contribution rate and ceiling of the statutory pension insurance. The default is the 2024 rule, 18.6% up to an annual wage of EUR 90,600; the presets abolish the ceiling or double it."
+      },
+      "explanation": {
+        "de": "Die Kurve legt fest, welcher Beitragssatz auf welchen Teil des Bruttojahreslohns erhoben wird, Arbeitnehmer- und Arbeitgeberanteil zusammen. Nach der Regel von 2024 ist es über der Beitragsbemessungsgrenze nichts. Solange kein Punkt bewegt wird, ändert sich nichts.\n\nDie Rechnung wendet die alte und die neue Regel auf die Verteilung der Löhne an und überträgt die relative Änderung auf die Beiträge aus Löhnen. Die höheren Renten, die aus höheren Beiträgen später entstehen, sind nicht enthalten. Weil Arbeitnehmer ihre Beiträge von der Steuer absetzen, ändert sich zugleich die Lohnsteuer in die entgegengesetzte Richtung; das ist eingerechnet.",
+        "en": "The curve sets the contribution rate charged on each part of the gross annual wage, employee and employer share together. Under the 2024 rule nothing is charged above the contribution ceiling. As long as no point is moved, nothing changes.\n\nThe calculation applies the old and the new rule to the distribution of wages and transfers the relative change to contributions on wages. The higher pensions that higher contributions later give rise to are not included. Because employees deduct their contributions from taxable income, wage tax moves the other way at the same time; this is included."
       },
       "topic": "pensions",
       "params": [
@@ -5014,8 +5078,20 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Ein Teil der Mehreinnahmen geht über die Lohnsteuer wieder verloren, weil Arbeitnehmer ihre Beiträge absetzen: bei Aufhebung der Grenze rund 5,4 der 26,9 Mrd. Euro. Den Ausfall tragen Bund, Länder und Gemeinden, die Beiträge erhält die Rentenversicherung. Tragen die Unternehmen ihren höheren Anteil selbst, sinken zusätzlich die Steuern auf ihre Gewinne; das ist nicht eingerechnet.",
+            "en": "Part of the additional revenue is lost again through wage tax, because employees deduct their contributions: about EUR 5.4 billion of the 26.9 billion if the ceiling is abolished. The loss is borne by the federal, state and municipal levels, while the pension insurance receives the contributions. If firms bear their higher share themselves, taxes on their profits fall as well; that is not included."
+          },
+          "sources": [
+            "estg_10",
+            "bt_drs_17_2885"
+          ]
+        }
+      ],
+      "limits": [
+        {
           "text": {
             "de": "Die Grenze steigt jedes Jahr mit den Löhnen: 2025 auf 96.600 Euro, 2026 auf 101.400 Euro. 2024 galt in Ostdeutschland noch eine niedrigere Grenze (89.400 Euro); die Rechnung verwendet einheitlich den Wert für Westdeutschland. Die Kurve steht in Werten von 2024.",
             "en": "The ceiling rises every year with wages: to EUR 96,600 in 2025 and EUR 101,400 in 2026. In 2024 a lower ceiling still applied in eastern Germany (EUR 89,400); the calculation uses the western value throughout. The curve is in 2024 values."
@@ -5026,8 +5102,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Grundlage sind die Bruttolöhne laut Lohnsteuerbescheinigung, die vom beitragspflichtigen Entgelt etwas abweichen. Beiträge, die für Arbeitslose, Kranke oder Pflegende gezahlt werden, und die Beiträge der Selbständigen sind nicht Teil dieser Rechnung. Die Mehreinnahmen fließen der Rentenversicherung zu, nicht dem Bundeshaushalt.",
             "en": "The basis is gross wages according to wage tax statements, which differ somewhat from earnings subject to contributions. Contributions paid for unemployed persons, the sick or carers, and the contributions of the self-employed are not part of this calculation. The additional revenue goes to the pension insurance, not to the federal budget."
@@ -5035,18 +5109,6 @@
           "sources": [
             "destatis_lest_2022",
             "drv_rv_in_zeitreihen_2026"
-          ]
-        },
-        {
-          "kind": "cost_shift",
-          "severity": "major",
-          "text": {
-            "de": "Ein Teil der Mehreinnahmen geht über die Lohnsteuer wieder verloren, weil Arbeitnehmer ihre Beiträge absetzen: bei Aufhebung der Grenze rund 5,4 der 26,9 Mrd. Euro. Den Ausfall tragen Bund, Länder und Gemeinden, die Beiträge erhält die Rentenversicherung. Tragen die Unternehmen ihren höheren Anteil selbst, sinken zusätzlich die Steuern auf ihre Gewinne; das ist nicht eingerechnet.",
-            "en": "Part of the additional revenue is lost again through wage tax, because employees deduct their contributions: about EUR 5.4 billion of the 26.9 billion if the ceiling is abolished. The loss is borne by the federal, state and municipal levels, while the pension insurance receives the contributions. If firms bear their higher share themselves, taxes on their profits fall as well; that is not included."
-          },
-          "sources": [
-            "estg_10",
-            "bt_drs_17_2885"
           ]
         }
       ],
@@ -5064,8 +5126,12 @@
         "en": "Everyone pays into the statutory pension insurance"
       },
       "summary": {
-        "de": "Bezieht Beamte und andere bisher nicht rentenversicherungspflichtige Arbeitnehmer in die gesetzliche Rentenversicherung ein, und zwar alle auf einmal, und zeigt damit die Wirkung eines vollständigen Wechsels. Alle Erwerbstätigen einschließlich der Beamten einzubeziehen, fordern Die Linke und das BSW; Die Linke will das im Bundestag schrittweise und unter Wahrung des Vertrauensschutzes (Antrag vom Dezember 2025). Eine Forderung, alle auf einmal einzubeziehen, ist nicht bekannt. Der Betrag gilt für das erste volle Jahr: Die Rentenversicherung erhält zusätzliche Beiträge, der Staat zahlt als Arbeitgeber seinen Anteil, die laufenden Pensionen laufen unverändert weiter. Rentenansprüche, die dadurch entstehen, kosten erst später und sind nicht enthalten. Selbständige und berufsständische Versorgungswerke sind mangels belastbarer Zahlen nicht beziffert. Weil Beamte ihren eigenen Beitrag von der Steuer absetzen, sinkt zugleich die Lohnsteuer; das ist eingerechnet.",
-        "en": "Brings civil servants and other employees not yet liable to pension insurance into the statutory pension insurance, all at once, and so shows the effect of a complete switch. Die Linke and the BSW call for bringing everyone in work, civil servants included, into the pension insurance; in the Bundestag Die Linke wants this step by step and with protection of legitimate expectations (motion of December 2025). No demand to bring everyone in at once is known. The amount is for the first full year: the pension insurance receives additional contributions, the state pays its share as employer, and current civil-service pensions continue unchanged. The pension entitlements this creates cost money only later and are not included. The self-employed and the professional pension schemes are not quantified for lack of reliable figures. Because civil servants deduct their own contribution from taxable income, wage tax falls at the same time; this is included."
+        "de": "Bezieht Beamte und andere bisher nicht pflichtversicherte Arbeitnehmer auf einmal in die gesetzliche Rente ein. Die Linke und das BSW fordern das für alle Erwerbstätigen, Die Linke aber schrittweise.",
+        "en": "Brings civil servants and other employees not yet compulsorily insured into the statutory pension insurance at once. Die Linke and the BSW call for this for everyone in work, Die Linke step by step."
+      },
+      "explanation": {
+        "de": "Einbezogen werden Beamte und andere bisher nicht rentenversicherungspflichtige Arbeitnehmer, alle auf einmal; die Grundeinstellung zeigt damit die Wirkung eines vollständigen Wechsels. Die Linke will die Einbeziehung im Bundestag schrittweise und unter Wahrung des Vertrauensschutzes (Antrag vom Dezember 2025). Eine Forderung, alle auf einmal einzubeziehen, ist nicht bekannt. In der Grundeinstellung trägt der Staat als Arbeitgeber die Hälfte des Beitrags.\n\nDer Betrag gilt für das erste volle Jahr: Die Rentenversicherung erhält zusätzliche Beiträge, der Staat zahlt als Arbeitgeber seinen Anteil, die laufenden Pensionen laufen unverändert weiter. Rentenansprüche, die dadurch entstehen, kosten erst später und sind nicht enthalten. Selbständige und berufsständische Versorgungswerke sind mangels belastbarer Zahlen nicht beziffert. Weil Beamte ihren eigenen Beitrag von der Steuer absetzen, sinkt zugleich die Lohnsteuer; das ist eingerechnet.",
+        "en": "Civil servants and other employees not yet liable to pension insurance are brought in, all at once; the default thus shows the effect of a complete switch. In the Bundestag Die Linke wants this step by step and with protection of legitimate expectations (motion of December 2025). No demand to bring everyone in at once is known. At the default setting the state as employer bears half of the contribution.\n\nThe amount is for the first full year: the pension insurance receives additional contributions, the state pays its share as employer, and current civil-service pensions continue unchanged. The pension entitlements this creates cost money only later and are not included. The self-employed and the professional pension schemes are not quantified for lack of reliable figures. Because civil servants deduct their own contribution from taxable income, wage tax falls at the same time; this is included."
       },
       "topic": "pensions",
       "params": [
@@ -5192,17 +5258,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
-            "de": "Nicht enthalten sind Selbständige ohne Pflichtversicherung, die Mitglieder berufsständischer Versorgungswerke und Abgeordnete. Für sie fehlen belastbare Zahlen zu den beitragspflichtigen Einkommen; auch für sie gilt, dass neuen Beiträgen später neue Rentenansprüche gegenüberstehen.",
-            "en": "Not included are self-employed persons without compulsory insurance, members of the professional pension schemes and members of parliament. Reliable figures on their income liable to contributions are lacking; for them, too, new contributions are matched later by new pension entitlements."
-          },
-          "sources": [
-            "destatis_lest_2022"
-          ]
-        },
-        {
           "kind": "cost_shift",
           "severity": "major",
           "text": {
@@ -5212,6 +5267,17 @@
           "sources": [
             "estg_10",
             "bt_drs_17_2885"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Nicht enthalten sind Selbständige ohne Pflichtversicherung, die Mitglieder berufsständischer Versorgungswerke und Abgeordnete. Für sie fehlen belastbare Zahlen zu den beitragspflichtigen Einkommen; auch für sie gilt, dass neuen Beiträgen später neue Rentenansprüche gegenüberstehen.",
+            "en": "Not included are self-employed persons without compulsory insurance, members of the professional pension schemes and members of parliament. Reliable figures on their income liable to contributions are lacking; for them, too, new contributions are matched later by new pension entitlements."
+          },
+          "sources": [
+            "destatis_lest_2022"
           ]
         }
       ],
@@ -5231,8 +5297,12 @@
         "en": "Health insurance contribution: change the rate and the ceiling"
       },
       "summary": {
-        "de": "Legt fest, welcher Beitragssatz zur gesetzlichen Krankenversicherung auf welchen Teil des Bruttojahreslohns erhoben wird (Arbeitnehmer- und Arbeitgeberanteil zusammen). Voreingestellt ist die Regel von 2024: 16,27 % (allgemeiner Satz von 14,6 % plus durchschnittlicher Zusatzbeitrag von 1,67 %) bis zur Beitragsbemessungsgrenze von 62.100 Euro, darüber nichts; solange kein Punkt bewegt wird, ändert sich nichts. Die Vorlagen heben die Grenze auf das Niveau der Rentenversicherung an oder heben sie auf. Die Rechnung überträgt die relative Änderung auf die Beiträge der Mitglieder aus Löhnen. Weil ein Teil der gut Verdienenden privat versichert ist und keine Beiträge an die gesetzlichen Kassen zahlt, rechnet sie mit 80 % des Modellergebnisses für alle Beschäftigten; die Spanne reicht von 60 % bis zum vollen Ergebnis. Weil Arbeitnehmer ihre Beiträge von der Steuer absetzen, ändert sich zugleich die Lohnsteuer in die entgegengesetzte Richtung; das ist eingerechnet.",
-        "en": "Sets the contribution rate to statutory health insurance charged on each part of the gross annual wage (employee and employer share together). The default is the 2024 rule: 16.27% (general rate of 14.6% plus the average additional contribution of 1.67%) up to the contribution ceiling of EUR 62,100 and nothing above; as long as no point is moved, nothing changes. The presets raise the ceiling to the level of the pension insurance or abolish it. The calculation transfers the relative change to members' contributions on wages. Because some high earners are privately insured and pay no contributions to the statutory funds, it uses 80% of the model result for all employees; the range runs from 60% to the full result. Because employees deduct their contributions from taxable income, wage tax moves the other way at the same time; this is included."
+        "de": "Ändert Beitragssatz und Beitragsbemessungsgrenze der Krankenversicherung. Voreingestellt ist die Regel von 2024, 16,27 % bis 62.100 Euro Jahreslohn; die Vorlagen heben die Grenze an oder auf.",
+        "en": "Changes the contribution rate and ceiling of statutory health insurance. The default is the 2024 rule, 16.27% up to an annual wage of EUR 62,100; the presets raise the ceiling or abolish it."
+      },
+      "explanation": {
+        "de": "Die Kurve legt fest, welcher Beitragssatz auf welchen Teil des Bruttojahreslohns erhoben wird, Arbeitnehmer- und Arbeitgeberanteil zusammen. Die 16,27 % sind der allgemeine Satz von 14,6 % plus der durchschnittliche Zusatzbeitrag von 1,67 %; über der Beitragsbemessungsgrenze ist es nach der Regel von 2024 nichts. Solange kein Punkt bewegt wird, ändert sich nichts. Die Vorlagen heben die Grenze auf das Niveau der Rentenversicherung an oder heben sie ganz auf.\n\nDie Rechnung überträgt die relative Änderung auf die Beiträge der Mitglieder aus Löhnen. Weil ein Teil der gut Verdienenden privat versichert ist und keine Beiträge an die gesetzlichen Kassen zahlt, rechnet sie mit 80 % des Modellergebnisses für alle Beschäftigten; die Spanne reicht von 60 % bis zum vollen Ergebnis. Weil Arbeitnehmer ihre Beiträge von der Steuer absetzen, ändert sich zugleich die Lohnsteuer in die entgegengesetzte Richtung; das ist eingerechnet.",
+        "en": "The curve sets the contribution rate charged on each part of the gross annual wage, employee and employer share together. The 16.27% are the general rate of 14.6% plus the average additional contribution of 1.67%; under the 2024 rule nothing is charged above the contribution ceiling. As long as no point is moved, nothing changes. The presets raise the ceiling to the level of the pension insurance or abolish it.\n\nThe calculation transfers the relative change to members' contributions on wages. Because some high earners are privately insured and pay no contributions to the statutory funds, it uses 80% of the model result for all employees; the range runs from 60% to the full result. Because employees deduct their contributions from taxable income, wage tax moves the other way at the same time; this is included."
       },
       "topic": "social",
       "params": [
@@ -5467,18 +5537,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
-            "de": "Der Zusatzbeitrag ist je Kasse verschieden; 1,67 % ist der Durchschnitt von 2024. Seither sind die Sätze gestiegen (Durchschnitt 2026: 3,10 %). Die Mehreinnahmen fließen den Krankenkassen zu, nicht dem Bundeshaushalt; sie könnten für niedrigere Beitragssätze genutzt werden. Die Beiträge der Rentner sind nicht Teil dieser Rechnung.",
-            "en": "The additional contribution differs by fund; 1.67% is the 2024 average. Rates have risen since (2026 average: 3.10%). The additional revenue goes to the health insurance funds, not to the federal budget; it could be used for lower contribution rates. Pensioners' contributions are not part of this calculation."
-          },
-          "sources": [
-            "drv_rv_in_zahlen_2026",
-            "bmg_kj1_2024"
-          ]
-        },
-        {
           "kind": "cost_shift",
           "severity": "major",
           "text": {
@@ -5488,6 +5546,18 @@
           "sources": [
             "estg_10",
             "bt_drs_17_2885"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Der Zusatzbeitrag ist je Kasse verschieden; 1,67 % ist der Durchschnitt von 2024. Seither sind die Sätze gestiegen (Durchschnitt 2026: 3,10 %). Die Mehreinnahmen fließen den Krankenkassen zu, nicht dem Bundeshaushalt; sie könnten für niedrigere Beitragssätze genutzt werden. Die Beiträge der Rentner sind nicht Teil dieser Rechnung.",
+            "en": "The additional contribution differs by fund; 1.67% is the 2024 average. Rates have risen since (2026 average: 3.10%). The additional revenue goes to the health insurance funds, not to the federal budget; it could be used for lower contribution rates. Pensioners' contributions are not part of this calculation."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "bmg_kj1_2024"
           ]
         }
       ],
@@ -5505,8 +5575,12 @@
         "en": "One health insurance for everyone (citizens' insurance)"
       },
       "summary": {
-        "de": "Alle bisher privat Versicherten, darunter Beamte, Selbständige und Gutverdienende, wären in der gesetzlichen Krankenversicherung. Der Betrag stammt aus einer Simulation des IGES Instituts und beschreibt den Zustand, in dem alle bereits gewechselt sind, kein erstes Jahr und keinen Übergang: Die gesetzlichen Kassen hätten dann jährlich rund 9 Mrd. Euro mehr Beitragseinnahmen als zusätzliche Ausgaben. Der Regler zeigt, was davon bleibt, wenn Ärzten die höheren Honorare für Privatpatienten ersetzt werden.",
-        "en": "All persons currently insured privately, among them civil servants, the self-employed and high earners, would be in statutory health insurance. The amount comes from a simulation by the IGES institute and describes the state in which everyone has already switched, not a first year and not a transition: the statutory funds would then have about EUR 9 billion more contribution revenue per year than additional spending. The slider shows what remains if doctors are compensated for the higher fees paid for private patients."
+        "de": "Bringt alle bisher privat Versicherten in die gesetzliche Krankenversicherung, darunter Beamte, Selbständige und Gutverdienende. Gezeigt ist der Zustand, wenn alle gewechselt sind.",
+        "en": "Brings everyone insured privately into statutory health insurance, among them civil servants, the self-employed and high earners. It shows the state once everyone has switched."
+      },
+      "explanation": {
+        "de": "Der Betrag stammt aus einer Simulation des IGES Instituts und beschreibt den Zustand, in dem alle bereits gewechselt sind, kein erstes Jahr und keinen Übergang: Die gesetzlichen Kassen hätten dann jährlich rund 9 Mrd. Euro mehr Beitragseinnahmen als zusätzliche Ausgaben. Der Regler zeigt, was davon bleibt, wenn Ärzten die höheren Honorare für Privatpatienten ersetzt werden; in der Grundeinstellung werden sie nicht ersetzt.",
+        "en": "The amount comes from a simulation by the IGES institute and describes the state in which everyone has already switched, not a first year and not a transition: the statutory funds would then have about EUR 9 billion more contribution revenue per year than additional spending. The slider shows what remains if doctors are compensated for the higher fees paid for private patients; at the default setting they are not."
       },
       "topic": "social",
       "params": [
@@ -5549,17 +5623,6 @@
       ],
       "catches": [
         {
-          "kind": "practical",
-          "severity": "major",
-          "text": {
-            "de": "Die Zahl beschreibt einen gedachten Endzustand. Ein Übergang, bei dem nur neu Versicherte in die gesetzliche Kasse kommen und bestehende Privatverträge weiterlaufen, brächte über Jahrzehnte nur einen Bruchteil. Die Kassen würden den Überschuss zudem eher für niedrigere Beiträge nutzen: Die Studie nennt 0,2 bis 0,6 Beitragssatzpunkte.",
-            "en": "The figure describes an imagined end state. A transition in which only newly insured persons join the statutory funds while existing private contracts continue would yield only a fraction over decades. Moreover, the funds would more likely use the surplus for lower contributions: the study gives 0.2 to 0.6 contribution-rate points."
-          },
-          "sources": [
-            "bertelsmann_iges_pkv_2020"
-          ]
-        },
-        {
           "kind": "legal",
           "severity": "major",
           "text": {
@@ -5594,6 +5657,17 @@
           ]
         }
       ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Zahl beschreibt einen gedachten Endzustand. Ein Übergang, bei dem nur neu Versicherte in die gesetzliche Kasse kommen und bestehende Privatverträge weiterlaufen, brächte über Jahrzehnte nur einen Bruchteil. Die Kassen würden den Überschuss zudem eher für niedrigere Beiträge nutzen: Die Studie nennt 0,2 bis 0,6 Beitragssatzpunkte.",
+            "en": "The figure describes an imagined end state. A transition in which only newly insured persons join the statutory funds while existing private contracts continue would yield only a fraction over decades. Moreover, the funds would more likely use the surplus for lower contributions: the study gives 0.2 to 0.6 contribution-rate points."
+          },
+          "sources": [
+            "bertelsmann_iges_pkv_2020"
+          ]
+        }
+      ],
       "sources": [
         "bertelsmann_iges_pkv_2020",
         "bertelsmann_iges_beamte_gkv_2017",
@@ -5607,8 +5681,12 @@
         "en": "One statutory health insurer instead of 93"
       },
       "summary": {
-        "de": "Legt die 93 gesetzlichen Krankenkassen zu einer einzigen zusammen. Leistungen und Beiträge bleiben, wie sie sind; private Zusatzversicherungen bleiben getrennt und finanzieren sich selbst, wie schon heute. Gespart wird nur in der Verwaltung: Sie kostete die Kassen 2024 netto 12,6 Mrd. Euro, 3,9 % ihrer Ausgaben, davon etwa zwei Drittel Personal. Die zentrale Schätzung zählt nur, was mit dem Wettbewerb sicher wegfällt: Werbung und Mitgliedergewinnung, soweit die 2026 halbierte Obergrenze sie nicht ohnehin begrenzt, und die Vorstände, zusammen 0,24 Mrd. Euro im Jahr, sobald die Fusion abgeschlossen ist, in Werten von 2024. Dass größere Kassen billiger verwalten, belegen die vorliegenden Untersuchungen nicht; die Spanne reicht deshalb von Mehrkosten wie nach der Zusammenlegung in Österreich bis zu einer eigenen Obergrenze von 0,9 Mrd. Euro. Die Ersparnis bleibt bei den Kassen und ihren Beitragszahlern. Eine Einheitskasse käme frühestens ab 2029. Zusammen mit „Eine Krankenversicherung für alle (Bürgerversicherung)“ ergibt sich eine Kasse für alle: jene Maßnahme bringt die Privatversicherten in die gesetzliche Versicherung, diese legt die Kassen zusammen; beide wirken auf verschiedene Posten und zählen nichts doppelt.",
-        "en": "Merges the 93 statutory health insurers into a single one. Benefits and contributions stay as they are; private supplementary insurance stays separate and pays for itself, as it already does. The saving is in administration only: in 2024 it cost the funds EUR 12.6 billion net, 3.9% of their spending, about two thirds of it staff. The central estimate counts only what certainly goes with competition: advertising and member acquisition, as far as the cap halved in 2026 does not already limit them, and the boards, together EUR 0.24 billion a year once the merger is complete, in 2024 values. The studies available do not show that larger funds administer more cheaply; the range therefore runs from extra costs like those after the merger in Austria to an own upper bound of EUR 0.9 billion. The saving stays with the funds and their contributors. A single fund could start in 2029 at the earliest. Together with \"One health insurance for everyone (citizens' insurance)\" this gives one fund for everyone: that measure brings the privately insured into the statutory system, this one merges the funds; the two act on different items and count nothing twice."
+        "de": "Legt die 93 gesetzlichen Krankenkassen zu einer zusammen; Leistungen und Beiträge bleiben. Sicher wegfallen nur Werbung, Mitgliedergewinnung und Vorstände: 0,24 Mrd. Euro im Jahr.",
+        "en": "Merges the 93 statutory health insurers into one; benefits and contributions stay. Only advertising, member acquisition and boards certainly go: EUR 0.24 billion a year."
+      },
+      "explanation": {
+        "de": "Private Zusatzversicherungen bleiben getrennt und finanzieren sich selbst, wie schon heute. Gespart wird nur in der Verwaltung: Sie kostete die Kassen 2024 netto 12,6 Mrd. Euro, 3,9 % ihrer Ausgaben, davon etwa zwei Drittel Personal. Die zentrale Schätzung zählt nur, was mit dem Wettbewerb sicher wegfällt: Werbung und Mitgliedergewinnung, soweit die 2026 halbierte Obergrenze sie nicht ohnehin begrenzt, und die Vorstände, zusammen 0,24 Mrd. Euro im Jahr, sobald die Fusion abgeschlossen ist, in Werten von 2024. Dass größere Kassen billiger verwalten, belegen die vorliegenden Untersuchungen nicht; die Spanne reicht deshalb von Mehrkosten wie nach der Zusammenlegung in Österreich bis zu einer eigenen Obergrenze von 0,9 Mrd. Euro.\n\nZusammen mit „Eine Krankenversicherung für alle (Bürgerversicherung)“ ergibt sich eine Kasse für alle: Jene Maßnahme bringt die Privatversicherten in die gesetzliche Versicherung, diese legt die Kassen zusammen. Beide wirken auf verschiedene Posten und zählen nichts doppelt.",
+        "en": "Private supplementary insurance stays separate and pays for itself, as it already does. The saving is in administration only: in 2024 it cost the funds EUR 12.6 billion net, 3.9% of their spending, about two thirds of it staff. The central estimate counts only what certainly goes with competition: advertising and member acquisition, as far as the cap halved in 2026 does not already limit them, and the boards, together EUR 0.24 billion a year once the merger is complete, in 2024 values. The studies available do not show that larger funds administer more cheaply; the range therefore runs from extra costs like those after the merger in Austria to an own upper bound of EUR 0.9 billion.\n\nTogether with \"One health insurance for everyone (citizens' insurance)\" this gives one fund for everyone: that measure brings the privately insured into the statutory system, this one merges the funds. The two act on different items and count nothing twice."
       },
       "topic": "social",
       "params": [],
@@ -5706,19 +5784,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "minor",
-          "text": {
-            "de": "Zusatzversicherungen, etwa für Zahnersatz oder ein Einzelzimmer im Krankenhaus, bieten private Versicherer an; die Kassen dürfen sie nur vermitteln und sich dafür allenfalls ihre Kosten erstatten lassen. Wahltarife der Kassen müssen sich nach § 53 Abs. 9 SGB V aus eigenen Einnahmen und Einsparungen finanzieren. Öffentliches Geld oder Beitragsgeld fließt nach Gesetz und Aufsichtspraxis nicht in Zusatzversicherungen; daraus ergibt sich deshalb keine weitere Ersparnis.",
-            "en": "Supplementary insurance, for example for dentures or a single room in hospital, is offered by private insurers; the funds may only broker it and at most have their costs reimbursed. The funds' optional tariffs must finance themselves from their own revenue and savings under section 53(9) of Social Code Book V. By law and supervisory practice no public money or contribution money flows into supplementary insurance, so no further saving arises from it."
-          },
-          "sources": [
-            "sgb5_194",
-            "sgb5_53",
-            "bva_sonderbericht_2018"
-          ]
-        },
-        {
           "kind": "political",
           "severity": "minor",
           "text": {
@@ -5743,6 +5808,19 @@
           },
           "sources": [
             "bundeshaushalt_2024"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Zusatzversicherungen, etwa für Zahnersatz oder ein Einzelzimmer im Krankenhaus, bieten private Versicherer an; die Kassen dürfen sie nur vermitteln und sich dafür allenfalls ihre Kosten erstatten lassen. Wahltarife der Kassen müssen sich nach § 53 Abs. 9 SGB V aus eigenen Einnahmen und Einsparungen finanzieren. Öffentliches Geld oder Beitragsgeld fließt nach Gesetz und Aufsichtspraxis nicht in Zusatzversicherungen; daraus ergibt sich deshalb keine weitere Ersparnis.",
+            "en": "Supplementary insurance, for example for dentures or a single room in hospital, is offered by private insurers; the funds may only broker it and at most have their costs reimbursed. The funds' optional tariffs must finance themselves from their own revenue and savings under section 53(9) of Social Code Book V. By law and supervisory practice no public money or contribution money flows into supplementary insurance, so no further saving arises from it."
+          },
+          "sources": [
+            "sgb5_194",
+            "sgb5_53",
+            "bva_sonderbericht_2018"
           ]
         }
       ],
@@ -5775,8 +5853,12 @@
         "en": "Cut administrative posts at the social insurance funds"
       },
       "summary": {
-        "de": "Streicht einen Teil der Verwaltungsstellen bei der Rentenversicherung, bei der Bundesagentur für Arbeit in der Arbeitslosenversicherung und bei den Kranken- und Pflegekassen. In der Verwaltung waren 2024 rund 52.500 Vollzeitstellen bei der Rentenversicherung und 55.300 bei der Bundesagentur besetzt, bei den Krankenkassen arbeiteten Mitte 2025 rund 132.000 Menschen; ihr Personal kostete 4,0, 5,0 und 9,6 Mrd. Euro, zusammen 18,6 Mrd. Euro oder 2,4 % der Ausgaben dieser Versicherungen. Die Grundeinstellung streicht 10 % der Stellen, so viel, wie der Gesetzgeber der Rentenversicherung 2005 bei den Verwaltungskosten für fünf Jahre vorgab. Der Betrag ist die jährliche Ersparnis, sobald der Abbau abgeschlossen ist, in Werten von 2024; sie entlastet die Beitragszahler, nicht den Bundeshaushalt. Weil Beamte und langjährig Beschäftigte praktisch nicht gekündigt werden können, gelingt der Abbau nur, indem frei werdende Stellen nicht nachbesetzt werden; gerechnet ist mit 2 Prozentpunkten im Jahr. Die Rechnung nimmt an, dass die Menschen, die nicht mehr eingestellt werden, anderswo arbeiten, sodass Lohnsteuer und Beiträge nicht verloren gehen.",
-        "en": "Cuts part of the administrative posts at the pension insurance, at the Federal Employment Agency in unemployment insurance, and at the health and long-term care insurers. In 2024 about 52,500 full-time equivalents worked in administration at the pension insurance and 55,300 at the Employment Agency, and about 132,000 people at the health insurers in mid-2025; their staff cost EUR 4.0, 5.0 and 9.6 billion, together EUR 18.6 billion or 2.4% of these insurers' spending. The default cuts 10% of posts, the same cut in administrative costs that the legislature required of the pension insurance over five years in 2005. The amount is the annual saving once the cut is complete, in 2024 values; it relieves contributors, not the federal budget. Because civil servants and long-serving employees can hardly be dismissed, the cut can only be made by not refilling posts that fall vacant; the calculation assumes 2 percentage points a year. It assumes that the people who are no longer hired work elsewhere, so that wage tax and contributions are not lost."
+        "de": "Streicht Verwaltungsstellen bei Rentenversicherung, Bundesagentur für Arbeit und Kranken- und Pflegekassen, in der Grundeinstellung 10 %. Das entlastet die Beitragszahler, nicht den Bundeshaushalt.",
+        "en": "Cuts administrative posts at the pension insurance, the Federal Employment Agency and the health and long-term care insurers, 10% by default. This relieves contributors, not the federal budget."
+      },
+      "explanation": {
+        "de": "Bei der Bundesagentur für Arbeit geht es um die Arbeitslosenversicherung. In der Verwaltung waren 2024 rund 52.500 Vollzeitstellen bei der Rentenversicherung und 55.300 bei der Bundesagentur besetzt, bei den Krankenkassen arbeiteten Mitte 2025 rund 132.000 Menschen; ihr Personal kostete 4,0, 5,0 und 9,6 Mrd. Euro, zusammen 18,6 Mrd. Euro oder 2,4 % der Ausgaben dieser Versicherungen. Die 10 % der Grundeinstellung sind so viel, wie der Gesetzgeber der Rentenversicherung 2005 bei den Verwaltungskosten für fünf Jahre vorgab.\n\nDer Betrag ist die jährliche Ersparnis, sobald der Abbau abgeschlossen ist, in Werten von 2024. Weil Beamte und langjährig Beschäftigte praktisch nicht gekündigt werden können, gelingt der Abbau nur, indem frei werdende Stellen nicht nachbesetzt werden; gerechnet ist mit 2 Prozentpunkten im Jahr. Die Rechnung nimmt an, dass die Menschen, die nicht mehr eingestellt werden, anderswo arbeiten, sodass Lohnsteuer und Beiträge nicht verloren gehen.",
+        "en": "At the Federal Employment Agency this concerns unemployment insurance. In 2024 about 52,500 full-time equivalents worked in administration at the pension insurance and 55,300 at the Employment Agency, and about 132,000 people at the health insurers in mid-2025; their staff cost EUR 4.0, 5.0 and 9.6 billion, together EUR 18.6 billion or 2.4% of these insurers' spending. The default's 10% is the same cut in administrative costs that the legislature required of the pension insurance over five years in 2005.\n\nThe amount is the annual saving once the cut is complete, in 2024 values. Because civil servants and long-serving employees can hardly be dismissed, the cut can only be made by not refilling posts that fall vacant; the calculation assumes 2 percentage points a year. It assumes that the people who are no longer hired work elsewhere, so that wage tax and contributions are not lost."
       },
       "topic": "state",
       "params": [
@@ -5887,14 +5969,6 @@
           ]
         },
         {
-          "kind": "economic",
-          "severity": "minor",
-          "text": {
-            "de": "Würden Beschäftigte entlassen und fänden keine neue Arbeit, entfielen ihre Lohnsteuer und Sozialbeiträge, und die Arbeitslosenversicherung zahlte Arbeitslosengeld. Nach eigener Überschlagsrechnung bliebe dann im ersten Jahr nur rund ein Viertel der Ersparnis. Die Rechnung nimmt an, dass Stellen über Ruhestand und Wechsel wegfallen und die Menschen, die nicht eingestellt werden, anderswo arbeiten.",
-            "en": "If staff were dismissed and found no new work, their wage tax and social contributions would be lost and unemployment insurance would pay unemployment benefit. By an own rough calculation only about a quarter of the saving would then remain in the first year. The calculation assumes that posts disappear through retirement and departures and that the people who are not hired work elsewhere."
-          }
-        },
-        {
           "kind": "cost_shift",
           "severity": "minor",
           "text": {
@@ -5921,10 +5995,16 @@
             "bundestag_drs_21_7301",
             "koa_2026_07_02"
           ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Würden Beschäftigte entlassen und fänden keine neue Arbeit, entfielen ihre Lohnsteuer und Sozialbeiträge, und die Arbeitslosenversicherung zahlte Arbeitslosengeld. Nach eigener Überschlagsrechnung bliebe dann im ersten Jahr nur rund ein Viertel der Ersparnis. Die Rechnung nimmt an, dass Stellen über Ruhestand und Wechsel wegfallen und die Menschen, die nicht eingestellt werden, anderswo arbeiten.",
+            "en": "If staff were dismissed and found no new work, their wage tax and social contributions would be lost and unemployment insurance would pay unemployment benefit. By an own rough calculation only about a quarter of the saving would then remain in the first year. The calculation assumes that posts disappear through retirement and departures and that the people who are not hired work elsewhere."
+          }
         },
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "de": "Nicht enthalten sind die Verwaltungen von Bund, Ländern und Gemeinden; für sie gibt es die Maßnahme „Stellen in den Verwaltungen von Bund, Ländern und Gemeinden abbauen“.",
             "en": "The administrations of the federal government, the states and the municipalities are not included; they have a measure of their own, \"Cut posts in federal, state and municipal administration\"."
@@ -5963,8 +6043,12 @@
         "en": "Cut posts in federal, state and municipal administration"
       },
       "summary": {
-        "de": "Streicht Stellen in der allgemeinen Verwaltung: in Ministerien, Staatskanzleien, Rathäusern und Kreisverwaltungen und ihren zentralen Diensten, beim Bund auch im Auswärtigen Dienst. Dort arbeiteten im Juni 2024 beim Bund gut 51.000 Menschen (48.600 Vollzeitstellen), in den Ländern 166.700 (153.600) und in Gemeinden und Kreisen 394.800 (347.000); ihr Personal kostete 3,8, 12,2 und 26,6 Mrd. Euro. Nicht erfasst sind Polizei, Ordnungsämter und Feuerwehr, Justiz, Schulen und Hochschulen, Finanzämter und Zoll, die Bundeswehrverwaltung, Fachbehörden wie die Wasserstraßen- und Schifffahrtsverwaltung und die Sozialversicherung, für die es eine eigene Maßnahme gibt. Welche Ebenen kürzen, ist wählbar; der Anteil gilt für jede gewählte Ebene. Beim Bund zählt er die Stellen, die über die Kürzungen der Haushaltsgesetze 2025 bis 2027 hinaus wegfallen, bei Ländern und Gemeinden die gegenüber 2024. Die Grundeinstellung streicht beim Bund weitere 3,5 %, so viel, wie die Bundesregierung für 2028 und 2029 noch plant, um ihr Ziel von 8 % zu erreichen. Der Betrag ist die jährliche Ersparnis an Gehältern und Arbeitgeberbeiträgen, sobald der Abbau abgeschlossen ist, in Werten von 2024; die Pensionen der Beamten sinken erst Jahrzehnte später und sind nicht gerechnet. Gekündigt wird niemand: Stellen fallen weg, wenn Beschäftigte in Ruhestand gehen oder wechseln; gerechnet ist mit 2 Prozentpunkten im Jahr ab 2028. Die Rechnung nimmt an, dass die Menschen, die nicht mehr eingestellt werden, anderswo arbeiten.",
-        "en": "Cuts posts in general administration: in ministries, state chancelleries, town halls and district offices and their central services, and at federal level also in the foreign service. In June 2024 a little over 51,000 people worked there at federal level (48,600 full-time equivalents), 166,700 in the states (153,600) and 394,800 in the municipalities and districts (347,000); their staff cost EUR 3.8, 12.2 and 26.6 billion. Not covered are the police, public-order offices and fire services, the courts, schools and universities, tax offices and customs, the armed forces' civilian administration, specialist agencies such as the waterways and shipping administration, and the social insurance funds, which have a measure of their own. The levels that cut can be chosen; the share applies to each of them. At federal level it counts the posts cut beyond the cuts in the budget acts for 2025 to 2027, at state and municipal level those cut against 2024. The default cuts a further 3.5% at federal level, as much as the federal government still plans for 2028 and 2029 to reach its target of 8%. The amount is the annual saving in pay and employer contributions once the cut is complete, in 2024 values; civil servants' pensions fall only decades later and are not counted. Nobody is dismissed: posts disappear when staff retire or leave; the calculation assumes 2 percentage points a year from 2028. It assumes that the people who are no longer hired work elsewhere."
+        "de": "Streicht Stellen in Ministerien und zentralen Verwaltungen von Bund, Ländern und Gemeinden. Die Grundeinstellung streicht beim Bund weitere 3,5 %, so viel, wie der Bund für 2028 und 2029 plant.",
+        "en": "Cuts posts in ministries and central administrations of the federal government, the states and the municipalities. The default cuts a further 3.5% at federal level, as planned for 2028 and 2029."
+      },
+      "explanation": {
+        "de": "Betroffen ist die allgemeine Verwaltung: Ministerien, Staatskanzleien, Rathäuser und Kreisverwaltungen mit ihren zentralen Diensten, beim Bund auch der Auswärtige Dienst. Dort arbeiteten im Juni 2024 beim Bund gut 51.000 Menschen (48.600 Vollzeitstellen), in den Ländern 166.700 (153.600) und in Gemeinden und Kreisen 394.800 (347.000); ihr Personal kostete 3,8, 12,2 und 26,6 Mrd. Euro. Nicht erfasst sind Polizei, Ordnungsämter und Feuerwehr, Justiz, Schulen und Hochschulen, Finanzämter und Zoll, die Bundeswehrverwaltung, Fachbehörden wie die Wasserstraßen- und Schifffahrtsverwaltung und die Sozialversicherung, für die es eine eigene Maßnahme gibt.\n\nWelche Ebenen kürzen, ist wählbar; der Anteil gilt für jede gewählte Ebene. Beim Bund zählt er die Stellen, die über die Kürzungen der Haushaltsgesetze 2025 bis 2027 hinaus wegfallen, bei Ländern und Gemeinden die gegenüber 2024. Mit den Schritten für 2028 und 2029 will die Bundesregierung ihr Ziel von 8 % erreichen.\n\nDer Betrag ist die jährliche Ersparnis an Gehältern und Arbeitgeberbeiträgen, sobald der Abbau abgeschlossen ist, in Werten von 2024; die Pensionen der Beamten sinken erst Jahrzehnte später und sind nicht gerechnet. Gekündigt wird niemand: Stellen fallen weg, wenn Beschäftigte in Ruhestand gehen oder wechseln; gerechnet ist mit 2 Prozentpunkten im Jahr ab 2028. Die Rechnung nimmt an, dass die Menschen, die nicht mehr eingestellt werden, anderswo arbeiten.",
+        "en": "The cut applies to general administration: ministries, state chancelleries, town halls and district offices with their central services, and at federal level also the foreign service. In June 2024 a little over 51,000 people worked there at federal level (48,600 full-time equivalents), 166,700 in the states (153,600) and 394,800 in the municipalities and districts (347,000); their staff cost EUR 3.8, 12.2 and 26.6 billion. Not covered are the police, public-order offices and fire services, the courts, schools and universities, tax offices and customs, the armed forces' civilian administration, specialist agencies such as the waterways and shipping administration, and the social insurance funds, which have a measure of their own.\n\nThe levels that cut can be chosen; the share applies to each of them. At federal level it counts the posts cut beyond the cuts in the budget acts for 2025 to 2027, at state and municipal level those cut against 2024. With the steps for 2028 and 2029 the federal government wants to reach its target of 8%.\n\nThe amount is the annual saving in pay and employer contributions once the cut is complete, in 2024 values; civil servants' pensions fall only decades later and are not counted. Nobody is dismissed: posts disappear when staff retire or leave; the calculation assumes 2 percentage points a year from 2028. It assumes that the people who are no longer hired work elsewhere."
       },
       "topic": "state",
       "params": [
@@ -6157,14 +6241,6 @@
           ]
         },
         {
-          "kind": "economic",
-          "severity": "minor",
-          "text": {
-            "de": "Die Pensionen laufen weiter. Gespart werden Gehälter und Arbeitgeberbeiträge; die Versorgung der Beamten im Ruhestand zahlt dieselbe Ebene weiter, und weniger aktive Beamte senken sie erst, wenn diese in Ruhestand gegangen wären, also über Jahrzehnte. Würden Beschäftigte dagegen entlassen und fänden keine neue Arbeit, entfielen Lohnsteuer und Beiträge, und die Arbeitslosenversicherung zahlte Arbeitslosengeld; die Rechnung nimmt an, dass die Menschen, die nicht eingestellt werden, anderswo arbeiten.",
-            "en": "Pensions continue. What is saved is pay and employer contributions; the same level keeps paying the pensions of retired civil servants, and fewer active civil servants lower them only when they would have retired, that is over decades. If staff were dismissed instead and found no new work, wage tax and contributions would be lost and unemployment insurance would pay unemployment benefit; the calculation assumes that the people who are not hired work elsewhere."
-          }
-        },
-        {
           "kind": "legal",
           "severity": "minor",
           "text": {
@@ -6175,6 +6251,14 @@
             "gg_art_109",
             "gg_art_28"
           ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Pensionen laufen weiter. Gespart werden Gehälter und Arbeitgeberbeiträge; die Versorgung der Beamten im Ruhestand zahlt dieselbe Ebene weiter, und weniger aktive Beamte senken sie erst, wenn diese in Ruhestand gegangen wären, also über Jahrzehnte. Würden Beschäftigte dagegen entlassen und fänden keine neue Arbeit, entfielen Lohnsteuer und Beiträge, und die Arbeitslosenversicherung zahlte Arbeitslosengeld; die Rechnung nimmt an, dass die Menschen, die nicht eingestellt werden, anderswo arbeiten.",
+            "en": "Pensions continue. What is saved is pay and employer contributions; the same level keeps paying the pensions of retired civil servants, and fewer active civil servants lower them only when they would have retired, that is over decades. If staff were dismissed instead and found no new work, wage tax and contributions would be lost and unemployment insurance would pay unemployment benefit; the calculation assumes that the people who are not hired work elsewhere."
+          }
         }
       ],
       "sources": [

@@ -7,8 +7,12 @@
         "de": "Auslandshilfe kürzen"
       },
       "summary": {
-        "en": "Cuts federal spending on development and humanitarian aid abroad by the chosen share: global health programs, disaster and refugee aid, development aid, food aid and contributions to development banks. Military and security assistance and the State Department's own costs are not included.",
-        "de": "Kürzt die Ausgaben des Bundes für Entwicklungs- und humanitäre Hilfe im Ausland um den eingestellten Anteil: globale Gesundheitsprogramme, Katastrophen- und Flüchtlingshilfe, Entwicklungshilfe, Nahrungsmittelhilfe und Beiträge an Entwicklungsbanken. Militär- und Sicherheitshilfe und die eigenen Kosten des Außenministeriums sind nicht enthalten."
+        "en": "Cuts federal spending on development and humanitarian aid abroad by the chosen share, by half at the default setting.",
+        "de": "Kürzt die Ausgaben des Bundes für Entwicklungs- und humanitäre Hilfe im Ausland um den eingestellten Anteil, in der Grundeinstellung um die Hälfte."
+      },
+      "explanation": {
+        "en": "This covers global health programs, disaster and refugee aid, development aid, food aid and contributions to development banks. Military and security assistance and the State Department's own costs are not included.",
+        "de": "Dazu gehören globale Gesundheitsprogramme, Katastrophen- und Flüchtlingshilfe, Entwicklungshilfe, Nahrungsmittelhilfe und Beiträge an Entwicklungsbanken. Militär- und Sicherheitshilfe und die eigenen Kosten des Außenministeriums sind nicht enthalten."
       },
       "topic": "other",
       "params": [
@@ -100,8 +104,12 @@
         "de": "Verteidigungsausgaben festlegen"
       },
       "summary": {
-        "en": "Sets defense spending under NATO's definition to the chosen share of gross domestic product. NATO's estimate for the United States in 2025: 3.22% ($980 billion). The default shows NATO's target of 3.5% for core defense; the slider runs from 2%, NATO's commitment of 2014, to 5%, the commitment for 2035.",
-        "de": "Setzt die Verteidigungsausgaben nach NATO-Definition auf den eingestellten Anteil am Bruttoinlandsprodukt. NATO-Schätzung für die Vereinigten Staaten 2025: 3,22 % (980 Mrd. Dollar). Die Grundeinstellung zeigt das NATO-Ziel von 3,5 % für Verteidigung im engeren Sinn; der Regler reicht von 2 %, der NATO-Zusage von 2014, bis 5 %, der Zusage für 2035."
+        "en": "Sets defense spending under NATO's definition to a share of GDP; NATO estimates 3.22% ($980 billion) for 2025. The default shows NATO's target of 3.5% for core defense.",
+        "de": "Setzt die Verteidigungsausgaben nach NATO-Definition auf einen Anteil am BIP; die NATO schätzt sie 2025 auf 3,22 % (980 Mrd. Dollar). Die Grundeinstellung zeigt das NATO-Ziel von 3,5 %."
+      },
+      "explanation": {
+        "en": "The slider runs from 2%, NATO's commitment of 2014, to 5%, the commitment for 2035.",
+        "de": "Die 3,5 % sind das NATO-Ziel für Verteidigung im engeren Sinn. Der Regler reicht von 2 %, der NATO-Zusage von 2014, bis 5 %, der Zusage für 2035."
       },
       "topic": "defense",
       "params": [
@@ -176,10 +184,10 @@
             "en": "More spending that is not offset elsewhere raises the deficit and the debt, and with them later interest costs, which are not included here.",
             "de": "Mehrausgaben, die nicht an anderer Stelle ausgeglichen werden, erhöhen Defizit und Schulden und damit spätere Zinsausgaben, die hier nicht mitgerechnet sind."
           }
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "en": "NATO's definition is wider than the defense budget: among other things it counts pensions paid to retired military personnel. NATO puts U.S. defense spending in calendar year 2025 at $980 billion, while the budget's defense function was $916.1 billion in fiscal year 2025.",
             "de": "Die NATO-Definition ist weiter als der Verteidigungshaushalt: Sie zählt unter anderem Pensionen ehemaliger Soldaten. Die NATO beziffert die US-Verteidigungsausgaben im Kalenderjahr 2025 auf 980 Mrd. Dollar, die Verteidigungsfunktion des Haushalts lag im Haushaltsjahr 2025 bei 916,1 Mrd. Dollar."
@@ -204,8 +212,12 @@
         "de": "Ausgaben für Grenzschutz und Einwanderungsbehörde ändern"
       },
       "summary": {
-        "en": "Changes the spending of U.S. Customs and Border Protection (CBP) and U.S. Immigration and Customs Enforcement (ICE) by the chosen percentage of their 2025 level, in either direction: −100% ends both agencies' spending, +100% doubles it. The default of +60% is how much the two agencies' outlays actually rose from fiscal year 2025 to 2026.",
-        "de": "Ändert die Ausgaben der Zoll- und Grenzschutzbehörde (CBP) und der Einwanderungs- und Zollbehörde (ICE) um den eingestellten Prozentsatz ihres Niveaus von 2025, in beide Richtungen: −100 % beendet die Ausgaben beider Behörden, +100 % verdoppelt sie. Die Grundeinstellung von +60 % entspricht dem tatsächlichen Anstieg ihrer Ausgaben vom Haushaltsjahr 2025 auf 2026."
+        "en": "Changes the spending of CBP and ICE compared with 2025, up or down. The default of +60% is how much their outlays actually rose from fiscal year 2025 to 2026.",
+        "de": "Ändert die Ausgaben von CBP und ICE gegenüber 2025, nach oben oder unten. Die Grundeinstellung von +60 % ist der tatsächliche Anstieg ihrer Ausgaben vom Haushaltsjahr 2025 auf 2026."
+      },
+      "explanation": {
+        "en": "The two agencies are U.S. Customs and Border Protection (CBP) and U.S. Immigration and Customs Enforcement (ICE). The slider gives the change as a percentage of their 2025 level: −100% ends both agencies' spending, +100% doubles it.",
+        "de": "Gemeint sind die Zoll- und Grenzschutzbehörde (U.S. Customs and Border Protection, CBP) und die Einwanderungs- und Zollbehörde (U.S. Immigration and Customs Enforcement, ICE). Der Regler gibt die Änderung in Prozent ihres Niveaus von 2025 an: −100 % beendet die Ausgaben beider Behörden, +100 % verdoppelt sie."
       },
       "topic": "migration",
       "params": [
@@ -295,10 +307,10 @@
             "plaw_119_1",
             "plaw_119_21"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "practical",
-          "severity": "minor",
           "text": {
             "en": "Not all of the two agencies' work is immigration enforcement: both have customs tasks, and ICE's Homeland Security Investigations unit pursues other crimes, such as the sexual exploitation of children; the Secure America Act funds this work separately.",
             "de": "Nicht alles, was die beiden Behörden tun, betrifft Einwanderung: Beide haben Zollaufgaben, und die Ermittler der ICE (Homeland Security Investigations) verfolgen auch andere Straftaten, etwa sexuelle Ausbeutung von Kindern; der Secure America Act finanziert diese Arbeit gesondert."
@@ -308,8 +320,6 @@
           ]
         },
         {
-          "kind": "economic",
-          "severity": "minor",
           "text": {
             "en": "The effects of more or fewer arrests and removals on the economy and on tax revenue are not included.",
             "de": "Wirkungen von mehr oder weniger Festnahmen und Abschiebungen auf Wirtschaft und Steuereinnahmen sind nicht enthalten."
@@ -331,8 +341,12 @@
         "de": "Social-Security-Beitrag: Beitragsbemessungsgrenze ändern"
       },
       "summary": {
-        "en": "Sets the Social Security payroll tax rate on each part of a worker's annual wages, employee and employer share together. Under the 2025 rule, the rate is 12.4% up to $176,100 and zero above that. The default removes the cap, as the Social Security 2100 Act introduced in June 2026 would from 2027; a preset taxes wages above $400,000 again, and the curve can be redrawn. The old and the new rule are applied to the distribution of wages, and the relative change is carried over to Social Security payroll taxes. Higher benefits that the extra taxes may later earn are not included.",
-        "de": "Legt fest, welcher Beitragssatz zur Social Security auf welchen Teil des Jahreslohns erhoben wird, Arbeitnehmer- und Arbeitgeberanteil zusammen. Die Regel von 2025: 12,4 % bis 176.100 Dollar, darüber nichts. Die Grundeinstellung hebt die Grenze auf, wie es der im Juni 2026 eingebrachte Social Security 2100 Act ab 2027 vorsieht; eine Vorlage belastet Löhne über 400.000 Dollar wieder, und die Kurve lässt sich frei verändern. Die alte und die neue Regel werden auf die Verteilung der Löhne angewendet, und die relative Änderung wird auf die Social-Security-Beiträge übertragen. Höhere Renten, die aus den Mehrbeiträgen später entstehen können, sind nicht enthalten."
+        "en": "Changes the Social Security payroll tax, under the 2025 rule 12.4% of wages up to $176,100. The default removes the cap, as the Social Security 2100 Act would from 2027.",
+        "de": "Ändert den Social-Security-Beitrag auf Löhne, nach der Regel von 2025 12,4 % bis 176.100 Dollar. Die Grundeinstellung hebt die Grenze auf, wie es der Social Security 2100 Act ab 2027 vorsieht."
+      },
+      "explanation": {
+        "en": "The curve sets the rate on each part of a worker's annual wages, employee and employer share together; under the 2025 rule it is zero above the cap. The Social Security 2100 Act was introduced in June 2026. A preset taxes wages above $400,000 again, and the curve can be redrawn.\n\nThe old and the new rule are applied to the distribution of wages, and the relative change is carried over to Social Security payroll taxes. Higher benefits that the extra taxes may later earn are not included.",
+        "de": "Die Kurve legt fest, welcher Satz auf welchen Teil des Jahreslohns erhoben wird, Arbeitnehmer- und Arbeitgeberanteil zusammen; nach der Regel von 2025 ist es über der Grenze nichts. Der Social Security 2100 Act wurde im Juni 2026 eingebracht. Eine Vorlage belastet Löhne über 400.000 Dollar wieder, und die Kurve lässt sich frei verändern.\n\nDie alte und die neue Regel werden auf die Verteilung der Löhne angewendet, und die relative Änderung wird auf die Social-Security-Beiträge übertragen. Höhere Renten, die aus den Mehrbeiträgen später entstehen können, sind nicht enthalten."
       },
       "topic": "pensions",
       "params": [
@@ -560,10 +574,10 @@
           "sources": [
             "ssa_trustees_2026"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "economic",
-          "severity": "minor",
           "text": {
             "en": "The employer's share is a business expense: a higher employer tax lowers taxable profits or wages and with them income tax revenue. That is not included.",
             "de": "Der Arbeitgeberanteil ist Betriebsausgabe: Ein höherer Arbeitgeberbeitrag senkt steuerpflichtige Gewinne oder Löhne und damit die Einkommensteuer. Das ist nicht eingerechnet."
@@ -584,8 +598,12 @@
         "de": "Körperschaftsteuersatz ändern"
       },
       "summary": {
-        "en": "Sets the federal tax rate on the profits of corporations taxed as such (C corporations), 21% since the Tax Cuts and Jobs Act of 2017. The default shows 28%, which the Treasury proposed in March 2024 with the Budget for fiscal year 2025; lower rates can be set as well. The revenue change follows the Treasury's estimate for 28%, which already allows for firms' reactions, and is applied in proportion to the change in the rate.",
-        "de": "Legt den Bundessteuersatz auf die Gewinne von Kapitalgesellschaften (C corporations) fest, seit dem Tax Cuts and Jobs Act von 2017 21 %. Die Grundeinstellung zeigt 28 %, wie es das Finanzministerium im März 2024 mit dem Haushaltsentwurf für 2025 vorgeschlagen hat; niedrigere Sätze lassen sich ebenfalls einstellen. Die Mehr- oder Mindereinnahme folgt der Schätzung des Finanzministeriums für 28 %, die Ausweichreaktionen der Unternehmen schon berücksichtigt, und wird im Verhältnis zur Satzänderung übertragen."
+        "en": "Sets the federal tax rate on corporate profits, 21% since 2017. The default shows 28%, which the Treasury proposed in March 2024 with the Budget for fiscal year 2025.",
+        "de": "Legt den Bundessteuersatz auf Unternehmensgewinne fest, seit 2017 21 %. Die Grundeinstellung zeigt 28 %, wie es das Finanzministerium im März 2024 mit dem Haushaltsentwurf für 2025 vorschlug."
+      },
+      "explanation": {
+        "en": "The rate applies to corporations taxed as such (C corporations); the 21% was set by the Tax Cuts and Jobs Act of 2017. Lower rates can be set as well. The revenue change follows the Treasury's estimate for 28%, which already allows for firms' reactions, and is applied in proportion to the change in the rate.",
+        "de": "Der Satz gilt für Kapitalgesellschaften, die als solche besteuert werden (C corporations); die 21 % hat der Tax Cuts and Jobs Act von 2017 festgelegt. Niedrigere Sätze lassen sich ebenfalls einstellen. Die Mehr- oder Mindereinnahme folgt der Schätzung des Finanzministeriums für 28 %, die Ausweichreaktionen der Unternehmen schon berücksichtigt, und wird im Verhältnis zur Satzänderung übertragen."
       },
       "topic": "taxes",
       "params": [
@@ -679,8 +697,12 @@
         "de": "Zoll auf alle Einfuhren"
       },
       "summary": {
-        "en": "Adds a tariff of the chosen rate on the value of all imported goods, on top of the duties of 2025; negative values lower duties. The default of 10% is the rate of the general tariff the President imposed in April 2025, which the Supreme Court found unlawful in February 2026, and of the temporary surcharge that replaced it for 150 days. Part of the yield is lost because imports fall, and part is offset by lower income and payroll tax receipts.",
-        "de": "Erhebt auf den Wert aller eingeführten Waren einen Zoll in der eingestellten Höhe, zusätzlich zu den Zöllen von 2025; negative Werte senken die Zölle. Die Grundeinstellung von 10 % ist der Satz des allgemeinen Zolls, den der Präsident im April 2025 verhängte und den der Supreme Court im Februar 2026 für rechtswidrig erklärte, und des befristeten Aufschlags, der ihn für 150 Tage ersetzte. Ein Teil des Ertrags geht verloren, weil die Einfuhren sinken, und ein Teil fehlt bei Einkommensteuer und Sozialversicherungsbeiträgen."
+        "en": "Adds a tariff of the chosen rate on all imported goods. The default of 10% is the rate of the general tariff of April 2025, which the Supreme Court found unlawful.",
+        "de": "Erhebt auf alle eingeführten Waren einen zusätzlichen Zoll. Die Grundeinstellung von 10 % ist der Satz des allgemeinen Zolls vom April 2025, den der Supreme Court für rechtswidrig erklärte."
+      },
+      "explanation": {
+        "en": "The tariff is levied on the value of the goods, on top of the duties of 2025; negative values lower duties. The President imposed the general tariff in April 2025; the Supreme Court found it unlawful in February 2026, and a temporary surcharge at the same rate replaced it for 150 days.\n\nPart of the yield is lost because imports fall, and part is offset by lower income and payroll tax receipts.",
+        "de": "Der Zoll wird auf den Wert der Waren erhoben, zusätzlich zu den Zöllen von 2025; negative Werte senken die Zölle. Den allgemeinen Zoll hatte der Präsident im April 2025 verhängt; der Supreme Court erklärte ihn im Februar 2026 für rechtswidrig, und ein befristeter Aufschlag mit demselben Satz ersetzte ihn für 150 Tage.\n\nEin Teil des Ertrags geht verloren, weil die Einfuhren sinken, und ein Teil fehlt bei Einkommensteuer und Sozialversicherungsbeiträgen."
       },
       "topic": "taxes",
       "params": [
@@ -757,18 +779,6 @@
           ]
         },
         {
-          "kind": "practical",
-          "severity": "major",
-          "text": {
-            "en": "The duties of 2025 in the base include duties under the emergency powers act (IEEPA), which the President ended on February 20, 2026, the day of the ruling (Executive Order 14389). In fiscal year 2026, $144.6 billion of the $317.8 billion of customs duties collected was refunded (Treasury).",
-            "de": "Die Zölle von 2025 in der Ausgangslage enthalten Zölle nach dem Notstandsgesetz IEEPA, die der Präsident am 20. Februar 2026, dem Tag des Urteils, beendete (Executive Order 14389). Im Haushaltsjahr 2026 wurden von 317,8 Mrd. Dollar erhobenen Zöllen 144,6 Mrd. Dollar erstattet (Finanzministerium)."
-          },
-          "sources": [
-            "fr_2026_03832",
-            "treasury_mts_2026_09"
-          ]
-        },
-        {
           "kind": "political",
           "severity": "minor",
           "text": {
@@ -786,6 +796,18 @@
             "en": "Importers pay the duty. How much of it ends up in consumer prices, how much foreign suppliers absorb and how other countries retaliate is not modeled here.",
             "de": "Die Importeure zahlen den Zoll. Wie viel davon in den Verbraucherpreisen landet, wie viel ausländische Lieferanten übernehmen und wie andere Länder mit Gegenzöllen reagieren, ist hier nicht abgebildet."
           }
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "en": "The duties of 2025 in the base include duties under the emergency powers act (IEEPA), which the President ended on February 20, 2026, the day of the ruling (Executive Order 14389). In fiscal year 2026, $144.6 billion of the $317.8 billion of customs duties collected was refunded (Treasury).",
+            "de": "Die Zölle von 2025 in der Ausgangslage enthalten Zölle nach dem Notstandsgesetz IEEPA, die der Präsident am 20. Februar 2026, dem Tag des Urteils, beendete (Executive Order 14389). Im Haushaltsjahr 2026 wurden von 317,8 Mrd. Dollar erhobenen Zöllen 144,6 Mrd. Dollar erstattet (Finanzministerium)."
+          },
+          "sources": [
+            "fr_2026_03832",
+            "treasury_mts_2026_09"
+          ]
         }
       ],
       "sources": [
@@ -806,8 +828,12 @@
         "de": "Zivile Stellen des Bundes abbauen"
       },
       "summary": {
-        "en": "Cuts the civilian staff of the federal executive branch by the chosen share of positions, set separately for four parts of government; 0 exempts a part. Their pay and benefits came to $383.3 billion in fiscal year 2025: Department of Defense $113.8 billion, health care at Veterans Affairs $66.4 billion, the Departments of Homeland Security and Justice $64.8 billion, all other agencies $138.3 billion. Each cut lands in the budget items where the staff work, according to OMB's data on obligations by object class; 12.8% of it reappears in the item for federal retirement, where the agencies' contributions to the retirement funds are netted out. The amount is the annual saving once the staff are gone, in 2025 values; one-time costs on the way, such as paid leave and severance pay, are not included. Military personnel, the Postal Service, Congress and the courts are not included. The default cuts 12% everywhere: the Office of Personnel Management counts a reduction of the federal workforce of over 12% from December 2024 to March 2026. The 2025 figures still contain most of these staff, because many stayed on the payroll, some on paid leave, until they left: federal employment outside the Postal Service averaged 2.374 million in fiscal year 2025 and was 2.075 million in October 2026, 12.6% less (BLS). The calculation assumes that the people who leave work elsewhere, so that income and payroll taxes are not lost.",
-        "de": "Streicht den eingestellten Anteil der zivilen Stellen in der Exekutive des Bundes, getrennt für vier Teile der Regierung; 0 nimmt einen Teil aus. Ihre Gehälter und Nebenleistungen kosteten im Haushaltsjahr 2025 383,3 Mrd. Dollar: Verteidigungsministerium 113,8 Mrd. Dollar, Gesundheitsversorgung im Veteranenministerium 66,4 Mrd. Dollar, Heimatschutz- und Justizministerium 64,8 Mrd. Dollar, alle übrigen Behörden 138,3 Mrd. Dollar. Jede Kürzung trifft die Haushaltsposten, in denen die Beschäftigten arbeiten, nach den Daten der OMB zu den Mittelbindungen nach Ausgabearten; 12,8 % davon fallen beim Posten für die Pensionen der Bundesbediensteten wieder an, wo die Beiträge der Behörden an die Pensionsfonds verrechnet werden. Der Betrag ist die jährliche Ersparnis, sobald die Stellen weg sind, in Werten von 2025; einmalige Kosten auf dem Weg dorthin, etwa bezahlte Freistellung und Abfindungen, sind nicht enthalten. Nicht enthalten sind Soldaten, die Post, der Kongress und die Gerichte. Die Grundeinstellung streicht überall 12 %: Die Personalbehörde des Bundes (Office of Personnel Management) zählt von Dezember 2024 bis März 2026 einen Rückgang der Bundesbeschäftigten um mehr als 12 %. Die Zahlen von 2025 enthalten die meisten dieser Beschäftigten noch, weil viele bis zu ihrem Ausscheiden bezahlt wurden, manche in bezahlter Freistellung: Ohne die Post arbeiteten im Haushaltsjahr 2025 im Schnitt 2,374 Mio. Menschen für den Bund, im Oktober 2026 2,075 Mio., 12,6 % weniger (BLS). Die Rechnung nimmt an, dass die Menschen, die gehen, anderswo arbeiten, sodass Einkommensteuer und Sozialversicherungsbeiträge nicht verloren gehen."
+        "en": "Cuts civilian positions in the federal executive branch, set separately for four parts of government. The default cuts 12% everywhere, about the reduction OPM counts from December 2024 to March 2026.",
+        "de": "Streicht zivile Stellen in der Exekutive des Bundes, getrennt für vier Teile der Regierung. Die Grundeinstellung streicht überall 12 %, etwa den Rückgang, den die Personalbehörde bis März 2026 zählt."
+      },
+      "explanation": {
+        "en": "A slider at 0 exempts its part. Pay and benefits of the civilian staff came to $383.3 billion in fiscal year 2025: Department of Defense $113.8 billion, health care at Veterans Affairs $66.4 billion, the Departments of Homeland Security and Justice $64.8 billion, all other agencies $138.3 billion. Military personnel, the Postal Service, Congress and the courts are not included.\n\nEach cut lands in the budget items where the staff work, according to OMB's data on obligations by object class; 12.8% of it reappears in the item for federal retirement, where the agencies' contributions to the retirement funds are netted out. The amount is the annual saving once the staff are gone, in 2025 values; one-time costs on the way, such as paid leave and severance pay, are not included.\n\nThe Office of Personnel Management (OPM) counts a reduction of the federal workforce of over 12% from December 2024 to March 2026. The 2025 figures still contain most of these staff, because many stayed on the payroll, some on paid leave, until they left: federal employment outside the Postal Service averaged 2.374 million in fiscal year 2025 and was 2.075 million in October 2026, 12.6% less (BLS). The calculation assumes that the people who leave work elsewhere, so that income and payroll taxes are not lost.",
+        "de": "Ein Regler auf 0 nimmt seinen Teil aus. Die Gehälter und Nebenleistungen der zivilen Beschäftigten kosteten im Haushaltsjahr 2025 383,3 Mrd. Dollar: Verteidigungsministerium 113,8 Mrd. Dollar, Gesundheitsversorgung im Veteranenministerium 66,4 Mrd. Dollar, Heimatschutz- und Justizministerium 64,8 Mrd. Dollar, alle übrigen Behörden 138,3 Mrd. Dollar. Nicht enthalten sind Soldaten, die Post, der Kongress und die Gerichte.\n\nJede Kürzung trifft die Haushaltsposten, in denen die Beschäftigten arbeiten, nach den Daten der OMB zu den Mittelbindungen nach Ausgabearten; 12,8 % davon fallen beim Posten für die Pensionen der Bundesbediensteten wieder an, wo die Beiträge der Behörden an die Pensionsfonds verrechnet werden. Der Betrag ist die jährliche Ersparnis, sobald die Stellen weg sind, in Werten von 2025; einmalige Kosten auf dem Weg dorthin, etwa bezahlte Freistellung und Abfindungen, sind nicht enthalten.\n\nDie Personalbehörde des Bundes (Office of Personnel Management, OPM) zählt von Dezember 2024 bis März 2026 einen Rückgang der Bundesbeschäftigten um mehr als 12 %. Die Zahlen von 2025 enthalten die meisten dieser Beschäftigten noch, weil viele bis zu ihrem Ausscheiden bezahlt wurden, manche in bezahlter Freistellung: Ohne die Post arbeiteten im Haushaltsjahr 2025 im Schnitt 2,374 Mio. Menschen für den Bund, im Oktober 2026 2,075 Mio., 12,6 % weniger (BLS). Die Rechnung nimmt an, dass die Menschen, die gehen, anderswo arbeiten, sodass Einkommensteuer und Sozialversicherungsbeiträge nicht verloren gehen."
       },
       "topic": "state",
       "params": [
@@ -1954,10 +1980,10 @@
             "plaw_119_37",
             "plaw_119_103"
           ]
-        },
+        }
+      ],
+      "limits": [
         {
-          "kind": "economic",
-          "severity": "minor",
           "text": {
             "en": "One-time costs come first and are not in the amount: pay during administrative leave, severance pay, payment for unused annual leave, separation incentives, and unemployment compensation for former federal employees, which their agencies pay for. The Office of Personnel Management (OPM) puts the one-time cost of the paid leave in the 2025 deferred resignation program at less than 3% of total basic payroll; since 2026, such leave is limited to 12 weeks at a time unless OPM and OMB approve more, and OPM's rule on it took effect on November 18, 2026. Employees who retire early draw their pensions sooner. If those who leave find no work, their income and payroll taxes are lost as well; the calculation assumes they work elsewhere.",
             "de": "Zuerst fallen einmalige Kosten an, die im Betrag nicht enthalten sind: Gehalt während der bezahlten Freistellung, Abfindungen, die Auszahlung nicht genommenen Urlaubs, Prämien für freiwilliges Ausscheiden und Arbeitslosengeld für frühere Bundesbeschäftigte, das ihre Behörden bezahlen. Die Personalbehörde OPM beziffert die einmaligen Kosten der bezahlten Freistellung im Programm von 2025 auf weniger als 3 % der gesamten Grundgehälter; seit 2026 ist eine solche Freistellung auf 12 Wochen am Stück begrenzt, wenn OPM und OMB nicht mehr genehmigen, und die Verordnung der OPM dazu gilt seit dem 18. November 2026. Wer früh in Ruhestand geht, bezieht die Pension früher. Finden die Ausscheidenden keine Arbeit, gehen auch ihre Einkommensteuer und ihre Sozialversicherungsbeiträge verloren; die Rechnung nimmt an, dass sie anderswo arbeiten."

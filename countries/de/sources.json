@@ -5,7 +5,10 @@
     "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table?lang=en",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Last updated 21 October 2026. Latest year with data: 2024. Retrieved through the dissemination API (geo=DE, unit=MIO_EUR, all sectors and transactions)."
+    "note": {
+      "de": "Zuletzt aktualisiert am 21. Oktober 2026. Jüngstes Jahr mit Daten: 2024. Abgerufen über die Dissemination API (geo=DE, unit=MIO_EUR, alle Sektoren und Transaktionen).",
+      "en": "Last updated 21 October 2026. Latest year with data: 2024. Retrieved through the dissemination API (geo=DE, unit=MIO_EUR, all sectors and transactions)."
+    }
   },
   "eurostat_gov_10a_main": {
     "title": "Government revenue, expenditure and main aggregates [gov_10a_main], Germany",
@@ -13,7 +16,10 @@
     "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=en",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Last updated 21 October 2026 (autumn 2026 EDP notification). Total revenue 2,028,340, total expenditure 2,147,486, net borrowing 119,146 million euros."
+    "note": {
+      "de": "Zuletzt aktualisiert am 21. Oktober 2026 (Defizitmeldung vom Herbst 2026). Einnahmen insgesamt 2.028.340, Ausgaben insgesamt 2.147.486, Finanzierungsdefizit 119.146 Mio. Euro.",
+      "en": "Last updated 21 October 2026 (autumn 2026 EDP notification). Total revenue 2,028,340, total expenditure 2,147,486, net borrowing 119,146 million euros."
+    }
   },
   "eurostat_ntl": {
     "title": "National Tax Lists: individual taxes and social contributions by national classification (ESA 2010), update of 29 October 2026, sheet DE",
@@ -21,7 +27,10 @@
     "url": "https://ec.europa.eu/eurostat/statistics-explained/images/3/3b/National_tax_lists_2025_2026-10-29.xlsx",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Covers general government plus EU institutions; customs duties (5,517 million euros in 2024) go to the EU and are excluded from the pack."
+    "note": {
+      "de": "Umfasst den Staat und die EU-Institutionen; die Zölle (5.517 Mio. Euro im Jahr 2024) stehen der EU zu und sind im Datensatz nicht enthalten.",
+      "en": "Covers general government plus EU institutions; customs duties (5,517 million euros in 2024) go to the EU and are excluded from the pack."
+    }
   },
   "eurostat_gov_10dd_edpt1": {
     "title": "Government deficit/surplus, debt and associated data [gov_10dd_edpt1], Germany",
@@ -29,7 +38,10 @@
     "url": "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=en",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Last updated 21 October 2026."
+    "note": {
+      "de": "Zuletzt aktualisiert am 21. Oktober 2026.",
+      "en": "Last updated 21 October 2026."
+    }
   },
   "eurostat_nama_10_gdp": {
     "title": "Gross domestic product and main components [nama_10_gdp], Germany, current prices",
@@ -37,7 +49,10 @@
     "url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table?lang=en",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Last updated 11 November 2026."
+    "note": {
+      "de": "Zuletzt aktualisiert am 11. November 2026.",
+      "en": "Last updated 11 November 2026."
+    }
   },
   "eurostat_demo_gind": {
     "title": "Population change: demographic balance and crude rates [demo_gind], Germany, average population",
@@ -59,7 +74,10 @@
     "url": "https://www.bundeshaushalt.de/DE/Bundeshaushalt-digital/bundeshaushalt-digital.html",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Cash actuals (Ist) of the federal budget, data as of July 2025. Titles used are named in the notes of the items concerned."
+    "note": {
+      "de": "Ist-Ergebnisse des Bundeshaushalts, Datenstand Juli 2025. Welche Titel verwendet sind, steht in den Anmerkungen der jeweiligen Posten.",
+      "en": "Cash actuals (Ist) of the federal budget, data as of July 2025. Titles used are named in the notes of the items concerned."
+    }
   },
   "drv_rv_in_zahlen_2026": {
     "title": "Rentenversicherung in Zahlen 2026 (Stand: 25. Juni 2026)",
@@ -67,7 +85,10 @@
     "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zahlen.pdf?__blob=publicationFile",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Revenue and expenditure 2024 and 2025 (p. 20), rules of thumb on pension finances (p. 10), pension level time series (p. 27)."
+    "note": {
+      "de": "Einnahmen und Ausgaben 2024 und 2025 (S. 20), Faustdaten zu den Rentenfinanzen (S. 10), Zeitreihe zum Rentenniveau (S. 27).",
+      "en": "Revenue and expenditure 2024 and 2025 (p. 20), rules of thumb on pension finances (p. 10), pension level time series (p. 27)."
+    }
   },
   "sozialpolitik_aktuell_viii51": {
     "title": "Rentenausgaben nach Rentenarten 1960–2024 (Abbildung VIII.51)",
@@ -75,7 +96,10 @@
     "url": "https://www.sozialpolitik-aktuell.de/files/sozialpolitik-aktuell/_Politikfelder/Alter-Rente/Datensammlung/PDF-Dateien/abbVIII51.pdf",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Shares of old-age, survivors' and disability pensions in pension expenditure of the general pension insurance."
+    "note": {
+      "de": "Anteile der Alters-, Hinterbliebenen- und Erwerbsminderungsrenten an den Rentenausgaben der allgemeinen Rentenversicherung.",
+      "en": "Shares of old-age, survivors' and disability pensions in pension expenditure of the general pension insurance."
+    }
   },
   "ba_geschaeftsbericht_2024": {
     "title": "Geschäftsbericht 2024",
@@ -104,7 +128,10 @@
     "url": "https://www.bundesregierung.de/breg-de/service/fragen-und-anworten/bundesrat-neue-grundsicherung-2399562",
     "accessed": "2026-11-17",
     "year": 2026,
-    "note": "Bundestag 5 March 2026, Bundesrat 27 March 2026, in force in stages from 1 July 2026; the cash benefit is renamed Grundsicherungsgeld."
+    "note": {
+      "de": "Bundestag am 5. März 2026, Bundesrat am 27. März 2026, stufenweise in Kraft ab 1. Juli 2026; die Geldleistung wird in Grundsicherungsgeld umbenannt.",
+      "en": "Bundestag 5 March 2026, Bundesrat 27 March 2026, in force in stages from 1 July 2026; the cash benefit is renamed Grundsicherungsgeld."
+    }
   },
   "destatis_asylblg_ausgaben": {
     "title": "Asylbewerberleistungen: Bruttoausgaben, Einnahmen und Nettoausgaben im Zeitvergleich",
@@ -112,7 +139,10 @@
     "url": "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Soziales/Asylbewerberleistungen/Tabellen/liste-ausgaben-einnahmen-ew.html",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Table as of 29 July 2026; 2024 figures revised on 24 April 2026."
+    "note": {
+      "de": "Tabelle mit Stand 29. Juli 2026; die Zahlen für 2024 wurden am 24. April 2026 revidiert.",
+      "en": "Table as of 29 July 2026; 2024 figures revised on 24 April 2026."
+    }
   },
   "destatis_asylblg_2025": {
     "title": "Asylbewerberleistungen (Themenseite mit Eckzahlen 2025)",
@@ -127,7 +157,10 @@
     "url": "https://www.bpb.de/themen/migration-integration/zahlen-zu-asyl/265776/asylbedingte-kosten-und-ausgaben/",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Breakdown of 2024 gross expenditure by type of benefit, citing Destatis."
+    "note": {
+      "de": "Aufschlüsselung der Bruttoausgaben 2024 nach Leistungsarten, nach Angaben von Destatis.",
+      "en": "Breakdown of 2024 gross expenditure by type of benefit, citing Destatis."
+    }
   },
   "bt_drs_21_1069": {
     "title": "Antwort der Bundesregierung: Entwicklung der Ausgaben im SGB II (Bürgergeld) in den Jahren 2024 und 2025, Drucksache 21/1069 mit Tabellenanhang",
@@ -135,7 +168,10 @@
     "url": "https://dserver.bundestag.de/btd/21/010/2101069.pdf",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Table 1: payment entitlements 2024 by nationality (Federal Employment Agency statistics, data as of July 2025)."
+    "note": {
+      "de": "Tabelle 1: Zahlungsansprüche 2024 nach Staatsangehörigkeit (Statistik der Bundesagentur für Arbeit, Datenstand Juli 2025).",
+      "en": "Table 1: payment entitlements 2024 by nationality (Federal Employment Agency statistics, data as of July 2025)."
+    }
   },
   "bt_drs_21_3539": {
     "title": "Gesetzentwurf der Bundesregierung: Leistungsrechtsanpassungsgesetz, Drucksache 21/3539 vom 12.01.2026",
@@ -143,7 +179,10 @@
     "url": "https://dserver.bundestag.de/btd/21/035/2103539.pdf",
     "accessed": "2026-11-17",
     "year": 2026,
-    "note": "Section D: budgetary effects for 2026 and 2027."
+    "note": {
+      "de": "Abschnitt D: Auswirkungen auf die Haushalte 2026 und 2027.",
+      "en": "Section D: budgetary effects for 2026 and 2027."
+    }
   },
   "gegen_hartz_2026_11": {
     "title": "Bürgergeld für Ukrainer: Geplante Leistungskürzung gerät ins Stocken (8. November 2026)",
@@ -151,7 +190,10 @@
     "url": "https://www.gegen-hartz.de/?p=250616",
     "accessed": "2026-11-17",
     "year": 2026,
-    "note": "Secondary source (news portal) on the state of the legislative procedure; no official confirmation of the status in November 2026 was found."
+    "note": {
+      "de": "Sekundärquelle (Nachrichtenportal) zum Stand des Gesetzgebungsverfahrens; eine amtliche Bestätigung des Stands im November 2026 war nicht zu finden.",
+      "en": "Secondary source (news portal) on the state of the legislative procedure; no official confirmation of the status in November 2026 was found."
+    }
   },
   "bverfg_2012_asylblg": {
     "title": "Pressemitteilung Nr. 56/2012: Regelungen zu den Grundleistungen in Form der Geldleistungen nach dem Asylbewerberleistungsgesetz verfassungswidrig (Urteil vom 18. Juli 2012, 1 BvL 10/10)",
@@ -243,7 +285,10 @@
     "url": "https://data.ecb.europa.eu/data/datasets/DWA",
     "accessed": "2026-11-17",
     "year": 2024,
-    "note": "Experimental statistics. Retrieved through the ECB data API (series DWA.Q.DE.S14.*.NWA.*)."
+    "note": {
+      "de": "Experimentelle Statistik. Abgerufen über die Daten-API der EZB (Reihen DWA.Q.DE.S14.*.NWA.*).",
+      "en": "Experimental statistics. Retrieved through the ECB data API (series DWA.Q.DE.S14.*.NWA.*)."
+    }
   },
   "diw_wb_29_2020": {
     "title": "MillionärInnen unter dem Mikroskop: Datenlücke bei sehr hohen Vermögen geschlossen – Konzentration höher als bisher ausgewiesen. DIW Wochenbericht 29/2020",
@@ -258,7 +303,10 @@
     "url": "https://www.diw.de/documents/publikationen/73/diw_01.c.525161.de/diwkompakt_2016-108.pdf",
     "accessed": "2026-11-17",
     "year": 2011,
-    "note": "Microsimulation for 2011: tables 4, 5 and 8."
+    "note": {
+      "de": "Mikrosimulation für 2011: Tabellen 4, 5 und 8.",
+      "en": "Microsimulation for 2011: tables 4, 5 and 8."
+    }
   },
   "bverfg_1995_vermoegensteuer": {
     "title": "Beschluss vom 22. Juni 1995, 2 BvL 37/91 (BVerfGE 93, 121, Vermögensteuer)",
@@ -294,7 +342,10 @@
     "url": "https://dserver.bundestag.de/btd/21/016/2101600.pdf",
     "accessed": "2026-11-18",
     "year": 2025,
-    "note": "Annex 2, item 45: relief for business assets under sections 13a to 13c and 28a of the Inheritance Tax Act."
+    "note": {
+      "de": "Anlage 2, Nr. 45: Verschonung des Betriebsvermögens nach §§ 13a bis 13c und 28a ErbStG.",
+      "en": "Annex 2, item 45: relief for business assets under sections 13a to 13c and 28a of the Inheritance Tax Act."
+    }
   },
   "bverfg_2014_erbst": {
     "title": "Pressemitteilung Nr. 116/2014: Privilegierung des Betriebsvermögens bei der Erbschaftsteuer in ihrer derzeitigen Ausgestaltung nicht in jeder Hinsicht mit der Verfassung vereinbar (Urteil vom 17. Dezember 2014, 1 BvL 21/12)",
@@ -309,7 +360,10 @@
     "url": "https://blogs.pwc.de/de/steuern-und-recht/article/257300/erbschaftsteuer-2026-erste-eindruecke-aus-der-muendlichen-verhandlung-vor-dem-bundesverfassungsgericht/",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Secondary source on the hearing in case 1 BvR 804/22; no ruling yet."
+    "note": {
+      "de": "Sekundärquelle zur mündlichen Verhandlung im Verfahren 1 BvR 804/22; noch kein Urteil.",
+      "en": "Secondary source on the hearing in case 1 BvR 804/22; no ruling yet."
+    }
   },
   "bt_drs_21_8794": {
     "title": "Antwort der Bundesregierung: Aktuelle Fragen zur Erbschaft- und Schenkungsteuer, Drucksache 21/8794 vom 27.10.2026",
@@ -324,7 +378,10 @@
     "url": "https://nato.int/content/dam/nato/webready/documents/finance/def-exp-2025-en.pdf",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "Germany 2024: 86,638 million euros at current prices, 2.00% of GDP. No German figure for 2025."
+    "note": {
+      "de": "Deutschland 2024: 86.638 Mio. Euro zu jeweiligen Preisen, 2,00 % des BIP. Für 2025 keine Angabe zu Deutschland.",
+      "en": "Germany 2024: 86,638 million euros at current prices, 2.00% of GDP. No German figure for 2025."
+    }
   },
   "nato_5_percent": {
     "title": "Defence expenditures and NATO's 5% commitment (updated 29 June 2026)",
@@ -346,7 +403,10 @@
     "url": "https://www.umweltbundesamt.de/system/files/medien/479/publikationen/texte_143-2021_umweltschaedliche_subventionen.pdf",
     "accessed": "2026-11-18",
     "year": 2018,
-    "note": "Latest edition; figures refer to 2018. Table 2 (transport), sections 2.2.1, 2.2.3, 2.2.8 and 2.2.9."
+    "note": {
+      "de": "Jüngste Ausgabe; die Zahlen beziehen sich auf 2018. Tabelle 2 (Verkehr), Abschnitte 2.2.1, 2.2.3, 2.2.8 und 2.2.9.",
+      "en": "Latest edition; figures refer to 2018. Table 2 (transport), sections 2.2.1, 2.2.3, 2.2.8 and 2.2.9."
+    }
   },
   "uba_pm_29_2025": {
     "title": "Pressemitteilung Nr. 29/2025 vom 16. Juli 2025 zum Emissionshandel (Erlöse 2024, Klima- und Transformationsfonds)",
@@ -361,7 +421,10 @@
     "url": "https://www.pv-magazine.de/2026/01/07/erloese-aus-dem-emissionshandel-steigen-2025-auf-21-milliarden-euro/",
     "accessed": "2026-11-18",
     "year": 2025,
-    "note": "Secondary source reporting the figures of the German Emissions Trading Authority: national system about 16 bn euros in 2025 (+23 %), EU ETS about 5.4 bn, total 21.4 bn after 18.5 bn in 2024."
+    "note": {
+      "de": "Sekundärquelle mit den Zahlen der Deutschen Emissionshandelsstelle: nationaler Emissionshandel 2025 rund 16 Mrd. Euro (+23 %), EU-ETS rund 5,4 Mrd. Euro, zusammen 21,4 Mrd. Euro nach 18,5 Mrd. Euro im Jahr 2024.",
+      "en": "Secondary source reporting the figures of the German Emissions Trading Authority: national system about 16 bn euros in 2025 (+23%), EU ETS about 5.4 bn, total 21.4 bn after 18.5 bn in 2024."
+    }
   },
   "eu_ets2": {
     "title": "ETS2: buildings, road transport and additional sectors (page updated 2 September 2026)",
@@ -376,7 +439,10 @@
     "url": "https://www.ihk.de/darmstadt/servicemarken/news/service/aenderungen-am-brennstoffemissionshandelsgesetz-7209170",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Secondary source on the 2026 amendment of the Fuel Emissions Trading Act; names the Bundestag decision without a date."
+    "note": {
+      "de": "Sekundärquelle zur Änderung des Brennstoffemissionshandelsgesetzes von 2026; nennt den Beschluss des Bundestags ohne Datum.",
+      "en": "Secondary source on the 2026 amendment of the Fuel Emissions Trading Act; names the Bundestag decision without a date."
+    }
   },
   "bertelsmann_diw_rente_2026": {
     "title": "Pressemitteilung vom 3. Juni 2026: Abschaffung der „Altersrente für besonders langjährig Versicherte“ würde 9,5 Milliarden Euro pro Jahrgang sparen und 125.000 Arbeitskräfte erhalten",
@@ -391,7 +457,10 @@
     "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/BiW/Abschaffung_der_abschlagsfreien_Fruehverrentung_Zusammenfassung.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Summary sheet with the fiscal effects by branch for the 1957 birth cohort. The full study was not opened."
+    "note": {
+      "de": "Zusammenfassung mit den fiskalischen Wirkungen nach Bereichen für den Geburtsjahrgang 1957. Die vollständige Studie wurde nicht geöffnet.",
+      "en": "Summary sheet with the fiscal effects by branch for the 1957 birth cohort. The full study was not opened."
+    }
   },
   "test_de_rentenreform_2026": {
     "title": "Rentenreform 2026: Bundesregierung will gesetzliche Rente grundlegend umbauen (2. Juli 2026)",
@@ -413,7 +482,10 @@
     "url": "https://dserver.bundestag.de/btd/21/077/2107774.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Used for the dates of the commission (set up December 2025, report with 33 recommendations on 23 June 2026)."
+    "note": {
+      "de": "Herangezogen für die Eckdaten der Kommission (eingesetzt im Dezember 2025, Bericht mit 33 Empfehlungen am 23. Juni 2026).",
+      "en": "Used for the dates of the commission (set up December 2025, report with 33 recommendations on 23 June 2026)."
+    }
   },
   "sgb6_236b": {
     "title": "Sozialgesetzbuch Sechstes Buch, § 236b Altersrente für besonders langjährig Versicherte",
@@ -426,7 +498,10 @@
     "publisher": "Bundesministerium für Gesundheit",
     "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/GKV/Finanzergebnisse/KJ1_2024_Internetauftritt.pdf",
     "year": 2024,
-    "note": "Contribution revenue by account: 02000 and 02900 (compulsorily insured employees), 02600 and 02907 (other), 02999 (total 298.2 bn euros including the insurers' own column).",
+    "note": {
+      "de": "Beitragseinnahmen nach Konten: 02000 und 02900 (versicherungspflichtig Beschäftigte), 02600 und 02907 (sonstige), 02999 (insgesamt 298,2 Mrd. Euro einschließlich der eigenen Spalte der Kassen).",
+      "en": "Contribution revenue by account: 02000 and 02900 (compulsorily insured employees), 02600 and 02907 (other), 02999 (total 298.2 bn euros including the insurers' own column)."
+    },
     "accessed": "2026-11-18"
   },
   "drv_rv_in_zeitreihen_2026": {
@@ -434,7 +509,10 @@
     "publisher": "Deutsche Rentenversicherung Bund",
     "url": "https://www.deutsche-rentenversicherung.de/SharedDocs/Downloads/DE/Statistiken-und-Berichte/statistikpublikationen/rv_in_zeitreihen.pdf?__blob=publicationFile",
     "year": 2024,
-    "note": "Revenue of the pension insurance by year; contributions 2022: 275,622, 2024: 305,905 million euros.",
+    "note": {
+      "de": "Einnahmen der Rentenversicherung nach Jahren; Beiträge 2022: 275.622, 2024: 305.905 Mio. Euro.",
+      "en": "Revenue of the pension insurance by year; contributions 2022: 275,622, 2024: 305,905 million euros."
+    },
     "accessed": "2026-11-18"
   },
   "bundesregierung_rechengroessen_2024": {
@@ -449,7 +527,10 @@
     "publisher": "Deutscher Bundestag",
     "url": "https://dserver.bundestag.de/btd/21/058/2105839.pdf",
     "year": 2026,
-    "note": "Computational revenue forgone of the reduced rate by year (2024: 39.2 bn euros), of a zero rate on food (about 18 bn in 2027) and by food category; assumes full pass-through and no behavioural change.",
+    "note": {
+      "de": "Rechnerische Steuermindereinnahmen durch den ermäßigten Satz nach Jahren (2024: 39,2 Mrd. Euro), durch einen Nullsatz auf Lebensmittel (rund 18 Mrd. Euro im Jahr 2027) und nach Lebensmittelgruppen; unterstellt volle Weitergabe und unverändertes Verhalten.",
+      "en": "Notional revenue forgone from the reduced rate by year (2024: 39.2 bn euros), from a zero rate on food (about 18 bn in 2027) and by food category; assumes full pass-through and no behavioural change."
+    },
     "accessed": "2026-11-18"
   },
   "zew_bmf_umsatzsteuersaetze_2025": {
@@ -457,7 +538,10 @@
     "publisher": "ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung",
     "url": "https://www.zew.de/fileadmin/FTP/gutachten/BMF_Umsatzsteuersaetze_2026.pdf",
     "year": 2024,
-    "note": "Tables 3, 5, 8, 10 and 12: revenue forgone per category (finance ministry estimates); section 2.1: EU law; section 2.3.4: pass-through; executive summary: reform options and burden by income decile.",
+    "note": {
+      "de": "Tabellen 3, 5, 8, 10 und 12: Steuermindereinnahmen je Kategorie (Schätzungen des Finanzministeriums); Abschnitt 2.1: EU-Recht; Abschnitt 2.3.4: Preisweitergabe; Kurzfassung: Reformoptionen und Belastung nach Einkommensdezilen.",
+      "en": "Tables 3, 5, 8, 10 and 12: revenue forgone per category (finance ministry estimates); section 2.1: EU law; section 2.3.4: pass-through; executive summary: reform options and burden by income decile."
+    },
     "accessed": "2026-11-18"
   },
   "iw_beamte_rente_2025": {
@@ -472,7 +556,10 @@
     "publisher": "Bertelsmann Stiftung",
     "url": "https://www.bertelsmann-stiftung.de/de/themen/aktuelle-meldungen/2020/februar/duales-system-kostet-mitglieder-der-gesetzlichen-krankenversicherung-bis-zu-145-euro-pro-jahr",
     "year": 2020,
-    "note": "Simulation of a hypothetical state in which all privately insured persons are in statutory health insurance. Only the publisher's summary was opened, not the full study.",
+    "note": {
+      "de": "Simulation eines hypothetischen Zustands, in dem alle privat Versicherten gesetzlich krankenversichert sind. Geöffnet wurde nur die Zusammenfassung des Herausgebers, nicht die vollständige Studie.",
+      "en": "Simulation of a hypothetical state in which all privately insured persons are in statutory health insurance. Only the publisher's summary was opened, not the full study."
+    },
     "accessed": "2026-11-18"
   },
   "bertelsmann_iges_beamte_gkv_2017": {
@@ -499,7 +586,10 @@
     "title": "Energiesteuergesetz, § 2 Steuertarif",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/energiestg/__2.html",
-    "note": "Petrol with at most 10 mg/kg sulphur: EUR 654.50 per 1,000 litres; gas oil (diesel): EUR 470.40 per 1,000 litres.",
+    "note": {
+      "de": "Benzin mit höchstens 10 mg/kg Schwefel: 654,50 Euro je 1.000 Liter; Gasöl (Diesel): 470,40 Euro je 1.000 Liter.",
+      "en": "Petrol with at most 10 mg/kg sulphur: EUR 654.50 per 1,000 litres; gas oil (diesel): EUR 470.40 per 1,000 litres."
+    },
     "accessed": "2026-11-18"
   },
   "bt_drs_20_1741": {
@@ -507,7 +597,10 @@
     "publisher": "Deutscher Bundestag",
     "url": "https://dserver.bundestag.de/btd/20/017/2001741.pdf",
     "year": 2022,
-    "note": "Minimum rates of the EU Energy Taxation Directive (EUR 359 and 330 per 1,000 litres), revenue per month at regular and minimum rates, revenue forgone of EUR 3.15 billion for June to August 2022, VAT.",
+    "note": {
+      "de": "Mindeststeuersätze der EU-Energiesteuerrichtlinie (359 und 330 Euro je 1.000 Liter), Aufkommen je Monat zu Regel- und zu Mindestsätzen, Steuermindereinnahmen von 3,15 Mrd. Euro für Juni bis August 2022, Mehrwertsteuer.",
+      "en": "Minimum rates of the EU Energy Taxation Directive (EUR 359 and 330 per 1,000 litres), revenue per month at regular and minimum rates, revenue forgone of EUR 3.15 billion for June to August 2022, VAT."
+    },
     "accessed": "2026-11-18"
   },
   "bt_wd_tankrabatt_2026": {
@@ -557,7 +650,10 @@
     "publisher": "Cash.Online",
     "url": "https://www.cash-online.de/a/stromsteuersenkung-2027-koalition-entscheidet-ueber-entlastung-fuer-alle-730659/",
     "year": 2026,
-    "note": "Published the day before the coalition committee met; the outcome of that meeting could not be verified.",
+    "note": {
+      "de": "Erschienen am Tag vor der Sitzung des Koalitionsausschusses; deren Ergebnis ließ sich nicht überprüfen.",
+      "en": "Published the day before the coalition committee met; the outcome of that meeting could not be verified."
+    },
     "accessed": "2026-11-18"
   },
   "bt_drs_20_12783": {
@@ -565,7 +661,10 @@
     "publisher": "Deutscher Bundestag",
     "url": "https://dserver.bundestag.de/btd/20/127/2012783.pdf",
     "year": 2024,
-    "note": "Section 32a(1) of the Income Tax Act as applicable from the 2024 assessment period; case law of the Federal Constitutional Court on the tax-free subsistence minimum.",
+    "note": {
+      "de": "§ 32a Abs. 1 EStG in der ab dem Veranlagungszeitraum 2024 geltenden Fassung; Rechtsprechung des Bundesverfassungsgerichts zur Steuerfreiheit des Existenzminimums.",
+      "en": "Section 32a(1) of the Income Tax Act as applicable from the 2024 assessment period; case law of the Federal Constitutional Court on the tax-free subsistence minimum."
+    },
     "accessed": "2026-11-18"
   },
   "zew_wahlprogramme_2025": {
@@ -573,7 +672,10 @@
     "publisher": "ZEW – Leibniz-Zentrum für Europäische Wirtschaftsforschung",
     "url": "https://ftp.zew.de/pub/zew-docs/gutachten/Bundestagswahlprogramme_ZEW_2025.pdf",
     "year": 2025,
-    "note": "Section 2: how the parties' income tax proposals were implemented, in terms of 2024 law. Only direct effects, no second-round effects.",
+    "note": {
+      "de": "Abschnitt 2: wie die Einkommensteuerpläne der Parteien umgesetzt wurden, bezogen auf den Rechtsstand 2024. Nur direkte Wirkungen, keine Zweitrundeneffekte.",
+      "en": "Section 2: how the parties' income tax proposals were implemented, in terms of 2024 law. Only direct effects, no second-round effects."
+    },
     "accessed": "2026-11-18"
   },
   "arqus_132": {
@@ -595,7 +697,10 @@
     "url": "https://dserver.bundestag.de/btd/19/141/1914103.pdf",
     "accessed": "2026-11-18",
     "year": 2019,
-    "note": "Exemption threshold raised from EUR 972 to 16,956 of income tax from 2021, mitigation zone capped at 11.9%; about 90% of payers of wage and income tax fully relieved; revenue forgone EUR 10.89 bn full-year effect, cash 2024 EUR 12.11 bn; revenue accrues to the federal government alone."
+    "note": {
+      "de": "Freigrenze ab 2021 von 972 auf 16.956 Euro Einkommensteuer angehoben, Milderungszone auf 11,9 % begrenzt; rund 90 % der Zahler von Lohn- und Einkommensteuer vollständig entlastet; Steuermindereinnahmen 10,89 Mrd. Euro in voller Jahreswirkung und kassenmäßig 12,11 Mrd. Euro im Jahr 2024; das Aufkommen steht allein dem Bund zu.",
+      "en": "Exemption threshold raised from EUR 972 to 16,956 of income tax from 2021, mitigation zone capped at 11.9%; about 90% of payers of wage and income tax fully relieved; revenue forgone EUR 10.89 bn in full-year effect and EUR 12.11 bn in cash in 2024; revenue accrues to the federal government alone."
+    }
   },
   "bverfg_2025_soli": {
     "title": "Pressemitteilung Nr. 30/2025: Erfolglose Verfassungsbeschwerde gegen Solidaritätszuschlag (Urteil vom 26. März 2025, 2 BvR 1505/20)",
@@ -610,7 +715,10 @@
     "url": "https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/06/Inhalte/Kapitel-3-Analysen/3-2-solidaritaetszuschlag-vor-bverfge.html",
     "accessed": "2026-11-18",
     "year": 2025,
-    "note": "Revenue 2024 about EUR 12.6 bn; rate 5.5% since 1998; no hollowing-out of shared taxes at the current rate; duty to monitor; citing the court, higher federal excise duties burden low earners disproportionately."
+    "note": {
+      "de": "Aufkommen 2024 rund 12,6 Mrd. Euro; Satz seit 1998 5,5 %; beim derzeitigen Satz keine Aushöhlung der Gemeinschaftsteuern; Beobachtungspflicht; mit Verweis auf das Gericht: Höhere Verbrauchsteuern des Bundes belasten Geringverdienende überproportional.",
+      "en": "Revenue 2024 about EUR 12.6 bn; rate 5.5% since 1998; no hollowing-out of shared taxes at the current rate; duty to monitor; citing the court, higher federal excise duties burden low earners disproportionately."
+    }
   },
   "svr_jg_2026_27": {
     "title": "Jahresgutachten 2026/27: Finanzpolitik vor harten Entscheidungen (11. November 2026)",
@@ -618,7 +726,10 @@
     "url": "https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/jg202627/JG202627_Gesamtausgabe.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Item 154 and Table 16: a defence surcharge on income, corporate and capital income tax similar to the solidarity surcharge before 2021 of 2.5 / 5.0 / 7.5 percentage points would raise EUR 10.5 / 20.7 / 30.7 bn in 2027 after behavioural responses (elasticities 0.34 income tax, 0.6 flat tax, 2.55 corporate tax). Item 136 (p. 127): the pension commission's package (including the link of the standard age to life expectancy) relieves the federal budget by less than EUR 1 bn in 2030, about 5.4 bn in 2035 and 9.6 bn in 2040, solely through the federal subsidy formula. Item 180 (p. 144): implement the commission's measures quickly and as completely as possible, including the dynamic standard age."
+    "note": {
+      "de": "Ziffer 154 und Tabelle 16: Ein Verteidigungszuschlag von 2,5 / 5,0 / 7,5 Prozentpunkten auf Einkommen-, Körperschaft- und Abgeltungsteuer, ähnlich dem Solidaritätszuschlag vor 2021, brächte 2027 nach Verhaltensreaktionen 10,5 / 20,7 / 30,7 Mrd. Euro (Elastizitäten: Einkommensteuer 0,34, Abgeltungsteuer 0,6, Körperschaftsteuer 2,55). Ziffer 136 (S. 127): Das Paket der Alterssicherungskommission (einschließlich der Kopplung der Regelaltersgrenze an die Lebenserwartung) entlastet den Bundeshaushalt 2030 um weniger als 1 Mrd. Euro, 2035 um rund 5,4 Mrd. Euro und 2040 um 9,6 Mrd. Euro, allein über die Formel des Bundeszuschusses. Ziffer 180 (S. 144): die Maßnahmen der Kommission zügig und möglichst vollständig umsetzen, einschließlich der dynamischen Regelaltersgrenze.",
+      "en": "Item 154 and Table 16: a defence surcharge of 2.5 / 5.0 / 7.5 percentage points on income, corporate and capital income tax, similar to the solidarity surcharge before 2021, would raise EUR 10.5 / 20.7 / 30.7 bn in 2027 after behavioural responses (elasticities 0.34 income tax, 0.6 flat tax, 2.55 corporate tax). Item 136 (p. 127): the pension commission's package (including linking the standard age to life expectancy) relieves the federal budget by less than EUR 1 bn in 2030, about 5.4 bn in 2035 and 9.6 bn in 2040, solely through the federal subsidy formula. Item 180 (p. 144): implement the commission's measures quickly and as completely as possible, including the dynamic standard age."
+    }
   },
   "bmf_mb_2025_01_steuereinnahmen": {
     "title": "BMF-Monatsbericht Januar 2025: Steuereinnahmen im Dezember 2024 und konjunkturelles Umfeld",
@@ -626,7 +737,10 @@
     "url": "https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/01/Inhalte/Kapitel-4-Wirtschafts-und-Finanzlage/4-2-steuereinnahmen-dezember-2024.html",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "Cash receipts 2024: tobacco tax 15,637, alcohol tax 1,980, beer tax 558, solidarity surcharge 12,634 million euros; tobacco tax in December 2024 26% above the previous year because of pull-forward effects before the increase on 1 January 2025."
+    "note": {
+      "de": "Kasseneinnahmen 2024: Tabaksteuer 15.637, Alkoholsteuer 1.980, Biersteuer 558, Solidaritätszuschlag 12.634 Mio. Euro; die Tabaksteuer lag im Dezember 2024 um 26 % über dem Vorjahr, wegen Vorzieheffekten vor der Erhöhung zum 1. Januar 2025.",
+      "en": "Cash receipts 2024: tobacco tax 15,637, alcohol tax 1,980, beer tax 558, solidarity surcharge 12,634 million euros; tobacco tax in December 2024 26% above the previous year because of pull-forward effects before the increase on 1 January 2025."
+    }
   },
   "dkfz_pb_tabaksteuer_2026": {
     "title": "Preiserhöhungen für Tabakerzeugnisse und E-Zigaretten: Wirksame Maßnahme mit hoher Zustimmung der Bevölkerung (Policy Brief, 2026)",
@@ -634,7 +748,10 @@
     "url": "https://www.dkfz.de/fileadmin/user_upload/Krebspraevention/Download/pdf/PB/PB_2026_Preiserh%C3%B6hungen-f%C3%BCr-Tabakerzeugnisse-und-E-Zigaretten.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Recommends annual tobacco tax increases of 10% over ten years; a 10% higher price cuts adult consumption by about 5% and youth consumption by up to 13%; Figure 2 (Destatis data): 66.2 bn cigarettes in 2024, average cigarette tax 18.8 cents, cigarette tax revenue EUR 12.5 bn."
+    "note": {
+      "de": "Empfiehlt, die Tabaksteuer zehn Jahre lang jährlich um 10 % zu erhöhen; ein um 10 % höherer Preis senkt den Konsum Erwachsener um rund 5 % und den Jugendlicher um bis zu 13 %; Abbildung 2 (Daten von Destatis): 66,2 Mrd. Zigaretten im Jahr 2024, durchschnittliche Steuer je Zigarette 18,8 Cent, Aufkommen aus der Zigarettensteuer 12,5 Mrd. Euro.",
+      "en": "Recommends annual tobacco tax increases of 10% over ten years; a 10% higher price cuts adult consumption by about 5% and youth consumption by up to 13%; Figure 2 (Destatis data): 66.2 bn cigarettes in 2024, average cigarette tax 18.8 cents, cigarette tax revenue EUR 12.5 bn."
+    }
   },
   "destatis_tabak_2024": {
     "title": "Pressemitteilung Nr. 035 vom 27. Januar 2025: 3,5 % mehr versteuerte Zigaretten im Jahr 2024",
@@ -642,7 +759,10 @@
     "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/01/PD25_035_73.html",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "66.2 bn cigarettes, 25,152 t fine-cut tobacco and 1.3 m litres of substitutes taxed in 2024; increase mainly a pull-forward effect before the tax increase of 1 January 2025."
+    "note": {
+      "de": "2024 versteuert: 66,2 Mrd. Zigaretten, 25.152 t Feinschnitt und 1,3 Mio. Liter Substitute; der Anstieg ist vor allem ein Vorzieheffekt vor der Steuererhöhung zum 1. Januar 2025.",
+      "en": "66.2 bn cigarettes, 25,152 t fine-cut tobacco and 1.3 m litres of substitutes taxed in 2024; increase mainly a pull-forward effect before the tax increase of 1 January 2025."
+    }
   },
   "bt_drs_21_6150": {
     "title": "Antwort der Bundesregierung: Erhöhung der Tabaksteuer, Drucksache 21/6150 vom 26.05.2026",
@@ -650,7 +770,10 @@
     "url": "https://dserver.bundestag.de/btd/21/061/2106150.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Tobacco tax actual against the estimate of November 2021: 2022 14.23 / 15.42, 2023 14.67 / 16.01, 2024 15.64 / 16.06, 2025 17.63 / 16.83 bn euros; 256 million untaxed cigarettes seized in 2025 (EUR 47 m of tax); tax steps 2022 to 2026."
+    "note": {
+      "de": "Tabaksteueraufkommen, Ist gegenüber der Schätzung vom November 2021: 2022 14,23 / 15,42, 2023 14,67 / 16,01, 2024 15,64 / 16,06, 2025 17,63 / 16,83 Mrd. Euro; 2025 wurden 256 Mio. unversteuerte Zigaretten sichergestellt (47 Mio. Euro Steuer); Steuerstufen 2022 bis 2026.",
+      "en": "Tobacco tax revenue, actual against the estimate of November 2021: 2022 14.23 / 15.42, 2023 14.67 / 16.01, 2024 15.64 / 16.06, 2025 17.63 / 16.83 bn euros; 256 million untaxed cigarettes seized in 2025 (EUR 47 m of tax); tax steps 2022 to 2026."
+    }
   },
   "bt_drs_21_7859": {
     "title": "Gesetzentwurf der Bundesregierung: Entwurf eines Gesetzes zur Änderung des Tabaksteuergesetzes, Drucksache 21/7859 vom 07.09.2026",
@@ -658,7 +781,10 @@
     "url": "https://dserver.bundestag.de/btd/21/078/2107859.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Annual increases 2027 to 2030; revenue EUR 14.1 to 14.9 bn in 2011 to 2023, 15.6 bn in 2024, 17.4 bn in 2025; revenue for the federal government only; a single large increase rejected because of cross-border purchases and the black market."
+    "note": {
+      "de": "Jährliche Erhöhungen 2027 bis 2030; Aufkommen 2011 bis 2023 zwischen 14,1 und 14,9 Mrd. Euro, 2024 15,6 Mrd. Euro, 2025 17,4 Mrd. Euro; das Aufkommen steht allein dem Bund zu; eine einmalige große Erhöhung wird wegen grenzüberschreitender Einkäufe und des Schwarzmarkts abgelehnt.",
+      "en": "Annual increases 2027 to 2030; revenue EUR 14.1 to 14.9 bn in 2011 to 2023, 15.6 bn in 2024, 17.4 bn in 2025; revenue for the federal government only; a single large increase rejected because of cross-border purchases and the black market."
+    }
   },
   "bt_drs_21_8605": {
     "title": "Beschlussempfehlung und Bericht des Finanzausschusses zum Entwurf eines Gesetzes zur Änderung des Tabaksteuergesetzes, Drucksache 21/8605 vom 14.10.2026",
@@ -666,14 +792,20 @@
     "url": "https://dserver.bundestag.de/btd/21/086/2108605.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Adopted rates for cigarettes 14.34 cents and 21.05% of the price in 2027, 18.57 cents and 21.05% in 2030; additional cash revenue EUR 1,507 m in 2027 to 4,461 m in 2030; positions of the parliamentary groups."
+    "note": {
+      "de": "Beschlossene Sätze für Zigaretten: 2027 14,34 Cent und 21,05 % des Preises, 2030 18,57 Cent und 21,05 %; kassenmäßige Mehreinnahmen von 1.507 Mio. Euro 2027 bis 4.461 Mio. Euro 2030; Positionen der Fraktionen.",
+      "en": "Adopted rates for cigarettes 14.34 cents and 21.05% of the price in 2027, 18.57 cents and 21.05% in 2030; additional cash revenue EUR 1,507 m in 2027 to 4,461 m in 2030; positions of the parliamentary groups."
+    }
   },
   "tabstg_2": {
     "title": "Tabaksteuergesetz, § 2 Steuertarif",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/tabstg_2009/__2.html",
     "accessed": "2026-11-18",
-    "note": "Shows the rates for 2027 to 2030 in the version recommended by the finance committee in October 2026."
+    "note": {
+      "de": "Enthält die Sätze für 2027 bis 2030 in der vom Finanzausschuss im Oktober 2026 empfohlenen Fassung.",
+      "en": "Shows the rates for 2027 to 2030 in the version recommended by the finance committee in October 2026."
+    }
   },
   "bt_drs_21_8482": {
     "title": "Antwort der Bundesregierung: Annahmen und Auswirkungen der geplanten Tabaksteuererhöhungen, Drucksache 21/8482 vom 09.10.2026",
@@ -681,7 +813,10 @@
     "url": "https://dserver.bundestag.de/btd/21/084/2108482.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Price elasticities used by the finance ministry: cigarettes -0.7, fine-cut -0.3, cigars -0.4, pipe tobacco -0.7, waterpipe tobacco -0.5, heated tobacco +0.4, substitutes -0.7, implicitly including avoidance; full pass-through; costs of smoking at least EUR 97 bn a year; Health Finance Commission estimates; fine-cut taxed at about 38% of a comparable cigarette."
+    "note": {
+      "de": "Vom Finanzministerium verwendete Preiselastizitäten: Zigaretten −0,7, Feinschnitt −0,3, Zigarren −0,4, Pfeifentabak −0,7, Wasserpfeifentabak −0,5, erhitzter Tabak +0,4, Substitute −0,7, Ausweichverhalten implizit eingeschlossen; volle Weitergabe; Kosten des Rauchens mindestens 97 Mrd. Euro im Jahr; Schätzungen der FinanzKommission Gesundheit; Feinschnitt mit rund 38 % einer vergleichbaren Zigarette besteuert.",
+      "en": "Price elasticities used by the finance ministry: cigarettes -0.7, fine-cut -0.3, cigars -0.4, pipe tobacco -0.7, waterpipe tobacco -0.5, heated tobacco +0.4, substitutes -0.7, implicitly including avoidance; full pass-through; costs of smoking at least EUR 97 bn a year; Health Finance Commission estimates; fine-cut taxed at about 38% of a comparable cigarette."
+    }
   },
   "bt_drs_19_30490": {
     "title": "Beschlussempfehlung und Bericht des Finanzausschusses zum Entwurf eines Tabaksteuermodernisierungsgesetzes, Drucksache 19/30490 vom 09.06.2021",
@@ -689,7 +824,10 @@
     "url": "https://dserver.bundestag.de/btd/19/304/1930490.pdf",
     "accessed": "2026-11-18",
     "year": 2021,
-    "note": "Rates 2022 to 2026: cigarettes 2024 11.15 cents per piece and 19.84% of the retail price (2026: 12.28 cents), fine-cut 2024 EUR 54.39 per kg and 17.00%; expected revenue in 2024 from cigarettes EUR 12,894 m and from fine-cut EUR 2,272 m."
+    "note": {
+      "de": "Sätze 2022 bis 2026: Zigaretten 2024 11,15 Cent je Stück und 19,84 % des Kleinverkaufspreises (2026: 12,28 Cent), Feinschnitt 2024 54,39 Euro je kg und 17,00 %; erwartetes Aufkommen 2024 aus Zigaretten 12.894 Mio. Euro und aus Feinschnitt 2.272 Mio. Euro.",
+      "en": "Rates 2022 to 2026: cigarettes 2024 11.15 cents per piece and 19.84% of the retail price (2026: 12.28 cents), fine-cut 2024 EUR 54.39 per kg and 17.00%; expected revenue in 2024 from cigarettes EUR 12,894 m and from fine-cut EUR 2,272 m."
+    }
   },
   "ec_ted_qa_2025": {
     "title": "Tobacco Taxation: Frequently asked questions (16 July 2025)",
@@ -697,7 +835,10 @@
     "url": "https://taxation-customs.ec.europa.eu/document/download/3e526c91-e7a1-400b-a64b-19ba0361ae46_en",
     "accessed": "2026-11-18",
     "year": 2025,
-    "note": "Current minimum for cigarettes EUR 90 per 1,000 and 60% of the weighted average price; proposal EUR 215 per 1,000 and 63% from 2028, adjusted to price levels; 15% of minimum rates as EU own resource; fraud costs member states up to EUR 13 bn a year; no direct proportionality between tax levels and illicit trade."
+    "note": {
+      "de": "Derzeitiger Mindestsatz für Zigaretten 90 Euro je 1.000 Stück und 60 % des gewichteten Durchschnittspreises; Vorschlag: 215 Euro je 1.000 Stück und 63 % ab 2028, an die Preisniveaus angepasst; 15 % der Mindestsätze als Eigenmittel der EU; Betrug kostet die Mitgliedstaaten bis zu 13 Mrd. Euro im Jahr; kein direkt proportionaler Zusammenhang zwischen Steuerhöhe und illegalem Handel.",
+      "en": "Current minimum for cigarettes EUR 90 per 1,000 and 60% of the weighted average price; proposal EUR 215 per 1,000 and 63% from 2028, adjusted to price levels; 15% of minimum rates as EU own resource; fraud costs member states up to EUR 13 bn a year; no direct proportionality between tax levels and illicit trade."
+    }
   },
   "fkg_bericht_1": {
     "title": "Erster Bericht der FinanzKommission Gesundheit: Management Summary (30. März 2026)",
@@ -705,7 +846,10 @@
     "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/F/FinanzKommission_Gesundheit/Management_Summary__Erster_Bericht_der_Finanzkommission_Gesundheit_.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Recommendation 64: raise the tobacco tax (EUR 1.2 bn in 2027, 3.8 bn in 2030); 65: raise the alcohol tax on spirits (EUR 0.6 bn in 2027, 1.2 bn in 2030); additional revenue to go to statutory health insurance."
+    "note": {
+      "de": "Empfehlung 64: Tabaksteuer erhöhen (1,2 Mrd. Euro 2027, 3,8 Mrd. Euro 2030); 65: Alkoholsteuer auf Spirituosen erhöhen (0,6 Mrd. Euro 2027, 1,2 Mrd. Euro 2030); die Mehreinnahmen sollen der gesetzlichen Krankenversicherung zufließen.",
+      "en": "Recommendation 64: raise the tobacco tax (EUR 1.2 bn in 2027, 3.8 bn in 2030); 65: raise the alcohol tax on spirits (EUR 0.6 bn in 2027, 1.2 bn in 2030); additional revenue to go to statutory health insurance."
+    }
   },
   "bt_drs_21_7860": {
     "title": "Gesetzentwurf der Bundesregierung: Entwurf eines Haushaltsbegleitgesetzes 2027, Drucksache 21/7860 vom 07.09.2026",
@@ -713,7 +857,10 @@
     "url": "https://dserver.bundestag.de/btd/21/078/2107860.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Articles 1 to 3: alcohol tax from EUR 1,303 to 1,564 per hl of pure alcohol, sparkling wine tax from 136 to 163 EUR/hl, intermediate products and alcopops also +20%; additional revenue EUR 455 m a year (full-year effect), all federal."
+    "note": {
+      "de": "Artikel 1 bis 3: Alkoholsteuer von 1.303 auf 1.564 Euro je hl reinen Alkohols, Schaumweinsteuer von 136 auf 163 Euro/hl, Zwischenerzeugnisse und Alkopops ebenfalls +20 %; Mehreinnahmen 455 Mio. Euro im Jahr (volle Jahreswirkung), ganz beim Bund.",
+      "en": "Articles 1 to 3: alcohol tax from EUR 1,303 to 1,564 per hl of pure alcohol, sparkling wine tax from 136 to 163 EUR/hl, intermediate products and alcopops also +20%; additional revenue EUR 455 m a year (full-year effect), all federal."
+    }
   },
   "hib_935_2026": {
     "title": "hib 935/2026: Finanzausschuss stimmt Verbrauchsteuer-Änderungen zu (12. November 2026)",
@@ -721,7 +868,10 @@
     "url": "https://www.bundestag.de/1233052",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Finance committee approved the Budget Accompanying Act 2027 with changes: no increase of the sparkling wine tax, alcopop tax extended to mixed drinks with up to 15% alcohol at a rate 45% lower than planned."
+    "note": {
+      "de": "Der Finanzausschuss hat dem Haushaltsbegleitgesetz 2027 mit Änderungen zugestimmt: keine Erhöhung der Schaumweinsteuer, Alkopopsteuer auf Mischgetränke mit bis zu 15 % Alkohol ausgedehnt, mit einem um 45 % niedrigeren Satz als geplant.",
+      "en": "The finance committee approved the Budget Accompanying Act 2027 with changes: no increase of the sparkling wine tax, alcopop tax extended to mixed drinks with up to 15% alcohol at a rate 45% lower than planned."
+    }
   },
   "destatis_alkoholsteuer": {
     "title": "2025: 149,0 Millionen Liter Alkohol versteuert (Verbrauchsteuern, 7. Juli 2026)",
@@ -729,7 +879,10 @@
     "url": "https://www.destatis.de/DE/Themen/Staat/Steuern/Verbrauchsteuern/alkoholsteuer.html",
     "accessed": "2026-11-18",
     "year": 2025,
-    "note": "149.0 m litres of pure alcohol taxed in 2025, 5.3% less than in 2024 (so about 157 m litres in 2024)."
+    "note": {
+      "de": "2025 wurden 149,0 Mio. Liter reiner Alkohol versteuert, 5,3 % weniger als 2024 (2024 also rund 157 Mio. Liter).",
+      "en": "149.0 m litres of pure alcohol taxed in 2025, 5.3% less than in 2024 (so about 157 m litres in 2024)."
+    }
   },
   "destatis_bier_2024": {
     "title": "1,4 % weniger Bier im Jahr 2024 abgesetzt (Pressemitteilung des Statistischen Bundesamts, veröffentlicht über news aktuell)",
@@ -737,7 +890,10 @@
     "url": "https://www.presseportal.de/pm/32102/5962436",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "8.3 bn litres of beer sold in 2024, of which 82.3% or 6.8 bn litres taxed for domestic consumption."
+    "note": {
+      "de": "2024 wurden 8,3 Mrd. Liter Bier abgesetzt, davon 82,3 % oder 6,8 Mrd. Liter für den Verbrauch im Inland versteuert.",
+      "en": "8.3 bn litres of beer sold in 2024, of which 82.3% or 6.8 bn litres taxed for domestic consumption."
+    }
   },
   "dwi_statistik_2025": {
     "title": "Deutscher Wein Statistik 2025",
@@ -745,7 +901,10 @@
     "url": "https://www.deutscheweine.de/fileadmin/DWI/News_Medien/Publikationen/Deutscher_Wein_Statistik/Statistik_2025.pdf",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "Table 22, wine balance 2023/24 compiled by the German Winegrowers' Association from Destatis data: 18.6 m hl of wine and sparkling wine marketed, 21.9 litres per head, of which 3.1 litres sparkling wine (so about 15.9 m hl of still wine)."
+    "note": {
+      "de": "Tabelle 22, Weinbilanz 2023/24, vom Deutschen Weinbauverband aus Daten von Destatis zusammengestellt: 18,6 Mio. hl Wein und Schaumwein vermarktet, 21,9 Liter je Kopf, davon 3,1 Liter Schaumwein (also rund 15,9 Mio. hl Stillwein).",
+      "en": "Table 22, wine balance 2023/24 compiled by the German Winegrowers' Association from Destatis data: 18.6 m hl of wine and sparkling wine marketed, 21.9 litres per head, of which 3.1 litres sparkling wine (so about 15.9 m hl of still wine)."
+    }
   },
   "kilian_2022_alkoholsteuer": {
     "title": "Kilian C, Rovira P, Neufeld M, Manthey J, Rehm J: Potenzielle Auswirkungen erhöhter Alkoholsteuern auf die alkoholbedingte Krankheitslast in Deutschland: Eine Modellierungsstudie. Bundesgesundheitsblatt 65 (2022), S. 668–676",
@@ -753,7 +912,10 @@
     "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9132832/fullTextXML",
     "accessed": "2026-11-18",
     "year": 2022,
-    "note": "Price elasticities beer -0.36, wine -0.60, spirits -1.20, people with high consumption -0.28; average prices 2020 beer 2.43, wine 7.01, spirits 16.64 EUR per litre; excise share of the price beer 3.9%, spirits 31.3%; avoidable cases and deaths for tax increases of 20, 50 and 100%."
+    "note": {
+      "de": "Preiselastizitäten: Bier −0,36, Wein −0,60, Spirituosen −1,20, Menschen mit hohem Konsum −0,28; Durchschnittspreise 2020: Bier 2,43, Wein 7,01, Spirituosen 16,64 Euro je Liter; Anteil der Verbrauchsteuer am Preis: Bier 3,9 %, Spirituosen 31,3 %; vermeidbare Krankheitsfälle und Todesfälle bei Steuererhöhungen um 20, 50 und 100 %.",
+      "en": "Price elasticities beer -0.36, wine -0.60, spirits -1.20, people with high consumption -0.28; average prices 2020 beer 2.43, wine 7.01, spirits 16.64 EUR per litre; excise share of the price beer 3.9%, spirits 31.3%; avoidable cases and deaths for tax increases of 20, 50 and 100%."
+    }
   },
   "vds_bwsi_spirituosen_2026": {
     "title": "Modellrechnungen des VDS und BWSI zu möglichen Auswirkungen höherer Verbrauchsteuern auf Spirituosen und Schaumwein (2026)",
@@ -761,21 +923,30 @@
     "url": "https://www.frischeingeschenkt.de/fileadmin/user_upload/Modellrechnung_des_VDS_und_BWSI.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Industry model by interested parties: price elasticity -1.9 for spirits and -0.95 for sparkling wine; with a 20% increase alcohol tax revenue would rise by 0.6% in 2027 and fall together with VAT."
+    "note": {
+      "de": "Modellrechnung der Branche, also interessierter Verbände: Preiselastizität −1,9 für Spirituosen und −0,95 für Schaumwein; bei einer Erhöhung um 20 % stiege das Alkoholsteueraufkommen 2027 um 0,6 %, zusammen mit der Mehrwertsteuer sänken die Einnahmen.",
+      "en": "Industry model by interested parties: price elasticity -1.9 for spirits and -0.95 for sparkling wine; with a 20% increase, alcohol tax revenue would rise by 0.6% in 2027, and revenue including VAT would fall."
+    }
   },
   "eu_alcohol_excise": {
     "title": "Excise duties on alcoholic beverages",
     "publisher": "European Commission, Directorate-General for Taxation and Customs Union",
     "url": "https://taxation-customs.ec.europa.eu/taxation/excise-duties/excise-duties-alcohol_en",
     "accessed": "2026-11-18",
-    "note": "Minimum rates of Directive 92/84/EEC: beer EUR 0.748 per hl per degree Plato (or 1.87 per hl per degree of alcohol), wine and sparkling wine EUR 0, intermediate products EUR 45 per hl, spirits EUR 550 per hl of pure alcohol; the directive is under evaluation."
+    "note": {
+      "de": "Mindestsätze der Richtlinie 92/84/EWG: Bier 0,748 Euro je hl und Grad Plato (oder 1,87 Euro je hl und Grad Alkohol), Wein und Schaumwein 0 Euro, Zwischenerzeugnisse 45 Euro je hl, Spirituosen 550 Euro je hl reinen Alkohols; die Richtlinie wird derzeit evaluiert.",
+      "en": "Minimum rates of Directive 92/84/EEC: beer EUR 0.748 per hl per degree Plato (or 1.87 per hl per degree of alcohol), wine and sparkling wine EUR 0, intermediate products EUR 45 per hl, spirits EUR 550 per hl of pure alcohol; the directive is under evaluation."
+    }
   },
   "bierstg_2": {
     "title": "Biersteuergesetz, § 2 Steuertarif",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/bierstg_2009/__2.html",
     "accessed": "2026-11-18",
-    "note": "EUR 0.787 per hectolitre per degree Plato; reduced rates of 50 to 75% for small independent breweries."
+    "note": {
+      "de": "0,787 Euro je Hektoliter und Grad Plato; ermäßigte Sätze von 50 bis 75 % für kleine unabhängige Brauereien.",
+      "en": "EUR 0.787 per hectolitre per degree Plato; reduced rates of 50 to 75% for small independent breweries."
+    }
   },
   "ecb_gfs_residual_maturity": {
     "title": "Government finance statistics: average residual maturity of general government debt securities, Germany (series GFS.M.N.DE.W0.S13.S1.N.L.LE.F3.TT._Z.YR._T.F.V.A1._T)",
@@ -783,7 +954,10 @@
     "url": "https://data.ecb.europa.eu/data/datasets/GFS/GFS.M.N.DE.W0.S13.S1.N.L.LE.F3.TT._Z.YR._T.F.V.A1._T",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "December 2024: 8.15 years (8.1482; non-consolidated, outstanding amounts). September 2026: 8.30 years. Retrieved through the ECB data API."
+    "note": {
+      "de": "Dezember 2024: 8,15 Jahre (8,1482; nicht konsolidiert, Bestände). September 2026: 8,30 Jahre. Abgerufen über die Daten-API der EZB.",
+      "en": "December 2024: 8.15 years (8.1482; non-consolidated, outstanding amounts). September 2026: 8.30 years. Retrieved through the ECB data API."
+    }
   },
   "ecb_gfs_debt_maturity": {
     "title": "Government finance statistics: general government debt by residual maturity and with variable interest rate, Germany, percent of government debt",
@@ -791,7 +965,10 @@
     "url": "https://data.ecb.europa.eu/data/datasets/GFS/GFS.A.N.DE.W0.S13.S1.C.L.LE.GD.TS._Z.XDC_R_GD._T.F.V.N._T",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "2024: residual maturity up to 1 year 17.76 %, over 1 and up to 5 years 33.41 %, over 5 years 48.84 % of the debt; long-term debt with a variable interest rate 6.61 %. Series GD.TS, GD.TY15, GD.TY5_ and GDA.L with unit XDC_R_GD."
+    "note": {
+      "de": "2024: Restlaufzeit bis 1 Jahr 17,76 %, über 1 bis 5 Jahre 33,41 %, über 5 Jahre 48,84 % der Schulden; langfristige Schulden mit variablem Zins 6,61 %. Reihen GD.TS, GD.TY15, GD.TY5_ und GDA.L mit der Einheit XDC_R_GD.",
+      "en": "2024: residual maturity up to 1 year 17.76%, over 1 and up to 5 years 33.41%, over 5 years 48.84% of the debt; long-term debt with a variable interest rate 6.61%. Series GD.TS, GD.TY15, GD.TY5_ and GDA.L with unit XDC_R_GD."
+    }
   },
   "bundesbank_yield_curve_daily": {
     "title": "Term structure of interest rates on listed Federal securities (method by Svensson), daily data, residual maturities of 1 to 30 years",
@@ -799,14 +976,20 @@
     "url": "https://api.statistiken.bundesbank.de/rest/data/BBSIS/D.I.ZST.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A?format=csv&lang=en&startPeriod=2026-11-01",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "18 November 2026: 3.01 % (1 year), 3.12 % (2 years), 3.18 % (5 years), 3.43 % (10 years), 3.72 % (20 years), 3.82 % (30 years). The link is the 10-year series; the other maturities replace R10XX with R01XX, R02XX, R05XX, R20XX and R30XX."
+    "note": {
+      "de": "18. November 2026: 3,01 % (1 Jahr), 3,12 % (2 Jahre), 3,18 % (5 Jahre), 3,43 % (10 Jahre), 3,72 % (20 Jahre), 3,82 % (30 Jahre). Der Link führt zur Reihe für 10 Jahre; für die anderen Laufzeiten R10XX durch R01XX, R02XX, R05XX, R20XX und R30XX ersetzen.",
+      "en": "18 November 2026: 3.01% (1 year), 3.12% (2 years), 3.18% (5 years), 3.43% (10 years), 3.72% (20 years), 3.82% (30 years). The link is the 10-year series; for the other maturities, replace R10XX with R01XX, R02XX, R05XX, R20XX and R30XX."
+    }
   },
   "bundesbank_yield_10y_monthly": {
     "title": "Term structure of interest rates on listed Federal securities (method by Svensson), residual maturity of 10 years, monthly data",
     "publisher": "Deutsche Bundesbank",
     "url": "https://api.statistiken.bundesbank.de/rest/data/BBSIS/M.I.ZST.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A?format=csv&lang=en&startPeriod=1990-01",
     "accessed": "2026-11-18",
-    "note": "Averages of the monthly values: 1991 to 2000 6.40 %; 2016 0.07 %, 2017 0.40 %, 2018 0.47 %, 2019 -0.25 %, 2020 -0.52 %, 2021 -0.30 %, so 2016 to 2021 -0.02 %; 2024 2.40 %, 2025 2.68 %."
+    "note": {
+      "de": "Durchschnitte der Monatswerte: 1991 bis 2000 6,40 %; 2016 0,07 %, 2017 0,40 %, 2018 0,47 %, 2019 −0,25 %, 2020 −0,52 %, 2021 −0,30 %, also 2016 bis 2021 −0,02 %; 2024 2,40 %, 2025 2,68 %.",
+      "en": "Averages of the monthly values: 1991 to 2000 6.40%; 2016 0.07%, 2017 0.40%, 2018 0.47%, 2019 -0.25%, 2020 -0.52%, 2021 -0.30%, so 2016 to 2021 -0.02%; 2024 2.40%, 2025 2.68%."
+    }
   },
   "us_treasury_yields_2026_11": {
     "title": "Daily Treasury Par Yield Curve Rates, November 2026",
@@ -814,7 +997,10 @@
     "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value_month=202611",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "10-year par yield: 5.07 % on 18 November 2026 (5.10 % on 17 November)."
+    "note": {
+      "de": "Par-Rendite bei 10 Jahren Laufzeit: 5,07 % am 18. November 2026 (5,10 % am 17. November).",
+      "en": "10-year par yield: 5.07% on 18 November 2026 (5.10% on 17 November)."
+    }
   },
   "ameco_2026_11": {
     "title": "AMECO annual macro-economic database, release of 17 November 2026 (autumn 2026 forecast)",
@@ -822,7 +1008,10 @@
     "url": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database_en",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "General government, percent of GDP, 2024: interest under the excessive deficit procedure (UYIGE) and consolidated gross debt (UDGG): United States 4.71 and 123.27, Italy 3.87 and 134.25, France 2.05 and 112.63, Japan 1.22 and 213.59, Germany 1.05 and 61.42. Germany 1995: 3.50 and 54.89; 2010: 2.44 and 81.03 (UYIGE, UDGGL). Total revenue (URTG), same unit: United States 31.44, Italy 46.90, France 51.23, Japan 36.89 and Germany 46.24 in 2024; Germany 45.80 in 1995 and 43.71 in 2010. Germany, nominal GDP (UVGD) 2025 to 2028: 4,529.7, 4,716.0, 4,910.9 and 5,090.2 billion euros; potential GDP (OVGDP) grows by 0.5 to 0.6 % a year. Chapter files 6, 16 and 18 of the download."
+    "note": {
+      "de": "Staat, in Prozent des BIP, 2024: Zinsen nach dem Verfahren bei einem übermäßigen Defizit (UYIGE) und konsolidierter Bruttoschuldenstand (UDGG): Vereinigte Staaten 4,71 und 123,27, Italien 3,87 und 134,25, Frankreich 2,05 und 112,63, Japan 1,22 und 213,59, Deutschland 1,05 und 61,42. Deutschland 1995: 3,50 und 54,89; 2010: 2,44 und 81,03 (UYIGE, UDGGL). Gesamteinnahmen (URTG), gleiche Einheit: Vereinigte Staaten 31,44, Italien 46,90, Frankreich 51,23, Japan 36,89 und Deutschland 46,24 im Jahr 2024; Deutschland 45,80 im Jahr 1995 und 43,71 im Jahr 2010. Deutschland, nominales BIP (UVGD) 2025 bis 2028: 4.529,7, 4.716,0, 4.910,9 und 5.090,2 Mrd. Euro; das Produktionspotenzial (OVGDP) wächst um 0,5 bis 0,6 % im Jahr. Kapiteldateien 6, 16 und 18 des Downloads.",
+      "en": "General government, percent of GDP, 2024: interest under the excessive deficit procedure (UYIGE) and consolidated gross debt (UDGG): United States 4.71 and 123.27, Italy 3.87 and 134.25, France 2.05 and 112.63, Japan 1.22 and 213.59, Germany 1.05 and 61.42. Germany 1995: 3.50 and 54.89; 2010: 2.44 and 81.03 (UYIGE, UDGGL). Total revenue (URTG), same unit: United States 31.44, Italy 46.90, France 51.23, Japan 36.89 and Germany 46.24 in 2024; Germany 45.80 in 1995 and 43.71 in 2010. Germany, nominal GDP (UVGD) 2025 to 2028: 4,529.7, 4,716.0, 4,910.9 and 5,090.2 billion euros; potential GDP (OVGDP) grows by 0.5 to 0.6% a year. Chapter files 6, 16 and 18 of the download."
+    }
   },
   "bmf_tragfaehigkeitsbericht_2024": {
     "title": "Sechster Bericht zur Tragfähigkeit der öffentlichen Finanzen, Drucksache 20/11235 vom 22. April 2024",
@@ -830,20 +1019,29 @@
     "url": "https://dserver.bundestag.de/btd/20/112/2011235.pdf",
     "accessed": "2026-11-18",
     "year": 2024,
-    "note": "Age-related spending 27.3 % of GDP in 2022, 2070: 36.1 % (variant T-) and 30.8 % (T+); debt ratio in 2070 about 365 % and 140 % of GDP. Real GDP growth 0.6 % (2040) and 0.4 % (2070) in T-, 1.5 % and 1.6 % in T+; inflation 2.0 % from 2025; interest on new debt rising to 4 % by 2035; starting point a primary balance of +0.1 % of GDP in 2027 (pages 7 to 8, 25 to 27)."
+    "note": {
+      "de": "Demografieabhängige Ausgaben 2022 27,3 % des BIP, 2070 36,1 % (Variante T-) und 30,8 % (T+); Schuldenquote 2070 rund 365 % und 140 % des BIP. Reales BIP-Wachstum 0,6 % (2040) und 0,4 % (2070) in T-, 1,5 % und 1,6 % in T+; Inflation 2,0 % ab 2025; Zins auf neue Schulden steigt bis 2035 auf 4 %; Ausgangspunkt ist ein Primärsaldo von +0,1 % des BIP im Jahr 2027 (S. 7 bis 8 und 25 bis 27).",
+      "en": "Age-related spending 27.3% of GDP in 2022, 2070: 36.1% (variant T-) and 30.8% (T+); debt ratio in 2070 about 365% and 140% of GDP. Real GDP growth 0.6% (2040) and 0.4% (2070) in T-, 1.5% and 1.6% in T+; inflation 2.0% from 2025; interest on new debt rising to 4% by 2035; starting point a primary balance of +0.1% of GDP in 2027 (pages 7 to 8, 25 to 27)."
+    }
   },
   "tfeu_protocol_12": {
     "title": "Protocol (No 12) on the excessive deficit procedure, Article 1",
     "publisher": "European Union (EUR-Lex)",
     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:12016E/PRO/12",
     "accessed": "2026-11-18",
-    "note": "Reference values: 3 % of GDP for the planned or actual government deficit, 60 % of GDP for government debt."
+    "note": {
+      "de": "Referenzwerte: 3 % des BIP für das geplante oder tatsächliche öffentliche Defizit, 60 % des BIP für den öffentlichen Schuldenstand.",
+      "en": "Reference values: 3% of GDP for the planned or actual government deficit, 60% of GDP for government debt."
+    }
   },
   "estg_10": {
     "title": "Einkommensteuergesetz, § 10 Sonderausgaben",
     "publisher": "Bundesministerium der Justiz",
     "url": "https://www.gesetze-im-internet.de/estg/__10.html",
-    "note": "Contributions to the statutory pension insurance are deductible as special expenses (Abs. 1 Nr. 2), 100 % from 2023, up to the maximum contribution to the miners' pension insurance (Abs. 3); the tax-free employer share is deducted from the deduction. Basic health and long-term care insurance contributions are deductible in full (Abs. 1 Nr. 3, Abs. 4), reduced by 4 % where they give an entitlement to sick pay.",
+    "note": {
+      "de": "Beiträge zur gesetzlichen Rentenversicherung sind als Sonderausgaben abziehbar (Abs. 1 Nr. 2), ab 2023 zu 100 %, bis zum Höchstbeitrag zur knappschaftlichen Rentenversicherung (Abs. 3); der steuerfreie Arbeitgeberanteil wird vom abziehbaren Betrag abgezogen. Beiträge zur Basiskranken- und Pflegeversicherung sind voll abziehbar (Abs. 1 Nr. 3, Abs. 4), um 4 % gekürzt, wenn sie einen Anspruch auf Krankengeld begründen.",
+      "en": "Contributions to the statutory pension insurance are deductible as special expenses (Abs. 1 Nr. 2), 100% from 2023, up to the maximum contribution to the miners' pension insurance (Abs. 3); the tax-free employer share is subtracted from the amount deductible. Basic health and long-term care insurance contributions are deductible in full (Abs. 1 Nr. 3, Abs. 4), reduced by 4% where they give an entitlement to sick pay."
+    },
     "accessed": "2026-11-18"
   },
   "bt_drs_17_2885": {
@@ -851,7 +1049,10 @@
     "publisher": "Deutscher Bundestag",
     "url": "https://dserver.bundestag.de/btd/17/028/1702885.pdf",
     "year": 2010,
-    "note": "Raising the health insurance contribution rate by 0.6 points (about EUR 6 billion, half from the insured) costs about EUR 590 million of income tax and EUR 30 million of solidarity surcharge a year, because employees deduct their contributions as special expenses. Higher employer contributions are deductible business expenses too, but employers try to pass the cost on, so the government gives no figure for them. Marginal burden of a single employee earning EUR 40,000: about 35 % (wage tax plus surcharge).",
+    "note": {
+      "de": "Eine Anhebung des Beitragssatzes zur Krankenversicherung um 0,6 Punkte (rund 6 Mrd. Euro, die Hälfte von den Versicherten) kostet im Jahr rund 590 Mio. Euro Einkommensteuer und 30 Mio. Euro Solidaritätszuschlag, weil Arbeitnehmer ihre Beiträge als Sonderausgaben abziehen. Höhere Arbeitgeberbeiträge sind ebenfalls als Betriebsausgaben abziehbar, die Arbeitgeber versuchen aber, die Kosten weiterzugeben; deshalb nennt die Bundesregierung dafür keine Zahl. Grenzbelastung eines ledigen Arbeitnehmers mit 40.000 Euro Verdienst: rund 35 % (Lohnsteuer und Solidaritätszuschlag).",
+      "en": "Raising the health insurance contribution rate by 0.6 points (about EUR 6 billion, half from the insured) costs about EUR 590 million of income tax and EUR 30 million of solidarity surcharge a year, because employees deduct their contributions as special expenses. Higher employer contributions are deductible business expenses too, but employers try to pass the cost on, so the government gives no figure for them. Marginal burden of a single employee earning EUR 40,000: about 35% (wage tax plus surcharge)."
+    },
     "accessed": "2026-11-18"
   },
   "bundestag_drs_21_7301": {
@@ -860,7 +1061,10 @@
     "url": "https://dserver.bundestag.de/btd/21/073/2107301.pdf",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Adopted by the federal cabinet on 6 July 2026 together with the draft budget 2027. 'Handlungsbedarf' (gap not yet covered by measures, booked as a global spending cut in section 60): about EUR 22 billion in 2028, 39 billion in 2029 and 48 billion in 2030; the 2027 gap of 34 billion in the previous plan is closed (section 3.3, page 19; also page 9). Federal interest spending, chapter 3205: 41.9 billion in 2027, 55.2 in 2028, 68.1 in 2029, 80.7 in 2030 (section 4.4.1, page 40); by type of spending 29.9 (2025 outturn), 30.2, 41.8, 55.1, 68.0, 80.6 (table 9, page 25). Spending 555.4 billion in 2027 (table 3, page 8). Exemption from the debt brake under Art. 115 (2) sentence 4 GG, created by the amendment of 24 March 2025 (BGBl. 2025 I Nr. 94), and the spending it covers: section 4.2, table 10, pages 26 to 27 (2028: defence 153.2 billion, civil protection 2.7, intelligence services 2.8, IT protection 4.0, aid to states attacked in breach of international law 8.5, less 1 % of GDP 46.0)."
+    "note": {
+      "de": "Vom Bundeskabinett am 6. Juli 2026 zusammen mit dem Regierungsentwurf für den Haushalt 2027 beschlossen. „Handlungsbedarf“ (noch nicht durch Maßnahmen gedeckte Lücke, als Globale Minderausgabe im Einzelplan 60 verbucht): rund 22 Mrd. Euro 2028, 39 Mrd. Euro 2029 und 48 Mrd. Euro 2030; die Lücke von 34 Mrd. Euro für 2027 aus dem vorigen Finanzplan ist geschlossen (Abschnitt 3.3, S. 19; auch S. 9). Zinsausgaben des Bundes, Kapitel 3205: 41,9 Mrd. Euro 2027, 55,2 Mrd. Euro 2028, 68,1 Mrd. Euro 2029, 80,7 Mrd. Euro 2030 (Abschnitt 4.4.1, S. 40); in der Gliederung nach Ausgabearten 29,9 (Ist 2025), 30,2, 41,8, 55,1, 68,0, 80,6 (Tabelle 9, S. 25). Ausgaben 2027: 555,4 Mrd. Euro (Tabelle 3, S. 8). Ausnahme von der Schuldenbremse nach Art. 115 Abs. 2 Satz 4 GG, geschaffen durch die Grundgesetzänderung vom 24. März 2025 (BGBl. 2025 I Nr. 94), und die davon erfassten Ausgaben: Abschnitt 4.2, Tabelle 10, S. 26 bis 27 (2028: Verteidigung 153,2 Mrd. Euro, Bevölkerungsschutz 2,7, Nachrichtendienste 2,8, Schutz der informationstechnischen Systeme 4,0, Hilfe für völkerrechtswidrig angegriffene Staaten 8,5, abzüglich 1 % des BIP 46,0).",
+      "en": "Adopted by the federal cabinet on 6 July 2026 together with the draft budget 2027. 'Handlungsbedarf' (gap not yet covered by measures, booked as a global spending cut in budget section 60): about EUR 22 billion in 2028, 39 billion in 2029 and 48 billion in 2030; the 2027 gap of 34 billion in the previous plan is closed (section 3.3, page 19; also page 9). Federal interest spending, chapter 3205: 41.9 billion in 2027, 55.2 in 2028, 68.1 in 2029, 80.7 in 2030 (section 4.4.1, page 40); by type of spending 29.9 (2025 outturn), 30.2, 41.8, 55.1, 68.0, 80.6 (table 9, page 25). Spending 555.4 billion in 2027 (table 3, page 8). Exemption from the debt brake under Art. 115 (2) sentence 4 GG, created by the amendment of 24 March 2025 (BGBl. 2025 I Nr. 94), and the spending it covers: section 4.2, table 10, pages 26 to 27 (2028: defence 153.2 billion, civil protection 2.7, intelligence services 2.8, IT protection 4.0, aid to states attacked in breach of international law 8.5, less 1% of GDP 46.0)."
+    }
   },
   "bundestag_drs_21_9010": {
     "title": "Bericht des Stabilitätsrates gemäß § 9 des Stabilitätsratsgesetzes: 36. Sitzung am 12. Oktober 2026, Drucksache 21/9010 vom 3. November 2026",
@@ -868,7 +1072,10 @@
     "url": "https://dserver.bundestag.de/btd/21/090/2109010.pdf",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Advance version. Projection of general government finances by the Federal Ministry of Finance, as of 3 September 2026 (table 1, page 13; also page 23): Maastricht balance -3.0 % of GDP in 2025, then -4 3/4, -5 1/4, -4 3/4, -4 1/2 and -4 1/2 % in 2026 to 2030; Maastricht debt 62.8 % in 2025, then 65 3/4, 68 3/4, 72 1/4, 75 1/4 and 78 1/4 %. Interest of the federal government, Länder and municipalities with off-budget entities, without social insurance, in cash: 52.1, 64 1/2, 69, 84, 99 and 124 billion euros in 2025 to 2030 (page 25). Federal 'Handlungsbedarf' plus savings not yet assigned to measures: 33 1/2, 49 1/2 and 58 billion euros in 2028 to 2030 (page 16). Nominal GDP growth 3.3, 2.8, 3.8, 3.0 and 3.0 % in 2025 to 2030 (table 6, page 21)."
+    "note": {
+      "de": "Vorabfassung. Projektion des Bundesfinanzministeriums für den Staat insgesamt, Rechenstand 3. September 2026 (Tabelle 1, S. 13; auch S. 23): Maastricht-Saldo 2025 −3,0 % des BIP, dann −4¾, −5¼, −4¾, −4½ und −4½ % in den Jahren 2026 bis 2030; Maastricht-Schuldenstand 2025 62,8 %, dann 65¾, 68¾, 72¼, 75¼ und 78¼ %. Zinsen von Bund, Ländern und Gemeinden mit Extrahaushalten, ohne Sozialversicherung, in Zahlungen gerechnet: 52,1, 64½, 69, 84, 99 und 124 Mrd. Euro in den Jahren 2025 bis 2030 (S. 25). „Handlungsbedarf“ des Bundes zuzüglich noch nicht mit Maßnahmen unterlegter Einsparungen: 33½, 49½ und 58 Mrd. Euro in den Jahren 2028 bis 2030 (S. 16). Nominales BIP-Wachstum 3,3, 2,8, 3,8, 3,0 und 3,0 % in den Jahren 2025 bis 2030 (Tabelle 6, S. 21).",
+      "en": "Advance version. Projection of general government finances by the Federal Ministry of Finance, as of 3 September 2026 (table 1, page 13; also page 23): Maastricht balance -3.0% of GDP in 2025, then -4 3/4, -5 1/4, -4 3/4, -4 1/2 and -4 1/2% in 2026 to 2030; Maastricht debt 62.8% in 2025, then 65 3/4, 68 3/4, 72 1/4, 75 1/4 and 78 1/4%. Interest paid by the federal government, Länder and municipalities with off-budget entities, excluding social insurance, in cash: 52.1, 64 1/2, 69, 84, 99 and 124 billion euros in 2025 to 2030 (page 25). Federal 'Handlungsbedarf' plus savings not yet assigned to measures: 33 1/2, 49 1/2 and 58 billion euros in 2028 to 2030 (page 16). Nominal GDP growth 3.3, 2.8, 3.8, 3.0 and 3.0% in 2025 to 2030 (table 6, page 21)."
+    }
   },
   "bt_drs_21_9241": {
     "title": "Beschlussempfehlung und Bericht des Haushaltsausschusses zu dem Gesetzentwurf der Bundesregierung: Entwurf eines Haushaltsbegleitgesetzes 2027, Drucksache 21/9241 vom 16.11.2026 (Vorabfassung)",
@@ -876,7 +1083,10 @@
     "url": "https://dserver.bundestag.de/btd/21/092/2109241.pdf",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Adopted on 13 November 2026 with the votes of CDU/CSU and SPD. Inserts the Sugar-Sweetened Drinks Tax Act as new Article 1: EUR 0.25, 0.30 and 0.35 per litre at 5 to under 7, 7 to under 9 and 9 or more grams of sugar per 100 ml, from 1 January 2028 (p. 10); full-year revenue EUR 1,115 m in 2028, 1,120 m in 2029, 1,130 m in 2030 and 1,135 m in 2031, all federal (p. 57); customs and IT costs about EUR 90 m up to 2029, 200 customs staff (pp. 55 to 56); the tax counter-finances the smaller cut of the federal subsidy to the health fund in the GKV contribution stabilisation act (pp. 49 and 53). Drops the abolition of the immediate supplement in the child supplement (p. 2); cuts the federal pension subsidy in 2027 by a further EUR 3.0 bn, EUR 4.2 bn in total (p. 107); keeps standard benefits unchanged until 30 June 2028 (pp. 107 to 108); alcohol, intermediate products and alcopop taxes EUR 470 m a year, of which spirits EUR 385 m and alcopops EUR 80 m (pp. 109 to 110); positions of the parliamentary groups (pp. 49 to 52)."
+    "note": {
+      "de": "Am 13. November 2026 mit den Stimmen von CDU/CSU und SPD angenommen. Fügt das Zuckergetränkesteuergesetz als neuen Artikel 1 ein: 0,25, 0,30 und 0,35 Euro je Liter bei 5 bis unter 7, 7 bis unter 9 und 9 oder mehr Gramm Zucker je 100 ml, ab 1. Januar 2028 (S. 10); Aufkommen in voller Jahreswirkung 1.115 Mio. Euro 2028, 1.120 Mio. Euro 2029, 1.130 Mio. Euro 2030 und 1.135 Mio. Euro 2031, ganz beim Bund (S. 57); Kosten für Zoll und IT bis 2029 rund 90 Mio. Euro, 200 Beschäftigte beim Zoll (S. 55 bis 56); die Steuer dient als Gegenfinanzierung dafür, dass der Bund seinen Zuschuss an den Gesundheitsfonds im GKV-Beitragssatzstabilisierungsgesetz weniger stark kürzt (S. 49 und 53). Streicht die Abschaffung des Sofortzuschlags im Kinderzuschlag (S. 2); kürzt den Bundeszuschuss zur Rentenversicherung 2027 um weitere 3,0 Mrd. Euro, insgesamt um 4,2 Mrd. Euro (S. 107); lässt die Regelbedarfe bis 30. Juni 2028 unverändert (S. 107 bis 108); Alkohol-, Zwischenerzeugnis- und Alkopopsteuer 470 Mio. Euro im Jahr, davon Spirituosen 385 Mio. Euro und Alkopops 80 Mio. Euro (S. 109 bis 110); Positionen der Fraktionen (S. 49 bis 52).",
+      "en": "Adopted on 13 November 2026 with the votes of CDU/CSU and SPD. Inserts the Sugar-Sweetened Drinks Tax Act as new Article 1: EUR 0.25, 0.30 and 0.35 per litre at 5 to under 7, 7 to under 9 and 9 or more grams of sugar per 100 ml, from 1 January 2028 (p. 10); full-year revenue EUR 1,115 m in 2028, 1,120 m in 2029, 1,130 m in 2030 and 1,135 m in 2031, all federal (p. 57); customs and IT costs about EUR 90 m up to 2029, 200 customs staff (pp. 55 to 56); the tax pays for the smaller cut in the federal subsidy to the health fund in the GKV contribution stabilisation act (pp. 49 and 53). Drops the abolition of the immediate supplement in the child supplement (p. 2); cuts the federal pension subsidy in 2027 by a further EUR 3.0 bn, EUR 4.2 bn in total (p. 107); keeps standard benefits unchanged until 30 June 2028 (pp. 107 to 108); alcohol, intermediate products and alcopop taxes EUR 470 m a year, of which spirits EUR 385 m and alcopops EUR 80 m (pp. 109 to 110); positions of the parliamentary groups (pp. 49 to 52)."
+    }
   },
   "bmf_pm_zuckergetraenkesteuer_2026": {
     "title": "Bundeskabinett bringt Gesetzentwurf für Zuckergetränkesteuer auf den Weg (Pressemitteilung, 14. Oktober 2026)",
@@ -884,7 +1094,10 @@
     "url": "https://www.bundesfinanzministerium.de/Content/DE/Pressemitteilungen/Finanzpolitik/2026/10/2026-10-14-gesetzentwurf-zuckergetraenkesteuer.html",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Cabinet's draft for the coalition groups: two rates, EUR 0.26 per litre at 5 to under 8 g of sugar per 100 ml and EUR 0.32 from 8 g, from 1 July 2027; additional federal revenue EUR 690 m in 2027, 925 m in 2028 and 875 to 890 m a year after that; revenue meant to keep health insurance contributions stable; exemption for small producers up to 70,000 litres a year, relief up to 1 million litres subject to EU state aid approval; health costs of sugary drinks put at about EUR 2.1 bn a year."
+    "note": {
+      "de": "Vom Kabinett beschlossener Entwurf für die Koalitionsfraktionen: zwei Sätze, 0,26 Euro je Liter bei 5 bis unter 8 g Zucker je 100 ml und 0,32 Euro ab 8 g, ab 1. Juli 2027; Mehreinnahmen des Bundes 690 Mio. Euro 2027, 925 Mio. Euro 2028 und danach 875 bis 890 Mio. Euro im Jahr; die Einnahmen sollen die Beiträge zur Krankenversicherung stabil halten; Ausnahme für kleine Hersteller bis 70.000 Liter im Jahr, Entlastung bis 1 Mio. Liter vorbehaltlich der beihilferechtlichen Genehmigung der EU; Gesundheitskosten zuckerhaltiger Getränke auf rund 2,1 Mrd. Euro im Jahr beziffert.",
+      "en": "The cabinet's draft for the coalition groups: two rates, EUR 0.26 per litre at 5 to under 8 g of sugar per 100 ml and EUR 0.32 from 8 g, from 1 July 2027; additional federal revenue EUR 690 m in 2027, 925 m in 2028 and 875 to 890 m a year after that; revenue meant to keep health insurance contributions stable; exemption for small producers up to 70,000 litres a year, relief up to 1 million litres subject to EU state aid approval; health costs of sugary drinks put at about EUR 2.1 bn a year."
+    }
   },
   "wd4_zuckersteuer_2026": {
     "title": "Fragen zur geplanten Einführung einer Zuckersteuer, WD 4 - 30000 - 0003 - 0009 (Abschluss der Arbeit: 20. August 2026)",
@@ -892,7 +1105,10 @@
     "url": "https://www.bundestag.de/resource/blob/1216560/WD-4-0003-0009_zuckersteuer.pdf",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Pages 4 to 6: the revenue of a sugar tax goes to the federal level alone (Article 106(1) No. 2 Basic Law); the Health Finance Commission recommended the British model with 26 and 32 cents per litre; the health committee's report on the GKV contribution stabilisation act (Drucksache 21/7016, 8 July 2026, p. 209) expected EUR 650 m in 2027 and, after reformulation, EUR 450 m a year from 2028."
+    "note": {
+      "de": "S. 4 bis 6: Das Aufkommen einer Zuckersteuer steht allein dem Bund zu (Art. 106 Abs. 1 Nr. 2 GG); die FinanzKommission Gesundheit empfahl das britische Modell mit 26 und 32 Cent je Liter; der Bericht des Gesundheitsausschusses zum GKV-Beitragssatzstabilisierungsgesetz (Drucksache 21/7016, 8. Juli 2026, S. 209) erwartete 650 Mio. Euro im Jahr 2027 und nach Reformulierung ab 2028 450 Mio. Euro im Jahr.",
+      "en": "Pages 4 to 6: the revenue of a sugar tax goes to the federal level alone (Article 106(1) No. 2 of the Basic Law); the Health Finance Commission recommended the British model with 26 and 32 cents per litre; the health committee's report on the GKV contribution stabilisation act (Drucksache 21/7016, 8 July 2026, p. 209) expected EUR 650 m in 2027 and, after reformulation, EUR 450 m a year from 2028."
+    }
   },
   "dpa_plastiksteuer_entwurf_2026": {
     "title": "Gesetzentwurf: Koalitionsfraktionen planen neue Plastiksteuer (dpa, 5. Oktober 2026)",
@@ -900,7 +1116,10 @@
     "url": "https://www.tagesspiegel.de/wirtschaft/dpa-gesetzentwurf-koalitionsfraktionen-planen-neue-plastiksteuer-16127519.html",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Draft Plastic Packaging Tax Act (Kunststoffverpackungsteuergesetz) of the finance and environment ministries, to be introduced by the coalition groups: EUR 550 per tonne of plastic in packaging with a plastic share of more than 5%, from July 2027; about 3 million tonnes taxable at first, expected to fall; EUR 805 m in 2027 and about EUR 1.5 bn a year from 2028; packaging of recycled plastic can be exempted on application. No published version of the draft could be found as of 19 November 2026."
+    "note": {
+      "de": "Entwurf eines Kunststoffverpackungsteuergesetzes von Finanz- und Umweltministerium, den die Koalitionsfraktionen einbringen sollen: 550 Euro je Tonne Kunststoff in Verpackungen mit einem Kunststoffanteil von mehr als 5 %, ab Juli 2027; anfangs rund 3 Mio. Tonnen steuerpflichtig, mit voraussichtlich sinkender Menge; 805 Mio. Euro 2027 und ab 2028 rund 1,5 Mrd. Euro im Jahr; Verpackungen aus recyceltem Kunststoff können auf Antrag befreit werden. Eine veröffentlichte Fassung des Entwurfs war bis zum 19. November 2026 nicht zu finden.",
+      "en": "Draft Plastic Packaging Tax Act (Kunststoffverpackungsteuergesetz) of the finance and environment ministries, to be introduced by the coalition groups: EUR 550 per tonne of plastic in packaging with a plastic share of more than 5%, from July 2027; about 3 million tonnes taxable at first, expected to fall; EUR 805 m in 2027 and about EUR 1.5 bn a year from 2028; packaging of recycled plastic can be exempted on application. No published version of the draft could be found as of 19 November 2026."
+    }
   },
   "tonline_plastiksteuer_2026": {
     "title": "Haushalt 2027: Frei erklärt die geplante Plastiksteuer für tot (dpa, Reuters, 9. November 2026)",
@@ -908,7 +1127,10 @@
     "url": "https://www.t-online.de/nachrichten/deutschland/innenpolitik/id_101519006/haushalt-2027-frei-erklaert-die-geplante-plastiksteuer-fuer-tot.html",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "CDU/CSU group leader Thorsten Frei on ZDF: \"Die Plastiksteuer machen wir nicht\"; SPD group leader Matthias Miersch: not off the table, a first draft exists; planned revenue EUR 805 m in 2027 and just under EUR 1.5 bn a year from 2028."
+    "note": {
+      "de": "CDU/CSU-Fraktionschef Thorsten Frei im ZDF: „Die Plastiksteuer machen wir nicht“; SPD-Fraktionschef Matthias Miersch: nicht vom Tisch, ein erster Entwurf liege vor; geplante Einnahmen 805 Mio. Euro 2027 und ab 2028 knapp 1,5 Mrd. Euro im Jahr.",
+      "en": "CDU/CSU group leader Thorsten Frei on ZDF: \"Die Plastiksteuer machen wir nicht\"; SPD group leader Matthias Miersch: not off the table, a first draft exists; planned revenue EUR 805 m in 2027 and just under EUR 1.5 bn a year from 2028."
+    }
   },
   "adhoc_dpa_zuckersteuer_2028": {
     "title": "Haushalt 2027: Zuckersteuer kommt erst ab Januar 2028 (dpa, 12. November 2026)",
@@ -916,7 +1138,10 @@
     "url": "https://www.ad-hoc-news.de/politik/haushalt-2027-zuckersteuer-kommt-erst-ab-januar-2028/70498163",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Coalition agreement before the final committee session: sugar tax postponed by half a year to 1 January 2028, in three rates; the planned tax on plastic packaging dropped (Thorsten Frei: the draft offered no unbureaucratic solution); no increase of the sparkling wine tax; parental allowance still being negotiated; electricity tax cut for everyone (about EUR 5 bn a year) still open."
+    "note": {
+      "de": "Einigung der Koalition vor der Bereinigungssitzung: Zuckersteuer um ein halbes Jahr auf den 1. Januar 2028 verschoben, mit drei Sätzen; die geplante Steuer auf Kunststoffverpackungen gestrichen (Thorsten Frei: Der Entwurf biete keine unbürokratische Lösung); keine Erhöhung der Schaumweinsteuer; über das Elterngeld wird noch verhandelt; die Stromsteuersenkung für alle (rund 5 Mrd. Euro im Jahr) ist weiter offen.",
+      "en": "Coalition agreement before the final committee session: sugar tax postponed by half a year to 1 January 2028, in three rates; the planned tax on plastic packaging dropped (Thorsten Frei: the draft offered no unbureaucratic solution); no increase of the sparkling wine tax; parental allowance still being negotiated; electricity tax cut for everyone (about EUR 5 bn a year) still open."
+    }
   },
   "bundestag_kw46_haushalt_2027": {
     "title": "Bereinigungssitzung: Ausschuss beschließt Bundeshaushalt 2027 (Textarchiv, November 2026)",
@@ -924,14 +1149,20 @@
     "url": "https://www.bundestag.de/dokumente/textarchiv/2026/kw46-pa-haushalt-1231890",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Final session of the budget committee on 12 and 13 November 2026: spending EUR 560.92 bn, net borrowing EUR 122.97 bn, of which EUR 84.55 bn under the exemption for defence; defence budget EUR 109.75 bn; changes to the Budget Accompanying Act (sugar tax from 2028, federal pension subsidy cut by a further EUR 2 bn, standard benefits adjusted on 1 July, next on 1 July 2028); final vote in the Bundestag scheduled for 27 November 2026."
+    "note": {
+      "de": "Bereinigungssitzung des Haushaltsausschusses am 12. und 13. November 2026: Ausgaben 560,92 Mrd. Euro, Nettokreditaufnahme 122,97 Mrd. Euro, davon 84,55 Mrd. Euro unter der Ausnahme für Verteidigung; Verteidigungsetat 109,75 Mrd. Euro; Änderungen am Haushaltsbegleitgesetz (Zuckersteuer ab 2028, Bundeszuschuss zur Rentenversicherung um weitere 2 Mrd. Euro gekürzt, Regelbedarfe werden zum 1. Juli angepasst, das nächste Mal zum 1. Juli 2028); Schlussabstimmung im Bundestag für den 27. November 2026 angesetzt.",
+      "en": "Final session of the budget committee on 12 and 13 November 2026: spending EUR 560.92 bn, net borrowing EUR 122.97 bn, of which EUR 84.55 bn under the exemption for defence; defence budget EUR 109.75 bn; changes to the Budget Accompanying Act (sugar tax from 2028, federal pension subsidy cut by a further EUR 2 bn, standard benefits adjusted on 1 July, next on 1 July 2028); final vote in the Bundestag scheduled for 27 November 2026."
+    }
   },
   "ec_plastics_own_resource": {
     "title": "Plastics own resource",
     "publisher": "European Commission",
     "url": "https://commission.europa.eu/strategy-and-policy/eu-budget/long-term-eu-budget/2021-2027/revenue/own-resources/plastics-own-resource_en",
     "accessed": "2026-11-19",
-    "note": "Since 1 January 2021 member states contribute EUR 0.80 per kilogram of non-recycled plastic packaging waste to the EU budget; how they reduce such waste is left to them."
+    "note": {
+      "de": "Seit 1. Januar 2021 führen die Mitgliedstaaten je Kilogramm nicht recycelter Verpackungsabfälle aus Kunststoff 0,80 Euro an den EU-Haushalt ab; wie sie solche Abfälle verringern, bleibt ihnen überlassen.",
+      "en": "Since 1 January 2021 member states contribute EUR 0.80 per kilogram of non-recycled plastic packaging waste to the EU budget; how they reduce such waste is left to them."
+    }
   },
   "bmbfsfj_refe_elterngeld_2026": {
     "title": "Referentenentwurf: Entwurf eines Gesetzes zur Änderung des Bundeselterngeld- und Elternzeitgesetzes zur Weiterentwicklung und Vereinfachung des Elterngeldes sowie des Mutterschutzgesetzes (Bearbeitungsstand 10.11.2026)",
@@ -939,7 +1170,10 @@
     "url": "https://www.bmbfsfj.bund.de/resource/blob/298782/61aa2a6d54d3050b50f38f86477f7dad/referentenentwurf-data.pdf",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Section D (pp. 3 to 4): federal savings in parental allowance of EUR 60 m in 2027, 535 m in 2028, 1,330 m in 2029 and 1,360 m in 2030 (full effect), none for states and municipalities; within it, counting one-off pay in the assessment costs EUR 140 m and abolishing the partnership bonus saves EUR 25 m in 2030. Replacement rate 80% in each parent's first four months and 50% after, instead of usually 65%; minimum EUR 330 instead of 300, maximum EUR 1,900 instead of 1,800."
+    "note": {
+      "de": "Abschnitt D (S. 3 bis 4): Einsparungen des Bundes beim Elterngeld von 60 Mio. Euro 2027, 535 Mio. Euro 2028, 1.330 Mio. Euro 2029 und 1.360 Mio. Euro 2030 (volle Wirkung), keine für Länder und Gemeinden; darin enthalten sind Mehrkosten von 140 Mio. Euro, weil Einmalzahlungen in die Bemessung eingehen, und 25 Mio. Euro Einsparung durch den Wegfall des Partnerschaftsbonus im Jahr 2030. Ersatzrate 80 % in den ersten vier Monaten jedes Elternteils und danach 50 % statt in der Regel 65 %; Mindestbetrag 330 statt 300 Euro, Höchstbetrag 1.900 statt 1.800 Euro.",
+      "en": "Section D (pp. 3 to 4): federal savings in parental allowance of EUR 60 m in 2027, 535 m in 2028, 1,330 m in 2029 and 1,360 m in 2030 (full effect), none for states and municipalities; within it, counting one-off pay in the assessment costs EUR 140 m and abolishing the partnership bonus saves EUR 25 m in 2030. Replacement rate 80% in each parent's first four months and 50% after, instead of usually 65%; minimum EUR 330 instead of 300, maximum EUR 1,900 instead of 1,800."
+    }
   },
   "bundesregierung_kabinett_elterngeld_2026": {
     "title": "Kabinett: Reform von Elterngeld und Mutterschutz (13. November 2026)",
@@ -947,7 +1181,10 @@
     "url": "https://www.bundesregierung.de/breg-de/aktuelles/kabinett-reform-elterngeld-2460372",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Adopted by the cabinet by written procedure: up to 14 months together, four reserved for each parent at 80% of prior income, further months at 50%; minimum EUR 330, maximum EUR 1,900; parallel receipt again unrestricted; from 1 November 2027. No fiscal figures."
+    "note": {
+      "de": "Vom Kabinett im Umlaufverfahren beschlossen: zusammen bis zu 14 Monate, davon vier für jeden Elternteil reserviert, mit 80 % des vorherigen Einkommens, weitere Monate mit 50 %; Mindestbetrag 330 Euro, Höchstbetrag 1.900 Euro; paralleler Bezug wieder ohne Einschränkung; ab 1. November 2027. Keine Angaben zu den Haushaltswirkungen.",
+      "en": "Adopted by the cabinet by written procedure: up to 14 months together, four reserved for each parent at 80% of prior income, further months at 50%; minimum EUR 330, maximum EUR 1,900; parallel receipt again unrestricted; from 1 November 2027. No fiscal figures."
+    }
   },
   "hib_654_2026": {
     "title": "hib 654/2026: Haushalt 2027: Weniger Ausgaben für Bildung und Familie (19. August 2026)",
@@ -955,7 +1192,10 @@
     "url": "https://www.bundestag.de/presse/hib/kurzmeldungen-1205456",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Draft budget 2027, section 17: parental allowance about EUR 7.07 bn (2026: 7.51 bn), child supplement about EUR 3.12 bn (2026: 3.38 bn), advance maintenance payments EUR 914 m (2026: 1.31 bn)."
+    "note": {
+      "de": "Regierungsentwurf 2027, Einzelplan 17: Elterngeld rund 7,07 Mrd. Euro (2026: 7,51 Mrd. Euro), Kinderzuschlag rund 3,12 Mrd. Euro (2026: 3,38 Mrd. Euro), Unterhaltsvorschuss 914 Mio. Euro (2026: 1,31 Mrd. Euro).",
+      "en": "Draft budget 2027, budget section 17: parental allowance about EUR 7.07 bn (2026: 7.51 bn), child supplement about EUR 3.12 bn (2026: 3.38 bn), advance maintenance payments EUR 914 m (2026: 1.31 bn)."
+    }
   },
   "vdw_bayern_koalitionsausschuss_2026": {
     "title": "Beschluss des Koalitionsausschusses vom 17. November 2026: Senkung der Stromsteuer (18. November 2026)",
@@ -963,7 +1203,10 @@
     "url": "https://www.vdwbayern.de/2026/11/18/beschluss-des-koalitionsausschusses-vom-17-november-2026-senkung-der-stromsteuer/",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Reproduces the text of the decision: the electricity tax is reduced to the European minimum, at first for 2027 only, and financed in 2027 from room in the EEG title of the federal budget, otherwise by a package of measures during the year; continuing beyond 31 December 2027 requires sustainable counter-financing in the 2028 budget; a permanent reduction is intended."
+    "note": {
+      "de": "Gibt den Wortlaut des Beschlusses wieder: Die Stromsteuer wird auf das europäische Mindestmaß gesenkt, zunächst nur für 2027, und 2027 aus Spielräumen im EEG-Titel des Bundeshaushalts finanziert, andernfalls durch ein Maßnahmenpaket im Laufe des Jahres; eine Fortführung über den 31. Dezember 2027 hinaus erfordert eine nachhaltige Gegenfinanzierung im Haushalt 2028; angestrebt ist eine dauerhafte Senkung.",
+      "en": "Reproduces the text of the decision: the electricity tax is reduced to the European minimum, at first for 2027 only, and financed in 2027 from room in the EEG title of the federal budget, otherwise by a package of measures during the year; continuing beyond 31 December 2027 requires sustainable offsetting finance in the 2028 budget; a permanent reduction is intended."
+    }
   },
   "tonline_stromsteuer_2026_11": {
     "title": "Stromsteuer: Koalition beschließt Senkung – mit einem Haken (18. November 2026)",
@@ -971,7 +1214,10 @@
     "url": "https://www.t-online.de/nachrichten/deutschland/innenpolitik/id_101534002/stromsteuer-koalition-beschliesst-senkung-mit-einem-haken.html",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Coalition committee: electricity tax at 0.1 instead of 2.05 cents per kWh for everyone from 1 January to 31 December 2027; cost about EUR 5.4 bn (dpa); financed from savings in the EEG title; the law still has to be passed."
+    "note": {
+      "de": "Koalitionsausschuss: Stromsteuer für alle vom 1. Januar bis 31. Dezember 2027 bei 0,1 statt 2,05 Cent je kWh; Kosten rund 5,4 Mrd. Euro (dpa); finanziert aus Einsparungen im EEG-Titel; das Gesetz muss noch beschlossen werden.",
+      "en": "Coalition committee: electricity tax at 0.1 instead of 2.05 cents per kWh for everyone from 1 January to 31 December 2027; cost about EUR 5.4 bn (dpa); financed from savings in the EEG title; the law still has to be passed."
+    }
   },
   "tonline_frei_haushalt_2028": {
     "title": "Frei sieht gewaltige Herausforderungen für Bundeshaushalt (dpa, 19. November 2026)",
@@ -979,7 +1225,10 @@
     "url": "https://www.t-online.de/nachrichten/deutschland/id_101535588/frei-sieht-gewaltige-herausforderungen-fuer-bundeshaushalt.html",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "CDU/CSU group leader Thorsten Frei: as things stand, a gap of EUR 25 bn in the 2028 budget, about EUR 5 bn larger with the electricity tax cut."
+    "note": {
+      "de": "CDU/CSU-Fraktionschef Thorsten Frei: Nach jetzigem Stand fehlen im Haushalt 2028 25 Mrd. Euro, mit der Stromsteuersenkung rund 5 Mrd. Euro mehr.",
+      "en": "CDU/CSU group leader Thorsten Frei: as things stand, a gap of EUR 25 bn in the 2028 budget, about EUR 5 bn larger with the electricity tax cut."
+    }
   },
   "dpa_klingbeil_abgeltungsteuer_2026": {
     "title": "SPD-Chef Klingbeil will von CDU mehr Tempo bei Reformen (dpa, 14. November 2026)",
@@ -987,7 +1236,10 @@
     "url": "https://www.volksstimme.de/panorama/spd-chef-klingbeil-will-von-cdu-mehr-tempo-bei-reformen-4356437",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Finance Minister Lars Klingbeil (SPD) names a higher flat tax on capital income as one option to finance the electricity tax cut for everyone (about EUR 5.4 bn a year), without naming a rate, and expects the Union to reject it."
+    "note": {
+      "de": "Finanzminister Lars Klingbeil (SPD) nennt eine höhere Abgeltungsteuer als eine Möglichkeit, die Stromsteuersenkung für alle (rund 5,4 Mrd. Euro im Jahr) zu finanzieren, ohne einen Satz zu nennen, und erwartet, dass die Union sie ablehnt.",
+      "en": "Finance Minister Lars Klingbeil (SPD) names a higher flat tax on capital income as one option to finance the electricity tax cut for everyone (about EUR 5.4 bn a year), without naming a rate, and expects the Union to reject it."
+    }
   },
   "haufe_plastiksteuer_2026": {
     "title": "Was bedeutet die geplante Plastiksteuer (13. Oktober 2026)",
@@ -995,7 +1247,10 @@
     "url": "https://www.haufe.de/sustainability/umwelt/was-bedeutet-die-geplante-plastiksteuer_575774_700306.html",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Describes the draft Plastic Packaging Tax Act: EUR 550 per tonne of plastic, taxpayers are domestic manufacturers, importers and buyers from other EU states, with notification duty, monthly tax returns and no de minimis threshold; relief for recycled plastic applies only once a regulation with a proof system exists, for which the draft sets no date."
+    "note": {
+      "de": "Beschreibt den Entwurf des Kunststoffverpackungsteuergesetzes: 550 Euro je Tonne Kunststoff; steuerpflichtig sind inländische Hersteller, Importeure und Erwerber aus anderen EU-Staaten, mit Anzeigepflicht, monatlichen Steueranmeldungen und ohne Bagatellgrenze; die Entlastung für recycelten Kunststoff greift erst, wenn es eine Verordnung mit einem Nachweissystem gibt, für die der Entwurf keinen Termin nennt.",
+      "en": "Describes the draft Plastic Packaging Tax Act: EUR 550 per tonne of plastic, taxpayers are domestic manufacturers, importers and buyers from other EU states, with notification duty, monthly tax returns and no de minimis threshold; relief for recycled plastic applies only once a regulation with a proof system exists, for which the draft sets no date."
+    }
   },
   "bt_drs_21_8495": {
     "title": "Kleine Anfrage der Fraktion der AfD: Elterngeldreform 2027 – Auswirkungen der Haushaltskonsolidierung auf Familien, Drucksache 21/8495 vom 12.10.2026",
@@ -1003,7 +1258,10 @@
     "url": "https://dserver.bundestag.de/btd/21/084/2108495.pdf",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Page 2: the key figures for the 2027 budget list the parental allowance reform among the consolidation steps; appropriation EUR 7.07 bn in the 2027 draft after 7.51 bn in 2026; Family Minister Karin Prien promised in the budget debate on 10 September 2026 that parents already expecting a child would keep their entitlement (Vertrauensschutz)."
+    "note": {
+      "de": "S. 2: Die Eckwerte für den Haushalt 2027 führen die Elterngeldreform unter den Konsolidierungsschritten; Ansatz im Entwurf 2027 7,07 Mrd. Euro nach 7,51 Mrd. Euro 2026; Familienministerin Karin Prien sagte in der Haushaltsdebatte am 10. September 2026 zu, dass Eltern, die bereits ein Kind erwarten, ihren Anspruch behalten (Vertrauensschutz).",
+      "en": "Page 2: the key figures for the 2027 budget list the parental allowance reform among the consolidation steps; appropriation EUR 7.07 bn in the 2027 draft after 7.51 bn in 2026; Family Minister Karin Prien promised in the budget debate on 10 September 2026 that parents already expecting a child would keep their entitlement (Vertrauensschutz)."
+    }
   },
   "bt_drs_21_7016": {
     "title": "Beschlussempfehlung und Bericht des Ausschusses für Gesundheit zu dem Gesetzentwurf der Bundesregierung: Entwurf eines Gesetzes zur Stabilisierung der Beitragssätze in der gesetzlichen Krankenversicherung (GKV-Beitragssatzstabilisierungsgesetz), Drucksache 21/7016 vom 08.07.2026 (Vorabfassung)",
@@ -1011,7 +1269,10 @@
     "url": "https://dserver.bundestag.de/btd/21/070/2107016.pdf",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "Page 6: in the government draft the federal subsidy to the health fund falls by EUR 2.0 bn a year from 2027; a levy on sugar-sweetened drinks (EUR 0.5 bn a year) is listed only for information and not counted in the totals. Page 209: the committee uses the room from a tax on sugary drinks to reduce the cut in the subsidy, assuming tax revenue of EUR 650 m in 2027 and, after reformulation, EUR 450 m a year from 2028."
+    "note": {
+      "de": "S. 6: Im Regierungsentwurf sinkt der Bundeszuschuss an den Gesundheitsfonds ab 2027 um 2,0 Mrd. Euro im Jahr; eine Abgabe auf zuckergesüßte Getränke (0,5 Mrd. Euro im Jahr) ist nur nachrichtlich aufgeführt und nicht in die Summen eingerechnet. S. 209: Der Ausschuss nutzt den Spielraum aus einer Steuer auf zuckerhaltige Getränke, um die Kürzung des Zuschusses zu verringern, und unterstellt Steuereinnahmen von 650 Mio. Euro im Jahr 2027 und nach Reformulierung ab 2028 von 450 Mio. Euro im Jahr.",
+      "en": "Page 6: in the government draft the federal subsidy to the health fund falls by EUR 2.0 bn a year from 2027; a levy on sugar-sweetened drinks (EUR 0.5 bn a year) is listed only for information and not counted in the totals. Page 209: the committee uses the room from a tax on sugary drinks to reduce the cut in the subsidy, assuming tax revenue of EUR 650 m in 2027 and, after reformulation, EUR 450 m a year from 2028."
+    }
   },
   "bt_drs_21_9229": {
     "title": "Beschlussempfehlung und Bericht des Finanzausschusses zu dem Antrag der Fraktion der AfD: Steuererhöhung auf Tabak zurücknehmen – Keine weiteren Steuern auf Alkohol, Zucker und Plastik – Bagatellsteuern abschaffen, Drucksache 21/9229 vom 13.11.2026 (Vorabfassung)",
@@ -1019,7 +1280,10 @@
     "url": "https://dserver.bundestag.de/btd/21/092/2109229.pdf",
     "accessed": "2026-11-19",
     "year": 2026,
-    "note": "The AfD motion (Drucksache 21/8637) asks to reverse the tobacco tax increases before the first step on 1 January 2027, to freeze the alcohol tax, to repeal a sugar tax and not to introduce a plastic tax; the finance committee recommends rejecting it with the votes of CDU/CSU, SPD, Greens and Left against the AfD."
+    "note": {
+      "de": "Der Antrag der AfD (Drucksache 21/8637) fordert, die Tabaksteuererhöhungen vor der ersten Stufe am 1. Januar 2027 zurückzunehmen, die Alkoholsteuer einzufrieren, eine Zuckersteuer aufzuheben und keine Plastiksteuer einzuführen; der Finanzausschuss empfiehlt mit den Stimmen von CDU/CSU, SPD, Grünen und Linken gegen die AfD, ihn abzulehnen.",
+      "en": "The AfD motion (Drucksache 21/8637) asks to reverse the tobacco tax increases before the first step on 1 January 2027, to freeze the alcohol tax, to repeal a sugar tax and not to introduce a plastic tax; the finance committee recommends rejecting it with the votes of CDU/CSU, SPD, Greens and Left against the AfD."
+    }
   },
   "ask_bericht_2026": {
     "title": "Empfehlungen der Alterssicherungskommission (Bericht, übergeben am 23. Juni 2026)",
@@ -1027,7 +1291,10 @@
     "url": "https://www.bundesregierung.de/resource/blob/2196306/2444780/0fcbf810775351c64007ee6cb2c7cad9/2026-06-24-bericht-alterssicherungskommission-data.pdf?download=1",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Recommendation 5 (pp. 22 to 23): link the standard retirement age to life expectancy after 2031 in a ratio of 2:1, about 67.5 years by 2041 and half a year per decade under Destatis' medium assumptions, lead time of at least five years, effective from 2032; six months' later retirement relieves the contribution rate by 0.35 to 0.5 points and raises the pension level by 0.3 to 0.5 points; transfer to civil servants. Recommendation 6 (pp. 24 to 25): 6.5 bn euros per entry cohort if the especially long-insured retired one year later; no limit on earnings alongside a pension. Recommendation 8 (p. 27): raise the limit for people with long insurance records from 63 to 64 and then move all age limits in parallel. Page 11: contribution rate 21.1 % in 2040 under current law (DRV spring estimate 2026)."
+    "note": {
+      "de": "Empfehlung 5 (S. 22 bis 23): die Regelaltersgrenze nach 2031 im Verhältnis 2:1 an die Lebenserwartung koppeln, nach den mittleren Annahmen von Destatis rund 67,5 Jahre bis 2041 und ein halbes Jahr je Jahrzehnt, Vorlauf von mindestens fünf Jahren, wirksam ab 2032; ein um ein halbes Jahr späterer Renteneintritt entlastet den Beitragssatz um 0,35 bis 0,5 Punkte und hebt das Rentenniveau um 0,3 bis 0,5 Punkte; Übertragung auf Beamte. Empfehlung 6 (S. 24 bis 25): 6,5 Mrd. Euro je Zugangsjahrgang, wenn besonders langjährig Versicherte ein Jahr später in Rente gingen; keine Hinzuverdienstgrenze neben der Rente. Empfehlung 8 (S. 27): die Altersgrenze für langjährig Versicherte von 63 auf 64 anheben und danach alle Altersgrenzen parallel verschieben. S. 11: Beitragssatz 2040 nach geltendem Recht 21,1 % (Frühjahrsschätzung der DRV 2026).",
+      "en": "Recommendation 5 (pp. 22 to 23): link the standard retirement age to life expectancy after 2031 in a ratio of 2:1, about 67.5 years by 2041 and half a year per decade under Destatis' medium assumptions, lead time of at least five years, effective from 2032; retiring six months later relieves the contribution rate by 0.35 to 0.5 points and raises the pension level by 0.3 to 0.5 points; transfer to civil servants. Recommendation 6 (pp. 24 to 25): 6.5 bn euros per entry cohort if people with especially long insurance records retired one year later; no limit on earnings alongside a pension. Recommendation 8 (p. 27): raise the limit for people with long insurance records from 63 to 64 and then move all age limits in parallel. Page 11: contribution rate 21.1% in 2040 under current law (DRV spring estimate 2026)."
+    }
   },
   "diw_bertelsmann_fruehrente_64_2026": {
     "title": "Reform der Rente für langjährig Versicherte: Analyse der fiskalischen Einsparungen und Beschäftigungseffekte (29. Juli 2026)",
@@ -1035,7 +1302,10 @@
     "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/Studie_Fruehverrentung_Modul2_LAY3_WEB.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Raising the earliest age for the pension with deductions from 63 to 64, 1957 cohort. Pages 14 to 15: those employed in the year before retirement (57.2 %) keep working, all others keep their status, based on Geyer and Welteke (2021). Table 2 (p. 17): health and care contributions of pensioners 112 and 43 euros on a gross pension of 1,401 euros. Page 18: average marginal tax rates of 22 % on earned income and 18.7 % on pension income; present value of the cohort's fiscal effects: pension insurance +81 m, health +395 m, care +76 m, income tax +488 m, unemployment −312 m euros."
+    "note": {
+      "de": "Anhebung des frühesten Alters für die Rente mit Abschlägen von 63 auf 64, Jahrgang 1957. S. 14 bis 15: Wer im Jahr vor dem Renteneintritt beschäftigt war (57,2 %), arbeitet weiter, alle anderen behalten ihren Status, gestützt auf Geyer und Welteke (2021). Tabelle 2 (S. 17): Kranken- und Pflegeversicherungsbeiträge der Rentner 112 und 43 Euro bei einer Bruttorente von 1.401 Euro. S. 18: durchschnittliche Grenzsteuersätze von 22 % auf Erwerbseinkommen und 18,7 % auf Renteneinkünfte; Barwert der fiskalischen Wirkungen für den Jahrgang: Rentenversicherung +81 Mio., Krankenversicherung +395 Mio., Pflegeversicherung +76 Mio., Einkommensteuer +488 Mio., Arbeitslosenversicherung −312 Mio. Euro.",
+      "en": "Raising the earliest age for the pension with deductions from 63 to 64, 1957 cohort. Pages 14 to 15: those employed in the year before retirement (57.2%) keep working, all others keep their status, based on Geyer and Welteke (2021). Table 2 (p. 17): health and care contributions of pensioners 112 and 43 euros on a gross pension of 1,401 euros. Page 18: average marginal tax rates of 22% on earned income and 18.7% on pension income; present value of the cohort's fiscal effects: pension insurance +81 m, health +395 m, care +76 m, income tax +488 m, unemployment −312 m euros."
+    }
   },
   "bt_drs_20_894": {
     "title": "Schriftliche Fragen mit den in der Woche vom 28. Februar 2022 eingegangenen Antworten der Bundesregierung, Drucksache 20/894",
@@ -1043,7 +1313,10 @@
     "url": "https://dserver.bundestag.de/btd/20/008/2000894.pdf",
     "accessed": "2026-11-20",
     "year": 2022,
-    "note": "Question 86 (pp. 53 to 54): disability pensions converted into standard old-age pensions on reaching the standard age, 2006 to 2020; 2020: 85,671 pensions, average payment after conversion 900 euros."
+    "note": {
+      "de": "Frage 86 (S. 53 bis 54): Erwerbsminderungsrenten, die bei Erreichen der Regelaltersgrenze in Regelaltersrenten umgewandelt wurden, 2006 bis 2020; 2020: 85.671 Renten, durchschnittlicher Zahlbetrag nach der Umwandlung 900 Euro.",
+      "en": "Question 86 (pp. 53 to 54): disability pensions converted into standard old-age pensions on reaching the standard age, 2006 to 2020; 2020: 85,671 pensions, average payment after conversion 900 euros."
+    }
   },
   "bt_drs_16_3794": {
     "title": "Gesetzentwurf der Fraktionen der CDU/CSU und SPD: Entwurf eines RV-Altersgrenzenanpassungsgesetzes, Drucksache 16/3794 vom 12.12.2006",
@@ -1051,7 +1324,10 @@
     "url": "https://dserver.bundestag.de/btd/16/037/1603794.pdf",
     "accessed": "2026-11-20",
     "year": 2006,
-    "note": "Section C (p. 56): raising the standard age from 65 to 67 from 2012 relieves the contribution rate by an amount rising to 0.5 points by 2030; the age of 63 for people with long insurance records was kept, a pension after 45 contribution years at 65 was introduced."
+    "note": {
+      "de": "Abschnitt C (S. 56): Die Anhebung der Regelaltersgrenze von 65 auf 67 ab 2012 entlastet den Beitragssatz um einen Betrag, der bis 2030 auf 0,5 Punkte steigt; die Altersgrenze von 63 für langjährig Versicherte blieb, eingeführt wurde eine Rente mit 65 nach 45 Beitragsjahren.",
+      "en": "Section C (p. 56): raising the standard age from 65 to 67 from 2012 relieves the contribution rate by an amount rising to 0.5 points by 2030; the age of 63 for people with long insurance records was kept, a pension after 45 contribution years at 65 was introduced."
+    }
   },
   "bt_drs_21_8388": {
     "title": "Antrag der Fraktion Die Linke: Keine weitere Erhöhung der Regelaltersgrenze, Drucksache 21/8388 vom 06.10.2026",
@@ -1073,7 +1349,10 @@
     "url": "https://www.die-linke.de/fileadmin/user_upload/Wahlprogramm_Langfassung_Linke-BTW25_01.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\" Page 15: 53% pension level; insurance for all people in work including civil servants. Pages 6 and 42: abolish VAT on basic food."
+    "note": {
+      "de": "S. 15: „Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.“ S. 15: Rentenniveau von 53 %; eine Versicherung für alle Erwerbstätigen einschließlich der Beamten. S. 6 und 42: Mehrwertsteuer auf Grundnahrungsmittel abschaffen.",
+      "en": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\" Page 15: 53% pension level; insurance for all people in work including civil servants. Pages 6 and 42: abolish VAT on basic food."
+    }
   },
   "bt_drs_21_3115": {
     "title": "Entschließungsantrag der Fraktion Die Linke zu dem Gesetzentwurf der Bundesregierung zur Stabilisierung des Rentenniveaus und zur vollständigen Gleichstellung der Kindererziehungszeiten, Drucksache 21/3115 vom 03.12.2025",
@@ -1081,7 +1360,10 @@
     "url": "https://dserver.bundestag.de/btd/21/031/2103115.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Section II, page 2: (1) raise the pension level (Sicherungsniveau vor Steuern) 'in einem Schritt sofort um 10 Prozent auf lebensstandardsichernde 53 Prozent' and stabilise it permanently; (3) convert the statutory pension insurance step by step into an insurance for everyone in work, including members of the Bundestag, managers, the self-employed, freelancers and civil servants, 'der Grundsatz des Vertrauensschutzes ist hierbei zu beachten'. Page 3: about EUR 39.58 bn a year more revenue needed, a contribution rate 2.44 points higher."
+    "note": {
+      "de": "Abschnitt II, S. 2: (1) das Rentenniveau (Sicherungsniveau vor Steuern) „in einem Schritt sofort um 10 Prozent auf lebensstandardsichernde 53 Prozent“ anheben und dauerhaft stabilisieren; (3) die gesetzliche Rentenversicherung schrittweise in eine Versicherung aller Erwerbstätigen umwandeln, auch der Bundestagsabgeordneten, Manager, Selbständigen, Freiberufler und Beamten, „der Grundsatz des Vertrauensschutzes ist hierbei zu beachten“. S. 3: rund 39,58 Mrd. Euro Mehreinnahmen im Jahr nötig, ein um 2,44 Punkte höherer Beitragssatz.",
+      "en": "Section II, page 2: (1) raise the pension level (Sicherungsniveau vor Steuern) 'in einem Schritt sofort um 10 Prozent auf lebensstandardsichernde 53 Prozent' and stabilise it permanently; (3) convert the statutory pension insurance step by step into an insurance for everyone in work, including members of the Bundestag, managers, the self-employed, freelancers and civil servants, 'der Grundsatz des Vertrauensschutzes ist hierbei zu beachten'. Page 3: about EUR 39.58 bn a year more revenue needed, a contribution rate 2.44 points higher."
+    }
   },
   "bt_drs_21_135": {
     "title": "Antrag der Fraktion Die Linke: Mehrwertsteuer auf Grundnahrungsmittel, Hygieneprodukte und auf Bus und Bahn abschaffen, Drucksache 21/135 vom 12.05.2025",
@@ -1089,7 +1371,10 @@
     "url": "https://dserver.bundestag.de/btd/21/001/2100135.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Section II, page 2: exempt basic food, hygiene products and bus and rail from VAT with the right to deduct input tax; set up price supervision; define basic food to include milk and meat substitutes and baby food. Page 1: exempting basic food costs about EUR 16 bn a year (citing Handelsblatt)."
+    "note": {
+      "de": "Abschnitt II, S. 2: Grundnahrungsmittel, Hygieneprodukte sowie Bus und Bahn mit Recht auf Vorsteuerabzug von der Mehrwertsteuer befreien; eine Preisaufsicht einrichten; Grundnahrungsmittel so bestimmen, dass auch Milch- und Fleischersatzprodukte und Babynahrung dazugehören. S. 1: Die Befreiung der Grundnahrungsmittel kostet rund 16 Mrd. Euro im Jahr (nach Angaben des Handelsblatts).",
+      "en": "Section II, page 2: exempt basic food, hygiene products and bus and rail from VAT with the right to deduct input tax; set up price supervision; define basic food to include milk and meat substitutes and baby food. Page 1: exempting basic food costs about EUR 16 bn a year (citing Handelsblatt)."
+    }
   },
   "bt_textarchiv_kw37_2025_mwst": {
     "title": "Mehrwertsteuerbefreiung bei Grundnahrungsmitteln abgelehnt (Textarchiv, 12. September 2025)",
@@ -1097,7 +1382,10 @@
     "url": "https://www.bundestag.de/dokumente/textarchiv/2025/kw37-de-mehrwertsteuer-grundnahrungsmittel-1099354",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "The Bundestag rejected motion 21/135 on 12 September 2025: CDU/CSU, AfD and SPD against, Greens abstaining; committee recommendation 21/1583."
+    "note": {
+      "de": "Der Bundestag lehnte den Antrag 21/135 am 12. September 2025 ab: CDU/CSU, AfD und SPD dagegen, die Grünen enthielten sich; Beschlussempfehlung des Ausschusses 21/1583.",
+      "en": "The Bundestag rejected motion 21/135 on 12 September 2025: CDU/CSU, AfD and SPD against, Greens abstaining; committee recommendation 21/1583."
+    }
   },
   "bt_drs_21_6334": {
     "title": "Gesetzentwurf der Fraktion der AfD: Entwurf eines Gesetzes zur Aufhebung des Treibhausgas-Emissionshandelsgesetzes und des Brennstoffemissionshandelsgesetzes (CO2-Preis-Abschaffungsgesetz), Drucksache 21/6334 vom 09.06.2026",
@@ -1105,7 +1393,10 @@
     "url": "https://dserver.bundestag.de/btd/21/063/2106334.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section B, page 2: both acts repealed 'vollständig und ersatzlos', ending the national CO2 price and EU emissions trading in Germany. Section D: revenue loss about EUR 21.4 bn a year on 2025 data, of which 16.0 bn from the national price. The environment committee recommended rejection on 24 June 2026 with the votes of all other groups (Drucksache 21/6694)."
+    "note": {
+      "de": "Abschnitt B, S. 2: Beide Gesetze werden „vollständig und ersatzlos“ aufgehoben; damit enden der nationale CO2-Preis und der EU-Emissionshandel in Deutschland. Abschnitt D: Einnahmeausfall rund 21,4 Mrd. Euro im Jahr auf Basis der Daten von 2025, davon 16,0 Mrd. Euro aus dem nationalen Preis. Der Umweltausschuss empfahl am 24. Juni 2026 mit den Stimmen aller anderen Fraktionen die Ablehnung (Drucksache 21/6694).",
+      "en": "Section B, page 2: both acts repealed 'vollständig und ersatzlos', ending the national CO2 price and EU emissions trading in Germany. Section D: revenue loss about EUR 21.4 bn a year on 2025 data, of which 16.0 bn from the national price. The environment committee recommended rejection on 24 June 2026 with the votes of all other groups (Drucksache 21/6694)."
+    }
   },
   "bt_drs_21_6642": {
     "title": "Antrag der Fraktion der AfD: Einwanderung in das Sozialsystem und Sozialleistungsmissbrauch stoppen, Drucksache 21/6642 vom 23.06.2026",
@@ -1113,7 +1404,10 @@
     "url": "https://dserver.bundestag.de/btd/21/066/2106642.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section II.2, pages 2 f.: after a transition, adult foreigners able to work from the EU and third countries are in principle excluded from SGB II unless they have worked at least ten years (third countries) or five years (EU) in employment subject to social insurance and have German at level B2, third-country nationals also a settlement permit; benefits capped at 12 consecutive months and five years in total; the others referred to return assistance and narrowly limited bridging benefits, as far as the constitution allows. Debated on 25 June 2026 and referred to committee."
+    "note": {
+      "de": "Abschnitt II.2, S. 2 f.: Nach einer Übergangszeit sind erwerbsfähige erwachsene Ausländer aus der EU und aus Drittstaaten grundsätzlich vom SGB II ausgeschlossen, außer wenn sie mindestens zehn Jahre (Drittstaaten) oder fünf Jahre (EU) sozialversicherungspflichtig gearbeitet haben und Deutsch auf Niveau B2 sprechen, Drittstaatsangehörige brauchen zudem eine Niederlassungserlaubnis; Leistungen höchstens 12 Monate am Stück und insgesamt fünf Jahre; die übrigen werden auf Rückkehrhilfen und eng begrenzte Überbrückungsleistungen verwiesen, soweit die Verfassung es zulässt. Am 25. Juni 2026 beraten und an den Ausschuss überwiesen.",
+      "en": "Section II.2, pages 2 f.: after a transition, adult foreigners able to work from the EU and third countries are in principle excluded from SGB II unless they have worked at least ten years (third countries) or five years (EU) in employment subject to social insurance and speak German at level B2, third-country nationals also needing a settlement permit; benefits capped at 12 consecutive months and five years in total; the others referred to return assistance and narrowly limited bridging benefits, as far as the constitution allows. Debated on 25 June 2026 and referred to committee."
+    }
   },
   "afd_wahlprogramm_2025": {
     "title": "Zeit für Deutschland. Programm der Alternative für Deutschland für die Wahl zum 21. Deutschen Bundestag",
@@ -1121,7 +1415,10 @@
     "url": "https://www.afd.de/wp-content/uploads/2025/02/AfD_Bundestagswahlprogramm2025_web.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Adopted in Riesa on 11 and 12 January 2025. Page 57: 'Wir fordern eine ersatzlose Abschaffung der CO₂-Abgaben.' Page 25: foreign nationals to get Bürgergeld only after ten years of employment subject to social insurance without top-up benefits, and for one year at most; Ukrainian refugees moved to asylum seekers' benefits. Page 18: civil-servant status only for sovereign tasks, politicians into the statutory pension insurance."
+    "note": {
+      "de": "Beschlossen in Riesa am 11. und 12. Januar 2025. S. 57: „Wir fordern eine ersatzlose Abschaffung der CO₂-Abgaben.“ S. 25: Ausländer sollen Bürgergeld erst nach zehn Jahren sozialversicherungspflichtiger Beschäftigung ohne aufstockende Leistungen erhalten, und höchstens ein Jahr lang; ukrainische Geflüchtete sollen in die Asylbewerberleistungen wechseln. S. 18: Beamtenstatus nur für hoheitliche Aufgaben, Politiker in die gesetzliche Rentenversicherung.",
+      "en": "Adopted in Riesa on 11 and 12 January 2025. Page 57: 'Wir fordern eine ersatzlose Abschaffung der CO₂-Abgaben.' Page 25: foreign nationals to get Bürgergeld only after ten years of employment subject to social insurance without top-up benefits, and for one year at most; Ukrainian refugees moved to asylum seekers' benefits. Page 18: civil-servant status only for sovereign tasks, politicians into the statutory pension insurance."
+    }
   },
   "bsw_wahlprogramm_2025": {
     "title": "Unser Land verdient mehr! Wahlprogramm für die Bundestagswahl 2025",
@@ -1129,7 +1426,10 @@
     "url": "https://bsw-vg.de/wp-content/themes/bsw/assets/downloads/BSW%20Wahlprogramm%202025.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Page 10: 'Den CO2-Preis, der alles teurer macht, ohne dass es für die meisten Menschen Alternativen gibt, wollen wir abschaffen.' Page 23: all people in work, including members of the Bundestag and federal ministers, to pay into the statutory pension insurance as in Austria. Page 31: VAT 'auf 0 Prozent für Grundnahrungsmittel wie Fleisch, Getreide, Milchprodukte, sowie Obst und Gemüse'."
+    "note": {
+      "de": "S. 10: „Den CO2-Preis, der alles teurer macht, ohne dass es für die meisten Menschen Alternativen gibt, wollen wir abschaffen.“ S. 23: Alle Erwerbstätigen, auch Bundestagsabgeordnete und Bundesminister, sollen wie in Österreich in die gesetzliche Rentenversicherung einzahlen. S. 31: Mehrwertsteuer „auf 0 Prozent für Grundnahrungsmittel wie Fleisch, Getreide, Milchprodukte, sowie Obst und Gemüse“.",
+      "en": "Page 10: 'Den CO2-Preis, der alles teurer macht, ohne dass es für die meisten Menschen Alternativen gibt, wollen wir abschaffen.' Page 23: all people in work, including members of the Bundestag and federal ministers, to pay into the statutory pension insurance as in Austria. Page 31: VAT 'auf 0 Prozent für Grundnahrungsmittel wie Fleisch, Getreide, Milchprodukte, sowie Obst und Gemüse'."
+    }
   },
   "stuttgarter_nachrichten_rente_2026_11": {
     "title": "Koalitionsausschuss: Keine Einigung bei der Rentenreform (Lukas Böhl, 18. November 2026)",
@@ -1137,7 +1437,10 @@
     "url": "https://www.stuttgarter-nachrichten.de/wirtschaft/koalitionsausschuss-wann-gibt-es-ergebnisse-zur-rentenreform-79714856.html",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "\"Ein endgültiger Gesetzentwurf zur Rentenreform liegt bislang nicht vor.\""
+    "note": {
+      "de": "„Ein endgültiger Gesetzentwurf zur Rentenreform liegt bislang nicht vor.“",
+      "en": "\"Ein endgültiger Gesetzentwurf zur Rentenreform liegt bislang nicht vor.\""
+    }
   },
   "svr_jg_2023_24": {
     "title": "Jahresgutachten 2023/24: Wachstumsschwäche überwinden – in die Zukunft investieren, Kapitel 5 Alterungsschub und Rentenreformen",
@@ -1145,7 +1448,10 @@
     "url": "https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/jg202324/JG202324_Gesamtausgabe.pdf",
     "accessed": "2026-11-20",
     "year": 2023,
-    "note": "Items 405 to 415 (pp. 314 to 321): coupling the standard age to life expectancy in a ratio of 2:1; men with low education have a remaining life expectancy 3.7 years lower than men with high education (Luy et al. 2015), occupational groups differ by up to five years (Guenzel et al. 2023); physically demanding work. Figure 124 (SIM.21, data file Abb124.xlsx): with the 2:1 rule the contribution rate is 22.2 instead of 22.8 % in 2060 and 22.9 instead of 24.1 % in 2080, the pension level 45.9 instead of 45.1 % and 45.4 instead of 44.0 %. Figure 123 (Abb123.xlsx): standard age 68.31 for the 1992 cohort and 69.25 for the 2012 cohort."
+    "note": {
+      "de": "Ziffern 405 bis 415 (S. 314 bis 321): Kopplung der Regelaltersgrenze an die Lebenserwartung im Verhältnis 2:1; Männer mit niedriger Bildung haben eine um 3,7 Jahre geringere fernere Lebenserwartung als Männer mit hoher Bildung (Luy et al. 2015), Berufsgruppen unterscheiden sich um bis zu fünf Jahre (Guenzel et al. 2023); körperlich belastende Arbeit. Abbildung 124 (SIM.21, Datendatei Abb124.xlsx): Mit der 2:1-Regel liegt der Beitragssatz 2060 bei 22,2 statt 22,8 % und 2080 bei 22,9 statt 24,1 %, das Rentenniveau bei 45,9 statt 45,1 % und 45,4 statt 44,0 %. Abbildung 123 (Abb123.xlsx): Regelaltersgrenze 68,31 Jahre für den Jahrgang 1992 und 69,25 Jahre für den Jahrgang 2012.",
+      "en": "Items 405 to 415 (pp. 314 to 321): coupling the standard age to life expectancy in a ratio of 2:1; men with low education have a remaining life expectancy 3.7 years lower than men with high education (Luy et al. 2015), occupational groups differ by up to five years (Guenzel et al. 2023); physically demanding work. Figure 124 (SIM.21, data file Abb124.xlsx): with the 2:1 rule the contribution rate is 22.2 instead of 22.8% in 2060 and 22.9 instead of 24.1% in 2080, the pension level 45.9 instead of 45.1% and 45.4 instead of 44.0%. Figure 123 (Abb123.xlsx): standard age 68.31 for the 1992 cohort and 69.25 for the 2012 cohort."
+    }
   },
   "sgb6_235": {
     "title": "Sozialgesetzbuch Sechstes Buch, § 235 Regelaltersrente",
@@ -1159,7 +1465,10 @@
     "url": "https://www.diw.de/de/diw_01.c.1012115.de/publikationen/wochenberichte/2026_27_3/die_rente_mit_70_waere_ein_wachstumsprogramm__kommentar.html",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "DOI 10.18723/diw_wb:2026-27-3; a longer version appeared in the Frankfurter Rundschau on 24 June 2026. \"Eine faire Rente mit 70 wäre die sozialste Rentenreform\"; the commission's proposal to reach 70 only in decades through the link to life expectancy is \"eine verpasste Chance\"; people who cannot work longer need better protection."
+    "note": {
+      "de": "DOI 10.18723/diw_wb:2026-27-3; eine längere Fassung erschien am 24. Juni 2026 in der Frankfurter Rundschau. „Eine faire Rente mit 70 wäre die sozialste Rentenreform“; der Vorschlag der Kommission, die 70 über die Kopplung an die Lebenserwartung erst in Jahrzehnten zu erreichen, sei „eine verpasste Chance“; wer nicht länger arbeiten kann, brauche besseren Schutz.",
+      "en": "DOI 10.18723/diw_wb:2026-27-3; a longer version appeared in the Frankfurter Rundschau on 24 June 2026. \"Eine faire Rente mit 70 wäre die sozialste Rentenreform\"; the commission's proposal to reach 70 only in decades through the link to life expectancy is \"eine verpasste Chance\"; people who cannot work longer need better protection."
+    }
   },
   "bmg_kg1_2025": {
     "title": "Gesetzliche Krankenversicherung: Personal- und Verwaltungskosten 2025 (KG1/2025 und KJ1/2025, Stand 4. August 2026)",
@@ -1167,7 +1476,10 @@
     "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/GKV/Kennzahlen_Daten/KG1_2025_Internet.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Page 7: staff of the health insurers on 30 June 2025, 132,011 in total, of which 129,144 administrative staff. Page 10: net administrative costs 2025 EUR 13.44 billion, gross 17.07 billion."
+    "note": {
+      "de": "S. 7: Personal der Krankenkassen am 30. Juni 2025: insgesamt 132.011, davon 129.144 in der Verwaltung. S. 10: Netto-Verwaltungskosten 2025 13,44 Mrd. Euro, brutto 17,07 Mrd. Euro.",
+      "en": "Page 7: staff of the health insurers on 30 June 2025, 132,011 in total, of which 129,144 administrative staff. Page 10: net administrative costs 2025 EUR 13.44 billion, gross 17.07 billion."
+    }
   },
   "bt_drs_21_8817": {
     "title": "Antwort der Bundesregierung: Effizienz der Deutschen Rentenversicherung im internationalen Vergleich, Drucksache 21/8817 vom 28.10.2026",
@@ -1175,7 +1487,10 @@
     "url": "https://dserver.bundestag.de/btd/21/088/2108817.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Table 1 (p. 3): administrative staff without own establishments 49,311 FTE (2019), 52,474 (2024), 53,393 (2025). Tables 3 to 6 (pp. 3 f.): net administrative and procedural costs 2024 EUR 5.32 billion; staff costs 2024 employees 2.63 and civil servants 1.33 billion. Page 7: the 2005 reform required a 10 % cut in administrative and procedural costs within five years, which was met; the coalition committee agreed on 1 July 2026 to implement the pensions commission's recommendations."
+    "note": {
+      "de": "Tabelle 1 (S. 3): Verwaltungspersonal ohne Eigeneinrichtungen 49.311 Vollzeitäquivalente (2019), 52.474 (2024), 53.393 (2025). Tabellen 3 bis 6 (S. 3 f.): Netto-Verwaltungs- und Verfahrenskosten 2024 5,32 Mrd. Euro; Personalkosten 2024 für Arbeitnehmer 2,63 und für Beamte 1,33 Mrd. Euro. S. 7: Die Reform von 2005 verlangte, die Verwaltungs- und Verfahrenskosten binnen fünf Jahren um 10 % zu senken, was erreicht wurde; der Koalitionsausschuss verständigte sich am 1. Juli 2026 darauf, die Empfehlungen der Alterssicherungskommission umzusetzen.",
+      "en": "Table 1 (p. 3): administrative staff excluding own facilities 49,311 FTE (2019), 52,474 (2024), 53,393 (2025). Tables 3 to 6 (pp. 3 f.): net administrative and procedural costs 2024 EUR 5.32 billion; staff costs 2024 employees 2.63 and civil servants 1.33 billion. Page 7: the 2005 reform required a 10% cut in administrative and procedural costs within five years, which was met; the coalition committee agreed on 1 July 2026 to implement the pensions commission's recommendations."
+    }
   },
   "bt_drs_21_1792": {
     "title": "Antwort der Bundesregierung: Aktuelle Entwicklungen bei der Erwerbsminderungsrente, Drucksache 21/1792 vom 23.09.2025",
@@ -1183,7 +1498,10 @@
     "url": "https://dserver.bundestag.de/btd/21/017/2101792.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Annex to question 13: average processing times of new disability pension claims in days by carrier; 2024 between 101 (Knappschaft-Bahn-See) and 181 (Mitteldeutschland), DRV Bund 129."
+    "note": {
+      "de": "Anlage zu Frage 13: durchschnittliche Bearbeitungszeiten neuer Anträge auf Erwerbsminderungsrente in Tagen nach Trägern; 2024 zwischen 101 (Knappschaft-Bahn-See) und 181 (Mitteldeutschland), DRV Bund 129.",
+      "en": "Annex to question 13: average processing times of new disability pension claims in days by carrier; 2024 between 101 (Knappschaft-Bahn-See) and 181 (Mitteldeutschland), DRV Bund 129."
+    }
   },
   "ba_geschaeftsbericht_2024_pdf": {
     "title": "Geschäftsbericht 2024 der Bundesagentur für Arbeit (PDF)",
@@ -1191,7 +1509,10 @@
     "url": "https://www.arbeitsagentur.de/datei/geschaeftsbericht-2024_ba052936.pdf",
     "accessed": "2026-11-20",
     "year": 2024,
-    "note": "Pages 31 f.: 114,100 employees at the end of 2024; staff capacity 101,300 full-time equivalents, of which 55,300 unemployment insurance and services for basic income support, 39,400 basic income support (job centres), 6,500 family benefits office; automation is not meant to cut jobs but to make up for staff shortages."
+    "note": {
+      "de": "S. 31 f.: 114.100 Beschäftigte Ende 2024; Personalkapazität 101.300 Vollzeitäquivalente, davon 55.300 Arbeitslosenversicherung und Dienstleistungen für die Grundsicherung, 39.400 Grundsicherung (Jobcenter), 6.500 Familienkasse; die Automatisierung soll keine Stellen abbauen, sondern Personalengpässe ausgleichen.",
+      "en": "Pages 31 f.: 114,100 employees at the end of 2024; staff capacity 101,300 full-time equivalents, of which 55,300 unemployment insurance and services for basic income support, 39,400 basic income support (job centres), 6,500 family benefits office; automation is not meant to cut jobs but to make up for staff shortages."
+    }
   },
   "ba_geschaeftsbericht_2025": {
     "title": "Geschäftsbericht 2025 der Bundesagentur für Arbeit (PDF)",
@@ -1199,7 +1520,10 @@
     "url": "https://www.arbeitsagentur.de/datei/geschaeftsbericht-2025_ba056572.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Page 36: a quarter of the staff is over 55; about 20,000 employees are expected to leave by the end of 2030 through retirement and other turnover."
+    "note": {
+      "de": "S. 36: Ein Viertel des Personals ist älter als 55; bis Ende 2030 werden voraussichtlich rund 20.000 Beschäftigte durch Ruhestand und sonstige Fluktuation ausscheiden.",
+      "en": "Page 36: a quarter of the staff is over 55; about 20,000 employees are expected to leave by the end of 2030 through retirement and other turnover."
+    }
   },
   "ba_haushaltsplan_2026": {
     "title": "Haushaltsplan 2026 der Bundesagentur für Arbeit",
@@ -1207,7 +1531,10 @@
     "url": "https://www.arbeitsagentur.de/datei/haushaltsplan-2026_ba056174.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Page 7 (summary, 2024 actuals): chapter 5 personnel spending including administrative assistance EUR 5,589 million; chapter 6 personnel spending for core tasks under Social Code Book II EUR 3,175 million; reimbursement of administrative costs under Social Code Book II EUR 4,032 million and for the family benefits office EUR 674 million. The file was retrieved on 20 November 2026; later that day the address returned an error."
+    "note": {
+      "de": "S. 7 (Übersicht, Ist 2024): Kapitel 5, Personalausgaben einschließlich Verwaltungshilfe 5.589 Mio. Euro; Kapitel 6, Personalausgaben für Kernaufgaben nach dem SGB II 3.175 Mio. Euro; Erstattung von Verwaltungskosten nach dem SGB II 4.032 Mio. Euro und für die Familienkasse 674 Mio. Euro. Die Datei wurde am 20. November 2026 abgerufen; später am selben Tag meldete die Adresse einen Fehler.",
+      "en": "Page 7 (summary, 2024 actuals): chapter 5 personnel spending including administrative assistance EUR 5,589 million; chapter 6 personnel spending for core tasks under Social Code Book II EUR 3,175 million; reimbursement of administrative costs under Social Code Book II EUR 4,032 million and for the family benefits office EUR 674 million. The file was retrieved on 20 November 2026; later that day the address returned an error."
+    }
   },
   "tv_ba": {
     "title": "Tarifvertrag für die Arbeitnehmerinnen und Arbeitnehmer der Bundesagentur für Arbeit (TV-BA), Fassung des 31. Änderungstarifvertrages, gültig 2026",
@@ -1215,7 +1542,10 @@
     "url": "https://www.arbeitsagentur.de/bakarriere/datei/tarifvertrag_ba020650.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section 34(2): employees who are 40 or older and have been employed for more than 15 years can be dismissed by the agency only for good cause."
+    "note": {
+      "de": "§ 34 Abs. 2: Beschäftigten, die 40 Jahre oder älter und mehr als 15 Jahre beschäftigt sind, kann die Bundesagentur nur aus wichtigem Grund kündigen.",
+      "en": "Section 34(2): employees who are 40 or older and have been employed for more than 15 years can be dismissed by the agency only for good cause."
+    }
   },
   "koalitionsvertrag_2025": {
     "title": "Verantwortung für Deutschland: Koalitionsvertrag zwischen CDU, CSU und SPD, 21. Legislaturperiode (barrierefreie Fassung)",
@@ -1223,7 +1553,10 @@
     "url": "https://www.spd.de/fileadmin/Dokumente/Koalitionsvertrag2025_bf.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Section on budget consolidation: \"Stellenabbau in der Bundesverwaltung um acht Prozent (zwei Prozent/Jahr) (Ausnahme für Sicherheitsbehörden)\"."
+    "note": {
+      "de": "Abschnitt zur Haushaltskonsolidierung: „Stellenabbau in der Bundesverwaltung um acht Prozent (zwei Prozent/Jahr) (Ausnahme für Sicherheitsbehörden)“.",
+      "en": "Section on budget consolidation: \"Stellenabbau in der Bundesverwaltung um acht Prozent (zwei Prozent/Jahr) (Ausnahme für Sicherheitsbehörden)\"."
+    }
   },
   "gkv_spitzenverband_verwaltungskosten": {
     "title": "Fokus: Verwaltungskosten und Anzahl der Krankenkassen (zuletzt aktualisiert 7. Mai 2026)",
@@ -1231,7 +1564,10 @@
     "url": "https://www.gkv-spitzenverband.de/gkv_spitzenverband/presse/fokus/verwaltungskosten_kk.jsp",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Net administrative costs 2024 EUR 12.63 billion, 3.86 % of total spending, EUR 169.54 per insured person; personnel about 85.5 % of administrative costs; 93 funds, 21 of them company funds; staff down from about 136,000 full-time posts in 2015 to 132,000 in 2024 while the number of insured rose by 5.4 %; administrative costs up 26 % from 2014 to 2024. The association opposes mergers ordered by law."
+    "note": {
+      "de": "Netto-Verwaltungskosten 2024 12,63 Mrd. Euro, 3,86 % der Gesamtausgaben, 169,54 Euro je Versicherten; Personal rund 85,5 % der Verwaltungskosten; 93 Kassen, davon 21 Betriebskrankenkassen; Personal von rund 136.000 Vollzeitstellen 2015 auf 132.000 im Jahr 2024 gesunken, während die Zahl der Versicherten um 5,4 % stieg; Verwaltungskosten von 2014 bis 2024 um 26 % gestiegen. Der Verband lehnt gesetzlich angeordnete Fusionen ab.",
+      "en": "Net administrative costs 2024 EUR 12.63 billion, 3.86% of total spending, EUR 169.54 per insured person; personnel about 85.5% of administrative costs; 93 funds, 21 of them company funds; staff down from about 136,000 full-time posts in 2015 to 132,000 in 2024 while the number of insured rose by 5.4%; administrative costs up 26% from 2014 to 2024. The association opposes mergers ordered by law."
+    }
   },
   "fkg_bericht_2026": {
     "title": "FinanzKommission Gesundheit: Erster Bericht (30. März 2026, Fassung vom 1. Juni 2026)",
@@ -1239,7 +1575,10 @@
     "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/F/FinanzKommission_Gesundheit/FinanzKommissionGesundheit_Erster_Bericht_20260330.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Page 385: net administrative spending of the funds about EUR 13.3 billion in 2025, about 4 % of spending; gross 16.9 billion, of which personnel 11.5 billion. Pages 388 f.: halving the advertising cap to 0.075 % saves about EUR 70 million a year. Page 391: board pay about EUR 25 million in 2025. Page 392: the 20 largest funds insure 84 % of members; no clear relationship between fund size and administrative spending per insured person; 487 insured persons per employee in 2004, 563 in 2024; the Austrian merger brought no cost advantages."
+    "note": {
+      "de": "S. 385: Netto-Verwaltungsausgaben der Kassen 2025 rund 13,3 Mrd. Euro, rund 4 % der Ausgaben; brutto 16,9 Mrd. Euro, davon Personal 11,5 Mrd. Euro. S. 388 f.: Die Halbierung der Obergrenze für Werbung auf 0,075 % spart rund 70 Mio. Euro im Jahr. S. 391: Vorstandsvergütungen 2025 rund 25 Mio. Euro. S. 392: Die 20 größten Kassen versichern 84 % der Mitglieder; kein eindeutiger Zusammenhang zwischen Kassengröße und Verwaltungsausgaben je Versicherten; 487 Versicherte je Beschäftigten 2004, 563 im Jahr 2024; die Fusion in Österreich brachte keine Kostenvorteile.",
+      "en": "Page 385: net administrative spending of the funds about EUR 13.3 billion in 2025, about 4% of spending; gross 16.9 billion, of which personnel 11.5 billion. Pages 388 f.: halving the advertising cap to 0.075% saves about EUR 70 million a year. Page 391: board pay about EUR 25 million in 2025. Page 392: the 20 largest funds insure 84% of members; no clear relationship between fund size and administrative spending per insured person; 487 insured persons per employee in 2004, 563 in 2024; the Austrian merger brought no cost advantages."
+    }
   },
   "rh_at_2022_41": {
     "title": "Reform der Sozialversicherungsträger – Fusion und finanzielle Lage, Bericht des Rechnungshofes 2022/41 und 2022/42 (Dezember 2022)",
@@ -1247,7 +1586,10 @@
     "url": "https://www.rechnungshof.gv.at/rh/home/home/Reform_SV_Traeger_41_42.pdf",
     "accessed": "2026-11-20",
     "year": 2022,
-    "note": "Pages 10 f.: the impact assessment expected a 30 % cut in administrative staff and material costs and savings of about EUR 1 billion from 2020 to the end of 2023; instead additional spending of EUR 214.95 million; in a narrower scenario EUR 34.78 to 134.10 million. Page 12: one-off merger costs estimated at EUR 300 to 400 million; actual costs well above the 33.82 million booked. Page 23: gross administrative spending of the merged carriers EUR 1,145.93 million in 2020. The 21 carriers were reduced to 5; the Austrian Health Insurance Fund has existed since 1 January 2020 after a decision in December 2018."
+    "note": {
+      "de": "S. 10 f.: Die Wirkungsfolgenabschätzung erwartete, den Personal- und Sachaufwand der Verwaltung um 30 % zu senken und von 2020 bis Ende 2023 rund 1 Mrd. Euro einzusparen; stattdessen entstand ein Mehraufwand von 214,95 Mio. Euro, in einem engeren Szenario von 34,78 bis 134,10 Mio. Euro. S. 12: einmalige Fusionskosten auf 300 bis 400 Mio. Euro geschätzt; die tatsächlichen Kosten lagen deutlich über den verbuchten 33,82 Mio. Euro. S. 23: Brutto-Verwaltungsaufwand der fusionierten Träger 2020 1.145,93 Mio. Euro. Die 21 Träger wurden auf 5 verringert; die Österreichische Gesundheitskasse besteht seit 1. Januar 2020, nach einem Beschluss vom Dezember 2018.",
+      "en": "Pages 10 f.: the impact assessment expected a 30% cut in administrative staff and material costs and savings of about EUR 1 billion from 2020 to the end of 2023; instead additional spending of EUR 214.95 million; in a narrower scenario EUR 34.78 to 134.10 million. Page 12: one-off merger costs estimated at EUR 300 to 400 million; actual costs well above the 33.82 million booked. Page 23: gross administrative spending of the merged carriers EUR 1,145.93 million in 2020. The 21 carriers were reduced to 5; the Austrian Health Insurance Fund has existed since 1 January 2020 after a decision in December 2018."
+    }
   },
   "bt_drs_17_7600": {
     "title": "Bemerkungen 2011 des Bundesrechnungshofes zur Haushalts- und Wirtschaftsführung des Bundes, Nr. 70: Fusionen von Krankenkassen müssen wirtschaftlich sein, Drucksache 17/7600 vom 14.11.2011",
@@ -1255,7 +1597,10 @@
     "url": "https://dserver.bundestag.de/btd/17/076/1707600.pdf",
     "accessed": "2026-11-20",
     "year": 2011,
-    "note": "Pages 263 f.: in almost all mergers audited, administrative spending rose in the year of the merger, in one case by up to 18 %, and did not fall in the following three years; staff stayed unchanged because collective agreements ruled out merger-related dismissals; board pay rose by up to 25 % in half of the cases."
+    "note": {
+      "de": "S. 263 f.: Bei fast allen geprüften Fusionen stiegen die Verwaltungsausgaben im Jahr der Fusion, in einem Fall um bis zu 18 %, und sanken in den drei Folgejahren nicht; das Personal blieb unverändert, weil Tarifverträge fusionsbedingte Kündigungen ausschlossen; die Vorstandsvergütungen stiegen in der Hälfte der Fälle um bis zu 25 %.",
+      "en": "Pages 263 f.: in almost all mergers audited, administrative spending rose in the year of the merger, in one case by up to 18%, and did not fall in the following three years; staff stayed unchanged because collective agreements ruled out merger-related dismissals; board pay rose by up to 25% in half of the cases."
+    }
   },
   "bt_drs_20_14639": {
     "title": "Schriftliche Fragen mit den in der Woche vom 20. Januar 2025 eingegangenen Antworten der Bundesregierung, Drucksache 20/14639",
@@ -1263,7 +1608,10 @@
     "url": "https://dserver.bundestag.de/btd/20/146/2014639.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Question 84 (pp. 58 f.), answer of 21 January 2025: no findings on administrative cost advantages; the share of administrative costs fell from 5.4 % (2010) to 4.1 % (2023); \"Die Bundesregierung geht daher insgesamt nicht von einem höheren Einsparpotential durch eine Zusammenlegung aller Krankenkassen aus.\""
+    "note": {
+      "de": "Frage 84 (S. 58 f.), Antwort vom 21. Januar 2025: keine Erkenntnisse zu Verwaltungskostenvorteilen; der Anteil der Verwaltungskosten sank von 5,4 % (2010) auf 4,1 % (2023); „Die Bundesregierung geht daher insgesamt nicht von einem höheren Einsparpotential durch eine Zusammenlegung aller Krankenkassen aus.“",
+      "en": "Question 84 (pp. 58 f.), answer of 21 January 2025: no findings on administrative cost advantages; the share of administrative costs fell from 5.4% (2010) to 4.1% (2023); \"Die Bundesregierung geht daher insgesamt nicht von einem höheren Einsparpotential durch eine Zusammenlegung aller Krankenkassen aus.\""
+    }
   },
   "bt_drs_21_5759": {
     "title": "Antrag der Fraktion der AfD, Drucksache 21/5759 vom 05.05.2026",
@@ -1271,7 +1619,10 @@
     "url": "https://dserver.bundestag.de/btd/21/057/2105759.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Item II.4: reduce the number of statutory health insurers considerably through mergers and ban advertising by the funds (estimated relief at least EUR 0.23 billion from the advertising ban alone)."
+    "note": {
+      "de": "Nr. II.4: die Zahl der gesetzlichen Krankenkassen durch Fusionen deutlich verringern und Werbung der Kassen verbieten (geschätzte Entlastung allein durch das Werbeverbot mindestens 0,23 Mrd. Euro).",
+      "en": "Item II.4: reduce the number of statutory health insurers considerably through mergers and ban advertising by the funds (estimated relief at least EUR 0.23 billion from the advertising ban alone)."
+    }
   },
   "bmg_interview_linnemann_2026_08": {
     "title": "Linnemann: Ich möchte nicht bei der Rente von pflegenden Angehörigen sparen (Interview mit BILD, 23. August 2026)",
@@ -1279,14 +1630,20 @@
     "url": "https://www.bundesgesundheitsministerium.de/presse/interviews/bild-23-08-26",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Question: whether he would pursue as minister his earlier demand to reduce the number of funds from 93 to at most 20. Answer: \"Ich bleibe bei dem, was ich gesagt habe. Davon nehme ich nichts zurück. Und jetzt bin ich Bundesgesundheitsminister und jetzt habe ich Ende des Jahres eine Kommission, die einen Endbericht vorlegt.\""
+    "note": {
+      "de": "Frage: ob er als Minister seine frühere Forderung weiterverfolge, die Zahl der Kassen von 93 auf höchstens 20 zu senken. Antwort: „Ich bleibe bei dem, was ich gesagt habe. Davon nehme ich nichts zurück. Und jetzt bin ich Bundesgesundheitsminister und jetzt habe ich Ende des Jahres eine Kommission, die einen Endbericht vorlegt.“",
+      "en": "Question: whether, as minister, he would pursue his earlier demand to reduce the number of funds from 93 to at most 20. Answer: \"Ich bleibe bei dem, was ich gesagt habe. Davon nehme ich nichts zurück. Und jetzt bin ich Bundesgesundheitsminister und jetzt habe ich Ende des Jahres eine Kommission, die einen Endbericht vorlegt.\""
+    }
   },
   "vdk_gesundheitssystem": {
     "title": "Gesundheitssystem (Themenseite)",
     "publisher": "Sozialverband VdK Deutschland",
     "url": "https://www.vdk.de/themen/gesundheit/gesundheitssystem/",
     "accessed": "2026-11-20",
-    "note": "\"Möglichkeiten zu einer deutlichen Verschlankung des Systems der gesetzlichen Kassen sind zu prüfen mit dem Ziel einer gesetzlichen Krankenkasse mit regionalen Untergliederungen.\" Undated."
+    "note": {
+      "de": "„Möglichkeiten zu einer deutlichen Verschlankung des Systems der gesetzlichen Kassen sind zu prüfen mit dem Ziel einer gesetzlichen Krankenkasse mit regionalen Untergliederungen.“ Ohne Datum.",
+      "en": "\"Möglichkeiten zu einer deutlichen Verschlankung des Systems der gesetzlichen Kassen sind zu prüfen mit dem Ziel einer gesetzlichen Krankenkasse mit regionalen Untergliederungen.\" Undated."
+    }
   },
   "kj1_2025": {
     "title": "Gesetzliche Krankenversicherung: Endgültige Rechnungsergebnisse 2025 (KJ 1, Stand 29. Juli 2026)",
@@ -1294,7 +1651,10 @@
     "url": "https://www.bundesgesundheitsministerium.de/fileadmin/Dateien/3_Downloads/Statistiken/GKV/Finanzergebnisse/KJ1_2025_bf.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Page 13: spending on additional statutory benefits under section 11(6) of Social Code Book V EUR 766.3 million (account 06300)."
+    "note": {
+      "de": "S. 13: Ausgaben für zusätzliche Satzungsleistungen nach § 11 Abs. 6 SGB V 766,3 Mio. Euro (Konto 06300).",
+      "en": "Page 13: spending on additional benefits under the funds' statutes (section 11(6) of Social Code Book V) EUR 766.3 million (account 06300)."
+    }
   },
   "bva_sonderbericht_2018": {
     "title": "Sonderbericht zum Wettbewerb in der gesetzlichen Krankenversicherung (April 2018)",
@@ -1302,7 +1662,10 @@
     "url": "https://www.bundesamtsozialesicherung.de/fileadmin/user_upload/20180404Sonderbericht_web.pdf",
     "accessed": "2026-11-20",
     "year": 2018,
-    "note": "Pages 84 f.: private insurers may pay the funds no commission for brokering supplementary insurance; the funds may at most have a verifiable, cost-covering administrative expense reimbursed."
+    "note": {
+      "de": "S. 84 f.: Private Versicherer dürfen den Kassen für die Vermittlung von Zusatzversicherungen keine Provision zahlen; die Kassen dürfen sich allenfalls einen nachweisbaren, kostendeckenden Verwaltungsaufwand erstatten lassen.",
+      "en": "Pages 84 f.: private insurers may pay the funds no commission for brokering supplementary insurance; at most, the funds may be reimbursed for verifiable administrative expenses on a cost-covering basis."
+    }
   },
   "bverfge_113_167": {
     "title": "Bundesverfassungsgericht, Urteil vom 18. Juli 2005, 2 BvF 2/01 (Risikostrukturausgleich), BVerfGE 113, 167",
@@ -1310,7 +1673,10 @@
     "url": "https://www.servat.unibe.ch/dfr/bv113167.html",
     "accessed": "2026-11-20",
     "year": 2005,
-    "note": "Paragraph 240: \"Verfassungsrechtlich ist der Gesetzgeber weder verpflichtet noch gehindert, alle Krankenkassen zu einem einzigen Träger der gesetzlichen Krankenversicherung zusammenzufassen … Der Gesetzgeber durfte davon ausgehen, dass kleinere Einheiten mit eigenem Wirtschaftlichkeitsanreiz im Wettbewerb sparsamer wirtschaften als große ohne einen solchen Anreiz.\""
+    "note": {
+      "de": "Rn. 240: „Verfassungsrechtlich ist der Gesetzgeber weder verpflichtet noch gehindert, alle Krankenkassen zu einem einzigen Träger der gesetzlichen Krankenversicherung zusammenzufassen … Der Gesetzgeber durfte davon ausgehen, dass kleinere Einheiten mit eigenem Wirtschaftlichkeitsanreiz im Wettbewerb sparsamer wirtschaften als große ohne einen solchen Anreiz.“",
+      "en": "Paragraph 240: \"Verfassungsrechtlich ist der Gesetzgeber weder verpflichtet noch gehindert, alle Krankenkassen zu einem einzigen Träger der gesetzlichen Krankenversicherung zusammenzufassen … Der Gesetzgeber durfte davon ausgehen, dass kleinere Einheiten mit eigenem Wirtschaftlichkeitsanreiz im Wettbewerb sparsamer wirtschaften als große ohne einen solchen Anreiz.\""
+    }
   },
   "bverfge_39_302": {
     "title": "Bundesverfassungsgericht, Beschluss vom 9. April 1975, 2 BvR 879/73, BVerfGE 39, 302",
@@ -1318,35 +1684,50 @@
     "url": "https://www.servat.unibe.ch/dfr/bv039302.html",
     "accessed": "2026-11-20",
     "year": 1975,
-    "note": "Paragraph 60: \"Es wäre deshalb mit dem Grundgesetz zu vereinbaren, wenn z.B. der Gesetzgeber sämtliche Träger der gesetzlichen Krankenversicherung zusammenfaßte und in einem Bundesamt für Krankenversicherung als bundesunmittelbarer Körperschaft organisierte.\""
+    "note": {
+      "de": "Rn. 60: „Es wäre deshalb mit dem Grundgesetz zu vereinbaren, wenn z.B. der Gesetzgeber sämtliche Träger der gesetzlichen Krankenversicherung zusammenfaßte und in einem Bundesamt für Krankenversicherung als bundesunmittelbarer Körperschaft organisierte.“",
+      "en": "Paragraph 60: \"Es wäre deshalb mit dem Grundgesetz zu vereinbaren, wenn z.B. der Gesetzgeber sämtliche Träger der gesetzlichen Krankenversicherung zusammenfaßte und in einem Bundesamt für Krankenversicherung als bundesunmittelbarer Körperschaft organisierte.\""
+    }
   },
   "sgb5_4": {
     "title": "Sozialgesetzbuch Fünftes Buch, § 4 Krankenkassen",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/sgb_5/__4.html",
     "accessed": "2026-11-20",
-    "note": "Paragraph 5: from the budget year 2027 a fund's administrative spending may rise only in line with the average change in spending per insured person."
+    "note": {
+      "de": "Abs. 5: Ab dem Haushaltsjahr 2027 dürfen die Verwaltungsausgaben einer Kasse nur im Umfang der durchschnittlichen Veränderung der Ausgaben je Versicherten steigen.",
+      "en": "Paragraph 5: from the budget year 2027 a fund's administrative spending may rise only in line with the average change in spending per insured person."
+    }
   },
   "sgb5_4a": {
     "title": "Sozialgesetzbuch Fünftes Buch, § 4a Sonderregelungen zum Verwaltungsverfahren",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/sgb_5/__4a.html",
     "accessed": "2026-11-20",
-    "note": "Paragraph 3: advertising spending of a fund may not exceed 0.075 % of the monthly reference value per member and year."
+    "note": {
+      "de": "Abs. 3: Die Werbeausgaben einer Kasse dürfen je Mitglied und Jahr 0,075 % der monatlichen Bezugsgröße nicht überschreiten.",
+      "en": "Paragraph 3: advertising spending of a fund may not exceed 0.075% of the monthly reference value per member and year."
+    }
   },
   "sgb5_53": {
     "title": "Sozialgesetzbuch Fünftes Buch, § 53 Wahltarife",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/sgb_5/__53.html",
     "accessed": "2026-11-20",
-    "note": "Paragraph 9: each optional tariff must be financed permanently from its own revenue, savings and efficiency gains."
+    "note": {
+      "de": "Abs. 9: Jeder Wahltarif muss sich auf Dauer aus eigenen Einnahmen, Einsparungen und Effizienzsteigerungen finanzieren.",
+      "en": "Paragraph 9: each optional tariff must be financed permanently from its own revenue, savings and efficiency gains."
+    }
   },
   "sgb5_194": {
     "title": "Sozialgesetzbuch Fünftes Buch, § 194 Satzung der Krankenkassen",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/sgb_5/__194.html",
     "accessed": "2026-11-20",
-    "note": "Paragraph 1a: the funds may broker private supplementary insurance contracts between their insured and private health insurers."
+    "note": {
+      "de": "Abs. 1a: Die Kassen dürfen private Zusatzversicherungsverträge zwischen ihren Versicherten und privaten Krankenversicherungsunternehmen vermitteln.",
+      "en": "Paragraph 1a: the funds may broker private supplementary insurance contracts between their insured and private health insurers."
+    }
   },
   "destatis_personalstand_2024": {
     "title": "Statistischer Bericht: Personal des öffentlichen Dienstes, Stichtag 30.06.2024",
@@ -1354,7 +1735,10 @@
     "url": "https://www.destatis.de/DE/Themen/Staat/Oeffentlicher-Dienst/Publikationen/Downloads-Oeffentlicher-Dienst/statistischer-bericht-personalstand-oeffentlicher-dienst-2140600247005.xlsx?__blob=publicationFile&v=3",
     "accessed": "2026-11-20",
     "year": 2024,
-    "note": "Published 3 November 2025. Tables 74111-03 (employees) and 74111-04 (full-time equivalents), in thousands, employees/FTE: political leadership and central administration federal 45.5/42.6, states 166.7/153.6, municipalities 394.8/347.0; foreign affairs (federal) 9.0/8.8; tax administration federal 53.8/51.4, states 143.5/130.2, municipalities 0.5/0.5. Civil servants' FTE: federal 25.4 (central administration), 2.9 (foreign affairs), 45.3 (tax administration); states 63.4 and 109.6; municipalities 66.0. All civil servants and soldiers, FTE: federal 362.9, states 1,240.2, municipalities 174.8. Table 74111-05: age groups (central administration of all levels: 96,100 aged 55 to 59 and 89,800 aged 60 or more of 607,000). Table 74111-06: average gross monthly pay in June 2024."
+    "note": {
+      "de": "Veröffentlicht am 3. November 2025. Tabellen 74111-03 (Beschäftigte) und 74111-04 (Vollzeitäquivalente), in Tausend, Beschäftigte/Vollzeitäquivalente: politische Führung und zentrale Verwaltung Bund 45,5/42,6, Länder 166,7/153,6, Gemeinden 394,8/347,0; Auswärtige Angelegenheiten (Bund) 9,0/8,8; Finanzverwaltung Bund 53,8/51,4, Länder 143,5/130,2, Gemeinden 0,5/0,5. Vollzeitäquivalente der Beamten: Bund 25,4 (zentrale Verwaltung), 2,9 (Auswärtige Angelegenheiten), 45,3 (Finanzverwaltung); Länder 63,4 und 109,6; Gemeinden 66,0. Alle Beamten und Soldaten, Vollzeitäquivalente: Bund 362,9, Länder 1.240,2, Gemeinden 174,8. Tabelle 74111-05: Altersgruppen (zentrale Verwaltung aller Ebenen: 96.100 im Alter von 55 bis 59 und 89.800 im Alter von 60 und mehr Jahren von 607.000). Tabelle 74111-06: durchschnittliche Bruttomonatsverdienste im Juni 2024.",
+      "en": "Published 3 November 2025. Tables 74111-03 (employees) and 74111-04 (full-time equivalents), in thousands, employees/FTE: political leadership and central administration federal 45.5/42.6, states 166.7/153.6, municipalities 394.8/347.0; foreign affairs (federal) 9.0/8.8; tax administration federal 53.8/51.4, states 143.5/130.2, municipalities 0.5/0.5. Civil servants' FTE: federal 25.4 (central administration), 2.9 (foreign affairs), 45.3 (tax administration); states 63.4 and 109.6; municipalities 66.0. All civil servants and soldiers, FTE: federal 362.9, states 1,240.2, municipalities 174.8. Table 74111-05: age groups (central administration of all levels: 96,100 aged 55 to 59 and 89,800 aged 60 or more of 607,000). Table 74111-06: average gross monthly pay in June 2024."
+    }
   },
   "bt_drs_21_5666": {
     "title": "Antwort der Bundesregierung: Geplante Stelleneinsparungen in der Bundesverwaltung von mindestens 8 Prozent bis zum Jahr 2029, Drucksache 21/5666 vom 28.04.2026",
@@ -1362,7 +1746,10 @@
     "url": "https://dserver.bundestag.de/btd/21/056/2105666.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Pages 2 to 5: 107,441.4 posts outside the areas exempted by section 17(2) of the Budget Act 2026 (among them chapter 0212, Bundestag, 2,671.5 posts), 197,793.4 posts in exempted areas. Page 9: cuts of 0.5 % (2025, actual, 600 posts), 2.2 % (2026, 2,252), 2.0 % (2027, 2,048), 2.0 % (2028, 2,048) and 1.5 % (2029, 1,531); posts that fall vacant cannot be refilled, mainly retirements. Page 10: dismissals are in principle ruled out. Page 10 (question 8): which tasks will disappear cannot yet be said exactly."
+    "note": {
+      "de": "S. 2 bis 5: 107.441,4 Stellen außerhalb der nach § 17 Abs. 2 des Haushaltsgesetzes 2026 ausgenommenen Bereiche (darunter Kapitel 0212, Bundestag, 2.671,5 Stellen), 197.793,4 Stellen in ausgenommenen Bereichen. S. 9: Kürzungen um 0,5 % (2025, Ist, 600 Stellen), 2,2 % (2026, 2.252), 2,0 % (2027, 2.048), 2,0 % (2028, 2.048) und 1,5 % (2029, 1.531); frei werdende Stellen, vor allem durch Ruhestand, dürfen nicht nachbesetzt werden. S. 10: Kündigungen sind grundsätzlich ausgeschlossen. S. 10 (Frage 8): Welche Aufgaben wegfallen, lässt sich noch nicht genau sagen.",
+      "en": "Pages 2 to 5: 107,441.4 posts outside the areas exempted by section 17(2) of the Budget Act 2026 (among them chapter 0212, Bundestag, 2,671.5 posts), 197,793.4 posts in exempted areas. Page 9: cuts of 0.5% (2025, actual, 600 posts), 2.2% (2026, 2,252), 2.0% (2027, 2,048), 2.0% (2028, 2,048) and 1.5% (2029, 1,531); posts that fall vacant, mainly through retirement, cannot be refilled. Page 10: dismissals are in principle ruled out. Page 10 (question 8): which tasks will disappear cannot yet be said exactly."
+    }
   },
   "hg_2026_17": {
     "title": "Haushaltsgesetz 2026, § 17 Stelleneinsparung",
@@ -1370,7 +1757,10 @@
     "url": "https://www.gesetze-im-internet.de/hg_2026/__17.html",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Posts are to be saved in 2026 to the financial extent of 2.2 % of posts, by 31 December 2026; exempt are among others the courts, federal police, Federal Criminal Police Office, customs and budget section 14 (defence)."
+    "note": {
+      "de": "2026 sind bis zum 31. Dezember 2026 Stellen im finanziellen Umfang von 2,2 % der Stellen einzusparen; ausgenommen sind unter anderem die Gerichte, die Bundespolizei, das Bundeskriminalamt, der Zoll und der Einzelplan 14 (Verteidigung).",
+      "en": "Posts are to be saved in 2026 to a financial value of 2.2% of posts, by 31 December 2026; exemptions include the courts, federal police, Federal Criminal Police Office, customs and budget section 14 (defence)."
+    }
   },
   "hib_656_2026": {
     "title": "hib 656/2026: Haushalt 2027: Zwei Prozent Stelleneinsparung geplant (21. August 2026)",
@@ -1378,7 +1768,10 @@
     "url": "https://www.bundestag.de/presse/hib/kurzmeldungen-1205518",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Draft Budget Act 2027 (printed paper 21/7300): posts to be saved to the financial extent of 2 % by 31 December 2027; the same exemptions as in 2026, slightly extended."
+    "note": {
+      "de": "Entwurf des Haushaltsgesetzes 2027 (Drucksache 21/7300): Stellen im finanziellen Umfang von 2 % sind bis zum 31. Dezember 2027 einzusparen; dieselben Ausnahmen wie 2026, leicht erweitert.",
+      "en": "Draft Budget Act 2027 (Bundestag document 21/7300): posts to be saved to a financial value of 2% by 31 December 2027; the same exemptions as in 2026, slightly extended."
+    }
   },
   "hib_947_2026": {
     "title": "hib 947/2026: Haushalt 2027: Personaleinsparungsziele verschärft (16. November 2026)",
@@ -1386,7 +1779,10 @@
     "url": "https://www.bundestag.de/presse/hib/kurzmeldungen-1233460",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Final session of the budget committee: the rate stays at 2 %, but in areas exempted so far (federal police, Federal Criminal Police Office, customs, Federal Agency for Technical Relief, civil protection, IT security, defence) 14 % of posts now fall under the requirement, with reference to the coalition committee of 1 July 2026."
+    "note": {
+      "de": "Bereinigungssitzung des Haushaltsausschusses: Der Satz bleibt bei 2 %, aber in den bisher ausgenommenen Bereichen (Bundespolizei, Bundeskriminalamt, Zoll, Technisches Hilfswerk, Bevölkerungsschutz, IT-Sicherheit, Verteidigung) fallen nun 14 % der Stellen unter die Vorgabe, mit Verweis auf den Koalitionsausschuss vom 1. Juli 2026.",
+      "en": "Final session of the budget committee: the rate stays at 2%, but in areas exempted so far (federal police, Federal Criminal Police Office, customs, Federal Agency for Technical Relief, civil protection, IT security, defence) 14% of posts now fall under the requirement, with reference to the coalition committee of 1 July 2026."
+    }
   },
   "koa_2026_07_02": {
     "title": "Ein Programm für Aufschwung und Beschäftigung (Ergebnis des Koalitionsausschusses vom 1. Juli 2026)",
@@ -1394,7 +1790,10 @@
     "url": "https://www.bundesregierung.de/resource/blob/2196306/2445592/344cc50b4c10a5939658e3fc0a5fd93f/2026-07-02-koaausschuss-data.pdf?download=1",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Item 31 (pages 11 f.): target of an 8 % staff saving at almost all federal authorities and the indirect federal administration where the federal government influences the budget or provides funds; exceptions only to a very limited extent, e.g. critical infrastructure and security authorities, which are to save on overhead; combined with centralising tasks, shared services and merging or abolishing agencies."
+    "note": {
+      "de": "Nr. 31 (S. 11 f.): Ziel einer Personaleinsparung von 8 % bei fast allen Bundesbehörden und in der mittelbaren Bundesverwaltung, soweit der Bund auf den Haushalt Einfluss nimmt oder Mittel bereitstellt; Ausnahmen nur in sehr begrenztem Umfang, etwa für kritische Infrastruktur und Sicherheitsbehörden, die im Overhead sparen sollen; verbunden mit der Bündelung von Aufgaben, gemeinsam genutzten Diensten (Shared Services) und dem Zusammenlegen oder Auflösen von Behörden.",
+      "en": "Item 31 (pages 11 f.): target of an 8% staff saving at almost all federal authorities and the indirect federal administration where the federal government influences the budget or provides funds; exceptions only to a very limited extent, e.g. critical infrastructure and security authorities, which are to save on overhead; combined with centralising tasks, shared services and merging or abolishing agencies."
+    }
   },
   "bmf_eckwerte_2027": {
     "title": "Eckwerte des Regierungsentwurfs zum Bundeshaushalt 2027 und des Finanzplans des Bundes 2026 bis 2030, Kabinettvorlage vom 28. April 2026",
@@ -1402,7 +1801,10 @@
     "url": "https://www.baymevbm.de/Redaktion/Frei-zugaengliche-Medien/Abteilungen-GS/Wirtschaftspolitik/2026/Downloads/Bundesfinanzministerium-Kabinettsvorlage-Eckwerte-zum-Bundeshaushalt-2027.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Page 16, section 11: to reach the coalition's target of cutting 8 % of federal posts, the annual budget act has included a post cut since 2025, 2 % for 2027; outside the exempted areas these requirements amount in effect to a hiring freeze."
+    "note": {
+      "de": "S. 16, Abschnitt 11: Um das Ziel der Koalition zu erreichen, 8 % der Stellen des Bundes abzubauen, enthält das jährliche Haushaltsgesetz seit 2025 eine Stelleneinsparung, für 2027 2 %; außerhalb der ausgenommenen Bereiche kommen diese Vorgaben faktisch einem Einstellungsstopp gleich.",
+      "en": "Page 16, section 11: to reach the coalition's target of cutting 8% of federal posts, the annual budget act has included a post cut since 2025, 2% for 2027; outside the exempted areas these requirements amount in effect to a hiring freeze."
+    }
   },
   "brh_stellenschere_2025": {
     "title": "Stellenmehrung und Stellenschere in der Bundesverwaltung, Bericht nach § 88 Absatz 2 BHO vom 7. Mai 2025",
@@ -1410,7 +1812,10 @@
     "url": "https://bundesrechnungshof.de/fileadmin/import/___Alte_Struktur/Downloads/DE/Berichte/2025/stellenschere-volltext-stellenschere-volltext.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Pages 2, 6 and 7: over 30,000 more posts in the 19th electoral term (2017 to 2021), +8,770 to 296,760 posts in the 2024 budget; since 2020 more than 10 % of posts vacant, over 30,000 in 2023."
+    "note": {
+      "de": "S. 2, 6 und 7: über 30.000 zusätzliche Stellen in der 19. Wahlperiode (2017 bis 2021), im Haushalt 2024 +8.770 auf 296.760 Stellen; seit 2020 mehr als 10 % der Stellen unbesetzt, 2023 über 30.000.",
+      "en": "Pages 2, 6 and 7: over 30,000 more posts in the 19th electoral term (2017 to 2021), +8,770 to 296,760 posts in the 2024 budget; since 2020 more than 10% of posts vacant, over 30,000 in 2023."
+    }
   },
   "bt_drs_13_9980": {
     "title": "Erster Bericht und Fortschreibung des Aktionsprogramms zur weiteren Steigerung von Effektivität und Wirtschaftlichkeit der Bundesverwaltung, Drucksache 13/9980 vom 19.02.1998",
@@ -1418,7 +1823,10 @@
     "url": "https://dserver.bundestag.de/btd/13/099/1309980.pdf",
     "accessed": "2026-11-20",
     "year": 1998,
-    "note": "Page 2: federal staff rose from about 300,000 (1989) to 381,000 (1991) and was cut to about 315,000 posts in the 1998 budget, about 2.4 % a year over eight years, 85 % of it through the civilian staff of defence (57,000 posts); the ministries will have about 18,500 posts at the end of 1998, 13 % fewer than at the peak of about 21,300 in 1992."
+    "note": {
+      "de": "S. 2: Das Personal des Bundes stieg von rund 300.000 (1989) auf 381.000 (1991) und wurde bis zum Haushalt 1998 auf rund 315.000 Stellen verringert, um rund 2,4 % im Jahr über acht Jahre, zu 85 % beim Zivilpersonal der Verteidigung (57.000 Stellen); die Ministerien werden Ende 1998 rund 18.500 Stellen haben, 13 % weniger als auf dem Höchststand von rund 21.300 im Jahr 1992.",
+      "en": "Page 2: federal staff rose from about 300,000 (1989) to 381,000 (1991) and was cut to about 315,000 posts in the 1998 budget, about 2.4% a year over eight years, 85% of it through the civilian staff of defence (57,000 posts); the ministries will have about 18,500 posts at the end of 1998, 13% fewer than at the peak of about 21,300 in 1992."
+    }
   },
   "mdf_bb_pm_13_2026": {
     "title": "Finanzminister Keller: Ziel: Aufwüchse begrenzen – Handlungsfähigkeit sichern, Pressemitteilung 13/2026 vom 14.04.2026",
@@ -1426,7 +1834,10 @@
     "url": "https://mdf.brandenburg.de/mdf/de/ministerium/presse/pressemitteilungen/pressemitteilung/~14-04-2026-finanzminister-zur-haushaltsklausur",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "The cabinet agreed to cut 5 % of posts, exempting police, justice, schools and the tax administration, initially about 700 posts, step by step over the three years 2027 to 2029."
+    "note": {
+      "de": "Das Kabinett hat beschlossen, 5 % der Stellen abzubauen, ausgenommen Polizei, Justiz, Schulen und Finanzverwaltung, zunächst rund 700 Stellen, schrittweise über die drei Jahre 2027 bis 2029.",
+      "en": "The cabinet agreed to cut 5% of posts, exempting police, justice, schools and the tax administration, initially about 700 posts, step by step over the three years 2027 to 2029."
+    }
   },
   "land_nrw_pm_haushalt_2026": {
     "title": "Investieren – Priorisieren – Konsolidieren: Kabinett bringt Landeshaushalt für 2026 auf den Weg (8. Juli 2025)",
@@ -1434,7 +1845,10 @@
     "url": "https://www.land.nrw/pressemitteilung/investieren-priorisieren-konsolidieren-kabinett-bringt-landeshaushalt-fuer-2026",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "In the ministerial administrations a 10 % cut in posts over five years is planned, almost 550 posts in total."
+    "note": {
+      "de": "In den Ministerialverwaltungen ist über fünf Jahre ein Abbau von 10 % der Stellen geplant, insgesamt knapp 550 Stellen.",
+      "en": "In the ministerial administrations a 10% cut in posts over five years is planned, almost 550 posts in total."
+    }
   },
   "tvoed_2025": {
     "title": "Tarifvertrag für den öffentlichen Dienst (TVöD) vom 13. September 2005 in der Fassung des Änderungstarifvertrags Nr. 22 vom 6. April 2025",
@@ -1442,27 +1856,39 @@
     "url": "https://ww2.dbb.de/fileadmin/user_upload/globale_elemente/pdfs/2026/260119_TVoeD-AT_und_BT-V_Bund_und_VKA.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Section 34(2): employees of the federal government, and of municipal employers in the western collective-bargaining area, who are 40 or older can be dismissed after more than 15 years of service only for good cause."
+    "note": {
+      "de": "§ 34 Abs. 2: Beschäftigten des Bundes und kommunaler Arbeitgeber im Tarifgebiet West, die 40 Jahre oder älter sind, kann nach einer Beschäftigungszeit von mehr als 15 Jahren nur aus wichtigem Grund gekündigt werden.",
+      "en": "Section 34(2): employees of the federal government, and of municipal employers in the western collective-bargaining area, who are 40 or older can be dismissed after more than 15 years of service only for good cause."
+    }
   },
   "tv_l_34": {
     "title": "Tarifvertrag für den öffentlichen Dienst der Länder (TV-L), § 34 Kündigung des Arbeitsverhältnisses",
     "publisher": "Bayerische Staatskanzlei (gesetze-bayern.de)",
     "url": "https://www.gesetze-bayern.de/Content/Document/TV_L-34",
     "accessed": "2026-11-20",
-    "note": "Paragraph 2: employees in the western collective-bargaining area who are 40 or older can be dismissed after more than 15 years of service only for good cause."
+    "note": {
+      "de": "Abs. 2: Beschäftigten im Tarifgebiet West, die 40 Jahre oder älter sind, kann nach einer Beschäftigungszeit von mehr als 15 Jahren nur aus wichtigem Grund gekündigt werden.",
+      "en": "Paragraph 2: employees in the western collective-bargaining area who are 40 or older can be dismissed after more than 15 years of service only for good cause."
+    }
   },
   "gg_art_109": {
     "title": "Grundgesetz, Artikel 109",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/gg/art_109.html",
     "accessed": "2026-11-20",
-    "note": "Paragraph 1: the federal government and the states are independent of each other in their budget management."
+    "note": {
+      "de": "Abs. 1: Bund und Länder sind in ihrer Haushaltswirtschaft voneinander unabhängig.",
+      "en": "Paragraph 1: the federal government and the states are independent of each other in their budget management."
+    }
   },
   "gg_art_28": {
     "title": "Grundgesetz, Artikel 28",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/gg/art_28.html",
     "accessed": "2026-11-20",
-    "note": "Paragraph 2: municipalities regulate all local affairs on their own responsibility within the law."
+    "note": {
+      "de": "Abs. 2: Die Gemeinden regeln alle Angelegenheiten der örtlichen Gemeinschaft im Rahmen der Gesetze in eigener Verantwortung.",
+      "en": "Paragraph 2: municipalities regulate all local affairs on their own responsibility within the law."
+    }
   }
 }
