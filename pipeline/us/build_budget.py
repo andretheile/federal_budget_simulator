@@ -267,7 +267,7 @@ NIPA_SMI = nipa("M31809") * 1000  # supplementary medical insurance premiums, ne
 EXP = [
     G("exp.social_security", "Social Security", "Social Security (gesetzliche Rentenversicherung)", code="650", desc=T(
         "Alters-, Hinterbliebenen- und Erwerbsminderungsrenten aus den beiden Treuhandfonds der Social Security, finanziert vor allem aus Lohnsummensteuern. Die Fonds stehen gesetzlich außerhalb des Haushalts („off-budget“), zählen aber zum Gesamthaushalt und zu seinem Defizit.",
-        "Old-age, survivors' and disability benefits paid from the two Social Security trust funds, financed mainly by payroll taxes. By law the trust funds are \"off-budget\", but they are part of the unified budget and its deficit."), children=[
+        "Old-age, survivors' and disability benefits paid from the two Social Security trust funds, financed mainly by payroll taxes. By law the trust funds are \"off-budget,\" but they are part of the unified budget and its deficit."), children=[
         L("exp.social_security.oasi", "Old-age and survivors insurance (OASI)", "Alters- und Hinterbliebenenrenten (OASI)",
           rest=["651"], quality="derived", sources=H3, code="651 less 017-00-8007",
           desc=T("Renten für Ruheständler, ihre Ehepartner und Kinder sowie Hinterbliebene, einschließlich der Verwaltungskosten des Fonds.",
@@ -279,7 +279,7 @@ EXP = [
         L("exp.social_security.di", "Disability insurance (DI)", "Erwerbsminderungsrenten (DI)",
           take=[A("651", "017", "00", "8007")], code="017-00-8007",
           desc=T("Renten für Erwerbstätige, die wegen einer Behinderung nicht mehr arbeiten können, und ihre Angehörigen.",
-                 "Benefits for workers who can no longer work because of a disability, and their dependants."),
+                 "Benefits for workers who can no longer work because of a disability, and their dependents."),
           note=T("Konto „Federal Disability Insurance Trust Fund“ der OMB-Haushaltsdatenbank.", "Account \"Federal Disability Insurance Trust Fund\" of OMB's Public Budget Database.")),
     ]),
     G("exp.medicare", "Medicare", "Medicare (Krankenversicherung der Älteren)", code="570", desc=T(
@@ -319,7 +319,7 @@ EXP = [
         L("exp.health.medicaid", "Medicaid (federal share)", "Medicaid (Bundesanteil)", take=[A("551", "009", "38", "0512")], code="009-38-0512",
           desc=T("Zuschüsse des Bundes an die Bundesstaaten für die Gesundheitsversorgung von Menschen mit geringem Einkommen. Den Rest der Kosten tragen die Bundesstaaten; er ist hier nicht enthalten.",
                  "Federal grants to the states for health care for people with low incomes. The states pay the rest of the cost, which is not included here."),
-          note=T("Konto „Grants to States for Medicaid“.", "Account \"Grants to States for Medicaid\".")),
+          note=T("Konto „Grants to States for Medicaid“.", "Account \"Grants to States for Medicaid.\"")),
         L("exp.health.chip", "Children's Health Insurance Program (CHIP)", "Krankenversicherung für Kinder (CHIP)", take=[A("551", "009", "38", "0515")], code="009-38-0515",
           desc=T("Zuschüsse an die Bundesstaaten für die Krankenversicherung von Kindern aus Familien knapp oberhalb der Medicaid-Grenze.", "Grants to the states for health insurance of children in families just above the Medicaid limit.")),
         L("exp.health.aca_credits", "Premium tax credits for marketplace insurance (ACA)", "Prämienzuschüsse für Versicherungen der Marktplätze (ACA, „Obamacare“)",
@@ -327,10 +327,10 @@ EXP = [
           desc=T("Zuschüsse zu Krankenversicherungen, die auf den Marktplätzen des Affordable Care Act gekauft werden, ausgezahlt als Steuergutschrift.",
                  "Subsidies for health insurance bought on the Affordable Care Act marketplaces, paid as a tax credit."),
           note=T("Konto „Refundable Premium Tax Credit“. Ausgabe ist nur der Teil, der über die geschuldete Einkommensteuer hinaus ausgezahlt wird; der Rest mindert die Einkommensteuer.",
-                 "Account \"Refundable Premium Tax Credit\". Only the part paid out beyond the income tax owed counts as spending; the rest reduces income tax revenue.")),
+                 "Account \"Refundable Premium Tax Credit.\" Only the part paid out beyond the income tax owed counts as spending; the rest reduces income tax revenue.")),
         L("exp.health.other_care", "Other health care services", "Übrige Gesundheitsversorgung", rest=["551"], quality="derived", sources=H3, code="551, rest",
           desc=T("Öffentlicher Gesundheitsdienst (CDC), Gesundheitszentren (HRSA), Indian Health Service, psychische Gesundheit und Suchthilfe (SAMHSA), Krankenversicherung der Bundes- und Postpensionäre, TRICARE for Life für Militärpensionäre, Ausgleichszahlungen zwischen Versicherern der Marktplätze und anderes.",
-                 "Public health (CDC), community health centres (HRSA), Indian Health Service, mental health and addiction services (SAMHSA), health benefits of federal and postal retirees, TRICARE for Life for military retirees, risk-adjustment payments between marketplace insurers, and other programmes."),
+                 "Public health (CDC), community health centers (HRSA), Indian Health Service, mental health and addiction services (SAMHSA), health benefits of federal and postal retirees, TRICARE for Life for military retirees, risk-adjustment payments between marketplace insurers, and other programs."),
           note=T("Teilfunktion 551 (%s) ohne Medicaid, CHIP und die Prämienzuschüsse." % de(sub("551")), "Subfunction 551 (%s) without Medicaid, CHIP and the premium tax credits." % en(sub("551")))),
         L("exp.health.research", "Health research and training (NIH)", "Gesundheitsforschung und Ausbildung (NIH)", rest=["552"], sources=H3, code="552",
           note=T("Teilfunktion 552, davon National Institutes of Health %s." % de(acct("552", "009", "25", "9915")), "Subfunction 552, of which National Institutes of Health %s." % en(acct("552", "009", "25", "9915")))),
@@ -342,7 +342,7 @@ EXP = [
              "Interest on Treasury securities held by the public, less interest the government receives."),
       note=T("Funktion 900 der OMB: Zinsen auf Staatsanleihen %s; abgezogen sind die Zinsen, die bundeseigene Treuhandfonds auf ihre Staatsanleihen erhalten (%s, etwa die Pensionsfonds für Soldaten und Beamte, und %s für die Social-Security-Fonds), da sie innerhalb des Staates bleiben, sowie übrige Zinseinnahmen, vor allem aus Förderkrediten (%s), und Kapitalerträge (%s)." % (
           de(GROSS_INTEREST), de(INT_ON), de(INT_OFF), de(INT_OTHER), de(INT_INVEST)),
-             "OMB function 900: interest on Treasury debt securities %s, less the interest that federal trust funds receive on the Treasury securities they hold (%s, for example the military and civil service retirement funds, and %s for the Social Security trust funds), since it stays within the government, and less other interest received, mainly from federal credit programmes (%s), and other investment income (%s)." % (
+             "OMB function 900: interest on Treasury debt securities %s, less the interest that federal trust funds receive on the Treasury securities they hold (%s, for example the military and civil service retirement funds, and %s for the Social Security trust funds), since it stays within the government, and less other interest received, mainly from federal credit programs (%s), and other investment income (%s)." % (
           en(GROSS_INTEREST), en(INT_ON), en(INT_OFF), en(INT_OTHER), en(INT_INVEST)))),
     G("exp.defense", "National defense", "Verteidigung", code="050", children=[
         L("exp.defense.military_personnel", "Military personnel", "Militärpersonal", take=[dict(sub="051", bureau="05")], sources=H3, code="051 Military Personnel",
@@ -355,23 +355,23 @@ EXP = [
         L("exp.defense.rdte", "Research, development, test and evaluation", "Forschung, Entwicklung und Erprobung", take=[dict(sub="051", bureau="20")], sources=H3, code="051 Research, Development, Test, and Evaluation"),
         L("exp.defense.construction_housing", "Military construction and family housing", "Militärbauten und Wohnungen für Soldatenfamilien", take=[dict(sub="051", bureau=("25", "30"))],
           quality="derived", sources=H3, code="051 Military Construction + Family Housing"),
-        L("exp.defense.other_dod", "Revolving funds and other defence accounts", "Betriebsmittelfonds und übrige Konten", rest=["051"], sources=H3, code="051 Other",
+        L("exp.defense.other_dod", "Revolving funds and other defense accounts", "Betriebsmittelfonds und übrige Konten", rest=["051"], sources=H3, code="051 Other",
           note=T("Zeile „Other“ der Tabelle 3.2: Betriebsmittel- und Treuhandfonds des Verteidigungsministeriums, abzüglich Einnahmen.", "Line \"Other\" of Table 3.2: revolving, management and trust funds of the Department of Defense, less receipts.")),
-        L("exp.defense.atomic_energy", "Nuclear weapons and other atomic energy defence (Department of Energy)", "Atomwaffen und andere militärische Nuklearprogramme (Energieministerium)", rest=["053"], sources=H3, code="053"),
-        L("exp.defense.related", "Other defence-related activities", "Übrige verteidigungsbezogene Aufgaben", rest=["054"], sources=H3, code="054",
+        L("exp.defense.atomic_energy", "Nuclear weapons and other atomic energy defense activities (Department of Energy)", "Atomwaffen und andere militärische Nuklearprogramme (Energieministerium)", rest=["053"], sources=H3, code="053"),
+        L("exp.defense.related", "Other defense-related activities", "Übrige verteidigungsbezogene Aufgaben", rest=["054"], sources=H3, code="054",
           desc=T("Nationale Sicherheitsaufgaben des FBI, Cybersicherheit (CISA), Pensionsfonds der CIA und andere.", "National security work of the FBI, cybersecurity (CISA), the CIA retirement system and others."),
           note=T("Teilfunktion 054. Enthält auch die Zahlungen des allgemeinen Haushalts an den Fonds für Militärpensionen (%s) und deren Verbuchung als Einnahme des Fonds; beide heben sich auf." % de(q(sub="054", account="0040")),
                  "Subfunction 054. Also contains the general fund's payment to the Military Retirement Fund (%s) and its booking as a receipt of the fund; the two cancel out." % en(q(sub="054", account="0040")))),
     ]),
     G("exp.income_security", "Income security", "Einkommenssicherung", code="600", desc=T(
         "Leistungen für Menschen mit geringem Einkommen, Arbeitslosenunterstützung und Pensionen der Bundesbediensteten. Die OMB weist für diese Funktion %s aus; hier sind %s an Arbeitgeberbeiträgen der Behörden zu den Pensionsfonds und %s an Nettoeinnahmen aus Hypothekengarantien abgezogen (siehe die beiden Posten)." % (de(F600), de(-EMPLOYER), de(-MORTGAGE)),
-        "Benefits for people with low incomes, unemployment compensation and pensions of federal employees. OMB's total for this function is %s; here %s of agencies' employer contributions to the retirement funds and %s of net receipts from mortgage guarantees are deducted (see the two items)." % (en(F600), en(-EMPLOYER), en(-MORTGAGE))), children=[
+        "Benefits for people with low incomes, unemployment compensation and retirement benefits of federal employees. OMB's total for this function is %s; here %s of agencies' employer contributions to the retirement funds and %s of net receipts from mortgage guarantees are deducted (see the two items)." % (en(F600), en(-EMPLOYER), en(-MORTGAGE))), children=[
         G("exp.income_security.nutrition", "Food and nutrition assistance", "Ernährungshilfe", code="605", children=[
             L("exp.income_security.nutrition.snap", "Supplemental Nutrition Assistance Program (SNAP)", "Lebensmittelhilfe SNAP („Food Stamps“)", take=[A("605", "005", "84", "3505")], code="005-84-3505",
               desc=T("Monatliches Guthaben für Lebensmittel für Haushalte mit geringem Einkommen.", "A monthly benefit for buying food for households with low incomes.")),
             L("exp.income_security.nutrition.other", "School meals, WIC and other food assistance", "Schulessen, WIC und andere Ernährungshilfen", rest=["605"], quality="derived", sources=H3, code="605, rest",
               note=T("Teilfunktion 605 ohne SNAP: Schulessen und andere Kinderernährung (%s), Ernährungsprogramm für Schwangere, Mütter und Kleinkinder WIC (%s) und weitere." % (de(acct("605", "005", "84", "3539")), de(acct("605", "005", "84", "3510"))),
-                     "Subfunction 605 without SNAP: school meals and other child nutrition (%s), the nutrition programme for women, infants and children WIC (%s), and others." % (en(acct("605", "005", "84", "3539")), en(acct("605", "005", "84", "3510"))))),
+                     "Subfunction 605 without SNAP: school meals and other child nutrition (%s), WIC, the Special Supplemental Nutrition Program for Women, Infants, and Children (%s), and others." % (en(acct("605", "005", "84", "3539")), en(acct("605", "005", "84", "3510"))))),
         ]),
         G("exp.income_security.other", "Other income support", "Weitere Leistungen für Geringverdienende", code="609", children=[
             L("exp.income_security.other.ssi", "Supplemental Security Income (SSI)", "Grundsicherung für Ältere und Menschen mit Behinderung (SSI)",
@@ -398,12 +398,12 @@ EXP = [
               de(sub("604")), de(acct("604", "025", "03", "0302")), de(acct("604", "025", "09", "0303")), de(-MORTGAGE), de(F370)),
                  "Own allocation. Housing assistance (subfunction 604): %s, of which tenant-based vouchers %s and project-based rental assistance %s. Deducted: the net receipts of federal mortgage guarantees (subfunction 371) of %s, mainly from the Federal Housing Administration's mortgage insurance, guarantee fees of Fannie Mae and Freddie Mac, and Ginnie Mae. The budget books them as negative spending in function 370 (\"Commerce and housing credit\"), which as a whole was negative (−%s) and therefore cannot be shown as an item of its own." % (
               en(sub("604")), en(acct("604", "025", "03", "0302")), en(acct("604", "025", "09", "0303")), en(-MORTGAGE), en(F370)))),
-        L("exp.income_security.federal_retirement", "Federal civilian and military pensions, net of agencies' contributions", "Pensionen für Bundesbeamte und Soldaten, abzüglich der Beiträge der Behörden",
+        L("exp.income_security.federal_retirement", "Federal civilian and military retirement, net of agency contributions", "Pensionen für Bundesbeamte und Soldaten, abzüglich der Beiträge der Behörden",
           rest=["602", "951", "952"], quality="derived", sources=H3, code="602 + 951 + 952",
-          desc=T("Pensionen und Erwerbsminderungsleistungen aus dem Pensionsfonds der zivilen Bundesbediensteten und dem Fonds für Militärpensionen.", "Pensions and disability benefits paid from the Civil Service Retirement and Disability Fund and the Military Retirement Fund."),
+          desc=T("Pensionen und Erwerbsminderungsleistungen aus dem Pensionsfonds der zivilen Bundesbediensteten und dem Fonds für Militärpensionen.", "Retirement and disability benefits paid from the Civil Service Retirement and Disability Fund and the Military Retirement Fund."),
           note=T("Eigene Zuordnung. Gezahlte Pensionen (Teilfunktion 602): %s. Abgezogen: %s, die Bundesbehörden als Arbeitgeber für ihr eigenes Personal an die Pensionsfonds, an die Social Security und an Medicare gezahlt haben (Teilfunktionen 951 und 952, „undistributed offsetting receipts“). Diese Beiträge sind bereits als Ausgaben der Behörden gezählt, etwa beim Militärpersonal, und der Haushalt ordnet ihre Gegenbuchung keiner Funktion zu. Der Abzug an dieser Stelle hält die Summe gleich den amtlichen Ausgaben, ohne einen negativen Posten." % (
               de(sub("602")), de(-EMPLOYER)),
-                 "Own allocation. Pensions paid (subfunction 602): %s. Deducted: %s that federal agencies paid as employers for their own staff into the retirement funds, Social Security and Medicare (subfunctions 951 and 952, \"undistributed offsetting receipts\"). These contributions are already counted as spending of the agencies, for example under military personnel, and the budget assigns their counterpart to no function. Deducting them here keeps the total equal to official outlays without a negative item." % (
+                 "Own allocation. Retirement benefits paid (subfunction 602): %s. Deducted: %s that federal agencies paid as employers for their own staff into the retirement funds, Social Security and Medicare (subfunctions 951 and 952, \"undistributed offsetting receipts\"). These contributions are already counted as spending of the agencies, for example under military personnel, and the budget assigns their counterpart to no function. Deducting them here keeps the total equal to official outlays without a negative item." % (
               en(sub("602")), en(-EMPLOYER)))),
         L("exp.income_security.other_retirement", "Railroad retirement and pension insurance (PBGC)", "Eisenbahnerrenten und Insolvenzsicherung von Betriebsrenten (PBGC)", rest=["601"], sources=H3, code="601"),
     ]),
@@ -419,7 +419,7 @@ EXP = [
           note=T("Konten der Federal Highway Administration in Teilfunktion 401, vor allem Zuschüsse an die Bundesstaaten aus dem Highway Trust Fund.", "Accounts of the Federal Highway Administration in subfunction 401, mainly grants to the states from the Highway Trust Fund.")),
         L("exp.transportation.transit", "Public transit", "Öffentlicher Nahverkehr", take=[dict(sub="401", agency="021", bureau="36")], quality="derived", code="021-36 in 401"),
         L("exp.transportation.rail", "Rail, including Amtrak", "Bahn, einschließlich Amtrak", take=[dict(sub="401", agency="021", bureau="27")], quality="derived", code="021-27 in 401"),
-        L("exp.transportation.other_ground", "Road safety and other ground transport", "Verkehrssicherheit und übriger Landverkehr", rest=["401"], quality="derived", sources=H3, code="401, rest"),
+        L("exp.transportation.other_ground", "Highway safety and other ground transportation", "Verkehrssicherheit und übriger Landverkehr", rest=["401"], quality="derived", sources=H3, code="401, rest"),
         L("exp.transportation.air", "Aviation", "Luftverkehr", rest=["402"], sources=H3, code="402",
           desc=T("Flugsicherung und Flughäfen (FAA), Fluggastkontrollen (TSA).", "Air traffic control and airports (FAA), passenger screening (TSA).")),
         L("exp.transportation.water_other", "Coast Guard, shipping and other", "Küstenwache, Schifffahrt und Sonstiges", rest=["403", "407"], quality="derived", sources=H3, code="403 + 407"),
@@ -450,7 +450,7 @@ EXP = [
           desc=T("Bauten und Unterhalt des Corps of Engineers und des Bureau of Reclamation.", "Projects of the Army Corps of Engineers and the Bureau of Reclamation.")),
         L("exp.natural_resources.land", "Conservation and land management, net of offshore royalties", "Naturschutz und Verwaltung bundeseigener Flächen, abzüglich Offshore-Förderabgaben",
           rest=["302", "953", "954"], quality="derived", sources=H3, code="302 + 953 + 954",
-          desc=T("Forstverwaltung und Waldbrandbekämpfung, Naturschutzprogramme für Landwirte, Verwaltung der Flächen und Bodenschätze des Bundes.", "Forest Service and wildland fire, conservation programmes for farmers, management of federal lands and minerals."),
+          desc=T("Forstverwaltung und Waldbrandbekämpfung, Naturschutzprogramme für Landwirte, Verwaltung der Flächen und Bodenschätze des Bundes.", "Forest Service and wildland fire, conservation programs for farmers, management of federal lands and minerals."),
           note=T("Eigene Zuordnung. Teilfunktion 302: %s, bereits abzüglich der Förderabgaben an Land. Abgezogen außerdem: Pachten und Förderabgaben für Öl und Gas auf dem äußeren Festlandsockel und Verkäufe von Vermögen (Teilfunktionen 953 und 954, %s), die der Haushalt keiner Funktion zuordnet." % (de(sub("302")), de(-OCS)),
                  "Own allocation. Subfunction 302: %s, already net of royalties on public lands. Also deducted: rents and royalties for oil and gas on the Outer Continental Shelf and sales of major assets (subfunctions 953 and 954, %s), which the budget assigns to no function." % (en(sub("302")), en(-OCS)))),
         L("exp.natural_resources.recreation", "National parks and recreation", "Nationalparks und Erholung", rest=["303"], sources=H3, code="303"),
@@ -460,14 +460,14 @@ EXP = [
         L("exp.education.schools_colleges", "Schools, colleges and student aid, student loans netted", "Schulen, Hochschulen und Studienförderung, Studienkredite saldiert",
           rest=["501", "502", "503"], quality="derived", sources=H3 + ["omb_ap_credit_fy2027"], code="501 + 502 + 503",
           desc=T("Zuschüsse für Schulen mit benachteiligten Schülern (Title I) und für Sonderpädagogik, Pandemiehilfen für Schulen, Pell-Stipendien und die Studienkredite des Bundes.",
-                 "Grants to schools for disadvantaged pupils (Title I) and for special education, pandemic aid to schools, Pell grants and the federal student loans."),
+                 "Grants to schools for disadvantaged students (Title I) and for special education, pandemic aid to schools, Pell grants and the federal student loans."),
           note=T("Schulen (Teilfunktion 501): %s. Pell-Stipendien und übrige Studienförderung: %s. Die Studienkredite des Bundes senkten die Ausgaben 2025 dagegen um %s: Ein Kredit zählt bei Vergabe mit seinen erwarteten Gesamtkosten, und spätere Änderungen dieser Kosten werden gebucht, sobald sie geschätzt werden. 2025 buchte das Direktkreditprogramm %s als negative Subvention; die OMB schätzt die künftigen Kosten aller ausstehenden Studienkredite Ende 2025 auf %s, nach %s ein Jahr zuvor (Analytical Perspectives, Tabelle 4-1). Weil die Hochschulförderung (Teilfunktion 502) damit insgesamt negativ war (%s), ist sie hier mit Schulen und Bildungsforschung (503) zusammengefasst." % (
               de(sub("501")), de(sub("502") - STUDENT_LOANS), de(-STUDENT_LOANS), de(-NEG_SUBSIDY), de(SL25_COST * 1e6), de(SL24_COST * 1e6), "−" + de(-sub("502"))),
-                 "Schools (subfunction 501): %s. Pell grants and other student aid: %s. The federal student loans, by contrast, lowered spending in 2025 by %s: a loan counts at its expected lifetime cost when it is made, and later changes in that cost are booked when they are estimated. In 2025 the Direct Loan programme booked %s as negative subsidy; OMB puts the future cost of all outstanding federal student loans at %s at the end of 2025, after %s a year earlier (Analytical Perspectives, Table 4-1). Because higher education (subfunction 502) was negative as a whole (−%s), it is combined here with schools and education research (503)." % (
+                 "Schools (subfunction 501): %s. Pell grants and other student aid: %s. The federal student loans, by contrast, lowered spending in 2025 by %s: a loan counts at its expected lifetime cost when it is made, and later changes in that cost are booked when they are estimated. In 2025 the Direct Loan program booked %s as negative subsidy; OMB puts the future cost of all outstanding federal student loans at %s at the end of 2025, after %s a year earlier (Analytical Perspectives, Table 4-1). Because higher education (subfunction 502) was negative as a whole (−%s), it is combined here with schools and education research (503)." % (
               en(sub("501")), en(sub("502") - STUDENT_LOANS), en(-STUDENT_LOANS), en(-NEG_SUBSIDY), en(SL25_COST * 1e6), en(SL24_COST * 1e6), en(-sub("502"))))),
         L("exp.education.social_services", "Social services", "Soziale Dienste", rest=["506"], sources=H3, code="506",
           desc=T("Head Start, Kinder- und Jugendhilfe, Altenhilfe, berufliche Rehabilitation.", "Head Start, child welfare, services for the aging, vocational rehabilitation.")),
-        L("exp.education.training", "Job training and labour services", "Arbeitsförderung und Arbeitsverwaltung", rest=["504", "505"], quality="derived", sources=H3, code="504 + 505"),
+        L("exp.education.training", "Job training and labor services", "Arbeitsförderung und Arbeitsverwaltung", rest=["504", "505"], quality="derived", sources=H3, code="504 + 505"),
     ]),
     G("exp.agriculture", "Agriculture", "Landwirtschaft", code="350", children=[
         L("exp.agriculture.farm_income", "Farm income support and crop insurance", "Einkommensstützung und Ernteversicherung", rest=["351"], sources=H3, code="351"),
@@ -475,19 +475,19 @@ EXP = [
     ]),
     G("exp.international", "International affairs", "Internationale Angelegenheiten", code="150", desc=T(
         "Die OMB weist für diese Funktion %s aus, einschließlich negativer Ausgaben der internationalen Finanzprogramme." % de(F150),
-        "OMB's total for this function is %s, including negative outlays of the international financial programmes." % en(F150)), children=[
+        "OMB's total for this function is %s, including negative outlays of the international financial programs." % en(F150)), children=[
         L("exp.international.aid", "Development and humanitarian aid", "Entwicklungs- und humanitäre Hilfe", rest=["151"], sources=H3, code="151",
           desc=T("Globale Gesundheitsprogramme, Katastrophen- und Flüchtlingshilfe, Entwicklungshilfe, Nahrungsmittelhilfe, Beiträge zur Weltbanktochter IDA, Millennium Challenge Corporation, Friedenskorps.",
-                 "Global health programmes, disaster and refugee assistance, development assistance, food aid, contributions to the World Bank's IDA, the Millennium Challenge Corporation, the Peace Corps.")),
+                 "Global health programs, disaster and refugee assistance, development assistance, food aid, contributions to the World Bank's IDA, the Millennium Challenge Corporation, the Peace Corps.")),
         L("exp.international.security", "Security assistance, net of the Foreign Military Sales trust fund", "Sicherheitshilfe, saldiert mit dem Treuhandfonds für Rüstungsexporte (FMS)",
           rest=["152"], take=[A("155", "184", "70", "8242"), A("155", "184", "70", "824210")], quality="derived", sources=H3, code="152 + 184-70-8242",
           note=T("Internationale Sicherheitshilfe (Teilfunktion 152): %s, davon Economic Support Fund %s und Militärfinanzierung für Partnerstaaten (Foreign Military Financing) %s. Saldiert: der Treuhandfonds für Rüstungsverkäufe an ausländische Regierungen (Foreign Military Sales), über den auch die Militärfinanzierung ausgegeben wird; 2025 nahm er %s mehr ein als er auszahlte. Er gehört zur Teilfunktion 155 (internationale Finanzprogramme), die insgesamt negativ war." % (
               de(sub("152")), de(q(sub="152", account="1037")), de(q(sub="152", account="1082")), de(-(FMS_IN + FMS_OUT))),
-                 "International security assistance (subfunction 152): %s, of which the Economic Support Fund %s and Foreign Military Financing %s. Netted: the trust fund for arms sales to foreign governments (Foreign Military Sales), through which Foreign Military Financing is also spent; in 2025 it took in %s more than it paid out. It belongs to subfunction 155 (international financial programmes), which was negative as a whole." % (
+                 "International security assistance (subfunction 152): %s, of which the Economic Support Fund %s and Foreign Military Financing %s. Netted: the trust fund for arms sales to foreign governments (Foreign Military Sales), through which Foreign Military Financing is also spent; in 2025 it took in %s more than it paid out. It belongs to subfunction 155 (international financial programs), which was negative as a whole." % (
               en(sub("152")), en(q(sub="152", account="1037")), en(q(sub="152", account="1082")), en(-(FMS_IN + FMS_OUT))))),
         L("exp.international.diplomacy", "Diplomacy, embassies and exchanges", "Diplomatie, Botschaften und Austausch", rest=["153", "154", "155"], quality="derived", sources=H3, code="153 + 154 + 155, rest",
           note=T("Teilfunktionen 153 und 154 (%s), abzüglich der Visa- und Passgebühren, sowie der Rest der internationalen Finanzprogramme (%s, vor allem der Devisenstabilisierungsfonds)." % (de(sub("153", "154")), "−" + de(-(sub("155") - FMS_IN - FMS_OUT))),
-                 "Subfunctions 153 and 154 (%s), net of visa and passport fees, and the rest of the international financial programmes (−%s, mainly the Exchange Stabilization Fund)." % (en(sub("153", "154")), en(-(sub("155") - FMS_IN - FMS_OUT))))),
+                 "Subfunctions 153 and 154 (%s), net of visa and passport fees, and the rest of the international financial programs (−%s, mainly the Exchange Stabilization Fund)." % (en(sub("153", "154")), en(-(sub("155") - FMS_IN - FMS_OUT))))),
     ]),
     G("exp.science", "General science, space and technology", "Wissenschaft, Raumfahrt und Technologie", code="250", children=[
         L("exp.science.space", "Space flight and research (NASA)", "Raumfahrt und -forschung (NASA)", rest=["252"], sources=H3, code="252"),
@@ -497,7 +497,7 @@ EXP = [
     G("exp.general_government", "General government", "Allgemeine Verwaltung", code="800", children=[
         L("exp.general_government.irs", "Internal Revenue Service (IRS)", "Bundessteuerbehörde (IRS)", take=[dict(sub="803", agency="015", bureau="45")], quality="derived", code="015-45 in 803",
           desc=T("Steuerberatung, Steuerprüfung und -vollstreckung, Betrieb und IT der Steuerbehörde. Die auszahlbaren Steuergutschriften, die sie überweist, stehen bei den Programmen, denen sie dienen.",
-                 "Taxpayer services, enforcement, operations and IT of the tax agency. The refundable tax credits it pays out are shown with the programmes they serve.")),
+                 "Taxpayer services, enforcement, operations and IT of the tax agency. The refundable tax credits it pays out are shown with the programs they serve.")),
         L("exp.general_government.fiscal_assistance", "General payments to states and territories", "Allgemeine Zahlungen an Bundesstaaten und Territorien", rest=["806"], sources=H3, code="806"),
         L("exp.general_government.congress", "Congress and legislative agencies", "Kongress und Einrichtungen der Legislative", rest=["801"], sources=H3, code="801"),
         L("exp.general_government.other", "Other general government, net of general receipts", "Übrige allgemeine Verwaltung, abzüglich allgemeiner Einnahmen",
@@ -507,7 +507,7 @@ EXP = [
     ]),
     G("exp.energy", "Energy", "Energie", code="270", children=[
         L("exp.energy.supply", "Energy supply", "Energieversorgung", rest=["271"], sources=H3, code="271"),
-        L("exp.energy.other", "Energy conservation, petroleum reserve and regulation", "Energieeinsparung, strategische Ölreserve und Regulierung", rest=["272", "274", "276"], quality="derived", sources=H3, code="272 + 274 + 276"),
+        L("exp.energy.other", "Energy conservation, Strategic Petroleum Reserve and regulation", "Energieeinsparung, strategische Ölreserve und Regulierung", rest=["272", "274", "276"], quality="derived", sources=H3, code="272 + 274 + 276"),
     ]),
     G("exp.commerce", "Commerce, postal service and deposit insurance", "Wirtschaftsförderung, Post und Einlagensicherung", code="370 without 371", desc=T(
         "Die Funktion „Commerce and housing credit“ der OMB war 2025 negativ (−%s): Die Einnahmen aus Hypothekengarantien und Einlagensicherung überstiegen die Ausgaben. Die Hypothekengarantien sind bei den Wohnungshilfen abgezogen; hier steht der Rest." % de(F370),
@@ -544,7 +544,7 @@ REV = [
     G("rev.social_insurance", "Social insurance and retirement receipts", "Sozialversicherungsbeiträge", code="933", children=[
         G("rev.social_insurance.social_security", "Social Security payroll taxes", "Beiträge zur Social Security", desc=T(
             "6,2 % des Lohns für Arbeitnehmer und Arbeitgeber, also 12,4 %, bis zur Beitragsbemessungsgrenze von 176.100 Dollar im Kalenderjahr 2025, für Selbständige entsprechend. Die Beiträge fließen in die Treuhandfonds der Social Security und stehen gesetzlich außerhalb des Haushalts („off-budget“).",
-            "6.2 % of wages each for employees and employers, 12.4 % in all, up to the taxable maximum of $176,100 in calendar year 2025, and the same for the self-employed. The taxes go to the Social Security trust funds and are \"off-budget\" by law."), children=[
+            "6.2% of wages each for employees and employers, 12.4% in all, up to the taxable maximum of $176,100 in calendar year 2025, and the same for the self-employed. The taxes go to the Social Security trust funds and are \"off-budget\" by law."), children=[
             L("rev.social_insurance.social_security.oasi", "Old-age and survivors insurance (OASI)", "Alters- und Hinterbliebenenrente (OASI)",
               take=[dict(cat="933", account=("800610", "800611"))], sources=REC_SRC + ["irs_pub15_2025"], code="020-800610 + 800611"),
             L("rev.social_insurance.social_security.di", "Disability insurance (DI)", "Erwerbsminderungsrente (DI)",
@@ -552,7 +552,7 @@ REV = [
         ]),
         L("rev.social_insurance.medicare", "Medicare payroll taxes (Hospital Insurance)", "Medicare-Beiträge (Krankenhausversicherung)",
           take=[dict(cat="933", account=("800501", "800511", "800510"))], sources=REC_SRC + ["irs_pub15_2025"], code="009-800501 + 800511 + 800510",
-          desc=T("1,45 % des Lohns für Arbeitnehmer und Arbeitgeber ohne Obergrenze, dazu 0,9 % für Arbeitnehmer auf den Teil des Lohns über 200.000 Dollar.", "1.45 % of wages each for employees and employers, without a cap, plus 0.9 % for employees on wages above $200,000.")),
+          desc=T("1,45 % des Lohns für Arbeitnehmer und Arbeitgeber ohne Obergrenze, dazu 0,9 % für Arbeitnehmer auf den Teil des Lohns über 200.000 Dollar.", "1.45% of wages each for employees and employers, without a cap, plus 0.9% for employees on wages above $200,000.")),
         L("rev.social_insurance.unemployment", "Unemployment insurance taxes", "Beiträge zur Arbeitslosenversicherung", take=[dict(cat="933", subcat="10")], sources=REC_SRC, code="933-10",
           desc=T("Einzahlungen der Bundesstaaten aus ihren Arbeitgeberabgaben und die Arbeitslosensteuer des Bundes (FUTA).", "Deposits of the states from their employer taxes, and the federal unemployment tax (FUTA).")),
         L("rev.social_insurance.federal_employees", "Federal employees' retirement contributions", "Pensionsbeiträge der Bundesbediensteten", take=[dict(cat="933", subcat="15")], sources=REC_SRC, code="933-15"),
@@ -581,7 +581,7 @@ REV = [
           note=T("Im Haushaltsjahr 2026: %s (Monatsausweis September 2026)." % de(MTS26_FED * K), "Fiscal year 2026: %s (Monthly Treasury Statement, September 2026)." % en(MTS26_FED * K))),
         L("rev.miscellaneous.other", "Fees, fines and other receipts", "Gebühren, Strafen und übrige Einnahmen", rest=["937"], quality="derived", sources=REC_SRC, code="937, rest",
           note=T("Unter anderem Beiträge der Telekommunikationsanbieter zum Universaldienstfonds (%s), Einnahmen des Ausgleichsprogramms zwischen Versicherern der Marktplätze (%s), Strafen und Einziehungen." % (de(rq(account="518310")), de(rq(account="573310"))),
-                 "Among them the telecommunications carriers' contributions to the Universal Service Fund (%s), receipts of the risk-adjustment programme between marketplace insurers (%s), fines and forfeitures." % (en(rq(account="518310")), en(rq(account="573310"))))),
+                 "Among them the telecommunications carriers' contributions to the Universal Service Fund (%s), receipts of the risk-adjustment program between marketplace insurers (%s), fines and forfeitures." % (en(rq(account="518310")), en(rq(account="573310"))))),
     ]),
 ]
 

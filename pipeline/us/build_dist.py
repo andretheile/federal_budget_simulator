@@ -87,11 +87,11 @@ def build():
         "sources": ["irs_soi_w2_2023", "ssa_trustees_2026"],
         "note": {
             "en": ("IRS Statistics of Income, Form W-2 statistics for tax year 2023, Table 1.B: %s million taxpayers with $%s billion of wages, "
-                   "by size of wage income. A person's wages from all employers are added up, as for the wage limit of the employee's share. "
+                   "by size of wage income. A person's wages from all employers are added up, as for the wage base of the employee's share. "
                    "Only workers on an individual income tax return are counted; wages of state and local government employees "
                    "who are not covered by Social Security are included. The top class ($10 million and over) is a Pareto distribution "
-                   "whose mean equals the official class mean. 2023 is the latest year published: every dollar value is uprated by the growth "
-                   "of the Social Security wage limit from $160,200 (2023) to $176,100 (2025), +%.1f %%, which follows the national average "
+                   "whose mean equals the official class mean. 2023 is the latest year published: every dollar value is adjusted by the growth "
+                   "of the Social Security wage base from $160,200 (2023) to $176,100 (2025), +%.1f%%, which follows the national average "
                    "wage index by law; the number of workers is that of 2023.") % (
                 "{:,.1f}".format(count / 1e6), "{:,.1f}".format(wages / 1e9), (UPRATE - 1) * 100),
             "de": ("Statistik der Steuerbehörde IRS zu den Lohnbescheinigungen (Form W-2) für das Steuerjahr 2023, Tabelle 1.B: %s Mio. "

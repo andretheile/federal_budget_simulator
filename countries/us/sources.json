@@ -5,7 +5,7 @@
     "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/outlays_fy2027.xlsx",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "One row per account, subfunction and budget category, in thousand dollars; actual values for fiscal year 2025, published April 2026. Every spending item of the pack is a sum of rows of this file (column 2025), and the rows add up to Historical Table 3.2 in every subfunction and to total outlays of 7,011,105 million dollars."
+    "note": "One row per account, subfunction and budget category, in thousands of dollars; actual values for fiscal year 2025, published April 2026. Every spending item of the pack is a sum of rows of this file (column 2025), and the rows add up to Historical Table 3.2 in every subfunction and to total outlays of 7,011,105 million dollars."
   },
   "omb_pbd_receipts_fy2027": {
     "title": "Public Budget Database: receipts by account and source, Budget of the U.S. Government, Fiscal Year 2027 (receipts_fy2027.xlsx)",
@@ -13,7 +13,7 @@
     "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/receipts_fy2027.xlsx",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "One row per receipt account and source category, in thousand dollars. Every revenue item of the pack is a sum of rows of this file (column 2025); they add up to total receipts of 5,236,421 million dollars."
+    "note": "One row per receipt account and source category, in thousands of dollars. Every revenue item of the pack is a sum of rows of this file (column 2025); they add up to total receipts of 5,236,421 million dollars."
   },
   "omb_hist_fy2027": {
     "title": "Historical Tables, Budget of the U.S. Government, Fiscal Year 2027: Tables 1.1, 2.1, 3.2 and 10.1",
@@ -53,7 +53,7 @@
     "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Resident population of the United States on 1 July 2025: 341,784,857 (the middle of fiscal year 2025 is 1 April 2025). Puerto Rico is not included."
+    "note": "Resident population of the United States on July 1, 2025: 341,784,857 (the middle of fiscal year 2025 is April 1, 2025). Puerto Rico is not included."
   },
   "bea_nipa_3_18b": {
     "title": "NIPA Table 3.18B. Relation of Federal Government Current Receipts and Expenditures in the National Income and Product Accounts to the Budget, Fiscal Years and Quarters",
@@ -61,7 +61,7 @@
     "url": "https://apps.bea.gov/national/Release/TXT/NipaDataA.txt",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Annual series M31801 to M31856 of the flat file of all annual NIPA data (release of 4 November 2026). Fiscal year 2025: federal current receipts 5,550.0 and current expenditures 7,409.9 billion dollars in the national accounts; supplementary medical insurance premiums 160.2 billion dollars."
+    "note": "Annual series M31801 to M31856 of the flat file of all annual NIPA data (release of November 4, 2026). Fiscal year 2025: federal current receipts 5,550.0 and current expenditures 7,409.9 billion dollars in the national accounts; supplementary medical insurance premiums 160.2 billion dollars."
   },
   "irs_pub15_2025": {
     "title": "Publication 15 (Circular E), Employer's Tax Guide, for use in 2025",
@@ -69,26 +69,26 @@
     "url": "https://www.irs.gov/pub/irs-prior/p15--2025.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Social Security tax 6.2 % each for employee and employer on wages up to 176,100 dollars; Medicare tax 1.45 % each without a wage base limit; Additional Medicare Tax of 0.9 % withheld from wages above 200,000 dollars."
+    "note": "Social Security tax 6.2% each for employee and employer on wages up to 176,100 dollars; Medicare tax 1.45% each without a wage base limit; Additional Medicare Tax of 0.9% withheld from wages above 200,000 dollars."
   },
   "plaw_119_1": {
-    "title": "Public Law 119-1, Laken Riley Act (29 January 2025)",
+    "title": "Public Law 119-1, Laken Riley Act (January 29, 2025)",
     "publisher": "U.S. Government Publishing Office (govinfo)",
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ1.xml",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Amends section 236(c) of the Immigration and Nationality Act: detention of inadmissible aliens charged with burglary, theft, larceny, shoplifting, assault of a law enforcement officer and other offences."
+    "note": "Amends section 236(c) of the Immigration and Nationality Act: detention of inadmissible aliens charged with burglary, theft, larceny, shoplifting, assault of a law enforcement officer and other offenses."
   },
   "plaw_119_21": {
-    "title": "Public Law 119-21, an act to provide for reconciliation pursuant to title II of H. Con. Res. 14 (4 July 2025)",
+    "title": "Public Law 119-21, an act to provide for reconciliation pursuant to title II of H. Con. Res. 14 (July 4, 2025)",
     "publisher": "U.S. Government Publishing Office (govinfo)",
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ21.xml",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Sections 90001 (border wall, 46.55 billion dollars), 90003 (ICE detention capacity, 45.0 billion) and 100052 (ICE, 29.85 billion), available until 30 September 2029. Section 11(b) of the Internal Revenue Code (corporate rate) is not amended."
+    "note": "Sections 90001 (border wall, 46.55 billion dollars), 90003 (ICE detention capacity, 45.0 billion) and 100052 (ICE, 29.85 billion), available until September 30, 2029. Section 11(b) of the Internal Revenue Code (corporate rate) is not amended."
   },
   "plaw_119_28": {
-    "title": "Public Law 119-28, Rescissions Act of 2025 (24 July 2025)",
+    "title": "Public Law 119-28, Rescissions Act of 2025 (July 24, 2025)",
     "publisher": "U.S. Government Publishing Office (govinfo)",
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ28.xml",
     "accessed": "2026-11-20",
@@ -96,23 +96,23 @@
     "note": "Nineteen rescissions of unobligated balances for international affairs, together 7,903 million dollars, among them development assistance 2,500 million, Economic Support Fund 1,650 million, migration and refugee assistance 800 million and global health programs 500 million (HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health exempted); also the Corporation for Public Broadcasting."
   },
   "plaw_119_98": {
-    "title": "Public Law 119-98, Secure America Act (10 June 2026)",
+    "title": "Public Law 119-98, Secure America Act (June 10, 2026)",
     "publisher": "U.S. Government Publishing Office (govinfo)",
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ98.xml",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Reconciliation act: 69.545 billion dollars for fiscal year 2026, available until 30 September 2029: CBP 26.02 billion (sections 101, 103, 201), ICE 38.525 billion (sections 102, 202), Department of Homeland Security 5.0 billion (sections 104, 203)."
+    "note": "Reconciliation act: 69.545 billion dollars for fiscal year 2026, available until September 30, 2029: CBP 26.02 billion (sections 101, 103, 201), ICE 38.525 billion (sections 102, 202), Department of Homeland Security 5.0 billion (sections 104, 203)."
   },
   "plaw_119_103": {
-    "title": "Public Law 119-103, Continuing Appropriations and Extensions Act, 2027 (2 September 2026)",
+    "title": "Public Law 119-103, Continuing Appropriations and Extensions Act, 2027 (September 2, 2026)",
     "publisher": "U.S. Government Publishing Office (govinfo)",
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ103.xml",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section 106: continuing appropriations available until 11 December 2026 at the latest."
+    "note": "Section 106: continuing appropriations available until December 11, 2026, at the latest."
   },
   "scotus_24_1287": {
-    "title": "Learning Resources, Inc. v. Trump, No. 24-1287, together with Trump v. V.O.S. Selections, Inc., No. 25-250 (decided 20 February 2026), 607 U.S.",
+    "title": "Learning Resources, Inc. v. Trump, No. 24-1287, together with Trump v. V.O.S. Selections, Inc., No. 25-250 (decided February 20, 2026), 607 U.S.",
     "publisher": "Supreme Court of the United States",
     "url": "https://www.supremecourt.gov/opinions/25pdf/607us2r12_8nj9.pdf",
     "accessed": "2026-11-20",
@@ -120,15 +120,15 @@
     "note": "Held: the International Emergency Economic Powers Act does not authorize the President to impose tariffs."
   },
   "fr_2026_03824": {
-    "title": "Proclamation of 20 February 2026, Imposing a Temporary Import Surcharge To Address Fundamental International Payments Problems, 91 FR 9339",
+    "title": "Proclamation of February 20, 2026, Imposing a Temporary Import Surcharge To Address Fundamental International Payments Problems, 91 FR 9339",
     "publisher": "Federal Register (Office of the Federal Register)",
     "url": "https://www.govinfo.gov/content/pkg/FR-2026-02-25/pdf/2026-03824.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section 122 of the Trade Act of 1974: 10 percent ad valorem on all imports with exceptions, from 24 February 2026 through 24 July 2026 unless extended by an Act of Congress; section 122 allows up to 15 percent for up to 150 days."
+    "note": "Section 122 of the Trade Act of 1974: 10 percent ad valorem on all imports with exceptions, from February 24, 2026, through July 24, 2026, unless extended by an Act of Congress; section 122 allows up to 15 percent for up to 150 days."
   },
   "fr_2026_03832": {
-    "title": "Executive Order 14389 of 20 February 2026, Ending Certain Tariff Actions, 91 FR 9437",
+    "title": "Executive Order 14389 of February 20, 2026, Ending Certain Tariff Actions, 91 FR 9437",
     "publisher": "Federal Register (Office of the Federal Register)",
     "url": "https://www.govinfo.gov/content/pkg/FR-2026-02-25/pdf/2026-03832.pdf",
     "accessed": "2026-11-20",
@@ -136,7 +136,7 @@
     "note": "The additional duties imposed under IEEPA by Executive Orders 14193, 14194, 14195, 14245, 14257, 14323, 14329, 14380 and 14382 shall no longer be in effect."
   },
   "fr_2026_15274": {
-    "title": "Memorandum of 23 July 2026, Actions by the United States in the Investigations Under Section 301 of the Trade Act of 1974 of the Acts, Policies, and Practices of 60 Economies, 91 FR 47717",
+    "title": "Memorandum of July 23, 2026, Actions by the United States in the Investigations Under Section 301 of the Trade Act of 1974 of the Acts, Policies, and Practices of 60 Economies, 91 FR 47717",
     "publisher": "Federal Register (Office of the Federal Register)",
     "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-28/pdf/2026-15274.pdf",
     "accessed": "2026-11-20",
@@ -152,7 +152,7 @@
     "note": "Goods imports, balance-of-payments basis, seasonally adjusted, million dollars. October 2024 to September 2025 (fiscal year 2025): 3,482,146; October 2025 to September 2026: 3,631,243. The address always holds the latest release."
   },
   "jct_jcx_11_21": {
-    "title": "New Income and Payroll Tax Offsets to Changes in Excise Tax Revenues for 2021-2031 (JCX-11-21), 23 February 2021",
+    "title": "New Income and Payroll Tax Offsets to Changes in Excise Tax Revenues for 2021-2031 (JCX-11-21), February 23, 2021",
     "publisher": "Joint Committee on Taxation (via govinfo)",
     "url": "https://www.govinfo.gov/content/pkg/GOVPUB-Y4_T19_4-PURL-gpo157077/pdf/GOVPUB-Y4_T19_4-PURL-gpo157077.pdf",
     "accessed": "2026-11-20",
@@ -176,15 +176,15 @@
     "note": "United States, 2025 estimate: 980,000 million dollars, 3.22 percent of GDP (2024: 3.21 percent). Personnel expenditure includes pensions paid to retirees."
   },
   "nato_5_percent": {
-    "title": "Defence investment and NATO's 5% commitment (updated 29 June 2026)",
+    "title": "Defence investment and NATO's 5% commitment (updated June 29, 2026)",
     "publisher": "NATO",
     "url": "https://www.nato.int/en/what-we-do/introduction-to-nato/defence-expenditures-and-natos-5-commitment",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "The Hague, 2025: 5 percent of GDP annually by 2035, at least 3.5 percent for core defence and up to 1.5 percent for defence- and security-related investment; review in 2029. Wales, 2014: 2 percent commitment."
+    "note": "The Hague, 2025: 5 percent of GDP annually by 2035, at least 3.5 percent for core defense and up to 1.5 percent for defense- and security-related investment; review in 2029. Wales, 2014: 2 percent commitment."
   },
   "treasury_greenbook_fy2025": {
-    "title": "General Explanations of the Administration's Fiscal Year 2025 Revenue Proposals (11 March 2024)",
+    "title": "General Explanations of the Administration's Fiscal Year 2025 Revenue Proposals (March 11, 2024)",
     "publisher": "U.S. Department of the Treasury",
     "url": "https://home.treasury.gov/system/files/131/General-Explanations-FY2025.pdf",
     "accessed": "2026-11-20",
@@ -200,7 +200,7 @@
     "note": "Table V.C6: contribution and benefit base 160,200 dollars (2023), 176,100 (2025), 184,500 (2026); OASDI rate 12.4 percent (OASI 10.6, DI 1.8). Depletion: OASI fourth quarter of 2032, OASDI third quarter of 2034, then 83 percent of scheduled benefits payable."
   },
   "hr_9519_2026": {
-    "title": "H.R. 9519, Social Security 2100 Act, as introduced in the House on 29 June 2026",
+    "title": "H.R. 9519, Social Security 2100 Act, as introduced in the House on June 29, 2026",
     "publisher": "U.S. Government Publishing Office (govinfo)",
     "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr9519ih/pdf/BILLS-119hr9519ih.pdf",
     "accessed": "2026-11-20",

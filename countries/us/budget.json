@@ -59,7 +59,7 @@
             "de": "Beiträge zur Social Security"
           },
           "description": {
-            "en": "6.2 % of wages each for employees and employers, 12.4 % in all, up to the taxable maximum of $176,100 in calendar year 2025, and the same for the self-employed. The taxes go to the Social Security trust funds and are \"off-budget\" by law.",
+            "en": "6.2% of wages each for employees and employers, 12.4% in all, up to the taxable maximum of $176,100 in calendar year 2025, and the same for the self-employed. The taxes go to the Social Security trust funds and are \"off-budget\" by law.",
             "de": "6,2 % des Lohns für Arbeitnehmer und Arbeitgeber, also 12,4 %, bis zur Beitragsbemessungsgrenze von 176.100 Dollar im Kalenderjahr 2025, für Selbständige entsprechend. Die Beiträge fließen in die Treuhandfonds der Social Security und stehen gesetzlich außerhalb des Haushalts („off-budget“)."
           },
           "children": [
@@ -108,7 +108,7 @@
             "de": "Medicare-Beiträge (Krankenhausversicherung)"
           },
           "description": {
-            "en": "1.45 % of wages each for employees and employers, without a cap, plus 0.9 % for employees on wages above $200,000.",
+            "en": "1.45% of wages each for employees and employers, without a cap, plus 0.9% for employees on wages above $200,000.",
             "de": "1,45 % des Lohns für Arbeitnehmer und Arbeitgeber ohne Obergrenze, dazu 0,9 % für Arbeitnehmer auf den Teil des Lohns über 200.000 Dollar."
           },
           "code": "009-800501 + 800511 + 800510",
@@ -391,7 +391,7 @@
             "omb_hist_fy2027"
           ],
           "note": {
-            "en": "Among them the telecommunications carriers' contributions to the Universal Service Fund ($8.6 billion), receipts of the risk-adjustment programme between marketplace insurers ($11.7 billion), fines and forfeitures.",
+            "en": "Among them the telecommunications carriers' contributions to the Universal Service Fund ($8.6 billion), receipts of the risk-adjustment program between marketplace insurers ($11.7 billion), fines and forfeitures.",
             "de": "Unter anderem Beiträge der Telekommunikationsanbieter zum Universaldienstfonds (8,6 Mrd. Dollar), Einnahmen des Ausgleichsprogramms zwischen Versicherern der Marktplätze (11,7 Mrd. Dollar), Strafen und Einziehungen."
           }
         }
@@ -406,7 +406,7 @@
         "de": "Social Security (gesetzliche Rentenversicherung)"
       },
       "description": {
-        "en": "Old-age, survivors' and disability benefits paid from the two Social Security trust funds, financed mainly by payroll taxes. By law the trust funds are \"off-budget\", but they are part of the unified budget and its deficit.",
+        "en": "Old-age, survivors' and disability benefits paid from the two Social Security trust funds, financed mainly by payroll taxes. By law the trust funds are \"off-budget,\" but they are part of the unified budget and its deficit.",
         "de": "Alters-, Hinterbliebenen- und Erwerbsminderungsrenten aus den beiden Treuhandfonds der Social Security, finanziert vor allem aus Lohnsummensteuern. Die Fonds stehen gesetzlich außerhalb des Haushalts („off-budget“), zählen aber zum Gesamthaushalt und zu seinem Defizit."
       },
       "code": "650",
@@ -443,7 +443,7 @@
             "de": "Erwerbsminderungsrenten (DI)"
           },
           "description": {
-            "en": "Benefits for workers who can no longer work because of a disability, and their dependants.",
+            "en": "Benefits for workers who can no longer work because of a disability, and their dependents.",
             "de": "Renten für Erwerbstätige, die wegen einer Behinderung nicht mehr arbeiten können, und ihre Angehörigen."
           },
           "code": "017-00-8007",
@@ -598,7 +598,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Account \"Grants to States for Medicaid\".",
+            "en": "Account \"Grants to States for Medicaid.\"",
             "de": "Konto „Grants to States for Medicaid“."
           }
         },
@@ -642,7 +642,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Account \"Refundable Premium Tax Credit\". Only the part paid out beyond the income tax owed counts as spending; the rest reduces income tax revenue.",
+            "en": "Account \"Refundable Premium Tax Credit.\" Only the part paid out beyond the income tax owed counts as spending; the rest reduces income tax revenue.",
             "de": "Konto „Refundable Premium Tax Credit“. Ausgabe ist nur der Teil, der über die geschuldete Einkommensteuer hinaus ausgezahlt wird; der Rest mindert die Einkommensteuer."
           }
         },
@@ -653,7 +653,7 @@
             "de": "Übrige Gesundheitsversorgung"
           },
           "description": {
-            "en": "Public health (CDC), community health centres (HRSA), Indian Health Service, mental health and addiction services (SAMHSA), health benefits of federal and postal retirees, TRICARE for Life for military retirees, risk-adjustment payments between marketplace insurers, and other programmes.",
+            "en": "Public health (CDC), community health centers (HRSA), Indian Health Service, mental health and addiction services (SAMHSA), health benefits of federal and postal retirees, TRICARE for Life for military retirees, risk-adjustment payments between marketplace insurers, and other programs.",
             "de": "Öffentlicher Gesundheitsdienst (CDC), Gesundheitszentren (HRSA), Indian Health Service, psychische Gesundheit und Suchthilfe (SAMHSA), Krankenversicherung der Bundes- und Postpensionäre, TRICARE for Life für Militärpensionäre, Ausgleichszahlungen zwischen Versicherern der Marktplätze und anderes."
           },
           "code": "551, rest",
@@ -736,7 +736,7 @@
         "omb_pbd_outlays_fy2027"
       ],
       "note": {
-        "en": "OMB function 900: interest on Treasury debt securities $1,215.6 billion, less the interest that federal trust funds receive on the Treasury securities they hold ($117.5 billion, for example the military and civil service retirement funds, and $70.0 billion for the Social Security trust funds), since it stays within the government, and less other interest received, mainly from federal credit programmes ($55.2 billion), and other investment income ($2.7 billion).",
+        "en": "OMB function 900: interest on Treasury debt securities $1,215.6 billion, less the interest that federal trust funds receive on the Treasury securities they hold ($117.5 billion, for example the military and civil service retirement funds, and $70.0 billion for the Social Security trust funds), since it stays within the government, and less other interest received, mainly from federal credit programs ($55.2 billion), and other investment income ($2.7 billion).",
         "de": "Funktion 900 der OMB: Zinsen auf Staatsanleihen 1.215,6 Mrd. Dollar; abgezogen sind die Zinsen, die bundeseigene Treuhandfonds auf ihre Staatsanleihen erhalten (117,5 Mrd. Dollar, etwa die Pensionsfonds für Soldaten und Beamte, und 70,0 Mrd. Dollar für die Social-Security-Fonds), da sie innerhalb des Staates bleiben, sowie übrige Zinseinnahmen, vor allem aus Förderkrediten (55,2 Mrd. Dollar), und Kapitalerträge (2,7 Mrd. Dollar)."
       }
     },
@@ -848,7 +848,7 @@
         {
           "id": "exp.defense.other_dod",
           "label": {
-            "en": "Revolving funds and other defence accounts",
+            "en": "Revolving funds and other defense accounts",
             "de": "Betriebsmittelfonds und übrige Konten"
           },
           "code": "051 Other",
@@ -869,7 +869,7 @@
         {
           "id": "exp.defense.atomic_energy",
           "label": {
-            "en": "Nuclear weapons and other atomic energy defence (Department of Energy)",
+            "en": "Nuclear weapons and other atomic energy defense activities (Department of Energy)",
             "de": "Atomwaffen und andere militärische Nuklearprogramme (Energieministerium)"
           },
           "code": "053",
@@ -886,7 +886,7 @@
         {
           "id": "exp.defense.related",
           "label": {
-            "en": "Other defence-related activities",
+            "en": "Other defense-related activities",
             "de": "Übrige verteidigungsbezogene Aufgaben"
           },
           "description": {
@@ -917,7 +917,7 @@
         "de": "Einkommenssicherung"
       },
       "description": {
-        "en": "Benefits for people with low incomes, unemployment compensation and pensions of federal employees. OMB's total for this function is $701.6 billion; here $144.4 billion of agencies' employer contributions to the retirement funds and $40.7 billion of net receipts from mortgage guarantees are deducted (see the two items).",
+        "en": "Benefits for people with low incomes, unemployment compensation and retirement benefits of federal employees. OMB's total for this function is $701.6 billion; here $144.4 billion of agencies' employer contributions to the retirement funds and $40.7 billion of net receipts from mortgage guarantees are deducted (see the two items).",
         "de": "Leistungen für Menschen mit geringem Einkommen, Arbeitslosenunterstützung und Pensionen der Bundesbediensteten. Die OMB weist für diese Funktion 701,6 Mrd. Dollar aus; hier sind 144,4 Mrd. Dollar an Arbeitgeberbeiträgen der Behörden zu den Pensionsfonds und 40,7 Mrd. Dollar an Nettoeinnahmen aus Hypothekengarantien abgezogen (siehe die beiden Posten)."
       },
       "code": "600",
@@ -967,7 +967,7 @@
                 "omb_pbd_outlays_fy2027"
               ],
               "note": {
-                "en": "Subfunction 605 without SNAP: school meals and other child nutrition ($33.4 billion), the nutrition programme for women, infants and children WIC ($8.0 billion), and others.",
+                "en": "Subfunction 605 without SNAP: school meals and other child nutrition ($33.4 billion), WIC, the Special Supplemental Nutrition Program for Women, Infants, and Children ($8.0 billion), and others.",
                 "de": "Teilfunktion 605 ohne SNAP: Schulessen und andere Kinderernährung (33,4 Mrd. Dollar), Ernährungsprogramm für Schwangere, Mütter und Kleinkinder WIC (8,0 Mrd. Dollar) und weitere."
               }
             }
@@ -1137,11 +1137,11 @@
         {
           "id": "exp.income_security.federal_retirement",
           "label": {
-            "en": "Federal civilian and military pensions, net of agencies' contributions",
+            "en": "Federal civilian and military retirement, net of agency contributions",
             "de": "Pensionen für Bundesbeamte und Soldaten, abzüglich der Beiträge der Behörden"
           },
           "description": {
-            "en": "Pensions and disability benefits paid from the Civil Service Retirement and Disability Fund and the Military Retirement Fund.",
+            "en": "Retirement and disability benefits paid from the Civil Service Retirement and Disability Fund and the Military Retirement Fund.",
             "de": "Pensionen und Erwerbsminderungsleistungen aus dem Pensionsfonds der zivilen Bundesbediensteten und dem Fonds für Militärpensionen."
           },
           "code": "602 + 951 + 952",
@@ -1155,7 +1155,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Own allocation. Pensions paid (subfunction 602): $190.2 billion. Deducted: $144.4 billion that federal agencies paid as employers for their own staff into the retirement funds, Social Security and Medicare (subfunctions 951 and 952, \"undistributed offsetting receipts\"). These contributions are already counted as spending of the agencies, for example under military personnel, and the budget assigns their counterpart to no function. Deducting them here keeps the total equal to official outlays without a negative item.",
+            "en": "Own allocation. Retirement benefits paid (subfunction 602): $190.2 billion. Deducted: $144.4 billion that federal agencies paid as employers for their own staff into the retirement funds, Social Security and Medicare (subfunctions 951 and 952, \"undistributed offsetting receipts\"). These contributions are already counted as spending of the agencies, for example under military personnel, and the budget assigns their counterpart to no function. Deducting them here keeps the total equal to official outlays without a negative item.",
             "de": "Eigene Zuordnung. Gezahlte Pensionen (Teilfunktion 602): 190,2 Mrd. Dollar. Abgezogen: 144,4 Mrd. Dollar, die Bundesbehörden als Arbeitgeber für ihr eigenes Personal an die Pensionsfonds, an die Social Security und an Medicare gezahlt haben (Teilfunktionen 951 und 952, „undistributed offsetting receipts“). Diese Beiträge sind bereits als Ausgaben der Behörden gezählt, etwa beim Militärpersonal, und der Haushalt ordnet ihre Gegenbuchung keiner Funktion zu. Der Abzug an dieser Stelle hält die Summe gleich den amtlichen Ausgaben, ohne einen negativen Posten."
           }
         },
@@ -1323,7 +1323,7 @@
         {
           "id": "exp.transportation.other_ground",
           "label": {
-            "en": "Road safety and other ground transport",
+            "en": "Highway safety and other ground transportation",
             "de": "Verkehrssicherheit und übriger Landverkehr"
           },
           "code": "401, rest",
@@ -1620,7 +1620,7 @@
             "de": "Naturschutz und Verwaltung bundeseigener Flächen, abzüglich Offshore-Förderabgaben"
           },
           "description": {
-            "en": "Forest Service and wildland fire, conservation programmes for farmers, management of federal lands and minerals.",
+            "en": "Forest Service and wildland fire, conservation programs for farmers, management of federal lands and minerals.",
             "de": "Forstverwaltung und Waldbrandbekämpfung, Naturschutzprogramme für Landwirte, Verwaltung der Flächen und Bodenschätze des Bundes."
           },
           "code": "302 + 953 + 954",
@@ -1689,7 +1689,7 @@
             "de": "Schulen, Hochschulen und Studienförderung, Studienkredite saldiert"
           },
           "description": {
-            "en": "Grants to schools for disadvantaged pupils (Title I) and for special education, pandemic aid to schools, Pell grants and the federal student loans.",
+            "en": "Grants to schools for disadvantaged students (Title I) and for special education, pandemic aid to schools, Pell grants and the federal student loans.",
             "de": "Zuschüsse für Schulen mit benachteiligten Schülern (Title I) und für Sonderpädagogik, Pandemiehilfen für Schulen, Pell-Stipendien und die Studienkredite des Bundes."
           },
           "code": "501 + 502 + 503",
@@ -1704,7 +1704,7 @@
             "omb_ap_credit_fy2027"
           ],
           "note": {
-            "en": "Schools (subfunction 501): $68.4 billion. Pell grants and other student aid: $50.4 billion. The federal student loans, by contrast, lowered spending in 2025 by $85.4 billion: a loan counts at its expected lifetime cost when it is made, and later changes in that cost are booked when they are estimated. In 2025 the Direct Loan programme booked $132.9 billion as negative subsidy; OMB puts the future cost of all outstanding federal student loans at $343.1 billion at the end of 2025, after $476.9 billion a year earlier (Analytical Perspectives, Table 4-1). Because higher education (subfunction 502) was negative as a whole (−$35.0 billion), it is combined here with schools and education research (503).",
+            "en": "Schools (subfunction 501): $68.4 billion. Pell grants and other student aid: $50.4 billion. The federal student loans, by contrast, lowered spending in 2025 by $85.4 billion: a loan counts at its expected lifetime cost when it is made, and later changes in that cost are booked when they are estimated. In 2025 the Direct Loan program booked $132.9 billion as negative subsidy; OMB puts the future cost of all outstanding federal student loans at $343.1 billion at the end of 2025, after $476.9 billion a year earlier (Analytical Perspectives, Table 4-1). Because higher education (subfunction 502) was negative as a whole (−$35.0 billion), it is combined here with schools and education research (503).",
             "de": "Schulen (Teilfunktion 501): 68,4 Mrd. Dollar. Pell-Stipendien und übrige Studienförderung: 50,4 Mrd. Dollar. Die Studienkredite des Bundes senkten die Ausgaben 2025 dagegen um 85,4 Mrd. Dollar: Ein Kredit zählt bei Vergabe mit seinen erwarteten Gesamtkosten, und spätere Änderungen dieser Kosten werden gebucht, sobald sie geschätzt werden. 2025 buchte das Direktkreditprogramm 132,9 Mrd. Dollar als negative Subvention; die OMB schätzt die künftigen Kosten aller ausstehenden Studienkredite Ende 2025 auf 343,1 Mrd. Dollar, nach 476,9 Mrd. Dollar ein Jahr zuvor (Analytical Perspectives, Tabelle 4-1). Weil die Hochschulförderung (Teilfunktion 502) damit insgesamt negativ war (−35,0 Mrd. Dollar), ist sie hier mit Schulen und Bildungsforschung (503) zusammengefasst."
           }
         },
@@ -1732,7 +1732,7 @@
         {
           "id": "exp.education.training",
           "label": {
-            "en": "Job training and labour services",
+            "en": "Job training and labor services",
             "de": "Arbeitsförderung und Arbeitsverwaltung"
           },
           "code": "504 + 505",
@@ -1799,7 +1799,7 @@
         "de": "Internationale Angelegenheiten"
       },
       "description": {
-        "en": "OMB's total for this function is $45.2 billion, including negative outlays of the international financial programmes.",
+        "en": "OMB's total for this function is $45.2 billion, including negative outlays of the international financial programs.",
         "de": "Die OMB weist für diese Funktion 45,2 Mrd. Dollar aus, einschließlich negativer Ausgaben der internationalen Finanzprogramme."
       },
       "code": "150",
@@ -1811,7 +1811,7 @@
             "de": "Entwicklungs- und humanitäre Hilfe"
           },
           "description": {
-            "en": "Global health programmes, disaster and refugee assistance, development assistance, food aid, contributions to the World Bank's IDA, the Millennium Challenge Corporation, the Peace Corps.",
+            "en": "Global health programs, disaster and refugee assistance, development assistance, food aid, contributions to the World Bank's IDA, the Millennium Challenge Corporation, the Peace Corps.",
             "de": "Globale Gesundheitsprogramme, Katastrophen- und Flüchtlingshilfe, Entwicklungshilfe, Nahrungsmittelhilfe, Beiträge zur Weltbanktochter IDA, Millennium Challenge Corporation, Friedenskorps."
           },
           "code": "151",
@@ -1842,7 +1842,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "International security assistance (subfunction 152): $15.5 billion, of which the Economic Support Fund $7.5 billion and Foreign Military Financing $6.9 billion. Netted: the trust fund for arms sales to foreign governments (Foreign Military Sales), through which Foreign Military Financing is also spent; in 2025 it took in $13.2 billion more than it paid out. It belongs to subfunction 155 (international financial programmes), which was negative as a whole.",
+            "en": "International security assistance (subfunction 152): $15.5 billion, of which the Economic Support Fund $7.5 billion and Foreign Military Financing $6.9 billion. Netted: the trust fund for arms sales to foreign governments (Foreign Military Sales), through which Foreign Military Financing is also spent; in 2025 it took in $13.2 billion more than it paid out. It belongs to subfunction 155 (international financial programs), which was negative as a whole.",
             "de": "Internationale Sicherheitshilfe (Teilfunktion 152): 15,5 Mrd. Dollar, davon Economic Support Fund 7,5 Mrd. Dollar und Militärfinanzierung für Partnerstaaten (Foreign Military Financing) 6,9 Mrd. Dollar. Saldiert: der Treuhandfonds für Rüstungsverkäufe an ausländische Regierungen (Foreign Military Sales), über den auch die Militärfinanzierung ausgegeben wird; 2025 nahm er 13,2 Mrd. Dollar mehr ein als er auszahlte. Er gehört zur Teilfunktion 155 (internationale Finanzprogramme), die insgesamt negativ war."
           }
         },
@@ -1863,7 +1863,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Subfunctions 153 and 154 ($14.6 billion), net of visa and passport fees, and the rest of the international financial programmes (−$1.7 billion, mainly the Exchange Stabilization Fund).",
+            "en": "Subfunctions 153 and 154 ($14.6 billion), net of visa and passport fees, and the rest of the international financial programs (−$1.7 billion, mainly the Exchange Stabilization Fund).",
             "de": "Teilfunktionen 153 und 154 (14,6 Mrd. Dollar), abzüglich der Visa- und Passgebühren, sowie der Rest der internationalen Finanzprogramme (−1,7 Mrd. Dollar, vor allem der Devisenstabilisierungsfonds)."
           }
         }
@@ -1932,7 +1932,7 @@
             "de": "Bundessteuerbehörde (IRS)"
           },
           "description": {
-            "en": "Taxpayer services, enforcement, operations and IT of the tax agency. The refundable tax credits it pays out are shown with the programmes they serve.",
+            "en": "Taxpayer services, enforcement, operations and IT of the tax agency. The refundable tax credits it pays out are shown with the programs they serve.",
             "de": "Steuerberatung, Steuerprüfung und -vollstreckung, Betrieb und IT der Steuerbehörde. Die auszahlbaren Steuergutschriften, die sie überweist, stehen bei den Programmen, denen sie dienen."
           },
           "code": "015-45 in 803",
@@ -2030,7 +2030,7 @@
         {
           "id": "exp.energy.other",
           "label": {
-            "en": "Energy conservation, petroleum reserve and regulation",
+            "en": "Energy conservation, Strategic Petroleum Reserve and regulation",
             "de": "Energieeinsparung, strategische Ölreserve und Regulierung"
           },
           "code": "272 + 274 + 276",
