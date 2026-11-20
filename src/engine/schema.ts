@@ -283,6 +283,7 @@ export const numberParamSchema = z.strictObject({
   step: z.number().positive(),
   default: z.number(),
   baseline: z.number().optional(),
+  baselineLabel: localizedTextSchema.optional(),
   unitLabel: localizedTextSchema.optional(),
   role: z.literal("assumption").optional(),
 });

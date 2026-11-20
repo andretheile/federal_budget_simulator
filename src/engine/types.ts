@@ -192,6 +192,12 @@ export interface NumberParam {
    */
   baseline?: number;
   /**
+   * What the baseline is, where it is not the base year's value: "Current law", say, for a limit
+   * that the law of the base year already raises later. It then stands in for the base year wherever
+   * the baseline is shown or named ("Current law: 67 years" instead of "2024: 67 years").
+   */
+  baselineLabel?: LocalizedText;
+  /**
    * A display unit written after the number, e.g. "cents per litre". It replaces the generic
    * formatting of `unit` on screen; `unit` still says what the value is for validation.
    */

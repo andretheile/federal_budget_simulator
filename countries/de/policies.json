@@ -2672,7 +2672,11 @@
           "max": 70,
           "step": 0.5,
           "default": 67.5,
-          "baseline": 67
+          "baseline": 67,
+          "baselineLabel": {
+            "de": "Geltendes Recht",
+            "en": "Current law"
+          }
         }
       ],
       "effects": [

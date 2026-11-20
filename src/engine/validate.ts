@@ -429,6 +429,10 @@ function check(
 
       if (param.type === "number") {
         text(POLICIES, [...path, "unitLabel"], param.unitLabel);
+        text(POLICIES, [...path, "baselineLabel"], param.baselineLabel);
+        if (param.baselineLabel !== undefined && param.baseline === undefined) {
+          warn(POLICIES, [...path, "baselineLabel"], `param "${param.id}" names its baseline but has none; drop "baselineLabel" or add "baseline"`);
+        }
         if (param.role === "assumption" && param.baseline !== undefined) {
           warn(POLICIES, [...path, "baseline"], `param "${param.id}" is an assumption, which has no base-year value; drop "baseline" or "role"`);
         }

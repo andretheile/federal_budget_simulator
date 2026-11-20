@@ -858,6 +858,23 @@ describe("number params", () => {
     delete files.policies.policies[6].params[0].unitLabel;
     expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
   });
+
+  it("a name for the baseline is a text in every locale, and only makes sense with a baseline", () => {
+    // family_bonus has no baseline; given one (0: no bonus, so it changes nothing) and a name for it, the pack is fine.
+    const named = (f: Files): void => {
+      f.policies.policies[6].params[0].baseline = 0;
+      f.policies.policies[6].params[0].baselineLabel = { en: "Current law", de: "Geltendes Recht" };
+    };
+    const files = testlandFiles() as Files;
+    named(files);
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+    const AT = "$.policies[6].params[0].baselineLabel";
+    expectOnly((f) => (named(f), delete f.policies.policies[6].params[0].baselineLabel.de), "policies.json", AT, /text for locale "de" is missing/);
+    expectOnly((f) => (named(f), (f.policies.policies[6].params[0].baselineLabel = "Current law")), "policies.json", AT, /expected object/);
+    // A name without a baseline: a warning, since nothing would show it.
+    const warnings = warningsAfter((f) => (named(f), delete f.policies.policies[6].params[0].baseline));
+    expect(warnings).toEqual([{ file: "policies.json", path: AT, message: 'param "amount" names its baseline but has none; drop "baselineLabel" or add "baseline"' }]);
+  });
 });
 
 describe("warnings", () => {
