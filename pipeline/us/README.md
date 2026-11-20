@@ -1,10 +1,12 @@
 # United States: how the budget data is built
 
 `build_budget.py` produces `countries/us/budget.json`, the federal budget of fiscal year 2025 (October 2024 to
-September 2025) in the unified budget, from the files of the Office of Management and Budget (OMB). The other pack
-files (`country.json`, `sources.json`, `policies.json`) are maintained by hand; `--check` also compares the GDP and
-population in `country.json` with the cached sources. The source ids used in the script are the keys of
-`countries/us/sources.json`.
+September 2025) in the unified budget, from the files of the Office of Management and Budget (OMB). `build_dist.py`
+produces `countries/us/distributions/wages.json`, the wages per worker that the Social Security measure is
+calculated on. The other pack files (`country.json`, `sources.json`, `policies.json`) are maintained by hand;
+`build_budget.py --check` also compares the GDP and population in `country.json` with the cached sources, and
+`measures.py --check` recomputes the constants that the measures in `policies.json` take from sources. The source
+ids used in the scripts are the keys of `countries/us/sources.json`.
 
 ## Run it
 
@@ -15,16 +17,18 @@ python3 pipeline/us/fetch_inputs.py            # download what is missing into p
 python3 pipeline/us/build_budget.py            # diagnostics: checks, reconciliation with Treasury, every leaf
 python3 pipeline/us/build_budget.py --check    # rebuild in memory, compare with budget.json and country.json
 python3 pipeline/us/build_budget.py --write    # replace budget.json
+python3 pipeline/us/build_dist.py --check      # the same for distributions/wages.json (--write to replace it)
+python3 pipeline/us/measures.py --check        # the figures behind the measures, compared with policies.json
 npm run validate                               # then check the whole pack
 ```
 
-With the cache as downloaded on 20 November 2026, `--check` reports `budget.json` as identical and finds no problem.
+With the cache as downloaded on 20 November 2026, the three checks report no difference.
 Every run, with or without an option, stops with an error if the leaves do not add up to OMB's published totals.
 
 ## Sources and the cache
 
-`.cache/` holds the downloaded files, one folder per publisher, and is not in git (14 MB, most of it the BEA flat
-file). Nothing in it is executed or imported. OMB rarely replaces a Budget's files after publication, and the
+`.cache/` holds the downloaded files, one folder per publisher, and is not in git (119 MB, of which 77 MB are the
+Trustees Report and 12 MB the BEA flat file). Nothing in it is executed or imported. OMB rarely replaces a Budget's files after publication, and the
 Monthly Treasury Statement for a given month is fixed, so a fresh download should reproduce the pack; BEA's flat file
 is replaced with every NIPA release, which can change the one BEA figure quoted in a note.
 
@@ -42,6 +46,10 @@ is replaced with every NIPA release, which can change the one BEA figure quoted 
 | `census/NST-EST2025-ALLDATA.csv` | Census Bureau, population estimates, Vintage 2025 | population (`country.json`) |
 | `bea/NipaDataA.txt` | BEA, all annual NIPA series | Table 3.18B: national-accounts comparison, Medicare premiums |
 | `irs/p15--2025.pdf` | IRS Publication 15 (2025) | payroll tax rates and wage base in descriptions (read by hand) |
+| `irs/23in01w2all.xlsx` | IRS Statistics of Income, Form W-2 statistics 2023 (October 2026), Table 1 | `build_dist.py`: wages per worker |
+| `census/ft900_exh1.xlsx` | Census Bureau, FT-900 release of November 2026, Exhibit 1 (the address always holds the latest release) | `measures.py`: goods imports for the tariff measure |
+| `mts/mts_table_5_*.csv` | Monthly Treasury Statement, Table 5 (outlays by agency) | `measures.py`: CBP and ICE outlays in 2025 and 2026 |
+| `govinfo/`, `scotus/`, `fr/`, `nato/`, `treasury/` | laws, a bill, the Trustees Report, the Supreme Court's tariff decision, Federal Register documents, NATO and Treasury documents (list in `fetch_inputs.py`) | read by hand for the measures' notes and catches |
 
 ## How the tree is built
 
@@ -125,3 +133,35 @@ used.
 4. Update GDP and population in `country.json` (the diagnostics print them), the base year and its label, the
    totals in the method note, and the `accessed` dates and notes in `sources.json`.
 5. Rebuild with `--write`, run `--check` and `npm run validate`.
+
+## The measures
+
+`policies.json` is written by hand, like the German one, and every note shows its arithmetic. The constants that
+come from a source are recomputed by `measures.py` (`--check` fails if `policies.json` holds another value):
+
+| Measure | Constant | How |
+|---|---|---|
+| `defense_spending_gdp` | offset −0.0322 | NATO's estimate of US defence spending in 2025, 3.22 % of GDP (read by hand from the NATO report); the effect adds the difference to the target times GDP |
+| `corporate_tax_rate` | factor 0.038701 × rate + 0.187279 | Treasury's estimate for a 28 % rate in fiscal year 2025 ($122.5 billion, read by hand) divided by the static gain on 2025 receipts ($452.1 billion × 7/21): 81.3 %, applied to every point of rate change |
+| `tariff_all_imports` | $27.857 billion per point | goods imports from October 2024 to September 2025 (FT-900, $3,482.1 billion) × 1 % × (1 − 0.20) |
+| `tariff_all_imports` | offset 0.221 | the Joint Committee on Taxation's income and payroll tax offset for 2025 (JCX-11-21, read by hand) |
+
+The Social Security measure needs no constant: the engine applies the old and the new rate curve to
+`distributions/wages.json` and carries the relative change over to the payroll taxes. `build_dist.py` prints what
+the 2025 rule and a rule without a cap yield on the distribution (without a cap the taxable wages are 17.9 % higher)
+and checks the bins against Table 1.H, which gives the same wages by multiples of the wage limit.
+
+Data, taken as published: outlays and receipts of 2025 in the budget, imports, NATO's estimate, Treasury's revenue
+estimate, the JCT offset, wages by size class, the wage limits.
+
+Judgement, marked "own judgement" or "own assumption" in the notes:
+
+- **Ranges.** The low and high multipliers of all six measures (foreign aid 0.6 to 1.0, defence ±10 %,
+  enforcement 0.8 to 1.0, wage cap 0.75 to 1.0, corporate rate 0.7 to 1.1, tariff 0.75 to 1.125 and the offset
+  20 % to 25 %).
+- **The tariff's import loss** of 20 % (range 10 % to 40 %): no official estimate could be retrieved; the
+  Congressional Budget Office's estimates of the tariffs' budgetary effects are on cbo.gov, which refuses
+  automated downloads.
+- **The corporate rate**: Treasury's share for 28 % is applied linearly to every rate, up and down.
+- **Wages**: per taxpayer on a tax return, uprated from 2023 to 2025 by the growth of the wage limit; the relative
+  change is applied to the self-employment tax as well.
