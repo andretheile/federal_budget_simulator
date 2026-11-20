@@ -8,7 +8,7 @@ import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { curveChanged, curveSettings } from "../app/curveModel.ts";
 import { collectionsByPolicy, listView } from "../app/listModel.ts";
 import { useUi } from "../app/ui.ts";
-import type { CurvePoint, Goal, ParamValue, PolicyTopic, Scenario, SimulationResult } from "../engine/index.ts";
+import type { CurvePoint, Goal, ParamValue, Policy, PolicyTopic, Scenario, SimulationResult } from "../engine/index.ts";
 import { reducedMotion } from "../hooks/useAnimatedNumber.ts";
 import { preloadEditor } from "./CurveEditor.tsx";
 import { asSentence, exclusionsOf } from "./GoalBar.tsx";
@@ -80,7 +80,12 @@ export function PolicyList({
   const [topic, setTopic] = useState<PolicyTopic | null>(null);
 
   // The measures of the chosen collection (or all), and among them the topics with their counts.
-  const view = listView(pack, scenario, collectionId, topic);
+  // Alphabetical in the language shown; the engine applies the measures in the pack's order all the same.
+  const order = useMemo(
+    () => ({ language: ui.language, label: (policy: Policy) => ui.text(policy.label), topic: (id: PolicyTopic) => t.policies.topics[id] }),
+    [ui, t],
+  );
+  const view = listView(pack, scenario, collectionId, topic, order);
   const { topics, topic: active, shown, hidden, collection } = view;
   const collections = pack.collections ?? [];
   // Per measure, the names of its collections: the same arrays on every render, so cards stay memoized.
