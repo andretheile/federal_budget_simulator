@@ -50,7 +50,7 @@
                   ],
                   "note": {
                     "de": "Volkswirtschaftliche Gesamtrechnungen (286,4 Mrd. Euro) abzüglich des Solidaritätszuschlags zur Lohnsteuer (4,1 Mrd. Euro, Kasse), der gesondert ausgewiesen ist. Höher als die kassenmäßige Lohnsteuer (rund 249 Mrd. Euro, hochgerechnet aus dem Bundesanteil von 105,8 Mrd. Euro), unter anderem weil das Kindergeld dort abgezogen wird. Gesetzliche Aufteilung 42,5 % Bund, 42,5 % Länder, 15 % Gemeinden; der Gemeindeanteil der Stadtstaaten zählt in der Statistik zu den Ländern.",
-                    "en": "National accounts figure (EUR 286.4 billion) minus the solidarity surcharge on wage tax (EUR 4.1 billion, cash), which is shown separately. Higher than cash wage tax (about EUR 249 billion, extrapolated from the federal share of EUR 105.8 billion), among other things because child benefit is deducted there. Statutory split 42.5% federal, 42.5% states, 15% municipalities; the municipal share of the city states counts as state level in the statistics."
+                    "en": "National accounts figure (€286.4bn) minus the solidarity surcharge on wage tax (€4.1bn, cash), which is shown separately. Higher than cash wage tax (about €249bn, extrapolated from the federal share of €105.8bn), among other things because child benefit is deducted there. Statutory split 42.5% federal, 42.5% states, 15% municipalities; the municipal share of the city states counts as state level in the statistics."
                   }
                 },
                 {
@@ -80,7 +80,7 @@
                   ],
                   "note": {
                     "de": "Volkswirtschaftliche Gesamtrechnungen (62,0 Mrd. Euro) abzüglich des Solidaritätszuschlags zur Einkommensteuer (3,4 Mrd. Euro, Kasse). Aufteilung wie bei der Lohnsteuer.",
-                    "en": "National accounts figure (EUR 62.0 billion) minus the solidarity surcharge on assessed income tax (EUR 3.4 billion, cash). Split as for wage tax."
+                    "en": "National accounts figure (€62.0bn) minus the solidarity surcharge on assessed income tax (€3.4bn, cash). Split as for wage tax."
                   }
                 }
               ]
@@ -106,7 +106,7 @@
               ],
               "note": {
                 "de": "Volkswirtschaftliche Gesamtrechnungen (53,3 Mrd. Euro) abzüglich des Solidaritätszuschlags (2,9 Mrd. Euro, Kasse). Aufteilung nach den gesetzlichen Anteilen (Dividenden: je 50 % Bund und Länder; Zinsen und Veräußerungsgewinne: 44 % Bund, 44 % Länder, 12 % Gemeinden), gewichtet mit dem Kassenaufkommen 2024.",
-                "en": "National accounts figure (EUR 53.3 billion) minus the solidarity surcharge (EUR 2.9 billion, cash). Split by statutory shares (dividends: 50% federal, 50% states; interest and capital gains: 44% federal, 44% states, 12% municipalities), weighted by 2024 cash receipts."
+                "en": "National accounts figure (€53.3bn) minus the solidarity surcharge (€2.9bn, cash). Split by statutory shares (dividends: 50% federal, 50% states; interest and capital gains: 44% federal, 44% states, 12% municipalities), weighted by 2024 cash receipts."
               }
             },
             {
@@ -129,7 +129,7 @@
               ],
               "note": {
                 "de": "Volkswirtschaftliche Gesamtrechnungen (42,7 Mrd. Euro) abzüglich des Solidaritätszuschlags zur Körperschaftsteuer (2,2 Mrd. Euro, Kasse). Je zur Hälfte Bund und Länder.",
-                "en": "National accounts figure (EUR 42.7 billion) minus the solidarity surcharge on corporate income tax (EUR 2.2 billion, cash). Half federal, half states."
+                "en": "National accounts figure (€42.7bn) minus the solidarity surcharge on corporate income tax (€2.2bn, cash). Half federal, half states."
               }
             },
             {
@@ -153,7 +153,7 @@
               ],
               "note": {
                 "de": "Betrag amtlich. Gemeindeanteil aus den Eurostat-Daten zu den Unternehmenssteuern der Gemeinden abgeleitet; Bundesanteil ist die Gewerbesteuerumlage (2,8 Mrd. Euro). Der Länderanteil enthält die Umlage der Länder und die Gewerbesteuer der Stadtstaaten.",
-                "en": "Official amount. Municipal share derived from Eurostat data on municipalities' taxes on corporate income; the federal share is the trade tax levy (EUR 2.8 billion). The state share comprises the states' levy and the trade tax of the city states."
+                "en": "Official amount. Municipal share derived from Eurostat data on municipalities' taxes on corporate income; the federal share is the trade tax levy (€2.8bn). The state share comprises the states' levy and the trade tax of the city states."
               }
             },
             {
@@ -199,7 +199,7 @@
               ],
               "note": {
                 "de": "Einkommensteuer der übrigen Welt (15,2 Mrd. Euro) und EU-Energiekrisenbeitrag (1,9 Mrd. Euro). Aufteilung auf die Ebenen als Rest aus den Eurostat-Daten zu den Einkommensteuern je Ebene.",
-                "en": "Income tax paid by the rest of the world (EUR 15.2 billion) and the EU energy crisis contribution (EUR 1.9 billion). Split across levels as the remainder from Eurostat data on income taxes by level."
+                "en": "Income tax paid by the rest of the world (€15.2bn) and the EU energy crisis contribution (€1.9bn). Split across levels as the remainder from Eurostat data on income taxes by level."
               }
             }
           ]
@@ -220,7 +220,7 @@
               },
               "description": {
                 "de": "Betrag und Aufteilung auf die Ebenen laut Eurostat (298,8 Mrd. Euro). Der EU-Anteil erscheint als Ausgabe (EU-Beitrag). Die Aufteilung nach Steuersätzen ist aus den geschätzten Mindereinnahmen der ermäßigten Sätze abgeleitet; amtlich wird das Aufkommen nicht nach Sätzen ausgewiesen.",
-                "en": "Amount and split across levels according to Eurostat (EUR 298.8 billion). The EU share appears as expenditure (EU contribution). The split by rate is derived from the estimated revenue forgone through the reduced rates; revenue by rate is not published officially."
+                "en": "Amount and split across levels according to Eurostat (€298.8bn). The EU share appears as expenditure (EU contribution). The split by rate is derived from the estimated revenue forgone through the reduced rates; revenue by rate is not published officially."
               },
               "code": "D211",
               "children": [
@@ -257,7 +257,7 @@
                       ],
                       "note": {
                         "de": "Rechnerische Mindereinnahmen bei 7 statt 19 % laut Finanzministerium (3,40 Mrd. Euro), geteilt durch 12 und mal 19. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
-                        "en": "Notional revenue forgone at 7 instead of 19% according to the finance ministry (EUR 3.40 billion), divided by 12 and multiplied by 19. Split across levels as for VAT as a whole according to Eurostat."
+                        "en": "Notional revenue forgone at 7 instead of 19% according to the finance ministry (€3.40bn), divided by 12 and multiplied by 19. Split across levels as for VAT as a whole according to Eurostat."
                       }
                     },
                     {
@@ -295,7 +295,7 @@
                   },
                   "description": {
                     "de": "Aufkommen zum ermäßigten Satz, abgeleitet aus den rechnerischen Mindereinnahmen gegenüber dem Regelsatz (39,2 Mrd. Euro im Jahr 2024 laut Bundesregierung): geteilt durch den Abstand von 12 Punkten und mal 7.",
-                    "en": "Revenue at the reduced rate, derived from the notional revenue forgone compared with the standard rate (EUR 39.2 billion in 2024 according to the federal government): divided by the 12-point gap and multiplied by 7."
+                    "en": "Revenue at the reduced rate, derived from the notional revenue forgone compared with the standard rate (€39.2bn in 2024 according to the federal government): divided by the 12-point gap and multiplied by 7."
                   },
                   "children": [
                     {
@@ -324,7 +324,7 @@
                       ],
                       "note": {
                         "de": "Rechnerische Mindereinnahmen laut Finanzministerium (27,92 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
-                        "en": "Notional revenue forgone according to the finance ministry (EUR 27.92 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                        "en": "Notional revenue forgone according to the finance ministry (€27.92bn), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
                       }
                     },
                     {
@@ -349,7 +349,7 @@
                       ],
                       "note": {
                         "de": "Mindereinnahmen laut Subventionsbericht (1,79 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
-                        "en": "Revenue forgone according to the Subsidy Report (EUR 1.79 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                        "en": "Revenue forgone according to the Subsidy Report (€1.79bn), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
                       }
                     },
                     {
@@ -374,7 +374,7 @@
                       ],
                       "note": {
                         "de": "Mindereinnahmen laut Subventionsbericht (4,07 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
-                        "en": "Revenue forgone according to the Subsidy Report (EUR 4.07 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                        "en": "Revenue forgone according to the Subsidy Report (€4.07bn), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
                       }
                     },
                     {
@@ -399,7 +399,7 @@
                       ],
                       "note": {
                         "de": "Mindereinnahmen laut Subventionsbericht (2,26 Mrd. Euro), geteilt durch 12 und mal 7. Aufteilung auf die Ebenen wie bei der gesamten Mehrwertsteuer laut Eurostat.",
-                        "en": "Revenue forgone according to the Subsidy Report (EUR 2.26 billion), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
+                        "en": "Revenue forgone according to the Subsidy Report (€2.26bn), divided by 12 and multiplied by 7. Split across levels as for VAT as a whole according to Eurostat."
                       }
                     },
                     {
@@ -526,7 +526,7 @@
                   ],
                   "note": {
                     "de": "Alkoholsteuer einschließlich Alkopopsteuer (1,99 Mrd. Euro), Kaffeesteuer (1,0 Mrd. Euro), Schaumweinsteuer (0,37 Mrd. Euro) und sonstige Verbrauchsteuern (3 Mio. Euro). Als Verbrauchsteuern stehen sie dem Bund zu (Art. 106 Abs. 1 Grundgesetz).",
-                    "en": "Alcohol tax including the tax on alcopops (EUR 1.99 billion), coffee tax (EUR 1.0 billion), sparkling wine tax (EUR 0.37 billion) and other excise duties (EUR 3 million). As excise duties they go to the federal level (Article 106(1) of the Basic Law)."
+                    "en": "Alcohol tax including the tax on alcopops (€1.99bn), coffee tax (€1.0bn), sparkling wine tax (€0.37bn) and other excise duties (€3m). As excise duties they go to the federal level (Article 106(1) of the Basic Law)."
                   }
                 }
               ]
@@ -642,7 +642,7 @@
                   },
                   "description": {
                     "de": "Erlöse aus dem nationalen Brennstoffemissionshandel: Wer Benzin, Diesel, Heizöl oder Erdgas in Verkehr bringt, muss für den CO2-Ausstoß Zertifikate kaufen (2024: 45 Euro je Tonne).",
-                    "en": "Proceeds from national emissions trading for fuels: suppliers of petrol, diesel, heating oil or natural gas have to buy certificates for the resulting CO2 emissions (2024: EUR 45 per tonne)."
+                    "en": "Proceeds from national emissions trading for fuels: suppliers of petrol, diesel, heating oil or natural gas have to buy certificates for the resulting CO2 emissions (2024: €45 per tonne)."
                   },
                   "code": "D29F",
                   "amount": 10957000000,
@@ -657,7 +657,7 @@
                   ],
                   "note": {
                     "de": "Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen. Die Deutsche Emissionshandelsstelle weist für 2024 Kasseneinnahmen von rund 13 Mrd. Euro aus, für 2025 rund 16 Mrd. Euro.",
-                    "en": "National accounts definition. The German Emissions Trading Authority reports cash proceeds of about EUR 13 billion for 2024 and about EUR 16 billion for 2025."
+                    "en": "National accounts definition. The German Emissions Trading Authority reports cash proceeds of about €13bn for 2024 and about €16bn for 2025."
                   }
                 },
                 {
@@ -683,7 +683,7 @@
                   ],
                   "note": {
                     "de": "Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen. Die Deutsche Emissionshandelsstelle weist für 2024 Versteigerungserlöse von rund 5,5 Mrd. Euro aus.",
-                    "en": "National accounts definition. The German Emissions Trading Authority reports auction proceeds of about EUR 5.5 billion for 2024."
+                    "en": "National accounts definition. The German Emissions Trading Authority reports auction proceeds of about €5.5bn for 2024."
                   }
                 }
               ]
@@ -855,7 +855,7 @@
           },
           "description": {
             "de": "Pflichtbeiträge von Arbeitgebern und Arbeitnehmern zusammen. Die Gesamtsumme stammt aus den Volkswirtschaftlichen Gesamtrechnungen (Arbeitgeber 302,4 Mrd. Euro, Arbeitnehmer 280,2 Mrd. Euro); die Aufteilung auf Renten- und Krankenversicherung beruht auf den Rechnungsergebnissen der Versicherungen.",
-            "en": "Compulsory contributions of employers and employees together. The total comes from national accounts (employers EUR 302.4 billion, employees EUR 280.2 billion); the split into pension and health insurance is based on the insurers' accounts."
+            "en": "Compulsory contributions of employers and employees together. The total comes from national accounts (employers €302.4bn, employees €280.2bn); the split into pension and health insurance is based on the insurers' accounts."
           },
           "code": "D611+D613CE",
           "children": [
@@ -867,7 +867,7 @@
               },
               "description": {
                 "de": "Beitragssatz 2024: 18,6 % des Bruttolohns bis zur Beitragsbemessungsgrenze von 90.600 Euro im Jahr (Ost: 89.400 Euro), je zur Hälfte von Arbeitgeber und Arbeitnehmer.",
-                "en": "Contribution rate 2024: 18.6% of gross wages up to the contribution ceiling of EUR 90,600 a year (East: EUR 89,400), half each from employer and employee."
+                "en": "Contribution rate 2024: 18.6% of gross wages up to the contribution ceiling of €90,600 a year (East: €89,400), half each from employer and employee."
               },
               "amount": 274848575948,
               "levels": {
@@ -881,7 +881,7 @@
               ],
               "note": {
                 "de": "Die Rentenversicherung weist für 2024 Beitragseinnahmen von 305,9 Mrd. Euro aus, ohne Aufteilung nach Beitragsarten. Der Anteil der Beiträge auf Löhne (89,8 %) ist geschätzt: 18,6 % der Bruttolöhne bis zur Beitragsbemessungsgrenze laut Lohnsteuerstatistik 2022 (247,6 Mrd. Euro) im Verhältnis zu den Beitragseinnahmen 2022 (275,6 Mrd. Euro). Der Rest sind unter anderem Beiträge des Bundes für Kindererziehungszeiten und Beiträge auf Lohnersatzleistungen.",
-                "en": "The pension insurance reports contribution revenue of EUR 305.9 billion for 2024 without a breakdown by type. The share of contributions on wages (89.8%) is estimated: 18.6% of gross wages up to the contribution ceiling according to the 2022 wage tax statistics (EUR 247.6 billion) relative to contribution revenue in 2022 (EUR 275.6 billion). The rest includes federal contributions for child-raising periods and contributions on wage-replacement benefits."
+                "en": "The pension insurance reports contribution revenue of €305.9bn for 2024 without a breakdown by type. The share of contributions on wages (89.8%) is estimated: 18.6% of gross wages up to the contribution ceiling according to the 2022 wage tax statistics (€247.6bn) relative to contribution revenue in 2022 (€275.6bn). The rest includes federal contributions for child-raising periods and contributions on wage-replacement benefits."
               }
             },
             {
@@ -892,7 +892,7 @@
               },
               "description": {
                 "de": "Beitragssatz 2024: 14,6 % plus durchschnittlich 1,67 % Zusatzbeitrag des Bruttolohns bis zur Beitragsbemessungsgrenze von 62.100 Euro im Jahr, je zur Hälfte von Arbeitgeber und Arbeitnehmer.",
-                "en": "Contribution rate 2024: 14.6% plus an average additional contribution of 1.67% of gross wages up to the contribution ceiling of EUR 62,100 a year, half each from employer and employee."
+                "en": "Contribution rate 2024: 14.6% plus an average additional contribution of 1.67% of gross wages up to the contribution ceiling of €62,100 a year, half each from employer and employee."
               },
               "children": [
                 {
@@ -913,7 +913,7 @@
                   ],
                   "note": {
                     "de": "Endgültige Rechnungsergebnisse der gesetzlichen Krankenversicherung 2024: Beiträge für versicherungspflichtige Beschäftigte (158,2 Mrd. Euro) und Zusatzbeiträge (18,4 Mrd. Euro). Kassenzahl, keine Abgrenzung der Volkswirtschaftlichen Gesamtrechnungen.",
-                    "en": "Final accounts of statutory health insurance 2024: contributions for compulsorily insured employees (EUR 158.2 billion) and additional contributions (EUR 18.4 billion). Cash figure, not the national accounts definition."
+                    "en": "Final accounts of statutory health insurance 2024: contributions for compulsorily insured employees (€158.2bn) and additional contributions (€18.4bn). Cash figure, not the national accounts definition."
                   }
                 },
                 {
@@ -924,7 +924,7 @@
                   },
                   "description": {
                     "de": "Darunter die Beiträge freiwillig versicherter Beschäftigter mit einem Lohn oberhalb der Versicherungspflichtgrenze (2024: 69.300 Euro) und freiwillig versicherter Selbständiger.",
-                    "en": "Includes the contributions of voluntarily insured employees with wages above the compulsory insurance threshold (2024: EUR 69,300) and of voluntarily insured self-employed persons."
+                    "en": "Includes the contributions of voluntarily insured employees with wages above the compulsory insurance threshold (2024: €69,300) and of voluntarily insured self-employed persons."
                   },
                   "amount": 53323674000,
                   "levels": {
@@ -937,7 +937,7 @@
                   ],
                   "note": {
                     "de": "Endgültige Rechnungsergebnisse 2024: „Sonstige Beiträge“ (48,0 Mrd. Euro) und „Sonstige Zusatzbeiträge“ (5,3 Mrd. Euro) des Gesundheitsfonds. Die Jahresrechnung weist die freiwilligen Mitglieder nicht gesondert aus; ein Teil dieser Beiträge stammt nicht aus Löhnen.",
-                    "en": "Final accounts 2024: \"other contributions\" (EUR 48.0 billion) and \"other additional contributions\" (EUR 5.3 billion) of the health fund. The accounts do not show voluntary members separately; part of these contributions does not come from wages."
+                    "en": "Final accounts 2024: \"other contributions\" (€48.0bn) and \"other additional contributions\" (€5.3bn) of the health fund. The accounts do not show voluntary members separately; part of these contributions does not come from wages."
                   }
                 }
               ]
@@ -961,7 +961,7 @@
               ],
               "note": {
                 "de": "Rest: Beiträge von Arbeitgebern und Arbeitnehmern laut Volkswirtschaftlichen Gesamtrechnungen (582,5 Mrd. Euro) abzüglich der oben ausgewiesenen Kassenzahlen für Renten- und Krankenversicherung. Wegen der unterschiedlichen Abgrenzung nur näherungsweise richtig.",
-                "en": "Remainder: contributions of employers and employees according to national accounts (EUR 582.5 billion) minus the cash figures for pension and health insurance shown above. Only approximately right because of the different definitions."
+                "en": "Remainder: contributions of employers and employees according to national accounts (€582.5bn) minus the cash figures for pension and health insurance shown above. Only approximately right because of the different definitions."
               }
             }
           ]
@@ -1193,7 +1193,7 @@
               ],
               "note": {
                 "de": "Betrag aus der aktuellen Datenlieferung (Oktober 2026); die funktionale Gliederung beruht auf einem etwas älteren Datenstand. Ob auch die Plastikabgabe an die EU (2024: 1,38 Mrd. Euro, Kasse, Titel 6001 022 03) in diesem Betrag enthalten ist, lässt sich der Statistik nicht sicher entnehmen; der Abgleich mit den Kassenzahlen des Bundes (Mehrwertsteuer- und BNE-Eigenmittel 2024: 25,17 Mrd. Euro) spricht eher dafür.",
-                "en": "Amount from the latest data release (October 2026); the breakdown by function is based on a slightly older vintage. Whether the plastics contribution to the EU (2024: EUR 1.38 billion, cash, title 6001 022 03) is included in this amount cannot be told for certain from the statistics; a comparison with the federal cash figures (VAT- and GNI-based own resources 2024: EUR 25.17 billion) suggests that it is."
+                "en": "Amount from the latest data release (October 2026); the breakdown by function is based on a slightly older vintage. Whether the plastics contribution to the EU (2024: €1.38bn, cash, title 6001 022 03) is included in this amount cannot be told for certain from the statistics; a comparison with the federal cash figures (VAT- and GNI-based own resources 2024: €25.17bn) suggests that it is."
               }
             },
             {
@@ -1239,7 +1239,7 @@
               ],
               "note": {
                 "de": "Einzelplan 02 (1.150,4 Mio. Euro, Ist 2024) abzüglich der Diäten.",
-                "en": "Budget section 02 (EUR 1,150.4 million, 2024 actuals) minus MPs' pay."
+                "en": "Budget section 02 (€1,150.4m, 2024 actuals) minus MPs' pay."
               }
             },
             {
@@ -1394,7 +1394,7 @@
               ],
               "note": {
                 "de": "Eigene Schätzung: Arbeitnehmerentgelt des Bundes in der allgemeinen öffentlichen Verwaltung ohne Forschung und Entwicklungshilfe (8,42 Mrd. Euro), nach Vollzeitstellen der Personalstandstatistik aufgeteilt zwischen politischer Führung, zentraler Verwaltung und Auswärtigem Dienst (51.400 Vollzeitstellen ohne 2.800 Stellen der Bundestagsverwaltung) und Finanzverwaltung (51.400); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 24.200 Euro je Vollzeitstelle. Davon 0,65 Mrd. Euro unterstellte Beiträge.",
-                "en": "Own estimate: federal compensation of employees in general public services without research and development aid (EUR 8.42 billion), split by full-time equivalents of the personnel statistics between political leadership, central administration and foreign service (51,400 full-time equivalents less 2,800 posts of the Bundestag administration) and the tax administration (51,400); civil servants carry the imputed contributions for their pensions, EUR 24,200 per full-time equivalent. Of this, EUR 0.65 billion are imputed contributions."
+                "en": "Own estimate: federal compensation of employees in general public services without research and development aid (€8.42bn), split by full-time equivalents of the personnel statistics between political leadership, central administration and foreign service (51,400 full-time equivalents less 2,800 posts of the Bundestag administration) and the tax administration (51,400); civil servants carry the imputed contributions for their pensions, €24,200 per full-time equivalent. Of this, €0.65bn are imputed contributions."
               }
             },
             {
@@ -1461,7 +1461,7 @@
               ],
               "note": {
                 "de": "Eigene Schätzung: Arbeitnehmerentgelt der Länder in der allgemeinen öffentlichen Verwaltung ohne Forschung (23,93 Mrd. Euro), nach Vollzeitstellen aufgeteilt zwischen politischer Führung und zentraler Verwaltung (153.600) und Finanzverwaltung (130.200); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 25.800 Euro je Vollzeitstelle. Davon 1,63 Mrd. Euro unterstellte Beiträge.",
-                "en": "Own estimate: the states' compensation of employees in general public services without research (EUR 23.93 billion), split by full-time equivalents between political leadership and central administration (153,600) and the tax administration (130,200); civil servants carry the imputed contributions for their pensions, EUR 25,800 per full-time equivalent. Of this, EUR 1.63 billion are imputed contributions."
+                "en": "Own estimate: the states' compensation of employees in general public services without research (€23.93bn), split by full-time equivalents between political leadership and central administration (153,600) and the tax administration (130,200); civil servants carry the imputed contributions for their pensions, €25,800 per full-time equivalent. Of this, €1.63bn are imputed contributions."
               }
             },
             {
@@ -1528,7 +1528,7 @@
               ],
               "note": {
                 "de": "Eigene Schätzung: Arbeitnehmerentgelt der Gemeinden in der allgemeinen öffentlichen Verwaltung (26,68 Mrd. Euro) ohne den Anteil ihrer Finanzverwaltung (500 Vollzeitstellen); Beamte tragen dabei die unterstellten Beiträge für ihre Versorgung, 28.300 Euro je Vollzeitstelle. Davon 1,87 Mrd. Euro unterstellte Beiträge.",
-                "en": "Own estimate: the municipalities' compensation of employees in general public services (EUR 26.68 billion) less the share of their tax administration (500 full-time equivalents); civil servants carry the imputed contributions for their pensions, EUR 28,300 per full-time equivalent. Of this, EUR 1.87 billion are imputed contributions."
+                "en": "Own estimate: the municipalities' compensation of employees in general public services (€26.68bn) less the share of their tax administration (500 full-time equivalents); civil servants carry the imputed contributions for their pensions, €28,300 per full-time equivalent. Of this, €1.87bn are imputed contributions."
               }
             }
           ]
@@ -1576,7 +1576,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat), abzüglich des ebenfalls amtlichen Arbeitnehmerentgelts dieser Gruppe (28,83 Mrd. Euro), das unter „Personal der allgemeinen Verwaltung“ steht. Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
-            "en": "Official amount (Eurostat), less this group's compensation of employees (EUR 28.83 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
+            "en": "Official amount (Eurostat), less this group's compensation of employees (€28.83bn, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
           }
         },
         {
@@ -1641,7 +1641,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat), abzüglich des ebenfalls amtlichen Arbeitnehmerentgelts dieser Gruppe (3,20 Mrd. Euro), das unter „Personal der allgemeinen Verwaltung“ steht. Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
-            "en": "Official amount (Eurostat), less this group's compensation of employees (EUR 3.20 billion, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
+            "en": "Official amount (Eurostat), less this group's compensation of employees (€3.20bn, also official), which is under 'Staff of the general administration'. The split across levels is derived from Eurostat data per division and estimated within the division."
           }
         },
         {
@@ -2017,7 +2017,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Die Regionalisierungsmittel des Bundes für den Schienennahverkehr der Länder (12,7 Mrd. Euro) sind dem Bund zugerechnet.",
-            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal regionalisation funds for the states' regional rail services (EUR 12.7 billion) are attributed to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal regionalisation funds for the states' regional rail services (€12.7bn) are attributed to the federal level."
           }
         },
         {
@@ -2278,7 +2278,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Die Finanzhilfen des Bundes für den sozialen Wohnungsbau (1,7 Mrd. Euro) sind dem Bund zugerechnet.",
-            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for social housing (EUR 1.7 billion) are attributed to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for social housing (€1.7bn) are attributed to the federal level."
           }
         },
         {
@@ -2418,7 +2418,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
-            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (€14.5bn) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
           }
         },
         {
@@ -2441,7 +2441,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
-            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (€14.5bn) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
           }
         },
         {
@@ -2464,7 +2464,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
-            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (€14.5bn) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
           }
         },
         {
@@ -2531,7 +2531,7 @@
           ],
           "note": {
             "de": "Bereich „Gesundheit, sonstiges“ (COFOG 07.6) nach Abzug von Personal und Sachkosten der Verwaltung der Kranken- und Pflegekassen, die als eigene Posten ausgewiesen sind; Aufteilung auf die Ebenen geschätzt. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
-            "en": "Health n.e.c. (COFOG 07.6) after deducting the staff and the non-staff administrative costs of the health and long-term care insurers, shown as items of their own; split across levels estimated. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+            "en": "Health n.e.c. (COFOG 07.6) after deducting the staff and the non-staff administrative costs of the health and long-term care insurers, shown as items of their own; split across levels estimated. The federal subsidy to statutory health insurance (€14.5bn) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
           }
         },
         {
@@ -2554,7 +2554,7 @@
           ],
           "note": {
             "de": "Kassenwert aus den Rechnungsergebnissen der Kassen 2024 (KJ1): Brutto-Verwaltungskosten 15,98 Mrd. Euro abzüglich der persönlichen Verwaltungskosten (10,80 Mrd. Euro) und der Beiträge an Kassenverbände und andere Verbände (0,62 Mrd. Euro), deren Personal schon im Arbeitnehmerentgelt steckt. Ganz der Sozialversicherung zugeordnet; aus dem Bereich „Gesundheit, sonstiges“ (COFOG 07.6) herausgelöst.",
-            "en": "Cash figure from the funds' accounts for 2024 (KJ1): gross administrative costs of EUR 15.98 billion less personal administrative costs (EUR 10.80 billion) and the fees to the funds' associations and other associations (EUR 0.62 billion), whose staff is already in compensation of employees. Attributed entirely to the social insurance funds; taken out of health n.e.c. (COFOG 07.6)."
+            "en": "Cash figure from the funds' accounts for 2024 (KJ1): gross administrative costs of €15.98bn less personal administrative costs (€10.80bn) and the fees to the funds' associations and other associations (€0.62bn), whose staff is already in compensation of employees. Attributed entirely to the social insurance funds; taken out of health n.e.c. (COFOG 07.6)."
           }
         },
         {
@@ -2579,7 +2579,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat, Arbeitnehmerentgelt D.1 der Sozialversicherung im Bereich Gesundheit). Er ist aus dem Bereich „Gesundheit, sonstiges“ (COFOG 07.6) herausgelöst, für den Eurostat 15,0 Mrd. Euro Arbeitnehmerentgelt aller Ebenen ausweist; die übrigen Gesundheitsbereiche haben zusammen weniger als 2,5 Mrd. Euro. Ganz der Sozialversicherung zugeordnet: Anders als bei den Leistungsausgaben ist der Bundeszuschuss hier nicht anteilig zugerechnet, weil er ein fester Betrag ist und eine Einsparung beim Personal den Kassen bleibt.",
-            "en": "Official amount (Eurostat, compensation of employees D.1 of the social insurance funds in health). It is taken out of health n.e.c. (COFOG 07.6), for which Eurostat shows EUR 15.0 billion of compensation of employees of all levels; the other health groups together have less than EUR 2.5 billion. Attributed entirely to the social insurance funds: unlike for benefit spending, the federal subsidy is not attributed pro rata here, because it is a fixed amount and a saving on staff stays with the funds."
+            "en": "Official amount (Eurostat, compensation of employees D.1 of the social insurance funds in health). It is taken out of health n.e.c. (COFOG 07.6), for which Eurostat shows €15.0bn of compensation of employees of all levels; the other health groups together have less than €2.5bn. Attributed entirely to the social insurance funds: unlike for benefit spending, the federal subsidy is not attributed pro rata here, because it is a fixed amount and a saving on staff stays with the funds."
           }
         }
       ]
@@ -2777,7 +2777,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Das BAföG für Schülerinnen und Schüler (0,5 Mrd. Euro) ist dem Bund zugerechnet.",
-            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for school pupils (BAföG, EUR 0.5 billion) are attributed to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal grants for school pupils (BAföG, €0.5bn) are attributed to the federal level."
           }
         },
         {
@@ -2820,7 +2820,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Das BAföG für Studierende (1,3 Mrd. Euro) ist dem Bund zugerechnet.",
-            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal student grants (BAföG, EUR 1.3 billion) are attributed to the federal level."
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Federal student grants (BAföG, €1.3bn) are attributed to the federal level."
           }
         },
         {
@@ -2947,7 +2947,7 @@
               ],
               "note": {
                 "de": "Rentenausgaben 2024 (360,1 Mrd. Euro) mal Anteil der Altersrenten (79,9 %). Bundesanteil: Zahlungen des Bundes an die Rentenversicherung (116,1 Mrd. Euro) im Verhältnis zu deren Gesamtausgaben (402,8 Mrd. Euro).",
-                "en": "Pension expenditure 2024 (EUR 360.1 billion) times the share of old-age pensions (79.9%). Federal share: federal payments to the pension insurance (EUR 116.1 billion) relative to its total spending (EUR 402.8 billion)."
+                "en": "Pension expenditure 2024 (€360.1bn) times the share of old-age pensions (79.9%). Federal share: federal payments to the pension insurance (€116.1bn) relative to its total spending (€402.8bn)."
               }
             },
             {
@@ -3159,7 +3159,7 @@
               ],
               "note": {
                 "de": "Rest der Gruppe nach Abzug des Elterngelds; Aufteilung geschätzt. Die Geldleistungen der gesamten Gruppe betragen laut Eurostat 38,6 Mrd. Euro, die Familienkasse zahlte 2024 aber 54,5 Mrd. Euro Kindergeld aus: Die Volkswirtschaftlichen Gesamtrechnungen buchen demnach nur einen Teil des Kindergelds als Ausgabe, der Rest wird dort offenbar mit der Lohnsteuer verrechnet.",
-                "en": "Remainder of the group after deducting parental allowance; split estimated. Cash benefits of the whole group amount to EUR 38.6 billion according to Eurostat, whereas the family benefits office paid out EUR 54.5 billion in child benefit in 2024: national accounts thus record only part of child benefit as spending, the rest is evidently netted against wage tax there."
+                "en": "Remainder of the group after deducting parental allowance; split estimated. Cash benefits of the whole group amount to €38.6bn according to Eurostat, whereas the family benefits office paid out €54.5bn in child benefit in 2024: national accounts thus record only part of child benefit as spending, the rest is evidently netted against wage tax there."
               }
             }
           ]
@@ -3260,7 +3260,7 @@
                   ],
                   "note": {
                     "de": "Anteile an den Zahlungsansprüchen aller Leistungsberechtigten im SGB II im Jahr 2024 (46,9 Mrd. Euro, Statistik der Bundesagentur für Arbeit). Die Anteile beziehen sich auf alle Leistungsarten zusammen und werden hier unverändert auf diese Teilleistung angewendet. Eingebürgerte zählen als Deutsche.",
-                    "en": "Shares of the payment entitlements of all recipients under Social Code Book II in 2024 (EUR 46.9 billion, Federal Employment Agency statistics). The shares refer to all benefit types together and are applied unchanged to this component. Naturalised persons count as German."
+                    "en": "Shares of the payment entitlements of all recipients under Social Code Book II in 2024 (€46.9bn, Federal Employment Agency statistics). The shares refer to all benefit types together and are applied unchanged to this component. Naturalised persons count as German."
                   }
                 }
               },
@@ -3344,7 +3344,7 @@
                   ],
                   "note": {
                     "de": "Anteile an den Zahlungsansprüchen aller Leistungsberechtigten im SGB II im Jahr 2024 (46,9 Mrd. Euro, Statistik der Bundesagentur für Arbeit). Die Anteile beziehen sich auf alle Leistungsarten zusammen und werden hier unverändert auf diese Teilleistung angewendet. Eingebürgerte zählen als Deutsche.",
-                    "en": "Shares of the payment entitlements of all recipients under Social Code Book II in 2024 (EUR 46.9 billion, Federal Employment Agency statistics). The shares refer to all benefit types together and are applied unchanged to this component. Naturalised persons count as German."
+                    "en": "Shares of the payment entitlements of all recipients under Social Code Book II in 2024 (€46.9bn, Federal Employment Agency statistics). The shares refer to all benefit types together and are applied unchanged to this component. Naturalised persons count as German."
                   }
                 }
               },
@@ -3360,7 +3360,7 @@
               ],
               "note": {
                 "de": "Zahlungsansprüche laut Bundesagentur für Arbeit (Monatsdurchschnitt 2024 mal 12). Bundesanteil 69,9 %: Bundesbeteiligung 12,36 Mrd. Euro (Ist 2024).",
-                "en": "Payment entitlements according to the Federal Employment Agency (2024 monthly average times 12). Federal share 69.9%: federal contribution of EUR 12.36 billion (2024 actuals)."
+                "en": "Payment entitlements according to the Federal Employment Agency (2024 monthly average times 12). Federal share 69.9%: federal contribution of €12.36bn (2024 actuals)."
               }
             },
             {
@@ -3435,7 +3435,7 @@
               ],
               "note": {
                 "de": "Rest der drei Gruppen nach Abzug der einzeln ausgewiesenen Leistungen. Die Einzelwerte sind Kassenzahlen, die Gruppensumme stammt aus den Volkswirtschaftlichen Gesamtrechnungen; der Rest ist deshalb nur näherungsweise richtig. Dem Bund zugerechnet: Erstattung der Grundsicherung im Alter (11,1 Mrd. Euro) und der Bundesanteil am Wohngeld (2,3 Mrd. Euro).",
-                "en": "Remainder of the three groups after deducting the benefits shown separately. The individual items are cash figures, the group total comes from national accounts; the remainder is therefore only approximately right. Attributed to the federal level: reimbursement of basic security in old age (EUR 11.1 billion) and the federal share of housing benefit (EUR 2.3 billion)."
+                "en": "Remainder of the three groups after deducting the benefits shown separately. The individual items are cash figures, the group total comes from national accounts; the remainder is therefore only approximately right. Attributed to the federal level: reimbursement of basic security in old age (€11.1bn) and the federal share of housing benefit (€2.3bn)."
               }
             }
           ]
@@ -3506,7 +3506,7 @@
           ],
           "note": {
             "de": "Betrag amtlich (Eurostat, Arbeitnehmerentgelt D.1 der Sozialversicherung im Bereich soziale Sicherung). Angenommen ist, dass er im Bereich „Soziale Sicherung, sonstiges“ (COFOG 10.9) liegt, für den Eurostat 19,1 Mrd. Euro Arbeitnehmerentgelt aller Ebenen ausweist; in den Bereichen Alter (0,8) und Arbeitslosigkeit (0,3 Mrd. Euro) ist kaum Personal gebucht. Ganz der Sozialversicherung zugeordnet; das Personal der Bundesagentur in den Jobcentern bezahlt in der Sache großenteils der Bund über die Erstattung der Verwaltungskosten.",
-            "en": "Official amount (Eurostat, compensation of employees D.1 of the social insurance funds in social protection). It is assumed to lie in social protection n.e.c. (COFOG 10.9), for which Eurostat shows EUR 19.1 billion of compensation of employees of all levels; hardly any staff is booked under old age (0.8) and unemployment (EUR 0.3 billion). Attributed entirely to the social insurance funds; the Employment Agency's staff in the job centres is in substance largely paid for by the federal government through the reimbursement of administrative costs."
+            "en": "Official amount (Eurostat, compensation of employees D.1 of the social insurance funds in social protection). It is assumed to lie in social protection n.e.c. (COFOG 10.9), for which Eurostat shows €19.1bn of compensation of employees of all levels; hardly any staff is booked under old age (0.8) and unemployment (€0.3bn). Attributed entirely to the social insurance funds; the Employment Agency's staff in the job centres is in substance largely paid for by the federal government through the reimbursement of administrative costs."
           }
         }
       ]
@@ -3519,7 +3519,7 @@
       },
       "description": {
         "de": "Die Gesamtausgaben des Staates für 2024 wurden im Herbst 2026 um 7,8 Mrd. Euro nach oben revidiert (vor allem Investitionen). Die Gliederung nach Aufgabenbereichen wurde noch nicht angepasst; die Differenz steht deshalb hier.",
-        "en": "Total government expenditure for 2024 was revised upwards by EUR 7.8 billion in autumn 2026 (mainly investment). The breakdown by function has not been updated yet, so the difference is shown here."
+        "en": "Total government expenditure for 2024 was revised upwards by €7.8bn in autumn 2026 (mainly investment). The breakdown by function has not been updated yet, so the difference is shown here."
       },
       "amount": 7769000000,
       "levels": {
@@ -3534,7 +3534,7 @@
       ],
       "note": {
         "de": "Gesamtausgaben laut aktueller Datenlieferung (2.147,5 Mrd. Euro) minus Summe der Aufgabenbereiche (2.139,7 Mrd. Euro). Aufteilung auf die Ebenen nach der Revision ihrer Ausgaben ohne Transfers.",
-        "en": "Total expenditure in the latest data release (EUR 2,147.5 billion) minus the sum of the functional breakdown (EUR 2,139.7 billion). Split across levels according to the revision of each level's spending excluding transfers."
+        "en": "Total expenditure in the latest data release (€2,147.5bn) minus the sum of the functional breakdown (€2,139.7bn). Split across levels according to the revision of each level's spending excluding transfers."
       }
     }
   ]
