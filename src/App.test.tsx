@@ -120,7 +120,10 @@ describe("the simulator on Testland", () => {
     act(() => root.render(<Simulator pack={{ ...testland, policies: [], collections: undefined, goals: undefined }} />));
     expect(text("#measures")).toContain("No measures have been added for this country yet.");
     expect(container.querySelector("#what-changed")).toBeNull();
-    expect(text(".scoreboard__change")).toContain("No measure is switched on");
+    // Nothing to switch on: the scoreboard only says which year it shows, the tagline what there is.
+    expect(text(".scoreboard__change")).toBe("As in 2024.");
+    expect(text(".masthead__tagline")).toBe("Where the money in the public budget comes from and where it goes. Measures to switch on are still to come.");
+    expect(container.querySelector("#measures .section-head p")).toBeNull();
   });
 
   it("previews a setting on the card before the measure is switched on, then applies it", () => {

@@ -380,6 +380,22 @@ main:focus {
   font-size: 14px;
 }
 
+/* A preview pack: a quieter band than the fixture's, which must never be missed. */
+.dev-notice--preview {
+  border-bottom: 1px solid var(--rule-strong);
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+.dev-notice--preview p {
+  flex-wrap: nowrap;
+}
+
+.dev-notice--preview span {
+  flex: 1;
+  min-width: 0;
+}
+
 .dev-notice p {
   display: flex;
   flex-wrap: wrap;

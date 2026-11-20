@@ -156,6 +156,8 @@ export const countrySchema = z.strictObject({
   locales: z.array(text).min(1),
   baseYear: year,
   baseYearLabel: localizedTextSchema.optional(),
+  baseYearShort: localizedTextSchema.optional(),
+  preview: z.boolean().optional(),
   levels: z.partialRecord(levelIdSchema, z.strictObject({ name: localizedTextSchema })),
   indicators: z.strictObject({
     gdp: indicatorSchema,

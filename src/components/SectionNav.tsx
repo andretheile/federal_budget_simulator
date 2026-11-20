@@ -70,9 +70,10 @@ export function sectionInView(keys: readonly SectionKey[]): SectionKey | undefin
   );
 }
 
-export function SectionNav({ debt }: { debt: boolean }) {
+export function SectionNav({ measures = true, debt }: { measures?: boolean; debt: boolean }) {
   const { t } = useUi();
-  const keys: SectionKey[] = debt ? ["measures", "budget", "debt"] : ["measures", "budget"];
+  // A pack without measures yet has no list to lead to; one destination alone needs no row.
+  const keys = (["measures", "budget", "debt"] as const).filter((key) => (key === "measures" ? measures : key === "debt" ? debt : true));
   const [current, setCurrent] = useState<SectionKey | undefined>();
   const signature = keys.join(",");
 
@@ -104,6 +105,7 @@ export function SectionNav({ debt }: { debt: boolean }) {
     setCurrent(key);
   };
 
+  if (keys.length < 2) return null;
   return (
     <nav className="sectionnav" aria-label={t.nav.label}>
       <ul className="sectionnav__list page">

@@ -91,7 +91,7 @@ export function CurveEntry({
         <div className="policy__curve-text">
           <p className="policy__curve-state">
             <span className={`curve-state${changed ? " curve-state--changed" : ""}`}>
-              {changed ? t.curve.changed : t.curve.asBase(pack.country.baseYear)}
+              {changed ? t.curve.changed : t.curve.asBase(ui.period)}
             </span>
             {top && <span>{t.curve.topRate(rate(top.rate), fmt.exactMoney(top.from))}</span>}
           </p>

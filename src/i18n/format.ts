@@ -5,6 +5,11 @@
  * `Intl`'s own compact notation would turn 2,028 billion into "2 Bio. €" / "€2tn"; budget figures
  * are discussed in billions, so the unit is capped there: the locale's compact pattern is taken
  * from `Intl` and the number inside it is replaced by our own.
+ *
+ * The US debate counts in trillions: for the US dollar, amounts from a trillion up are written in
+ * trillions with two decimals ("$7.01T", "7,01 Bio. $"). English for a country whose language is
+ * English follows that country (en-US, see i18n/index.ts localeFor): then Intl's own abbreviations
+ * are used ("$12.4B", "$450M"), not the British "bn" and "m".
  */
 import type { NumberParam } from "../engine/index.ts";
 import { baseLanguage, hasDictionary, intlLocale, localize, messagesFor, type Messages } from "./index.ts";
@@ -53,6 +58,10 @@ const NUMERIC_PARTS = new Set(["integer", "group", "decimal", "fraction"]);
 /** From here on a value is written in millions; 999,500 would already round to "1,0 Mio.". */
 const COMPACT_FROM = 999_500;
 const BILLIONS_FROM = 999_500_000;
+/** From here on a trillion-counting currency is written in trillions; 999.5 billion would round to "1,000.0". */
+const TRILLIONS_FROM = 999_500_000_000;
+/** Currencies whose budget debate counts in trillions: the US federal budget is "$7.0 trillion". */
+const TRILLION_CURRENCIES = new Set(["USD"]);
 
 /** Number of decimals needed to show multiples of `step`: 1 -> 0, 0.5 -> 1, 0.25 -> 2. */
 export function decimalsOf(step: number): number {
@@ -79,8 +88,10 @@ export function createFormatters(
   language: string,
   currency: string,
   messages: Messages = messagesFor(language),
+  /** The locale to write in, if not the language's usual one (localeFor: "en-US" for the United States). */
+  localeOverride?: string,
 ): Formatters {
-  const locale = intlLocale(language);
+  const locale = localeOverride ?? intlLocale(language);
   // The narrow symbol: "$12.4bn" for the US dollar, where British English would write "US$12.4bn".
   // Pages show one country's currency at a time, so the bare symbol is not ambiguous.
   const base = { numberingSystem: "latn", currencyDisplay: "narrowSymbol" } as const;
@@ -101,9 +112,19 @@ export function createFormatters(
    * and the locale counts in millions and billions. A language shown with the English fallback
    * dictionary keeps the abbreviations of its own locale.
    */
-  const ownWords = hasDictionary(language);
+  // A regional English (en-US) keeps Intl's abbreviations, which are that region's ("B", "M", "T").
+  const ownWords = hasDictionary(language) && locale === intlLocale(language);
   const abbreviation = (unit: number): string | undefined =>
-    !ownWords ? undefined : unit === 1e9 ? messages.units.billion : unit === 1e6 ? messages.units.million : undefined;
+    !ownWords
+      ? undefined
+      : unit === 1e12
+        ? messages.units.trillion
+        : unit === 1e9
+          ? messages.units.billion
+          : unit === 1e6
+            ? messages.units.million
+            : undefined;
+  const trillions = TRILLION_CURRENCIES.has(currency);
   const named = <T extends { type: string; value: string }>(part: T, unit: number): T =>
     part.type === "compact" ? { ...part, value: abbreviation(unit) ?? part.value } : part;
 
@@ -160,9 +181,15 @@ export function createFormatters(
     if (!Number.isFinite(value)) return "–";
     const abs = Math.abs(value);
     if (abs < COMPACT_FROM) return exactMoney(value, options.signed);
-    const pattern = compactPattern(abs >= BILLIONS_FROM ? 1.5e9 : 1.5e6, value < 0, options.signed === true);
+    const sample = trillions && abs >= TRILLIONS_FROM ? 1.5e12 : abs >= BILLIONS_FROM ? 1.5e9 : 1.5e6;
+    const pattern = compactPattern(sample, value < 0, options.signed === true);
     if (!pattern) return exactMoney(value, options.signed);
     const scaled = abs / pattern.unit;
+    // Trillions with two decimals: "$7.01T" still moves when a measure changes it by $10bn.
+    if (pattern.unit >= 1e12) {
+      const number = plain(scaled, options.trim ? 0 : 2, 2);
+      return pattern.parts.map((part) => (part.type === "number" ? number : part.value)).join("");
+    }
     const billions = pattern.unit >= 1e9;
     const max = billions || scaled < 99.95 ? 1 : 0;
     const min = billions && !options.trim ? 1 : 0;

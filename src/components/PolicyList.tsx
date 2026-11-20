@@ -169,7 +169,7 @@ export function PolicyList({
     <section className="policies" id="measures" aria-labelledby="policies-title" tabIndex={-1}>
       <header className="section-head">
         <h2 id="policies-title">{t.policies.title}</h2>
-        <p>{t.policies.intro}</p>
+        {pack.policies.length > 0 && <p>{t.policies.intro}</p>}
       </header>
 
       {changedCurves.length > 0 && (

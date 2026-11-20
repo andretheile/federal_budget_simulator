@@ -1,5 +1,6 @@
 {
   "id": "us",
+  "preview": true,
   "name": {
     "en": "United States",
     "de": "Vereinigte Staaten"
@@ -13,6 +14,10 @@
   "baseYearLabel": {
     "en": "fiscal year 2025 (Oct 2024 to Sep 2025)",
     "de": "Haushaltsjahr 2025 (Okt. 2024 bis Sept. 2025)"
+  },
+  "baseYearShort": {
+    "en": "FY 2025",
+    "de": "Haushaltsjahr 2025"
   },
   "levels": {
     "central": {

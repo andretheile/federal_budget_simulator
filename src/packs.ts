@@ -3,11 +3,17 @@
  *
  * The JSON files are bundled as raw text and parsed here, not by the bundler, so a pack with a
  * syntax error shows up as a validation error instead of breaking the build. Each file is its
- * own lazy chunk, so only the country that is opened gets downloaded.
+ * own lazy chunk, so only the country that is opened gets downloaded. Which packs a build
+ * contains is decided in packFiles.ts.
  */
 import { validatePackFiles, type ValidationResult } from "./engine/index.ts";
+import { packFiles, previewPacks } from "./packFiles.ts";
 
-const loaders = import.meta.glob<string>("/countries/*/**/*.json", { query: "?raw", import: "default" });
+/**
+ * The packs this build contains (see packFiles.ts): a production build leaves out the packs that
+ * mark themselves as a preview, so an address that names one is treated as an unknown country.
+ */
+const loaders = packFiles;
 
 /** Country id -> path inside the pack directory -> loader of the file's text. */
 const packs = new Map<string, Map<string, () => Promise<string>>>();
@@ -29,6 +35,11 @@ export function listPackIds(): string[] {
 
 export function hasPack(id: string): boolean {
   return packs.has(id);
+}
+
+/** Whether a pack of this build marks itself as a preview: not live yet, shown as such. */
+export function isPreviewPack(id: string): boolean {
+  return previewPacks.includes(id);
 }
 
 /**

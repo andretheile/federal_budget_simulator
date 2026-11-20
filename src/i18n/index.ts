@@ -87,3 +87,21 @@ export function pickLanguage(packLocales: readonly string[], hints: LanguageHint
 export function intlLocale(language: string): string {
   return baseLanguage(language) === "en" && !language.includes("-") ? "en-GB" : language;
 }
+
+/**
+ * The locale numbers, money and dates of a country are written in. English is British English,
+ * unless English is the country's own first language: then it is that country's English, so the
+ * United States read "$7.01T" and "Nov 18, 2026". Other languages are as they are.
+ */
+export function localeFor(language: string, country: { id: string; locales: readonly string[] }): string {
+  const own = country.locales[0];
+  if (baseLanguage(language) !== "en" || language.includes("-") || own === undefined || baseLanguage(own) !== "en") return intlLocale(language);
+  const regional = `en-${country.id.toUpperCase()}`;
+  try {
+    // Only a region the engine really knows: an unknown one ("en-XT" for a test country) would
+    // quietly fall back to American English.
+    return new Intl.NumberFormat(regional).resolvedOptions().locale === regional ? regional : intlLocale(language);
+  } catch {
+    return intlLocale(language);
+  }
+}

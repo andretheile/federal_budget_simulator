@@ -298,7 +298,10 @@ function main(): number {
     for (const file of jsonFiles(dir)) texts[file] = readFileSync(join(dir, file), "utf8");
     const result = validatePackFiles(texts, id);
     if (result.ok) {
-      console.log(`${label}/${id}: valid`);
+      // A preview is checked like any pack; the line says that a production build leaves it out.
+      console.log(
+        `${label}/${id}: valid${result.pack.country.preview ? " (preview: left out of a production build unless PREVIEW_PACKS=include)" : ""}`,
+      );
       printIssues("warnings", result.warnings);
       printSummary(result.pack);
       printCollections(result.pack);

@@ -14,10 +14,13 @@
 # Needs bash, ssh, rsync and curl (the versions that ship with macOS are enough)
 # and, for the build, npm. See deploy/README.md.
 #
-# Before anything is uploaded, the script says in a box whether the site has its
-# imprint and privacy statement (site.config.json, see the README), whether the
-# imprint lacks a postal address, and whether search engines may index it. It
-# publishes either way: read the box.
+# Before anything is uploaded, the script says in a box which countries the build
+# contains and which it left out as previews (a pack that marks itself
+# "preview": true in its country.json is left out unless PREVIEW_PACKS=include
+# is set), whether the site has its imprint and privacy statement
+# (site.config.json, see the README), whether the imprint lacks a postal
+# address, and whether search engines may index it. It publishes either way:
+# read the box.
 
 set -euo pipefail
 
@@ -31,7 +34,7 @@ step() { printf '\n==> %s\n' "$*"; }
 banner() {
   local rule="################################################################################"
   printf '\n%s\n' "$rule"
-  printf '%s\n' "$*" | fold -s -w 76 | sed -e 's/ *$//' -e 's/^/##  /'
+  printf '%s\n' "$*" | fold -s -w 76 | sed -e 's/^/##  /' -e 's/ *$//'
   printf '%s\n\n' "$rule"
 }
 
@@ -75,19 +78,25 @@ trap 'rm -rf "$tmp"' EXIT
 if [ "$placeholder" = 1 ]; then
   src="$here/placeholder"
   legal="Legal pages: NONE. The placeholder has no imprint and no privacy statement and asks search engines not to index it."
+  countries="Countries: none. The placeholder is a single page without the app."
 else
   command -v npm >/dev/null || die "'npm' is not installed, cannot build the app"
   step "Building the app (npm run build in $root)"
-  # The build says in one line starting with "Legal pages:" whether the site has
-  # its imprint and privacy statement; keep a copy of the output to find it.
+  # The build says in one line starting with "Countries:" which country packs it
+  # contains and which it left out as previews, and in one starting with "Legal
+  # pages:" whether the site has its imprint and privacy statement; keep a copy of
+  # the output to find them.
   (cd "$root" && npm run build) 2>&1 | tee "$tmp/build.log" || die "the build failed; nothing was uploaded"
+  countries="$(grep '^Countries:' "$tmp/build.log" | tail -n 1 || true)"
   legal="$(grep '^Legal pages:' "$tmp/build.log" | tail -n 1 || true)"
   src="$root/dist"
 fi
 [ -f "$src/index.html" ] || die "$src/index.html is missing; nothing was uploaded"
 
-step "Imprint and privacy statement"
-banner "${legal:-Legal pages: UNKNOWN. The build did not say whether the site has an imprint and a privacy statement; read the build output above.}"
+step "Countries, imprint and privacy statement"
+banner "${countries:-Countries: UNKNOWN. The build did not say which country packs it contains; read the build output above.}
+
+${legal:-Legal pages: UNKNOWN. The build did not say whether the site has an imprint and a privacy statement; read the build output above.}"
 
 # --- 2. Upload ---------------------------------------------------------------
 

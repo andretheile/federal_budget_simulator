@@ -55,14 +55,40 @@ describe("money", () => {
 
   it("writes the US dollar with its bare symbol in both languages", () => {
     const usd = { en: createFormatters("en", "USD"), de: createFormatters("de", "USD") };
-    expect(usd.en.money(7_011_105e6)).toBe("$7,011.1bn");
-    expect(usd.en.money(-1_774_684e6, { signed: true })).toBe("−$1,774.7bn");
     expect(usd.en.exactMoney(176_100)).toBe("$176,100");
-    expect(plain(usd.de.money(7_011_105e6))).toBe("7.011,1 Mrd. $");
     expect(plain(usd.de.money(450e6))).toBe("450 Mio. $");
+    expect(plain(usd.de.money(12.4e9))).toBe("12,4 Mrd. $");
     expect(usd.en.currencySymbol).toBe("$");
     expect(usd.en.currencyName).toBe("US dollar");
     expect(usd.de.currencyName).toBe("US-Dollar");
+  });
+
+  it("counts the US dollar in trillions from a trillion up, with two decimals", () => {
+    // American English, as for the US pack (localeFor), with Intl's own abbreviations.
+    const us = createFormatters("en", "USD", undefined, "en-US");
+    expect(us.money(7_011_105e6)).toBe("$7.01T");
+    expect(us.money(-1_774_684e6, { signed: true })).toBe("−$1.77T");
+    expect(us.money(999_600e6)).toBe("$1.00T");
+    expect(us.money(999_400e6)).toBe("$999.4B");
+    expect(us.money(12.4e9)).toBe("$12.4B");
+    expect(us.money(450e6)).toBe("$450M");
+    expect(us.money(2e12, { trim: true })).toBe("$2T");
+    expect(us.date("2026-11-18")).toBe("Nov 18, 2026");
+    // German: "Billion" is a trillion.
+    const de = createFormatters("de", "USD");
+    expect(plain(de.money(7_011_105e6))).toBe("7,01 Bio. $");
+    expect(plain(de.money(-1_774_684e6, { signed: true }))).toBe("−1,77 Bio. $");
+    // British English with the dollar keeps its own words.
+    expect(createFormatters("en", "USD").money(7_011_105e6)).toBe("$7.01tn");
+  });
+
+  it("keeps the euro in billions, however large, as the German debate does", () => {
+    const de = createFormatters("de", "EUR");
+    const en = createFormatters("en", "EUR");
+    expect(plain(de.money(2_028_300e6))).toBe("2.028,3 Mrd. €");
+    expect(plain(de.money(-1_774_684e6, { signed: true }))).toBe("−1.774,7 Mrd. €");
+    expect(en.money(2_147_500e6)).toBe("€2,147.5bn");
+    expect(en.date("2026-11-18")).toBe("18 Nov 2026");
   });
 
   it("works with a currency that has no symbol", () => {

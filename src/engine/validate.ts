@@ -264,6 +264,7 @@ function check(
     if (Object.keys(country.levels).length === 0) error(COUNTRY, ["levels"], "at least one level is needed");
     text(COUNTRY, ["name"], country.name);
     text(COUNTRY, ["baseYearLabel"], country.baseYearLabel);
+    text(COUNTRY, ["baseYearShort"], country.baseYearShort);
     text(COUNTRY, ["methodology"], country.methodology);
     for (const [level, entry] of Object.entries(country.levels)) text(COUNTRY, ["levels", level, "name"], entry.name);
     for (const [key, indicator] of Object.entries(country.indicators)) {

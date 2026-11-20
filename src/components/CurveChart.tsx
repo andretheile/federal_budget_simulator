@@ -361,10 +361,10 @@ export function CurveChart({
   ];
   if (hover !== null) {
     const at = snap(hover, param.x);
-    readout = t.curve.hover(fmt.exactMoney(at), rate(rateAt(points, at), 1), today ? rate(rateAt(today, at), 1) : null, ...averages(at), ui.pack.country.baseYear);
+    readout = t.curve.hover(fmt.exactMoney(at), rate(rateAt(points, at), 1), today ? rate(rateAt(today, at), 1) : null, ...averages(at), ui.period);
   } else if (selected !== null && points[selected]) {
     const point = points[selected];
-    readout = t.curve.point(t.curve.pointName(selected + 1, points.length), fmt.exactMoney(point.x), rate(point.y), ...averages(point.x), ui.pack.country.baseYear);
+    readout = t.curve.point(t.curve.pointName(selected + 1, points.length), fmt.exactMoney(point.x), rate(point.y), ...averages(point.x), ui.period);
   }
 
   const examples = param.examples ?? [];

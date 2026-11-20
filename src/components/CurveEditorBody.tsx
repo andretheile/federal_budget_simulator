@@ -262,7 +262,7 @@ export function EditorBody({
           <ul className="cchart__legend">
             <li className="key key--line">{t.curve.legend.reform}</li>
             <li className="key key--average">{t.curve.legend.average}</li>
-            {today && <li className="key key--today">{t.curve.legend.base(pack.country.baseYear)}</li>}
+            {today && <li className="key key--today">{t.curve.legend.base(ui.period)}</li>}
             <li className="key key--area">{t.curve.legend.distribution}</li>
             {(param.examples?.length ?? 0) > 0 && <li className="key key--example">{t.curve.legend.examples}</li>}
           </ul>
@@ -273,7 +273,7 @@ export function EditorBody({
           <div className="editor__toolbar">
             <button type="button" className="tool" disabled={isToday} onClick={() => apply(todayValue ?? param.default)}>
               <ResetIcon size={14} />
-              <span>{todayValue ? t.curve.toBase(pack.country.baseYear) : t.curve.toDefault}</span>
+              <span>{todayValue ? t.curve.toBase(ui.period) : t.curve.toDefault}</span>
             </button>
             <button type="button" className="tool" disabled={!undo.undo} onClick={undoLast}>
               <UndoIcon />
@@ -346,7 +346,7 @@ export function EditorBody({
               <h3 className="editor__label">{t.curve.top}</h3>
               <p className="editor__top">
                 <strong>{rate(top.rate)}</strong> {t.curve.from(fmt.exactMoney(top.from))}
-                {topToday && <span className="muted"> · {t.curve.topBase(rate(topToday.rate), fmt.exactMoney(topToday.from), pack.country.baseYear)}</span>}
+                {topToday && <span className="muted"> · {t.curve.topBase(rate(topToday.rate), fmt.exactMoney(topToday.from), ui.period)}</span>}
               </p>
               <p className="editor__note">{t.curve.topNote}</p>
             </section>
@@ -394,7 +394,7 @@ export function EditorBody({
                   <th scope="col">
                     <span className="visually-hidden">{ui.text(distribution.label)}</span>
                   </th>
-                  <th scope="col">{t.curve.exampleBase(pack.country.baseYear)}</th>
+                  <th scope="col">{t.curve.exampleBase(ui.period)}</th>
                   <th scope="col">{t.curve.exampleAfter}</th>
                   <th scope="col">{t.curve.exampleChange}</th>
                 </tr>
@@ -414,7 +414,7 @@ export function EditorBody({
                         <span className="examples__amount">{fmt.exactMoney(example.x)}</span>
                         <span className="examples__label">{ui.text(example.label)}</span>
                       </th>
-                      <td data-label={t.curve.exampleBase(pack.country.baseYear)}>{t.curve.owes(fmt.exactMoney(before), average(before))}</td>
+                      <td data-label={t.curve.exampleBase(ui.period)}>{t.curve.owes(fmt.exactMoney(before), average(before))}</td>
                       <td data-label={t.curve.exampleAfter}>{t.curve.owes(fmt.exactMoney(after), average(after))}</td>
                       <td data-label={t.curve.exampleChange} className="examples__change">
                         {Math.abs(difference) < 0.5 ? (
@@ -480,7 +480,7 @@ export function EditorBody({
                     fmt.percent(model.baseline > 0 ? model.reform / model.baseline - 1 : 0, { signed: true, digits: 1 }),
                     ui.text(node.label),
                     fmt.money(baseAmount(pack, effect.target)),
-                    pack.country.baseYear,
+                    ui.period,
                   )
                 : t.curve.modelAbsolute(ui.text(distribution.label), fmt.money(model.reform), ui.text(node.label))}
             </p>

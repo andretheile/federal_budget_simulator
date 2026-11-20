@@ -109,7 +109,7 @@ export function BudgetView({ result, selection, onSelect, highlight }: BudgetVie
   return (
     <section className="budget" id="budget" aria-labelledby="budget-title" tabIndex={-1}>
       <header className="section-head">
-        <h2 id="budget-title">{t.budget.title(pack.country.baseYear)}</h2>
+        <h2 id="budget-title">{t.budget.title(ui.period)}</h2>
         <p>
           {result.level === "all" ? t.budget.intro : t.budget.introLevel(ui.levelName(result.level))} {t.budget.hint}
         </p>
@@ -335,7 +335,7 @@ function StackedBar({
         {changed && (
           <div className="bar__today" style={{ left: percentOf(baseline, max) }} aria-hidden="true">
             <span className={baseline / max > 0.5 ? "is-left" : undefined}>
-              {t.budget.baseMark(fmt.money(baseline), pack.country.baseYear)}
+              {t.budget.baseMark(fmt.money(baseline), ui.period)}
             </span>
           </div>
         )}
@@ -356,7 +356,7 @@ function StackedBar({
                   direction={directionOfNode(side, activeSegment.delta, noise)}
                   text={fmt.money(activeSegment.delta, { signed: true })}
                 />{" "}
-                {t.scoreboard.vsBase(pack.country.baseYear)}
+                {t.scoreboard.vsBase(ui.period)}
               </span>
             )}
           </Tip>
@@ -577,7 +577,7 @@ function DetailList({ layout, result, selection, onSelect, highlight, noise }: D
                 direction={directionOfNode(side, here.delta, noise)}
                 text={fmt.money(here.delta, { signed: true })}
               />{" "}
-              <span className="muted">{t.scoreboard.vsBase(pack.country.baseYear)}</span>
+              <span className="muted">{t.scoreboard.vsBase(ui.period)}</span>
             </>
           )}
         </p>
@@ -602,7 +602,7 @@ function DetailList({ layout, result, selection, onSelect, highlight, noise }: D
           ))}
         </ul>
       )}
-      {anyChanged && <p className="detail__key">{t.budget.key(pack.country.baseYear)}</p>}
+      {anyChanged && <p className="detail__key">{t.budget.key(ui.period)}</p>}
       {hidden > 0 && <p className="detail__key">{t.budget.hiddenZero(hidden)}</p>}
     </div>
   );
@@ -658,7 +658,7 @@ function DetailRow({ row, side, max, noise, highlighted, level, onDrill }: Detai
               direction={directionOfNode(side, row.delta, noise)}
               text={fmt.money(row.delta, { signed: true })}
             />
-            <span className="row__today"> {t.budget.baseMark(fmt.money(row.baseline), ui.pack.country.baseYear)}</span>
+            <span className="row__today"> {t.budget.baseMark(fmt.money(row.baseline), ui.period)}</span>
           </>
         )}
       </span>
@@ -720,7 +720,8 @@ function LeafDetails({ leaf, level }: { leaf: LeafNode; level: SimulationResult[
             )}
           </dd>
         </div>
-        {levels.length > 0 && (
+        {/* A pack of one level (the US federal budget) would say "100 %" on every item. */}
+        {levels.length > 0 && Object.keys(pack.country.levels).length > 1 && (
           <div>
             <dt>{t.budget.levels}</dt>
             <dd>

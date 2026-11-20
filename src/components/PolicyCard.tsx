@@ -371,7 +371,7 @@ function warningText(ui: Ui, warning: SimulationWarning, enabledBefore: string):
       .map((policy) => t.common.quote(ui.text(policy.label)));
     if (names.length > 0) return t.policies.alreadyExcludedBy(listOf(ui, names));
   }
-  if (warning.code === "empty_group") return t.policies.warnings.empty_group(pack.country.baseYear);
+  if (warning.code === "empty_group") return t.policies.warnings.empty_group(ui.period);
   return t.policies.warnings[warning.code];
 }
 
@@ -420,6 +420,8 @@ function effectBearers(levels: LevelEffect[], effectIndex: number): LevelId[] {
 }
 
 function levelNames(ui: Ui, ids: LevelId[]): string {
+  // A pack of one level (the US federal budget): every amount is that level's, so it is not named.
+  if (Object.keys(ui.pack.country.levels).length < 2) return "";
   return ids.length > 0
     ? ` (${listOf(
         ui,
@@ -430,11 +432,12 @@ function levelNames(ui: Ui, ids: LevelId[]): string {
 
 /** The size of a measure against the base year's deficit, as a thin meter with the share in words. */
 function Meter({ insight, share }: { insight: PolicyInsight; share: number }) {
-  const { pack, t, fmt } = useUi();
-  const text = t.policies.ofDeficit(fmt.share(share), pack.country.baseYear);
+  const ui = useUi();
+  const { t, fmt } = ui;
+  const text = t.policies.ofDeficit(fmt.share(share), ui.period);
   return (
     <div className={`meter meter--${insight.direction}${share > 1 ? " is-over" : ""}`}>
-      <span className="meter__track" role="img" aria-label={t.policies.meterLabel(fmt.share(share), pack.country.baseYear)}>
+      <span className="meter__track" role="img" aria-label={t.policies.meterLabel(fmt.share(share), ui.period)}>
         <span className="meter__fill" style={{ width: `${Math.min(1, share) * 100}%` }} />
       </span>
       <span className="meter__text" aria-hidden="true">

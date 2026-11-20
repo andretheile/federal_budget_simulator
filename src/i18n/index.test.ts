@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { de } from "./de.ts";
 import { en } from "./en.ts";
-import { intlLocale, languagesOf, localize, messagesFor, pickLanguage } from "./index.ts";
+import { intlLocale, languagesOf, localeFor, localize, messagesFor, pickLanguage } from "./index.ts";
 
 describe("localize", () => {
   const text = { en: "Health", de: "Gesundheit" };
@@ -68,5 +68,15 @@ describe("intlLocale", () => {
     expect(intlLocale("en")).toBe("en-GB");
     expect(intlLocale("en-US")).toBe("en-US");
     expect(intlLocale("de")).toBe("de");
+  });
+});
+
+describe("the locale a country is written in", () => {
+  it("is the country's own English where English is its first language, British English otherwise", () => {
+    expect(localeFor("en", { id: "us", locales: ["en", "de"] })).toBe("en-US");
+    expect(localeFor("de", { id: "us", locales: ["en", "de"] })).toBe("de");
+    expect(localeFor("en", { id: "de", locales: ["de", "en"] })).toBe("en-GB");
+    // A region the engine does not know is no region: British English.
+    expect(localeFor("en", { id: "xt", locales: ["en", "de"] })).toBe("en-GB");
   });
 });
