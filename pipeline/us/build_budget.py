@@ -170,13 +170,17 @@ def matches(row, rule):
     return True
 
 
-def q(rows=None, **rule):
-    """Sum in thousand dollars of the rows that match."""
-    return sum(r["v"] for r in (rows or OUTLAYS) if matches(r, rule))
+def q(rows=None, strict=True, **rule):
+    """Sum in thousand dollars of the rows that match. A figure quoted in a text must come from rows that
+    exist: with `strict`, a rule that matches no row stops the build instead of quoting zero."""
+    hits = [r["v"] for r in (rows or OUTLAYS) if matches(r, rule)]
+    if strict and not hits:
+        sys.exit("no row matches %r" % rule)
+    return sum(hits)
 
 
-def sub(*codes):
-    return q(sub=codes)
+def sub(*codes, strict=True):
+    return q(sub=codes, strict=strict)
 
 
 def acct(sub_, agency, bureau, account):
@@ -681,10 +685,11 @@ def checks(budget):
     worst = 0.0
     for code, official in H32.items():
         if re.fullmatch(r"\d{3}", code):
-            diff = sub(code) / 1000 - official
+            mine = sub(code, strict=False) / 1000
+            diff = mine - official
             worst = max(worst, abs(diff))
             if abs(diff) > 1:
-                problems.append("subfunction %s: PBD %.3f, Table 3.2 %.0f million" % (code, sub(code) / 1000, official))
+                problems.append("subfunction %s: PBD %.3f, Table 3.2 %.0f million" % (code, mine, official))
     titles = {"05": "Military Personnel", "10": "Operation and Maintenance", "15": "Procurement",
               "20": "Research, Development, Test, and Evaluation", "25": "Military Construction", "30": "Family Housing"}
     for bureau, title in titles.items():
