@@ -21,6 +21,8 @@ export interface HeaderProps {
   canReset: boolean;
   /** Ids of all country packs; the switch is only shown if there is more than one. */
   countries: readonly string[];
+  /** Of those, the packs that are not live yet: marked as a preview in the switch. */
+  previews?: readonly string[];
   onCountry?(id: string): void;
   /** Out of reach while a sheet lies over the page. */
   inert?: boolean;
@@ -49,6 +51,7 @@ export function Header({
   onReset,
   canReset,
   countries,
+  previews = [],
   onCountry,
   inert = false,
   legal = false,
@@ -97,7 +100,11 @@ export function Header({
       <div className="page masthead__inner">
         <div className="masthead__brand">
           <h1 className="masthead__name">{t.app.name}</h1>
-          <p className="masthead__country">{t.app.countryYear(ui.text(pack.country.name), pack.country.baseYear)}</p>
+          <p className="masthead__country">
+            {pack.country.baseYearLabel
+              ? t.app.countryPeriod(ui.text(pack.country.name), ui.text(pack.country.baseYearLabel))
+              : t.app.countryYear(ui.text(pack.country.name), pack.country.baseYear)}
+          </p>
         </div>
 
         <div className="masthead__tools">
@@ -108,6 +115,7 @@ export function Header({
                 {countries.map((id) => (
                   <option key={id} value={id}>
                     {countryName(id, language)}
+                    {previews.includes(id) && ` (${t.header.preview})`}
                   </option>
                 ))}
               </select>
@@ -185,7 +193,7 @@ export function Header({
       </div>
 
       <div className="page masthead__lower">
-        <p className="masthead__tagline">{t.app.tagline}</p>
+        <p className="masthead__tagline">{pack.policies.length > 0 ? t.app.tagline : t.app.taglineOverview}</p>
         {levels.length > 1 && !legal && (
           <>
             <fieldset

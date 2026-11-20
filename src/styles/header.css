@@ -277,7 +277,23 @@
   }
 
   .masthead__tools {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    min-width: 0;
     gap: 6px;
+  }
+
+  /* With a country switch the tools take a line of their own: the switch takes the room the other
+     tools leave, and a long country name is cut short in it rather than pushing them off the screen. */
+  .masthead__tools > .select {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .masthead__tools > .select select {
+    width: 100%;
+    min-width: 0;
+    text-overflow: ellipsis;
   }
 
   .langs button {

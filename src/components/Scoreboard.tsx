@@ -81,7 +81,10 @@ export interface ScoreboardProps {
 
 export function Scoreboard({ result, editing, children }: ScoreboardProps) {
   const steady = editing !== undefined;
-  const { pack, t, fmt, levelName } = useUi();
+  const ui = useUi();
+  const { pack, t, fmt, levelName } = ui;
+  // A pack without measures has nothing to switch on: the line only says which year it shows.
+  const asBase = pack.policies.length > 0 ? t.scoreboard.asBase(ui.period) : t.scoreboard.asBaseOnly(ui.period);
   const band = useRef<HTMLDivElement>(null);
   const sentinel = useRef<HTMLDivElement>(null);
   const [stuck, setStuck] = useState(false);
@@ -149,12 +152,12 @@ export function Scoreboard({ result, editing, children }: ScoreboardProps) {
         levelName(result.level as Exclude<typeof result.level, "all">),
         signedMoney(change),
         stateWord,
-        pack.country.baseYear,
+        ui.period,
       )
     : t.scoreboard.announce(
         signedMoney(balance),
         stateWord,
-        enabled === 0 ? t.scoreboard.asBase(pack.country.baseYear) : `${signedMoney(change)} ${t.scoreboard.vsBase(pack.country.baseYear)}, ${directionWord}.`,
+        enabled === 0 ? asBase : `${signedMoney(change)} ${t.scoreboard.vsBase(ui.period)}, ${directionWord}.`,
       );
   const [announced, setAnnounced] = useState("");
   const first = useRef(true);
@@ -210,7 +213,7 @@ export function Scoreboard({ result, editing, children }: ScoreboardProps) {
           <p className="scoreboard__change slot__stand-in" aria-hidden="true">
             {!singleLevel && (
               <span>
-                <Delta amount={-1} direction="worsen" text={standIns.money} /> {t.scoreboard.vsBase(pack.country.baseYear)}
+                <Delta amount={-1} direction="worsen" text={standIns.money} /> {t.scoreboard.vsBase(ui.period)}
               </span>
             )}
             <span className="scoreboard__count">{standIns.count}</span>
@@ -219,7 +222,7 @@ export function Scoreboard({ result, editing, children }: ScoreboardProps) {
           </p>
           {!singleLevel && mostMeasures === 1 && (
             <p className="scoreboard__change slot__stand-in" aria-hidden="true">
-              <span className="muted">{t.scoreboard.asBase(pack.country.baseYear)}</span>
+              <span className="muted">{asBase}</span>
             </p>
           )}
         </>
@@ -253,10 +256,10 @@ export function Scoreboard({ result, editing, children }: ScoreboardProps) {
             <div className="scoreboard__main">
               <p className="scoreboard__label">
                 {singleLevel ? (
-                  t.scoreboard.levelLabel(levelName(result.level as Exclude<typeof result.level, "all">), pack.country.baseYear)
+                  t.scoreboard.levelLabel(levelName(result.level as Exclude<typeof result.level, "all">), ui.period)
                 ) : (
                   <>
-                    {t.scoreboard.balanceLabel(pack.country.baseYear)}
+                    {t.scoreboard.balanceLabel(ui.period)}
                     {/* Which levels the figure covers, as the goal bar below names its own. */}
                     {levelsOf(pack).length > 1 && <span className="scoreboard__scope">{t.header.allLevels}</span>}
                   </>
@@ -285,12 +288,12 @@ export function Scoreboard({ result, editing, children }: ScoreboardProps) {
                 ) : (
                   <p className="scoreboard__change">
                     {enabled === 0 ? (
-                      <span className="muted">{t.scoreboard.asBase(pack.country.baseYear)}</span>
+                      <span className="muted">{asBase}</span>
                     ) : (
                       <>
                         <span>
                           <Delta amount={change} direction={direction} text={signedMoney(change)} animate={signedMoney} />{" "}
-                          {t.scoreboard.vsBase(pack.country.baseYear)}
+                          {t.scoreboard.vsBase(ui.period)}
                         </span>
                         {extras}
                       </>

@@ -137,8 +137,16 @@ export function CurveChart({
   // --- geometry -------------------------------------------------------------------------------
   const narrow = width < 560;
   const height = narrow ? 290 : Math.round(Math.min(430, Math.max(320, width * 0.44)));
-  const margin = { top: 30, right: narrow ? 14 : 20, bottom: 26, left: narrow ? 40 : 48 };
-  const plotW = Math.max(1, width - margin.left - margin.right);
+  const left = narrow ? 40 : 48;
+  const right = narrow ? 14 : 20;
+  const plotW = Math.max(1, width - left - right);
+  // The axis title stands top left, the examples' numbered markers in the same row above the plot.
+  // An example near the left edge (a low threshold, as a wage cap's) would sit on the title: the
+  // markers then get a row of their own below it. The title's width is estimated from its letters
+  // (11px capitals with letter spacing), with room for the marker's circle.
+  const titleWidth = t.curve.axisRate.length * 7.6 + 10;
+  const crowded = (param.examples ?? []).some((example) => left + toFraction(scale, example.x) * plotW - 9 < titleWidth);
+  const margin = { top: crowded ? 46 : 30, right, bottom: 26, left };
   const plotH = height - margin.top - margin.bottom;
   const ySpan = param.y.max - param.y.min || 1;
   const X = (value: number): number => margin.left + toFraction(scale, value) * plotW;
@@ -361,10 +369,10 @@ export function CurveChart({
   ];
   if (hover !== null) {
     const at = snap(hover, param.x);
-    readout = t.curve.hover(fmt.exactMoney(at), rate(rateAt(points, at), 1), today ? rate(rateAt(today, at), 1) : null, ...averages(at), ui.pack.country.baseYear);
+    readout = t.curve.hover(fmt.exactMoney(at), rate(rateAt(points, at), 1), today ? rate(rateAt(today, at), 1) : null, ...averages(at), ui.period);
   } else if (selected !== null && points[selected]) {
     const point = points[selected];
-    readout = t.curve.point(t.curve.pointName(selected + 1, points.length), fmt.exactMoney(point.x), rate(point.y), ...averages(point.x), ui.pack.country.baseYear);
+    readout = t.curve.point(t.curve.pointName(selected + 1, points.length), fmt.exactMoney(point.x), rate(point.y), ...averages(point.x), ui.period);
   }
 
   const examples = param.examples ?? [];
@@ -381,9 +389,6 @@ export function CurveChart({
             {kneeX !== null && (
               <g className="cchart__band">
                 <rect x={kneeX} y={margin.top} width={margin.left + plotW - kneeX} height={plotH} />
-                <text x={margin.left + plotW - 6} y={margin.top + plotH - 8} textAnchor="end">
-                  {t.curve.compressed}
-                </text>
               </g>
             )}
             <path className="cchart__histogram" d={histogram} />
@@ -417,6 +422,14 @@ export function CurveChart({
                 <path className="cchart__break" d={`M${kneeX - 5},${margin.top + plotH + 6}l4,-12M${kneeX + 1},${margin.top + plotH + 6}l4,-12`} />
               )}
             </g>
+            {/* The band's word, above the histogram and the curves, which would otherwise cover
+                letters of it; only where the band has room for it. The break on the axis and the
+                note under the chart say it all the same. */}
+            {kneeX !== null && margin.left + plotW - kneeX >= t.curve.compressed.length * 7.2 + 12 && (
+              <text className="cchart__band-label" x={margin.left + plotW - 6} y={margin.top + plotH - 8} textAnchor="end">
+                {t.curve.compressed}
+              </text>
+            )}
             <g className="cchart__examples">
               {examples.map((example, index) => {
                 const at = X(example.x);

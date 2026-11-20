@@ -55,8 +55,9 @@ From the repository root:
 The script
 
 1. runs `npm run build` and stops if the build fails or `dist/index.html` is missing,
-   then shows in a box whether the build has an imprint and a privacy statement, with or
-   without a postal address, and whether it may be indexed (see below),
+   then shows in a box which countries the build contains and which it left out as
+   previews, whether it has an imprint and a privacy statement, with or without a postal
+   address, and whether it may be indexed (see below),
 2. uploads `docker-compose.yml`, `nginx.conf` and `.env`, then the contents of `dist/` to `site/`,
 3. runs `docker compose up -d` on the server, which leaves a running, unchanged container alone,
 4. if `nginx.conf` changed: checks it with `nginx -t` inside the container and reloads nginx.
@@ -86,11 +87,22 @@ in, and `deploy.sh` shows it before it uploads anything:
 
 ```text
 ################################################################################
+##  Countries: de, us.
+##
 ##  Legal pages: NONE. No site config (site.config.json or SITE_CONFIG), so the
 ##  site has no imprint and no privacy statement and asks search engines not to
 ##  index it.
 ################################################################################
 ```
+
+The first line names the country packs the build contains. A pack under
+construction marks itself `"preview": true` in its `country.json` and is left
+out of the build, so it cannot go live by accident; the line then names it as
+well, for example `Countries: de, us. Left out as previews: fr
+(PREVIEW_PACKS=include builds them in).` (see "Adding or changing a country"
+in the main [README](../README.md)). `deploy.sh` builds without previews unless
+`PREVIEW_PACKS=include` is set in its environment, and the box then says that
+it built them in.
 
 With a config, the box names the file and says whether search engines may
 index the site. If the imprint has no postal address, it says that too:

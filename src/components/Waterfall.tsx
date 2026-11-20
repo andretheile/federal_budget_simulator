@@ -36,7 +36,7 @@ export function Waterfall({ result, onShowPolicy }: { result: SimulationResult; 
 
   const steps: Step[] = [];
   if (!singleLevel)
-    steps.push({ key: "today", label: t.common.baseYear(pack.country.baseYear), kind: "anchor", from: 0, to: start, low: start, high: start });
+    steps.push({ key: "today", label: t.common.baseYear(ui.period), kind: "anchor", from: 0, to: start, low: start, high: start });
   let running = start;
   for (const entry of result.policies) {
     const policy = pack.policies.find((candidate) => candidate.id === entry.id);
@@ -80,7 +80,7 @@ export function Waterfall({ result, onShowPolicy }: { result: SimulationResult; 
     <section className="waterfall" aria-labelledby="waterfall-title" id="what-changed">
       <header className="section-head">
         <h2 id="waterfall-title">{t.waterfall.title}</h2>
-        <p>{singleLevel ? t.waterfall.introLevel : t.waterfall.intro(pack.country.baseYear)}</p>
+        <p>{singleLevel ? t.waterfall.introLevel : t.waterfall.intro(ui.period)}</p>
       </header>
 
       {steps.length > 0 && (
@@ -158,7 +158,7 @@ export function Waterfall({ result, onShowPolicy }: { result: SimulationResult; 
             <span className="wf__plot">
               <span className="wf__zero" style={{ left: `${zeroAt}%` }} />
               <span className={`wf__zero-label${zeroSide}`} style={{ left: `${zeroAt}%` }}>
-                {singleLevel ? t.waterfall.zeroLevel(pack.country.baseYear) : t.waterfall.zero}
+                {singleLevel ? t.waterfall.zeroLevel(ui.period) : t.waterfall.zero}
               </span>
             </span>
             <span className="wf__value" />

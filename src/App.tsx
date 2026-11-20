@@ -48,7 +48,7 @@ import {
 } from "./engine/index.ts";
 import { useMediaQuery } from "./hooks/useMediaQuery.ts";
 import { languagesOf, messagesFor, pickLanguage } from "./i18n/index.ts";
-import { listPackIds, loadPack } from "./packs.ts";
+import { isPreviewPack, listPackIds, loadPack } from "./packs.ts";
 import type { LegalPage, SiteConfig } from "./site/config.ts";
 import { currentSite } from "./site/current.ts";
 import { REPOSITORY_URL } from "./site/project.ts";
@@ -123,6 +123,12 @@ async function load(id: string | undefined): Promise<Loaded> {
 export function App() {
   const ids = useMemo(() => listPackIds(), []);
   const [country, setCountry] = useState(() => initialCountry(ids));
+  /** Whether a country was chosen after the page opened; the address then names it at once. */
+  const [switched, setSwitched] = useState(false);
+  const onCountry = useCallback((id: string) => {
+    setSwitched(true);
+    setCountry(id);
+  }, []);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
 
   useEffect(() => {
@@ -148,7 +154,9 @@ export function App() {
       pack={loaded.pack}
       fallback={loaded.fallback}
       countries={ids}
-      onCountry={setCountry}
+      previews={ids.filter(isPreviewPack)}
+      onCountry={onCountry}
+      countrySwitched={switched}
     />
   );
 }
@@ -157,12 +165,19 @@ export interface SimulatorProps {
   pack: CountryPack;
   fallback?: Fallback;
   countries?: readonly string[];
+  /** Of those, the packs that mark themselves as a preview and are in this build only on request. */
+  previews?: readonly string[];
   onCountry?(id: string): void;
+  /**
+   * The country was chosen on the page, not by the address it was opened with: the address is
+   * written at once, so that it names the country and a reload stays there.
+   */
+  countrySwitched?: boolean;
   /** The operator's details for imprint and privacy statement; without them there are no legal pages. Default: the build's. */
   site?: SiteConfig | null;
 }
 
-export function Simulator({ pack, fallback, countries = [], onCountry, site = currentSite }: SimulatorProps) {
+export function Simulator({ pack, fallback, countries = [], previews = [], onCountry, countrySwitched = false, site = currentSite }: SimulatorProps) {
   const languages = useMemo(() => languagesOf(pack.country.locales), [pack]);
   const [language, setLanguage] = useState(() =>
     pickLanguage(pack.country.locales, {
@@ -230,8 +245,9 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
   const linkRef = useRef(link);
   linkRef.current = link;
   const initialHash = useRef(hash);
-  // A bare address stays bare until the visitor changes something; a link is kept in sync from the start.
-  const dirty = useRef(currentHash() !== "");
+  // A bare address stays bare until the visitor changes something; a link is kept in sync from the
+  // start, and so is the address after the visitor switched to another country.
+  const dirty = useRef(currentHash() !== "" || countrySwitched);
   // Writes draw on a budget, so that Safari, which allows replaceState about 100 times in ten
   // seconds, never refuses while a point of a curve is dragged (see addressWriter.ts).
   const writer = useRef<AddressWriter | null>(null);
@@ -302,7 +318,7 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
     document.documentElement.lang = language;
     document.title = legalPage
       ? t.legal.documentTitle(legalPage === "imprint" ? t.legal.imprint : t.legal.privacyTitle, t.app.name)
-      : t.app.title(ui.text(pack.country.name), pack.country.baseYear);
+      : t.app.title(ui.text(pack.country.name), ui.period);
   }, [language, t, ui, pack, legalPage]);
 
   // --- what the visitor can do -----------------------------------------------------------------
@@ -472,6 +488,17 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
       <a className="skip-link" href="#main" onClick={(event) => jumpTo(event, "main")}>
         {t.app.skipToContent}
       </a>
+      {/* A pack that is not live yet, in a view that includes previews (development, or a build with PREVIEW_PACKS=include). */}
+      {!fallback && previews.includes(pack.country.id) && (
+        <aside className="dev-notice dev-notice--preview" role="note" inert={editing}>
+          <div className="page">
+            <p>
+              <WarningIcon size={15} />
+              <span>{t.dev.preview}</span>
+            </p>
+          </div>
+        </aside>
+      )}
       {fallback && (
         <aside className="dev-notice" role="note" inert={editing}>
           <div className="page">
@@ -508,6 +535,7 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
         onReset={onReset}
         canReset={canReset}
         countries={fallback ? [] : countries}
+        previews={previews}
         onCountry={onCountry}
         inert={editing}
         legal={legalPage !== undefined}
@@ -517,7 +545,9 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
           {goal && <GoalBar goal={goal} scenario={scenario} result={result} onGoal={onGoal} steady={editing} />}
           {/* One column: the sections lie one under the other, below the whole list of measures. A row
               in the band leads to each; not while the curve editor lies over the page. */}
-          {oneColumn && !editing && <SectionNav debt={debt !== undefined && debtAssumptions !== undefined} />}
+          {oneColumn && !editing && (
+            <SectionNav measures={pack.policies.length > 0} debt={debt !== undefined && debtAssumptions !== undefined} />
+          )}
         </Scoreboard>
       )}
       {editing && editor && editorPolicy && (
@@ -551,8 +581,10 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
                 line that leads to the debt section is only needed beside the two columns. The order in
                 the document follows the order on screen, so keyboard and screen reader agree with the eye. */}
             {!oneColumn && <DebtTeaser view={debt} />}
-            <div className="workspace">{oneColumn ? [policies, budget] : [budget, policies]}</div>
-            <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />
+            {/* A pack without measures yet: the budget is what there is, so it comes first on one column too. */}
+            <div className="workspace">{oneColumn && pack.policies.length > 0 ? [policies, budget] : [budget, policies]}</div>
+            {/* A pack without measures has nothing to switch on, so there is no change to show. */}
+            {pack.policies.length > 0 && <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />}
             {debt && debtAssumptions && (
               <DebtSection view={debt} assumptions={debtAssumptions} onAssumptions={setDebtAssumptions} level={pageResult.level} />
             )}

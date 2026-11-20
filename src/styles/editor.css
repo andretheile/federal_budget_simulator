@@ -214,11 +214,16 @@
   fill: var(--sunken);
 }
 
-.cchart__band text {
+.cchart__svg .cchart__band-label {
   font-size: 10.5px;
   font-weight: 650;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+  /* A halo in the band's colour, so lines and bars behind the word do not cut it. */
+  paint-order: stroke;
+  stroke: var(--sunken);
+  stroke-width: 4px;
+  stroke-linejoin: round;
 }
 
 .cchart__svg .cchart__histogram {

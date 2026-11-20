@@ -74,6 +74,7 @@ describe("a valid pack", () => {
     files.goals.goals[0].excluded.pop();
     files.distributions = {};
     delete files.country.methodology;
+    delete files.country.baseYearLabel;
     delete files.country.indicators.households;
     delete files.country.indicators.grossDebt;
     files.sources = { finance_ministry: files.sources.finance_ministry, stats_office: files.sources.stats_office };
@@ -243,6 +244,7 @@ describe("locales", () => {
     const cases: [string, string, (f: Files) => Loose][] = [
       ["country.json", "$.name", (f) => f.country.name],
       ["country.json", "$.methodology", (f) => f.country.methodology],
+      ["country.json", "$.baseYearLabel", (f) => f.country.baseYearLabel],
       ["country.json", "$.levels.state.name", (f) => f.country.levels.state.name],
       ["budget.json", "$.revenue[0].label", (f) => f.budget.revenue[0].label],
       ["budget.json", "$.revenue[0].description", (f) => f.budget.revenue[0].description],

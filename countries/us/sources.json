@@ -1,0 +1,218 @@
+{
+  "omb_pbd_outlays_fy2027": {
+    "title": "Public Budget Database: outlays by account, Budget of the U.S. Government, Fiscal Year 2027 (outlays_fy2027.xlsx)",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/outlays_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "One row per account, subfunction and budget category, in thousands of dollars; actual values for fiscal year 2025, published April 2026. Every spending item of the pack is a sum of rows of this file (column 2025), and the rows add up to Historical Table 3.2 in every subfunction and to total outlays of 7,011,105 million dollars."
+  },
+  "omb_pbd_receipts_fy2027": {
+    "title": "Public Budget Database: receipts by account and source, Budget of the U.S. Government, Fiscal Year 2027 (receipts_fy2027.xlsx)",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/receipts_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "One row per receipt account and source category, in thousands of dollars. Every revenue item of the pack is a sum of rows of this file (column 2025); they add up to total receipts of 5,236,421 million dollars."
+  },
+  "omb_hist_fy2027": {
+    "title": "Historical Tables, Budget of the U.S. Government, Fiscal Year 2027: Tables 1.1, 2.1, 3.2 and 10.1",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/omb/information-resources/budget/historical-tables/",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Fiscal year 2025: receipts 5,236,421, outlays 7,011,105 and deficit 1,774,684 million dollars (Table 1.1); receipts by source (Table 2.1); outlays by function and subfunction, with the Department of Defense by title (Table 3.2); GDP of 30,322.847 billion dollars (Table 10.1). Table 3.2 also gives the Budget's estimates for 2026 and 2027, for example national defense 966,396 and 1,205,028 million dollars and international development and humanitarian assistance 37,852 and 22,827 million dollars."
+  },
+  "omb_ap_credit_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 4 (Credit and Insurance), Table 4-1: Estimated future cost of outstanding federal credit programs",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_4_tables_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Federal student loans: estimated future cost of the loans outstanding 476.856 billion dollars at the end of 2024 and 343.098 billion dollars at the end of 2025."
+  },
+  "treasury_mts_2025_09": {
+    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2025 (fiscal year 2025), Tables 1, 3, 4, 5 and 9",
+    "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
+    "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Retrieved through the Fiscal Data API, record date 2025-09-30. Fiscal year 2025: receipts 5,234.6, outlays 7,010.0 and deficit 1,775.4 billion dollars; Table 4 gives receipts before and after refunds. Table 5: Immigration and Customs Enforcement 10.7 billion, U.S. Customs and Border Protection 21.2 billion. Table 9 (prior year): corporation income taxes 529.9 billion in fiscal year 2024."
+  },
+  "treasury_mts_2026_09": {
+    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2026 (fiscal year 2026), Tables 1, 3, 4, 5 and 9",
+    "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
+    "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Retrieved through the Fiscal Data API, record date 2026-09-30. Fiscal year 2026: receipts 5,403.3, outlays 7,395.8 and deficit 1,992.5 billion dollars. Table 4: customs duties 317.8 billion collected, 144.6 billion refunded. Table 5: Immigration and Customs Enforcement 22.4 billion, U.S. Customs and Border Protection 28.9 billion."
+  },
+  "census_popest_v2025": {
+    "title": "Annual Estimates of the Resident Population for the United States, Regions, States, District of Columbia, and Puerto Rico, Vintage 2025 (NST-EST2025-ALLDATA)",
+    "publisher": "U.S. Census Bureau",
+    "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Resident population of the United States on July 1, 2025: 341,784,857 (the middle of fiscal year 2025 is April 1, 2025). Puerto Rico is not included."
+  },
+  "bea_nipa_3_18b": {
+    "title": "NIPA Table 3.18B. Relation of Federal Government Current Receipts and Expenditures in the National Income and Product Accounts to the Budget, Fiscal Years and Quarters",
+    "publisher": "U.S. Bureau of Economic Analysis",
+    "url": "https://apps.bea.gov/national/Release/TXT/NipaDataA.txt",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Annual series M31801 to M31856 of the flat file of all annual NIPA data (release of November 4, 2026). Fiscal year 2025: federal current receipts 5,550.0 and current expenditures 7,409.9 billion dollars in the national accounts; supplementary medical insurance premiums 160.2 billion dollars."
+  },
+  "irs_pub15_2025": {
+    "title": "Publication 15 (Circular E), Employer's Tax Guide, for use in 2025",
+    "publisher": "Internal Revenue Service",
+    "url": "https://www.irs.gov/pub/irs-prior/p15--2025.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Social Security tax 6.2% each for employee and employer on wages up to 176,100 dollars; Medicare tax 1.45% each without a wage base limit; Additional Medicare Tax of 0.9% withheld from wages above 200,000 dollars."
+  },
+  "plaw_119_1": {
+    "title": "Public Law 119-1, Laken Riley Act (January 29, 2025)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ1.xml",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Amends section 236(c) of the Immigration and Nationality Act: detention of inadmissible aliens charged with burglary, theft, larceny, shoplifting, assault of a law enforcement officer and other offenses."
+  },
+  "plaw_119_21": {
+    "title": "Public Law 119-21, an act to provide for reconciliation pursuant to title II of H. Con. Res. 14 (July 4, 2025)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ21.xml",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Sections 90001 (border wall, 46.55 billion dollars), 90003 (ICE detention capacity, 45.0 billion) and 100052 (ICE, 29.85 billion), available until September 30, 2029. Section 11(b) of the Internal Revenue Code (corporate rate) is not amended."
+  },
+  "plaw_119_28": {
+    "title": "Public Law 119-28, Rescissions Act of 2025 (July 24, 2025)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ28.xml",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Nineteen rescissions of unobligated balances for international affairs, together 7,903 million dollars, among them development assistance 2,500 million, Economic Support Fund 1,650 million, migration and refugee assistance 800 million and global health programs 500 million (HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health exempted); also the Corporation for Public Broadcasting."
+  },
+  "plaw_119_98": {
+    "title": "Public Law 119-98, Secure America Act (June 10, 2026)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ98.xml",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Reconciliation act: 69.545 billion dollars for fiscal year 2026, available until September 30, 2029: CBP 26.02 billion (sections 101, 103, 201), ICE 38.525 billion (sections 102, 202), Department of Homeland Security 5.0 billion (sections 104, 203)."
+  },
+  "plaw_119_103": {
+    "title": "Public Law 119-103, Continuing Appropriations and Extensions Act, 2027 (September 2, 2026)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ103.xml",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Section 106: continuing appropriations available until December 11, 2026, at the latest."
+  },
+  "scotus_24_1287": {
+    "title": "Learning Resources, Inc. v. Trump, No. 24-1287, together with Trump v. V.O.S. Selections, Inc., No. 25-250 (decided February 20, 2026), 607 U.S.",
+    "publisher": "Supreme Court of the United States",
+    "url": "https://www.supremecourt.gov/opinions/25pdf/607us2r12_8nj9.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Held: the International Emergency Economic Powers Act does not authorize the President to impose tariffs."
+  },
+  "fr_2026_03824": {
+    "title": "Proclamation of February 20, 2026, Imposing a Temporary Import Surcharge To Address Fundamental International Payments Problems, 91 FR 9339",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-02-25/pdf/2026-03824.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Section 122 of the Trade Act of 1974: 10 percent ad valorem on all imports with exceptions, from February 24, 2026, through July 24, 2026, unless extended by an Act of Congress; section 122 allows up to 15 percent for up to 150 days."
+  },
+  "fr_2026_03832": {
+    "title": "Executive Order 14389 of February 20, 2026, Ending Certain Tariff Actions, 91 FR 9437",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-02-25/pdf/2026-03832.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "The additional duties imposed under IEEPA by Executive Orders 14193, 14194, 14195, 14245, 14257, 14323, 14329, 14380 and 14382 shall no longer be in effect."
+  },
+  "fr_2026_15274": {
+    "title": "Memorandum of July 23, 2026, Actions by the United States in the Investigations Under Section 301 of the Trade Act of 1974 of the Acts, Policies, and Practices of 60 Economies, 91 FR 47717",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-28/pdf/2026-15274.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Tariffs of 10 percent or 12.5 percent on all goods of the investigated economies (for some, net of the MFN tariff), with exemptions listed in the annex."
+  },
+  "census_ft900_2026_11": {
+    "title": "U.S. International Trade in Goods and Services (FT-900), release of November 2026, Exhibit 1",
+    "publisher": "U.S. Census Bureau and U.S. Bureau of Economic Analysis",
+    "url": "https://www.census.gov/foreign-trade/Press-Release/current_press_release/exh1.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Goods imports, balance-of-payments basis, seasonally adjusted, million dollars. October 2024 to September 2025 (fiscal year 2025): 3,482,146; October 2025 to September 2026: 3,631,243. The address always holds the latest release."
+  },
+  "jct_jcx_11_21": {
+    "title": "New Income and Payroll Tax Offsets to Changes in Excise Tax Revenues for 2021-2031 (JCX-11-21), February 23, 2021",
+    "publisher": "Joint Committee on Taxation (via govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/GOVPUB-Y4_T19_4-PURL-gpo157077/pdf/GOVPUB-Y4_T19_4-PURL-gpo157077.pdf",
+    "accessed": "2026-11-20",
+    "year": 2021,
+    "note": "Table 1: offset 0.221 for 2025, 0.245 for 2026 (before the 2025 reconciliation act); the text calls 25 percent the long-time standard offset factor."
+  },
+  "cbo_offset_2009": {
+    "title": "The Role of the 25 Percent Revenue Offset in Estimating the Budgetary Effects of Legislation (Economic and Budget Issue Brief, January 2009)",
+    "publisher": "Congressional Budget Office (via govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/GOVPUB-Y10-PURL-LPS107729/pdf/GOVPUB-Y10-PURL-LPS107729.pdf",
+    "accessed": "2026-11-20",
+    "year": 2009,
+    "note": "CBO, JCT and Treasury's Office of Tax Analysis reduce the estimated proceeds of excise taxes, customs duties and other indirect taxes by 25 percent for the resulting reductions in income and payroll taxes."
+  },
+  "nato_defexp_2025": {
+    "title": "Defence Expenditure of NATO Countries (2014-2025)",
+    "publisher": "NATO",
+    "url": "https://www.nato.int/content/dam/nato/webready/documents/finance/def-exp-2025-en.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "United States, 2025 estimate: 980,000 million dollars, 3.22 percent of GDP (2024: 3.21 percent). Personnel expenditure includes pensions paid to retirees."
+  },
+  "nato_5_percent": {
+    "title": "Defence investment and NATO's 5% commitment (updated June 29, 2026)",
+    "publisher": "NATO",
+    "url": "https://www.nato.int/en/what-we-do/introduction-to-nato/defence-expenditures-and-natos-5-commitment",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "The Hague, 2025: 5 percent of GDP annually by 2035, at least 3.5 percent for core defense and up to 1.5 percent for defense- and security-related investment; review in 2029. Wales, 2014: 2 percent commitment."
+  },
+  "treasury_greenbook_fy2025": {
+    "title": "General Explanations of the Administration's Fiscal Year 2025 Revenue Proposals (March 11, 2024)",
+    "publisher": "U.S. Department of the Treasury",
+    "url": "https://home.treasury.gov/system/files/131/General-Explanations-FY2025.pdf",
+    "accessed": "2026-11-20",
+    "year": 2024,
+    "note": "Raise the corporate income tax rate to 28 percent: 122,474 million dollars in fiscal year 2025, 1,349,941 million in 2025-2034 (table of revenue estimates)."
+  },
+  "ssa_trustees_2026": {
+    "title": "The 2026 Annual Report of the Board of Trustees of the Federal Old-Age and Survivors Insurance and Federal Disability Insurance Trust Funds (House Document 119-163)",
+    "publisher": "Social Security Board of Trustees (via govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/CDOC-119hdoc163/pdf/CDOC-119hdoc163.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Table V.C6: contribution and benefit base 160,200 dollars (2023), 176,100 (2025), 184,500 (2026); OASDI rate 12.4 percent (OASI 10.6, DI 1.8). Depletion: OASI fourth quarter of 2032, OASDI third quarter of 2034, then 83 percent of scheduled benefits payable."
+  },
+  "hr_9519_2026": {
+    "title": "H.R. 9519, Social Security 2100 Act, as introduced in the House on June 29, 2026",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr9519ih/pdf/BILLS-119hr9519ih.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Section 201: repeal of the limitation on the Social Security wage base after 2026; section 202: earnings over the contribution and benefit base included in the benefit formula."
+  },
+  "irs_soi_w2_2023": {
+    "title": "SOI Tax Stats, Individual Information Return Form W-2 Statistics, tax year 2023, Table 1 (23in01w2all.xlsx)",
+    "publisher": "Internal Revenue Service, Statistics of Income",
+    "url": "https://www.irs.gov/pub/irs-soi/23in01w2all.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2023,
+    "note": "Published October 2026. Table 1.B: 146,669,608 taxpayers with wages of 9,795,581,128 thousand dollars, by size of wage income; Table 1.H: by multiples of the OASDI wage limit."
+  }
+}

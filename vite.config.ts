@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import type { Plugin } from "vite";
 import { defineConfig } from "vitest/config";
+import { previewPacksPlugin } from "./scripts/preview-packs.ts";
 import type { SiteConfig } from "./src/site/config.ts";
 import { applyNoscriptImprint, applyRobots, parseSiteConfig, siteState, stateLine } from "./src/site/schema.ts";
 
@@ -65,14 +66,20 @@ export default defineConfig(({ mode }) => {
   const testing = mode === "test" || process.env.VITEST !== undefined;
   const site = testing ? { config: null, source: null } : loadSiteConfig();
   return {
-    plugins: [react(), siteConfigPlugin(site.config, site.source, testing)],
+    // Which country packs the build contains: preview packs only on request (scripts/preview-packs.ts).
+    plugins: [previewPacksPlugin(root, { quiet: testing }), react(), siteConfigPlugin(site.config, site.source, testing)],
     define: { __SITE_CONFIG__: JSON.stringify(site.config) },
     optimizeDeps: { entries: ["index.html"] },
     // Local Python environments (the pipeline's, leftovers) are large and never part of the app.
     server: { watch: { ignored: ["**/venv/**"] } },
     test: {
       environment: "node",
-      include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+      projects: [
+        { extends: true, test: { name: "app", include: ["src/**/*.test.ts", "src/**/*.test.tsx"] } },
+        // Real production builds (scripts/preview-packs.test.ts) take every core for a moment: they
+        // run after all other tests, never beside the engine's timing tests.
+        { extends: true, test: { name: "builds", include: ["scripts/**/*.test.ts"], sequence: { groupOrder: 1 } } },
+      ],
     },
   };
 });

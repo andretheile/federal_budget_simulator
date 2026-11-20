@@ -2,7 +2,7 @@
 
 An interactive dashboard of a country's public budget: revenue, spending and balance of the whole state, not only of the central government. You switch on a policy proposal from public debate, such as ending citizen's income for non-citizens, reintroducing the wealth tax or halving MPs' pay, and see at once what it does to the budget and what the catch is: legal limits, costs that move to another level of government, side effects. The site shows numbers and catches and takes no political side.
 
-Germany is the first country. A preview is live at **[budget.drtheile.com](https://budget.drtheile.com)**.
+Germany is the first country; the second is the United States, with the federal budget only and its first six measures. A preview is live at **[budget.drtheile.com](https://budget.drtheile.com)**.
 
 ![Budget Simulator with the German budget and four measures switched on: the balance, the goal bar for the 2028 gap in the federal financial plan with a tag for what the other levels pay at the same time, bars for revenue and spending, and a measure card showing a cost shift](docs/screenshot.png)
 
@@ -72,10 +72,11 @@ npm run dev
 | `npm test` | Unit tests (Vitest) |
 | `npm run typecheck` | TypeScript checks for the app, the engine and the scripts |
 | `npm run validate` | Checks every country pack in `countries/` and prints its totals |
-| `npm run build` | Type check, then production build into `dist/` |
+| `npm run build` | Type check, then production build into `dist/`, without preview packs |
+| `PREVIEW_PACKS=include npm run build` | The same build with the preview packs, to look at before a release |
 | `npm run preview` | Serves the built `dist/` locally |
 
-Python is only needed to rebuild the German budget data ([pipeline/de/README.md](pipeline/de/README.md)). Imprint and privacy statement come from a site config, see [Running your own instance](#running-your-own-instance). Hosting is described in [deploy/README.md](deploy/README.md).
+Python is only needed to rebuild the budget data ([pipeline/de/README.md](pipeline/de/README.md), [pipeline/us/README.md](pipeline/us/README.md)). Imprint and privacy statement come from a site config, see [Running your own instance](#running-your-own-instance). Hosting is described in [deploy/README.md](deploy/README.md).
 
 ## Project layout
 
@@ -89,6 +90,8 @@ countries/
     distributions/         taxable_income.json, gross_earnings.json, net_wealth.json
     debt.json              the debt and interest projection
     goals.json             targets for the balance, such as the gaps in the federal financial plan
+  us/                      the US pack: federal budget only, six measures (country, budget, policies, sources,
+                           distributions/wages.json)
 src/
   engine/                  calculation engine, knows no country
     types.ts               the country pack format
@@ -111,6 +114,7 @@ src/
   App.tsx, main.tsx
 scripts/validate-packs.ts  behind "npm run validate"
 pipeline/de/               Python scripts that rebuild the German budget data (own README)
+pipeline/us/               the same for the US federal budget (own README)
 deploy/                    static hosting files and a deploy script (own README)
 docs/                      the screenshots in this README
 site.config.example.json   example of the site config, with made-up details
@@ -151,9 +155,11 @@ The texts are a starting point, not legal advice: read both pages on your own si
 
 A country pack is a folder `countries/<id>/`, named after the country's lower-case ISO 3166-1 alpha-2 code. The build picks up every folder in `countries/`; nothing has to be registered in code. With more than one pack, the header shows a country switch.
 
+A pack that is not ready to go live marks itself with `"preview": true` in its `country.json`. A production build (`npm run build`, and so `deploy/deploy.sh`) leaves it out entirely: none of its files are in `dist/`, and an address that names it opens the default country. `PREVIEW_PACKS=include npm run build` builds it in, to look at a build before a release. The development server always shows every pack and marks previews as such, in the country switch and on the pack's own page; tests and `npm run validate` cover previews like any pack. Every build says in a line starting with `Countries:` which countries it contains and which it left out as previews, and `deploy.sh` repeats that line in its box before it uploads anything. To publish a preview, remove the mark.
+
 | File | What it holds |
 | --- | --- |
-| `country.json` | Name, currency, languages, base year, the levels of government that exist and what they are called, reference values (GDP and population, optionally households and gross debt), and a method note that the app shows under "About the numbers" |
+| `country.json` | Name, currency, languages, base year (and, for a fiscal year, how the masthead names it), the levels of government that exist and what they are called, reference values (GDP and population, optionally households and gross debt), and a method note that the app shows under "About the numbers" |
 | `budget.json` | The budget as two trees, `revenue` and `expenditure` |
 | `policies.json` | The measures, in the order in which they are applied, and optionally named collections of them |
 | `sources.json` | Every source under an id: title, publisher, URL, date of access |
@@ -164,7 +170,7 @@ A country pack is a folder `countries/<id>/`, named after the country's lower-ca
 The main concepts:
 
 - **Budget tree.** A node is either a group with `children` or a leaf. Only leaves carry an `amount`, in plain currency units per year (euros, not millions); the total of a group is always the sum of its leaves. Node ids are dotted paths that start with `rev.` or `exp.`, such as `exp.social.basic_security.asylum_benefits`.
-- **Levels of government.** A country declares which of four levels it has: `central`, `state`, `local` and `social_security`, the subsectors of general government in ESA 2010. Every leaf states which share of its amount each level bears, and the shares sum to 1.
+- **Levels of government.** A country declares which of four levels it has: `central`, `state`, `local` and `social_security`, the subsectors of general government in ESA 2010. Every leaf states which share of its amount each level bears, and the shares sum to 1. A country can have a single level, as the US pack has; the level filter is then not shown.
 - **Quality and sources.** Every leaf has a `quality` (`official`, `derived` or `estimate`) and at least one source id from `sources.json`.
 - **Breakdowns and distributions.** A node can carry a breakdown of its amount into groups, which a measure can then exclude. In the German pack, citizen's income is broken down by the nationality of the recipients. A distribution describes how income or wealth is spread, as bins with an optional Pareto tail, so that a tax schedule or rate curve can be applied to it.
 - **Policies.** A measure has `params` (the settings a visitor can move), at least one effect, and `catches`. A param is a `number` (a slider, with an optional `unitLabel` such as "ct/l" that replaces the generic unit on screen), `groups` (a choice of groups of a breakdown) or a `curve` (see below). A number param's `baseline` is its value in the base year; with every number param at its baseline a measure must change nothing, and the validator warns if it does. Where the baseline is not the base year's value but, say, what current law sets for a later year, `baselineLabel` names it ("Current law"), and the slider shows that name wherever it would show the base year. A number param marked `"role": "assumption"` is not a political choice but an assumption of the calculation, such as how much revenue avoidance costs; the interface marks it as such. An effect names the budget node it changes and has a type: `scale`, `add`, `set`, `excludeGroups` (remove groups of a breakdown) or `schedule` (marginal rates over a distribution, as brackets or as the value of a curve param, calibrated against a `baseline` where one is given). It carries a quality label and, optionally, the low and high multipliers for the range (`uncertainty`). Effects of one measure whose uncertainty names the same `basis` depend on the same uncertain quantity and take the same end of their range together, so that, for example, contributions and the employer's share of them cannot be at opposite ends. Any effect can have a `shift`: a share of its change is passed on to another node, with the opposite sign and its own label, quality, range and note. This is how a cost that moves to another level of government is expressed, and how a knock-on effect is, such as the income tax that falls when employees deduct higher contributions. A catch has a `kind` (`legal`, `economic`, `cost_shift`, `practical` or `political`), a `severity` (`blocker`, `major` or `minor`), a text and its sources.
@@ -239,6 +245,7 @@ The main concepts:
     ]
   }
   ```
+- **Base year.** `baseYear` is a number, and the interface shows it as such ("Balance 2024"). Where the budget year is not the calendar year, `baseYearLabel` gives the name the masthead shows instead of "base year 2025", for example `{ "en": "fiscal year 2025 (Oct 2024 to Sep 2025)", "de": "Haushaltsjahr 2025 (Okt. 2024 bis Sept. 2025)" }`, and `baseYearShort` the short name that headings and labels use instead of the bare number, which would read as a calendar year: `{ "en": "FY 2025", "de": "Haushaltsjahr 2025" }` gives "Balance FY 2025", "compared with FY 2025" and "Der Haushalt im Haushaltsjahr 2025". Charts and tables of later years keep plain years.
 - **Texts.** Every label and text is an object with one entry per language: `en` is required, plus every locale listed in `country.json`. The interface itself is translated in `src/i18n/`, so far into German and English; for any other locale it falls back to English.
 
 A shortened measure from `countries/de/policies.json`:
@@ -345,7 +352,7 @@ countries/de: valid
 
 The reference for the format is [src/engine/types.ts](src/engine/types.ts). [src/engine/__fixtures__/testland.ts](src/engine/__fixtures__/testland.ts) is a small made-up country that uses every optional field of the format; the timing fields are in its variant `testlandTimed()`, so that the projections of the main fixture stay those of measures that act from the first projection year. If a pack does not validate, the app shows Testland in its place, under a notice that lists the errors.
 
-In the German pack, `budget.json` and the three distributions are generated by the scripts in `pipeline/de/`: change the scripts, not the JSON. `country.json`, `policies.json` and `sources.json` are maintained by hand. See [pipeline/de/README.md](pipeline/de/README.md).
+In the German pack, `budget.json` and the three distributions are generated by the scripts in `pipeline/de/`: change the scripts, not the JSON. `country.json`, `policies.json` and `sources.json` are maintained by hand. See [pipeline/de/README.md](pipeline/de/README.md). The US pack's `budget.json` and its wage distribution are generated the same way by `pipeline/us/`, which also checks GDP and population in `country.json` and recomputes the constants that the US measures take from sources ([pipeline/us/README.md](pipeline/us/README.md)).
 
 ## Contributing
 
@@ -359,7 +366,7 @@ To propose a measure or to correct a figure, a catch or a source, open a pull re
 ## Status and limitations
 
 - **A preview.** The version is 0.1.0, and the pack format is marked "v0" in `src/engine/types.ts` and can still change. Search engines are asked not to index a site unless its site config says `"indexable": true` (see [Running your own instance](#running-your-own-instance)).
-- **One country.** Germany, base year 2024, with 34 measures.
+- **Two countries.** Germany, base year 2024, with 34 measures. The United States, federal government only, fiscal year 2025 in the unified budget, with six measures (foreign aid, defence, border and immigration enforcement, the Social Security wage cap, the corporate tax rate and a general tariff) and without debt projection or goals so far. Both packs are public. The preview mark is for packs under construction: a pack that carries it is left out of a production build (see [Adding or changing a country](#adding-or-changing-a-country)).
 - **Static estimates.** The figures are direct effects on the budget of a single year, as a rule the first; a measure whose figure stands for a later year or for the full effect of a rule says so in its summary. There is no forecast and no model of how the economy reacts.
 - **Goals are a rough yardstick.** The goal bar sets these static effects on the 2024 budget, in national accounts, against a gap in the cash plan for a later year's federal core budget, so a measure may yield more or less by then than it shows here. What the plan already counts on and what is paid for outside the debt brake is left out of the comparison and named on the bar, with the reason in the goal's details.
 - **Judgement in the data.** Which level of government bears an item is partly estimated, and the remainders next to named cash items are approximate. [pipeline/de/README.md](pipeline/de/README.md) lists every such judgement.

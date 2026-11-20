@@ -101,6 +101,31 @@ describe("the simulator on Testland", () => {
     expect(query('#policy-cut_admin [role="switch"]').getAttribute("aria-checked")).toBe("false");
   });
 
+  it("names the pack's base year as the pack does, and puts a country chosen on the page in the address", () => {
+    root = createRoot(container);
+    act(() => root.render(<Simulator pack={testland} countries={["xx", "yy"]} />));
+    expect(text(".masthead__country")).toBe("Testland, budget year 2024 (April 2024 to March 2025)");
+    // A first visit to the bare address leaves it bare.
+    expect(window.location.hash).toBe("");
+    act(() => root.unmount());
+    // After the switch the new country's page writes its address at once, so a reload stays there.
+    root = createRoot(container);
+    act(() => root.render(<Simulator pack={testland} countries={["xx", "yy"]} countrySwitched />));
+    expect(window.location.hash).toMatch(/^#c=xx&lang=[a-z]+$/);
+  });
+
+  it("says so when a pack has no measures yet, and leaves out the waterfall", () => {
+    window.history.replaceState(null, "", "#lang=en");
+    root = createRoot(container);
+    act(() => root.render(<Simulator pack={{ ...testland, policies: [], collections: undefined, goals: undefined }} />));
+    expect(text("#measures")).toContain("No measures have been added for this country yet.");
+    expect(container.querySelector("#what-changed")).toBeNull();
+    // Nothing to switch on: the scoreboard only says which year it shows, the tagline what there is.
+    expect(text(".scoreboard__change")).toBe("As in 2024.");
+    expect(text(".masthead__tagline")).toBe("Where the money in the public budget comes from and where it goes. Measures to switch on are still to come.");
+    expect(container.querySelector("#measures .section-head p")).toBeNull();
+  });
+
   it("previews a setting on the card before the measure is switched on, then applies it", () => {
     mount("#lang=en");
     click("#policy-cut_admin .policy__more");
@@ -179,6 +204,33 @@ describe("the simulator on Testland", () => {
       "Other administration",
       "Parliament",
     ]);
+  });
+});
+
+describe("a pack under construction (a preview), in a view that includes previews", () => {
+  const options = (): string[] =>
+    [...container.querySelectorAll(".masthead__tools select option")].map((option) => (option.textContent ?? "").replace(/[\u00a0\u202f]/g, " "));
+  function render(language: string, previews: string[]): void {
+    window.history.replaceState(null, "", `#lang=${language}`);
+    root = createRoot(container);
+    act(() => root.render(<Simulator pack={testland} countries={["xx", "yy"]} previews={previews} onCountry={() => {}} />));
+  }
+
+  it("is marked in the country switch, and on its own page", () => {
+    render("en", ["yy"]);
+    expect(options()).toEqual([expect.stringMatching(/^[^(]+$/), expect.stringMatching(/ \(preview\)$/)]);
+    expect(container.querySelector(".dev-notice--preview")).toBeNull();
+    act(() => root.unmount());
+    // Testland is "xx": its own page says that it is a preview.
+    render("de", ["xx"]);
+    expect(text(".dev-notice--preview")).toMatch(/^Vorschau: Dieses Land ist noch nicht veröffentlicht\./);
+    expect(options()[0]).toMatch(/ \(Vorschau\)$/);
+  });
+
+  it("is not marked when no pack is a preview, as in a production build", () => {
+    render("en", []);
+    expect(options().every((option) => !option.includes("preview"))).toBe(true);
+    expect(container.querySelector(".dev-notice--preview")).toBeNull();
   });
 });
 

@@ -1,0 +1,170 @@
+{
+  "id": "wages",
+  "label": {
+    "en": "Annual wages per worker",
+    "de": "Jahreslohn je Beschäftigtem"
+  },
+  "variable": {
+    "en": "wages, tips and other compensation per year in dollars, all Forms W-2 of a person together",
+    "de": "Löhne, Trinkgelder und andere Vergütungen pro Jahr in Dollar, alle Lohnbescheinigungen (Form W-2) einer Person zusammen"
+  },
+  "unit": {
+    "en": "workers (taxpayers with wages)",
+    "de": "Beschäftigte (Steuerpflichtige mit Lohneinkommen)"
+  },
+  "year": 2025,
+  "bins": [
+    {
+      "from": 0,
+      "to": 5496,
+      "count": 7968483,
+      "mean": 2670.25
+    },
+    {
+      "from": 5496,
+      "to": 10993,
+      "count": 8017948,
+      "mean": 8202.01
+    },
+    {
+      "from": 10993,
+      "to": 16489,
+      "count": 7658533,
+      "mean": 13716.41
+    },
+    {
+      "from": 16489,
+      "to": 21985,
+      "count": 7496753,
+      "mean": 19195.76
+    },
+    {
+      "from": 21985,
+      "to": 27481,
+      "count": 7395608,
+      "mean": 24720.72
+    },
+    {
+      "from": 27481,
+      "to": 32978,
+      "count": 7771308,
+      "mean": 30242.58
+    },
+    {
+      "from": 32978,
+      "to": 38474,
+      "count": 8470832,
+      "mean": 35729.2
+    },
+    {
+      "from": 38474,
+      "to": 43970,
+      "count": 8562099,
+      "mean": 41187.9
+    },
+    {
+      "from": 43970,
+      "to": 49466,
+      "count": 8349600,
+      "mean": 46691.89
+    },
+    {
+      "from": 49466,
+      "to": 54963,
+      "count": 7685541,
+      "mean": 52151.78
+    },
+    {
+      "from": 54963,
+      "to": 65955,
+      "count": 13331452,
+      "mean": 60287.63
+    },
+    {
+      "from": 65955,
+      "to": 76948,
+      "count": 10522610,
+      "mean": 71219.26
+    },
+    {
+      "from": 76948,
+      "to": 87940,
+      "count": 8388156,
+      "mean": 82142.52
+    },
+    {
+      "from": 87940,
+      "to": 109925,
+      "count": 11505002,
+      "mean": 97849.92
+    },
+    {
+      "from": 109925,
+      "to": 131910,
+      "count": 6983961,
+      "mean": 120155.83
+    },
+    {
+      "from": 131910,
+      "to": 175880,
+      "count": 7491540,
+      "mean": 150764.45
+    },
+    {
+      "from": 175880,
+      "to": 219850,
+      "count": 3386371,
+      "mean": 195131.16
+    },
+    {
+      "from": 219850,
+      "to": 439700,
+      "count": 4264354,
+      "mean": 292827.87
+    },
+    {
+      "from": 439700,
+      "to": 1099251,
+      "count": 1207418,
+      "mean": 621231.96
+    },
+    {
+      "from": 1099251,
+      "to": 1648876,
+      "count": 109346,
+      "mean": 1318576.7
+    },
+    {
+      "from": 1648876,
+      "to": 2198502,
+      "count": 39658,
+      "mean": 1882719.49
+    },
+    {
+      "from": 2198502,
+      "to": 5496255,
+      "count": 48256,
+      "mean": 3202188.75
+    },
+    {
+      "from": 5496255,
+      "to": 10992509,
+      "count": 9748,
+      "mean": 7454666.87
+    }
+  ],
+  "tail": {
+    "from": 10992509,
+    "count": 5031,
+    "alpha": 1.7845
+  },
+  "quality": "derived",
+  "sources": [
+    "irs_soi_w2_2023",
+    "ssa_trustees_2026"
+  ],
+  "note": {
+    "en": "IRS Statistics of Income, Form W-2 statistics for tax year 2023, Table 1.B: 146.7 million taxpayers with $9,795.6 billion of wages, by size of wage income. A person's wages from all employers are added up, as for the wage base of the employee's share. Only workers on an individual income tax return are counted; wages of state and local government employees who are not covered by Social Security are included. The top class ($10 million and over) is a Pareto distribution whose mean equals the official class mean. 2023 is the latest year published: every dollar value is adjusted by the growth of the Social Security wage base from $160,200 (2023) to $176,100 (2025), +9.9%, which follows the national average wage index by law; the number of workers is that of 2023.",
+    "de": "Statistik der Steuerbehörde IRS zu den Lohnbescheinigungen (Form W-2) für das Steuerjahr 2023, Tabelle 1.B: 146,7 Mio. Steuerpflichtige mit 9.795,6 Mrd. Dollar Lohn, nach Größenklassen des Lohns. Die Löhne einer Person von allen Arbeitgebern sind zusammengezählt, wie für die Beitragsgrenze des Arbeitnehmeranteils. Erfasst sind nur Beschäftigte, die eine Einkommensteuererklärung abgeben; Löhne von Beschäftigten der Bundesstaaten und Kommunen, die nicht in der Social Security versichert sind, sind enthalten. Die oberste Klasse (ab 10 Mio. Dollar) ist als Pareto-Verteilung dargestellt, deren Mittelwert dem amtlichen Klassenmittel entspricht. 2023 ist das jüngste veröffentlichte Jahr: Alle Dollarwerte sind mit dem Anstieg der Beitragsbemessungsgrenze der Social Security von 160.200 Dollar (2023) auf 176.100 Dollar (2025) fortgeschrieben, also um 9,9 %, der gesetzlich dem nationalen Durchschnittslohnindex folgt; die Zahl der Beschäftigten ist die von 2023."
+  }
+}

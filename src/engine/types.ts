@@ -58,6 +58,22 @@ export interface Country {
   /** The first entry is the default locale. */
   locales: string[];
   baseYear: number;
+  /**
+   * How the masthead names the base year where it is not a calendar year, e.g. "fiscal year 2025
+   * (October 2024 to September 2025)". Absent: "base year" and the number.
+   */
+  baseYearLabel?: LocalizedText;
+  /**
+   * The short name of the base year where the bare number would mislead, as headings and labels use
+   * it: "FY 2025", "Haushaltsjahr 2025" ("Balance FY 2025", "compared with FY 2025"). Absent: the
+   * number. Charts and tables of later years keep plain years.
+   */
+  baseYearShort?: LocalizedText;
+  /**
+   * The pack is being written and is not live yet: a production build leaves it out unless asked to
+   * include previews, and the development server marks it as a preview (scripts/preview-packs.ts).
+   */
+  preview?: boolean;
   /** Levels of government that exist in this country, with their local names. */
   levels: Partial<Record<LevelId, { name: LocalizedText }>>;
   indicators: {

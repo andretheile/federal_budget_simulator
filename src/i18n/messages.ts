@@ -9,16 +9,36 @@ import type { DebtMessages } from "./debt/messages.ts";
 
 export type IndicatorId = "gdp" | "population" | "households" | "grossDebt";
 
+/**
+ * The base year as the texts name it: the number, or the pack's short name where the bare number
+ * would mislead ("FY 2025", "Haushaltsjahr 2025"; country.json `baseYearShort`). Charts and tables
+ * of later years always use numbers.
+ */
+export type YearName = number | string;
+
+/**
+ * What a slider's baseline is called: the base year (its number or short name), or the baseline's
+ * own name where it is not the base year's value (a param's baselineLabel, "Geltendes Recht"),
+ * which the texts quote.
+ */
+export type SliderBase = YearName | { named: string };
+
 export interface Messages {
   app: {
     name: string;
     tagline: string;
+    /** The tagline of a pack without measures yet: the budget is all there is to see. */
+    taglineOverview: string;
     loading: string;
     skipToContent: string;
-    title(country: string, year: number): string;
+    title(country: string, year: YearName): string;
     countryYear(country: string, year: number): string;
+    /** The country with the pack's own name for its base year, such as a fiscal year. */
+    countryPeriod(country: string, period: string): string;
   };
   dev: {
+    /** On the page of a pack that marks itself as a preview: not live yet. */
+    preview: string;
     badge: string;
     /** Why the fixture is shown: the wanted pack is invalid, there is none, or it was asked for. */
     invalid(packId: string): string;
@@ -39,6 +59,8 @@ export interface Messages {
     allLevels: string;
     language: string;
     country: string;
+    /** After a country's name in the switch, for a pack that is not live yet. */
+    preview: string;
     share: string;
     shareHint: string;
     copied: string;
@@ -57,7 +79,7 @@ export interface Messages {
     surplus: string;
     balanced: string;
     /** The base year as a label, where the old wording said "today": the start of the waterfall. */
-    baseYear(year: number): string;
+    baseYear(year: YearName): string;
     simulated: string;
     perYear: string;
     improves: string;
@@ -76,37 +98,39 @@ export interface Messages {
   };
   scoreboard: {
     label: string;
-    balanceLabel(year: number): string;
+    balanceLabel(year: YearName): string;
     /** After a change: against the base year, which is not always today. */
-    vsBase(year: number): string;
-    asBase(year: number): string;
+    vsBase(year: YearName): string;
+    asBase(year: YearName): string;
+    /** A pack without measures: only the year the figures are for. */
+    asBaseOnly(year: YearName): string;
     measuresOn(count: number): string;
     ofGdp(share: string): string;
     perInhabitant(amount: string): string;
     rangeLabel: string;
     announce(balance: string, state: string, change: string): string;
-    levelLabel(level: string, year: number): string;
+    levelLabel(level: string, year: YearName): string;
     relief: string;
     burden: string;
     unchanged: string;
     noLevelBalance: string;
-    announceLevel(level: string, change: string, state: string, year: number): string;
+    announceLevel(level: string, change: string, state: string, year: YearName): string;
   };
   budget: {
-    title(year: number): string;
+    title(year: YearName): string;
     intro: string;
     introLevel(level: string): string;
     hint: string;
     other(count: number): string;
     gap(kind: "deficit" | "surplus", amount: string): string;
     /** The mark for the base-year value of a bar or a row. */
-    baseMark(amount: string, year: number): string;
+    baseMark(amount: string, year: YearName): string;
     shareOf(side: "revenue" | "expenditure", share: string): string;
     path: string;
     up: string;
     /** Said after a row that opens the next level, for screen readers. */
     breakDown: string;
-    key(year: number): string;
+    key(year: YearName): string;
     hiddenZero(count: number): string;
     noItems: string;
     quality: string;
@@ -148,8 +172,8 @@ export interface Messages {
     ofAll(side: "revenue" | "expenditure", share: string): string;
     ofLevel(side: "revenue" | "expenditure", share: string): string;
     perInhabitant(amount: string): string;
-    ofDeficit(share: string, year: number): string;
-    meterLabel(share: string, year: number): string;
+    ofDeficit(share: string, year: YearName): string;
+    meterLabel(share: string, year: YearName): string;
     settings: string;
     settingCount(count: number): string;
     previewHint: string;
@@ -157,13 +181,13 @@ export interface Messages {
      * A setting's baseline, under its slider. `base` is the base year, or the baseline's own name
      * where it is not the base year's value (the param's baselineLabel, e.g. "Geltendes Recht").
      */
-    baseValue(value: string, base: number | string): string;
+    baseValue(value: string, base: SliderBase): string;
     /** The end of a slider's scale where the baseline lies: "0 % · 2024". */
-    baseAtEnd(end: string, base: number | string): string;
+    baseAtEnd(end: string, base: SliderBase): string;
     /** Name of the button that sets a slider back to its baseline. */
-    toBaseValue(value: string, base: number | string): string;
+    toBaseValue(value: string, base: SliderBase): string;
     /** How far a setting is from its baseline, for screen readers. */
-    changeFromBase(change: string, base: number | string): string;
+    changeFromBase(change: string, base: SliderBase): string;
     /** The tag before a setting that is an assumption of the calculation, not a political choice. */
     assumption: string;
     /** Name of the button that shows a setting's value and turns it into a field. */
@@ -203,11 +227,13 @@ export interface Messages {
      */
     linkedRange(low: string, high: string): string;
     clampedNote: string;
-    warnings: Record<Exclude<WarningCode, "empty_group">, string> & { empty_group(year: number): string };
+    warnings: Record<Exclude<WarningCode, "empty_group">, string> & { empty_group(year: YearName): string };
     /** The repeated_exclusion warning when the measures that got there first are known. */
     alreadyExcludedBy(measures: string): string;
     warningItem(item: string): string;
     none: string;
+    /** The pack has no measures at all yet. */
+    noneInPack: string;
     /** Name of the filter by collection (the pack's named groups of measures), for screen readers. */
     collectionFilter: string;
     /** Said before the badges of the collections a measure belongs to, for screen readers. */
@@ -293,7 +319,7 @@ export interface Messages {
     /** Small caption above the preview on the card. */
     section: string;
     edit: string;
-    asBase(year: number): string;
+    asBase(year: YearName): string;
     changed: string;
     preset(label: string): string;
     topRate(rate: string, from: string): string;
@@ -311,14 +337,14 @@ export interface Messages {
     explain(currency: string): string;
     hint: string;
     /** `base` and `averageBase`: the base year's rates there, if there is a base-year curve. */
-    hover(at: string, rate: string, base: string | null, average: string, averageBase: string | null, year: number): string;
-    point(name: string, at: string, rate: string, average: string, averageBase: string | null, year: number): string;
+    hover(at: string, rate: string, base: string | null, average: string, averageBase: string | null, year: YearName): string;
+    point(name: string, at: string, rate: string, average: string, averageBase: string | null, year: YearName): string;
     axisRate: string;
     compressed: string;
     scaleNote(knee: string, max: string): string;
     legend: {
       reform: string;
-      base(year: number): string;
+      base(year: YearName): string;
       average: string;
       distribution: string;
       examples: string;
@@ -329,7 +355,7 @@ export interface Messages {
     offHint: string;
     presets: string;
     presetSources: string;
-    toBase(year: number): string;
+    toBase(year: YearName): string;
     toDefault: string;
     undo: string;
     remove: string;
@@ -346,9 +372,9 @@ export interface Messages {
     from(amount: string): string;
     top: string;
     topNote: string;
-    topBase(rate: string, from: string, year: number): string;
+    topBase(rate: string, from: string, year: YearName): string;
     examples: string;
-    exampleBase(year: number): string;
+    exampleBase(year: YearName): string;
     exampleAfter: string;
     exampleChange: string;
     owes(amount: string, rate: string): string;
@@ -367,16 +393,16 @@ export interface Messages {
     clampedTo(value: string): string;
     otherSettings: string;
     model: string;
-    modelCalibrated(distribution: string, after: string, base: string, change: string, item: string, amount: string, year: number): string;
+    modelCalibrated(distribution: string, after: string, base: string, change: string, item: string, amount: string, year: YearName): string;
     modelAbsolute(distribution: string, after: string, item: string): string;
   };
   waterfall: {
     title: string;
-    intro(year: number): string;
+    intro(year: YearName): string;
     empty: string;
     zero: string;
     introLevel: string;
-    zeroLevel(year: number): string;
+    zeroLevel(year: YearName): string;
     totalChange: string;
     rangeNote: string;
     orderNote: string;
@@ -406,6 +432,8 @@ export interface Messages {
      */
     billion?: string;
     million?: string;
+    /** For a currency counted in trillions (format.ts): "tn", "Bio.". */
+    trillion?: string;
   };
   levelFallback: Record<LevelId, string>;
   /** Imprint and privacy statement (src/i18n/legal/). */

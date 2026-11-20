@@ -1,0 +1,49 @@
+{
+  "id": "us",
+  "name": {
+    "en": "United States",
+    "de": "Vereinigte Staaten"
+  },
+  "currency": "USD",
+  "locales": [
+    "en",
+    "de"
+  ],
+  "baseYear": 2025,
+  "baseYearLabel": {
+    "en": "fiscal year 2025 (Oct 2024 to Sep 2025)",
+    "de": "Haushaltsjahr 2025 (Okt. 2024 bis Sept. 2025)"
+  },
+  "baseYearShort": {
+    "en": "FY 2025",
+    "de": "Haushaltsjahr 2025"
+  },
+  "levels": {
+    "central": {
+      "name": {
+        "en": "Federal government",
+        "de": "Bund"
+      }
+    }
+  },
+  "indicators": {
+    "gdp": {
+      "value": 30322847000000,
+      "quality": "official",
+      "sources": [
+        "omb_hist_fy2027"
+      ]
+    },
+    "population": {
+      "value": 341784857,
+      "quality": "official",
+      "sources": [
+        "census_popest_v2025"
+      ]
+    }
+  },
+  "methodology": {
+    "en": "The base year is fiscal year 2025, from October 2024 to September 2025. It is the latest year whose final figures are published with the full breakdown by function, subfunction and account: in the Historical Tables and the Public Budget Database of the Budget for Fiscal Year 2027, published by the Office of Management and Budget (OMB) in April 2026. Fiscal year 2026 ended on September 30, 2026. Treasury's final monthly statement shows receipts of $5,403.3 billion, outlays of $7,395.8 billion and a deficit of $1,992.5 billion for it, but the breakdown by subfunction and account only comes with the next Budget.\n\nThe pack covers the federal government in the unified budget, the figures in which the U.S. budget debate is conducted: receipts of $5,236.4 billion, outlays of $7,011.1 billion and a deficit of $1,774.7 billion. Every amount is a sum of rows of OMB's Public Budget Database, and the items add up to OMB's totals. Treasury's final monthly statement for the year shows slightly different figures ($5,234.6 billion, $7,010.0 billion and $1,775.4 billion), because OMB's figures include corrections reported later. The Social Security trust funds and the Postal Service are \"off-budget\" by law, but they are part of the unified budget and of this pack. The states and local governments are not included: Medicaid, for example, appears only with the federal share.\n\nThe unified budget deducts some receipts from spending instead of counting them as revenue, for example Medicare premiums. Where such receipts belong to a program, its item is shown net, as OMB does. Four kinds of receipts that OMB assigns to no function, or to a function that is negative as a whole, are deducted here from a related item, so that no item is negative and the totals stay the official ones (own allocation): employer contributions that agencies pay for their own staff from federal employee retirement ($144.4 billion), net receipts of federal mortgage guarantees from housing assistance ($40.7 billion), net receipts of deposit insurance from commerce ($32.2 billion), and offshore oil and gas royalties from land management ($5.8 billion). Net interest is one item: interest on Treasury securities, less the interest paid to federal trust funds, which stays within the government, and less other interest received.\n\nThe national accounts of the Bureau of Economic Analysis, the basis of the German pack, show federal current receipts of $5,550.0 billion and current expenditures of $7,409.9 billion for fiscal year 2025 (NIPA Table 3.18B): they count premiums and similar receipts as revenue, record interest and pensions as they accrue, and leave out loans and other financial transactions.\n\nAll items belong to one level, the federal government. Quality labels: \"official\" means the amount is a line of OMB's tables or a single account as published; \"derived\" means it is a sum or difference of such figures, including the deductions above. No amount is estimated.",
+    "de": "Basisjahr ist das Haushaltsjahr 2025, von Oktober 2024 bis September 2025. Es ist das jüngste Jahr, dessen endgültige Zahlen mit der vollen Gliederung nach Funktionen, Teilfunktionen und Konten veröffentlicht sind: in den Historical Tables und der Haushaltsdatenbank (Public Budget Database) zum Haushaltsentwurf für 2027, die das Haushaltsamt des Präsidenten (Office of Management and Budget, OMB) im April 2026 veröffentlicht hat. Das Haushaltsjahr 2026 endete am 30. September 2026. Der letzte Monatsausweis des Finanzministeriums weist dafür Einnahmen von 5.403,3 Mrd. Dollar, Ausgaben von 7.395,8 Mrd. Dollar und ein Defizit von 1.992,5 Mrd. Dollar aus; die Gliederung nach Teilfunktionen und Konten erscheint aber erst mit dem nächsten Haushaltsentwurf.\n\nDas Paket umfasst den Bund im Gesamthaushalt (unified budget), in dessen Zahlen die amerikanische Haushaltsdebatte geführt wird: Einnahmen von 5.236,4 Mrd. Dollar, Ausgaben von 7.011,1 Mrd. Dollar und ein Defizit von 1.774,7 Mrd. Dollar. Jeder Betrag ist eine Summe von Zeilen der Haushaltsdatenbank der OMB, und die Posten ergeben zusammen die Summen der OMB. Der letzte Monatsausweis des Finanzministeriums für das Jahr nennt etwas andere Zahlen (5.234,6, 7.010,0 und 1.775,4 Mrd. Dollar), weil die Zahlen der OMB spätere Korrekturen enthalten. Die Treuhandfonds der Social Security und die Post stehen gesetzlich außerhalb des Haushalts („off-budget“), gehören aber zum Gesamthaushalt und zu diesem Paket. Die Bundesstaaten und Kommunen sind nicht enthalten: Medicaid etwa erscheint nur mit dem Anteil des Bundes.\n\nDer Gesamthaushalt zieht manche Einnahmen von den Ausgaben ab, statt sie als Einnahmen zu zählen, etwa die Beiträge zu Medicare. Wo solche Einnahmen zu einem Programm gehören, ist sein Posten netto gezeigt, wie bei der OMB. Vier Arten von Einnahmen, die die OMB keiner Funktion oder einer insgesamt negativen Funktion zuordnet, sind hier von einem verwandten Posten abgezogen, damit kein Posten negativ ist und die Summen die amtlichen bleiben (eigene Zuordnung): die Arbeitgeberbeiträge der Behörden für ihr eigenes Personal von den Pensionen der Bundesbediensteten (144,4 Mrd. Dollar), die Nettoeinnahmen der Hypothekengarantien des Bundes von den Wohnungshilfen (40,7 Mrd. Dollar), die Nettoeinnahmen der Einlagensicherung von der Wirtschaftsförderung (32,2 Mrd. Dollar) und die Förderabgaben für Öl und Gas vor der Küste von der Verwaltung bundeseigener Flächen (5,8 Mrd. Dollar). Die Nettozinsen sind ein Posten: Zinsen auf Staatsanleihen, abzüglich der Zinsen an bundeseigene Treuhandfonds, die innerhalb des Staates bleiben, und abzüglich übriger Zinseinnahmen.\n\nDie Volkswirtschaftlichen Gesamtrechnungen des Bureau of Economic Analysis, die Grundlage des deutschen Pakets, weisen für das Haushaltsjahr 2025 laufende Einnahmen des Bundes von 5.550,0 Mrd. Dollar und laufende Ausgaben von 7.409,9 Mrd. Dollar aus (NIPA-Tabelle 3.18B): Sie zählen Beiträge und ähnliche Einnahmen als Einnahmen, buchen Zinsen und Pensionen periodengerecht und lassen Kredite und andere Finanztransaktionen weg.\n\nAlle Posten gehören zu einer Ebene, dem Bund. Qualitätsangaben: „amtlich“ heißt, der Betrag ist eine Zeile der Tabellen der OMB oder ein einzelnes Konto, wie veröffentlicht; „abgeleitet“ heißt, er ist eine Summe oder Differenz solcher Zahlen, einschließlich der Abzüge oben. Kein Betrag ist geschätzt."
+  }
+}

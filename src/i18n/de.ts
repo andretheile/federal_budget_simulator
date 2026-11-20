@@ -1,19 +1,27 @@
 import { legalDe } from "./legal/de.ts";
 import { debtDe } from "./debt/de.ts";
-import type { Messages } from "./messages.ts";
+import type { Messages, YearName } from "./messages.ts";
 
 const plural = (count: number, one: string, many: string): string => `${count} ${count === 1 ? one : many}`;
+
+/** "von 2024", or "im Haushaltsjahr 2025" for a named base year. */
+const vonJahr = (year: YearName): string => (typeof year === "number" ? `von ${year}` : `im ${year}`);
+/** "im Jahr 2024", or "im Haushaltsjahr 2025". */
+const imJahr = (year: YearName): string => (typeof year === "number" ? `im Jahr ${year}` : `im ${year}`);
 
 export const de: Messages = {
   app: {
     name: "Haushaltssimulator",
     tagline: "Maßnahme einschalten und sofort sehen, was sie im Staatshaushalt bewegt und wo der Haken liegt.",
+    taglineOverview: "Woher das Geld im Staatshaushalt kommt und wohin es geht. Maßnahmen zum Einschalten kommen noch hinzu.",
     loading: "Daten werden geladen …",
     skipToContent: "Zum Inhalt springen",
-    title: (country, year) => `Haushaltssimulator: ${country} ${year}`,
+    title: (country, year) => `Haushaltssimulator: ${country}${typeof year === "number" ? " " : ", "}${year}`,
     countryYear: (country, year) => `${country}, Basisjahr ${year}`,
+    countryPeriod: (country, period) => `${country}, ${period}`,
   },
   dev: {
+    preview: "Vorschau: Dieses Land ist noch nicht veröffentlicht. Ein normaler Build lässt es weg; diese Ansicht enthält es, weil sie Vorschauen einschließt.",
     badge: "Entwicklungsansicht",
     invalid: (packId) => `Das Länderpaket „${packId}“ ist noch nicht gültig.`,
     noPack: "Es wurde kein Länderpaket gefunden.",
@@ -31,6 +39,7 @@ export const de: Messages = {
     allLevels: "Alle Ebenen",
     language: "Sprache",
     country: "Land",
+    preview: "Vorschau",
     share: "Teilen",
     shareHint: "Link zu genau diesem Szenario kopieren",
     copied: "Link kopiert",
@@ -68,6 +77,7 @@ export const de: Messages = {
     balanceLabel: (year) => `Saldo ${year}`,
     vsBase: (year) => `gegenüber ${year}`,
     asBase: (year) => `Stand ${year}. Keine Maßnahme ist eingeschaltet.`,
+    asBaseOnly: (year) => `Stand ${year}.`,
     measuresOn: (count) => plural(count, "Maßnahme eingeschaltet", "Maßnahmen eingeschaltet"),
     ofGdp: (share) => `${share} des BIP`,
     perInhabitant: (amount) => `${amount} je Einwohner`,
@@ -82,7 +92,7 @@ export const de: Messages = {
     announceLevel: (level, change, state, year) => `${level}: ${change} gegenüber ${year}, ${state}.`,
   },
   budget: {
-    title: (year) => `Der Haushalt ${year}`,
+    title: (year) => (typeof year === "number" ? `Der Haushalt ${year}` : `Der Haushalt im ${year}`),
     intro: "Einnahmen und Ausgaben auf einer gemeinsamen Skala. Der Abstand zwischen den beiden Balken ist der Saldo.",
     introLevel: (level) =>
       `Einnahmen und Ausgaben dieser Ebene (${level}) auf einer gemeinsamen Skala. Für eine einzelne Ebene wird kein Saldo gezeigt.`,
@@ -94,7 +104,7 @@ export const de: Messages = {
     path: "Sie sind hier",
     up: "Eine Ebene höher",
     breakDown: "aufschlüsseln",
-    key: (year) => `Balken: simulierter Wert. Senkrechter Strich: Wert von ${year}.`,
+    key: (year) => `Balken: simulierter Wert. Senkrechter Strich: Wert ${vonJahr(year)}.`,
     hiddenZero: (count) =>
       count === 1
         ? "1 Posten ohne Anteil dieser Ebene ist ausgeblendet."
@@ -140,15 +150,16 @@ export const de: Messages = {
     ofAll: (side, share) => `${share} aller ${side === "revenue" ? "Einnahmen" : "Ausgaben"}`,
     ofLevel: (side, share) => `${share} der ${side === "revenue" ? "Einnahmen" : "Ausgaben"} dieser Ebene`,
     perInhabitant: (amount) => `${amount} je Einwohner`,
-    ofDeficit: (share, year) => `${share} des Defizits von ${year}`,
-    meterLabel: (share, year) => `Größe im Verhältnis zum Defizit von ${year}: ${share}`,
+    ofDeficit: (share, year) => `${share} des Defizits ${vonJahr(year)}`,
+    meterLabel: (share, year) => `Größe im Verhältnis zum Defizit ${vonJahr(year)}: ${share}`,
     settings: "Einstellungen",
     settingCount: (count) => plural(count, "Regler", "Regler"),
     previewHint: "Nicht eingeschaltet. Die Zahlen zeigen, was die Maßnahme bewirken würde.",
-    baseValue: (value, base) => `${base}: ${value}`,
-    baseAtEnd: (end, base) => `${end} · ${base}`,
-    toBaseValue: (value, base) => (typeof base === "number" ? `Auf den Wert von ${base} setzen: ${value}` : `Auf „${base}“ setzen: ${value}`),
-    changeFromBase: (change, base) => (typeof base === "number" ? `${change} gegenüber ${base}` : `${change} gegenüber „${base}“`),
+    baseValue: (value, base) => `${typeof base === "object" ? base.named : base}: ${value}`,
+    baseAtEnd: (end, base) => `${end} · ${typeof base === "object" ? base.named : base}`,
+    toBaseValue: (value, base) =>
+      typeof base === "object" ? `Auf „${base.named}“ setzen: ${value}` : `Auf den Wert ${vonJahr(base)} setzen: ${value}`,
+    changeFromBase: (change, base) => (typeof base === "object" ? `${change} gegenüber „${base.named}“` : `${change} gegenüber ${base}`),
     assumption: "Annahme",
     typeValue: (label, value) => `${label}: ${value}. Wert eingeben`,
     valueField: (label) => `Wert für ${label}`,
@@ -195,7 +206,7 @@ export const de: Messages = {
       clamped: "Ein Betrag kann nicht unter null fallen. Die Wirkung wurde bei null abgeschnitten.",
       not_finite: "Eine Wirkung ließ sich mit diesen Einstellungen nicht berechnen und wurde ausgelassen.",
       empty_group: (year) =>
-        `Dieser Posten war bereits auf null gesenkt. Der neue Betrag wurde nach den Anteilen von ${year} verteilt.`,
+        `Dieser Posten war bereits auf null gesenkt. Der neue Betrag wurde nach den Anteilen ${vonJahr(year)} verteilt.`,
       brackets_reordered:
         "Die Schwellenwerte überschneiden sich bei diesen Einstellungen. Die niedrigere Schwelle wurde auf die vorherige angehoben.",
       baseline_yields_nothing: "Für diese Wirkung fehlt eine Vergleichsbasis. Sie wurde mit null angesetzt.",
@@ -207,6 +218,7 @@ export const de: Messages = {
       `Die gewählten Gruppen sind bereits durch ${measures} vollständig ausgeschlossen. Diese Maßnahme bewirkt für sie nichts zusätzlich.`,
     warningItem: (item) => `Posten: ${item}`,
     none: "Zu diesem Thema gibt es keine Maßnahme.",
+    noneInPack: "Für dieses Land sind noch keine Maßnahmen erfasst. Der Haushalt ist so gezeigt, wie er im Basisjahr war.",
     collectionFilter: "Maßnahmen auswählen",
     partOf: "Gehört zu",
     hiddenOn: (count) =>
@@ -259,7 +271,7 @@ export const de: Messages = {
   curve: {
     section: "Kurve",
     edit: "Kurve bearbeiten",
-    asBase: (year) => `wie ${year}`,
+    asBase: (year) => (typeof year === "number" ? `wie ${year}` : `wie im ${year}`),
     changed: "geändert",
     preset: (label) => `Vorlage: ${label}`,
     topRate: (rate, from) => `Spitzensatz ${rate} ab ${from}`,
@@ -283,7 +295,7 @@ export const de: Messages = {
       `Die waagerechte Achse ist bis ${knee} gleichmäßig eingeteilt, darüber gestaucht: Das getönte Feld rechts reicht von ${knee} bis ${max}.`,
     legend: {
       reform: "Grenzsatz mit dieser Kurve",
-      base: (year) => `Kurve von ${year}`,
+      base: (year) => `Kurve ${vonJahr(year)}`,
       average: "Durchschnittssatz",
       distribution: "Verteilung (Fläche = Anzahl)",
       examples: "Beispiele, siehe unten",
@@ -294,7 +306,7 @@ export const de: Messages = {
     offHint: "Die Maßnahme ist ausgeschaltet. Jede Änderung hier schaltet sie ein.",
     presets: "Vorlagen",
     presetSources: "Quelle der Vorlage",
-    toBase: (year) => `Kurve von ${year}`,
+    toBase: (year) => `Kurve ${vonJahr(year)}`,
     toDefault: "Ausgangskurve",
     undo: "Rückgängig",
     remove: "Punkt entfernen",
@@ -334,17 +346,17 @@ export const de: Messages = {
     otherSettings: "Weitere Einstellungen",
     model: "So wird gerechnet",
     modelCalibrated: (distribution, after, base, change, item, amount, year) =>
-      `Die Kurve wird auf die Verteilung „${distribution}“ angewendet. Dort ergibt sie ${after} statt ${base} im Jahr ${year} (${change}); diese relative Änderung wird auf den Haushaltsposten „${item}“ (${amount}) übertragen.`,
+      `Die Kurve wird auf die Verteilung „${distribution}“ angewendet. Dort ergibt sie ${after} statt ${base} ${imJahr(year)} (${change}); diese relative Änderung wird auf den Haushaltsposten „${item}“ (${amount}) übertragen.`,
     modelAbsolute: (distribution, after, item) =>
       `Die Kurve wird auf die Verteilung „${distribution}“ angewendet. Was sie dort ergibt, ${after}, kommt im Haushaltsposten „${item}“ hinzu.`,
   },
   waterfall: {
     title: "Was sich ändert",
-    intro: (year) => `Vom Saldo ${year} über jede eingeschaltete Maßnahme zum simulierten Saldo.`,
+    intro: (year) => `Vom Saldo ${typeof year === "number" ? year : `im ${year}`} über jede eingeschaltete Maßnahme zum simulierten Saldo.`,
     empty: "Noch ist keine Maßnahme eingeschaltet. Schalten Sie eine ein, um zu sehen, wie weit sie den Saldo bewegt.",
     zero: "0 = ausgeglichen",
     introLevel: "Wie jede eingeschaltete Maßnahme diese Ebene ent- oder belastet.",
-    zeroLevel: (year) => `0 = wie ${year}`,
+    zeroLevel: (year) => (typeof year === "number" ? `0 = wie ${year}` : `0 = wie im ${year}`),
     totalChange: "Änderung insgesamt",
     rangeNote: "Dünne Linien zeigen die Spanne der jeweiligen Schätzung.",
     orderNote:
@@ -377,6 +389,7 @@ export const de: Messages = {
   },
   units: {
     ofGdp: (value) => `${value} des BIP`,
+    trillion: "Bio.",
     billion: "Mrd.",
     million: "Mio.",
   },

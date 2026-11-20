@@ -1,0 +1,803 @@
+{
+  "policies": [
+    {
+      "id": "foreign_aid_cut",
+      "label": {
+        "en": "Cut foreign aid",
+        "de": "Auslandshilfe kürzen"
+      },
+      "summary": {
+        "en": "Cuts federal spending on development and humanitarian aid abroad by the chosen share: global health programs, disaster and refugee aid, development aid, food aid and contributions to development banks. Military and security assistance and the State Department's own costs are not included.",
+        "de": "Kürzt die Ausgaben des Bundes für Entwicklungs- und humanitäre Hilfe im Ausland um den eingestellten Anteil: globale Gesundheitsprogramme, Katastrophen- und Flüchtlingshilfe, Entwicklungshilfe, Nahrungsmittelhilfe und Beiträge an Entwicklungsbanken. Militär- und Sicherheitshilfe und die eigenen Kosten des Außenministeriums sind nicht enthalten."
+      },
+      "topic": "other",
+      "params": [
+        {
+          "id": "cut",
+          "type": "number",
+          "label": {
+            "en": "Cut",
+            "de": "Kürzung"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 50,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.international.aid",
+          "factor": {
+            "param": "cut",
+            "scale": -0.01,
+            "offset": 1
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0
+          },
+          "sources": [
+            "omb_pbd_outlays_fy2027",
+            "omb_hist_fy2027"
+          ],
+          "note": {
+            "en": "Cut times outlays in fiscal year 2025 for international development and humanitarian assistance (OMB subfunction 151): $30.0 billion. The lower bound assumes that only 60% of the cut can be realized within the year, because outlays follow commitments made in earlier years (own judgment).",
+            "de": "Kürzung mal Ausgaben im Haushaltsjahr 2025 für internationale Entwicklungs- und humanitäre Hilfe (Teilfunktion 151 der OMB): 30,0 Mrd. Dollar. Die untere Grenze nimmt an, dass sich innerhalb des Jahres nur 60 % der Kürzung verwirklichen lassen, weil die Ausgaben Zusagen aus früheren Jahren folgen (eigene Einschätzung)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "en": "Money Congress has appropriated can only be withdrawn by law. In July 2025, Congress canceled $7.9 billion of unspent funds for foreign aid and international organizations that the President had proposed to rescind (Rescissions Act of 2025, Public Law 119-28). Deeper cuts need new appropriations acts or further rescissions.",
+            "de": "Vom Kongress bewilligtes Geld kann nur per Gesetz zurückgenommen werden. Im Juli 2025 strich der Kongress auf Vorschlag des Präsidenten 7,9 Mrd. Dollar noch nicht ausgegebener Mittel für Auslandshilfe und internationale Organisationen (Rescissions Act of 2025, Public Law 119-28). Weitere Kürzungen brauchen neue Haushaltsgesetze oder weitere Streichungsgesetze."
+          },
+          "sources": [
+            "plaw_119_28"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "en": "The largest items are health and emergency aid: global health programs $7.5 billion (among them HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health), international disaster assistance $5.8 billion, migration and refugee assistance $2.9 billion (outlays in 2025).",
+            "de": "Die größten Posten sind Gesundheits- und Nothilfe: globale Gesundheitsprogramme 7,5 Mrd. Dollar (darunter HIV/Aids, Tuberkulose, Malaria, Ernährung sowie Mütter- und Kindergesundheit), internationale Katastrophenhilfe 5,8 Mrd. Dollar, Migrations- und Flüchtlingshilfe 2,9 Mrd. Dollar (Ausgaben 2025)."
+          },
+          "sources": [
+            "omb_pbd_outlays_fy2027",
+            "plaw_119_28"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "Development and humanitarian aid was 0.4% of federal outlays in 2025 ($30.0 billion of $7,011.1 billion). The President's Budget for 2027 estimates $37.9 billion for 2026 and $22.8 billion for 2027.",
+            "de": "Entwicklungs- und humanitäre Hilfe machte 2025 0,4 % der Bundesausgaben aus (30,0 von 7.011,1 Mrd. Dollar). Der Haushaltsentwurf des Präsidenten für 2027 schätzt 37,9 Mrd. Dollar für 2026 und 22,8 Mrd. Dollar für 2027."
+          },
+          "sources": [
+            "omb_hist_fy2027"
+          ]
+        }
+      ],
+      "sources": [
+        "omb_pbd_outlays_fy2027",
+        "omb_hist_fy2027",
+        "plaw_119_28"
+      ]
+    },
+    {
+      "id": "defense_spending_gdp",
+      "label": {
+        "en": "Set defense spending",
+        "de": "Verteidigungsausgaben festlegen"
+      },
+      "summary": {
+        "en": "Sets defense spending under NATO's definition to the chosen share of gross domestic product. NATO's estimate for the United States in 2025: 3.22% ($980 billion). The default shows NATO's target of 3.5% for core defense; the slider runs from 2%, NATO's commitment of 2014, to 5%, the commitment for 2035.",
+        "de": "Setzt die Verteidigungsausgaben nach NATO-Definition auf den eingestellten Anteil am Bruttoinlandsprodukt. NATO-Schätzung für die Vereinigten Staaten 2025: 3,22 % (980 Mrd. Dollar). Die Grundeinstellung zeigt das NATO-Ziel von 3,5 % für Verteidigung im engeren Sinn; der Regler reicht von 2 %, der NATO-Zusage von 2014, bis 5 %, der Zusage für 2035."
+      },
+      "topic": "defense",
+      "params": [
+        {
+          "id": "target",
+          "type": "number",
+          "label": {
+            "en": "Defense spending, NATO definition",
+            "de": "Verteidigungsausgaben nach NATO-Definition"
+          },
+          "unit": "percent_gdp",
+          "min": 2.0,
+          "max": 5.0,
+          "step": 0.01,
+          "default": 3.5,
+          "baseline": 3.22
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.defense",
+          "amount": {
+            "param": "target",
+            "scale": 0.01,
+            "offset": -0.0322,
+            "times": "gdp"
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.9,
+            "high": 1.1
+          },
+          "sources": [
+            "nato_defexp_2025",
+            "omb_hist_fy2027"
+          ],
+          "note": {
+            "en": "Difference between the target and the 3.22% NATO estimates for the United States in 2025, times GDP in fiscal year 2025 ($30,322.8 billion, OMB): $303.2 billion per percentage point. The amount is added to the defense function of the budget (OMB function 050: $916.1 billion, 3.02% of GDP), which is narrower than NATO's definition. The range of ±10% reflects that NATO counts calendar years and more items (own judgment).",
+            "de": "Differenz zwischen Zielwert und den 3,22 %, die die NATO für die Vereinigten Staaten 2025 schätzt, mal Bruttoinlandsprodukt im Haushaltsjahr 2025 (30.322,8 Mrd. Dollar, OMB): 303,2 Mrd. Dollar je Prozentpunkt. Der Betrag wird auf die Verteidigungsfunktion des Haushalts aufgeschlagen (Funktion 050 der OMB: 916,1 Mrd. Dollar, 3,02 % des BIP), die enger abgegrenzt ist als die NATO-Definition. Die Spanne von ±10 % trägt dem Rechnung, dass die NATO Kalenderjahre und mehr Posten zählt (eigene Einschätzung)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "en": "At the 2025 summit in The Hague, the NATO allies committed to spending 5% of GDP annually on defense by 2035: at least 3.5% on core defense and up to 1.5% on defense- and security-related items such as infrastructure and civil preparedness. The path is to be reviewed in 2029.",
+            "de": "Auf dem Gipfel 2025 in Den Haag haben die NATO-Staaten zugesagt, bis 2035 jährlich 5 % der Wirtschaftsleistung für Verteidigung aufzuwenden: mindestens 3,5 % für Verteidigung im engeren Sinn und bis zu 1,5 % für verteidigungs- und sicherheitsnahe Ausgaben wie Infrastruktur und Zivilschutz. Der Pfad wird 2029 überprüft."
+          },
+          "sources": [
+            "nato_5_percent"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "As of November 2026, the President's Budget for 2027 estimates national defense outlays of $1,205.0 billion for fiscal year 2027, about 3.6% of the GDP it projects, after $966.4 billion in 2026. Congress has not yet passed the appropriations for 2027: the government runs on a continuing resolution until December 11, 2026 (Public Law 119-103).",
+            "de": "Stand November 2026 schätzt der Haushaltsentwurf des Präsidenten für 2027 Verteidigungsausgaben von 1.205,0 Mrd. Dollar im Haushaltsjahr 2027, etwa 3,6 % des erwarteten BIP, nach 966,4 Mrd. Dollar 2026. Der Kongress hat die Mittel für 2027 noch nicht bewilligt: Bis zum 11. Dezember 2026 gilt ein Übergangshaushalt (Public Law 119-103)."
+          },
+          "sources": [
+            "omb_hist_fy2027",
+            "plaw_119_103"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "More spending that is not offset elsewhere raises the deficit and the debt, and with them later interest costs, which are not included here.",
+            "de": "Mehrausgaben, die nicht an anderer Stelle ausgeglichen werden, erhöhen Defizit und Schulden und damit spätere Zinsausgaben, die hier nicht mitgerechnet sind."
+          }
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "en": "NATO's definition is wider than the defense budget: among other things it counts pensions paid to retired military personnel. NATO puts U.S. defense spending in calendar year 2025 at $980 billion, while the budget's defense function was $916.1 billion in fiscal year 2025.",
+            "de": "Die NATO-Definition ist weiter als der Verteidigungshaushalt: Sie zählt unter anderem Pensionen ehemaliger Soldaten. Die NATO beziffert die US-Verteidigungsausgaben im Kalenderjahr 2025 auf 980 Mrd. Dollar, die Verteidigungsfunktion des Haushalts lag im Haushaltsjahr 2025 bei 916,1 Mrd. Dollar."
+          },
+          "sources": [
+            "nato_defexp_2025",
+            "omb_hist_fy2027"
+          ]
+        }
+      ],
+      "sources": [
+        "nato_defexp_2025",
+        "nato_5_percent",
+        "omb_hist_fy2027",
+        "plaw_119_103"
+      ]
+    },
+    {
+      "id": "immigration_enforcement",
+      "label": {
+        "en": "Change spending on border and immigration enforcement",
+        "de": "Ausgaben für Grenzschutz und Einwanderungsbehörde ändern"
+      },
+      "summary": {
+        "en": "Changes the spending of U.S. Customs and Border Protection (CBP) and U.S. Immigration and Customs Enforcement (ICE) by the chosen percentage of their 2025 level, in either direction: −100% ends both agencies' spending, +100% doubles it. The default of +60% is how much the two agencies' outlays actually rose from fiscal year 2025 to 2026.",
+        "de": "Ändert die Ausgaben der Zoll- und Grenzschutzbehörde (CBP) und der Einwanderungs- und Zollbehörde (ICE) um den eingestellten Prozentsatz ihres Niveaus von 2025, in beide Richtungen: −100 % beendet die Ausgaben beider Behörden, +100 % verdoppelt sie. Die Grundeinstellung von +60 % entspricht dem tatsächlichen Anstieg ihrer Ausgaben vom Haushaltsjahr 2025 auf 2026."
+      },
+      "topic": "migration",
+      "params": [
+        {
+          "id": "change",
+          "type": "number",
+          "label": {
+            "en": "Change in spending",
+            "de": "Änderung der Ausgaben"
+          },
+          "unit": "percent",
+          "min": -100,
+          "max": 200,
+          "step": 10,
+          "default": 60,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.justice.cbp",
+          "factor": {
+            "param": "change",
+            "scale": 0.01,
+            "offset": 1
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.8,
+            "high": 1.0,
+            "basis": "enforcement"
+          },
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Change times CBP's outlays in fiscal year 2025 for law enforcement (OMB subfunction 751): $21.0 billion. The lower bound assumes that only 80% of a change takes effect within the year, because hiring, building and contracts take time and many tasks are required by law (own judgment).",
+            "de": "Änderung mal Ausgaben der CBP im Haushaltsjahr 2025 für Strafverfolgung (Teilfunktion 751 der OMB): 21,0 Mrd. Dollar. Die untere Grenze nimmt an, dass innerhalb des Jahres nur 80 % einer Änderung wirken, weil Einstellungen, Bauten und Verträge Zeit brauchen und viele Aufgaben gesetzlich vorgeschrieben sind (eigene Einschätzung)."
+          }
+        },
+        {
+          "type": "scale",
+          "target": "exp.justice.ice",
+          "factor": {
+            "param": "change",
+            "scale": 0.01,
+            "offset": 1
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.8,
+            "high": 1.0,
+            "basis": "enforcement"
+          },
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Change times ICE's outlays in fiscal year 2025 (OMB subfunction 751): $10.7 billion. Range as for CBP.",
+            "de": "Änderung mal Ausgaben der ICE im Haushaltsjahr 2025 (Teilfunktion 751 der OMB): 10,7 Mrd. Dollar. Spanne wie bei der CBP."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "en": "Congress has already added large multi-year funds: the reconciliation act of July 4, 2025 (Public Law 119-21) gave among other things $46.55 billion for the border wall, $45.0 billion for ICE detention capacity and $29.85 billion for ICE, and the Secure America Act of June 10, 2026 (Public Law 119-98) another $69.5 billion for CBP, ICE and the Department of Homeland Security, all available until September 30, 2029. Outlays in fiscal year 2026: ICE $22.4 billion and CBP $28.9 billion, after $10.7 billion and $21.2 billion in 2025 (Treasury).",
+            "de": "Der Kongress hat bereits große mehrjährige Mittel bereitgestellt: das Haushaltsgesetz vom 4. Juli 2025 (Public Law 119-21) unter anderem 46,55 Mrd. Dollar für die Grenzmauer, 45,0 Mrd. Dollar für Haftplätze der ICE und 29,85 Mrd. Dollar für die ICE, der Secure America Act vom 10. Juni 2026 (Public Law 119-98) weitere 69,5 Mrd. Dollar für CBP, ICE und das Heimatschutzministerium, alles verfügbar bis 30. September 2029. Ausgaben im Haushaltsjahr 2026: ICE 22,4 Mrd. Dollar und CBP 28,9 Mrd. Dollar, nach 10,7 und 21,2 Mrd. Dollar 2025 (Finanzministerium)."
+          },
+          "sources": [
+            "plaw_119_21",
+            "plaw_119_98",
+            "treasury_mts_2026_09"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "en": "Much of the work is required by law: section 236(c) of the Immigration and Nationality Act requires the detention of certain non-citizens, and the Laken Riley Act of January 2025 (Public Law 119-1) extended it to inadmissible non-citizens charged with burglary, theft, shoplifting or assaulting a police officer, among others. Cutting funds that Congress appropriated until 2029 also needs a new law.",
+            "de": "Viele Aufgaben sind gesetzlich vorgeschrieben: Abschnitt 236(c) des Einwanderungs- und Staatsangehörigkeitsgesetzes verlangt die Inhaftierung bestimmter Ausländer, und der Laken Riley Act vom Januar 2025 (Public Law 119-1) hat das unter anderem auf Ausländer ohne Einreiserecht ausgedehnt, die wegen Einbruchs, Diebstahls, Ladendiebstahls oder eines Angriffs auf Polizisten angeklagt sind. Bis 2029 bewilligte Mittel zu kürzen, braucht zudem ein neues Gesetz."
+          },
+          "sources": [
+            "plaw_119_1",
+            "plaw_119_21"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "en": "Not all of the two agencies' work is immigration enforcement: both have customs tasks, and ICE's Homeland Security Investigations unit pursues other crimes, such as the sexual exploitation of children; the Secure America Act funds this work separately.",
+            "de": "Nicht alles, was die beiden Behörden tun, betrifft Einwanderung: Beide haben Zollaufgaben, und die Ermittler der ICE (Homeland Security Investigations) verfolgen auch andere Straftaten, etwa sexuelle Ausbeutung von Kindern; der Secure America Act finanziert diese Arbeit gesondert."
+          },
+          "sources": [
+            "plaw_119_98"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "en": "The effects of more or fewer arrests and removals on the economy and on tax revenue are not included.",
+            "de": "Wirkungen von mehr oder weniger Festnahmen und Abschiebungen auf Wirtschaft und Steuereinnahmen sind nicht enthalten."
+          }
+        }
+      ],
+      "sources": [
+        "omb_pbd_outlays_fy2027",
+        "plaw_119_21",
+        "plaw_119_98",
+        "plaw_119_1",
+        "treasury_mts_2026_09"
+      ]
+    },
+    {
+      "id": "social_security_wage_cap",
+      "label": {
+        "en": "Social Security tax: change the wage cap",
+        "de": "Social-Security-Beitrag: Beitragsbemessungsgrenze ändern"
+      },
+      "summary": {
+        "en": "Sets the Social Security payroll tax rate on each part of a worker's annual wages, employee and employer share together. Under the 2025 rule, the rate is 12.4% up to $176,100 and zero above that. The default removes the cap, as the Social Security 2100 Act introduced in June 2026 would from 2027; a preset taxes wages above $400,000 again, and the curve can be redrawn. The old and the new rule are applied to the distribution of wages, and the relative change is carried over to Social Security payroll taxes. Higher benefits that the extra taxes may later earn are not included.",
+        "de": "Legt fest, welcher Beitragssatz zur Social Security auf welchen Teil des Jahreslohns erhoben wird, Arbeitnehmer- und Arbeitgeberanteil zusammen. Die Regel von 2025: 12,4 % bis 176.100 Dollar, darüber nichts. Die Grundeinstellung hebt die Grenze auf, wie es der im Juni 2026 eingebrachte Social Security 2100 Act ab 2027 vorsieht; eine Vorlage belastet Löhne über 400.000 Dollar wieder, und die Kurve lässt sich frei verändern. Die alte und die neue Regel werden auf die Verteilung der Löhne angewendet, und die relative Änderung wird auf die Social-Security-Beiträge übertragen. Höhere Renten, die aus den Mehrbeiträgen später entstehen können, sind nicht enthalten."
+      },
+      "topic": "pensions",
+      "params": [
+        {
+          "id": "schedule",
+          "type": "curve",
+          "label": {
+            "en": "Tax rate by annual wage",
+            "de": "Beitragssatz nach Jahreslohn"
+          },
+          "x": {
+            "unit": "currency",
+            "min": 0,
+            "max": 1000000,
+            "step": 100
+          },
+          "y": {
+            "unit": "percent",
+            "min": 0,
+            "max": 20,
+            "step": 0.1
+          },
+          "default": [
+            {
+              "x": 0,
+              "y": 12.4
+            }
+          ],
+          "baseline": [
+            {
+              "x": 0,
+              "y": 12.4
+            },
+            {
+              "x": 176100,
+              "y": 12.4
+            },
+            {
+              "x": 176100,
+              "y": 0
+            }
+          ],
+          "minPoints": 1,
+          "maxPoints": 12,
+          "presets": [
+            {
+              "id": "law_2025",
+              "label": {
+                "en": "2025 rule: cap at $176,100",
+                "de": "Regel von 2025: Grenze bei 176.100 Dollar"
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 12.4
+                },
+                {
+                  "x": 176100,
+                  "y": 12.4
+                },
+                {
+                  "x": 176100,
+                  "y": 0
+                }
+              ],
+              "sources": [
+                "ssa_trustees_2026",
+                "irs_pub15_2025"
+              ]
+            },
+            {
+              "id": "above_400k",
+              "label": {
+                "en": "Tax wages above $400,000 again",
+                "de": "Löhne über 400.000 Dollar wieder belasten"
+              },
+              "note": {
+                "en": "Wages between the cap and $400,000 stay free of the tax.",
+                "de": "Löhne zwischen der Grenze und 400.000 Dollar bleiben beitragsfrei."
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 12.4
+                },
+                {
+                  "x": 176100,
+                  "y": 12.4
+                },
+                {
+                  "x": 176100,
+                  "y": 0
+                },
+                {
+                  "x": 400000,
+                  "y": 0
+                },
+                {
+                  "x": 400000,
+                  "y": 12.4
+                }
+              ]
+            },
+            {
+              "id": "no_cap",
+              "label": {
+                "en": "Remove the cap (Social Security 2100 Act)",
+                "de": "Grenze aufheben (Social Security 2100 Act)"
+              },
+              "note": {
+                "en": "H.R. 9519, introduced on June 29, 2026: no cap for wages paid after 2026, and the extra wages count toward benefits.",
+                "de": "H.R. 9519, eingebracht am 29. Juni 2026: keine Grenze für Löhne ab 2027, und die zusätzlichen Löhne zählen für die Rente."
+              },
+              "points": [
+                {
+                  "x": 0,
+                  "y": 12.4
+                }
+              ],
+              "sources": [
+                "hr_9519_2026"
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "x": 50000,
+              "label": {
+                "en": "Median wage (about half of workers earn less)",
+                "de": "Mittlerer Lohn (etwa die Hälfte der Beschäftigten verdient weniger)"
+              }
+            },
+            {
+              "x": 150000,
+              "label": {
+                "en": "High wage (about 90% earn less)",
+                "de": "Hoher Lohn (etwa 90 % verdienen weniger)"
+              }
+            },
+            {
+              "x": 440000,
+              "label": {
+                "en": "Very high wage (about 99% earn less)",
+                "de": "Sehr hoher Lohn (etwa 99 % verdienen weniger)"
+              }
+            }
+          ]
+        }
+      ],
+      "effects": [
+        {
+          "type": "schedule",
+          "target": "rev.social_insurance.social_security",
+          "distribution": "wages",
+          "baseline": {
+            "points": [
+              {
+                "x": 0,
+                "y": 12.4
+              },
+              {
+                "x": 176100,
+                "y": 12.4
+              },
+              {
+                "x": 176100,
+                "y": 0
+              }
+            ],
+            "scale": 0.01
+          },
+          "reform": {
+            "curve": {
+              "param": "schedule",
+              "scale": 0.01
+            }
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.75,
+            "high": 1.0
+          },
+          "sources": [
+            "irs_soi_w2_2023",
+            "ssa_trustees_2026",
+            "omb_pbd_receipts_fy2027"
+          ],
+          "note": {
+            "en": "The 2025 rule and the new rule are applied to the wages of 146.7 million workers (IRS Form W-2 statistics for 2023, adjusted to 2025 by the growth of the wage cap). Without a cap, taxable wages would be 17.9% higher; the relative change is applied to Social Security payroll taxes in 2025 ($1,283.7 billion, old-age and disability insurance), including the self-employment tax, as if self-employment income were spread like wages. The 2025 rule yields $1,132.6 billion on the distribution, 88% of those receipts. Static: wages and employment do not change. The low end assumes that a quarter of the extra base is lost because high earners take more of their pay in forms not subject to the tax (own judgment). The Social Security actuaries' own estimates of such changes are published on ssa.gov, which could not be retrieved.",
+            "de": "Die Regel von 2025 und die neue Regel werden auf die Löhne von 146,7 Mio. Beschäftigten angewendet (Lohnbescheinigungs-Statistik der IRS für 2023, mit der Beitragsgrenze auf 2025 fortgeschrieben). Ohne Grenze wären die beitragspflichtigen Löhne um 17,9 % höher; die relative Änderung wird auf die Social-Security-Beiträge 2025 übertragen (1.283,7 Mrd. Dollar, Alters- und Erwerbsminderungsversicherung), einschließlich der Beiträge der Selbständigen, als wären deren Einkommen wie Löhne verteilt. Die Regel von 2025 ergibt auf der Verteilung 1.132,6 Mrd. Dollar, 88 % dieser Einnahmen. Statisch gerechnet: Löhne und Beschäftigung ändern sich nicht. Die untere Grenze nimmt an, dass ein Viertel der zusätzlichen Bemessungsgrundlage verloren geht, weil Spitzenverdiener mehr ihres Einkommens in beitragsfreier Form beziehen (eigene Einschätzung). Die Schätzungen der Versicherungsmathematiker der Social Security zu solchen Änderungen stehen auf ssa.gov, das nicht abrufbar war."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "Under current law, wages above the cap earn no benefits. The Social Security 2100 Act would count them in the benefit formula as well (sections 201 and 202 of H.R. 9519), so part of the extra revenue would later be paid out as higher benefits. The figure here is the revenue of one year.",
+            "de": "Nach geltendem Recht begründen Löhne über der Grenze keine Rentenansprüche. Der Social Security 2100 Act würde sie auch in der Rentenformel berücksichtigen (Abschnitte 201 und 202 von H.R. 9519); ein Teil der Mehreinnahmen würde also später als höhere Renten ausgezahlt. Die Zahl hier ist die Mehreinnahme eines Jahres."
+          },
+          "sources": [
+            "hr_9519_2026"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "en": "As of November 2026, the cap is law: $176,100 in 2025 and $184,500 in 2026. H.R. 9519 was introduced in the House on June 29, 2026, and referred to committees; it is not among the public laws enacted through November 10, 2026.",
+            "de": "Stand November 2026 gilt die Grenze: 176.100 Dollar 2025 und 184.500 Dollar 2026. H.R. 9519 wurde am 29. Juni 2026 im Repräsentantenhaus eingebracht und an Ausschüsse überwiesen; unter den bis zum 10. November 2026 verkündeten Gesetzen ist es nicht."
+          },
+          "sources": [
+            "ssa_trustees_2026",
+            "hr_9519_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "en": "The Trustees project that the old-age and survivors trust fund will be depleted in the fourth quarter of 2032 and the combined trust funds in the third quarter of 2034; after that, income would cover 83% of scheduled benefits (2026 report).",
+            "de": "Die Treuhänder erwarten, dass der Fonds der Alters- und Hinterbliebenenrente im vierten Quartal 2032 und die beiden Fonds zusammen im dritten Quartal 2034 aufgebraucht sind; danach deckten die Einnahmen 83 % der vorgesehenen Renten (Bericht 2026)."
+          },
+          "sources": [
+            "ssa_trustees_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "en": "The employer's share is a business expense: a higher employer tax lowers taxable profits or wages and with them income tax revenue. That is not included.",
+            "de": "Der Arbeitgeberanteil ist Betriebsausgabe: Ein höherer Arbeitgeberbeitrag senkt steuerpflichtige Gewinne oder Löhne und damit die Einkommensteuer. Das ist nicht eingerechnet."
+          }
+        }
+      ],
+      "sources": [
+        "irs_soi_w2_2023",
+        "ssa_trustees_2026",
+        "hr_9519_2026",
+        "irs_pub15_2025"
+      ]
+    },
+    {
+      "id": "corporate_tax_rate",
+      "label": {
+        "en": "Change the corporate income tax rate",
+        "de": "Körperschaftsteuersatz ändern"
+      },
+      "summary": {
+        "en": "Sets the federal tax rate on the profits of corporations taxed as such (C corporations), 21% since the Tax Cuts and Jobs Act of 2017. The default shows 28%, which the Treasury proposed in March 2024 with the Budget for fiscal year 2025; lower rates can be set as well. The revenue change follows the Treasury's estimate for 28%, which already allows for firms' reactions, and is applied in proportion to the change in the rate.",
+        "de": "Legt den Bundessteuersatz auf die Gewinne von Kapitalgesellschaften (C corporations) fest, seit dem Tax Cuts and Jobs Act von 2017 21 %. Die Grundeinstellung zeigt 28 %, wie es das Finanzministerium im März 2024 mit dem Haushaltsentwurf für 2025 vorgeschlagen hat; niedrigere Sätze lassen sich ebenfalls einstellen. Die Mehr- oder Mindereinnahme folgt der Schätzung des Finanzministeriums für 28 %, die Ausweichreaktionen der Unternehmen schon berücksichtigt, und wird im Verhältnis zur Satzänderung übertragen."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "en": "Corporate income tax rate",
+            "de": "Körperschaftsteuersatz"
+          },
+          "unit": "percent",
+          "min": 10,
+          "max": 40,
+          "step": 0.5,
+          "default": 28,
+          "baseline": 21
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "rev.corporate_income",
+          "factor": {
+            "param": "rate",
+            "scale": 0.038701,
+            "offset": 0.187279
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.7,
+            "high": 1.1
+          },
+          "sources": [
+            "treasury_greenbook_fy2025",
+            "omb_pbd_receipts_fy2027"
+          ],
+          "note": {
+            "en": "Corporation income taxes in fiscal year 2025: $452.1 billion. With profits unchanged, 28% instead of 21% would raise them by a third, $150.7 billion. The Treasury estimated $122.5 billion for fiscal year 2025, 81% of that, because firms shift and reduce taxable profits. That share is applied to every point of rate change, up or down: $17.5 billion per percentage point. The range runs from 70% to 110% of this (own judgment): the Treasury's estimate dates from March 2024 and refers to the profits it then expected, and the estimates of the Congressional Budget Office and the Joint Committee on Taxation could not be retrieved.",
+            "de": "Körperschaftsteuer im Haushaltsjahr 2025: 452,1 Mrd. Dollar. Bei unveränderten Gewinnen brächte ein Satz von 28 statt 21 % ein Drittel mehr, 150,7 Mrd. Dollar. Das Finanzministerium schätzte 122,5 Mrd. Dollar für 2025, 81 % davon, weil Unternehmen steuerpflichtige Gewinne verlagern und verringern. Dieser Anteil gilt für jeden Prozentpunkt Änderung, nach oben wie nach unten: 17,5 Mrd. Dollar je Prozentpunkt. Die Spanne reicht von 70 % bis 110 % davon (eigene Einschätzung): Die Schätzung des Finanzministeriums stammt vom März 2024 und bezieht sich auf die damals erwarteten Gewinne, und die Schätzungen des Congressional Budget Office und des Joint Committee on Taxation waren nicht abrufbar."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "Who finally bears the tax, shareholders, workers or foreign investors, is disputed; the Treasury argued in 2024 that a significant share of a higher rate would fall on foreign investors. Effects on investment, wages and growth are not included.",
+            "de": "Wer die Steuer letztlich trägt, Anteilseigner, Beschäftigte oder ausländische Investoren, ist umstritten; das Finanzministerium argumentierte 2024, ein erheblicher Teil eines höheren Satzes treffe ausländische Investoren. Wirkungen auf Investitionen, Löhne und Wachstum sind nicht enthalten."
+          },
+          "sources": [
+            "treasury_greenbook_fy2025"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "The flat rate of 21% was set by the Tax Cuts and Jobs Act of 2017. The reconciliation act of July 2025 (Public Law 119-21) did not change it; as of November 2026 it applies.",
+            "de": "Den einheitlichen Satz von 21 % hat der Tax Cuts and Jobs Act von 2017 eingeführt. Das Haushaltsgesetz vom Juli 2025 (Public Law 119-21) hat ihn nicht geändert; Stand November 2026 gilt er."
+          },
+          "sources": [
+            "treasury_greenbook_fy2025",
+            "plaw_119_21"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "en": "The base is shrinking: corporate receipts fell from $529.9 billion in 2024 to $452.1 billion in 2025 and $381.4 billion in 2026 (Treasury). A rate change acts on a smaller base than the Treasury expected in 2024.",
+            "de": "Die Bemessungsgrundlage schrumpft: Die Körperschaftsteuer sank von 529,9 Mrd. Dollar 2024 auf 452,1 Mrd. Dollar 2025 und 381,4 Mrd. Dollar 2026 (Finanzministerium). Eine Satzänderung wirkt auf eine kleinere Grundlage, als das Finanzministerium 2024 erwartete."
+          },
+          "sources": [
+            "treasury_mts_2025_09",
+            "treasury_mts_2026_09"
+          ]
+        }
+      ],
+      "sources": [
+        "treasury_greenbook_fy2025",
+        "omb_pbd_receipts_fy2027",
+        "plaw_119_21",
+        "treasury_mts_2026_09"
+      ]
+    },
+    {
+      "id": "tariff_all_imports",
+      "label": {
+        "en": "Tariff on all imports",
+        "de": "Zoll auf alle Einfuhren"
+      },
+      "summary": {
+        "en": "Adds a tariff of the chosen rate on the value of all imported goods, on top of the duties of 2025; negative values lower duties. The default of 10% is the rate of the general tariff the President imposed in April 2025, which the Supreme Court found unlawful in February 2026, and of the temporary surcharge that replaced it for 150 days. Part of the yield is lost because imports fall, and part comes back as lower income and payroll taxes.",
+        "de": "Erhebt auf den Wert aller eingeführten Waren einen Zoll in der eingestellten Höhe, zusätzlich zu den Zöllen von 2025; negative Werte senken die Zölle. Die Grundeinstellung von 10 % ist der Satz des allgemeinen Zolls, den der Präsident im April 2025 verhängte und den der Supreme Court im Februar 2026 für rechtswidrig erklärte, und des befristeten Aufschlags, der ihn für 150 Tage ersetzte. Ein Teil des Ertrags geht verloren, weil die Einfuhren sinken, und ein Teil fehlt bei Einkommen- und Lohnsummensteuern."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "en": "Additional tariff on the import value",
+            "de": "Zusätzlicher Zoll auf den Einfuhrwert"
+          },
+          "unit": "percent",
+          "min": -5,
+          "max": 30,
+          "step": 0.5,
+          "default": 10,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.customs",
+          "amount": {
+            "param": "rate",
+            "scale": 27857168000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.75,
+            "high": 1.125
+          },
+          "sources": [
+            "census_ft900_2026_11",
+            "omb_pbd_receipts_fy2027"
+          ],
+          "note": {
+            "en": "Rate times goods imports in fiscal year 2025 ($3,482.1 billion, Census Bureau, balance-of-payments basis), less a fifth for imports that fall away, shift to other suppliers or are exempted (own assumption; the low end assumes 40%, the high end 10%): $27.9 billion per percentage point. At 10%: $348.2 billion before and $278.6 billion after that deduction. Customs duties in 2025 were $194.9 billion, 5.6% of the import value. Static: prices, the exchange rate and growth do not change.",
+            "de": "Satz mal Wareneinfuhren im Haushaltsjahr 2025 (3.482,1 Mrd. Dollar, Census Bureau, Zahlungsbilanzabgrenzung), abzüglich eines Fünftels für Einfuhren, die wegfallen, zu anderen Lieferanten wandern oder ausgenommen werden (eigene Annahme; die untere Grenze nimmt 40 % an, die obere 10 %): 27,9 Mrd. Dollar je Prozentpunkt. Bei 10 %: 348,2 Mrd. Dollar vor und 278,6 Mrd. Dollar nach diesem Abzug. Die Zölle brachten 2025 194,9 Mrd. Dollar, 5,6 % des Einfuhrwerts. Statisch gerechnet: Preise, Wechselkurs und Wachstum ändern sich nicht."
+          },
+          "shift": {
+            "to": "rev.individual_income",
+            "ratio": 0.221,
+            "uncertainty": {
+              "low": 0.905,
+              "high": 1.131
+            },
+            "label": {
+              "en": "Income and payroll taxes fall (revenue offset)",
+              "de": "Einkommen- und Lohnsummensteuern sinken (Einnahmenausgleich)"
+            },
+            "quality": "derived",
+            "sources": [
+              "jct_jcx_11_21",
+              "cbo_offset_2009"
+            ],
+            "note": {
+              "en": "Customs duties and excise taxes take money out of incomes that would otherwise be taxed. The Congressional Budget Office, the Joint Committee on Taxation and the Treasury's Office of Tax Analysis therefore count only about three-quarters of their yield (CBO, 2009); the Joint Committee's offset for 2025 is 22.1% (JCX-11-21). The range runs from 20% to 25%, the long-standing standard figure. The offset falls on income, payroll and corporate taxes; for simplicity it is booked here against individual income taxes.",
+              "de": "Zölle und Verbrauchsteuern entziehen Einkommen, die sonst besteuert würden. Das Congressional Budget Office, das Joint Committee on Taxation und die Steuerabteilung des Finanzministeriums rechnen deshalb nur etwa drei Viertel ihres Ertrags an (CBO, 2009); der Abschlag des Joint Committee für 2025 beträgt 22,1 % (JCX-11-21). Die Spanne reicht von 20 % bis 25 %, dem langjährigen Standardwert. Der Abschlag trifft Einkommen-, Lohnsummen- und Körperschaftsteuer; vereinfachend ist er hier bei der Einkommensteuer gebucht."
+            }
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "en": "The President cannot impose such a tariff for long on his own. On February 20, 2026, the Supreme Court held that the International Emergency Economic Powers Act does not authorize tariffs (Learning Resources, Inc. v. Trump). Section 122 of the Trade Act of 1974 allows a surcharge of up to 15% for 150 days unless Congress extends it; the 10% surcharge of February 24, 2026, ran until July 24, 2026. Tariffs under section 232 (national security) and section 301 (other countries' practices) require investigations of particular goods or countries. A lasting general tariff needs an act of Congress.",
+            "de": "Der Präsident kann einen solchen Zoll nicht dauerhaft allein verhängen. Am 20. Februar 2026 entschied der Supreme Court, dass das Notstandsgesetz IEEPA keine Zölle erlaubt (Learning Resources, Inc. v. Trump). Abschnitt 122 des Trade Act von 1974 erlaubt einen Aufschlag von bis zu 15 % für 150 Tage, sofern der Kongress nicht verlängert; der Aufschlag von 10 % vom 24. Februar 2026 lief bis zum 24. Juli 2026. Zölle nach Abschnitt 232 (nationale Sicherheit) und 301 (Praktiken anderer Länder) setzen Untersuchungen bestimmter Waren oder Länder voraus. Ein dauerhafter allgemeiner Zoll braucht ein Gesetz des Kongresses."
+          },
+          "sources": [
+            "scotus_24_1287",
+            "fr_2026_03824"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "en": "The duties of 2025 in the base include duties under the emergency powers act (IEEPA), which the President ended on February 20, 2026, the day of the ruling (Executive Order 14389). In fiscal year 2026, $144.6 billion of the $317.8 billion of customs duties collected was refunded (Treasury).",
+            "de": "Die Zölle von 2025 in der Ausgangslage enthalten Zölle nach dem Notstandsgesetz IEEPA, die der Präsident am 20. Februar 2026, dem Tag des Urteils, beendete (Executive Order 14389). Im Haushaltsjahr 2026 wurden von 317,8 Mrd. Dollar erhobenen Zöllen 144,6 Mrd. Dollar erstattet (Finanzministerium)."
+          },
+          "sources": [
+            "fr_2026_03832",
+            "treasury_mts_2026_09"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "As of November 2026: in a memorandum of July 23, 2026, the President directed tariffs of 10% or 12.5% on most goods of 60 economies under section 301, with exemptions, besides the sector tariffs under section 232.",
+            "de": "Stand November 2026: Mit einem Memorandum vom 23. Juli 2026 wies der Präsident Zölle von 10 % oder 12,5 % auf die meisten Waren aus 60 Volkswirtschaften nach Abschnitt 301 an, mit Ausnahmen, neben den Branchenzöllen nach Abschnitt 232."
+          },
+          "sources": [
+            "fr_2026_15274"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "Importers pay the duty. How much of it ends up in consumer prices, how much foreign suppliers absorb and how other countries retaliate is not modeled here.",
+            "de": "Die Importeure zahlen den Zoll. Wie viel davon in den Verbraucherpreisen landet, wie viel ausländische Lieferanten übernehmen und wie andere Länder mit Gegenzöllen reagieren, ist hier nicht abgebildet."
+          }
+        }
+      ],
+      "sources": [
+        "census_ft900_2026_11",
+        "jct_jcx_11_21",
+        "cbo_offset_2009",
+        "scotus_24_1287",
+        "fr_2026_03824",
+        "fr_2026_03832",
+        "fr_2026_15274",
+        "treasury_mts_2026_09"
+      ]
+    }
+  ]
+}
