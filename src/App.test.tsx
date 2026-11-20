@@ -207,6 +207,33 @@ describe("the simulator on Testland", () => {
   });
 });
 
+describe("a pack under construction (a preview), in a view that includes previews", () => {
+  const options = (): string[] =>
+    [...container.querySelectorAll(".masthead__tools select option")].map((option) => (option.textContent ?? "").replace(/[\u00a0\u202f]/g, " "));
+  function render(language: string, previews: string[]): void {
+    window.history.replaceState(null, "", `#lang=${language}`);
+    root = createRoot(container);
+    act(() => root.render(<Simulator pack={testland} countries={["xx", "yy"]} previews={previews} onCountry={() => {}} />));
+  }
+
+  it("is marked in the country switch, and on its own page", () => {
+    render("en", ["yy"]);
+    expect(options()).toEqual([expect.stringMatching(/^[^(]+$/), expect.stringMatching(/ \(preview\)$/)]);
+    expect(container.querySelector(".dev-notice--preview")).toBeNull();
+    act(() => root.unmount());
+    // Testland is "xx": its own page says that it is a preview.
+    render("de", ["xx"]);
+    expect(text(".dev-notice--preview")).toMatch(/^Vorschau: Dieses Land ist noch nicht veröffentlicht\./);
+    expect(options()[0]).toMatch(/ \(Vorschau\)$/);
+  });
+
+  it("is not marked when no pack is a preview, as in a production build", () => {
+    render("en", []);
+    expect(options().every((option) => !option.includes("preview"))).toBe(true);
+    expect(container.querySelector(".dev-notice--preview")).toBeNull();
+  });
+});
+
 describe("details that depend on the engine of the browser or the size of the screen", () => {
   it("puts the label of the waterfall's zero line on the side where there is room", () => {
     // All levels, a deficit: zero is at the right end of the scale, the label stands left of it.

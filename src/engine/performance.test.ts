@@ -230,22 +230,40 @@ function bigPack() {
   return result.pack;
 }
 
+/** CPU time this process has used so far, in milliseconds; undefined where the runtime cannot say. */
+function cpuTime(): number | undefined {
+  const usage = (globalThis as { process?: { cpuUsage?: () => { user: number; system: number } } }).process?.cpuUsage?.();
+  return usage ? (usage.user + usage.system) / 1000 : undefined;
+}
+
 /**
  * The average time of one run in milliseconds, in the quickest of `batches` batches of `size` runs.
- * Wall-clock time also counts the moments other programs take the processor away; the quickest
- * batch is the one they disturbed least, so it measures the code rather than how busy the machine is.
+ *
+ * Wall-clock time also counts the moments other programs take the processor away. Each batch is
+ * therefore also measured in the CPU time this process used, and the lower of the two counts: on
+ * an idle machine they are the same (CPU time can be the higher one, when the runtime collects
+ * garbage on other threads alongside), so the measure is the one this test always used; on a busy
+ * machine CPU time leaves out what other programs took. The quickest batch is the one disturbed
+ * least by what is left (other programs' use of the shared caches, a slower core).
  */
 function averageOfQuickestBatch(batches: number, size: number, run: (i: number) => void): number {
   let quickest = Infinity;
   for (let batch = 0; batch < batches; batch++) {
+    const cpuStart = cpuTime();
     const start = performance.now();
     for (let i = 0; i < size; i++) run(batch * size + i);
-    quickest = Math.min(quickest, (performance.now() - start) / size);
+    const wall = performance.now() - start;
+    const cpuEnd = cpuTime();
+    const cpu = cpuStart === undefined || cpuEnd === undefined ? wall : cpuEnd - cpuStart;
+    quickest = Math.min(quickest, Math.min(wall, cpu) / size);
   }
   return quickest;
 }
 
-describe("performance", () => {
+// The budgets below are for the code, measured as above. How long a test takes in wall-clock time
+// depends on how busy the machine is (another program's load test, the rest of the suite in
+// parallel), so each test has a wall-clock limit far above what it needs: 60 s instead of Vitest's 5 s.
+describe("performance", { timeout: 60_000 }, () => {
   const pack = bigPack();
 
   /** Everything switched on, with params that change from call to call like sliders being dragged. */
@@ -281,7 +299,7 @@ describe("performance", () => {
     let checksum = 0;
     // 3000 runs, in ten batches of 300.
     const average = averageOfQuickestBatch(10, 300, (i) => void (checksum += simulate(pack, scenarios[i % scenarios.length]).reform.balance));
-    console.info(`simulate: ${(average * 1000).toFixed(1)} µs on average in the quickest of 10 batches of 300 runs (375 nodes, 15 policies, 3 x 40 bins)`);
+    console.info(`simulate: ${(average * 1000).toFixed(1)} µs on average (CPU time or wall clock, the lower) in the quickest of 10 batches of 300 runs (375 nodes, 15 policies, 3 x 40 bins)`);
     expect(Number.isFinite(checksum)).toBe(true);
     expect(average).toBeLessThan(1);
   });
@@ -310,7 +328,7 @@ describe("performance", () => {
     for (let i = 0; i < 300; i++) frame(i); // warm-up
     // 3000 frames, in ten batches of 300.
     const average = averageOfQuickestBatch(10, 300, frame);
-    console.info(`curve helpers: ${(average * 1000).toFixed(1)} µs per frame on average in the quickest of 10 batches of 300 frames (40 bins and a tail, 12-point curve, 11-point baseline)`);
+    console.info(`curve helpers: ${(average * 1000).toFixed(1)} µs per frame on average (CPU time or wall clock, the lower) in the quickest of 10 batches of 300 frames (40 bins and a tail, 12-point curve, 11-point baseline)`);
     expect(Number.isFinite(checksum)).toBe(true);
     expect(bands).toHaveLength(41);
     expect(average).toBeLessThan(0.3);
@@ -332,7 +350,7 @@ describe("performance", () => {
     let checksum = 0;
     // 100 projections, in ten batches of 10.
     const average = averageOfQuickestBatch(10, 10, (i) => void (checksum += projectDebt(timed, results[i % results.length], { horizon: 50 }).reform.years[49].debt));
-    console.info(`projection with build-ups: ${average.toFixed(2)} ms on average in the quickest of 10 batches of 10 (50 years, 15 policies building up)`);
+    console.info(`projection with build-ups: ${average.toFixed(2)} ms on average (CPU time or wall clock, the lower) in the quickest of 10 batches of 10 (50 years, 15 policies building up)`);
     expect(Number.isFinite(checksum)).toBe(true);
     expect(average).toBeLessThan(25);
   });

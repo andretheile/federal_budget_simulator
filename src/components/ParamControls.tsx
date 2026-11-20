@@ -21,6 +21,7 @@ import { changeFromBase, onGrid, snapWhileDragging, typedValue, valueAfterKey } 
 import { useUi } from "../app/ui.ts";
 import { findNode, type GroupsParam, type NumberParam } from "../engine/index.ts";
 import { decimalsOf } from "../i18n/format.ts";
+import type { SliderBase } from "../i18n/messages.ts";
 import { Check } from "./icons.tsx";
 import { QualityBadge } from "./primitives.tsx";
 
@@ -49,10 +50,10 @@ export function NumberControl({
 }) {
   const ui = useUi();
   const { t, fmt } = ui;
-  const year = ui.pack.country.baseYear;
   // What the baseline is called wherever it is shown: the base year, or its own name where it is not
   // the base year's value ("Geltendes Recht" for a limit the law already raises later).
-  const baseName: number | string = param.baselineLabel ? ui.text(param.baselineLabel) : year;
+  // A named baseline is quoted in the texts; otherwise the base year as the pack names it ("FY 2025").
+  const baseName: SliderBase = param.baselineLabel ? { named: ui.text(param.baselineLabel) } : ui.period;
   const span = param.max - param.min || 1;
   const at = (amount: number): number => Math.max(0, Math.min(1, (amount - param.min) / span));
   const base = param.baseline;

@@ -6,6 +6,7 @@ import { createContext, useContext } from "react";
 import type { CountryPack, LevelId, LocalizedText } from "../engine/index.ts";
 import { createFormatters, type Formatters } from "../i18n/format.ts";
 import { localize, localeFor, messagesFor, type Messages } from "../i18n/index.ts";
+import { enUS } from "../i18n/en-us.ts";
 import type { YearName } from "../i18n/messages.ts";
 
 export interface Ui {
@@ -25,14 +26,17 @@ export interface Ui {
 }
 
 export function createUi(pack: CountryPack, language: string): Ui {
-  const t = messagesFor(language);
+  // English for a country whose own language is English follows that country (en-US for the United
+  // States): its spelling in the few words that differ, its numbers, money and dates.
+  const locale = localeFor(language, pack.country);
+  const t = locale === "en-US" ? enUS : messagesFor(language);
   return {
     language,
     pack,
     t,
     // English for a country whose own language is English follows that country's conventions
     // (en-US for the United States); otherwise English is British, as for Germany.
-    fmt: createFormatters(language, pack.country.currency, t, localeFor(language, pack.country)),
+    fmt: createFormatters(language, pack.country.currency, t, locale),
     text: (value) => localize(value, language),
     levelName: (level) => localize(pack.country.levels[level]?.name, language) || t.levelFallback[level],
     period: localize(pack.country.baseYearShort, language) || pack.country.baseYear,

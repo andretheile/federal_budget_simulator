@@ -2,7 +2,7 @@
 /**
  * A second kind of pack, on the US pack as it is in the working tree: a fiscal year with its own
  * short name, one level of government, the US dollar counted in trillions, American English, and
- * (for now) no measures. The German pack is checked against the same places, unchanged.
+ * its measures. Testland, the stand-in for Germany, is checked against the same places, unchanged.
  *
  * If the pack does not validate, the test fails with the pack's own errors.
  */
@@ -41,11 +41,11 @@ afterEach(() => {
   delete (window as { matchMedia?: unknown }).matchMedia;
 });
 
-function mount(hash: string, pack: CountryPack, extra: { countries?: string[]; previews?: string[] } = {}): void {
+function mount(hash: string, pack: CountryPack): void {
   act(() => root?.unmount());
   window.history.replaceState(null, "", hash);
   root = createRoot(container);
-  act(() => root!.render(<Simulator pack={pack} onCountry={() => {}} {...extra} />));
+  act(() => root!.render(<Simulator pack={pack} />));
 }
 
 /** A window of this width: media queries answered the way the browser would. */
@@ -91,6 +91,35 @@ describe("the US pack", () => {
     expect(text(".scoreboard__number [data-final-value]")).toMatch(/^−\d,\d\d Bio\. \$$/);
   });
 
+  it("spells the interface's own words the American way in English, and only there", () => {
+    const chips = (): string[] => [...container.querySelectorAll(".filter__item")].map((chip) => plain(chip.textContent));
+    mount("#lang=en", us);
+    if (us.policies.some((policy) => policy.topic === "defense")) {
+      expect(chips().some((chip) => chip.startsWith("Defense "))).toBe(true);
+      expect(chips().some((chip) => chip.startsWith("Defence "))).toBe(false);
+    }
+    // Germany keeps British English.
+    mount("#lang=en", testland);
+    expect(chips().some((chip) => chip.startsWith("Defence "))).toBe(true);
+  });
+
+  it("names the fiscal year on a slider: its tick, its reset and what screen readers hear", () => {
+    const measure = us.policies.find((policy) => policy.params.some((param) => param.type === "number" && param.baseline !== undefined && !param.baselineLabel));
+    if (!measure) return;
+    mount(`#lang=en&s=${measure.id}`, us);
+    act(() => container.querySelector<HTMLButtonElement>(`#policy-${measure.id} .policy__more`)!.click());
+    const slider = container.querySelector<HTMLInputElement>(`#policy-${measure.id} input[type=range]`)!;
+    expect(plain(slider.getAttribute("aria-valuetext"))).toMatch(/ compared with FY 2025, /);
+    expect(plain(container.querySelector(`#policy-${measure.id} .param__base, #policy-${measure.id} .param__end--base`)?.textContent)).toMatch(/FY 2025/);
+    expect(container.querySelector(`#policy-${measure.id}`)?.textContent).not.toContain("“FY 2025”");
+    mount(`#lang=de&s=${measure.id}`, us);
+    act(() => container.querySelector<HTMLButtonElement>(`#policy-${measure.id} .policy__more`)!.click());
+    const sliderDe = container.querySelector<HTMLInputElement>(`#policy-${measure.id} input[type=range]`)!;
+    expect(plain(sliderDe.getAttribute("aria-valuetext"))).toMatch(/ gegenüber Haushaltsjahr 2025, /);
+    const reset = container.querySelector(`#policy-${measure.id} .param__base, #policy-${measure.id} .param__end--base`);
+    expect(plain(reset?.getAttribute("aria-label"))).toMatch(/^Auf den Wert im Haushaltsjahr 2025 setzen: /);
+  });
+
   it("does not say on every item that the one level bears all of it", () => {
     mount("#lang=en", us);
     expect(firstLeafDetails()).not.toContain("Borne by");
@@ -126,19 +155,5 @@ describe("Germany, in the same places", () => {
     expect(text("#budget-title")).toBe("The budget in 2024");
     mount("#lang=de", testland);
     expect(text("#budget-title")).toBe("Der Haushalt 2024");
-  });
-});
-
-describe("a preview pack", () => {
-  it("is marked in the country switch, and on its own page", () => {
-    mount("#lang=en", testland, { countries: ["xx", "yy"], previews: ["yy"] });
-    expect([...container.querySelectorAll(".masthead__tools select option")].map((option) => plain(option.textContent))).toEqual([
-      expect.stringMatching(/^[^(]+$/),
-      expect.stringMatching(/ \(preview\)$/),
-    ]);
-    expect(container.querySelector(".dev-notice--preview")).toBeNull();
-    mount("#lang=de", testland, { countries: ["xx", "yy"], previews: ["xx"] });
-    expect(text(".dev-notice--preview")).toMatch(/^Vorschau: Dieses Land ist noch nicht veröffentlicht\./);
-    expect(plain(container.querySelector(".masthead__tools select option")?.textContent)).toMatch(/ \(Vorschau\)$/);
   });
 });

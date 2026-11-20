@@ -74,7 +74,12 @@ export default defineConfig(({ mode }) => {
     server: { watch: { ignored: ["**/venv/**"] } },
     test: {
       environment: "node",
-      include: ["src/**/*.test.ts", "src/**/*.test.tsx", "scripts/**/*.test.ts"],
+      projects: [
+        { extends: true, test: { name: "app", include: ["src/**/*.test.ts", "src/**/*.test.tsx"] } },
+        // Real production builds (scripts/preview-packs.test.ts) take every core for a moment: they
+        // run after all other tests, never beside the engine's timing tests.
+        { extends: true, test: { name: "builds", include: ["scripts/**/*.test.ts"], sequence: { groupOrder: 1 } } },
+      ],
     },
   };
 });

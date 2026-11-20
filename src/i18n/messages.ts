@@ -16,6 +16,13 @@ export type IndicatorId = "gdp" | "population" | "households" | "grossDebt";
  */
 export type YearName = number | string;
 
+/**
+ * What a slider's baseline is called: the base year (its number or short name), or the baseline's
+ * own name where it is not the base year's value (a param's baselineLabel, "Geltendes Recht"),
+ * which the texts quote.
+ */
+export type SliderBase = YearName | { named: string };
+
 export interface Messages {
   app: {
     name: string;
@@ -174,13 +181,13 @@ export interface Messages {
      * A setting's baseline, under its slider. `base` is the base year, or the baseline's own name
      * where it is not the base year's value (the param's baselineLabel, e.g. "Geltendes Recht").
      */
-    baseValue(value: string, base: number | string): string;
+    baseValue(value: string, base: SliderBase): string;
     /** The end of a slider's scale where the baseline lies: "0 % · 2024". */
-    baseAtEnd(end: string, base: number | string): string;
+    baseAtEnd(end: string, base: SliderBase): string;
     /** Name of the button that sets a slider back to its baseline. */
-    toBaseValue(value: string, base: number | string): string;
+    toBaseValue(value: string, base: SliderBase): string;
     /** How far a setting is from its baseline, for screen readers. */
-    changeFromBase(change: string, base: number | string): string;
+    changeFromBase(change: string, base: SliderBase): string;
     /** The tag before a setting that is an assumption of the calculation, not a political choice. */
     assumption: string;
     /** Name of the button that shows a setting's value and turns it into a field. */

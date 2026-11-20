@@ -2,7 +2,7 @@
 
 An interactive dashboard of a country's public budget: revenue, spending and balance of the whole state, not only of the central government. You switch on a policy proposal from public debate, such as ending citizen's income for non-citizens, reintroducing the wealth tax or halving MPs' pay, and see at once what it does to the budget and what the catch is: legal limits, costs that move to another level of government, side effects. The site shows numbers and catches and takes no political side.
 
-Germany is the first country; a second pack, the US federal budget without measures so far, is in preparation. A preview is live at **[budget.drtheile.com](https://budget.drtheile.com)**.
+Germany is the first country; the second is the United States, with the federal budget only and its first six measures. A preview is live at **[budget.drtheile.com](https://budget.drtheile.com)**.
 
 ![Budget Simulator with the German budget and four measures switched on: the balance, the goal bar for the 2028 gap in the federal financial plan with a tag for what the other levels pay at the same time, bars for revenue and spending, and a measure card showing a cost shift](docs/screenshot.png)
 
@@ -366,7 +366,7 @@ To propose a measure or to correct a figure, a catch or a source, open a pull re
 ## Status and limitations
 
 - **A preview.** The version is 0.1.0, and the pack format is marked "v0" in `src/engine/types.ts` and can still change. Search engines are asked not to index a site unless its site config says `"indexable": true` (see [Running your own instance](#running-your-own-instance)).
-- **Two countries.** Germany, base year 2024, with 34 measures. The United States, federal government only, fiscal year 2025 in the unified budget, with six measures (foreign aid, defence, border and immigration enforcement, the Social Security wage cap, the corporate tax rate and a general tariff) and without debt projection or goals so far. The US pack is marked as a preview: a production build leaves it out (see [Adding or changing a country](#adding-or-changing-a-country)).
+- **Two countries.** Germany, base year 2024, with 34 measures. The United States, federal government only, fiscal year 2025 in the unified budget, with six measures (foreign aid, defence, border and immigration enforcement, the Social Security wage cap, the corporate tax rate and a general tariff) and without debt projection or goals so far. Both packs are public. The preview mark is for packs under construction: a pack that carries it is left out of a production build (see [Adding or changing a country](#adding-or-changing-a-country)).
 - **Static estimates.** The figures are direct effects on the budget of a single year, as a rule the first; a measure whose figure stands for a later year or for the full effect of a rule says so in its summary. There is no forecast and no model of how the economy reacts.
 - **Goals are a rough yardstick.** The goal bar sets these static effects on the 2024 budget, in national accounts, against a gap in the cash plan for a later year's federal core budget, so a measure may yield more or less by then than it shows here. What the plan already counts on and what is paid for outside the debt brake is left out of the comparison and named on the bar, with the reason in the goal's details.
 - **Judgement in the data.** Which level of government bears an item is partly estimated, and the remainders next to named cash items are approximate. [pipeline/de/README.md](pipeline/de/README.md) lists every such judgement.

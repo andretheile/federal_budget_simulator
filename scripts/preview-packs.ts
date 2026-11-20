@@ -81,7 +81,6 @@ export function countriesLine(choice: PackChoice, withPreviews: boolean, build: 
   const parts = [contained];
   if (previews.length) parts.push(`Left out as previews: ${list(previews)} (PREVIEW_PACKS=include builds them in).`);
   if (unreadable.length) parts.push(`Left out because their country.json cannot be read: ${list(unreadable)}.`);
-  if (!previews.length && !unreadable.length) parts.push("No pack is left out.");
   return parts.join(" ");
 }
 

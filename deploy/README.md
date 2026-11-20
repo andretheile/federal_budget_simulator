@@ -87,8 +87,7 @@ in, and `deploy.sh` shows it before it uploads anything:
 
 ```text
 ################################################################################
-##  Countries: de. Left out as previews: us (PREVIEW_PACKS=include builds them
-##  in).
+##  Countries: de, us.
 ##
 ##  Legal pages: NONE. No site config (site.config.json or SITE_CONFIG), so the
 ##  site has no imprint and no privacy statement and asks search engines not to
@@ -96,10 +95,12 @@ in, and `deploy.sh` shows it before it uploads anything:
 ################################################################################
 ```
 
-The first line comes from the country packs: a pack that marks itself
-`"preview": true` in its `country.json` is left out of the build, so it cannot
-go live by accident (see "Adding or changing a country" in the main
-[README](../README.md)). `deploy.sh` builds without previews unless
+The first line names the country packs the build contains. A pack under
+construction marks itself `"preview": true` in its `country.json` and is left
+out of the build, so it cannot go live by accident; the line then names it as
+well, for example `Countries: de, us. Left out as previews: fr
+(PREVIEW_PACKS=include builds them in).` (see "Adding or changing a country"
+in the main [README](../README.md)). `deploy.sh` builds without previews unless
 `PREVIEW_PACKS=include` is set in its environment, and the box then says that
 it built them in.
 
