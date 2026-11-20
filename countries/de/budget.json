@@ -2141,10 +2141,10 @@
           "code": "GF0701",
           "amount": 76510000000,
           "levels": {
-            "central": 0.0578,
-            "state": 0.0074,
-            "local": 0.0046,
-            "social_security": 0.9302
+            "central": 0.0634,
+            "state": 0.0088,
+            "local": 0.0056,
+            "social_security": 0.9222
           },
           "quality": "derived",
           "sources": [
@@ -2164,10 +2164,10 @@
           "code": "GF0702",
           "amount": 98458000000,
           "levels": {
-            "central": 0.062,
-            "state": 0.0149,
-            "local": 0.0092,
-            "social_security": 0.9139
+            "central": 0.0697,
+            "state": 0.0176,
+            "local": 0.0112,
+            "social_security": 0.9015
           },
           "quality": "derived",
           "sources": [
@@ -2187,10 +2187,10 @@
           "code": "GF0703",
           "amount": 123652000000,
           "levels": {
-            "central": 0.0587,
-            "state": 0.0605,
-            "local": 0.0282,
-            "social_security": 0.8526
+            "central": 0.0654,
+            "state": 0.0707,
+            "local": 0.0337,
+            "social_security": 0.8302
           },
           "quality": "derived",
           "sources": [
@@ -2210,9 +2210,9 @@
           "code": "GF0704",
           "amount": 3990000000,
           "levels": {
-            "central": 0.3375,
-            "state": 0.2494,
-            "local": 0.4131
+            "central": 0.3874,
+            "state": 0.2275,
+            "local": 0.3851
           },
           "quality": "derived",
           "sources": [
@@ -2232,8 +2232,8 @@
           "code": "GF0705",
           "amount": 3712000000,
           "levels": {
-            "central": 0.5751,
-            "state": 0.4249
+            "central": 0.6299,
+            "state": 0.3701
           },
           "quality": "derived",
           "sources": [
@@ -2247,24 +2247,73 @@
         {
           "id": "exp.health.other",
           "label": {
-            "de": "Verwaltung der Krankenkassen und sonstige Gesundheitsausgaben",
-            "en": "Health insurance administration and other health spending"
+            "de": "Sonstige Gesundheitsausgaben und -verwaltung",
+            "en": "Other health spending and administration"
           },
           "code": "GF0706",
-          "amount": 22932000000,
+          "amount": 4847223508,
           "levels": {
-            "central": 0.1447,
-            "state": 0.0762,
-            "local": 0.0474,
-            "social_security": 0.7317
+            "central": 0.1849,
+            "state": 0.0845,
+            "local": 0.0537,
+            "social_security": 0.6769
+          },
+          "quality": "estimate",
+          "sources": [
+            "eurostat_gov_10a_exp",
+            "bmg_kj1_2024"
+          ],
+          "note": {
+            "de": "Bereich „Gesundheit, sonstiges“ (COFOG 07.6) nach Abzug von Personal und Sachkosten der Verwaltung der Kranken- und Pflegekassen, die als eigene Posten ausgewiesen sind; Aufteilung auf die Ebenen geschätzt. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
+            "en": "Health n.e.c. (COFOG 07.6) after deducting the staff and the non-staff administrative costs of the health and long-term care insurers, shown as items of their own; split across levels estimated. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+          }
+        },
+        {
+          "id": "exp.health.insurers_material",
+          "label": {
+            "de": "Sachkosten der Verwaltung der Kranken- und Pflegekassen",
+            "en": "Non-staff administrative costs of the health and long-term care insurers"
+          },
+          "description": {
+            "de": "Mieten, IT, Porto, Werbung, Aufklärung, Prüfungs- und Gerichtskosten und Zahlungen an Dienstleister für Verwaltungsaufgaben der Kassen.",
+            "en": "Rent, IT, postage, advertising, information campaigns, audit and court costs and payments to service providers for the funds' administrative tasks."
+          },
+          "amount": 4554776492,
+          "levels": {
+            "social_security": 1.0
           },
           "quality": "derived",
           "sources": [
-            "eurostat_gov_10a_exp"
+            "bmg_kj1_2024"
           ],
           "note": {
-            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Der Bundeszuschuss an die gesetzliche Krankenversicherung (14,5 Mrd. Euro) und die Zuschüsse zur Krankenversicherung der Landwirte sind anteilig dem Bund zugerechnet.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. The federal subsidy to statutory health insurance (EUR 14.5 billion) and the subsidies to farmers' health insurance are attributed pro rata to the federal level."
+            "de": "Kassenwert aus den Rechnungsergebnissen der Kassen 2024 (KJ1): Brutto-Verwaltungskosten 15,98 Mrd. Euro abzüglich der persönlichen Verwaltungskosten (10,80 Mrd. Euro) und der Beiträge an Kassenverbände und andere Verbände (0,62 Mrd. Euro), deren Personal schon im Arbeitnehmerentgelt steckt. Ganz der Sozialversicherung zugeordnet; aus dem Bereich „Gesundheit, sonstiges“ (COFOG 07.6) herausgelöst.",
+            "en": "Cash figure from the funds' accounts for 2024 (KJ1): gross administrative costs of EUR 15.98 billion less personal administrative costs (EUR 10.80 billion) and the fees to the funds' associations and other associations (EUR 0.62 billion), whose staff is already in compensation of employees. Attributed entirely to the social insurance funds; taken out of health n.e.c. (COFOG 07.6)."
+          }
+        },
+        {
+          "id": "exp.health.insurers_staff",
+          "label": {
+            "de": "Personal der Kranken- und Pflegekassen",
+            "en": "Staff of the health and long-term care insurers"
+          },
+          "description": {
+            "de": "Arbeitnehmerentgelt der Sozialversicherung im Gesundheitswesen: Löhne, Gehälter und Arbeitgeberbeiträge der Beschäftigten der Kranken- und Pflegekassen, ihrer Verbände und des Medizinischen Dienstes. Die Kassen hatten am 30. Juni 2025 rund 132.000 Beschäftigte.",
+            "en": "Compensation of employees of the social insurance funds in health: wages, salaries and employer contributions of the staff of the health and long-term care insurers, their associations and the Medical Service. The insurers had about 132,000 employees on 30 June 2025."
+          },
+          "amount": 13530000000,
+          "levels": {
+            "social_security": 1.0
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp",
+            "bmg_kj1_2024",
+            "bmg_kg1_2025"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat, Arbeitnehmerentgelt D.1 der Sozialversicherung im Bereich Gesundheit). Er ist aus dem Bereich „Gesundheit, sonstiges“ (COFOG 07.6) herausgelöst, für den Eurostat 15,0 Mrd. Euro Arbeitnehmerentgelt aller Ebenen ausweist; die übrigen Gesundheitsbereiche haben zusammen weniger als 2,5 Mrd. Euro. Ganz der Sozialversicherung zugeordnet: Anders als bei den Leistungsausgaben ist der Bundeszuschuss hier nicht anteilig zugerechnet, weil er ein fester Betrag ist und eine Einsparung beim Personal den Kassen bleibt.",
+            "en": "Amount official (Eurostat, compensation of employees D.1 of the social insurance funds in health). It is taken out of health n.e.c. (COFOG 07.6), for which Eurostat shows EUR 15.0 billion of compensation of employees of all levels; the other health groups together have less than EUR 2.5 billion. Attributed entirely to the social insurance funds: unlike for benefit spending, the federal subsidy is not attributed pro rata here, because it is a fixed amount and a saving on staff stays with the funds."
           }
         }
       ]
@@ -2669,10 +2718,10 @@
               },
               "amount": 139472944000,
               "levels": {
-                "central": 0.2202,
-                "state": 0.3127,
-                "local": 0.0843,
-                "social_security": 0.3828
+                "central": 0.2251,
+                "state": 0.3219,
+                "local": 0.0901,
+                "social_security": 0.3629
               },
               "quality": "estimate",
               "sources": [
@@ -2725,10 +2774,10 @@
               },
               "amount": 32224560000,
               "levels": {
-                "central": 0.2242,
-                "state": 0.4686,
-                "local": 0.1158,
-                "social_security": 0.1914
+                "central": 0.2282,
+                "state": 0.4714,
+                "local": 0.121,
+                "social_security": 0.1794
               },
               "quality": "estimate",
               "sources": [
@@ -2780,10 +2829,10 @@
               },
               "amount": 120157496000,
               "levels": {
-                "central": 0.0257,
-                "state": 0.1041,
-                "local": 0.2122,
-                "social_security": 0.658
+                "central": 0.027,
+                "state": 0.108,
+                "local": 0.2287,
+                "social_security": 0.6363
               },
               "quality": "estimate",
               "sources": [
@@ -2832,9 +2881,9 @@
               },
               "amount": 76590570000,
               "levels": {
-                "central": 0.1428,
-                "state": 0.2488,
-                "local": 0.6084
+                "central": 0.1409,
+                "state": 0.2426,
+                "local": 0.6165
               },
               "quality": "estimate",
               "sources": [
@@ -3060,8 +3109,8 @@
               },
               "amount": 6718465000,
               "levels": {
-                "state": 0.3749,
-                "local": 0.6251
+                "state": 0.366,
+                "local": 0.634
               },
               "quality": "derived",
               "sources": [
@@ -3084,8 +3133,8 @@
               },
               "amount": 0,
               "levels": {
-                "state": 0.3749,
-                "local": 0.6251
+                "state": 0.366,
+                "local": 0.634
               },
               "quality": "derived",
               "sources": [
@@ -3105,10 +3154,10 @@
               },
               "amount": 42043785000,
               "levels": {
-                "central": 0.5085,
-                "state": 0.0715,
-                "local": 0.0962,
-                "social_security": 0.3238
+                "central": 0.512,
+                "state": 0.0722,
+                "local": 0.1123,
+                "social_security": 0.3035
               },
               "quality": "estimate",
               "sources": [
@@ -3134,8 +3183,8 @@
           "code": "GF1008",
           "amount": 218000000,
           "levels": {
-            "central": 0.4177,
-            "state": 0.5823
+            "central": 0.4206,
+            "state": 0.5794
           },
           "quality": "derived",
           "sources": [
@@ -3149,24 +3198,49 @@
         {
           "id": "exp.social.other",
           "label": {
-            "de": "Verwaltung der Sozialversicherungen und sonstige soziale Sicherung",
-            "en": "Administration of social insurance and other social protection"
+            "de": "Sonstige soziale Sicherung (u. a. Sachkosten der Sozialversicherungsträger)",
+            "en": "Other social protection (incl. the social insurance funds' non-staff administrative costs)"
           },
           "code": "GF1009",
-          "amount": 29441000000,
+          "amount": 14037000000,
           "levels": {
-            "central": 0.0642,
-            "state": 0.0895,
-            "local": 0.2984,
-            "social_security": 0.5479
+            "central": 0.0666,
+            "state": 0.0918,
+            "local": 0.3179,
+            "social_security": 0.5237
           },
-          "quality": "derived",
+          "quality": "estimate",
           "sources": [
             "eurostat_gov_10a_exp"
           ],
           "note": {
-            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Amount official (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "de": "Bereich „Soziale Sicherung, sonstiges“ (COFOG 10.9) nach Abzug des Personals der Sozialversicherung, das als eigener Posten ausgewiesen ist; Aufteilung auf die Ebenen geschätzt.",
+            "en": "Social protection n.e.c. (COFOG 10.9) after deducting the staff of the social insurance funds, shown as an item of its own; split across levels estimated."
+          }
+        },
+        {
+          "id": "exp.social.insurers_staff",
+          "label": {
+            "de": "Personal der Renten-, Unfall- und Arbeitslosenversicherung",
+            "en": "Staff of the pension, accident and unemployment insurance"
+          },
+          "description": {
+            "de": "Arbeitnehmerentgelt der Sozialversicherung im Bereich soziale Sicherung: vor allem die Beschäftigten der Rentenversicherung (2024: 52.500 Vollzeitstellen in der Verwaltung) und der Bundesagentur für Arbeit (101.300 Vollzeitstellen, davon 39.400 für die Jobcenter), dazu die Unfallversicherung.",
+            "en": "Compensation of employees of the social insurance funds in social protection: mainly the staff of the pension insurance (2024: 52,500 full-time equivalents in administration) and of the Federal Employment Agency (101,300 full-time equivalents, of which 39,400 for the job centres), plus accident insurance."
+          },
+          "amount": 15404000000,
+          "levels": {
+            "social_security": 1.0
+          },
+          "quality": "derived",
+          "sources": [
+            "eurostat_gov_10a_exp",
+            "bt_drs_21_8817",
+            "ba_haushaltsplan_2026"
+          ],
+          "note": {
+            "de": "Betrag amtlich (Eurostat, Arbeitnehmerentgelt D.1 der Sozialversicherung im Bereich soziale Sicherung). Angenommen ist, dass er im Bereich „Soziale Sicherung, sonstiges“ (COFOG 10.9) liegt, für den Eurostat 19,1 Mrd. Euro Arbeitnehmerentgelt aller Ebenen ausweist; in den Bereichen Alter (0,8) und Arbeitslosigkeit (0,3 Mrd. Euro) ist kaum Personal gebucht. Ganz der Sozialversicherung zugeordnet; das Personal der Bundesagentur in den Jobcentern bezahlt in der Sache großenteils der Bund über die Erstattung der Verwaltungskosten.",
+            "en": "Amount official (Eurostat, compensation of employees D.1 of the social insurance funds in social protection). It is assumed to lie in social protection n.e.c. (COFOG 10.9), for which Eurostat shows EUR 19.1 billion of compensation of employees of all levels; hardly any staff is booked under old age (0.8) and unemployment (EUR 0.3 billion). Attributed entirely to the social insurance funds; the Employment Agency's staff in the job centres is in substance largely paid for by the federal government through the reimbursement of administrative costs."
           }
         }
       ]

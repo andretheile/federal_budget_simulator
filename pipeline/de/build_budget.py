@@ -53,6 +53,15 @@ FED_RV_SHARE = FED_TO_RV / RV_TOTAL
 d4 = [M[("GF01", s)].get("D4", 0) for s in ["S1311", "S1312", "S1313", "S1314"]]
 INTEREST = tuple(x / sum(d4) for x in d4)
 
+# ---- staff of the social insurance funds --------------------------------------------------------------------
+# eurostat_gov_10a_exp: compensation of employees (D1) of social security funds (S1314), by COFOG division, 2024.
+SS_STAFF_HEALTH = M[("GF07", "S1314")]["D1"]   # 13,530: health and long-term care insurers, their associations, Medical Service
+SS_STAFF_SOCIAL = M[("GF10", "S1314")]["D1"]   # 15,404: pension, accident and unemployment insurance
+# bmg_kj1_2024: non-staff administrative costs of the health insurers, 2024, all funds (column BUND): gross
+# administrative costs (07599) minus personal administrative costs (accounts 07000-07099) minus the fees to the
+# funds' associations (07320, 07321), whose staff is already in compensation of employees.
+GKV_ADMIN_MATERIAL = 15975.499175 - 10796.8 - 392.591010 - 231.331673
+
 # ---- individually named items (cash figures unless stated) ------------------------------------------------
 EU_OWN = 27330.0        # eurostat_gov_10a_main: D76PAY, VAT- and GNI-based EU own resources, 2024
 MP_PAY = 92.623         # bundeshaushalt_2024: title 0212 411 01, MPs' salaries and office allowances
@@ -173,7 +182,22 @@ EXP = [
         CL("exp.health.hospitals", "GF0703", "Krankenhäuser", "Hospitals", (0.01, 0.08, 0.03, 0.88)),
         CL("exp.health.public_health", "GF0704", "Öffentlicher Gesundheitsdienst und Vorsorge", "Public health services and prevention", (0.3, 0.3, 0.4, 0)),
         CL("exp.health.rd", "GF0705", "Gesundheitsforschung", "Health research", (0.5, 0.5, 0, 0)),
-        CL("exp.health.other", "GF0706", "Verwaltung der Krankenkassen und sonstige Gesundheitsausgaben", "Health insurance administration and other health spending", (0.1, 0.1, 0.05, 0.75)),
+        L("exp.health.other", "Sonstige Gesundheitsausgaben und -verwaltung", "Other health spending and administration",
+          amount=cof("GF0706") - SS_STAFF_HEALTH - GKV_ADMIN_MATERIAL, code="GF0706", seed=(0.1, 0.1, 0.05, 0.75), quality="estimate", sources=SRC_EXP + ["bmg_kj1_2024"],
+          note=("Bereich „Gesundheit, sonstiges“ (COFOG 07.6) nach Abzug von Personal und Sachkosten der Verwaltung der Kranken- und Pflegekassen, die als eigene Posten ausgewiesen sind; Aufteilung auf die Ebenen geschätzt.",
+                "Health n.e.c. (COFOG 07.6) after deducting the staff and the non-staff administrative costs of the health and long-term care insurers, shown as items of their own; split across levels estimated.")),
+        L("exp.health.insurers_material", "Sachkosten der Verwaltung der Kranken- und Pflegekassen", "Non-staff administrative costs of the health and long-term care insurers",
+          amount=GKV_ADMIN_MATERIAL, fixed=SS, quality="derived", sources=["bmg_kj1_2024"],
+          desc=("Mieten, IT, Porto, Werbung, Aufklärung, Prüfungs- und Gerichtskosten und Zahlungen an Dienstleister für Verwaltungsaufgaben der Kassen.",
+                "Rent, IT, postage, advertising, information campaigns, audit and court costs and payments to service providers for the funds' administrative tasks."),
+          note=("Kassenwert aus den Rechnungsergebnissen der Kassen 2024 (KJ1): Brutto-Verwaltungskosten 15,98 Mrd. Euro abzüglich der persönlichen Verwaltungskosten (10,80 Mrd. Euro) und der Beiträge an Kassenverbände und andere Verbände (0,62 Mrd. Euro), deren Personal schon im Arbeitnehmerentgelt steckt. Ganz der Sozialversicherung zugeordnet; aus dem Bereich „Gesundheit, sonstiges“ (COFOG 07.6) herausgelöst.",
+                "Cash figure from the funds' accounts for 2024 (KJ1): gross administrative costs of EUR 15.98 billion less personal administrative costs (EUR 10.80 billion) and the fees to the funds' associations and other associations (EUR 0.62 billion), whose staff is already in compensation of employees. Attributed entirely to the social insurance funds; taken out of health n.e.c. (COFOG 07.6).")),
+        L("exp.health.insurers_staff", "Personal der Kranken- und Pflegekassen", "Staff of the health and long-term care insurers",
+          amount=SS_STAFF_HEALTH, fixed=SS, quality="derived", sources=SRC_EXP + ["bmg_kj1_2024", "bmg_kg1_2025"],
+          desc=("Arbeitnehmerentgelt der Sozialversicherung im Gesundheitswesen: Löhne, Gehälter und Arbeitgeberbeiträge der Beschäftigten der Kranken- und Pflegekassen, ihrer Verbände und des Medizinischen Dienstes. Die Kassen hatten am 30. Juni 2025 rund 132.000 Beschäftigte.",
+                "Compensation of employees of the social insurance funds in health: wages, salaries and employer contributions of the staff of the health and long-term care insurers, their associations and the Medical Service. The insurers had about 132,000 employees on 30 June 2025."),
+          note=("Betrag amtlich (Eurostat, Arbeitnehmerentgelt D.1 der Sozialversicherung im Bereich Gesundheit). Er ist aus dem Bereich „Gesundheit, sonstiges“ (COFOG 07.6) herausgelöst, für den Eurostat 15,0 Mrd. Euro Arbeitnehmerentgelt aller Ebenen ausweist; die übrigen Gesundheitsbereiche haben zusammen weniger als 2,5 Mrd. Euro. Ganz der Sozialversicherung zugeordnet: Anders als bei den Leistungsausgaben ist der Bundeszuschuss hier nicht anteilig zugerechnet, weil er ein fester Betrag ist und eine Einsparung beim Personal den Kassen bleibt.",
+                "Amount official (Eurostat, compensation of employees D.1 of the social insurance funds in health). It is taken out of health n.e.c. (COFOG 07.6), for which Eurostat shows EUR 15.0 billion of compensation of employees of all levels; the other health groups together have less than EUR 2.5 billion. Attributed entirely to the social insurance funds: unlike for benefit spending, the federal subsidy is not attributed pro rata here, because it is a fixed amount and a saving on staff stays with the funds.")),
     ]),
     G("exp.culture", "Kultur, Sport, Rundfunk und Religion", "Culture, sport, broadcasting and religion", code="GF08", children=[
         CL("exp.culture.sport", "GF0801", "Sport und Erholung (Bäder, Sportstätten, Parks)", "Sport and recreation (pools, sports facilities, parks)", (0.03, 0.12, 0.85, 0)),
@@ -270,7 +294,16 @@ EXP = [
                     "Remainder of the three groups after deducting the benefits shown separately. The individual items are cash figures, the group total comes from national accounts; the remainder is therefore only approximately right.")),
         ]),
         CL("exp.social.rd", "GF1008", "Sozialforschung", "Research on social protection", (0.5, 0.5, 0, 0)),
-        CL("exp.social.other", "GF1009", "Verwaltung der Sozialversicherungen und sonstige soziale Sicherung", "Administration of social insurance and other social protection", (0.1, 0.1, 0.3, 0.5)),
+        L("exp.social.other", "Sonstige soziale Sicherung (u. a. Sachkosten der Sozialversicherungsträger)", "Other social protection (incl. the social insurance funds' non-staff administrative costs)",
+          amount=cof("GF1009") - SS_STAFF_SOCIAL, code="GF1009", seed=(0.1, 0.1, 0.3, 0.5), quality="estimate", sources=SRC_EXP,
+          note=("Bereich „Soziale Sicherung, sonstiges“ (COFOG 10.9) nach Abzug des Personals der Sozialversicherung, das als eigener Posten ausgewiesen ist; Aufteilung auf die Ebenen geschätzt.",
+                "Social protection n.e.c. (COFOG 10.9) after deducting the staff of the social insurance funds, shown as an item of its own; split across levels estimated.")),
+        L("exp.social.insurers_staff", "Personal der Renten-, Unfall- und Arbeitslosenversicherung", "Staff of the pension, accident and unemployment insurance",
+          amount=SS_STAFF_SOCIAL, fixed=SS, quality="derived", sources=SRC_EXP + ["bt_drs_21_8817", "ba_haushaltsplan_2026"],
+          desc=("Arbeitnehmerentgelt der Sozialversicherung im Bereich soziale Sicherung: vor allem die Beschäftigten der Rentenversicherung (2024: 52.500 Vollzeitstellen in der Verwaltung) und der Bundesagentur für Arbeit (101.300 Vollzeitstellen, davon 39.400 für die Jobcenter), dazu die Unfallversicherung.",
+                "Compensation of employees of the social insurance funds in social protection: mainly the staff of the pension insurance (2024: 52,500 full-time equivalents in administration) and of the Federal Employment Agency (101,300 full-time equivalents, of which 39,400 for the job centres), plus accident insurance."),
+          note=("Betrag amtlich (Eurostat, Arbeitnehmerentgelt D.1 der Sozialversicherung im Bereich soziale Sicherung). Angenommen ist, dass er im Bereich „Soziale Sicherung, sonstiges“ (COFOG 10.9) liegt, für den Eurostat 19,1 Mrd. Euro Arbeitnehmerentgelt aller Ebenen ausweist; in den Bereichen Alter (0,8) und Arbeitslosigkeit (0,3 Mrd. Euro) ist kaum Personal gebucht. Ganz der Sozialversicherung zugeordnet; das Personal der Bundesagentur in den Jobcentern bezahlt in der Sache großenteils der Bund über die Erstattung der Verwaltungskosten.",
+                "Amount official (Eurostat, compensation of employees D.1 of the social insurance funds in social protection). It is assumed to lie in social protection n.e.c. (COFOG 10.9), for which Eurostat shows EUR 19.1 billion of compensation of employees of all levels; hardly any staff is booked under old age (0.8) and unemployment (EUR 0.3 billion). Attributed entirely to the social insurance funds; the Employment Agency's staff in the job centres is in substance largely paid for by the federal government through the reimbursement of administrative costs.")),
     ]),
 ]
 

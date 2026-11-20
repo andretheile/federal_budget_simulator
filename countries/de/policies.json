@@ -5586,6 +5586,361 @@
         "bertelsmann_iges_beamte_gkv_2017",
         "bverfg_2009_pkv"
       ]
+    },
+    {
+      "id": "single_health_insurer",
+      "label": {
+        "de": "Eine gesetzliche Krankenkasse statt 93",
+        "en": "One statutory health insurer instead of 93"
+      },
+      "summary": {
+        "de": "Legt die 93 gesetzlichen Krankenkassen zu einer einzigen zusammen. Leistungen und Beiträge bleiben, wie sie sind; private Zusatzversicherungen bleiben getrennt und finanzieren sich selbst, wie schon heute. Gespart wird nur in der Verwaltung: Sie kostete die Kassen 2024 netto 12,6 Mrd. Euro, 3,9 % ihrer Ausgaben, davon etwa zwei Drittel Personal. Die zentrale Schätzung zählt nur, was mit dem Wettbewerb sicher wegfällt: Werbung und Mitgliedergewinnung, soweit die 2026 halbierte Obergrenze sie nicht ohnehin begrenzt, und die Vorstände, zusammen 0,24 Mrd. Euro im Jahr, sobald die Fusion abgeschlossen ist, in Werten von 2024. Dass größere Kassen billiger verwalten, belegen die vorliegenden Untersuchungen nicht; die Spanne reicht deshalb von Mehrkosten wie nach der Zusammenlegung in Österreich bis zu einer eigenen Obergrenze von 0,9 Mrd. Euro. Die Ersparnis bleibt bei den Kassen und ihren Beitragszahlern. Eine Einheitskasse käme frühestens ab 2029. Zusammen mit „Eine Krankenversicherung für alle (Bürgerversicherung)“ ergibt sich eine Kasse für alle: jene Maßnahme bringt die Privatversicherten in die gesetzliche Versicherung, diese legt die Kassen zusammen; beide wirken auf verschiedene Posten und zählen nichts doppelt.",
+        "en": "Merges the 93 statutory health insurers into a single one. Benefits and contributions stay as they are; private supplementary insurance stays separate and pays for itself, as it already does. The saving is in administration only: in 2024 it cost the funds EUR 12.6 billion net, 3.9% of their spending, about two thirds of it staff. The central estimate counts only what certainly goes with competition: advertising and member acquisition, as far as the cap halved in 2026 does not already limit them, and the boards, together EUR 0.24 billion a year once the merger is complete, in 2024 values. The studies available do not show that larger funds administer more cheaply; the range therefore runs from extra costs like those after the merger in Austria to an own upper bound of EUR 0.9 billion. The saving stays with the funds and their contributors. A single fund could start in 2029 at the earliest. Together with \"One health insurance for everyone (citizens' insurance)\" this gives one fund for everyone: that measure brings the privately insured into the statutory system, this one merges the funds; the two act on different items and count nothing twice."
+      },
+      "topic": "social",
+      "params": [],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.health.insurers_material",
+          "amount": -213117332,
+          "quality": "estimate",
+          "uncertainty": {
+            "low": -2.4978965,
+            "high": 3.7980894,
+            "basis": "merger"
+          },
+          "sources": [
+            "bmg_kj1_2024",
+            "fkg_bericht_2026",
+            "sgb5_4a"
+          ],
+          "note": {
+            "de": "Werbung und Mitgliedergewinnung kosteten die Kassen 2024 zusammen 283 Mio. Euro: Werbemaßnahmen 205,8, Mitgliederwerbung durch private Dienstleister 63,4, Werbekosten in Einrichtung und Verbandsbeiträgen 13,9 Mio. Euro (KJ1 2024, Konten 7004, 7108, 7133 bis 7135 und 7326). Ein Gesetz von 2026 hat die Obergrenze für Werbung halbiert (§ 4a Abs. 3 SGB V); die FinanzKommission Gesundheit schätzt die Wirkung auf rund 70 Mio. Euro im Jahr (Bericht, S. 388 f.). Eine Einheitskasse wirbt nicht um Mitglieder. Eigene Rechnung: 283 − 70 = 213 Mio. Euro im Jahr. Die Spanne gilt für beide Wirkungen gemeinsam; sie ist bei den Vorständen erklärt.",
+            "en": "Advertising and member acquisition cost the funds EUR 283 million in 2024: advertising 205.8, member recruitment by private service providers 63.4, advertising costs in equipment and association fees 13.9 million (KJ1 2024, accounts 7004, 7108, 7133 to 7135 and 7326). A law of 2026 halved the cap on advertising (section 4a(3) of Social Code Book V); the Health Finance Commission estimates the effect at about EUR 70 million a year (report, pp. 388 f.). A single fund does not compete for members. Own calculation: 283 − 70 = EUR 213 million a year. The range applies to both effects together; it is explained under the boards."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.health.insurers_staff",
+          "amount": -24000000,
+          "quality": "estimate",
+          "uncertainty": {
+            "low": -2.4978965,
+            "high": 3.7980894,
+            "basis": "merger"
+          },
+          "sources": [
+            "fkg_bericht_2026",
+            "rh_at_2022_41",
+            "bmg_kj1_2024",
+            "bt_drs_20_14639"
+          ],
+          "note": {
+            "de": "Die Vorstände der Kassen erhielten 2025 zusammen rund 25 Mio. Euro (FinanzKommission Gesundheit, S. 391). Eine Kasse braucht einen Vorstand; eigene Annahme: rund 1 Mio. Euro, die Ersparnis also 24 Mio. Euro. Zusammen mit der Werbung 237 Mio. Euro. Die Spanne gilt für beide Wirkungen. Unten stehen Mehrkosten wie in Österreich: Dort brachte die Zusammenlegung von 21 auf 5 Träger von 2020 bis 2023 statt der angekündigten Einsparung von 1 Mrd. Euro einen Mehraufwand von 214,95 Mio. Euro (Rechnungshof Österreich, Bericht 2022/41, S. 10 f.), im Jahr rund 4,7 % des Verwaltungsaufwands der fusionierten Träger von 1,15 Mrd. Euro (S. 23). Eigene Übertragung auf die 12,63 Mrd. Euro Netto-Verwaltungskosten der deutschen Kassen: 0,59 Mrd. Euro Mehrkosten im Jahr. Oben steht eine eigene Schätzung: zusätzlich die Hälfte der Beiträge an die Kassenverbände (392,6 Mio. Euro) und ein Drittel der Zahlungen an andere für Verwaltungsaufgaben, vor allem IT (1.401,5 Mio. Euro; KJ1 2024, Konten 7320 und 7390), zusammen 0,90 Mrd. Euro, 7 % der Verwaltungskosten. Eine belastbare Schätzung größerer Einsparungen wurde nicht gefunden; die Bundesregierung ging im Januar 2025 „nicht von einem höheren Einsparpotential durch eine Zusammenlegung aller Krankenkassen aus“ (Drucksache 20/14639, S. 59).",
+            "en": "The funds' boards received about EUR 25 million in total in 2025 (Health Finance Commission, p. 391). One fund needs one board; own assumption: about EUR 1 million, so the saving is EUR 24 million. Together with advertising EUR 237 million. The range applies to both effects. At the bottom are extra costs as in Austria: there the merger of 21 carriers into 5 brought additional spending of EUR 214.95 million from 2020 to 2023 instead of the announced saving of EUR 1 billion (Austrian Court of Audit, report 2022/41, pp. 10 f.), about 4.7% a year of the merged carriers' administrative spending of EUR 1.15 billion (p. 23). Own transfer to the EUR 12.63 billion of net administrative costs of the German funds: EUR 0.59 billion of extra costs a year. At the top is an own estimate: in addition half of the fees to the funds' associations (EUR 392.6 million) and a third of the payments to others for administrative tasks, mainly IT (EUR 1,401.5 million; KJ1 2024, accounts 7320 and 7390), together EUR 0.90 billion, 7% of administrative costs. No sound estimate of larger savings was found; in January 2025 the federal government did \"not expect a higher savings potential from merging all health insurers\" (printed paper 20/14639, p. 59)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Dass eine große Kasse billiger verwaltet als viele kleine, ist nicht belegt. Die FinanzKommission Gesundheit fand im März 2026 keinen eindeutigen Zusammenhang zwischen der Größe einer Kasse und ihren Verwaltungskosten je Versicherten; die 20 größten Kassen versichern schon 84 % der Mitglieder. Bei den Kassenfusionen, die der Bundesrechnungshof prüfte, stiegen die Verwaltungsausgaben im Jahr der Fusion um bis zu 18 % und sanken in den drei Folgejahren nicht; das Personal blieb, weil Tarifverträge fusionsbedingte Kündigungen ausschlossen. In Österreich führte die Zusammenlegung der Gebietskrankenkassen 2020 statt zu der angekündigten Milliarde Einsparung zu Mehraufwand.",
+            "en": "It has not been shown that one large fund administers more cheaply than many small ones. In March 2026 the Health Finance Commission found no clear relationship between the size of a fund and its administrative costs per insured person; the 20 largest funds already insure 84% of members. In the fund mergers audited by the Federal Court of Audit, administrative spending rose by up to 18% in the year of the merger and did not fall in the following three years; staff stayed because collective agreements ruled out merger-related dismissals. In Austria the merger of the regional health insurers in 2020 led to additional spending instead of the announced billion of savings."
+          },
+          "sources": [
+            "fkg_bericht_2026",
+            "bt_drs_17_7600",
+            "rh_at_2022_41"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Eine Fusion kostet zuerst Geld: neue Versichertenkarten, eine gemeinsame IT, Beratung, Abfindungen. Für Österreichs Reform schätzte ein Gutachten die einmaligen Kosten auf 300 bis 400 Mio. Euro; der Rechnungshof hielt die tatsächlichen Kosten für deutlich höher als die gebuchten 34 Mio. Euro. Eine deutsche Einheitskasse mit rund 132.000 Beschäftigten wäre um ein Vielfaches größer. Diese Einmalkosten sind im gezeigten Jahresbetrag nicht enthalten.",
+            "en": "A merger first costs money: new insurance cards, a common IT system, consultants, severance pay. For Austria's reform an expert opinion put the one-off costs at EUR 300 to 400 million; the Court of Audit considered the actual costs to be considerably higher than the EUR 34 million booked. A single German fund with about 132,000 employees would be many times larger. These one-off costs are not included in the annual amount shown."
+          },
+          "sources": [
+            "rh_at_2022_41",
+            "bmg_kg1_2025"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Mit einer Kasse entfallen die freie Kassenwahl und der Wettbewerb um Service und Verträge, auf den der Gesetzgeber seit 1996 setzt. Das Bundesverfassungsgericht hielt 2005 fest, der Gesetzgeber habe davon ausgehen dürfen, dass kleinere Einheiten im Wettbewerb sparsamer wirtschaften als große ohne diesen Anreiz. Die Zusatzleistungen, die einzelne Kassen heute aus Beiträgen bezahlen (Satzungsleistungen, 2025: 0,77 Mrd. Euro), müssten vereinheitlicht werden: gestrichen, was spart, oder für alle eingeführt, was kostet.",
+            "en": "With one fund, the free choice of fund and the competition on service and contracts that the legislature has relied on since 1996 disappear. In 2005 the Federal Constitutional Court held that the legislature was entitled to assume that smaller units competing with each other manage more economically than large ones without that incentive. The extra benefits that individual funds pay from contributions today (statutory additional benefits, 2025: EUR 0.77 billion) would have to be harmonised: dropped, which saves money, or introduced for everyone, which costs money."
+          },
+          "sources": [
+            "bverfge_113_167",
+            "kj1_2025"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Rechtlich ist eine Einheitskasse möglich. Das Grundgesetz garantiert die heutige Vielzahl der Kassen nicht; der Gesetzgeber dürfte alle Kassen in einer bundesunmittelbaren Körperschaft zusammenfassen (Bundesverfassungsgericht 1975 und 2005). Sie bliebe eine Körperschaft des öffentlichen Rechts mit Selbstverwaltung.",
+            "en": "Legally a single fund is possible. The Basic Law does not guarantee today's large number of funds; the legislature could combine all funds in one federal corporation (Federal Constitutional Court, 1975 and 2005). It would remain a public-law corporation with self-administration."
+          },
+          "sources": [
+            "bverfge_39_302",
+            "bverfge_113_167"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Zusatzversicherungen, etwa für Zahnersatz oder ein Einzelzimmer im Krankenhaus, bieten private Versicherer an; die Kassen dürfen sie nur vermitteln und sich dafür allenfalls ihre Kosten erstatten lassen. Wahltarife der Kassen müssen sich nach § 53 Abs. 9 SGB V aus eigenen Einnahmen und Einsparungen finanzieren. Öffentliches Geld oder Beitragsgeld fließt nach Gesetz und Aufsichtspraxis nicht in Zusatzversicherungen; daraus ergibt sich deshalb keine weitere Ersparnis.",
+            "en": "Supplementary insurance, for example for dentures or a single room in hospital, is offered by private insurers; the funds may only broker it and at most have their costs reimbursed. The funds' optional tariffs must finance themselves from their own revenue and savings under section 53(9) of Social Code Book V. By law and supervisory practice no public money or contribution money flows into supplementary insurance, so no further saving arises from it."
+          },
+          "sources": [
+            "sgb5_194",
+            "sgb5_53",
+            "bva_sonderbericht_2018"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Stand November 2026: Gesundheitsminister Carsten Linnemann (CDU) antwortete im August 2026 auf die Frage, ob er die Zahl der Kassen von 93 auf höchstens 20 senken wolle: „Ich bleibe bei dem, was ich gesagt habe.“ Er verwies auf den Endbericht einer Kommission zum Jahresende. Die AfD hat im Mai 2026 im Bundestag beantragt, die Zahl der Kassen deutlich zu verringern und Werbung zu verbieten; der Sozialverband VdK will eine Kasse mit regionalen Untergliederungen prüfen lassen. Dagegen stehen der GKV-Spitzenverband und die Bundesregierung, die im Januar 2025 kein höheres Einsparpotenzial durch eine Zusammenlegung aller Kassen sah. Ab 2027 dürfen die Verwaltungskosten jeder Kasse nur noch so stark steigen wie die Ausgaben je Versicherten (§ 4 Abs. 5 SGB V).",
+            "en": "As of November 2026: asked in August 2026 whether he wanted to reduce the number of funds from 93 to at most 20, Health Minister Carsten Linnemann (CDU) answered: \"I stand by what I said.\" He referred to the final report of a commission due at the end of the year. In May 2026 the AfD moved in the Bundestag to reduce the number of funds considerably and to ban advertising; the social association VdK wants a single fund with regional branches to be examined. Opposed are the umbrella association of the funds and the federal government, which in January 2025 saw no higher savings potential from merging all funds. From 2027 each fund's administrative costs may rise only as fast as spending per insured person (section 4(5) of Social Code Book V)."
+          },
+          "sources": [
+            "bmg_interview_linnemann_2026_08",
+            "bt_drs_21_5759",
+            "vdk_gesundheitssystem",
+            "gkv_spitzenverband_verwaltungskosten",
+            "bt_drs_20_14639",
+            "sgb5_4"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Ersparnis bleibt bei den Krankenkassen und kann ihren Zusatzbeitrag senken. Den Bundeshaushalt entlastet sie nicht, weil der Bundeszuschuss an die Krankenversicherung ein fester Betrag ist.",
+            "en": "The saving stays with the health insurers and can lower their additional contribution. It does not relieve the federal budget, because the federal subsidy to health insurance is a fixed amount."
+          },
+          "sources": [
+            "bundeshaushalt_2024"
+          ]
+        }
+      ],
+      "sources": [
+        "bmg_kj1_2024",
+        "fkg_bericht_2026",
+        "rh_at_2022_41",
+        "bt_drs_17_7600",
+        "bt_drs_20_14639",
+        "gkv_spitzenverband_verwaltungskosten"
+      ],
+      "timing": {
+        "from": "2029-01-01",
+        "years": 3,
+        "note": {
+          "de": "Für eine Einheitskasse gibt es keinen Gesetzentwurf; der Gesundheitsminister verwies im August 2026 auf den Endbericht einer Kommission zum Jahresende. In Österreich lag zwischen dem Beschluss im Dezember 2018 und dem Start der Österreichischen Gesundheitskasse am 1. Januar 2020 ein Jahr (Rechnungshof Österreich, Bericht 2022/41). Die Rechnung lässt die Einheitskasse deshalb 2029 beginnen, nach einem Gesetz 2027 und einem Jahr Vorbereitung. Nach den Kassenfusionen, die der Bundesrechnungshof prüfte, sanken die Verwaltungsausgaben in den ersten drei Jahren nicht; die Wirkung wächst deshalb über drei Jahre auf und ist 2032 voll.",
+          "en": "There is no bill for a single fund; in August 2026 the Health Minister referred to the final report of a commission due at the end of the year. In Austria one year passed between the decision in December 2018 and the start of the Austrian Health Insurance Fund on 1 January 2020 (Austrian Court of Audit, report 2022/41). The calculation therefore lets the single fund start in 2029, after a law in 2027 and a year of preparation. After the fund mergers audited by the Federal Court of Audit, administrative spending did not fall in the first three years; the effect therefore builds up over three years and is full in 2032."
+        },
+        "sources": [
+          "bmg_interview_linnemann_2026_08",
+          "rh_at_2022_41",
+          "bt_drs_17_7600"
+        ]
+      }
+    },
+    {
+      "id": "social_insurance_staff_cut",
+      "label": {
+        "de": "Stellen in der Verwaltung der Sozialversicherung abbauen",
+        "en": "Cut administrative posts at the social insurance funds"
+      },
+      "summary": {
+        "de": "Streicht einen Teil der Verwaltungsstellen bei der Rentenversicherung, bei der Bundesagentur für Arbeit in der Arbeitslosenversicherung und bei den Kranken- und Pflegekassen. In der Verwaltung waren 2024 rund 52.500 Vollzeitstellen bei der Rentenversicherung und 55.300 bei der Bundesagentur besetzt, bei den Krankenkassen arbeiteten Mitte 2025 rund 132.000 Menschen; ihr Personal kostete 4,0, 5,0 und 9,6 Mrd. Euro, zusammen 18,6 Mrd. Euro oder 2,4 % der Ausgaben dieser Versicherungen. Die Grundeinstellung streicht 10 % der Stellen, so viel, wie der Gesetzgeber der Rentenversicherung 2005 bei den Verwaltungskosten für fünf Jahre vorgab. Der Betrag ist die jährliche Ersparnis, sobald der Abbau abgeschlossen ist, in Werten von 2024; sie entlastet die Beitragszahler, nicht den Bundeshaushalt. Weil Beamte und langjährig Beschäftigte praktisch nicht gekündigt werden können, gelingt der Abbau nur, indem frei werdende Stellen nicht nachbesetzt werden; gerechnet ist mit 2 Prozentpunkten im Jahr. Die Rechnung nimmt an, dass die Menschen, die nicht mehr eingestellt werden, anderswo arbeiten, sodass Lohnsteuer und Beiträge nicht verloren gehen.",
+        "en": "Cuts part of the administrative posts at the pension insurance, at the Federal Employment Agency in unemployment insurance, and at the health and long-term care insurers. In 2024 about 52,500 full-time equivalents worked in administration at the pension insurance and 55,300 at the Employment Agency, and about 132,000 people at the health insurers in mid-2025; their staff cost EUR 4.0, 5.0 and 9.6 billion, together EUR 18.6 billion or 2.4% of these insurers' spending. The default cuts 10% of posts, as much as the legislature required of the pension insurance's administrative costs over five years in 2005. The amount is the annual saving once the cut is complete, in 2024 values; it relieves contributors, not the federal budget. Because civil servants and long-serving employees can hardly be dismissed, the cut can only be made by not refilling posts that fall vacant; the calculation assumes 2 percentage points a year. It assumes that the people who are no longer hired work elsewhere, so that wage tax and contributions are not lost."
+      },
+      "topic": "state",
+      "params": [
+        {
+          "id": "cut",
+          "type": "number",
+          "label": {
+            "de": "Anteil der Verwaltungsstellen, die wegfallen",
+            "en": "Share of administrative posts cut"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "default": 10,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.social.insurers_staff",
+          "factor": {
+            "param": "cut",
+            "scale": -0.0058201,
+            "offset": 1
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.1,
+            "basis": "staff"
+          },
+          "sources": [
+            "bt_drs_21_8817",
+            "ba_haushaltsplan_2026",
+            "ba_geschaeftsbericht_2024_pdf",
+            "gkv_spitzenverband_verwaltungskosten"
+          ],
+          "note": {
+            "de": "Rentenversicherung: Personalkosten 2024 3,96 Mrd. Euro, davon 2,63 Mrd. Euro für Arbeitnehmer und 1,33 Mrd. Euro für Beamte, bei 52.474 Vollzeitstellen in der Verwaltung ohne die Reha-Kliniken (Drucksache 21/8817, Tabellen 1, 5 und 6); die Netto-Verwaltungskosten lagen bei 5,32 Mrd. Euro, 1,3 % der Ausgaben. Bundesagentur für Arbeit: Personalausgaben im Kapitel 5 ihres Haushalts 5,59 Mrd. Euro, Ist 2024 (Haushaltsplan 2026, S. 7), für 55.300 Vollzeitstellen in der Arbeitslosenversicherung und in Dienstleistungen für die Jobcenter und 6.500 in der Familienkasse (Geschäftsbericht 2024, S. 31). Eigene Rechnung: Der Anteil der Arbeitslosenversicherung nach Vollzeitstellen sind 5,00 Mrd. Euro. Nicht enthalten sind die Familienkasse und das Personal in den Jobcentern (Kapitel 6, 3,18 Mrd. Euro), die der Bund bezahlt. Zusammen 8,97 Mrd. Euro, 58,2 % dieses Postens; je Prozentpunkt weniger Stellen 89,7 Mio. Euro. Die Spanne reicht von 50 % bis 110 % (eigene Einschätzung): unten, wenn ein Teil der Arbeit an IT und externe Dienstleister geht, wie bei den Krankenkassen, deren Personal von 2015 bis 2024 um 3 % sank, während ihre Verwaltungskosten von 2014 bis 2024 um 26 % stiegen (GKV-Spitzenverband); oben, wenn mit dem Personal auch Büros und Sachkosten wegfallen.",
+            "en": "Pension insurance: staff costs 2024 EUR 3.96 billion, of which 2.63 billion for employees and 1.33 billion for civil servants, with 52,474 full-time equivalents in administration excluding the rehabilitation clinics (printed paper 21/8817, tables 1, 5 and 6); net administrative costs were EUR 5.32 billion, 1.3% of spending. Federal Employment Agency: personnel spending in chapter 5 of its budget EUR 5.59 billion, 2024 actuals (budget plan 2026, p. 7), for 55,300 full-time equivalents in unemployment insurance and in services for the job centres and 6,500 in the family benefits office (annual report 2024, p. 31). Own calculation: the share of unemployment insurance by full-time equivalents is EUR 5.00 billion. Not included are the family benefits office and the staff in the job centres (chapter 6, EUR 3.18 billion), which the federal government pays for. Together EUR 8.97 billion, 58.2% of this item; per percentage point fewer posts EUR 89.7 million. The range runs from 50% to 110% (own judgement): at the bottom if part of the work goes to IT and external service providers, as at the health insurers, whose staff fell by 3% from 2015 to 2024 while their administrative costs rose by 26% from 2014 to 2024 (umbrella association of the funds); at the top if offices and other costs go with the staff."
+          }
+        },
+        {
+          "type": "scale",
+          "target": "exp.health.insurers_staff",
+          "factor": {
+            "param": "cut",
+            "scale": -0.0071321,
+            "offset": 1
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.1,
+            "basis": "staff"
+          },
+          "sources": [
+            "bmg_kj1_2024",
+            "bmg_kg1_2025",
+            "gkv_spitzenverband_verwaltungskosten"
+          ],
+          "note": {
+            "de": "Personalkosten der Krankenkassen 2024: Gehälter 7,57 Mrd. Euro, Bezüge der Beamten und Dienstordnungsangestellten 0,38, Arbeitgeberbeiträge 1,54, Zusatzversorgung 0,15 und Entgelte 0,02 Mrd. Euro, zusammen 9,65 Mrd. Euro (KJ1 2024, Konten 7000, 7001, 7003, 7011 und 7015), für 132.011 Beschäftigte am 30. Juni 2025 (KG1 2025, S. 7). Die Netto-Verwaltungskosten lagen bei 12,63 Mrd. Euro, 3,86 % der Ausgaben der Kassen (GKV-Spitzenverband). Eigene Rechnung: 9,65 Mrd. Euro sind 71,3 % dieses Postens; je Prozentpunkt weniger Stellen 96,5 Mio. Euro. Spanne wie bei der Renten- und Arbeitslosenversicherung.",
+            "en": "Staff costs of the health insurers 2024: salaries EUR 7.57 billion, pay of civil servants and employees under service regulations 0.38, employer contributions 1.54, supplementary pensions 0.15 and other pay 0.02 billion, together EUR 9.65 billion (KJ1 2024, accounts 7000, 7001, 7003, 7011 and 7015), for 132,011 employees on 30 June 2025 (KG1 2025, p. 7). Net administrative costs were EUR 12.63 billion, 3.86% of the funds' spending (umbrella association of the funds). Own calculation: EUR 9.65 billion is 71.3% of this item; per percentage point fewer posts EUR 96.5 million. Range as for pension and unemployment insurance."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Kündigen lässt sich kaum jemand. Beamte sind auf Lebenszeit ernannt; bei der Rentenversicherung entfällt ein Drittel der Personalkosten auf Beamte. Tarifbeschäftigte, die 40 Jahre alt und mehr als 15 Jahre beschäftigt sind, kann zum Beispiel die Bundesagentur nur aus wichtigem Grund kündigen (§ 34 Abs. 2 TV-BA). Als Krankenkassen fusionierten, blieb das Personal, weil Tarifverträge fusionsbedingte Kündigungen ausschlossen (Bundesrechnungshof 2011). Stellen fallen deshalb nur weg, wenn Beschäftigte in Ruhestand gehen oder wechseln. Die Bundesagentur erwartet, dass bis Ende 2030 rund 20.000 Beschäftigte gehen, gut 4 % im Jahr; die Rechnung nimmt an, dass die Hälfte davon nicht ersetzt wird.",
+            "en": "Hardly anyone can be dismissed. Civil servants are appointed for life; at the pension insurance a third of staff costs is for civil servants. Employees under collective agreements who are 40 or older and have been employed for more than 15 years can, for example, be dismissed by the Employment Agency only for good cause (section 34(2) TV-BA). When health insurers merged, staff stayed because collective agreements ruled out merger-related dismissals (Federal Court of Audit, 2011). Posts therefore disappear only when staff retire or leave. The Employment Agency expects about 20,000 employees to leave by the end of 2030, a little over 4% a year; the calculation assumes that half of them are not replaced."
+          },
+          "sources": [
+            "bt_drs_21_8817",
+            "tv_ba",
+            "bt_drs_17_7600",
+            "ba_geschaeftsbericht_2025"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Die Beschäftigten bearbeiten Anträge, zahlen Leistungen aus und beraten. Über einen Antrag auf Erwerbsminderungsrente entschied die Rentenversicherung 2024 je nach Träger im Schnitt nach 101 bis 181 Tagen. Weniger Personal bei gleichen Aufgaben heißt längere Wartezeiten, wenn nicht Digitalisierung oder einfachere Regeln Arbeit abnehmen. Die Bundesagentur automatisiert nach eigenen Angaben, um frei werdende Stellen ersetzen zu können, die sie schwer besetzt; Abbau ist nicht ihr Ziel.",
+            "en": "The staff process applications, pay benefits and give advice. In 2024 the pension insurance decided on an application for a disability pension after 101 to 181 days on average, depending on the carrier. Fewer staff with the same tasks means longer waits unless digitalisation or simpler rules take work off them. According to its own statements, the Employment Agency automates in order to cope with posts falling vacant that it finds hard to fill, not in order to cut jobs."
+          },
+          "sources": [
+            "bt_drs_21_1792",
+            "ba_geschaeftsbericht_2024_pdf"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Frühere Vorgaben zeigen, was möglich ist und wo die Grenzen liegen. Die Rentenversicherung musste ihre Verwaltungs- und Verfahrenskosten nach der Organisationsreform 2005 in fünf Jahren um 10 % senken; das gelang nach Angaben der Bundesregierung. Seit 2019 ist ihr Personal in der Verwaltung aber von 49.300 auf 53.400 Vollzeitstellen gewachsen, wegen mehr Anträgen, der Grundrente und der IT. Die Krankenkassen betreuen je Beschäftigten heute 563 Versicherte statt 487 im Jahr 2004; ihre Verwaltungskosten stiegen trotzdem. Dauerhaft gespart wird eher, wenn Aufgaben wegfallen oder einfacher werden, als durch eine bloße Stellenvorgabe.",
+            "en": "Earlier targets show what is possible and where the limits are. After the organisational reform of 2005, the pension insurance had to cut its administrative and procedural costs by 10% within five years; according to the federal government it did so. Since 2019, however, its administrative staff has grown from 49,300 to 53,400 full-time equivalents because of more applications, the basic pension supplement and IT. The health insurers now look after 563 insured persons per employee instead of 487 in 2004; their administrative costs rose all the same. Lasting savings come rather from tasks that disappear or become simpler than from a mere target for posts."
+          },
+          "sources": [
+            "bt_drs_21_8817",
+            "fkg_bericht_2026",
+            "gkv_spitzenverband_verwaltungskosten"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Würden Beschäftigte entlassen und fänden keine neue Arbeit, entfielen ihre Lohnsteuer und Sozialbeiträge, und die Arbeitslosenversicherung zahlte Arbeitslosengeld. Nach eigener Überschlagsrechnung bliebe dann im ersten Jahr nur rund ein Viertel der Ersparnis. Die Rechnung nimmt an, dass Stellen über Ruhestand und Wechsel wegfallen und die Menschen, die nicht eingestellt werden, anderswo arbeiten.",
+            "en": "If staff were dismissed and found no new work, their wage tax and social contributions would be lost and unemployment insurance would pay unemployment benefit. By an own rough calculation only about a quarter of the saving would then remain in the first year. The calculation assumes that posts disappear through retirement and departures and that the people who are not hired work elsewhere."
+          }
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Ersparnis bleibt bei den Sozialversicherungen und kann ihre Beiträge senken. Beim Bund kommt bei der Rentenversicherung über die Fortschreibung des Bundeszuschusses langfristig ein kleiner Teil an, nach den Faustdaten rund 16 % einer Beitragssatzsenkung; die Krankenversicherung erhält einen festen Bundeszuschuss. Das Personal der Bundesagentur in den Jobcentern und in der Familienkasse bezahlt der Bund; es ist hier nicht enthalten.",
+            "en": "The saving stays with the social insurance funds and can lower their contributions. At the pension insurance a small part reaches the federal government in the long run through the formula for the federal subsidy, about 16% of a cut in the contribution rate according to the rules of thumb; health insurance receives a fixed federal subsidy. The Employment Agency's staff in the job centres and the family benefits office is paid for by the federal government and is not included here."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "ba_haushaltsplan_2026"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Stand November 2026: Die Alterssicherungskommission hat im Juni 2026 empfohlen, die 16 Träger der Rentenversicherung unter einer Leitung zusammenzuführen und Aufgaben zu bündeln, ohne eine Zahl einzusparender Stellen zu nennen; der Koalitionsausschuss verständigte sich am 1. Juli 2026 darauf, ihre Empfehlungen umzusetzen. Für die Krankenkassen begrenzt das Gesetz die Verwaltungskosten ab 2027 auf den Anstieg der Ausgaben je Versicherten. Die Koalition will das Personal der Bundesverwaltung bis 2029 um 8 % verringern, 2 % im Jahr; im Entwurf des Haushalts 2027 steigt die Zahl der zivilen Stellen des Bundes allerdings um 4.752.",
+            "en": "As of November 2026: in June 2026 the pensions commission recommended bringing the 16 pension insurance carriers under one management and pooling tasks, without naming a number of posts to be saved; on 1 July 2026 the coalition committee agreed to implement its recommendations. For the health insurers the law limits administrative costs from 2027 to the increase in spending per insured person. The coalition wants to reduce federal administrative staff by 8% by 2029, 2% a year; in the draft budget for 2027, however, the number of civilian federal posts rises by 4,752."
+          },
+          "sources": [
+            "ask_bericht_2026",
+            "bt_drs_21_8817",
+            "sgb5_4",
+            "koalitionsvertrag_2025",
+            "bundestag_drs_21_7301"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Nicht enthalten sind die Verwaltungen von Bund, Ländern und Gemeinden. Ihr Personal in der allgemeinen öffentlichen Verwaltung, einschließlich der Grundlagenforschung, kostete 2024 15,0, 30,0 und 26,7 Mrd. Euro; die Posten des Haushalts mischen dort aber die drei Ebenen, sodass eine Kürzung nicht der Ebene zugeordnet werden könnte, die sie beschließt.",
+            "en": "Not included are the administrations of the federal government, the states and the municipalities. Their staff in general public services, including basic research, cost EUR 15.0, 30.0 and 26.7 billion in 2024; the budget items there, however, mix the three levels, so a cut could not be assigned to the level that decides it."
+          },
+          "sources": [
+            "eurostat_gov_10a_exp"
+          ]
+        }
+      ],
+      "sources": [
+        "bt_drs_21_8817",
+        "bmg_kj1_2024",
+        "bmg_kg1_2025",
+        "ba_haushaltsplan_2026",
+        "ba_geschaeftsbericht_2024_pdf",
+        "eurostat_gov_10a_exp"
+      ],
+      "timing": {
+        "param": "cut",
+        "yearsPerUnit": 0.5,
+        "note": {
+          "de": "Stellen fallen im Wesentlichen nur weg, wenn frei werdende Stellen nicht nachbesetzt werden. Die Bundesagentur erwartet, dass bis Ende 2030 rund 20.000 ihrer gut 100.000 Vollzeitkräfte gehen, gut 4 % im Jahr (Geschäftsbericht 2025, S. 36). Die Rechnung nimmt an, dass die Hälfte davon nicht ersetzt wird: 2 Prozentpunkte im Jahr, so schnell, wie die Koalition die Bundesverwaltung verkleinern will (Koalitionsvertrag 2025, Haushaltskonsolidierung), und wie der Gesetzgeber 2005 der Rentenversicherung vorgab, ihre Verwaltungskosten in fünf Jahren um 10 % zu senken (Drucksache 21/8817, S. 7). Der Abbau beginnt im ersten Jahr, in dem Maßnahmen wirken; die Grundeinstellung von 10 % ist nach fünf Jahren erreicht, 30 % nach 15.",
+          "en": "In essence posts disappear only when vacancies are not refilled. The Employment Agency expects about 20,000 of its 100,000 or so full-time staff to leave by the end of 2030, a little over 4% a year (annual report 2025, p. 36). The calculation assumes that half of them are not replaced: 2 percentage points a year, as fast as the coalition wants to shrink the federal administration (coalition agreement 2025, budget consolidation), and as fast as the legislature required in 2005 when it told the pension insurance to cut its administrative costs by 10% within five years (printed paper 21/8817, p. 7). The cut starts in the first year in which measures act; the default of 10% is reached after five years, 30% after 15."
+        },
+        "sources": [
+          "ba_geschaeftsbericht_2025",
+          "koalitionsvertrag_2025",
+          "bt_drs_21_8817"
+        ]
+      }
     }
   ],
   "collections": [
