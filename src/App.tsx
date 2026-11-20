@@ -33,6 +33,7 @@ import { LegalLinks, LegalPageView } from "./components/Legal.tsx";
 import { ExternalIcon, WarningIcon } from "./components/icons.tsx";
 import { PolicyList } from "./components/PolicyList.tsx";
 import { Scoreboard } from "./components/Scoreboard.tsx";
+import { SectionNav } from "./components/SectionNav.tsx";
 import { Waterfall } from "./components/Waterfall.tsx";
 import {
   emptyScenario,
@@ -514,6 +515,9 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
       {!legalPage && (
         <Scoreboard result={result} editing={editing ? editor?.policy : undefined}>
           {goal && <GoalBar goal={goal} scenario={scenario} result={result} onGoal={onGoal} steady={editing} />}
+          {/* One column: the sections lie one under the other, below the whole list of measures. A row
+              in the band leads to each; not while the curve editor lies over the page. */}
+          {oneColumn && !editing && <SectionNav debt={debt !== undefined && debtAssumptions !== undefined} />}
         </Scoreboard>
       )}
       {editing && editor && editorPolicy && (
@@ -542,14 +546,12 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
         ) : (
           <>
             {/* Where the page has one column (phone and tablet) the measures come first: they are what
-                the visitor acts on, and the first of them should be on the first screen. The line that
-                leads to the debt section then follows them ("where does this lead?"), before the
-                budget. The order in the document follows the order on screen, so keyboard and screen
-                reader agree with the eye. */}
+                the visitor acts on, and the first of them should be on the first screen. The row of
+                sections in the band leads to the budget and the debt section from anywhere, so the
+                line that leads to the debt section is only needed beside the two columns. The order in
+                the document follows the order on screen, so keyboard and screen reader agree with the eye. */}
             {!oneColumn && <DebtTeaser view={debt} />}
-            <div className="workspace">
-              {oneColumn ? [policies, <DebtTeaser key="debt-teaser" view={debt} />, budget] : [budget, policies]}
-            </div>
+            <div className="workspace">{oneColumn ? [policies, budget] : [budget, policies]}</div>
             <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />
             {debt && debtAssumptions && (
               <DebtSection view={debt} assumptions={debtAssumptions} onAssumptions={setDebtAssumptions} level={pageResult.level} />

@@ -1,15 +1,17 @@
-import type { DebtIntroFacts, DebtLeadText, DebtMessages } from "./messages.ts";
+import type { DebtIntroFacts, DebtLeadText, DebtMessages, PhaseWords } from "./messages.ts";
 
-function intro({ baseYear, plan, measuresOn }: DebtIntroFacts): string {
+function intro({ baseYear, plan }: DebtIntroFacts): string {
   if (!plan) {
-    return `So entwickelten sich Schulden und Zinsen, wenn der Haushalt von ${baseYear} mit den eingeschalteten Maßnahmen im Verhältnis zur Wirtschaft so bliebe.`;
+    return `So entwickelten sich Schulden und Zinsen, wenn der Haushalt von ${baseYear} im Verhältnis zur Wirtschaft so bliebe.`;
   }
-  return (
-    `Bis ${plan.until} folgen Schulden und Wachstum der amtlichen Planung „${plan.label}“; danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${plan.until} hat, und es gelten die Annahmen. ` +
-    (measuresOn
-      ? "Mit den eingeschalteten Maßnahmen weicht der Pfad vom ersten Jahr an von der Planung ab."
-      : "Eingeschaltete Maßnahmen kommen vom ersten Jahr an hinzu.")
-  );
+  return `Bis ${plan.until} folgen Schulden und Wachstum der amtlichen Planung „${plan.label}“; danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${plan.until} hat, und es gelten die Annahmen.`;
+}
+
+function when({ start, startYear, full, last }: PhaseWords): string {
+  if (last !== undefined && startYear > last) return `ab ${start}, nach dem Ende der Rechnung`;
+  if (full === undefined) return `ab ${start}`;
+  if (last !== undefined && full > last) return `ab ${start}, voll erst ab ${full}, nach dem Ende der Rechnung`;
+  return `ab ${start}, voll ab ${full}`;
 }
 
 function lead(f: DebtLeadText): string {
@@ -74,11 +76,21 @@ export const debtDe: DebtMessages = {
     debt: (year) => `Schulden ${year}`,
     debtUnit: "der Wirtschaftsleistung (BIP)",
     withMeasures: "mit den eingeschalteten Maßnahmen",
+    withMeasuresBy: (year) => `mit den eingeschalteten Maßnahmen, soweit sie bis ${year} wirken`,
     noMeasures: "keine Maßnahme eingeschaltet",
     rate: (rate) => `bei ${rate} Zins für neue Schulden`,
     range: (range) => `je nach Schätzung ${range}`,
     without: (value) => `ohne die Maßnahmen: ${value}`,
     inYear: (year, value) => `${year}: ${value}`,
+  },
+  timing: {
+    from: (year, measuresOn) =>
+      measuresOn
+        ? `Maßnahmen wirken in dieser Rechnung ab ${year}; bis dahin verläuft der Pfad mit Maßnahmen wie der ohne.`
+        : `Eingeschaltete Maßnahmen wirken in dieser Rechnung ab ${year}.`,
+    why: (year) => `Warum ab ${year}?`,
+    laterTitle: "Später oder nach und nach wirken:",
+    when,
   },
   teaserLink: (year) => `Wohin führt das? Schulden und Zinsen bis ${year}`,
   teaserFigure: (year, interest, without, baseYear, today) =>

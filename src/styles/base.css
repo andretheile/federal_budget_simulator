@@ -407,6 +407,19 @@ main {
   padding-block: 36px 24px;
 }
 
+/* One column: the row of sections closes the band, so the measures start closer under it. */
+@media (max-width: 1079px) {
+  main {
+    padding-top: 18px;
+  }
+}
+
+/* The sections take the focus when the row of sections leads there; they are not controls. */
+.policies:focus,
+.budget:focus {
+  outline: none;
+}
+
 .workspace {
   display: grid;
   /* Not wider than the page, whatever is inside (the topics scroll sideways on a phone). */

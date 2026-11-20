@@ -216,8 +216,9 @@ describe("details that depend on the engine of the browser or the size of the sc
 
   describe("the order of measures and budget", () => {
     /** A window of this width: media queries answered the way the browser would. */
-    function widthOf(width: number): void {
+    function widthOf(width: number, motion: "reduce" | "no-preference" = "no-preference"): void {
       const answer = (media: string): boolean => {
+        if (media.includes("prefers-reduced-motion")) return motion === "reduce";
         const max = /max-width:\s*(\d+)px/.exec(media);
         const min = /min-width:\s*(\d+)px/.exec(media);
         return (!max || width <= Number(max[1])) && (!min || width >= Number(min[1]));
@@ -241,8 +242,9 @@ describe("details that depend on the engine of the browser or the size of the sc
       for (const width of [390, 768, 1079]) {
         widthOf(width);
         mount("#lang=en");
-        // The line to the debt section follows the measures, so the first measure comes sooner.
-        expect(order()).toEqual({ parts: ["policies", "debt-teaser", "budget"], teaserFirst: false });
+        // The row of sections in the band leads to the debt section; no line to it in the page.
+        expect(order()).toEqual({ parts: ["policies", "budget"], teaserFirst: false });
+        expect(container.querySelector(".debt-teaser")).toBeNull();
         act(() => root.unmount());
       }
       mount("#lang=en");
@@ -253,9 +255,71 @@ describe("details that depend on the engine of the browser or the size of the sc
         widthOf(width);
         mount("#lang=en");
         expect(order()).toEqual({ parts: ["budget", "policies"], teaserFirst: true });
+        // Beside each other, measures and budget need no row of sections.
+        expect(container.querySelector(".sectionnav")).toBeNull();
         act(() => root.unmount());
       }
       mount("#lang=en");
+    });
+
+    describe("the row of sections (one column)", () => {
+      /** Where the window was asked to scroll to. */
+      let scrolled: ScrollToOptions[];
+      beforeEach(() => {
+        scrolled = [];
+        window.scrollTo = ((options: ScrollToOptions) => void scrolled.push(options)) as typeof window.scrollTo;
+      });
+      const links = (): HTMLAnchorElement[] => [...container.querySelectorAll<HTMLAnchorElement>(".sectionnav a")];
+
+      it("is a named navigation landmark in the band, with the measures, the budget and the debt section", () => {
+        widthOf(390);
+        mount("#lang=en");
+        const nav = query(".scoreboard__band nav.sectionnav");
+        expect(nav.getAttribute("aria-label")).toBe("Sections");
+        expect(links().map((link) => [link.textContent, link.getAttribute("href")])).toEqual([
+          ["Measures", "#measures"],
+          ["Budget", "#budget"],
+          ["Debt", "#debt"],
+        ]);
+        // Each leads to a section that exists and can take the focus.
+        for (const id of ["measures", "budget", "debt"]) expect(query(`#${id}`).tabIndex).toBe(-1);
+        act(() => root.unmount());
+        widthOf(768);
+        mount("#lang=de");
+        expect(query("nav.sectionnav").getAttribute("aria-label")).toBe("Abschnitte");
+        expect(links().map((link) => link.textContent)).toEqual(["Maßnahmen", "Haushalt", "Schulden"]);
+      });
+
+      it("jumps to a section without touching the address, gives it the focus and marks it as the current one", () => {
+        widthOf(390);
+        mount("#lang=en&s=halve_mp_pay");
+        const before = window.location.hash;
+        const budget = links()[1];
+        const event = new MouseEvent("click", { bubbles: true, cancelable: true });
+        act(() => void budget.dispatchEvent(event));
+        expect(event.defaultPrevented).toBe(true);
+        expect(window.location.hash).toBe(before);
+        expect(document.activeElement).toBe(query("#budget"));
+        expect(budget.getAttribute("aria-current")).toBe("location");
+        expect(links().filter((link) => link.hasAttribute("aria-current"))).toHaveLength(1);
+        // Smoothly where motion is welcome.
+        expect(scrolled.at(-1)?.behavior).toBe("smooth");
+      });
+
+      it("does not scroll smoothly where the visitor asks for less motion", () => {
+        widthOf(390, "reduce");
+        mount("#lang=en");
+        act(() => links()[2].click());
+        expect(scrolled.at(-1)?.behavior).toBe("auto");
+        expect(document.activeElement).toBe(query("#debt"));
+      });
+
+      it("is not there while the curve editor lies over the page", () => {
+        widthOf(390);
+        mount("#lang=en&e=redraw_income_tax.tariff");
+        expect(container.querySelector(".sheet")).not.toBeNull();
+        expect(container.querySelector(".sectionnav")).toBeNull();
+      });
     });
   });
 });

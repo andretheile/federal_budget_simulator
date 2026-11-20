@@ -20,6 +20,12 @@ export const en: Messages = {
     fixture: "You are looking at Testland, a made-up country with invented numbers.",
     errors: (count) => plural(count, "validation error", "validation errors"),
   },
+  nav: {
+    label: "Sections",
+    measures: "Measures",
+    budget: "Budget",
+    debt: "Debt",
+  },
   header: {
     level: "Level of government",
     allLevels: "All levels",
@@ -122,6 +128,9 @@ export const en: Messages = {
     aloneLevel: (level) => `On its own, ${level} only`,
     combined: (amount) => `In this combination: ${amount}`,
     combinedHint: "Other measures that are switched on act on the same budget items.",
+    timingLine: (when) => `The figure is the full effect; in the projection of debt and interest ${when}.`,
+    timingTitle: "When it takes effect",
+    timingDetail: (when) => `In the projection of debt and interest the measure acts, at this setting, ${when}.`,
     ofAll: (side, share) => `${share} of all ${side === "revenue" ? "revenue" : "spending"}`,
     ofLevel: (side, share) => `${share} of this level’s ${side === "revenue" ? "revenue" : "spending"}`,
     perInhabitant: (amount) => `${amount} per inhabitant`,

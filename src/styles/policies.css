@@ -398,6 +398,43 @@
   white-space: nowrap;
 }
 
+/*
+ * Under the figure of a measure that acts later or builds up in the debt projection: the figure is
+ * the full effect, and when the projection has it. What is shown lies over invisible stand-ins of
+ * every form the line can take, so the card keeps its height while the slider moves.
+ */
+.policy__timing {
+  display: grid;
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.policy__timing > * {
+  grid-area: 1 / 1;
+}
+
+.policy__stand-in {
+  visibility: hidden;
+}
+
+.policy__timing-detail {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.policy__timing-note {
+  margin-top: 6px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.policy__section .sources {
+  margin-top: 6px;
+}
+
 .policy__proportion {
   margin-top: 3px;
 }
