@@ -231,7 +231,7 @@ describe("the section on Testland", () => {
   it("speaks German", () => {
     mount("#lang=de");
     expect(lead()).toMatch(/^Bei 4 % Zins für neue Schulden müsste der Staat im Jahr 2054 15,8 % aller Einnahmen für Zinsen ausgeben; 2024 waren es 2,5 %\./);
-    expect(lead()).toContain("Ab 2028 kosteten die Zinsen mehr als alles, was der Staat für Verteidigung ausgibt.");
+    expect(lead()).toContain("Ab 2028 würden die Zinsen mehr kosten als alles, was der Staat für Verteidigung ausgibt.");
   });
 
   it("follows a slider at once, and puts what differs from the default into the address", () => {
@@ -595,7 +595,7 @@ describe("the official plans", () => {
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&d=fministry_projection");
     expect(all(".dchart__marker text").map((label) => plain(label.textContent))).toEqual(["from 2027 by the assumptions", "from 2027 by the assumptions"]);
     expect(text("#debt .debt__intro")).toBe(
-      "Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply.",
+      "Up to 2026, debt and growth follow the official plan “Ministry projection”. After that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply.",
     );
     // A slider keeps the starting point; the reset goes back to the pack's.
     slide(slider("Market interest rate"), 8);
@@ -631,7 +631,7 @@ describe("a pack that starts from its official plan", () => {
     mount("#lang=en", following());
     expect(window.location.hash).toBe("#lang=en");
     expect(text("#debt .debt__intro")).toBe(
-      "Up to 2026, debt and growth follow the official plan “Ministry projection”; after that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply.",
+      "Up to 2026, debt and growth follow the official plan “Ministry projection”. After that, the budget before interest keeps the share of economic output it has in 2026, and the assumptions apply.",
     );
     expect(radios()).toEqual([
       ["Official plan to 2026default", true],

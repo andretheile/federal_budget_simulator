@@ -11,9 +11,9 @@ import { useUi } from "../app/ui.ts";
 import type { CurvePoint, Goal, ParamValue, Policy, PolicyTopic, Scenario, SimulationResult } from "../engine/index.ts";
 import { reducedMotion } from "../hooks/useAnimatedNumber.ts";
 import { preloadEditor } from "./CurveEditor.tsx";
-import { asSentence, exclusionsOf } from "./GoalBar.tsx";
+import { asSentence, exclusionsOf, shortReason } from "./GoalBar.tsx";
 import { ChevronRight, InfoIcon } from "./icons.tsx";
-import { PolicyCard } from "./PolicyCard.tsx";
+import { PolicyCard, type GoalHint } from "./PolicyCard.tsx";
 import { SourceList } from "./primitives.tsx";
 
 export interface PolicyListProps {
@@ -90,14 +90,21 @@ export function PolicyList({
   const collections = pack.collections ?? [];
   // Per measure, the names of its collections: the same arrays on every render, so cards stay memoized.
   const badges = useMemo(() => collectionsByPolicy(pack, (entry) => ui.text(entry.label)), [pack, ui]);
-  // Per measure the goal leaves out: the hint on its card, with the pack's reason.
+  // Per measure the goal leaves out: the hint on its card, with the short reason on the face (the
+  // goal bar's rule) and the full one in the details.
   const goalHints = useMemo(() => {
-    const out = new Map<string, string>();
+    const out = new Map<string, GoalHint>();
     if (!goal) return out;
     for (const entry of exclusionsOf(goal)) {
       if (entry.policy === undefined) continue;
-      const reason = entry.reason ? ` ${asSentence(ui.text(entry.reason), ui.language)}` : "";
-      out.set(entry.policy, `${t.goal.cardExcluded(ui.text(goal.label))}${reason}`);
+      const short = shortReason(ui, entry);
+      out.set(entry.policy, {
+        statement: t.goal.cardExcluded(ui.text(goal.label)),
+        reason: short.text,
+        more: short.more,
+        full: asSentence(ui.text(entry.reason), ui.language),
+        sources: entry.sources,
+      });
     }
     return out;
   }, [goal, ui, t]);

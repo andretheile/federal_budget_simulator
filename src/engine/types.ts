@@ -39,7 +39,11 @@ export interface Source {
   /** ISO date (YYYY-MM-DD) the source was last checked. */
   accessed: string;
   year?: number;
-  note?: string;
+  /**
+   * What the source is used for or where in it a figure is. A plain string is shown in every
+   * language; a localized text in the language shown. The title stays in the source's own language.
+   */
+  note?: string | LocalizedText;
 }
 
 export interface Indicator {
@@ -180,13 +184,29 @@ export type PolicyTopic =
 export interface Policy {
   id: string;
   label: LocalizedText;
+  /**
+   * What the card's face says: what the measure does and what its default setting shows, in at
+   * most two sentences. Up to SUMMARY_FACE_LENGTH characters it is shown whole; a longer one is cut
+   * to two lines until the card is opened, and validation warns about it.
+   */
   summary: LocalizedText;
+  /**
+   * The rest, at the top of the opened card: how the figure is calculated, how to use the
+   * settings, how the measure works together with others. Paragraphs are separated by a blank line.
+   */
+  explanation?: LocalizedText;
   topic: PolicyTopic;
   /** May be empty for pure on/off measures. */
   params: Param[];
   /** At least one. */
   effects: Effect[];
+  /** What stands against the measure itself: law, economics, costs that move, practice, politics. */
   catches: Catch[];
+  /**
+   * Limits of the calculation, not of the measure: what the figure leaves out and what the model
+   * assumes. Shown under a heading of their own after the catches, and not counted among them.
+   */
+  limits?: PolicyLimit[];
   sources: SourceId[];
   /**
    * When the measure acts in the debt projection and how its effect builds up to the full amount
@@ -484,6 +504,22 @@ export interface Catch {
 }
 
 /**
+ * A limit of the calculation of a measure: something the figure leaves out or an assumption of the
+ * model. Unlike a catch it says nothing against the measure, so it has no kind and no severity.
+ */
+export interface PolicyLimit {
+  text: LocalizedText;
+  sources?: SourceId[];
+}
+
+/**
+ * The longest summary, in characters, that a card's face shows whole: room for what the measure
+ * does and what its default shows. On a phone (390 px wide) that is about five lines, on a desktop
+ * three, in German and English. Validation warns about a longer one.
+ */
+export const SUMMARY_FACE_LENGTH = 200;
+
+/**
  * A named group of measures that the pack chooses, for example the measures debated around one
  * year's budget. A collection only groups: it changes no measure and is not a scenario. A measure
  * can be in several collections, or in none.
@@ -754,8 +790,17 @@ export interface GoalExclusion {
   policy?: string;
   /** Why, in a sentence a visitor understands. */
   reason: LocalizedText;
+  /**
+   * The reason in one short sentence, for the card of an excluded measure and the goal bar's line;
+   * `reason` stays one step away, in the details. Absent: a reason of up to GOAL_REASON_SHORT
+   * characters stands there itself; a longer one only in the details.
+   */
+  reasonShort?: LocalizedText;
   sources?: SourceId[];
 }
+
+/** The longest `reason` of a goal exclusion that stands on a card or the goal bar itself, without `reasonShort`. */
+export const GOAL_REASON_SHORT = 90;
 
 /**
  * A target: the balance of one level of government, or of the whole state, has to improve by

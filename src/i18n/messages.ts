@@ -194,9 +194,14 @@ export interface Messages {
     typeValue(label: string, value: string): string;
     /** Name of that field. */
     valueField(label: string): string;
+    /**
+     * Under a choice of groups (the chips), what the chosen ones stand for in the item. Worded for
+     * whatever the chips are, nationalities or levels of government: "the selection", not "groups".
+     */
     selectedShare(share: string, basis: "spending" | "recipients", item: string): string;
     /** Said before a group's share, for screen readers. */
     groupShare: string;
+    /** Under the chips when none is chosen. */
     noGroups: string;
     facts: string;
     rangeFact: string;
@@ -207,11 +212,26 @@ export interface Messages {
     threshold(variable: string, value: string): string;
     catches: string;
     noCatches: string;
+    /** Heading of the limits of the calculation in the details, after the catches; they are not counted among them. */
+    limits: string;
+    /** Heading of the details on the goal that leaves the measure out: the statement, the full reason and its sources. */
+    goalTitle: string;
     catchCount(count: number): string;
     moreCatches(count: number): string;
     severity: Record<Catch["severity"], string>;
     kind: Record<Catch["kind"], string>;
     effects: string;
+    /**
+     * Many effects are grouped by the setting that drives them, with the largest shown. The button
+     * that shows the further ones of a group: how many, and what they do to the balance together.
+     */
+    moreEffects(count: number, balance: string): string;
+    /** The same button once they are shown. */
+    fewerEffects: string;
+    /** The heading of a group of effects that no setting drives. */
+    effectsFixed: string;
+    /** Among many effects: what opens an effect's note, its sources, or both. */
+    effectNote(note: boolean, sources: boolean): string;
     showInBudget(label: string): string;
     effectSide(side: "revenue" | "expenditure"): string;
     byLevel: string;
@@ -295,9 +315,11 @@ export interface Messages {
     excludedPart(what: string, amount: string): string;
     /** The line for several things left out, already joined; the reasons are in the details. */
     excludedMany(items: string): string;
-    /** The button after excludedMany that opens the details with the reasons. */
+    /** The button that leads to the reasons where none is written out: after excludedMany, or after excludedOne or cardExcluded without a short reason. */
     why: string;
-    /** On the card of a measure the goal leaves out; the pack's reason follows. */
+    /** The same button after a short reason, where the full reason says more. */
+    moreReason: string;
+    /** On the card of a measure the goal leaves out; the short reason follows, if there is one. */
     cardExcluded(goal: string): string;
     /** The button that opens the description, the note and the sources. */
     details: string;

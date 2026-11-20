@@ -4,7 +4,7 @@ function intro({ baseYear, plan }: DebtIntroFacts): string {
   if (!plan) {
     return `So entwickelten sich Schulden und Zinsen, wenn der Haushalt von ${baseYear} im Verhältnis zur Wirtschaft so bliebe.`;
   }
-  return `Bis ${plan.until} folgen Schulden und Wachstum der amtlichen Planung „${plan.label}“; danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${plan.until} hat, und es gelten die Annahmen.`;
+  return `Bis ${plan.until} folgen Schulden und Wachstum der amtlichen Planung „${plan.label}“. Danach behält der Haushalt ohne Zinsen den Anteil an der Wirtschaftsleistung, den er ${plan.until} hat, und es gelten die Annahmen.`;
 }
 
 function when({ start, startYear, full, last }: PhaseWords): string {
@@ -24,7 +24,7 @@ function lead(f: DebtLeadText): string {
     sentences.push(
       measures
         ? `Ohne die Maßnahmen müsste der Staat im Jahr ${f.year} ${f.interestWithout} aller Einnahmen für Zinsen ausgeben; ${f.baseYear} waren es ${f.interestToday}.`
-        : `${f.baseYear} gingen ${f.interestToday} aller Einnahmen für Zinsen drauf.`,
+        : `${f.baseYear} flossen ${f.interestToday} aller Einnahmen in Zinsen.`,
     );
   } else if (f.negative) {
     sentences.push(
@@ -51,8 +51,8 @@ function lead(f: DebtLeadText): string {
       since === f.baseYear
         ? `Schon ${since} kosteten die Zinsen mehr als alles, was der Staat für ${label} ausgibt.`
         : measures
-          ? `Mit den Maßnahmen kosteten die Zinsen ab ${since} mehr als alles, was der Staat für ${label} ausgibt.`
-          : `Ab ${since} kosteten die Zinsen mehr als alles, was der Staat für ${label} ausgibt.`,
+          ? `Mit den Maßnahmen würden die Zinsen ab ${since} mehr kosten als alles, was der Staat für ${label} ausgibt.`
+          : `Ab ${since} würden die Zinsen mehr kosten als alles, was der Staat für ${label} ausgibt.`,
     );
   }
   return sentences.join(" ");
