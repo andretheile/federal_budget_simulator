@@ -618,7 +618,7 @@
     "url": "https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/jg202627/JG202627_Gesamtausgabe.pdf",
     "accessed": "2026-11-18",
     "year": 2026,
-    "note": "Item 154 and Table 16: a defence surcharge on income, corporate and capital income tax similar to the solidarity surcharge before 2021 of 2.5 / 5.0 / 7.5 percentage points would raise EUR 10.5 / 20.7 / 30.7 bn in 2027 after behavioural responses (elasticities 0.34 income tax, 0.6 flat tax, 2.55 corporate tax)."
+    "note": "Item 154 and Table 16: a defence surcharge on income, corporate and capital income tax similar to the solidarity surcharge before 2021 of 2.5 / 5.0 / 7.5 percentage points would raise EUR 10.5 / 20.7 / 30.7 bn in 2027 after behavioural responses (elasticities 0.34 income tax, 0.6 flat tax, 2.55 corporate tax). Item 136 (p. 127): the pension commission's package (including the link of the standard age to life expectancy) relieves the federal budget by less than EUR 1 bn in 2030, about 5.4 bn in 2035 and 9.6 bn in 2040, solely through the federal subsidy formula. Item 180 (p. 144): implement the commission's measures quickly and as completely as possible, including the dynamic standard age."
   },
   "bmf_mb_2025_01_steuereinnahmen": {
     "title": "BMF-Monatsbericht Januar 2025: Steuereinnahmen im Dezember 2024 und konjunkturelles Umfeld",
@@ -1020,5 +1020,89 @@
     "accessed": "2026-11-19",
     "year": 2026,
     "note": "The AfD motion (Drucksache 21/8637) asks to reverse the tobacco tax increases before the first step on 1 January 2027, to freeze the alcohol tax, to repeal a sugar tax and not to introduce a plastic tax; the finance committee recommends rejecting it with the votes of CDU/CSU, SPD, Greens and Left against the AfD."
+  },
+  "ask_bericht_2026": {
+    "title": "Empfehlungen der Alterssicherungskommission (Bericht, übergeben am 23. Juni 2026)",
+    "publisher": "Alterssicherungskommission der Bundesregierung (veröffentlicht von der Bundesregierung)",
+    "url": "https://www.bundesregierung.de/resource/blob/2196306/2444780/0fcbf810775351c64007ee6cb2c7cad9/2026-06-24-bericht-alterssicherungskommission-data.pdf?download=1",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Recommendation 5 (pp. 22 to 23): link the standard retirement age to life expectancy after 2031 in a ratio of 2:1, about 67.5 years by 2041 and half a year per decade under Destatis' medium assumptions, lead time of at least five years, effective from 2032; six months' later retirement relieves the contribution rate by 0.35 to 0.5 points and raises the pension level by 0.3 to 0.5 points; transfer to civil servants. Recommendation 6 (pp. 24 to 25): 6.5 bn euros per entry cohort if the especially long-insured retired one year later; no limit on earnings alongside a pension. Recommendation 8 (p. 27): raise the limit for people with long insurance records from 63 to 64 and then move all age limits in parallel. Page 11: contribution rate 21.1 % in 2040 under current law (DRV spring estimate 2026)."
+  },
+  "diw_bertelsmann_fruehrente_64_2026": {
+    "title": "Reform der Rente für langjährig Versicherte: Analyse der fiskalischen Einsparungen und Beschäftigungseffekte (29. Juli 2026)",
+    "publisher": "Bertelsmann Stiftung (Studie des DIW Berlin: Bach, Geyer, Haan, Harder)",
+    "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/Studie_Fruehverrentung_Modul2_LAY3_WEB.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Raising the earliest age for the pension with deductions from 63 to 64, 1957 cohort. Pages 14 to 15: those employed in the year before retirement (57.2 %) keep working, all others keep their status, based on Geyer and Welteke (2021). Table 2 (p. 17): health and care contributions of pensioners 112 and 43 euros on a gross pension of 1,401 euros. Page 18: average marginal tax rates of 22 % on earned income and 18.7 % on pension income; present value of the cohort's fiscal effects: pension insurance +81 m, health +395 m, care +76 m, income tax +488 m, unemployment −312 m euros."
+  },
+  "bt_drs_20_894": {
+    "title": "Schriftliche Fragen mit den in der Woche vom 28. Februar 2022 eingegangenen Antworten der Bundesregierung, Drucksache 20/894",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/20/008/2000894.pdf",
+    "accessed": "2026-11-20",
+    "year": 2022,
+    "note": "Question 86 (pp. 53 to 54): disability pensions converted into standard old-age pensions on reaching the standard age, 2006 to 2020; 2020: 85,671 pensions, average payment after conversion 900 euros."
+  },
+  "bt_drs_16_3794": {
+    "title": "Gesetzentwurf der Fraktionen der CDU/CSU und SPD: Entwurf eines RV-Altersgrenzenanpassungsgesetzes, Drucksache 16/3794 vom 12.12.2006",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/16/037/1603794.pdf",
+    "accessed": "2026-11-20",
+    "year": 2006,
+    "note": "Section C (p. 56): raising the standard age from 65 to 67 from 2012 relieves the contribution rate by an amount rising to 0.5 points by 2030; the age of 63 for people with long insurance records was kept, a pension after 45 contribution years at 65 was introduced."
+  },
+  "bt_drs_21_8388": {
+    "title": "Antrag der Fraktion Die Linke: Keine weitere Erhöhung der Regelaltersgrenze, Drucksache 21/8388 vom 06.10.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/083/2108388.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026
+  },
+  "bt_drs_21_2165": {
+    "title": "Antrag der Fraktion der AfD: Regelaltersgrenze von 67 Jahren sichern und abschlagsfreie Rente nach 45 Arbeitsjahren einführen, Drucksache 21/2165 vom 13.10.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/021/2102165.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025
+  },
+  "linke_wahlprogramm_2025": {
+    "title": "Wahlprogramm zur Bundestagswahl 2025 (Langfassung)",
+    "publisher": "Die Linke",
+    "url": "https://www.die-linke.de/fileadmin/user_upload/Wahlprogramm_Langfassung_Linke-BTW25_01.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\""
+  },
+  "stuttgarter_nachrichten_rente_2026_11": {
+    "title": "Koalitionsausschuss: Keine Einigung bei der Rentenreform (Lukas Böhl, 18. November 2026)",
+    "publisher": "Stuttgarter Nachrichten",
+    "url": "https://www.stuttgarter-nachrichten.de/wirtschaft/koalitionsausschuss-wann-gibt-es-ergebnisse-zur-rentenreform-79714856.html",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "\"Ein endgültiger Gesetzentwurf zur Rentenreform liegt bislang nicht vor.\""
+  },
+  "svr_jg_2023_24": {
+    "title": "Jahresgutachten 2023/24: Wachstumsschwäche überwinden – in die Zukunft investieren, Kapitel 5 Alterungsschub und Rentenreformen",
+    "publisher": "Sachverständigenrat zur Begutachtung der gesamtwirtschaftlichen Entwicklung",
+    "url": "https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/gutachten/jg202324/JG202324_Gesamtausgabe.pdf",
+    "accessed": "2026-11-20",
+    "year": 2023,
+    "note": "Items 405 to 415 (pp. 314 to 321): coupling the standard age to life expectancy in a ratio of 2:1; men with low education have a remaining life expectancy 3.7 years lower than men with high education (Luy et al. 2015), occupational groups differ by up to five years (Guenzel et al. 2023); physically demanding work. Figure 124 (SIM.21, data file Abb124.xlsx): with the 2:1 rule the contribution rate is 22.2 instead of 22.8 % in 2060 and 22.9 instead of 24.1 % in 2080, the pension level 45.9 instead of 45.1 % and 45.4 instead of 44.0 %. Figure 123 (Abb123.xlsx): standard age 68.31 for the 1992 cohort and 69.25 for the 2012 cohort."
+  },
+  "sgb6_235": {
+    "title": "Sozialgesetzbuch Sechstes Buch, § 235 Regelaltersrente",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/sgb_6/__235.html",
+    "accessed": "2026-11-20"
+  },
+  "diw_wb_2026_27_fratzscher": {
+    "title": "Marcel Fratzscher: Die Rente mit 70 wäre ein Wachstumsprogramm (Kommentar), DIW Wochenbericht 27/2026, S. 436",
+    "publisher": "Deutsches Institut für Wirtschaftsforschung (DIW Berlin)",
+    "url": "https://www.diw.de/de/diw_01.c.1012115.de/publikationen/wochenberichte/2026_27_3/die_rente_mit_70_waere_ein_wachstumsprogramm__kommentar.html",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "DOI 10.18723/diw_wb:2026-27-3; a longer version appeared in the Frankfurter Rundschau on 24 June 2026. \"Eine faire Rente mit 70 wäre die sozialste Rentenreform\"; the commission's proposal to reach 70 only in decades through the link to life expectancy is \"eine verpasste Chance\"; people who cannot work longer need better protection."
   }
 }

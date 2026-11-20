@@ -2649,6 +2649,399 @@
       ]
     },
     {
+      "id": "retirement_age",
+      "label": {
+        "de": "Renteneintrittsalter ändern",
+        "en": "Change the retirement age"
+      },
+      "summary": {
+        "de": "Verschiebt die Regelaltersgrenze, ab der die gesetzliche Altersrente ohne Abschläge beginnt, und mit ihr alle früheren Altersgrenzen um dieselbe Zahl von Jahren, wie es die Alterssicherungskommission der Bundesregierung vorschlägt. Ausgangswert: 67 Jahre, die Grenze für alle ab 1964 Geborenen. Die Grundeinstellung zeigt die Empfehlung der Kommission vom Juni 2026: 67,5 Jahre, die sich bis 2041 aus der Kopplung an die Lebenserwartung ergäben. Die Linke fordert in ihrem Wahlprogramm von 2025 eine Grenze von 65 Jahren; DIW-Präsident Marcel Fratzscher hat sich im Juni 2026 für eine „faire Rente mit 70“ ausgesprochen, die früher kommt, als die Kommission vorschlägt. Der Betrag ist eine Schätzung der jährlichen Wirkung, sobald die neue Grenze für alle Rentnerjahrgänge gilt, in Werten von 2024: weniger Rentenzahlungen, mehr Beiträge und Lohnsteuer von denen, die länger arbeiten, aber auch mehr Erwerbsminderungsrenten, Arbeitslosengeld und Bürgergeld. Eine Anhebung käme frühestens ab 2032 und in kleinen Schritten; in den ersten Jahren wäre die Wirkung nur ein kleiner Bruchteil davon.",
+        "en": "Moves the standard retirement age (Regelaltersgrenze), from which the statutory old-age pension is paid without deductions, and with it all earlier age limits by the same number of years, as the federal government's pensions commission proposes. Starting value: 67 years, the limit for everyone born in 1964 or later. The default shows the commission's recommendation of June 2026: 67.5 years, which linking the limit to life expectancy would give by 2041. Die Linke calls for a limit of 65 years in its 2025 election programme; DIW president Marcel Fratzscher argued in June 2026 for a \"fair retirement at 70\" that comes sooner than the commission proposes. The amount is an estimate of the annual effect once the new limit applies to all cohorts of pensioners, in 2024 values: less pension spending, more contributions and wage tax from those who work longer, but also more disability pensions, unemployment benefit and citizen's income. An increase would start in 2032 at the earliest and in small steps; in the first years the effect would be only a small fraction of it."
+      },
+      "topic": "pensions",
+      "params": [
+        {
+          "id": "age",
+          "type": "number",
+          "label": {
+            "de": "Renteneintrittsalter (Regelaltersgrenze)",
+            "en": "Statutory retirement age"
+          },
+          "unit": "years",
+          "min": 65,
+          "max": 70,
+          "step": 0.5,
+          "default": 67.5,
+          "baseline": 67
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.social.old_age.statutory_pensions",
+          "factor": {
+            "param": "age",
+            "scale": -0.042154,
+            "offset": 3.824318
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.65,
+            "high": 1.3,
+            "basis": "pension_rules"
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "bt_drs_20_894",
+            "ask_bericht_2026",
+            "svr_jg_2023_24"
+          ],
+          "note": {
+            "de": "Je Jahr höherer Altersgrenze, wenn alle Altersgrenzen mitwandern. (1) Jeder neue Rentnerjahrgang bekommt ein Jahr später Altersrente. 2025 gingen 925.865 Menschen in Altersrente, mit im Schnitt 1.354 Euro brutto im Monat (Deutsche Rentenversicherung, Rentenversicherung in Zahlen 2026, S. 52 und 56). Eigene Rechnung: 925.865 × 1.354 Euro × 12, umgerechnet auf die Rentenwerte von 2024 (im Jahresmittel 38,46 statt 40,06 Euro, S. 12), sind 14,44 Mrd. Euro, 5,0 % der Altersrenten von 2024. Zum Vergleich: Renten, die 2025 endeten, waren im Schnitt 20,7 Jahre bezogen worden (S. 66), ein Jahr davon sind 4,8 %. (2) Erwerbsminderungsrenten werden erst an der neuen Grenze in Altersrenten umgewandelt. 2020 waren das 85.671 Renten mit im Schnitt 900 Euro Zahlbetrag (Bundestags-Drucksache 20/894, S. 53 f.). Eigene Umrechnung auf Bruttowerte von 2024: 1,19 Mrd. Euro, die hier wegfallen und bei den Erwerbsminderungsrenten hinzukommen. (3) Wer im zusätzlichen Jahr arbeitet, erwirbt mehr Rente: 54,9 % der Neurentner waren im Jahr vor der Rente versicherungspflichtig beschäftigt (S. 55). Eigene Rechnung: Ein zusätzlicher Beitragszahler bringt laut Faustdaten 7.000 Euro Beitrag im Jahr (2026, S. 10), das sind 0,72 Entgeltpunkte; für 54,9 % der 19,09 Mio. Altersrenten (S. 9) kostet das, sobald alle Rentner so gearbeitet haben, 3,50 Mrd. Euro im Jahr. Zusammen −14,44 − 1,19 + 3,50 = −12,13 Mrd. Euro, 4,2 % der Altersrenten je Jahr. Die untere Grenze der Spanne (65 %) gilt, wenn nur die Regelaltersgrenze steigt und die früheren Grenzen bleiben (eigene Schätzung, siehe Haken), die obere (130 %) für die Jahrzehnte, bevor die zusätzlichen Renten aus Punkt (3) aufgebaut sind. Zum Vergleich zwei amtliche Schätzungen in Beitragssatzpunkten späterer Jahre. Die Alterssicherungskommission: Sechs Monate späterer Renteneintritt entlasten den Beitragssatz um 0,35 bis 0,5 Punkte und heben das Rentenniveau um 0,3 bis 0,5 Punkte (Bericht, S. 23), je Jahr also 0,7 bis 1,0 Beitragssatzpunkte und 0,6 bis 1,0 Niveaupunkte. Der Sachverständigenrat: Mit der Kopplung an die Lebenserwartung liegt der Beitragssatz 2060 um 0,6 und 2080 um 1,2 Punkte niedriger, das Rentenniveau um 0,8 und 1,4 Punkte höher (Jahresgutachten 2023/24, Daten zu Abbildung 124), bei einer um 1,3 und 2,2 Jahre höheren Altersgrenze (Abbildung 123); je Jahr also 0,46 bis 0,54 Beitragssatzpunkte und 0,61 bis 0,63 Niveaupunkte. Eigene Umrechnung: Ein Beitragssatzpunkt waren 2024 16,4 Mrd. Euro Beiträge (305,9 Mrd. Euro bei 18,6 %) und 19 % davon über den Bundeszuschuss (3,4 zu 17,7 Mrd. Euro in den Faustdaten 2026), zusammen 19,6 Mrd. Euro; ein Niveaupunkt bei 48 % sind 2,1 % höhere Renten, 8,1 Mrd. Euro einschließlich der Beiträge der Rentenversicherung zur Krankenversicherung der Rentner (Rentenausgaben 360,1 und 28,7 Mrd. Euro, 2024, S. 20). Beide rechnen für Jahre mit mehr Rentnern je Beitragszahler; geteilt durch das Verhältnis ihres Beitragssatzes ohne Reform zu 18,6 % (Kommission 21,1 % im Jahr 2040, S. 11; Sachverständigenrat 22,8 % 2060 und 24,1 % 2080) ergibt das in Verhältnissen von 2024 für die Rentenversicherung einschließlich Bundeszuschuss 16,4 bis 24,4 Mrd. Euro (Kommission) und 11,5 bis 12,4 Mrd. Euro (Sachverständigenrat). Diese Maßnahme kommt auf 14,8 Mrd. Euro: Renten 10,7, Beiträge der Rentenversicherung zur Krankenversicherung der Rentner 0,85 (8,0 % der Renten) und Rentenbeiträge 3,3. Ohne die zusätzlichen Renten aus Punkt (3) wären es 18,6 Mrd. Euro, an den Enden der Spanne 9,5 und 19,3 Mrd. Euro. Die Spanne deckt damit die Schätzung des Sachverständigenrats und den unteren Teil der Kommissionsspanne; deren größerer Teil liegt darüber. Die obere Grenze ist nicht weiter angehoben, weil schon 130 % fast die ganze Rente eines Jahrgangs ohne jeden Ausgleich bedeuten.",
+            "en": "Per year of higher age limit, with all age limits moving along. (1) Each new cohort of pensioners receives its old-age pension one year later. In 2025, 925,865 people started an old-age pension, averaging EUR 1,354 gross a month (Deutsche Rentenversicherung, Rentenversicherung in Zahlen 2026, pp. 52 and 56). Own calculation: 925,865 × EUR 1,354 × 12, converted to the pension values of 2024 (annual average 38.46 instead of 40.06 euros, p. 12), is EUR 14.44 billion, 5.0% of old-age pensions in 2024. For comparison: pensions that ended in 2025 had been drawn for 20.7 years on average (p. 66), one year of which is 4.8%. (2) Disability pensions are converted into old-age pensions only at the new limit. In 2020 that concerned 85,671 pensions averaging EUR 900 paid out (Bundestag document 20/894, pp. 53 f.). Own conversion to 2024 gross values: EUR 1.19 billion, which drop out here and are added to disability pensions. (3) Those who work in the extra year earn a higher pension: 54.9% of new pensioners were in employment liable to contributions in the year before their pension (p. 55). Own calculation: according to the rules of thumb one additional contributor pays EUR 7,000 a year (2026, p. 10), that is 0.72 earnings points; for 54.9% of the 19.09 million old-age pensions (p. 9) this costs EUR 3.50 billion a year once all pensioners have worked that way. Together −14.44 − 1.19 + 3.50 = EUR −12.13 billion, 4.2% of old-age pensions per year. The lower bound of the range (65%) applies if only the standard age rises and the earlier limits stay (own estimate, see catches), the upper bound (130%) to the decades before the additional pensions from point (3) have built up. For comparison, two official estimates in contribution-rate points of later years. The pensions commission: retiring six months later relieves the contribution rate by 0.35 to 0.5 points and raises the pension level by 0.3 to 0.5 points (report, p. 23), so per year 0.7 to 1.0 contribution points and 0.6 to 1.0 points of pension level. The German Council of Economic Experts: with the link to life expectancy the contribution rate is 0.6 points lower in 2060 and 1.2 points lower in 2080, the pension level 0.8 and 1.4 points higher (annual report 2023/24, data for figure 124), with an age limit higher by 1.3 and 2.2 years (figure 123); so per year 0.46 to 0.54 contribution points and 0.61 to 0.63 points of pension level. Own conversion: in 2024 one contribution point was EUR 16.4 billion of contributions (305.9 billion at 18.6%) plus 19% of that via the federal subsidy (3.4 to 17.7 billion in the 2026 rules of thumb), together EUR 19.6 billion; one point of pension level at 48% is 2.1% higher pensions, EUR 8.1 billion including the pension insurance's contributions to pensioners' health insurance (pension spending 360.1 and 28.7 billion euros, 2024, p. 20). Both calculate for years with more pensioners per contributor; divided by the ratio of their contribution rate without reform to 18.6% (commission 21.1% in 2040, p. 11; Council 22.8% in 2060 and 24.1% in 2080) this gives, in the conditions of 2024, EUR 16.4 to 24.4 billion (commission) and EUR 11.5 to 12.4 billion (Council) for the pension insurance including the federal subsidy. This measure arrives at EUR 14.8 billion: pensions 10.7, the pension insurance's contributions to pensioners' health insurance 0.85 (8.0% of pensions) and pension contributions 3.3. Without the additional pensions from point (3) it would be EUR 18.6 billion, and at the ends of the range EUR 9.5 and 19.3 billion. The range thus covers the Council's estimate and the lower part of the commission's range; the larger part of the latter lies above it. The upper bound is not raised further because 130% already means almost a whole cohort's pension for a year without any offset."
+          }
+        },
+        {
+          "type": "scale",
+          "target": "exp.social.sickness_disability.em_pensions",
+          "factor": {
+            "param": "age",
+            "scale": 0.060838,
+            "offset": -3.076146
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.65,
+            "high": 1.3,
+            "basis": "pension_rules"
+          },
+          "sources": [
+            "bt_drs_20_894",
+            "drv_rv_in_zahlen_2026"
+          ],
+          "note": {
+            "de": "Je Jahr höherer Altersgrenze: (1) Erwerbsminderungsrenten laufen ein Jahr länger, bevor sie in Altersrenten umgewandelt werden: 1,19 Mrd. Euro (siehe Altersrenten, Punkt 2). (2) Wer das zusätzliche Jahr gesundheitlich nicht schafft, kann eine Erwerbsminderungsrente beantragen. Angenommen ist, dass das 2 % eines Rentnerjahrgangs tun, mit der durchschnittlichen Zugangsrente von 1.067 Euro Zahlbetrag (Rentenversicherung in Zahlen 2026, S. 52), brutto in Werten von 2024 1.152 Euro: 0,26 Mrd. Euro. Der Anteil ist eine eigene Annahme; für ihn wurde keine Quelle gefunden. Zusammen 1,45 Mrd. Euro, 6,1 % der Erwerbsminderungsrenten je Jahr.",
+            "en": "Per year of higher age limit: (1) disability pensions run one year longer before they are converted into old-age pensions: EUR 1.19 billion (see old-age pensions, point 2). (2) Those whose health does not allow them to work the extra year can apply for a disability pension. The assumption is that 2% of a cohort of pensioners do so, with the average new disability pension of EUR 1,067 paid out (Rentenversicherung in Zahlen 2026, p. 52), EUR 1,152 gross in 2024 values: EUR 0.26 billion. The share is an own assumption; no source was found for it. Together EUR 1.45 billion, 6.1% of disability pensions per year."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.contributions.non_employed",
+          "amount": {
+            "param": "age",
+            "scale": -1182000000,
+            "offset": 79194000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.65,
+            "high": 1.3,
+            "basis": "pension_rules"
+          },
+          "sources": [
+            "diw_bertelsmann_fruehrente_64_2026"
+          ],
+          "note": {
+            "de": "Rentner zahlen auf ihre Rente Beiträge zur Kranken- und Pflegeversicherung, in der DIW-Studie für die Rente mit 64 im Schnitt 155 von 1.401 Euro Bruttorente, 11,1 % (Tabelle 2, S. 17). Eigene Rechnung: 11,1 % der um 10,68 Mrd. Euro niedrigeren Alters- und Erwerbsminderungsrenten sind 1,18 Mrd. Euro je Jahr. Den Anteil, den die Rentenversicherung für die Rentner an die Krankenkassen zahlt (2024: 28,7 Mrd. Euro, 8,0 % der Renten, Rentenversicherung in Zahlen 2026, S. 20), führt der Haushalt doppelt: als Ausgabe im Posten der übrigen Altersleistungen und als Einnahme bei diesen Beiträgen. Weniger Renten senken beides um rund 0,85 Mrd. Euro je Jahr; für den Saldo ist das null, deshalb ist es nicht als Wirkung eingetragen.",
+            "en": "Pensioners pay health and long-term care contributions on their pension, in the DIW study on retirement at 64 on average 155 of 1,401 euros of gross pension, 11.1% (table 2, p. 17). Own calculation: 11.1% of old-age and disability pensions lower by EUR 10.68 billion is EUR 1.18 billion per year. The share that the pension insurance pays to the health insurance funds on behalf of pensioners (2024: EUR 28.7 billion, 8.0% of pensions, Rentenversicherung in Zahlen 2026, p. 20) appears twice in the budget: as spending in the item of other old-age benefits and as revenue among these contributions. Lower pensions reduce both by about EUR 0.85 billion a year; for the balance that is zero, so it is not entered as an effect."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.income.personal.assessed",
+          "amount": {
+            "param": "age",
+            "scale": -1998000000,
+            "offset": 133866000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.65,
+            "high": 1.3,
+            "basis": "pension_rules"
+          },
+          "sources": [
+            "diw_bertelsmann_fruehrente_64_2026"
+          ],
+          "note": {
+            "de": "Renten werden über die Einkommensteuerveranlagung besteuert. Die DIW-Studie rechnet mit einem durchschnittlichen Grenzsteuersatz von 18,7 % auf Renteneinkünfte (S. 18). Eigene Rechnung: 18,7 % von 10,68 Mrd. Euro weniger Rente sind 2,00 Mrd. Euro weniger Steuer je Jahr. Der Satz gilt für langjährig Versicherte mit eher hohen Renten; für alle Neurentner dürfte er niedriger sein, der Verlust also kleiner.",
+            "en": "Pensions are taxed through the income tax assessment. The DIW study assumes an average marginal tax rate of 18.7% on pension income (p. 18). Own calculation: 18.7% of EUR 10.68 billion less pension is EUR 2.00 billion less tax per year. The rate applies to people with long insurance records and rather high pensions; for all new pensioners it is likely lower, and the loss smaller."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.contributions.wages.pension",
+          "amount": {
+            "param": "age",
+            "scale": 3306000000,
+            "offset": -221502000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.3,
+            "basis": "employment"
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "drv_rv_in_zeitreihen_2026",
+            "diw_bertelsmann_fruehrente_64_2026"
+          ],
+          "note": {
+            "de": "54,9 % der Neurentner von 2025 waren im Jahr vor der Rente versicherungspflichtig beschäftigt, 6,1 % bezogen Arbeitslosengeld, 4,1 % waren über Anrechnungszeiten versichert (darunter Bürgergeld), 10,0 % auf andere Weise aktiv versichert, 23,0 % zahlten keine Beiträge mehr (Rentenversicherung in Zahlen 2026, S. 55). Angenommen ist wie in der DIW-Studie zur Rente mit 64 (S. 14 f.), gestützt auf Geyer und Welteke (2021), dass die Beschäftigten das zusätzliche Jahr weiterarbeiten und alle anderen in ihrem bisherigen Status bleiben. Laut Faustdaten bringen 100.000 Pflichtbeitragszahler mehr 0,7 Mrd. Euro (2026, S. 10). Eigene Umrechnung auf 2024 mit dem Verhältnis der Beitragseinnahmen (305,9 Mrd. Euro 2024 zu 17,7 × 18,6 = 329,2 Mrd. Euro 2026): 6.504 Euro je Beitragszahler, also ein beitragspflichtiger Lohn von 34.969 Euro. 508.300 Beschäftigte mal 6.504 Euro sind 3,31 Mrd. Euro je Jahr. Die Spanne von 60 % bis 130 % gilt für alle Wirkungen, die vom längeren Arbeiten abhängen: unten, wenn deutlich weniger das zusätzliche Jahr durchhalten, oben, wenn mehr Menschen arbeiten oder sie mehr verdienen als angenommen. Die höheren Renten, die aus diesen Beiträgen später entstehen, sind bei den Altersrenten eingerechnet.",
+            "en": "Of the new pensioners of 2025, 54.9% were in employment liable to contributions in the year before their pension, 6.1% drew unemployment benefit, 4.1% were insured only through credited periods (including citizen's income), 10.0% were actively insured in other ways and 23.0% no longer paid contributions (Rentenversicherung in Zahlen 2026, p. 55). As in the DIW study on retirement at 64 (pp. 14 f.), based on Geyer and Welteke (2021), the assumption is that those in employment keep working for the extra year and all others stay in their status. According to the rules of thumb, 100,000 more compulsory contributors bring EUR 0.7 billion (2026, p. 10). Own conversion to 2024 with the ratio of contribution revenue (EUR 305.9 billion in 2024 to 17.7 × 18.6 = 329.2 billion in 2026): EUR 6,504 per contributor, i.e. a wage liable to contributions of EUR 34,969. 508,300 employees times EUR 6,504 is EUR 3.31 billion per year. The range from 60% to 130% applies to all effects that depend on working longer: at the bottom if clearly fewer manage the extra year, at the top if more people work or earn more than assumed. The higher pensions that these contributions give rise to later are included under old-age pensions."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.contributions.wages.health.compulsory",
+          "amount": {
+            "param": "age",
+            "scale": 2892000000,
+            "offset": -193764000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.3,
+            "basis": "employment"
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ],
+          "note": {
+            "de": "16,27 % (allgemeiner Satz 14,6 % und durchschnittlicher Zusatzbeitrag 1,67 % im Jahr 2024, Rentenversicherung in Zahlen 2026, S. 15) auf die Löhne der Weiterarbeitenden von 17,78 Mrd. Euro (508.300 × 34.969 Euro, siehe Rentenbeiträge): 2,89 Mrd. Euro je Jahr. Dass dieselben Menschen als Rentner Beiträge auf ihre Rente gezahlt hätten, steht bei den Beiträgen der Rentner.",
+            "en": "16.27% (general rate of 14.6% and average additional contribution of 1.67% in 2024, Rentenversicherung in Zahlen 2026, p. 15) on the wages of those who keep working of EUR 17.78 billion (508,300 × EUR 34,969, see pension contributions): EUR 2.89 billion per year. That the same people would have paid contributions on their pension as pensioners is shown under pensioners' contributions."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.contributions.wages.other",
+          "amount": {
+            "param": "age",
+            "scale": 1102000000,
+            "offset": -73834000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.3,
+            "basis": "employment"
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ],
+          "note": {
+            "de": "Pflegeversicherung 3,6 % und Arbeitslosenversicherung 2,6 % (Sätze 2025, Rentenversicherung in Zahlen 2026, S. 15; der Pflegesatz lag 2024 um 0,2 Punkte niedriger, der Zuschlag für Kinderlose ist nicht gerechnet) auf 17,78 Mrd. Euro Löhne: 1,10 Mrd. Euro je Jahr.",
+            "en": "Long-term care insurance 3.6% and unemployment insurance 2.6% (2025 rates, Rentenversicherung in Zahlen 2026, p. 15; the care rate was 0.2 points lower in 2024, the surcharge for the childless is not included) on EUR 17.78 billion of wages: EUR 1.10 billion per year."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.income.personal.wage_tax",
+          "amount": {
+            "param": "age",
+            "scale": 3910000000,
+            "offset": -261970000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.3,
+            "basis": "employment"
+          },
+          "sources": [
+            "diw_bertelsmann_fruehrente_64_2026"
+          ],
+          "note": {
+            "de": "Die DIW-Studie rechnet für Erwerbseinkommen in diesem Alter mit einem durchschnittlichen Grenzsteuersatz von 22 % (S. 18). Eigene Rechnung: 22 % von 17,78 Mrd. Euro Löhnen sind 3,91 Mrd. Euro je Jahr. Die Steuer, die auf die wegfallenden Renten entfallen wäre, steht bei der veranlagten Einkommensteuer.",
+            "en": "The DIW study assumes an average marginal tax rate of 22% on earned income at this age (p. 18). Own calculation: 22% of EUR 17.78 billion of wages is EUR 3.91 billion per year. The tax that would have been due on the pensions no longer paid is shown under assessed income tax."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.social.basic_security.unemployment_benefit",
+          "amount": {
+            "param": "age",
+            "scale": 1400000000,
+            "offset": -93800000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.6,
+            "basis": "transfers"
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "ba_geschaeftsbericht_2024",
+            "diw_bertelsmann_fruehrente_64_2026"
+          ],
+          "note": {
+            "de": "6,1 % der Neurentner von 2025 bezogen im Jahr vor der Rente Arbeitslosengeld (Rentenversicherung in Zahlen 2026, S. 55). Angenommen ist wie in der DIW-Studie (S. 14 f.), dass sie es ein Jahr länger beziehen. 2024 gab die Bundesagentur 22,16 Mrd. Euro für Arbeitslosengeld aus, bei 894.000 Beziehern im Jahresdurchschnitt (Geschäftsbericht 2024), 24.787 Euro je Bezieher. Eigene Rechnung: 56.500 × 24.787 Euro sind 1,40 Mrd. Euro je Jahr. Wer die Höchstdauer von 24 Monaten schon ausgeschöpft hat, fiele stattdessen ins Bürgergeld oder hätte kein Einkommen. Die Spanne von 50 % bis 160 % gilt für alle Sozialleistungen dieser Maßnahme; oben liegt der Fall, dass viel mehr Menschen das zusätzliche Jahr ohne Arbeit überbrücken müssen.",
+            "en": "Of the new pensioners of 2025, 6.1% drew unemployment benefit in the year before their pension (Rentenversicherung in Zahlen 2026, p. 55). As in the DIW study (pp. 14 f.), the assumption is that they draw it one year longer. In 2024 the Federal Employment Agency spent EUR 22.16 billion on unemployment benefit, with 894,000 recipients on annual average (annual report 2024), EUR 24,787 per recipient. Own calculation: 56,500 × EUR 24,787 is EUR 1.40 billion per year. Those who have already used up the maximum of 24 months would fall back on citizen's income instead or have no income. The range from 50% to 160% applies to all social benefits of this measure; at the top is the case that many more people have to bridge the extra year without work."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.social.basic_security.buergergeld",
+          "amount": {
+            "param": "age",
+            "scale": 289000000,
+            "offset": -19363000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.6,
+            "basis": "transfers"
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "bt_drs_21_1069"
+          ],
+          "note": {
+            "de": "4,1 % der Neurentner von 2025 waren im Jahr vor der Rente nur über Anrechnungszeiten versichert, darunter Bezieher von Bürgergeld (Rentenversicherung in Zahlen 2026, S. 55). Angenommen ist, dass drei Viertel von ihnen ein Jahr länger Bürgergeld beziehen (eigene Annahme), mit dem durchschnittlichen Zahlungsanspruch je Bedarfsgemeinschaft von 1.347 Euro im Monat, davon 502 Euro für die Wohnung (Februar 2025, Statistik der Bundesagentur nach Bundestags-Drucksache 21/1069, S. 1). Eigene Rechnung: 28.470 × 845 Euro × 12 sind 0,29 Mrd. Euro je Jahr. Nicht gegengerechnet ist, dass einige von ihnen als Rentner Grundsicherung im Alter bezogen hätten.",
+            "en": "Of the new pensioners of 2025, 4.1% were insured only through credited periods in the year before their pension, among them recipients of citizen's income (Rentenversicherung in Zahlen 2026, p. 55). The assumption is that three quarters of them draw citizen's income one year longer (own assumption), with the average payment entitlement per benefit household of EUR 1,347 a month, of which EUR 502 for housing (February 2025, Federal Employment Agency statistics as quoted in Bundestag document 21/1069, p. 1). Own calculation: 28,470 × EUR 845 × 12 is EUR 0.29 billion per year. Not offset is that some of them would have drawn basic security in old age as pensioners."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.social.basic_security.housing_costs",
+          "amount": {
+            "param": "age",
+            "scale": 172000000,
+            "offset": -11524000000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.6,
+            "basis": "transfers"
+          },
+          "sources": [
+            "bt_drs_21_1069"
+          ],
+          "note": {
+            "de": "Wohnkosten derselben 28.470 Menschen im Bürgergeld, 502 Euro im Monat je Bedarfsgemeinschaft (Februar 2025, nach Bundestags-Drucksache 21/1069): 0,17 Mrd. Euro je Jahr.",
+            "en": "Housing costs of the same 28,470 people on citizen's income, EUR 502 a month per benefit household (February 2025, as quoted in Bundestag document 21/1069): EUR 0.17 billion per year."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Der gezeigte Betrag ist kein Wert für die nächsten Jahre. Er gilt, sobald die neue Grenze für alle Jahrgänge gilt. Die Alterssicherungskommission hält mindestens fünf Jahre Vorlauf für nötig und schlägt kleine Schritte ab 2032 vor: 67,5 Jahre erst 2041, danach etwa ein halbes Jahr je Jahrzehnt. Nach diesem Vorschlag wirkt eine Anhebung bis 2031 gar nicht. Gerechnet ist der Unterschied zu 67 Jahren, der Grenze nach geltendem Recht ab 2031; 2024 lag sie noch bei 66 Jahren. Die Kommission erwartet von einem halben Jahr späteren Renteneintritt einen um 0,35 bis 0,5 Punkte niedrigeren Beitragssatz und ein um 0,3 bis 0,5 Punkte höheres Rentenniveau; für die Rentenversicherung auf Beträge von 2024 umgerechnet ist das mehr, als diese Rechnung ergibt, während die Modellrechnung des Sachverständigenrats von 2023 etwas weniger ergibt. Der Sachverständigenrat schätzt die Entlastung des Bundes durch das ganze Rentenpaket der Kommission, zu dem die höhere Altersgrenze gehört, auf weniger als 1 Mrd. Euro im Jahr 2030, 5,4 Mrd. Euro 2035 und 9,6 Mrd. Euro 2040. Die zusätzlichen Renten aus längeren Beitragszeiten bauen sich erst über rund zwei Jahrzehnte auf; bis dahin ist die Entlastung etwas größer als gezeigt.",
+            "en": "The amount shown is not a figure for the coming years. It applies once the new limit applies to all cohorts. The pensions commission considers a lead time of at least five years necessary and proposes small steps from 2032: 67.5 years only in 2041, then about half a year per decade. Under this proposal an increase has no effect at all until 2031. The calculation shows the difference from 67 years, the limit under current law from 2031; in 2024 it was still 66. The commission expects retiring half a year later to lower the contribution rate by 0.35 to 0.5 points and raise the pension level by 0.3 to 0.5 points; converted to 2024 amounts for the pension insurance that is more than this calculation gives, while the Council of Economic Experts' projection of 2023 gives somewhat less. The German Council of Economic Experts estimates the relief for the federal budget from the commission's whole pension package, which includes the higher age limit, at less than EUR 1 billion in 2030, EUR 5.4 billion in 2035 and EUR 9.6 billion in 2040. The additional pensions from longer contribution periods build up only over about two decades; until then the relief is somewhat larger than shown."
+          },
+          "sources": [
+            "ask_bericht_2026",
+            "svr_jg_2026_27",
+            "svr_jg_2023_24"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Am stärksten trifft die Anhebung Menschen, die nicht bis zur neuen Grenze arbeiten können. Von den Neurentnern 2025 zahlten 23 % im Jahr vor der Rente keine Beiträge mehr, 10 % bezogen Arbeitslosengeld oder waren nur über Anrechnungszeiten versichert; sie bekämen ein Jahr später Rente, ohne in der Zeit mehr zu verdienen. Die Lebenserwartung hängt an Bildung, Einkommen und Beruf: Männer mit niedriger Bildung leben im Alter im Schnitt 3,7 Jahre kürzer als Männer mit hoher Bildung, zwischen Berufsgruppen liegen bis zu fünf Jahre. Für sie ist ein Jahr weniger Rente ein größerer Teil ihrer Rentenzeit. Gesundheit und körperlich belastende Arbeit können dazu führen, dass Menschen nicht bis zur höheren Grenze arbeiten können. Die Kommission empfiehlt deshalb Härtefallregelungen sowie mehr Prävention und Rehabilitation; Die Linke lehnt die Kopplung an die Lebenserwartung wegen wachsender regionaler und sozialer Unterschiede ab.",
+            "en": "The increase hits hardest those who cannot work until the new limit. Of the new pensioners of 2025, 23% no longer paid contributions in the year before their pension, and 10% drew unemployment benefit or were insured only through credited periods; they would receive their pension a year later without earning more in the meantime. Life expectancy depends on education, income and occupation: men with low education live on average 3.7 years less in old age than men with high education, and between occupational groups the gap is up to five years. For them, a year less of pension is a larger part of their time in retirement. Health and physically demanding work can mean that people cannot work until the higher limit. The commission therefore recommends hardship rules and more prevention and rehabilitation; Die Linke rejects linking the limit to life expectancy because of growing regional and social differences."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026",
+            "svr_jg_2023_24",
+            "ask_bericht_2026",
+            "bt_drs_21_8388"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Rechnung nimmt an, dass alle, die vor der Rente beschäftigt waren, das zusätzliche Jahr weiterarbeiten, und alle anderen in ihrem bisherigen Status bleiben, wie es eine Studie für die Anhebung der Altersgrenze für Frauen gezeigt hat. Schaffen deutlich weniger das zusätzliche Jahr, fallen Beiträge und Lohnsteuer niedriger und die Ausgaben für Arbeitslosengeld, Bürgergeld und Erwerbsminderungsrenten höher aus. Bei 69 oder 70 Jahren dürfte das häufiger sein als bei 68: Der Regler rechnet mit einer geraden Linie und überschätzt dort eher die Entlastung.",
+            "en": "The calculation assumes that everyone who was employed before retirement keeps working for the extra year and all others stay in their status, as a study of the increase in the age limit for women found. If clearly fewer manage the extra year, contributions and wage tax are lower and spending on unemployment benefit, citizen's income and disability pensions higher. At 69 or 70 this is likely to be more frequent than at 68: the slider calculates along a straight line and there rather overstates the relief."
+          },
+          "sources": [
+            "diw_bertelsmann_fruehrente_64_2026"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Gerechnet ist, dass alle Altersgrenzen mitwandern, auch die für die Rente mit Abschlägen (heute 63), für schwerbehinderte Menschen und für 45 Beitragsjahre, wie es die Kommission empfiehlt. Bei der Anhebung von 65 auf 67 war das anders: Die Grenze von 63 Jahren für langjährig Versicherte blieb, wer früher ging, bekam höhere Abschläge, und mit 45 Beitragsjahren blieb es bei 65 Jahren (§ 236b SGB VI). Stiege nur die Regelaltersgrenze, wäre die Einsparung bei den Renten nach eigener Schätzung etwa ein Drittel kleiner und entstünde über Jahrzehnte. Die damaligen Koalitionsfraktionen erwarteten 2006 von der Anhebung um zwei Jahre eine Beitragssatzentlastung, die bis 2030 auf 0,5 Prozentpunkte steigt.",
+            "en": "The calculation assumes that all age limits move along, including those for the pension with deductions (63 today), for severely disabled people and for 45 contribution years, as the commission recommends. The increase from 65 to 67 was different: the limit of 63 for people with long insurance records stayed, those who retired earlier got higher deductions, and with 45 contribution years the limit stayed at 65 (section 236b of Social Code Book VI). If only the standard age rose, the saving on pensions would be about a third smaller by own estimate and would arise over decades. In 2006 the then coalition groups expected the increase by two years to relieve the contribution rate by an amount rising to 0.5 percentage points by 2030."
+          },
+          "sources": [
+            "ask_bericht_2026",
+            "sgb6_236b",
+            "bt_drs_16_3794"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "de": "Die Altersgrenzen stehen in den §§ 35 und 235 SGB VI und können durch Bundesgesetz geändert werden. Die Alterssicherungskommission der Bundesregierung hat im Juni 2026 empfohlen, die Regelaltersgrenze nach 2031 im Verhältnis 2:1 an die Lebenserwartung zu koppeln; der Sachverständigenrat hat im November 2026 verlangt, das zügig umzusetzen. Einen fertigen Gesetzentwurf gab es am 18. November 2026 noch nicht. Die Linke hat im Oktober 2026 im Bundestag beantragt, keine weitere Anhebung zu verfolgen; die AfD hat im Oktober 2025 beantragt, die Grenze bei 67 Jahren zu halten.",
+            "en": "The age limits are set in sections 35 and 235 of Social Code Book VI and can be changed by federal law. The federal government's pensions commission recommended in June 2026 linking the standard age to life expectancy after 2031 in a ratio of 2:1; the German Council of Economic Experts called in November 2026 for doing so quickly. On 18 November 2026 there was no finished bill yet. In October 2026 Die Linke moved in the Bundestag that no further increase be pursued; in October 2025 the AfD moved to keep the limit at 67."
+          },
+          "sources": [
+            "sgb6_235",
+            "ask_bericht_2026",
+            "svr_jg_2026_27",
+            "stuttgarter_nachrichten_rente_2026_11",
+            "bt_drs_21_8388",
+            "bt_drs_21_2165"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Für eine Senkung gilt dieselbe Rechnung umgekehrt: Alle Altersgrenzen sinken mit, Renten beginnen früher. Die Linke verbindet ihre Forderung nach 65 Jahren mit einer abschlagsfreien Rente ab 60 nach 40 Beitragsjahren; das ist nicht enthalten und kostete zusätzlich. Weil man neben einer vorgezogenen Altersrente unbegrenzt hinzuverdienen darf, würden manche trotz Rente weiterarbeiten: Beiträge und Lohnsteuer fielen dann weniger, als die Rechnung zeigt, die Rentenausgaben dagegen fast voll an.",
+            "en": "For a reduction the same calculation applies in reverse: all age limits fall along with it, and pensions start earlier. Die Linke combines its demand for 65 years with a deduction-free pension from 60 after 40 contribution years; that is not included and would cost extra. Because there is no limit on earnings alongside an early old-age pension, some would keep working despite drawing a pension: contributions and wage tax would then fall by less than the calculation shows, while pension spending would arise almost in full."
+          },
+          "sources": [
+            "linke_wahlprogramm_2025",
+            "ask_bericht_2026"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Zusammen mit anderen Rentenmaßnahmen zählt die Rechnung nichts doppelt, aber die Wirkungen addieren sich nicht genau. Zusammen mit der Abschaffung der „Rente mit 63“ wirkt die höhere Altersgrenze auf schon gekürzte Altersrenten und spart dadurch etwas weniger; mit einem höheren Rentenniveau spart ein Jahr weniger Rente entsprechend mehr. Nicht enthalten ist die Übertragung auf Beamte, die die Kommission empfiehlt; sie entlastete vor allem die Länder bei den Pensionen.",
+            "en": "Together with other pension measures nothing is counted twice, but the effects do not add up exactly. Together with ending the \"Rente mit 63\" the higher age limit acts on old-age pensions that are already reduced and therefore saves somewhat less; with a higher pension level, a year less of pension saves correspondingly more. Not included is the transfer to civil servants that the commission recommends; it would relieve mainly the states, which pay most civil service pensions."
+          },
+          "sources": [
+            "ask_bericht_2026"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Rechnung verteilt Mehr- oder Minderausgaben für Renten im selben Verhältnis auf Bund und Rentenversicherung wie die Rentenausgaben von 2024: 29 % Bund, so viel wie der Anteil der Bundesmittel an den Ausgaben der Rentenversicherung. Tatsächlich folgen die Bundeszuschüsse nicht den Rentenausgaben, sondern den Löhnen und dem Beitragssatz; nach den Faustdaten der Rentenversicherung käme von einem niedrigeren Beitragssatz rund 16 % beim Bund an. Die zusätzlichen Beiträge fließen ganz an die Sozialversicherungen.",
+            "en": "The calculation splits higher or lower pension spending between the federal government and the pension insurance in the same ratio as pension spending in 2024: 29% federal, the share of federal funds in the pension insurance's spending. In fact the federal subsidies do not follow pension spending but wages and the contribution rate; according to the pension insurance's rules of thumb about 16% of a lower contribution rate would reach the federal government. The additional contributions go entirely to the social insurance funds."
+          },
+          "sources": [
+            "drv_rv_in_zahlen_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "ask_bericht_2026",
+        "drv_rv_in_zahlen_2026",
+        "diw_bertelsmann_fruehrente_64_2026",
+        "svr_jg_2026_27",
+        "svr_jg_2023_24",
+        "linke_wahlprogramm_2025",
+        "diw_wb_2026_27_fratzscher"
+      ]
+    },
+    {
       "id": "vat_rates",
       "label": {
         "de": "Mehrwertsteuer erhöhen oder senken",

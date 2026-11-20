@@ -340,7 +340,7 @@ To propose a measure or to correct a figure, a catch or a source, open a pull re
 ## Status and limitations
 
 - **A preview.** The version is 0.1.0, and the pack format is marked "v0" in `src/engine/types.ts` and can still change. Search engines are asked not to index a site unless its site config says `"indexable": true` (see [Running your own instance](#running-your-own-instance)).
-- **One country.** Germany, base year 2024, with 31 measures.
+- **One country.** Germany, base year 2024, with 32 measures.
 - **Static estimates.** The figures are direct effects on the budget of a single year, as a rule the first; a measure whose figure stands for a later year or for the full effect of a rule says so in its summary. There is no forecast and no model of how the economy reacts.
 - **Goals are a rough yardstick.** The goal bar sets these static effects on the 2024 budget, in national accounts, against a gap in the cash plan for a later year's federal core budget, so a measure may yield more or less by then than it shows here. What the plan already counts on and what is paid for outside the debt brake is left out of the comparison and named on the bar, with the reason in the goal's details.
 - **Judgement in the data.** Which level of government bears an item is partly estimated, and the remainders next to named cash items are approximate. [pipeline/de/README.md](pipeline/de/README.md) lists every such judgement.

@@ -57,6 +57,14 @@
             "en": "The financial plan already counts on the 7 % rate on restaurant meals in force since 2026, so the measure is not counted."
           },
           "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
+        },
+        {
+          "policy": "retirement_age",
+          "reason": {
+            "de": "Der Betrag des Renteneintrittsalters ist eine Dauerwirkung gegenüber 67 Jahren, der Grenze, die erst ab 2031 für alle gilt; was in den Jahren des Finanzplans im Bundeshaushalt ankäme, beschreibt er in keiner Richtung. Eine Anhebung begänne nach dem Vorschlag der Alterssicherungskommission frühestens 2032, nach den Planjahren, und verkleinert die Lücke nicht. Eine Senkung könnte schneller wirken, ihr Betrag in den Planjahren wäre aber ein anderer als der gezeigte; sie wird deshalb ebenfalls nicht gezählt.",
+            "en": "The amount of the retirement age measure is a lasting effect against 67 years, the limit that applies to everyone only from 2031; in neither direction does it describe what would reach the federal budget in the years of the financial plan. Under the pensions commission's proposal an increase would begin in 2032 at the earliest, after the plan years, and does not narrow the gap. A reduction could take effect sooner, but its amount in the plan years would differ from the one shown; it is therefore not counted either."
+          },
+          "sources": ["ask_bericht_2026", "sgb6_235", "bundestag_drs_21_7301"]
         }
       ]
     },
@@ -116,6 +124,14 @@
             "en": "The financial plan already counts on the 7 % rate on restaurant meals in force since 2026, so the measure is not counted."
           },
           "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
+        },
+        {
+          "policy": "retirement_age",
+          "reason": {
+            "de": "Der Betrag des Renteneintrittsalters ist eine Dauerwirkung gegenüber 67 Jahren, der Grenze, die erst ab 2031 für alle gilt; was in den Jahren des Finanzplans im Bundeshaushalt ankäme, beschreibt er in keiner Richtung. Eine Anhebung begänne nach dem Vorschlag der Alterssicherungskommission frühestens 2032, nach den Planjahren, und verkleinert die Lücke nicht. Eine Senkung könnte schneller wirken, ihr Betrag in den Planjahren wäre aber ein anderer als der gezeigte; sie wird deshalb ebenfalls nicht gezählt.",
+            "en": "The amount of the retirement age measure is a lasting effect against 67 years, the limit that applies to everyone only from 2031; in neither direction does it describe what would reach the federal budget in the years of the financial plan. Under the pensions commission's proposal an increase would begin in 2032 at the earliest, after the plan years, and does not narrow the gap. A reduction could take effect sooner, but its amount in the plan years would differ from the one shown; it is therefore not counted either."
+          },
+          "sources": ["ask_bericht_2026", "sgb6_235", "bundestag_drs_21_7301"]
         }
       ]
     },
@@ -175,6 +191,14 @@
             "en": "The financial plan already counts on the 7 % rate on restaurant meals in force since 2026, so the measure is not counted."
           },
           "sources": ["bundestag_drs_21_7301", "svr_jg_2026_27"]
+        },
+        {
+          "policy": "retirement_age",
+          "reason": {
+            "de": "Der Betrag des Renteneintrittsalters ist eine Dauerwirkung gegenüber 67 Jahren, der Grenze, die erst ab 2031 für alle gilt; was in den Jahren des Finanzplans im Bundeshaushalt ankäme, beschreibt er in keiner Richtung. Eine Anhebung begänne nach dem Vorschlag der Alterssicherungskommission frühestens 2032, nach den Planjahren, und verkleinert die Lücke nicht. Eine Senkung könnte schneller wirken, ihr Betrag in den Planjahren wäre aber ein anderer als der gezeigte; sie wird deshalb ebenfalls nicht gezählt.",
+            "en": "The amount of the retirement age measure is a lasting effect against 67 years, the limit that applies to everyone only from 2031; in neither direction does it describe what would reach the federal budget in the years of the financial plan. Under the pensions commission's proposal an increase would begin in 2032 at the earliest, after the plan years, and does not narrow the gap. A reduction could take effect sooner, but its amount in the plan years would differ from the one shown; it is therefore not counted either."
+          },
+          "sources": ["ask_bericht_2026", "sgb6_235", "bundestag_drs_21_7301"]
         }
       ]
     }
