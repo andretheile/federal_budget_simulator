@@ -1,0 +1,44 @@
+{
+  "indexable": false,
+  "operator": {
+    "name": "Erika Mustermann",
+    "address": ["Musterstraße 1", "12345 Musterstadt"],
+    "email": "kontakt@example.org",
+    "phone": "+49 30 1234567"
+  },
+  "contentResponsible": {
+    "name": "Max Mustermann",
+    "address": ["Musterstraße 1", "12345 Musterstadt"]
+  },
+  "hosting": {
+    "name": "Beispiel-Hosting GmbH",
+    "address": ["Serverweg 2", "12345 Musterstadt", "Deutschland"],
+    "country": "DE",
+    "privacyPolicy": "https://hosting.example.org/datenschutz"
+  },
+  "proxy": {
+    "name": "Example CDN, Inc.",
+    "address": ["1 Example Street", "Springfield, XY 12345", "USA"],
+    "country": "US",
+    "transfer": "dpf",
+    "networkErrorReports": true,
+    "privacyPolicy": "https://cdn.example.com/privacy"
+  },
+  "serverLog": {
+    "fields": ["time", "request", "status", "bytes", "referrer"],
+    "retention": { "maxMegabytes": 30 }
+  },
+  "imprint": {
+    "addition": {
+      "de": "Ein eigener Absatz am Ende des Impressums, etwa eine Umsatzsteuer-Identifikationsnummer.",
+      "en": "A paragraph of your own at the end of the legal notice, such as a VAT identification number."
+    }
+  },
+  "privacy": {
+    "updated": "2026-11-18",
+    "addition": {
+      "de": "Ein eigener Absatz am Ende der Datenschutzerklärung.\n\nEine Leerzeile beginnt einen neuen Absatz.",
+      "en": "A paragraph of your own at the end of the privacy policy.\n\nA blank line starts a new paragraph."
+    }
+  }
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<title>Haushaltssimulator</title>
+<link rel="icon" href="data:,">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #fafaf8;
+    --fg: #1c1c1a;
+    --muted: #5f5f5a;
+    --rule: #d9d9d4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161615;
+      --fg: #ececea;
+      --muted: #a3a39d;
+      --rule: #3a3a37;
+    }
+  }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    color: var(--fg);
+    font: 1.0625rem/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 34rem;
+    padding: 2rem 1.5rem;
+  }
+  h1 {
+    margin: 0 0 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  p { margin: 0; }
+  p + p { margin-top: 0.5rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Haushaltssimulator</h1>
+  <p>Hier entsteht eine interaktive Ansicht des öffentlichen Haushalts.</p>
+  <p lang="en">An interactive view of the public budget is being built here.</p>
+</main>
+</body>
+</html>

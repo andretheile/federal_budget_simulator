@@ -1,0 +1,317 @@
+/*
+ * Rate curves on the first page: the small preview on a measure's card, the notice above the
+ * measures, and the sheet that holds the editor, which lies over the page below the scoreboard.
+ * What is inside the editor is styled in editor.css, which is loaded with the editor's code.
+ */
+
+/* --- On the card ------------------------------------------------------------------------------ */
+.policy__curve {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.policy__curve-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 6px;
+}
+
+.curve-preview {
+  flex: 1 1 170px;
+  min-width: 150px;
+  max-width: 280px;
+  height: 56px;
+  overflow: visible;
+}
+
+.curve-preview path,
+.curve-preview line {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.curve-preview__band {
+  fill: var(--sunken);
+}
+
+.curve-preview__axis {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.curve-preview__today {
+  stroke: var(--ink-3);
+  stroke-width: 1.25;
+}
+
+.curve-preview__line {
+  stroke: var(--ink);
+  stroke-width: 2.25;
+  stroke-linejoin: round;
+}
+
+.policy__curve-text {
+  flex: 1 1 190px;
+  min-width: 0;
+}
+
+.policy__curve-state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.curve-state {
+  padding: 1px 6px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.curve-state--changed {
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+}
+
+.policy__curve-preset {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.policy__edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  margin-top: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 650;
+}
+
+.policy__edit:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* --- Above the measures: curves that differ from today's -------------------------------------- */
+.changed-curves {
+  margin-bottom: 18px;
+  padding: 9px 12px;
+  border-left: 3px solid var(--ink);
+  background: var(--sunken);
+  font-size: 14px;
+}
+
+.changed-curves ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+}
+
+.changed-curves__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: 650;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.changed-curves__open:hover {
+  text-decoration-color: currentColor;
+}
+
+/* --- The sheet -------------------------------------------------------------------------------- */
+/* The page does not scroll under the sheet; the gutter of its scroll bar stays, so nothing shifts. */
+html.has-sheet {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.sheet {
+  position: fixed;
+  top: var(--scoreboard-height);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 25;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--paper);
+}
+
+.sheet__inner {
+  padding-block: 18px 56px;
+}
+
+/* The title and what it is about on the left, the switch and the close button on the right. */
+.sheet__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "topic tools"
+    "title tools"
+    "subtitle tools";
+  align-items: start;
+  column-gap: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.sheet__topic {
+  grid-area: topic;
+}
+
+.sheet__title {
+  grid-area: title;
+  margin-top: 4px;
+  font-family: var(--font-serif);
+  font-size: clamp(23px, 2.4vw, 30px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  /* A long compound ("Beitragsbemessungsgrenze") is hyphenated rather than run out of its column. */
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+/* The title takes the focus when the sheet opens, so screen readers start there; it is not a control. */
+.sheet__title:focus,
+.sheet__title:focus-visible {
+  outline: none;
+}
+
+.sheet__subtitle {
+  grid-area: subtitle;
+  margin-top: 4px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.sheet__tools {
+  grid-area: tools;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+
+/* While the inside of the editor is on its way, or could not be loaded. */
+.sheet__pending {
+  min-height: 50vh;
+  padding-top: 28px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+/* Said only if the wait is noticeable: usually the editor is there before the eye could read it. */
+.sheet__loading {
+  animation: sheet-loading 0.2s ease 0.4s both;
+}
+
+@keyframes sheet-loading {
+  from {
+    opacity: 0;
+  }
+}
+
+.sheet__pending--failed {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 14px;
+}
+
+.sheet__pending--failed p {
+  max-width: 60ch;
+  padding: 9px 12px;
+  border-left: 3px solid var(--worsen);
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+/* --- Small screens ---------------------------------------------------------------------------- */
+@media (max-width: 719px) {
+  .sheet__inner {
+    padding-top: 10px;
+  }
+
+  /* The switch and the close button share the line of the topic; the title below has the whole
+     width, whatever its length and language. */
+  .sheet__head {
+    grid-template-areas:
+      "topic tools"
+      "title title"
+      "subtitle subtitle";
+    align-items: center;
+    column-gap: 12px;
+    padding-bottom: 10px;
+  }
+
+  .sheet__title {
+    margin-top: 6px;
+  }
+
+  .sheet__tools {
+    gap: 12px;
+  }
+
+  .sheet__subtitle {
+    font-size: 14px;
+  }
+}
+
+/* The header's tools lose their words on a phone; in the sheet they keep them. */
+@media (max-width: 559px) {
+  .sheet .tool {
+    width: auto;
+    padding: 0 11px;
+  }
+
+  .sheet .tool span {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+
+  /* Closing is an icon here; the button keeps its name for assistive technology. */
+  .sheet .sheet__close {
+    width: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .sheet .sheet__close .sheet__close-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

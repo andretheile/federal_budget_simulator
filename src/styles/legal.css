@@ -1,0 +1,113 @@
+/*
+ * Imprint and privacy statement (components/Legal.tsx): one column of text in the type of
+ * "About the numbers" (about.css), and the links to them in the footer.
+ */
+.legal {
+  /* The measure of the lead paragraph under "About the numbers" (44em at 19px). */
+  max-width: 52rem;
+}
+
+.legal__back {
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.legal__back a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.legal__back a:hover {
+  text-decoration: underline;
+}
+
+/* The rule and the headline of a section, as above "About the numbers". */
+.legal > .section-head {
+  padding-top: 28px;
+  border-top: 2px solid var(--ink);
+}
+
+/* Focused by the page to announce it, not a control: no focus ring. */
+.legal h2:focus {
+  outline: none;
+}
+
+.legal__body {
+  display: grid;
+  gap: 30px;
+  font-size: 14.5px;
+  line-height: 1.62;
+  color: var(--ink-2);
+}
+
+.legal__body section {
+  display: grid;
+  gap: 10px;
+}
+
+.legal h3 {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.legal strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.legal__lines span {
+  display: block;
+}
+
+.legal__body a {
+  overflow-wrap: anywhere;
+  text-decoration-color: var(--rule-strong);
+}
+
+.legal__body a:hover {
+  text-decoration-color: currentColor;
+}
+
+.legal__url .icon {
+  margin-left: 4px;
+  color: var(--ink-3);
+}
+
+/* The operator's own text: a line break in the config is kept. */
+.legal__addition p {
+  white-space: pre-line;
+}
+
+.legal__updated {
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+
+/* Footer: "About the numbers", the source code, then the legal pages. */
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+/* The source code opens elsewhere: marked as the links in the lists of sources. */
+.footer__links .icon {
+  margin-left: 4px;
+  color: var(--ink-3);
+}
+
+.footer__links a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+}

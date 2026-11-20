@@ -1,0 +1,936 @@
+/*
+ * The inside of the debt section: the two charts, the panel with the assumptions, the lists of
+ * budget items and reference values, the limits, the table and the sources. Loaded with the
+ * section's code (DebtBody.tsx), not with the first page; debt.css has the frame.
+ */
+.debt__body {
+  margin-top: 28px;
+}
+
+.debt__grid {
+  display: grid;
+  gap: 40px;
+}
+
+.debt__main {
+  display: grid;
+  align-content: start;
+  gap: 30px;
+  min-width: 0;
+}
+
+@media (min-width: 1080px) {
+  .debt__grid {
+    grid-template-columns: minmax(0, 1.75fr) minmax(300px, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+}
+
+/* Source titles can hold long codes (an ECB series key) that would otherwise widen a phone's page. */
+.debt__body .sources {
+  overflow-wrap: anywhere;
+}
+
+.debt__note {
+  max-width: 72ch;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+.debt__main > .debt__note {
+  margin-top: -18px;
+}
+
+.debt__block h3,
+.dpanel h3,
+.debt__limits h3,
+.debt__basis h3 {
+  margin-bottom: 10px;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* --- A chart ---------------------------------------------------------------------------------- */
+.dchart {
+  min-width: 0;
+}
+
+.dchart__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.dchart__title {
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+
+.dchart__title strong {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Share of revenue or of GDP: two buttons, the chosen one filled. */
+.dunit {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+}
+
+.dunit button {
+  min-height: 34px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.dunit button:hover {
+  color: var(--ink);
+}
+
+.dunit button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.dchart__readout {
+  min-height: 2.9em;
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.dchart__readout.is-reading {
+  color: var(--ink);
+  font-weight: 550;
+}
+
+.dchart__frame {
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.dchart__svg {
+  display: block;
+  overflow: visible;
+}
+
+.dchart__svg text {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  fill: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.dchart__svg path,
+.dchart__svg line {
+  fill: none;
+}
+
+.dchart__grid line {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.dchart__grid line.is-zero {
+  stroke: var(--rule-strong);
+}
+
+.dchart__xaxis line {
+  stroke: var(--rule-strong);
+}
+
+.dchart__refline {
+  stroke: var(--ink-3);
+  stroke-width: 1.25;
+  stroke-dasharray: 1 3;
+  stroke-linecap: round;
+}
+
+.is-threshold .dchart__refline {
+  stroke: var(--ink-2);
+  stroke-dasharray: 6 4;
+  stroke-linecap: butt;
+}
+
+.dchart__leader {
+  stroke: var(--rule-strong);
+}
+
+.dchart__svg .dchart__refs text {
+  font-size: 11px;
+  font-weight: 500;
+  fill: var(--ink-2);
+}
+
+.dchart__svg .dchart__band {
+  fill: color-mix(in srgb, var(--ink) 13%, transparent);
+}
+
+.dchart__line {
+  stroke: var(--ink-3);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.dchart__line.is-strong {
+  stroke: var(--ink);
+  stroke-width: 2.75;
+}
+
+/* An official plan: its own colour, dashed, a diamond at each of its years, ringed in the page colour. */
+.debt__body {
+  --plan: var(--cat-3);
+}
+
+.dchart__svg .dchart__plan-line,
+.dkey__plan .dchart__plan-line {
+  fill: none;
+  stroke: var(--plan);
+  stroke-width: 2;
+  stroke-dasharray: 5 3;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+
+.dchart__svg .dchart__plan-point,
+.dkey__plan .dchart__plan-point {
+  fill: var(--plan);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+
+/* Where a followed plan ends and the calculation goes on by itself. */
+.dchart__marker line {
+  stroke: var(--ink-2);
+  stroke-width: 1.25;
+  stroke-dasharray: 3 3;
+}
+
+.dchart__svg .dchart__marker text {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ink-2);
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.dchart__cursor line {
+  stroke: var(--ink-3);
+  stroke-dasharray: 1 2;
+}
+
+.dchart__svg .dchart__cursor circle {
+  fill: var(--paper);
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+}
+
+.dchart__svg .dchart__cursor circle.is-strong,
+.dchart__svg .dchart__end {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+
+/* The control for the years lies over the plot. A finger on it still scrolls the page up and
+   down; a sideways move picks the years. */
+.dchart__layer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+
+.dchart__layer:focus {
+  outline: none;
+}
+
+.dchart__layer:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.dchart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.dkey {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.dkey::before {
+  content: "";
+  flex: none;
+  display: inline-block;
+  width: 20px;
+}
+
+.dkey--strong::before {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.dkey--thin::before {
+  height: 2px;
+  background: var(--ink-3);
+}
+
+.dkey--band::before {
+  width: 14px;
+  height: 12px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--ink) 13%, transparent);
+}
+
+.dkey--ref::before {
+  height: 0;
+  border-top: 2px dotted var(--ink-3);
+}
+
+/* A plan's key is drawn as in the chart, so it needs no box of its own. */
+.dkey--plan::before {
+  display: none;
+}
+
+.dkey__plan {
+  flex: none;
+  overflow: visible;
+}
+
+/* --- Official plans --------------------------------------------------------------------------- */
+.dplans {
+  display: grid;
+  gap: 18px;
+}
+
+.dplans > h3 {
+  margin-bottom: -6px;
+}
+
+.dplan {
+  display: grid;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.dplan__name {
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.dplan__intro {
+  max-width: 72ch;
+  font-size: 14.5px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.dplans .debt__note {
+  margin-top: 0;
+}
+
+/* A plan that cannot be set against the calculation: its scope comes first, on a tinted ground. */
+.dplan__scope {
+  max-width: 72ch;
+  padding: 8px 12px;
+  border-left: 3px solid var(--ink);
+  background: var(--sunken);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.dplan__scope strong {
+  font-weight: 650;
+}
+
+.dplan__table {
+  justify-self: start;
+  width: auto;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dplan__table th,
+.dplan__table td {
+  padding: 4px 18px 4px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.dplan__table th:first-child {
+  text-align: left;
+}
+
+.dplan__table thead th {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+  white-space: normal;
+  vertical-align: bottom;
+}
+
+.dplan__table tbody th {
+  font-weight: 600;
+}
+
+.dplan__table td:last-child,
+.dplan__table th:last-child {
+  padding-right: 0;
+}
+
+.dplan__note {
+  display: grid;
+  gap: 0.6em;
+  max-width: 72ch;
+  margin-top: 8px;
+}
+
+.dplan__more .dplan__note p {
+  margin-top: 0;
+}
+
+.dplan__quality {
+  margin-top: 8px;
+}
+
+/* --- When interest costs more than … ---------------------------------------------------------- */
+.dcmp__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "name when"
+    "amount amount";
+  gap: 1px 16px;
+  padding: 9px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 14.5px;
+}
+
+.dcmp__row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.dcmp__name {
+  grid-area: name;
+  font-weight: 600;
+}
+
+.dcmp__when {
+  grid-area: when;
+  font-weight: 650;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.dcmp__amount {
+  grid-area: amount;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.debt__block .debt__note {
+  margin-top: 8px;
+}
+
+.debt__block > .debt__note:first-of-type:not(:last-child) {
+  margin: -4px 0 8px;
+}
+
+/* --- For comparison --------------------------------------------------------------------------- */
+.dref__row {
+  display: grid;
+  gap: 3px;
+  padding: 9px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 14px;
+}
+
+.dref__row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.dref__name {
+  font-weight: 600;
+}
+
+.dref__values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dref__values strong {
+  font-weight: 650;
+}
+
+.dref__note {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.dref__sources {
+  margin-top: 12px;
+}
+
+/* --- The assumptions -------------------------------------------------------------------------- */
+.dpanel {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  min-width: 0;
+  padding: 18px 18px 20px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.dpanel h3 {
+  margin-bottom: 0;
+}
+
+.dpanel__result {
+  margin-top: -8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.dpanel__label {
+  margin-bottom: 7px;
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* The starting point: one of two paths, radio buttons in one box. The presets below act on either. */
+.dstart {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.dstart legend {
+  padding: 0;
+}
+
+.dstart__list {
+  display: grid;
+  border: 1px solid var(--rule-strong);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dstart__option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "dot label"
+    ". note";
+  align-items: baseline;
+  gap: 2px 9px;
+  padding: 9px 12px 10px;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.dstart__option + .dstart__option {
+  border-top: 1px solid var(--rule-strong);
+}
+
+.dstart__option.is-chosen {
+  background: var(--surface);
+  box-shadow: inset 4px 0 0 var(--ink);
+}
+
+.dstart__option input {
+  grid-area: dot;
+  align-self: center;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+
+.dstart__option input:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.dstart__label {
+  grid-area: label;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  font-size: 13.5px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.dstart__default {
+  padding: 0 5px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.dstart__note {
+  grid-area: note;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.dpresets__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+  gap: 6px;
+}
+
+.dpreset {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  min-height: 40px;
+  padding: 7px 11px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 5px;
+  background: var(--paper);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.dpreset:hover {
+  border-color: var(--ink);
+}
+
+/* Chosen: a tick, an ink edge on the left and the surface colour, so it is told apart by shape too. */
+.dpreset[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--surface);
+  box-shadow: inset 4px 0 0 var(--ink);
+}
+
+.dpreset .icon {
+  flex: none;
+}
+
+.dpresets__note {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.dpresets__note strong {
+  color: var(--ink);
+}
+
+.dpresets__note .sources {
+  margin-top: 4px;
+}
+
+.dparam {
+  display: grid;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.dparam__explain {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.dparam__more summary {
+  /* A taller area for the finger that takes no more room in the layout. */
+  margin: -4px 0;
+  padding: 4px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.dparam__more p {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.dparam__more .sources {
+  margin-top: 6px;
+}
+
+.debt__reset {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.debt__reset:hover:not([aria-disabled="true"]) {
+  border-color: var(--ink);
+}
+
+.debt__reset[aria-disabled="true"] {
+  color: var(--ink-3);
+  opacity: 0.65;
+  cursor: default;
+}
+
+/* --- What the calculation leaves out ---------------------------------------------------------- */
+.debt__limits {
+  margin-top: 40px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--ink);
+  background: var(--sunken);
+}
+
+.debt__limits p {
+  max-width: 82ch;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.debt__limits p + p {
+  margin-top: 8px;
+}
+
+/* --- The table -------------------------------------------------------------------------------- */
+.debt__table {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.debt__table summary {
+  margin: -4px 0;
+  padding: 4px 0;
+  font-size: 15px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+/* From 720 px on, one column per figure. Should it ever be too wide, it scrolls inside its box;
+   the page itself never does. */
+.debt__scroll {
+  margin-top: 12px;
+  overflow-x: auto;
+}
+
+.debt__scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.debt__scroll th,
+.debt__scroll td {
+  padding: 7px 0 7px 14px;
+  border-top: 1px solid var(--rule);
+  text-align: right;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.debt__scroll thead th {
+  min-width: 6.5em;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink-2);
+  white-space: normal;
+  vertical-align: bottom;
+}
+
+.debt__scroll tbody th,
+.debt__scroll thead th:first-child {
+  min-width: 0;
+  padding-left: 0;
+  text-align: left;
+}
+
+.debt__scroll tbody th[scope="row"] + th,
+.debt__scroll tbody tr + tr th {
+  padding-left: 14px;
+}
+
+.debt__scroll tbody th {
+  font-weight: 600;
+}
+
+.debt__scroll tbody tr + tr th,
+.debt__scroll tbody tr + tr td {
+  border-top-style: dotted;
+}
+
+.debt__table .debt__note {
+  margin-top: 8px;
+}
+
+/* On a phone: year, interest and debt, each cell with its figures under one another. */
+.debt__compact {
+  width: 100%;
+  margin-top: 12px;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.debt__compact th,
+.debt__compact td {
+  padding: 7px 0 7px 8px;
+  border-top: 1px solid var(--rule);
+  text-align: right;
+  vertical-align: top;
+}
+
+.debt__compact th:first-child {
+  padding-left: 0;
+  text-align: left;
+}
+
+.debt__compact thead th {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-2);
+  vertical-align: bottom;
+}
+
+.debt__compact tbody th {
+  font-weight: 600;
+}
+
+.debt__compact td span {
+  display: block;
+  white-space: nowrap;
+}
+
+.debt__compact td span + span {
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+/* With the measures: the year over its two rows, which are told apart by "without" and "with". */
+.debt__compact .is-year th {
+  padding-top: 10px;
+  padding-bottom: 0;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.debt__compact .is-year + tr th,
+.debt__compact .is-year + tr td {
+  border-top: 0;
+}
+
+.debt__compact .is-year ~ tr th[scope="row"] {
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+/* --- Where the figures come from -------------------------------------------------------------- */
+.debt__basis {
+  margin-top: 32px;
+}
+
+.debt__basis .facts > div {
+  grid-template-columns: 12em minmax(0, 1fr);
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+}
+
+.debt__basis .facts__sub {
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+@media (max-width: 559px) {
+  .dpanel {
+    padding: 14px 14px 16px;
+  }
+
+  .debt__basis .facts > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dchart__title strong {
+    display: block;
+  }
+}
+
+@media (forced-colors: active) {
+  .dchart__svg .dchart__band {
+    fill: Highlight;
+    fill-opacity: 0.3;
+  }
+
+  .dkey::before {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+}

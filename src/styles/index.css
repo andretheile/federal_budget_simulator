@@ -1,0 +1,16 @@
+/*
+ * Stylesheet entry. Plain CSS, design tokens as custom properties, one file per part of the page.
+ * Nothing is loaded from another host: the two typefaces are bundled from npm (SIL Open Font
+ * License) and served with the app.
+ */
+@import "./fonts.css";
+@import "./tokens.css";
+@import "./base.css";
+@import "./header.css";
+@import "./scoreboard.css";
+@import "./goal.css";
+@import "./budget.css";
+@import "./policies.css";
+@import "./curve.css";
+@import "./waterfall.css";
+@import "./about.css";

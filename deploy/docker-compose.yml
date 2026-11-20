@@ -1,0 +1,54 @@
+# Static site behind an existing Traefik (v2) that watches Docker labels.
+# Uploaded and started by deploy.sh; see README.md in this directory.
+
+name: budget
+
+services:
+  web:
+    image: nginx:1.30-alpine
+    restart: unless-stopped
+    mem_limit: 64m
+    networks:
+      - proxy
+    volumes:
+      # create_host_path: false makes "up" fail if a source is missing, instead
+      # of letting Docker create it as a root-owned directory.
+      - type: bind
+        source: ./site
+        target: /usr/share/nginx/html
+        read_only: true
+        bind:
+          create_host_path: false
+      # Single-file mount: the container holds on to this exact file (inode).
+      # Update it in place (deploy.sh does); a replaced file is not seen until
+      # the container is recreated.
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+        read_only: true
+        bind:
+          create_host_path: false
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      # SITE_HOST comes from the .env file that deploy.sh writes next to this file.
+      - "traefik.http.routers.budget.rule=Host(`${SITE_HOST:-budget.drtheile.com}`)"
+      - "traefik.http.routers.budget.entrypoints=websecure"
+      # TLS without a certificate resolver, on purpose. The DNS record is proxied
+      # through Cloudflare, and Traefik's resolver "myresolver" uses the TLS-ALPN
+      # challenge, which cannot succeed behind the Cloudflare proxy. Traefik
+      # therefore answers with its default certificate, which Cloudflare accepts
+      # for the connection to the origin; visitors see Cloudflare's certificate.
+      # If the DNS record is ever switched to "DNS only", add:
+      #   - "traefik.http.routers.budget.tls.certresolver=myresolver"
+      - "traefik.http.routers.budget.tls=true"
+      - "traefik.http.services.budget.loadbalancer.server.port=80"
+
+networks:
+  proxy:
+    external: true

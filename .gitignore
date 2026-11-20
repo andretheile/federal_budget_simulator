@@ -1,20 +1,17 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# dependencies and build output
+node_modules/
+dist/
 
-# dependencies
-/.pnp
-.pnp.js
-frontend/node_modules/
-backend/venv/
+# the operator's details for the imprint and the privacy statement (see site.config.example.json)
+/site.config.json
 
 # testing
 /coverage
 
-# python
+# python (pipeline/de; the local leftovers of the removed prototype in backend/)
 __pycache__/
 *.pyc
-
-# production
-/build
+backend/venv/
 
 # misc
 .DS_Store
@@ -28,6 +25,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 *.log
-
-# databases
-*.sqlite3

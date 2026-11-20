@@ -1,0 +1,323 @@
+.masthead {
+  position: relative;
+  padding-top: 18px;
+}
+
+.masthead__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.masthead__brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 14px;
+}
+
+.masthead__name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.masthead__country {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.masthead__tools {
+  /* The box with the link hangs below the tools. */
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tool:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.tool:disabled {
+  color: var(--ink-3);
+  opacity: 0.6;
+  cursor: default;
+}
+
+.langs {
+  display: inline-flex;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+}
+
+.langs button {
+  min-width: 40px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ink-2);
+}
+
+.langs button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.select select {
+  /* The height is set as well as the minimum: WebKit's own style for select boxes overrides a min-height (with 18px). */
+  height: 36px;
+  min-height: 36px;
+  padding: 0 28px 0 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.masthead__lower {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 40px;
+  padding-block: 18px 22px;
+}
+
+.masthead__tagline {
+  max-width: 31em;
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.9vw, 23px);
+  line-height: 1.32;
+  text-wrap: balance;
+}
+
+.levelbar {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.levelbar legend {
+  margin-bottom: 6px;
+  padding: 0;
+}
+
+.levelbar__options {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+}
+
+.levelbar__option {
+  position: relative;
+  display: block;
+}
+
+.levelbar__option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.levelbar__option span {
+  display: block;
+  padding: 7px 13px;
+  border-radius: 3px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.levelbar__option input:checked + span {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* The second selector is for Safari, which does not count focus moved by the arrow keys as keyboard focus. */
+.levelbar__option input:focus-visible + span,
+.levelbar.is-keyboard .levelbar__option input:focus + span {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.levelselect {
+  display: none;
+}
+
+.masthead__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Copying the link failed: the reason and the link itself, below the tools, until it is closed. */
+.sharebox {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  width: min(380px, calc(100vw - 2 * var(--gutter)));
+  padding: 10px 12px 12px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 13.5px;
+  line-height: 1.4;
+  box-shadow: var(--shadow-float);
+}
+
+.sharebox__row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.sharebox input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink);
+  /* Not smaller: below 16px Safari on a phone zooms into a field when it gets the focus. */
+  font-size: 16px;
+}
+
+.sharebox__close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  background: none;
+  color: inherit;
+}
+
+/* On the dark box the focus mark is light. */
+.sharebox :focus-visible {
+  outline-color: var(--paper);
+}
+
+@media (max-width: 899px) {
+  /* Name over country, so the tools fit beside them instead of on a line of their own. */
+  .masthead__brand {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .levelbar {
+    display: none;
+  }
+
+  .levelselect {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 559px) {
+  .masthead {
+    padding-top: 12px;
+  }
+
+  .masthead__name {
+    font-size: 21px;
+  }
+
+  /* The tools beside the name, not on a line of their own, so the first measure comes sooner. Where
+     even that is too narrow, they still wrap under it. */
+  .masthead__inner {
+    align-items: flex-start;
+    column-gap: 10px;
+  }
+
+  .masthead__tools {
+    gap: 6px;
+  }
+
+  .langs button {
+    min-width: 34px;
+    min-height: 32px;
+    padding: 0 8px;
+  }
+
+  .masthead__lower {
+    padding-block: 10px 14px;
+  }
+
+  .masthead__tagline {
+    font-size: 17px;
+  }
+
+  /* Icon-only tools; their names stay available to assistive technology. */
+  .tool {
+    width: 34px;
+    min-height: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .tool span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .levelselect {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .levelselect select {
+    flex: 1;
+    max-width: 240px;
+  }
+}
