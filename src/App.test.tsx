@@ -101,6 +101,28 @@ describe("the simulator on Testland", () => {
     expect(query('#policy-cut_admin [role="switch"]').getAttribute("aria-checked")).toBe("false");
   });
 
+  it("names the pack's base year as the pack does, and puts a country chosen on the page in the address", () => {
+    root = createRoot(container);
+    act(() => root.render(<Simulator pack={testland} countries={["xx", "yy"]} />));
+    expect(text(".masthead__country")).toBe("Testland, budget year 2024 (April 2024 to March 2025)");
+    // A first visit to the bare address leaves it bare.
+    expect(window.location.hash).toBe("");
+    act(() => root.unmount());
+    // After the switch the new country's page writes its address at once, so a reload stays there.
+    root = createRoot(container);
+    act(() => root.render(<Simulator pack={testland} countries={["xx", "yy"]} countrySwitched />));
+    expect(window.location.hash).toMatch(/^#c=xx&lang=[a-z]+$/);
+  });
+
+  it("says so when a pack has no measures yet, and leaves out the waterfall", () => {
+    window.history.replaceState(null, "", "#lang=en");
+    root = createRoot(container);
+    act(() => root.render(<Simulator pack={{ ...testland, policies: [], collections: undefined, goals: undefined }} />));
+    expect(text("#measures")).toContain("No measures have been added for this country yet.");
+    expect(container.querySelector("#what-changed")).toBeNull();
+    expect(text(".scoreboard__change")).toContain("No measure is switched on");
+  });
+
   it("previews a setting on the card before the measure is switched on, then applies it", () => {
     mount("#lang=en");
     click("#policy-cut_admin .policy__more");

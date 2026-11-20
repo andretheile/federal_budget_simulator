@@ -11,8 +11,8 @@
   ],
   "baseYear": 2025,
   "baseYearLabel": {
-    "en": "fiscal year 2025 (October 2024 to September 2025)",
-    "de": "Haushaltsjahr 2025 (Oktober 2024 bis September 2025)"
+    "en": "fiscal year 2025 (Oct 2024 to Sep 2025)",
+    "de": "Haushaltsjahr 2025 (Okt. 2024 bis Sept. 2025)"
   },
   "levels": {
     "central": {

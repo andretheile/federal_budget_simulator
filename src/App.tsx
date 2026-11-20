@@ -123,6 +123,12 @@ async function load(id: string | undefined): Promise<Loaded> {
 export function App() {
   const ids = useMemo(() => listPackIds(), []);
   const [country, setCountry] = useState(() => initialCountry(ids));
+  /** Whether a country was chosen after the page opened; the address then names it at once. */
+  const [switched, setSwitched] = useState(false);
+  const onCountry = useCallback((id: string) => {
+    setSwitched(true);
+    setCountry(id);
+  }, []);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
 
   useEffect(() => {
@@ -148,7 +154,8 @@ export function App() {
       pack={loaded.pack}
       fallback={loaded.fallback}
       countries={ids}
-      onCountry={setCountry}
+      onCountry={onCountry}
+      countrySwitched={switched}
     />
   );
 }
@@ -158,11 +165,16 @@ export interface SimulatorProps {
   fallback?: Fallback;
   countries?: readonly string[];
   onCountry?(id: string): void;
+  /**
+   * The country was chosen on the page, not by the address it was opened with: the address is
+   * written at once, so that it names the country and a reload stays there.
+   */
+  countrySwitched?: boolean;
   /** The operator's details for imprint and privacy statement; without them there are no legal pages. Default: the build's. */
   site?: SiteConfig | null;
 }
 
-export function Simulator({ pack, fallback, countries = [], onCountry, site = currentSite }: SimulatorProps) {
+export function Simulator({ pack, fallback, countries = [], onCountry, countrySwitched = false, site = currentSite }: SimulatorProps) {
   const languages = useMemo(() => languagesOf(pack.country.locales), [pack]);
   const [language, setLanguage] = useState(() =>
     pickLanguage(pack.country.locales, {
@@ -230,8 +242,9 @@ export function Simulator({ pack, fallback, countries = [], onCountry, site = cu
   const linkRef = useRef(link);
   linkRef.current = link;
   const initialHash = useRef(hash);
-  // A bare address stays bare until the visitor changes something; a link is kept in sync from the start.
-  const dirty = useRef(currentHash() !== "");
+  // A bare address stays bare until the visitor changes something; a link is kept in sync from the
+  // start, and so is the address after the visitor switched to another country.
+  const dirty = useRef(currentHash() !== "" || countrySwitched);
   // Writes draw on a budget, so that Safari, which allows replaceState about 100 times in ten
   // seconds, never refuses while a point of a curve is dragged (see addressWriter.ts).
   const writer = useRef<AddressWriter | null>(null);
