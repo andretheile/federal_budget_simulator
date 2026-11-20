@@ -1,0 +1,74 @@
+{
+  "omb_pbd_outlays_fy2027": {
+    "title": "Public Budget Database: outlays by account, Budget of the U.S. Government, Fiscal Year 2027 (outlays_fy2027.xlsx)",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/outlays_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "One row per account, subfunction and budget category, in thousand dollars; actual values for fiscal year 2025, published April 2026. Every spending item of the pack is a sum of rows of this file (column 2025), and the rows add up to Historical Table 3.2 in every subfunction and to total outlays of 7,011,105 million dollars."
+  },
+  "omb_pbd_receipts_fy2027": {
+    "title": "Public Budget Database: receipts by account and source, Budget of the U.S. Government, Fiscal Year 2027 (receipts_fy2027.xlsx)",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/receipts_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "One row per receipt account and source category, in thousand dollars. Every revenue item of the pack is a sum of rows of this file (column 2025); they add up to total receipts of 5,236,421 million dollars."
+  },
+  "omb_hist_fy2027": {
+    "title": "Historical Tables, Budget of the U.S. Government, Fiscal Year 2027: Tables 1.1, 2.1, 3.2 and 10.1",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/omb/information-resources/budget/historical-tables/",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Fiscal year 2025: receipts 5,236,421, outlays 7,011,105 and deficit 1,774,684 million dollars (Table 1.1); receipts by source (Table 2.1); outlays by function and subfunction, with the Department of Defense by title (Table 3.2); GDP of 30,322.847 billion dollars (Table 10.1)."
+  },
+  "omb_ap_credit_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 4 (Credit and Insurance), Table 4-1: Estimated future cost of outstanding federal credit programs",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_4_tables_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Federal student loans: estimated future cost of the loans outstanding 476.856 billion dollars at the end of 2024 and 343.098 billion dollars at the end of 2025."
+  },
+  "treasury_mts_2025_09": {
+    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2025 (fiscal year 2025), Tables 1, 3, 4 and 9",
+    "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
+    "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Retrieved through the Fiscal Data API, record date 2025-09-30. Fiscal year 2025: receipts 5,234.6, outlays 7,010.0 and deficit 1,775.4 billion dollars; Table 4 gives receipts before and after refunds."
+  },
+  "treasury_mts_2026_09": {
+    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2026 (fiscal year 2026), Tables 1, 3, 4 and 9",
+    "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
+    "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": "Retrieved through the Fiscal Data API, record date 2026-09-30. Fiscal year 2026: receipts 5,403.3, outlays 7,395.8 and deficit 1,992.5 billion dollars."
+  },
+  "census_popest_v2025": {
+    "title": "Annual Estimates of the Resident Population for the United States, Regions, States, District of Columbia, and Puerto Rico, Vintage 2025 (NST-EST2025-ALLDATA)",
+    "publisher": "U.S. Census Bureau",
+    "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Resident population of the United States on 1 July 2025: 341,784,857 (the middle of fiscal year 2025 is 1 April 2025). Puerto Rico is not included."
+  },
+  "bea_nipa_3_18b": {
+    "title": "NIPA Table 3.18B. Relation of Federal Government Current Receipts and Expenditures in the National Income and Product Accounts to the Budget, Fiscal Years and Quarters",
+    "publisher": "U.S. Bureau of Economic Analysis",
+    "url": "https://apps.bea.gov/national/Release/TXT/NipaDataA.txt",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Annual series M31801 to M31856 of the flat file of all annual NIPA data (release of 4 November 2026). Fiscal year 2025: federal current receipts 5,550.0 and current expenditures 7,409.9 billion dollars in the national accounts; supplementary medical insurance premiums 160.2 billion dollars."
+  },
+  "irs_pub15_2025": {
+    "title": "Publication 15 (Circular E), Employer's Tax Guide, for use in 2025",
+    "publisher": "Internal Revenue Service",
+    "url": "https://www.irs.gov/pub/irs-prior/p15--2025.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": "Social Security tax 6.2 % each for employee and employer on wages up to 176,100 dollars; Medicare tax 1.45 % each without a wage base limit; Additional Medicare Tax of 0.9 % withheld from wages above 200,000 dollars."
+  }
+}

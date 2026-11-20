@@ -1,0 +1,2106 @@
+{
+  "revenue": [
+    {
+      "id": "rev.individual_income",
+      "label": {
+        "en": "Individual income taxes",
+        "de": "Einkommensteuer"
+      },
+      "code": "931",
+      "amount": 2656044000000,
+      "levels": {
+        "central": 1
+      },
+      "quality": "official",
+      "sources": [
+        "omb_pbd_receipts_fy2027",
+        "omb_hist_fy2027",
+        "treasury_mts_2025_09"
+      ],
+      "note": {
+        "en": "Net of refunds. Treasury's Monthly Treasury Statement for September 2025 (Table 4): withheld $1,919.4 billion, other payments $1,063.9 billion, refunds $327.3 billion.",
+        "de": "Nach Erstattungen. Laut Monatsausweis des Finanzministeriums für September 2025 (Tabelle 4): einbehaltene Steuer 1.919,4 Mrd. Dollar, übrige Zahlungen 1.063,9 Mrd. Dollar, Erstattungen 327,3 Mrd. Dollar."
+      }
+    },
+    {
+      "id": "rev.corporate_income",
+      "label": {
+        "en": "Corporation income taxes",
+        "de": "Körperschaftsteuer"
+      },
+      "code": "932",
+      "amount": 452089000000,
+      "levels": {
+        "central": 1
+      },
+      "quality": "official",
+      "sources": [
+        "omb_pbd_receipts_fy2027",
+        "omb_hist_fy2027",
+        "treasury_mts_2025_09"
+      ],
+      "note": {
+        "en": "Net of refunds: $486.4 billion collected, $34.3 billion refunded (Monthly Treasury Statement, September 2025, Table 4).",
+        "de": "Nach Erstattungen: 486,4 Mrd. Dollar eingenommen, 34,3 Mrd. Dollar erstattet (Monatsausweis September 2025, Tabelle 4)."
+      }
+    },
+    {
+      "id": "rev.social_insurance",
+      "label": {
+        "en": "Social insurance and retirement receipts",
+        "de": "Sozialversicherungsbeiträge"
+      },
+      "code": "933",
+      "children": [
+        {
+          "id": "rev.social_insurance.social_security",
+          "label": {
+            "en": "Social Security payroll taxes",
+            "de": "Beiträge zur Social Security"
+          },
+          "description": {
+            "en": "6.2 % of wages each for employees and employers, 12.4 % in all, up to the taxable maximum of $176,100 in calendar year 2025, and the same for the self-employed. The taxes go to the Social Security trust funds and are \"off-budget\" by law.",
+            "de": "6,2 % des Lohns für Arbeitnehmer und Arbeitgeber, also 12,4 %, bis zur Beitragsbemessungsgrenze von 176.100 Dollar im Kalenderjahr 2025, für Selbständige entsprechend. Die Beiträge fließen in die Treuhandfonds der Social Security und stehen gesetzlich außerhalb des Haushalts („off-budget“)."
+          },
+          "children": [
+            {
+              "id": "rev.social_insurance.social_security.oasi",
+              "label": {
+                "en": "Old-age and survivors insurance (OASI)",
+                "de": "Alters- und Hinterbliebenenrente (OASI)"
+              },
+              "code": "020-800610 + 800611",
+              "amount": 1097382000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "official",
+              "sources": [
+                "omb_pbd_receipts_fy2027",
+                "omb_hist_fy2027",
+                "irs_pub15_2025"
+              ]
+            },
+            {
+              "id": "rev.social_insurance.social_security.di",
+              "label": {
+                "en": "Disability insurance (DI)",
+                "de": "Erwerbsminderungsrente (DI)"
+              },
+              "code": "020-800701 + 800711",
+              "amount": 186354000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "official",
+              "sources": [
+                "omb_pbd_receipts_fy2027",
+                "omb_hist_fy2027",
+                "irs_pub15_2025"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "rev.social_insurance.medicare",
+          "label": {
+            "en": "Medicare payroll taxes (Hospital Insurance)",
+            "de": "Medicare-Beiträge (Krankenhausversicherung)"
+          },
+          "description": {
+            "en": "1.45 % of wages each for employees and employers, without a cap, plus 0.9 % for employees on wages above $200,000.",
+            "de": "1,45 % des Lohns für Arbeitnehmer und Arbeitgeber ohne Obergrenze, dazu 0,9 % für Arbeitnehmer auf den Teil des Lohns über 200.000 Dollar."
+          },
+          "code": "009-800501 + 800511 + 800510",
+          "amount": 395350000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027",
+            "irs_pub15_2025"
+          ]
+        },
+        {
+          "id": "rev.social_insurance.unemployment",
+          "label": {
+            "en": "Unemployment insurance taxes",
+            "de": "Beiträge zur Arbeitslosenversicherung"
+          },
+          "description": {
+            "en": "Deposits of the states from their employer taxes, and the federal unemployment tax (FUTA).",
+            "de": "Einzahlungen der Bundesstaaten aus ihren Arbeitgeberabgaben und die Arbeitslosensteuer des Bundes (FUTA)."
+          },
+          "code": "933-10",
+          "amount": 54049000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ]
+        },
+        {
+          "id": "rev.social_insurance.federal_employees",
+          "label": {
+            "en": "Federal employees' retirement contributions",
+            "de": "Pensionsbeiträge der Bundesbediensteten"
+          },
+          "code": "933-15",
+          "amount": 8613000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ]
+        },
+        {
+          "id": "rev.social_insurance.railroad",
+          "label": {
+            "en": "Railroad retirement taxes",
+            "de": "Beiträge zur Eisenbahnerrente"
+          },
+          "code": "060-801020 + 801021 + 801120",
+          "amount": 6546000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rev.excise",
+      "label": {
+        "en": "Excise taxes",
+        "de": "Verbrauchsteuern"
+      },
+      "code": "934",
+      "children": [
+        {
+          "id": "rev.excise.highway",
+          "label": {
+            "en": "Fuel and truck taxes (Highway Trust Fund)",
+            "de": "Kraftstoff- und Lkw-Steuern (Highway Trust Fund)"
+          },
+          "code": "069-810210 + 810211",
+          "amount": 43768000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ]
+        },
+        {
+          "id": "rev.excise.aviation",
+          "label": {
+            "en": "Aviation taxes (Airport and Airway Trust Fund)",
+            "de": "Luftverkehrsteuern (Airport and Airway Trust Fund)"
+          },
+          "code": "069-810310",
+          "amount": 23118000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ]
+        },
+        {
+          "id": "rev.excise.tobacco",
+          "label": {
+            "en": "Tobacco taxes",
+            "de": "Tabaksteuer"
+          },
+          "code": "015500",
+          "amount": 9468000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ]
+        },
+        {
+          "id": "rev.excise.alcohol",
+          "label": {
+            "en": "Alcohol taxes",
+            "de": "Alkoholsteuer"
+          },
+          "code": "015600",
+          "amount": 8116000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ]
+        },
+        {
+          "id": "rev.excise.stock_buybacks",
+          "label": {
+            "en": "Excise tax on stock buybacks",
+            "de": "Steuer auf Aktienrückkäufe"
+          },
+          "description": {
+            "en": "Tax on repurchases of their own shares by listed corporations.",
+            "de": "Steuer auf den Rückkauf eigener Aktien durch börsennotierte Unternehmen."
+          },
+          "code": "015220",
+          "amount": 8527000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ]
+        },
+        {
+          "id": "rev.excise.other",
+          "label": {
+            "en": "Other excise taxes",
+            "de": "Übrige Verbrauchsteuern"
+          },
+          "code": "934, rest",
+          "amount": 12940000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ],
+          "note": {
+            "en": "Among them the fee on branded prescription drug manufacturers ($2.8 billion), taxes for the Superfund and the Oil Spill Liability Trust Fund, taxes on firearms and ammunition; less fuel tax credits paid from the general fund ($5.6 billion).",
+            "de": "Unter anderem die Abgabe der Hersteller von Markenarzneimitteln (2,8 Mrd. Dollar), Abgaben für den Superfund und den Ölunfallfonds, Waffen- und Munitionssteuer; abzüglich der Kraftstoffsteuer-Gutschriften, die aus dem allgemeinen Haushalt gezahlt werden (5,6 Mrd. Dollar)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "rev.customs",
+      "label": {
+        "en": "Customs duties",
+        "de": "Zölle"
+      },
+      "description": {
+        "en": "Duties on imported goods, and the harbor maintenance fee.",
+        "de": "Zölle auf eingeführte Waren und die Hafenunterhaltungsgebühr."
+      },
+      "code": "936",
+      "amount": 194866000000,
+      "levels": {
+        "central": 1
+      },
+      "quality": "official",
+      "sources": [
+        "omb_pbd_receipts_fy2027",
+        "omb_hist_fy2027",
+        "treasury_mts_2025_09",
+        "treasury_mts_2026_09"
+      ],
+      "note": {
+        "en": "Net of refunds: $202.4 billion collected, $7.5 billion refunded (Monthly Treasury Statement, September 2025, Table 4). In fiscal year 2026, $317.8 billion was collected, $144.6 billion refunded and $173.2 billion kept (Monthly Treasury Statement, September 2026).",
+        "de": "Nach Erstattungen: 202,4 Mrd. Dollar erhoben, 7,5 Mrd. Dollar erstattet (Monatsausweis September 2025, Tabelle 4). Im Haushaltsjahr 2026 waren es 317,8 Mrd. Dollar erhoben, 144,6 Mrd. Dollar erstattet und 173,2 Mrd. Dollar netto (Monatsausweis September 2026)."
+      }
+    },
+    {
+      "id": "rev.estate_gift",
+      "label": {
+        "en": "Estate and gift taxes",
+        "de": "Erbschaft- und Schenkungsteuer"
+      },
+      "code": "935",
+      "amount": 29462000000,
+      "levels": {
+        "central": 1
+      },
+      "quality": "official",
+      "sources": [
+        "omb_pbd_receipts_fy2027",
+        "omb_hist_fy2027"
+      ]
+    },
+    {
+      "id": "rev.miscellaneous",
+      "label": {
+        "en": "Miscellaneous receipts",
+        "de": "Sonstige Einnahmen"
+      },
+      "code": "937",
+      "children": [
+        {
+          "id": "rev.miscellaneous.federal_reserve",
+          "label": {
+            "en": "Earnings of the Federal Reserve",
+            "de": "Gewinnabführung der Federal Reserve"
+          },
+          "code": "065000",
+          "amount": 5490000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027",
+            "treasury_mts_2026_09"
+          ],
+          "note": {
+            "en": "Fiscal year 2026: $10.5 billion (Monthly Treasury Statement, September 2026).",
+            "de": "Im Haushaltsjahr 2026: 10,5 Mrd. Dollar (Monatsausweis September 2026)."
+          }
+        },
+        {
+          "id": "rev.miscellaneous.other",
+          "label": {
+            "en": "Fees, fines and other receipts",
+            "de": "Gebühren, Strafen und übrige Einnahmen"
+          },
+          "code": "937, rest",
+          "amount": 44239000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "omb_hist_fy2027"
+          ],
+          "note": {
+            "en": "Among them the telecommunications carriers' contributions to the Universal Service Fund ($8.6 billion), receipts of the risk-adjustment programme between marketplace insurers ($11.7 billion), fines and forfeitures.",
+            "de": "Unter anderem Beiträge der Telekommunikationsanbieter zum Universaldienstfonds (8,6 Mrd. Dollar), Einnahmen des Ausgleichsprogramms zwischen Versicherern der Marktplätze (11,7 Mrd. Dollar), Strafen und Einziehungen."
+          }
+        }
+      ]
+    }
+  ],
+  "expenditure": [
+    {
+      "id": "exp.social_security",
+      "label": {
+        "en": "Social Security",
+        "de": "Social Security (gesetzliche Rentenversicherung)"
+      },
+      "description": {
+        "en": "Old-age, survivors' and disability benefits paid from the two Social Security trust funds, financed mainly by payroll taxes. By law the trust funds are \"off-budget\", but they are part of the unified budget and its deficit.",
+        "de": "Alters-, Hinterbliebenen- und Erwerbsminderungsrenten aus den beiden Treuhandfonds der Social Security, finanziert vor allem aus Lohnsummensteuern. Die Fonds stehen gesetzlich außerhalb des Haushalts („off-budget“), zählen aber zum Gesamthaushalt und zu seinem Defizit."
+      },
+      "code": "650",
+      "children": [
+        {
+          "id": "exp.social_security.oasi",
+          "label": {
+            "en": "Old-age and survivors insurance (OASI)",
+            "de": "Alters- und Hinterbliebenenrenten (OASI)"
+          },
+          "description": {
+            "en": "Benefits for retired workers, their spouses and children, and survivors, including the trust fund's administrative costs.",
+            "de": "Renten für Ruheständler, ihre Ehepartner und Kinder sowie Hinterbliebene, einschließlich der Verwaltungskosten des Fonds."
+          },
+          "code": "651 less 017-00-8007",
+          "amount": 1420474000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "OMB subfunction 651 ($1,580.7 billion) without the Disability Insurance Trust Fund: the Old-Age and Survivors Insurance Trust Fund ($1,421.6 billion), the general fund's payments to both trust funds ($59.8 billion) and their booking as receipts of the trust funds, which cancel out, and smaller items, together −$1.1 billion.",
+            "de": "Teilfunktion 651 der OMB (1.580,7 Mrd. Dollar) ohne den Fonds der Erwerbsminderungsrente: der Old-Age and Survivors Insurance Trust Fund (1.421,6 Mrd. Dollar), die Zahlungen des allgemeinen Haushalts an beide Treuhandfonds (59,8 Mrd. Dollar) und deren Verbuchung als Einnahme der Fonds, die sich aufheben, sowie kleinere Posten, zusammen −1,1 Mrd. Dollar."
+          }
+        },
+        {
+          "id": "exp.social_security.di",
+          "label": {
+            "en": "Disability insurance (DI)",
+            "de": "Erwerbsminderungsrenten (DI)"
+          },
+          "description": {
+            "en": "Benefits for workers who can no longer work because of a disability, and their dependants.",
+            "de": "Renten für Erwerbstätige, die wegen einer Behinderung nicht mehr arbeiten können, und ihre Angehörigen."
+          },
+          "code": "017-00-8007",
+          "amount": 160199000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Account \"Federal Disability Insurance Trust Fund\" of OMB's Public Budget Database.",
+            "de": "Konto „Federal Disability Insurance Trust Fund“ der OMB-Haushaltsdatenbank."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.medicare",
+      "label": {
+        "en": "Medicare",
+        "de": "Medicare (Krankenversicherung der Älteren)"
+      },
+      "description": {
+        "en": "Health insurance for people aged 65 and over and for people with disabilities. The amounts are net: the budget deducts the premiums paid by beneficiaries and the states' payments for Part D from spending as offsetting receipts.",
+        "de": "Krankenversicherung für Menschen ab 65 Jahren und für Menschen mit Behinderung. Die Beträge sind netto: Der Haushalt zieht die Beiträge der Versicherten und die Zahlungen der Bundesstaaten für Teil D als Einnahmen von den Ausgaben ab."
+      },
+      "code": "570",
+      "children": [
+        {
+          "id": "exp.medicare.part_a",
+          "label": {
+            "en": "Hospital insurance (Part A)",
+            "de": "Krankenhausversicherung (Teil A)"
+          },
+          "description": {
+            "en": "Hospital stays, skilled nursing after a hospital stay, home health care, hospice.",
+            "de": "Krankenhaus, Pflegeeinrichtungen nach einem Klinikaufenthalt, häusliche Pflege, Hospiz."
+          },
+          "code": "009-38-8005",
+          "amount": 430788000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Outlays of the Hospital Insurance Trust Fund ($444.8 billion) less premiums of voluntary enrollees ($5.5 billion) and refunds ($8.6 billion).",
+            "de": "Ausgaben des Hospital Insurance Trust Fund (444,8 Mrd. Dollar) abzüglich der Beiträge freiwillig Versicherter (5,5 Mrd. Dollar) und Rückzahlungen (8,6 Mrd. Dollar)."
+          }
+        },
+        {
+          "id": "exp.medicare.part_b",
+          "label": {
+            "en": "Medical insurance (Part B), net of premiums",
+            "de": "Ambulante Versorgung (Teil B), abzüglich Beiträge"
+          },
+          "description": {
+            "en": "Doctors' services, outpatient care, medical equipment; Part B is voluntary and about a quarter of it is paid for by premiums.",
+            "de": "Arztbesuche, ambulante Behandlung, Medizinprodukte; Teil B ist freiwillig und wird zu etwa einem Viertel aus Beiträgen bezahlt."
+          },
+          "code": "009-38-8004",
+          "amount": 426873000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027",
+            "bea_nipa_3_18b"
+          ],
+          "note": {
+            "en": "Outlays of the Supplementary Medical Insurance Trust Fund for Part B ($578.6 billion) less premiums of aged ($133.0 billion) and disabled enrollees ($14.6 billion) and refunds ($4.1 billion). The national accounts count the premiums for Parts B and D as revenue (BEA, NIPA Table 3.18B: $160.2 billion).",
+            "de": "Ausgaben des Supplementary Medical Insurance Trust Fund für Teil B (578,6 Mrd. Dollar) abzüglich der Beiträge von Älteren (133,0 Mrd. Dollar) und Menschen mit Behinderung (14,6 Mrd. Dollar) und Rückzahlungen (4,1 Mrd. Dollar). In den Volkswirtschaftlichen Gesamtrechnungen zählen die Beiträge zu Teil B und D als Einnahmen (BEA, NIPA-Tabelle 3.18B: 160,2 Mrd. Dollar)."
+          }
+        },
+        {
+          "id": "exp.medicare.part_d",
+          "label": {
+            "en": "Prescription drugs (Part D), net of premiums and state payments",
+            "de": "Arzneimittel (Teil D), abzüglich Beiträge und Zahlungen der Bundesstaaten"
+          },
+          "description": {
+            "en": "Subsidies for the private prescription drug plans of Medicare beneficiaries.",
+            "de": "Zuschüsse zu privaten Arzneimittelversicherungen der Medicare-Versicherten."
+          },
+          "code": "009-38-8308",
+          "amount": 138181000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Outlays of the Medicare Prescription Drug Account ($163.0 billion) less premiums collected through the government ($6.2 billion) and payments of the states for beneficiaries who also receive Medicaid ($18.6 billion).",
+            "de": "Ausgaben des Medicare Prescription Drug Account (163,0 Mrd. Dollar) abzüglich der über den Bund erhobenen Beiträge (6,2 Mrd. Dollar) und der Zahlungen der Bundesstaaten für Versicherte, die auch Medicaid erhalten (18,6 Mrd. Dollar)."
+          }
+        },
+        {
+          "id": "exp.medicare.other",
+          "label": {
+            "en": "Fraud control, administration and transfers between the funds",
+            "de": "Betrugsbekämpfung, Verwaltung und Zahlungen zwischen den Fonds"
+          },
+          "code": "571, rest",
+          "amount": 876000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Remainder of subfunction 571 (Medicare, $996.7 billion): the Health Care Fraud and Abuse Control account ($2.6 billion) and smaller accounts. Also contains the general fund's payments to the Medicare trust funds ($592.0 billion) and their booking as receipts of the funds; the two almost cancel out.",
+            "de": "Rest der Teilfunktion 571 (Medicare, 996,7 Mrd. Dollar): Konto zur Bekämpfung von Betrug und Missbrauch (2,6 Mrd. Dollar) und kleinere Konten. Enthält auch die Zahlungen des allgemeinen Haushalts an die Medicare-Fonds (592,0 Mrd. Dollar) und deren Verbuchung als Einnahme der Fonds; beide heben sich fast auf."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.health",
+      "label": {
+        "en": "Health",
+        "de": "Gesundheit"
+      },
+      "code": "550",
+      "children": [
+        {
+          "id": "exp.health.medicaid",
+          "label": {
+            "en": "Medicaid (federal share)",
+            "de": "Medicaid (Bundesanteil)"
+          },
+          "description": {
+            "en": "Federal grants to the states for health care for people with low incomes. The states pay the rest of the cost, which is not included here.",
+            "de": "Zuschüsse des Bundes an die Bundesstaaten für die Gesundheitsversorgung von Menschen mit geringem Einkommen. Den Rest der Kosten tragen die Bundesstaaten; er ist hier nicht enthalten."
+          },
+          "code": "009-38-0512",
+          "amount": 668139000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Account \"Grants to States for Medicaid\".",
+            "de": "Konto „Grants to States for Medicaid“."
+          }
+        },
+        {
+          "id": "exp.health.chip",
+          "label": {
+            "en": "Children's Health Insurance Program (CHIP)",
+            "de": "Krankenversicherung für Kinder (CHIP)"
+          },
+          "description": {
+            "en": "Grants to the states for health insurance of children in families just above the Medicaid limit.",
+            "de": "Zuschüsse an die Bundesstaaten für die Krankenversicherung von Kindern aus Familien knapp oberhalb der Medicaid-Grenze."
+          },
+          "code": "009-38-0515",
+          "amount": 23068000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.health.aca_credits",
+          "label": {
+            "en": "Premium tax credits for marketplace insurance (ACA)",
+            "de": "Prämienzuschüsse für Versicherungen der Marktplätze (ACA, „Obamacare“)"
+          },
+          "description": {
+            "en": "Subsidies for health insurance bought on the Affordable Care Act marketplaces, paid as a tax credit.",
+            "de": "Zuschüsse zu Krankenversicherungen, die auf den Marktplätzen des Affordable Care Act gekauft werden, ausgezahlt als Steuergutschrift."
+          },
+          "code": "015-45-0949",
+          "amount": 129260000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Account \"Refundable Premium Tax Credit\". Only the part paid out beyond the income tax owed counts as spending; the rest reduces income tax revenue.",
+            "de": "Konto „Refundable Premium Tax Credit“. Ausgabe ist nur der Teil, der über die geschuldete Einkommensteuer hinaus ausgezahlt wird; der Rest mindert die Einkommensteuer."
+          }
+        },
+        {
+          "id": "exp.health.other_care",
+          "label": {
+            "en": "Other health care services",
+            "de": "Übrige Gesundheitsversorgung"
+          },
+          "description": {
+            "en": "Public health (CDC), community health centres (HRSA), Indian Health Service, mental health and addiction services (SAMHSA), health benefits of federal and postal retirees, TRICARE for Life for military retirees, risk-adjustment payments between marketplace insurers, and other programmes.",
+            "de": "Öffentlicher Gesundheitsdienst (CDC), Gesundheitszentren (HRSA), Indian Health Service, psychische Gesundheit und Suchthilfe (SAMHSA), Krankenversicherung der Bundes- und Postpensionäre, TRICARE for Life für Militärpensionäre, Ausgleichszahlungen zwischen Versicherern der Marktplätze und anderes."
+          },
+          "code": "551, rest",
+          "amount": 102192000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Subfunction 551 ($922.7 billion) without Medicaid, CHIP and the premium tax credits.",
+            "de": "Teilfunktion 551 (922,7 Mrd. Dollar) ohne Medicaid, CHIP und die Prämienzuschüsse."
+          }
+        },
+        {
+          "id": "exp.health.research",
+          "label": {
+            "en": "Health research and training (NIH)",
+            "de": "Gesundheitsforschung und Ausbildung (NIH)"
+          },
+          "code": "552",
+          "amount": 50204000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Subfunction 552, of which National Institutes of Health $46.3 billion.",
+            "de": "Teilfunktion 552, davon National Institutes of Health 46,3 Mrd. Dollar."
+          }
+        },
+        {
+          "id": "exp.health.safety",
+          "label": {
+            "en": "Food, drug and workplace safety",
+            "de": "Lebensmittel-, Arzneimittel- und Arbeitssicherheit"
+          },
+          "code": "554",
+          "amount": 5648000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Subfunction 554: Food and Drug Administration, food safety inspection, occupational safety.",
+            "de": "Teilfunktion 554: Arzneimittelbehörde FDA, Lebensmittelkontrolle, Arbeitsschutz."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.net_interest",
+      "label": {
+        "en": "Net interest",
+        "de": "Nettozinsen"
+      },
+      "description": {
+        "en": "Interest on Treasury securities held by the public, less interest the government receives.",
+        "de": "Zinsen auf die Staatsanleihen im Besitz der Öffentlichkeit, abzüglich der Zinsen, die der Bund selbst einnimmt."
+      },
+      "code": "900",
+      "amount": 970065000000,
+      "levels": {
+        "central": 1
+      },
+      "quality": "official",
+      "sources": [
+        "omb_hist_fy2027",
+        "omb_pbd_outlays_fy2027"
+      ],
+      "note": {
+        "en": "OMB function 900: interest on Treasury debt securities $1,215.6 billion, less the interest that federal trust funds receive on the Treasury securities they hold ($117.5 billion, for example the military and civil service retirement funds, and $70.0 billion for the Social Security trust funds), since it stays within the government, and less other interest received, mainly from federal credit programmes ($55.2 billion), and other investment income ($2.7 billion).",
+        "de": "Funktion 900 der OMB: Zinsen auf Staatsanleihen 1.215,6 Mrd. Dollar; abgezogen sind die Zinsen, die bundeseigene Treuhandfonds auf ihre Staatsanleihen erhalten (117,5 Mrd. Dollar, etwa die Pensionsfonds für Soldaten und Beamte, und 70,0 Mrd. Dollar für die Social-Security-Fonds), da sie innerhalb des Staates bleiben, sowie übrige Zinseinnahmen, vor allem aus Förderkrediten (55,2 Mrd. Dollar), und Kapitalerträge (2,7 Mrd. Dollar)."
+      }
+    },
+    {
+      "id": "exp.defense",
+      "label": {
+        "en": "National defense",
+        "de": "Verteidigung"
+      },
+      "code": "050",
+      "children": [
+        {
+          "id": "exp.defense.military_personnel",
+          "label": {
+            "en": "Military personnel",
+            "de": "Militärpersonal"
+          },
+          "description": {
+            "en": "Pay and allowances of active forces, reserves and the National Guard, and the Defense Department's contributions to the military retirement fund and to retiree health care.",
+            "de": "Sold und Zulagen der aktiven Truppe, der Reserve und der Nationalgarde sowie die Beiträge des Verteidigungsministeriums zu den Fonds für Militärpensionen und für die Krankenversorgung der Pensionäre."
+          },
+          "code": "051 Military Personnel",
+          "amount": 206527000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.defense.operation_maintenance",
+          "label": {
+            "en": "Operation and maintenance",
+            "de": "Betrieb und Instandhaltung"
+          },
+          "description": {
+            "en": "Training, fuel, spare parts, bases, the military health system and civilian staff.",
+            "de": "Ausbildung, Treibstoff, Ersatzteile, Stützpunkte, das militärische Gesundheitssystem und zivile Beschäftigte."
+          },
+          "code": "051 Operation and Maintenance",
+          "amount": 342398000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.defense.procurement",
+          "label": {
+            "en": "Procurement",
+            "de": "Beschaffung"
+          },
+          "description": {
+            "en": "Aircraft, ships, vehicles, missiles, ammunition.",
+            "de": "Flugzeuge, Schiffe, Fahrzeuge, Raketen, Munition."
+          },
+          "code": "051 Procurement",
+          "amount": 161963000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.defense.rdte",
+          "label": {
+            "en": "Research, development, test and evaluation",
+            "de": "Forschung, Entwicklung und Erprobung"
+          },
+          "code": "051 Research, Development, Test, and Evaluation",
+          "amount": 141424000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.defense.construction_housing",
+          "label": {
+            "en": "Military construction and family housing",
+            "de": "Militärbauten und Wohnungen für Soldatenfamilien"
+          },
+          "code": "051 Military Construction + Family Housing",
+          "amount": 14935000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.defense.other_dod",
+          "label": {
+            "en": "Revolving funds and other defence accounts",
+            "de": "Betriebsmittelfonds und übrige Konten"
+          },
+          "code": "051 Other",
+          "amount": 1179000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Line \"Other\" of Table 3.2: revolving, management and trust funds of the Department of Defense, less receipts.",
+            "de": "Zeile „Other“ der Tabelle 3.2: Betriebsmittel- und Treuhandfonds des Verteidigungsministeriums, abzüglich Einnahmen."
+          }
+        },
+        {
+          "id": "exp.defense.atomic_energy",
+          "label": {
+            "en": "Nuclear weapons and other atomic energy defence (Department of Energy)",
+            "de": "Atomwaffen und andere militärische Nuklearprogramme (Energieministerium)"
+          },
+          "code": "053",
+          "amount": 36551000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.defense.related",
+          "label": {
+            "en": "Other defence-related activities",
+            "de": "Übrige verteidigungsbezogene Aufgaben"
+          },
+          "description": {
+            "en": "National security work of the FBI, cybersecurity (CISA), the CIA retirement system and others.",
+            "de": "Nationale Sicherheitsaufgaben des FBI, Cybersicherheit (CISA), Pensionsfonds der CIA und andere."
+          },
+          "code": "054",
+          "amount": 11163000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Subfunction 054. Also contains the general fund's payment to the Military Retirement Fund ($154.4 billion) and its booking as a receipt of the fund; the two cancel out.",
+            "de": "Teilfunktion 054. Enthält auch die Zahlungen des allgemeinen Haushalts an den Fonds für Militärpensionen (154,4 Mrd. Dollar) und deren Verbuchung als Einnahme des Fonds; beide heben sich auf."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.income_security",
+      "label": {
+        "en": "Income security",
+        "de": "Einkommenssicherung"
+      },
+      "description": {
+        "en": "Benefits for people with low incomes, unemployment compensation and pensions of federal employees. OMB's total for this function is $701.6 billion; here $144.4 billion of agencies' employer contributions to the retirement funds and $40.7 billion of net receipts from mortgage guarantees are deducted (see the two items).",
+        "de": "Leistungen für Menschen mit geringem Einkommen, Arbeitslosenunterstützung und Pensionen der Bundesbediensteten. Die OMB weist für diese Funktion 701,6 Mrd. Dollar aus; hier sind 144,4 Mrd. Dollar an Arbeitgeberbeiträgen der Behörden zu den Pensionsfonds und 40,7 Mrd. Dollar an Nettoeinnahmen aus Hypothekengarantien abgezogen (siehe die beiden Posten)."
+      },
+      "code": "600",
+      "children": [
+        {
+          "id": "exp.income_security.nutrition",
+          "label": {
+            "en": "Food and nutrition assistance",
+            "de": "Ernährungshilfe"
+          },
+          "code": "605",
+          "children": [
+            {
+              "id": "exp.income_security.nutrition.snap",
+              "label": {
+                "en": "Supplemental Nutrition Assistance Program (SNAP)",
+                "de": "Lebensmittelhilfe SNAP („Food Stamps“)"
+              },
+              "description": {
+                "en": "A monthly benefit for buying food for households with low incomes.",
+                "de": "Monatliches Guthaben für Lebensmittel für Haushalte mit geringem Einkommen."
+              },
+              "code": "005-84-3505",
+              "amount": 106336000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "official",
+              "sources": [
+                "omb_pbd_outlays_fy2027"
+              ]
+            },
+            {
+              "id": "exp.income_security.nutrition.other",
+              "label": {
+                "en": "School meals, WIC and other food assistance",
+                "de": "Schulessen, WIC und andere Ernährungshilfen"
+              },
+              "code": "605, rest",
+              "amount": 43295000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "derived",
+              "sources": [
+                "omb_hist_fy2027",
+                "omb_pbd_outlays_fy2027"
+              ],
+              "note": {
+                "en": "Subfunction 605 without SNAP: school meals and other child nutrition ($33.4 billion), the nutrition programme for women, infants and children WIC ($8.0 billion), and others.",
+                "de": "Teilfunktion 605 ohne SNAP: Schulessen und andere Kinderernährung (33,4 Mrd. Dollar), Ernährungsprogramm für Schwangere, Mütter und Kleinkinder WIC (8,0 Mrd. Dollar) und weitere."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.income_security.other",
+          "label": {
+            "en": "Other income support",
+            "de": "Weitere Leistungen für Geringverdienende"
+          },
+          "code": "609",
+          "children": [
+            {
+              "id": "exp.income_security.other.ssi",
+              "label": {
+                "en": "Supplemental Security Income (SSI)",
+                "de": "Grundsicherung für Ältere und Menschen mit Behinderung (SSI)"
+              },
+              "description": {
+                "en": "A minimum income for aged, blind and disabled people with little income and few assets, paid from general revenue.",
+                "de": "Mindestleistung für Ältere, Blinde und Menschen mit Behinderung mit geringem Einkommen und Vermögen, aus Steuermitteln."
+              },
+              "code": "016-00-0406",
+              "amount": 65894000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "derived",
+              "sources": [
+                "omb_pbd_outlays_fy2027"
+              ],
+              "note": {
+                "en": "Account \"Supplemental Security Income Program\" ($69.5 billion) less recovered overpayments ($3.6 billion).",
+                "de": "Konto „Supplemental Security Income Program“ (69,5 Mrd. Dollar) abzüglich zurückgeforderter Überzahlungen (3,6 Mrd. Dollar)."
+              }
+            },
+            {
+              "id": "exp.income_security.other.eitc",
+              "label": {
+                "en": "Earned income tax credit, refundable part",
+                "de": "Steuergutschrift für Erwerbstätige (EITC), ausgezahlter Teil"
+              },
+              "code": "015-45-0906",
+              "amount": 66007000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "official",
+              "sources": [
+                "omb_pbd_outlays_fy2027"
+              ],
+              "note": {
+                "en": "Only the part paid out beyond the income tax owed counts as spending; the rest reduces income tax revenue.",
+                "de": "Ausgabe ist nur der Teil, der über die geschuldete Einkommensteuer hinaus ausgezahlt wird; der Rest mindert die Einkommensteuer."
+              }
+            },
+            {
+              "id": "exp.income_security.other.ctc",
+              "label": {
+                "en": "Child tax credit, refundable part",
+                "de": "Kinder-Steuergutschrift, ausgezahlter Teil"
+              },
+              "code": "015-45-0922",
+              "amount": 26566000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "official",
+              "sources": [
+                "omb_pbd_outlays_fy2027"
+              ],
+              "note": {
+                "en": "Only the part paid out beyond the income tax owed counts as spending; the rest reduces income tax revenue.",
+                "de": "Ausgabe ist nur der Teil, der über die geschuldete Einkommensteuer hinaus ausgezahlt wird; der Rest mindert die Einkommensteuer."
+              }
+            },
+            {
+              "id": "exp.income_security.other.tanf",
+              "label": {
+                "en": "Temporary Assistance for Needy Families (TANF)",
+                "de": "Sozialhilfe für Familien (TANF)"
+              },
+              "description": {
+                "en": "A block grant to the states for cash assistance and services for families with children.",
+                "de": "Pauschalzuschuss an die Bundesstaaten für Geldleistungen und Dienste für Familien mit Kindern."
+              },
+              "code": "009-70-1552",
+              "amount": 17714000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "official",
+              "sources": [
+                "omb_pbd_outlays_fy2027"
+              ]
+            },
+            {
+              "id": "exp.income_security.other.rest",
+              "label": {
+                "en": "Child care, foster care, refugee assistance and other",
+                "de": "Kinderbetreuung, Pflegefamilien, Flüchtlingshilfe und anderes"
+              },
+              "code": "609, rest",
+              "amount": 59140000000,
+              "levels": {
+                "central": 1
+              },
+              "quality": "derived",
+              "sources": [
+                "omb_hist_fy2027",
+                "omb_pbd_outlays_fy2027"
+              ],
+              "note": {
+                "en": "Remainder of subfunction 609 ($235.3 billion), including the pandemic refundable credits for employers ($18.2 billion).",
+                "de": "Rest der Teilfunktion 609 (235,3 Mrd. Dollar), darunter die pandemiebedingten Steuergutschriften für Arbeitgeber (18,2 Mrd. Dollar)."
+              }
+            }
+          ]
+        },
+        {
+          "id": "exp.income_security.unemployment",
+          "label": {
+            "en": "Unemployment compensation",
+            "de": "Arbeitslosenunterstützung"
+          },
+          "description": {
+            "en": "State unemployment benefits paid from the federal Unemployment Trust Fund.",
+            "de": "Arbeitslosengeld der Bundesstaaten aus dem Arbeitslosenversicherungsfonds des Bundes."
+          },
+          "code": "603",
+          "amount": 41771000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.income_security.housing",
+          "label": {
+            "en": "Housing assistance, net of mortgage-guarantee receipts",
+            "de": "Wohnungshilfen, abzüglich Einnahmen aus Hypothekengarantien"
+          },
+          "description": {
+            "en": "Rental vouchers (\"Section 8\"), project-based rental assistance, public housing, homeless assistance.",
+            "de": "Mietgutscheine („Section 8“), objektbezogene Mietzuschüsse, Sozialwohnungen, Hilfe für Wohnungslose."
+          },
+          "code": "604 + 371",
+          "amount": 37281000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Own allocation. Housing assistance (subfunction 604): $78.0 billion, of which tenant-based vouchers $38.3 billion and project-based rental assistance $17.2 billion. Deducted: the net receipts of federal mortgage guarantees (subfunction 371) of $40.7 billion, mainly from the Federal Housing Administration's mortgage insurance, guarantee fees of Fannie Mae and Freddie Mac, and Ginnie Mae. The budget books them as negative spending in function 370 (\"Commerce and housing credit\"), which as a whole was negative (−$28.1 billion) and therefore cannot be shown as an item of its own.",
+            "de": "Eigene Zuordnung. Wohnungshilfen (Teilfunktion 604): 78,0 Mrd. Dollar, davon Mietgutscheine 38,3 Mrd. Dollar und objektbezogene Mietzuschüsse 17,2 Mrd. Dollar. Abgezogen: die Nettoeinnahmen der Hypothekengarantien des Bundes (Teilfunktion 371) von 40,7 Mrd. Dollar, vor allem der Hypothekenversicherung der Federal Housing Administration, der Garantiegebühren von Fannie Mae und Freddie Mac und von Ginnie Mae. Der Haushalt bucht sie als negative Ausgaben in der Funktion 370 („Commerce and housing credit“), die insgesamt negativ war (−28,1 Mrd. Dollar) und deshalb nicht als eigener Posten gezeigt werden kann."
+          }
+        },
+        {
+          "id": "exp.income_security.federal_retirement",
+          "label": {
+            "en": "Federal civilian and military pensions, net of agencies' contributions",
+            "de": "Pensionen für Bundesbeamte und Soldaten, abzüglich der Beiträge der Behörden"
+          },
+          "description": {
+            "en": "Pensions and disability benefits paid from the Civil Service Retirement and Disability Fund and the Military Retirement Fund.",
+            "de": "Pensionen und Erwerbsminderungsleistungen aus dem Pensionsfonds der zivilen Bundesbediensteten und dem Fonds für Militärpensionen."
+          },
+          "code": "602 + 951 + 952",
+          "amount": 45786000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Own allocation. Pensions paid (subfunction 602): $190.2 billion. Deducted: $144.4 billion that federal agencies paid as employers for their own staff into the retirement funds, Social Security and Medicare (subfunctions 951 and 952, \"undistributed offsetting receipts\"). These contributions are already counted as spending of the agencies, for example under military personnel, and the budget assigns their counterpart to no function. Deducting them here keeps the total equal to official outlays without a negative item.",
+            "de": "Eigene Zuordnung. Gezahlte Pensionen (Teilfunktion 602): 190,2 Mrd. Dollar. Abgezogen: 144,4 Mrd. Dollar, die Bundesbehörden als Arbeitgeber für ihr eigenes Personal an die Pensionsfonds, an die Social Security und an Medicare gezahlt haben (Teilfunktionen 951 und 952, „undistributed offsetting receipts“). Diese Beiträge sind bereits als Ausgaben der Behörden gezählt, etwa beim Militärpersonal, und der Haushalt ordnet ihre Gegenbuchung keiner Funktion zu. Der Abzug an dieser Stelle hält die Summe gleich den amtlichen Ausgaben, ohne einen negativen Posten."
+          }
+        },
+        {
+          "id": "exp.income_security.other_retirement",
+          "label": {
+            "en": "Railroad retirement and pension insurance (PBGC)",
+            "de": "Eisenbahnerrenten und Insolvenzsicherung von Betriebsrenten (PBGC)"
+          },
+          "code": "601",
+          "amount": 6663000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.veterans",
+      "label": {
+        "en": "Veterans benefits and services",
+        "de": "Leistungen für Veteranen"
+      },
+      "code": "700",
+      "children": [
+        {
+          "id": "exp.veterans.compensation",
+          "label": {
+            "en": "Disability compensation and pensions",
+            "de": "Entschädigungen und Renten"
+          },
+          "description": {
+            "en": "Compensation for service-connected disabilities and means-tested pensions.",
+            "de": "Entschädigung für im Dienst erlittene Gesundheitsschäden und bedürftigkeitsabhängige Renten."
+          },
+          "code": "701",
+          "amount": 200631000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.veterans.health",
+          "label": {
+            "en": "Veterans' health care",
+            "de": "Gesundheitsversorgung"
+          },
+          "code": "703",
+          "amount": 148835000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.veterans.education",
+          "label": {
+            "en": "Education, training and rehabilitation (GI Bill)",
+            "de": "Bildung und Rehabilitation (GI Bill)"
+          },
+          "code": "702",
+          "amount": 16379000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.veterans.other",
+          "label": {
+            "en": "Housing loans and other services",
+            "de": "Wohnungsbaukredite und übrige Leistungen"
+          },
+          "code": "704 + 705",
+          "amount": 11318000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.transportation",
+      "label": {
+        "en": "Transportation",
+        "de": "Verkehr"
+      },
+      "code": "400",
+      "children": [
+        {
+          "id": "exp.transportation.highways",
+          "label": {
+            "en": "Highways",
+            "de": "Fernstraßen (Highways)"
+          },
+          "code": "021-15 in 401",
+          "amount": 65032000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Accounts of the Federal Highway Administration in subfunction 401, mainly grants to the states from the Highway Trust Fund.",
+            "de": "Konten der Federal Highway Administration in Teilfunktion 401, vor allem Zuschüsse an die Bundesstaaten aus dem Highway Trust Fund."
+          }
+        },
+        {
+          "id": "exp.transportation.transit",
+          "label": {
+            "en": "Public transit",
+            "de": "Öffentlicher Nahverkehr"
+          },
+          "code": "021-36 in 401",
+          "amount": 25294000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.transportation.rail",
+          "label": {
+            "en": "Rail, including Amtrak",
+            "de": "Bahn, einschließlich Amtrak"
+          },
+          "code": "021-27 in 401",
+          "amount": 6424000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.transportation.other_ground",
+          "label": {
+            "en": "Road safety and other ground transport",
+            "de": "Verkehrssicherheit und übriger Landverkehr"
+          },
+          "code": "401, rest",
+          "amount": 4077000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.transportation.air",
+          "label": {
+            "en": "Aviation",
+            "de": "Luftverkehr"
+          },
+          "description": {
+            "en": "Air traffic control and airports (FAA), passenger screening (TSA).",
+            "de": "Flugsicherung und Flughäfen (FAA), Fluggastkontrollen (TSA)."
+          },
+          "code": "402",
+          "amount": 29743000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.transportation.water_other",
+          "label": {
+            "en": "Coast Guard, shipping and other",
+            "de": "Küstenwache, Schifffahrt und Sonstiges"
+          },
+          "code": "403 + 407",
+          "amount": 14750000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.justice",
+      "label": {
+        "en": "Administration of justice",
+        "de": "Justiz und innere Sicherheit"
+      },
+      "code": "750",
+      "children": [
+        {
+          "id": "exp.justice.cbp",
+          "label": {
+            "en": "Customs and Border Protection (CBP)",
+            "de": "Zoll- und Grenzschutzbehörde (CBP)"
+          },
+          "description": {
+            "en": "Border checks, the Border Patrol, customs clearance.",
+            "de": "Grenzkontrollen, Grenzpolizei, Zollabfertigung."
+          },
+          "code": "024-58 in 751",
+          "amount": 20987000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Accounts of CBP in subfunction 751. Customs user fees, which the budget does not attribute to the agency itself, are under other law enforcement.",
+            "de": "Konten der CBP in Teilfunktion 751. Die Zollgebühren, die der Haushalt der Behörde nicht direkt zurechnet, stehen bei der übrigen Strafverfolgung."
+          }
+        },
+        {
+          "id": "exp.justice.ice",
+          "label": {
+            "en": "Immigration and Customs Enforcement (ICE)",
+            "de": "Einwanderungs- und Zollbehörde (ICE)"
+          },
+          "description": {
+            "en": "Arrest, detention and removal of non-citizens without a right to stay; investigations.",
+            "de": "Festnahme, Haft und Abschiebung von Ausländern ohne Aufenthaltsrecht; Ermittlungen."
+          },
+          "code": "024-55 in 751",
+          "amount": 10701000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.justice.other_enforcement",
+          "label": {
+            "en": "FBI, DEA, Secret Service and other law enforcement, net of fees",
+            "de": "FBI, DEA, Secret Service und übrige Strafverfolgung, abzüglich Gebühren"
+          },
+          "code": "751, rest",
+          "amount": 12174000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Remainder of subfunction 751 ($43.9 billion), including the fee-funded immigration services (USCIS) and less receipts from immigration and customs user fees.",
+            "de": "Rest der Teilfunktion 751 (43,9 Mrd. Dollar), einschließlich der gebührenfinanzierten Einwanderungsbehörde USCIS und abzüglich der Einnahmen aus Einwanderungs- und Zollgebühren."
+          }
+        },
+        {
+          "id": "exp.justice.courts",
+          "label": {
+            "en": "Courts, prosecutors and marshals",
+            "de": "Gerichte, Staatsanwaltschaften und Marshals"
+          },
+          "code": "752",
+          "amount": 19909000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.justice.prisons",
+          "label": {
+            "en": "Federal prisons",
+            "de": "Bundesgefängnisse"
+          },
+          "code": "753",
+          "amount": 9133000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.justice.assistance",
+          "label": {
+            "en": "Justice grants and compensation for victims",
+            "de": "Zuschüsse an die Justiz der Bundesstaaten und Opferentschädigung"
+          },
+          "code": "754",
+          "amount": 10242000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.community",
+      "label": {
+        "en": "Community and regional development",
+        "de": "Kommunal- und Regionalentwicklung"
+      },
+      "code": "450",
+      "children": [
+        {
+          "id": "exp.community.disaster_relief_fund",
+          "label": {
+            "en": "FEMA Disaster Relief Fund",
+            "de": "Katastrophenhilfefonds der FEMA"
+          },
+          "description": {
+            "en": "Aid of the Federal Emergency Management Agency after declared disasters.",
+            "de": "Hilfe der Bundesbehörde für Katastrophenschutz nach erklärten Katastrophen."
+          },
+          "code": "024-70-0702",
+          "amount": 48244000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.community.disaster_other",
+          "label": {
+            "en": "Flood insurance, disaster loans and other disaster aid",
+            "de": "Hochwasserversicherung, Katastrophendarlehen und übrige Katastrophenhilfe"
+          },
+          "code": "453, rest",
+          "amount": 14524000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.community.development",
+          "label": {
+            "en": "Community and regional development grants",
+            "de": "Zuschüsse für Kommunal- und Regionalentwicklung"
+          },
+          "code": "451 + 452",
+          "amount": 19606000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.natural_resources",
+      "label": {
+        "en": "Natural resources and environment",
+        "de": "Umwelt und natürliche Ressourcen"
+      },
+      "code": "300",
+      "children": [
+        {
+          "id": "exp.natural_resources.pollution",
+          "label": {
+            "en": "Pollution control (EPA)",
+            "de": "Umweltschutz (Umweltbehörde EPA)"
+          },
+          "code": "304",
+          "amount": 36232000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.natural_resources.water",
+          "label": {
+            "en": "Water resources",
+            "de": "Wasserwirtschaft"
+          },
+          "description": {
+            "en": "Projects of the Army Corps of Engineers and the Bureau of Reclamation.",
+            "de": "Bauten und Unterhalt des Corps of Engineers und des Bureau of Reclamation."
+          },
+          "code": "301",
+          "amount": 17020000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.natural_resources.land",
+          "label": {
+            "en": "Conservation and land management, net of offshore royalties",
+            "de": "Naturschutz und Verwaltung bundeseigener Flächen, abzüglich Offshore-Förderabgaben"
+          },
+          "description": {
+            "en": "Forest Service and wildland fire, conservation programmes for farmers, management of federal lands and minerals.",
+            "de": "Forstverwaltung und Waldbrandbekämpfung, Naturschutzprogramme für Landwirte, Verwaltung der Flächen und Bodenschätze des Bundes."
+          },
+          "code": "302 + 953 + 954",
+          "amount": 13869000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Own allocation. Subfunction 302: $19.7 billion, already net of royalties on public lands. Also deducted: rents and royalties for oil and gas on the Outer Continental Shelf and sales of major assets (subfunctions 953 and 954, $5.8 billion), which the budget assigns to no function.",
+            "de": "Eigene Zuordnung. Teilfunktion 302: 19,7 Mrd. Dollar, bereits abzüglich der Förderabgaben an Land. Abgezogen außerdem: Pachten und Förderabgaben für Öl und Gas auf dem äußeren Festlandsockel und Verkäufe von Vermögen (Teilfunktionen 953 und 954, 5,8 Mrd. Dollar), die der Haushalt keiner Funktion zuordnet."
+          }
+        },
+        {
+          "id": "exp.natural_resources.recreation",
+          "label": {
+            "en": "National parks and recreation",
+            "de": "Nationalparks und Erholung"
+          },
+          "code": "303",
+          "amount": 5614000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.natural_resources.other",
+          "label": {
+            "en": "Weather, oceans and other (NOAA)",
+            "de": "Wetter- und Meeresdienst (NOAA) und Sonstiges"
+          },
+          "code": "306",
+          "amount": 11293000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.education",
+      "label": {
+        "en": "Education, training, employment and social services",
+        "de": "Bildung, Ausbildung, Beschäftigung und soziale Dienste"
+      },
+      "code": "500",
+      "children": [
+        {
+          "id": "exp.education.schools_colleges",
+          "label": {
+            "en": "Schools, colleges and student aid, student loans netted",
+            "de": "Schulen, Hochschulen und Studienförderung, Studienkredite saldiert"
+          },
+          "description": {
+            "en": "Grants to schools for disadvantaged pupils (Title I) and for special education, pandemic aid to schools, Pell grants and the federal student loans.",
+            "de": "Zuschüsse für Schulen mit benachteiligten Schülern (Title I) und für Sonderpädagogik, Pandemiehilfen für Schulen, Pell-Stipendien und die Studienkredite des Bundes."
+          },
+          "code": "501 + 502 + 503",
+          "amount": 38015000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027",
+            "omb_ap_credit_fy2027"
+          ],
+          "note": {
+            "en": "Schools (subfunction 501): $68.4 billion. Pell grants and other student aid: $50.4 billion. The federal student loans, by contrast, lowered spending in 2025 by $85.4 billion: a loan counts at its expected lifetime cost when it is made, and later changes in that cost are booked when they are estimated. In 2025 the Direct Loan programme booked $132.9 billion as negative subsidy; OMB puts the future cost of all outstanding federal student loans at $343.1 billion at the end of 2025, after $476.9 billion a year earlier (Analytical Perspectives, Table 4-1). Because higher education (subfunction 502) was negative as a whole (−$35.0 billion), it is combined here with schools and education research (503).",
+            "de": "Schulen (Teilfunktion 501): 68,4 Mrd. Dollar. Pell-Stipendien und übrige Studienförderung: 50,4 Mrd. Dollar. Die Studienkredite des Bundes senkten die Ausgaben 2025 dagegen um 85,4 Mrd. Dollar: Ein Kredit zählt bei Vergabe mit seinen erwarteten Gesamtkosten, und spätere Änderungen dieser Kosten werden gebucht, sobald sie geschätzt werden. 2025 buchte das Direktkreditprogramm 132,9 Mrd. Dollar als negative Subvention; die OMB schätzt die künftigen Kosten aller ausstehenden Studienkredite Ende 2025 auf 343,1 Mrd. Dollar, nach 476,9 Mrd. Dollar ein Jahr zuvor (Analytical Perspectives, Tabelle 4-1). Weil die Hochschulförderung (Teilfunktion 502) damit insgesamt negativ war (−35,0 Mrd. Dollar), ist sie hier mit Schulen und Bildungsforschung (503) zusammengefasst."
+          }
+        },
+        {
+          "id": "exp.education.social_services",
+          "label": {
+            "en": "Social services",
+            "de": "Soziale Dienste"
+          },
+          "description": {
+            "en": "Head Start, child welfare, services for the aging, vocational rehabilitation.",
+            "de": "Head Start, Kinder- und Jugendhilfe, Altenhilfe, berufliche Rehabilitation."
+          },
+          "code": "506",
+          "amount": 26311000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.education.training",
+          "label": {
+            "en": "Job training and labour services",
+            "de": "Arbeitsförderung und Arbeitsverwaltung"
+          },
+          "code": "504 + 505",
+          "amount": 7716000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.agriculture",
+      "label": {
+        "en": "Agriculture",
+        "de": "Landwirtschaft"
+      },
+      "code": "350",
+      "children": [
+        {
+          "id": "exp.agriculture.farm_income",
+          "label": {
+            "en": "Farm income support and crop insurance",
+            "de": "Einkommensstützung und Ernteversicherung"
+          },
+          "code": "351",
+          "amount": 21185000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.agriculture.research_services",
+          "label": {
+            "en": "Agricultural research and services",
+            "de": "Agrarforschung und -dienste"
+          },
+          "code": "352",
+          "amount": 26262000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.international",
+      "label": {
+        "en": "International affairs",
+        "de": "Internationale Angelegenheiten"
+      },
+      "description": {
+        "en": "OMB's total for this function is $45.2 billion, including negative outlays of the international financial programmes.",
+        "de": "Die OMB weist für diese Funktion 45,2 Mrd. Dollar aus, einschließlich negativer Ausgaben der internationalen Finanzprogramme."
+      },
+      "code": "150",
+      "children": [
+        {
+          "id": "exp.international.aid",
+          "label": {
+            "en": "Development and humanitarian aid",
+            "de": "Entwicklungs- und humanitäre Hilfe"
+          },
+          "description": {
+            "en": "Global health programmes, disaster and refugee assistance, development assistance, food aid, contributions to the World Bank's IDA, the Millennium Challenge Corporation, the Peace Corps.",
+            "de": "Globale Gesundheitsprogramme, Katastrophen- und Flüchtlingshilfe, Entwicklungshilfe, Nahrungsmittelhilfe, Beiträge zur Weltbanktochter IDA, Millennium Challenge Corporation, Friedenskorps."
+          },
+          "code": "151",
+          "amount": 30014000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.international.security",
+          "label": {
+            "en": "Security assistance, net of the Foreign Military Sales trust fund",
+            "de": "Sicherheitshilfe, saldiert mit dem Treuhandfonds für Rüstungsexporte (FMS)"
+          },
+          "code": "152 + 184-70-8242",
+          "amount": 2303000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "International security assistance (subfunction 152): $15.5 billion, of which the Economic Support Fund $7.5 billion and Foreign Military Financing $6.9 billion. Netted: the trust fund for arms sales to foreign governments (Foreign Military Sales), through which Foreign Military Financing is also spent; in 2025 it took in $13.2 billion more than it paid out. It belongs to subfunction 155 (international financial programmes), which was negative as a whole.",
+            "de": "Internationale Sicherheitshilfe (Teilfunktion 152): 15,5 Mrd. Dollar, davon Economic Support Fund 7,5 Mrd. Dollar und Militärfinanzierung für Partnerstaaten (Foreign Military Financing) 6,9 Mrd. Dollar. Saldiert: der Treuhandfonds für Rüstungsverkäufe an ausländische Regierungen (Foreign Military Sales), über den auch die Militärfinanzierung ausgegeben wird; 2025 nahm er 13,2 Mrd. Dollar mehr ein als er auszahlte. Er gehört zur Teilfunktion 155 (internationale Finanzprogramme), die insgesamt negativ war."
+          }
+        },
+        {
+          "id": "exp.international.diplomacy",
+          "label": {
+            "en": "Diplomacy, embassies and exchanges",
+            "de": "Diplomatie, Botschaften und Austausch"
+          },
+          "code": "153 + 154 + 155, rest",
+          "amount": 12854000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Subfunctions 153 and 154 ($14.6 billion), net of visa and passport fees, and the rest of the international financial programmes (−$1.7 billion, mainly the Exchange Stabilization Fund).",
+            "de": "Teilfunktionen 153 und 154 (14,6 Mrd. Dollar), abzüglich der Visa- und Passgebühren, sowie der Rest der internationalen Finanzprogramme (−1,7 Mrd. Dollar, vor allem der Devisenstabilisierungsfonds)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.science",
+      "label": {
+        "en": "General science, space and technology",
+        "de": "Wissenschaft, Raumfahrt und Technologie"
+      },
+      "code": "250",
+      "children": [
+        {
+          "id": "exp.science.space",
+          "label": {
+            "en": "Space flight and research (NASA)",
+            "de": "Raumfahrt und -forschung (NASA)"
+          },
+          "code": "252",
+          "amount": 23604000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.science.basic_research",
+          "label": {
+            "en": "General science and basic research",
+            "de": "Grundlagenforschung"
+          },
+          "description": {
+            "en": "Mainly the National Science Foundation and the Department of Energy's Office of Science.",
+            "de": "Vor allem die National Science Foundation und das Wissenschaftsbüro des Energieministeriums."
+          },
+          "code": "251",
+          "amount": 18362000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.general_government",
+      "label": {
+        "en": "General government",
+        "de": "Allgemeine Verwaltung"
+      },
+      "code": "800",
+      "children": [
+        {
+          "id": "exp.general_government.irs",
+          "label": {
+            "en": "Internal Revenue Service (IRS)",
+            "de": "Bundessteuerbehörde (IRS)"
+          },
+          "description": {
+            "en": "Taxpayer services, enforcement, operations and IT of the tax agency. The refundable tax credits it pays out are shown with the programmes they serve.",
+            "de": "Steuerberatung, Steuerprüfung und -vollstreckung, Betrieb und IT der Steuerbehörde. Die auszahlbaren Steuergutschriften, die sie überweist, stehen bei den Programmen, denen sie dienen."
+          },
+          "code": "015-45 in 803",
+          "amount": 18232000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.general_government.fiscal_assistance",
+          "label": {
+            "en": "General payments to states and territories",
+            "de": "Allgemeine Zahlungen an Bundesstaaten und Territorien"
+          },
+          "code": "806",
+          "amount": 9134000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.general_government.congress",
+          "label": {
+            "en": "Congress and legislative agencies",
+            "de": "Kongress und Einrichtungen der Legislative"
+          },
+          "code": "801",
+          "amount": 6303000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.general_government.other",
+          "label": {
+            "en": "Other general government, net of general receipts",
+            "de": "Übrige allgemeine Verwaltung, abzüglich allgemeiner Einnahmen"
+          },
+          "code": "802-809, rest",
+          "amount": 6877000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "White House, Treasury's fiscal operations other than the IRS, personnel and property management, federal claims and judgments; less general receipts of the budget (subfunction 809).",
+            "de": "Weißes Haus, Finanzverwaltung ohne IRS, Personal- und Liegenschaftsverwaltung, Schadensersatzzahlungen des Bundes; abzüglich allgemeiner Einnahmen des Haushalts (Teilfunktion 809)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "exp.energy",
+      "label": {
+        "en": "Energy",
+        "de": "Energie"
+      },
+      "code": "270",
+      "children": [
+        {
+          "id": "exp.energy.supply",
+          "label": {
+            "en": "Energy supply",
+            "de": "Energieversorgung"
+          },
+          "code": "271",
+          "amount": 11794000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        },
+        {
+          "id": "exp.energy.other",
+          "label": {
+            "en": "Energy conservation, petroleum reserve and regulation",
+            "de": "Energieeinsparung, strategische Ölreserve und Regulierung"
+          },
+          "code": "272 + 274 + 276",
+          "amount": 8971000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exp.commerce",
+      "label": {
+        "en": "Commerce, postal service and deposit insurance",
+        "de": "Wirtschaftsförderung, Post und Einlagensicherung"
+      },
+      "description": {
+        "en": "OMB's function \"Commerce and housing credit\" was negative in 2025 (−$28.1 billion): receipts from mortgage guarantees and deposit insurance exceeded spending. Mortgage credit is deducted under housing assistance; the rest is here.",
+        "de": "Die Funktion „Commerce and housing credit“ der OMB war 2025 negativ (−28,1 Mrd. Dollar): Die Einnahmen aus Hypothekengarantien und Einlagensicherung überstiegen die Ausgaben. Die Hypothekengarantien sind bei den Wohnungshilfen abgezogen; hier steht der Rest."
+      },
+      "code": "370 without 371",
+      "children": [
+        {
+          "id": "exp.commerce.commerce",
+          "label": {
+            "en": "Commerce and small business, net of deposit insurance",
+            "de": "Wirtschafts- und Mittelstandsförderung, abzüglich Einlagensicherung"
+          },
+          "code": "376 + 373",
+          "amount": 7412000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "derived",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Own allocation. Other advancement of commerce (subfunction 376): $39.6 billion, including semiconductor subsidies under the CHIPS Act ($14.6 billion) and the Universal Service Fund for telecommunications ($8.6 billion). Deducted: deposit insurance (subfunction 373), whose receipts exceeded its costs by $32.2 billion, mainly at the FDIC's Deposit Insurance Fund.",
+            "de": "Eigene Zuordnung. Übrige Wirtschaftsförderung (Teilfunktion 376): 39,6 Mrd. Dollar, darunter die Halbleiterförderung nach dem CHIPS Act (14,6 Mrd. Dollar) und der Universaldienstfonds für Telekommunikation (8,6 Mrd. Dollar). Abgezogen: die Einlagensicherung (Teilfunktion 373), deren Einnahmen die Kosten um 32,2 Mrd. Dollar überstiegen, vor allem beim Einlagensicherungsfonds der FDIC."
+          }
+        },
+        {
+          "id": "exp.commerce.postal",
+          "label": {
+            "en": "Postal Service",
+            "de": "Post (Postal Service)"
+          },
+          "code": "372",
+          "amount": 5165000000,
+          "levels": {
+            "central": 1
+          },
+          "quality": "official",
+          "sources": [
+            "omb_hist_fy2027",
+            "omb_pbd_outlays_fy2027"
+          ],
+          "note": {
+            "en": "Outlays of the Postal Service less its own revenue. The Postal Service Fund is \"off-budget\" by law.",
+            "de": "Ausgaben der Post abzüglich ihrer eigenen Einnahmen. Der Postal Service Fund steht gesetzlich außerhalb des Haushalts („off-budget“)."
+          }
+        }
+      ]
+    }
+  ]
+}
