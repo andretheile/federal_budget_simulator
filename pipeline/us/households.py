@@ -18,11 +18,17 @@ Inputs (.cache/, written by fetch_inputs.py; nothing there is executed):
 
 Own steps, each named in the card that uses it:
   - Rebate phase-out: AGI is taken as evenly spread within each AGI class of Table 1.2; children are counted with
-    the adults in proportion (the Census ratio of people under 18 to adults), because the table does not give
-    children per return.
+    the adults in proportion (the Census ratio of children under 17 to adults), because the table does not give
+    children per return. S. 2475 pays for qualifying children in the sense of IRC 24(c), who are under 17;
+    17-year-olds are neither such children nor eligible individuals (they can be claimed as dependents).
   - Top rate: the ordinary income above the bill's thresholds is the income taxed at 37% on returns with AGI of $1
     million or more (Table 3.5), less, for each return taxed at 37%, the income between the 37% threshold of 2023
-    and the bill's threshold, weighted by the filing statuses of the returns taxed at 37% (Table 3.6).
+    and the bill's threshold. The bill's thresholds are in 2018 dollars and indexed like the other brackets
+    (sec. 2(f)); for 2023 each is raised by the factor that took the same filing status's 37% threshold from the
+    bill's (2018) table to 2023. The gap is weighted, in each AGI class, by the filing statuses of all returns in
+    that class (Table 1.2): Table 3.6 gives the statuses only for all returns taxed at 37%, including those with AGI
+    below $1 million, where the lower thresholds of single, head-of-household and separate filers put relatively
+    more of them.
   - Wealth: a Pareto distribution through the top 1% and the top 0.1% of the Distributional Financial Accounts
     gives the net worth above $50 million and above $1 billion.
 """
@@ -37,14 +43,18 @@ from xls import XLS  # noqa: E402
 
 # --- bill and law parameters (HAND: read from the bill or law text named) -----------------------------------
 # S. 2475, American Worker Rebate Act of 2025 (Hawley, July 28, 2025), new IRC 6428C: $600 per eligible individual
-# (twice on a joint return) and per qualifying child, reduced by 5% of AGI above these amounts.
+# (twice on a joint return) and per qualifying child (IRC 24(c): under 17), reduced by 5% of AGI above these amounts.
 REBATE_DEFAULT = 600
 REBATE_PHASEOUT_RATE = 0.05
 REBATE_THRESHOLD = {"joint": 150000, "separate": 75000, "head": 112500, "single": 75000}
 ADULTS = {"joint": 2, "separate": 1, "head": 1, "single": 1}
-# H.R. 4280, Bipartisan Tax Fairness Act of 2025 (Fitzpatrick, July 2, 2025): 39.6% on taxable income above
-# $2,000,000 on joint returns and above $1,000,000 on other returns.
-TOP_THRESHOLD = {"joint": 2000000, "separate": 1000000, "head": 1000000, "single": 1000000}
+CHILD_AGE_LIMIT = 17          # IRC 24(c)(1): a qualifying child "who has not attained age 17"
+# H.R. 4280, Bipartisan Tax Fairness Act of 2025 (Fitzpatrick, July 2, 2025), sec. 2(a) to (d): 39.6% on taxable
+# income above $2,000,000 on joint returns and above $1,000,000 on other returns, in rate tables that are those of
+# 2018 (37% from $600,000 joint, $500,000 head of household and single, $300,000 separate); sec. 2(f) indexes every
+# bracket amount from 2017, as the brackets of 2018 have been.
+TOP_THRESHOLD_2018 = {"joint": 2000000, "separate": 1000000, "head": 1000000, "single": 1000000}
+TOP_BRACKET_2018 = {"joint": 600000, "separate": 300000, "head": 500000, "single": 500000}
 TOP_RATE_NOW = 37.0
 # S. 4246, Ultra-Millionaire Tax Act of 2026 (Warren, March 26, 2026): 2% of net worth above $50 million, 3% above
 # $1 billion.
@@ -84,6 +94,7 @@ SNAP_PER_ROWS = {
 }
 SNAP_PER_FY2025 = {state: row[2] for state, row in SNAP_PER_ROWS.items()}
 SNAP_PER_NATIONAL = 10.62
+SNAP_NOT_STATES = ("District of Columbia", "Guam", "Virgin Islands")   # "State" agencies of the Act that are not states
 
 
 def cache(rel):
@@ -96,17 +107,19 @@ def cache(rel):
 # --- Census ----------------------------------------------------------------------------------------------------
 
 def population_2025():
-    """(people under 18, people 18 and over) on July 1, 2025."""
-    young = adults = 0
+    """(children under 17, people aged 17, people 18 and over) on July 1, 2025."""
+    young = seventeen = adults = 0
     for r in csv.DictReader(open(cache("census/nc-est2025-agesex-res.csv"), encoding="utf-8-sig")):
         if r["SEX"] != "0" or r["AGE"] == "999":
             continue
         v = int(r["POPESTIMATE2025"])
-        if int(r["AGE"]) < 18:
+        if int(r["AGE"]) < CHILD_AGE_LIMIT:
             young += v
+        elif int(r["AGE"]) < 18:
+            seventeen += v
         else:
             adults += v
-    return young, adults
+    return young, seventeen, adults
 
 
 # --- IRS Statistics of Income, Table 1.2 ------------------------------------------------------------------------
@@ -164,9 +177,9 @@ def _loss_uniform(lo, hi, threshold, cap):
 
 
 def rebate(amount=REBATE_DEFAULT):
-    """Rebate of `amount` per adult and child: gross cost for the whole population, the part the phase-out takes
-    away from filers, and the net cost."""
-    young, adults = population_2025()
+    """Rebate of `amount` per adult and child under 17: gross cost for the whole population of those ages, the part
+    the phase-out takes away from filers, and the net cost."""
+    young, _, adults = population_2025()
     per_adult = amount * (1 + young / adults)       # the adult's own amount and, in proportion, the children's
     loss = 0.0
     for status, classes in soi_classes().items():
@@ -196,19 +209,38 @@ def _rate_row(rel):
     return book, book.rows(book.sheets[0])
 
 
+def top_thresholds_2023():
+    """The thresholds of H.R. 4280's 39.6% rate in tax year 2023, by filing status: the bill's 2018 amounts, raised by
+    the factor that took the same status's 37% threshold from the bill's table (2018) to 2023 (Rev. Proc. 2022-38)."""
+    return {s: TOP_THRESHOLD_2018[s] * TOP_BRACKET_2023[s] / TOP_BRACKET_2018[s] for s in TOP_THRESHOLD_2018}
+
+
 def top_rate_base():
     """Ordinary taxable income above the H.R. 4280 thresholds, tax year 2023, dollars. Table 3.5 gives the income
     taxed at 37% by size of AGI; from each class of $1 million or more, the income between the 37% threshold and the
-    bill's threshold is taken off for every return taxed at 37%, with the thresholds weighted by the filing statuses
-    of the returns taxed at 37% (Table 3.6). Classes below $1 million are left out."""
+    bill's threshold (indexed to 2023) is taken off for every return taxed at 37%, with the gap weighted by the filing
+    statuses of all returns in the same AGI class (Table 1.2). Classes below $1 million are left out."""
+    thresholds = top_thresholds_2023()
     _, rows36 = _rate_row("irs/23in36tr.xls")
     row37 = next(v for _, v in rows36 if v and str(v[0]).strip().startswith("37 percent"))
     n37 = {s: float(row37[c]) for s, c in TABLE36_COLUMN.items()}
-    gap = sum(n37[s] / n37["all"] * (TOP_THRESHOLD[s] - TOP_BRACKET_2023[s]) for s in TOP_THRESHOLD)
+    classes = soi_classes()
+    mix = {}                                          # AGI class (lower bound) -> {status: share of its returns}
+    for status in thresholds:
+        for lo, _, n, _, _ in classes[status]:
+            if lo is not None and lo >= 1e6:
+                mix.setdefault(lo, {})[status] = n
+    for lo, row in mix.items():
+        total = sum(row.values())
+        all_returns = next(n for l, _, n, _, _ in classes["all"] if l == lo)
+        if abs(total - all_returns) > 5:              # the four statuses add up to the class
+            sys.exit("Table 1.2: the filing statuses of the class from $%d do not add up" % lo)
+        mix[lo] = {s: v / total for s, v in row.items()}
+    gap_of = lambda lo: sum(mix[lo][s] * (thresholds[s] - TOP_BRACKET_2023[s]) for s in thresholds)
     book, rows35 = _rate_row("irs/23in35tr.xls")
     header = dict(rows35)[4]
     col = next(i for i, x in enumerate(header) if str(x).strip().startswith("37 percent"))
-    base, income37 = 0.0, 0.0
+    base, income37, returns, gap_sum = 0.0, 0.0, 0.0, 0.0
     for _, v in rows35:
         label = str(v[0]) if v and v[0] not in (None, "None") else ""
         if not label.startswith("$"):
@@ -216,12 +248,23 @@ def top_rate_base():
         lo, _ = _bounds(label)
         if lo is None or lo < 1e6:
             continue
+        if lo not in mix:
+            sys.exit("Tables 3.5 and 1.2: no class from $%d in Table 1.2" % lo)
         n, inc = float(v[col] or 0), float(v[col + 1] or 0) * 1e3
         income37 += inc
-        base += max(0.0, inc - n * gap)
+        returns += n
+        gap_sum += n * gap_of(lo)
+        base += max(0.0, inc - n * gap_of(lo))
+    if len(mix) != 5:
+        sys.exit("Table 1.2: expected five AGI classes of $1 million or more, found %d" % len(mix))
     total37 = float(row37[2]) * 1e3
-    return {"base": base, "gap": gap, "income37_1m": income37, "income37_all": total37, "returns37": n37["all"],
-            "joint_share": n37["joint"] / n37["all"]}
+    joint_1m = sum(n for lo, _, n, _, _ in classes["joint"] if lo is not None and lo >= 1e6)
+    all_1m = sum(n for lo, _, n, _, _ in classes["all"] if lo is not None and lo >= 1e6)
+    return {"base": base, "gap": gap_sum / returns, "income37_1m": income37, "income37_all": total37,
+            "returns37": n37["all"], "returns37_1m": returns, "joint_share": n37["joint"] / n37["all"],
+            "joint_share_1m": joint_1m / all_1m, "threshold_joint_2023": thresholds["joint"],
+            "threshold_single_2023": thresholds["single"], "threshold_head_2023": thresholds["head"],
+            "threshold_separate_2023": thresholds["separate"]}
 
 
 # --- Federal Reserve, Distributional Financial Accounts --------------------------------------------------------
@@ -296,9 +339,13 @@ def snap_state_share():
         sys.exit("SNAP error rates: weighted %.2f against the national %.2f; check the transcription" % (weighted / total, SNAP_PER_NATIONAL))
     share = sum(v * f for v, (_, f) in zip(by_tier, SNAP_TIERS)) * SNAP_TOP_SHARE / 100
     delayed = sum(v for s, v in states.items() if v and SNAP_PER_FY2025[s] * 1.5 >= 20)
+    high = [s for s, v in states.items() if v and SNAP_PER_FY2025[s] >= 10]
+    low = [s for s, v in states.items() if v and SNAP_PER_FY2025[s] < 6]
     return {"benefits": total, "by_tier": by_tier, "state_share": share, "delayed_benefits": delayed,
-            "weighted_per": weighted / total, "states_15": sum(1 for s, v in states.items() if v and SNAP_PER_FY2025[s] >= 10),
-            "states_0": sum(1 for s, v in states.items() if v and SNAP_PER_FY2025[s] < 6)}
+            "weighted_per": weighted / total, "states_15": len(high), "states_0": len(low),
+            # the Food and Nutrition Act counts DC, Guam and the Virgin Islands as states: the 50 states among them
+            "states_15_of_50": sum(1 for s in high if s not in SNAP_NOT_STATES),
+            "states_0_of_50": sum(1 for s in low if s not in SNAP_NOT_STATES)}
 
 
 # --- CMS, Marketplace open enrollment ---------------------------------------------------------------------------
@@ -321,8 +368,9 @@ def figures():
     for year in (2025, 2026):
         for k, v in marketplace(year).items():
             f["oep%d_%s" % (year, k)] = v
-    young, adults = population_2025()
-    f["pop_under18_2025"], f["pop_adults_2025"] = young, adults
+    young, seventeen, adults = population_2025()
+    f["pop_under17_2025"], f["pop_age17_2025"], f["pop_adults_2025"] = young, seventeen, adults
+    f["pop_total_2025"] = young + seventeen + adults
     for amount in (600, 2000, 5000):
         r = rebate(amount)
         f["rebate_gross_%d" % amount], f["rebate_loss_%d" % amount], f["rebate_net_%d" % amount] = r["gross"], r["loss"], r["net"]
@@ -346,6 +394,7 @@ def figures():
     f["snap_delayed_benefits"] = s["delayed_benefits"]
     f["snap_weighted_per"] = s["weighted_per"]
     f["snap_states_15"], f["snap_states_0"] = s["states_15"], s["states_0"]
+    f["snap_states_15_of_50"], f["snap_states_0_of_50"] = s["states_15_of_50"], s["states_0_of_50"]
     return f
 
 

@@ -66,11 +66,27 @@ T12_4_CUSTOMS = {2025: 194.9, 2026: 406.1, 2036: 681.3}
 T12_2_GDP = {2025: 30323, 2026: 32076, 2027: 33793, 2028: 35540, 2029: 37372, 2030: 39285, 2031: 41254,
              2032: 43295, 2033: 45436, 2034: 47683, 2035: 50039, 2036: 52515}
 T12_2_REAL_GDP = {2025: 23709, 2031: 28357, 2036: 32715}
-T12_2_BILL = {2030: 3.1, 2036: 3.1}
-T12_2_NOTE10 = {2030: 3.4, 2036: 3.3}
-# HAND: Analytical Perspectives FY 2027, chapter 1 (ap_1_assumptions_fy2027.pdf), p. 5, Table 1-2, 10-year Treasury
-# notes in the 2027 Budget, calendar years: 3.3 percent from 2030 ("a terminal rate of 3.3 percent in 2030", p. 3).
+T12_2_BILL = {2025: 4.2, 2026: 3.4, 2027: 3.0, 2028: 3.1, 2029: 3.1, 2030: 3.1, 2031: 3.1, 2032: 3.1, 2033: 3.1,
+              2034: 3.1, 2035: 3.1, 2036: 3.1}
+T12_2_NOTE10 = {2025: 4.3, 2026: 3.8, 2027: 3.6, 2028: 3.5, 2029: 3.4, 2030: 3.4, 2031: 3.3, 2032: 3.3, 2033: 3.3,
+                2034: 3.3, 2035: 3.3, 2036: 3.3}
+# HAND: Analytical Perspectives FY 2027, chapter 1 (ap_1_assumptions_fy2027.pdf), printed p. 6, Table 1-2, 10-year
+# Treasury notes in the 2027 Budget, calendar years: 3.3 percent from 2030 ("a terminal rate of 3.3 percent in 2030",
+# printed p. 5).
 AP1_NOTE10_TERMINAL = (2030, 3.3)
+# TRANSCRIBED from the same Table 1-2 (printed p. 6): real GDP, percent change fourth quarter over fourth quarter,
+# calendar years 2026-2036, in the 2027 Budget and in the forecasts it is compared with (CBO's ends in 2035). Checks
+# (check_transcriptions): the Budget's row averages 3.0 over 2026-2036 and the 2026 column is 3.5, 1.8, 2.2 and 1.8,
+# as the text on p. 5 says.
+AP1_T12_REAL_GDP = {
+    "budget": (3.5, 3.1, 3.1, 3.1, 3.0, 2.9, 2.9, 2.9, 2.9, 2.9, 2.9),
+    "blue_chip": (1.8, 2.0, 2.0, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9),
+    "cbo": (2.2, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.7),
+    "fed": (1.8, 1.9, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8),
+}
+# HAND: OMB, Mid-Session Review (MSR_2027.pdf), p. 1: "the Administration's requested $87.6 billion in supplemental
+# funding", $ billion.
+MSR_SUPPLEMENTAL = 87.6
 # HAND: the same chapter, p. 7, Table 1-3, "Interest rates only, sustained during 2026-2036", Outlays, $ billion.
 T01_3_RATES_OUTLAYS = {2026: 44.1, 2027: 142.4, 2028: 206.0, 2029: 265.2, 2030: 318.1, 2031: 370.0, 2032: 417.4,
                        2033: 463.2, 2034: 505.8, 2035: 548.2, 2036: 590.6}
@@ -83,9 +99,15 @@ AP11_AVERAGE_MATURITY_MONTHS = 71
 FR = {"primary_2025": 2.7, "primary_10y": 3.3, "peak": 4.2, "peak_year": 2046, "primary_2100": 3.1, "debt_2100": 576}
 # HAND: OMB, Mid-Session Review of the Budget for FY 2027 (MSR_2027.pdf), transmittal letter of September 4, 2026, and
 # p. 1: it gives no new totals, only Tables S-1 and S-2; outlays for 2026 are projected lower than in the Budget,
-# "partially offset by a reduction in receipts", which is "partly attributable to changes in expected collections from
-# customs duties".
+# "largely due to lower spending projections for non-defense discretionary programs and a decrease in outlays for
+# mandatory programs such as the Supplemental Nutrition Assistance Program and unemployment compensation", "partially
+# offset by a reduction in receipts", which is "partly attributable to changes in expected collections from customs
+# duties"; outlays and receipts in 2027 are "the result of funding provided in the Secure America Act", the
+# supplemental for the Department of War and other needs, and revisions; "Higher revenue projections are driven by
+# technical revisions to individual income taxes and economic changes to corporation income taxes".
 MSR_DATE = dt.date(2026, 9, 4)
+# The day of the Supreme Court's ruling on the emergency tariffs (Learning Resources, Inc. v. Trump, scotus/24-1287.pdf).
+SCOTUS_TARIFF_RULING = dt.date(2026, 2, 20)
 
 # ---- sources (ids of countries/us/sources.json) ----------------------------------------------------------------
 S_HIST = "omb_hist_fy2027"            # Tables 1.1, 2.1, 3.2, 10.1
@@ -104,6 +126,10 @@ S_CR = "plaw_119_103"
 S_OBBBA = "plaw_119_21"
 S_PLAWS = "govinfo_plaw_119"
 S_SCOTUS = "scotus_24_1287"
+S_MTS25 = "treasury_mts_2025_09"
+S_H41 = "fed_h41_20251002"
+S_SECURE = "plaw_119_98"
+S_AP5 = "omb_ap_workforce_fy2027"
 
 
 def cache(rel):
@@ -130,6 +156,11 @@ def check_transcriptions():
     for y, g in T12_2_NOMINAL_GROWTH.items():
         if abs((T12_2_GDP[y] / T12_2_GDP[y - 1] - 1) * 100 - g) > 0.051:
             fail("Table 12-2 %d: GDP grows %.2f%%, the table says %.1f%%" % (y, (T12_2_GDP[y] / T12_2_GDP[y - 1] - 1) * 100, g))
+    budget = AP1_T12_REAL_GDP["budget"]
+    if round(sum(budget) / len(budget), 1) != 3.0 or len(budget) != 11:
+        fail("Table 1-2: the Budget's real growth does not average 3.0 over 2026-2036")
+    if tuple(AP1_T12_REAL_GDP[k][0] for k in ("budget", "blue_chip", "cbo", "fed")) != (3.5, 1.8, 2.2, 1.8):
+        fail("Table 1-2: the 2026 column differs from the text of p. 5")
 
 
 def fail(message):
@@ -172,6 +203,16 @@ def h32_2025():
         if m and len(r) > col and r[col].strip():
             out[m.group(1)] = num(r[col])
     return out
+
+
+def h32_line(prefix):
+    """Table 3.2: {year (estimates included): $ million} of the row whose label starts with `prefix`."""
+    rows = list(X(cache("omb/hist03z2_fy2027.xlsx")).rows("Table"))
+    years = [int(h[:4]) if h[:4].isdigit() else None for h in rows[2][1]]
+    for _, r in rows:
+        if r and r[0].strip().startswith(prefix):
+            return {years[i]: num(r[i]) for i in range(1, len(r)) if years[i] and r[i].strip()}
+    fail("Table 3.2: no row %r" % prefix)
 
 
 def t12_6():
@@ -310,6 +351,63 @@ def fed_longer_run():
         fail("SEP: not the projections of September 2026")
     row = lambda label: [float(v) for v in re.search(label + r"((?: [\d.]+){5})", table).group(1).split()]
     return row("Change in real GDP")[4], row("PCE inflation")[4]
+
+
+def fed_funds_path():
+    """Median federal funds rate at the end of 2026, 2027, 2028 and 2029 and in the longer run, Summary of Economic
+    Projections, Table 1 (memo line, projected appropriate policy path)."""
+    text = open(cache("fed/fomcprojtabl20260916.htm"), encoding="utf-8").read()
+    text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<script.*?</script>", "", text, flags=re.S))))
+    table = text[text.index("Table 1. Economic projections"):]
+    header = re.search(r"Median 1 Central Tendency 2 Range 3 ((?:\d{4} ){4})Longer run", table)
+    if not header or header.group(1).split() != ["2026", "2027", "2028", "2029"]:
+        fail("SEP: the table's years are not 2026 to 2029")
+    values = [float(v) for v in re.search(r"Federal funds rate((?: [\d.]+){5})", table).group(1).split()]
+    return dict(zip([2026, 2027, 2028, 2029, "longer"], values))
+
+
+def fed_deferred_asset():
+    """Federal Reserve, H.4.1 of October 2, 2025, Table 6, all Reserve Banks: "Earnings remittances due to the U.S.
+    Treasury" on Wednesday, October 1, 2025, $ million; negative: the deferred asset, the net earnings the Reserve
+    Banks must realize before remittances to the Treasury resume (footnote 8)."""
+    text = open(cache("fed/h41_20251002.htm"), encoding="utf-8").read()
+    text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<script.*?</script>", "", text, flags=re.S))))
+    if "H.4.1 - October 02, 2025" not in text or "Wednesday Oct 1, 2025" not in text:
+        fail("H.4.1: not the release of October 2, 2025")
+    hits = re.findall(r"Earnings remittances due to the U\.S\. Treasury \d (-?[\d,]+)", text)
+    if len(hits) != 1 or "before remittances to the U.S. Treasury resume" not in text:
+        fail("H.4.1: the line of earnings remittances or its footnote not found")
+    return num(hits[0]) * 1e6, dt.date(2025, 10, 1)
+
+
+def secure_america_act():
+    """P.L. 119-98, the Secure America Act: approval date and the sum of what it appropriates (each section's
+    appropriation, the first amount after "appropriated"), dollars; all of it available until September 30, 2029."""
+    text = open(cache("govinfo/PLAW-119publ98.xml"), encoding="utf-8").read()
+    approved = dt.date.fromisoformat(re.search(r"<approvedDate>([^<]+)", text).group(1))
+    text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", text))
+    if "Secure America Act" not in text:
+        fail("P.L. 119-98: not the Secure America Act")
+    sections = re.split(r" SEC\. (?=\d{3}\. )", text)[1:]
+    amounts = []
+    for s in sections:
+        m = re.search(r"there (?:is|are) appropriated.*?\$([\d,]+)", s)
+        if m:
+            amounts.append(num(m.group(1)))
+            if "September 30, 2029" not in s:
+                fail("P.L. 119-98: an appropriation not available until September 30, 2029")
+    if len(amounts) != 7:
+        fail("P.L. 119-98: %d appropriations, expected 7" % len(amounts))
+    return approved, sum(amounts)
+
+
+def civilian_fte():
+    """Analytical Perspectives FY 2027, Table 5-1: civilian full-time equivalents of the executive branch without the
+    Postal Service, thousands, {2024, 2025, 2026 (estimate), 2027 (estimate)}."""
+    for _, r in X(cache("omb/ap_5_tables_1-3_fy2027.xlsx")).rows("Table 5-1"):
+        if r and r[0].strip().startswith("Total, Executive Branch civilian employment"):
+            return {2024: num(r[1]), 2025: num(r[2]), 2026: num(r[3]), 2027: num(r[4])}
+    fail("Table 5-1: total not found")
 
 
 def continuing_resolution():
@@ -489,6 +587,12 @@ def figures():
     if abs(f["interest_gross"] - f["interest_trust_funds"] - f["interest_other_income"] - f["net_interest"][BASE]) > 1e6:
         fail("the subfunctions of function 900 do not add up to net interest")
     f["fed_remittances"] = budget_node("rev.miscellaneous.federal_reserve")
+    fed_desc = "Deposit of Earnings, Federal Reserve System"
+    f["fed_deposits"] = {2025: mts("4", "2025-09-30", "current_fytd_net_rcpt_amt", fed_desc),
+                         2026: mts("4", "2026-09-30", "current_fytd_net_rcpt_amt", fed_desc)}
+    if abs(f["fed_deposits"][2025] - f["fed_remittances"]) > 0.05e9:
+        fail("the Federal Reserve's deposits in the MTS differ from the budget item")
+    f["fed_deferred_asset"], f["fed_deferred_date"] = fed_deferred_asset()
     f["receipts"] = {y: v[0] * 1e6 for y, v in h1.items()}
     f["outlays"] = {y: v[1] * 1e6 for y, v in h1.items()}
     f["deficit"] = {y: -v[2] * 1e6 for y, v in h1.items()}
@@ -514,7 +618,12 @@ def figures():
     f["fy26_borrowing"] = mts("6", "2026-09-30", "fytd_net_txn_amt", line="9310")
     f["fy26_gap"] = f["fy26_borrowing"] - f["fy26_deficit"]
     f["fy26_customs"] = mts("4", "2026-09-30", "current_fytd_net_rcpt_amt", "Customs Duties")
+    f["fy26_customs_gross"] = mts("4", "2026-09-30", "current_fytd_gross_rcpt_amt", "Customs Duties")
     f["fy26_customs_refunds"] = mts("4", "2026-09-30", "current_fytd_refund_amt", "Customs Duties")
+    # Refunds after the ruling of February 20, 2026: the year's refunds less those through February 2026.
+    f["fy26_customs_refunds_after"] = f["fy26_customs_refunds"] - mts("4", "2026-02-28", "current_fytd_refund_amt",
+                                                                     "Customs Duties")
+    f["fy25_customs_refunds"] = mts("4", "2025-09-30", "current_fytd_refund_amt", "Customs Duties")
     f["fy26_primary"] = f["fy26_receipts"] - f["fy26_outlays"] + f["fy26_interest"]
 
     # The two paths of OMB. The President's Budget: Historical Tables 2.1, 3.1 and 10.1, to 2031.
@@ -535,6 +644,14 @@ def figures():
     f["defense_above_baseline"] = {y: def31[y] * 1e6 - t12_6_defense(y) for y in (2027, 2031)}
     f["intl_above_baseline"] = {y: t31["International Affairs"][y] * 1e6 - t12_6_line("International Affairs", y)
                                 for y in range(2027, 2032)}
+    # Foreign aid (subfunction 151) in FY 2025 and FY 2026 (Table 3.2); the baseline continues FY 2026, whose figures
+    # in Table 3.2 are the baseline's (international affairs as a whole equals Table 12-6).
+    f["aid151"] = {y: v * 1e6 for y, v in h32_line("151 ").items() if y in (2025, 2026)}
+    if abs(h32_line("Total, International Affairs")[2026] * 1e6 - t12_6_line("International Affairs", 2026)) > 0.5e9:
+        fail("Table 3.2 and Table 12-6 differ for international affairs in FY 2026")
+    f["defense_baseline_share"] = {y: t12_6_defense(y) / gdp[y] for y in (2025, 2036)}
+    f["fte"] = civilian_fte()
+    f["secure_america_date"], f["secure_america"] = secure_america_act()
     f["primary_2025"] = (f["receipts"][BASE] - f["outlays"][BASE] + f["net_interest"][BASE]) / gdp[BASE]
     f["real_growth_2026_2036"] = (T12_2_REAL_GDP[2036] / T12_2_REAL_GDP[2025]) ** (1 / 11) - 1
     f["real_growth_2032_2036"] = (T12_2_REAL_GDP[2036] / T12_2_REAL_GDP[2031]) ** (1 / 5) - 1
@@ -548,7 +665,15 @@ def figures():
     days = curve_days(2026)
     f["curve_date"], f["curve"] = max(days)
     f["market_rate"] = weighted_yield(f["curve"], secs)
+    # The same with every bill at the three-month yield: the MSPD gives each bill's CUSIP with its first issue date,
+    # and a CUSIP first issued as a 52-week bill is reopened at shorter terms.
+    f["market_rate_bills_3m"] = weighted_yield(f["curve"], [(c, o, 0.25 if c.startswith("Bills") else term, left, mat)
+                                                            for c, o, term, left, mat in secs])
     f["omb_rate"] = weighted_yield({0.25: T12_2_BILL[2036], 10.0: T12_2_NOTE10[2036]}, secs)
+    # The first fiscal year from which OMB's rates stay at their final value (Table 12-2).
+    f["omb_bill_from"] = min(y for y in T12_2_BILL if all(T12_2_BILL[z] == T12_2_BILL[2036] for z in T12_2_BILL if z >= y))
+    f["omb_note_from"] = min(y for y in T12_2_NOTE10 if all(T12_2_NOTE10[z] == T12_2_NOTE10[2036] for z in T12_2_NOTE10 if z >= y))
+    f["ffr"] = fed_funds_path()
     f["low_years"] = years_average(range(2012, 2022), secs)
     f["nineties"] = years_average(range(1991, 2001), secs)
 
@@ -650,6 +775,8 @@ def build(f):
     low, low10 = f["low_years"]
     nineties, nineties10 = f["nineties"]
     drift_fr = round(-(FR["peak"] - FR["primary_2025"]) / (FR["peak_year"] - BASE), 2)
+    # The primary deficit of the starting path (the FY 2025 budget continued) with that drift, in a later year.
+    drifted = lambda year: -f["primary_2025"] - drift_fr / 100 * (year - BASE)
     pb = {"policy": f["policy"][2031]["primary"] / gdp[2031], "baseline": f["baseline"][2036]["primary"] / gdp[2036]}
     curve = f["curve"]
     terms = sorted(curve)
@@ -699,30 +826,42 @@ def build(f):
         "value": round(f["net_interest"][BASE]),
         "node": "exp.net_interest",
         "quality": "official",
-        "sources": [S_HIST_DEBT, S_HIST],
+        "sources": [S_HIST_DEBT, S_HIST, S_MTS25, S_MTS26, S_H41],
         "note": L(lambda l: (
             "Net interest in FY 2025 (OMB function 900): %s or %s of GDP. It is the interest on Treasury securities "
             "(%s), less the %s credited to federal trust funds, which stays within the government, and less %s of other "
             "interest and investment income the government receives, mostly from its loan accounts. The projection "
             "starts from the budget item net interest, the same amount, so that the first year matches the budget "
-            "exactly; over debt held by the public it gives a starting rate of %s. The Federal Reserve pays most of the "
-            "interest it earns on Treasury securities back to the Treasury, which the budget counts as revenue (%s in "
-            "FY 2025); in the projection that revenue keeps its share of GDP and does not follow rates."
+            "exactly; over debt held by the public it gives a starting rate of %s. Because that rate nets the other "
+            "income against the interest paid, the income (%s of GDP) fades out of the calculation as the debt takes "
+            "new rates. The Federal Reserve normally remits its net earnings to the Treasury, which the budget counts "
+            "as revenue. While its earnings do not cover its costs, dividends and surplus, it records a deferred asset "
+            "instead, the net earnings it must realize before remittances resume: %s on %s (Federal Reserve, H.4.1). "
+            "Deposits of its earnings were %s in FY 2025 and %s in FY 2026 (Treasury). In the projection this revenue "
+            "keeps its share of GDP and does not follow rates."
             % (money(f["net_interest"][BASE], l), pct(f["net_interest"][BASE] / gdp[BASE], l, 2),
                money(f["interest_gross"], l), money(f["interest_trust_funds"], l), money(f["interest_other_income"], l),
-               pct(start_rate, l, 2), money(f["fed_remittances"], l))
+               pct(start_rate, l, 2), pct(f["interest_other_income"] / gdp[BASE], l, 2),
+               money(-f["fed_deferred_asset"], l), date(f["fed_deferred_date"], l), money(f["fed_deposits"][2025], l),
+               money(f["fed_deposits"][2026], l))
             if l == "en" else
             "Nettozinsen im Haushaltsjahr 2025 (Funktion 900 der OMB): %s oder %s des BIP. Das sind die Zinsen auf "
             "Staatsanleihen (%s), abzüglich der %s, die den Treuhandfonds des Bundes gutgeschrieben werden und innerhalb "
             "des Staates bleiben, und abzüglich %s übriger Zins- und Kapitalerträge des Bundes, vor allem aus seinen "
             "Kreditkonten. Die Projektion beginnt mit dem Haushaltsposten Nettozinsen, demselben Betrag, damit das erste "
             "Jahr genau zum Haushalt passt; bezogen auf die Schulden bei Dritten ergibt das einen Anfangszins von %s. "
-            "Die Federal Reserve führt den größten Teil der Zinsen, die sie auf Staatsanleihen erhält, an das "
-            "Finanzministerium ab; der Haushalt zählt das als Einnahme (%s im Haushaltsjahr 2025). In der Projektion "
-            "behält diese Einnahme ihren Anteil am BIP und folgt den Zinsen nicht."
+            "Weil dieser Zins die übrigen Erträge mit den gezahlten Zinsen verrechnet, fallen diese Erträge (%s des "
+            "BIP) aus der Rechnung heraus, je mehr Schulden einen neuen Zins bekommen. Die Federal Reserve führt ihre "
+            "Nettoerträge normalerweise an das Finanzministerium ab; der Haushalt zählt das als Einnahme. Solange ihre "
+            "Erträge ihre Kosten, Dividenden und Rücklagen nicht decken, bucht sie stattdessen einen Ausgleichsposten "
+            "(deferred asset), die Nettoerträge, die sie erzielen muss, bevor sie wieder abführt: %s am %s (Federal "
+            "Reserve, H.4.1). Abgeführt hat sie %s im Haushaltsjahr 2025 und %s im Haushaltsjahr 2026 "
+            "(Finanzministerium). In der Projektion behält diese Einnahme ihren Anteil am BIP und folgt den Zinsen nicht."
             % (money(f["net_interest"][BASE], l), pct(f["net_interest"][BASE] / gdp[BASE], l, 2),
                money(f["interest_gross"], l), money(f["interest_trust_funds"], l), money(f["interest_other_income"], l),
-               pct(start_rate, l, 2), money(f["fed_remittances"], l)))),
+               pct(start_rate, l, 2), pct(f["interest_other_income"] / gdp[BASE], l, 2),
+               money(-f["fed_deferred_asset"], l), date(f["fed_deferred_date"], l), money(f["fed_deposits"][2025], l),
+               money(f["fed_deposits"][2026], l)))),
     }
     refinancing = {
         "share": share,
@@ -732,23 +871,27 @@ def build(f):
         "note": L(lambda l: (
             "A share fitted to OMB's estimates, not one divided by the average time to maturity (%s years at the end of "
             "FY 2025, which would give %s): %s of marketable debt took a new rate within the following year, mostly "
-            "bills, which roll over several times a year, while the rest keeps its rate for years. At %s, run on OMB's own path and rates, this "
-            "calculation reproduces OMB's estimate of how much more interest the government would pay if all rates "
-            "stayed one point higher from 2026, to within %s in FY 2027 and %s from FY 2028 to FY 2036 (Analytical "
-            "Perspectives, Table 1-3). Maturities: Treasury, Monthly Statement of the Public Debt, %s."
-            % (fixed(m["years"], 2, l), pct(one_over, l), pct(m["repriced"], l), pct(share, l, 0), pct(err27, l, 0),
-               pct(err_later, l, 0), date(dt.date(2025, 9, 30), l))
+            "bills, which roll over several times a year, while the rest keeps its rate for years. At %s, run on OMB's "
+            "primary balances with OMB's rates of FY 2036 weighted like the debt (%s) in every year, this calculation "
+            "reproduces OMB's estimate of how much more interest the government would pay if all rates stayed one point "
+            "higher from 2026, to within %s in FY 2027 and %s from FY 2028 to FY 2036; in FY 2026 it gives %s %s "
+            "(Analytical Perspectives, Table 1-3). Maturities: Treasury, Monthly Statement of the Public Debt, %s."
+            % (fixed(m["years"], 2, l), pct(one_over, l), pct(m["repriced"], l), pct(share, l, 0), pp(f["omb_rate"], l),
+               pct(err27, l, 0), pct(err_later, l, 0), pct(abs(errors[2026]), l, 0),
+               "more" if errors[2026] > 0 else "less", date(dt.date(2025, 9, 30), l))
             if l == "en" else
             "Ein an die Schätzungen der OMB angepasster Anteil, nicht eins geteilt durch die durchschnittliche Restlaufzeit "
             "(Ende des Haushaltsjahres 2025 %s Jahre, das ergäbe %s): %s der handelbaren Schulden bekamen im folgenden "
-            "Jahr einen neuen Zins, vor allem kurzfristige Schatzwechsel, die mehrmals im Jahr erneuert werden, während der Rest seinen Zins "
-            "über Jahre behält. Mit %s gibt diese Rechnung, auf dem Pfad und mit den Zinsen der OMB, deren Schätzung "
-            "wieder, wie viel mehr Zinsen der Bund zahlen würde, wenn alle Zinsen ab 2026 dauerhaft einen Prozentpunkt "
-            "höher lägen: auf %s genau im Haushaltsjahr 2027 und auf %s genau in den Haushaltsjahren 2028 bis 2036 "
-            "(Analytical Perspectives, Tabelle 1-3). Laufzeiten: Finanzministerium, Monatsausweis der Staatsschuld "
-            "zum %s."
-            % (fixed(m["years"], 2, l), pct(one_over, l), pct(m["repriced"], l), pct(share, l, 0), pct(err27, l, 0),
-               pct(err_later, l, 0), date(dt.date(2025, 9, 30), l)))),
+            "Jahr einen neuen Zins, vor allem kurzfristige Schatzwechsel, die mehrmals im Jahr erneuert werden, während "
+            "der Rest seinen Zins über Jahre behält. Mit %s gibt diese Rechnung, auf den Primärsalden der OMB und in "
+            "jedem Jahr mit deren Zinsen von 2036, gewichtet wie die Schulden (%s), die Schätzung der OMB wieder, wie "
+            "viel mehr Zinsen der Bund zahlen würde, wenn alle Zinsen ab 2026 dauerhaft einen Prozentpunkt höher lägen: "
+            "auf %s genau im Haushaltsjahr 2027 und auf %s genau in den Haushaltsjahren 2028 bis 2036; im "
+            "Haushaltsjahr 2026 ergibt sie %s %s (Analytical Perspectives, Tabelle 1-3). Laufzeiten: Finanzministerium, "
+            "Monatsausweis der Staatsschuld zum %s."
+            % (fixed(m["years"], 2, l), pct(one_over, l), pct(m["repriced"], l), pct(share, l, 0), pp(f["omb_rate"], l),
+               pct(err27, l, 0), pct(err_later, l, 0), pct(abs(errors[2026]), l, 0),
+               "mehr" if errors[2026] > 0 else "weniger", date(dt.date(2025, 9, 30), l)))),
     }
 
     curve_day = f["curve_date"]
@@ -758,42 +901,50 @@ def build(f):
          "note": L(lambda l: (
              "Default: Treasury's par yields on %s, weighted by how the marketable debt outstanding at the end of FY "
              "2025 was spread over terms at issue: %s. Bills, %s of that debt, yielded %s to %s (one month to one "
-             "year), ten-year notes %s, thirty-year bonds %s; floating-rate notes count at the three-month yield, "
-             "inflation-protected securities at the nominal yield of their term. All new and refinanced debt pays this "
-             "one rate, which does not react to the level of debt. OMB's paths assume %s on 91-day bills and %s on "
-             "ten-year notes from %d."
+             "year) and count at the term their security was first issued for; all at three months, they would give "
+             "%s. Ten-year notes yielded %s, thirty-year bonds %s; floating-rate notes count at the three-month yield, "
+             "inflation-protected securities at the nominal yield of their term. It is the curve of one day, held for "
+             "the whole horizon: all new and refinanced debt pays this one rate, which reacts neither to the level of "
+             "debt nor to monetary policy. The Federal Reserve's policymakers expect the federal funds rate at %s at "
+             "the end of 2026, %s at the end of 2029 and %s in the longer run (median, September 2026), which would "
+             "lower short-term rates. OMB's paths assume, by fiscal year, %s on 91-day bills from FY %d and %s on "
+             "ten-year notes from FY %d."
              % (date(curve_day, l), pp(f["market_rate"], l), pct(m["bills"], l, 0), pp(bill_lo, l, 2), pp(bill_hi, l, 2),
-                pp(curve[10.0], l, 2), pp(curve[30.0], l, 2), pp(T12_2_BILL[2030], l), pp(AP1_NOTE10_TERMINAL[1], l),
-                AP1_NOTE10_TERMINAL[0])
+                pp(f["market_rate_bills_3m"], l, 2), pp(curve[10.0], l, 2), pp(curve[30.0], l, 2), pp(f["ffr"][2026], l),
+                pp(f["ffr"][2029], l), pp(f["ffr"]["longer"], l), pp(T12_2_BILL[2036], l), f["omb_bill_from"],
+                pp(T12_2_NOTE10[2036], l), f["omb_note_from"])
              if l == "en" else
              "Vorgabe: Renditen von US-Staatsanleihen am %s (Par Yield Curve des Finanzministeriums), gewichtet danach, "
              "wie sich die handelbaren Schulden Ende des Haushaltsjahres 2025 auf die ursprünglichen Laufzeiten "
              "verteilten: %s. Kurzfristige Schatzwechsel, %s dieser Schulden, rentierten mit %s bis %s (ein Monat bis "
-             "ein Jahr), zehnjährige Anleihen mit %s, dreißigjährige mit %s; variabel verzinsliche Anleihen zählen mit "
-             "dem Dreimonatszins, inflationsgeschützte mit dem nominalen Zins ihrer Laufzeit. Für alle neuen und "
-             "umgeschuldeten Kredite gilt dieser eine Zins; er reagiert nicht auf die Höhe der Schulden. Die Pfade der "
-             "OMB rechnen mit %s für Schatzwechsel mit 91 Tagen Laufzeit und %s für zehnjährige Anleihen ab %d."
+             "ein Jahr) und zählen mit der Laufzeit, für die ihr Wertpapier zuerst ausgegeben wurde; alle mit drei "
+             "Monaten ergäben sie %s. Zehnjährige Anleihen rentierten mit %s, dreißigjährige mit %s; variabel "
+             "verzinsliche Anleihen zählen mit dem Dreimonatszins, inflationsgeschützte mit dem nominalen Zins ihrer "
+             "Laufzeit. Es ist die Zinskurve eines Tages, gehalten für den ganzen Zeitraum: Für alle neuen und "
+             "umgeschuldeten Kredite gilt dieser eine Zins; er reagiert weder auf die Höhe der Schulden noch auf die "
+             "Geldpolitik. Die geldpolitischen Entscheider der Federal Reserve erwarten den Leitzins Ende 2026 bei %s, "
+             "Ende 2029 bei %s und langfristig bei %s (Median, September 2026), was die kurzfristigen Zinsen senken "
+             "würde. Die Pfade der OMB rechnen nach Haushaltsjahren mit %s für Schatzwechsel mit 91 Tagen Laufzeit ab "
+             "dem Haushaltsjahr %d und %s für zehnjährige Anleihen ab dem Haushaltsjahr %d."
              % (date(curve_day, l), pp(f["market_rate"], l), pct(m["bills"], l, 0), pp(bill_lo, l, 2), pp(bill_hi, l, 2),
-                pp(curve[10.0], l, 2), pp(curve[30.0], l, 2), pp(T12_2_BILL[2030], l), pp(AP1_NOTE10_TERMINAL[1], l),
-                AP1_NOTE10_TERMINAL[0]))),
-         "sources": [S_YIELDS, S_MSPD25, S_AP12]},
+                pp(f["market_rate_bills_3m"], l, 2), pp(curve[10.0], l, 2), pp(curve[30.0], l, 2), pp(f["ffr"][2026], l),
+                pp(f["ffr"][2029], l), pp(f["ffr"]["longer"], l), pp(T12_2_BILL[2036], l), f["omb_bill_from"],
+                pp(T12_2_NOTE10[2036], l), f["omb_note_from"]))),
+         "sources": [S_YIELDS, S_MSPD25, S_SEP, S_AP12]},
         {"id": "growth", "type": "number", "label": T("Nominal economic growth per year", "Nominales Wirtschaftswachstum pro Jahr"),
          "unit": "percent", "min": -2, "max": 8, "step": 0.1, "default": growth,
          "note": L(lambda l: (
              "Default %s: real growth in the longer run of %s a year, the median of the Federal Reserve's policymakers "
-             "in September 2026, plus inflation at the Federal Reserve's target of %s. The economic assumptions of "
-             "OMB's paths, which OMB developed on the assumption that the President's proposals are enacted, expect "
-             "%s a year by fiscal year from 2032 to 2036, on real growth of %s. When the calculation follows one of "
-             "OMB's paths, the path's growth applies up to its last year and this value only after that."
+             "in September 2026, plus inflation at the Federal Reserve's target of %s. OMB's paths expect %s a year by "
+             "fiscal year from 2032 to 2036, on real growth of %s. When the calculation follows one of OMB's paths, "
+             "the path's growth applies up to its last year and this value only after that."
              % (pp(growth, l), pp(f["fed_real"], l), pp(f["fed_pce"], l, 0), pct(f["nominal_growth_2032_2036"], l),
                 pct(f["real_growth_2032_2036"], l))
              if l == "en" else
              "Vorgabe %s: langfristiges reales Wachstum von %s im Jahr, der Median der geldpolitischen Entscheider der "
-             "Federal Reserve vom September 2026, plus Inflation in Höhe ihres Ziels von %s. Die Wirtschaftsannahmen "
-             "der Pfade der OMB, die die OMB unter der Annahme entwickelt hat, dass die Vorschläge des Präsidenten "
-             "Gesetz werden, rechnen in den Haushaltsjahren 2032 bis 2036 mit %s im Jahr bei realem Wachstum von %s. "
-             "Folgt die Rechnung einem Pfad der OMB, gilt bis zu dessen letztem Jahr dessen Wachstum und dieser Wert "
-             "erst danach."
+             "Federal Reserve vom September 2026, plus Inflation in Höhe ihres Ziels von %s. Die Pfade der OMB rechnen "
+             "in den Haushaltsjahren 2032 bis 2036 mit %s im Jahr bei realem Wachstum von %s. Folgt die Rechnung einem "
+             "Pfad der OMB, gilt bis zu dessen letztem Jahr dessen Wachstum und dieser Wert erst danach."
              % (pp(growth, l), pp(f["fed_real"], l), pp(f["fed_pce"], l, 0), pct(f["nominal_growth_2032_2036"], l),
                 pct(f["real_growth_2032_2036"], l)))),
          "sources": [S_SEP, S_AP12]},
@@ -810,7 +961,7 @@ def build(f):
              "2031 on the President's Budget, %s in FY 2036 on the baseline); then the change counts only after that "
              "year. A negative value stands for costs that grow faster than the economy, such as Social Security and "
              "Medicare as the population ages: %s0.1 means the primary balance worsens by 0.1%% of GDP every year, by 3%% "
-             "after 30 years. Treasury's long-term projection under current policy corresponds to about %s until %d."
+             "after 30 years. Treasury's long-term projection under current policy corresponds to about %s until FY %d."
              % (pct(f["primary_2025"], l, 2), pct(pb["policy"], l, 2), pct(pb["baseline"], l, 2), MINUS,
                 fixed(drift_fr, 2, l), FR["peak_year"])
              if l == "en" else
@@ -820,7 +971,7 @@ def build(f):
              "Fortschreibung); die Veränderung zählt dann erst nach diesem Jahr. Ein negativer Wert steht für Kosten, die "
              "schneller wachsen als die Wirtschaft, etwa Social Security und Medicare in einer alternden Gesellschaft: "
              "%s0,1 heißt, der Primärsaldo verschlechtert sich jedes Jahr um 0,1 %% des BIP, nach 30 Jahren um 3 %%. Der "
-             "Langfristprojektion des Finanzministeriums nach geltender Politik entsprechen bis %d etwa %s."
+             "Langfristprojektion des Finanzministeriums nach geltender Politik entsprechen bis zum Haushaltsjahr %d etwa %s."
              % (pct(f["primary_2025"], l, 2), pct(pb["policy"], l, 2), pct(pb["baseline"], l, 2), MINUS,
                 FR["peak_year"], fixed(drift_fr, 2, l)))),
          "sources": [S_FR]},
@@ -831,15 +982,14 @@ def build(f):
          "values": {"market_rate": omb_rate, "growth": omb_growth},
          "note": L(lambda l: (
              "The economics of the Budget for FY 2027 from 2032 on: %s on 91-day bills and %s on ten-year notes, %s "
-             "when weighted like the debt; nominal growth of %s a year by fiscal year, on real growth of %s. OMB "
-             "developed them on the assumption that the President's proposals are enacted. Only rate and growth change."
+             "when weighted like the debt; nominal growth of %s a year by fiscal year, on real growth of %s. Only rate "
+             "and growth change."
              % (pp(T12_2_BILL[2036], l), pp(T12_2_NOTE10[2036], l), pp(f["omb_rate"], l), pct(f["nominal_growth_2032_2036"], l),
                 pct(f["real_growth_2032_2036"], l))
              if l == "en" else
              "Die Wirtschaftsannahmen des Haushaltsentwurfs für 2027 ab 2032: %s für Schatzwechsel mit 91 Tagen Laufzeit "
              "und %s für zehnjährige Anleihen, gewichtet wie die Schulden %s; nominales Wachstum von %s im Jahr bei "
-             "realem Wachstum von %s. Die OMB hat sie unter der Annahme entwickelt, dass die Vorschläge des Präsidenten "
-             "Gesetz werden. Nur Zins und Wachstum ändern sich."
+             "realem Wachstum von %s. Nur Zins und Wachstum ändern sich."
              % (pp(T12_2_BILL[2036], l), pp(T12_2_NOTE10[2036], l), pp(f["omb_rate"], l), pct(f["nominal_growth_2032_2036"], l),
                 pct(f["real_growth_2032_2036"], l)))),
          "sources": [S_AP12, S_MSPD25]},
@@ -866,24 +1016,30 @@ def build(f):
              % (pp(nineties, l), pp(nineties10, l), f["peak_interest_year"],
                 pct(f["net_interest"][f["peak_interest_year"]] / f["receipts"][f["peak_interest_year"]], l)))),
          "sources": [S_YIELDS, S_HIST_DEBT]},
-        {"id": "treasury_long_term", "label": T("Rising costs as in Treasury's long-term projection",
-                                                "Steigende Kosten wie in der Langfristprojektion des Finanzministeriums"),
+        {"id": "treasury_long_term", "label": T("Rising costs as in Treasury's projection to FY %d" % FR["peak_year"],
+                                                "Steigende Kosten wie in der Projektion des Finanzministeriums bis zum Haushaltsjahr %d"
+                                                % FR["peak_year"]),
          "values": {"drift": drift_fr},
          "note": L(lambda l: (
              "Treasury's projection under current policy (Financial Report for FY 2025): the primary deficit, %s of GDP "
              "in 2025, averages %s over the next ten years and peaks at %s in %d, about %s points of GDP worse each "
              "year; it then falls back to %s in 2100, when debt held by the public reaches %s of GDP. Only the yearly "
-             "change is set here; rate and growth stay as chosen."
+             "change is set here, and it goes on after %d: from the %s of FY 2025 the primary deficit reaches %s in FY "
+             "2055 and %s in FY 2075, so after %d the path is no longer Treasury's. Rate and growth stay as chosen."
              % (pp(FR["primary_2025"], l), pp(FR["primary_10y"], l), pp(FR["peak"], l), FR["peak_year"],
-                fixed(-drift_fr, 2, l), pp(FR["primary_2100"], l), pp(FR["debt_2100"], l, 0))
+                fixed(-drift_fr, 2, l), pp(FR["primary_2100"], l), pp(FR["debt_2100"], l, 0), FR["peak_year"],
+                pct(-f["primary_2025"], l, 2), pct(drifted(2055), l, 2), pct(drifted(2075), l, 2), FR["peak_year"])
              if l == "en" else
              "Projektion des Finanzministeriums nach geltender Politik (Finanzbericht für das Haushaltsjahr 2025): Das "
              "Primärdefizit, 2025 %s des BIP, beträgt in den nächsten zehn Jahren im Mittel %s und erreicht %d mit %s "
              "seinen Höchststand, jedes Jahr um etwa %s Punkte des BIP mehr; danach sinkt es bis 2100 auf %s, wenn die "
-             "Schulden bei Dritten %s des BIP erreichen. Gesetzt wird hier nur die jährliche Veränderung; Zins und "
+             "Schulden bei Dritten %s des BIP erreichen. Gesetzt wird hier nur die jährliche Veränderung, und sie geht "
+             "nach %d weiter: Von den %s des Haushaltsjahres 2025 steigt das Primärdefizit auf %s im Haushaltsjahr 2055 "
+             "und %s im Haushaltsjahr 2075; nach %d ist der Pfad also nicht mehr der des Finanzministeriums. Zins und "
              "Wachstum bleiben, wie gewählt."
              % (pp(FR["primary_2025"], l), pp(FR["primary_10y"], l), FR["peak_year"], pp(FR["peak"], l),
-                fixed(-drift_fr, 2, l), pp(FR["primary_2100"], l), pp(FR["debt_2100"], l, 0)))),
+                fixed(-drift_fr, 2, l), pp(FR["primary_2100"], l), pp(FR["debt_2100"], l, 0), FR["peak_year"],
+                pct(-f["primary_2025"], l, 2), pct(drifted(2055), l, 2), pct(drifted(2075), l, 2), FR["peak_year"]))),
          "sources": [S_FR]},
     ]
 
@@ -901,7 +1057,7 @@ def build(f):
                 "(Historical Tables 1.1, 3.1, 7.1 and 10.1).",
                 "Nach dem Zweiten Weltkrieg. Schulden bei Dritten, Nettozinsen und Einnahmen, wie die OMB sie heute "
                 "rechnet (Historical Tables 1.1, 3.1, 7.1 und 10.1)."),
-        history(iy, "highest interest burden before 2025", "höchste Zinslast vor 2025",
+        history(iy, "highest interest burden before FY 2025", "höchste Zinslast vor dem Haushaltsjahr 2025",
                 "Net interest as a share of revenue and of GDP was higher in no year before FY 2025.",
                 "Nettozinsen gemessen an den Einnahmen und am BIP waren in keinem Jahr vor dem Haushaltsjahr 2025 höher."),
     ]
@@ -922,87 +1078,119 @@ def build(f):
     customs = lambda y, l: money(T12_4_CUSTOMS[y] * 1e9, l)
     fy26 = lambda l, path: (
         "FY 2026 came out differently: OMB estimated a deficit of %s and net interest of %s; Treasury's final statement "
-        "for the year shows a deficit of %s and net interest of %s. OMB's Mid-Session Review of %s gives no new totals; "
-        "it expected lower outlays for FY 2026, partly offset by lower receipts from customs duties."
+        "for the year shows a deficit of %s and net interest of %s. OMB's Mid-Session Review of %s gives no new totals. "
+        "For FY 2026 it expected lower outlays, mainly for non-defense discretionary programs, SNAP and unemployment "
+        "compensation, partially offset by lower receipts, partly from customs duties; for FY 2027 higher outlays from "
+        "the Secure America Act and a requested %s supplemental, above all for the Department of War, and higher "
+        "receipts from individual and corporation income taxes."
         % (money(path[2026]["deficit"], l), money(path[2026]["interest"], l), money(f["fy26_deficit"], l),
-           money(f["fy26_interest"], l), date(MSR_DATE, l))
+           money(f["fy26_interest"], l), date(MSR_DATE, l), money(MSR_SUPPLEMENTAL * 1e9, l))
         if l == "en" else
         "Das Haushaltsjahr 2026 ist anders ausgefallen: Die OMB schätzte ein Defizit von %s und Nettozinsen von %s; der "
         "letzte Monatsausweis des Finanzministeriums für das Jahr zeigt ein Defizit von %s und Nettozinsen von %s. Die "
-        "Halbjahresüberprüfung der OMB (Mid-Session Review) vom %s nennt keine neuen Summen; sie erwartete für 2026 "
-        "geringere Ausgaben, teils ausgeglichen durch geringere Einnahmen aus Zöllen."
+        "Halbjahresüberprüfung der OMB (Mid-Session Review) vom %s nennt keine neuen Summen. Für 2026 erwartete sie "
+        "geringere Ausgaben, vor allem für nicht militärische, jährlich bewilligte Programme, SNAP und das "
+        "Arbeitslosengeld, teils ausgeglichen durch geringere Einnahmen, unter anderem aus Zöllen; für 2027 höhere "
+        "Ausgaben durch den Secure America Act und einen beantragten Nachtragshaushalt von %s, vor allem für das "
+        "Kriegsministerium (Department of War), und höhere Einnahmen aus Einkommen- und Körperschaftsteuer."
         % (money(path[2026]["deficit"], l), money(path[2026]["interest"], l), money(f["fy26_deficit"], l),
-           money(f["fy26_interest"], l), date(MSR_DATE, l)))
+           money(f["fy26_interest"], l), date(MSR_DATE, l), money(MSR_SUPPLEMENTAL * 1e9, l)))
+    fte_cut = 1 - f["fte"][2026] / f["fte"][2025]
+    dshare = f["defense_baseline_share"]
     plans = [
         {"id": "omb_baseline_fy2027",
          "label": T("OMB baseline under current law (Budget FY 2027)",
-                    "Fortschreibung der OMB nach geltendem Recht (Haushaltsentwurf 2027)"),
+                    "Fortschreibung der OMB nach geltendem Recht (Haushaltsentwurf für das Haushaltsjahr 2027)"),
          "scope": "all", "accounts": "budget", "points": points(bl, list(range(2026, 2037))), "quality": "official",
-         "sources": [S_AP12, S_AP1, S_HIST, S_MTS26, S_MSR, S_SCOTUS],
+         "sources": [S_AP12, S_AP1, S_HIST, S_MTS26, S_MSR, S_SCOTUS, S_SECURE, S_AP5, S_MTS25],
          "note": L(lambda l: "\n\n".join([
              ("OMB's current-services baseline from the Budget for FY 2027 (April 2026): receipts, outlays and net "
               "interest for FY 2026 to FY 2036 under the laws in force when it was made, with discretionary spending at "
               "its 2026 level plus inflation (Analytical Perspectives, Tables 12-4 and 12-6), and GDP by fiscal year "
-              "(Table 12-2). OMB projects no debt. Followed, the calculation takes each year's balance before interest "
-              "and computes interest and debt itself, at the rates chosen here; after FY 2036 it holds that year's "
-              "primary balance, %s of GDP." % pct(pb["baseline"], l, 2)
+              "(Table 12-2). OMB projects no debt. Followed, the calculation takes each year's receipts and balance "
+              "before interest and computes interest and debt itself, at the rates chosen here; after FY 2036 it holds "
+              "that year's receipts and primary balance as shares of GDP, the latter %s." % pct(pb["baseline"], l, 2)
               if l == "en" else
-              "Die Fortschreibung der OMB zum Haushaltsentwurf für 2027 (April 2026): Einnahmen, Ausgaben und "
+              "Die Fortschreibung der OMB zum Haushaltsentwurf für das Haushaltsjahr 2027 (April 2026): Einnahmen, Ausgaben und "
               "Nettozinsen der Haushaltsjahre 2026 bis 2036 nach den Gesetzen, die bei ihrer Erstellung galten, die "
               "jährlich bewilligten Ausgaben auf dem Stand von 2026 zuzüglich Inflation (Analytical Perspectives, "
               "Tabellen 12-4 und 12-6), und das BIP nach Haushaltsjahren (Tabelle 12-2). Schulden projiziert die OMB "
-              "nicht. Folgt ihr die Rechnung, übernimmt sie in jedem Jahr den Saldo ohne Zinsen und berechnet Zinsen "
-              "und Schulden selbst, mit den hier gewählten Zinsen; nach dem Haushaltsjahr 2036 hält sie dessen "
-              "Primärsaldo von %s des BIP." % pct(pb["baseline"], l, 2)),
-             ("Its economics are those of the President's Budget, which OMB developed on the assumption that the "
-              "President's proposals are enacted: real growth of %s a year on average to FY 2036, %s on 91-day bills "
-              "and %s on ten-year notes from %d. Its receipts include customs duties of %s in FY 2026, rising to %s in "
-              "FY 2036, after %s in FY 2025."
-              % (pct(f["real_growth_2026_2036"], l), pp(T12_2_BILL[2030], l), pp(AP1_NOTE10_TERMINAL[1], l),
-                 AP1_NOTE10_TERMINAL[0], customs(2026, l), customs(2036, l), customs(2025, l))
+              "nicht. Folgt ihr die Rechnung, übernimmt sie in jedem Jahr die Einnahmen und den Saldo ohne Zinsen und "
+              "berechnet Zinsen und Schulden selbst, mit den hier gewählten Zinsen; nach dem Haushaltsjahr 2036 hält "
+              "sie Einnahmen und Primärsaldo dieses Jahres als Anteil am BIP, den Saldo bei %s." % pct(pb["baseline"], l, 2)),
+             ("Its economics are those of the President's Budget: real growth of %s a year on average to FY 2036, %s "
+              "on 91-day bills from FY %d and %s on ten-year notes from FY %d. Its receipts include customs duties of "
+              "%s in FY 2026, rising to %s in FY 2036, after %s in FY 2025."
+              % (pct(f["real_growth_2026_2036"], l), pp(T12_2_BILL[2036], l), f["omb_bill_from"],
+                 pp(T12_2_NOTE10[2036], l), f["omb_note_from"], customs(2026, l), customs(2036, l), customs(2025, l))
               if l == "en" else
-              "Ihre Wirtschaftsannahmen sind die des Haushaltsentwurfs, die die OMB unter der Annahme entwickelt hat, "
-              "dass die Vorschläge des Präsidenten Gesetz werden: reales Wachstum von %s im Jahr bis zum Haushaltsjahr "
-              "2036, %s für Schatzwechsel mit 91 Tagen Laufzeit und %s für zehnjährige Anleihen ab %d. Ihre Einnahmen "
-              "enthalten Zölle von %s im Haushaltsjahr 2026, steigend auf %s im Haushaltsjahr 2036, nach %s im "
-              "Haushaltsjahr 2025."
-              % (pct(f["real_growth_2026_2036"], l), pp(T12_2_BILL[2030], l), pp(AP1_NOTE10_TERMINAL[1], l),
-                 AP1_NOTE10_TERMINAL[0], customs(2026, l), customs(2036, l), customs(2025, l))),
+              "Ihre Wirtschaftsannahmen sind die des Haushaltsentwurfs: reales Wachstum von im Mittel %s im Jahr bis "
+              "zum Haushaltsjahr 2036, %s für Schatzwechsel mit 91 Tagen Laufzeit ab dem Haushaltsjahr %d und %s für "
+              "zehnjährige Anleihen ab dem Haushaltsjahr %d. Ihre Einnahmen enthalten Zölle von %s im Haushaltsjahr "
+              "2026, steigend auf %s im Haushaltsjahr 2036, nach %s im Haushaltsjahr 2025."
+              % (pct(f["real_growth_2026_2036"], l), pp(T12_2_BILL[2036], l), f["omb_bill_from"],
+                 pp(T12_2_NOTE10[2036], l), f["omb_note_from"], customs(2026, l), customs(2036, l), customs(2025, l))),
              fy26(l, bl) + (
-                 " Customs duties came to %s, after %s was refunded to importers following the Supreme Court's ruling "
-                 "of February 2026 on the emergency tariffs." % (money(f["fy26_customs"], l), money(f["fy26_customs_refunds"], l))
+                 " Customs duties came to %s: %s was collected and %s refunded, %s of it from March 2026 on, after the "
+                 "Supreme Court's ruling of %s on the emergency tariffs (refunds were %s in FY 2025)."
+                 % (money(f["fy26_customs"], l), money(f["fy26_customs_gross"], l), money(f["fy26_customs_refunds"], l),
+                    money(f["fy26_customs_refunds_after"], l), date(SCOTUS_TARIFF_RULING, l),
+                    money(f["fy25_customs_refunds"], l))
                  if l == "en" else
-                 " Die Zölle brachten %s, nachdem %s an Importeure erstattet wurden, weil der Supreme Court die "
-                 "Notstandszölle im Februar 2026 für rechtswidrig erklärt hatte."
-                 % (money(f["fy26_customs"], l), money(f["fy26_customs_refunds"], l))),
+                 " Die Zölle brachten %s: %s wurden erhoben und %s erstattet, %s davon ab März 2026, nach dem Urteil des "
+                 "Supreme Court vom %s über die Notstandszölle (im Haushaltsjahr 2025 wurden %s erstattet)."
+                 % (money(f["fy26_customs"], l), money(f["fy26_customs_gross"], l), money(f["fy26_customs_refunds"], l),
+                    money(f["fy26_customs_refunds_after"], l), date(SCOTUS_TARIFF_RULING, l),
+                    money(f["fy25_customs_refunds"], l))),
              ("The baseline is current law of early 2026, not the FY 2025 budget that the measures here change. Some "
               "of them are already in it: the end of the enhanced ACA premium tax credits, the states' share of SNAP "
-              "from FY 2028, the money of the July 2025 law for border and immigration enforcement, and tariffs well "
-              "above those of FY 2025. Following the baseline and switching on one of these counts it twice."
+              "from FY 2028, the money of the July 2025 law for border and immigration enforcement, tariffs well above "
+              "those of FY 2025 and, as far as the funding of 2026 pays fewer staff, part of the federal workforce cut "
+              "(OMB estimates %s fewer civilian full-time equivalents in 2026 than in 2025). Following the baseline "
+              "and switching on one of these counts it twice. Foreign aid is not among them: OMB puts it at %s in FY "
+              "2026, whose funding the baseline continues, after %s in FY 2025. Not in it is the Secure America Act of %s (Public "
+              "Law 119-98), %s for CBP, ICE and the Department of Homeland Security to spend until September 30, 2029. "
+              "National defense falls in it from %s of GDP in FY 2025 to %s in FY 2036; the defense measure adds the "
+              "distance of its target from FY 2025, so on this path it does not reach the target."
+              % (pct(fte_cut, l), money(f["aid151"][2026], l), money(f["aid151"][2025], l),
+                 date(f["secure_america_date"], l), money(f["secure_america"], l), pct(dshare[2025], l, 2),
+                 pct(dshare[2036], l, 2))
               if l == "en" else
-              "Die Fortschreibung bildet das geltende Recht von Anfang 2026 ab, nicht den Haushalt 2025, den die "
+              "Die Fortschreibung bildet das geltende Recht von Anfang 2026 ab, nicht den Haushalt des Haushaltsjahres 2025, den die "
               "Maßnahmen hier verändern. Manche von ihnen sind schon enthalten: das Ende der erhöhten Prämienzuschüsse "
               "nach dem ACA, der Anteil der Bundesstaaten an SNAP ab dem Haushaltsjahr 2028, das Geld des Gesetzes vom "
-              "Juli 2025 für Grenzschutz und Einwanderungsbehörden und Zölle weit über denen des Haushaltsjahres 2025. "
-              "Wer der Fortschreibung folgt und eine dieser Maßnahmen einschaltet, zählt sie doppelt."),
+              "Juli 2025 für Grenzschutz und Einwanderungsbehörden, Zölle weit über denen des Haushaltsjahres 2025 und, "
+              "soweit die Mittel für 2026 weniger Personal bezahlen, ein Teil des Personalabbaus beim Bund (die OMB "
+              "schätzt für 2026 %s weniger zivile Vollzeitstellen als 2025). Wer der Fortschreibung folgt und eine "
+              "dieser Maßnahmen einschaltet, zählt sie doppelt. Die Auslandshilfe gehört nicht dazu: Die OMB setzt sie "
+              "im Haushaltsjahr 2026, dessen Mittel die Fortschreibung fortführt, mit %s an, nach %s im Haushaltsjahr "
+              "2025. Nicht enthalten ist der Secure America Act vom %s (Public Law 119-98), %s für CBP, "
+              "ICE und das Heimatschutzministerium, verfügbar bis 30. September 2029. Die Verteidigungsausgaben sinken "
+              "in ihr von %s des BIP im Haushaltsjahr 2025 auf %s im Haushaltsjahr 2036; die Maßnahme zur Verteidigung "
+              "schlägt den Abstand ihres Ziels zum Haushaltsjahr 2025 auf und erreicht auf diesem Pfad ihr Ziel deshalb "
+              "nicht."
+              % (pct(fte_cut, l), money(f["aid151"][2026], l), money(f["aid151"][2025], l),
+                 date(f["secure_america_date"], l), money(f["secure_america"], l), pct(dshare[2025], l, 2),
+                 pct(dshare[2036], l, 2))),
          ]))},
         {"id": "omb_budget_fy2027",
-         "label": T("President's Budget FY 2027", "Haushaltsentwurf des Präsidenten für 2027"),
+         "label": T("President's Budget FY 2027", "Haushaltsentwurf des Präsidenten für das Haushaltsjahr 2027"),
          "scope": "all", "accounts": "budget", "points": points(po, list(range(2026, 2032))), "quality": "official",
          "sources": [S_HIST, S_HIST_DEBT, S_AP12, S_MTS26, S_MSR],
          "note": L(lambda l: "\n\n".join([
              ("OMB's estimates for the President's Budget for FY 2027 (April 2026), which assume that the President's "
               "proposals are enacted: receipts (Historical Table 2.1), outlays and net interest (Table 3.1) and GDP "
               "(Table 10.1) for FY 2026 to FY 2031. OMB projects no debt. Followed, the calculation takes each year's "
-              "balance before interest and computes interest and debt itself, at the rates chosen here; after FY 2031 "
-              "it holds that year's primary balance, %s of GDP." % pct(pb["policy"], l, 2)
+              "receipts and balance before interest and computes interest and debt itself, at the rates chosen here; "
+              "after FY 2031 it holds that year's receipts and primary balance as shares of GDP, the latter %s."
+              % pct(pb["policy"], l, 2)
               if l == "en" else
               "Die Schätzungen der OMB zum Haushaltsentwurf des Präsidenten für 2027 (April 2026), die annehmen, dass "
               "die Vorschläge des Präsidenten Gesetz werden: Einnahmen (Historical Table 2.1), Ausgaben und Nettozinsen "
               "(Tabelle 3.1) und BIP (Tabelle 10.1) der Haushaltsjahre 2026 bis 2031. Schulden projiziert die OMB "
-              "nicht. Folgt ihm die Rechnung, übernimmt sie in jedem Jahr den Saldo ohne Zinsen und berechnet Zinsen "
-              "und Schulden selbst, mit den hier gewählten Zinsen; nach dem Haushaltsjahr 2031 hält sie dessen "
-              "Primärsaldo von %s des BIP." % pct(pb["policy"], l, 2)),
+              "nicht. Folgt ihm die Rechnung, übernimmt sie in jedem Jahr die Einnahmen und den Saldo ohne Zinsen und "
+              "berechnet Zinsen und Schulden selbst, mit den hier gewählten Zinsen; nach dem Haushaltsjahr 2031 hält "
+              "sie Einnahmen und Primärsaldo dieses Jahres als Anteil am BIP, den Saldo bei %s." % pct(pb["policy"], l, 2)),
              ("Receipts and economics are those of OMB's baseline. The proposals raise national defense above the "
               "baseline by %s in FY 2027 and %s in FY 2031, to %s and %s, and lower most other spending, international "
               "affairs by %s to %s a year."
@@ -1053,44 +1241,54 @@ def build(f):
     }
 
     gap_lo, gap_hi = min(f["gap_ratio"].values()), max(f["gap_ratio"].values())
+    t12 = AP1_T12_REAL_GDP
+    budget_lo, budget_hi = min(t12["budget"]), max(t12["budget"])
+    others = [v for k in ("blue_chip", "cbo", "fed") for v in t12[k]]
+    others_lo, others_hi = min(others), max(others)
+    fy26_primary = -f["fy26_primary"] / gdp[2026]
     note = L(lambda l: "\n\n".join([
         "The starting point is the budget of FY 2025, continued: revenue and spending other than interest keep their "
-        "FY 2025 share of GDP, a deficit before interest of %s of GDP. The measures change this budget, so none of them "
-        "is counted twice." % pct(-f["primary_2025"], l, 2),
-        "OMB's baseline and the President's Budget can be chosen instead. They are not the default because their "
-        "economics assume that the President's proposals are enacted; on them the deficit before interest shrinks to "
-        "%s of GDP by FY 2036, while Treasury's long-term projection under current policy puts it at %s on average "
-        "over the next ten years." % (pct(-pb["baseline"], l, 2), pp(FR["primary_10y"], l)),
-        "What the calculation leaves out. Debt grows here by the deficit alone, although loans, above all student "
-        "loans, and the cash balance added %s to %s of GDP a year in FY 2023 to 2025. Interest follows the rates "
-        "chosen here, on OMB's paths too. Inflation-protected securities, %s of marketable debt, are treated like the "
-        "rest. The debt limit is not modeled; at the end of October 2026 the debt subject to it was %s below it. "
-        "Higher debt does not "
-        "push up rates, and measures do not change growth."
-        % (pct(gap_lo, l), pct(gap_hi, l), pct(m["tips"], l), money(f["headroom"], l)),
-        "FY 2026 is over but is computed like any later year. Treasury's final statement shows a deficit of %s, net "
-        "interest of %s and debt held by the public of %s at its end."
-        % (money(f["fy26_deficit"], l), money(f["fy26_interest"], l), money(f["fy26_dhp"], l)),
+        "FY 2025 share of GDP, a deficit before interest of %s of GDP. The measures change this budget, so none is "
+        "counted twice. But nothing that has changed since is in it, in either direction: the tax and spending "
+        "provisions of the July 2025 law, the end of the enhanced ACA credits, the higher tariffs and their refunds, "
+        "the Secure America Act. FY 2026, computed like any later year, came in at a deficit before interest of %s of "
+        "GDP and debt held by the public of %s (Treasury; GDP as OMB estimates it)."
+        % (pct(-f["primary_2025"], l, 2), pct(fy26_primary, l, 2), money(f["fy26_dhp"], l)),
+        "OMB's baseline and the President's Budget can be chosen instead. By convention OMB builds both on the same "
+        "economics, which assume that the President's proposals are enacted: real growth of %s to %s a year to 2036, "
+        "against %s to %s in the forecasts of the Congressional Budget Office, the Blue Chip panel and the Federal "
+        "Reserve (Analytical Perspectives, Table 1-2). On them the deficit before interest shrinks to %s of GDP by FY "
+        "2036; Treasury's long-term projection puts it at %s on average over the next ten years."
+        % (pp(budget_lo, l), pp(budget_hi, l), pp(others_lo, l), pp(others_hi, l), pct(-pb["baseline"], l, 2),
+           pp(FR["primary_10y"], l)),
+        "Left out: loans and the cash balance, which added %s to %s of GDP a year to the debt in FY 2023 to 2025 "
+        "beyond the deficit; the debt limit (%s of room at the end of October 2026); any effect of debt on rates or of "
+        "measures on growth. Interest follows the rates chosen here, on OMB's paths too; inflation-protected "
+        "securities (%s of marketable debt) count like the rest."
+        % (pct(gap_lo, l), pct(gap_hi, l), money(f["headroom"], l), pct(m["tips"], l)),
     ]) if l == "en" else "\n\n".join([
         "Ausgangspunkt ist der Haushalt des Haushaltsjahres 2025, fortgeschrieben: Einnahmen und Ausgaben ohne Zinsen "
         "behalten ihren Anteil am BIP von 2025, ein Defizit ohne Zinsen von %s des BIP. Die Maßnahmen verändern diesen "
-        "Haushalt; keine zählt deshalb doppelt." % pct(-f["primary_2025"], l, 2),
-        "Wählbar sind stattdessen die Fortschreibung der OMB und der Haushaltsentwurf des Präsidenten. Sie sind nicht "
-        "die Vorgabe, weil ihre Wirtschaftsannahmen voraussetzen, dass die Vorschläge des Präsidenten Gesetz werden; auf "
-        "ihnen schrumpft das Defizit ohne Zinsen bis zum Haushaltsjahr 2036 auf %s des BIP, während die "
-        "Langfristprojektion des Finanzministeriums nach geltender Politik es für die nächsten zehn Jahre im Mittel mit "
-        "%s ansetzt." % (pct(-pb["baseline"], l, 2), pp(FR["primary_10y"], l)),
-        "Was die Rechnung weglässt. Die Schulden wachsen hier nur um das Defizit, obwohl Kredite, vor allem an "
-        "Studierende, und der Kassenbestand in den Haushaltsjahren 2023 bis 2025 jährlich %s bis %s des BIP hinzufügten. "
-        "Die Zinsen folgen den hier gewählten Sätzen, auch auf den Pfaden der OMB. Inflationsgeschützte Anleihen, %s der "
-        "handelbaren Schulden, werden wie die übrigen behandelt. Die Schuldenobergrenze ist nicht abgebildet; Ende "
-        "Oktober 2026 lagen die ihr unterliegenden Schulden %s darunter. Höhere Schulden treiben den Zins nicht nach "
-        "oben, und Maßnahmen "
-        "ändern das Wachstum nicht."
-        % (pct(gap_lo, l), pct(gap_hi, l), pct(m["tips"], l), money(f["headroom"], l)),
-        "Das Haushaltsjahr 2026 ist vorbei, wird aber wie jedes spätere Jahr berechnet. Der letzte Monatsausweis des "
-        "Finanzministeriums zeigt ein Defizit von %s, Nettozinsen von %s und Schulden bei Dritten von %s zum Jahresende."
-        % (money(f["fy26_deficit"], l), money(f["fy26_interest"], l), money(f["fy26_dhp"], l)),
+        "Haushalt; keine zählt deshalb doppelt. Was sich seither in die eine oder andere Richtung geändert hat, "
+        "enthält er aber nicht: die Steuer- und Ausgabenregeln des Gesetzes vom Juli 2025, das Ende der erhöhten ACA-Zuschüsse, die "
+        "höheren Zölle und ihre Erstattung, den Secure America Act. Das Haushaltsjahr 2026, wie jedes spätere Jahr "
+        "berechnet, schloss mit einem Defizit ohne Zinsen von %s des BIP und Schulden bei Dritten von %s "
+        "(Finanzministerium; BIP nach Schätzung der OMB)."
+        % (pct(-f["primary_2025"], l, 2), pct(fy26_primary, l, 2), money(f["fy26_dhp"], l)),
+        "Wählbar sind stattdessen die Fortschreibung der OMB und der Haushaltsentwurf des Präsidenten. Die OMB rechnet "
+        "beide üblicherweise mit denselben Wirtschaftsannahmen, die voraussetzen, dass die Vorschläge des Präsidenten "
+        "Gesetz werden: reales Wachstum von %s bis %s im Jahr bis 2036, gegenüber %s bis %s in den Prognosen des "
+        "Congressional Budget Office, des Blue-Chip-Panels und der Federal Reserve (Analytical Perspectives, Tabelle "
+        "1-2). Auf ihnen schrumpft das Defizit ohne Zinsen bis zum Haushaltsjahr 2036 auf %s des BIP; die "
+        "Langfristprojektion des Finanzministeriums setzt es für die nächsten zehn Jahre im Mittel mit %s an."
+        % (pp(budget_lo, l), pp(budget_hi, l), pp(others_lo, l), pp(others_hi, l), pct(-pb["baseline"], l, 2),
+           pp(FR["primary_10y"], l)),
+        "Nicht enthalten: Kredite und der Kassenbestand, die in den Haushaltsjahren 2023 bis 2025 jährlich %s bis %s "
+        "des BIP über das Defizit hinaus zu den Schulden hinzufügten; die Schuldenobergrenze (Ende Oktober 2026 noch "
+        "%s Spielraum); jede Wirkung der Schulden auf den Zins und der Maßnahmen auf das Wachstum. Die Zinsen folgen "
+        "den hier gewählten Sätzen, auch auf den Pfaden der OMB; inflationsgeschützte Anleihen (%s der handelbaren "
+        "Schulden) zählen wie die übrigen."
+        % (pct(gap_lo, l), pct(gap_hi, l), money(f["headroom"], l), pct(m["tips"], l)),
     ]))
 
     return {

@@ -47,22 +47,22 @@
     "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2025 (fiscal year 2025), Tables 1, 3, 4, 5, 6 and 9",
     "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
     "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
-    "accessed": "2026-11-20",
+    "accessed": "2026-11-21",
     "year": 2025,
     "note": {
-      "en": "Retrieved through the Fiscal Data API, record date 2025-09-30. Fiscal year 2025: receipts 5,234.6, outlays 7,010.0 and deficit 1,775.4 billion dollars; Table 4 gives receipts before and after refunds. Table 5: Immigration and Customs Enforcement 10.7 billion, U.S. Customs and Border Protection 21.2 billion. Table 9 (prior year): corporation income taxes 529.9 billion in fiscal year 2024. Table 6: debt held by the public at face value 30,277.8 billion dollars at the end of the year.",
-      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2025. Haushaltsjahr 2025: Einnahmen 5.234,6, Ausgaben 7.010,0 und Defizit 1.775,4 Mrd. Dollar; Tabelle 4 zeigt die Einnahmen vor und nach Erstattungen. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 10,7 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 21,2 Mrd. Dollar. Tabelle 9 (Vorjahr): Körperschaftsteuer 529,9 Mrd. Dollar im Haushaltsjahr 2024. Tabelle 6: Schulden bei Dritten zum Nennwert 30.277,8 Mrd. Dollar am Jahresende."
+      "en": "Retrieved through the Fiscal Data API, record date 2025-09-30. Fiscal year 2025: receipts 5,234.6, outlays 7,010.0 and deficit 1,775.4 billion dollars; Table 4 gives receipts before and after refunds. Table 5: Immigration and Customs Enforcement 10.7 billion, U.S. Customs and Border Protection 21.2 billion. Table 9 (prior year): corporation income taxes 529.9 billion in fiscal year 2024. Table 6: debt held by the public at face value 30,277.8 billion dollars at the end of the year. Table 4: customs duties 202.4 billion collected, 7.5 billion refunded; deposit of earnings of the Federal Reserve System 5.5 billion.",
+      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2025. Haushaltsjahr 2025: Einnahmen 5.234,6, Ausgaben 7.010,0 und Defizit 1.775,4 Mrd. Dollar; Tabelle 4 zeigt die Einnahmen vor und nach Erstattungen. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 10,7 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 21,2 Mrd. Dollar. Tabelle 9 (Vorjahr): Körperschaftsteuer 529,9 Mrd. Dollar im Haushaltsjahr 2024. Tabelle 6: Schulden bei Dritten zum Nennwert 30.277,8 Mrd. Dollar am Jahresende. Tabelle 4: Zölle 202,4 Mrd. Dollar erhoben, 7,5 Mrd. Dollar erstattet; abgeführte Erträge der Federal Reserve 5,5 Mrd. Dollar."
     }
   },
   "treasury_mts_2026_09": {
     "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2026 (fiscal year 2026), Tables 1, 3, 4, 5, 6 and 9",
     "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
     "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
-    "accessed": "2026-11-20",
+    "accessed": "2026-11-21",
     "year": 2026,
     "note": {
-      "en": "Retrieved through the Fiscal Data API, record date 2026-09-30. Fiscal year 2026: receipts 5,403.3, outlays 7,395.8 and deficit 1,992.5 billion dollars. Table 4: customs duties 317.8 billion collected, 144.6 billion refunded. Table 5: Immigration and Customs Enforcement 22.4 billion, U.S. Customs and Border Protection 28.9 billion. Table 6: borrowing from the public 2,073.0 billion dollars in the year, 32,245.4 billion at its end (net of premium and discount). Table 9: net interest 1,051.8 billion.",
-      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2026. Haushaltsjahr 2026: Einnahmen 5.403,3, Ausgaben 7.395,8 und Defizit 1.992,5 Mrd. Dollar. Tabelle 4: Zölle 317,8 Mrd. Dollar erhoben, 144,6 Mrd. Dollar erstattet. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 22,4 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 28,9 Mrd. Dollar. Tabelle 6: Kreditaufnahme beim Publikum 2.073,0 Mrd. Dollar im Jahr, 32.245,4 Mrd. Dollar an seinem Ende (nach Auf- und Abschlägen). Tabelle 9: Nettozinsen 1.051,8 Mrd. Dollar."
+      "en": "Retrieved through the Fiscal Data API, record date 2026-09-30. Fiscal year 2026: receipts 5,403.3, outlays 7,395.8 and deficit 1,992.5 billion dollars. Table 4: customs duties 317.8 billion collected, 144.6 billion refunded. Table 5: Immigration and Customs Enforcement 22.4 billion, U.S. Customs and Border Protection 28.9 billion. Table 6: borrowing from the public 2,073.0 billion dollars in the year, 32,245.4 billion at its end (net of premium and discount). Table 9: net interest 1,051.8 billion. Table 4: deposit of earnings of the Federal Reserve System 10.5 billion.",
+      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2026. Haushaltsjahr 2026: Einnahmen 5.403,3, Ausgaben 7.395,8 und Defizit 1.992,5 Mrd. Dollar. Tabelle 4: Zölle 317,8 Mrd. Dollar erhoben, 144,6 Mrd. Dollar erstattet. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 22,4 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 28,9 Mrd. Dollar. Tabelle 6: Kreditaufnahme beim Publikum 2.073,0 Mrd. Dollar im Jahr, 32.245,4 Mrd. Dollar an seinem Ende (nach Auf- und Abschlägen). Tabelle 9: Nettozinsen 1.051,8 Mrd. Dollar. Tabelle 4: abgeführte Erträge der Federal Reserve 10,5 Mrd. Dollar."
     }
   },
   "census_popest_v2025": {
@@ -135,7 +135,7 @@
     "title": "Public Law 119-98, Secure America Act (June 10, 2026)",
     "publisher": "U.S. Government Publishing Office (govinfo)",
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ98.xml",
-    "accessed": "2026-11-20",
+    "accessed": "2026-11-21",
     "year": 2026,
     "note": {
       "en": "Reconciliation act: 69.545 billion dollars for fiscal year 2026, available until September 30, 2029: CBP 26.02 billion (sections 101, 103, 201), ICE 38.525 billion (sections 102, 202), Department of Homeland Security 5.0 billion (sections 104, 203).",
@@ -267,11 +267,11 @@
     "title": "The 2026 Annual Report of the Board of Trustees of the Federal Old-Age and Survivors Insurance and Federal Disability Insurance Trust Funds (House Document 119-163)",
     "publisher": "Social Security Board of Trustees (via govinfo)",
     "url": "https://www.govinfo.gov/content/pkg/CDOC-119hdoc163/pdf/CDOC-119hdoc163.pdf",
-    "accessed": "2026-11-20",
+    "accessed": "2026-11-21",
     "year": 2026,
     "note": {
-      "en": "Table V.C6: contribution and benefit base 160,200 dollars (2023), 176,100 (2025), 184,500 (2026); OASDI rate 12.4 percent (OASI 10.6, DI 1.8). Depletion: OASI fourth quarter of 2032, OASDI third quarter of 2034, then 83 percent of scheduled benefits payable.",
-      "de": "Tabelle V.C6: Beitragsbemessungsgrenze 160.200 Dollar (2023), 176.100 (2025), 184.500 (2026); OASDI-Beitragssatz 12,4 % (OASI 10,6, DI 1,8). Erschöpfung der Fonds: OASI im vierten Quartal 2032, OASDI im dritten Quartal 2034, danach sind 83 % der vorgesehenen Leistungen zahlbar."
+      "en": "Table V.C6: contribution and benefit base 160,200 dollars (2023), 176,100 (2025), 184,500 (2026); OASDI rate 12.4 percent (OASI 10.6, DI 1.8). Depletion: OASI fourth quarter of 2032, OASDI third quarter of 2034, then 83 percent of scheduled benefits payable. Table VI.C3 (p. 190), fiscal year 2025: income of the OASI and DI trust funds from the taxation of benefits 59,748 million dollars, of which 335 million withheld from benefits paid to nonresident aliens. Pages 160 and 161: benefits are taxed for beneficiaries whose income (AGI without benefits, plus half of the benefits and all tax-exempt interest) exceeds 25,000 dollars for single and 32,000 dollars for joint filers; the thresholds \"have never been changed\".",
+      "de": "Tabelle V.C6: Beitragsbemessungsgrenze 160.200 Dollar (2023), 176.100 (2025), 184.500 (2026); OASDI-Beitragssatz 12,4 % (OASI 10,6, DI 1,8). Erschöpfung der Fonds: OASI im vierten Quartal 2032, OASDI im dritten Quartal 2034, danach sind 83 % der vorgesehenen Leistungen zahlbar. Tabelle VI.C3 (S. 190), Haushaltsjahr 2025: Einnahmen der Fonds OASI und DI aus der Besteuerung der Renten 59.748 Mio. Dollar, davon 335 Mio. Dollar von Renten an Ausländer ohne Wohnsitz in den USA einbehalten. Seiten 160 und 161: Renten werden besteuert, wenn das Einkommen (bereinigtes Einkommen ohne Renten, plus die Hälfte der Renten und alle steuerfreien Zinsen) 25.000 Dollar bei Einzel- und 32.000 Dollar bei gemeinsamer Veranlagung übersteigt; die Schwellen wurden nie geändert."
     }
   },
   "hr_9519_2026": {
@@ -446,8 +446,8 @@
     "accessed": "2026-11-21",
     "year": 2025,
     "note": {
-      "en": "New section 86(g): the taxation of benefits \"shall not apply to any taxable year beginning after the date of the enactment\"; the Social Security and Railroad Retirement trust funds receive the lost amounts from the general fund. Identical Senate bill: S. 458 (Sen. Tuberville). Referred to committee, no further action.",
-      "de": "Neuer Abschnitt 86(g): Die Besteuerung der Renten gilt nicht mehr für Steuerjahre nach Inkrafttreten; die Treuhandfonds von Social Security und Railroad Retirement erhalten die Ausfälle aus dem allgemeinen Haushalt. Gleichlautender Senatsentwurf: S. 458 (Senator Tuberville). An den Ausschuss überwiesen, seither keine Beratung."
+      "en": "New section 86(g): the taxation of benefits \"shall not apply to any taxable year beginning after the date of the enactment of this subsection\"; the Social Security and Railroad Retirement trust funds receive the lost amounts from the general fund. Identical Senate bill: S. 458 (Sen. Tuberville). Referred to committee, no further action.",
+      "de": "Neuer Abschnitt 86(g): Die Besteuerung der Renten gilt nicht mehr für Steuerjahre, die nach dem Inkrafttreten dieses Abschnitts beginnen; die Treuhandfonds von Social Security und Railroad Retirement erhalten die Ausfälle aus dem allgemeinen Haushalt. Gleichlautender Senatsentwurf: S. 458 (Senator Tuberville). An den Ausschuss überwiesen, seither keine Beratung."
     }
   },
   "s_2716_2025": {
@@ -457,8 +457,8 @@
     "accessed": "2026-11-21",
     "year": 2025,
     "note": {
-      "en": "Ends the income tax on benefits and finances the trust funds with Social Security tax on wages above 250,000 dollars.",
-      "de": "Schafft die Einkommensteuer auf die Renten ab und finanziert die Treuhandfonds mit Social-Security-Beiträgen auf Löhne über 250.000 Dollar."
+      "en": "Section 2(a): ends the income tax on benefits (new section 86(g), as in H.R. 1040); section 2(b): holds the trust funds under the Social Security Act, the Hospital Insurance fund included, and the Railroad Retirement Act harmless from the general fund; section 3: applies Social Security tax to wages above 250,000 dollars.",
+      "de": "Abschnitt 2(a): schafft die Einkommensteuer auf die Renten ab (neuer Abschnitt 86(g), wie in H.R. 1040); Abschnitt 2(b): entschädigt die Treuhandfonds nach dem Social Security Act, den Krankenhausfonds eingeschlossen, und dem Railroad Retirement Act aus dem allgemeinen Haushalt; Abschnitt 3: erhebt Social-Security-Beiträge auf Löhne über 250.000 Dollar."
     }
   },
   "s_2475_2025": {
@@ -468,8 +468,8 @@
     "accessed": "2026-11-21",
     "year": 2025,
     "note": {
-      "en": "New section 6428C: a refundable credit for the first taxable year beginning in 2025, paid in advance; per eligible individual (twice on a joint return) and per qualifying child the greater of 600 dollars or tariff revenue since January 20, 2025 divided by the number of eligible people; reduced by 5% of AGI above 75,000 dollars (112,500 for heads of household, 150,000 for joint returns). No payment after December 31, 2026. Referred to the Finance Committee, no further action.",
-      "de": "Neuer Abschnitt 6428C: eine erstattungsfähige Steuergutschrift für das erste Steuerjahr ab 2025, im Voraus ausgezahlt; je berechtigter Person (bei gemeinsamer Veranlagung doppelt) und je Kind der höhere Betrag von 600 Dollar oder den Zolleinnahmen seit dem 20. Januar 2025 geteilt durch die Zahl der Berechtigten; gekürzt um 5 % des Einkommens über 75.000 Dollar (112.500 für Alleinerziehende, 150.000 für Paare). Keine Zahlung nach dem 31. Dezember 2026. An den Finanzausschuss überwiesen, seither keine Beratung."
+      "en": "New section 6428C: a refundable credit for the first taxable year beginning in 2025, paid in advance; per eligible individual (twice on a joint return) and per qualifying child within the meaning of section 24(c), that is under 17, the greater of 600 dollars or the tariff proceeds received during the taxable year from duties imposed after January 20, 2025, divided by the number of eligible individuals and qualifying children; reduced by 5% of AGI above 75,000 dollars (112,500 for heads of household, 150,000 for joint returns). Dependents are not eligible individuals. No payment after December 31, 2026. Referred to the Finance Committee, no further action.",
+      "de": "Neuer Abschnitt 6428C: eine erstattungsfähige Steuergutschrift für das erste Steuerjahr ab 2025, im Voraus ausgezahlt; je berechtigter Person (bei gemeinsamer Veranlagung doppelt) und je Kind im Sinn von Abschnitt 24(c), also unter 17, der höhere Betrag von 600 Dollar oder den im Steuerjahr eingenommenen Zöllen, die nach dem 20. Januar 2025 verhängt wurden, geteilt durch die Zahl der Berechtigten und Kinder; gekürzt um 5 % des Einkommens über 75.000 Dollar (112.500 für Alleinerziehende, 150.000 für Paare). Angehörige sind keine Berechtigten. Keine Zahlung nach dem 31. Dezember 2026. An den Finanzausschuss überwiesen, seither keine Beratung."
     }
   },
   "dcpd_202501109": {
@@ -484,14 +484,14 @@
     }
   },
   "dcpd_202600688": {
-    "title": "Remarks by the President, October 7, 2026 (Daily Compilation of Presidential Documents, DCPD-202600688)",
+    "title": "Remarks at a Campaign Rally for Texas Republican Candidates in San Antonio, Texas, October 7, 2026 (Daily Compilation of Presidential Documents, DCPD-202600688)",
     "publisher": "Office of the Federal Register (govinfo)",
     "url": "https://www.govinfo.gov/content/pkg/DCPD-202600688/html/DCPD-202600688.htm",
     "accessed": "2026-11-21",
     "year": 2026,
     "note": {
-      "en": "\"I will issue a 'Trump dividend' of $5,000 to every adult citizen in America.\" On September 9, 2026 (DCPD-202600590) the President tied it to the Republicans winning both chambers of Congress.",
-      "de": "„I will issue a 'Trump dividend' of $5,000 to every adult citizen in America.“ Am 9. September 2026 (DCPD-202600590) knüpfte der Präsident das an einen Sieg der Republikaner in beiden Kammern des Kongresses."
+      "en": "\"If Republicans win the House of Representatives and the Senate ... I'm going to give all adult citizens in the United States of America $5,000.\" \"We call it the 'Trump dividend'—is approximately $1 trillion\". \"I will issue a 'Trump dividend' of $5,000 to every adult citizen in America.\"",
+      "de": "„If Republicans win the House of Representatives and the Senate ... I'm going to give all adult citizens in the United States of America $5,000.“ „We call it the 'Trump dividend'—is approximately $1 trillion“. „I will issue a 'Trump dividend' of $5,000 to every adult citizen in America.“"
     }
   },
   "irs_soi_2023_t12": {
@@ -611,8 +611,8 @@
     "accessed": "2026-11-21",
     "year": 2025,
     "note": {
-      "en": "New rate tables: 39.6% of the excess over 2,000,000 dollars of taxable income on joint returns and over 1,000,000 dollars on other returns, 37% below; for taxable years after December 31, 2025. Referred to committee.",
-      "de": "Neue Tariftabellen: 39,6 % auf den Teil des zu versteuernden Einkommens über 2.000.000 Dollar bei gemeinsamer Veranlagung und über 1.000.000 Dollar bei den übrigen, darunter 37 %; für Steuerjahre nach dem 31. Dezember 2025. An den Ausschuss überwiesen."
+      "en": "Section 2(a) to (d): new rate tables, those of 2018, with 39.6% of the excess over 2,000,000 dollars of taxable income on joint returns and over 1,000,000 dollars on other returns, 37% below; section 2(f): every bracket amount is indexed for inflation from 2017, as the brackets of 2018 have been (in 2023, with the factor of the 37% threshold in Rev. Proc. 2022-38: 2,312,500 and 1,156,250 dollars, own calculation); section 2(h): for taxable years after December 31, 2025. Referred to committee.",
+      "de": "Abschnitt 2(a) bis (d): neue Tariftabellen, die von 2018, mit 39,6 % auf den Teil des zu versteuernden Einkommens über 2.000.000 Dollar bei gemeinsamer Veranlagung und über 1.000.000 Dollar bei den übrigen, darunter 37 %; Abschnitt 2(f): Alle Tarifgrenzen werden ab 2017 an die Inflation angepasst, wie die von 2018 (2023, mit dem Faktor der 37-%-Schwelle in Rev. Proc. 2022-38: 2.312.500 und 1.156.250 Dollar, eigene Rechnung); Abschnitt 2(h): für Steuerjahre nach dem 31. Dezember 2025. An den Ausschuss überwiesen."
     }
   },
   "fns_snap_fy2025": {
@@ -655,8 +655,8 @@
     "accessed": "2026-11-21",
     "year": 2026,
     "note": {
-      "en": "Section 4102: the State cost share starts in fiscal year 2029 instead of 2028, and from fiscal year 2031 a State with an error rate of 10% or more pays 20%.",
-      "de": "Abschnitt 4102: Der Anteil der Bundesstaaten beginnt im Haushaltsjahr 2029 statt 2028, und ab 2031 zahlt ein Bundesstaat mit einer Fehlerquote von 10 % oder mehr 20 %."
+      "en": "Section 4102: the State cost share starts in fiscal year 2029 instead of 2028; a State is delayed only if its error rate times 1.5 is 20% or more in both fiscal years 2025 and 2026, and then to fiscal year 2030; from fiscal year 2031 a State with an error rate of 10% or more pays 20%. Placed on the Senate calendar, no further action.",
+      "de": "Abschnitt 4102: Der Anteil der Bundesstaaten beginnt im Haushaltsjahr 2029 statt 2028; ein Bundesstaat beginnt nur später, wenn seine Fehlerquote mal 1,5 in den Haushaltsjahren 2025 und 2026 jeweils mindestens 20 % ergibt, und dann im Haushaltsjahr 2030; ab 2031 zahlt ein Bundesstaat mit einer Fehlerquote von 10 % oder mehr 20 %. Auf die Tagesordnung des Senats gesetzt, seither keine Beratung."
     }
   },
   "omb_hist_debt_fy2027": {
@@ -710,8 +710,8 @@
     "accessed": "2026-11-21",
     "year": 2026,
     "note": {
-      "en": "Contains only Table S-1 (mandatory outlays under current law to 2031) and Table S-2; no receipts, deficits, interest or economic assumptions. Page 1: outlays for 2026 are projected lower than in the Budget, partially offset by lower receipts, partly from customs duties.",
-      "de": "Enthält nur Tabelle S-1 (gesetzlich festgelegte Ausgaben nach geltendem Recht bis 2031) und Tabelle S-2; keine Einnahmen, Defizite, Zinsen oder Wirtschaftsannahmen. Seite 1: Die Ausgaben 2026 werden niedriger erwartet als im Haushaltsentwurf, teils ausgeglichen durch geringere Einnahmen, unter anderem aus Zöllen."
+      "en": "Contains only Table S-1 (mandatory outlays under current law to 2031) and Table S-2; no receipts, deficits, interest or economic assumptions. Page 1: outlays for 2026 are projected lower than in the Budget, largely for non-defense discretionary programs and mandatory programs such as SNAP and unemployment compensation, partially offset by lower receipts, partly from customs duties; outlays and receipts in 2027 reflect the Secure America Act, a requested 87.6 billion dollar supplemental, mainly for the Department of War, and higher revenue projections for individual and corporation income taxes.",
+      "de": "Enthält nur Tabelle S-1 (gesetzlich festgelegte Ausgaben nach geltendem Recht bis 2031) und Tabelle S-2; keine Einnahmen, Defizite, Zinsen oder Wirtschaftsannahmen. Seite 1: Die Ausgaben 2026 werden niedriger erwartet als im Haushaltsentwurf, vor allem bei nicht militärischen, jährlich bewilligten Programmen und bei gesetzlichen Programmen wie SNAP und dem Arbeitslosengeld, teils ausgeglichen durch geringere Einnahmen, unter anderem aus Zöllen; Ausgaben und Einnahmen 2027 spiegeln den Secure America Act, einen beantragten Nachtragshaushalt von 87,6 Mrd. Dollar, vor allem für das Kriegsministerium, und höhere Erwartungen bei Einkommen- und Körperschaftsteuer."
     }
   },
   "treasury_mspd_2025_09": {
@@ -765,8 +765,8 @@
     "accessed": "2026-11-21",
     "year": 2026,
     "note": {
-      "en": "Median projections of the Federal Reserve Board members and Reserve Bank presidents for the longer run: real GDP growth 2.0%, PCE inflation 2.0%, federal funds rate 3.2%.",
-      "de": "Median der Projektionen der Mitglieder des Board und der Präsidenten der regionalen Notenbanken für die lange Frist: reales BIP-Wachstum 2,0 %, PCE-Inflation 2,0 %, Leitzins 3,2 %."
+      "en": "Median projections of the Federal Reserve Board members and Reserve Bank presidents: real GDP growth in the longer run 2.0%, PCE inflation 2.0%; federal funds rate 4.1% at the end of 2026 and 2027, 3.9% in 2028, 3.6% in 2029 and 3.2% in the longer run.",
+      "de": "Median der Projektionen der Mitglieder des Board und der Präsidenten der regionalen Notenbanken: langfristiges reales BIP-Wachstum 2,0 %, PCE-Inflation 2,0 %; Leitzins 4,1 % Ende 2026 und 2027, 3,9 % 2028, 3,6 % 2029 und 3,2 % auf lange Sicht."
     }
   },
   "govinfo_plaw_119": {
@@ -778,6 +778,149 @@
     "note": {
       "en": "The public laws through P.L. 119-142 of November 10, 2026. None after P.L. 119-103, the continuing resolution, makes appropriations for fiscal year 2027.",
       "de": "Die Gesetze bis P.L. 119-142 vom 10. November 2026. Keines nach P.L. 119-103, dem Übergangshaushalt, bewilligt Mittel für das Haushaltsjahr 2027."
+    }
+  },
+  "s_4093_2026": {
+    "title": "S. 4093, Tariff Refunds for Working Families Act, introduced March 12, 2026 (Sen. Heinrich)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119s4093is/html/BILLS-119s4093is.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "New section 6428C: a refundable credit for the first taxable year beginning in 2026 of 600 dollars (1,200 on a joint return) plus 600 dollars per qualifying child, none above AGI of 90,000 dollars (120,000 for heads of household, 180,000 for joint returns), paid in advance; refunds \"derived from revenues raised from unlawful tariffs\". Sponsor and 8 cosponsors are Democrats. Referred to the Finance Committee, no further action.",
+      "de": "Neuer Abschnitt 6428C: eine erstattungsfähige Steuergutschrift für das erste Steuerjahr ab 2026 von 600 Dollar (1.200 bei gemeinsamer Veranlagung) plus 600 Dollar je Kind, nichts bei einem Einkommen über 90.000 Dollar (120.000 für Alleinerziehende, 180.000 für Paare), im Voraus ausgezahlt; finanziert nach dem Willen des Kongresses aus rechtswidrig erhobenen Zöllen. Antragsteller und 8 Mitunterzeichner sind Demokraten. An den Finanzausschuss überwiesen, seither keine Beratung."
+    }
+  },
+  "hr_10494_2026": {
+    "title": "H.R. 10494, American Tariff Rebate Act, introduced September 17, 2026 (Rep. Foushee)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr10494ih/html/BILLS-119hr10494ih.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Section 2, new section 6428C: a refundable credit for the first taxable year beginning in 2026 of 2,000 dollars (4,000 on a joint return) plus 600 dollars per dependent, reduced ratably over 5,000 dollars of AGI above 75,000 (10,000 above 150,000 for joint returns, 7,500 above 112,500 for heads of household), paid in advance. Section 3 repeals the rate cuts extended by Public Law 119-21, section 4 lowers the estate tax exemption, section 5 rescinds 46.55 billion dollars for the border wall and 45.0 billion for detention from that law's unobligated balances. Sponsor a Democrat; referred to committees, no further action.",
+      "de": "Abschnitt 2, neuer Abschnitt 6428C: eine erstattungsfähige Steuergutschrift für das erste Steuerjahr ab 2026 von 2.000 Dollar (4.000 bei gemeinsamer Veranlagung) plus 600 Dollar je Angehörigem, abgeschmolzen über 5.000 Dollar Einkommen oberhalb von 75.000 (10.000 oberhalb von 150.000 für Paare, 7.500 oberhalb von 112.500 für Alleinerziehende), im Voraus ausgezahlt. Abschnitt 3 hebt die durch Public Law 119-21 verlängerten Tarifsenkungen auf, Abschnitt 4 senkt den Freibetrag der Erbschaftsteuer, Abschnitt 5 streicht aus nicht gebundenen Mitteln dieses Gesetzes 46,55 Mrd. Dollar für die Grenzmauer und 45,0 Mrd. Dollar für Haftplätze. Antragstellerin ist Demokratin; an die Ausschüsse überwiesen, seither keine Beratung."
+    }
+  },
+  "s_3956_2026": {
+    "title": "S. 3956, Make Billionaires Pay Their Fair Share Act, introduced March 2, 2026 (Sen. Sanders)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119s3956is/html/BILLS-119s3956is.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "New section 2901: \"a tax computed equal to 5 percent of the net value of assets held by the taxpayer\" for any taxpayer whose net assets exceed 1,000,000,000 dollars (indexed from 2025); married couples count as one taxpayer. Referred to the Finance Committee, no further action.",
+      "de": "Neuer Abschnitt 2901: eine Steuer von 5 % des gesamten Nettovermögens für jeden Steuerpflichtigen, dessen Nettovermögen 1.000.000.000 Dollar übersteigt (ab 2025 indexiert); Ehepaare zählen als ein Steuerpflichtiger. An den Finanzausschuss überwiesen, seither keine Beratung."
+    }
+  },
+  "hr_1834_2026": {
+    "title": "H.R. 1834, engrossed in the House on January 8, 2026, with its bill status (Senate Calendar No. 319)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr1834eh/html/BILLS-119hr1834eh.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Section 1: extends the enhanced premium tax credit to taxable years \"before January 1, 2029\". Passed the House 230 to 196 (roll call 11); received in the Senate and placed on the calendar under General Orders on February 10, 2026 (Calendar No. 319), no later action (bill status, https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr1834.xml).",
+      "de": "Abschnitt 1: verlängert die erhöhten Prämienzuschüsse für Steuerjahre „before January 1, 2029“. Vom Repräsentantenhaus mit 230 zu 196 Stimmen beschlossen (namentliche Abstimmung 11); im Senat am 10. Februar 2026 auf die Tagesordnung gesetzt (Calendar No. 319), seither keine Beratung (Bearbeitungsstand, https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr1834.xml)."
+    }
+  },
+  "house_roll_2026_011": {
+    "title": "Final vote results for roll call 11, H.R. 1834, January 8, 2026",
+    "publisher": "Office of the Clerk, U.S. House of Representatives",
+    "url": "https://clerk.house.gov/evs/2026/roll011.xml",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "On passage: yeas 230, nays 196; Republicans 17 yeas, 196 nays, 5 not voting; Democrats 213 yeas, 0 nays.",
+      "de": "Schlussabstimmung: 230 Ja, 196 Nein; Republikaner 17 Ja, 196 Nein, 5 ohne Stimme; Demokraten 213 Ja, 0 Nein."
+    }
+  },
+  "hr_5145_2025": {
+    "title": "H.R. 5145, Bipartisan Premium Tax Credit Extension Act, introduced September 4, 2025 (Rep. Kiggans)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr5145ih/html/BILLS-119hr5145ih.htm",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Extends the enhanced premium tax credit by one year, to taxable years before January 1, 2027. Sponsor a Republican; 14 Republican and 16 Democratic cosponsors (bill status, https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr5145.xml). Referred to the Ways and Means Committee, no further action.",
+      "de": "Verlängert die erhöhten Prämienzuschüsse um ein Jahr, für Steuerjahre vor dem 1. Januar 2027. Antragstellerin ist Republikanerin; 14 republikanische und 16 demokratische Mitunterzeichner (Bearbeitungsstand, https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr5145.xml). An den Ausschuss überwiesen, seither keine Beratung."
+    }
+  },
+  "hr_7567_2026": {
+    "title": "H.R. 7567, Farm, Food, and National Security Act of 2026, engrossed in the House on April 30, 2026",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr7567eh/html/BILLS-119hr7567eh.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Passed the House 224 to 200 on April 30, 2026 (roll call 154); received in the Senate on May 19, 2026. It does not amend the State cost share of 7 U.S.C. 2013(a)(2).",
+      "de": "Vom Repräsentantenhaus am 30. April 2026 mit 224 zu 200 Stimmen beschlossen (namentliche Abstimmung 154); im Senat am 19. Mai 2026 eingegangen. Den Anteil der Bundesstaaten nach 7 U.S.C. 2013(a)(2) ändert er nicht."
+    }
+  },
+  "dcpd_202600590": {
+    "title": "Remarks at the Republican National Committee Midterm Convention in Dallas, Texas, September 9, 2026 (Daily Compilation of Presidential Documents, DCPD-202600590)",
+    "publisher": "Office of the Federal Register (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/DCPD-202600590/html/DCPD-202600590.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "\"I will issue a dividend to every adult citizen in the United States of America for $5,000.\" \"So, if the Republicans win, you win with us and you get $5,000. It will be called the Trump dividend.\"",
+      "de": "„I will issue a dividend to every adult citizen in the United States of America for $5,000.“ „So, if the Republicans win, you win with us and you get $5,000. It will be called the Trump dividend.“"
+    }
+  },
+  "scotus_22_800": {
+    "title": "Moore v. United States, No. 22-800 (decided June 20, 2024), 602 U.S. 572",
+    "publisher": "Supreme Court of the United States",
+    "url": "https://www.supremecourt.gov/opinions/23pdf/22-800_jg6o.pdf",
+    "accessed": "2026-11-21",
+    "year": 2024,
+    "note": {
+      "en": "Slip opinion, p. 8, note 2: \"our analysis today does not address the distinct issues that would be raised by ... taxes on holdings, wealth, or net worth\"; pp. 22 to 24.",
+      "de": "Urteil, S. 8, Fußnote 2: Die Prüfung betrifft nicht die Fragen, die Steuern auf Bestände, Vermögen oder Nettovermögen aufwerfen würden („taxes on holdings, wealth, or net worth“); S. 22 bis 24."
+    }
+  },
+  "fed_h41_20251002": {
+    "title": "Factors Affecting Reserve Balances (H.4.1), October 2, 2025, Table 6",
+    "publisher": "Board of Governors of the Federal Reserve System",
+    "url": "https://www.federalreserve.gov/releases/h41/20251002/",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Wednesday, October 1, 2025, all Federal Reserve Banks: earnings remittances due to the U.S. Treasury -242,928 million dollars. Footnote 8: negative amounts are the deferred asset, \"the amount of net earnings that the Federal Reserve Banks need to realize before remittances to the U.S. Treasury resume\".",
+      "de": "Mittwoch, 1. Oktober 2025, alle Federal Reserve Banks: an das Finanzministerium abzuführende Erträge -242.928 Mio. Dollar. Fußnote 8: Negative Beträge sind der Ausgleichsposten (deferred asset), die Nettoerträge, die die Federal Reserve Banks erzielen müssen, bevor sie wieder an das Finanzministerium abführen."
+    }
+  },
+  "treasury_mts_2026_02": {
+    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, February 2026, Table 4",
+    "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
+    "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Retrieved through the Fiscal Data API, record date 2026-02-28. Customs duties, fiscal year 2026 through February: 150.9 billion dollars collected, 6.5 billion refunded.",
+      "de": "Abgerufen über die Fiscal Data API, Stichtag 28. Februar 2026. Zölle im Haushaltsjahr 2026 bis Februar: 150,9 Mrd. Dollar erhoben, 6,5 Mrd. Dollar erstattet."
+    }
+  },
+  "clerk_house_election_2026": {
+    "title": "Election Information: 120th Congress Nominees (official list, published October 8, 2026)",
+    "publisher": "Office of the Clerk, U.S. House of Representatives",
+    "url": "https://clerk.house.gov/Members/ViewElectionInformation",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "As of November 21, 2026 the page lists, for the 120th Congress, only the official list of nominees for Senator and Representative; the latest election statistics are those of 2024. The Clerk calls the roll of the Members-elect when the 120th Congress convenes.",
+      "de": "Am 21. November 2026 führt die Seite für den 120. Kongress nur die amtliche Liste der Kandidaten für Senat und Repräsentantenhaus; die neueste Wahlstatistik ist die von 2024. Der Clerk ruft die gewählten Abgeordneten auf, wenn der 120. Kongress zusammentritt."
+    }
+  },
+  "ca_sos_general_2026": {
+    "title": "General Election, November 3, 2026: Key Dates and Deadlines",
+    "publisher": "California Secretary of State",
+    "url": "https://www.sos.ca.gov/elections/upcoming-elections/general-election-november-3-2026/key-dates-deadlines",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "County elections officials certify their results by December 3, 2026; the Secretary of State certifies the Statement of Vote on December 11, 2026.",
+      "de": "Die Wahlbehörden der Countys bestätigen ihre Ergebnisse bis zum 3. Dezember 2026; die Secretary of State bestätigt das Gesamtergebnis (Statement of Vote) am 11. Dezember 2026."
     }
   }
 }

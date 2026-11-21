@@ -35,9 +35,12 @@ TARIFF_IMPORT_LOSS = 0.20
 JCT_OFFSET_2025 = 0.221
 # HAND: IRS Publication 5901 (February 2024), p. 2: revenue from IRS enforcement, tax years 2020-2021, $ billion a year.
 IRS_ENFORCEMENT_REVENUE = 63e9
-# HAND: 2026 OASDI Trustees Report (H. Doc. 119-163), Table VI.C3, fiscal year 2025: income of the OASI and DI trust
-# funds from the taxation of benefits, $ million.
-OASDI_BENEFIT_TAX_FY2025 = 59748
+# HAND: 2026 OASDI Trustees Report (H. Doc. 119-163), Table VI.C3 (printed p. 190, PDF p. 198), fiscal year 2025:
+# income of the OASI and DI trust funds from the taxation of benefits, $ million: "All other, not subject to
+# withholding" (the income tax under IRC 86, which H.R. 1040 ends) and "Withheld from benefit payments to nonresident
+# aliens" (the flat tax under IRC 871(a)(3), which it does not end). Together 59,748.
+OASDI_BENEFIT_TAX_FY2025 = 59413
+OASDI_BENEFIT_TAX_NONRESIDENT_FY2025 = 335
 # HAND: 2026 Medicare Trustees Report, Table V.H1 (p. 228), fiscal year 2025: HI income from the taxation of OASDI
 # benefits, $ thousand.
 HI_BENEFIT_TAX_FY2025 = 41054000
@@ -154,6 +157,9 @@ def figures():
     for date, tag in (("2025-09-30", "fy2025"), ("2026-09-30", "fy2026")):
         for col, name in (("current_fytd_gross_rcpt_amt", "gross"), ("current_fytd_refund_amt", "refunds"), ("current_fytd_net_rcpt_amt", "net")):
             f["customs_%s_%s" % (name, tag)] = mts("4", date, "Customs Duties", col)
+    # Refunds of fiscal year 2026 through February 2026 (the Supreme Court ruled on February 20, 2026) and after it.
+    f["customs_refunds_fy2026_to_feb"] = mts("4", "2026-02-28", "Customs Duties", "current_fytd_refund_amt")
+    f["customs_refunds_fy2026_from_mar"] = f["customs_refunds_fy2026"] - f["customs_refunds_fy2026_to_feb"]
     f["tariff_scale"] = round(f["imports_fy2025"] * 0.01 * (1 - TARIFF_IMPORT_LOSS))
     f["tariff_offset"] = JCT_OFFSET_2025
     # federal civilian workforce (workforce.py; amounts in dollars, employment in people)
@@ -166,7 +172,10 @@ def figures():
     f["wf_irs_enforcement_12"] = IRS_ENFORCEMENT_REVENUE * 0.12
     # measures added in November 2026 (households.py; dollars and people)
     f.update(households().figures())
-    f["ssb_tax_fy2025"] = OASDI_BENEFIT_TAX_FY2025 * 1e6 + HI_BENEFIT_TAX_FY2025 * 1e3
+    f["ssb_oasdi_fy2025"] = OASDI_BENEFIT_TAX_FY2025 * 1e6
+    f["ssb_oasdi_nonresident_fy2025"] = OASDI_BENEFIT_TAX_NONRESIDENT_FY2025 * 1e6
+    f["ssb_hi_fy2025"] = HI_BENEFIT_TAX_FY2025 * 1e3
+    f["ssb_tax_fy2025"] = f["ssb_oasdi_fy2025"] + f["ssb_hi_fy2025"]
     f["ssb_scale"] = -round(f["ssb_tax_fy2025"] / 100)
     f["ptc_total_fy2027"] = -GREENBOOK_PTC_FY2027 * 1e6
     f["ptc_outlays_fy2027"] = -GREENBOOK_PTC_OUTLAYS_FY2027 * 1e6
@@ -175,6 +184,7 @@ def figures():
     f["ptc_receipt_scale"] = -round(f["ptc_receipts_fy2027"] / 100)
     f["ptc_premium_rise"] = f["oep2026_Avg_Prm"] / f["oep2025_Avg_Prm"] - 1
     f["top_default_396"] = f["top_per_point"] * 2.6
+    f["rebate_young_per_adult"] = f["pop_under17_2025"] / f["pop_adults_2025"]
     f["wealth_default"] = f["wealth_scale_low"] * 2 + f["wealth_scale_high"] * 3
     f["rebate_default"] = f["rebate_per_dollar"] * 600
     for amount in (2000, 5000):       # the linear figure against the phase-out computed at that amount

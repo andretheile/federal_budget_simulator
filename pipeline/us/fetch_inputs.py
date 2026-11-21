@@ -39,6 +39,10 @@ Read by hand for the measures added in November 2026 (constants marked HAND in m
   fns/snap-qcfy25-per.pdf       FNS, SNAP payment error rates, fiscal year 2025 (by state)
   irs/rp-22-38.pdf              IRS, Rev. Proc. 2022-38: the 37% thresholds of tax year 2023
   govinfo/BILLS-*.htm, DCPD-*.htm  bills of the 119th Congress and presidential remarks quoted on the cards
+  govinfo/BILLSTATUS-119hr{1834,5145,7567}.xml, house/roll011_2026.xml  bill status, the House vote on H.R. 1834
+  house/ViewElectionInformation.html, ca/key-dates-general-2026.html  the 2026 election as of November 21, 2026
+  scotus/22-800.pdf             Supreme Court, Moore v. United States (2024): taxes on wealth left open
+  mts/mts_table_4_2026-02-28.csv  Monthly Treasury Statement for February 2026: customs refunds before the ruling
 Kept for reference (read by hand; the measures quote them):
   irs/p15--2025.pdf             IRS Publication 15 (2025): payroll tax rates, Social Security wage base
   govinfo/CDOC-119hdoc163.pdf   2026 Annual Report of the Social Security Trustees (H. Doc. 119-163)
@@ -70,8 +74,12 @@ Read by debt.py (countries/us/debt.json, the debt and interest projection):
   treasury/mspd_table_2_2026-10-31.csv         Monthly Statement of the Public Debt, debt subject to limit
   treasury/yield_curve_*.csv    Treasury, daily par yield curve rates by calendar year
   fed/fomcprojtabl20260916.htm  Federal Reserve, Summary of Economic Projections, September 2026, Table 1
+  fed/h41_20251002.htm          Federal Reserve, H.4.1 of October 2, 2025: the deferred asset (remittances)
   govinfo/PLAW-119-public.zip   public laws of the 119th Congress: titles and dates (appropriations for FY 2027)
   govinfo/PLAW-119publ21.xml, PLAW-119publ103.xml  the debt limit (sec. 72001); the continuing resolution's end date
+  govinfo/PLAW-119publ98.xml    the Secure America Act: its appropriations, added up
+  omb/ap_5_tables_1-3_fy2027.xlsx  Analytical Perspectives, Table 5-1: civilian employment in 2025 and 2026
+  mts/mts_table_4_2026-02-28.csv  customs refunds of fiscal year 2026 through February 2026
 Read by hand for debt.py (constants marked HAND there):
   omb/ap_12_current_services_fy2027.pdf  Analytical Perspectives, chapter 12: Tables 12-2 (GDP) and 12-4 (receipts)
                                          in the baseline for 2032-2036, which the workbook does not hold
@@ -168,8 +176,25 @@ DOWNLOADS = {
     "cms/2026-oep-state-level-public-use-file.zip": "https://www.cms.gov/files/zip/2026-oep-state-level-public-use-file.zip",
 }
 for doc in ("BILLS-119hr1040ih", "BILLS-119s2475is", "BILLS-119s3385pcs", "BILLS-119hr247ih", "BILLS-119s4246is",
-            "BILLS-119hr4280ih", "BILLS-119hr7975ih", "BILLS-119s5526rs", "DCPD-202501109", "DCPD-202600688"):
+            "BILLS-119hr4280ih", "BILLS-119hr7975ih", "BILLS-119s5526rs", "DCPD-202501109", "DCPD-202600688",
+            # added after the fact-check of November 21, 2026: the other bills and remarks the cards quote
+            "BILLS-119s2716is", "BILLS-119s3956is", "BILLS-119s4093is", "BILLS-119hr10494ih", "BILLS-119hr1834eh",
+            "BILLS-119hr5145ih", "BILLS-119hr7567eh", "DCPD-202600590"):
     DOWNLOADS["govinfo/%s.htm" % doc] = "https://www.govinfo.gov/content/pkg/%s/html/%s.htm" % (doc, doc)
+# The status of H.R. 1834 (passed by the House, on the Senate calendar) and the House roll call on it; the status of
+# H.R. 5145 (cosponsors by party) and H.R. 7567 (the House farm bill's vote).
+for bill in ("hr1834", "hr5145", "hr7567"):
+    DOWNLOADS["govinfo/BILLSTATUS-119%s.xml" % bill] = (
+        "https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119%s.xml" % bill)
+DOWNLOADS["house/roll011_2026.xml"] = "https://clerk.house.gov/evs/2026/roll011.xml"
+# The election of November 3, 2026, as the official sources stood on November 21, 2026 (the pages change; the cached
+# copies are of that day): the Clerk's election page, which lists only the nominees for the 120th Congress, and
+# California's certification dates.
+DOWNLOADS["house/ViewElectionInformation.html"] = "https://clerk.house.gov/Members/ViewElectionInformation"
+DOWNLOADS["ca/key-dates-general-2026.html"] = (
+    "https://www.sos.ca.gov/elections/upcoming-elections/general-election-november-3-2026/key-dates-deadlines")
+# Supreme Court, Moore v. United States (June 20, 2024): what it leaves open about taxes on wealth.
+DOWNLOADS["scotus/22-800.pdf"] = "https://www.supremecourt.gov/opinions/23pdf/22-800_jg6o.pdf"
 # Members taken out of downloaded archives: (archive, member, cache path).
 EXTRACT = [("fns/snap-zip-fy69tocurrent-11.zip", "FY25.xlsx", "fns/FY25.xlsx")]
 for law in ("1", "21", "28", "37", "75", "98", "103"):
@@ -177,6 +202,9 @@ for law in ("1", "21", "28", "37", "75", "98", "103"):
 for date in ("2025-09-30", "2026-09-30"):
     for table in ("1", "3", "4", "5", "6", "9"):
         DOWNLOADS["mts/mts_table_%s_%s.csv" % (table, date)] = MTS % (table, date)
+# Table 4 for February 2026: customs refunds of fiscal year 2026 before and after the Supreme Court's ruling of
+# February 20, 2026 (measures.py, debt.py).
+DOWNLOADS["mts/mts_table_4_2026-02-28.csv"] = MTS % ("4", "2026-02-28")
 # --- the debt projection (debt.py) ---
 for name in ("hist03z1_fy2027.xlsx", "hist07z1_fy2027.xlsx", "ap_12_tables_fy2027.xlsx", "ap_11_tables_fy2027.xlsx",
              "ap_12_current_services_fy2027.pdf", "ap_1_assumptions_fy2027.pdf", "ap_11_borrowing_fy2027.pdf"):
@@ -200,8 +228,12 @@ DOWNLOADS["treasury/executive-summary-2025.pdf"] = "https://fiscal.treasury.gov/
 # All public laws of the 119th Congress as one archive (always the latest; the cached copy was fetched on November 21,
 # 2026 and runs to P.L. 119-142): debt.py checks that no law after P.L. 119-103 appropriates for fiscal year 2027.
 DOWNLOADS["govinfo/PLAW-119-public.zip"] = "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119-public.zip"
-# Federal Reserve, Summary of Economic Projections of September 16, 2026: longer-run growth (the growth default).
+# Federal Reserve, Summary of Economic Projections of September 16, 2026: longer-run growth (the growth default) and
+# the policymakers' path of the federal funds rate (market-rate note).
 DOWNLOADS["fed/fomcprojtabl20260916.htm"] = "https://www.federalreserve.gov/monetarypolicy/fomcprojtabl20260916.htm"
+# Federal Reserve, H.4.1 of October 2, 2025 (data of Wednesday, October 1, 2025): the deferred asset in "Earnings
+# remittances due to the U.S. Treasury" (interest note).
+DOWNLOADS["fed/h41_20251002.htm"] = "https://www.federalreserve.gov/releases/h41/20251002/"
 
 
 def main():

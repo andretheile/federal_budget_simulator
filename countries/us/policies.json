@@ -71,8 +71,8 @@
           "kind": "practical",
           "severity": "major",
           "text": {
-            "en": "The largest items are health and emergency aid: global health programs $7.5B (among them HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health), international disaster assistance $5.8B, migration and refugee assistance $2.9B (outlays in 2025).",
-            "de": "Die größten Posten sind Gesundheits- und Nothilfe: globale Gesundheitsprogramme 7,5 Mrd. Dollar (darunter HIV/Aids, Tuberkulose, Malaria, Ernährung sowie Mütter- und Kindergesundheit), internationale Katastrophenhilfe 5,8 Mrd. Dollar, Migrations- und Flüchtlingshilfe 2,9 Mrd. Dollar (Ausgaben 2025)."
+            "en": "The largest items are health and emergency aid: global health programs $7.5B (among them HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health), international disaster assistance $5.8B, migration and refugee assistance $2.9B (outlays in FY 2025).",
+            "de": "Die größten Posten sind Gesundheits- und Nothilfe: globale Gesundheitsprogramme 7,5 Mrd. Dollar (darunter HIV/Aids, Tuberkulose, Malaria, Ernährung sowie Mütter- und Kindergesundheit), internationale Katastrophenhilfe 5,8 Mrd. Dollar, Migrations- und Flüchtlingshilfe 2,9 Mrd. Dollar (Ausgaben im Haushaltsjahr 2025)."
           },
           "sources": [
             "omb_pbd_outlays_fy2027",
@@ -83,8 +83,8 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "en": "Development and humanitarian aid was 0.4% of federal outlays in 2025 ($30.0B of $7.01T). The President's Budget for 2027 estimates $37.9B for 2026 and $22.8B for 2027.",
-            "de": "Entwicklungs- und humanitäre Hilfe machte 2025 0,4 % der Bundesausgaben aus (30,0 von 7.011,1 Mrd. Dollar). Der Haushaltsentwurf des Präsidenten für 2027 schätzt 37,9 Mrd. Dollar für 2026 und 22,8 Mrd. Dollar für 2027."
+            "en": "Development and humanitarian aid was 0.4% of federal outlays in FY 2025 ($30.0B of $7.01T). The President's Budget for FY 2027 estimates $37.9B for FY 2026 and $22.8B for FY 2027.",
+            "de": "Entwicklungs- und humanitäre Hilfe machte im Haushaltsjahr 2025 0,4 % der Bundesausgaben aus (30,0 von 7.011,1 Mrd. Dollar). Der Haushaltsentwurf des Präsidenten für das Haushaltsjahr 2027 schätzt 37,9 Mrd. Dollar für 2026 und 22,8 Mrd. Dollar für 2027."
           },
           "sources": [
             "omb_hist_fy2027"
@@ -212,8 +212,8 @@
         "de": "Ausgaben für Grenzschutz und Einwanderungsbehörde ändern"
       },
       "summary": {
-        "en": "Changes the spending of CBP and ICE compared with 2025, up or down. The default of +60% is how much their outlays actually rose from fiscal year 2025 to 2026.",
-        "de": "Ändert die Ausgaben von CBP und ICE gegenüber 2025, nach oben oder unten. Die Grundeinstellung von +60 % ist der tatsächliche Anstieg ihrer Ausgaben vom Haushaltsjahr 2025 auf 2026."
+        "en": "Changes the spending of CBP and ICE compared with FY 2025, up or down. The default of +60% is how much their outlays actually rose from FY 2025 to FY 2026.",
+        "de": "Ändert die Ausgaben von CBP und ICE gegenüber dem Haushaltsjahr 2025, nach oben oder unten. Die Grundeinstellung von +60 % ist der tatsächliche Anstieg ihrer Ausgaben vom Haushaltsjahr 2025 auf 2026."
       },
       "explanation": {
         "en": "The two agencies are U.S. Customs and Border Protection (CBP) and U.S. Immigration and Customs Enforcement (ICE). The slider gives the change as a percentage of their 2025 level: −100% ends both agencies' spending, +100% doubles it.",
@@ -287,13 +287,15 @@
           "kind": "political",
           "severity": "major",
           "text": {
-            "en": "Congress has already added large multi-year funds: the reconciliation act of July 4, 2025 (Public Law 119-21) gave among other things $46.55B for the border wall, $45.0B for ICE detention capacity and $29.85B for ICE, and the Secure America Act of June 10, 2026 (Public Law 119-98) another $69.5B for CBP, ICE and the Department of Homeland Security, all available until September 30, 2029. Outlays in fiscal year 2026: ICE $22.4B and CBP $28.9B, after $10.7B and $21.2B in 2025 (Treasury).",
-            "de": "Der Kongress hat bereits große mehrjährige Mittel bereitgestellt: das Haushaltsgesetz vom 4. Juli 2025 (Public Law 119-21) unter anderem 46,55 Mrd. Dollar für die Grenzmauer, 45,0 Mrd. Dollar für Haftplätze der ICE und 29,85 Mrd. Dollar für die ICE, der Secure America Act vom 10. Juni 2026 (Public Law 119-98) weitere 69,5 Mrd. Dollar für CBP, ICE und das Heimatschutzministerium, alles verfügbar bis 30. September 2029. Ausgaben im Haushaltsjahr 2026: ICE 22,4 Mrd. Dollar und CBP 28,9 Mrd. Dollar, nach 10,7 und 21,2 Mrd. Dollar 2025 (Finanzministerium)."
+            "en": "Congress has already added large multi-year funds: the reconciliation act of July 4, 2025 (Public Law 119-21) gave among other things $46.55B for the border wall, $45.0B for ICE detention capacity and $29.85B for ICE, and the Secure America Act of June 10, 2026 (Public Law 119-98) another $69.5B for CBP, ICE and the Department of Homeland Security, all available until September 30, 2029. Outlays in fiscal year 2026: ICE $22.4B and CBP $28.9B, after $10.7B and $21.2B in 2025 (Treasury). Two Democratic bills would take part of it back: H.R. 7975 (Rep. Shontel Brown, March 2026) would repeal the $45.0B for detention and the $29.85B for ICE and rescind what is unspent, H.R. 10494 (Rep. Foushee, September 2026) would rescind unspent money for the wall and for detention; neither has moved.",
+            "de": "Der Kongress hat bereits große mehrjährige Mittel bereitgestellt: das Haushaltsgesetz vom 4. Juli 2025 (Public Law 119-21) unter anderem 46,55 Mrd. Dollar für die Grenzmauer, 45,0 Mrd. Dollar für Haftplätze der ICE und 29,85 Mrd. Dollar für die ICE, der Secure America Act vom 10. Juni 2026 (Public Law 119-98) weitere 69,5 Mrd. Dollar für CBP, ICE und das Heimatschutzministerium, alles verfügbar bis 30. September 2029. Ausgaben im Haushaltsjahr 2026: ICE 22,4 Mrd. Dollar und CBP 28,9 Mrd. Dollar, nach 10,7 und 21,2 Mrd. Dollar 2025 (Finanzministerium). Zwei Entwürfe von Demokraten würden einen Teil davon zurücknehmen: H.R. 7975 (Abgeordnete Shontel Brown, März 2026) würde die 45,0 Mrd. Dollar für Haftplätze und die 29,85 Mrd. Dollar für die ICE aufheben und streichen, was nicht ausgegeben ist, H.R. 10494 (Abgeordnete Foushee, September 2026) nicht gebundene Mittel für die Grenzmauer und für Haftplätze; keiner wurde beraten."
           },
           "sources": [
             "plaw_119_21",
             "plaw_119_98",
-            "treasury_mts_2026_09"
+            "treasury_mts_2026_09",
+            "hr_7975_2026",
+            "hr_10494_2026"
           ]
         },
         {
@@ -331,7 +333,9 @@
         "plaw_119_21",
         "plaw_119_98",
         "plaw_119_1",
-        "treasury_mts_2026_09"
+        "treasury_mts_2026_09",
+        "hr_7975_2026",
+        "hr_10494_2026"
       ]
     },
     {
@@ -609,7 +613,7 @@
       },
       "summary": {
         "en": "Sets the federal tax rate on corporate profits, 21% since 2017. The default shows 28%, which the Treasury proposed in March 2024 with the Budget for fiscal year 2025.",
-        "de": "Legt den Bundessteuersatz auf Unternehmensgewinne fest, seit 2017 21 %. Die Grundeinstellung zeigt 28 %, wie es das Finanzministerium im März 2024 mit dem Haushaltsentwurf für 2025 vorschlug."
+        "de": "Legt den Bundessteuersatz auf Unternehmensgewinne fest, seit 2017 21 %. Die Grundeinstellung zeigt 28 %, vom Finanzministerium im März 2024 mit dem Entwurf für das Haushaltsjahr 2025 vorgeschlagen."
       },
       "explanation": {
         "en": "The rate applies to corporations taxed as such (C corporations). Lower rates can be set as well.",
@@ -702,8 +706,8 @@
       "timing": {
         "from": "2028-01-01",
         "note": {
-          "en": "As for every tax change in this pack, the start is the date the bill or proposal names if it has not passed, otherwise the first January 1 in FY 2028, the first year in which measures act. The Treasury's proposal of March 2024 applied to taxable years beginning after December 31, 2023; that date has passed, so the rate changes on January 1, 2028. Its own estimate put 61% of the full yearly amount into the first fiscal year ($74.6B in FY 2024 against $122.5B in FY 2025). FY 2028 then has three quarters of the yearly amount (274 of its 366 days).",
-          "de": "Wie bei jeder Steueränderung in diesem Paket ist der Beginn der Tag, den der Entwurf oder Vorschlag nennt, wenn er noch nicht vorbei ist, sonst der erste 1. Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. Der Vorschlag des Finanzministeriums vom März 2024 galt für Steuerjahre, die nach dem 31. Dezember 2023 beginnen; dieser Tag ist vorbei, der Satz wechselt also am 1. Januar 2028. Seine eigene Schätzung setzte im ersten Haushaltsjahr 61 % des vollen Jahresbetrags an (74,6 Mrd. Dollar im Haushaltsjahr 2024 gegenüber 122,5 Mrd. Dollar 2025). Das Haushaltsjahr 2028 hat dann drei Viertel des Jahresbetrags (274 seiner 366 Tage)."
+          "en": "As for every tax change in this pack, the start is the date the bill or proposal names if it has not passed, otherwise the first January 1 in FY 2028, the first year in which measures act. The Treasury's proposal of March 2024 applied to taxable years beginning after December 31, 2023; that date has passed, so the rate changes on January 1, 2028. The calculation counts days: FY 2028 has three quarters of the yearly amount (274 of its 366 days). The Treasury's own estimate put less into the first fiscal year, 61% ($74.6B in FY 2024 against $122.5B in FY 2025), because payments lag behind the tax year: corporations pay in installments during the year and settle after it ends. The calculation therefore overstates FY 2028.",
+          "de": "Wie bei jeder Steueränderung in diesem Paket ist der Beginn der Tag, den der Entwurf oder Vorschlag nennt, wenn er noch nicht vorbei ist, sonst der erste 1. Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. Der Vorschlag des Finanzministeriums vom März 2024 galt für Steuerjahre, die nach dem 31. Dezember 2023 beginnen; dieser Tag ist vorbei, der Satz wechselt also am 1. Januar 2028. Die Rechnung zählt Tage: Das Haushaltsjahr 2028 hat drei Viertel des Jahresbetrags (274 seiner 366 Tage). Die eigene Schätzung des Finanzministeriums setzte im ersten Haushaltsjahr weniger an, 61 % (74,6 Mrd. Dollar im Haushaltsjahr 2024 gegenüber 122,5 Mrd. Dollar 2025), weil die Zahlungen dem Steuerjahr nachlaufen: Unternehmen zahlen im Jahr Vorauszahlungen und rechnen nach seinem Ende ab. Die Rechnung überschätzt das Haushaltsjahr 2028 deshalb."
         },
         "sources": [
           "treasury_greenbook_fy2025"
@@ -759,8 +763,8 @@
             "omb_pbd_receipts_fy2027"
           ],
           "note": {
-            "en": "Rate times goods imports in fiscal year 2025 ($3.48T, Census Bureau, balance-of-payments basis), less a fifth for imports that fall away, shift to other suppliers or are exempted (own assumption; the low end assumes 40%, the high end 10%): $27.9B per percentage point. At 10%: $348.2B before and $278.6B after that deduction. Customs duties in 2025 were $194.9B, 5.6% of the import value. Static: prices, the exchange rate and growth do not change.",
-            "de": "Satz mal Wareneinfuhren im Haushaltsjahr 2025 (3.482,1 Mrd. Dollar, Census Bureau, Zahlungsbilanzabgrenzung), abzüglich eines Fünftels für Einfuhren, die wegfallen, zu anderen Lieferanten wandern oder ausgenommen werden (eigene Annahme; die untere Grenze nimmt 40 % an, die obere 10 %): 27,9 Mrd. Dollar je Prozentpunkt. Bei 10 %: 348,2 Mrd. Dollar vor und 278,6 Mrd. Dollar nach diesem Abzug. Die Zölle brachten 2025 194,9 Mrd. Dollar, 5,6 % des Einfuhrwerts. Statisch gerechnet: Preise, Wechselkurs und Wachstum ändern sich nicht."
+            "en": "Rate times goods imports in fiscal year 2025 ($3.48T, Census Bureau, balance-of-payments basis), less a fifth for imports that fall away, shift to other suppliers or are exempted (own assumption; the low end assumes 40%, the high end 10%): $27.9B per percentage point. At 10%: $348.2B before and $278.6B after that deduction. Customs duties in FY 2025 were $194.9B, 5.6% of the import value. Static: prices, the exchange rate and growth do not change.",
+            "de": "Satz mal Wareneinfuhren im Haushaltsjahr 2025 (3.482,1 Mrd. Dollar, Census Bureau, Zahlungsbilanzabgrenzung), abzüglich eines Fünftels für Einfuhren, die wegfallen, zu anderen Lieferanten wandern oder ausgenommen werden (eigene Annahme; die untere Grenze nimmt 40 % an, die obere 10 %): 27,9 Mrd. Dollar je Prozentpunkt. Bei 10 %: 348,2 Mrd. Dollar vor und 278,6 Mrd. Dollar nach diesem Abzug. Die Zölle brachten im Haushaltsjahr 2025 194,9 Mrd. Dollar, 5,6 % des Einfuhrwerts. Statisch gerechnet: Preise, Wechselkurs und Wachstum ändern sich nicht."
           },
           "shift": {
             "to": "rev.individual_income",
@@ -2035,12 +2039,12 @@
         "de": "Einkommensteuer auf Social-Security-Renten abschaffen"
       },
       "summary": {
-        "en": "Ends federal income tax on Social Security benefits, $100.8B in fiscal year 2025. The default ends it fully, as H.R. 1040 (Rep. Massie, R) and S. 458 (Sen. Tuberville, R) propose.",
-        "de": "Schafft die Einkommensteuer auf Social-Security-Renten ab, 2025 100,8 Mrd. Dollar. Die Grundeinstellung schafft sie ganz ab, wie H.R. 1040 und S. 458 der Republikaner Massie und Tuberville."
+        "en": "Ends federal income tax on Social Security benefits, $100.5B in fiscal year 2025. The default ends it fully, as H.R. 1040 (Rep. Massie, R) and S. 458 (Sen. Tuberville, R) propose.",
+        "de": "Streicht die Einkommensteuer auf Social-Security-Renten: 100,5 Mrd. Dollar im Haushaltsjahr 2025. Die Grundeinstellung streicht sie ganz, wie H.R. 1040 und S. 458 (Massie, Tuberville, Republikaner)."
       },
       "explanation": {
-        "en": "The tax on benefits is income tax, but its yield goes to the trust funds: in fiscal year 2025, $59.7B to Social Security and $41.1B to Medicare's Hospital Insurance fund. The slider sets the share of it that is dropped.\n\nSen. Gallego (D) proposes the same and would pay for it with Social Security tax on wages above $250,000 (S. 2716, September 2025); that financing is not part of this measure.",
-        "de": "Die Steuer auf die Renten ist Einkommensteuer, ihr Ertrag fließt aber an die Treuhandfonds: im Haushaltsjahr 2025 59,7 Mrd. Dollar an die Social Security und 41,1 Mrd. Dollar an den Krankenhausfonds von Medicare. Der Regler legt fest, welcher Anteil davon entfällt.\n\nSenator Gallego (Demokrat) schlägt dasselbe vor und will es mit Social-Security-Beiträgen auf Löhne über 250.000 Dollar bezahlen (S. 2716, September 2025); diese Finanzierung ist nicht Teil dieser Maßnahme."
+        "en": "The tax on benefits is income tax, but its yield goes to the trust funds: in fiscal year 2025, $59.4B to Social Security and $41.1B to Medicare's Hospital Insurance fund. The slider sets the share of it that is dropped.\n\nSen. Gallego (D) proposes the same and would also hold the trust funds harmless from the general fund (S. 2716, September 2025); separately, his bill would apply Social Security tax to wages above $250,000, which is not part of this measure.",
+        "de": "Die Steuer auf die Renten ist Einkommensteuer, ihr Ertrag fließt aber an die Treuhandfonds: im Haushaltsjahr 2025 59,4 Mrd. Dollar an die Social Security und 41,1 Mrd. Dollar an den Krankenhausfonds von Medicare. Der Regler legt fest, welcher Anteil davon entfällt.\n\nSenator Gallego (Demokrat) schlägt dasselbe vor und würde die Fonds ebenfalls aus dem allgemeinen Haushalt entschädigen (S. 2716, September 2025); daneben würde sein Entwurf Social-Security-Beiträge auf Löhne über 250.000 Dollar erheben, was nicht Teil dieser Maßnahme ist."
       },
       "topic": "pensions",
       "params": [
@@ -2065,7 +2069,7 @@
           "target": "rev.individual_income",
           "amount": {
             "param": "share",
-            "scale": -1008020000
+            "scale": -1004670000
           },
           "quality": "derived",
           "uncertainty": {
@@ -2077,8 +2081,8 @@
             "cms_medicare_trustees_2026"
           ],
           "note": {
-            "en": "Income from the taxation of benefits in fiscal year 2025: $59.7B for Social Security's two trust funds and $41.1B for Medicare's Hospital Insurance fund, together $100.8B (Trustees Reports 2026, Tables VI.C3 and V.H1). The measure takes the chosen share of it. The range runs down to 85% (own judgment): the trust funds are credited with Treasury's estimate of the tax, which is corrected later, and the new deduction for people 65 and over lowers the tax on benefits from tax year 2025 on.",
-            "de": "Einnahmen aus der Besteuerung der Renten im Haushaltsjahr 2025: 59,7 Mrd. Dollar für die beiden Treuhandfonds der Social Security und 41,1 Mrd. Dollar für den Krankenhausfonds von Medicare, zusammen 100,8 Mrd. Dollar (Berichte der Treuhänder 2026, Tabellen VI.C3 und V.H1). Die Maßnahme nimmt davon den eingestellten Anteil. Die Spanne reicht bis 85 % (eigene Einschätzung): Den Fonds wird die Steuer nach einer Schätzung des Finanzministeriums gutgeschrieben, die später berichtigt wird, und der neue Freibetrag für Menschen ab 65 senkt die Steuer auf Renten ab dem Steuerjahr 2025."
+            "en": "Income from the taxation of benefits under section 86 in fiscal year 2025: $59.4B for Social Security's two trust funds and $41.1B for Medicare's Hospital Insurance fund, together $100.5B (Trustees Reports 2026, Tables VI.C3 and V.H1). Not included are the $335M withheld from the benefits of nonresident aliens, a separate tax (section 871(a)(3)) that H.R. 1040 does not end. The measure takes the chosen share. The range runs down to 85% (own judgment): the trust funds are credited with Treasury's estimate of the tax, which is corrected later, and the new deduction for people 65 and over lowers the tax on benefits from tax year 2025 on.",
+            "de": "Einnahmen aus der Besteuerung der Renten nach Abschnitt 86 im Haushaltsjahr 2025: 59,4 Mrd. Dollar für die beiden Treuhandfonds der Social Security und 41,1 Mrd. Dollar für den Krankenhausfonds von Medicare, zusammen 100,5 Mrd. Dollar (Berichte der Treuhänder 2026, Tabellen VI.C3 und V.H1). Nicht enthalten sind die 335 Mio. Dollar, die von den Renten von Ausländern ohne Wohnsitz in den USA einbehalten werden, eine eigene Steuer (Abschnitt 871(a)(3)), die H.R. 1040 nicht abschafft. Die Maßnahme nimmt davon den eingestellten Anteil. Die Spanne reicht bis 85 % (eigene Einschätzung): Den Fonds wird die Steuer nach einer Schätzung des Finanzministeriums gutgeschrieben, die später berichtigt wird, und der neue Freibetrag für Menschen ab 65 senkt die Steuer auf Renten ab dem Steuerjahr 2025."
           }
         }
       ],
@@ -2087,13 +2091,24 @@
           "kind": "cost_shift",
           "severity": "major",
           "text": {
-            "en": "The tax is income of the trust funds. H.R. 1040 would replace it from the general fund, so the trust funds lose nothing and the deficit grows by the full amount; without that transfer, Social Security would lose $59.7B a year and Medicare's Hospital Insurance fund $41.1B.",
-            "de": "Die Steuer ist eine Einnahme der Treuhandfonds. H.R. 1040 würde sie aus dem allgemeinen Haushalt ersetzen, sodass die Fonds nichts verlieren und das Defizit um den vollen Betrag wächst; ohne diesen Ausgleich verlöre die Social Security 59,7 Mrd. Dollar im Jahr und der Krankenhausfonds von Medicare 41,1 Mrd. Dollar."
+            "en": "The tax is income of the trust funds. H.R. 1040 would replace it from the general fund, so the trust funds lose nothing and the deficit grows by the full amount; without that transfer, Social Security would lose $59.4B a year and Medicare's Hospital Insurance fund $41.1B.",
+            "de": "Die Steuer ist eine Einnahme der Treuhandfonds. H.R. 1040 würde sie aus dem allgemeinen Haushalt ersetzen, sodass die Fonds nichts verlieren und das Defizit um den vollen Betrag wächst; ohne diesen Ausgleich verlöre die Social Security 59,4 Mrd. Dollar im Jahr und der Krankenhausfonds von Medicare 41,1 Mrd. Dollar."
           },
           "sources": [
             "hr_1040_2025",
             "ssa_trustees_2026",
             "cms_medicare_trustees_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "Only beneficiaries whose income, counted as their other income plus half their benefits and their tax-exempt interest, exceeds $25,000 ($32,000 for couples) pay the tax; these thresholds have never been changed. Ending the tax gives nothing to beneficiaries below them; only those above them gain.",
+            "de": "Die Steuer zahlen nur Rentner, deren Einkommen, gerechnet als ihr übriges Einkommen plus die Hälfte der Rente und ihre steuerfreien Zinsen, 25.000 Dollar übersteigt (32.000 Dollar für Paare); diese Schwellen wurden nie geändert. Ihre Abschaffung bringt Rentnern darunter nichts; gewinnen können nur die darüber."
+          },
+          "sources": [
+            "ssa_trustees_2026"
           ]
         },
         {
@@ -2112,9 +2127,13 @@
       "limits": [
         {
           "text": {
-            "en": "The measure removes the tax as it was in fiscal year 2025. Whether the end of the tax would reach Railroad Retirement benefits too, as in H.R. 1040, is not separated out.",
-            "de": "Die Maßnahme streicht die Steuer, wie sie im Haushaltsjahr 2025 anfiel. Ob auch Renten der Railroad Retirement erfasst sind, wie in H.R. 1040, ist nicht getrennt ausgewiesen."
-          }
+            "en": "The measure removes the tax as it was in fiscal year 2025. The tax on Tier 1 Railroad Retirement benefits, which H.R. 1040 would end too, is not included.",
+            "de": "Die Maßnahme streicht die Steuer, wie sie im Haushaltsjahr 2025 anfiel. Die Steuer auf Renten der Railroad Retirement (Tier 1), die H.R. 1040 ebenfalls abschaffen würde, ist nicht enthalten."
+          },
+          "sources": [
+            "hr_1040_2025",
+            "ssa_trustees_2026"
+          ]
         }
       ],
       "sources": [
@@ -2142,12 +2161,12 @@
         "de": "Zollrückzahlung an die Bürger"
       },
       "summary": {
-        "en": "Pays every adult and child a one-time rebate from tariff revenue, reduced at higher incomes. The default shows $600, as in Sen. Hawley's American Worker Rebate Act (S. 2475, July 2025).",
-        "de": "Zahlt jedem Erwachsenen und Kind einmalig eine Rückzahlung aus Zolleinnahmen, gekürzt bei höheren Einkommen. Die Grundeinstellung zeigt 600 Dollar wie Senator Hawleys Entwurf (S. 2475, Juli 2025)."
+        "en": "Pays every adult and child under 17 a one-time tariff rebate, reduced at higher incomes, as bills of both parties propose. The default shows $600, as in Sen. Hawley's (R) S. 2475.",
+        "de": "Zahlt Erwachsenen und Kindern unter 17 einmalig eine Zollrückzahlung, gekürzt bei hohem Einkommen, wie Entwürfe beider Parteien. Die Grundeinstellung zeigt 600 Dollar wie S. 2475 (Senator Hawley, R)."
       },
       "explanation": {
-        "en": "One payment: the bill pays $600 per adult, twice on a joint return, and per child, or more if tariff revenue since January 20, 2025 divided by the eligible people comes to more, and it reduces the payment by 5% of income above $75,000 ($112,500 for heads of household, $150,000 for couples). The slider sets the amount per person.\n\nThe President spoke of a dividend of \"about $2,000\" on November 10, 2025, and of $5,000 for every adult citizen in September and October 2026; no bill or executive document carries out these amounts.",
-        "de": "Eine einmalige Zahlung: Der Entwurf zahlt 600 Dollar je Erwachsenem, bei gemeinsamer Veranlagung doppelt, und je Kind, oder mehr, wenn die Zolleinnahmen seit dem 20. Januar 2025 geteilt durch die Berechtigten mehr ergeben, und er kürzt die Zahlung um 5 % des Einkommens über 75.000 Dollar (112.500 für Alleinerziehende, 150.000 für Paare). Der Regler legt den Betrag je Person fest.\n\nDer Präsident sprach am 10. November 2025 von einer Dividende von „about $2,000“ und im September und Oktober 2026 von 5.000 Dollar für jeden erwachsenen Bürger; kein Gesetzentwurf und kein Dokument der Regierung setzt diese Beträge um."
+        "en": "One payment: S. 2475 (July 2025) pays $600 per adult, twice on a joint return, and per child under 17, or more if the tariff revenue received in 2025 from duties imposed after January 20, 2025, divided by the eligible people, comes to more; it reduces the payment by 5% of income above $75,000 ($112,500 for heads of household, $150,000 for couples). The slider sets the amount per person and keeps this design at every amount.\n\nDemocrats have bills of their own: S. 4093 (Sen. Heinrich, March 2026) would pay $600 per adult and child for tax year 2026, but nothing above incomes of $90,000 ($120,000 for heads of household, $180,000 for couples); H.R. 10494 (Rep. Foushee, September 2026) would pay $2,000 per adult ($4,000 for couples) and $600 per dependent for tax year 2026, phased out between $75,000 and $80,000 of income ($150,000 and $160,000 for couples).\n\nThe President spoke of a dividend of \"about $2,000\" on November 10, 2025, and in September and October 2026 of $5,000 for every adult citizen, which he put at \"approximately $1 trillion\". No bill carries out the $5,000, and the Federal Register has no presidential document that carries out either amount. The slider does not reproduce that proposal, which names adult citizens only and no reduction at higher incomes: at $5,000 it pays children too and phases out as S. 2475 does.",
+        "de": "Eine einmalige Zahlung: S. 2475 (Juli 2025) zahlt 600 Dollar je Erwachsenem, bei gemeinsamer Veranlagung doppelt, und je Kind unter 17, oder mehr, wenn die 2025 eingenommenen Zölle, die nach dem 20. Januar 2025 verhängt wurden, geteilt durch die Berechtigten mehr ergeben; er kürzt die Zahlung um 5 % des Einkommens über 75.000 Dollar (112.500 für Alleinerziehende, 150.000 für Paare). Der Regler legt den Betrag je Person fest und behält diese Gestaltung bei jedem Betrag bei.\n\nDie Demokraten haben eigene Entwürfe: S. 4093 (Senator Heinrich, März 2026) würde für das Steuerjahr 2026 je Erwachsenem und Kind 600 Dollar zahlen, aber nichts bei Einkommen über 90.000 Dollar (120.000 für Alleinerziehende, 180.000 für Paare); H.R. 10494 (Abgeordnete Foushee, September 2026) würde für das Steuerjahr 2026 je Erwachsenem 2.000 Dollar zahlen (Paare 4.000) und je Angehörigem 600 Dollar, abgeschmolzen zwischen 75.000 und 80.000 Dollar Einkommen (150.000 und 160.000 für Paare).\n\nDer Präsident sprach am 10. November 2025 von einer Dividende von „about $2,000“ und im September und Oktober 2026 von 5.000 Dollar für jeden erwachsenen Bürger, die er mit „approximately $1 trillion“ bezifferte. Kein Entwurf setzt die 5.000 Dollar um, und im Federal Register steht kein Dokument des Präsidenten, das einen der Beträge umsetzt. Der Regler bildet diesen Vorschlag nicht ab, der nur erwachsene Bürger und keine Kürzung bei höheren Einkommen nennt: Bei 5.000 Dollar zahlt er auch für Kinder und kürzt wie S. 2475."
       },
       "topic": "social",
       "params": [
@@ -2155,8 +2174,8 @@
           "id": "amount",
           "type": "number",
           "label": {
-            "en": "Rebate per adult and child",
-            "de": "Rückzahlung je Erwachsenem und Kind"
+            "en": "Rebate per adult and child under 17",
+            "de": "Rückzahlung je Erwachsenem und Kind unter 17"
           },
           "unit": "currency",
           "min": 0,
@@ -2172,7 +2191,7 @@
           "target": "exp.income_security.other.rest",
           "amount": {
             "param": "amount",
-            "scale": 277073620
+            "scale": 273293855
           },
           "quality": "estimate",
           "uncertainty": {
@@ -2185,8 +2204,8 @@
             "s_2475_2025"
           ],
           "note": {
-            "en": "341.8 million residents on July 1, 2025 (269.8 million adults, 72.0 million under 18): at $600 each, $205.1B. The phase-out takes $38.8B of it, leaving $166.2B, or $277.1M per dollar of rebate. Own estimate from the IRS income statistics for tax year 2023, with incomes taken as evenly spread within each income class and children counted in proportion to adults. The figure is that amount per dollar, exact at $600 and an approximation elsewhere: the phase-out takes a smaller share of larger payments (19% at $600, 14% at $2,000, 10% at $5,000), so the figure is 6% too low at $2,000 and 10% too low at $5,000. The range runs from 85% to 105% (own judgment): people without a Social Security number, nonresidents and adults claimed as dependents are not eligible, and incomes have grown since 2023.",
-            "de": "341,8 Mio. Einwohner am 1. Juli 2025 (269,8 Mio. Erwachsene, 72,0 Mio. unter 18): bei je 600 Dollar 205,1 Mrd. Dollar. Die Kürzung bei höheren Einkommen nimmt davon 38,8 Mrd. Dollar, es bleiben 166,2 Mrd. Dollar oder 277,1 Mio. Dollar je Dollar Rückzahlung. Eigene Schätzung aus der Einkommensstatistik der IRS für das Steuerjahr 2023; die Einkommen gelten innerhalb jeder Einkommensklasse als gleich verteilt, Kinder werden im Verhältnis zu den Erwachsenen gezählt. Die Rechnung nimmt diesen Betrag je Dollar, genau bei 600 Dollar und sonst eine Näherung: Bei höheren Zahlungen nimmt die Kürzung einen kleineren Anteil (19 % bei 600, 14 % bei 2.000, 10 % bei 5.000 Dollar), sodass die Rechnung bei 2.000 Dollar um 6 % und bei 5.000 Dollar um 10 % zu niedrig liegt. Die Spanne reicht von 85 bis 105 % (eigene Einschätzung): Menschen ohne Sozialversicherungsnummer, Ausländer ohne Wohnsitz und als Angehörige geltend gemachte Erwachsene sind nicht berechtigt, und die Einkommen sind seit 2023 gestiegen."
+            "en": "341.8 million residents on July 1, 2025: 269.8 million adults and 67.5 million children under 17, the children the bill counts; the 4.5 million aged 17 can be claimed as dependents and are not eligible. At $600 each, $202.4B. The phase-out takes $38.4B of it, leaving $164.0B, or $273.3M per dollar of rebate. Own estimate from the IRS income statistics for tax year 2023, with incomes taken as evenly spread within each income class and children counted in proportion to adults. The figure is that amount per dollar, exact at $600 and an approximation elsewhere: the phase-out takes a smaller share of larger payments (19% at $600, 14% at $2,000, 10% at $5,000), so the figure is 6% too low at $2,000 and 10% too low at $5,000. The range runs from 85% to 105% (own judgment): people without a Social Security number, nonresidents and adults claimed as dependents are not eligible, and incomes have grown since 2023.",
+            "de": "341,8 Mio. Einwohner am 1. Juli 2025: 269,8 Mio. Erwachsene und 67,5 Mio. Kinder unter 17, die Kinder, die der Entwurf zählt; die 4,5 Mio. 17-Jährigen können als Angehörige geltend gemacht werden und sind nicht berechtigt. Bei je 600 Dollar 202,4 Mrd. Dollar. Die Kürzung bei höheren Einkommen nimmt davon 38,4 Mrd. Dollar, es bleiben 164,0 Mrd. Dollar oder 273,3 Mio. Dollar je Dollar Rückzahlung. Eigene Schätzung aus der Einkommensstatistik der IRS für das Steuerjahr 2023; die Einkommen gelten innerhalb jeder Einkommensklasse als gleich verteilt, Kinder werden im Verhältnis zu den Erwachsenen gezählt. Die Rechnung nimmt diesen Betrag je Dollar, genau bei 600 Dollar und sonst eine Näherung: Bei höheren Zahlungen nimmt die Kürzung einen kleineren Anteil (19 % bei 600, 14 % bei 2.000, 10 % bei 5.000 Dollar), sodass die Rechnung bei 2.000 Dollar um 6 % und bei 5.000 Dollar um 10 % zu niedrig liegt. Die Spanne reicht von 85 bis 105 % (eigene Einschätzung): Menschen ohne Sozialversicherungsnummer, Ausländer ohne Wohnsitz und als Angehörige geltend gemachte Erwachsene sind nicht berechtigt, und die Einkommen sind seit 2023 gestiegen."
           }
         }
       ],
@@ -2195,26 +2214,32 @@
           "kind": "economic",
           "severity": "major",
           "text": {
-            "en": "The tariff revenue is already in the budget: customs duties of $194.9B in fiscal year 2025 reduced the deficit, so a rebate paid from them raises it again. After the Supreme Court found the emergency tariffs unlawful in February 2026, $144.6B of the $317.8B collected in fiscal year 2026 was refunded to importers (Treasury).",
-            "de": "Die Zolleinnahmen stehen schon im Haushalt: Zölle von 194,9 Mrd. Dollar im Haushaltsjahr 2025 haben das Defizit gesenkt, eine Rückzahlung daraus erhöht es wieder. Nachdem der Supreme Court die Notstandszölle im Februar 2026 für rechtswidrig erklärt hatte, wurden von den 317,8 Mrd. Dollar des Haushaltsjahres 2026 144,6 Mrd. Dollar an Importeure erstattet (Finanzministerium)."
+            "en": "The tariff revenue is already in the budget: customs duties of $194.9B in fiscal year 2025 reduced the deficit, so a rebate paid from them raises it again. Of the $317.8B collected in fiscal year 2026, $144.6B was refunded to importers, $138.1B of it from March 2026 on, after the Supreme Court found the emergency tariffs unlawful on February 20, 2026; refunds were $7.5B in fiscal year 2025 (Treasury).",
+            "de": "Die Zolleinnahmen stehen schon im Haushalt: Zölle von 194,9 Mrd. Dollar im Haushaltsjahr 2025 haben das Defizit gesenkt, eine Rückzahlung daraus erhöht es wieder. Von den 317,8 Mrd. Dollar des Haushaltsjahres 2026 wurden 144,6 Mrd. Dollar an Importeure erstattet, 138,1 Mrd. Dollar davon ab März 2026, nachdem der Supreme Court die Notstandszölle am 20. Februar 2026 für rechtswidrig erklärt hatte; im Haushaltsjahr 2025 wurden 7,5 Mrd. Dollar erstattet (Finanzministerium)."
           },
           "sources": [
             "omb_pbd_receipts_fy2027",
             "treasury_mts_2026_09",
-            "scotus_24_1287"
+            "scotus_24_1287",
+            "treasury_mts_2026_02",
+            "treasury_mts_2025_09"
           ]
         },
         {
           "kind": "political",
           "severity": "minor",
           "text": {
-            "en": "S. 2475 was referred to the Finance Committee in July 2025 and has not moved. The President's $5,000 \"Trump dividend\" was announced for the case that Republicans win both chambers of Congress (October 7, 2026).",
-            "de": "S. 2475 wurde im Juli 2025 an den Finanzausschuss überwiesen und seither nicht beraten. Die „Trump-Dividende“ von 5.000 Dollar kündigte der Präsident für den Fall an, dass die Republikaner beide Kammern des Kongresses gewinnen (7. Oktober 2026)."
+            "en": "S. 2475 was referred to the Finance Committee in July 2025 and has not moved, nor have S. 4093 and H.R. 10494. The President announced the $5,000 \"Trump dividend\" for the case that Republicans win the House and the Senate (October 7, 2026). The election of November 3, 2026 decides that, but as of November 21, 2026 no official source states the new majorities: the states are still certifying their results (California by December 11, 2026), and the Clerk of the House lists only the nominees for the 120th Congress.",
+            "de": "S. 2475 wurde im Juli 2025 an den Finanzausschuss überwiesen und seither nicht beraten, ebenso wenig S. 4093 und H.R. 10494. Die „Trump-Dividende“ von 5.000 Dollar kündigte der Präsident für den Fall an, dass die Republikaner Repräsentantenhaus und Senat gewinnen (7. Oktober 2026). Darüber entscheidet die Wahl vom 3. November 2026; eine amtliche Quelle nennt die neuen Mehrheiten aber am 21. November 2026 noch nicht: Die Bundesstaaten bestätigen ihre Ergebnisse noch (Kalifornien bis zum 11. Dezember 2026), und der Clerk des Repräsentantenhauses führt für den 120. Kongress nur die Kandidaten auf."
           },
           "sources": [
             "s_2475_2025",
+            "s_4093_2026",
+            "hr_10494_2026",
             "dcpd_202600688",
-            "dcpd_202501109"
+            "dcpd_202600590",
+            "clerk_house_election_2026",
+            "ca_sos_general_2026"
           ]
         }
       ],
@@ -2234,7 +2259,10 @@
         "s_2475_2025",
         "census_popest_age_v2025",
         "irs_soi_2023_t12",
+        "s_4093_2026",
+        "hr_10494_2026",
         "dcpd_202501109",
+        "dcpd_202600590",
         "dcpd_202600688"
       ],
       "timing": {
@@ -2255,12 +2283,12 @@
         "de": "Erhöhte ACA-Prämienzuschüsse beenden"
       },
       "summary": {
-        "en": "Ends the larger marketplace subsidies of 2021 to 2025, as the law has done since January 2026; the 2025 budget still contains them. Democrats demand them back (S. 3385, H.R. 247).",
-        "de": "Beendet die höheren Zuschüsse für Marktplatz-Versicherungen von 2021 bis 2025, wie es das Gesetz seit Januar 2026 tut; der Haushalt 2025 enthält sie noch. Die Demokraten wollen sie zurück."
+        "en": "Ends the larger marketplace subsidies of 2021 to 2025, as the law has since January 2026; the FY 2025 budget still has them. Democrats and some Republicans want them back (H.R. 1834, S. 3385).",
+        "de": "Beendet die höheren ACA-Zuschüsse von 2021 bis 2025 wie das Gesetz seit Januar 2026; im Haushaltsjahr 2025 gab es sie noch. Demokraten und einige Republikaner wollen sie zurück (H.R. 1834, S. 3385)."
       },
       "explanation": {
-        "en": "Switched on at its default, the card shows the law as it has stood since January 1, 2026: the enhanced credits have ended. The 2025 budget still contains them, so against it their end lowers spending and raises income tax. The slider sets how much of the enhancement ends; at 0% it is kept, as Democrats demand: through 2028 in S. 3385, for good in H.R. 247.\n\nFrom 2021 the enhancement lowered the share of income a household pays for a benchmark plan, to at most 8.5%, and opened the credit to people above four times the poverty line.\n\nIn open enrollment, marketplace plan selections fell from 24.3 million for 2025 to 23.1 million for 2026 and consumers with a tax credit from 22.4 to 20.0 million, while the average premium before credits rose from $619 to $741 a month (CMS).",
-        "de": "Eingeschaltet zeigt die Karte in der Grundeinstellung das Recht, wie es seit dem 1. Januar 2026 gilt: Die erhöhten Zuschüsse sind beendet. Der Haushalt 2025 enthält sie noch; gegenüber ihm senkt ihr Ende die Ausgaben und erhöht die Einkommensteuer. Der Regler legt fest, wie viel der Erhöhung wegfällt; bei 0 % bleibt sie, wie die Demokraten es verlangen: bis 2028 in S. 3385, dauerhaft in H.R. 247.\n\nAb 2021 senkte die Erhöhung den Anteil des Einkommens, den ein Haushalt für einen Referenztarif zahlt, auf höchstens 8,5 %, und öffnete den Zuschuss für Menschen über dem Vierfachen der Armutsgrenze.\n\nIn der Einschreibeperiode sank die Zahl der gewählten Marktplatz-Tarife von 24,3 Mio. für 2025 auf 23,1 Mio. für 2026 und die der Versicherten mit Zuschuss von 22,4 auf 20,0 Mio., während die durchschnittliche Prämie vor Zuschuss von 619 auf 741 Dollar im Monat stieg (CMS)."
+        "en": "Switched on at its default, the card shows the law as it has stood since January 1, 2026: the enhanced credits have ended. The FY 2025 budget still contains them, so against it their end lowers spending and raises income tax. The slider sets how much of the enhancement ends; at 0% it is kept: through 2028 in H.R. 1834 and S. 3385, for good in H.R. 247.\n\nFrom 2021 the enhancement lowered the share of income a household pays for a benchmark plan, to at most 8.5%, and opened the credit to people above four times the poverty line.\n\nIn open enrollment, marketplace plan selections fell from 24.3 million for 2025 to 23.1 million for 2026 and consumers with a tax credit from 22.4 to 20.0 million, while the average premium before credits rose from $619 to $741 a month (CMS).",
+        "de": "Eingeschaltet zeigt die Karte in der Grundeinstellung das Recht, wie es seit dem 1. Januar 2026 gilt: Die erhöhten Zuschüsse sind beendet. Der Haushalt des Haushaltsjahres 2025 enthält sie noch; gegenüber ihm senkt ihr Ende die Ausgaben und erhöht die Einkommensteuer. Der Regler legt fest, wie viel der Erhöhung wegfällt; bei 0 % bleibt sie: bis 2028 in H.R. 1834 und S. 3385, dauerhaft in H.R. 247.\n\nAb 2021 senkte die Erhöhung den Anteil des Einkommens, den ein Haushalt für einen Referenztarif zahlt, auf höchstens 8,5 %, und öffnete den Zuschuss für Menschen über dem Vierfachen der Armutsgrenze.\n\nIn der Einschreibeperiode sank die Zahl der gewählten Marktplatz-Tarife von 24,3 Mio. für 2025 auf 23,1 Mio. für 2026 und die der Versicherten mit Zuschuss von 22,4 auf 20,0 Mio., während die durchschnittliche Prämie vor Zuschuss von 619 auf 741 Dollar im Monat stieg (CMS)."
       },
       "topic": "social",
       "params": [
@@ -2340,11 +2368,14 @@
           "kind": "political",
           "severity": "major",
           "text": {
-            "en": "In December 2025 a Senate bill to extend the enhancement through 2028 (S. 3385, Sen. Schumer) failed cloture, 51 to 48. H.R. 247 (Rep. Underwood) and S. 46 would make it permanent. As of November 2026 no law has restored it.",
-            "de": "Im Dezember 2025 scheiterte im Senat ein Entwurf, der die Erhöhung bis 2028 verlängert hätte (S. 3385, Senator Schumer), mit 51 zu 48 Stimmen an der Hürde für das Ende der Debatte. H.R. 247 (Abgeordnete Underwood) und S. 46 würden sie dauerhaft machen. Stand November 2026 hat kein Gesetz sie wiederhergestellt."
+            "en": "The House passed an extension through 2028 on January 8, 2026 (H.R. 1834, 230 to 196; Democrats 213 to 0, Republicans 17 to 196); it has been on the Senate calendar since February 10, 2026, without a vote. The Senate's own bill, S. 3385 (Sen. Schumer), had failed cloture in December 2025, 51 to 48. A one-year extension by Rep. Kiggans (R), H.R. 5145, has 14 Republican and 16 Democratic cosponsors; H.R. 247 (Rep. Underwood) and S. 46 would make the enhancement permanent. As of November 2026 no law has restored it.",
+            "de": "Das Repräsentantenhaus beschloss am 8. Januar 2026 eine Verlängerung bis 2028 (H.R. 1834, 230 zu 196 Stimmen; Demokraten 213 zu 0, Republikaner 17 zu 196); seit dem 10. Februar 2026 steht sie auf der Tagesordnung des Senats, ohne Abstimmung. Der eigene Entwurf des Senats, S. 3385 (Senator Schumer), war im Dezember 2025 mit 51 zu 48 Stimmen an der Hürde für das Ende der Debatte gescheitert. Eine Verlängerung um ein Jahr der Abgeordneten Kiggans (Republikanerin), H.R. 5145, hat 14 republikanische und 16 demokratische Mitunterzeichner; H.R. 247 (Abgeordnete Underwood) und S. 46 würden die Erhöhung dauerhaft machen. Stand November 2026 hat kein Gesetz sie wiederhergestellt."
           },
           "sources": [
+            "hr_1834_2026",
+            "house_roll_2026_011",
             "s_3385_2025",
+            "hr_5145_2025",
             "hr_247_2025",
             "plaw_117_169"
           ]
@@ -2364,14 +2395,14 @@
       "limits": [
         {
           "text": {
-            "en": "The Treasury's estimate dates from March 2024, before the 2025 law and the 2026 premiums; it is applied to the 2025 budget unchanged, as the amount of one full year.",
-            "de": "Die Schätzung des Finanzministeriums stammt vom März 2024, vor dem Gesetz von 2025 und den Prämien für 2026; sie wird unverändert als Betrag eines vollen Jahres auf den Haushalt 2025 angewandt."
+            "en": "The Treasury's estimate dates from March 2024, before the 2025 law and the 2026 premiums; it is applied to the FY 2025 budget unchanged, as the amount of one full year.",
+            "de": "Die Schätzung des Finanzministeriums stammt vom März 2024, vor dem Gesetz von 2025 und den Prämien für 2026; sie wird unverändert als Betrag eines vollen Jahres auf den Haushalt des Haushaltsjahres 2025 angewandt."
           }
         },
         {
           "text": {
-            "en": "In the debt projection the end of the enhancement counts from FY 2028, the first year in which measures act, although it has been the law since January 1, 2026 (the Inflation Reduction Act extended it only to years before 2026). FY 2026 and FY 2027 therefore still have the enhanced credits of the 2025 budget, with this measure as without it.",
-            "de": "In der Schuldenprojektion zählt das Ende der Erhöhung ab dem Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken, obwohl es seit dem 1. Januar 2026 geltendes Recht ist (der Inflation Reduction Act verlängerte sie nur für die Jahre vor 2026). Die Haushaltsjahre 2026 und 2027 enthalten deshalb noch die erhöhten Zuschüsse des Haushalts 2025, mit dieser Maßnahme wie ohne sie."
+            "en": "In the debt projection the end of the enhancement counts from FY 2028, the first year in which measures act, although it has been the law since January 1, 2026 (the Inflation Reduction Act extended it only to years before 2026). FY 2026 and FY 2027 therefore still have the enhanced credits of the FY 2025 budget, with this measure as without it.",
+            "de": "In der Schuldenprojektion zählt das Ende der Erhöhung ab dem Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken, obwohl es seit dem 1. Januar 2026 geltendes Recht ist (der Inflation Reduction Act verlängerte sie nur für die Jahre vor 2026). Die Haushaltsjahre 2026 und 2027 enthalten deshalb noch die erhöhten Zuschüsse des Haushalts des Haushaltsjahres 2025, mit dieser Maßnahme wie ohne sie."
           },
           "sources": [
             "plaw_117_169"
@@ -2381,7 +2412,10 @@
       "sources": [
         "treasury_greenbook_fy2025",
         "cms_oep_2025_2026",
+        "hr_1834_2026",
+        "house_roll_2026_011",
         "s_3385_2025",
+        "hr_5145_2025",
         "hr_247_2025",
         "plaw_117_169",
         "plaw_119_21"
@@ -2398,8 +2432,8 @@
         "de": "Besteuert Vermögen über 50 Mio. Dollar jedes Jahr. Die Grundeinstellung zeigt den Entwurf von Senatorin Warren (S. 4246, März 2026): 2 % über 50 Mio. und 3 % über 1 Mrd. Dollar."
       },
       "explanation": {
-        "en": "The bill taxes a household's net worth, married couples together, from 2027; the House version is H.R. 8085 (Rep. Jayapal). The two sliders set the rates of the two brackets. The revenue appears on a line of its own, empty in the 2025 budget.",
-        "de": "Der Entwurf besteuert das Nettovermögen eines Haushalts, Ehepaare gemeinsam, ab 2027; die Fassung im Repräsentantenhaus ist H.R. 8085 (Abgeordnete Jayapal). Die beiden Regler legen die Sätze der beiden Stufen fest. Die Einnahmen stehen in einer eigenen Zeile, die im Haushalt 2025 leer ist."
+        "en": "The bill taxes a household's net worth, married couples together, from 2027; the House version is H.R. 8085 (Rep. Jayapal). The two sliders set the rates of the two brackets. The revenue appears on a line of its own, empty in the FY 2025 budget.",
+        "de": "Der Entwurf besteuert das Nettovermögen eines Haushalts, Ehepaare gemeinsam, ab 2027; die Fassung im Repräsentantenhaus ist H.R. 8085 (Abgeordnete Jayapal). Die beiden Regler legen die Sätze der beiden Stufen fest. Die Einnahmen stehen in einer eigenen Zeile, die im Haushaltsjahr 2025 leer ist."
       },
       "topic": "taxes",
       "params": [
@@ -2483,9 +2517,12 @@
           "kind": "legal",
           "severity": "major",
           "text": {
-            "en": "Whether a federal tax on wealth is a direct tax that the Constitution requires to be apportioned among the states by population is disputed, and the Supreme Court has not decided it.",
-            "de": "Ob eine Bundessteuer auf Vermögen eine direkte Steuer ist, die nach der Verfassung nach der Bevölkerung auf die Bundesstaaten aufgeteilt werden muss, ist umstritten; der Supreme Court hat es nicht entschieden."
-          }
+            "en": "Whether a federal tax on wealth is a direct tax that the Constitution requires to be apportioned among the states by population is disputed, and the Supreme Court has not decided it: in Moore v. United States (2024) it said its analysis did not address taxes on holdings, wealth or net worth.",
+            "de": "Ob eine Bundessteuer auf Vermögen eine direkte Steuer ist, die nach der Verfassung nach der Bevölkerung auf die Bundesstaaten aufgeteilt werden muss, ist umstritten; der Supreme Court hat es nicht entschieden: In Moore v. United States (2024) schrieb er, seine Prüfung betreffe Steuern auf Bestände, Vermögen oder Nettovermögen nicht."
+          },
+          "sources": [
+            "scotus_22_800"
+          ]
         },
         {
           "kind": "practical",
@@ -2499,11 +2536,12 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "en": "As of November 2026 the bill has 10 cosponsors in the Senate and has not been taken up. Sen. Sanders proposes 5% on net worth above $1B (S. 3956).",
-            "de": "Stand November 2026 hat der Entwurf im Senat 10 Mitunterzeichner und wurde nicht beraten. Senator Sanders schlägt 5 % auf Vermögen über 1 Mrd. Dollar vor (S. 3956)."
+            "en": "As of November 2026 the bill has 10 cosponsors in the Senate and has not been taken up. Sen. Sanders proposes a tax of 5% a year on the entire net worth of anyone worth more than $1B (S. 3956, March 2026).",
+            "de": "Stand November 2026 hat der Entwurf im Senat 10 Mitunterzeichner und wurde nicht beraten. Senator Sanders schlägt eine jährliche Steuer von 5 % auf das gesamte Vermögen aller vor, die mehr als 1 Mrd. Dollar besitzen (S. 3956, März 2026)."
           },
           "sources": [
-            "s_4246_2026"
+            "s_4246_2026",
+            "s_3956_2026"
           ]
         }
       ],
@@ -2517,7 +2555,9 @@
       ],
       "sources": [
         "s_4246_2026",
-        "fed_dfa"
+        "fed_dfa",
+        "s_3956_2026",
+        "scotus_22_800"
       ],
       "timing": {
         "from": "2027-01-01",
@@ -2537,12 +2577,12 @@
         "de": "Höherer Einkommensteuersatz für Millionäre"
       },
       "summary": {
-        "en": "Sets the tax rate on taxable income above $1M ($2M for couples), now 37%. The default shows 39.6%, as in H.R. 4280 (Reps. Fitzpatrick, R, and Golden, D, July 2025).",
-        "de": "Legt den Steuersatz auf Einkommen über 1 Mio. Dollar (2 Mio. für Paare) fest, heute 37 %. Die Grundeinstellung zeigt 39,6 % wie H.R. 4280 (Fitzpatrick, Republikaner, und Golden, Demokrat, Juli 2025)."
+        "en": "Sets the rate above $1M of taxable income ($2M for couples) in 2018 dollars, indexed: $1.16M ($2.31M) in 2023; now 37%. The default shows 39.6%, as in H.R. 4280 (Fitzpatrick, R, and Golden, D).",
+        "de": "Legt den Satz über 1 Mio. Dollar (Paare 2 Mio.) in Dollar von 2018 fest, indexiert: 2023 1,16 (2,31) Mio.; heute 37 %. Die Grundeinstellung zeigt 39,6 % wie H.R. 4280 (Fitzpatrick, R, und Golden, D)."
       },
       "explanation": {
-        "en": "39.6% was the top rate before the 2017 tax law; the July 2025 law (Public Law 119-21, section 70101) made 37% permanent. The bill keeps 37% below its thresholds. Capital gains and dividends taxed at their own lower rates are not affected. The slider sets the rate above the thresholds.",
-        "de": "39,6 % war der Spitzensatz vor dem Steuergesetz von 2017; das Gesetz vom Juli 2025 (Public Law 119-21, Abschnitt 70101) hat 37 % dauerhaft gemacht. Der Entwurf behält 37 % unterhalb seiner Schwellen. Veräußerungsgewinne und Dividenden, die eigenen, niedrigeren Sätzen unterliegen, sind nicht betroffen. Der Regler legt den Satz oberhalb der Schwellen fest."
+        "en": "39.6% was the top rate before the 2017 tax law; the July 2025 law (Public Law 119-21, section 70101) made 37% permanent. The bill keeps 37% below its thresholds. Its rate tables are those of 2018, and like every bracket amount its thresholds rise with inflation each year (section 2(f)): in tax year 2023, the year of the income data used here, they would have been $1,156,250 for single filers ($1,156,200 for heads of household) and $2,312,500 for couples. Capital gains and dividends taxed at their own lower rates are not affected. The slider sets the rate above the thresholds.",
+        "de": "39,6 % war der Spitzensatz vor dem Steuergesetz von 2017; das Gesetz vom Juli 2025 (Public Law 119-21, Abschnitt 70101) hat 37 % dauerhaft gemacht. Der Entwurf behält 37 % unterhalb seiner Schwellen. Seine Tariftabellen sind die von 2018, und wie alle Tarifgrenzen steigen seine Schwellen jedes Jahr mit der Inflation (Abschnitt 2(f)): Im Steuerjahr 2023, dem Jahr der hier verwendeten Einkommensdaten, hätten sie bei 1.156.250 Dollar für Alleinstehende (1.156.200 für Alleinerziehende) und 2.312.500 Dollar für Paare gelegen. Veräußerungsgewinne und Dividenden, die eigenen, niedrigeren Sätzen unterliegen, sind nicht betroffen. Der Regler legt den Satz oberhalb der Schwellen fest."
       },
       "topic": "taxes",
       "params": [
@@ -2550,8 +2590,8 @@
           "id": "rate",
           "type": "number",
           "label": {
-            "en": "Rate above $1M ($2M for couples)",
-            "de": "Satz über 1 Mio. Dollar (2 Mio. für Paare)"
+            "en": "Rate above $1M ($2M for couples) in 2018 dollars, indexed",
+            "de": "Satz über 1 Mio. Dollar (2 Mio. für Paare) in Dollar von 2018, indexiert"
           },
           "unit": "percent",
           "min": 30,
@@ -2567,8 +2607,8 @@
           "target": "rev.individual_income",
           "amount": {
             "param": "rate",
-            "scale": 6233880413,
-            "offset": -230653575281
+            "scale": 5504349940,
+            "offset": -203660947780
           },
           "quality": "estimate",
           "uncertainty": {
@@ -2578,11 +2618,12 @@
           "sources": [
             "irs_soi_2023_t35_t36",
             "irs_rp_2022_38",
-            "hr_4280_2025"
+            "hr_4280_2025",
+            "irs_soi_2023_t12"
           ],
           "note": {
-            "en": "Ordinary taxable income above the bill's thresholds: $623.4B in tax year 2023, own estimate from the IRS statistics. Income taxed at 37% on returns with AGI of $1M or more was $1,111.9B; for each return taxed at 37%, the income between the 37% threshold of 2023 and the bill's threshold, $1.13M when weighted by filing status, is taken off. Each point of rate brings $6.2B; 39.6% brings $16.2B. Mechanical: people with the highest incomes can shift income in time and form; the range runs down to 60% (own judgment), because the estimate of the Joint Committee on Taxation could not be retrieved.",
-            "de": "Gewöhnliches zu versteuerndes Einkommen über den Schwellen des Entwurfs: 623,4 Mrd. Dollar im Steuerjahr 2023, eigene Schätzung aus der IRS-Statistik. Zu 37 % besteuertes Einkommen in Erklärungen mit mindestens 1 Mio. Dollar Einkommen: 1.111,9 Mrd. Dollar; für jede zu 37 % besteuerte Erklärung wird das Einkommen zwischen der 37-%-Schwelle von 2023 und der Schwelle des Entwurfs abgezogen, nach Veranlagungsart gewichtet 1,13 Mio. Dollar. Jeder Prozentpunkt bringt 6,2 Mrd. Dollar, 39,6 % bringen 16,2 Mrd. Dollar. Rein rechnerisch: Menschen mit den höchsten Einkommen können Einkommen zeitlich und in der Form verschieben; die Spanne reicht bis 60 % (eigene Einschätzung), weil die Schätzung des Joint Committee on Taxation nicht abrufbar war."
+            "en": "Ordinary taxable income above the bill's thresholds: $550.4B in tax year 2023, own estimate from the IRS statistics. Income taxed at 37% on returns with AGI of $1M or more was $1,111.9B; for each return taxed at 37%, the income between the 37% threshold of 2023 and the bill's threshold for 2023 is taken off, $1.45M on average, weighted by the filing statuses of all returns in each income class (84% of the returns with AGI of $1M or more are joint returns). Each point of rate brings $5.5B; 39.6% brings $14.3B. Mechanical: people with the highest incomes can shift income in time and form; the range runs down to 60% (own judgment), because the estimate of the Joint Committee on Taxation could not be retrieved.",
+            "de": "Gewöhnliches zu versteuerndes Einkommen über den Schwellen des Entwurfs: 550,4 Mrd. Dollar im Steuerjahr 2023, eigene Schätzung aus der IRS-Statistik. Zu 37 % besteuertes Einkommen in Erklärungen mit mindestens 1 Mio. Dollar Einkommen: 1.111,9 Mrd. Dollar; für jede zu 37 % besteuerte Erklärung wird das Einkommen zwischen der 37-%-Schwelle von 2023 und der Schwelle des Entwurfs für 2023 abgezogen, im Mittel 1,45 Mio. Dollar, gewichtet nach der Veranlagungsart aller Erklärungen jeder Einkommensklasse (84 % der Erklärungen mit mindestens 1 Mio. Dollar Einkommen sind gemeinsame). Jeder Prozentpunkt bringt 5,5 Mrd. Dollar, 39,6 % bringen 14,3 Mrd. Dollar. Rein rechnerisch: Menschen mit den höchsten Einkommen können Einkommen zeitlich und in der Form verschieben; die Spanne reicht bis 60 % (eigene Einschätzung), weil die Schätzung des Joint Committee on Taxation nicht abrufbar war."
           }
         }
       ],
@@ -2611,16 +2652,22 @@
       "limits": [
         {
           "text": {
-            "en": "The base is tax year 2023 and is not grown to 2025; the bill's thresholds are not indexed in this calculation.",
-            "de": "Die Grundlage ist das Steuerjahr 2023 und wird nicht auf 2025 fortgeschrieben; die Schwellen des Entwurfs sind in dieser Rechnung nicht indexiert."
-          }
+            "en": "The base is tax year 2023 and is not grown to 2025; the bill's thresholds are indexed to 2023, like the incomes. The filing statuses weighted are those of all returns in each income class, as the IRS does not give them for the returns with AGI of $1M or more that are taxed at 37%.",
+            "de": "Die Grundlage ist das Steuerjahr 2023 und wird nicht auf 2025 fortgeschrieben; die Schwellen des Entwurfs sind wie die Einkommen auf 2023 indexiert. Gewichtet wird mit den Veranlagungsarten aller Erklärungen jeder Einkommensklasse, weil die IRS sie für die zu 37 % besteuerten Erklärungen mit mindestens 1 Mio. Dollar Einkommen nicht ausweist."
+          },
+          "sources": [
+            "irs_soi_2023_t12",
+            "irs_soi_2023_t35_t36",
+            "hr_4280_2025"
+          ]
         }
       ],
       "sources": [
         "hr_4280_2025",
         "irs_soi_2023_t35_t36",
         "irs_rp_2022_38",
-        "plaw_119_21"
+        "plaw_119_21",
+        "irs_soi_2023_t12"
       ],
       "timing": {
         "from": "2028-01-01",
@@ -2641,11 +2688,11 @@
       },
       "summary": {
         "en": "Makes states pay up to 15% of SNAP food benefits, depending on their error rate, as the July 2025 law does from fiscal year 2028. The default shows that law; H.R. 7975 (D) would repeal it.",
-        "de": "Lässt die Bundesstaaten je nach Fehlerquote bis zu 15 % der SNAP-Leistungen zahlen, wie das Gesetz vom Juli 2025 ab 2028. Die Grundeinstellung zeigt dieses Recht; H.R. 7975 will es aufheben."
+        "de": "Bundesstaaten zahlen je nach Fehlerquote bis zu 15 % der SNAP-Leistungen, wie nach dem Gesetz vom Juli 2025 ab dem Haushaltsjahr 2028. Die Grundeinstellung zeigt das; H.R. 7975 (D) will es aufheben."
       },
       "explanation": {
-        "en": "Under Public Law 119-21, section 10105, a state with a payment error rate below 6% pays nothing, from 6% 5% of the benefits, from 8% 10% and from 10% 15%; states with a rate of 13.34% or more start a year or two later. The slider sets the share in the top tier; the lower tiers stay at one third and two thirds of it. The 2025 budget still has the whole cost federal.\n\nThe Senate farm bill (S. 5526, September 2026) would start in fiscal year 2029 and raise the top tier to 20% from 2031.",
-        "de": "Nach Public Law 119-21, Abschnitt 10105, zahlt ein Bundesstaat mit einer Fehlerquote unter 6 % nichts, ab 6 % 5 % der Leistungen, ab 8 % 10 % und ab 10 % 15 %; Bundesstaaten mit 13,34 % oder mehr beginnen ein oder zwei Jahre später. Der Regler legt den Anteil der obersten Stufe fest; die unteren bleiben bei einem und zwei Dritteln davon. Im Haushalt 2025 trägt der Bund die Kosten noch ganz.\n\nDer Agrarentwurf des Senats (S. 5526, September 2026) würde 2029 beginnen und die oberste Stufe ab 2031 auf 20 % anheben."
+        "en": "Under Public Law 119-21, section 10105, a state with a payment error rate below 6% pays nothing, from 6% 5% of the benefits, from 8% 10% and from 10% 15%; states with a rate of 13.34% or more start a year or two later. The slider sets the share in the top tier; the lower tiers stay at one third and two thirds of it. The FY 2025 budget still has the whole cost federal.\n\nThe Senate farm bill (S. 5526, reported in September 2026) would start in fiscal year 2029, delay only states whose rates meet the test in both 2025 and 2026, then to fiscal year 2030, and raise the top tier to 20% from 2031.",
+        "de": "Nach Public Law 119-21, Abschnitt 10105, zahlt ein Bundesstaat mit einer Fehlerquote unter 6 % nichts, ab 6 % 5 % der Leistungen, ab 8 % 10 % und ab 10 % 15 %; Bundesstaaten mit 13,34 % oder mehr beginnen ein oder zwei Jahre später. Der Regler legt den Anteil der obersten Stufe fest; die unteren bleiben bei einem und zwei Dritteln davon. Im Haushaltsjahr 2025 trägt der Bund die Kosten noch ganz.\n\nDer Agrarentwurf des Senats (S. 5526, im September 2026 vom Ausschuss vorgelegt) würde 2029 beginnen, nur Bundesstaaten später beginnen lassen, deren Quoten 2025 und 2026 die Schwelle erreichen, dann ab 2030, und die oberste Stufe ab 2031 auf 20 % anheben."
       },
       "topic": "social",
       "params": [
@@ -2693,8 +2740,8 @@
           "kind": "cost_shift",
           "severity": "major",
           "text": {
-            "en": "The federal saving is a cost for the states: they pay it, or cut what their own budgets add, or lower their error rates; 21 states had a rate of 10% or more in 2025 and 10 states below 6%. Since October 2026 the states also pay 75% instead of 50% of the costs of running the program (section 10106), which this measure does not include.",
-            "de": "Die Ersparnis des Bundes ist eine Last der Bundesstaaten: Sie zahlen sie, kürzen eigene Ausgaben oder senken ihre Fehlerquoten; 21 Staaten hatten 2025 eine Quote von 10 % oder mehr und 10 Staaten unter 6 %. Seit Oktober 2026 tragen die Staaten außerdem 75 statt 50 % der Verwaltungskosten (Abschnitt 10106), was diese Maßnahme nicht enthält."
+            "en": "The federal saving is a cost for the states: they pay it, or cut what their own budgets add, or lower their error rates; 21 of the 53 state agencies had a rate of 10% or more in 2025 (19 states, DC and Guam) and 10 a rate below 6% (9 states and the Virgin Islands). Since October 2026 the states also pay 75% instead of 50% of the costs of running the program (section 10106), which this measure does not include.",
+            "de": "Die Ersparnis des Bundes ist eine Last der Bundesstaaten: Sie zahlen sie, kürzen eigene Ausgaben oder senken ihre Fehlerquoten; 21 der 53 zuständigen Verwaltungen hatten 2025 eine Quote von 10 % oder mehr (19 Bundesstaaten, der District of Columbia und Guam) und 10 eine unter 6 % (9 Bundesstaaten und die Amerikanischen Jungferninseln). Seit Oktober 2026 tragen die Staaten außerdem 75 statt 50 % der Verwaltungskosten (Abschnitt 10106), was diese Maßnahme nicht enthält."
           },
           "sources": [
             "fns_snap_per_fy2025",
@@ -2705,12 +2752,12 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "en": "H.R. 7975 (Rep. Shontel Brown, D, March 2026) would repeal the SNAP changes of the July 2025 law; the House farm bill that passed in April 2026 leaves them in place.",
-            "de": "H.R. 7975 (Abgeordnete Shontel Brown, Demokratin, März 2026) würde die SNAP-Änderungen des Gesetzes vom Juli 2025 aufheben; der Agrarentwurf, den das Repräsentantenhaus im April 2026 beschloss, lässt sie bestehen."
+            "en": "H.R. 7975 (Rep. Shontel Brown, D, March 2026) would repeal the SNAP changes of the July 2025 law; the farm bill the House passed on April 30, 2026 (H.R. 7567, 224 to 200) leaves them in place.",
+            "de": "H.R. 7975 (Abgeordnete Shontel Brown, Demokratin, März 2026) würde die SNAP-Änderungen des Gesetzes vom Juli 2025 aufheben; der Agrarentwurf, den das Repräsentantenhaus am 30. April 2026 beschloss (H.R. 7567, 224 zu 200 Stimmen), lässt sie bestehen."
           },
           "sources": [
             "hr_7975_2026",
-            "s_5526_2026"
+            "hr_7567_2026"
           ]
         }
       ],
@@ -2727,7 +2774,8 @@
         "fns_snap_fy2025",
         "fns_snap_per_fy2025",
         "hr_7975_2026",
-        "s_5526_2026"
+        "s_5526_2026",
+        "hr_7567_2026"
       ],
       "timing": {
         "from": "2027-10-01",
