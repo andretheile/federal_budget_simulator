@@ -177,6 +177,8 @@ def figures():
     f["top_default_396"] = f["top_per_point"] * 2.6
     f["wealth_default"] = f["wealth_scale_low"] * 2 + f["wealth_scale_high"] * 3
     f["rebate_default"] = f["rebate_per_dollar"] * 600
+    for amount in (2000, 5000):       # the linear figure against the phase-out computed at that amount
+        f["rebate_linear_error_%d" % amount] = f["rebate_per_dollar"] * amount / f["rebate_net_%d" % amount] - 1
     f["snap_default"] = f["snap_scale"] * 15
     return f
 
@@ -191,10 +193,8 @@ def expected(f):
         ("tariff_all_imports", ("effects", 0, "shift", "ratio"), f["tariff_offset"]),
         ("social_security_benefit_tax", ("effects", 0, "amount", "scale"), f["ssb_scale"]),
         ("tariff_rebate_checks", ("effects", 0, "amount", "scale"), f["rebate_per_dollar"]),
-        ("aca_enhanced_credits", ("effects", 0, "amount", "scale"), f["ptc_outlay_scale"]),
-        ("aca_enhanced_credits", ("effects", 0, "amount", "offset"), -f["ptc_outlay_scale"] * 100),
-        ("aca_enhanced_credits", ("effects", 1, "amount", "scale"), f["ptc_receipt_scale"]),
-        ("aca_enhanced_credits", ("effects", 1, "amount", "offset"), -f["ptc_receipt_scale"] * 100),
+        ("aca_enhanced_credits", ("effects", 0, "amount", "scale"), -f["ptc_outlay_scale"]),
+        ("aca_enhanced_credits", ("effects", 1, "amount", "scale"), -f["ptc_receipt_scale"]),
         ("wealth_tax", ("effects", 0, "amount", "scale"), f["wealth_scale_low"]),
         ("wealth_tax", ("effects", 1, "amount", "scale"), f["wealth_scale_high"]),
         ("top_income_tax_rate", ("effects", 0, "amount", "scale"), f["top_per_point"]),

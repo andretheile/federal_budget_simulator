@@ -18,7 +18,7 @@
         "treasury_mts_2025_09"
       ],
       "note": {
-        "en": "Net of refunds. Treasury's Monthly Treasury Statement for September 2025 (Table 4): withheld $1,919.4 billion, other payments $1,063.9 billion, refunds $327.3 billion.",
+        "en": "Net of refunds. Treasury's Monthly Treasury Statement for September 2025 (Table 4): withheld $1.92T, other payments $1.06T, refunds $327.3B.",
         "de": "Nach Erstattungen. Laut Monatsausweis des Finanzministeriums für September 2025 (Tabelle 4): einbehaltene Steuer 1.919,4 Mrd. Dollar, übrige Zahlungen 1.063,9 Mrd. Dollar, Erstattungen 327,3 Mrd. Dollar."
       }
     },
@@ -40,7 +40,7 @@
         "treasury_mts_2025_09"
       ],
       "note": {
-        "en": "Net of refunds: $486.4 billion collected, $34.3 billion refunded (Monthly Treasury Statement, September 2025, Table 4).",
+        "en": "Net of refunds: $486.4B collected, $34.3B refunded (Monthly Treasury Statement, September 2025, Table 4).",
         "de": "Nach Erstattungen: 486,4 Mrd. Dollar eingenommen, 34,3 Mrd. Dollar erstattet (Monatsausweis September 2025, Tabelle 4)."
       }
     },
@@ -294,7 +294,7 @@
             "omb_hist_fy2027"
           ],
           "note": {
-            "en": "Among them the fee on branded prescription drug manufacturers ($2.8 billion), taxes for the Superfund and the Oil Spill Liability Trust Fund, taxes on firearms and ammunition; less fuel tax credits paid from the general fund ($5.6 billion).",
+            "en": "Among them the fee on branded prescription drug manufacturers ($2.8B), taxes for the Superfund and the Oil Spill Liability Trust Fund, taxes on firearms and ammunition; less fuel tax credits paid from the general fund ($5.6B).",
             "de": "Unter anderem die Abgabe der Hersteller von Markenarzneimitteln (2,8 Mrd. Dollar), Abgaben für den Superfund und den Ölunfallfonds, Waffen- und Munitionssteuer; abzüglich der Kraftstoffsteuer-Gutschriften, die aus dem allgemeinen Haushalt gezahlt werden (5,6 Mrd. Dollar)."
           }
         }
@@ -323,7 +323,7 @@
         "treasury_mts_2026_09"
       ],
       "note": {
-        "en": "Net of refunds: $202.4 billion collected, $7.5 billion refunded (Monthly Treasury Statement, September 2025, Table 4). In fiscal year 2026, $317.8 billion was collected, $144.6 billion refunded and $173.2 billion kept (Monthly Treasury Statement, September 2026).",
+        "en": "Net of refunds: $202.4B collected, $7.5B refunded (Monthly Treasury Statement, September 2025, Table 4). In fiscal year 2026, $317.8B was collected, $144.6B refunded and $173.2B kept (Monthly Treasury Statement, September 2026).",
         "de": "Nach Erstattungen: 202,4 Mrd. Dollar erhoben, 7,5 Mrd. Dollar erstattet (Monatsausweis September 2025, Tabelle 4). Im Haushaltsjahr 2026 waren es 317,8 Mrd. Dollar erhoben, 144,6 Mrd. Dollar erstattet und 173,2 Mrd. Dollar netto (Monatsausweis September 2026)."
       }
     },
@@ -335,6 +335,26 @@
       },
       "code": "935",
       "amount": 29462000000,
+      "levels": {
+        "central": 1
+      },
+      "quality": "official",
+      "sources": [
+        "omb_pbd_receipts_fy2027",
+        "omb_hist_fy2027"
+      ]
+    },
+    {
+      "id": "rev.wealth_tax",
+      "label": {
+        "en": "Wealth tax (not levied)",
+        "de": "Vermögensteuer (nicht erhoben)"
+      },
+      "description": {
+        "en": "The federal government levies no tax on net worth. The line is empty; it holds the revenue of measures that would introduce one.",
+        "de": "Der Bund erhebt keine Steuer auf das Nettovermögen. Die Zeile ist leer; sie nimmt die Einnahmen von Maßnahmen auf, die eine solche Steuer einführen würden."
+      },
+      "amount": 0,
       "levels": {
         "central": 1
       },
@@ -370,7 +390,7 @@
             "treasury_mts_2026_09"
           ],
           "note": {
-            "en": "Fiscal year 2026: $10.5 billion (Monthly Treasury Statement, September 2026).",
+            "en": "Fiscal year 2026: $10.5B (Monthly Treasury Statement, September 2026).",
             "de": "Im Haushaltsjahr 2026: 10,5 Mrd. Dollar (Monatsausweis September 2026)."
           }
         },
@@ -391,7 +411,7 @@
             "omb_hist_fy2027"
           ],
           "note": {
-            "en": "Among them the telecommunications carriers' contributions to the Universal Service Fund ($8.6 billion), receipts of the risk-adjustment program between marketplace insurers ($11.7 billion), fines and forfeitures.",
+            "en": "Among them the telecommunications carriers' contributions to the Universal Service Fund ($8.6B), receipts of the risk-adjustment program between marketplace insurers ($11.7B), fines and forfeitures.",
             "de": "Unter anderem Beiträge der Telekommunikationsanbieter zum Universaldienstfonds (8,6 Mrd. Dollar), Einnahmen des Ausgleichsprogramms zwischen Versicherern der Marktplätze (11,7 Mrd. Dollar), Strafen und Einziehungen."
           }
         }
@@ -432,7 +452,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "OMB subfunction 651 ($1,580.7 billion) without the Disability Insurance Trust Fund: the Old-Age and Survivors Insurance Trust Fund ($1,421.6 billion), the general fund's payments to both trust funds ($59.8 billion) and their booking as receipts of the trust funds, which cancel out, and smaller items, together −$1.1 billion.",
+            "en": "OMB subfunction 651 ($1.58T) without the Disability Insurance Trust Fund: the Old-Age and Survivors Insurance Trust Fund ($1.42T), the general fund's payments to both trust funds ($59.8B) and their booking as receipts of the trust funds, which cancel out, and smaller items, together −$1.1B.",
             "de": "Teilfunktion 651 der OMB (1.580,7 Mrd. Dollar) ohne den Fonds der Erwerbsminderungsrente: der Old-Age and Survivors Insurance Trust Fund (1.421,6 Mrd. Dollar), die Zahlungen des allgemeinen Haushalts an beide Treuhandfonds (59,8 Mrd. Dollar) und deren Verbuchung als Einnahme der Fonds, die sich aufheben, sowie kleinere Posten, zusammen −1,1 Mrd. Dollar."
           }
         },
@@ -494,7 +514,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Outlays of the Hospital Insurance Trust Fund ($444.8 billion) less premiums of voluntary enrollees ($5.5 billion) and refunds ($8.6 billion).",
+            "en": "Outlays of the Hospital Insurance Trust Fund ($444.8B) less premiums of voluntary enrollees ($5.5B) and refunds ($8.6B).",
             "de": "Ausgaben des Hospital Insurance Trust Fund (444,8 Mrd. Dollar) abzüglich der Beiträge freiwillig Versicherter (5,5 Mrd. Dollar) und Rückzahlungen (8,6 Mrd. Dollar)."
           }
         },
@@ -519,7 +539,7 @@
             "bea_nipa_3_18b"
           ],
           "note": {
-            "en": "Outlays of the Supplementary Medical Insurance Trust Fund for Part B ($578.6 billion) less premiums of aged ($133.0 billion) and disabled enrollees ($14.6 billion) and refunds ($4.1 billion). The national accounts count the premiums for Parts B and D as revenue (BEA, NIPA Table 3.18B: $160.2 billion).",
+            "en": "Outlays of the Supplementary Medical Insurance Trust Fund for Part B ($578.6B) less premiums of aged ($133.0B) and disabled enrollees ($14.6B) and refunds ($4.1B). The national accounts count the premiums for Parts B and D as revenue (BEA, NIPA Table 3.18B: $160.2B).",
             "de": "Ausgaben des Supplementary Medical Insurance Trust Fund für Teil B (578,6 Mrd. Dollar) abzüglich der Beiträge von Älteren (133,0 Mrd. Dollar) und Menschen mit Behinderung (14,6 Mrd. Dollar) und Rückzahlungen (4,1 Mrd. Dollar). In den Volkswirtschaftlichen Gesamtrechnungen zählen die Beiträge zu Teil B und D als Einnahmen (BEA, NIPA-Tabelle 3.18B: 160,2 Mrd. Dollar)."
           }
         },
@@ -543,7 +563,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Outlays of the Medicare Prescription Drug Account ($163.0 billion) less premiums collected through the government ($6.2 billion) and payments of the states for beneficiaries who also receive Medicaid ($18.6 billion).",
+            "en": "Outlays of the Medicare Prescription Drug Account ($163.0B) less premiums collected through the government ($6.2B) and payments of the states for beneficiaries who also receive Medicaid ($18.6B).",
             "de": "Ausgaben des Medicare Prescription Drug Account (163,0 Mrd. Dollar) abzüglich der über den Bund erhobenen Beiträge (6,2 Mrd. Dollar) und der Zahlungen der Bundesstaaten für Versicherte, die auch Medicaid erhalten (18,6 Mrd. Dollar)."
           }
         },
@@ -564,7 +584,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Remainder of subfunction 571 (Medicare, $996.7 billion): the Health Care Fraud and Abuse Control account ($2.6 billion) and smaller accounts. Also contains the general fund's payments to the Medicare trust funds ($592.0 billion) and their booking as receipts of the funds; the two almost cancel out.",
+            "en": "Remainder of subfunction 571 (Medicare, $996.7B): the Health Care Fraud and Abuse Control account ($2.6B) and smaller accounts. Also contains the general fund's payments to the Medicare trust funds ($592.0B) and their booking as receipts of the funds; the two almost cancel out.",
             "de": "Rest der Teilfunktion 571 (Medicare, 996,7 Mrd. Dollar): Konto zur Bekämpfung von Betrug und Missbrauch (2,6 Mrd. Dollar) und kleinere Konten. Enthält auch die Zahlungen des allgemeinen Haushalts an die Medicare-Fonds (592,0 Mrd. Dollar) und deren Verbuchung als Einnahme der Fonds; beide heben sich fast auf."
           }
         }
@@ -667,7 +687,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Subfunction 551 ($922.7 billion) without Medicaid, CHIP and the premium tax credits.",
+            "en": "Subfunction 551 ($922.7B) without Medicaid, CHIP and the premium tax credits.",
             "de": "Teilfunktion 551 (922,7 Mrd. Dollar) ohne Medicaid, CHIP und die Prämienzuschüsse."
           }
         },
@@ -688,7 +708,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Subfunction 552, of which National Institutes of Health $46.3 billion.",
+            "en": "Subfunction 552, of which National Institutes of Health $46.3B.",
             "de": "Teilfunktion 552, davon National Institutes of Health 46,3 Mrd. Dollar."
           }
         },
@@ -736,7 +756,7 @@
         "omb_pbd_outlays_fy2027"
       ],
       "note": {
-        "en": "OMB function 900: interest on Treasury debt securities $1,215.6 billion, less the interest that federal trust funds receive on the Treasury securities they hold ($117.5 billion, for example the military and civil service retirement funds, and $70.0 billion for the Social Security trust funds), since it stays within the government, and less other interest received, mainly from federal credit programs ($55.2 billion), and other investment income ($2.7 billion).",
+        "en": "OMB function 900: interest on Treasury debt securities $1.22T, less the interest that federal trust funds receive on the Treasury securities they hold ($117.5B, for example the military and civil service retirement funds, and $70.0B for the Social Security trust funds), since it stays within the government, and less other interest received, mainly from federal credit programs ($55.2B), and other investment income ($2.7B).",
         "de": "Funktion 900 der OMB: Zinsen auf Staatsanleihen 1.215,6 Mrd. Dollar; abgezogen sind die Zinsen, die bundeseigene Treuhandfonds auf ihre Staatsanleihen erhalten (117,5 Mrd. Dollar, etwa die Pensionsfonds für Soldaten und Beamte, und 70,0 Mrd. Dollar für die Social-Security-Fonds), da sie innerhalb des Staates bleiben, sowie übrige Zinseinnahmen, vor allem aus Förderkrediten (55,2 Mrd. Dollar), und Kapitalerträge (2,7 Mrd. Dollar)."
       }
     },
@@ -904,7 +924,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Subfunction 054. Also contains the general fund's payment to the Military Retirement Fund ($154.4 billion) and its booking as a receipt of the fund; the two cancel out.",
+            "en": "Subfunction 054. Also contains the general fund's payment to the Military Retirement Fund ($154.4B) and its booking as a receipt of the fund; the two cancel out.",
             "de": "Teilfunktion 054. Enthält auch die Zahlungen des allgemeinen Haushalts an den Fonds für Militärpensionen (154,4 Mrd. Dollar) und deren Verbuchung als Einnahme des Fonds; beide heben sich auf."
           }
         }
@@ -917,7 +937,7 @@
         "de": "Einkommenssicherung"
       },
       "description": {
-        "en": "Benefits for people with low incomes, unemployment compensation and retirement benefits of federal employees. OMB's total for this function is $701.6 billion; here $144.4 billion of agencies' employer contributions to the retirement funds and $40.7 billion of net receipts from mortgage guarantees are deducted (see the two items).",
+        "en": "Benefits for people with low incomes, unemployment compensation and retirement benefits of federal employees. OMB's total for this function is $701.6B; here $144.4B of agencies' employer contributions to the retirement funds and $40.7B of net receipts from mortgage guarantees are deducted (see the two items).",
         "de": "Leistungen für Menschen mit geringem Einkommen, Arbeitslosenunterstützung und Pensionen der Bundesbediensteten. Die OMB weist für diese Funktion 701,6 Mrd. Dollar aus; hier sind 144,4 Mrd. Dollar an Arbeitgeberbeiträgen der Behörden zu den Pensionsfonds und 40,7 Mrd. Dollar an Nettoeinnahmen aus Hypothekengarantien abgezogen (siehe die beiden Posten)."
       },
       "code": "600",
@@ -967,7 +987,7 @@
                 "omb_pbd_outlays_fy2027"
               ],
               "note": {
-                "en": "Subfunction 605 without SNAP: school meals and other child nutrition ($33.4 billion), WIC, the Special Supplemental Nutrition Program for Women, Infants, and Children ($8.0 billion), and others.",
+                "en": "Subfunction 605 without SNAP: school meals and other child nutrition ($33.4B), WIC, the Special Supplemental Nutrition Program for Women, Infants, and Children ($8.0B), and others.",
                 "de": "Teilfunktion 605 ohne SNAP: Schulessen und andere Kinderernährung (33,4 Mrd. Dollar), Ernährungsprogramm für Schwangere, Mütter und Kleinkinder WIC (8,0 Mrd. Dollar) und weitere."
               }
             }
@@ -1001,7 +1021,7 @@
                 "omb_pbd_outlays_fy2027"
               ],
               "note": {
-                "en": "Account \"Supplemental Security Income Program\" ($69.5 billion) less recovered overpayments ($3.6 billion).",
+                "en": "Account \"Supplemental Security Income Program\" ($69.5B) less recovered overpayments ($3.6B).",
                 "de": "Konto „Supplemental Security Income Program“ (69,5 Mrd. Dollar) abzüglich zurückgeforderter Überzahlungen (3,6 Mrd. Dollar)."
               }
             },
@@ -1082,7 +1102,7 @@
                 "omb_pbd_outlays_fy2027"
               ],
               "note": {
-                "en": "Remainder of subfunction 609 ($235.3 billion), including the pandemic refundable credits for employers ($18.2 billion).",
+                "en": "Remainder of subfunction 609 ($235.3B), including the pandemic refundable credits for employers ($18.2B).",
                 "de": "Rest der Teilfunktion 609 (235,3 Mrd. Dollar), darunter die pandemiebedingten Steuergutschriften für Arbeitgeber (18,2 Mrd. Dollar)."
               }
             }
@@ -1130,7 +1150,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Own allocation. Housing assistance (subfunction 604): $78.0 billion, of which tenant-based vouchers $38.3 billion and project-based rental assistance $17.2 billion. Deducted: the net receipts of federal mortgage guarantees (subfunction 371) of $40.7 billion, mainly from the Federal Housing Administration's mortgage insurance, guarantee fees of Fannie Mae and Freddie Mac, and Ginnie Mae. The budget books them as negative spending in function 370 (\"Commerce and housing credit\"), which as a whole was negative (−$28.1 billion) and therefore cannot be shown as an item of its own.",
+            "en": "Own allocation. Housing assistance (subfunction 604): $78.0B, of which tenant-based vouchers $38.3B and project-based rental assistance $17.2B. Deducted: the net receipts of federal mortgage guarantees (subfunction 371) of $40.7B, mainly from the Federal Housing Administration's mortgage insurance, guarantee fees of Fannie Mae and Freddie Mac, and Ginnie Mae. The budget books them as negative spending in function 370 (\"Commerce and housing credit\"), which as a whole was negative (−$28.1B) and therefore cannot be shown as an item of its own.",
             "de": "Eigene Zuordnung. Wohnungshilfen (Teilfunktion 604): 78,0 Mrd. Dollar, davon Mietgutscheine 38,3 Mrd. Dollar und objektbezogene Mietzuschüsse 17,2 Mrd. Dollar. Abgezogen: die Nettoeinnahmen der Hypothekengarantien des Bundes (Teilfunktion 371) von 40,7 Mrd. Dollar, vor allem der Hypothekenversicherung der Federal Housing Administration, der Garantiegebühren von Fannie Mae und Freddie Mac und von Ginnie Mae. Der Haushalt bucht sie als negative Ausgaben in der Funktion 370 („Commerce and housing credit“), die insgesamt negativ war (−28,1 Mrd. Dollar) und deshalb nicht als eigener Posten gezeigt werden kann."
           }
         },
@@ -1155,7 +1175,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Own allocation. Retirement benefits paid (subfunction 602): $190.2 billion. Deducted: $144.4 billion that federal agencies paid as employers for their own staff into the retirement funds, Social Security and Medicare (subfunctions 951 and 952, \"undistributed offsetting receipts\"). These contributions are already counted as spending of the agencies, for example under military personnel, and the budget assigns their counterpart to no function. Deducting them here keeps the total equal to official outlays without a negative item.",
+            "en": "Own allocation. Retirement benefits paid (subfunction 602): $190.2B. Deducted: $144.4B that federal agencies paid as employers for their own staff into the retirement funds, Social Security and Medicare (subfunctions 951 and 952, \"undistributed offsetting receipts\"). These contributions are already counted as spending of the agencies, for example under military personnel, and the budget assigns their counterpart to no function. Deducting them here keeps the total equal to official outlays without a negative item.",
             "de": "Eigene Zuordnung. Gezahlte Pensionen (Teilfunktion 602): 190,2 Mrd. Dollar. Abgezogen: 144,4 Mrd. Dollar, die Bundesbehörden als Arbeitgeber für ihr eigenes Personal an die Pensionsfonds, an die Social Security und an Medicare gezahlt haben (Teilfunktionen 951 und 952, „undistributed offsetting receipts“). Diese Beiträge sind bereits als Ausgaben der Behörden gezählt, etwa beim Militärpersonal, und der Haushalt ordnet ihre Gegenbuchung keiner Funktion zu. Der Abzug an dieser Stelle hält die Summe gleich den amtlichen Ausgaben, ohne einen negativen Posten."
           }
         },
@@ -1446,7 +1466,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Remainder of subfunction 751 ($43.9 billion), including the fee-funded immigration services (USCIS) and less receipts from immigration and customs user fees.",
+            "en": "Remainder of subfunction 751 ($43.9B), including the fee-funded immigration services (USCIS) and less receipts from immigration and customs user fees.",
             "de": "Rest der Teilfunktion 751 (43,9 Mrd. Dollar), einschließlich der gebührenfinanzierten Einwanderungsbehörde USCIS und abzüglich der Einnahmen aus Einwanderungs- und Zollgebühren."
           }
         },
@@ -1634,7 +1654,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Own allocation. Subfunction 302: $19.7 billion, already net of royalties on public lands. Also deducted: rents and royalties for oil and gas on the Outer Continental Shelf and sales of major assets (subfunctions 953 and 954, $5.8 billion), which the budget assigns to no function.",
+            "en": "Own allocation. Subfunction 302: $19.7B, already net of royalties on public lands. Also deducted: rents and royalties for oil and gas on the Outer Continental Shelf and sales of major assets (subfunctions 953 and 954, $5.8B), which the budget assigns to no function.",
             "de": "Eigene Zuordnung. Teilfunktion 302: 19,7 Mrd. Dollar, bereits abzüglich der Förderabgaben an Land. Abgezogen außerdem: Pachten und Förderabgaben für Öl und Gas auf dem äußeren Festlandsockel und Verkäufe von Vermögen (Teilfunktionen 953 und 954, 5,8 Mrd. Dollar), die der Haushalt keiner Funktion zuordnet."
           }
         },
@@ -1704,7 +1724,7 @@
             "omb_ap_credit_fy2027"
           ],
           "note": {
-            "en": "Schools (subfunction 501): $68.4 billion. Pell grants and other student aid: $50.4 billion. The federal student loans, by contrast, lowered spending in 2025 by $85.4 billion: a loan counts at its expected lifetime cost when it is made, and later changes in that cost are booked when they are estimated. In 2025 the Direct Loan program booked $132.9 billion as negative subsidy; OMB puts the future cost of all outstanding federal student loans at $343.1 billion at the end of 2025, after $476.9 billion a year earlier (Analytical Perspectives, Table 4-1). Because higher education (subfunction 502) was negative as a whole (−$35.0 billion), it is combined here with schools and education research (503).",
+            "en": "Schools (subfunction 501): $68.4B. Pell grants and other student aid: $50.4B. The federal student loans, by contrast, lowered spending in 2025 by $85.4B: a loan counts at its expected lifetime cost when it is made, and later changes in that cost are booked when they are estimated. In 2025 the Direct Loan program booked $132.9B as negative subsidy; OMB puts the future cost of all outstanding federal student loans at $343.1B at the end of 2025, after $476.9B a year earlier (Analytical Perspectives, Table 4-1). Because higher education (subfunction 502) was negative as a whole (−$35.0B), it is combined here with schools and education research (503).",
             "de": "Schulen (Teilfunktion 501): 68,4 Mrd. Dollar. Pell-Stipendien und übrige Studienförderung: 50,4 Mrd. Dollar. Die Studienkredite des Bundes senkten die Ausgaben 2025 dagegen um 85,4 Mrd. Dollar: Ein Kredit zählt bei Vergabe mit seinen erwarteten Gesamtkosten, und spätere Änderungen dieser Kosten werden gebucht, sobald sie geschätzt werden. 2025 buchte das Direktkreditprogramm 132,9 Mrd. Dollar als negative Subvention; die OMB schätzt die künftigen Kosten aller ausstehenden Studienkredite Ende 2025 auf 343,1 Mrd. Dollar, nach 476,9 Mrd. Dollar ein Jahr zuvor (Analytical Perspectives, Tabelle 4-1). Weil die Hochschulförderung (Teilfunktion 502) damit insgesamt negativ war (−35,0 Mrd. Dollar), ist sie hier mit Schulen und Bildungsforschung (503) zusammengefasst."
           }
         },
@@ -1799,7 +1819,7 @@
         "de": "Internationale Angelegenheiten"
       },
       "description": {
-        "en": "OMB's total for this function is $45.2 billion, including negative outlays of the international financial programs.",
+        "en": "OMB's total for this function is $45.2B, including negative outlays of the international financial programs.",
         "de": "Die OMB weist für diese Funktion 45,2 Mrd. Dollar aus, einschließlich negativer Ausgaben der internationalen Finanzprogramme."
       },
       "code": "150",
@@ -1842,7 +1862,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "International security assistance (subfunction 152): $15.5 billion, of which the Economic Support Fund $7.5 billion and Foreign Military Financing $6.9 billion. Netted: the trust fund for arms sales to foreign governments (Foreign Military Sales), through which Foreign Military Financing is also spent; in 2025 it took in $13.2 billion more than it paid out. It belongs to subfunction 155 (international financial programs), which was negative as a whole.",
+            "en": "International security assistance (subfunction 152): $15.5B, of which the Economic Support Fund $7.5B and Foreign Military Financing $6.9B. Netted: the trust fund for arms sales to foreign governments (Foreign Military Sales), through which Foreign Military Financing is also spent; in 2025 it took in $13.2B more than it paid out. It belongs to subfunction 155 (international financial programs), which was negative as a whole.",
             "de": "Internationale Sicherheitshilfe (Teilfunktion 152): 15,5 Mrd. Dollar, davon Economic Support Fund 7,5 Mrd. Dollar und Militärfinanzierung für Partnerstaaten (Foreign Military Financing) 6,9 Mrd. Dollar. Saldiert: der Treuhandfonds für Rüstungsverkäufe an ausländische Regierungen (Foreign Military Sales), über den auch die Militärfinanzierung ausgegeben wird; 2025 nahm er 13,2 Mrd. Dollar mehr ein als er auszahlte. Er gehört zur Teilfunktion 155 (internationale Finanzprogramme), die insgesamt negativ war."
           }
         },
@@ -1863,7 +1883,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Subfunctions 153 and 154 ($14.6 billion), net of visa and passport fees, and the rest of the international financial programs (−$1.7 billion, mainly the Exchange Stabilization Fund).",
+            "en": "Subfunctions 153 and 154 ($14.6B), net of visa and passport fees, and the rest of the international financial programs (−$1.7B, mainly the Exchange Stabilization Fund).",
             "de": "Teilfunktionen 153 und 154 (14,6 Mrd. Dollar), abzüglich der Visa- und Passgebühren, sowie der Rest der internationalen Finanzprogramme (−1,7 Mrd. Dollar, vor allem der Devisenstabilisierungsfonds)."
           }
         }
@@ -2053,7 +2073,7 @@
         "de": "Wirtschaftsförderung, Post und Einlagensicherung"
       },
       "description": {
-        "en": "OMB's function \"Commerce and housing credit\" was negative in 2025 (−$28.1 billion): receipts from mortgage guarantees and deposit insurance exceeded spending. Mortgage credit is deducted under housing assistance; the rest is here.",
+        "en": "OMB's function \"Commerce and housing credit\" was negative in 2025 (−$28.1B): receipts from mortgage guarantees and deposit insurance exceeded spending. Mortgage credit is deducted under housing assistance; the rest is here.",
         "de": "Die Funktion „Commerce and housing credit“ der OMB war 2025 negativ (−28,1 Mrd. Dollar): Die Einnahmen aus Hypothekengarantien und Einlagensicherung überstiegen die Ausgaben. Die Hypothekengarantien sind bei den Wohnungshilfen abgezogen; hier steht der Rest."
       },
       "code": "370 without 371",
@@ -2075,7 +2095,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Own allocation. Other advancement of commerce (subfunction 376): $39.6 billion, including semiconductor subsidies under the CHIPS Act ($14.6 billion) and the Universal Service Fund for telecommunications ($8.6 billion). Deducted: deposit insurance (subfunction 373), whose receipts exceeded its costs by $32.2 billion, mainly at the FDIC's Deposit Insurance Fund.",
+            "en": "Own allocation. Other advancement of commerce (subfunction 376): $39.6B, including semiconductor subsidies under the CHIPS Act ($14.6B) and the Universal Service Fund for telecommunications ($8.6B). Deducted: deposit insurance (subfunction 373), whose receipts exceeded its costs by $32.2B, mainly at the FDIC's Deposit Insurance Fund.",
             "de": "Eigene Zuordnung. Übrige Wirtschaftsförderung (Teilfunktion 376): 39,6 Mrd. Dollar, darunter die Halbleiterförderung nach dem CHIPS Act (14,6 Mrd. Dollar) und der Universaldienstfonds für Telekommunikation (8,6 Mrd. Dollar). Abgezogen: die Einlagensicherung (Teilfunktion 373), deren Einnahmen die Kosten um 32,2 Mrd. Dollar überstiegen, vor allem beim Einlagensicherungsfonds der FDIC."
           }
         },

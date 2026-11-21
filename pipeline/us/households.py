@@ -55,20 +55,34 @@ DFA_QUARTER = "2025:Q3"     # end of fiscal year 2025
 # year 2028: below 6% none, 6% to below 8% 5%, 8% to below 10% 10%, 10% or more 15%. As fractions of the top share:
 SNAP_TIERS = [(6.0, 0.0), (8.0, 1 / 3), (10.0, 2 / 3), (float("inf"), 1.0)]
 SNAP_TOP_SHARE = 15
-# HAND: USDA Food and Nutrition Service, "Supplemental Nutrition Assistance Program: Payment Error Rates, Fiscal Year
-# 2025" (dated June 24, 2026), payment error rate (over- plus underpayments), percent. National: 10.62.
-SNAP_PER_FY2025 = {
-    "Alabama": 9.52, "Alaska": 23.15, "Arizona": 10.80, "Arkansas": 8.81, "California": 10.93, "Colorado": 10.09,
-    "Connecticut": 9.08, "Delaware": 16.00, "District of Columbia": 18.66, "Florida": 12.97, "Georgia": 15.21,
-    "Guam": 11.70, "Hawaii": 10.92, "Idaho": 3.85, "Illinois": 14.67, "Indiana": 9.77, "Iowa": 5.34, "Kansas": 9.44,
-    "Kentucky": 4.70, "Louisiana": 8.14, "Maine": 10.81, "Maryland": 13.08, "Massachusetts": 12.49,
-    "Michigan": 9.89, "Minnesota": 12.58, "Mississippi": 9.51, "Missouri": 8.67, "Montana": 8.86, "Nebraska": 5.90,
-    "Nevada": 6.22, "New Hampshire": 8.85, "New Jersey": 6.86, "New Mexico": 16.81, "New York": 13.18,
-    "North Carolina": 7.36, "North Dakota": 9.89, "Ohio": 6.76, "Oklahoma": 11.04, "Oregon": 14.14,
-    "Pennsylvania": 9.21, "Rhode Island": 12.42, "South Carolina": 8.80, "South Dakota": 2.47, "Tennessee": 9.44,
-    "Texas": 9.34, "Utah": 5.54, "Vermont": 5.38, "Virgin Islands": 5.36, "Virginia": 12.32, "Washington": 6.98,
-    "West Virginia": 6.69, "Wisconsin": 5.72, "Wyoming": 3.96,
+# TRANSCRIBED by hand from USDA Food and Nutrition Service, "Supplemental Nutrition Assistance Program: Payment Error
+# Rates, Fiscal Year 2025" (dated June 24, 2026; fns/snap-qcfy25-per.pdf, the one table of the document): per state
+# the overpayment rate, the underpayment rate and the payment error rate, percent. Checks (snap_state_share): each
+# row's two parts add up to its total within rounding, which catches a mistyped digit in any one of the three
+# figures of a row; and the states' rates weighted by their FY 2025 benefits come to the published national rate
+# within 0.05 points, which catches a wrong total in a large state. Not caught: the same slip in a part and in the
+# total of one row, or a small state's rate swapped with another's.
+SNAP_PER_ROWS = {
+    "Alabama": (8.82, 0.70, 9.52), "Alaska": (20.58, 2.57, 23.15), "Arizona": (8.63, 2.16, 10.80),
+    "Arkansas": (7.97, 0.84, 8.81), "California": (10.06, 0.87, 10.93), "Colorado": (8.52, 1.57, 10.09),
+    "Connecticut": (7.43, 1.65, 9.08), "Delaware": (14.55, 1.45, 16.00), "District of Columbia": (15.33, 3.33, 18.66),
+    "Florida": (11.54, 1.43, 12.97), "Georgia": (13.62, 1.59, 15.21), "Guam": (9.52, 2.18, 11.70),
+    "Hawaii": (9.94, 0.98, 10.92), "Idaho": (3.45, 0.40, 3.85), "Illinois": (13.33, 1.33, 14.67),
+    "Indiana": (7.73, 2.04, 9.77), "Iowa": (4.63, 0.71, 5.34), "Kansas": (8.46, 0.98, 9.44),
+    "Kentucky": (4.02, 0.67, 4.70), "Louisiana": (6.84, 1.30, 8.14), "Maine": (9.33, 1.48, 10.81),
+    "Maryland": (10.89, 2.19, 13.08), "Massachusetts": (11.83, 0.66, 12.49), "Michigan": (8.66, 1.23, 9.89),
+    "Minnesota": (9.86, 2.72, 12.58), "Mississippi": (7.57, 1.94, 9.51), "Missouri": (8.24, 0.43, 8.67),
+    "Montana": (7.51, 1.35, 8.86), "Nebraska": (4.82, 1.08, 5.90), "Nevada": (5.69, 0.53, 6.22),
+    "New Hampshire": (6.15, 2.70, 8.85), "New Jersey": (4.81, 2.05, 6.86), "New Mexico": (15.76, 1.06, 16.81),
+    "New York": (12.06, 1.12, 13.18), "North Carolina": (5.76, 1.60, 7.36), "North Dakota": (7.48, 2.40, 9.89),
+    "Ohio": (5.10, 1.66, 6.76), "Oklahoma": (9.63, 1.41, 11.04), "Oregon": (13.88, 0.26, 14.14),
+    "Pennsylvania": (8.03, 1.18, 9.21), "Rhode Island": (11.63, 0.79, 12.42), "South Carolina": (7.83, 0.97, 8.80),
+    "South Dakota": (2.05, 0.42, 2.47), "Tennessee": (7.84, 1.60, 9.44), "Texas": (6.99, 2.35, 9.34),
+    "Utah": (4.64, 0.89, 5.54), "Vermont": (5.06, 0.32, 5.38), "Virgin Islands": (4.17, 1.19, 5.36),
+    "Virginia": (10.30, 2.02, 12.32), "Washington": (6.15, 0.83, 6.98), "West Virginia": (6.22, 0.46, 6.69),
+    "Wisconsin": (5.32, 0.40, 5.72), "Wyoming": (3.55, 0.41, 3.96),
 }
+SNAP_PER_FY2025 = {state: row[2] for state, row in SNAP_PER_ROWS.items()}
 SNAP_PER_NATIONAL = 10.62
 
 
@@ -262,6 +276,9 @@ def snap_state_share():
     """Benefits of fiscal year 2025 that states would have paid under P.L. 119-21, sec. 10105, with their fiscal year
     2025 payment error rates; per tier and in total (dollars)."""
     states, total = snap_benefits_fy2025()
+    for state, (over, under, rate) in SNAP_PER_ROWS.items():
+        if abs(over + under - rate) > 0.015:
+            sys.exit("SNAP error rates: %s %.2f + %.2f is not %.2f; check the transcription" % (state, over, under, rate))
     missing = [s for s, v in states.items() if v and s not in SNAP_PER_FY2025]
     if missing:
         sys.exit("SNAP: no payment error rate for %s" % missing)
@@ -275,6 +292,8 @@ def snap_state_share():
             if per < upper:
                 by_tier[i] += v
                 break
+    if abs(weighted / total - SNAP_PER_NATIONAL) > 0.05:
+        sys.exit("SNAP error rates: weighted %.2f against the national %.2f; check the transcription" % (weighted / total, SNAP_PER_NATIONAL))
     share = sum(v * f for v, (_, f) in zip(by_tier, SNAP_TIERS)) * SNAP_TOP_SHARE / 100
     delayed = sum(v for s, v in states.items() if v and SNAP_PER_FY2025[s] * 1.5 >= 20)
     return {"benefits": total, "by_tier": by_tier, "state_share": share, "delayed_benefits": delayed,
@@ -304,7 +323,7 @@ def figures():
             f["oep%d_%s" % (year, k)] = v
     young, adults = population_2025()
     f["pop_under18_2025"], f["pop_adults_2025"] = young, adults
-    for amount in (600, 2000):
+    for amount in (600, 2000, 5000):
         r = rebate(amount)
         f["rebate_gross_%d" % amount], f["rebate_loss_%d" % amount], f["rebate_net_%d" % amount] = r["gross"], r["loss"], r["net"]
         f["rebate_loss_share_%d" % amount] = r["loss"] / r["gross"]

@@ -82,6 +82,9 @@ The script stops if a row is taken twice, if a row with a value is left over, or
 format does not allow. The leaves then add up to Historical Table 1.1 to the thousand dollars, and each subfunction
 and each defence title to Table 3.2 to the million; `build_budget.py` prints both checks.
 
+One revenue leaf is empty on purpose: `rev.wealth_tax`, for measures that would introduce a tax the federal
+government does not levy.
+
 Spending follows OMB's functions. Below them are subfunctions, and where the debate needs a single programme, the
 accounts of that programme: Social Security by trust fund, Medicare by part, Medicaid, CHIP, the premium tax credits,
 SNAP, SSI, the refundable parts of the earned income and child tax credits, TANF, the FEMA Disaster Relief Fund,
@@ -221,7 +224,7 @@ cut below zero.
 |---|---|---|
 | `social_security_benefit_tax` | −$1.008B per point | income of the trust funds from the taxation of benefits in fiscal year 2025: OASDI $59.7B (Trustees Report, Table VI.C3) and HI $41.1B (Medicare Trustees Report, Table V.H1), read by hand |
 | `tariff_rebate_checks` | $277.1M per dollar | Census population of July 1, 2025 (341.8 million) less the phase-out of S. 2475 on the IRS's 2023 returns by AGI and filing status (Table 1.2): 18.9 % at $600 |
-| `aca_enhanced_credits` | outlays $13.8B, income tax $8.0B at 0 % | Treasury's estimate for making the enhancement permanent, fiscal year 2027 (Greenbook FY 2025, read by hand) |
+| `aca_enhanced_credits` | outlays −$13.8B, income tax +$8.0B when the enhancement ends in full | Treasury's estimate for making the enhancement permanent, fiscal year 2027 (Greenbook FY 2025, read by hand) |
 | `wealth_tax` | $142.7B and $38.2B per point | a Pareto tail through the top 1 % and top 0.1 % of the Distributional Financial Accounts (2025 Q3): net worth between $50 million and $1 billion above the threshold, and above $1 billion |
 | `top_income_tax_rate` | $6.23B per point above 37 % | income taxed at 37 % on returns with AGI of $1 million or more (IRS Table 3.5), less the income between the 2023 threshold of the 37 % rate (Rev. Proc. 2022-38) and the bill's threshold for each return taxed at 37 %, weighted by filing status (Table 3.6) |
 | `snap_state_cost_share` | −$741M per point of the top share | FY 2025 benefits by state (FNS) in the tiers of P.L. 119-21 sec. 10105 by each state's FY 2025 payment error rate (read by hand from FNS's PDF; the benefit-weighted mean, 10.63 %, is checked against the national 10.62 %) |

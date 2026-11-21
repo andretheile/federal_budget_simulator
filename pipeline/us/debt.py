@@ -45,6 +45,20 @@ COMPARISONS = [("exp.defense", "national defense", "Verteidigung"), ("exp.medica
 # "Total, receipts", $ billion. 2026-2031 are checked against Historical Table 2.1, which has no years after 2031.
 T12_4_RECEIPTS = {2025: 5236.4, 2026: 5475.7, 2027: 5921.0, 2028: 6288.4, 2029: 6660.3, 2030: 7137.3, 2031: 7559.4,
                   2032: 7984.3, 2033: 8446.8, 2034: 8891.3, 2035: 9360.8, 2036: 9846.1}
+# TRANSCRIBED by hand from the same table, p. 134, for the years no workbook holds (2032-2036): the sources of
+# receipts, $ billion, in the order individual income, corporation income, social insurance and retirement, excise,
+# estate and gift, customs, miscellaneous. Check (check_transcriptions): they add up to the transcribed total of
+# each year within rounding, which catches a mistyped digit in the total or in one source; not caught: the same slip
+# in a source and in the total.
+T12_4_SOURCES = {2032: (4043.8, 562.9, 2518.8, 114.7, 57.8, 575.0, 111.3),
+                 2033: (4294.9, 579.4, 2675.6, 116.2, 61.5, 600.0, 119.2),
+                 2034: (4546.2, 605.3, 2806.0, 116.9, 64.8, 625.4, 126.6),
+                 2035: (4804.3, 630.0, 2954.7, 120.0, 68.7, 652.4, 130.8),
+                 2036: (5069.1, 653.4, 3110.3, 123.0, 72.7, 681.3, 136.2)}
+# TRANSCRIBED from Table 12-2 of the same page: growth of GDP in current dollars, percent, 2032-2036. Check: the
+# transcribed GDP levels grow at these rates after rounding, which catches a mistyped digit in a level (above the
+# last two digits); not caught: a slip that keeps the growth within the rounding of the published rate.
+T12_2_NOMINAL_GROWTH = {2032: 4.9, 2033: 4.9, 2034: 4.9, 2035: 4.9, 2036: 4.9}
 # HAND: the same table, "Customs duties", $ billion.
 T12_4_CUSTOMS = {2025: 194.9, 2026: 406.1, 2036: 681.3}
 # HAND: the same page, Table 12-2 (fiscal years): GDP in current dollars, $ billion (2025-2031 checked against
@@ -104,6 +118,18 @@ def num(text):
     if text in ("", "null", "*", "-*") or set(text) <= {"."}:
         return 0.0
     return float(text)
+
+
+def check_transcriptions():
+    """Checks of the tables transcribed by hand (see their comments)."""
+    for y, parts in T12_4_SOURCES.items():
+        if abs(sum(parts) - T12_4_RECEIPTS[y]) > 0.35:
+            fail("Table 12-4 %d: the sources add up to %.1f, the transcribed total is %.1f" % (y, sum(parts), T12_4_RECEIPTS[y]))
+        if parts[5] != T12_4_CUSTOMS.get(y, parts[5]):
+            fail("Table 12-4 %d: customs %.1f and %.1f" % (y, parts[5], T12_4_CUSTOMS[y]))
+    for y, g in T12_2_NOMINAL_GROWTH.items():
+        if abs((T12_2_GDP[y] / T12_2_GDP[y - 1] - 1) * 100 - g) > 0.051:
+            fail("Table 12-2 %d: GDP grows %.2f%%, the table says %.1f%%" % (y, (T12_2_GDP[y] / T12_2_GDP[y - 1] - 1) * 100, g))
 
 
 def fail(message):
@@ -422,6 +448,7 @@ def T(en, de):
 
 
 def figures():
+    check_transcriptions()
     f = {}
     country = pack_json("country.json")
     h1 = hist_by_year("hist01z1_fy2027.xlsx")          # receipts, outlays, deficit ($ million), to 2025
@@ -1026,64 +1053,45 @@ def build(f):
     }
 
     gap_lo, gap_hi = min(f["gap_ratio"].values()), max(f["gap_ratio"].values())
-    note = L(lambda l: (
+    note = L(lambda l: "\n\n".join([
         "The starting point is the budget of FY 2025, continued: revenue and spending other than interest keep their "
-        "share of GDP of FY 2025, a deficit before interest of %s of GDP, and the chosen assumptions hold every year. "
-        "The measures change this budget, so on this path none of them is counted twice. OMB's two paths, its baseline "
-        "under current law and the President's Budget, can be chosen instead. They are not the default because they "
-        "rest on economic assumptions that OMB developed on the assumption that the President's proposals are enacted, "
-        "with real growth of %s a year to FY 2036, and on customs duties of %s for FY 2026, of which %s was collected after "
-        "refunds; on them the deficit before interest shrinks to %s of GDP by FY 2036. In FY 2026 it came to %s of GDP "
-        "(on OMB's estimate of GDP), and Treasury's long-term projection under current policy puts it at %s on average over the next "
-        "ten years. What the calculation leaves out: debt held by the public grows here by the deficit alone. In fact it "
-        "also grows with the government's loans, above all student loans, and with its cash balance: by %s to %s of "
-        "GDP a year more than the deficit in FY 2023 to 2025, and by %s in FY 2026; OMB had expected %s for FY 2026 "
-        "and expects %s for FY 2027. Interest follows the rates chosen here, on OMB's paths too, not OMB's rates. All new debt costs "
-        "one market rate; inflation-protected securities, %s of marketable debt, are treated like the rest, although "
-        "their principal grows with consumer prices. The debt limit is not modeled; at the end of October 2026 the "
-        "debt subject to it was %s below the limit of %s. FY 2026 is over, but the "
-        "calculation computes it like any later year; Treasury's final statement shows a deficit of %s, net interest "
-        "of %s and debt held by the public of %s at its end. Feedback is left out: higher debt does not push up rates, "
-        "and measures do not change growth. Each measure acts in full and for good from FY 2028 unless its card says "
-        "it starts later; expiry dates and the reactions of people and firms are missing. Costs that grow faster than "
-        "the economy, such as Social Security and Medicare as the population ages, enter only through the yearly "
-        "change in the budget before interest."
-        % (pct(-f["primary_2025"], l, 2), pct(f["real_growth_2026_2036"], l), customs(2026, l), money(f["fy26_customs"], l),
-           pct(-pb["baseline"], l, 2), pct(-fy26_gdp_share, l), pp(FR["primary_10y"], l), pct(gap_lo, l), pct(gap_hi, l),
-           money(f["fy26_gap"], l), money(f["other_omb"][2026], l), money(f["other_omb"][2027], l), pct(m["tips"], l),
-           money(f["headroom"], l), money(f["limit"], l),
-           money(f["fy26_deficit"], l), money(f["fy26_interest"], l), money(f["fy26_dhp"], l))
-        if l == "en" else
+        "FY 2025 share of GDP, a deficit before interest of %s of GDP. The measures change this budget, so none of them "
+        "is counted twice." % pct(-f["primary_2025"], l, 2),
+        "OMB's baseline and the President's Budget can be chosen instead. They are not the default because their "
+        "economics assume that the President's proposals are enacted; on them the deficit before interest shrinks to "
+        "%s of GDP by FY 2036, while Treasury's long-term projection under current policy puts it at %s on average "
+        "over the next ten years." % (pct(-pb["baseline"], l, 2), pp(FR["primary_10y"], l)),
+        "What the calculation leaves out. Debt grows here by the deficit alone, although loans, above all student "
+        "loans, and the cash balance added %s to %s of GDP a year in FY 2023 to 2025. Interest follows the rates "
+        "chosen here, on OMB's paths too. Inflation-protected securities, %s of marketable debt, are treated like the "
+        "rest. The debt limit is not modeled; at the end of October 2026 the debt subject to it was %s below it. "
+        "Higher debt does not "
+        "push up rates, and measures do not change growth."
+        % (pct(gap_lo, l), pct(gap_hi, l), pct(m["tips"], l), money(f["headroom"], l)),
+        "FY 2026 is over but is computed like any later year. Treasury's final statement shows a deficit of %s, net "
+        "interest of %s and debt held by the public of %s at its end."
+        % (money(f["fy26_deficit"], l), money(f["fy26_interest"], l), money(f["fy26_dhp"], l)),
+    ]) if l == "en" else "\n\n".join([
         "Ausgangspunkt ist der Haushalt des Haushaltsjahres 2025, fortgeschrieben: Einnahmen und Ausgaben ohne Zinsen "
-        "behalten ihren Anteil am BIP von 2025, ein Defizit ohne Zinsen von %s des BIP, und die gewählten Annahmen "
-        "gelten jedes Jahr. Die Maßnahmen verändern diesen Haushalt; auf diesem Pfad zählt deshalb keine doppelt. "
-        "Wählbar sind stattdessen die beiden Pfade der OMB, ihre Fortschreibung nach geltendem Recht und der "
-        "Haushaltsentwurf des Präsidenten. Sie sind nicht die Vorgabe, weil sie auf Wirtschaftsannahmen beruhen, die "
-        "die OMB unter der Annahme entwickelt hat, dass die Vorschläge des Präsidenten Gesetz werden, mit realem "
-        "Wachstum von %s im Jahr bis 2036, und auf Zöllen von %s für das Haushaltsjahr 2026, von denen nach Erstattungen %s "
-        "blieben; damit schrumpft das Defizit ohne Zinsen bis zum Haushaltsjahr 2036 auf %s des BIP. Im Haushaltsjahr "
-        "2026 betrug es %s des BIP (nach der Schätzung der OMB für das BIP), und die Langfristprojektion des Finanzministeriums nach "
-        "geltender Politik setzt es für die nächsten zehn Jahre im Mittel mit %s an. Was die Rechnung weglässt: Die "
-        "Schulden bei Dritten wachsen hier nur um das Defizit. Tatsächlich wachsen sie auch mit den Krediten des "
-        "Bundes, vor allem an Studierende, und mit seinem Kassenbestand: in den Haushaltsjahren 2023 bis 2025 um %s bis "
-        "%s des BIP im Jahr mehr als das Defizit und im Haushaltsjahr 2026 um %s; die OMB hatte für 2026 %s erwartet "
-        "und erwartet für 2027 %s. Die Zinsen folgen den hier gewählten Zinssätzen, auch auf den Pfaden der OMB, nicht denen der OMB. "
-        "Alle neuen Schulden kosten denselben Marktzins; inflationsgeschützte Anleihen, %s der handelbaren Schulden, "
-        "werden wie die übrigen behandelt, obwohl ihr Nennwert mit den Verbraucherpreisen wächst. Die "
-        "Schuldenobergrenze ist nicht abgebildet; Ende Oktober 2026 lagen die ihr unterliegenden Schulden %s unter "
-        "der Grenze von %s. Das Haushaltsjahr 2026 ist vorbei, doch die "
-        "Rechnung berechnet es wie jedes spätere Jahr; der letzte Monatsausweis des Finanzministeriums zeigt ein "
-        "Defizit von %s, Nettozinsen von %s und Schulden bei Dritten von %s zum Jahresende. Rückwirkungen fehlen: "
-        "Höhere Schulden treiben den Zins nicht nach oben, und Maßnahmen ändern das Wachstum nicht. Jede Maßnahme wirkt "
-        "ab dem Haushaltsjahr 2028 voll und dauerhaft, außer ihre Karte nennt einen späteren Beginn; Befristungen und "
-        "Reaktionen von Menschen und Unternehmen fehlen. Kosten, die schneller wachsen als die Wirtschaft, etwa Social "
-        "Security und Medicare in einer alternden Gesellschaft, kommen nur über die jährliche Veränderung des Haushalts "
-        "ohne Zinsen hinein."
-        % (pct(-f["primary_2025"], l, 2), pct(f["real_growth_2026_2036"], l), customs(2026, l), money(f["fy26_customs"], l),
-           pct(-pb["baseline"], l, 2), pct(-fy26_gdp_share, l), pp(FR["primary_10y"], l), pct(gap_lo, l), pct(gap_hi, l),
-           money(f["fy26_gap"], l), money(f["other_omb"][2026], l), money(f["other_omb"][2027], l), pct(m["tips"], l),
-           money(f["headroom"], l), money(f["limit"], l),
-           money(f["fy26_deficit"], l), money(f["fy26_interest"], l), money(f["fy26_dhp"], l))))
+        "behalten ihren Anteil am BIP von 2025, ein Defizit ohne Zinsen von %s des BIP. Die Maßnahmen verändern diesen "
+        "Haushalt; keine zählt deshalb doppelt." % pct(-f["primary_2025"], l, 2),
+        "Wählbar sind stattdessen die Fortschreibung der OMB und der Haushaltsentwurf des Präsidenten. Sie sind nicht "
+        "die Vorgabe, weil ihre Wirtschaftsannahmen voraussetzen, dass die Vorschläge des Präsidenten Gesetz werden; auf "
+        "ihnen schrumpft das Defizit ohne Zinsen bis zum Haushaltsjahr 2036 auf %s des BIP, während die "
+        "Langfristprojektion des Finanzministeriums nach geltender Politik es für die nächsten zehn Jahre im Mittel mit "
+        "%s ansetzt." % (pct(-pb["baseline"], l, 2), pp(FR["primary_10y"], l)),
+        "Was die Rechnung weglässt. Die Schulden wachsen hier nur um das Defizit, obwohl Kredite, vor allem an "
+        "Studierende, und der Kassenbestand in den Haushaltsjahren 2023 bis 2025 jährlich %s bis %s des BIP hinzufügten. "
+        "Die Zinsen folgen den hier gewählten Sätzen, auch auf den Pfaden der OMB. Inflationsgeschützte Anleihen, %s der "
+        "handelbaren Schulden, werden wie die übrigen behandelt. Die Schuldenobergrenze ist nicht abgebildet; Ende "
+        "Oktober 2026 lagen die ihr unterliegenden Schulden %s darunter. Höhere Schulden treiben den Zins nicht nach "
+        "oben, und Maßnahmen "
+        "ändern das Wachstum nicht."
+        % (pct(gap_lo, l), pct(gap_hi, l), pct(m["tips"], l), money(f["headroom"], l)),
+        "Das Haushaltsjahr 2026 ist vorbei, wird aber wie jedes spätere Jahr berechnet. Der letzte Monatsausweis des "
+        "Finanzministeriums zeigt ein Defizit von %s, Nettozinsen von %s und Schulden bei Dritten von %s zum Jahresende."
+        % (money(f["fy26_deficit"], l), money(f["fy26_interest"], l), money(f["fy26_dhp"], l)),
+    ]))
 
     return {
         "stock": stock,
