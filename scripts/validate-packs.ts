@@ -20,7 +20,11 @@ import {
   followablePlans,
   formatIssue,
   goalProgress,
-  isComparablePlan,
+  calendarYears,
+  isComparablePlanIn,
+  projectionAccounts,
+  yearEnd,
+  yearStart,
   measurePhase,
   measuresFrom,
   projectScenario,
@@ -183,6 +187,13 @@ function printDebtSummary(pack: CountryPack): void {
     `  debt projection without measures at default assumptions (market rate ${market_rate} %, growth ${growth} %, ` +
       `${change}, ${percent(projection.refinancingShare)} of the debt refinanced a year):`,
   );
+  // Where the pack is not a calendar-year pack in national accounts, say what its years and accounts are.
+  if (!calendarYears(pack) || debt.accounts !== undefined) {
+    const years = calendarYears(pack)
+      ? "calendar years"
+      : `the pack's own years, ${projection.baseYear} from ${yearStart(pack, projection.baseYear)} to ${yearEnd(pack, projection.baseYear)}`;
+    console.log(`    years: ${years}; accounts of the budget and the projection: ${projectionAccounts(debt).replace("_", " ")}`);
+  }
   console.log(`    starting path: ${pathName(projection.followed, projection.baseYear)}`);
   if (other) console.log(`    beside it: ${pathName(other.followed, other.baseYear)}`);
   console.log(`    year            debt   of GDP        interest  of GDP  of revenue${other ? "   beside it: debt of GDP  of revenue" : ""}`);
@@ -207,7 +218,7 @@ function printDebtSummary(pack: CountryPack): void {
 }
 
 /**
- * The official projections in debt.json. One that covers the whole state in national accounts is
+ * The official projections in debt.json. One that covers the pack's whole budget in its accounts is
  * set against the base year's budget continued, without measures; any other is listed with its scope.
  */
 function printPlans(pack: CountryPack, baseline: DebtPath, baseYear: number): void {
@@ -215,8 +226,8 @@ function printPlans(pack: CountryPack, baseline: DebtPath, baseYear: number): vo
   if (plans.length === 0) return;
   const optional = (value: number | undefined, format: (n: number) => string): string => (value === undefined ? "" : format(value));
   for (const plan of plans) {
-    const scope = `${plan.scope === "all" ? "whole state" : plan.scope}, ${plan.accounts.replace("_", " ")}`;
-    if (isComparablePlan(plan)) {
+    const scope = `${plan.scope === "all" ? "whole budget" : plan.scope}, ${plan.accounts.replace("_", " ")}`;
+    if (isComparablePlanIn(pack.debt!, plan)) {
       console.log(`  official plan ${plan.id} (${scope}) against the budget of ${baseYear} continued at default assumptions without measures:`);
       console.log("    year   debt: plan    model   balance: plan    model   interest/GDP: plan    model");
       for (const point of plan.points) {

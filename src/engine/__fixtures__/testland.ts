@@ -71,7 +71,7 @@
  * part of 50, of which the centre bears a fifth, and half of the 15 less income tax.
  */
 import type { RawPackFiles } from "../validate.ts";
-import type { CountryPack, Effect, LocalizedText, Policy } from "../types.ts";
+import type { BudgetNode, CountryPack, Effect, LocalizedText, Policy } from "../types.ts";
 
 const t = (en: string, de: string): LocalizedText => ({ en, de });
 
@@ -1037,6 +1037,57 @@ export function testlandTimed(): CountryPack {
 export function testlandTimedFiles(): RawPackFiles {
   const copy = testlandTimed();
   return { ...testlandFiles(), policies: { policies: copy.policies, collections: copy.collections }, debt: copy.debt };
+}
+
+/**
+ * Testland as a pack like the US one: one level of government, fiscal years, a budget in its own
+ * budget accounts, and an official plan in those accounts that the projection follows.
+ *
+ *   - Years run from 1 October to 30 September and are named after the year they end in: the base
+ *     year 2024 is October 2023 to September 2024 (country.json `baseYearStart` "2023-10-01"), and
+ *     its short name "FY 2024" names later years too ("FY 2030").
+ *   - Every item belongs to the one level, the central government.
+ *   - The budget and the projection are in "budget" accounts (debt.json `accounts`), and so is the
+ *     ministry's projection, which the projection follows (2025 and 2026, as in Testland). The
+ *     central budget's interest stays a cash figure of its own.
+ *   - Measures act from FY 2026, which starts on 1 October 2025. The wealth tax starts on 1 January
+ *     2026, so FY 2026 has 273 of its 365 days of it; cutting administration builds up over 4 years.
+ */
+export function testlandFiscal(): CountryPack {
+  const pack = testlandCopy();
+  pack.country.baseYearStart = "2023-10-01";
+  pack.country.baseYearLabel = t("fiscal year 2024 (October 2023 to September 2024)", "Haushaltsjahr 2024 (Oktober 2023 bis September 2024)");
+  pack.country.baseYearShort = t("FY 2024", "Haushaltsjahr 2024");
+  pack.country.levels = { central: { name: t("Federal government", "Bund") } };
+  const central = (nodes: BudgetNode[]): void => {
+    for (const node of nodes) {
+      if ("children" in node) central(node.children);
+      else node.levels = { central: 1 };
+    }
+  };
+  central(pack.budget.revenue);
+  central(pack.budget.expenditure);
+  const debt = pack.debt!;
+  debt.accounts = "budget";
+  debt.plans!.find((plan) => plan.id === "ministry_projection")!.accounts = "budget";
+  debt.follow = "ministry_projection";
+  debt.measuresFrom = { year: 2026, note: t("The budget for FY 2025 is enacted.", "Der Haushalt für 2025 ist beschlossen.") };
+  const policy = (id: string) => pack.policies.find((candidate) => candidate.id === id)!;
+  policy("wealth_tax").timing = { from: "2026-01-01", note: t("From the next calendar year.", "Ab dem nächsten Kalenderjahr."), sources: ["wealth_survey"] };
+  policy("cut_admin").timing = { years: 4, note: t("Posts go as people retire.", "Stellen fallen mit dem Ruhestand weg."), sources: ["finance_ministry"] };
+  return pack;
+}
+
+/** testlandFiscal as the raw content of its JSON files. */
+export function testlandFiscalFiles(): RawPackFiles {
+  const copy = testlandFiscal();
+  return {
+    ...testlandFiles(),
+    country: copy.country,
+    budget: copy.budget,
+    policies: { policies: copy.policies, collections: copy.collections },
+    debt: copy.debt,
+  };
 }
 
 /**

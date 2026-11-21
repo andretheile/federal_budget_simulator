@@ -1456,11 +1456,11 @@ describe("the starting path of the debt projection", () => {
       (f) => (f.debt.follow = "central_budget_interest"),
       DEBT,
       "$.follow",
-      /plan "central_budget_interest" is for level "central" in cash accounts; only a plan for the whole state in national_accounts can be followed/,
+      /plan "central_budget_interest" is for level "central" in cash accounts; only a plan for the whole budget \("scope": "all"\) in the accounts of the pack's budget \(national_accounts\) can be followed/,
     );
-    expectOnly((f) => ((f.debt.plans[0].accounts = "cash"), following(f)), DEBT, "$.follow", /for the whole state in cash accounts/);
-    // Not followable: a point without a debt ratio, a gap between years, no balance at the end.
-    expectOnly((f) => (delete f.debt.plans[0].points[0].debtRatio, following(f)), DEBT, "$.follow", /cannot be followed: it needs a "debtRatio" in every point/);
+    expectOnly((f) => ((f.debt.plans[0].accounts = "cash"), following(f)), DEBT, "$.follow", /for the whole budget in cash accounts/);
+    // Not followable: a point without a debt ratio or an interest ratio, a gap between years, no balance at the end.
+    expectOnly((f) => (delete f.debt.plans[0].points[0].debtRatio, following(f)), DEBT, "$.follow", /cannot be followed: it needs in every point a "debtRatio", or else a "balanceRatio" and an "interestRatio"/);
     expectOnly((f) => ((f.debt.plans[0].points[1].year = 2027), following(f)), DEBT, "$.follow", /cannot be followed/);
     expectOnly((f) => (delete f.debt.plans[0].points[1].balanceRatio, following(f)), DEBT, "$.follow", /cannot be followed/);
     expectOnly((f) => (f.debt.follow = "Ministry"), DEBT, "$.follow", /lower_snake_case/);

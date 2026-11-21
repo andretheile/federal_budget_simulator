@@ -156,6 +156,7 @@ export const countrySchema = z.strictObject({
   currency: z.string().regex(/^[A-Z]{3}$/, "must be an ISO 4217 code"),
   locales: z.array(text).min(1),
   baseYear: year,
+  baseYearStart: z.iso.date("must be an ISO date (YYYY-MM-DD)").optional(),
   baseYearLabel: localizedTextSchema.optional(),
   baseYearShort: localizedTextSchema.optional(),
   preview: z.boolean().optional(),
@@ -485,7 +486,7 @@ export const debtFileSchema = z.strictObject({
         message: "a preset must set at least one assumption",
         path: ["values"],
       }),
-  ),
+  ).default([]),
   references: z.array(
     z.strictObject({
       id: idSchema,
@@ -498,7 +499,7 @@ export const debtFileSchema = z.strictObject({
       sources: sourceIds.min(1),
       note: localizedTextSchema.optional(),
     }),
-  ),
+  ).default([]),
   comparisons: z.array(z.strictObject({ node: z.string(), label: localizedTextSchema.optional() })).optional(),
   plans: z
     .array(
@@ -506,7 +507,7 @@ export const debtFileSchema = z.strictObject({
         id: idSchema,
         label: localizedTextSchema,
         scope: z.enum(["all", "central", "state", "local", "social_security"]),
-        accounts: z.enum(["national_accounts", "cash"]),
+        accounts: z.enum(["national_accounts", "cash", "budget"]),
         points: z
           .array(
             z.strictObject({
@@ -527,6 +528,7 @@ export const debtFileSchema = z.strictObject({
     )
     .optional(),
   measuresFrom: z.strictObject({ year, note: localizedTextSchema, sources: sourceIds.optional() }).optional(),
+  accounts: z.enum(["national_accounts", "cash", "budget"]).optional(),
   follow: idSchema.optional(),
   note: localizedTextSchema,
 });
