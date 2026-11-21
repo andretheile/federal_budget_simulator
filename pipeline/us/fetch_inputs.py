@@ -59,6 +59,26 @@ Kept for reference (read by hand; the measures quote them):
   irs/p5901.pdf                 IRS Publication 5901, return on investment of IRS funding (enforcement revenue)
   nato/                         NATO defence expenditure 2014-2025; the 5 % commitment
   treasury/General-Explanations-FY2025.pdf   Treasury, revenue proposals of the FY 2025 Budget (corporate rate)
+Read by debt.py (countries/us/debt.json, the debt and interest projection):
+  omb/hist01z1_fy2027.xlsx, hist03z1_fy2027.xlsx, hist07z1_fy2027.xlsx, hist10z1_fy2027.xlsx
+                                OMB Historical Tables 1.1 (receipts, outlays), 3.1 (defense, net interest), 7.1 (debt
+                                held by the public), 10.1 (GDP): the stock, the President's Budget path to 2031, history
+  omb/ap_12_tables_fy2027.xlsx  Analytical Perspectives, Table 12-6: outlays and net interest in the baseline to 2036
+  omb/ap_11_tables_fy2027.xlsx  Analytical Perspectives, Table 11-2: other transactions affecting borrowing
+  mts/mts_table_6_*.csv         Monthly Treasury Statement, Table 6 (means of financing): debt held by the public
+  treasury/mspd_table_3_market_2025-09-30.csv  Monthly Statement of the Public Debt, marketable securities by CUSIP
+  treasury/mspd_table_2_2026-10-31.csv         Monthly Statement of the Public Debt, debt subject to limit
+  treasury/yield_curve_*.csv    Treasury, daily par yield curve rates by calendar year
+  fed/fomcprojtabl20260916.htm  Federal Reserve, Summary of Economic Projections, September 2026, Table 1
+  govinfo/PLAW-119-public.zip   public laws of the 119th Congress: titles and dates (appropriations for FY 2027)
+  govinfo/PLAW-119publ21.xml, PLAW-119publ103.xml  the debt limit (sec. 72001); the continuing resolution's end date
+Read by hand for debt.py (constants marked HAND there):
+  omb/ap_12_current_services_fy2027.pdf  Analytical Perspectives, chapter 12: Tables 12-2 (GDP) and 12-4 (receipts)
+                                         in the baseline for 2032-2036, which the workbook does not hold
+  omb/ap_1_assumptions_fy2027.pdf        Analytical Perspectives, chapter 1: Table 1-3, sensitivity of outlays to rates
+  omb/ap_11_borrowing_fy2027.pdf         Analytical Perspectives, chapter 11: average maturity, debt limit
+  omb/MSR_2027.pdf                       Mid-Session Review of the Budget for FY 2027 (September 2026)
+  treasury/executive-summary-2025.pdf    Executive Summary to the FY 2025 Financial Report of the U.S. Government
 """
 import os, sys, urllib.request, zipfile
 
@@ -155,8 +175,33 @@ EXTRACT = [("fns/snap-zip-fy69tocurrent-11.zip", "FY25.xlsx", "fns/FY25.xlsx")]
 for law in ("1", "21", "28", "37", "75", "98", "103"):
     DOWNLOADS["govinfo/PLAW-119publ%s.xml" % law] = "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ%s.xml" % law
 for date in ("2025-09-30", "2026-09-30"):
-    for table in ("1", "3", "4", "5", "9"):
+    for table in ("1", "3", "4", "5", "6", "9"):
         DOWNLOADS["mts/mts_table_%s_%s.csv" % (table, date)] = MTS % (table, date)
+# --- the debt projection (debt.py) ---
+for name in ("hist03z1_fy2027.xlsx", "hist07z1_fy2027.xlsx", "ap_12_tables_fy2027.xlsx", "ap_11_tables_fy2027.xlsx",
+             "ap_12_current_services_fy2027.pdf", "ap_1_assumptions_fy2027.pdf", "ap_11_borrowing_fy2027.pdf"):
+    DOWNLOADS["omb/" + name] = OMB + name
+# The Mid-Session Review of September 2026, which updates no path for receipts, deficits or interest.
+DOWNLOADS["omb/MSR_2027.pdf"] = "https://www.whitehouse.gov/wp-content/uploads/2026/09/MSR_2027.pdf"
+# Treasury Fiscal Data API: Monthly Statement of the Public Debt, marketable securities by CUSIP at the end of fiscal
+# year 2025 (maturity profile), and the debt subject to limit at the latest month-end.
+FISCAL = "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/debt/mspd/"
+DOWNLOADS["treasury/mspd_table_3_market_2025-09-30.csv"] = (
+    FISCAL + "mspd_table_3_market?filter=record_date:eq:2025-09-30&page[size]=10000&format=csv")
+DOWNLOADS["treasury/mspd_table_2_2026-10-31.csv"] = (
+    FISCAL + "mspd_table_2?filter=record_date:eq:2026-10-31&page[size]=10000&format=csv")
+# Treasury, daily par yield curve rates, one file per calendar year: 2026 for the market rate (the cached copy runs to
+# November 20, 2026), 1991-2000 and 2012-2021 for two presets.
+for year in [2026] + list(range(1991, 2001)) + list(range(2012, 2022)):
+    DOWNLOADS["treasury/yield_curve_%d.csv" % year] = (
+        "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/%d/all"
+        "?type=daily_treasury_yield_curve&field_tdr_date_value=%d&page&_format=csv" % (year, year))
+DOWNLOADS["treasury/executive-summary-2025.pdf"] = "https://fiscal.treasury.gov/system/files/2026-03/executive-summary-2025.pdf"
+# All public laws of the 119th Congress as one archive (always the latest; the cached copy was fetched on November 21,
+# 2026 and runs to P.L. 119-142): debt.py checks that no law after P.L. 119-103 appropriates for fiscal year 2027.
+DOWNLOADS["govinfo/PLAW-119-public.zip"] = "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119-public.zip"
+# Federal Reserve, Summary of Economic Projections of September 16, 2026: longer-run growth (the growth default).
+DOWNLOADS["fed/fomcprojtabl20260916.htm"] = "https://www.federalreserve.gov/monetarypolicy/fomcprojtabl20260916.htm"
 
 
 def main():

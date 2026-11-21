@@ -10,6 +10,7 @@
     "de"
   ],
   "baseYear": 2025,
+  "baseYearStart": "2024-10-01",
   "baseYearLabel": {
     "en": "fiscal year 2025 (Oct 2024 to Sep 2025)",
     "de": "Haushaltsjahr 2025 (Okt. 2024 bis Sept. 2025)"

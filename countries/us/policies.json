@@ -589,7 +589,17 @@
         "ssa_trustees_2026",
         "hr_9519_2026",
         "irs_pub15_2025"
-      ]
+      ],
+      "timing": {
+        "from": "2027-01-01",
+        "note": {
+          "en": "H.R. 9519 ends the cap for wages paid in calendar years after 2026 and for self-employment income of taxable years beginning after December 31, 2026 (section 201(d)). Measures act in the calculation from FY 2028 at the earliest; the change counts in full from then.",
+          "de": "H.R. 9519 hebt die Grenze für Löhne auf, die in Kalenderjahren nach 2026 gezahlt werden, und für Einkommen aus selbständiger Arbeit in Steuerjahren, die nach dem 31. Dezember 2026 beginnen (Abschnitt 201(d)). Maßnahmen wirken in der Rechnung frühestens ab dem Haushaltsjahr 2028; die Änderung zählt von da an voll."
+        },
+        "sources": [
+          "hr_9519_2026"
+        ]
+      }
     },
     {
       "id": "corporate_tax_rate",
@@ -688,7 +698,17 @@
         "omb_pbd_receipts_fy2027",
         "plaw_119_21",
         "treasury_mts_2026_09"
-      ]
+      ],
+      "timing": {
+        "from": "2028-01-01",
+        "note": {
+          "en": "The Treasury's proposal of March 2024 applied to taxable years beginning after December 31, 2023, the January after it was made; that date has passed. Its estimate put 61% of the full yearly amount into the first fiscal year ($74.6B in FY 2024 against $122.5B in FY 2025). The calculation lets the rate change on January 1, 2028, the first January in FY 2028, the first year in which measures act. FY 2028 then has three quarters of the yearly amount (274 of its 366 days).",
+          "de": "Der Vorschlag des Finanzministeriums vom März 2024 galt für Steuerjahre, die nach dem 31. Dezember 2023 beginnen, also ab dem Januar nach dem Vorschlag; dieser Tag ist vorbei. Seine Schätzung setzte im ersten Haushaltsjahr 61 % des vollen Jahresbetrags an (74,6 Mrd. Dollar im Haushaltsjahr 2024 gegenüber 122,5 Mrd. Dollar 2025). Die Rechnung lässt den Satz am 1. Januar 2028 wechseln, dem ersten Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. Das Haushaltsjahr 2028 hat dann drei Viertel des Jahresbetrags (274 seiner 366 Tage)."
+        },
+        "sources": [
+          "treasury_greenbook_fy2025"
+        ]
+      }
     },
     {
       "id": "tariff_all_imports",
@@ -2103,7 +2123,17 @@
         "hr_1040_2025",
         "s_2716_2025",
         "plaw_119_21"
-      ]
+      ],
+      "timing": {
+        "from": "2028-01-01",
+        "note": {
+          "en": "H.R. 1040 ends the tax for taxable years beginning after the day it is enacted (section 2(a)), so from the first January 1 after the law. The calculation lets it end on January 1, 2028, the first January in FY 2028, the first year in which measures act. FY 2028 then has three quarters of the yearly amount (274 of its 366 days).",
+          "de": "H.R. 1040 streicht die Steuer für Steuerjahre, die nach dem Tag des Inkrafttretens beginnen (Abschnitt 2(a)), also ab dem ersten 1. Januar nach dem Gesetz. Die Rechnung lässt sie am 1. Januar 2028 enden, dem ersten Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. Das Haushaltsjahr 2028 hat dann drei Viertel des Jahresbetrags (274 seiner 366 Tage)."
+        },
+        "sources": [
+          "hr_1040_2025"
+        ]
+      }
     },
     {
       "id": "tariff_rebate_checks",
@@ -2334,7 +2364,17 @@
         "hr_247_2025",
         "plaw_117_169",
         "plaw_119_21"
-      ]
+      ],
+      "timing": {
+        "from": "2026-01-01",
+        "note": {
+          "en": "The enhancement ended on January 1, 2026: the Inflation Reduction Act extended it only to years before 2026 (Public Law 117-169, section 12001). Measures act in the calculation from FY 2028 at the earliest. So in FY 2026 and FY 2027 the path with this measure still has the enhanced credits of the 2025 budget, like the path without it, and the end of the enhancement counts in full from FY 2028.",
+          "de": "Die Erhöhung endete am 1. Januar 2026: Der Inflation Reduction Act verlängerte sie nur für die Jahre vor 2026 (Public Law 117-169, Abschnitt 12001). Maßnahmen wirken in der Rechnung frühestens ab dem Haushaltsjahr 2028. In den Haushaltsjahren 2026 und 2027 enthält der Pfad mit dieser Maßnahme deshalb noch die erhöhten Zuschüsse des Haushalts 2025, wie der Pfad ohne sie, und das Ende der Erhöhung zählt ab dem Haushaltsjahr 2028 voll."
+        },
+        "sources": [
+          "plaw_117_169"
+        ]
+      }
     },
     {
       "id": "wealth_tax",
@@ -2467,7 +2507,17 @@
       "sources": [
         "s_4246_2026",
         "fed_dfa"
-      ]
+      ],
+      "timing": {
+        "from": "2027-01-01",
+        "note": {
+          "en": "S. 4246 applies to calendar years beginning after December 31, 2026 (section 2(f)), so the tax would first fall on net worth in 2027. Measures act in the calculation from FY 2028 at the earliest; the tax counts in full from then.",
+          "de": "S. 4246 gilt für Kalenderjahre, die nach dem 31. Dezember 2026 beginnen (Abschnitt 2(f)); die Steuer fiele also erstmals auf das Vermögen im Jahr 2027 an. Maßnahmen wirken in der Rechnung frühestens ab dem Haushaltsjahr 2028; die Steuer zählt von da an voll."
+        },
+        "sources": [
+          "s_4246_2026"
+        ]
+      }
     },
     {
       "id": "top_income_tax_rate",
@@ -2560,7 +2610,17 @@
         "irs_soi_2023_t35_t36",
         "irs_rp_2022_38",
         "plaw_119_21"
-      ]
+      ],
+      "timing": {
+        "from": "2028-01-01",
+        "note": {
+          "en": "H.R. 4280 applies to taxable years beginning after December 31, 2025, the January after it was introduced (section 2(h)); that date has passed. Income tax rates change at the start of a tax year, for individuals January 1. The calculation lets the rate change on January 1, 2028, the first January in FY 2028, the first year in which measures act. FY 2028 then has three quarters of the yearly amount (274 of its 366 days).",
+          "de": "H.R. 4280 gilt für Steuerjahre, die nach dem 31. Dezember 2025 beginnen, also ab dem Januar nach seiner Einbringung (Abschnitt 2(h)); dieser Tag ist vorbei. Einkommensteuersätze ändern sich zu Beginn eines Steuerjahres, für Privatpersonen am 1. Januar. Die Rechnung lässt den Satz am 1. Januar 2028 wechseln, dem ersten Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. Das Haushaltsjahr 2028 hat dann drei Viertel des Jahresbetrags (274 seiner 366 Tage)."
+        },
+        "sources": [
+          "hr_4280_2025"
+        ]
+      }
     },
     {
       "id": "snap_state_cost_share",
@@ -2657,7 +2717,19 @@
         "fns_snap_per_fy2025",
         "hr_7975_2026",
         "s_5526_2026"
-      ]
+      ],
+      "timing": {
+        "from": "2027-10-01",
+        "note": {
+          "en": "The states' share applies from FY 2028 (Public Law 119-21, section 10105), the first year in which measures act. States whose payment error rate times 1.5 was 20% or more in FY 2025 start in FY 2029: Alaska, Delaware, the District of Columbia, Georgia, Illinois, New Mexico and Oregon, with $11.5B of the $95.8B of benefits and $1.7B of the $11.1B that the law's shares save. States that meet the same test with their FY 2026 rate start in FY 2030. The calculation counts the share in full from FY 2028, so it overstates FY 2028 by about 15%; a start in steps cannot be set here.",
+          "de": "Der Anteil der Bundesstaaten gilt ab dem Haushaltsjahr 2028 (Public Law 119-21, Abschnitt 10105), dem ersten Jahr, in dem Maßnahmen wirken. Bundesstaaten, deren Fehlerquote im Haushaltsjahr 2025 mal 1,5 mindestens 20 % ergab, beginnen im Haushaltsjahr 2029: Alaska, Delaware, der District of Columbia, Georgia, Illinois, New Mexico und Oregon, mit 11,5 Mrd. Dollar der 95,8 Mrd. Dollar an Leistungen und 1,7 Mrd. Dollar der 11,1 Mrd. Dollar, die die Anteile des Gesetzes einsparen. Wer diese Schwelle mit der Quote von 2026 erreicht, beginnt im Haushaltsjahr 2030. Die Rechnung zählt den Anteil ab dem Haushaltsjahr 2028 voll und überschätzt dieses Jahr deshalb um rund 15 %; ein Beginn in Stufen lässt sich hier nicht abbilden."
+        },
+        "sources": [
+          "plaw_119_21",
+          "fns_snap_per_fy2025",
+          "fns_snap_fy2025"
+        ]
+      }
     }
   ]
 }

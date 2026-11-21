@@ -44,25 +44,25 @@
     }
   },
   "treasury_mts_2025_09": {
-    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2025 (fiscal year 2025), Tables 1, 3, 4, 5 and 9",
+    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2025 (fiscal year 2025), Tables 1, 3, 4, 5, 6 and 9",
     "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
     "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
     "accessed": "2026-11-20",
     "year": 2025,
     "note": {
-      "en": "Retrieved through the Fiscal Data API, record date 2025-09-30. Fiscal year 2025: receipts 5,234.6, outlays 7,010.0 and deficit 1,775.4 billion dollars; Table 4 gives receipts before and after refunds. Table 5: Immigration and Customs Enforcement 10.7 billion, U.S. Customs and Border Protection 21.2 billion. Table 9 (prior year): corporation income taxes 529.9 billion in fiscal year 2024.",
-      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2025. Haushaltsjahr 2025: Einnahmen 5.234,6, Ausgaben 7.010,0 und Defizit 1.775,4 Mrd. Dollar; Tabelle 4 zeigt die Einnahmen vor und nach Erstattungen. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 10,7 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 21,2 Mrd. Dollar. Tabelle 9 (Vorjahr): Körperschaftsteuer 529,9 Mrd. Dollar im Haushaltsjahr 2024."
+      "en": "Retrieved through the Fiscal Data API, record date 2025-09-30. Fiscal year 2025: receipts 5,234.6, outlays 7,010.0 and deficit 1,775.4 billion dollars; Table 4 gives receipts before and after refunds. Table 5: Immigration and Customs Enforcement 10.7 billion, U.S. Customs and Border Protection 21.2 billion. Table 9 (prior year): corporation income taxes 529.9 billion in fiscal year 2024. Table 6: debt held by the public at face value 30,277.8 billion dollars at the end of the year.",
+      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2025. Haushaltsjahr 2025: Einnahmen 5.234,6, Ausgaben 7.010,0 und Defizit 1.775,4 Mrd. Dollar; Tabelle 4 zeigt die Einnahmen vor und nach Erstattungen. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 10,7 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 21,2 Mrd. Dollar. Tabelle 9 (Vorjahr): Körperschaftsteuer 529,9 Mrd. Dollar im Haushaltsjahr 2024. Tabelle 6: Schulden bei Dritten zum Nennwert 30.277,8 Mrd. Dollar am Jahresende."
     }
   },
   "treasury_mts_2026_09": {
-    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2026 (fiscal year 2026), Tables 1, 3, 4, 5 and 9",
+    "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2026 (fiscal year 2026), Tables 1, 3, 4, 5, 6 and 9",
     "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
     "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
     "accessed": "2026-11-20",
     "year": 2026,
     "note": {
-      "en": "Retrieved through the Fiscal Data API, record date 2026-09-30. Fiscal year 2026: receipts 5,403.3, outlays 7,395.8 and deficit 1,992.5 billion dollars. Table 4: customs duties 317.8 billion collected, 144.6 billion refunded. Table 5: Immigration and Customs Enforcement 22.4 billion, U.S. Customs and Border Protection 28.9 billion.",
-      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2026. Haushaltsjahr 2026: Einnahmen 5.403,3, Ausgaben 7.395,8 und Defizit 1.992,5 Mrd. Dollar. Tabelle 4: Zölle 317,8 Mrd. Dollar erhoben, 144,6 Mrd. Dollar erstattet. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 22,4 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 28,9 Mrd. Dollar."
+      "en": "Retrieved through the Fiscal Data API, record date 2026-09-30. Fiscal year 2026: receipts 5,403.3, outlays 7,395.8 and deficit 1,992.5 billion dollars. Table 4: customs duties 317.8 billion collected, 144.6 billion refunded. Table 5: Immigration and Customs Enforcement 22.4 billion, U.S. Customs and Border Protection 28.9 billion. Table 6: borrowing from the public 2,073.0 billion dollars in the year, 32,245.4 billion at its end (net of premium and discount). Table 9: net interest 1,051.8 billion.",
+      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2026. Haushaltsjahr 2026: Einnahmen 5.403,3, Ausgaben 7.395,8 und Defizit 1.992,5 Mrd. Dollar. Tabelle 4: Zölle 317,8 Mrd. Dollar erhoben, 144,6 Mrd. Dollar erstattet. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 22,4 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 28,9 Mrd. Dollar. Tabelle 6: Kreditaufnahme beim Publikum 2.073,0 Mrd. Dollar im Jahr, 32.245,4 Mrd. Dollar an seinem Ende (nach Auf- und Abschlägen). Tabelle 9: Nettozinsen 1.051,8 Mrd. Dollar."
     }
   },
   "census_popest_v2025": {
@@ -657,6 +657,127 @@
     "note": {
       "en": "Section 4102: the State cost share starts in fiscal year 2029 instead of 2028, and from fiscal year 2031 a State with an error rate of 10% or more pays 20%.",
       "de": "Abschnitt 4102: Der Anteil der Bundesstaaten beginnt im Haushaltsjahr 2029 statt 2028, und ab 2031 zahlt ein Bundesstaat mit einer Fehlerquote von 10 % oder mehr 20 %."
+    }
+  },
+  "omb_hist_debt_fy2027": {
+    "title": "Historical Tables, Budget of the U.S. Government, Fiscal Year 2027: Tables 3.1 and 7.1",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/omb/information-resources/budget/historical-tables/",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Table 7.1 (hist07z1_fy2027.xlsx), federal debt at the end of each fiscal year since 1940: at the end of fiscal year 2025 debt held by the public 30,167,224 million dollars (99.5% of GDP), of which the Federal Reserve held 4,196,345 million; held by federal government accounts 7,207,740 million; gross federal debt 37,374,964 million. In 1946, debt held by the public was 106.1% of GDP. Table 3.1 (hist03z1_fy2027.xlsx), outlays by function since 1940 and the Budget's estimates to 2031: net interest 970,065 and national defense 916,140 million dollars in fiscal year 2025.",
+      "de": "Tabelle 7.1 (hist07z1_fy2027.xlsx), Schulden des Bundes am Ende jedes Haushaltsjahres seit 1940: Ende des Haushaltsjahres 2025 Schulden bei Dritten (debt held by the public) von 30.167.224 Mio. Dollar (99,5 % des BIP), davon bei der Federal Reserve 4.196.345 Mio.; bei Konten des Bundes 7.207.740 Mio.; Bruttoschuld 37.374.964 Mio. 1946 betrugen die Schulden bei Dritten 106,1 % des BIP. Tabelle 3.1 (hist03z1_fy2027.xlsx), Ausgaben nach Funktionen seit 1940 und Schätzungen des Haushaltsentwurfs bis 2031: Nettozinsen 970.065 und Verteidigung 916.140 Mio. Dollar im Haushaltsjahr 2025."
+    }
+  },
+  "omb_ap_current_services_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 12 (Current Services Estimates), with Tables 12-6 to 12-9",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_12_current_services_fy2027.pdf",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "The baseline under current law for fiscal years 2026 to 2036: Table 12-4, receipts by source (total 5,475.7 billion dollars in 2026 and 9,846.1 billion in 2036; customs duties 406.1 and 681.3 billion); Table 12-6 (ap_12_tables_fy2027.xlsx), outlays by function, among them net interest; Table 12-2, economic assumptions by fiscal year (GDP, 91-day bills and ten-year notes). Page 131: the economic assumptions \"were developed on the assumption that the Administration's budget proposals will be enacted\"; page 133: baseline and Budget use the same economic assumptions.",
+      "de": "Die Fortschreibung nach geltendem Recht für die Haushaltsjahre 2026 bis 2036: Tabelle 12-4, Einnahmen nach Quellen (insgesamt 5.475,7 Mrd. Dollar 2026 und 9.846,1 Mrd. Dollar 2036; Zölle 406,1 und 681,3 Mrd. Dollar); Tabelle 12-6 (ap_12_tables_fy2027.xlsx), Ausgaben nach Funktionen, darunter die Nettozinsen; Tabelle 12-2, Wirtschaftsannahmen nach Haushaltsjahren (BIP, Schatzwechsel mit 91 Tagen, zehnjährige Anleihen). Seite 131: Die Wirtschaftsannahmen wurden unter der Annahme entwickelt, dass die Vorschläge des Haushaltsentwurfs Gesetz werden; Seite 133: Fortschreibung und Haushaltsentwurf verwenden dieselben Wirtschaftsannahmen."
+    }
+  },
+  "omb_ap_assumptions_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 1 (Economic Assumptions)",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_1_assumptions_fy2027.pdf",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Table 1-2: the Budget's economic assumptions beside those of the Congressional Budget Office, the Blue Chip panel and the Federal Reserve (real GDP 3.5% in 2026 and 2.9% to 3.1% later, against 1.7% to 2.2% in the other forecasts; ten-year notes 3.3% from 2030). Table 1-3, sensitivity of the budget: with interest rates one percentage point higher from 2026, outlays rise by 44.1 billion dollars in fiscal year 2026, 142.4 billion in 2027, 318.1 billion in 2030 and 590.6 billion in 2036.",
+      "de": "Tabelle 1-2: die Wirtschaftsannahmen des Haushaltsentwurfs neben denen des Congressional Budget Office, des Blue-Chip-Panels und der Federal Reserve (reales BIP 3,5 % 2026 und danach 2,9 bis 3,1 %, gegenüber 1,7 bis 2,2 % in den anderen Prognosen; zehnjährige Anleihen 3,3 % ab 2030). Tabelle 1-3, Empfindlichkeit des Haushalts: Liegen die Zinsen ab 2026 einen Prozentpunkt höher, steigen die Ausgaben um 44,1 Mrd. Dollar im Haushaltsjahr 2026, 142,4 Mrd. 2027, 318,1 Mrd. 2030 und 590,6 Mrd. 2036."
+    }
+  },
+  "omb_ap_borrowing_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 11 (Federal Borrowing and Debt), with Tables 11-2 to 11-5",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_11_borrowing_fy2027.pdf",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Page 124: \"The average maturity of outstanding debt was 71 months at the end of 2025.\" Table 11-2 (ap_11_tables_fy2027.xlsx): other transactions affecting borrowing from the public, 198.7 billion dollars in fiscal year 2025 (192.4 billion of it net disbursements of direct loan financing accounts), estimates of 79.0 billion for 2026 and 63.0 billion for 2027.",
+      "de": "Seite 124: Die durchschnittliche Laufzeit der Schulden betrug Ende 2025 71 Monate. Tabelle 11-2 (ap_11_tables_fy2027.xlsx): übrige Vorgänge, die die Kreditaufnahme beim Publikum verändern, 198,7 Mrd. Dollar im Haushaltsjahr 2025 (davon 192,4 Mrd. Nettoauszahlungen der Finanzierungskonten für Direktkredite), geschätzt 79,0 Mrd. für 2026 und 63,0 Mrd. für 2027."
+    }
+  },
+  "omb_msr_fy2027": {
+    "title": "Mid-Session Review, Budget of the U.S. Government, Fiscal Year 2027 (September 4, 2026)",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/09/MSR_2027.pdf",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Contains only Table S-1 (mandatory outlays under current law to 2031) and Table S-2; no receipts, deficits, interest or economic assumptions. Page 1: outlays for 2026 are projected lower than in the Budget, partially offset by lower receipts, partly from customs duties.",
+      "de": "Enthält nur Tabelle S-1 (gesetzlich festgelegte Ausgaben nach geltendem Recht bis 2031) und Tabelle S-2; keine Einnahmen, Defizite, Zinsen oder Wirtschaftsannahmen. Seite 1: Die Ausgaben 2026 werden niedriger erwartet als im Haushaltsentwurf, teils ausgeglichen durch geringere Einnahmen, unter anderem aus Zöllen."
+    }
+  },
+  "treasury_mspd_2025_09": {
+    "title": "Monthly Statement of the Public Debt of the United States, September 30, 2025, Table III: detail of marketable Treasury securities outstanding",
+    "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
+    "url": "https://fiscaldata.treasury.gov/datasets/monthly-statement-public-debt/",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Retrieved through the Fiscal Data API (mspd_table_3_market), record date 2025-09-30: each security with issue date, maturity date and amount outstanding; marketable debt 29,714.7 billion dollars, of it bills 6,397.0 billion and inflation-protected securities 2,088.0 billion. Average time to maturity (own calculation, weighted by amount): 5.91 years.",
+      "de": "Abgerufen über die Fiscal Data API (mspd_table_3_market), Stichtag 30. September 2025: jedes Wertpapier mit Ausgabedatum, Fälligkeit und ausstehendem Betrag; handelbare Schulden 29.714,7 Mrd. Dollar, davon Schatzwechsel 6.397,0 Mrd. und inflationsgeschützte Anleihen 2.088,0 Mrd. Durchschnittliche Restlaufzeit (eigene Rechnung, nach Beträgen gewichtet): 5,91 Jahre."
+    }
+  },
+  "treasury_mspd_2026_10": {
+    "title": "Monthly Statement of the Public Debt of the United States, October 31, 2026, Table II: statutory debt limit",
+    "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
+    "url": "https://fiscaldata.treasury.gov/datasets/monthly-statement-public-debt/",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Retrieved through the Fiscal Data API (mspd_table_2), record date 2026-10-31: total public debt subject to limit 40,327,074.7 million dollars, statutory debt limit 41,103,995.7 million, balance 776,921.0 million.",
+      "de": "Abgerufen über die Fiscal Data API (mspd_table_2), Stichtag 31. Oktober 2026: der Obergrenze unterliegende Schulden 40.327.074,7 Mio. Dollar, gesetzliche Schuldenobergrenze 41.103.995,7 Mio., Abstand 776.921,0 Mio."
+    }
+  },
+  "treasury_yield_curve": {
+    "title": "Daily Treasury Par Yield Curve Rates",
+    "publisher": "U.S. Department of the Treasury",
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "One CSV file per calendar year: 2026 through November 20, 1991 to 2000 and 2012 to 2021. On November 20, 2026: one month 4.19%, three months 4.32%, one year 4.51%, two years 4.63%, five years 4.71%, ten years 4.92%, twenty years 5.34%, thirty years 5.31%.",
+      "de": "Eine CSV-Datei je Kalenderjahr: 2026 bis zum 20. November, 1991 bis 2000 und 2012 bis 2021. Am 20. November 2026: ein Monat 4,19 %, drei Monate 4,32 %, ein Jahr 4,51 %, zwei Jahre 4,63 %, fünf Jahre 4,71 %, zehn Jahre 4,92 %, zwanzig Jahre 5,34 %, dreißig Jahre 5,31 %."
+    }
+  },
+  "treasury_fr_2025": {
+    "title": "Executive Summary to the FY 2025 Financial Report of the United States Government (March 2026)",
+    "publisher": "U.S. Department of the Treasury, Bureau of the Fiscal Service",
+    "url": "https://fiscal.treasury.gov/system/files/2026-03/executive-summary-2025.pdf",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Pages 8 and 9, long-term projections under current policy: primary deficit 2.7% of GDP in 2025, 3.3% on average over the next ten years, a peak of 4.2% in 2046 and 3.1% in 2100; debt held by the public 99% of GDP at the end of fiscal year 2025 and 576% in 2100.",
+      "de": "Seiten 8 und 9, Langfristprojektion nach geltender Politik: Primärdefizit 2,7 % des BIP 2025, im Mittel 3,3 % in den nächsten zehn Jahren, ein Höchststand von 4,2 % 2046 und 3,1 % 2100; Schulden bei Dritten 99 % des BIP Ende des Haushaltsjahres 2025 und 576 % 2100."
+    }
+  },
+  "fed_sep_2026_09": {
+    "title": "Summary of Economic Projections, September 16, 2026, Table 1",
+    "publisher": "Board of Governors of the Federal Reserve System",
+    "url": "https://www.federalreserve.gov/monetarypolicy/fomcprojtabl20260916.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Median projections of the Federal Reserve Board members and Reserve Bank presidents for the longer run: real GDP growth 2.0%, PCE inflation 2.0%, federal funds rate 3.2%.",
+      "de": "Median der Projektionen der Mitglieder des Board und der Präsidenten der regionalen Notenbanken für die lange Frist: reales BIP-Wachstum 2,0 %, PCE-Inflation 2,0 %, Leitzins 3,2 %."
+    }
+  },
+  "govinfo_plaw_119": {
+    "title": "Public and Private Laws of the 119th Congress, bulk data (PLAW-119-public.zip)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "The public laws through P.L. 119-142 of November 10, 2026. None after P.L. 119-103, the continuing resolution, makes appropriations for fiscal year 2027.",
+      "de": "Die Gesetze bis P.L. 119-142 vom 10. November 2026. Keines nach P.L. 119-103, dem Übergangshaushalt, bewilligt Mittel für das Haushaltsjahr 2027."
     }
   }
 }

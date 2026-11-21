@@ -1,0 +1,458 @@
+{
+  "stock": {
+    "value": 30167224000000,
+    "quality": "official",
+    "sources": [
+      "omb_hist_debt_fy2027",
+      "treasury_mts_2025_09",
+      "plaw_119_21",
+      "treasury_mspd_2026_10"
+    ],
+    "note": {
+      "en": "Debt held by the public at the end of FY 2025 (September 30, 2025): $30.17T or 99.5% of GDP (OMB, Historical Table 7.1). It is the debt that deficits add to: Treasury securities held outside the federal government, the Federal Reserve's $4.20T included, valued at their sale price plus the discount amortized since, the measure OMB uses with net interest. Not included are the $7.21T held by the Social Security trust funds and other federal accounts, whose interest the government pays to itself; with them, gross federal debt was $37.37T (123.3% of GDP). Treasury's statement at face value puts debt held by the public at $30.28T. The debt limit applies to nearly all gross debt: the July 2025 law raised it by $5.00T to $41.10T, and at the end of October 2026 the debt subject to it was $40.33T, $776.9B below.",
+      "de": "Schulden des Bundes bei Dritten (debt held by the public) Ende des Haushaltsjahres 2025 (30. September 2025): 30,17 Bio. Dollar oder 99,5 % des BIP (OMB, Historical Table 7.1). Zu diesen Schulden kommen die Defizite hinzu: Staatsanleihen in der Hand von Gläubigern außerhalb des Bundes, die 4,20 Bio. Dollar der Federal Reserve eingeschlossen, bewertet zum Ausgabekurs zuzüglich des seither aufgelösten Abschlags, wie die OMB sie den Nettozinsen gegenüberstellt. Nicht enthalten sind die 7,21 Bio. Dollar, die die Treuhandfonds der Social Security und andere Konten des Bundes halten; deren Zinsen zahlt der Bund sich selbst. Mit ihnen betrug die Bruttoschuld des Bundes 37,37 Bio. Dollar (123,3 % des BIP). Zum Nennwert weist das Finanzministerium die Schulden bei Dritten mit 30,28 Bio. Dollar aus. Die Schuldenobergrenze gilt für fast die ganze Bruttoschuld: Das Gesetz vom Juli 2025 hob sie um 5,00 Bio. Dollar auf 41,10 Bio. Dollar an, und Ende Oktober 2026 lagen die ihr unterliegenden Schulden bei 40,33 Bio. Dollar, 776,9 Mrd. Dollar darunter."
+    }
+  },
+  "interest": {
+    "value": 970065000000,
+    "node": "exp.net_interest",
+    "quality": "official",
+    "sources": [
+      "omb_hist_debt_fy2027",
+      "omb_hist_fy2027"
+    ],
+    "note": {
+      "en": "Net interest in FY 2025 (OMB function 900): $970.1B or 3.20% of GDP. It is the interest on Treasury securities ($1.22T), less the $187.6B credited to federal trust funds, which stays within the government, and less $58.0B of other interest and investment income the government receives, mostly from its loan accounts. The projection starts from the budget item net interest, the same amount, so that the first year matches the budget exactly; over debt held by the public it gives a starting rate of 3.22%. The Federal Reserve pays most of the interest it earns on Treasury securities back to the Treasury, which the budget counts as revenue ($5.5B in FY 2025); in the projection that revenue keeps its share of GDP and does not follow rates.",
+      "de": "Nettozinsen im Haushaltsjahr 2025 (Funktion 900 der OMB): 970,1 Mrd. Dollar oder 3,20 % des BIP. Das sind die Zinsen auf Staatsanleihen (1,22 Bio. Dollar), abzüglich der 187,6 Mrd. Dollar, die den Treuhandfonds des Bundes gutgeschrieben werden und innerhalb des Staates bleiben, und abzüglich 58,0 Mrd. Dollar übriger Zins- und Kapitalerträge des Bundes, vor allem aus seinen Kreditkonten. Die Projektion beginnt mit dem Haushaltsposten Nettozinsen, demselben Betrag, damit das erste Jahr genau zum Haushalt passt; bezogen auf die Schulden bei Dritten ergibt das einen Anfangszins von 3,22 %. Die Federal Reserve führt den größten Teil der Zinsen, die sie auf Staatsanleihen erhält, an das Finanzministerium ab; der Haushalt zählt das als Einnahme (5,5 Mrd. Dollar im Haushaltsjahr 2025). In der Projektion behält diese Einnahme ihren Anteil am BIP und folgt den Zinsen nicht."
+    }
+  },
+  "accounts": "budget",
+  "refinancing": {
+    "share": 0.24,
+    "averageMaturity": 5.91,
+    "quality": "derived",
+    "sources": [
+      "omb_ap_assumptions_fy2027",
+      "treasury_mspd_2025_09",
+      "omb_ap_borrowing_fy2027"
+    ],
+    "note": {
+      "en": "A share fitted to OMB's estimates, not one divided by the average time to maturity (5.91 years at the end of FY 2025, which would give 16.9%): 33.9% of marketable debt took a new rate within the following year, mostly bills, which roll over several times a year, while the rest keeps its rate for years. At 24%, run on OMB's own path and rates, this calculation reproduces OMB's estimate of how much more interest the government would pay if all rates stayed one point higher from 2026, to within 7% in FY 2027 and 3% from FY 2028 to FY 2036 (Analytical Perspectives, Table 1-3). Maturities: Treasury, Monthly Statement of the Public Debt, September 30, 2025.",
+      "de": "Ein an die Schätzungen der OMB angepasster Anteil, nicht eins geteilt durch die durchschnittliche Restlaufzeit (Ende des Haushaltsjahres 2025 5,91 Jahre, das ergäbe 16,9 %): 33,9 % der handelbaren Schulden bekamen im folgenden Jahr einen neuen Zins, vor allem kurzfristige Schatzwechsel, die mehrmals im Jahr erneuert werden, während der Rest seinen Zins über Jahre behält. Mit 24 % gibt diese Rechnung, auf dem Pfad und mit den Zinsen der OMB, deren Schätzung wieder, wie viel mehr Zinsen der Bund zahlen würde, wenn alle Zinsen ab 2026 dauerhaft einen Prozentpunkt höher lägen: auf 7 % genau im Haushaltsjahr 2027 und auf 3 % genau in den Haushaltsjahren 2028 bis 2036 (Analytical Perspectives, Tabelle 1-3). Laufzeiten: Finanzministerium, Monatsausweis der Staatsschuld zum 30. September 2025."
+    }
+  },
+  "assumptions": [
+    {
+      "id": "market_rate",
+      "type": "number",
+      "label": {
+        "en": "Interest rate on new debt",
+        "de": "Zins für neue Schulden"
+      },
+      "unit": "percent",
+      "min": -1,
+      "max": 10,
+      "step": 0.1,
+      "default": 4.8,
+      "note": {
+        "en": "Default: Treasury's par yields on November 20, 2026, weighted by how the marketable debt outstanding at the end of FY 2025 was spread over terms at issue: 4.8%. Bills, 22% of that debt, yielded 4.19% to 4.51% (one month to one year), ten-year notes 4.92%, thirty-year bonds 5.31%; floating-rate notes count at the three-month yield, inflation-protected securities at the nominal yield of their term. All new and refinanced debt pays this one rate, which does not react to the level of debt. OMB's paths assume 3.1% on 91-day bills and 3.3% on ten-year notes from 2030.",
+        "de": "Vorgabe: Renditen von US-Staatsanleihen am 20. November 2026 (Par Yield Curve des Finanzministeriums), gewichtet danach, wie sich die handelbaren Schulden Ende des Haushaltsjahres 2025 auf die ursprünglichen Laufzeiten verteilten: 4,8 %. Kurzfristige Schatzwechsel, 22 % dieser Schulden, rentierten mit 4,19 % bis 4,51 % (ein Monat bis ein Jahr), zehnjährige Anleihen mit 4,92 %, dreißigjährige mit 5,31 %; variabel verzinsliche Anleihen zählen mit dem Dreimonatszins, inflationsgeschützte mit dem nominalen Zins ihrer Laufzeit. Für alle neuen und umgeschuldeten Kredite gilt dieser eine Zins; er reagiert nicht auf die Höhe der Schulden. Die Pfade der OMB rechnen mit 3,1 % für Schatzwechsel mit 91 Tagen Laufzeit und 3,3 % für zehnjährige Anleihen ab 2030."
+      },
+      "sources": [
+        "treasury_yield_curve",
+        "treasury_mspd_2025_09",
+        "omb_ap_current_services_fy2027"
+      ]
+    },
+    {
+      "id": "growth",
+      "type": "number",
+      "label": {
+        "en": "Nominal economic growth per year",
+        "de": "Nominales Wirtschaftswachstum pro Jahr"
+      },
+      "unit": "percent",
+      "min": -2,
+      "max": 8,
+      "step": 0.1,
+      "default": 4.0,
+      "note": {
+        "en": "Default 4.0%: real growth in the longer run of 2.0% a year, the median of the Federal Reserve's policymakers in September 2026, plus inflation at the Federal Reserve's target of 2%. The economic assumptions of OMB's paths, which OMB developed on the assumption that the President's proposals are enacted, expect 4.9% a year by fiscal year from 2032 to 2036, on real growth of 2.9%. When the calculation follows one of OMB's paths, the path's growth applies up to its last year and this value only after that.",
+        "de": "Vorgabe 4,0 %: langfristiges reales Wachstum von 2,0 % im Jahr, der Median der geldpolitischen Entscheider der Federal Reserve vom September 2026, plus Inflation in Höhe ihres Ziels von 2 %. Die Wirtschaftsannahmen der Pfade der OMB, die die OMB unter der Annahme entwickelt hat, dass die Vorschläge des Präsidenten Gesetz werden, rechnen in den Haushaltsjahren 2032 bis 2036 mit 4,9 % im Jahr bei realem Wachstum von 2,9 %. Folgt die Rechnung einem Pfad der OMB, gilt bis zu dessen letztem Jahr dessen Wachstum und dieser Wert erst danach."
+      },
+      "sources": [
+        "fed_sep_2026_09",
+        "omb_ap_current_services_fy2027"
+      ]
+    },
+    {
+      "id": "horizon",
+      "type": "number",
+      "label": {
+        "en": "Years ahead",
+        "de": "Zeitraum"
+      },
+      "unit": "years",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "default": 30,
+      "note": {
+        "en": "How many fiscal years after FY 2025 are calculated.",
+        "de": "Wie viele Haushaltsjahre nach dem Haushaltsjahr 2025 berechnet werden."
+      }
+    },
+    {
+      "id": "drift",
+      "type": "number",
+      "label": {
+        "en": "Yearly change in the budget before interest",
+        "de": "Jährliche Veränderung des Haushalts ohne Zinsen"
+      },
+      "unit": "percent_gdp",
+      "min": -0.5,
+      "max": 0.5,
+      "step": 0.01,
+      "default": 0,
+      "note": {
+        "en": "The primary balance is the budget balance before interest. At 0 it keeps its share of GDP: that of FY 2025, −2.65%, or, when the calculation follows one of OMB's paths, that of the path's last year (−0.86% in FY 2031 on the President's Budget, −0.14% in FY 2036 on the baseline); then the change counts only after that year. A negative value stands for costs that grow faster than the economy, such as Social Security and Medicare as the population ages: −0.1 means the primary balance worsens by 0.1% of GDP every year, by 3% after 30 years. Treasury's long-term projection under current policy corresponds to about −0.07 until 2046.",
+        "de": "Der Primärsaldo ist der Haushaltssaldo ohne Zinsen. Bei 0 behält er seinen Anteil am BIP: den des Haushaltsjahres 2025, −2,65 %, oder, wenn die Rechnung einem Pfad der OMB folgt, den im letzten Jahr des Pfades (−0,86 % im Haushaltsjahr 2031 beim Haushaltsentwurf des Präsidenten, −0,14 % im Haushaltsjahr 2036 bei der Fortschreibung); die Veränderung zählt dann erst nach diesem Jahr. Ein negativer Wert steht für Kosten, die schneller wachsen als die Wirtschaft, etwa Social Security und Medicare in einer alternden Gesellschaft: −0,1 heißt, der Primärsaldo verschlechtert sich jedes Jahr um 0,1 % des BIP, nach 30 Jahren um 3 %. Der Langfristprojektion des Finanzministeriums nach geltender Politik entsprechen bis 2046 etwa −0,07."
+      },
+      "sources": [
+        "treasury_fr_2025"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "id": "omb_economics",
+      "label": {
+        "en": "OMB's economic assumptions",
+        "de": "Wirtschaftsannahmen der OMB"
+      },
+      "values": {
+        "market_rate": 3.2,
+        "growth": 4.9
+      },
+      "note": {
+        "en": "The economics of the Budget for FY 2027 from 2032 on: 3.1% on 91-day bills and 3.3% on ten-year notes, 3.2% when weighted like the debt; nominal growth of 4.9% a year by fiscal year, on real growth of 2.9%. OMB developed them on the assumption that the President's proposals are enacted. Only rate and growth change.",
+        "de": "Die Wirtschaftsannahmen des Haushaltsentwurfs für 2027 ab 2032: 3,1 % für Schatzwechsel mit 91 Tagen Laufzeit und 3,3 % für zehnjährige Anleihen, gewichtet wie die Schulden 3,2 %; nominales Wachstum von 4,9 % im Jahr bei realem Wachstum von 2,9 %. Die OMB hat sie unter der Annahme entwickelt, dass die Vorschläge des Präsidenten Gesetz werden. Nur Zins und Wachstum ändern sich."
+      },
+      "sources": [
+        "omb_ap_current_services_fy2027",
+        "treasury_mspd_2025_09"
+      ]
+    },
+    {
+      "id": "low_rates_2012_2021",
+      "label": {
+        "en": "The low-rate years",
+        "de": "Die Niedrigzinsjahre"
+      },
+      "values": {
+        "market_rate": 1.6
+      },
+      "note": {
+        "en": "From 2012 to 2021 Treasury yields, weighted like the debt, averaged 1.6%; ten-year notes yielded 2.0%.",
+        "de": "Von 2012 bis 2021 rentierten US-Staatsanleihen, gewichtet wie die Schulden, im Mittel mit 1,6 %, zehnjährige Anleihen mit 2,0 %."
+      },
+      "sources": [
+        "treasury_yield_curve"
+      ]
+    },
+    {
+      "id": "nineties",
+      "label": {
+        "en": "Rates as in the 1990s",
+        "de": "Zinsen wie in den 1990er-Jahren"
+      },
+      "values": {
+        "market_rate": 6.0
+      },
+      "note": {
+        "en": "From 1991 to 2000 Treasury yields, weighted like the debt, averaged 6.0%; ten-year notes yielded 6.4%. In FY 1991 net interest took 18.4% of federal revenue, the highest share before FY 2025.",
+        "de": "Von 1991 bis 2000 rentierten US-Staatsanleihen, gewichtet wie die Schulden, im Mittel mit 6,0 %, zehnjährige Anleihen mit 6,4 %. Im Haushaltsjahr 1991 gingen 18,4 % der Einnahmen des Bundes an Nettozinsen, der höchste Anteil vor dem Haushaltsjahr 2025."
+      },
+      "sources": [
+        "treasury_yield_curve",
+        "omb_hist_debt_fy2027"
+      ]
+    },
+    {
+      "id": "treasury_long_term",
+      "label": {
+        "en": "Rising costs as in Treasury's long-term projection",
+        "de": "Steigende Kosten wie in der Langfristprojektion des Finanzministeriums"
+      },
+      "values": {
+        "drift": -0.07
+      },
+      "note": {
+        "en": "Treasury's projection under current policy (Financial Report for FY 2025): the primary deficit, 2.7% of GDP in 2025, averages 3.3% over the next ten years and peaks at 4.2% in 2046, about 0.07 points of GDP worse each year; it then falls back to 3.1% in 2100, when debt held by the public reaches 576% of GDP. Only the yearly change is set here; rate and growth stay as chosen.",
+        "de": "Projektion des Finanzministeriums nach geltender Politik (Finanzbericht für das Haushaltsjahr 2025): Das Primärdefizit, 2025 2,7 % des BIP, beträgt in den nächsten zehn Jahren im Mittel 3,3 % und erreicht 2046 mit 4,2 % seinen Höchststand, jedes Jahr um etwa 0,07 Punkte des BIP mehr; danach sinkt es bis 2100 auf 3,1 %, wenn die Schulden bei Dritten 576 % des BIP erreichen. Gesetzt wird hier nur die jährliche Veränderung; Zins und Wachstum bleiben, wie gewählt."
+      },
+      "sources": [
+        "treasury_fr_2025"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "id": "fy1946",
+      "label": {
+        "en": "FY 1946: highest debt",
+        "de": "Haushaltsjahr 1946: höchste Schulden"
+      },
+      "kind": "history",
+      "year": 1946,
+      "debtRatio": 1.0608,
+      "interestRatio": 0.018,
+      "revenueRatio": 0.1724,
+      "sources": [
+        "omb_hist_debt_fy2027",
+        "omb_hist_fy2027"
+      ],
+      "note": {
+        "en": "After the Second World War. Debt held by the public, net interest and receipts as OMB counts them today (Historical Tables 1.1, 3.1, 7.1 and 10.1).",
+        "de": "Nach dem Zweiten Weltkrieg. Schulden bei Dritten, Nettozinsen und Einnahmen, wie die OMB sie heute rechnet (Historical Tables 1.1, 3.1, 7.1 und 10.1)."
+      }
+    },
+    {
+      "id": "fy1991",
+      "label": {
+        "en": "FY 1991: highest interest burden before 2025",
+        "de": "Haushaltsjahr 1991: höchste Zinslast vor 2025"
+      },
+      "kind": "history",
+      "year": 1991,
+      "debtRatio": 0.4413,
+      "interestRatio": 0.0319,
+      "revenueRatio": 0.1731,
+      "sources": [
+        "omb_hist_debt_fy2027",
+        "omb_hist_fy2027"
+      ],
+      "note": {
+        "en": "Net interest as a share of revenue and of GDP was higher in no year before FY 2025.",
+        "de": "Nettozinsen gemessen an den Einnahmen und am BIP waren in keinem Jahr vor dem Haushaltsjahr 2025 höher."
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "node": "exp.defense",
+      "label": {
+        "en": "national defense",
+        "de": "Verteidigung"
+      }
+    },
+    {
+      "node": "exp.medicare",
+      "label": {
+        "en": "Medicare",
+        "de": "Medicare"
+      }
+    },
+    {
+      "node": "exp.social_security",
+      "label": {
+        "en": "Social Security",
+        "de": "Social Security"
+      }
+    },
+    {
+      "node": "exp.health.medicaid",
+      "label": {
+        "en": "Medicaid",
+        "de": "Medicaid"
+      }
+    }
+  ],
+  "plans": [
+    {
+      "id": "omb_baseline_fy2027",
+      "label": {
+        "en": "OMB baseline under current law (Budget FY 2027)",
+        "de": "Fortschreibung der OMB nach geltendem Recht (Haushaltsentwurf 2027)"
+      },
+      "scope": "all",
+      "accounts": "budget",
+      "points": [
+        {
+          "year": 2026,
+          "balanceRatio": -0.0644,
+          "interestRatio": 0.0317,
+          "interestToRevenue": 0.1857,
+          "growth": 0.0578
+        },
+        {
+          "year": 2027,
+          "balanceRatio": -0.0599,
+          "interestRatio": 0.0315,
+          "interestToRevenue": 0.1796,
+          "growth": 0.0535
+        },
+        {
+          "year": 2028,
+          "balanceRatio": -0.0562,
+          "interestRatio": 0.0326,
+          "interestToRevenue": 0.1844,
+          "growth": 0.0517
+        },
+        {
+          "year": 2029,
+          "balanceRatio": -0.0504,
+          "interestRatio": 0.0327,
+          "interestToRevenue": 0.1836,
+          "growth": 0.0515
+        },
+        {
+          "year": 2030,
+          "balanceRatio": -0.046,
+          "interestRatio": 0.0328,
+          "interestToRevenue": 0.1808,
+          "growth": 0.0512
+        },
+        {
+          "year": 2031,
+          "balanceRatio": -0.0413,
+          "interestRatio": 0.0327,
+          "interestToRevenue": 0.1784,
+          "growth": 0.0501
+        },
+        {
+          "year": 2032,
+          "balanceRatio": -0.0395,
+          "interestRatio": 0.0325,
+          "interestToRevenue": 0.1764,
+          "growth": 0.0495
+        },
+        {
+          "year": 2033,
+          "balanceRatio": -0.0404,
+          "interestRatio": 0.0322,
+          "interestToRevenue": 0.173,
+          "growth": 0.0495
+        },
+        {
+          "year": 2034,
+          "balanceRatio": -0.0358,
+          "interestRatio": 0.0317,
+          "interestToRevenue": 0.1702,
+          "growth": 0.0495
+        },
+        {
+          "year": 2035,
+          "balanceRatio": -0.0308,
+          "interestRatio": 0.0311,
+          "interestToRevenue": 0.1663,
+          "growth": 0.0494
+        },
+        {
+          "year": 2036,
+          "balanceRatio": -0.032,
+          "interestRatio": 0.0306,
+          "interestToRevenue": 0.1635,
+          "growth": 0.0495
+        }
+      ],
+      "quality": "official",
+      "sources": [
+        "omb_ap_current_services_fy2027",
+        "omb_ap_assumptions_fy2027",
+        "omb_hist_fy2027",
+        "treasury_mts_2026_09",
+        "omb_msr_fy2027",
+        "scotus_24_1287"
+      ],
+      "note": {
+        "en": "OMB's current-services baseline from the Budget for FY 2027 (April 2026): receipts, outlays and net interest for FY 2026 to FY 2036 under the laws in force when it was made, with discretionary spending at its 2026 level plus inflation (Analytical Perspectives, Tables 12-4 and 12-6), and GDP by fiscal year (Table 12-2). OMB projects no debt. Followed, the calculation takes each year's balance before interest and computes interest and debt itself, at the rates chosen here; after FY 2036 it holds that year's primary balance, −0.14% of GDP.\n\nIts economics are those of the President's Budget, which OMB developed on the assumption that the President's proposals are enacted: real growth of 3.0% a year on average to FY 2036, 3.1% on 91-day bills and 3.3% on ten-year notes from 2030. Its receipts include customs duties of $406.1B in FY 2026, rising to $681.3B in FY 2036, after $194.9B in FY 2025.\n\nFY 2026 came out differently: OMB estimated a deficit of $2.06T and net interest of $1.02T; Treasury's final statement for the year shows a deficit of $1.99T and net interest of $1.05T. OMB's Mid-Session Review of September 4, 2026 gives no new totals; it expected lower outlays for FY 2026, partly offset by lower receipts from customs duties. Customs duties came to $173.2B, after $144.6B was refunded to importers following the Supreme Court's ruling of February 2026 on the emergency tariffs.\n\nThe baseline is current law of early 2026, not the FY 2025 budget that the measures here change. Some of them are already in it: the end of the enhanced ACA premium tax credits, the states' share of SNAP from FY 2028, the money of the July 2025 law for border and immigration enforcement, and tariffs well above those of FY 2025. Following the baseline and switching on one of these counts it twice.",
+        "de": "Die Fortschreibung der OMB zum Haushaltsentwurf für 2027 (April 2026): Einnahmen, Ausgaben und Nettozinsen der Haushaltsjahre 2026 bis 2036 nach den Gesetzen, die bei ihrer Erstellung galten, die jährlich bewilligten Ausgaben auf dem Stand von 2026 zuzüglich Inflation (Analytical Perspectives, Tabellen 12-4 und 12-6), und das BIP nach Haushaltsjahren (Tabelle 12-2). Schulden projiziert die OMB nicht. Folgt ihr die Rechnung, übernimmt sie in jedem Jahr den Saldo ohne Zinsen und berechnet Zinsen und Schulden selbst, mit den hier gewählten Zinsen; nach dem Haushaltsjahr 2036 hält sie dessen Primärsaldo von −0,14 % des BIP.\n\nIhre Wirtschaftsannahmen sind die des Haushaltsentwurfs, die die OMB unter der Annahme entwickelt hat, dass die Vorschläge des Präsidenten Gesetz werden: reales Wachstum von 3,0 % im Jahr bis zum Haushaltsjahr 2036, 3,1 % für Schatzwechsel mit 91 Tagen Laufzeit und 3,3 % für zehnjährige Anleihen ab 2030. Ihre Einnahmen enthalten Zölle von 406,1 Mrd. Dollar im Haushaltsjahr 2026, steigend auf 681,3 Mrd. Dollar im Haushaltsjahr 2036, nach 194,9 Mrd. Dollar im Haushaltsjahr 2025.\n\nDas Haushaltsjahr 2026 ist anders ausgefallen: Die OMB schätzte ein Defizit von 2,06 Bio. Dollar und Nettozinsen von 1,02 Bio. Dollar; der letzte Monatsausweis des Finanzministeriums für das Jahr zeigt ein Defizit von 1,99 Bio. Dollar und Nettozinsen von 1,05 Bio. Dollar. Die Halbjahresüberprüfung der OMB (Mid-Session Review) vom 4. September 2026 nennt keine neuen Summen; sie erwartete für 2026 geringere Ausgaben, teils ausgeglichen durch geringere Einnahmen aus Zöllen. Die Zölle brachten 173,2 Mrd. Dollar, nachdem 144,6 Mrd. Dollar an Importeure erstattet wurden, weil der Supreme Court die Notstandszölle im Februar 2026 für rechtswidrig erklärt hatte.\n\nDie Fortschreibung bildet das geltende Recht von Anfang 2026 ab, nicht den Haushalt 2025, den die Maßnahmen hier verändern. Manche von ihnen sind schon enthalten: das Ende der erhöhten Prämienzuschüsse nach dem ACA, der Anteil der Bundesstaaten an SNAP ab dem Haushaltsjahr 2028, das Geld des Gesetzes vom Juli 2025 für Grenzschutz und Einwanderungsbehörden und Zölle weit über denen des Haushaltsjahres 2025. Wer der Fortschreibung folgt und eine dieser Maßnahmen einschaltet, zählt sie doppelt."
+      }
+    },
+    {
+      "id": "omb_budget_fy2027",
+      "label": {
+        "en": "President's Budget FY 2027",
+        "de": "Haushaltsentwurf des Präsidenten für 2027"
+      },
+      "scope": "all",
+      "accounts": "budget",
+      "points": [
+        {
+          "year": 2026,
+          "balanceRatio": -0.0644,
+          "interestRatio": 0.0317,
+          "interestToRevenue": 0.1857,
+          "growth": 0.0578
+        },
+        {
+          "year": 2027,
+          "balanceRatio": -0.0643,
+          "interestRatio": 0.0315,
+          "interestToRevenue": 0.1799,
+          "growth": 0.0535
+        },
+        {
+          "year": 2028,
+          "balanceRatio": -0.0607,
+          "interestRatio": 0.0328,
+          "interestToRevenue": 0.1856,
+          "growth": 0.0517
+        },
+        {
+          "year": 2029,
+          "balanceRatio": -0.0533,
+          "interestRatio": 0.033,
+          "interestToRevenue": 0.1854,
+          "growth": 0.0515
+        },
+        {
+          "year": 2030,
+          "balanceRatio": -0.0473,
+          "interestRatio": 0.0332,
+          "interestToRevenue": 0.1828,
+          "growth": 0.0512
+        },
+        {
+          "year": 2031,
+          "balanceRatio": -0.0417,
+          "interestRatio": 0.0331,
+          "interestToRevenue": 0.1804,
+          "growth": 0.0501
+        }
+      ],
+      "quality": "official",
+      "sources": [
+        "omb_hist_fy2027",
+        "omb_hist_debt_fy2027",
+        "omb_ap_current_services_fy2027",
+        "treasury_mts_2026_09",
+        "omb_msr_fy2027"
+      ],
+      "note": {
+        "en": "OMB's estimates for the President's Budget for FY 2027 (April 2026), which assume that the President's proposals are enacted: receipts (Historical Table 2.1), outlays and net interest (Table 3.1) and GDP (Table 10.1) for FY 2026 to FY 2031. OMB projects no debt. Followed, the calculation takes each year's balance before interest and computes interest and debt itself, at the rates chosen here; after FY 2031 it holds that year's primary balance, −0.86% of GDP.\n\nReceipts and economics are those of OMB's baseline. The proposals raise national defense above the baseline by $189.1B in FY 2027 and $302.6B in FY 2031, to $1.21T and $1.37T, and lower most other spending, international affairs by $5.4B to $17.9B a year.\n\nFY 2026 came out differently: OMB estimated a deficit of $2.06T and net interest of $1.02T; Treasury's final statement for the year shows a deficit of $1.99T and net interest of $1.05T. OMB's Mid-Session Review of September 4, 2026 gives no new totals; it expected lower outlays for FY 2026, partly offset by lower receipts from customs duties.\n\nThis path contains the President's proposals as well as current law. Following it and switching on the measures for defense, foreign aid, the federal workforce, border and immigration enforcement, the ACA credits, SNAP or the tariff counts them twice, in part or in full.",
+        "de": "Die Schätzungen der OMB zum Haushaltsentwurf des Präsidenten für 2027 (April 2026), die annehmen, dass die Vorschläge des Präsidenten Gesetz werden: Einnahmen (Historical Table 2.1), Ausgaben und Nettozinsen (Tabelle 3.1) und BIP (Tabelle 10.1) der Haushaltsjahre 2026 bis 2031. Schulden projiziert die OMB nicht. Folgt ihm die Rechnung, übernimmt sie in jedem Jahr den Saldo ohne Zinsen und berechnet Zinsen und Schulden selbst, mit den hier gewählten Zinsen; nach dem Haushaltsjahr 2031 hält sie dessen Primärsaldo von −0,86 % des BIP.\n\nEinnahmen und Wirtschaftsannahmen sind die der Fortschreibung. Die Vorschläge heben die Verteidigung gegenüber der Fortschreibung um 189,1 Mrd. Dollar im Haushaltsjahr 2027 und 302,6 Mrd. Dollar im Haushaltsjahr 2031 an, auf 1,21 Bio. Dollar und 1,37 Bio. Dollar, und senken die meisten übrigen Ausgaben, die für internationale Angelegenheiten um 5,4 Mrd. Dollar bis 17,9 Mrd. Dollar im Jahr.\n\nDas Haushaltsjahr 2026 ist anders ausgefallen: Die OMB schätzte ein Defizit von 2,06 Bio. Dollar und Nettozinsen von 1,02 Bio. Dollar; der letzte Monatsausweis des Finanzministeriums für das Jahr zeigt ein Defizit von 1,99 Bio. Dollar und Nettozinsen von 1,05 Bio. Dollar. Die Halbjahresüberprüfung der OMB (Mid-Session Review) vom 4. September 2026 nennt keine neuen Summen; sie erwartete für 2026 geringere Ausgaben, teils ausgeglichen durch geringere Einnahmen aus Zöllen.\n\nDieser Pfad enthält die Vorschläge des Präsidenten und das geltende Recht. Wer ihm folgt und die Maßnahmen zu Verteidigung, Auslandshilfe, Bundespersonal, Grenzschutz und Einwanderungsbehörden, den ACA-Zuschüssen, SNAP oder dem Zoll einschaltet, zählt sie ganz oder teilweise doppelt."
+      }
+    }
+  ],
+  "measuresFrom": {
+    "year": 2028,
+    "note": {
+      "en": "Measures act in the projection from FY 2028 at the earliest, the first fiscal year that has not begun: FY 2026 is over, and FY 2027 began on October 1, 2026. Until December 11, 2026 it runs on a continuing resolution that carries on the funding of the year before (P.L. 119-103 of September 2, 2026); no later law provides its funding (govinfo, laws through P.L. 119-142 of November 10, 2026). This is an assumption of the calculation: a law could still change part of FY 2027, and many measures would take longer to be decided and to take effect. Where a law or a bill sets a later start, or a source shows a slow build-up, the measure says so itself.",
+      "de": "Maßnahmen wirken in der Projektion frühestens im Haushaltsjahr 2028, dem ersten, das noch nicht begonnen hat: Das Haushaltsjahr 2026 ist vorbei, und das Haushaltsjahr 2027 hat am 1. Oktober 2026 begonnen. Bis zum 11. Dezember 2026 gilt dafür ein Übergangshaushalt (continuing resolution), der die Mittel des Vorjahres fortschreibt (P.L. 119-103 vom 2. September 2026); ein späteres Gesetz, das das Jahr finanziert, gibt es nicht (govinfo, Gesetze bis P.L. 119-142 vom 10. November 2026). Das ist eine Annahme der Rechnung: Ein Gesetz könnte noch einen Teil des Haushaltsjahres 2027 ändern, und viele Maßnahmen bräuchten länger, bis sie beschlossen sind und wirken. Wo ein Gesetz oder Entwurf einen späteren Beginn festlegt oder eine Quelle einen langsamen Aufbau belegt, sagt die Maßnahme das selbst."
+    },
+    "sources": [
+      "plaw_119_103",
+      "govinfo_plaw_119"
+    ]
+  },
+  "covers": {
+    "en": "the federal government's unified budget and its debt held by the public",
+    "de": "den Gesamthaushalt des Bundes (unified budget) und seine Schulden bei Dritten (debt held by the public)"
+  },
+  "note": {
+    "en": "The starting point is the budget of FY 2025, continued: revenue and spending other than interest keep their share of GDP of FY 2025, a deficit before interest of 2.65% of GDP, and the chosen assumptions hold every year. The measures change this budget, so on this path none of them is counted twice. OMB's two paths, its baseline under current law and the President's Budget, can be chosen instead. They are not the default because they rest on economic assumptions that OMB developed on the assumption that the President's proposals are enacted, with real growth of 3.0% a year to FY 2036, and on customs duties of $406.1B for FY 2026, of which $173.2B was collected after refunds; on them the deficit before interest shrinks to 0.14% of GDP by FY 2036. In FY 2026 it came to 2.9% of GDP (on OMB's estimate of GDP), and Treasury's long-term projection under current policy puts it at 3.3% on average over the next ten years. What the calculation leaves out: debt held by the public grows here by the deficit alone. In fact it also grows with the government's loans, above all student loans, and with its cash balance: by 0.5% to 1.1% of GDP a year more than the deficit in FY 2023 to 2025, and by $80.5B in FY 2026; OMB had expected $79.0B for FY 2026 and expects $63.0B for FY 2027. Interest follows the rates chosen here, on OMB's paths too, not OMB's rates. All new debt costs one market rate; inflation-protected securities, 7.0% of marketable debt, are treated like the rest, although their principal grows with consumer prices. The debt limit is not modeled; at the end of October 2026 the debt subject to it was $776.9B below the limit of $41.10T. FY 2026 is over, but the calculation computes it like any later year; Treasury's final statement shows a deficit of $1.99T, net interest of $1.05T and debt held by the public of $32.25T at its end. Feedback is left out: higher debt does not push up rates, and measures do not change growth. Each measure acts in full and for good from FY 2028 unless its card says it starts later; expiry dates and the reactions of people and firms are missing. Costs that grow faster than the economy, such as Social Security and Medicare as the population ages, enter only through the yearly change in the budget before interest.",
+    "de": "Ausgangspunkt ist der Haushalt des Haushaltsjahres 2025, fortgeschrieben: Einnahmen und Ausgaben ohne Zinsen behalten ihren Anteil am BIP von 2025, ein Defizit ohne Zinsen von 2,65 % des BIP, und die gewählten Annahmen gelten jedes Jahr. Die Maßnahmen verändern diesen Haushalt; auf diesem Pfad zählt deshalb keine doppelt. Wählbar sind stattdessen die beiden Pfade der OMB, ihre Fortschreibung nach geltendem Recht und der Haushaltsentwurf des Präsidenten. Sie sind nicht die Vorgabe, weil sie auf Wirtschaftsannahmen beruhen, die die OMB unter der Annahme entwickelt hat, dass die Vorschläge des Präsidenten Gesetz werden, mit realem Wachstum von 3,0 % im Jahr bis 2036, und auf Zöllen von 406,1 Mrd. Dollar für das Haushaltsjahr 2026, von denen nach Erstattungen 173,2 Mrd. Dollar blieben; damit schrumpft das Defizit ohne Zinsen bis zum Haushaltsjahr 2036 auf 0,14 % des BIP. Im Haushaltsjahr 2026 betrug es 2,9 % des BIP (nach der Schätzung der OMB für das BIP), und die Langfristprojektion des Finanzministeriums nach geltender Politik setzt es für die nächsten zehn Jahre im Mittel mit 3,3 % an. Was die Rechnung weglässt: Die Schulden bei Dritten wachsen hier nur um das Defizit. Tatsächlich wachsen sie auch mit den Krediten des Bundes, vor allem an Studierende, und mit seinem Kassenbestand: in den Haushaltsjahren 2023 bis 2025 um 0,5 % bis 1,1 % des BIP im Jahr mehr als das Defizit und im Haushaltsjahr 2026 um 80,5 Mrd. Dollar; die OMB hatte für 2026 79,0 Mrd. Dollar erwartet und erwartet für 2027 63,0 Mrd. Dollar. Die Zinsen folgen den hier gewählten Zinssätzen, auch auf den Pfaden der OMB, nicht denen der OMB. Alle neuen Schulden kosten denselben Marktzins; inflationsgeschützte Anleihen, 7,0 % der handelbaren Schulden, werden wie die übrigen behandelt, obwohl ihr Nennwert mit den Verbraucherpreisen wächst. Die Schuldenobergrenze ist nicht abgebildet; Ende Oktober 2026 lagen die ihr unterliegenden Schulden 776,9 Mrd. Dollar unter der Grenze von 41,10 Bio. Dollar. Das Haushaltsjahr 2026 ist vorbei, doch die Rechnung berechnet es wie jedes spätere Jahr; der letzte Monatsausweis des Finanzministeriums zeigt ein Defizit von 1,99 Bio. Dollar, Nettozinsen von 1,05 Bio. Dollar und Schulden bei Dritten von 32,25 Bio. Dollar zum Jahresende. Rückwirkungen fehlen: Höhere Schulden treiben den Zins nicht nach oben, und Maßnahmen ändern das Wachstum nicht. Jede Maßnahme wirkt ab dem Haushaltsjahr 2028 voll und dauerhaft, außer ihre Karte nennt einen späteren Beginn; Befristungen und Reaktionen von Menschen und Unternehmen fehlen. Kosten, die schneller wachsen als die Wirtschaft, etwa Social Security und Medicare in einer alternden Gesellschaft, kommen nur über die jährliche Veränderung des Haushalts ohne Zinsen hinein."
+  }
+}
