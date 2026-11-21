@@ -4,7 +4,7 @@
     python3 pipeline/us/measures.py            print every figure the measures use, with its source
     python3 pipeline/us/measures.py --check    also compare the constants in policies.json with the recomputed ones;
                                                exit status 1 on a difference
-    python3 pipeline/us/measures.py --write    replace the generated effects in policies.json (see below)
+    python3 pipeline/us/measures.py --write    write the generated effects and the computed constants into policies.json
 
 policies.json is written by hand, like the German one; its notes show the arithmetic. This script makes the
 constants in the effects reproducible: where an effect's factor or amount is computed from a source, the
@@ -35,6 +35,26 @@ TARIFF_IMPORT_LOSS = 0.20
 JCT_OFFSET_2025 = 0.221
 # HAND: IRS Publication 5901 (February 2024), p. 2: revenue from IRS enforcement, tax years 2020-2021, $ billion a year.
 IRS_ENFORCEMENT_REVENUE = 63e9
+# HAND: 2026 OASDI Trustees Report (H. Doc. 119-163), Table VI.C3, fiscal year 2025: income of the OASI and DI trust
+# funds from the taxation of benefits, $ million.
+OASDI_BENEFIT_TAX_FY2025 = 59748
+# HAND: 2026 Medicare Trustees Report, Table V.H1 (p. 228), fiscal year 2025: HI income from the taxation of OASDI
+# benefits, $ thousand.
+HI_BENEFIT_TAX_FY2025 = 41054000
+# HAND: Treasury, General Explanations of the Administration's Fiscal Year 2025 Revenue Proposals (March 2024),
+# table of revenue estimates, "Make permanent the Inflation Reduction Act expansion of health insurance premium tax
+# credits", fiscal year 2027 (the first full year after the expansion's end), $ million: the total and, from note 3
+# of the table, its outlay part.
+GREENBOOK_PTC_FY2027 = -21751
+GREENBOOK_PTC_OUTLAYS_FY2027 = -13774
+
+
+def households():
+    """The module behind the measures added in November 2026 (households.py)."""
+    if HERE not in sys.path[:1]:
+        sys.path.insert(0, HERE)
+    import households as hh
+    return hh
 
 
 def workforce():
@@ -144,6 +164,20 @@ def figures():
     f["wf_saving_default_12"] = f["wf_saving_per_point"] * 12
     f["wf_irs_cut_12"] = f["wf_irs_2025"] * 0.12
     f["wf_irs_enforcement_12"] = IRS_ENFORCEMENT_REVENUE * 0.12
+    # measures added in November 2026 (households.py; dollars and people)
+    f.update(households().figures())
+    f["ssb_tax_fy2025"] = OASDI_BENEFIT_TAX_FY2025 * 1e6 + HI_BENEFIT_TAX_FY2025 * 1e3
+    f["ssb_scale"] = -round(f["ssb_tax_fy2025"] / 100)
+    f["ptc_total_fy2027"] = -GREENBOOK_PTC_FY2027 * 1e6
+    f["ptc_outlays_fy2027"] = -GREENBOOK_PTC_OUTLAYS_FY2027 * 1e6
+    f["ptc_receipts_fy2027"] = f["ptc_total_fy2027"] - f["ptc_outlays_fy2027"]
+    f["ptc_outlay_scale"] = round(f["ptc_outlays_fy2027"] / 100)
+    f["ptc_receipt_scale"] = -round(f["ptc_receipts_fy2027"] / 100)
+    f["ptc_premium_rise"] = f["oep2026_Avg_Prm"] / f["oep2025_Avg_Prm"] - 1
+    f["top_default_396"] = f["top_per_point"] * 2.6
+    f["wealth_default"] = f["wealth_scale_low"] * 2 + f["wealth_scale_high"] * 3
+    f["rebate_default"] = f["rebate_per_dollar"] * 600
+    f["snap_default"] = f["snap_scale"] * 15
     return f
 
 
@@ -155,6 +189,17 @@ def expected(f):
         ("corporate_tax_rate", ("effects", 0, "factor", "offset"), f["corporate_offset"]),
         ("tariff_all_imports", ("effects", 0, "amount", "scale"), f["tariff_scale"]),
         ("tariff_all_imports", ("effects", 0, "shift", "ratio"), f["tariff_offset"]),
+        ("social_security_benefit_tax", ("effects", 0, "amount", "scale"), f["ssb_scale"]),
+        ("tariff_rebate_checks", ("effects", 0, "amount", "scale"), f["rebate_per_dollar"]),
+        ("aca_enhanced_credits", ("effects", 0, "amount", "scale"), f["ptc_outlay_scale"]),
+        ("aca_enhanced_credits", ("effects", 0, "amount", "offset"), -f["ptc_outlay_scale"] * 100),
+        ("aca_enhanced_credits", ("effects", 1, "amount", "scale"), f["ptc_receipt_scale"]),
+        ("aca_enhanced_credits", ("effects", 1, "amount", "offset"), -f["ptc_receipt_scale"] * 100),
+        ("wealth_tax", ("effects", 0, "amount", "scale"), f["wealth_scale_low"]),
+        ("wealth_tax", ("effects", 1, "amount", "scale"), f["wealth_scale_high"]),
+        ("top_income_tax_rate", ("effects", 0, "amount", "scale"), f["top_per_point"]),
+        ("top_income_tax_rate", ("effects", 0, "amount", "offset"), -f["top_per_point"] * 37),
+        ("snap_state_cost_share", ("effects", 0, "amount", "scale"), -f["snap_scale"]),
     ]
 
 
@@ -174,7 +219,8 @@ def check_generated(policies):
     return problems
 
 
-def write_generated():
+def write_generated(f):
+    """Write the generated effects of the workforce measure and every constant that expected() names."""
     wf = workforce()
     path = os.path.join(PACK, "policies.json")
     data = json.load(open(path, encoding="utf-8"))
@@ -182,6 +228,12 @@ def write_generated():
     if policy is None:
         sys.exit("policies.json has no measure %s; write its card first" % wf.POLICY)
     policy["effects"] = wf.effects()
+    policies = {p["id"]: p for p in data["policies"]}
+    for pid, keys, want in expected(f):
+        node = policies[pid]
+        for key in keys[:-1]:
+            node = node[key]
+        node[keys[-1]] = want
     with open(path, "w", encoding="utf-8") as out:
         out.write(json.dumps(data, ensure_ascii=False, indent=2) + "\n")
     print("wrote %d effects of %s into %s" % (len(policy["effects"]), wf.POLICY, path))
@@ -204,9 +256,9 @@ def check(f):
 
 
 if __name__ == "__main__":
-    if "--write" in sys.argv:
-        write_generated()
     f = figures()
+    if "--write" in sys.argv:
+        write_generated(f)
     for key, value in f.items():
         print("%-32s %s" % (key, "{:,.6f}".format(value) if abs(value) < 100 else "{:,.0f}".format(value)))
     if "--check" in sys.argv:

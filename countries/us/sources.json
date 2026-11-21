@@ -427,5 +427,236 @@
       "en": "Page 2, from the tax gap projections for tax years 2020 and 2021: of an estimated true tax liability of 4,565 billion dollars a year, revenue from IRS enforcement efforts is 63 billion dollars, 1.4%.",
       "de": "S. 2, aus den Projektionen der Steuerlücke für die Steuerjahre 2020 und 2021: Von einer geschätzten tatsächlichen Steuerschuld von 4.565 Mrd. Dollar im Jahr stammen 63 Mrd. Dollar oder 1,4 % aus den Durchsetzungsmaßnahmen der IRS."
     }
+  },
+  "cms_medicare_trustees_2026": {
+    "title": "2026 Annual Report of the Boards of Trustees of the Federal Hospital Insurance and Federal Supplementary Medical Insurance Trust Funds",
+    "publisher": "Centers for Medicare & Medicaid Services",
+    "url": "https://www.cms.gov/oact/tr/2026",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Table V.H1 (p. 228), fiscal year 2025: HI income from the taxation of OASDI benefits 41,054,000 thousand dollars; payroll taxes 400,622,160 thousand.",
+      "de": "Tabelle V.H1 (S. 228), Haushaltsjahr 2025: Einnahmen des HI-Fonds aus der Besteuerung der OASDI-Renten 41.054.000 Tausend Dollar; Lohnsummensteuern 400.622.160 Tausend."
+    }
+  },
+  "hr_1040_2025": {
+    "title": "H.R. 1040, Senior Citizens Tax Elimination Act, introduced February 6, 2025 (Rep. Massie)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr1040ih/html/BILLS-119hr1040ih.htm",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "New section 86(g): the taxation of benefits \"shall not apply to any taxable year beginning after the date of the enactment\"; the Social Security and Railroad Retirement trust funds receive the lost amounts from the general fund. Identical Senate bill: S. 458 (Sen. Tuberville). Referred to committee, no further action.",
+      "de": "Neuer Abschnitt 86(g): Die Besteuerung der Renten gilt nicht mehr für Steuerjahre nach Inkrafttreten; die Treuhandfonds von Social Security und Railroad Retirement erhalten die Ausfälle aus dem allgemeinen Haushalt. Gleichlautender Senatsentwurf: S. 458 (Senator Tuberville). An den Ausschuss überwiesen, seither keine Beratung."
+    }
+  },
+  "s_2716_2025": {
+    "title": "S. 2716, introduced September 4, 2025 (Sen. Gallego), to end the taxation of Social Security benefits",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119s2716is/html/BILLS-119s2716is.htm",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Ends the income tax on benefits and finances the trust funds with Social Security tax on wages above 250,000 dollars.",
+      "de": "Schafft die Einkommensteuer auf die Renten ab und finanziert die Treuhandfonds mit Social-Security-Beiträgen auf Löhne über 250.000 Dollar."
+    }
+  },
+  "s_2475_2025": {
+    "title": "S. 2475, American Worker Rebate Act of 2025, introduced July 28, 2025 (Sen. Hawley)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119s2475is/html/BILLS-119s2475is.htm",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "New section 6428C: a refundable credit for the first taxable year beginning in 2025, paid in advance; per eligible individual (twice on a joint return) and per qualifying child the greater of 600 dollars or tariff revenue since January 20, 2025 divided by the number of eligible people; reduced by 5% of AGI above 75,000 dollars (112,500 for heads of household, 150,000 for joint returns). No payment after December 31, 2026. Referred to the Finance Committee, no further action.",
+      "de": "Neuer Abschnitt 6428C: eine erstattungsfähige Steuergutschrift für das erste Steuerjahr ab 2025, im Voraus ausgezahlt; je berechtigter Person (bei gemeinsamer Veranlagung doppelt) und je Kind der höhere Betrag von 600 Dollar oder den Zolleinnahmen seit dem 20. Januar 2025 geteilt durch die Zahl der Berechtigten; gekürzt um 5 % des Einkommens über 75.000 Dollar (112.500 für Alleinerziehende, 150.000 für Paare). Keine Zahlung nach dem 31. Dezember 2026. An den Finanzausschuss überwiesen, seither keine Beratung."
+    }
+  },
+  "dcpd_202501109": {
+    "title": "Remarks by the President, November 10, 2025 (Daily Compilation of Presidential Documents, DCPD-202501109)",
+    "publisher": "Office of the Federal Register (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/DCPD-202501109/html/DCPD-202501109.htm",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "\"we're going to issue a dividend to our middle-income people and lower-income people of about $2,000, and we're going to use the remaining tariffs to lower our debt.\"",
+      "de": "„we're going to issue a dividend to our middle-income people and lower-income people of about $2,000, and we're going to use the remaining tariffs to lower our debt.“"
+    }
+  },
+  "dcpd_202600688": {
+    "title": "Remarks by the President, October 7, 2026 (Daily Compilation of Presidential Documents, DCPD-202600688)",
+    "publisher": "Office of the Federal Register (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/DCPD-202600688/html/DCPD-202600688.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "\"I will issue a 'Trump dividend' of $5,000 to every adult citizen in America.\" On September 9, 2026 (DCPD-202600590) the President tied it to the Republicans winning both chambers of Congress.",
+      "de": "„I will issue a 'Trump dividend' of $5,000 to every adult citizen in America.“ Am 9. September 2026 (DCPD-202600590) knüpfte der Präsident das an einen Sieg der Republikaner in beiden Kammern des Kongresses."
+    }
+  },
+  "irs_soi_2023_t12": {
+    "title": "Statistics of Income, Individual Income Tax Returns, tax year 2023, Table 1.2: all returns by size of adjusted gross income and marital status (23in12ms.xls)",
+    "publisher": "Internal Revenue Service",
+    "url": "https://www.irs.gov/pub/irs-soi/23in12ms.xls",
+    "accessed": "2026-11-21",
+    "year": 2023,
+    "note": {
+      "en": "160,602,107 returns; number of returns, adjusted gross income and taxable income by size of AGI, separately for joint, separate, head-of-household and single returns.",
+      "de": "160.602.107 Steuererklärungen; Zahl der Erklärungen, Einkommen (AGI) und zu versteuerndes Einkommen nach Einkommensklassen, getrennt nach gemeinsamer, getrennter, Alleinerziehenden- und Einzelveranlagung."
+    }
+  },
+  "irs_soi_2023_t35_t36": {
+    "title": "Statistics of Income, Individual Income Tax Returns, tax year 2023, Tables 3.5 and 3.6: income and tax by tax rate, by size of AGI and by marital status (23in35tr.xls, 23in36tr.xls)",
+    "publisher": "Internal Revenue Service",
+    "url": "https://www.irs.gov/pub/irs-soi/23in35tr.xls",
+    "accessed": "2026-11-21",
+    "year": 2023,
+    "note": {
+      "en": "Table 3.6: 1,097,850 returns had income taxed at 37%, together 1,159.7 billion dollars, of which joint returns 870,941 and 917.2 billion. Table 3.6 is at https://www.irs.gov/pub/irs-soi/23in36tr.xls.",
+      "de": "Tabelle 3.6: 1.097.850 Erklärungen hatten zu 37 % besteuertes Einkommen, zusammen 1.159,7 Mrd. Dollar, davon gemeinsam veranlagte 870.941 mit 917,2 Mrd. Tabelle 3.6 steht unter https://www.irs.gov/pub/irs-soi/23in36tr.xls."
+    }
+  },
+  "irs_rp_2022_38": {
+    "title": "Revenue Procedure 2022-38: inflation adjustments for tax year 2023",
+    "publisher": "Internal Revenue Service",
+    "url": "https://www.irs.gov/pub/irs-drop/rp-22-38.pdf",
+    "accessed": "2026-11-21",
+    "year": 2023,
+    "note": {
+      "en": "Section 3.01: the 37% rate applies above 693,750 dollars of taxable income on joint returns, 578,125 single, 578,100 heads of household, 346,875 married filing separately.",
+      "de": "Abschnitt 3.01: Der Satz von 37 % gilt über 693.750 Dollar zu versteuerndem Einkommen bei gemeinsamer Veranlagung, 578.125 bei Einzelveranlagung, 578.100 für Alleinerziehende, 346.875 bei getrennter Veranlagung."
+    }
+  },
+  "census_popest_age_v2025": {
+    "title": "Annual Estimates of the Resident Population by Single Year of Age and Sex for the United States, Vintage 2025 (nc-est2025-agesex-res.csv)",
+    "publisher": "U.S. Census Bureau",
+    "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/national/asrh/nc-est2025-agesex-res.csv",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "July 1, 2025: 341,784,857 residents, of whom 72,021,348 under 18 and 269,763,509 aged 18 and over.",
+      "de": "1. Juli 2025: 341.784.857 Einwohner, davon 72.021.348 unter 18 und 269.763.509 ab 18 Jahren."
+    }
+  },
+  "s_3385_2025": {
+    "title": "S. 3385, Lower Health Care Costs Act, introduced December 8, 2025 (Sen. Schumer)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119s3385pcs/html/BILLS-119s3385pcs.htm",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Extends the enhanced premium tax credit through 2028 (\"before January 1, 2029\"). Cloture on the motion to proceed failed 51 to 48 on December 11, 2025 (record vote 644).",
+      "de": "Verlängert die erhöhten Prämienzuschüsse bis 2028 („before January 1, 2029“). Der Antrag, die Debatte zu beenden, scheiterte am 11. Dezember 2025 mit 51 zu 48 Stimmen (namentliche Abstimmung 644)."
+    }
+  },
+  "hr_247_2025": {
+    "title": "H.R. 247, Health Care Affordability Act of 2025, introduced January 9, 2025 (Rep. Underwood)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr247ih/html/BILLS-119hr247ih.htm",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Makes the 2021 applicable percentages permanent and removes the cap at 400% of the poverty line. Senate version: S. 46 (Sen. Shaheen).",
+      "de": "Macht die Eigenanteile von 2021 dauerhaft und streicht die Grenze bei 400 % der Armutsgrenze. Senatsfassung: S. 46 (Senatorin Shaheen)."
+    }
+  },
+  "plaw_117_169": {
+    "title": "Public Law 117-169, Inflation Reduction Act of 2022 (August 16, 2022)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/117/public/PLAW-117publ169.xml",
+    "accessed": "2026-11-21",
+    "year": 2022,
+    "note": {
+      "en": "Section 12001: the enhanced premium tax credit of the American Rescue Plan Act applies to taxable years \"after December 31, 2020, and before January 1, 2026\".",
+      "de": "Abschnitt 12001: Die erhöhte Prämiensteuergutschrift des American Rescue Plan Act gilt für Steuerjahre „after December 31, 2020, and before January 1, 2026“."
+    }
+  },
+  "cms_oep_2025_2026": {
+    "title": "Marketplace Open Enrollment Period Public Use Files, state level, plan years 2025 and 2026",
+    "publisher": "Centers for Medicare & Medicaid Services",
+    "url": "https://www.cms.gov/files/zip/2026-oep-state-level-public-use-file.zip",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "National row, all platforms. Plan selections 24,319,713 (2025) and 23,130,860 (2026); consumers with advance premium tax credit 22,380,137 and 20,035,756; average premium before credits 619 and 741 dollars a month, after credits 113 and 178. The 2025 file is at https://www.cms.gov/files/zip/2025-oep-state-level-public-use-file.zip.",
+      "de": "Bundesweite Zeile, alle Plattformen. Gewählte Tarife 24.319.713 (2025) und 23.130.860 (2026); Versicherte mit vorausgezahltem Zuschuss 22.380.137 und 20.035.756; durchschnittliche Prämie vor Zuschuss 619 und 741 Dollar im Monat, nach Zuschuss 113 und 178. Die Datei für 2025 steht unter https://www.cms.gov/files/zip/2025-oep-state-level-public-use-file.zip."
+    }
+  },
+  "s_4246_2026": {
+    "title": "S. 4246, Ultra-Millionaire Tax Act of 2026, introduced March 26, 2026 (Sen. Warren)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119s4246is/html/BILLS-119s4246is.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "New section 2901: 2 percent of net worth above the zero bracket of 50,000,000 dollars, 3 percent above 1,000,000,000 dollars (6 percent while a single-payer health law is in effect); married couples count as one taxpayer; from calendar years beginning after December 31, 2026. House version: H.R. 8085 (Rep. Jayapal).",
+      "de": "Neuer Abschnitt 2901: 2 % des Nettovermögens über dem Freibetrag von 50.000.000 Dollar, 3 % über 1.000.000.000 Dollar (6 %, solange ein Gesetz über eine staatliche Einheitskrankenversicherung gilt); Ehepaare zählen als ein Steuerpflichtiger; ab den Kalenderjahren nach dem 31. Dezember 2026. Fassung im Repräsentantenhaus: H.R. 8085 (Abgeordnete Jayapal)."
+    }
+  },
+  "fed_dfa": {
+    "title": "Distributional Financial Accounts: net worth by wealth percentile group (dfa-networth-levels-detail.csv), 2025 Q3",
+    "publisher": "Board of Governors of the Federal Reserve System",
+    "url": "https://www.federalreserve.gov/releases/z1/dataviz/download/zips/dfa.zip",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "End of September 2025: top 0.1% of households 136,912 households with net worth of 24,662,319 million dollars; next 0.9% 1,215,406 households with 29,279,568 million.",
+      "de": "Ende September 2025: oberste 0,1 % 136.912 Haushalte mit einem Nettovermögen von 24.662.319 Mio. Dollar; die nächsten 0,9 % 1.215.406 Haushalte mit 29.279.568 Mio."
+    }
+  },
+  "hr_4280_2025": {
+    "title": "H.R. 4280, Bipartisan Tax Fairness Act of 2025, introduced July 2, 2025 (Rep. Fitzpatrick, with Rep. Golden)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr4280ih/html/BILLS-119hr4280ih.htm",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "New rate tables: 39.6% of the excess over 2,000,000 dollars of taxable income on joint returns and over 1,000,000 dollars on other returns, 37% below; for taxable years after December 31, 2025. Referred to committee.",
+      "de": "Neue Tariftabellen: 39,6 % auf den Teil des zu versteuernden Einkommens über 2.000.000 Dollar bei gemeinsamer Veranlagung und über 1.000.000 Dollar bei den übrigen, darunter 37 %; für Steuerjahre nach dem 31. Dezember 2025. An den Ausschuss überwiesen."
+    }
+  },
+  "fns_snap_fy2025": {
+    "title": "SNAP Data Tables: monthly state participation and benefit summary, fiscal year 2025 (FY25.xlsx in snap-zip-fy69tocurrent-11.zip)",
+    "publisher": "U.S. Department of Agriculture, Food and Nutrition Service",
+    "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-zip-fy69tocurrent-11.zip",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Data as of November 13, 2026. Benefits in fiscal year 2025: 95,757,193,976 dollars, 42.14 million people a month on average; by state.",
+      "de": "Datenstand 13. November 2026. Leistungen im Haushaltsjahr 2025: 95.757.193.976 Dollar, im Monatsschnitt 42,14 Mio. Menschen; nach Bundesstaaten."
+    }
+  },
+  "fns_snap_per_fy2025": {
+    "title": "Supplemental Nutrition Assistance Program: Payment Error Rates, Fiscal Year 2025 (dated June 24, 2026)",
+    "publisher": "U.S. Department of Agriculture, Food and Nutrition Service",
+    "url": "https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-qcfy25-per.pdf",
+    "accessed": "2026-11-21",
+    "year": 2025,
+    "note": {
+      "en": "Payment error rates by state (over- plus underpayments); United States 10.62% (9.28% over, 1.33% under).",
+      "de": "Fehlerquoten bei den Zahlungen nach Bundesstaaten (zu viel und zu wenig gezahlt); USA 10,62 % (9,28 % zu viel, 1,33 % zu wenig)."
+    }
+  },
+  "hr_7975_2026": {
+    "title": "H.R. 7975, Feeding Families Not Fear Act of 2026, introduced March 18, 2026 (Rep. Shontel Brown)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr7975ih/html/BILLS-119hr7975ih.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Repeals subtitle A of title I of Public Law 119-21 (the SNAP changes) and restores the provisions it amended.",
+      "de": "Hebt Untertitel A von Titel I des Public Law 119-21 (die SNAP-Änderungen) auf und stellt die geänderten Vorschriften wieder her."
+    }
+  },
+  "s_5526_2026": {
+    "title": "S. 5526, Agricultural Act of 2026, reported September 24, 2026 (Sen. Boozman)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/content/pkg/BILLS-119s5526rs/html/BILLS-119s5526rs.htm",
+    "accessed": "2026-11-21",
+    "year": 2026,
+    "note": {
+      "en": "Section 4102: the State cost share starts in fiscal year 2029 instead of 2028, and from fiscal year 2031 a State with an error rate of 10% or more pays 20%.",
+      "de": "Abschnitt 4102: Der Anteil der Bundesstaaten beginnt im Haushaltsjahr 2029 statt 2028, und ab 2031 zahlt ein Bundesstaat mit einer Fehlerquote von 10 % oder mehr 20 %."
+    }
   }
 }

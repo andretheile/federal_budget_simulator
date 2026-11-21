@@ -27,6 +27,18 @@ Read by workforce.py (through measures.py; the measure federal_workforce_cut):
   omb/objclass_detail_fy2027.xlsx  OMB, object class detail by account (2025 actual)            -> personnel costs per budget item
   omb/ap_5_tables_1-3_fy2027.xlsx  Analytical Perspectives, Tables 5-1 to 5-3                  -> check of the base, FTE, pay and benefits
   bls/ces_CES9091100001.json    BLS Current Employment Statistics, federal except Postal Service -> employment quoted on the card
+Read by households.py (through measures.py; the measures added in November 2026):
+  census/nc-est2025-agesex-res.csv  Census Bureau, population by single year of age, July 1, 2025  -> rebate checks
+  irs/23in12ms.xls              IRS Statistics of Income 2023, Table 1.2 (by AGI and filing status) -> rebate phase-out
+  irs/23in35tr.xls, 23in36tr.xls  IRS Statistics of Income 2023, Tables 3.5 and 3.6 (income by tax rate) -> top rate
+  fed/dfa.zip                   Federal Reserve, Distributional Financial Accounts (net worth by percentile) -> wealth tax
+  fns/snap-zip-fy69tocurrent-11.zip  FNS, SNAP state data; fns/FY25.xlsx is extracted from it -> SNAP state share
+  cms/202{5,6}-oep-state-level-public-use-file.zip  CMS, Marketplace open enrollment, national rows -> ACA credits
+Read by hand for the measures added in November 2026 (constants marked HAND in measures.py and households.py):
+  cms/2026-medicare-trustees-report.pdf  Medicare Trustees Report 2026, Table V.H1 (tax on benefits to HI)
+  fns/snap-qcfy25-per.pdf       FNS, SNAP payment error rates, fiscal year 2025 (by state)
+  irs/rp-22-38.pdf              IRS, Rev. Proc. 2022-38: the 37% thresholds of tax year 2023
+  govinfo/BILLS-*.htm, DCPD-*.htm  bills of the 119th Congress and presidential remarks quoted on the cards
 Kept for reference (read by hand; the measures quote them):
   irs/p15--2025.pdf             IRS Publication 15 (2025): payroll tax rates, Social Security wage base
   govinfo/CDOC-119hdoc163.pdf   2026 Annual Report of the Social Security Trustees (H. Doc. 119-163)
@@ -48,7 +60,7 @@ Kept for reference (read by hand; the measures quote them):
   nato/                         NATO defence expenditure 2014-2025; the 5 % commitment
   treasury/General-Explanations-FY2025.pdf   Treasury, revenue proposals of the FY 2025 Budget (corporate rate)
 """
-import os, sys, urllib.request
+import os, sys, urllib.request, zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HERE, ".cache")
@@ -116,7 +128,30 @@ DOWNLOADS = {
     "fr/2026-21320.pdf": "https://www.govinfo.gov/content/pkg/FR-2026-10-19/pdf/2026-21320.pdf",
     "scotus/606US2PP_Ord.pdf": "https://www.supremecourt.gov/opinions/preliminaryprint/606US2PP_Ord.pdf",
     "irs/p5901.pdf": "https://www.irs.gov/pub/irs-pdf/p5901.pdf",
+    # --- the measures added in November 2026 ---
+    "census/nc-est2025-agesex-res.csv":
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/national/asrh/nc-est2025-agesex-res.csv",
+    "irs/23in12ms.xls": "https://www.irs.gov/pub/irs-soi/23in12ms.xls",
+    "irs/23in35tr.xls": "https://www.irs.gov/pub/irs-soi/23in35tr.xls",
+    "irs/23in36tr.xls": "https://www.irs.gov/pub/irs-soi/23in36tr.xls",
+    "irs/rp-22-38.pdf": "https://www.irs.gov/pub/irs-drop/rp-22-38.pdf",
+    # Federal Reserve, Distributional Financial Accounts: always the latest release; the cached copy has data
+    # through 2026 Q2. The pack reads 2025 Q3.
+    "fed/dfa.zip": "https://www.federalreserve.gov/releases/z1/dataviz/download/zips/dfa.zip",
+    # USDA FNS: the web pages refuse automated requests; the files are served from its file server. The SNAP
+    # archive always holds the latest data; the cached copy is the one of November 13, 2026.
+    "fns/snap-zip-fy69tocurrent-11.zip":
+        "https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-zip-fy69tocurrent-11.zip",
+    "fns/snap-qcfy25-per.pdf": "https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-qcfy25-per.pdf",
+    "cms/2026-medicare-trustees-report.pdf": "https://www.cms.gov/oact/tr/2026",
+    "cms/2025-oep-state-level-public-use-file.zip": "https://www.cms.gov/files/zip/2025-oep-state-level-public-use-file.zip",
+    "cms/2026-oep-state-level-public-use-file.zip": "https://www.cms.gov/files/zip/2026-oep-state-level-public-use-file.zip",
 }
+for doc in ("BILLS-119hr1040ih", "BILLS-119s2475is", "BILLS-119s3385pcs", "BILLS-119hr247ih", "BILLS-119s4246is",
+            "BILLS-119hr4280ih", "BILLS-119hr7975ih", "BILLS-119s5526rs", "DCPD-202501109", "DCPD-202600688"):
+    DOWNLOADS["govinfo/%s.htm" % doc] = "https://www.govinfo.gov/content/pkg/%s/html/%s.htm" % (doc, doc)
+# Members taken out of downloaded archives: (archive, member, cache path).
+EXTRACT = [("fns/snap-zip-fy69tocurrent-11.zip", "FY25.xlsx", "fns/FY25.xlsx")]
 for law in ("1", "21", "28", "37", "75", "98", "103"):
     DOWNLOADS["govinfo/PLAW-119publ%s.xml" % law] = "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ%s.xml" % law
 for date in ("2025-09-30", "2026-09-30"):
@@ -138,6 +173,15 @@ def main():
             f.write(data)
         os.replace(tmp, path)
         print("fetched ", rel, len(data), "bytes")
+    for archive, member, rel in EXTRACT:
+        path = os.path.join(CACHE, rel)
+        if os.path.exists(path) and not FORCE:
+            continue
+        with zipfile.ZipFile(os.path.join(CACHE, archive)) as z:
+            data = z.read(member)
+        with open(path, "wb") as f:
+            f.write(data)
+        print("extracted", rel, "from", archive)
 
 
 if __name__ == "__main__":

@@ -22,7 +22,8 @@ python3 pipeline/us/build_budget.py --write    # replace budget.json
 python3 pipeline/us/build_dist.py --check      # the same for distributions/wages.json (--write to replace it)
 python3 pipeline/us/workforce.py              # diagnostics: civilian staff costs by leaf, checked against OMB's total
 python3 pipeline/us/measures.py --check        # the figures behind the measures, compared with policies.json
-python3 pipeline/us/measures.py --write        # rewrite the generated effects of federal_workforce_cut
+python3 pipeline/us/households.py             # diagnostics: the figures of the measures added in November 2026
+python3 pipeline/us/measures.py --write        # rewrite the generated effects and the computed constants
 npm run validate                               # then check the whole pack
 ```
 
@@ -56,6 +57,7 @@ is replaced with every NIPA release, which can change the one BEA figure quoted 
 | `omb/objclass_detail_fy2027.xlsx` | OMB, object class detail of the Budget for FY 2027: obligations by account, object class, direct or reimbursable, $ million | `workforce.py`: civilian pay and benefits of 2025 per leaf |
 | `omb/ap_5_tables_1-3_fy2027.xlsx` | Analytical Perspectives, Tables 5-1 to 5-3: civilian FTE, pay and benefits | `workforce.py`: check of the personnel base, figures on the card |
 | `bls/ces_CES9091100001.json` | BLS Current Employment Statistics, federal employment except the Postal Service, through the public API (always the latest data) | `workforce.py`: employment quoted on the card |
+| `census/nc-est2025-agesex-res.csv`, `irs/23in12ms.xls`, `irs/23in35tr.xls`, `irs/23in36tr.xls`, `fed/dfa.zip`, `fns/snap-zip-fy69tocurrent-11.zip` (with `fns/FY25.xlsx` extracted), `cms/202?-oep-state-level-public-use-file.zip` | Census population by age 2025; IRS Statistics of Income 2023, Tables 1.2, 3.5, 3.6; Federal Reserve, Distributional Financial Accounts; FNS SNAP state data FY 2025; CMS Marketplace open enrollment 2025 and 2026 | `households.py`: the measures added in November 2026 |
 | `govinfo/`, `scotus/`, `fr/`, `nato/`, `treasury/`, `irs/p5901.pdf`, `omb/ap_5_management_fy2027.pdf` | laws, a bill, the Trustees Report, Supreme Court decisions and orders, Federal Register documents, NATO, Treasury, IRS and OMB documents (list in `fetch_inputs.py`) | read by hand for the measures' notes and catches |
 
 ## How the tree is built
@@ -196,6 +198,20 @@ other law enforcement (immigration and customs fees), commerce (deposit insuranc
 (the FDA's user fees, within its account) and the Defense revolving funds. The params stop at 50 %, where no leaf is
 cut below zero.
 
+### The measures added in November 2026
+
+`households.py` computes their figures from the cache; the IRS tables are old Excel files, read by `xls.py`
+(standard library). `measures.py --check` compares every constant with `policies.json`, and `--write` sets them.
+
+| Measure | Constant | How |
+|---|---|---|
+| `social_security_benefit_tax` | −$1.008B per point | income of the trust funds from the taxation of benefits in fiscal year 2025: OASDI $59.7B (Trustees Report, Table VI.C3) and HI $41.1B (Medicare Trustees Report, Table V.H1), read by hand |
+| `tariff_rebate_checks` | $277.1M per dollar | Census population of July 1, 2025 (341.8 million) less the phase-out of S. 2475 on the IRS's 2023 returns by AGI and filing status (Table 1.2): 18.9 % at $600 |
+| `aca_enhanced_credits` | outlays $13.8B, income tax $8.0B at 0 % | Treasury's estimate for making the enhancement permanent, fiscal year 2027 (Greenbook FY 2025, read by hand) |
+| `wealth_tax` | $142.7B and $38.2B per point | a Pareto tail through the top 1 % and top 0.1 % of the Distributional Financial Accounts (2025 Q3): net worth between $50 million and $1 billion above the threshold, and above $1 billion |
+| `top_income_tax_rate` | $6.23B per point above 37 % | income taxed at 37 % on returns with AGI of $1 million or more (IRS Table 3.5), less the income between the 2023 threshold of the 37 % rate (Rev. Proc. 2022-38) and the bill's threshold for each return taxed at 37 %, weighted by filing status (Table 3.6) |
+| `snap_state_cost_share` | −$741M per point of the top share | FY 2025 benefits by state (FNS) in the tiers of P.L. 119-21 sec. 10105 by each state's FY 2025 payment error rate (read by hand from FNS's PDF; the benefit-weighted mean, 10.63 %, is checked against the national 10.62 %) |
+
 Data, taken as published: outlays and receipts of 2025 in the budget, imports, NATO's estimate, Treasury's revenue
 estimate, the JCT offset, wages by size class, the wage limits, civilian pay and benefits by account.
 
@@ -203,12 +219,16 @@ Judgement, marked "own judgment" or "own assumption" in the notes:
 
 - **Ranges.** The low and high multipliers of all seven measures (foreign aid 0.6 to 1.0, defence ±10 %,
   enforcement 0.8 to 1.0, wage cap 0.75 to 1.0, corporate rate 0.7 to 1.1, tariff 0.75 to 1.125 and the offset
-  20 % to 25 %, federal workforce 0.6 to 1.0).
+  20 % to 25 %, federal workforce 0.6 to 1.0, tax on benefits 0.85 to 1.0, rebate 0.85 to 1.05, ACA credits 0.9 to
+  1.5, wealth tax 0.5 to 1.0, top rate 0.6 to 1.0, SNAP share 0.5 to 1.0).
 - **The federal workforce's allocation** to leaves where the object class file does not give it (above), and the
   executive branch's share of the retirement contributions.
 - **The tariff's import loss** of 20 % (range 10 % to 40 %): no official estimate could be retrieved; the
   Congressional Budget Office's estimates of the tariffs' budgetary effects are on cbo.gov, which refuses
   automated downloads.
 - **The corporate rate**: Treasury's share for 28 % is applied linearly to every rate, up and down.
+- **The rebate's phase-out**: incomes evenly spread within each AGI class, children in proportion to adults.
+- **The wealth tax's distribution**: the Pareto tail is an assumption; the Federal Reserve publishes no count of
+  households above $1 billion.
 - **Wages**: per taxpayer on a tax return, uprated from 2023 to 2025 by the growth of the wage limit; the relative
   change is applied to the self-employment tax as well.

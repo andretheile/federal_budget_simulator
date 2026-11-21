@@ -2,7 +2,7 @@
 
 An interactive dashboard of a country's public budget: revenue, spending and balance of the whole state, not only of the central government. You switch on a policy proposal from public debate, such as raising the retirement age, reintroducing the wealth tax, halving MPs' pay or ending citizen's income for non-citizens, and see at once what it does to the budget and what the catch is: legal limits, costs that move to another level of government, side effects. The site shows numbers and catches and takes no political side.
 
-Germany is the first country; the second is the United States, with the federal budget only and its first seven measures. A preview is live at **[fiscal.drtheile.com](https://fiscal.drtheile.com)**; links to its former address, budget.drtheile.com, lead there.
+Germany is the first country; the second is the United States, with the federal budget only and its first 13 measures. A preview is live at **[fiscal.drtheile.com](https://fiscal.drtheile.com)**; links to its former address, budget.drtheile.com, lead there.
 
 ![Budget Simulator with the German budget and three measures switched on: the balance, the goal bar for the 2028 gap in the federal financial plan, bars for revenue and spending, the list of measures narrowed to social policy, and the card of a changed health insurance contribution curve whose loss of wage tax falls on the federal government, the states and the municipalities](docs/screenshot.png)
 
@@ -90,7 +90,7 @@ countries/
     distributions/         taxable_income.json, gross_earnings.json, net_wealth.json
     debt.json              the debt and interest projection
     goals.json             targets for the balance, such as the gaps in the federal financial plan
-  us/                      the US pack: federal budget only, seven measures (country, budget, policies, sources,
+  us/                      the US pack: federal budget only, 13 measures (country, budget, policies, sources,
                            distributions/wages.json)
 src/
   engine/                  calculation engine, knows no country
@@ -367,7 +367,7 @@ To propose a measure or to correct a figure, a catch or a source, open a pull re
 ## Status and limitations
 
 - **A preview.** The version is 0.1.0, and the pack format is marked "v0" in `src/engine/types.ts` and can still change. Search engines are asked not to index a site unless its site config says `"indexable": true` (see [Running your own instance](#running-your-own-instance)).
-- **Two countries.** Germany, base year 2024, with 35 measures. The United States, federal government only, fiscal year 2025 in the unified budget, with seven measures (foreign aid, defence, border and immigration enforcement, the Social Security wage cap, the corporate tax rate, a general tariff and a cut of the federal civilian workforce) and without debt projection or goals so far. Both packs are public. The preview mark is for packs under construction: a pack that carries it is left out of a production build (see [Adding or changing a country](#adding-or-changing-a-country)).
+- **Two countries.** Germany, base year 2024, with 35 measures. The United States, federal government only, fiscal year 2025 in the unified budget, with 13 measures (foreign aid, defence, border and immigration enforcement, the Social Security wage cap, the corporate tax rate, a general tariff, a cut of the federal civilian workforce, no income tax on Social Security benefits, tariff rebate checks, the enhanced ACA premium tax credits, a tax on the largest fortunes, a higher rate on incomes above $1 million and the states' share of SNAP) and without debt projection or goals so far. Both packs are public. The preview mark is for packs under construction: a pack that carries it is left out of a production build (see [Adding or changing a country](#adding-or-changing-a-country)).
 - **Static estimates.** The figures are direct effects on the budget of a single year, as a rule the first; a measure whose figure stands for a later year or for the full effect of a rule says so on its card. There is no forecast and no model of how the economy reacts.
 - **Goals are a rough yardstick.** The goal bar sets these static effects on the 2024 budget, in national accounts, against a gap in the cash plan for a later year's federal core budget, so a measure may yield more or less by then than it shows here. What the plan already counts on and what is paid for outside the debt brake is left out of the comparison and named on the bar and on the cards of the measures concerned, with a short reason there and the full one in the details.
 - **Judgement in the data.** Which level of government bears an item is partly estimated, and the remainders next to named cash items are approximate. [pipeline/de/README.md](pipeline/de/README.md) lists every such judgement.
