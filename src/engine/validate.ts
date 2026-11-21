@@ -833,8 +833,20 @@ function check(
         error(POLICIES, [...at, "below", "yearsPerUnit"], '"yearsPerUnit" needs "param": the distance of which param?');
       }
       const phases = [timing, ...(timing.below ? [timing.below] : [])];
-      if (!timing.below && phases.every((phase) => phase.from === undefined && !phase.years && !phase.yearsPerUnit)) {
-        warn(POLICIES, at, "the timing has no start date and no build-up, so the measure acts in full from the first year measures can act, as without timing");
+      if (!timing.below && phases.every((phase) => phase.from === undefined && !phase.years && !phase.yearsPerUnit && !phase.once && phase.lasts === undefined)) {
+        warn(POLICIES, at, "the timing has no start date, no build-up and no end, so the measure acts in full from the first year measures can act, as without timing");
+      }
+      // An end: a one-off or a number of years, either, and without a build-up (each phase on its own).
+      for (const [phase, path] of [[timing, at], [timing.below, [...at, "below"]]] as const) {
+        if (!phase) continue;
+        if (phase.once && phase.lasts !== undefined) {
+          error(POLICIES, [...path, "lasts"], 'a one-off ("once") counts in one year: leave out "lasts", or leave out "once" for a measure that acts for a number of years');
+        }
+        const end = phase.once ? '"once"' : phase.lasts !== undefined ? '"lasts"' : undefined;
+        const buildUp = phase.years ? "years" : phase.yearsPerUnit ? "yearsPerUnit" : undefined;
+        if (end && buildUp) {
+          error(POLICIES, [...path, buildUp], `a measure that ends (${end}) acts in full from its start: leave out "years" and "yearsPerUnit", or the end`);
+        }
       }
       if (country) {
         for (const [phase, path] of [[timing, at], [timing.below, [...at, "below"]]] as const) {
@@ -1048,6 +1060,17 @@ function check(
           DEBT,
           [...path, "scope"],
           `"${plan.scope}" is the pack's only level, so the plan covers its whole budget: give "scope": "all" so that it is drawn against the projection and can be followed`,
+        );
+      }
+      // Revenue goes with the primary balance in the years a followed plan gives no debt ratio: all of them, or none.
+      const balanceYears = plan.points.filter((point) => point.debtRatio === undefined && point.balanceRatio !== undefined && point.interestRatio !== undefined);
+      const withRevenue = balanceYears.filter((point) => point.interestToRevenue !== undefined && point.interestToRevenue > 0);
+      if (withRevenue.length > 0 && withRevenue.length < balanceYears.length) {
+        const missing = balanceYears.filter((point) => !withRevenue.includes(point)).map((point) => point.year);
+        warn(
+          DEBT,
+          [...path, "points"],
+          `the plan gives "interestToRevenue" in some of its years without a debt ratio but not in ${missing.join(", ")}: a projection that follows it takes the plan's revenue only where it is given and the base year's share of GDP elsewhere`,
         );
       }
       plan.points.forEach((point, k) => {

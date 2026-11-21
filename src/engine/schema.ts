@@ -409,6 +409,8 @@ export const timingPhaseSchema = z.strictObject({
   from: z.iso.date("must be an ISO date (YYYY-MM-DD)").optional(),
   years: z.number().min(0).optional(),
   yearsPerUnit: z.number().min(0).optional(),
+  once: z.literal(true, "is true for a one-off; leave it out for a measure that does not end").optional(),
+  lasts: z.number().int("must be a whole number of years").positive("must be at least 1 year").optional(),
 });
 
 export const policyTimingSchema = timingPhaseSchema.extend({

@@ -1040,6 +1040,51 @@ export function testlandTimedFiles(): RawPackFiles {
 }
 
 /**
+ * Testland with measures that end: the first year measures can act is 2026 (the base year is 2024).
+ *
+ *   family_bonus        a one-off paid on 1 July 2027: the 100 it costs counts in 2027 only, in full
+ *   raise_top_tax_rate  for 4 years from 1 July 2026, to 30 June 2030: 184 of 365 days of the 125 in
+ *                       2026, all of it in 2027 to 2029, 181 of 365 days in 2030, nothing from 2031
+ *   defense_target      a one-off below the baseline (a cut for one year from 2026), for good from
+ *                       1 July 2027 above it, as in testlandTimed but at once
+ */
+export function testlandEnding(): CountryPack {
+  const pack = testlandCopy();
+  pack.debt!.measuresFrom = {
+    year: 2026,
+    note: t("The budget for 2025 is decided.", "Der Haushalt für 2025 ist beschlossen."),
+    sources: ["finance_ministry"],
+  };
+  const policy = (id: string) => pack.policies.find((candidate) => candidate.id === id)!;
+  policy("family_bonus").timing = {
+    from: "2027-07-01",
+    once: true,
+    note: t("The bonus is paid once, in July 2027.", "Der Bonus wird einmal gezahlt, im Juli 2027."),
+    sources: ["finance_ministry"],
+  };
+  policy("raise_top_tax_rate").timing = {
+    from: "2026-07-01",
+    lasts: 4,
+    note: t("A surcharge for four years.", "Ein Zuschlag für vier Jahre."),
+    sources: ["finance_ministry"],
+  };
+  policy("defense_target").timing = {
+    param: "share",
+    from: "2027-07-01",
+    below: { once: true },
+    note: t("A cut is a one-off saving.", "Eine Kürzung spart einmal."),
+    sources: ["finance_ministry"],
+  };
+  return pack;
+}
+
+/** testlandEnding as the raw content of its JSON files. */
+export function testlandEndingFiles(): RawPackFiles {
+  const copy = testlandEnding();
+  return { ...testlandFiles(), policies: { policies: copy.policies, collections: copy.collections }, debt: copy.debt };
+}
+
+/**
  * Testland as a pack like the US one: one level of government, fiscal years, a budget in its own
  * budget accounts, and an official plan in those accounts that the projection follows.
  *

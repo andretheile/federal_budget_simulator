@@ -1642,7 +1642,7 @@ describe("timing", () => {
 
   it("warns about a timing that changes nothing, and a start in the base year or before", () => {
     expect(timedWarnings((f) => (f.policies.policies[1].timing = { note: { en: "x", de: "x" }, sources: ["stats_office"] }))).toEqual([
-      { file: POLICIES, path: "$.policies[1].timing", message: expect.stringMatching(/no start date and no build-up/) },
+      { file: POLICIES, path: "$.policies[1].timing", message: expect.stringMatching(/no start date, no build-up and no end/) },
     ]);
     expect(timedWarnings((f) => (f.policies.policies[3].timing.from = "2024-06-01"))).toEqual([
       { file: POLICIES, path: "$.policies[3].timing.from", message: expect.stringMatching(/2024-06-01 lies in the base year 2024 or before it/) },

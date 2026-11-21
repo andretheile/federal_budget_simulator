@@ -218,16 +218,19 @@ export interface Policy {
   limits?: PolicyLimit[];
   sources: SourceId[];
   /**
-   * When the measure acts in the debt projection and how its effect builds up to the full amount
-   * its effects describe. Absent: in full from the first year measures can act (debt.json
-   * `measuresFrom`). The budget view of the base year is not affected.
+   * When the measure acts in the debt projection, how its effect builds up to the full amount its
+   * effects describe, and whether it ends. Absent: in full and for good from the first year
+   * measures can act (debt.json `measuresFrom`). The budget view of the base year is not affected:
+   * the figure on the card and the scoreboard is the effect of a year in which the measure acts in
+   * full, for a one-off (TimingPhase.once) the amount it pays or raises once.
    */
   timing?: PolicyTiming;
 }
 
 /**
  * One way a measure comes into effect: from a date, rising linearly to its full effect over a
- * number of years. The full effect is what the measure's effects describe, a steady state.
+ * number of years, and either for good, for a number of years (`lasts`) or once (`once`). The full
+ * effect is what the measure's effects describe: a steady state, or for a one-off its amount.
  */
 export interface TimingPhase {
   /**
@@ -244,11 +247,28 @@ export interface TimingPhase {
    * Needs PolicyTiming.param.
    */
   yearsPerUnit?: number;
+  /**
+   * A one-off, such as a rebate paid once: the measure's effects are the amount, and it counts in
+   * full in the one year of the projection that its start falls in (`from`, or the first year
+   * measures can act), whatever the day; in no other year. Not split over two years, as a payment is
+   * not a rate over time. Not with `years`, `yearsPerUnit` or `lasts`.
+   */
+  once?: true;
+  /**
+   * Whole years for which the measure acts, counted from its start in the projection (`from`, or
+   * the first year measures can act if that is later), such as a tax break that expires or a
+   * programme that runs four years. It acts in full from its start and stops at once after the last
+   * day: from 1 January 2028 for 3 years means to 31 December 2030, which in years from October puts
+   * three quarters of a year into the first and a quarter into the last. Absent: for good. Not with
+   * `years`, `yearsPerUnit` or `once`.
+   */
+  lasts?: number;
 }
 
 /**
  * The timing of a measure in the debt projection. The phase fields at the top apply to every
- * setting, or, with `param` and `below`, to settings at or above the param's baseline.
+ * setting, or, with `param` and `below`, to settings at or above the param's baseline; `below` is a
+ * phase of its own and takes none of the fields at the top, an end included.
  */
 export interface PolicyTiming extends TimingPhase {
   /**
@@ -702,7 +722,9 @@ export interface DebtComparison {
  *
  * A projection that follows the plan meets the point's `debtRatio` where it gives one; where it
  * gives none, as in a budget that projects deficits but not debt, it takes the point's primary
- * balance, `balanceRatio` plus `interestRatio`, and computes interest and debt itself.
+ * balance, `balanceRatio` plus `interestRatio`, and computes interest and debt itself. There it takes
+ * the plan's revenue as well where the point gives `interestToRevenue`: `interestRatio /
+ * interestToRevenue` of GDP, the revenue on which the plan's interest is that share.
  */
 export interface DebtPlanPoint {
   year: number;

@@ -190,6 +190,35 @@ describe("following a plan that projects balances but no debt", () => {
     expect(gap(2)).toBeCloseTo(0.004, 12);
   });
 
+  it("takes the plan's revenue with its balance where the point gives interest as a share of revenue, and holds it", () => {
+    const pack = byBalance();
+    // Revenue 1.2 % / 2.5 % = 48 % of GDP in FY 2026, against 40 % in the base year.
+    pack.debt!.plans![0].points[1].interestToRevenue = 0.025;
+    const projection = projectScenario(pack)!;
+    const share = (year: { revenue: number; gdp: number }) => year.revenue / year.gdp;
+    const [first, second, third] = projection.baseline.years;
+    // FY 2025 meets the plan's debt and keeps the base year's revenue share.
+    expect(share(first)).toBeCloseTo(0.4, 12);
+    expect(share(second)).toBeCloseTo(0.48, 12);
+    expect(second.interestToRevenue).toBeCloseTo(second.interest / second.revenue, 12);
+    expect(share(third)).toBeCloseTo(0.48, 12);
+    // Revenue moves no debt: the paths are those without the plan's revenue but for revenue.
+    const without = projectScenario(byBalance())!;
+    expect(projection.baseline.years.map((year) => year.debt)).toEqual(without.baseline.years.map((year) => year.debt));
+    // A measure's revenue adds to the plan's: the wealth tax, 0.4 % of GDP, from 1 January 2026.
+    const taxed = projectScenario(pack, on("wealth_tax"))!;
+    expect(share(taxed.reform.years[0])).toBeCloseTo(0.4, 12);
+    expect(share(taxed.reform.years[1])).toBeCloseTo(0.48 + (0.004 * 273) / 365, 12);
+    expect(share(taxed.reform.years[2])).toBeCloseTo(0.484, 12);
+  });
+
+  it("keeps the base year's revenue share in a year with a debt ratio, and where a point gives no share of revenue", () => {
+    const debtYear = byBalance(false);
+    debtYear.debt!.plans![0].points[1].interestToRevenue = 0.025;
+    for (const year of projectScenario(debtYear)!.baseline.years.slice(0, 3)) expect(year.revenue / year.gdp).toBeCloseTo(0.4, 12);
+    for (const year of projectScenario(byBalance())!.baseline.years.slice(0, 3)) expect(year.revenue / year.gdp).toBeCloseTo(0.4, 12);
+  });
+
   it("a plan that gives debt in every year is followed as before, without balance years", () => {
     const projection = projectScenario(byBalance(false))!;
     expect(projection.followed).toEqual({ plan: "ministry_projection", until: 2026 });
@@ -279,6 +308,17 @@ describe("validation of fiscal years and accounts", () => {
       "$.follow",
       /cannot be followed: it needs in every point a "debtRatio", or else a "balanceRatio" and an "interestRatio"/,
     );
+  });
+
+  it("warns where a plan gives its revenue in some of its years without a debt ratio but not in all", () => {
+    const byBalance = (f: Loose) => {
+      for (const point of f.debt.plans[0].points) delete point.debtRatio;
+      f.debt.plans[0].points[0].interestRatio = 0.01;
+    };
+    expect(warningsAfter(byBalance)).toEqual([
+      { file: "debt.json", path: "$.plans[0].points", message: expect.stringMatching(/gives "interestToRevenue" in some of its years without a debt ratio but not in 2025/) },
+    ]);
+    expect(warningsAfter((f) => (byBalance(f), (f.debt.plans[0].points[0].interestToRevenue = 0.03)))).toEqual([]);
   });
 
   it("a minimal debt.json: no presets, references, comparisons, plans, first year or starting plan", () => {
