@@ -7,7 +7,7 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { Simulator } from "../App.tsx";
-import { testland, testlandCopy, testlandTimed } from "../engine/__fixtures__/testland.ts";
+import { testland, testlandCopy, testlandManyEffects, testlandTimed } from "../engine/__fixtures__/testland.ts";
 import type { CountryPack } from "../engine/index.ts";
 
 let container: HTMLDivElement;
@@ -233,5 +233,213 @@ describe("the timing line at a setting that changes nothing", () => {
     expect(text("#policy-defense_target .policy__amount")).toBe("XTS 0");
     expect(timing.querySelector("span:not(.policy__stand-in)")).toBeNull();
     expect(timing.querySelectorAll(".policy__stand-in").length).toBeGreaterThan(0);
+  });
+});
+
+describe("the card's texts in their places", () => {
+  const BASIC = "#policy-no_basic_income_non_citizens";
+  /** The headings of the opened card's sections, in order. */
+  const headings = (card: string): string[] => all(`${card} .policy__section > h4`);
+  /** Testland with a summary of `length` characters on halving MPs' pay, in both languages. */
+  function withSummary(length: number): CountryPack {
+    const pack = testlandCopy();
+    const policy = pack.policies.find((candidate) => candidate.id === "halve_mp_pay")!;
+    const words = (start: string): string => (start + " " + "word ".repeat(60)).slice(0, length - 1).trimEnd().padEnd(length - 1, "x") + ".";
+    policy.summary = { en: words("Members of parliament get half"), de: words("Abgeordnete bekommen die Hälfte") };
+    return pack;
+  }
+
+  it("shows a short summary on the face whole, and cuts a long one to two lines until the card is opened", () => {
+    mount("#lang=en");
+    expect(query("#policy-halve_mp_pay .policy__summary").classList.contains("is-clamped")).toBe(false);
+    act(() => root?.unmount());
+    // 200 characters still stand whole; 201 are cut, as every summary used to be.
+    mount("#lang=en", withSummary(200));
+    expect(text("#policy-halve_mp_pay .policy__summary")).toHaveLength(200);
+    expect(query("#policy-halve_mp_pay .policy__summary").classList.contains("is-clamped")).toBe(false);
+    act(() => root?.unmount());
+    mount("#lang=de", withSummary(201));
+    const summary = query("#policy-halve_mp_pay .policy__summary");
+    expect(summary.classList.contains("is-clamped")).toBe(true);
+    expand("#policy-halve_mp_pay");
+    expect(summary.classList.contains("is-clamped")).toBe(false);
+  });
+
+  it("puts the explanation at the top of the opened card, in paragraphs, before the settings", () => {
+    mount("#lang=en");
+    expect(container.querySelector(`${BASIC} .policy__explanation`)).toBeNull();
+    expand(BASIC);
+    const panel = query(`${BASIC} .policy__panel`);
+    const explanation = query(`${BASIC} .policy__explanation`);
+    expect(panel.firstElementChild).toBe(explanation);
+    expect([...explanation.querySelectorAll("p")].map((paragraph) => plain(paragraph.textContent))).toEqual([
+      "The figure is the spending on the selected groups, less the fifth that stays as emergency aid.",
+      "Choose the groups under the settings; each adds its share of the spending.",
+    ]);
+    expect(headings(BASIC)[0]).toBe("Settings");
+    // The face keeps the summary alone.
+    expect(text(`${BASIC} .policy__summary`)).toBe("The selected groups lose the benefit.");
+    act(() => root?.unmount());
+    mount("#lang=de");
+    expand(BASIC);
+    expect(text(`${BASIC} .policy__explanation p`)).toBe("Die Zahl sind die Ausgaben für die gewählten Gruppen, abzüglich des Fünftels, das als Nothilfe bleibt.");
+    // A measure without one opens with its settings, as before.
+    expand("#policy-cut_admin");
+    expect(container.querySelector("#policy-cut_admin .policy__explanation")).toBeNull();
+    expect(query("#policy-cut_admin .policy__panel").firstElementChild?.querySelector("h4")?.textContent).toBe("Einstellungen");
+  });
+
+  it("lists the limits of the calculation under their own heading after the catches, with their sources", () => {
+    mount("#lang=en");
+    expand(BASIC);
+    expect(headings(BASIC).slice(-4)).toEqual(["The catch", "Limits of the calculation", "Where it shows in the budget", "Sources"]);
+    const limits = [...container.querySelectorAll(`${BASIC} .limit`)];
+    expect(limits.map((limit) => plain(limit.querySelector(".limit__text")?.textContent))).toEqual([
+      "Recipients who leave the country are not counted.",
+      "Administration costs stay as they are.",
+    ]);
+    expect(plain(limits[0].querySelector(".sources")?.textContent)).toContain("Statistical yearbook");
+    expect(limits[1].querySelector(".sources")).toBeNull();
+    // They are not catches: no severity, and the catches keep their own list.
+    expect(container.querySelectorAll(`${BASIC} .catch`)).toHaveLength(2);
+    expect(limits.every((limit) => limit.querySelector(".catch__severity") === null)).toBe(true);
+    act(() => root?.unmount());
+    mount("#lang=de");
+    expand(BASIC);
+    expect(headings(BASIC)).toContain("Grenzen der Rechnung");
+    expect(text(`${BASIC} .limit__text`)).toBe("Empfänger, die das Land verlassen, sind nicht gerechnet.");
+    // A measure without limits has no such section.
+    expand("#policy-halve_mp_pay");
+    expect(headings("#policy-halve_mp_pay")).not.toContain("Grenzen der Rechnung");
+  });
+
+  it("counts only the catches on the face, not the limits", () => {
+    const pack = testlandCopy();
+    const policy = pack.policies.find((candidate) => candidate.id === "halve_mp_pay")!;
+    policy.limits = [
+      { text: { en: "Pensions of former members are left out.", de: "Ruhegehälter früherer Abgeordneter sind nicht gerechnet." } },
+      { text: { en: "Staff of the members stay.", de: "Die Mitarbeiter der Abgeordneten bleiben." } },
+    ];
+    mount("#lang=en", pack);
+    expect(text("#policy-halve_mp_pay .policy__catches")).toBe("1 catch");
+    act(() => root?.unmount());
+    mount("#lang=de", pack);
+    expect(text("#policy-halve_mp_pay .policy__catches")).toBe("1 Haken");
+  });
+});
+
+describe("the line under a choice of groups", () => {
+  const BASIC = "#policy-no_basic_income_non_citizens";
+  const line = (): string => all(`${BASIC} .param--groups .param__note`)[0];
+
+  it("says what the selection stands for, whatever the chips are", () => {
+    mount("#lang=en");
+    expand(BASIC);
+    expect(line()).toBe("The selection accounts for 30.0% of spending in “Basic income support”.");
+    act(() => query(`${BASIC} .chip[aria-pressed="false"]`).click());
+    expect(line()).toBe("The selection accounts for 90.0% of spending in “Basic income support”.");
+    act(() => root?.unmount());
+    // Chips of levels of government read the same way: no "groups" in the sentence.
+    const pack = testlandCopy();
+    // Changed before anything reads the pack: the engine keeps an index of it once it has looked.
+    const social = pack.budget.expenditure[0];
+    if (!("children" in social)) throw new Error("exp.social has no children");
+    const node = social.children[1];
+    expect(node.id).toBe("exp.social.basic_income");
+    node.breakdowns!.citizenship.groups = [
+      { id: "central", label: { en: "Central government", de: "Zentralstaat" }, share: 0.3 },
+      { id: "provinces", label: { en: "Provinces", de: "Provinzen" }, share: 0.7 },
+    ];
+    const policy = pack.policies.find((candidate) => candidate.id === "no_basic_income_non_citizens")!;
+    (policy.params[0] as { default: string[] }).default = ["central"];
+    mount("#lang=de", pack);
+    expand(BASIC);
+    expect(all(`${BASIC} .chip`)).toEqual(["ZentralstaatAnteil 30,0 %", "ProvinzenAnteil 70,0 %"]);
+    expect(line()).toBe("Auf die Auswahl entfallen 30,0 % der Ausgaben im Posten „Grundsicherung“.");
+    act(() => query(`${BASIC} .chip[aria-pressed="true"]`).click());
+    expect(line()).toBe("Nichts ist ausgewählt. Diese Einstellung hat so keine Wirkung.");
+  });
+});
+
+describe("the notes of the sources", () => {
+  /** The note of a source in the list of all sources under "About the numbers". */
+  const note = (id: string): string | null => container.querySelector(`#source-${id} .sources__note`)?.textContent ?? null;
+
+  it("are in the language shown where the pack translates them, and as written where it does not", () => {
+    mount("#lang=en");
+    expect(note("tax_statistics")).toBe("Table 3, taxable income by bracket.");
+    expect(note("wealth_survey")).toBe("The top of the distribution is extrapolated.");
+    act(() => root?.unmount());
+    mount("#lang=de");
+    expect(note("tax_statistics")).toBe("Tabelle 3, zu versteuerndes Einkommen nach Stufen.");
+    // A plain note is shown in every language, as before.
+    expect(note("wealth_survey")).toBe("The top of the distribution is extrapolated.");
+    // The title stays in the source's own language.
+    expect(container.querySelector("#source-tax_statistics a")?.textContent).toContain("Income tax statistics");
+  });
+
+  it("fall back to English where the language shown is missing", () => {
+    const pack = testlandCopy();
+    pack.sources.tax_statistics.note = { en: "Table 3, taxable income by bracket." };
+    mount("#lang=de", pack);
+    expect(note("tax_statistics")).toBe("Table 3, taxable income by bracket.");
+  });
+});
+
+describe("a measure with many effects", () => {
+  const MANY = "#policy-many_cuts";
+  /** Each group: its head as shown, and the items it lists. */
+  const groups = (): { head: string; items: string[] }[] =>
+    [...container.querySelectorAll(`${MANY} .effect-group`)].map((group) => ({
+      head: plain(group.querySelector(".effect-group__head")?.textContent),
+      items: [...group.querySelectorAll(".effects:not([hidden]) > .effect .effect__node")].map((node) => plain(node.textContent)),
+    }));
+
+  it("groups them by the setting that drives them, with what each group does to the balance, the largest first", () => {
+    mount("#lang=en", testlandManyEffects().pack);
+    expand(MANY);
+    expect(groups()).toEqual([
+      { head: "Staff cut+XTS 150 improves the balance", items: ["Education", "Family benefits", "Health"] },
+      { head: "Pay cut+XTS 30 improves the balance", items: ["Other administration", "Parliament"] },
+      { head: "Not tied to a setting−XTS 3 worsens the balance", items: ["Health"] },
+    ]);
+  });
+
+  it("keeps the rest one step away, with how many and how much, and shows every one of them on request", () => {
+    mount("#lang=en", testlandManyEffects().pack);
+    expand(MANY);
+    const more = query<HTMLButtonElement>(`${MANY} .effects__more`);
+    expect(plain(more.textContent)).toBe("Show 2 more items (together +XTS 30 for the balance)");
+    expect(more.getAttribute("aria-expanded")).toBe("false");
+    const rest = query(`#${CSS.escape(more.getAttribute("aria-controls")!)}`);
+    expect(rest.hidden).toBe(true);
+    act(() => more.click());
+    expect(rest.hidden).toBe(false);
+    expect(more.getAttribute("aria-expanded")).toBe("true");
+    expect(plain(more.textContent)).toBe("Show fewer items");
+    expect(groups()[0].items).toEqual(["Education", "Family benefits", "Health", "Defence", "Other administration"]);
+    // Every effect keeps its line, range and note there.
+    expect(container.querySelectorAll(`${MANY} .effect`)).toHaveLength(8);
+    act(() => more.click());
+    expect(groups()[0].items).toHaveLength(3);
+    act(() => root?.unmount());
+    mount("#lang=de", testlandManyEffects().pack);
+    expand(MANY);
+    expect(text(`${MANY} .effects__more`)).toBe("2 weitere Posten zeigen (zusammen +30 XTS für den Saldo)");
+  });
+
+  it("follows the sliders in its amounts, not in its order", () => {
+    mount("#lang=en&s=many_cuts.staff.1.pay.20", testlandManyEffects().pack);
+    expand(MANY);
+    expect(groups()[0]).toEqual({ head: "Staff cut+XTS 15 improves the balance", items: ["Education", "Family benefits", "Health"] });
+    // 40 from other administration, and parliament's whole 10 (a cut of 20 there stops at zero).
+    expect(groups()[1].head).toBe("Pay cut+XTS 50 improves the balance");
+  });
+
+  it("leaves a measure with few effects as it was: one list, in the pack's order", () => {
+    mount("#lang=en");
+    expand(INSURE);
+    expect(container.querySelector(`${INSURE} .effect-group`)).toBeNull();
+    expect(container.querySelector(`${INSURE} .effects__more`)).toBeNull();
   });
 });

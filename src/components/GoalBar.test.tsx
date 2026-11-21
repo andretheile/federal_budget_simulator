@@ -278,7 +278,27 @@ describe("what a goal leaves out", () => {
     click(query(".goalbar__why"));
     const items = [...container.querySelectorAll(".goaldetails__excluded > li")].map((item) => plain(item.textContent));
     expect(items[0]).toMatch(/^The item “Defence” −XTS 100Defence is paid for outside the deficit rule\./);
-    expect(items[1]).toBe("The measure “Family bonus” −XTS 100The plan already counts on it.");
+    // The details give the full reason, not the short one of the card and the bar.
+    expect(items[1]).toBe(
+      "The measure “Family bonus” −XTS 100The plan already counts on it: the bonus was passed with the last budget, and the plan's figures for 2026 include it in full.",
+    );
+  });
+
+  it("one thing with a short reason of the pack's own: the short one on the line, the full one a click away", () => {
+    mount("#lang=en&g=close_deficit&s=family_bonus");
+    expect(text(".goalbar__inner > .goalbar__excluded")).toBe("Not counted: the measure “Family bonus” (−XTS 100). The plan already counts on it. More on this");
+    // The room keeps the same words, with the link as text.
+    expect(plain(query(".goalbar__room .goalbar__excluded").textContent)).toBe(text(".goalbar__inner > .goalbar__excluded"));
+    click(query(".goalbar__inner > .goalbar__excluded .goalbar__why"));
+    expect(query("dialog.goaldialog").hasAttribute("open")).toBe(true);
+    expect(text(".goaldetails__excluded > li:nth-child(2)")).toContain("the plan's figures for 2026 include it in full.");
+  });
+
+  it("one thing with a long reason and no short one: named with its amount, the reason a click away, not written out", () => {
+    const pack = testlandCopy();
+    delete pack.goals!.goals[0].excluded![1].reasonShort;
+    mount("#lang=en&g=close_deficit&s=family_bonus", pack);
+    expect(text(".goalbar__inner > .goalbar__excluded")).toBe("Not counted: the measure “Family bonus” (−XTS 100). Why?");
   });
 
   it("says nothing while what is left out is zero", () => {
@@ -286,12 +306,57 @@ describe("what a goal leaves out", () => {
     expect(container.querySelector(".goalbar__excluded")).toBeNull();
   });
 
-  it("marks the card of a measure the goal leaves out, with the reason, and only for that goal", () => {
+  it("marks the card of a measure the goal leaves out, with the short reason, and only for that goal", () => {
     mount("#lang=en&g=close_deficit");
-    expect(text("#policy-family_bonus .policy__goal")).toBe("Does not count towards the goal “Close the deficit”. The plan already counts on it.");
+    expect(text("#policy-family_bonus .policy__goal")).toBe("Does not count towards the goal “Close the deficit”. The plan already counts on it. More on this");
     expect(container.querySelectorAll(".policy__goal")).toHaveLength(1);
+    mount("#lang=de&g=close_deficit");
+    expect(text("#policy-family_bonus .policy__goal")).toBe("Zählt nicht für das Ziel „Das Defizit schließen“. Der Plan rechnet schon damit. Mehr dazu");
     mount("#lang=en");
     expect(container.querySelector(".policy__goal")).toBeNull();
+  });
+
+  it("leads from the card's face to the full reason in its details, which take the focus there", () => {
+    mount("#lang=en&g=close_deficit");
+    const card = "#policy-family_bonus";
+    expect(query(`${card} .policy__panel`).hidden).toBe(true);
+    const more = query<HTMLButtonElement>(`${card} .policy__goal-more`);
+    expect(more.getAttribute("aria-controls")).toBe(query(`${card} .policy__panel`).id);
+    click(more);
+    expect(query(`${card} .policy__panel`).hidden).toBe(false);
+    const section = [...container.querySelectorAll(`${card} .policy__section`)].find((element) => plain(element.querySelector("h4")?.textContent) === "The goal");
+    expect(section).toBeDefined();
+    expect(plain(section!.querySelector(".policy__goal-detail")?.textContent)).toBe(
+      "Does not count towards the goal “Close the deficit”. The plan already counts on it: the bonus was passed with the last budget, and the plan's figures for 2026 include it in full.",
+    );
+    expect(document.activeElement).toBe(section!.querySelector("h4"));
+    // What stands against the measure comes first, after the estimate; the goal's section follows the catches.
+    const headings = [...container.querySelectorAll(`${card} .policy__section > h4`)].map((heading) => plain(heading.textContent));
+    expect(headings.slice(0, 4)).toEqual(["Settings", "The estimate", "The catch", "The goal"]);
+    // Clicked again on the open card, the focus goes there once more; closed, the section is gone.
+    act(() => (document.activeElement as HTMLElement).blur());
+    click(more);
+    expect(document.activeElement).toBe(section!.querySelector("h4"));
+    click(query(`${card} .policy__more`));
+    expect(container.querySelector(`${card} .policy__goal-detail`)).toBeNull();
+  });
+
+  it("without a short reason: a short reason of its own stands on the card; a long one is a click away, not written out", () => {
+    const pack = testlandCopy();
+    const entry = pack.goals!.goals[0].excluded![1];
+    delete entry.reasonShort;
+    mount("#lang=en&g=close_deficit", pack);
+    // The reason is longer than a card and the bar take: the statement and the way to it.
+    expect(text("#policy-family_bonus .policy__goal")).toBe("Does not count towards the goal “Close the deficit”. Why?");
+    click(query("#policy-family_bonus .policy__goal-more"));
+    expect(text("#policy-family_bonus .policy__goal-detail")).toContain("include it in full.");
+    // A reason short enough stands there itself, as on the bar, and there is nothing more to see.
+    entry.reason = { en: "The plan already counts on it.", de: "Der Plan rechnet schon damit." };
+    mount("#lang=en&g=close_deficit", pack);
+    expect(text("#policy-family_bonus .policy__goal")).toBe("Does not count towards the goal “Close the deficit”. The plan already counts on it.");
+    expect(container.querySelector("#policy-family_bonus .policy__goal-more")).toBeNull();
+    mount("#lang=en&g=close_deficit&s=family_bonus", pack);
+    expect(text(".goalbar__inner > .goalbar__excluded")).toBe("Not counted: the measure “Family bonus” (−XTS 100). The plan already counts on it.");
   });
 });
 

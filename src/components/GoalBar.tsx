@@ -28,7 +28,16 @@ import { useDeferredValue, useEffect, useId, useMemo, useRef, useState, type Rea
 import { goalView, type ExcludedChange, type GoalView } from "../app/goalModel.ts";
 import { lazyModule } from "../app/lazy.ts";
 import { useUi, type Ui } from "../app/ui.ts";
-import { findNode, goalLevel, simulate, type Goal, type GoalExclusion, type Scenario, type SimulationResult } from "../engine/index.ts";
+import {
+  findNode,
+  goalLevel,
+  GOAL_REASON_SHORT,
+  simulate,
+  type Goal,
+  type GoalExclusion,
+  type Scenario,
+  type SimulationResult,
+} from "../engine/index.ts";
 import { Check, CloseIcon, InfoIcon, ResetIcon, TriangleDown } from "./icons.tsx";
 import { standIn, widest } from "./Scoreboard.tsx";
 
@@ -58,6 +67,23 @@ export function asSentence(text: string, language: string): string {
   if (!trimmed) return "";
   const capital = trimmed.charAt(0).toLocaleUpperCase(language) + trimmed.slice(1);
   return /[.!?…]$/.test(capital) ? capital : `${capital}.`;
+}
+
+/**
+ * The reason for leaving something out, where room is short: on the card of an excluded measure and
+ * on the goal bar's line. One rule for both: the pack's short reason (`reasonShort`), or else the
+ * reason itself if it is short (GOAL_REASON_SHORT characters at most); a longer one is not written
+ * out there. `more`: the details say more than is written there, so a way to them is offered.
+ */
+export function shortReason(ui: Ui, entry: GoalExclusion | undefined): { text?: string; more: boolean } {
+  if (!entry) return { more: false };
+  const full = asSentence(ui.text(entry.reason), ui.language);
+  if (entry.reasonShort) {
+    const text = asSentence(ui.text(entry.reasonShort), ui.language);
+    return { text, more: full !== "" && full !== text };
+  }
+  if (!full) return { more: false };
+  return [...full].length <= GOAL_REASON_SHORT ? { text: full, more: false } : { more: true };
 }
 
 /** What an excluded change (or the goal's entry for it) is, in words: the budget item's name or the measure's. */
@@ -126,25 +152,21 @@ function listOf(language: string, items: string[]): string {
   }
 }
 
-/** A reason up to this length stands on the bar itself; a longer one, or several, are in the details. */
-const SHORT_REASON = 90;
-
 /**
  * The line about what the goal leaves out, if anything left out is not zero: what it is and its
- * amount. With one entry and a short reason the reason follows; otherwise the reasons are one
- * click away, in the details.
+ * amount. With one entry its short reason follows (see shortReason), and the details are offered
+ * if they say more; with several the reasons are one click away, in the details.
  */
-export function excludedWords(ui: Ui, goal: Goal, view: GoalView): { line: string; reason?: string } | undefined {
+export function excludedWords(ui: Ui, goal: Goal, view: GoalView): { line: string; reason?: string; more: boolean } | undefined {
   if (view.excluded.length === 0) return undefined;
   const { t, fmt } = ui;
   const named = view.excluded.map((change) => ({ change, name: excludedName(ui, change), amount: fmt.money(change.improvement, { signed: true }) }));
   if (named.length === 1) {
     const [{ change, name, amount }] = named;
-    const reason = exclusionFor(goal, change)?.reason;
-    const text = reason ? asSentence(ui.text(reason), ui.language) : "";
-    return { line: t.goal.excludedOne(name, amount), reason: text && text.length <= SHORT_REASON ? text : undefined };
+    const short = shortReason(ui, exclusionFor(goal, change));
+    return { line: t.goal.excludedOne(name, amount), reason: short.text, more: short.more };
   }
-  return { line: t.goal.excludedMany(listOf(ui.language, named.map(({ name, amount }) => t.goal.excludedPart(name, amount)))) };
+  return { line: t.goal.excludedMany(listOf(ui.language, named.map(({ name, amount }) => t.goal.excludedPart(name, amount)))), more: true };
 }
 
 /**
@@ -352,16 +374,15 @@ export function GoalBar({ goal, scenario, result, onGoal, steady }: GoalBarProps
         {excluded && (
           <p className="goalbar__excluded">
             {excluded.line}
-            {excluded.reason ? (
-              ` ${excluded.reason}`
-            ) : !steady ? (
+            {excluded.reason && ` ${excluded.reason}`}
+            {excluded.more && !steady && (
               <>
                 {" "}
                 <button type="button" className="goalbar__why" onClick={openDetails} onPointerEnter={preloadGoalDetails} onFocus={preloadGoalDetails}>
-                  {t.goal.why}
+                  {excluded.reason ? t.goal.moreReason : t.goal.why}
                 </button>
               </>
-            ) : null}
+            )}
           </p>
         )}
 
@@ -386,14 +407,13 @@ export function GoalBar({ goal, scenario, result, onGoal, steady }: GoalBarProps
           {excluded && (
             <p className="goalbar__excluded">
               {excluded.line}
-              {excluded.reason ? (
-                ` ${excluded.reason}`
-              ) : !steady ? (
+              {excluded.reason && ` ${excluded.reason}`}
+              {excluded.more && !steady && (
                 <>
                   {" "}
-                  <span className="goalbar__why">{t.goal.why}</span>
+                  <span className="goalbar__why">{excluded.reason ? t.goal.moreReason : t.goal.why}</span>
                 </>
-              ) : null}
+              )}
             </p>
           )}
         </div>

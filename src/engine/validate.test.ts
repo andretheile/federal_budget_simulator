@@ -1654,3 +1654,81 @@ describe("timing", () => {
     expect(testland.policies.some((policy) => policy.timing)).toBe(false);
   });
 });
+
+describe("texts in their places: explanation, limits, short reasons, source notes", () => {
+  it("checks the new texts for every locale", () => {
+    expectOnly((f) => delete f.policies.policies[2].explanation.de, "policies.json", "$.policies[2].explanation", /text for locale "de" is missing/);
+    expectOnly((f) => delete f.policies.policies[2].limits[1].text.de, "policies.json", "$.policies[2].limits[1].text", /text for locale "de" is missing/);
+    expectOnly((f) => delete f.goals.goals[0].excluded[1].reasonShort.de, "goals.json", "$.goals[0].excluded[1].reasonShort", /text for locale "de" is missing/);
+    expectOnly((f) => delete f.sources.tax_statistics.note.de, "sources.json", "$.tax_statistics.note", /text for locale "de" is missing/);
+  });
+
+  it("takes a source's note as a plain text, shown in every language, or as a localized one", () => {
+    const files = testlandFiles() as Files;
+    expect(typeof files.sources.wealth_survey.note).toBe("string");
+    expect(typeof files.sources.tax_statistics.note).toBe("object");
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+    expectOnly((f) => (f.sources.wealth_survey.note = ""), "sources.json", "$.wealth_survey.note", /./);
+    expectOnly((f) => (f.sources.wealth_survey.note = 3), "sources.json", "$.wealth_survey.note", /./);
+  });
+
+  it("checks the sources of a limit, and a limit has a text and sources, no kind or severity", () => {
+    expectOnly((f) => (f.policies.policies[2].limits[0].sources = ["nowhere"]), "policies.json", "$.policies[2].limits[0].sources[0]", /unknown source "nowhere"/);
+    expectOnly((f) => (f.policies.policies[2].limits[0].severity = "minor"), "policies.json", "$.policies[2].limits[0]", /severity/);
+    expectOnly((f) => delete f.policies.policies[2].limits[0].text, "policies.json", "$.policies[2].limits[0].text", /./);
+    // Everything new is optional: a pack without any of it is as valid as before.
+    const files = testlandFiles() as Files;
+    delete files.policies.policies[2].explanation;
+    delete files.policies.policies[2].limits;
+    delete files.goals.goals[0].excluded[1].reasonShort;
+    delete files.sources.tax_statistics.note;
+    expect(validatePack(files)).toMatchObject({ ok: true, warnings: [] });
+  });
+
+  it("warns about a summary longer than a card's face shows whole, with its length in each language", () => {
+    const of = (length: number): string => "x".repeat(length);
+    expect(warningsAfter((f) => (f.policies.policies[0].summary = { en: of(200), de: of(200) }))).toEqual([]);
+    expect(warningsAfter((f) => (f.policies.policies[0].summary = { en: of(201), de: of(80) }))).toEqual([
+      {
+        file: "policies.json",
+        path: "$.policies[0].summary",
+        message: 'the summary of "halve_mp_pay" has 201 characters in "en", more than the 200 a card\'s face shows whole; keep what the measure does and what its default shows, and move the rest to "explanation"',
+      },
+    ]);
+    const both = warningsAfter((f) => (f.policies.policies[0].summary = { en: of(300), de: of(310) }));
+    expect(both.map((warning) => warning.message)).toEqual([expect.stringMatching(/^the summary of "halve_mp_pay" has 300 characters in "en" and 310 in "de", more than/)]);
+    // Characters as a reader counts them: an umlaut or a dash is one, spaces at the ends do not count.
+    expect(warningsAfter((f) => (f.policies.policies[0].summary = { en: of(200), de: ` ${"ä".repeat(199)}–  ` }))).toEqual([]);
+    // It is a warning: the pack stays valid, and an invalid one still lists its long summaries.
+    const long = testlandFiles() as Files;
+    long.policies.policies[0].summary.en = of(250);
+    expect(validatePack(long).ok).toBe(true);
+    const broken = testlandFiles() as Files;
+    broken.policies.policies[0].summary.en = of(250);
+    broken.policies.policies[1].effects[0].target = "exp.nowhere";
+    const result = validatePack(broken);
+    expect(result.ok).toBe(false);
+    expect(result.warnings.map((warning) => warning.path)).toEqual(["$.policies[0].summary"]);
+  });
+
+  it("does not let a long summary hide that a measure is not zero at its base-year values", () => {
+    const defence = 5; // defense_target
+    const warnings = warningsAfter((f) => {
+      f.policies.policies[defence].params[0].baseline = 2.5;
+      f.policies.policies[defence].summary.de = "x".repeat(250);
+    });
+    expect(warnings.map((warning) => warning.path)).toEqual([`$.policies[${defence}]`, `$.policies[${defence}].summary`]);
+  });
+
+  it("warns about a short reason that is not short", () => {
+    const warnings = warningsAfter((f) => (f.goals.goals[0].excluded[1].reasonShort.en = "y".repeat(91)));
+    expect(warnings).toEqual([
+      {
+        file: "goals.json",
+        path: "$.goals[0].excluded[1].reasonShort",
+        message: expect.stringMatching(/^has 91 characters in "en"; a short reason of up to 90 characters fits on a card/),
+      },
+    ]);
+    expect(warningsAfter((f) => (f.goals.goals[0].excluded[1].reasonShort.en = "y".repeat(90)))).toEqual([]);
+  });
+});

@@ -9,5 +9,9 @@ import type { Messages } from "./messages.ts";
 export const enUS: Messages = {
   ...en,
   policies: { ...en.policies, topics: { ...en.policies.topics, defense: "Defense" } },
-  curve: { ...en.curve, clampedTo: (value) => `Limited to ${value}: a point cannot overtake its neighbors.` },
+  curve: {
+    ...en.curve,
+    clampedTo: (value) => `Limited to ${value}: a point cannot overtake its neighbors.`,
+    examplesNote: "Amounts per year. The figure in parentheses is the average rate: the amount divided by the value on the horizontal axis.",
+  },
 };

@@ -26,6 +26,8 @@ import {
   CURVE_MIN_POINTS,
   DEBT_ASSUMPTION_IDS,
   DEBT_ASSUMPTION_UNITS,
+  GOAL_REASON_SHORT,
+  SUMMARY_FACE_LENGTH,
   type Breakdown,
   type BudgetNode,
   type CountryPack,
@@ -368,6 +370,7 @@ function check(
   const checkPolicy = (policy: Policy, base: Path): void => {
     text(POLICIES, [...base, "label"], policy.label);
     text(POLICIES, [...base, "summary"], policy.summary);
+    text(POLICIES, [...base, "explanation"], policy.explanation);
     refs(POLICIES, [...base, "sources"], policy.sources);
 
     const params = new Map<string, Param>();
@@ -774,6 +777,10 @@ function check(
       text(POLICIES, [...base, "catches", i, "text"], item.text);
       refs(POLICIES, [...base, "catches", i, "sources"], item.sources);
     });
+    policy.limits?.forEach((item, i) => {
+      text(POLICIES, [...base, "limits", i, "text"], item.text);
+      refs(POLICIES, [...base, "limits", i, "sources"], item.sources);
+    });
     policy.params.forEach((param, i) => {
       if (!usedParams.has(param.id)) warn(POLICIES, [...base, "params", i], `param "${param.id}" is not used by any effect`);
     });
@@ -1066,6 +1073,15 @@ function check(
       entries.forEach((exclusion, k) => {
         const at = [...path, "excluded", k];
         text(GOALS, [...at, "reason"], exclusion.reason);
+        text(GOALS, [...at, "reasonShort"], exclusion.reasonShort);
+        const long = overLength(exclusion.reasonShort, GOAL_REASON_SHORT);
+        if (long.length > 0) {
+          warn(
+            GOALS,
+            [...at, "reasonShort"],
+            `has ${lengths(long)}; a short reason of up to ${GOAL_REASON_SHORT} characters fits on a card and on the goal bar's line, so shorten it to one short sentence`,
+          );
+        }
         refs(GOALS, [...at, "sources"], exclusion.sources);
         const policyId = exclusion.policy;
         if (policyId !== undefined) {
@@ -1110,8 +1126,21 @@ function check(
     if (!goalIds.has(goals.default)) error(GOALS, ["default"], `unknown goal "${goals.default}"`);
   }
 
+  // --- sources.json ---------------------------------------------------------------------------
+
+  if (sources) {
+    for (const [id, source] of Object.entries(sources)) {
+      // A plain note is shown in every language; a localized one needs each of them.
+      if (typeof source.note === "object") text(SOURCES, [id, "note"], source.note);
+    }
+  }
+
   // --- result ---------------------------------------------------------------------------------
 
+  // Summaries too long for a card's face come after every other warning, and apart from them: the
+  // check of a measure at its baseline below leaves out a measure that has a warning already, and
+  // a long text is no reason to.
+  const long = policiesFile ? longSummaries(policiesFile.policies) : [];
   const complete =
     country &&
     budget &&
@@ -1126,13 +1155,52 @@ function check(
     }
   }
 
-  if (errors.length > 0 || !complete) return { ok: false, errors: sortByFile(errors), warnings: sortByFile(warnings) };
+  if (errors.length > 0 || !complete) return { ok: false, errors: sortByFile(errors), warnings: sortByFile([...warnings, ...long]) };
   const pack: CountryPack = { country, budget, policies: policiesFile.policies, sources, distributions };
   if (policiesFile.collections) pack.collections = policiesFile.collections;
   if (debt) pack.debt = debt;
   if (goals) pack.goals = goals;
   for (const issue of nonZeroAtBaseline(pack, warnings)) warnings.push(issue);
-  return { ok: true, pack, warnings: sortByFile(warnings) };
+  return { ok: true, pack, warnings: sortByFile([...warnings, ...long]) };
+}
+
+/** Length of a text as a reader counts it: in characters, not in UTF-16 code units. */
+function charCount(value: string): number {
+  return [...value.trim()].length;
+}
+
+/** The languages in which a text is longer than `max`, with its length in each. */
+function overLength(value: LocalizedText | undefined, max: number): [string, number][] {
+  if (!value) return [];
+  return Object.entries(value).flatMap(([locale, words]): [string, number][] => {
+    const count = charCount(words);
+    return count > max ? [[locale, count]] : [];
+  });
+}
+
+/** [["de", 312], ["en", 290]] -> '312 characters in "de" and 290 in "en"' */
+function lengths(entries: readonly [string, number][]): string {
+  return entries.map(([locale, count], i) => `${count}${i === 0 ? " characters" : ""} in "${locale}"`).join(" and ");
+}
+
+/**
+ * Summaries longer than a card's face shows whole (SUMMARY_FACE_LENGTH), one warning per measure
+ * with the length in each language that is too long: the list of faces that are cut.
+ */
+function longSummaries(policies: readonly Policy[]): ValidationIssue[] {
+  return policies.flatMap((policy, i) => {
+    const long = overLength(policy.summary, SUMMARY_FACE_LENGTH);
+    if (long.length === 0) return [];
+    return [
+      {
+        file: POLICIES,
+        path: formatPath(["policies", i, "summary"]),
+        message:
+          `the summary of "${policy.id}" has ${lengths(long)}, more than the ${SUMMARY_FACE_LENGTH} a card's face shows whole; ` +
+          `keep what the measure does and what its default shows, and move the rest to "explanation"`,
+      },
+    ];
+  });
 }
 
 /**

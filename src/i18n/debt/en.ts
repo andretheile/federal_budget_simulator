@@ -4,7 +4,7 @@ function intro({ baseYear, plan }: DebtIntroFacts): string {
   if (!plan) {
     return `This is how debt and interest would develop if the budget of ${baseYear} kept its size relative to the economy.`;
   }
-  return `Up to ${plan.until}, debt and growth follow the official plan “${plan.label}”; after that, the budget before interest keeps the share of economic output it has in ${plan.until}, and the assumptions apply.`;
+  return `Up to ${plan.until}, debt and growth follow the official plan “${plan.label}”. After that, the budget before interest keeps the share of economic output it has in ${plan.until}, and the assumptions apply.`;
 }
 
 function when({ start, startYear, full, last }: PhaseWords): string {

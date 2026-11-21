@@ -4,8 +4,8 @@
  */
 import type { ReactNode } from "react";
 import type { Direction } from "../app/policyModel.ts";
-import { useUi } from "../app/ui.ts";
-import type { Quality, SourceId } from "../engine/index.ts";
+import { useUi, type Ui } from "../app/ui.ts";
+import type { LocalizedText, Quality, SourceId } from "../engine/index.ts";
 import { useAnimatedNumber } from "../hooks/useAnimatedNumber.ts";
 import { Check, ExternalIcon, TriangleDown, TriangleUp } from "./icons.tsx";
 
@@ -119,9 +119,19 @@ function isWebUrl(url: string): boolean {
   return /^https?:\/\//i.test(url);
 }
 
-/** Sources by id, as links that open in a new tab. Ids the pack does not know are skipped. */
+/**
+ * A source's note in the language shown. A plain string is shown as it is, in every language: the
+ * notes of a pack that has not translated them yet. A localized one is in the language shown, or
+ * else in English.
+ */
+export function noteText(ui: Ui, note: string | LocalizedText): string {
+  return typeof note === "string" ? note : ui.text(note);
+}
+
+/** Sources by id, as links that open in a new tab. Ids the pack does not know are skipped. Titles stay in the source's own language. */
 export function SourceList({ ids, detailed = false }: { ids: readonly SourceId[]; detailed?: boolean }) {
-  const { pack, t, fmt } = useUi();
+  const ui = useUi();
+  const { pack, t, fmt } = ui;
   const known = ids.filter((id) => pack.sources[id]);
   if (known.length === 0) return null;
   return (
@@ -145,7 +155,7 @@ export function SourceList({ ids, detailed = false }: { ids: readonly SourceId[]
               {source.year !== undefined && ` ${source.year}`}
               {detailed && `, ${t.about.accessed(fmt.date(source.accessed))}`}
             </span>
-            {detailed && source.note && <span className="sources__note">{source.note}</span>}
+            {detailed && source.note && <span className="sources__note">{noteText(ui, source.note)}</span>}
           </li>
         );
       })}

@@ -307,9 +307,11 @@ main:focus {
   color: var(--ink-3);
 }
 
+/* The note under a source in the full list: set apart from the publisher and date above it. */
 .sources__note {
   display: block;
-  color: var(--ink-3);
+  margin-top: 3px;
+  color: var(--ink-2);
 }
 
 /* Label and value pairs. */

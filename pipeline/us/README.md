@@ -5,8 +5,10 @@ September 2025) in the unified budget, from the files of the Office of Managemen
 produces `countries/us/distributions/wages.json`, the wages per worker that the Social Security measure is
 calculated on. The other pack files (`country.json`, `sources.json`, `policies.json`) are maintained by hand;
 `build_budget.py --check` also compares the GDP and population in `country.json` with the cached sources, and
-`measures.py --check` recomputes the constants that the measures in `policies.json` take from sources. The source
-ids used in the scripts are the keys of `countries/us/sources.json`.
+`measures.py --check` recomputes the constants that the measures in `policies.json` take from sources. One measure's
+effects are generated: `workforce.py` derives what each spending leaf pays its civilian staff, and
+`measures.py --write` turns that into the effects of `federal_workforce_cut`. The source ids used in the scripts are
+the keys of `countries/us/sources.json`.
 
 ## Run it
 
@@ -18,7 +20,9 @@ python3 pipeline/us/build_budget.py            # diagnostics: checks, reconcilia
 python3 pipeline/us/build_budget.py --check    # rebuild in memory, compare with budget.json and country.json
 python3 pipeline/us/build_budget.py --write    # replace budget.json
 python3 pipeline/us/build_dist.py --check      # the same for distributions/wages.json (--write to replace it)
+python3 pipeline/us/workforce.py              # diagnostics: civilian staff costs by leaf, checked against OMB's total
 python3 pipeline/us/measures.py --check        # the figures behind the measures, compared with policies.json
+python3 pipeline/us/measures.py --write        # rewrite the generated effects of federal_workforce_cut
 npm run validate                               # then check the whole pack
 ```
 
@@ -27,7 +31,7 @@ Every run, with or without an option, stops with an error if the leaves do not a
 
 ## Sources and the cache
 
-`.cache/` holds the downloaded files, one folder per publisher, and is not in git (119 MB, of which 77 MB are the
+`.cache/` holds the downloaded files, one folder per publisher, and is not in git (127 MB, of which 77 MB are the
 Trustees Report and 12 MB the BEA flat file). Nothing in it is executed or imported. OMB rarely replaces a Budget's files after publication, and the
 Monthly Treasury Statement for a given month is fixed, so a fresh download should reproduce the pack; BEA's flat file
 is replaced with every NIPA release, which can change the one BEA figure quoted in a note.
@@ -48,8 +52,11 @@ is replaced with every NIPA release, which can change the one BEA figure quoted 
 | `irs/p15--2025.pdf` | IRS Publication 15 (2025) | payroll tax rates and wage base in descriptions (read by hand) |
 | `irs/23in01w2all.xlsx` | IRS Statistics of Income, Form W-2 statistics 2023 (October 2026), Table 1 | `build_dist.py`: wages per worker |
 | `census/ft900_exh1.xlsx` | Census Bureau, FT-900 release of November 2026, Exhibit 1 (the address always holds the latest release) | `measures.py`: goods imports for the tariff measure |
-| `mts/mts_table_5_*.csv` | Monthly Treasury Statement, Table 5 (outlays by agency) | `measures.py`: CBP and ICE outlays in 2025 and 2026 |
-| `govinfo/`, `scotus/`, `fr/`, `nato/`, `treasury/` | laws, a bill, the Trustees Report, the Supreme Court's tariff decision, Federal Register documents, NATO and Treasury documents (list in `fetch_inputs.py`) | read by hand for the measures' notes and catches |
+| `mts/mts_table_5_*.csv` | Monthly Treasury Statement, Table 5 (outlays by agency) | `measures.py`: CBP and ICE outlays in 2025 and 2026; `workforce.py`: administrative expenses of the Social Security trust funds |
+| `omb/objclass_detail_fy2027.xlsx` | OMB, object class detail of the Budget for FY 2027: obligations by account, object class, direct or reimbursable, $ million | `workforce.py`: civilian pay and benefits of 2025 per leaf |
+| `omb/ap_5_tables_1-3_fy2027.xlsx` | Analytical Perspectives, Tables 5-1 to 5-3: civilian FTE, pay and benefits | `workforce.py`: check of the personnel base, figures on the card |
+| `bls/ces_CES9091100001.json` | BLS Current Employment Statistics, federal employment except the Postal Service, through the public API (always the latest data) | `workforce.py`: employment quoted on the card |
+| `govinfo/`, `scotus/`, `fr/`, `nato/`, `treasury/`, `irs/p5901.pdf`, `omb/ap_5_management_fy2027.pdf` | laws, a bill, the Trustees Report, Supreme Court decisions and orders, Federal Register documents, NATO, Treasury, IRS and OMB documents (list in `fetch_inputs.py`) | read by hand for the measures' notes and catches |
 
 ## How the tree is built
 
@@ -151,14 +158,54 @@ The Social Security measure needs no constant: the engine applies the old and th
 the 2025 rule and a rule without a cap yield on the distribution (without a cap the taxable wages are 17.9 % higher)
 and checks the bins against Table 1.H, which gives the same wages by multiples of the wage limit.
 
+### The federal workforce (`federal_workforce_cut`)
+
+The measure has four params, the share of civilian positions cut in four groups of agencies: the Department of
+Defense (OMB agency 007), veterans' health care (Veterans Affairs staff whose costs lie in subfunction 703, including
+medical staff paid from the Toxic Exposures Fund), the Departments of Homeland Security and Justice (024, 011), and
+all other agencies of the executive branch. Its effects are generated, not written by hand: `workforce.py` derives
+what each spending leaf paid its civilian staff in 2025, and `measures.py --write` makes one `add` effect per leaf
+and group (the group's param times the cost) plus one effect per group on federal pensions (602). `--check`
+compares all of them, notes included, with `policies.json`.
+
+The base is object classes 11.1, 11.3, 11.5 and 12.1 (civilian pay and benefits) of the executive branch without
+the Postal Service in OMB's object class file: $383.299 billion, equal to Table 5-3 of the Analytical Perspectives
+to the million; the script stops if they differ. Legislative branch ($4.4 billion), judiciary ($5.6 billion), Postal
+Service ($65.0 billion) and military pay (11.6, 11.7, 12.2) are not in it. The file gives the account of every
+amount; which leaf an account belongs to comes from `build_budget.py`'s assignment of the Public Budget Database.
+Of the base, $269.5 billion lands in a leaf directly; the rest is placed by the script's own rules, which every
+effect's note names with its amount:
+
+- an account whose outlays lie in several leaves within its default subfunction, or whose default is a whole
+  function or "multiple" (the FBI's salaries, for example, which OMB books partly to defence-related activities),
+  is split by its positive outlays per leaf ($46.4 billion);
+- reimbursable obligations, work an account does for others such as the Defense working capital funds, are spread
+  over the same agency's leaves like its direct costs, because the paying accounts bear the saving ($59.4 billion);
+- Social Security's administrative account, which the database does not list as an account of its own, is split
+  between the two trust funds by their administrative expenses in the Monthly Treasury Statement ($7.9 billion);
+- leaf and group pairs below $1 billion are added to the group's largest pair in the same function (or the group's
+  largest overall, $0.3 billion), which leaves 40 pairs.
+
+The agencies' contributions to the civil service and Foreign Service retirement funds are offsetting receipts
+netted in federal pensions (see the table above); fewer employees pay less of them, so that leaf rises. The share is
+the contributions of 2025 ($50.4 billion, accounts 813520 and 818640), the executive branch's part by its share of
+civilian pay, over the base: 12.84 %. Employer Social Security and Medicare taxes are not netted out in the same
+way, because the measure assumes that those who leave work elsewhere and their new employers pay these taxes.
+Four leaves have staff costs above their net outlays, because fees and other receipts are netted against them:
+other law enforcement (immigration and customs fees), commerce (deposit insurance), food, drug and workplace safety
+(the FDA's user fees, within its account) and the Defense revolving funds. The params stop at 50 %, where no leaf is
+cut below zero.
+
 Data, taken as published: outlays and receipts of 2025 in the budget, imports, NATO's estimate, Treasury's revenue
-estimate, the JCT offset, wages by size class, the wage limits.
+estimate, the JCT offset, wages by size class, the wage limits, civilian pay and benefits by account.
 
-Judgement, marked "own judgement" or "own assumption" in the notes:
+Judgement, marked "own judgment" or "own assumption" in the notes:
 
-- **Ranges.** The low and high multipliers of all six measures (foreign aid 0.6 to 1.0, defence ±10 %,
+- **Ranges.** The low and high multipliers of all seven measures (foreign aid 0.6 to 1.0, defence ±10 %,
   enforcement 0.8 to 1.0, wage cap 0.75 to 1.0, corporate rate 0.7 to 1.1, tariff 0.75 to 1.125 and the offset
-  20 % to 25 %).
+  20 % to 25 %, federal workforce 0.6 to 1.0).
+- **The federal workforce's allocation** to leaves where the object class file does not give it (above), and the
+  executive branch's share of the retirement contributions.
 - **The tariff's import loss** of 20 % (range 10 % to 40 %): no official estimate could be retrieved; the
   Congressional Budget Office's estimates of the tariffs' budgetary effects are on cbo.gov, which refuses
   automated downloads.

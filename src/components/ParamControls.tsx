@@ -25,10 +25,15 @@ import type { SliderBase } from "../i18n/messages.ts";
 import { Check } from "./icons.tsx";
 import { QualityBadge } from "./primitives.tsx";
 
-/** Where the label of the base-year value stands: right or left of its tick, on the scale's line or on a line of its own. */
+/**
+ * Where the label of the base-year value stands: right or left of its tick, on the scale's line or
+ * on a line of its own; or, on a line of its own, centred under the tick and kept inside the scale
+ * ("center", at `left` px) where it is too long for either side, as a long label is on a phone.
+ */
 interface BasePlace {
-  side: "after" | "before";
+  side: "after" | "before" | "center";
   own: boolean;
+  left?: number;
 }
 
 export function NumberControl({
@@ -132,21 +137,27 @@ export function NumberControl({
       const [low, high] = [...element.querySelectorAll<HTMLElement>(".param__end")].map((end) => end.getBoundingClientRect());
       const label = element.querySelector<HTMLElement>(".param__base");
       if (!low || !high || !label || !(box.width > 0)) return;
-      const width = label.getBoundingClientRect().width;
+      // Its width beside a tick, with the tick's border and padding, also while it stands centred without them.
+      const width = label.getBoundingClientRect().width + (label.classList.contains("param__base--center") ? 7 : 0);
       const knob = 22;
       const x = knob / 2 + baseAt * (box.width - knob);
       const lowEnd = low.right - box.left + 8;
       const highStart = high.left - box.left - 8;
       const fits = (side: BasePlace["side"]): boolean =>
         side === "after" ? x - 1 >= lowEnd && x - 1 + width <= highStart : x + 1 - width >= lowEnd && x + 1 <= highStart;
-      const preferred: BasePlace["side"] = baseAt < 0.5 ? "after" : "before";
-      const other: BasePlace["side"] = preferred === "after" ? "before" : "after";
+      const preferred: "after" | "before" = baseAt < 0.5 ? "after" : "before";
+      const other: "after" | "before" = preferred === "after" ? "before" : "after";
+      const left = Math.round(Math.max(0, Math.min(box.width - width, x - width / 2)));
       const next: BasePlace = fits(preferred)
         ? { side: preferred, own: false }
         : fits(other)
           ? { side: other, own: false }
-          : { side: x - 1 + width <= box.width ? "after" : "before", own: true };
-      setPlace((current) => (current.side === next.side && current.own === next.own ? current : next));
+          : x - 1 + width <= box.width
+            ? { side: "after", own: true }
+            : x + 1 - width >= 0
+              ? { side: "before", own: true }
+              : { side: "center", own: true, left };
+      setPlace((current) => (current.side === next.side && current.own === next.own && current.left === next.left ? current : next));
     };
     measure();
     if (typeof ResizeObserver !== "function") return;
@@ -158,10 +169,11 @@ export function NumberControl({
   const toBase = (): void => {
     if (hasBase) set(onGrid(base, param));
   };
-  const baseButton = (text: string, className: string) => (
+  const baseButton = (text: string, className: string, left?: number) => (
     <button
       type="button"
       className={`${className}${value === base ? " is-current" : ""}`}
+      style={left === undefined ? undefined : { left: `${left}px` }}
       onClick={toBase}
       aria-label={t.policies.toBaseValue(baseText, baseName)}
     >
@@ -246,7 +258,10 @@ export function NumberControl({
             {fmt.param(param, param.min)}
           </span>
         )}
-        {baseOnScale && !atMin && !atMax && baseButton(t.policies.baseValue(baseText, baseName), `param__base param__base--${place.side}`)}
+        {baseOnScale &&
+          !atMin &&
+          !atMax &&
+          baseButton(t.policies.baseValue(baseText, baseName), `param__base param__base--${place.side}`, place.side === "center" ? place.left : undefined)}
         {atMax ? (
           baseButton(t.policies.baseAtEnd(fmt.param(param, param.max), baseName), "param__end param__end--max param__end--base")
         ) : (

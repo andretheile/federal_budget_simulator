@@ -1,12 +1,15 @@
 /**
  * One measure. Collapsed it shows the label, a short summary, the switch and what the measure
- * would do on its own at its current settings, put in proportion. Expanded it adds the controls,
- * the estimate (range, data quality, who is affected), the split by level of government, the
- * catches, the budget items it changes and the sources.
+ * would do on its own at its current settings, put in proportion. Expanded it adds the pack's
+ * explanation, the controls, the estimate (range, data quality, who is affected), the split by
+ * level of government, the catches, the limits of the calculation, why the goal leaves it out (if
+ * it does), when it acts, the budget items it changes and the sources: what stands against the
+ * measure comes right after its figure, what qualifies the figure after that.
  */
-import { memo, useMemo, type ReactNode } from "react";
+import { memo, useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { colorOf, layoutBudget } from "../app/budgetModel.ts";
 import { curveSettings } from "../app/curveModel.ts";
+import { effectGroups, MANY_EFFECTS } from "../app/effectGroups.ts";
 import {
   bearers,
   directionOf,
@@ -23,6 +26,7 @@ import {
   type LevelEffect,
   type PolicyInsight,
 } from "../app/policyModel.ts";
+import { paragraphs } from "../app/paragraphs.ts";
 import { phaseWords } from "../app/phaseModel.ts";
 import { sliderDirection } from "../app/sliderModel.ts";
 import { useUi, type Ui } from "../app/ui.ts";
@@ -31,8 +35,10 @@ import {
   measurePhase,
   resolveParams,
   simulatePolicy,
+  SUMMARY_FACE_LENGTH,
   type Catch,
   type CurvePoint,
+  type EffectResult,
   type LevelFilter,
   type LevelId,
   type MeasurePhase,
@@ -43,8 +49,10 @@ import {
   type PolicyResult,
   type PolicyState,
   type SimulationWarning,
+  type SourceId,
   type Totals,
 } from "../engine/index.ts";
+import { reducedMotion } from "../hooks/useAnimatedNumber.ts";
 import { CurveEntry } from "./CurvePreview.tsx";
 import { BlockerIcon, ChevronDown, InfoIcon, ShiftIcon, WarningIcon } from "./icons.tsx";
 import { GroupsControl, NumberControl } from "./ParamControls.tsx";
@@ -89,7 +97,29 @@ export interface PolicyCardProps {
   /** Names of the pack's collections the measure belongs to, shown as badges. */
   collections?: readonly string[];
   /** Said when the goal of the bar leaves this measure out: that it does not count, and why. */
-  goalHint?: string;
+  goalHint?: GoalHint;
+}
+
+/**
+ * What a card says when the goal of the bar leaves its measure out. The face has the statement and
+ * the short reason (one rule with the goal bar: shortReason in GoalBar.tsx), the details the full
+ * reason with its sources.
+ */
+export interface GoalHint {
+  /** "Does not count towards the goal “…”." */
+  statement: string;
+  /** The reason in short, for the face; absent where there is none short enough. */
+  reason?: string;
+  /** The details say more than the face, so the face offers the way to them. */
+  more: boolean;
+  /** The full reason, for the details. */
+  full: string;
+  sources?: readonly SourceId[];
+}
+
+/** Whether a summary is longer than the face shows whole: then it is cut to two lines until the card is opened. */
+function summaryIsLong(summary: string): boolean {
+  return [...summary.trim()].length > SUMMARY_FACE_LENGTH;
 }
 
 const SEVERITY_ICON: Record<Catch["severity"], (props: { size?: number }) => ReactNode> = {
@@ -131,6 +161,17 @@ export const PolicyCard = memo(function PolicyCard({
 }: PolicyCardProps) {
   const ui = useUi();
   const { pack, t, fmt } = ui;
+  // "Why?" on the face opens the details at the goal: its heading takes the focus once it is there.
+  const goalHeading = useRef<HTMLHeadingElement>(null);
+  const goalPending = useRef(false);
+  const [goalAsked, setGoalAsked] = useState(0);
+  useEffect(() => {
+    const heading = goalHeading.current;
+    if (!goalPending.current || !expanded || !heading) return;
+    goalPending.current = false;
+    heading.scrollIntoView?.({ block: "center", behavior: reducedMotion() ? "auto" : "smooth" });
+    heading.focus({ preventScroll: true });
+  }, [goalAsked, expanded]);
   const enabled = state?.enabled === true;
   const given = state?.params;
   const params = useMemo(() => resolveParams(pack, policy, given), [pack, policy, given]);
@@ -151,6 +192,7 @@ export const PolicyCard = memo(function PolicyCard({
   // Within floating-point noise an effect is zero, and is written as a plain zero.
   const balanceShown = insight.direction === "neutral" ? 0 : insight.balance;
   const label = ui.text(policy.label);
+  const summary = ui.text(policy.summary);
   const titleId = `policy-${policy.id}-title`;
   const panelId = `policy-${policy.id}-panel`;
   const signed = (value: number): string => fmt.money(value, { signed: true });
@@ -204,7 +246,8 @@ export const PolicyCard = memo(function PolicyCard({
         <h3 className="policy__title" id={titleId} onClick={() => onExpand(policy.id, !expanded)}>
           {label}
         </h3>
-        <p className={`policy__summary${expanded ? "" : " is-clamped"}`}>{ui.text(policy.summary)}</p>
+        {/* Whole when it is short, as a face should be; a longer one is cut to two lines until the card is opened. */}
+        <p className={`policy__summary${!expanded && summaryIsLong(summary) ? " is-clamped" : ""}`}>{summary}</p>
 
         <div className="policy__impact">
           <p className="policy__caption">
@@ -259,7 +302,27 @@ export const PolicyCard = memo(function PolicyCard({
           {goalHint && (
             <p className="policy__goal">
               <InfoIcon size={13} />
-              <span>{goalHint}</span>
+              <span>
+                {goalHint.statement}
+                {goalHint.reason && ` ${goalHint.reason}`}
+                {goalHint.more && (
+                  <>
+                    {" "}
+                    <button
+                      type="button"
+                      className="policy__goal-more"
+                      aria-controls={panelId}
+                      onClick={() => {
+                        goalPending.current = true;
+                        if (!expanded) onExpand(policy.id, true);
+                        setGoalAsked((count) => count + 1);
+                      }}
+                    >
+                      {goalHint.reason ? t.goal.moreReason : t.goal.why}
+                    </button>
+                  </>
+                )}
+              </span>
             </p>
           )}
           {/* The reason is written out, not left to a tooltip: a finger or a keyboard would never see that. */}
@@ -344,6 +407,8 @@ export const PolicyCard = memo(function PolicyCard({
               noise={noise}
               catches={catches}
               phase={phase}
+              goalHint={goalHint}
+              goalHeading={goalHeading}
               onParam={onParam}
               onShowNode={onShowNode}
             />
@@ -533,6 +598,10 @@ interface PolicyDetailsProps {
   catches: Catch[];
   /** When the measure acts in the debt projection, if it has timing of its own. */
   phase?: MeasurePhase;
+  /** Why the goal of the bar leaves the measure out, if it does. */
+  goalHint?: GoalHint;
+  /** The heading of that section, which takes the focus when the face's "Why?" opened the details. */
+  goalHeading: RefObject<HTMLHeadingElement | null>;
   onParam(id: string, param: string, value: ParamValue): void;
   onShowNode(nodeId: string): void;
 }
@@ -549,6 +618,8 @@ function PolicyDetails({
   noise,
   catches,
   phase,
+  goalHint,
+  goalHeading,
   onParam,
   onShowNode,
 }: PolicyDetailsProps) {
@@ -575,9 +646,119 @@ function PolicyDetails({
    * by what they do to the balance, which for spending is the other way round.
    */
   const amountRange = (a: number, b: number): string => t.common.range(signed(Math.min(a, b)), signed(Math.max(a, b)));
+  const zeroed = (amount: number): number => (Math.abs(amount) <= noise ? 0 : amount);
+  // Many effects: in groups by the setting that drives them, the largest first, the rest one step away.
+  const atDefaults = useMemo(
+    () => (policy.effects.length > MANY_EFFECTS ? (simulatePolicy(pack, policy.id, undefined, "all")?.effects ?? []) : []),
+    [pack, policy],
+  );
+  const groups = effectGroups(policy, whole.effects, atDefaults);
+  const [opened, setOpened] = useState<ReadonlySet<string>>(() => new Set());
+  const groupName = (params: readonly string[]): string =>
+    params.length === 0
+      ? t.policies.effectsFixed
+      : params.map((id) => ui.text(policy.params.find((param) => param.id === id)?.label) || id).join(" · ");
+  /**
+   * One budget item the measure changes: the amount, the range, the quality, a passed-on part, the
+   * note. Among many, the notes and their sources are one step away, so the amounts can be scanned.
+   */
+  const compact = groups !== undefined;
+  const effectItem = (effect: EffectResult): ReactNode => {
+    const definition = policy.effects[effect.index];
+    const node = findNode(pack, effect.target);
+    const name = ui.text(node?.label);
+    const shift = shiftOf(effect);
+    const shiftNode = shift ? findNode(pack, shift.target) : undefined;
+    const hasRange = Math.abs(effect.high - effect.low) > noise;
+    // Tied to the measure's other effects: its two ends are the measure's, not its own worst and best case.
+    const linked = definition?.uncertainty?.basis !== undefined;
+    const ends = (low: number, high: number): string =>
+      linked ? t.policies.linkedRange(signed(low), signed(high)) : amountRange(low, high);
+    return (
+      <li key={effect.index} className="effect">
+        <button
+          type="button"
+          className="effect__node"
+          onClick={() => onShowNode(effect.target)}
+          aria-label={t.policies.showInBudget(name)}
+        >
+          <span className={`swatch cat-${colorOf(layout, effect.target)}`} aria-hidden="true" />
+          <span>{name}</span>
+        </button>
+        <p className="effect__line">
+          <Delta
+            amount={zeroed(effect.delta)}
+            direction={directionOfNode(effect.side, effect.delta, noise)}
+            text={signed(zeroed(effect.delta))}
+          />{" "}
+          <span className="muted">
+            {t.policies.effectSide(effect.side)}
+            {levelNames(ui, effectBearers(levels, effect.index))}
+            {hasRange && ` · ${ends(effect.low, effect.high)}`}
+            {effect.clamped && ` · ${t.policies.clampedNote}`}
+          </span>{" "}
+          <QualityBadge quality={effect.quality} />
+        </p>
+        {shift && Math.abs(shift.delta) > noise && shiftNode && (
+          <div className="effect__shift">
+            <p className="effect__shift-title">
+              <ShiftIcon size={14} />
+              {definition?.shift?.label ? ui.text(definition.shift.label) : shiftHeading(ui, shift.side, shift.delta)}
+            </p>
+            <button
+              type="button"
+              className="effect__node"
+              onClick={() => onShowNode(shift.target)}
+              aria-label={t.policies.showInBudget(ui.text(shiftNode.label))}
+            >
+              <span className={`swatch cat-${colorOf(layout, shift.target)}`} aria-hidden="true" />
+              <span>{ui.text(shiftNode.label)}</span>
+            </button>
+            <p className="effect__line">
+              <Delta
+                amount={shift.delta}
+                direction={directionOfNode(shift.side, shift.delta, noise)}
+                text={signed(shift.delta)}
+              />{" "}
+              <span className="muted">
+                {t.policies.effectSide(shift.side)}
+                {levelNames(ui, shiftBearers(levels, [effect.index]))}
+                {Math.abs(shift.high - shift.low) > noise && ` · ${ends(shift.low, shift.high)}`}
+                {shift.clamped && ` · ${t.policies.clampedNote}`}
+              </span>{" "}
+              <QualityBadge quality={shift.quality} />
+            </p>
+            {!compact && definition?.shift?.note && <p className="effect__note">{ui.text(definition.shift.note)}</p>}
+            {!compact && definition?.shift?.sources && <SourceList ids={definition.shift.sources} />}
+          </div>
+        )}
+        {!compact && definition?.note && <p className="effect__note">{ui.text(definition.note)}</p>}
+        {compact && (definition?.note || definition?.sources || definition?.shift?.note || definition?.shift?.sources) && (
+          <details className="effect__about">
+            <summary>
+              {t.policies.effectNote(Boolean(definition.note || definition.shift?.note), Boolean(definition.sources || definition.shift?.sources))}
+            </summary>
+            {definition.note && <p className="effect__note">{ui.text(definition.note)}</p>}
+            {definition.sources && <SourceList ids={definition.sources} />}
+            {definition.shift?.note && <p className="effect__note">{ui.text(definition.shift.note)}</p>}
+            {definition.shift?.sources && <SourceList ids={definition.shift.sources} />}
+          </details>
+        )}
+      </li>
+    );
+  };
 
   return (
     <>
+      {/* The rest of the summary, as running text: how the figure comes about, how to use the settings. */}
+      {policy.explanation && (
+        <div className="policy__explanation">
+          {paragraphs(ui.text(policy.explanation)).map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+        </div>
+      )}
+
       {settingsOf(policy).length > 0 && (
         <section className="policy__section">
           <h4>{t.policies.settings}</h4>
@@ -648,15 +829,6 @@ function PolicyDetails({
         {levels.length > 1 && <LevelSplit levels={levels} noise={noise} current={level} />}
       </section>
 
-      {policy.timing && phase && (
-        <section className="policy__section">
-          <h4>{t.policies.timingTitle}</h4>
-          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui.language)), policy.timing.param !== undefined)}</p>
-          <p className="policy__timing-note">{ui.text(policy.timing.note)}</p>
-          <SourceList ids={policy.timing.sources} />
-        </section>
-      )}
-
       <section className="policy__section">
         <h4>{t.policies.catches}</h4>
         {catches.length === 0 ? (
@@ -683,84 +855,91 @@ function PolicyDetails({
         )}
       </section>
 
+      {/* What the figure leaves out and what the model assumes: apart from the catches, which are about the measure. */}
+      {policy.limits && policy.limits.length > 0 && (
+        <section className="policy__section">
+          <h4>{t.policies.limits}</h4>
+          <ul className="limits">
+            {policy.limits.map((item, index) => (
+              <li key={index} className="limit">
+                <p className="limit__text">{ui.text(item.text)}</p>
+                {item.sources && <SourceList ids={item.sources} />}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {goalHint && (
+        <section className="policy__section">
+          <h4 ref={goalHeading} tabIndex={-1}>
+            {t.policies.goalTitle}
+          </h4>
+          <p className="policy__goal-detail">
+            {goalHint.statement} {goalHint.full}
+          </p>
+          {goalHint.sources && <SourceList ids={goalHint.sources} />}
+        </section>
+      )}
+
+      {policy.timing && phase && (
+        <section className="policy__section">
+          <h4>{t.policies.timingTitle}</h4>
+          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui.language)), policy.timing.param !== undefined)}</p>
+          <p className="policy__timing-note">{ui.text(policy.timing.note)}</p>
+          <SourceList ids={policy.timing.sources} />
+        </section>
+      )}
+
       <section className="policy__section">
         <h4>{t.policies.effects}</h4>
-        <ul className="effects">
-          {whole.effects.map((effect) => {
-            const definition = policy.effects[effect.index];
-            const node = findNode(pack, effect.target);
-            const name = ui.text(node?.label);
-            const shift = shiftOf(effect);
-            const shiftNode = shift ? findNode(pack, shift.target) : undefined;
-            const hasRange = Math.abs(effect.high - effect.low) > noise;
-            // Tied to the measure's other effects: its two ends are the measure's, not its own worst and best case.
-            const linked = definition?.uncertainty?.basis !== undefined;
-            const ends = (low: number, high: number): string =>
-              linked ? t.policies.linkedRange(signed(low), signed(high)) : amountRange(low, high);
-            const zeroed = (amount: number): number => (Math.abs(amount) <= noise ? 0 : amount);
+        {groups ? (
+          groups.map((group) => {
+            const open = opened.has(group.key);
+            const restId = `${policy.id}-effects-${group.key || "fixed"}`;
+            const direction = directionOf(group.balance, noise);
             return (
-              <li key={effect.index} className="effect">
-                <button
-                  type="button"
-                  className="effect__node"
-                  onClick={() => onShowNode(effect.target)}
-                  aria-label={t.policies.showInBudget(name)}
-                >
-                  <span className={`swatch cat-${colorOf(layout, effect.target)}`} aria-hidden="true" />
-                  <span>{name}</span>
-                </button>
-                <p className="effect__line">
-                  <Delta
-                    amount={zeroed(effect.delta)}
-                    direction={directionOfNode(effect.side, effect.delta, noise)}
-                    text={signed(zeroed(effect.delta))}
-                  />{" "}
-                  <span className="muted">
-                    {t.policies.effectSide(effect.side)}
-                    {levelNames(ui, effectBearers(levels, effect.index))}
-                    {hasRange && ` · ${ends(effect.low, effect.high)}`}
-                    {effect.clamped && ` · ${t.policies.clampedNote}`}
-                  </span>{" "}
-                  <QualityBadge quality={effect.quality} />
-                </p>
-                {shift && Math.abs(shift.delta) > noise && shiftNode && (
-                  <div className="effect__shift">
-                    <p className="effect__shift-title">
-                      <ShiftIcon size={14} />
-                      {definition?.shift?.label ? ui.text(definition.shift.label) : shiftHeading(ui, shift.side, shift.delta)}
-                    </p>
+              <div key={group.key} className="effect-group">
+                {groups.length > 1 && (
+                  <p className="effect-group__head">
+                    <span className="effect-group__name">{groupName(group.params)}</span>
+                    <span className="effect-group__total">
+                      <Delta amount={zeroed(group.balance)} direction={direction} text={signed(zeroed(group.balance))} />{" "}
+                      <span className="muted">{directionWord(ui, direction, "all")}</span>
+                    </span>
+                  </p>
+                )}
+                <ul className="effects">{group.shown.map(effectItem)}</ul>
+                {group.rest.length > 0 && (
+                  <>
+                    <ul className="effects effects--rest" id={restId} hidden={!open}>
+                      {open && group.rest.map(effectItem)}
+                    </ul>
                     <button
                       type="button"
-                      className="effect__node"
-                      onClick={() => onShowNode(shift.target)}
-                      aria-label={t.policies.showInBudget(ui.text(shiftNode.label))}
+                      className="effects__more"
+                      aria-expanded={open}
+                      aria-controls={restId}
+                      onClick={() =>
+                        setOpened((before) => {
+                          const next = new Set(before);
+                          if (open) next.delete(group.key);
+                          else next.add(group.key);
+                          return next;
+                        })
+                      }
                     >
-                      <span className={`swatch cat-${colorOf(layout, shift.target)}`} aria-hidden="true" />
-                      <span>{ui.text(shiftNode.label)}</span>
+                      <ChevronDown size={14} />
+                      {open ? t.policies.fewerEffects : t.policies.moreEffects(group.rest.length, signed(zeroed(group.restBalance)))}
                     </button>
-                    <p className="effect__line">
-                      <Delta
-                        amount={shift.delta}
-                        direction={directionOfNode(shift.side, shift.delta, noise)}
-                        text={signed(shift.delta)}
-                      />{" "}
-                      <span className="muted">
-                        {t.policies.effectSide(shift.side)}
-                        {levelNames(ui, shiftBearers(levels, [effect.index]))}
-                        {Math.abs(shift.high - shift.low) > noise && ` · ${ends(shift.low, shift.high)}`}
-                        {shift.clamped && ` · ${t.policies.clampedNote}`}
-                      </span>{" "}
-                      <QualityBadge quality={shift.quality} />
-                    </p>
-                    {definition?.shift?.note && <p className="effect__note">{ui.text(definition.shift.note)}</p>}
-                    {definition?.shift?.sources && <SourceList ids={definition.shift.sources} />}
-                  </div>
+                  </>
                 )}
-                {definition?.note && <p className="effect__note">{ui.text(definition.note)}</p>}
-              </li>
+              </div>
             );
-          })}
-        </ul>
+          })
+        ) : (
+          <ul className="effects">{whole.effects.map(effectItem)}</ul>
+        )}
       </section>
 
       {sources.length > 0 && (

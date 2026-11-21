@@ -5,7 +5,10 @@
     "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/outlays_fy2027.xlsx",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "One row per account, subfunction and budget category, in thousands of dollars; actual values for fiscal year 2025, published April 2026. Every spending item of the pack is a sum of rows of this file (column 2025), and the rows add up to Historical Table 3.2 in every subfunction and to total outlays of 7,011,105 million dollars."
+    "note": {
+      "en": "One row per account, subfunction and budget category, in thousands of dollars; actual values for fiscal year 2025, published April 2026. Every spending item of the pack is a sum of rows of this file (column 2025), and the rows add up to Historical Table 3.2 in every subfunction and to total outlays of 7,011,105 million dollars.",
+      "de": "Eine Zeile je Konto, Teilfunktion und Haushaltskategorie, in Tausend Dollar; Ist-Werte für das Haushaltsjahr 2025, veröffentlicht im April 2026. Jeder Ausgabenposten des Datensatzes ist eine Summe von Zeilen dieser Datei (Spalte 2025), und die Zeilen ergeben in jeder Teilfunktion die Werte von Tabelle 3.2 der Historical Tables und zusammen Gesamtausgaben von 7.011.105 Mio. Dollar."
+    }
   },
   "omb_pbd_receipts_fy2027": {
     "title": "Public Budget Database: receipts by account and source, Budget of the U.S. Government, Fiscal Year 2027 (receipts_fy2027.xlsx)",
@@ -13,7 +16,10 @@
     "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/receipts_fy2027.xlsx",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "One row per receipt account and source category, in thousands of dollars. Every revenue item of the pack is a sum of rows of this file (column 2025); they add up to total receipts of 5,236,421 million dollars."
+    "note": {
+      "en": "One row per receipt account and source category, in thousands of dollars. Every revenue item of the pack is a sum of rows of this file (column 2025); they add up to total receipts of 5,236,421 million dollars.",
+      "de": "Eine Zeile je Einnahmekonto und Quellenkategorie, in Tausend Dollar. Jeder Einnahmeposten des Datensatzes ist eine Summe von Zeilen dieser Datei (Spalte 2025); zusammen ergeben sie Gesamteinnahmen von 5.236.421 Mio. Dollar."
+    }
   },
   "omb_hist_fy2027": {
     "title": "Historical Tables, Budget of the U.S. Government, Fiscal Year 2027: Tables 1.1, 2.1, 3.2 and 10.1",
@@ -21,7 +27,10 @@
     "url": "https://www.whitehouse.gov/omb/information-resources/budget/historical-tables/",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Fiscal year 2025: receipts 5,236,421, outlays 7,011,105 and deficit 1,774,684 million dollars (Table 1.1); receipts by source (Table 2.1); outlays by function and subfunction, with the Department of Defense by title (Table 3.2); GDP of 30,322.847 billion dollars (Table 10.1). Table 3.2 also gives the Budget's estimates for 2026 and 2027, for example national defense 966,396 and 1,205,028 million dollars and international development and humanitarian assistance 37,852 and 22,827 million dollars."
+    "note": {
+      "en": "Fiscal year 2025: receipts 5,236,421, outlays 7,011,105 and deficit 1,774,684 million dollars (Table 1.1); receipts by source (Table 2.1); outlays by function and subfunction, with the Department of Defense by title (Table 3.2); GDP of 30,322.847 billion dollars (Table 10.1). Table 3.2 also gives the Budget's estimates for 2026 and 2027, for example national defense 966,396 and 1,205,028 million dollars and international development and humanitarian assistance 37,852 and 22,827 million dollars.",
+      "de": "Haushaltsjahr 2025: Einnahmen 5.236.421, Ausgaben 7.011.105 und Defizit 1.774.684 Mio. Dollar (Tabelle 1.1); Einnahmen nach Quellen (Tabelle 2.1); Ausgaben nach Funktionen und Teilfunktionen, beim Verteidigungsministerium nach Titeln (Tabelle 3.2); BIP von 30.322,847 Mrd. Dollar (Tabelle 10.1). Tabelle 3.2 enthält auch die Schätzungen des Haushaltsentwurfs für 2026 und 2027, etwa für die Verteidigung 966.396 und 1.205.028 Mio. Dollar und für internationale Entwicklungs- und humanitäre Hilfe 37.852 und 22.827 Mio. Dollar."
+    }
   },
   "omb_ap_credit_fy2027": {
     "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 4 (Credit and Insurance), Table 4-1: Estimated future cost of outstanding federal credit programs",
@@ -29,7 +38,10 @@
     "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_4_tables_fy2027.xlsx",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Federal student loans: estimated future cost of the loans outstanding 476.856 billion dollars at the end of 2024 and 343.098 billion dollars at the end of 2025."
+    "note": {
+      "en": "Federal student loans: estimated future cost of the outstanding loans, 476.856 billion dollars at the end of 2024 and 343.098 billion dollars at the end of 2025.",
+      "de": "Studienkredite des Bundes: geschätzte künftige Kosten der ausstehenden Kredite, Ende 2024 476,856 Mrd. Dollar und Ende 2025 343,098 Mrd. Dollar."
+    }
   },
   "treasury_mts_2025_09": {
     "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2025 (fiscal year 2025), Tables 1, 3, 4, 5 and 9",
@@ -37,7 +49,10 @@
     "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Retrieved through the Fiscal Data API, record date 2025-09-30. Fiscal year 2025: receipts 5,234.6, outlays 7,010.0 and deficit 1,775.4 billion dollars; Table 4 gives receipts before and after refunds. Table 5: Immigration and Customs Enforcement 10.7 billion, U.S. Customs and Border Protection 21.2 billion. Table 9 (prior year): corporation income taxes 529.9 billion in fiscal year 2024."
+    "note": {
+      "en": "Retrieved through the Fiscal Data API, record date 2025-09-30. Fiscal year 2025: receipts 5,234.6, outlays 7,010.0 and deficit 1,775.4 billion dollars; Table 4 gives receipts before and after refunds. Table 5: Immigration and Customs Enforcement 10.7 billion, U.S. Customs and Border Protection 21.2 billion. Table 9 (prior year): corporation income taxes 529.9 billion in fiscal year 2024.",
+      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2025. Haushaltsjahr 2025: Einnahmen 5.234,6, Ausgaben 7.010,0 und Defizit 1.775,4 Mrd. Dollar; Tabelle 4 zeigt die Einnahmen vor und nach Erstattungen. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 10,7 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 21,2 Mrd. Dollar. Tabelle 9 (Vorjahr): Körperschaftsteuer 529,9 Mrd. Dollar im Haushaltsjahr 2024."
+    }
   },
   "treasury_mts_2026_09": {
     "title": "Monthly Treasury Statement of Receipts and Outlays of the United States Government, September 2026 (fiscal year 2026), Tables 1, 3, 4, 5 and 9",
@@ -45,7 +60,10 @@
     "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Retrieved through the Fiscal Data API, record date 2026-09-30. Fiscal year 2026: receipts 5,403.3, outlays 7,395.8 and deficit 1,992.5 billion dollars. Table 4: customs duties 317.8 billion collected, 144.6 billion refunded. Table 5: Immigration and Customs Enforcement 22.4 billion, U.S. Customs and Border Protection 28.9 billion."
+    "note": {
+      "en": "Retrieved through the Fiscal Data API, record date 2026-09-30. Fiscal year 2026: receipts 5,403.3, outlays 7,395.8 and deficit 1,992.5 billion dollars. Table 4: customs duties 317.8 billion collected, 144.6 billion refunded. Table 5: Immigration and Customs Enforcement 22.4 billion, U.S. Customs and Border Protection 28.9 billion.",
+      "de": "Abgerufen über die Fiscal Data API, Stichtag 30. September 2026. Haushaltsjahr 2026: Einnahmen 5.403,3, Ausgaben 7.395,8 und Defizit 1.992,5 Mrd. Dollar. Tabelle 4: Zölle 317,8 Mrd. Dollar erhoben, 144,6 Mrd. Dollar erstattet. Tabelle 5: Einwanderungs- und Zollbehörde (ICE) 22,4 Mrd. Dollar, Zoll- und Grenzschutzbehörde (CBP) 28,9 Mrd. Dollar."
+    }
   },
   "census_popest_v2025": {
     "title": "Annual Estimates of the Resident Population for the United States, Regions, States, District of Columbia, and Puerto Rico, Vintage 2025 (NST-EST2025-ALLDATA)",
@@ -53,7 +71,10 @@
     "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/state/totals/NST-EST2025-ALLDATA.csv",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Resident population of the United States on July 1, 2025: 341,784,857 (the middle of fiscal year 2025 is April 1, 2025). Puerto Rico is not included."
+    "note": {
+      "en": "Resident population of the United States on July 1, 2025: 341,784,857 (the middle of fiscal year 2025 is April 1, 2025). Puerto Rico is not included.",
+      "de": "Wohnbevölkerung der Vereinigten Staaten am 1. Juli 2025: 341.784.857 (die Mitte des Haushaltsjahres 2025 ist der 1. April 2025). Puerto Rico ist nicht enthalten."
+    }
   },
   "bea_nipa_3_18b": {
     "title": "NIPA Table 3.18B. Relation of Federal Government Current Receipts and Expenditures in the National Income and Product Accounts to the Budget, Fiscal Years and Quarters",
@@ -61,7 +82,10 @@
     "url": "https://apps.bea.gov/national/Release/TXT/NipaDataA.txt",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Annual series M31801 to M31856 of the flat file of all annual NIPA data (release of November 4, 2026). Fiscal year 2025: federal current receipts 5,550.0 and current expenditures 7,409.9 billion dollars in the national accounts; supplementary medical insurance premiums 160.2 billion dollars."
+    "note": {
+      "en": "Annual series M31801 to M31856 of the flat file of all annual NIPA data (release of November 4, 2026). Fiscal year 2025: federal current receipts 5,550.0 and current expenditures 7,409.9 billion dollars in the national accounts; supplementary medical insurance premiums 160.2 billion dollars.",
+      "de": "Jahresreihen M31801 bis M31856 der Sammeldatei aller jährlichen NIPA-Daten (Veröffentlichung vom 4. November 2026). Haushaltsjahr 2025: laufende Einnahmen des Bundes 5.550,0 und laufende Ausgaben 7.409,9 Mrd. Dollar in den Volkswirtschaftlichen Gesamtrechnungen; Beiträge zur Supplementary Medical Insurance 160,2 Mrd. Dollar."
+    }
   },
   "irs_pub15_2025": {
     "title": "Publication 15 (Circular E), Employer's Tax Guide, for use in 2025",
@@ -69,7 +93,10 @@
     "url": "https://www.irs.gov/pub/irs-prior/p15--2025.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Social Security tax 6.2% each for employee and employer on wages up to 176,100 dollars; Medicare tax 1.45% each without a wage base limit; Additional Medicare Tax of 0.9% withheld from wages above 200,000 dollars."
+    "note": {
+      "en": "Social Security tax 6.2% each for employee and employer on wages up to 176,100 dollars; Medicare tax 1.45% each without a wage base limit; Additional Medicare Tax of 0.9% withheld from wages above 200,000 dollars.",
+      "de": "Social-Security-Beitrag je 6,2 % für Arbeitnehmer und Arbeitgeber auf Löhne bis 176.100 Dollar; Medicare-Beitrag je 1,45 % ohne Beitragsbemessungsgrenze; zusätzlicher Medicare-Beitrag (Additional Medicare Tax) von 0,9 %, einbehalten von Löhnen über 200.000 Dollar."
+    }
   },
   "plaw_119_1": {
     "title": "Public Law 119-1, Laken Riley Act (January 29, 2025)",
@@ -77,7 +104,10 @@
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ1.xml",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Amends section 236(c) of the Immigration and Nationality Act: detention of inadmissible aliens charged with burglary, theft, larceny, shoplifting, assault of a law enforcement officer and other offenses."
+    "note": {
+      "en": "Amends section 236(c) of the Immigration and Nationality Act: detention of inadmissible aliens charged with burglary, theft, larceny, shoplifting, assault of a law enforcement officer and other offenses.",
+      "de": "Ändert Abschnitt 236(c) des Einwanderungs- und Staatsangehörigkeitsgesetzes (Immigration and Nationality Act): Inhaftierung von Ausländern ohne Einreiserecht, die wegen Einbruchs, Diebstahls (theft, larceny), Ladendiebstahls, eines Angriffs auf Polizeibeamte und anderer Straftaten angeklagt sind."
+    }
   },
   "plaw_119_21": {
     "title": "Public Law 119-21, an act to provide for reconciliation pursuant to title II of H. Con. Res. 14 (July 4, 2025)",
@@ -85,7 +115,10 @@
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ21.xml",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Sections 90001 (border wall, 46.55 billion dollars), 90003 (ICE detention capacity, 45.0 billion) and 100052 (ICE, 29.85 billion), available until September 30, 2029. Section 11(b) of the Internal Revenue Code (corporate rate) is not amended."
+    "note": {
+      "en": "Sections 90001 (border wall, 46.55 billion dollars), 90003 (ICE detention capacity, 45.0 billion) and 100052 (ICE, 29.85 billion), available until September 30, 2029. Section 11(b) of the Internal Revenue Code (corporate rate) is not amended.",
+      "de": "Abschnitte 90001 (Grenzmauer, 46,55 Mrd. Dollar), 90003 (Haftplätze der ICE, 45,0 Mrd. Dollar) und 100052 (ICE, 29,85 Mrd. Dollar), verfügbar bis 30. September 2029. Abschnitt 11(b) des Internal Revenue Code (Körperschaftsteuersatz) wird nicht geändert."
+    }
   },
   "plaw_119_28": {
     "title": "Public Law 119-28, Rescissions Act of 2025 (July 24, 2025)",
@@ -93,7 +126,10 @@
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ28.xml",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "Nineteen rescissions of unobligated balances for international affairs, together 7,903 million dollars, among them development assistance 2,500 million, Economic Support Fund 1,650 million, migration and refugee assistance 800 million and global health programs 500 million (HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health exempted); also the Corporation for Public Broadcasting."
+    "note": {
+      "en": "Nineteen rescissions of unobligated balances for international affairs, together 7,903 million dollars, among them development assistance 2,500 million, Economic Support Fund 1,650 million, migration and refugee assistance 800 million and global health programs 500 million (HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health exempted); also the Corporation for Public Broadcasting.",
+      "de": "Neunzehn Rücknahmen noch nicht gebundener Mittel für internationale Angelegenheiten, zusammen 7.903 Mio. Dollar, darunter Entwicklungshilfe 2.500 Mio., Economic Support Fund 1.650 Mio., Migrations- und Flüchtlingshilfe 800 Mio. und globale Gesundheitsprogramme 500 Mio. Dollar (ausgenommen HIV/Aids, Tuberkulose, Malaria, Ernährung sowie Mütter- und Kindergesundheit); außerdem die Corporation for Public Broadcasting."
+    }
   },
   "plaw_119_98": {
     "title": "Public Law 119-98, Secure America Act (June 10, 2026)",
@@ -101,7 +137,10 @@
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ98.xml",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Reconciliation act: 69.545 billion dollars for fiscal year 2026, available until September 30, 2029: CBP 26.02 billion (sections 101, 103, 201), ICE 38.525 billion (sections 102, 202), Department of Homeland Security 5.0 billion (sections 104, 203)."
+    "note": {
+      "en": "Reconciliation act: 69.545 billion dollars for fiscal year 2026, available until September 30, 2029: CBP 26.02 billion (sections 101, 103, 201), ICE 38.525 billion (sections 102, 202), Department of Homeland Security 5.0 billion (sections 104, 203).",
+      "de": "Haushaltsgesetz im Reconciliation-Verfahren: 69,545 Mrd. Dollar für das Haushaltsjahr 2026, verfügbar bis 30. September 2029: CBP 26,02 Mrd. Dollar (Abschnitte 101, 103, 201), ICE 38,525 Mrd. Dollar (Abschnitte 102, 202), Heimatschutzministerium 5,0 Mrd. Dollar (Abschnitte 104, 203)."
+    }
   },
   "plaw_119_103": {
     "title": "Public Law 119-103, Continuing Appropriations and Extensions Act, 2027 (September 2, 2026)",
@@ -109,7 +148,10 @@
     "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ103.xml",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section 106: continuing appropriations available until December 11, 2026, at the latest."
+    "note": {
+      "en": "Section 106: continuing appropriations available until December 11, 2026, at the latest. It contains no bar on reductions in force.",
+      "de": "Abschnitt 106: Mittel des Übergangshaushalts längstens bis 11. Dezember 2026 verfügbar. Ein Verbot von Personalabbauverfahren (reductions in force) enthält das Gesetz nicht."
+    }
   },
   "scotus_24_1287": {
     "title": "Learning Resources, Inc. v. Trump, No. 24-1287, together with Trump v. V.O.S. Selections, Inc., No. 25-250 (decided February 20, 2026), 607 U.S.",
@@ -117,7 +159,10 @@
     "url": "https://www.supremecourt.gov/opinions/25pdf/607us2r12_8nj9.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Held: the International Emergency Economic Powers Act does not authorize the President to impose tariffs."
+    "note": {
+      "en": "Held: the International Emergency Economic Powers Act does not authorize the President to impose tariffs.",
+      "de": "Entscheidung: Der International Emergency Economic Powers Act ermächtigt den Präsidenten nicht, Zölle zu verhängen."
+    }
   },
   "fr_2026_03824": {
     "title": "Proclamation of February 20, 2026, Imposing a Temporary Import Surcharge To Address Fundamental International Payments Problems, 91 FR 9339",
@@ -125,7 +170,10 @@
     "url": "https://www.govinfo.gov/content/pkg/FR-2026-02-25/pdf/2026-03824.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section 122 of the Trade Act of 1974: 10 percent ad valorem on all imports with exceptions, from February 24, 2026, through July 24, 2026, unless extended by an Act of Congress; section 122 allows up to 15 percent for up to 150 days."
+    "note": {
+      "en": "Section 122 of the Trade Act of 1974: 10 percent ad valorem on all imports with exceptions, from February 24, 2026, through July 24, 2026, unless extended by an Act of Congress; section 122 allows up to 15 percent for up to 150 days.",
+      "de": "Abschnitt 122 des Trade Act von 1974: 10 % auf den Wert aller Einfuhren, mit Ausnahmen, vom 24. Februar 2026 bis 24. Juli 2026, sofern der Kongress nicht per Gesetz verlängert; Abschnitt 122 erlaubt bis zu 15 % für bis zu 150 Tage."
+    }
   },
   "fr_2026_03832": {
     "title": "Executive Order 14389 of February 20, 2026, Ending Certain Tariff Actions, 91 FR 9437",
@@ -133,7 +181,10 @@
     "url": "https://www.govinfo.gov/content/pkg/FR-2026-02-25/pdf/2026-03832.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "The additional duties imposed under IEEPA by Executive Orders 14193, 14194, 14195, 14245, 14257, 14323, 14329, 14380 and 14382 shall no longer be in effect."
+    "note": {
+      "en": "The additional duties imposed under IEEPA by Executive Orders 14193, 14194, 14195, 14245, 14257, 14323, 14329, 14380 and 14382 shall no longer be in effect.",
+      "de": "Die nach dem IEEPA mit den Executive Orders 14193, 14194, 14195, 14245, 14257, 14323, 14329, 14380 und 14382 verhängten Zusatzzölle gelten nicht mehr."
+    }
   },
   "fr_2026_15274": {
     "title": "Memorandum of July 23, 2026, Actions by the United States in the Investigations Under Section 301 of the Trade Act of 1974 of the Acts, Policies, and Practices of 60 Economies, 91 FR 47717",
@@ -141,7 +192,10 @@
     "url": "https://www.govinfo.gov/content/pkg/FR-2026-07-28/pdf/2026-15274.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Tariffs of 10 percent or 12.5 percent on all goods of the investigated economies (for some, net of the MFN tariff), with exemptions listed in the annex."
+    "note": {
+      "en": "Tariffs of 10 percent or 12.5 percent on all goods of the investigated economies (for some, net of the MFN tariff), with exemptions listed in the annex.",
+      "de": "Zölle von 10 % oder 12,5 % auf alle Waren der untersuchten Volkswirtschaften (bei einigen abzüglich des Meistbegünstigungszolls), mit den im Anhang aufgeführten Ausnahmen."
+    }
   },
   "census_ft900_2026_11": {
     "title": "U.S. International Trade in Goods and Services (FT-900), release of November 2026, Exhibit 1",
@@ -149,7 +203,10 @@
     "url": "https://www.census.gov/foreign-trade/Press-Release/current_press_release/exh1.xlsx",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Goods imports, balance-of-payments basis, seasonally adjusted, million dollars. October 2024 to September 2025 (fiscal year 2025): 3,482,146; October 2025 to September 2026: 3,631,243. The address always holds the latest release."
+    "note": {
+      "en": "Goods imports, balance-of-payments basis, seasonally adjusted, million dollars. October 2024 to September 2025 (fiscal year 2025): 3,482,146; October 2025 to September 2026: 3,631,243. The address always holds the latest release.",
+      "de": "Wareneinfuhren, Zahlungsbilanzabgrenzung, saisonbereinigt, in Mio. Dollar. Oktober 2024 bis September 2025 (Haushaltsjahr 2025): 3.482.146; Oktober 2025 bis September 2026: 3.631.243. Unter der Adresse steht immer die jüngste Veröffentlichung."
+    }
   },
   "jct_jcx_11_21": {
     "title": "New Income and Payroll Tax Offsets to Changes in Excise Tax Revenues for 2021-2031 (JCX-11-21), February 23, 2021",
@@ -157,7 +214,10 @@
     "url": "https://www.govinfo.gov/content/pkg/GOVPUB-Y4_T19_4-PURL-gpo157077/pdf/GOVPUB-Y4_T19_4-PURL-gpo157077.pdf",
     "accessed": "2026-11-20",
     "year": 2021,
-    "note": "Table 1: offset 0.221 for 2025, 0.245 for 2026 (before the 2025 reconciliation act); the text calls 25 percent the long-time standard offset factor."
+    "note": {
+      "en": "Table 1: offset 0.221 for 2025, 0.245 for 2026 (before the 2025 reconciliation act); the text calls 25 percent the long-time standard offset factor.",
+      "de": "Tabelle 1: Abschlag 0,221 für 2025, 0,245 für 2026 (vor dem Reconciliation-Gesetz von 2025); der Text nennt 25 % den langjährigen Standardwert des Abschlags."
+    }
   },
   "cbo_offset_2009": {
     "title": "The Role of the 25 Percent Revenue Offset in Estimating the Budgetary Effects of Legislation (Economic and Budget Issue Brief, January 2009)",
@@ -165,7 +225,10 @@
     "url": "https://www.govinfo.gov/content/pkg/GOVPUB-Y10-PURL-LPS107729/pdf/GOVPUB-Y10-PURL-LPS107729.pdf",
     "accessed": "2026-11-20",
     "year": 2009,
-    "note": "CBO, JCT and Treasury's Office of Tax Analysis reduce the estimated proceeds of excise taxes, customs duties and other indirect taxes by 25 percent for the resulting reductions in income and payroll taxes."
+    "note": {
+      "en": "CBO, JCT and Treasury's Office of Tax Analysis reduce the estimated proceeds of excise taxes, customs duties and other indirect taxes by 25 percent for the resulting reductions in income and payroll taxes.",
+      "de": "CBO, JCT und die Steuerabteilung des Finanzministeriums (Office of Tax Analysis) verringern den geschätzten Ertrag von Verbrauchsteuern, Zöllen und anderen indirekten Steuern um 25 %, weil dadurch Einkommensteuer und Sozialversicherungsbeiträge sinken."
+    }
   },
   "nato_defexp_2025": {
     "title": "Defence Expenditure of NATO Countries (2014-2025)",
@@ -173,7 +236,10 @@
     "url": "https://www.nato.int/content/dam/nato/webready/documents/finance/def-exp-2025-en.pdf",
     "accessed": "2026-11-20",
     "year": 2025,
-    "note": "United States, 2025 estimate: 980,000 million dollars, 3.22 percent of GDP (2024: 3.21 percent). Personnel expenditure includes pensions paid to retirees."
+    "note": {
+      "en": "United States, 2025 estimate: 980,000 million dollars, 3.22 percent of GDP (2024: 3.21 percent). Personnel expenditure includes pensions paid to retirees.",
+      "de": "Vereinigte Staaten, Schätzung 2025: 980.000 Mio. Dollar, 3,22 % des BIP (2024: 3,21 %). Die Personalausgaben enthalten die Pensionen der Ruheständler."
+    }
   },
   "nato_5_percent": {
     "title": "Defence investment and NATO's 5% commitment (updated June 29, 2026)",
@@ -181,7 +247,10 @@
     "url": "https://www.nato.int/en/what-we-do/introduction-to-nato/defence-expenditures-and-natos-5-commitment",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "The Hague, 2025: 5 percent of GDP annually by 2035, at least 3.5 percent for core defense and up to 1.5 percent for defense- and security-related investment; review in 2029. Wales, 2014: 2 percent commitment."
+    "note": {
+      "en": "The Hague, 2025: 5 percent of GDP annually by 2035, at least 3.5 percent for core defense and up to 1.5 percent for defense- and security-related investment; review in 2029. Wales, 2014: 2 percent commitment.",
+      "de": "Den Haag, 2025: 5 % des BIP jährlich bis 2035, mindestens 3,5 % für die Kernverteidigung und bis zu 1,5 % für verteidigungs- und sicherheitsbezogene Investitionen; Überprüfung 2029. Wales, 2014: Zusage von 2 %."
+    }
   },
   "treasury_greenbook_fy2025": {
     "title": "General Explanations of the Administration's Fiscal Year 2025 Revenue Proposals (March 11, 2024)",
@@ -189,7 +258,10 @@
     "url": "https://home.treasury.gov/system/files/131/General-Explanations-FY2025.pdf",
     "accessed": "2026-11-20",
     "year": 2024,
-    "note": "Raise the corporate income tax rate to 28 percent: 122,474 million dollars in fiscal year 2025, 1,349,941 million in 2025-2034 (table of revenue estimates)."
+    "note": {
+      "en": "Raise the corporate income tax rate to 28 percent: 122,474 million dollars in fiscal year 2025, 1,349,941 million in 2025-2034 (table of revenue estimates).",
+      "de": "Körperschaftsteuersatz auf 28 % anheben: 122.474 Mio. Dollar im Haushaltsjahr 2025, 1.349.941 Mio. Dollar 2025 bis 2034 (Tabelle der Aufkommensschätzungen)."
+    }
   },
   "ssa_trustees_2026": {
     "title": "The 2026 Annual Report of the Board of Trustees of the Federal Old-Age and Survivors Insurance and Federal Disability Insurance Trust Funds (House Document 119-163)",
@@ -197,7 +269,10 @@
     "url": "https://www.govinfo.gov/content/pkg/CDOC-119hdoc163/pdf/CDOC-119hdoc163.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Table V.C6: contribution and benefit base 160,200 dollars (2023), 176,100 (2025), 184,500 (2026); OASDI rate 12.4 percent (OASI 10.6, DI 1.8). Depletion: OASI fourth quarter of 2032, OASDI third quarter of 2034, then 83 percent of scheduled benefits payable."
+    "note": {
+      "en": "Table V.C6: contribution and benefit base 160,200 dollars (2023), 176,100 (2025), 184,500 (2026); OASDI rate 12.4 percent (OASI 10.6, DI 1.8). Depletion: OASI fourth quarter of 2032, OASDI third quarter of 2034, then 83 percent of scheduled benefits payable.",
+      "de": "Tabelle V.C6: Beitragsbemessungsgrenze 160.200 Dollar (2023), 176.100 (2025), 184.500 (2026); OASDI-Beitragssatz 12,4 % (OASI 10,6, DI 1,8). Erschöpfung der Fonds: OASI im vierten Quartal 2032, OASDI im dritten Quartal 2034, danach sind 83 % der vorgesehenen Leistungen zahlbar."
+    }
   },
   "hr_9519_2026": {
     "title": "H.R. 9519, Social Security 2100 Act, as introduced in the House on June 29, 2026",
@@ -205,7 +280,10 @@
     "url": "https://www.govinfo.gov/content/pkg/BILLS-119hr9519ih/pdf/BILLS-119hr9519ih.pdf",
     "accessed": "2026-11-20",
     "year": 2026,
-    "note": "Section 201: repeal of the limitation on the Social Security wage base after 2026; section 202: earnings over the contribution and benefit base included in the benefit formula."
+    "note": {
+      "en": "Section 201: repeal of the limitation on the Social Security wage base after 2026; section 202: earnings over the contribution and benefit base included in the benefit formula.",
+      "de": "Abschnitt 201: Wegfall der Beitragsbemessungsgrenze der Social Security nach 2026; Abschnitt 202: Einkommen über der Beitragsbemessungsgrenze gehen in die Rentenformel ein."
+    }
   },
   "irs_soi_w2_2023": {
     "title": "SOI Tax Stats, Individual Information Return Form W-2 Statistics, tax year 2023, Table 1 (23in01w2all.xlsx)",
@@ -213,6 +291,141 @@
     "url": "https://www.irs.gov/pub/irs-soi/23in01w2all.xlsx",
     "accessed": "2026-11-20",
     "year": 2023,
-    "note": "Published October 2026. Table 1.B: 146,669,608 taxpayers with wages of 9,795,581,128 thousand dollars, by size of wage income; Table 1.H: by multiples of the OASDI wage limit."
+    "note": {
+      "en": "Published October 2026. Table 1.B: 146,669,608 taxpayers with wages of 9,795,581,128 thousand dollars, by size of wage income; Table 1.H: by multiples of the OASDI wage limit.",
+      "de": "Veröffentlicht im Oktober 2026. Tabelle 1.B: 146.669.608 Steuerpflichtige mit Löhnen von 9.795.581.128 Tausend Dollar, nach Lohnhöhe; Tabelle 1.H: nach Vielfachen der OASDI-Beitragsbemessungsgrenze."
+    }
+  },
+  "omb_objclass_fy2027": {
+    "title": "Object class detail by account, Budget of the U.S. Government, Fiscal Year 2027 (objclass_detail_fy2027.xlsx)",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/objclass_detail_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": {
+      "en": "Obligations by account, object class and direct or reimbursable, in millions of dollars; column PY Amount is the actual for fiscal year 2025. Civilian personnel compensation and benefits (object classes 11.1, 11.3, 11.5 and 12.1) of the executive branch excluding the Postal Service add up to 383,299 million dollars, the total of Table 5-3 of the Analytical Perspectives; among them the IRS 13,226 million, the Federal Aviation Administration 10,650 million and the Social Security Administration 8,093 million. Advisory and assistance services and other services from non-federal sources (25.1 and 25.2): 460,774 million.",
+      "de": "Mittelbindungen nach Konto, Objektklasse und danach, ob direkt oder gegen Erstattung, in Mio. Dollar; die Spalte PY Amount ist das Ist des Haushaltsjahres 2025. Gehälter und Nebenleistungen des zivilen Personals (Objektklassen 11.1, 11.3, 11.5 und 12.1) der Exekutive ohne die Post ergeben zusammen 383.299 Mio. Dollar, die Summe von Tabelle 5-3 der Analytical Perspectives; darunter die Steuerbehörde IRS 13.226 Mio., die Luftfahrtbehörde FAA 10.650 Mio. und die Sozialversicherungsbehörde 8.093 Mio. Dollar. Beratungs- und Unterstützungsleistungen und andere Dienstleistungen von außerhalb des Bundes (25.1 und 25.2): 460.774 Mio. Dollar."
+    }
+  },
+  "omb_ap_workforce_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 5 (Management), Tables 5-1 to 5-3: federal civilian employment in the executive branch, total federal employment, personnel pay and benefits",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_5_tables_1-3_fy2027.xlsx",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": {
+      "en": "Table 5-1: executive branch civilian full-time equivalents excluding the Postal Service 2,266,000 in 2025 (actual), 2,143,000 in 2026 and 2,146,000 in 2027 (estimates); by agency. Table 5-3: civilian pay and benefits of the executive branch excluding the Postal Service 383,299 million dollars in 2025 (pay 288,315, benefits 94,984), 371,886 million in 2026 (pay 269,791, benefits 102,095) and 375,064 million in 2027.",
+      "de": "Tabelle 5-1: zivile Vollzeitäquivalente der Exekutive ohne die Post 2.266.000 im Jahr 2025 (Ist), 2.143.000 im Jahr 2026 und 2.146.000 im Jahr 2027 (Schätzungen); nach Behörden. Tabelle 5-3: Gehälter und Nebenleistungen des zivilen Personals der Exekutive ohne die Post 383.299 Mio. Dollar 2025 (Gehälter 288.315, Nebenleistungen 94.984), 371.886 Mio. Dollar 2026 (Gehälter 269.791, Nebenleistungen 102.095) und 375.064 Mio. Dollar 2027."
+    }
+  },
+  "omb_ap_management_fy2027": {
+    "title": "Analytical Perspectives, Budget of the U.S. Government, Fiscal Year 2027, chapter 5: Management",
+    "publisher": "Office of Management and Budget",
+    "url": "https://www.whitehouse.gov/wp-content/uploads/2026/04/ap_5_management_fy2027.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": {
+      "en": "Page 43: \"approximately 300,000 Federal employees exiting government service in 2025, the largest reduction of the Federal workforce in American history.\"",
+      "de": "S. 43: \"approximately 300,000 Federal employees exiting government service in 2025, the largest reduction of the Federal workforce in American history.\""
+    }
+  },
+  "bls_ces_federal": {
+    "title": "Current Employment Statistics, series CES9091100001: federal government employment except U.S. Postal Service, seasonally adjusted",
+    "publisher": "U.S. Bureau of Labor Statistics",
+    "url": "https://api.bls.gov/publicAPI/v1/timeseries/data/CES9091100001?startyear=2024&endyear=2026",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": {
+      "en": "Monthly, in thousands; includes the legislative and judicial branches. December 2024: 2,410.8; average of fiscal year 2025 (October 2024 to September 2025): 2,374.3; September 2025: 2,321.5; October 2025: 2,156.8; March 2026: 2,082.7; October 2026 (preliminary): 2,074.8.",
+      "de": "Monatlich, in Tausend; einschließlich Legislative und Judikative. Dezember 2024: 2.410,8; Durchschnitt des Haushaltsjahres 2025 (Oktober 2024 bis September 2025): 2.374,3; September 2025: 2.321,5; Oktober 2025: 2.156,8; März 2026: 2.082,7; Oktober 2026 (vorläufig): 2.074,8."
+    }
+  },
+  "fr_2025_01905": {
+    "title": "Memorandum of January 20, 2025, Hiring Freeze, 90 FR 8247 (January 28, 2025)",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2025-01-28/pdf/2025-01905.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": {
+      "en": "Freeze on filling vacant civilian positions in the executive branch; does not apply to military personnel or to positions related to immigration enforcement, national security or public safety, and is not to adversely impact Social Security, Medicare or veterans' benefits. \"Contracting outside the Federal Government to circumvent the intent of this memorandum is prohibited.\"",
+      "de": "Stopp der Besetzung freier ziviler Stellen in der Exekutive; gilt nicht für Militärpersonal und nicht für Stellen in der Einwanderungsdurchsetzung, der nationalen Sicherheit oder der öffentlichen Sicherheit und soll Social Security, Medicare und die Leistungen für Veteranen nicht beeinträchtigen. \"Contracting outside the Federal Government to circumvent the intent of this memorandum is prohibited.\""
+    }
+  },
+  "fr_2025_02762": {
+    "title": "Executive Order 14210 of February 11, 2025, Implementing the President's \"Department of Government Efficiency\" Workforce Optimization Initiative, 90 FR 9669",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2025-02-14/pdf/2025-02762.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": {
+      "en": "Section 3(a): agencies to hire no more than one employee for every four that depart; 3(c): prepare large-scale reductions in force, prioritizing functions not mandated by statute; neither applies to functions related to public safety, immigration enforcement or law enforcement. Military personnel excluded.",
+      "de": "Abschnitt 3(a): Die Behörden sollen für je vier ausscheidende Beschäftigte höchstens eine Person einstellen; 3(c): umfangreiche Personalabbauverfahren (reductions in force) vorbereiten, vorrangig bei Aufgaben, die kein Gesetz vorschreibt; beides gilt nicht für Aufgaben der öffentlichen Sicherheit, der Einwanderungsdurchsetzung und der Strafverfolgung. Militärpersonal ist ausgenommen."
+    }
+  },
+  "fr_2025_19614": {
+    "title": "Executive Order 14356 of October 15, 2025, Ensuring Continued Accountability in Federal Hiring, 90 FR 48387",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2025-10-20/pdf/2025-19614.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": {
+      "en": "No vacant civilian position may be filled and no new position created except as the order provides: approval by each agency's Strategic Hiring Committee, Annual Staffing Plans; exceptions for immigration enforcement, national security and public safety. Contracting to circumvent the order is prohibited.",
+      "de": "Freie zivile Stellen dürfen nur besetzt und neue Stellen nur geschaffen werden, wie es die Anordnung vorsieht: mit Zustimmung des Strategic Hiring Committee jeder Behörde und nach jährlichen Stellenplänen (Annual Staffing Plans); Ausnahmen für Einwanderungsdurchsetzung, nationale Sicherheit und öffentliche Sicherheit. Aufträge an Dritte, um die Anordnung zu umgehen, sind verboten."
+    }
+  },
+  "fr_2026_21320": {
+    "title": "Office of Personnel Management, Administrative Leave for Workforce Realignment and Other Purposes, final rule, 91 FR 65924 (October 19, 2026)",
+    "publisher": "Federal Register (Office of the Federal Register)",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2026-10-19/pdf/2026-21320.pdf",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": {
+      "en": "Effective November 18, 2026. Page 65926: \"OPM calculates that DRP separations in 2025 represented a workforce reduction of over 6 percent, which contributed to the overall reduction of the Federal workforce of over 12 percent from December 2024 to March 2026\"; the one-time costs of administrative leave in the deferred resignation program \"represent less than 3 percent of total basic payroll\"; from calendar year 2026 such leave is limited to 12 weeks per instance unless OPM and OMB approve more.",
+      "de": "In Kraft ab 18. November 2026. S. 65926: \"OPM calculates that DRP separations in 2025 represented a workforce reduction of over 6 percent, which contributed to the overall reduction of the Federal workforce of over 12 percent from December 2024 to March 2026\"; die einmaligen Kosten der bezahlten Freistellung im Programm für einen aufgeschobenen Austritt (deferred resignation program) \"represent less than 3 percent of total basic payroll\"; ab dem Kalenderjahr 2026 ist eine solche Freistellung auf 12 Wochen je Fall begrenzt, sofern OPM und OMB nicht mehr genehmigen."
+    }
+  },
+  "scotus_24a1174": {
+    "title": "Trump v. American Federation of Government Employees, No. 24A1174 (July 8, 2025), order granting a stay, 606 U.S. (preliminary print, orders p. 961)",
+    "publisher": "Supreme Court of the United States",
+    "url": "https://www.supremecourt.gov/opinions/preliminaryprint/606US2PP_Ord.pdf",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": {
+      "en": "Stays the district court's injunction against Executive Order 14210 and the OMB-OPM memorandum implementing it, because the government is likely to succeed in arguing that they are lawful; \"We express no view on the legality of any agency RIF and Reorganization Plan.\"",
+      "de": "Setzt die einstweilige Verfügung des Bezirksgerichts gegen die Executive Order 14210 und das Memorandum von OMB und OPM zu ihrer Umsetzung aus, weil die Regierung mit dem Argument, beide seien rechtmäßig, voraussichtlich Erfolg haben wird; \"We express no view on the legality of any agency RIF and Reorganization Plan.\""
+    }
+  },
+  "plaw_119_37": {
+    "title": "Public Law 119-37, Continuing Appropriations, Agriculture, Legislative Branch, Military Construction and Veterans Affairs, and Extensions Act, 2026 (November 12, 2025)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ37.xml",
+    "accessed": "2026-11-20",
+    "year": 2025,
+    "note": {
+      "en": "Section 120: no federal funds for reductions in force from enactment to the end date of the continuing resolution (initially January 30, 2026; voluntary separations and retirements excepted); reductions in force taken between October 1, 2025 and enactment have no force or effect, the employees are reinstated with back pay.",
+      "de": "Abschnitt 120: keine Bundesmittel für Personalabbauverfahren vom Inkrafttreten bis zum Ende des Übergangshaushalts (zunächst 30. Januar 2026; freiwilliges Ausscheiden und Ruhestand ausgenommen); Personalabbauverfahren zwischen dem 1. Oktober 2025 und dem Inkrafttreten sind unwirksam, die Beschäftigten werden mit Nachzahlung ihrer Bezüge wieder eingestellt."
+    }
+  },
+  "plaw_119_75": {
+    "title": "Public Law 119-75, Consolidated Appropriations Act, 2026 (February 3, 2026)",
+    "publisher": "U.S. Government Publishing Office (govinfo)",
+    "url": "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ75.xml",
+    "accessed": "2026-11-20",
+    "year": 2026,
+    "note": {
+      "en": "Department of Defense Appropriations Act, 2026, section 8045: no funds to convert work done by Defense civilian employees to contractor performance unless a public-private competition shows the contractor to be cheaper by at least the lesser of 10 percent of the personnel-related costs or 10 million dollars.",
+      "de": "Department of Defense Appropriations Act, 2026, Abschnitt 8045: keine Mittel, um Arbeit von Zivilbeschäftigten des Verteidigungsministeriums an Auftragnehmer zu vergeben, es sei denn, ein öffentlich-privater Wettbewerb zeigt, dass der Auftragnehmer mindestens um 10 % der Personalkosten oder um 10 Mio. Dollar billiger ist, je nachdem, welcher Betrag niedriger ist."
+    }
+  },
+  "irs_p5901": {
+    "title": "Return on Investment: Re-Examining Revenue Estimates for IRS Funding, Publication 5901 (February 2024)",
+    "publisher": "Internal Revenue Service",
+    "url": "https://www.irs.gov/pub/irs-pdf/p5901.pdf",
+    "accessed": "2026-11-20",
+    "year": 2024,
+    "note": {
+      "en": "Page 2, from the tax gap projections for tax years 2020 and 2021: of an estimated true tax liability of 4,565 billion dollars a year, revenue from IRS enforcement efforts is 63 billion dollars, 1.4%.",
+      "de": "S. 2, aus den Projektionen der Steuerlücke für die Steuerjahre 2020 und 2021: Von einer geschätzten tatsächlichen Steuerschuld von 4.565 Mrd. Dollar im Jahr stammen 63 Mrd. Dollar oder 1,4 % aus den Durchsetzungsmaßnahmen der IRS."
+    }
   }
 }

@@ -23,16 +23,28 @@ Read by build_dist.py and measures.py (the measures in policies.json):
   irs/23in01w2all.xlsx          IRS Statistics of Income, Form W-2 statistics 2023, Table 1   -> distributions/wages.json
   census/ft900_exh1.xlsx        Census Bureau, FT-900 release of November 2026, Exhibit 1      -> goods imports (tariff measure)
   mts/mts_table_5_*.csv         Monthly Treasury Statement, Table 5 (outlays by agency)         -> fiscal year 2026 outlays in catches
+Read by workforce.py (through measures.py; the measure federal_workforce_cut):
+  omb/objclass_detail_fy2027.xlsx  OMB, object class detail by account (2025 actual)            -> personnel costs per budget item
+  omb/ap_5_tables_1-3_fy2027.xlsx  Analytical Perspectives, Tables 5-1 to 5-3                  -> check of the base, FTE, pay and benefits
+  bls/ces_CES9091100001.json    BLS Current Employment Statistics, federal except Postal Service -> employment quoted on the card
 Kept for reference (read by hand; the measures quote them):
   irs/p15--2025.pdf             IRS Publication 15 (2025): payroll tax rates, Social Security wage base
   govinfo/CDOC-119hdoc163.pdf   2026 Annual Report of the Social Security Trustees (H. Doc. 119-163)
   govinfo/BILLS-119hr9519ih.pdf Social Security 2100 Act, H.R. 9519 as introduced (29 June 2026)
   govinfo/PLAW-119publ*.xml     public laws: 119-1 (Laken Riley Act), 119-21 (reconciliation act of 2025),
-                                119-28 (Rescissions Act of 2025), 119-98 (Secure America Act), 119-103 (CR for 2027)
+                                119-28 (Rescissions Act of 2025), 119-37 (CR of November 2025, bar on reductions in
+                                force), 119-75 (Consolidated Appropriations Act, 2026), 119-98 (Secure America Act),
+                                119-103 (CR for 2027)
   govinfo/GOVPUB-Y4_T19_4-PURL-gpo157077.pdf  JCT, income and payroll tax offsets 2021-2031 (JCX-11-21)
   govinfo/GOVPUB-Y10-PURL-LPS107729.pdf      CBO, The Role of the 25 Percent Revenue Offset (2009)
   scotus/24-1287.pdf            Supreme Court, Learning Resources, Inc. v. Trump (20 February 2026)
-  fr/2026-*.pdf                 Federal Register: section 122 surcharge, end of the IEEPA duties, section 301 action
+  scotus/606US2PP_Ord.pdf       Supreme Court, orders of 606 U.S. (preliminary print), among them Trump v. AFGE, 24A1174
+  fr/2026-*.pdf                 Federal Register: section 122 surcharge, end of the IEEPA duties, section 301 action;
+                                2026-21320, OPM's rule on administrative leave for workforce realignment
+  fr/2025-*.pdf                 Federal Register: hiring freeze (2025-01905), Executive Orders 14210 (2025-02762)
+                                and 14356 (2025-19614)
+  omb/ap_5_management_fy2027.pdf  Analytical Perspectives, chapter 5 (Management): employees who left in 2025
+  irs/p5901.pdf                 IRS Publication 5901, return on investment of IRS funding (enforcement revenue)
   nato/                         NATO defence expenditure 2014-2025; the 5 % commitment
   treasury/General-Explanations-FY2025.pdf   Treasury, revenue proposals of the FY 2025 Budget (corporate rate)
 """
@@ -90,8 +102,22 @@ DOWNLOADS = {
     "nato/def-exp-2025-en.pdf": "https://www.nato.int/content/dam/nato/webready/documents/finance/def-exp-2025-en.pdf",
     "nato/five-percent.html": "https://www.nato.int/en/what-we-do/introduction-to-nato/defence-expenditures-and-natos-5-commitment",
     "treasury/General-Explanations-FY2025.pdf": "https://home.treasury.gov/system/files/131/General-Explanations-FY2025.pdf",
+    # --- the federal workforce measure ---
+    "omb/objclass_detail_fy2027.xlsx": OMB + "objclass_detail_fy2027.xlsx",
+    "omb/ap_5_tables_1-3_fy2027.xlsx": OMB + "ap_5_tables_1-3_fy2027.xlsx",
+    "omb/ap_5_management_fy2027.pdf": OMB + "ap_5_management_fy2027.pdf",
+    # BLS public API, version 1 (no registration). Always the latest data; the cached copy is the one of
+    # 20 November 2026 (October 2026 preliminary).
+    "bls/ces_CES9091100001.json":
+        "https://api.bls.gov/publicAPI/v1/timeseries/data/CES9091100001?startyear=2024&endyear=2026",
+    "fr/2025-01905.pdf": "https://www.govinfo.gov/content/pkg/FR-2025-01-28/pdf/2025-01905.pdf",
+    "fr/2025-02762.pdf": "https://www.govinfo.gov/content/pkg/FR-2025-02-14/pdf/2025-02762.pdf",
+    "fr/2025-19614.pdf": "https://www.govinfo.gov/content/pkg/FR-2025-10-20/pdf/2025-19614.pdf",
+    "fr/2026-21320.pdf": "https://www.govinfo.gov/content/pkg/FR-2026-10-19/pdf/2026-21320.pdf",
+    "scotus/606US2PP_Ord.pdf": "https://www.supremecourt.gov/opinions/preliminaryprint/606US2PP_Ord.pdf",
+    "irs/p5901.pdf": "https://www.irs.gov/pub/irs-pdf/p5901.pdf",
 }
-for law in ("1", "21", "28", "98", "103"):
+for law in ("1", "21", "28", "37", "75", "98", "103"):
     DOWNLOADS["govinfo/PLAW-119publ%s.xml" % law] = "https://www.govinfo.gov/bulkdata/PLAW/119/public/PLAW-119publ%s.xml" % law
 for date in ("2025-09-30", "2026-09-30"):
     for table in ("1", "3", "4", "5", "9"):

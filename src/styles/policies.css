@@ -258,7 +258,8 @@
   text-overflow: ellipsis;
 }
 
-/* The goal of the bar leaves this measure out: said on the card, with the reason. */
+/* The goal of the bar leaves this measure out: said on the card, with the short reason and the way
+   to the full one in the details. */
 .policy__goal {
   display: flex;
   align-items: flex-start;
@@ -272,6 +273,24 @@
 .policy__goal .icon {
   margin-top: 2px;
   color: var(--ink-3);
+}
+
+.policy__goal-more {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 650;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.policy__goal-more:hover {
+  color: var(--ink);
+  text-decoration-color: currentColor;
 }
 
 .policy__title {
@@ -600,6 +619,30 @@
 
 .policy__section h4 {
   margin-bottom: 10px;
+}
+
+/* The face's "Why?" brings the focus to a heading: it is not a control, so no ring. */
+.policy__section h4:focus {
+  outline: none;
+}
+
+/* The explanation, at the top of the opened card: running text in the summary's voice, before the
+   settings. */
+.policy__explanation {
+  max-width: 68ch;
+  padding: 2px 0 14px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.policy__explanation p + p {
+  margin-top: 0.65em;
+}
+
+.policy__goal-detail {
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .policy__hint {
@@ -946,6 +989,14 @@
   top: 19px;
 }
 
+/* Too long for either side of its tick (a long label on a phone): centred under the tick on a line of
+   its own, kept inside the scale (the script sets `left`); the tick on the track marks the value. */
+.param__base--center {
+  right: auto;
+  padding: 0;
+  border: 0;
+}
+
 .param__base:hover,
 .param__end--base:hover {
   color: var(--ink);
@@ -1144,10 +1195,105 @@
   font-weight: 500;
 }
 
+/* Limits of the calculation: what the figure leaves out and what the model assumes. They say
+   nothing against the measure, so they have no frame and no severity, only a dash. */
+.limits {
+  display: grid;
+  gap: 10px;
+}
+
+.limit {
+  position: relative;
+  padding-left: 16px;
+}
+
+.limit::before {
+  content: "–";
+  content: "–" / "";
+  position: absolute;
+  left: 2px;
+  color: var(--ink-3);
+}
+
+.limit__text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.limit .sources {
+  margin-top: 5px;
+  font-size: 12.5px;
+}
+
 /* Budget items a measure changes. */
 .effects {
   display: grid;
   gap: 14px;
+}
+
+/* Many effects: in groups by the setting that drives them, each with what it does to the balance;
+   the largest are shown, the rest behind a button that says how many and how much. */
+.effect-group + .effect-group {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--rule);
+}
+
+.effect-group__head {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 10px;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.effect-group__name {
+  font-weight: 650;
+}
+
+.effect-group__total {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.effects--rest:not([hidden]) {
+  margin-top: 14px;
+}
+
+.effects__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  text-align: left;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.effects__more:hover {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+.effects__more .icon {
+  flex: none;
+  color: var(--ink-3);
+  transition: transform 0.15s;
+}
+
+.effects__more[aria-expanded="true"] .icon {
+  transform: rotate(180deg);
 }
 
 .effect__node {
@@ -1188,6 +1334,35 @@
   font-size: 13px;
   line-height: 1.45;
   color: var(--ink-3);
+}
+
+/* Among many effects, an effect's note and sources open under it. */
+.effect__about {
+  margin-top: 3px;
+  font-size: 12.5px;
+}
+
+.effect__about > summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  color: var(--ink-3);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.effect__about > summary:hover {
+  color: var(--ink);
+}
+
+.effect__about[open] > summary {
+  color: var(--ink-2);
+}
+
+.effect__about .sources {
+  margin-top: 6px;
 }
 
 .effect__shift {

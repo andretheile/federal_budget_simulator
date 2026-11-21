@@ -71,16 +71,16 @@ describe("the filter by collection", () => {
     expect(container.querySelector(".collection-note")).toBeNull();
   });
 
-  it("narrows the list to a collection in its order, says what it is, and puts it in the address", () => {
+  it("narrows the list to a collection, alphabetically, says what it is, and puts it in the address", () => {
     mount("#lang=en&s=halve_mp_pay");
     click(chip("Budget debate"));
     expect(chip("Budget debate").getAttribute("aria-pressed")).toBe("true");
-    expect(cards()).toEqual(["wealth_tax", "cut_admin", "defense_target"]);
+    expect(cards()).toEqual(["cut_admin", "defense_target", "wealth_tax"]);
     expect(plain(query(".collection-note p").textContent)).toBe("Measures proposed in the debate on next year's budget.");
     expect(plain(query(".collection-note summary").textContent)).toBe("Sources (1)");
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&f=budget_debate");
-    // The topics are those of the collection's measures.
-    expect(all(".filter__item").map((item) => plain(item.textContent))).toEqual(["All topics 3", "Taxes 1", "State and administration 1", "Defence 1"]);
+    // The topics are those of the collection's measures, alphabetically.
+    expect(all(".filter__item").map((item) => plain(item.textContent))).toEqual(["All topics 3", "Defence 1", "State and administration 1", "Taxes 1"]);
   });
 
   it("a collection without a description and sources has no line about it", () => {
@@ -124,7 +124,7 @@ describe("the filter by collection", () => {
       window.history.replaceState(null, "", "#lang=en&f=budget_debate");
       window.dispatchEvent(new HashChangeEvent("hashchange"));
     });
-    expect(cards()).toEqual(["wealth_tax", "cut_admin", "defense_target"]);
+    expect(cards()).toEqual(["cut_admin", "defense_target", "wealth_tax"]);
     mount("#lang=en&f=no_such_collection");
     expect(chip("All measures").getAttribute("aria-pressed")).toBe("true");
     expect(window.location.hash).toBe("#lang=en");

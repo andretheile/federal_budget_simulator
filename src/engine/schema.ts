@@ -32,6 +32,7 @@ import type {
   PoliciesFile,
   Policy,
   PolicyCollection,
+  PolicyLimit,
   PolicyTiming,
   Schedule,
   Source,
@@ -135,7 +136,7 @@ export const sourceSchema = z.strictObject({
   url: text,
   accessed: z.iso.date("must be an ISO date (YYYY-MM-DD)"),
   year: year.optional(),
-  note: z.string().optional(),
+  note: z.union([text, localizedTextSchema]).optional(),
 });
 
 export const sourcesFileSchema = z.record(idSchema, sourceSchema);
@@ -398,6 +399,11 @@ export const catchSchema = z.strictObject({
   sources: sourceIds.optional(),
 });
 
+export const policyLimitSchema = z.strictObject({
+  text: localizedTextSchema,
+  sources: sourceIds.optional(),
+});
+
 export const timingPhaseSchema = z.strictObject({
   from: z.iso.date("must be an ISO date (YYYY-MM-DD)").optional(),
   years: z.number().min(0).optional(),
@@ -415,10 +421,12 @@ export const policySchema = z.strictObject({
   id: idSchema,
   label: localizedTextSchema,
   summary: localizedTextSchema,
+  explanation: localizedTextSchema.optional(),
   topic: z.enum(["migration", "social", "taxes", "pensions", "defense", "climate", "state", "europe", "other"]),
   params: z.array(paramSchema),
   effects: z.array(effectSchema).min(1),
   catches: z.array(catchSchema),
+  limits: z.array(policyLimitSchema).optional(),
   sources: sourceIds,
   timing: policyTimingSchema.optional(),
 });
@@ -538,7 +546,13 @@ export const goalSchema = z.strictObject({
   excluded: z
     .array(
       z
-        .strictObject({ node: z.string().optional(), policy: z.string().optional(), reason: localizedTextSchema, sources: sourceIds.optional() })
+        .strictObject({
+          node: z.string().optional(),
+          policy: z.string().optional(),
+          reason: localizedTextSchema,
+          reasonShort: localizedTextSchema.optional(),
+          sources: sourceIds.optional(),
+        })
         .refine((entry) => (entry.node === undefined) !== (entry.policy === undefined), 'an excluded entry needs exactly one of "node" and "policy"'),
     )
     .optional(),
@@ -574,6 +588,7 @@ export type SchemaMatchesTypes = [
   Assert<Same<Out<typeof shiftSchema>, EffectShift>>,
   Assert<Same<Out<typeof effectSchema>, Effect>>,
   Assert<Same<Out<typeof catchSchema>, Catch>>,
+  Assert<Same<Out<typeof policyLimitSchema>, PolicyLimit>>,
   Assert<Same<Out<typeof policySchema>, Policy>>,
   Assert<Same<Out<typeof timingPhaseSchema>, TimingPhase>>,
   Assert<Same<Out<typeof policyTimingSchema>, PolicyTiming>>,

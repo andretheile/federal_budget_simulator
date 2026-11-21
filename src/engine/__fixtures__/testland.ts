@@ -71,7 +71,7 @@
  * part of 50, of which the centre bears a fifth, and half of the 15 less income tax.
  */
 import type { RawPackFiles } from "../validate.ts";
-import type { CountryPack, LocalizedText } from "../types.ts";
+import type { CountryPack, Effect, LocalizedText, Policy } from "../types.ts";
 
 const t = (en: string, de: string): LocalizedText => ({ en, de });
 
@@ -304,6 +304,10 @@ export const testland: CountryPack = {
       id: "no_basic_income_non_citizens",
       label: t("No basic income support for non-citizens", "Keine Grundsicherung für Ausländer"),
       summary: t("The selected groups lose the benefit.", "Die gewählten Gruppen verlieren den Anspruch."),
+      explanation: t(
+        "The figure is the spending on the selected groups, less the fifth that stays as emergency aid.\n\nChoose the groups under the settings; each adds its share of the spending.",
+        "Die Zahl sind die Ausgaben für die gewählten Gruppen, abzüglich des Fünftels, das als Nothilfe bleibt.\n\nDie Gruppen wählt man unter den Einstellungen; jede bringt ihren Anteil an den Ausgaben.",
+      ),
       topic: "migration",
       params: [
         {
@@ -347,6 +351,13 @@ export const testland: CountryPack = {
           severity: "major",
           text: t("Provinces pay for emergency shelters.", "Die Provinzen zahlen für Notunterkünfte."),
         },
+      ],
+      limits: [
+        {
+          text: t("Recipients who leave the country are not counted.", "Empfänger, die das Land verlassen, sind nicht gerechnet."),
+          sources: ["stats_office"],
+        },
+        { text: t("Administration costs stay as they are.", "Die Verwaltungskosten bleiben, wie sie sind.") },
       ],
       sources: ["stats_office"],
     },
@@ -721,6 +732,7 @@ export const testland: CountryPack = {
       publisher: "Testland Statistics Office",
       url: "https://example.org/income-tax",
       accessed: "2025-01-15",
+      note: t("Table 3, taxable income by bracket.", "Tabelle 3, zu versteuerndes Einkommen nach Stufen."),
     },
   },
 
@@ -937,7 +949,11 @@ export const testland: CountryPack = {
           },
           {
             policy: "family_bonus",
-            reason: t("The plan already counts on it.", "Der Plan rechnet schon damit."),
+            reason: t(
+              "The plan already counts on it: the bonus was passed with the last budget, and the plan's figures for 2026 include it in full.",
+              "Der Plan rechnet schon damit: Der Bonus wurde mit dem letzten Haushalt beschlossen, und die Zahlen des Plans für 2026 enthalten ihn ganz.",
+            ),
+            reasonShort: t("The plan already counts on it.", "Der Plan rechnet schon damit."),
           },
         ],
       },
@@ -1021,4 +1037,39 @@ export function testlandTimed(): CountryPack {
 export function testlandTimedFiles(): RawPackFiles {
   const copy = testlandTimed();
   return { ...testlandFiles(), policies: { policies: copy.policies, collections: copy.collections }, debt: copy.debt };
+}
+
+/**
+ * Testland with a measure of many effects, as a pack builds from the budget's items one by one:
+ * "many_cuts" has eight, five driven by "staff" (cuts of 1 to 5 per point, on five items), two by
+ * "pay" (1 and 2 per point) and a fixed one of 3. Both settings default to 10, which saves
+ * 150 + 30 - 3 = 177.
+ */
+export function testlandManyEffects(): { pack: CountryPack; policy: Policy } {
+  const pack = testlandCopy();
+  const add = (target: string, amount: number | { param: string; scale: number }): Effect => ({ type: "add", target, amount, quality: "estimate" }) as Effect;
+  const policy: Policy = {
+    id: "many_cuts",
+    label: { en: "Many cuts", de: "Viele Kürzungen" },
+    summary: { en: "Cuts in many items.", de: "Kürzungen in vielen Posten." },
+    topic: "state",
+    params: [
+      { id: "staff", type: "number", label: { en: "Staff cut", de: "Stellenabbau" }, unit: "percent", min: 0, max: 50, step: 1, default: 10 },
+      { id: "pay", type: "number", label: { en: "Pay cut", de: "Gehaltskürzung" }, unit: "percent", min: 0, max: 50, step: 1, default: 10 },
+    ],
+    effects: [
+      add("exp.admin.other", { param: "staff", scale: -1 }),
+      add("exp.health", { param: "staff", scale: -3 }),
+      add("exp.education", { param: "staff", scale: -5 }),
+      add("exp.admin.parliament", { param: "pay", scale: -1 }),
+      add("exp.defense", { param: "staff", scale: -2 }),
+      add("exp.social.family", { param: "staff", scale: -4 }),
+      add("exp.admin.other", { param: "pay", scale: -2 }),
+      add("exp.health", 3),
+    ],
+    catches: [],
+    sources: [],
+  };
+  pack.policies.push(policy);
+  return { pack, policy };
 }

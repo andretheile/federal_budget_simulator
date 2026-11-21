@@ -116,7 +116,17 @@ Arithmetic on published figures:
   shrink by the same amounts, and belong wholly to the social insurance funds, so that a saving in their
   administration relieves the funds and not, through a node's shares, the federal, state or municipal
   budgets. Unlike the health benefit items, they carry no pro-rata share of the federal subsidy to health
-  insurance, which is a fixed amount; the other health items carry correspondingly more of it.
+  insurance, which is a fixed amount; the other health items carry correspondingly more of it;
+- the staff of the general administration as three leaves, one per level (`ADMIN_STAFF` in
+  `build_budget.py`): compensation of employees (D.1) in general public services by level without research
+  and foreign aid, split by full-time equivalents of the personnel statistics (Destatis, 30 June 2024)
+  between political leadership and central administration (plus the foreign service at federal level) on
+  the one hand and the tax administration and the Bundestag administration on the other. Civil servants
+  carry their level's imputed pension contributions per full-time equivalent; the rest is divided by
+  full-time equivalents. The leaves are taken out of 01.1 (the rest of the inside share), 01.3 and 01.6 (all
+  of their D.1), whose leaves shrink by the same amounts. Each leaf belongs wholly to its level, so that a
+  staff cut lands on the level that decides it; the group above carries the level shares as a breakdown that
+  a measure can offer for choice, and each leaf carries the same groups with its own level at 1.
 
 Judgement, to be reviewed by whoever updates the data:
 
@@ -136,6 +146,18 @@ Judgement, to be reviewed by whoever updates the data:
   the groups with by far the most compensation of employees in those divisions; part of the 10.9 amount may
   in fact belong to sickness and disability (10.1), for example the accident insurance. The health insurers'
   non-staff administrative costs are a cash figure assumed to lie in 07.6 as well.
+- **What counts as general administration, and where its staff sits.** The leaves count the personnel
+  statistics' "political leadership and central administration" and, at federal level, foreign affairs;
+  the tax administration (tax offices, customs) stays in 01.1, as does the Bundestag administration, which
+  is in the Bundestag's own item. Four assumptions: the tax and Bundestag administrations lie wholly in 01.1;
+  research staff (01.4, 01.5) is split across levels like the research leaves were fitted before the split
+  (federal 46.37 % of basic research, 41.43 % of R&D, the rest the states); the cost of an FTE in the general
+  administration equals that in the tax administration of the same level apart from the imputed
+  contributions; and the personnel statistics' functions match COFOG 01. The last is the weakest: per FTE the
+  leaves come to EUR 77,900 (federal), 79,300 (states) and 76,800 (municipalities). From the average gross
+  pay of all municipal staff in June 2024, with annual bonus, employer contributions and supplementary
+  pensions, a rough count gives about EUR 71,000. Central administrations pay somewhat above the average, but
+  the leaves may also include some staff that the personnel statistics assign to other functions.
 - **Merging COFOG 10.5, 10.6 and 10.7** into one group, because cash benefits cannot be assigned to
   one of them: housing costs under Bürgergeld alone exceed the cash benefits recorded under 10.6.
 - **Levels of capital-transfer revenue** and of the revision leaf.
