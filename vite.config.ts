@@ -75,7 +75,20 @@ export default defineConfig(({ mode }) => {
     test: {
       environment: "node",
       projects: [
-        { extends: true, test: { name: "app", include: ["src/**/*.test.ts", "src/**/*.test.tsx"] } },
+        {
+          extends: true,
+          test: {
+            name: "app",
+            include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+            // Many tests render the whole page, several times: up to two seconds each on a quiet
+            // machine with every core busy, against vitest's 5 s by default. On a machine slowed to
+            // a tenth (other programs, a hot processor that throttles) such a test needs 20 s. One
+            // limit for every test and hook, three times that, so that a correct test passes there
+            // and a test that hangs still ends. The performance tests keep their own budgets.
+            testTimeout: 60_000,
+            hookTimeout: 60_000,
+          },
+        },
         // Real production builds (scripts/preview-packs.test.ts) take every core for a moment: they
         // run after all other tests, never beside the engine's timing tests.
         { extends: true, test: { name: "builds", include: ["scripts/**/*.test.ts"], sequence: { groupOrder: 1 } } },

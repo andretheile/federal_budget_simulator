@@ -16,7 +16,7 @@ import { debtEn } from "../i18n/debt/en.ts";
 import { debtModule } from "./DebtSection.tsx";
 
 let container: HTMLDivElement;
-let root: Root;
+let root: Root | undefined;
 
 beforeAll(async () => {
   (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
@@ -26,7 +26,7 @@ beforeAll(async () => {
   };
   window.scrollTo = (() => {}) as typeof window.scrollTo;
   await debtModule.load();
-}, 30_000);
+});
 
 beforeEach(() => {
   window.history.replaceState(null, "", "/");
@@ -35,14 +35,21 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  act(() => root.unmount());
+  const mounted = root;
+  if (mounted) act(() => mounted.unmount());
+  root = undefined;
   container.remove();
 });
 
 function mount(hash: string, pack: CountryPack = testlandEnding()): void {
+  // A test may mount more than once: the page before goes first, so that it neither stays mounted
+  // for the rest of the file nor renders again on every later change of the address.
+  const previous = root;
+  if (previous) act(() => previous.unmount());
   window.history.replaceState(null, "", hash);
-  root = createRoot(container);
-  act(() => root.render(<Simulator pack={pack} />));
+  const created = createRoot(container);
+  root = created;
+  act(() => created.render(<Simulator pack={pack} />));
 }
 
 const plain = (value: string | null | undefined): string => (value ?? "").replace(/[  ]/g, " ");

@@ -9,10 +9,6 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vite
 import { ONE_COLUMN, Simulator } from "./App.tsx";
 import { testland } from "./engine/__fixtures__/testland.ts";
 
-// Every test here renders the whole page, most of them several times: a fraction of a second on a
-// quiet machine, but past vitest's 5 s when other programs keep the processor busy.
-vi.setConfig({ testTimeout: 20_000 });
-
 let container: HTMLDivElement;
 let root: Root;
 
@@ -409,7 +405,7 @@ describe("the address while a value changes fast", () => {
   });
 
   // 31 clicks, each of which renders the whole page again.
-  it("is written at most a few dozen times in ten seconds, and always ends on the last state", { timeout: 30_000 }, () => {
+  it("is written at most a few dozen times in ten seconds, and always ends on the last state", () => {
     // Safari throws after about 100 calls of replaceState in ten seconds; a drag can change the
     // scenario a hundred times in a few seconds. The budget itself, over ten seconds of changes,
     // is tested on a clock moved by hand in addressWriter.test.ts; here: that the page uses it.

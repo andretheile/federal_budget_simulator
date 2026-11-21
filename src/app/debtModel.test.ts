@@ -215,7 +215,7 @@ describe("the years of the table", () => {
 });
 
 describe("the German pack", () => {
-  it("starts from the government's projection by default, with the 2024 budget continued as the other path", { timeout: 30_000 }, async () => {
+  it("starts from the government's projection by default, with the 2024 budget continued as the other path", async () => {
     const result = await loadPack("de");
     if (!result.ok) {
       console.info("countries/de is not valid right now; the German figures are not checked");
