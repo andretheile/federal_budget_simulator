@@ -555,9 +555,10 @@ describe("the official plans", () => {
     expect(plain(plans[0].querySelector(".debt__note")?.textContent)).toBe("Drawn in the charts as a dashed line, with diamonds at the years it gives figures for.");
     const rows = (plan: HTMLElement): string[][] =>
       [...plan.querySelectorAll("tr")].map((row) => [...row.children].map((cell) => plain(cell.textContent)));
+    // Each column with as many decimals as its most precise figure needs: "−4.0%" beside "−3.5%".
     expect(rows(plans[0])).toEqual([
       ["Year", "Debt, share of GDP", "Balance, share of GDP", "Interest, share of GDP", "Interest, share of all revenue"],
-      ["2025", "52%", "−4%", "–", "–"],
+      ["2025", "52%", "−4.0%", "–", "–"],
       ["2026", "55%", "−3.5%", "1.2%", "3%"],
     ]);
     expect(plain(plans[1].querySelector(".dplan__scope")?.textContent)).toBe(

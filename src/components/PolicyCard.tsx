@@ -60,6 +60,15 @@ import { Delta, QualityBadge, SourceList, Switch } from "./primitives.tsx";
 import { widest } from "./Scoreboard.tsx";
 
 /**
+ * The line under a card's figure on when the debt projection has the measure. For a one-off the
+ * figure is not an effect of every year but an amount, counted once; the line says so.
+ */
+function timingText(ui: Ui, phase: MeasurePhase): string {
+  const when = ui.t.debt.timing.when(phaseWords(phase, ui));
+  return phase.once ? ui.t.policies.timingLineOnce(when) : ui.t.policies.timingLine(when);
+}
+
+/**
  * Every form the timing line of a card can take as its slider moves (lower end, upper end, baseline,
  * now), with the widest digits: the line keeps the room of the longest, so it never changes height.
  */
@@ -71,7 +80,7 @@ function timingVariants(ui: Ui, policy: Policy, params: ParamValues): string[] {
   const phases = [params, ...values.map((value) => ({ ...params, [param!.id]: value }))].flatMap(
     (candidate) => measurePhase(ui.pack, policy.id, candidate) ?? [],
   );
-  const texts = phases.map((phase) => widest(ui.t.policies.timingLine(ui.t.debt.timing.when(phaseWords(phase, ui)))));
+  const texts = phases.map((phase) => widest(timingText(ui, phase)));
   return [...new Set(texts)];
 }
 
@@ -260,7 +269,8 @@ export const PolicyCard = memo(function PolicyCard({
               direction={insight.direction}
               text={signed(balanceShown)}
             />
-            <span className="policy__per">{t.common.perYear}</span>
+            {/* A one-off is an amount, not an effect of every year. */}
+            <span className="policy__per">{phase?.once ? t.policies.once : t.common.perYear}</span>
             <span className={`policy__direction policy__direction--${insight.direction}`}>
               {directionWord(ui, insight.direction, level)}
             </span>
@@ -281,7 +291,7 @@ export const PolicyCard = memo(function PolicyCard({
           {phase && (
             <p className="policy__timing">
               {/* At a setting that changes nothing there is nothing to time; the line keeps its room. */}
-              {insight.direction !== "neutral" && <span>{t.policies.timingLine(t.debt.timing.when(phaseWords(phase, ui)))}</span>}
+              {insight.direction !== "neutral" && <span>{timingText(ui, phase)}</span>}
               {timingStandIns.map((text) => (
                 <span key={text} className="policy__stand-in" aria-hidden="true">
                   {text}
@@ -794,7 +804,7 @@ function PolicyDetails({
             <dd>
               {insight.hasRange ? (
                 <>
-                  {t.common.range(signed(insight.low), signed(insight.high))} {t.common.perYear}
+                  {t.common.range(signed(insight.low), signed(insight.high))} {phase?.once ? t.policies.once : t.common.perYear}
                   <RangeGlyph low={insight.low} value={insight.balance} high={insight.high} />
                 </>
               ) : (
@@ -885,7 +895,9 @@ function PolicyDetails({
       {policy.timing && phase && (
         <section className="policy__section">
           <h4>{t.policies.timingTitle}</h4>
-          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui)), policy.timing.param !== undefined)}</p>
+          <p className="policy__timing-detail">
+            {(phase.once ? t.policies.timingDetailOnce : t.policies.timingDetail)(t.debt.timing.when(phaseWords(phase, ui)), policy.timing.param !== undefined)}
+          </p>
           <p className="policy__timing-note">{ui.text(policy.timing.note)}</p>
           <SourceList ids={policy.timing.sources} />
         </section>

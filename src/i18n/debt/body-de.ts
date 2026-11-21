@@ -119,7 +119,12 @@ export const debtBodyDe: DebtBodyMessages = {
   bothPaths: (withText, withoutText) => `mit den Maßnahmen ${withText}, ohne ${withoutText}`,
 
   referencesTitle: "Zum Vergleich",
-  referencesNote: "Werte anderer Länder und früherer Jahre, und wann die Rechnung sie erreicht.",
+  referencesNote: ({ countries, history }) =>
+    countries && !history
+      ? "Werte anderer Länder, und wann die Rechnung sie erreicht."
+      : history && !countries
+        ? "Werte früherer Jahre, und wann die Rechnung sie erreicht."
+        : "Werte anderer Länder und früherer Jahre, und wann die Rechnung sie erreicht.",
   referenceName: (label, year) => (year === undefined ? label : typeof year === "number" ? `${label} ${year}` : `${label}, ${year}`),
   referenceInterestRevenue: (value) => `Zinsen ${value} der Einnahmen`,
   referenceInterest: (value) => `Zinsen ${value} des BIP`,

@@ -28,11 +28,14 @@ function intro({ baseYear, plan }: DebtIntroFacts): string {
   return `Bis ${plan.until} folgen Schulden und Wachstum der amtlichen Planung „${plan.label}“. ${after}, und es gelten die Annahmen.`;
 }
 
-function when({ start, startYear, full, last, fullName }: PhaseWords): string {
+function when({ start, startYear, full, fullName, horizonEnd, once, until }: PhaseWords): string {
+  const after = horizonEnd !== undefined && startYear > horizonEnd ? ", nach dem Ende der Rechnung" : "";
+  if (once !== undefined) return `einmal, ${imJahr(once)}${after}`;
+  if (until !== undefined) return `von ${start} bis ${until}${after}`;
+  if (after) return `ab ${start}${after}`;
   const fullText = fullName ?? full;
-  if (last !== undefined && startYear > last) return `ab ${start}, nach dem Ende der Rechnung`;
   if (full === undefined) return `ab ${start}`;
-  if (last !== undefined && full > last) return `ab ${start}, voll erst ab ${fullText}, nach dem Ende der Rechnung`;
+  if (horizonEnd !== undefined && full > horizonEnd) return `ab ${start}, voll erst ab ${fullText}, nach dem Ende der Rechnung`;
   return `ab ${start}, voll ab ${fullText}`;
 }
 
@@ -110,6 +113,12 @@ export const debtDe: DebtMessages = {
     debtUnit: "der Wirtschaftsleistung (BIP)",
     withMeasures: "mit den eingeschalteten Maßnahmen",
     withMeasuresBy: (year) => `mit den eingeschalteten Maßnahmen, soweit sie bis ${year} wirken`,
+    withMeasuresEnded: (year, notYet, all) =>
+      notYet
+        ? `mit den eingeschalteten Maßnahmen, soweit sie bis ${year} wirken (manche wirken bis dahin nicht mehr)`
+        : all
+          ? "mit den eingeschalteten Maßnahmen, die bis dahin nicht mehr wirken"
+          : "mit den eingeschalteten Maßnahmen, von denen manche bis dahin nicht mehr wirken",
     noMeasures: "keine Maßnahme eingeschaltet",
     rate: (rate) => `bei ${rate} Zins für neue Schulden`,
     range: (range) => `je nach Schätzung ${range}`,
@@ -122,7 +131,7 @@ export const debtDe: DebtMessages = {
         ? `Maßnahmen wirken in dieser Rechnung ab ${year}; bis dahin verläuft der Pfad mit Maßnahmen wie der ohne.`
         : `Eingeschaltete Maßnahmen wirken in dieser Rechnung ab ${year}.`,
     why: (year) => `Warum ab ${year}?`,
-    laterTitle: "Später oder nach und nach wirken:",
+    laterTitle: (ending) => (ending ? "Später, nach und nach, einmalig oder befristet wirken:" : "Später oder nach und nach wirken:"),
     when,
   },
   teaserLink: (year) => `Wohin führt das? Schulden und Zinsen bis ${year}`,

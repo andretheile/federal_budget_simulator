@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { paragraphs, sentences } from "./paragraphs.ts";
+import { blocks, paragraphs, sentences } from "./paragraphs.ts";
 
 describe("a long text in paragraphs", () => {
   it("cuts at the end of a sentence, never after an abbreviation, an ordinal or a page number", () => {
@@ -85,5 +85,14 @@ describe("a long text in paragraphs", () => {
     const long = "This first sentence is long enough to fill most of a paragraph on its own, which is the point here.";
     const out = paragraphs(`${long} ${long} ${long} Short one. ${long}`, 220);
     expect(out.some((paragraph) => paragraph === "Short one.")).toBe(false);
+  });
+});
+
+describe("a note in the pack's own paragraphs", () => {
+  it("breaks only where the text has a blank line, and keeps a long block whole", () => {
+    expect(blocks("One.\n\nTwo.\n   \nThree.")).toEqual(["One.", "Two.", "Three."]);
+    const long = "A sentence that goes on for a while. ".repeat(40).trim();
+    expect(blocks(long)).toEqual([long]);
+    expect(blocks("")).toEqual([]);
   });
 });

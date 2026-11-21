@@ -47,6 +47,17 @@ export function sentences(text: string): string[] {
 }
 
 /**
+ * The text's own paragraphs: a blank line starts one, and nothing else does. For the notes of the
+ * debt projection, which the pack breaks where it wants a break; a block stays whole however long.
+ */
+export function blocks(text: string): string[] {
+  return text
+    .split(/\n\s*\n/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+}
+
+/**
  * The text in paragraphs of about `target` characters, made of whole sentences. A short sentence
  * stays with the one before it rather than stand alone.
  */

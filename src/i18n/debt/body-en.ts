@@ -108,7 +108,12 @@ export const debtBodyEn: DebtBodyMessages = {
   bothPaths: (withText, withoutText) => `with the measures ${withText}, without ${withoutText}`,
 
   referencesTitle: "For comparison",
-  referencesNote: "Figures of other countries and earlier years, and when the calculation reaches them.",
+  referencesNote: ({ countries, history }) =>
+    countries && !history
+      ? "Figures of other countries, and when the calculation reaches them."
+      : history && !countries
+        ? "Figures of earlier years, and when the calculation reaches them."
+        : "Figures of other countries and earlier years, and when the calculation reaches them.",
   referenceName: (label, year) => (year === undefined ? label : typeof year === "number" ? `${label} ${year}` : `${label}, ${year}`),
   referenceInterestRevenue: (value) => `interest ${value} of revenue`,
   referenceInterest: (value) => `interest ${value} of GDP`,

@@ -18,7 +18,8 @@ import { useUi, type Ui } from "../app/ui.ts";
 import type { DebtAssumptions, LevelFilter } from "../engine/index.ts";
 import { decimalsIn } from "../i18n/format.ts";
 import type { DebtLeadText } from "../i18n/debt/messages.ts";
-import { laterPhases, notInFullBy, phaseWords } from "../app/phaseModel.ts";
+import { blocks } from "../app/paragraphs.ts";
+import { allEndedBy, anyEnding, endedBy, laterPhases, notInFullBy, phaseWords } from "../app/phaseModel.ts";
 import "../styles/debt.css";
 import { ArrowDown, ResetIcon } from "./icons.tsx";
 import { SourceList } from "./primitives.tsx";
@@ -72,12 +73,30 @@ export function leadText(ui: Ui, headline: DebtHeadline): DebtLeadText {
  * Interest received instead of paid, or the debt paid off, are said in the sentence only: there is
  * then no figure that would read the same way, and the sentence stands alone at its larger size.
  */
-export function DebtFigures({ facts, measuresOn, partial = false }: { facts: DebtLeadText; measuresOn: boolean; partial?: boolean }) {
+export function DebtFigures({
+  facts,
+  measuresOn,
+  partial = false,
+  ended = false,
+}: {
+  facts: DebtLeadText;
+  measuresOn: boolean;
+  /** A switched-on measure has not started, or is not yet in full, in the last year. */
+  partial?: boolean;
+  /** A switched-on measure has ended before the last year (a one-off, or one that acts for a number of years); "all": every one has. */
+  ended?: boolean | "all";
+}) {
   const { t } = useUi();
   const f = t.debt.figures;
   if (facts.paidOff !== undefined) return null;
   // A measure that starts later or builds up may not be in full by the last year: the label says so.
-  const measures = !measuresOn ? f.noMeasures : partial ? f.withMeasuresBy(facts.year) : f.withMeasures;
+  const measures = !measuresOn
+    ? f.noMeasures
+    : ended
+      ? f.withMeasuresEnded(facts.year, partial, ended === "all")
+      : partial
+        ? f.withMeasuresBy(facts.year)
+        : f.withMeasures;
   const condition = `${measures}, ${f.rate(facts.rate)}`;
   const tile = (key: string, what: string, value: string, unit: string, notes: (string | false | undefined)[]) => (
     <div key={key} className={`dfig dfig--${key}`}>
@@ -118,7 +137,7 @@ export function DebtFigures({ facts, measuresOn, partial = false }: { facts: Deb
  * and, for switched-on measures that start later or build up, which and when. A pack's year and
  * dates are the measures' own; nothing is written here.
  */
-export function DebtTiming({ view, last }: { view: DebtView; last: number }) {
+export function DebtTiming({ view, horizonEnd }: { view: DebtView; horizonEnd: number }) {
   const ui = useUi();
   const { t, pack } = ui;
   const year = ui.yearName(view.projection.measuresFrom);
@@ -130,20 +149,22 @@ export function DebtTiming({ view, last }: { view: DebtView; last: number }) {
       {reason && (
         <details className="debt__why">
           <summary>{t.debt.timing.why(year)}</summary>
-          <p>{ui.text(reason.note)}</p>
+          {blocks(ui.text(reason.note)).map((block, index) => (
+            <p key={index}>{block}</p>
+          ))}
           {reason.sources && reason.sources.length > 0 && <SourceList ids={reason.sources} />}
         </details>
       )}
       {later.length > 0 && (
         <>
-          <p className="debt__later-title">{t.debt.timing.laterTitle}</p>
+          <p className="debt__later-title">{t.debt.timing.laterTitle(anyEnding(later))}</p>
           <ul className="debt__later">
             {later.map((phase) => {
               const policy = pack.policies.find((candidate) => candidate.id === phase.policy);
               return (
                 <li key={phase.policy}>
                   <span className="debt__later-name">{ui.text(policy?.label) || phase.policy}:</span>{" "}
-                  {t.debt.timing.when(phaseWords(phase, ui, last))}
+                  {t.debt.timing.when(phaseWords(phase, ui, horizonEnd))}
                 </li>
               );
             })}
@@ -293,9 +314,14 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
       </header>
       {/* The result, as two figures with their labels, then the sentence that says it in full. Where
           the calculation starts from follows under the charts. */}
-      <DebtFigures facts={facts} measuresOn={view.measuresOn} partial={notInFullBy(view.projection.phases, headline.year)} />
+      <DebtFigures
+        facts={facts}
+        measuresOn={view.measuresOn}
+        partial={notInFullBy(view.projection.phases, headline.year)}
+        ended={allEndedBy(view.projection.phases, headline.year) ? "all" : endedBy(view.projection.phases, headline.year)}
+      />
       <p className={`debt__lead${figures ? "" : " debt__lead--alone"}`}>{lead}</p>
-      <DebtTiming view={view} last={headline.year} />
+      <DebtTiming view={view} horizonEnd={headline.year} />
       {level !== "all" && <p className="debt__level">{t.debt.wholeState(ui.levelName(level))}</p>}
       <p className="visually-hidden" aria-live="polite">
         {announced}

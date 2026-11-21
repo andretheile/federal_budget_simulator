@@ -38,7 +38,7 @@ import {
   type ReferenceReach,
 } from "../app/debtModel.ts";
 import { comparablePlans, otherPlans, planAgainstDefaults, planFields, planFollowingOf, planSeries, type PlanMeasure } from "../app/debtPlans.ts";
-import { paragraphs } from "../app/paragraphs.ts";
+import { blocks, paragraphs } from "../app/paragraphs.ts";
 import { useUi } from "../app/ui.ts";
 import {
   applyDebtPreset,
@@ -140,10 +140,16 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
   const bandFor = (measure: Measure) =>
     hasRange ? { from: series(reformLow, measure), to: series(reformHigh, measure), label: d.legend.range } : undefined;
 
-  /** The name of a reference in the chart's margin: a country by its name, the country's own past by name and year. */
+  /**
+   * The name of a reference in the chart's margin: a country by its name, the country's own past by
+   * name and year ("Germany 1995"), or where the pack names its years, by that name alone ("FY 1946"):
+   * it says the year is the country's own, and the margin is narrow.
+   */
   const shortName = (reference: DebtReference): string =>
     reference.kind === "history" && reference.year !== undefined
-      ? d.referenceName(ui.text(pack.country.name), name(reference.year))
+      ? calendar
+        ? d.referenceName(ui.text(pack.country.name), reference.year)
+        : String(name(reference.year))
       : ui.text(reference.label);
   /** The references in a chart: interest as a share of revenue (where a reference gives revenue) or of GDP, or debt. */
   const chartReferences = (field: "interestToRevenue" | "interestRatio" | "debtRatio"): ChartReference[] =>
@@ -340,7 +346,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
                       </p>
                     )}
                     <p className="debt__note">{d.planInChart(isFollowed, isFollowed ? by : planFollowingOf(plan, baseYear))}</p>
-                    <PlanFigures plan={plan} ratio={planRatio} yearWord={yearWord} />
+                    <PlanFigures plan={plan} yearWord={yearWord} />
                     <PlanMore plan={plan} label={d.planMore} />
                   </div>
                 );
@@ -352,7 +358,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
                     <strong>{d.planScope(plan.scope === "all" ? null : ui.levelName(plan.scope), plan.accounts, state)}</strong>{" "}
                     {d.planNotComparable(projectionAccounts(debt), state)}
                   </p>
-                  <PlanFigures plan={plan} ratio={planRatio} yearWord={yearWord} />
+                  <PlanFigures plan={plan} yearWord={yearWord} />
                   <PlanMore plan={plan} label={d.planMore} />
                 </div>
               ))}
@@ -386,7 +392,12 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
           {references.length > 0 && (
             <section className="debt__block" aria-labelledby={`${id}-references`}>
               <h3 id={`${id}-references`}>{d.referencesTitle}</h3>
-              <p className="debt__note">{d.referencesNote}</p>
+              <p className="debt__note">
+                {d.referencesNote({
+                  countries: references.some(({ reference }) => reference.kind === "country"),
+                  history: references.some(({ reference }) => reference.kind === "history"),
+                })}
+              </p>
               <ul className="dref">
                 {references.map(({ reference, interestRevenue, interest, debt: debtReach }) => (
                   <li key={reference.id} className="dref__row">
@@ -493,7 +504,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
               {(param.note || (param.sources?.length ?? 0) > 0) && (
                 <details className="dparam__more">
                   <summary>{d.whereFrom}</summary>
-                  {param.note && <p>{ui.text(param.note)}</p>}
+                  {param.note && blocks(ui.text(param.note)).map((block, index) => <p key={index}>{block}</p>)}
                   {param.sources && <SourceList ids={param.sources} />}
                 </details>
               )}
@@ -516,7 +527,10 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
 
       <section className="debt__limits" aria-labelledby={`${id}-limits`}>
         <h3 id={`${id}-limits`}>{d.limitsTitle}</h3>
-        <p>{ui.text(debt.note)}</p>
+        {/* The pack's note in its own paragraphs: a blank line in it starts one. */}
+        {blocks(ui.text(debt.note)).map((block, index) => (
+          <p key={index}>{block}</p>
+        ))}
         {covers && <p>{covers}</p>}
       </section>
 
@@ -680,11 +694,17 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
 }
 
 /** A plan's figures as a small table: a row per year, a column per figure it gives. */
-function PlanFigures({ plan, ratio, yearWord }: { plan: DebtPlan; ratio(fraction: number): string; yearWord: string }) {
+function PlanFigures({ plan, yearWord }: { plan: DebtPlan; yearWord: string }) {
   const ui = useUi();
   const { fmt, language } = ui;
   const d = debtBodyMessages(language);
   const fields = planFields(plan);
+  // Each column with the decimals its most precise value needs (at most two), so that the figures
+  // of a column line up: "3.30%" beside "3.17%", not "3.3%".
+  const digits = Object.fromEntries(
+    fields.map((field) => [field, Math.max(0, ...plan.points.map((point) => (point[field] === undefined ? 0 : decimalsIn(point[field]! * 100, 2))))]),
+  ) as Record<(typeof fields)[number], number>;
+  const ratio = (field: (typeof fields)[number], fraction: number): string => fmt.percent(fraction, { digits: digits[field] });
   return (
     <table className="dplan__table">
       <caption className="visually-hidden">{d.planCaption(ui.text(plan.label))}</caption>
@@ -704,7 +724,7 @@ function PlanFigures({ plan, ratio, yearWord }: { plan: DebtPlan; ratio(fraction
             <th scope="row">{point.year}</th>
             {fields.map((field) => {
               const value = point[field];
-              return <td key={field}>{value === undefined ? "–" : field === "interest" ? fmt.money(value) : ratio(value)}</td>;
+              return <td key={field}>{value === undefined ? "–" : field === "interest" ? fmt.money(value) : ratio(field, value)}</td>;
             })}
           </tr>
         ))}

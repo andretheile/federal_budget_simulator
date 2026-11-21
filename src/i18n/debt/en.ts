@@ -14,11 +14,14 @@ function intro({ baseYear, plan }: DebtIntroFacts): string {
   return `Up to ${plan.until}, debt and growth follow the official plan “${plan.label}”. ${after}, and the assumptions apply.`;
 }
 
-function when({ start, startYear, full, last, fullName }: PhaseWords): string {
+function when({ start, startYear, full, fullName, horizonEnd, once, until }: PhaseWords): string {
+  const after = horizonEnd !== undefined && startYear > horizonEnd ? ", after the end of the calculation" : "";
+  if (once !== undefined) return `once, in ${once}${after}`;
+  if (until !== undefined) return `from ${start} to ${until}${after}`;
+  if (after) return `from ${start}${after}`;
   const fullText = fullName ?? full;
-  if (last !== undefined && startYear > last) return `from ${start}, after the end of the calculation`;
   if (full === undefined) return `from ${start}`;
-  if (last !== undefined && full > last) return `from ${start}, in full only from ${fullText}, after the end of the calculation`;
+  if (horizonEnd !== undefined && full > horizonEnd) return `from ${start}, in full only from ${fullText}, after the end of the calculation`;
   return `from ${start}, in full from ${fullText}`;
 }
 
@@ -94,6 +97,12 @@ export const debtEn: DebtMessages = {
     debtUnit: "of economic output (GDP)",
     withMeasures: "with the measures switched on",
     withMeasuresBy: (year) => `with the measures switched on, as far as they act by ${year}`,
+    withMeasuresEnded: (year, notYet, all) =>
+      notYet
+        ? `with the measures switched on, as far as they act by ${year} (some have ended by then)`
+        : all
+          ? "with the measures switched on, which have ended by then"
+          : "with the measures switched on, some of which have ended by then",
     noMeasures: "no measure switched on",
     rate: (rate) => `at ${rate} interest on new debt`,
     range: (range) => `${range}, depending on the estimates`,
@@ -106,7 +115,7 @@ export const debtEn: DebtMessages = {
         ? `In this calculation measures act from ${year}; until then the path with measures is the path without them.`
         : `Measures that are switched on act in this calculation from ${year}.`,
     why: (year) => `Why from ${year}?`,
-    laterTitle: "Acting later or step by step:",
+    laterTitle: (ending) => (ending ? "Acting later, step by step, once or for a limited time:" : "Acting later or step by step:"),
     when,
   },
   teaserLink: (year) => `Where does this lead? Debt and interest to ${year}`,

@@ -73,10 +73,20 @@ export interface PhaseWords {
   startYear: number;
   /** The first whole year in full, if the measure builds up; absent if it is in full at once. */
   full?: number;
-  /** The last year of the calculation; absent where none applies (on a card). */
-  last?: number;
   /** How `full` is written (YearName); absent: the number. */
   fullName?: YearName;
+  /**
+   * The last year of the calculation, the end of its horizon; absent where none applies (on a card).
+   * Not the measure's own end, which is `once` or `until`.
+   */
+  horizonEnd?: number;
+  /** A one-off: its whole amount counts in one year, this one (YearName). Absent for any other measure. */
+  once?: YearName;
+  /**
+   * A measure that acts for a number of years and stops: its last year ("2029", "FY 2031"), or the
+   * month of its last day where that is not the end of a year ("Juni 2030" / "June 2030").
+   */
+  until?: string;
 }
 
 /**
@@ -107,6 +117,12 @@ export interface DebtMessages {
     withMeasures: string;
     /** With measures switched on of which at least one is not yet in full in the last year. */
     withMeasuresBy(year: YearName): string;
+    /**
+     * With measures switched on of which at least one has ended by the last year (a one-off, or one
+     * that acts for a number of years); `all`: every one of them has; `notYet`: another is not yet
+     * in full by then.
+     */
+    withMeasuresEnded(year: YearName, notYet: boolean, all: boolean): string;
     noMeasures: string;
     rate(rate: string): string;
     range(range: string): string;
@@ -120,7 +136,8 @@ export interface DebtMessages {
     /** The summary that opens the pack's reason for that year. */
     why(year: YearName): string;
     /** Above the list of switched-on measures that start later or build up. */
-    laterTitle: string;
+    /** `ending`: some of the measures listed end (a one-off, or for a number of years). */
+    laterTitle(ending: boolean): string;
     /** "ab 2032, voll ab 2059": when one measure acts. */
     when(phase: PhaseWords): string;
   };
@@ -249,7 +266,8 @@ export interface DebtBodyMessages {
 
   // --- reference values ---
   referencesTitle: string;
-  referencesNote: string;
+  /** What the references are: of other countries, of the country's own earlier years, or both (a threshold is either). */
+  referencesNote(kinds: { countries: boolean; history: boolean }): string;
   referenceName(label: string, year: YearName | undefined): string;
   /** Interest as a share of all revenue, e.g. "Zinsen 15,0 % der Einnahmen". */
   referenceInterestRevenue(value: string): string;

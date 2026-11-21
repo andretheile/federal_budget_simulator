@@ -277,6 +277,38 @@ describe("what a pack leaves out", () => {
   });
 });
 
+describe("the pack's notes", () => {
+  it("keep the paragraphs the pack gives them with blank lines, and a block without one whole", () => {
+    const pack = testlandFiscal();
+    pack.debt!.note = { en: "First part of the note.\n\nSecond part.", de: "Erster Teil.\n\nZweiter Teil." };
+    pack.debt!.measuresFrom!.note = { en: "Why this year.\n\nAnd more.", de: "Warum.\n\nUnd mehr." };
+    pack.debt!.assumptions[0].note = { en: "Where the rate comes from.\n\nA second thought.", de: "Woher.\n\nNoch etwas." };
+    mount("#lang=en", pack);
+    expect(all(".debt__limits p").map((paragraph) => plain(paragraph.textContent)).slice(0, 2)).toEqual(["First part of the note.", "Second part."]);
+    expect(all(".debt__why p").map((paragraph) => plain(paragraph.textContent))).toEqual(["Why this year.", "And more."]);
+    expect(all(".dparam__more")[0].querySelectorAll("p")).toHaveLength(2);
+    // The fixture's own note has no blank line: one paragraph, followed by whose budget it is.
+    mount("#lang=en", testlandFiscal());
+    expect(all(".debt__limits p")).toHaveLength(2);
+  });
+});
+
+describe("the values to compare with", () => {
+  it("are said to be of earlier years where they are all of the country's own past", () => {
+    const pack = testlandFiscal();
+    pack.debt!.references = pack.debt!.references.filter((reference) => reference.kind === "history");
+    mount("#lang=en", pack);
+    expect(all("#debt .debt__block .debt__note").map((note) => plain(note.textContent))).toContain("Figures of earlier years, and when the calculation reaches them.");
+    mount("#lang=de", pack);
+    expect(all("#debt .debt__block .debt__note").map((note) => plain(note.textContent))).toContain("Werte früherer Jahre, und wann die Rechnung sie erreicht.");
+    // Other countries and earlier years, as in the fixture: as before.
+    mount("#lang=en", testlandFiscal());
+    expect(all("#debt .debt__block .debt__note").map((note) => plain(note.textContent))).toContain(
+      "Figures of other countries and earlier years, and when the calculation reaches them.",
+    );
+  });
+});
+
 describe("the share refinanced each year", () => {
   it("is one fact with the time to maturity where it is one divided by it, and stands apart from it where it is set otherwise", () => {
     mount("#lang=en", testlandFiscal());

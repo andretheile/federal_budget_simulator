@@ -145,8 +145,11 @@ export const de: Messages = {
         level ? (opposite === "worsen" ? "belasten" : "entlasten") : opposite === "worsen" ? "verschlechtern" : "verbessern"
       }.`,
     timingLine: (when) => `Die Zahl ist die volle Wirkung; in der Rechnung zu Schulden und Zinsen ${when}.`,
+    timingLineOnce: (when) => `Die Zahl ist ein einmaliger Betrag; in der Rechnung zu Schulden und Zinsen zählt er ${when}.`,
+    once: "einmalig",
     timingTitle: "Wann sie wirkt",
     timingDetail: (when, setting) => `In der Rechnung zu Schulden und Zinsen wirkt die Maßnahme${setting ? " bei dieser Einstellung" : ""} ${when}.`,
+    timingDetailOnce: (when, setting) => `In der Rechnung zu Schulden und Zinsen zählt die Maßnahme${setting ? " bei dieser Einstellung" : ""} ${when}.`,
     ofAll: (side, share) => `${share} aller ${side === "revenue" ? "Einnahmen" : "Ausgaben"}`,
     ofLevel: (side, share) => `${share} der ${side === "revenue" ? "Einnahmen" : "Ausgaben"} dieser Ebene`,
     perInhabitant: (amount) => `${amount} je Einwohner`,
