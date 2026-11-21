@@ -530,6 +530,7 @@ export const debtFileSchema = z.strictObject({
   measuresFrom: z.strictObject({ year, note: localizedTextSchema, sources: sourceIds.optional() }).optional(),
   accounts: z.enum(["national_accounts", "cash", "budget"]).optional(),
   follow: idSchema.optional(),
+  covers: localizedTextSchema.optional(),
   note: localizedTextSchema,
 });
 

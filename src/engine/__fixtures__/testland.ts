@@ -1069,6 +1069,7 @@ export function testlandFiscal(): CountryPack {
   central(pack.budget.expenditure);
   const debt = pack.debt!;
   debt.accounts = "budget";
+  debt.covers = t("the central government's budget and its debt", "den Haushalt des Zentralstaats und seine Schulden");
   debt.plans!.find((plan) => plan.id === "ministry_projection")!.accounts = "budget";
   debt.follow = "ministry_projection";
   debt.measuresFrom = { year: 2026, note: t("The budget for FY 2025 is enacted.", "Der Haushalt für 2025 ist beschlossen.") };

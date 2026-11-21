@@ -814,6 +814,17 @@ export interface DebtFile {
    * plan only when one is chosen (DebtAssumptions.follow).
    */
   follow?: string;
+  /**
+   * Whose budget and debt the projection covers, as a phrase that completes "This calculation
+   * covers …" and, in German, "Diese Rechnung gilt für …" (accusative): "the federal government's
+   * unified budget and its debt held by the public", "den Gesamthaushalt des Bundes und seine
+   * Schulden in der Hand des Publikums". Shown under the projection with what it leaves out, in
+   * place of the list of levels. Needed where the budget is one level's, such as the US federal
+   * budget: the interface then neither speaks of "the state" nor knows on its own what the budget
+   * covers. Absent: a pack of several levels is "the whole state" with its levels named, a pack of
+   * one level is named by that level.
+   */
+  covers?: LocalizedText;
   /** What the projection is and what it leaves out, in plain words; shown with it. */
   note: LocalizedText;
 }

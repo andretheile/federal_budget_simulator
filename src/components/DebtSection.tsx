@@ -12,7 +12,7 @@
  */
 import { useEffect, useRef, useState, type MouseEvent, type RefObject } from "react";
 import { defaultDebtAssumptions, sameDebtAssumptions } from "../app/debtLink.ts";
-import { debtHeadline, interestComparisons, type DebtHeadline, type DebtView } from "../app/debtModel.ts";
+import { coversState, debtHeadline, interestComparisons, planFollowing, type DebtHeadline, type DebtView } from "../app/debtModel.ts";
 import { lazyModule } from "../app/lazy.ts";
 import { useUi, type Ui } from "../app/ui.ts";
 import type { DebtAssumptions, LevelFilter } from "../engine/index.ts";
@@ -42,8 +42,9 @@ export function leadText(ui: Ui, headline: DebtHeadline): DebtLeadText {
   const rangeLow = headline.interestRange ? share(headline.interestRange[0]) : "";
   const rangeHigh = headline.interestRange ? share(headline.interestRange[1]) : "";
   return {
-    year: headline.year,
-    baseYear: headline.baseYear,
+    year: ui.yearName(headline.year),
+    baseYear: ui.yearName(headline.baseYear),
+    state: coversState(ui.pack),
     rate: fmt.percent(headline.marketRate / 100, { digits: decimalsIn(headline.marketRate, 2) }),
     interest: share(Math.abs(headline.interest)),
     negative: headline.interest < 0 && share(headline.interest) !== share(0),
@@ -53,8 +54,12 @@ export function leadText(ui: Ui, headline: DebtHeadline): DebtLeadText {
     debt: ratio(headline.debt),
     debtWithout: headline.debtWithout === undefined ? undefined : ratio(headline.debtWithout),
     debtToday: ratio(headline.debtToday),
-    paidOff: headline.paidOff,
-    overtakes: headline.overtakes && { label: ui.text(headline.overtakes.label), since: headline.overtakes.since },
+    paidOff: headline.paidOff === undefined ? undefined : ui.yearName(headline.paidOff),
+    overtakes: headline.overtakes && {
+      label: ui.text(headline.overtakes.label),
+      since: ui.yearName(headline.overtakes.since),
+      already: headline.overtakes.since === headline.baseYear,
+    },
   };
 }
 
@@ -115,8 +120,8 @@ export function DebtFigures({ facts, measuresOn, partial = false }: { facts: Deb
  */
 export function DebtTiming({ view, last }: { view: DebtView; last: number }) {
   const ui = useUi();
-  const { t, pack, language } = ui;
-  const year = view.projection.measuresFrom;
+  const { t, pack } = ui;
+  const year = ui.yearName(view.projection.measuresFrom);
   const reason = pack.debt?.measuresFrom;
   const later = laterPhases(view.projection.phases);
   return (
@@ -138,7 +143,7 @@ export function DebtTiming({ view, last }: { view: DebtView; last: number }) {
               return (
                 <li key={phase.policy}>
                   <span className="debt__later-name">{ui.text(policy?.label) || phase.policy}:</span>{" "}
-                  {t.debt.timing.when(phaseWords(phase, language, last))}
+                  {t.debt.timing.when(phaseWords(phase, ui, last))}
                 </li>
               );
             })}
@@ -169,15 +174,15 @@ export function DebtTeaser({ view }: { view: DebtView | undefined }) {
   return (
     <p className="debt-teaser">
       <a href="#debt" onClick={jumpToSection} onPointerEnter={preloadDebt} onFocus={preloadDebt}>
-        <span>{t.debt.teaserLink(headline.year)}</span>
+        <span>{t.debt.teaserLink(ui.yearName(headline.year))}</span>
         <ArrowDown size={14} />
       </a>{" "}
       <span className="debt-teaser__figure">
         {t.debt.teaserFigure(
-          headline.year,
+          ui.yearName(headline.year),
           share(headline.interest),
           headline.interestWithout === undefined ? undefined : share(headline.interestWithout),
-          headline.baseYear,
+          ui.yearName(headline.baseYear),
           share(headline.interestToday),
         )}
       </span>
@@ -189,7 +194,7 @@ export interface DebtSectionProps {
   view: DebtView;
   assumptions: DebtAssumptions;
   onAssumptions(next: DebtAssumptions): void;
-  /** The level the budget view is filtered to; the projection is for the whole state all the same. */
+  /** The level the budget view is filtered to; the projection is for the whole budget all the same. */
   level: LevelFilter;
   /** Load the body at once, e.g. because the address carries assumptions. */
   eager?: boolean;
@@ -250,16 +255,19 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
   const facts = leadText(ui, headline);
   const lead = t.debt.lead(facts);
   const figures = facts.paidOff === undefined;
-  // Where the calculation starts from: an official plan it follows in its years, or the base year's budget.
+  // Where the calculation starts from: an official plan it follows in its years (its debt, or its
+  // budget before interest where it gives no debt), or the base year's budget.
   const plan = view.projection.followed && ui.pack.debt?.plans?.find((candidate) => candidate.id === view.projection.followed?.plan);
-  const followed = plan && view.projection.followed ? { label: ui.text(plan.label), until: view.projection.followed.until } : undefined;
-  const intro = t.debt.intro({ baseYear: headline.baseYear, plan: followed });
+  const by = planFollowing(view.projection, ui.pack);
+  const followed =
+    plan && view.projection.followed && by ? { label: ui.text(plan.label), until: ui.yearName(view.projection.followed.until), by } : undefined;
+  const intro = t.debt.intro({ baseYear: ui.yearName(headline.baseYear), plan: followed });
 
   // After the visitor changes an assumption, screen readers hear the new result once the slider rests.
   const [announced, setAnnounced] = useState("");
   const share = (fraction: number): string => fmt.percent(fraction, { digits: 1 });
   const announcement = t.debt.announce(
-    headline.year,
+    ui.yearName(headline.year),
     share(headline.interest),
     headline.interestWithout === undefined ? undefined : share(headline.interestWithout),
   );

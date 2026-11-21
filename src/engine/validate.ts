@@ -882,6 +882,7 @@ function check(
       refs(DEBT, [key, "sources"], debt[key].sources);
     }
     text(DEBT, ["note"], debt.note);
+    text(DEBT, ["covers"], debt.covers);
     if (debt.measuresFrom) {
       text(DEBT, ["measuresFrom", "note"], debt.measuresFrom.note);
       refs(DEBT, ["measuresFrom", "sources"], debt.measuresFrom.sources);

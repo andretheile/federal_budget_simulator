@@ -71,7 +71,7 @@ function timingVariants(ui: Ui, policy: Policy, params: ParamValues): string[] {
   const phases = [params, ...values.map((value) => ({ ...params, [param!.id]: value }))].flatMap(
     (candidate) => measurePhase(ui.pack, policy.id, candidate) ?? [],
   );
-  const texts = phases.map((phase) => widest(ui.t.policies.timingLine(ui.t.debt.timing.when(phaseWords(phase, ui.language)))));
+  const texts = phases.map((phase) => widest(ui.t.policies.timingLine(ui.t.debt.timing.when(phaseWords(phase, ui)))));
   return [...new Set(texts)];
 }
 
@@ -281,7 +281,7 @@ export const PolicyCard = memo(function PolicyCard({
           {phase && (
             <p className="policy__timing">
               {/* At a setting that changes nothing there is nothing to time; the line keeps its room. */}
-              {insight.direction !== "neutral" && <span>{t.policies.timingLine(t.debt.timing.when(phaseWords(phase, ui.language)))}</span>}
+              {insight.direction !== "neutral" && <span>{t.policies.timingLine(t.debt.timing.when(phaseWords(phase, ui)))}</span>}
               {timingStandIns.map((text) => (
                 <span key={text} className="policy__stand-in" aria-hidden="true">
                   {text}
@@ -885,7 +885,7 @@ function PolicyDetails({
       {policy.timing && phase && (
         <section className="policy__section">
           <h4>{t.policies.timingTitle}</h4>
-          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui.language)), policy.timing.param !== undefined)}</p>
+          <p className="policy__timing-detail">{t.policies.timingDetail(t.debt.timing.when(phaseWords(phase, ui)), policy.timing.param !== undefined)}</p>
           <p className="policy__timing-note">{ui.text(policy.timing.note)}</p>
           <SourceList ids={policy.timing.sources} />
         </section>

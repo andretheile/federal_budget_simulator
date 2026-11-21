@@ -224,6 +224,15 @@ describe("validation of fiscal years and accounts", () => {
     expect(validatePack(testlandFiles())).toMatchObject({ ok: true, warnings: [] });
   });
 
+  it("says whose budget the projection covers in every locale, where it says so (debt.json covers)", () => {
+    expect(testlandFiscal().debt?.covers).toEqual({ en: "the central government's budget and its debt", de: "den Haushalt des Zentralstaats und seine Schulden" });
+    only((files) => delete files.debt.covers.de, "debt.json", "$.covers", /text for locale "de" is missing/);
+    only((files) => (files.debt.covers = "the budget"), "debt.json", "$.covers", /./);
+    // Optional: the main fixture, of several levels, has none.
+    expect(testland.debt?.covers).toBeUndefined();
+    expect(errorsAfter((files) => delete files.debt.covers)).toEqual([]);
+  });
+
   it("the base year's first day lies in the base year or the year before, on a day every year has", () => {
     only((f) => (f.country.baseYearStart = "2022-10-01"), "country.json", "$.baseYearStart", /lies in neither the base year 2024 nor the year before/);
     only((f) => (f.country.baseYearStart = "2023-02-29"), "country.json", "$.baseYearStart", /ISO date/);
