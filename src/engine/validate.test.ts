@@ -1456,11 +1456,11 @@ describe("the starting path of the debt projection", () => {
       (f) => (f.debt.follow = "central_budget_interest"),
       DEBT,
       "$.follow",
-      /plan "central_budget_interest" is for level "central" in cash accounts; only a plan for the whole state in national_accounts can be followed/,
+      /plan "central_budget_interest" is for level "central" in cash accounts; only a plan for the whole budget \("scope": "all"\) in the accounts of the pack's budget \(national_accounts\) can be followed/,
     );
-    expectOnly((f) => ((f.debt.plans[0].accounts = "cash"), following(f)), DEBT, "$.follow", /for the whole state in cash accounts/);
-    // Not followable: a point without a debt ratio, a gap between years, no balance at the end.
-    expectOnly((f) => (delete f.debt.plans[0].points[0].debtRatio, following(f)), DEBT, "$.follow", /cannot be followed: it needs a "debtRatio" in every point/);
+    expectOnly((f) => ((f.debt.plans[0].accounts = "cash"), following(f)), DEBT, "$.follow", /for the whole budget in cash accounts/);
+    // Not followable: a point without a debt ratio or an interest ratio, a gap between years, no balance at the end.
+    expectOnly((f) => (delete f.debt.plans[0].points[0].debtRatio, following(f)), DEBT, "$.follow", /cannot be followed: it needs in every point a "debtRatio", or else a "balanceRatio" and an "interestRatio"/);
     expectOnly((f) => ((f.debt.plans[0].points[1].year = 2027), following(f)), DEBT, "$.follow", /cannot be followed/);
     expectOnly((f) => (delete f.debt.plans[0].points[1].balanceRatio, following(f)), DEBT, "$.follow", /cannot be followed/);
     expectOnly((f) => (f.debt.follow = "Ministry"), DEBT, "$.follow", /lower_snake_case/);
@@ -1642,7 +1642,7 @@ describe("timing", () => {
 
   it("warns about a timing that changes nothing, and a start in the base year or before", () => {
     expect(timedWarnings((f) => (f.policies.policies[1].timing = { note: { en: "x", de: "x" }, sources: ["stats_office"] }))).toEqual([
-      { file: POLICIES, path: "$.policies[1].timing", message: expect.stringMatching(/no start date and no build-up/) },
+      { file: POLICIES, path: "$.policies[1].timing", message: expect.stringMatching(/no start date, no build-up and no end/) },
     ]);
     expect(timedWarnings((f) => (f.policies.policies[3].timing.from = "2024-06-01"))).toEqual([
       { file: POLICIES, path: "$.policies[3].timing.from", message: expect.stringMatching(/2024-06-01 lies in the base year 2024 or before it/) },

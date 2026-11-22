@@ -11,17 +11,23 @@
  *   - Debt as a share of GDP, with the threshold and the other countries.
  *   - The path without the measures thin and grey, the one with them strong, the range of the
  *     estimates as a band; one strong line when the measures change nothing.
- *   - An official plan that describes the same thing as the projection (the whole state in national
- *     accounts) drawn against it in every chart it has figures for; where the projection follows it,
- *     the year it ends is marked. Plans of another scope or in other accounts are never drawn: they
- *     stand apart, with their scope said in words, as a small table.
+ *   - An official plan that describes the same thing as the projection (the pack's whole budget in
+ *     the projection's accounts) drawn against it in every chart it has figures for; where the
+ *     projection follows it, the year it ends is marked. Its debt lies on the path the projection
+ *     follows it by; its interest never does (the path's interest is the model's), so it is drawn
+ *     beside the path as figures of its own. Plans of another scope or in other accounts are never
+ *     drawn: they stand apart, with their scope said in words, as a small table.
+ *   - Years are the pack's: their names in words ("FY 2030"), plain numbers on the axes and in the
+ *     table's rows, with a line that says what a year is where they are not calendar years.
  */
 import { useId, useMemo, useState } from "react";
 import { defaultDebtAssumptions, sameDebtAssumptions } from "../app/debtLink.ts";
 import {
+  coversState,
   interestComparisons,
   interestToRevenue,
   lastOf,
+  planFollowing,
   recordAt,
   recordsOf,
   referenceRows,
@@ -31,18 +37,22 @@ import {
   type DebtView,
   type ReferenceReach,
 } from "../app/debtModel.ts";
-import { comparablePlans, otherPlans, planAgainstDefaults, planFields, planSeries, type PlanMeasure } from "../app/debtPlans.ts";
-import { paragraphs } from "../app/paragraphs.ts";
+import { comparablePlans, otherPlans, planAgainstDefaults, planFields, planFollowingOf, planSeries, type PlanMeasure } from "../app/debtPlans.ts";
+import { blocks, paragraphs } from "../app/paragraphs.ts";
 import { useUi } from "../app/ui.ts";
 import {
   applyDebtPreset,
+  calendarYears,
   DEBT_ASSUMPTION_IDS,
   debtAssumptionParam,
   defaultFollow,
   followablePlans,
   LEVEL_IDS,
   presetApplies,
+  projectionAccounts,
   resolveDebtAssumptions,
+  yearEnd,
+  yearStart,
   type DebtAssumptions,
   type DebtPath,
   type DebtPlan,
@@ -106,6 +116,13 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
   // A year picked before the horizon was shortened is no longer there.
   const shownYear = year !== null && year <= lastYear ? year : null;
 
+  // Whose budget: "the state" where the pack has several levels (see i18n/debt/messages.ts).
+  const state = coversState(pack);
+  // The pack's years: their names in words; where they are not calendar years, the word for them
+  // ("FY", "Haushaltsjahr") heads the table's column of years, which keeps plain numbers.
+  const calendar = calendarYears(pack);
+  const name = ui.yearName;
+  const yearWord = calendar ? d.year : String(name(baseYear)).replace(String(baseYear), "").trim() || d.year;
   const pct = (fraction: number, digits = 1): string => fmt.percent(fraction, { digits });
   const tick = (fraction: number): string => fmt.percent(fraction, { digits: decimalsIn(fraction * 100, 1) });
   const range = (a: number, b: number): string => t.common.range(pct(Math.min(a, b)), pct(Math.max(a, b)));
@@ -123,10 +140,16 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
   const bandFor = (measure: Measure) =>
     hasRange ? { from: series(reformLow, measure), to: series(reformHigh, measure), label: d.legend.range } : undefined;
 
-  /** The name of a reference in the chart's margin: a country by its name, the country's own past by name and year. */
+  /**
+   * The name of a reference in the chart's margin: a country by its name, the country's own past by
+   * name and year ("Germany 1995"), or where the pack names its years, by that name alone ("FY 1946"):
+   * it says the year is the country's own, and the margin is narrow.
+   */
   const shortName = (reference: DebtReference): string =>
     reference.kind === "history" && reference.year !== undefined
-      ? d.referenceName(ui.text(pack.country.name), reference.year)
+      ? calendar
+        ? d.referenceName(ui.text(pack.country.name), reference.year)
+        : String(name(reference.year))
       : ui.text(reference.label);
   /** The references in a chart: interest as a share of revenue (where a reference gives revenue) or of GDP, or debt. */
   const chartReferences = (field: "interestToRevenue" | "interestRatio" | "debtRatio"): ChartReference[] =>
@@ -142,17 +165,20 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
   const comparable = useMemo(() => comparablePlans(pack), [pack]);
   const others = useMemo(() => otherPlans(pack), [pack]);
   const followed = projection.followed;
-  // A plan the projection follows: its path runs through the plan's figures, so the plan is drawn
-  // as its diamonds on that path, up to where it is followed.
+  const by = planFollowing(projection, pack) ?? "debt";
+  // A plan the projection follows: the path without measures meets its debt, so the plan's debt is
+  // drawn as its diamonds on that path, up to where it is followed. Its interest is not on the path,
+  // whose interest is the model's at the assumed rates: it is drawn as a dashed line of its own,
+  // like a plan that is not followed (Germany's plan gives no interest, so nothing changes there).
   const plansFor = (measure: PlanMeasure): ChartPlan[] =>
     comparable.map((plan) => {
-      const onPath = followed?.plan === plan.id;
+      const onPath = followed?.plan === plan.id && measure === "debtRatio";
       const points = planSeries(plan, measure, baseYear, onPath ? followed.until : lastYear);
       return { key: plan.id, label: ui.text(plan.label), points, onPath };
     });
   /** A plan's ratio as the source gives it: 78.25 %, 62.8 %. */
   const planRatio = (fraction: number): string => fmt.percent(fraction, { digits: decimalsIn(fraction * 100, 2) });
-  const marker = followed ? { year: followed.until, label: d.continued(followed.until + 1) } : undefined;
+  const marker = followed ? { year: followed.until, label: d.continued(name(followed.until + 1), by) } : undefined;
   const defaults = useMemo(() => defaultDebtAssumptions(debt), [debt]);
 
   const readoutFor =
@@ -171,7 +197,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
         const value = plan.points.find((point) => point.year === at)?.[measure];
         if (value !== undefined) parts.push(d.planPart(planRatio(value)));
       }
-      return d.readout(at, parts);
+      return d.readout(name(at), parts);
     };
 
   const marginLabels = [...chartReferences("interestRatio"), ...chartReferences("debtRatio")].flatMap((reference) => [reference.label, reference.offScaleLabel]);
@@ -190,11 +216,11 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
         key: plan.id,
         follow: plan.id as string | null,
         // With one plan, a short name and its last year; with several, their own names.
-        label: followable.length === 1 ? d.startPlan(until) : ui.text(plan.label),
-        note: d.startPlanNote(ui.text(plan.label), until),
+        label: followable.length === 1 ? d.startPlan(name(until)) : ui.text(plan.label),
+        note: d.startPlanNote(ui.text(plan.label), name(until), planFollowingOf(plan, baseYear)),
       };
     }),
-    { key: "base", follow: null as string | null, label: d.startBase(baseYear), note: d.startBaseNote(baseYear) },
+    { key: "base", follow: null as string | null, label: d.startBase(name(baseYear)), note: d.startBaseNote(name(baseYear)) },
   ].map((start) => ({ ...start, chosen: start.follow === currentStart, isDefault: start.follow === packStart }));
 
   // --- assumptions ----------------------------------------------------------------------------
@@ -204,19 +230,19 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
   const atDefaults = sameDebtAssumptions(assumptions, defaultDebtAssumptions(debt));
   const refinanced = pct(projection.refinancingShare);
   const end = lastOf(reform);
-  const summary = t.debt.announce(lastYear, pct(end.interestToRevenue), twoPaths ? pct(lastOf(baseline).interestToRevenue) : undefined);
+  const summary = t.debt.announce(name(lastYear), pct(end.interestToRevenue), twoPaths ? pct(lastOf(baseline).interestToRevenue) : undefined);
 
   // --- texts for the lists --------------------------------------------------------------------
   const crossingText = (crossing: Crossing): string =>
     crossing.first === null
-      ? d.crossing.never(lastYear)
+      ? d.crossing.never(name(lastYear))
       : crossing.drop !== null && !crossing.atEnd
-        ? d.crossing.between(crossing.first, crossing.drop, baseYear)
+        ? d.crossing.between({ first: name(crossing.first), lastAbove: name(crossing.drop - 1), drop: name(crossing.drop), fromBase: crossing.first === baseYear })
         : crossing.first === baseYear
-          ? d.crossing.already(baseYear)
-          : d.crossing.since(crossing.first);
+          ? d.crossing.already(name(baseYear))
+          : d.crossing.since(name(crossing.first));
   const reachYear = (value: number | null): string =>
-    value === null ? d.reach.never(lastYear) : value === baseYear ? d.reach.already(baseYear) : d.reach.year(value);
+    value === null ? d.reach.never(name(lastYear)) : value === baseYear ? d.reach.already(name(baseYear)) : d.reach.year(name(value));
   const reachText = (reach: ReferenceReach): string => {
     const withText = reachYear(reach.with);
     const withoutText = reachYear(reach.without);
@@ -228,8 +254,14 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
     return measuresOn && withText !== withoutText ? d.bothPaths(withText, withoutText) : withoutText;
   };
   const levels = LEVEL_IDS.filter((level) => pack.country.levels[level]).map((level) => ui.levelName(level));
+  // Whose budget and debt: in the pack's words where it gives them, else the levels, or the one level.
+  const covers = debt.covers ? d.covers(ui.text(debt.covers)) : levels.length > 1 ? d.levelsNote(d.list(levels)) : levels.length === 1 ? d.oneLevel(levels[0]) : undefined;
   const horizonParam = debtAssumptionParam(debt, "horizon");
   const maturity = debt.refinancing.averageMaturity;
+  // Where the share is one divided by the average time to maturity (to the third decimal), the two
+  // are one fact; otherwise (a share set as its note says) the time stands on a line of its own.
+  const shareFromMaturity = maturity !== undefined && Math.abs(debt.refinancing.share - 1 / maturity) < 0.0005;
+  const maturityText = maturity === undefined ? undefined : fmt.param({ ...horizonParam, step: 0.01, unitLabel: undefined }, maturity);
   const gdp = pack.country.indicators.gdp.value;
 
   return (
@@ -238,7 +270,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
         <div className="debt__main">
           <DebtChart
             title={d.interestTitle}
-            subtitle={unit === "revenue" ? d.interestOfRevenue : d.interestOfGdp}
+            subtitle={unit === "revenue" ? d.interestOfRevenue(state) : d.interestOfGdp}
             controls={
               <div className="dunit" role="group" aria-label={d.unitLabel}>
                 {(["revenue", "gdp"] as const).map((option) => (
@@ -288,6 +320,9 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
           <p id={keysId} className="visually-hidden">
             {d.keys}
           </p>
+          {!calendar && (
+            <p className="debt__note debt__years">{d.yearsNote(name(baseYear), fmt.dateLong(yearStart(pack, baseYear)), fmt.dateLong(yearEnd(pack, baseYear)))}</p>
+          )}
           {intro && <p className="debt__intro">{intro}</p>}
 
           {(comparable.length > 0 || others.length > 0) && (
@@ -302,16 +337,16 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
                     {against && (
                       <p className="dplan__intro">
                         {d.plansIntro({
-                          baseYear,
-                          year: against.year,
+                          baseYear: name(baseYear),
+                          year: name(against.year),
                           plan: planRatio(against.plan),
                           model: pct(against.model),
                           followed: isFollowed,
                         })}
                       </p>
                     )}
-                    <p className="debt__note">{d.planInChart(isFollowed)}</p>
-                    <PlanFigures plan={plan} ratio={planRatio} />
+                    <p className="debt__note">{d.planInChart(isFollowed, isFollowed ? by : planFollowingOf(plan, baseYear))}</p>
+                    <PlanFigures plan={plan} yearWord={yearWord} />
                     <PlanMore plan={plan} label={d.planMore} />
                   </div>
                 );
@@ -320,10 +355,10 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
                 <div key={plan.id} className="dplan dplan--apart">
                   <h4 className="dplan__name">{ui.text(plan.label)}</h4>
                   <p className="dplan__scope">
-                    <strong>{d.planScope(plan.scope === "all" ? null : ui.levelName(plan.scope), plan.accounts === "cash")}</strong>{" "}
-                    {d.planNotComparable}
+                    <strong>{d.planScope(plan.scope === "all" ? null : ui.levelName(plan.scope), plan.accounts, state)}</strong>{" "}
+                    {d.planNotComparable(projectionAccounts(debt), state)}
                   </p>
-                  <PlanFigures plan={plan} ratio={planRatio} />
+                  <PlanFigures plan={plan} yearWord={yearWord} />
                   <PlanMore plan={plan} label={d.planMore} />
                 </div>
               ))}
@@ -339,7 +374,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
                     <span className="dcmp__name">{capitalized(ui.text(row.label), language)}</span>
                     <strong className="dcmp__when">{comparisonWhen(row)}</strong>
                     <span className="dcmp__amount">
-                      {d.itemToday(baseYear, fmt.money(row.amount), pct(row.share))}
+                      {d.itemToday(name(baseYear), fmt.money(row.amount), pct(row.share))}
                       {measuresOn && Math.abs(row.amountWith - row.amount) > Math.abs(row.amount) * 1e-6 && (
                         <>
                           <br />
@@ -350,14 +385,19 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
                   </li>
                 ))}
               </ul>
-              <p className="debt__note">{d.comparisonsNote(baseYear)}</p>
+              <p className="debt__note">{d.comparisonsNote(name(baseYear), state)}</p>
             </section>
           )}
 
           {references.length > 0 && (
             <section className="debt__block" aria-labelledby={`${id}-references`}>
               <h3 id={`${id}-references`}>{d.referencesTitle}</h3>
-              <p className="debt__note">{d.referencesNote}</p>
+              <p className="debt__note">
+                {d.referencesNote({
+                  countries: references.some(({ reference }) => reference.kind === "country"),
+                  history: references.some(({ reference }) => reference.kind === "history"),
+                })}
+              </p>
               <ul className="dref">
                 {references.map(({ reference, interestRevenue, interest, debt: debtReach }) => (
                   <li key={reference.id} className="dref__row">
@@ -460,11 +500,11 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
           {debt.assumptions.map((param) => (
             <div key={param.id} className="dparam">
               <NumberControl id={`${id}-${param.id}`} param={param} value={assumptions[param.id]} onChange={(value) => set(param.id, value)} />
-              <p className="dparam__explain">{d.explain[param.id](refinanced)}</p>
+              <p className="dparam__explain">{d.explain[param.id](refinanced, state)}</p>
               {(param.note || (param.sources?.length ?? 0) > 0) && (
                 <details className="dparam__more">
                   <summary>{d.whereFrom}</summary>
-                  {param.note && <p>{ui.text(param.note)}</p>}
+                  {param.note && blocks(ui.text(param.note)).map((block, index) => <p key={index}>{block}</p>)}
                   {param.sources && <SourceList ids={param.sources} />}
                 </details>
               )}
@@ -487,8 +527,11 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
 
       <section className="debt__limits" aria-labelledby={`${id}-limits`}>
         <h3 id={`${id}-limits`}>{d.limitsTitle}</h3>
-        <p>{ui.text(debt.note)}</p>
-        {levels.length > 1 && <p>{d.levelsNote(d.list(levels))}</p>}
+        {/* The pack's note in its own paragraphs: a blank line in it starts one. */}
+        {blocks(ui.text(debt.note)).map((block, index) => (
+          <p key={index}>{block}</p>
+        ))}
+        {covers && <p>{covers}</p>}
       </section>
 
       <details className="debt__table">
@@ -500,7 +543,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
             <caption className="visually-hidden">{d.tableCaption}</caption>
             <thead>
               <tr>
-                <th scope="col">{twoPaths ? <span className="visually-hidden">{d.path}</span> : d.year}</th>
+                <th scope="col">{twoPaths ? <span className="visually-hidden">{d.path}</span> : yearWord}</th>
                 <th scope="col">{d.interestAmount}</th>
                 <th scope="col">{d.debtAmount}</th>
               </tr>
@@ -526,7 +569,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
                 <tbody key={at}>
                   <tr className="is-year">
                     <th scope="rowgroup" colSpan={3}>
-                      {at}
+                      {name(at)}
                     </th>
                   </tr>
                   <tr>
@@ -554,7 +597,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
               <caption className="visually-hidden">{d.tableCaption}</caption>
               <thead>
                 <tr>
-                  <th scope="col">{d.year}</th>
+                  <th scope="col">{yearWord}</th>
                   {twoPaths && <th scope="col">{d.path}</th>}
                   <th scope="col">{d.interestShareRevenue}</th>
                   <th scope="col">{d.interestShareGdp}</th>
@@ -609,7 +652,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
         <h3 id={`${id}-basis`}>{d.basisTitle}</h3>
         <dl className="facts">
           <div>
-            <dt>{d.stock(baseYear)}</dt>
+            <dt>{d.stock(name(baseYear), calendar ? undefined : fmt.dateLong(yearEnd(pack, baseYear)))}</dt>
             <dd>
               {d.stockValue(fmt.money(debt.stock.value), pct(debt.stock.value / gdp))}
               <span className="muted"> · </span>
@@ -619,7 +662,7 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
             </dd>
           </div>
           <div>
-            <dt>{d.interest(baseYear)}</dt>
+            <dt>{d.interest(name(baseYear))}</dt>
             <dd>
               {d.interestValue(fmt.money(debt.interest.value), pct(debt.interest.value / gdp, 2))}
               <span className="muted"> · </span>
@@ -631,16 +674,19 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
           <div>
             <dt>{d.refinancing}</dt>
             <dd>
-              {d.refinancingValue(
-                refinanced,
-                maturity === undefined ? undefined : fmt.param({ ...horizonParam, step: 0.01, unitLabel: undefined }, maturity),
-              )}
+              {d.refinancingValue(refinanced, shareFromMaturity ? maturityText : undefined)}
               <span className="muted"> · </span>
               <QualityBadge quality={debt.refinancing.quality} />
               {debt.refinancing.note && <span className="facts__sub">{ui.text(debt.refinancing.note)}</span>}
               <SourceList ids={debt.refinancing.sources} />
             </dd>
           </div>
+          {!shareFromMaturity && maturityText !== undefined && (
+            <div>
+              <dt>{d.maturity}</dt>
+              <dd>{maturityText}</dd>
+            </div>
+          )}
         </dl>
       </section>
     </div>
@@ -648,17 +694,23 @@ export function DebtBody({ view, assumptions, onAssumptions, intro }: DebtBodyPr
 }
 
 /** A plan's figures as a small table: a row per year, a column per figure it gives. */
-function PlanFigures({ plan, ratio }: { plan: DebtPlan; ratio(fraction: number): string }) {
+function PlanFigures({ plan, yearWord }: { plan: DebtPlan; yearWord: string }) {
   const ui = useUi();
   const { fmt, language } = ui;
   const d = debtBodyMessages(language);
   const fields = planFields(plan);
+  // Each column with the decimals its most precise value needs (at most two), so that the figures
+  // of a column line up: "3.30%" beside "3.17%", not "3.3%".
+  const digits = Object.fromEntries(
+    fields.map((field) => [field, Math.max(0, ...plan.points.map((point) => (point[field] === undefined ? 0 : decimalsIn(point[field]! * 100, 2))))]),
+  ) as Record<(typeof fields)[number], number>;
+  const ratio = (field: (typeof fields)[number], fraction: number): string => fmt.percent(fraction, { digits: digits[field] });
   return (
     <table className="dplan__table">
       <caption className="visually-hidden">{d.planCaption(ui.text(plan.label))}</caption>
       <thead>
         <tr>
-          <th scope="col">{d.year}</th>
+          <th scope="col">{yearWord}</th>
           {fields.map((field) => (
             <th key={field} scope="col">
               {d.planFields[field]}
@@ -672,7 +724,7 @@ function PlanFigures({ plan, ratio }: { plan: DebtPlan; ratio(fraction: number):
             <th scope="row">{point.year}</th>
             {fields.map((field) => {
               const value = point[field];
-              return <td key={field}>{value === undefined ? "–" : field === "interest" ? fmt.money(value) : ratio(value)}</td>;
+              return <td key={field}>{value === undefined ? "–" : field === "interest" ? fmt.money(value) : ratio(field, value)}</td>;
             })}
           </tr>
         ))}

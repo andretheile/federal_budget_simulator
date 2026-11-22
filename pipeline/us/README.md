@@ -3,7 +3,8 @@
 `build_budget.py` produces `countries/us/budget.json`, the federal budget of fiscal year 2025 (October 2024 to
 September 2025) in the unified budget, from the files of the Office of Management and Budget (OMB). `build_dist.py`
 produces `countries/us/distributions/wages.json`, the wages per worker that the Social Security measure is
-calculated on. The other pack files (`country.json`, `sources.json`, `policies.json`) are maintained by hand;
+calculated on. `debt.py` produces `countries/us/debt.json`, the projection of debt and interest. The other pack files
+(`country.json`, `sources.json`, `policies.json`) are maintained by hand;
 `build_budget.py --check` also compares the GDP and population in `country.json` with the cached sources, and
 `measures.py --check` recomputes the constants that the measures in `policies.json` take from sources. One measure's
 effects are generated: `workforce.py` derives what each spending leaf pays its civilian staff, and
@@ -22,11 +23,14 @@ python3 pipeline/us/build_budget.py --write    # replace budget.json
 python3 pipeline/us/build_dist.py --check      # the same for distributions/wages.json (--write to replace it)
 python3 pipeline/us/workforce.py              # diagnostics: civilian staff costs by leaf, checked against OMB's total
 python3 pipeline/us/measures.py --check        # the figures behind the measures, compared with policies.json
-python3 pipeline/us/measures.py --write        # rewrite the generated effects of federal_workforce_cut
+python3 pipeline/us/households.py             # diagnostics: the figures of the measures added in November 2026
+python3 pipeline/us/measures.py --write        # rewrite the generated effects and the computed constants
+python3 pipeline/us/debt.py                    # diagnostics: the figures behind debt.json, the refinancing fit
+python3 pipeline/us/debt.py --check            # rebuild debt.json in memory and compare (--write to replace it)
 npm run validate                               # then check the whole pack
 ```
 
-With the cache as downloaded on 20 November 2026, the three checks report no difference.
+With the cache as downloaded on 20 and 21 November 2026, the four checks report no difference.
 Every run, with or without an option, stops with an error if the leaves do not add up to OMB's published totals.
 
 ## Sources and the cache
@@ -56,7 +60,22 @@ is replaced with every NIPA release, which can change the one BEA figure quoted 
 | `omb/objclass_detail_fy2027.xlsx` | OMB, object class detail of the Budget for FY 2027: obligations by account, object class, direct or reimbursable, $ million | `workforce.py`: civilian pay and benefits of 2025 per leaf |
 | `omb/ap_5_tables_1-3_fy2027.xlsx` | Analytical Perspectives, Tables 5-1 to 5-3: civilian FTE, pay and benefits | `workforce.py`: check of the personnel base, figures on the card |
 | `bls/ces_CES9091100001.json` | BLS Current Employment Statistics, federal employment except the Postal Service, through the public API (always the latest data) | `workforce.py`: employment quoted on the card |
-| `govinfo/`, `scotus/`, `fr/`, `nato/`, `treasury/`, `irs/p5901.pdf`, `omb/ap_5_management_fy2027.pdf` | laws, a bill, the Trustees Report, Supreme Court decisions and orders, Federal Register documents, NATO, Treasury, IRS and OMB documents (list in `fetch_inputs.py`) | read by hand for the measures' notes and catches |
+| `census/nc-est2025-agesex-res.csv`, `irs/23in12ms.xls`, `irs/23in35tr.xls`, `irs/23in36tr.xls`, `fed/dfa.zip`, `fns/snap-zip-fy69tocurrent-11.zip` (with `fns/FY25.xlsx` extracted), `cms/202?-oep-state-level-public-use-file.zip` | Census population by age 2025; IRS Statistics of Income 2023, Tables 1.2, 3.5, 3.6; Federal Reserve, Distributional Financial Accounts; FNS SNAP state data FY 2025; CMS Marketplace open enrollment 2025 and 2026 | `households.py`: the measures added in November 2026 |
+| `omb/hist03z1_fy2027.xlsx`, `omb/hist07z1_fy2027.xlsx` | Historical Tables 3.1 (outlays by function, with the Budget's estimates to 2031) and 7.1 (federal debt) | `debt.py`: the stock, net interest, defense, the President's Budget path, history |
+| `omb/ap_12_tables_fy2027.xlsx`, `omb/ap_12_current_services_fy2027.pdf` | Analytical Perspectives, chapter 12: Table 12-6 (outlays and net interest in the baseline to 2036); Tables 12-2 and 12-4 only in the PDF | `debt.py`: the baseline path; GDP and receipts for 2032-2036 read by hand |
+| `omb/ap_11_tables_fy2027.xlsx`, `omb/ap_11_borrowing_fy2027.pdf` | Analytical Perspectives, chapter 11: Table 11-2 (other transactions affecting borrowing), average maturity | `debt.py`: other means of financing; check of the maturity |
+| `omb/ap_1_assumptions_fy2027.pdf` | Analytical Perspectives, chapter 1: Table 1-3 (sensitivity of the budget to rates) | `debt.py`: the refinancing share (read by hand) |
+| `omb/MSR_2027.pdf` | Mid-Session Review of the Budget for FY 2027 (September 2026) | read by hand: it updates no totals |
+| `mts/mts_table_6_*.csv` | Monthly Treasury Statement, Table 6 (means of financing), through the Fiscal Data API | `debt.py`: debt held by the public at the end of FY 2026, borrowing |
+| `treasury/mspd_table_3_market_2025-09-30.csv`, `treasury/mspd_table_2_2026-10-31.csv` | Treasury, Monthly Statement of the Public Debt, Tables III (marketable securities by CUSIP) and II (debt limit), through the Fiscal Data API | `debt.py`: maturities, the weights of the market rate, the debt limit |
+| `treasury/yield_curve_{2026,1991-2000,2012-2021}.csv` | Treasury, daily par yield curve rates, one file per year | `debt.py`: the market rate (the latest day) and two presets |
+| `treasury/executive-summary-2025.pdf` | Treasury, Executive Summary to the FY 2025 Financial Report | `debt.py`: long-term projection of the primary deficit (read by hand) |
+| `fed/fomcprojtabl20260916.htm` | Federal Reserve, Summary of Economic Projections, September 2026 | `debt.py`: longer-run growth; the projected federal funds rate in the market-rate note |
+| `fed/h41_20251002.htm` | Federal Reserve, H.4.1 of October 2, 2025, Table 6 | `debt.py`: the deferred asset of the Reserve Banks (interest note) |
+| `mts/mts_table_4_2026-02-28.csv` | Monthly Treasury Statement for February 2026, Table 4 | `measures.py`, `debt.py`: customs refunds before and after the Supreme Court's ruling of February 20, 2026 |
+| `govinfo/PLAW-119publ98.xml`, `omb/ap_5_tables_1-3_fy2027.xlsx` | the Secure America Act; Analytical Perspectives, Table 5-1 | `debt.py`: the act's appropriations added up, civilian employment in 2025 and 2026 (baseline note) |
+| `govinfo/PLAW-119-public.zip` | all public laws of the 119th Congress (the address always holds the latest) | `debt.py`: no law after P.L. 119-103 appropriates for FY 2027 |
+| `govinfo/`, `house/`, `scotus/`, `fr/`, `nato/`, `treasury/`, `irs/p5901.pdf`, `omb/ap_5_management_fy2027.pdf` | laws, bills and their status, a House roll call, the Trustees Report, presidential remarks, Supreme Court decisions and orders, Federal Register documents, NATO, Treasury, IRS and OMB documents (list in `fetch_inputs.py`) | read by hand for the measures' notes and catches |
 
 ## How the tree is built
 
@@ -65,6 +84,9 @@ takes (`take`: subfunction, agency, bureau, account) and the subfunctions whose 
 The script stops if a row is taken twice, if a row with a value is left over, or if a leaf is negative, which the pack
 format does not allow. The leaves then add up to Historical Table 1.1 to the thousand dollars, and each subfunction
 and each defence title to Table 3.2 to the million; `build_budget.py` prints both checks.
+
+One revenue leaf is empty on purpose: `rev.wealth_tax`, for measures that would introduce a tax the federal
+government does not levy.
 
 Spending follows OMB's functions. Below them are subfunctions, and where the debate needs a single programme, the
 accounts of that programme: Social Security by trust fund, Medicare by part, Medicaid, CHIP, the premium tax credits,
@@ -196,6 +218,20 @@ other law enforcement (immigration and customs fees), commerce (deposit insuranc
 (the FDA's user fees, within its account) and the Defense revolving funds. The params stop at 50 %, where no leaf is
 cut below zero.
 
+### The measures added in November 2026
+
+`households.py` computes their figures from the cache; the IRS tables are old Excel files, read by `xls.py`
+(standard library). `measures.py --check` compares every constant with `policies.json`, and `--write` sets them.
+
+| Measure | Constant | How |
+|---|---|---|
+| `social_security_benefit_tax` | −$1.005B per point | income of the trust funds from the taxation of benefits under IRC 86 in fiscal year 2025: OASDI $59.4B (Trustees Report, Table VI.C3, without the $335M withheld from nonresident aliens under IRC 871(a)(3), which H.R. 1040 does not end) and HI $41.1B (Medicare Trustees Report, Table V.H1), read by hand |
+| `tariff_rebate_checks` | $273.3M per dollar | Census population of July 1, 2025 without the 4.5 million aged 17, who are neither qualifying children (IRC 24(c): under 17) nor eligible as dependents (337.3 million), less the phase-out of S. 2475 on the IRS's 2023 returns by AGI and filing status (Table 1.2): 19.0 % at $600 |
+| `aca_enhanced_credits` | outlays −$13.8B, income tax +$8.0B when the enhancement ends in full | Treasury's estimate for making the enhancement permanent, fiscal year 2027 (Greenbook FY 2025, read by hand) |
+| `wealth_tax` | $142.7B and $38.2B per point | a Pareto tail through the top 1 % and top 0.1 % of the Distributional Financial Accounts (2025 Q3): net worth between $50 million and $1 billion above the threshold, and above $1 billion |
+| `top_income_tax_rate` | $5.50B per point above 37 % | income taxed at 37 % on returns with AGI of $1 million or more (IRS Table 3.5), less, for each return taxed at 37 %, the income between the 2023 threshold of the 37 % rate (Rev. Proc. 2022-38) and the bill's threshold for 2023: the bill's amounts are in 2018 dollars and indexed (sec. 2(f)), so each is raised by the factor that took the same filing status's 37 % threshold from the bill's table to 2023 ($2,312,500 joint, $1,156,250 single). The gap is weighted by the filing statuses of all returns in the same AGI class (Table 1.2); Table 3.6 has them only for all returns taxed at 37 %, AGI below $1 million included |
+| `snap_state_cost_share` | −$741M per point of the top share | FY 2025 benefits by state (FNS) in the tiers of P.L. 119-21 sec. 10105 by each state's FY 2025 payment error rate (read by hand from FNS's PDF; the benefit-weighted mean, 10.63 %, is checked against the national 10.62 %) |
+
 Data, taken as published: outlays and receipts of 2025 in the budget, imports, NATO's estimate, Treasury's revenue
 estimate, the JCT offset, wages by size class, the wage limits, civilian pay and benefits by account.
 
@@ -203,12 +239,49 @@ Judgement, marked "own judgment" or "own assumption" in the notes:
 
 - **Ranges.** The low and high multipliers of all seven measures (foreign aid 0.6 to 1.0, defence ±10 %,
   enforcement 0.8 to 1.0, wage cap 0.75 to 1.0, corporate rate 0.7 to 1.1, tariff 0.75 to 1.125 and the offset
-  20 % to 25 %, federal workforce 0.6 to 1.0).
+  20 % to 25 %, federal workforce 0.6 to 1.0, tax on benefits 0.85 to 1.0, rebate 0.85 to 1.05, ACA credits 0.9 to
+  1.5, wealth tax 0.5 to 1.0, top rate 0.6 to 1.0, SNAP share 0.5 to 1.0).
 - **The federal workforce's allocation** to leaves where the object class file does not give it (above), and the
   executive branch's share of the retirement contributions.
 - **The tariff's import loss** of 20 % (range 10 % to 40 %): no official estimate could be retrieved; the
   Congressional Budget Office's estimates of the tariffs' budgetary effects are on cbo.gov, which refuses
   automated downloads.
 - **The corporate rate**: Treasury's share for 28 % is applied linearly to every rate, up and down.
+- **The rebate's phase-out**: incomes evenly spread within each AGI class, children in proportion to adults.
+- **The wealth tax's distribution**: the Pareto tail is an assumption; the Federal Reserve publishes no count of
+  households above $1 billion.
 - **Wages**: per taxpayer on a tax return, uprated from 2023 to 2025 by the growth of the wage limit; the relative
   change is applied to the self-employment tax as well.
+
+## The debt projection (`debt.py`)
+
+`debt.py` writes the whole of `countries/us/debt.json`, its texts included: every number in it is computed from the
+cache. Figures that only a PDF holds are constants marked HAND with the page; where a workbook holds the same figure for
+other years, the script checks the hand-read values against it (Table 12-4 against Historical Table 2.1, Table 12-2
+against Table 10.1, the average maturity against OMB's 71 months). It stops if the stock and flows do not fit: net
+interest against the budget item, Table 11-2 against the change in debt less the deficit, the MTS totals.
+
+| Field | Value | How |
+|---|---|---|
+| `stock` | $30.17T | debt held by the public at the end of FY 2025, Historical Table 7.1: the debt the deficits add to, at OMB's measure, the one net interest goes with |
+| `interest` | $970.1B, node `exp.net_interest` | net interest, Table 3.1 (function 900), equal to the budget item |
+| `refinancing.share` | 0.24 (derived) | the engine's recursion (`fit_refinancing`) from FY 2025, on OMB's primary balances (President's Budget to 2031, baseline to 2036) at OMB's rates weighted like the debt (3.2%), run once as it is and once with all rates one point higher from January 1, 2026; the share, in steps of 0.01, whose extra interest comes closest to Table 1-3 in FY 2027 to 2036. 1/average maturity (0.17) misses FY 2027 by 29%, the share repricing within a year (0.34) overshoots by 8% to 23% |
+| `refinancing.averageMaturity` | 5.91 years | MSPD Table III, by amount outstanding |
+| `market_rate` default | 4.8% | the par yield curve of the latest day in the 2026 file (November 20, 2026), held for the whole horizon, each marketable security at the yield of its term at issue (a bill at the term its CUSIP was first issued for; all bills at three months give 4.77%), floating-rate notes at three months, weighted by amount outstanding at the end of FY 2025. The note gives the Federal Reserve's projected federal funds rate (September 2026) beside it; no preset for lower short rates, as no source gives a matching long end |
+| `growth` default | 4.0% | the Federal Reserve's longer-run real growth (2.0%) plus its 2% inflation target |
+| presets | 3.2% and 4.9%; 1.6%; 6.0%; drift −0.07 | OMB's economics from 2032 (rates weighted the same way, FY GDP growth); the same weighting over the daily curves of 2012-2021 and 1991-2000; the rise of the primary deficit in Treasury's long-term projection from 2.7% (2025) to 4.2% (2046), which the preset's label and note limit to 2046, as Treasury's deficit falls back afterwards |
+| `plans` | baseline to FY 2036, President's Budget to FY 2031 | balance, net interest, net interest over receipts and growth per fiscal year; OMB projects no debt, so the projection follows their primary balance. The notes also compute what the baseline already holds (civilian employment, Table 5-1; international affairs and defense, Table 12-6) and what it lacks (the Secure America Act, P.L. 119-98, its appropriations added up) |
+| `references` | FY 1946, FY 1991 | the highest debt held by the public relative to GDP, and the highest share of net interest in receipts and GDP before FY 2025, from Tables 1.1, 3.1, 7.1 and 10.1 |
+| `measuresFrom` | FY 2028 | the end date of the continuing resolution is read from P.L. 119-103, the newest appropriations law in govinfo's archive of public laws (which runs to P.L. 119-142 of November 10, 2026) |
+
+The starting path is the FY 2025 budget continued (no `follow`). The note in `debt.json` says why OMB's paths are not
+the default and what the projection leaves out.
+
+The Congressional Budget Office's baseline projects debt held by the public as well, under current law and on economics
+that do not assume the President's proposals, but cbo.gov refuses automated downloads. To add it as a plan, download by
+hand the workbooks "10-Year Budget Projections" and "10-Year Economic Projections" of CBO's latest Budget and Economic
+Outlook from https://www.cbo.gov/data/budget-economic-data into `.cache/cbo/` and read them in `debt.py`: debt held by
+the public by fiscal year (as `debtRatio`), revenues, outlays, net interest and fiscal-year GDP. Followed by its debt
+ratios, the projection would then meet CBO's debt, other means of financing included, instead of adding the deficit
+alone. Check first how CBO values the debt: OMB's measure, the pack's stock, was $110B below Treasury's face value at
+the end of FY 2025, and a plan on another measure would move the path by that much.

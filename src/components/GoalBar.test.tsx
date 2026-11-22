@@ -28,7 +28,7 @@ beforeAll(async () => {
   window.scrollTo = (() => {}) as typeof window.scrollTo;
   await editorModule.load();
   await goalDetailsModule.load();
-}, 30_000);
+});
 
 beforeEach(() => {
   window.history.replaceState(null, "", "/");

@@ -20,7 +20,11 @@ import {
   followablePlans,
   formatIssue,
   goalProgress,
-  isComparablePlan,
+  calendarYears,
+  isComparablePlanIn,
+  projectionAccounts,
+  yearEnd,
+  yearStart,
   measurePhase,
   measuresFrom,
   projectScenario,
@@ -32,6 +36,7 @@ import {
   type CountryPack,
   type DebtLongRun,
   type DebtPath,
+  type TimingPhase,
   type ValidationIssue,
 } from "../src/engine/index.ts";
 
@@ -103,10 +108,10 @@ function printSummary(pack: CountryPack): void {
   }
 }
 
-/** Each collection: how many measures it lists and what they do together at default parameters. */
 /**
  * When measures act in the debt projection: the first year measures can act, and for each measure
- * with timing its start and build-up, and the year of its full effect at default settings.
+ * with timing its start, build-up and end, and at default settings the year of its full effect and
+ * the last year it acts.
  */
 function printTiming(pack: CountryPack): void {
   const timed = pack.policies.filter((policy) => policy.timing);
@@ -114,11 +119,13 @@ function printTiming(pack: CountryPack): void {
   console.log(`  timing in the debt projection: measures act from ${measuresFrom(pack)}, in full unless listed here`);
   if (timed.length === 0) return;
   const width = Math.max(...timed.map((policy) => policy.id.length));
-  const describe = (phase: { from?: string; years?: number; yearsPerUnit?: number }, unit?: string): string => {
+  const describe = (phase: TimingPhase, unit?: string): string => {
     const parts = [phase.from ? `from ${phase.from}` : `from ${measuresFrom(pack)}`];
     if (phase.years) parts.push(`over ${phase.years} years`);
     if (phase.yearsPerUnit) parts.push(`${phase.yearsPerUnit} years per unit of ${unit}`);
-    if (!phase.years && !phase.yearsPerUnit) parts.push("at once");
+    if (phase.once) parts.push("once (a one-off, in full in the year it falls in)");
+    else if (!phase.years && !phase.yearsPerUnit) parts.push("at once");
+    if (phase.lasts !== undefined) parts.push(`for ${phase.lasts} year${phase.lasts === 1 ? "" : "s"}`);
     return parts.join(", ");
   };
   for (const policy of timed) {
@@ -127,12 +134,19 @@ function printTiming(pack: CountryPack): void {
     const rule = timing.param
       ? `at or above the baseline of ${timing.param}: ${describe(timing, timing.param)}; below: ${describe(timing.below ?? timing, timing.param)}`
       : describe(timing);
-    const atDefaults = phase.years === 0 ? `full from ${phase.from}` : `${phase.from} to full in ${phase.full} (${phase.years} years)`;
+    const atDefaults = phase.once
+      ? `once, in ${phase.start} only`
+      : phase.to !== undefined
+        ? `full from ${phase.from} to ${phase.to}, last year ${phase.last}`
+        : phase.years === 0
+          ? `full from ${phase.from}`
+          : `${phase.from} to full in ${phase.full} (${phase.years} years)`;
     console.log(`    ${policy.id.padEnd(width)}  ${rule}`);
     console.log(`    ${"".padEnd(width)}  at default settings: ${atDefaults}`);
   }
 }
 
+/** Each collection: how many measures it lists and what they do together at default parameters. */
 function printCollections(pack: CountryPack): void {
   const collections = pack.collections ?? [];
   if (collections.length === 0) return;
@@ -183,6 +197,13 @@ function printDebtSummary(pack: CountryPack): void {
     `  debt projection without measures at default assumptions (market rate ${market_rate} %, growth ${growth} %, ` +
       `${change}, ${percent(projection.refinancingShare)} of the debt refinanced a year):`,
   );
+  // Where the pack is not a calendar-year pack in national accounts, say what its years and accounts are.
+  if (!calendarYears(pack) || debt.accounts !== undefined) {
+    const years = calendarYears(pack)
+      ? "calendar years"
+      : `the pack's own years, ${projection.baseYear} from ${yearStart(pack, projection.baseYear)} to ${yearEnd(pack, projection.baseYear)}`;
+    console.log(`    years: ${years}; accounts of the budget and the projection: ${projectionAccounts(debt).replace("_", " ")}`);
+  }
   console.log(`    starting path: ${pathName(projection.followed, projection.baseYear)}`);
   if (other) console.log(`    beside it: ${pathName(other.followed, other.baseYear)}`);
   console.log(`    year            debt   of GDP        interest  of GDP  of revenue${other ? "   beside it: debt of GDP  of revenue" : ""}`);
@@ -207,7 +228,7 @@ function printDebtSummary(pack: CountryPack): void {
 }
 
 /**
- * The official projections in debt.json. One that covers the whole state in national accounts is
+ * The official projections in debt.json. One that covers the pack's whole budget in its accounts is
  * set against the base year's budget continued, without measures; any other is listed with its scope.
  */
 function printPlans(pack: CountryPack, baseline: DebtPath, baseYear: number): void {
@@ -215,8 +236,8 @@ function printPlans(pack: CountryPack, baseline: DebtPath, baseYear: number): vo
   if (plans.length === 0) return;
   const optional = (value: number | undefined, format: (n: number) => string): string => (value === undefined ? "" : format(value));
   for (const plan of plans) {
-    const scope = `${plan.scope === "all" ? "whole state" : plan.scope}, ${plan.accounts.replace("_", " ")}`;
-    if (isComparablePlan(plan)) {
+    const scope = `${plan.scope === "all" ? "whole budget" : plan.scope}, ${plan.accounts.replace("_", " ")}`;
+    if (isComparablePlanIn(pack.debt!, plan)) {
       console.log(`  official plan ${plan.id} (${scope}) against the budget of ${baseYear} continued at default assumptions without measures:`);
       console.log("    year   debt: plan    model   balance: plan    model   interest/GDP: plan    model");
       for (const point of plan.points) {

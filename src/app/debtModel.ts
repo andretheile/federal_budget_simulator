@@ -4,10 +4,12 @@
  * budget items the pack names, when the projection reaches the reference values, and which years
  * the table lists.
  *
- * The projection is always for the whole state. If the visitor has filtered the budget view to one
- * level, the scenario is simulated once more without the filter (see useDebtView).
+ * The projection is always for the pack's whole budget: the whole state, where the pack has several
+ * levels of government, or the budget of its one level. If the visitor has filtered the budget view
+ * to one level, the scenario is simulated once more without the filter (see useDebtView).
  */
 import { useMemo } from "react";
+import type { PlanFollowing } from "../i18n/debt/messages.ts";
 import {
   findNode,
   firstYearAbove,
@@ -24,9 +26,32 @@ import {
   type SimulationResult,
 } from "../engine/index.ts";
 
+/**
+ * Whether the projection covers a state of several levels of government, which the texts call "the
+ * state", or the budget of the pack's one level, which they do not name (see i18n/debt/messages.ts).
+ */
+export function coversState(pack: CountryPack): boolean {
+  return Object.keys(pack.country.levels).length > 1;
+}
+
+/**
+ * How the projection follows the plan it follows, in the plan's years within the horizon: its debt,
+ * its budget before interest where the plan gives no debt (`followed.balanceYears`), or both in
+ * different years. Undefined where it follows none.
+ */
+export function planFollowing(projection: DebtProjection, pack: CountryPack): PlanFollowing | undefined {
+  const followed = projection.followed;
+  if (!followed) return undefined;
+  const balance = new Set(followed.balanceYears ?? []);
+  if (balance.size === 0) return "debt";
+  const plan = pack.debt?.plans?.find((candidate) => candidate.id === followed.plan);
+  const years = (plan?.points ?? []).map((point) => point.year).filter((year) => year > projection.baseYear && year <= followed.until);
+  return years.every((year) => balance.has(year)) ? "balance" : "mixed";
+}
+
 export interface DebtView {
   projection: DebtProjection;
-  /** The simulation of the scenario for the whole state, which the projection starts from. */
+  /** The simulation of the scenario without a level filter, which the projection starts from. */
   whole: SimulationResult;
   /** Whether at least one measure is switched on. */
   measuresOn: boolean;
@@ -46,7 +71,7 @@ export function lastOf(path: Pick<DebtPath, "start" | "years">): DebtYear {
   return path.years[path.years.length - 1] ?? path.start;
 }
 
-/** The record of a calendar year, if the path has it. */
+/** The record of a year (the pack's year), if the path has it. */
 export function recordAt(path: Pick<DebtPath, "start" | "years">, year: number): DebtYear | undefined {
   if (year === path.start.year) return path.start;
   return path.years[year - path.start.year - 1];
@@ -94,7 +119,7 @@ function viewOf(pack: CountryPack, whole: SimulationResult, assumptions: Partial
 }
 
 /**
- * debtView as a hook: the whole-state simulation is redone only when the scenario changes, the
+ * debtView as a hook: the unfiltered simulation is redone only when the scenario changes, the
  * projection when the scenario or an assumption changes. Undefined for a pack without debt data.
  */
 export function useDebtView(
@@ -126,7 +151,7 @@ export interface ComparisonRow {
   node: string;
   /** The pack's name for the comparison, or else the node's label. */
   label: LocalizedText;
-  /** The item's base-year amount for the whole state without the measures, and its share of GDP. */
+  /** The item's base-year amount for the whole budget without the measures, and its share of GDP. */
   amount: number;
   share: number;
   /** The same with the measures, which may change the item itself. */
@@ -219,7 +244,7 @@ export function referenceRows(pack: CountryPack, view: DebtView): ReferenceRow[]
 
 // --- the sentence that opens the section --------------------------------------------------------
 
-/** The facts behind the opening sentence: ratios as fractions, years as calendar years. */
+/** The facts behind the opening sentence: ratios as fractions, years as the pack's years (numbers). */
 export interface DebtHeadline {
   /** The last year of the horizon, which the sentence speaks of. */
   year: number;

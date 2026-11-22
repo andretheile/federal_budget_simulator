@@ -159,6 +159,10 @@ export interface Messages {
      * that the figure is the full effect, and when the projection has it (`when`, from DebtMessages.timing).
      */
     timingLine(when: string): string;
+    /** The same for a one-off: the figure is a one-off amount, and the year it counts in (`when`). */
+    timingLineOnce(when: string): string;
+    /** Beside the card's figure in place of "per year", for a one-off. */
+    once: string;
     /**
      * Under the figure, where the range of the estimate reaches the other side of zero: the range,
      * and that the measure may also do the opposite. `opposite`: what it then does ("worsen" the
@@ -169,6 +173,8 @@ export interface Messages {
     timingTitle: string;
     /** The first sentence of those details; `setting`: the timing depends on a slider, so it is said for its current value. */
     timingDetail(when: string, setting: boolean): string;
+    /** The same for a one-off: it counts once, in a year (`when`). */
+    timingDetailOnce(when: string, setting: boolean): string;
     ofAll(side: "revenue" | "expenditure", share: string): string;
     ofLevel(side: "revenue" | "expenditure", share: string): string;
     perInhabitant(amount: string): string;

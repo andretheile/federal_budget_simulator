@@ -8,13 +8,32 @@
  * Plain words: "Zinsen", "Schulden", "Anteil an allen Einnahmen". Where a term is needed, it is
  * explained on the spot.
  */
-import type { DebtAssumptionId } from "../../engine/index.ts";
+import type { DebtAssumptionId, DebtPlanAccounts } from "../../engine/index.ts";
+import type { YearName } from "../messages.ts";
+
+/*
+ * Years. Every year these texts name is a YearName: the number in a pack of calendar years, the
+ * pack's own name of the year where its years are not calendar years ("FY 2030", "Haushaltsjahr
+ * 2030"; Ui.yearName). A German text puts a name where the number stands without a preposition
+ * behind "im" ("2024 waren es" against "im Haushaltsjahr 2025 waren es"); after "ab" and "bis" the
+ * name stands as it is.
+ *
+ * Whose debt. A pack of several levels of government projects the whole state, and the texts say
+ * "the state" ("der Staat"). A pack of one level projects that level's budget alone, such as the US
+ * federal budget: there the texts say neither "the state" nor whose it is, and the section says it
+ * once, in the pack's own words (DebtBodyMessages.covers). `state` says which.
+ */
+
+/** How the projection follows a plan in the plan's years: its debt, its budget before interest (balance), or both in different years. */
+export type PlanFollowing = "debt" | "balance" | "mixed";
 
 /** The facts of the opening sentence, already formatted. */
 export interface DebtLeadText {
   /** The last year of the horizon. */
-  year: number;
-  baseYear: number;
+  year: YearName;
+  baseYear: YearName;
+  /** The projection covers a state of several levels ("the state"), not one level's budget. */
+  state: boolean;
   /** The market rate on new debt, e.g. "3,4 %". */
   rate: string;
   /** Interest as a share of all revenue in the last year: with the measures, or without if they change nothing. Never signed. */
@@ -31,16 +50,16 @@ export interface DebtLeadText {
   debtWithout?: string;
   debtToday: string;
   /** The year the debt is paid off, if within the horizon. */
-  paidOff?: number;
-  /** The largest compared item that interest is above in the last year, and since when. */
-  overtakes?: { label: string; since: number };
+  paidOff?: YearName;
+  /** The largest compared item that interest is above in the last year, and since when; `already` if since the base year. */
+  overtakes?: { label: string; since: YearName; already: boolean };
 }
 
 /** What the section's introduction says the calculation starts from. When measures act is said apart (DebtMessages.timing). */
 export interface DebtIntroFacts {
-  baseYear: number;
-  /** The plan the projection follows, by its label, and its last year; absent on the base year's budget. */
-  plan?: { label: string; until: number };
+  baseYear: YearName;
+  /** The plan the projection follows, by its label, its last year and what of it is followed; absent on the base year's budget. */
+  plan?: { label: string; until: YearName; by: PlanFollowing };
 }
 
 /**
@@ -49,13 +68,25 @@ export interface DebtIntroFacts {
  * year of the calculation, after which nothing is counted.
  */
 export interface PhaseWords {
-  /** "2032", or "Juli 2027" / "July 2027". */
+  /** "2032", or "Juli 2027" / "July 2027", or the pack's name of a year that begins that day ("FY 2027"). */
   start: string;
   startYear: number;
   /** The first whole year in full, if the measure builds up; absent if it is in full at once. */
   full?: number;
-  /** The last year of the calculation; absent where none applies (on a card). */
-  last?: number;
+  /** How `full` is written (YearName); absent: the number. */
+  fullName?: YearName;
+  /**
+   * The last year of the calculation, the end of its horizon; absent where none applies (on a card).
+   * Not the measure's own end, which is `once` or `until`.
+   */
+  horizonEnd?: number;
+  /** A one-off: its whole amount counts in one year, this one (YearName). Absent for any other measure. */
+  once?: YearName;
+  /**
+   * A measure that acts for a number of years and stops: its last year ("2029", "FY 2031"), or the
+   * month of its last day where that is not the end of a year ("Juni 2030" / "June 2030").
+   */
+  until?: string;
 }
 
 /**
@@ -79,36 +110,43 @@ export interface DebtMessages {
    * value without the measures, the range and the base year's value. The same values as the sentence.
    */
   figures: {
-    interest(year: number): string;
+    interest(year: YearName): string;
     interestUnit: string;
-    debt(year: number): string;
+    debt(year: YearName): string;
     debtUnit: string;
     withMeasures: string;
     /** With measures switched on of which at least one is not yet in full in the last year. */
-    withMeasuresBy(year: number): string;
+    withMeasuresBy(year: YearName): string;
+    /**
+     * With measures switched on of which at least one has ended by the last year (a one-off, or one
+     * that acts for a number of years); `all`: every one of them has; `notYet`: another is not yet
+     * in full by then.
+     */
+    withMeasuresEnded(year: YearName, notYet: boolean, all: boolean): string;
     noMeasures: string;
     rate(rate: string): string;
     range(range: string): string;
     without(value: string): string;
-    inYear(year: number, value: string): string;
+    inYear(year: YearName, value: string): string;
   };
   /** When measures act in the projection: the first year for all of them, and those that act later or build up. */
   timing: {
     /** The first year measures can act; with measures switched on, also that the two paths are one before it. */
-    from(year: number, measuresOn: boolean): string;
+    from(year: YearName, measuresOn: boolean): string;
     /** The summary that opens the pack's reason for that year. */
-    why(year: number): string;
+    why(year: YearName): string;
     /** Above the list of switched-on measures that start later or build up. */
-    laterTitle: string;
+    /** `ending`: some of the measures listed end (a one-off, or for a number of years). */
+    laterTitle(ending: boolean): string;
     /** "ab 2032, voll ab 2059": when one measure acts. */
     when(phase: PhaseWords): string;
   };
   /** Short version of the lead for screen readers after a change. */
-  announce(year: number, interest: string, without: string | undefined): string;
+  announce(year: YearName, interest: string, without: string | undefined): string;
 
   /** The line near the top of the page that leads to the section. */
-  teaserLink(year: number): string;
-  teaserFigure(year: number, interest: string, without: string | undefined, baseYear: number, today: string): string;
+  teaserLink(year: YearName): string;
+  teaserFigure(year: YearName, interest: string, without: string | undefined, baseYear: YearName, today: string): string;
   /** Link in the footer. */
   footerLink: string;
 
@@ -132,13 +170,13 @@ export interface DebtBodyMessages {
   presetChosen(label: string): string;
   reset: string;
   resetHint: string;
-  /** One or two plain sentences under each slider. `refinanced` is the share of the debt refinanced each year. */
-  explain: Record<DebtAssumptionId, (refinanced: string) => string>;
+  /** One or two plain sentences under each slider. `refinanced` is the share of the debt refinanced each year; `state`: see above. */
+  explain: Record<DebtAssumptionId, (refinanced: string, state: boolean) => string>;
   whereFrom: string;
 
   // --- charts ---
   interestTitle: string;
-  interestOfRevenue: string;
+  interestOfRevenue(state: boolean): string;
   interestOfGdp: string;
   unitLabel: string;
   unitRevenue: string;
@@ -156,7 +194,9 @@ export interface DebtBodyMessages {
   /** Name of the year control of a chart. */
   chartControl(title: string): string;
   keys: string;
-  readout(year: number, parts: readonly string[]): string;
+  /** Under the charts where the pack's years are not calendar years: what a year on the axes is, with the base year as the example. */
+  yearsNote(year: YearName, start: string, end: string): string;
+  readout(year: YearName, parts: readonly string[]): string;
   readoutPart(label: string, value: string): string;
   /** A value with its amount in money, e.g. "7,0 % (233,5 Mrd. €)". */
   withAmount(share: string, amount: string): string;
@@ -164,17 +204,22 @@ export interface DebtBodyMessages {
   offScale(label: string, value: string): string;
   /** The value of an official projection in the line above a chart. */
   planPart(value: string): string;
-  /** Next to the line where the followed plan ends: the years after it are the assumptions'. */
-  continued(fromYear: number): string;
+  /**
+   * Next to the line where the followed plan ends: the years after it are the assumptions'. Where
+   * the plan was followed by its budget before interest (`by`), interest was the assumptions' before
+   * it as well, so the line says only that the plan ends.
+   */
+  continued(fromYear: YearName, by: PlanFollowing): string;
 
   // --- the starting point ---
   startTitle: string;
   /** The option of following the pack's one plan, to its last year. */
-  startPlan(until: number): string;
-  startPlanNote(label: string, until: number): string;
+  startPlan(until: YearName): string;
+  /** What following the plan means: its debt and growth, or its budget before interest (`by`). */
+  startPlanNote(label: string, until: YearName, by: PlanFollowing): string;
   /** The option of continuing the base year's budget. */
-  startBase(baseYear: number): string;
-  startBaseNote(baseYear: number): string;
+  startBase(baseYear: YearName): string;
+  startBaseNote(baseYear: YearName): string;
   /** Marks the option that is the pack's own. */
   startDefault: string;
 
@@ -185,13 +230,18 @@ export interface DebtBodyMessages {
    * the calculation continues the base year's budget, the projection starts from what has been
    * decided since. Ratios already formatted.
    */
-  plansIntro(facts: { baseYear: number; year: number; plan: string; model: string; followed: boolean }): string;
-  /** Where a comparable projection is drawn: on the path while the projection follows it, dashed otherwise. */
-  planInChart(followed: boolean): string;
-  /** Whose finances a plan describes and in which accounts; `level` is null for the whole state. */
-  planScope(level: string | null, cash: boolean): string;
-  /** Said of a plan that cannot be set against the calculation. */
-  planNotComparable: string;
+  plansIntro(facts: { baseYear: YearName; year: YearName; plan: string; model: string; followed: boolean }): string;
+  /**
+   * Where a comparable projection is drawn: on the path while the projection follows it, dashed
+   * otherwise. Followed by its budget before interest (`by` "balance" or "mixed"), its debt is the
+   * model's and its interest is drawn as figures of its own beside the path. A plan that gives no
+   * debt (`by` "balance") is in the interest chart only.
+   */
+  planInChart(followed: boolean, by: PlanFollowing): string;
+  /** Whose finances a plan describes and in which accounts; `level` is null for the whole budget (the whole state where `state`). */
+  planScope(level: string | null, accounts: DebtPlanAccounts, state: boolean): string;
+  /** Said of a plan that cannot be set against the calculation, which is in `accounts`. */
+  planNotComparable(accounts: DebtPlanAccounts, state: boolean): string;
   /** Row names of a plan's figures. */
   planFields: { debtRatio: string; balanceRatio: string; interestRatio: string; interestToRevenue: string; interest: string };
   planCaption(label: string): string;
@@ -200,49 +250,58 @@ export interface DebtBodyMessages {
 
   // --- budget items ---
   comparisonsTitle: string;
-  comparisonsNote(baseYear: number): string;
-  itemToday(baseYear: number, amount: string, share: string): string;
+  comparisonsNote(baseYear: YearName, state: boolean): string;
+  itemToday(baseYear: YearName, amount: string, share: string): string;
   itemWith(amount: string, share: string): string;
   /** When interest is above the item, base year included. */
   crossing: {
-    already(baseYear: number): string;
-    since(year: number): string;
-    never(lastYear: number): string;
-    /** Above from `first` on, no longer from `drop` on. */
-    between(first: number, drop: number, baseYear: number): string;
+    already(baseYear: YearName): string;
+    since(year: YearName): string;
+    never(lastYear: YearName): string;
+    /** Above from `first` on (the base year where `fromBase`) to `lastAbove`, no longer from `drop` on. */
+    between(span: { first: YearName; lastAbove: YearName; drop: YearName; fromBase: boolean }): string;
   };
   /** Both paths: "mit den Maßnahmen: …; ohne: …". */
   bothPaths(withText: string, withoutText: string): string;
 
   // --- reference values ---
   referencesTitle: string;
-  referencesNote: string;
-  referenceName(label: string, year: number | undefined): string;
+  /** What the references are: of other countries, of the country's own earlier years, or both (a threshold is either). */
+  referencesNote(kinds: { countries: boolean; history: boolean }): string;
+  referenceName(label: string, year: YearName | undefined): string;
   /** Interest as a share of all revenue, e.g. "Zinsen 15,0 % der Einnahmen". */
   referenceInterestRevenue(value: string): string;
   referenceInterest(value: string): string;
   referenceDebt(value: string): string;
   reach: {
-    already(baseYear: number): string;
-    year(year: number): string;
-    never(lastYear: number): string;
+    already(baseYear: YearName): string;
+    year(year: YearName): string;
+    never(lastYear: YearName): string;
   };
 
   // --- limits ---
   limitsTitle: string;
   /** `levels` is the list of the pack's levels of government, already joined. */
   levelsNote(levels: string): string;
+  /** Whose budget and debt the calculation covers, in the pack's words (debt.json `covers`), which complete the sentence. */
+  covers(what: string): string;
+  /** The same for a pack of one level that does not say it: the level by its name. */
+  oneLevel(level: string): string;
   /** Joins the names of the levels: "Bund, Länder und Gemeinden". */
   list(items: readonly string[]): string;
 
   // --- where the figures come from ---
   basisTitle: string;
-  stock(year: number): string;
+  /** Debt at the end of the base year; `end` is that day where the pack's years are not calendar years. */
+  stock(year: YearName, end?: string): string;
   stockValue(amount: string, share: string): string;
-  interest(year: number): string;
+  interest(year: YearName): string;
   interestValue(amount: string, share: string): string;
   refinancing: string;
+  /** The share refinanced each year, with the average time to maturity it is one divided by, where it is. */
   refinancingValue(share: string, maturity: string | undefined): string;
+  /** Where the share is not one divided by the average time to maturity (it is set as its note says): that time on a line of its own. */
+  maturity: string;
 
   // --- table ---
   tableTitle: string;

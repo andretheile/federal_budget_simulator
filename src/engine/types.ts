@@ -63,6 +63,15 @@ export interface Country {
   locales: string[];
   baseYear: number;
   /**
+   * The first day of the base year, as an ISO date (YYYY-MM-DD), where the pack's years are not
+   * calendar years: "2024-10-01" for the US fiscal year 2025, which runs from October 2024 to
+   * September 2025; "2024-04-01" for a year from April 2024 to March 2025 that is named after the
+   * year it starts in. Every later year starts on the same day and month, one year later each.
+   * Absent: calendar years, 1 January. The debt projection counts its years on this calendar, and
+   * the dates of a measure's timing are placed in them (years.ts).
+   */
+  baseYearStart?: string;
+  /**
    * How the masthead names the base year where it is not a calendar year, e.g. "fiscal year 2025
    * (October 2024 to September 2025)". Absent: "base year" and the number.
    */
@@ -209,16 +218,19 @@ export interface Policy {
   limits?: PolicyLimit[];
   sources: SourceId[];
   /**
-   * When the measure acts in the debt projection and how its effect builds up to the full amount
-   * its effects describe. Absent: in full from the first year measures can act (debt.json
-   * `measuresFrom`). The budget view of the base year is not affected.
+   * When the measure acts in the debt projection, how its effect builds up to the full amount its
+   * effects describe, and whether it ends. Absent: in full and for good from the first year
+   * measures can act (debt.json `measuresFrom`). The budget view of the base year is not affected:
+   * the figure on the card and the scoreboard is the effect of a year in which the measure acts in
+   * full, for a one-off (TimingPhase.once) the amount it pays or raises once.
    */
   timing?: PolicyTiming;
 }
 
 /**
  * One way a measure comes into effect: from a date, rising linearly to its full effect over a
- * number of years. The full effect is what the measure's effects describe, a steady state.
+ * number of years, and either for good, for a number of years (`lasts`) or once (`once`). The full
+ * effect is what the measure's effects describe: a steady state, or for a one-off its amount.
  */
 export interface TimingPhase {
   /**
@@ -235,11 +247,28 @@ export interface TimingPhase {
    * Needs PolicyTiming.param.
    */
   yearsPerUnit?: number;
+  /**
+   * A one-off, such as a rebate paid once: the measure's effects are the amount, and it counts in
+   * full in the one year of the projection that its start falls in (`from`, or the first year
+   * measures can act), whatever the day; in no other year. Not split over two years, as a payment is
+   * not a rate over time. Not with `years`, `yearsPerUnit` or `lasts`.
+   */
+  once?: true;
+  /**
+   * Whole years for which the measure acts, counted from its start in the projection (`from`, or
+   * the first year measures can act if that is later), such as a tax break that expires or a
+   * programme that runs four years. It acts in full from its start and stops at once after the last
+   * day: from 1 January 2028 for 3 years means to 31 December 2030, which in years from October puts
+   * three quarters of a year into the first and a quarter into the last. Absent: for good. Not with
+   * `years`, `yearsPerUnit` or `once`.
+   */
+  lasts?: number;
 }
 
 /**
  * The timing of a measure in the debt projection. The phase fields at the top apply to every
- * setting, or, with `param` and `below`, to settings at or above the param's baseline.
+ * setting, or, with `param` and `below`, to settings at or above the param's baseline; `below` is a
+ * phase of its own and takes none of the fields at the top, an end included.
  */
 export interface PolicyTiming extends TimingPhase {
   /**
@@ -586,9 +615,18 @@ export interface DebtInterest extends DebtFigure {
 
 /** How fast the debt takes on a new market rate. */
 export interface DebtRefinancing {
-  /** Share of the debt that is refinanced each year, above 0 and at most 1; usually 1 / averageMaturity. */
+  /**
+   * Share of the debt that takes the market rate each year, above 0 and at most 1; the rest keeps
+   * the rate it carried, and new borrowing pays the market rate. The model has one market rate and
+   * reprices geometrically: after n years 1 - (1 - share)^n of the base year's debt carries it.
+   * Usually 1 / averageMaturity, which fits where maturities are spread evenly. Where much of the
+   * debt is in bills that roll over within the year (the US), the share maturing within a year
+   * overstates repricing in later years, as bills are counted again each year, and 1 / average
+   * maturity understates the first years; a share at which the model reproduces an official
+   * sensitivity of interest to rates is then closer. The note says which, with quality "derived".
+   */
   share: number;
-  /** The average residual maturity in years that the share is derived from, for display. */
+  /** The average residual maturity in years, for display, whether or not the share is derived from it. */
   averageMaturity?: number;
   quality: Quality;
   /** At least one. */
@@ -654,8 +692,9 @@ export interface DebtReference {
   /** Interest payable as a fraction of GDP. At least one of the two ratios is required. */
   interestRatio?: number;
   /**
-   * General government total revenue as a fraction of GDP, for the same year and from the same
-   * source as `interestRatio`, which it requires. With it the interest burden can also be shown as
+   * The total revenue of the same government as `interestRatio` (for another country, its general
+   * government) as a fraction of GDP, for the same year and from the same source as `interestRatio`,
+   * which it requires. With it the interest burden can also be shown as
    * a share of revenue (interestRatio / revenueRatio). Leave it out where the source's revenue is
    * not comparable with the country's own.
    */
@@ -680,12 +719,18 @@ export interface DebtComparison {
 /**
  * One year of an official projection. Ratios are fractions (0.6 is 60 %), money is in currency
  * units. The names are those of the same figures in the projection's DebtYear. At least one value.
+ *
+ * A projection that follows the plan meets the point's `debtRatio` where it gives one; where it
+ * gives none, as in a budget that projects deficits but not debt, it takes the point's primary
+ * balance, `balanceRatio` plus `interestRatio`, and computes interest and debt itself. There it takes
+ * the plan's revenue as well where the point gives `interestToRevenue`: `interestRatio /
+ * interestToRevenue` of GDP, the revenue on which the plan's interest is that share.
  */
 export interface DebtPlanPoint {
   year: number;
-  /** Gross debt as a fraction of GDP. */
+  /** Debt, as the pack's stock measures it (DebtFile.stock), as a fraction of GDP. */
   debtRatio?: number;
-  /** Balance (revenue minus spending, negative for a deficit) as a fraction of GDP. */
+  /** Balance (revenue minus spending, negative for a deficit) as a fraction of GDP, in the plan's accounts. */
   balanceRatio?: number;
   /** Interest as a fraction of GDP. */
   interestRatio?: number;
@@ -701,26 +746,35 @@ export interface DebtPlanPoint {
 }
 
 /**
- * Which accounts an official projection follows:
- *   national_accounts  ESA 2010, like the budget in budget.json and the debt projection
- *   cash               budget plans and financial statistics: payments in and out of the budgets
+ * Which accounts a budget, the debt projection or an official projection follows:
+ *   national_accounts  national accounts (ESA 2010, SNA 2008): what is due in the period, financial
+ *                      transactions such as loans left out; the German pack's budget
+ *   cash               budget plans and financial statistics in cash: payments in and out of the
+ *                      budgets, as the German federal budget counts them
+ *   budget             a government's own budget accounts as its budget law defines them, mostly
+ *                      cash with the exceptions that law makes, such as the US unified budget
+ *                      (interest on the public debt as it accrues, loans at their subsidy cost)
  */
-export type DebtPlanAccounts = "national_accounts" | "cash";
+export type DebtPlanAccounts = "national_accounts" | "cash" | "budget";
 
 /**
  * An official projection of the country's own path, for example the government's medium-term
- * fiscal projection: shown next to the model's path, for display only. It changes nothing in the
- * model.
+ * fiscal projection: shown next to the model's path, and followed where the pack or the visitor
+ * chooses it as the starting path.
  *
- * The projection always covers the whole state in national accounts. A plan with `scope` "all" and
- * `accounts` "national_accounts" describes the same thing and can be drawn against it (see
- * isComparablePlan); any other plan, such as the interest bill in the central government's cash
- * budget, is a figure of its own that must be shown with its scope.
+ * The projection covers the pack's whole budget, every level of government it has, in the
+ * accounts of that budget (DebtFile.accounts). A plan with `scope` "all" in those accounts
+ * describes the same thing and can be drawn against it (isComparablePlanIn); any other plan, such as
+ * the interest bill in the central government's cash budget beside a projection in national
+ * accounts, is a figure of its own that must be shown with its scope.
  */
 export interface DebtPlan {
   id: string;
   label: LocalizedText;
-  /** Whose finances the figures describe: "all" for the whole state, or one level of government. */
+  /**
+   * Whose finances the figures describe: "all" for the pack's whole budget (the whole state, or in a
+   * pack with one level that level), or one level of government of several.
+   */
   scope: LevelId | "all";
   accounts: DebtPlanAccounts;
   /** By year, ascending, each year once. At least one. */
@@ -734,7 +788,7 @@ export interface DebtPlan {
 
 /** The first year in which measures can act in the projection, and why that year. */
 export interface DebtMeasuresFrom {
-  /** A calendar year after the base year. */
+  /** A year after the base year: a calendar year, or the pack's own year (country.json `baseYearStart`). */
   year: number;
   note: LocalizedText;
   sources?: SourceId[];
@@ -742,14 +796,29 @@ export interface DebtMeasuresFrom {
 
 /** Content of debt.json. */
 export interface DebtFile {
-  /** Gross debt of general government at the end of the base year (for EU countries the Maastricht debt). */
+  /**
+   * The debt the projection carries, at the end of the base year: the debt that the deficits of the
+   * pack's budget add to. For an EU country the Maastricht debt of general government; for the US
+   * federal budget the debt held by the public.
+   */
   stock: DebtFigure;
-  /** Interest paid in the base year (ESA 2010 D.41, payable). */
+  /**
+   * Interest in the base year, on the same debt and in the same accounts as the budget: for an EU
+   * country interest payable (ESA 2010 D.41), for the US federal budget net interest.
+   */
   interest: DebtInterest;
+  /**
+   * The accounts the pack's budget (budget.json) is in, and so the projection: an official plan can
+   * be drawn against the projection and followed only if it is for the whole budget (`scope` "all")
+   * in these accounts. Absent: "national_accounts".
+   */
+  accounts?: DebtPlanAccounts;
   refinancing: DebtRefinancing;
   /** Exactly one param per DebtAssumptionId, in the order the interface shows them. */
   assumptions: DebtAssumptionParam[];
+  /** Ready-made sets of assumptions. debt.json may leave the list out; it is then empty. */
   presets: DebtPreset[];
+  /** Values to compare the projection with. debt.json may leave the list out; it is then empty. */
   references: DebtReference[];
   /** Budget items to compare the interest bill with, in the order the interface lists them. Optional. */
   comparisons?: DebtComparison[];
@@ -763,10 +832,21 @@ export interface DebtFile {
   /**
    * The starting path: the id of a plan in `plans` that the projection follows unless the visitor
    * chooses to continue the base year's budget instead. It must be one that can be followed
-   * (isFollowablePlan). Without it the projection continues the base year's budget, and follows a
+   * (isFollowablePlanIn). Without it the projection continues the base year's budget, and follows a
    * plan only when one is chosen (DebtAssumptions.follow).
    */
   follow?: string;
+  /**
+   * Whose budget and debt the projection covers, as a phrase that completes "This calculation
+   * covers …" and, in German, "Diese Rechnung gilt für …" (accusative): "the federal government's
+   * unified budget and its debt held by the public", "den Gesamthaushalt des Bundes und seine
+   * Schulden in der Hand des Publikums". Shown under the projection with what it leaves out, in
+   * place of the list of levels. Needed where the budget is one level's, such as the US federal
+   * budget: the interface then neither speaks of "the state" nor knows on its own what the budget
+   * covers. Absent: a pack of several levels is "the whole state" with its levels named, a pack of
+   * one level is named by that level.
+   */
+  covers?: LocalizedText;
   /** What the projection is and what it leaves out, in plain words; shown with it. */
   note: LocalizedText;
 }

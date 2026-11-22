@@ -9,14 +9,11 @@
  */
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { Simulator } from "../App.tsx";
 import type { CountryPack } from "../engine/index.ts";
 import { loadPack } from "../packs.ts";
 import { debtModule } from "./DebtSection.tsx";
-
-// The whole German page, rendered several times.
-vi.setConfig({ testTimeout: 30_000 });
 
 let pack: CountryPack;
 let container: HTMLDivElement;
@@ -30,7 +27,7 @@ beforeAll(async () => {
   if (!result.ok) throw new Error(`countries/de does not validate: ${JSON.stringify(result.errors.slice(0, 3))}`);
   pack = result.pack;
   await debtModule.load();
-}, 60_000);
+});
 
 beforeEach(() => {
   container = document.createElement("div");

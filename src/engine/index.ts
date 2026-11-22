@@ -48,6 +48,8 @@ export { emptyScenario, encodeScenario, decodeScenario, encodeNumber, decodeNumb
 
 export { measurePhase, measuresFrom, shareInYear, type MeasurePhase } from "./timing.ts";
 
+export { calendarYears, yearStart, yearEnd, yearOfDate, yearBeginningOn, yearShort } from "./years.ts";
+
 export { goalProgress, measureGoal, goalLevel, findGoal, defaultGoal, type GoalProgress } from "./goals.ts";
 
 export {
@@ -58,7 +60,10 @@ export {
   applyDebtPreset,
   presetApplies,
   isComparablePlan,
+  isComparablePlanIn,
+  projectionAccounts,
   isFollowablePlan,
+  isFollowablePlanIn,
   defaultFollow,
   followablePlans,
   longRunDebtRatio,

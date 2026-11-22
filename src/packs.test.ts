@@ -50,7 +50,7 @@ describe("country packs in /countries", () => {
   });
 
   // Heavy by design: every policy alone and all together, at five levels, each also on a fresh copy of the pack.
-  it("simulate the same on every call: each policy alone, with every level filter in between", { timeout: 30_000 }, async () => {
+  it("simulate the same on every call: each policy alone, with every level filter in between", async () => {
     const levels = ["all", "central", "state", "local", "social_security"] as const;
     for (const id of listPackIds()) {
       const result = await loadPack(id);

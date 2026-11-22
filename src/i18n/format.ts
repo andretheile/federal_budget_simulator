@@ -49,6 +49,8 @@ export interface Formatters {
   parse(text: string): number;
   /** An ISO date (YYYY-MM-DD). */
   date(iso: string): string;
+  /** An ISO date with the month in words, for running text: "30. September 2025", "30 September 2025", "September 30, 2025". */
+  dateLong(iso: string): string;
   /** A language's own name: "Deutsch", "English". */
   languageName(code: string): string;
 }
@@ -328,6 +330,11 @@ export function createFormatters(
     const time = Date.parse(`${iso}T00:00:00Z`);
     return Number.isNaN(time) ? iso : dateFormat.format(time);
   };
+  const longDateFormat = new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" });
+  const dateLong: Formatters["dateLong"] = (iso) => {
+    const time = Date.parse(`${iso}T00:00:00Z`);
+    return Number.isNaN(time) ? iso : longDateFormat.format(time);
+  };
 
   const languageName: Formatters["languageName"] = (code) => {
     try {
@@ -352,6 +359,7 @@ export function createFormatters(
     currencyName,
     parse,
     date,
+    dateLong,
     languageName,
   };
 }

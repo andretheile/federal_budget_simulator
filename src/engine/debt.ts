@@ -5,7 +5,7 @@
  * rates in the results are fractions (0.6 is 60 %). The assumptions are in the units of their
  * params in debt.json: percent, percent, years, and percentage points of GDP per year.
  *
- * The model, for year t = 1 ... horizon (calendar year baseYear + t):
+ * The model, for year t = 1 ... horizon (the pack's year baseYear + t):
  *   - GDP grows by the nominal growth rate g: GDP_t = GDP_0 (1 + g)^t.
  *   - The primary balance (the balance before interest) keeps the base year's share of GDP, plus
  *     the drift for every year that has passed: p_t = p_0 + drift t, P_t = p_t GDP_t, with
@@ -25,21 +25,34 @@
  * Interest after the base year is computed from the debt, so a measure that changes the interest
  * node itself changes the base-year balance but not the projection.
  *
- * The projection is always for the whole state: `projectDebt` refuses a result filtered to one level
- * of government, `projectScenario` ignores the scenario's level filter.
+ * The projection covers the pack's whole budget, every level of government it has, in the accounts
+ * of that budget (debt.json `accounts`): the whole state in national accounts for the German pack,
+ * the federal government in the unified budget for the US pack. `projectDebt` refuses a result
+ * filtered to one level of government, `projectScenario` ignores the scenario's level filter.
+ *
+ * Years are the pack's years (country.json `baseYearStart`): calendar years, or fiscal years such
+ * as the US one from October to September; year t of the projection is the pack's year
+ * baseYear + t, and GDP, the plan's points and the timing of measures are counted in those years.
  *
  * Measures act from the first year measures can act (debt.json `measuresFrom`, by default the
- * first projection year), each in full unless its `timing` says it starts later or builds up over
- * years (timing.ts). Where every measure acts in full from the first projection year, the paths
- * with measures are computed exactly as described above. Otherwise each year's primary balance and
- * revenue with measures come from the scenario simulated with each measure at its share of that
- * year (simulateWeighted), so measures that act on the same items interact as they do in full; see
- * timedEffects.
+ * first projection year), each in full and for good unless its `timing` says it starts later,
+ * builds up over years, lasts a number of years or acts once (timing.ts). Where every measure acts
+ * in full and for good from the first projection year, the paths with measures are computed exactly
+ * as described above. Otherwise each year's primary balance and revenue with measures come from the
+ * scenario simulated with each measure at its share of that year (simulateWeighted), so measures
+ * that act on the same items interact as they do in full; see timedEffects. A measure that has
+ * ended changes nothing more, but the debt it added or repaid stays, with its interest; and the
+ * long run (longRunDebtRatio) holds the balance without it.
  *
  * The starting path is either the base year's budget, as above, or an official plan (debt.json
  * `plans`) that the projection follows in the plan's years and continues from its last year with
- * the assumptions; see followPaths. Which one is the pack's choice (debt.json `follow`), and the
- * visitor can choose the other (DebtAssumptions.follow).
+ * the assumptions; see followPaths. In a plan's year it meets the plan's debt ratio, or, where the
+ * plan projects no debt (the US budget), takes the plan's primary balance. Which path is the
+ * pack's choice (debt.json `follow`), and the visitor can choose the other (DebtAssumptions.follow).
+ *
+ * The debt grows by the deficit alone: what else moves it (loans the state grants, the US credit
+ * financing accounts, changes in cash balances) is carried only in a followed plan's years that give
+ * a debt ratio, and not projected beyond them; there is no assumption for it.
  */
 import { simulate, simulateWeighted, type Scenario, type SimulationResult, type Totals } from "./simulate.ts";
 import { measurePhase, measuresFrom, shareInYear, type MeasurePhase } from "./timing.ts";
@@ -50,6 +63,8 @@ import {
   type DebtAssumptionParam,
   type DebtFile,
   type DebtPlan,
+  type DebtPlanAccounts,
+  type DebtPlanPoint,
   type DebtPreset,
 } from "./types.ts";
 
@@ -59,10 +74,10 @@ import {
  *
  * `follow` is the starting path:
  *   a plan id   follow that plan of debt.json `plans` (it must be one that can be followed,
- *               isFollowablePlan). In the plan's years the path without measures reproduces the
- *               plan's debt ratio, with the plan's growth where it gives one; after the plan's last
- *               year the primary balance is the plan's balance of that year plus the model's
- *               interest of that year, as a share of GDP, see followPaths.
+ *               isFollowablePlanIn). In the plan's years the path without measures reproduces the
+ *               plan's debt ratio, or where the plan gives none its primary balance, with the plan's
+ *               growth where it gives one; after the plan's last year the primary balance is the
+ *               plan's primary balance of that year, as a share of GDP, see followPaths.
  *   null        continue the base year's budget: no plan is followed.
  *   absent      the pack's starting path: debt.json `follow` if it names one, otherwise the base
  *               year's budget.
@@ -76,7 +91,10 @@ export type DebtAssumptions = Record<DebtAssumptionId, number> & { follow?: stri
 export interface DebtYear {
   year: number;
   gdp: number;
-  /** Revenue, at the scenario's share of GDP. */
+  /**
+   * Revenue, at the scenario's share of GDP; where the projection follows a plan by its balance and
+   * the plan gives its revenue, at the plan's share plus the measures' change (followPaths).
+   */
   revenue: number;
   /** Revenue minus spending other than interest. */
   primaryBalance: number;
@@ -84,7 +102,7 @@ export interface DebtYear {
   interest: number;
   /** primaryBalance - interest; negative is a deficit. */
   balance: number;
-  /** Gross debt at the end of the year. Never below zero. */
+  /** Debt at the end of the year, as the pack's stock measures it (debt.json `stock`). Never below zero. */
   debt: number;
   /** debt / gdp */
   debtRatio: number;
@@ -135,9 +153,11 @@ export interface DebtProjection {
   /**
    * Set when the projection follows a plan (assumptions.follow) and the plan has a year within the
    * horizon: `plan` is its id, `until` the last year taken from the plan. Years up to `until` are
-   * the plan's (for the path without measures), later years the continuation.
+   * the plan's (for the path without measures), later years the continuation. `balanceYears`, where
+   * there are any, are the plan's years in which it gives no debt ratio: there the path takes the
+   * plan's primary balance and computes interest and debt itself, instead of meeting the plan's debt.
    */
-  followed?: { plan: string; until: number };
+  followed?: { plan: string; until: number; balanceYears?: number[] };
   /** From the low end of the measures' range (reformLow.balance), the worse one: its debt is the higher. */
   reformLow: DebtPath;
   /** From the high end of the measures' range (reformHigh.balance): its debt is the lower. */
@@ -150,7 +170,8 @@ export interface DebtProjection {
   measuresFrom: number;
   /**
    * When each measure that is switched on acts, in pack order: start, years of build-up, the first
-   * year of its full effect, and whether it acts in full from `measuresFrom` (`immediate`).
+   * year of its full effect, whether it acts in full and for good from `measuresFrom` (`immediate`),
+   * and for a measure that ends its last year (`last`, `to`, `once`).
    */
   phases: MeasurePhase[];
 }
@@ -192,7 +213,7 @@ export function resolveDebtAssumptions(debt: DebtFile, given?: Partial<DebtAssum
 /** Whether the pack has a plan with this id that can be followed. */
 function followable(debt: DebtFile, id: string): boolean {
   const plan = debt.plans?.find((candidate) => candidate.id === id);
-  return plan !== undefined && isFollowablePlan(plan);
+  return plan !== undefined && isFollowablePlanIn(debt, plan);
 }
 
 /**
@@ -206,7 +227,7 @@ export function defaultFollow(debt: DebtFile): string | undefined {
 
 /** The plans of the pack that can be followed: the starting paths there are besides the base year's budget. */
 export function followablePlans(debt: DebtFile): DebtPlan[] {
-  return (debt.plans ?? []).filter(isFollowablePlan);
+  return (debt.plans ?? []).filter((plan) => isFollowablePlanIn(debt, plan));
 }
 
 /**
@@ -217,28 +238,61 @@ export function applyDebtPreset(debt: DebtFile, current: Partial<DebtAssumptions
   return resolveDebtAssumptions(debt, { ...current, ...preset.values });
 }
 
+/** The accounts of the pack's budget and so of the projection (debt.json `accounts`): national accounts unless the pack says otherwise. */
+export function projectionAccounts(debt: DebtFile): DebtPlanAccounts {
+  return debt.accounts ?? "national_accounts";
+}
+
 /**
  * Whether an official projection (debt.json `plans`) describes what the projection describes, the
- * whole state in national accounts, so that its points can be drawn against the projection's path.
- * Any other plan is a figure of its own, to be shown with its scope and never on the same axis.
+ * pack's whole budget (`scope` "all") in the accounts of that budget (projectionAccounts), so that
+ * its points can be drawn against the projection's path. Any other plan is a figure of its own, to
+ * be shown with its scope and never on the same axis.
+ */
+export function isComparablePlanIn(debt: DebtFile, plan: DebtPlan): boolean {
+  return plan.scope === "all" && plan.accounts === projectionAccounts(debt);
+}
+
+/**
+ * isComparablePlanIn for a pack whose budget is in national accounts, as the German one: the whole
+ * state in national accounts. A pack with other accounts needs isComparablePlanIn.
  */
 export function isComparablePlan(plan: DebtPlan): boolean {
   return plan.scope === "all" && plan.accounts === "national_accounts";
 }
 
+/** Whether a point says what the path without measures does in its year: meet its debt, or take its primary balance. */
+function followablePoint(point: DebtPlanPoint): boolean {
+  return point.debtRatio !== undefined || (point.balanceRatio !== undefined && point.interestRatio !== undefined);
+}
+
 /**
- * Whether a plan can be followed (DebtAssumptions.follow): it describes what the projection
- * describes (isComparablePlan), every point has a debt ratio, the years follow one another without
- * a gap, and the last point has a balance ratio, from which the projection continues after the plan.
+ * Whether every point gives a debt ratio, or else a balance and an interest ratio; the years
+ * follow one another without a gap; and the last point has a balance ratio.
  */
-export function isFollowablePlan(plan: DebtPlan): boolean {
+function followableShape(plan: DebtPlan): boolean {
   const last = plan.points[plan.points.length - 1];
   return (
-    isComparablePlan(plan) &&
     last !== undefined &&
     last.balanceRatio !== undefined &&
-    plan.points.every((point, i) => point.debtRatio !== undefined && (i === 0 || point.year === plan.points[i - 1].year + 1))
+    plan.points.every((point, i) => followablePoint(point) && (i === 0 || point.year === plan.points[i - 1].year + 1))
   );
+}
+
+/**
+ * Whether a plan can be followed (DebtAssumptions.follow): it describes what the projection
+ * describes (isComparablePlanIn); every point gives a debt ratio, which the path without measures
+ * then meets, or else a balance and an interest ratio, whose sum, the plan's primary balance, it
+ * then takes; the years follow one another without a gap; and the last point has a balance ratio,
+ * from which the projection continues after the plan.
+ */
+export function isFollowablePlanIn(debt: DebtFile, plan: DebtPlan): boolean {
+  return isComparablePlanIn(debt, plan) && followableShape(plan);
+}
+
+/** isFollowablePlanIn for a pack whose budget is in national accounts; a pack with other accounts needs isFollowablePlanIn. */
+export function isFollowablePlan(plan: DebtPlan): boolean {
+  return isComparablePlan(plan) && followableShape(plan);
 }
 
 /**
@@ -329,8 +383,15 @@ interface Followed {
   first: number;
   /** Index t of the plan's last year. */
   last: number;
-  /** Debt ratio by index t, for first <= t <= last. */
+  /** Debt ratio by index t, where the plan gives one. */
   debtRatio: Map<number, number>;
+  /** Primary balance ratio (balance plus interest) by index t, where the plan gives no debt ratio. */
+  primaryRatio: Map<number, number>;
+  /**
+   * Revenue as a share of GDP by index t, interestRatio / interestToRevenue, in the years of
+   * `primaryRatio` whose point gives both.
+   */
+  revenueRatio: Map<number, number>;
   /** The plan's growth by index t, where it gives one. */
   growth: Map<number, number>;
   /** Balance ratio of the plan's last year. */
@@ -341,31 +402,59 @@ interface Followed {
 function followedPlan(plan: DebtPlan, baseYear: number): Followed | undefined {
   const points = plan.points.filter((point) => point.year > baseYear);
   const last = points[points.length - 1];
-  if (!last || last.balanceRatio === undefined || points.some((point) => point.debtRatio === undefined)) return undefined;
+  if (!last || last.balanceRatio === undefined || !points.every(followablePoint)) return undefined;
   const debtRatio = new Map<number, number>();
+  const primaryRatio = new Map<number, number>();
+  const revenueRatio = new Map<number, number>();
   const growth = new Map<number, number>();
   for (const point of points) {
-    if (point.debtRatio !== undefined) debtRatio.set(point.year - baseYear, point.debtRatio);
-    if (point.growth !== undefined) growth.set(point.year - baseYear, point.growth);
+    const t = point.year - baseYear;
+    if (point.debtRatio !== undefined) debtRatio.set(t, point.debtRatio);
+    else if (point.balanceRatio !== undefined && point.interestRatio !== undefined) {
+      primaryRatio.set(t, point.balanceRatio + point.interestRatio);
+      if (point.interestToRevenue !== undefined && point.interestToRevenue > 0) revenueRatio.set(t, point.interestRatio / point.interestToRevenue);
+    }
+    if (point.growth !== undefined) growth.set(t, point.growth);
   }
-  return { id: plan.id, first: points[0].year - baseYear, last: last.year - baseYear, debtRatio, growth, balanceRatio: last.balanceRatio };
+  return {
+    id: plan.id,
+    first: points[0].year - baseYear,
+    last: last.year - baseYear,
+    debtRatio,
+    primaryRatio,
+    revenueRatio,
+    growth,
+    balanceRatio: last.balanceRatio,
+  };
 }
 
 /**
  * The paths when the projection follows a plan.
  *
  * GDP grows at the plan's growth in the plan's years where it gives one, otherwise at the growth
- * assumption. The path without measures sets its primary balance in each of the plan's years to
- * what makes its debt at the end of the year the plan's debt ratio times GDP: the debt of the year
- * before, plus the interest the model computes on it, minus the planned debt. That primary balance
- * absorbs everything that moves the plan's debt besides the deficit, such as loans the state grants;
- * so after the plan the projection does not hold it, but the plan's own balance in its last year plus
- * the model's interest of that year, as a share of GDP, with the drift counted from that year on.
- * Before the plan's first year, if the plan starts later, it runs as without a plan.
+ * assumption. In a year where the plan gives a debt ratio, the path without measures sets its
+ * primary balance to what makes its debt at the end of the year the plan's debt ratio times GDP:
+ * the debt of the year before, plus the interest the model computes on it, minus the planned debt.
+ * That primary balance absorbs everything that moves the plan's debt besides the deficit, such as
+ * loans the state grants. In a year where the plan gives no debt ratio, only a balance and an
+ * interest ratio (as the US budget's path, which projects no debt), the path takes the plan's primary
+ * balance, their sum, and computes interest and debt itself: the model's interest at the chosen
+ * rates, and the debt without what moves it besides the deficit. Where such a point also gives
+ * interest as a share of revenue, the path takes the plan's revenue as well, interestRatio /
+ * interestToRevenue of GDP, so that revenue and the primary balance are the plan's together;
+ * otherwise, and in years with a debt ratio, revenue keeps the base year's share of GDP.
+ *
+ * After the plan the projection holds a primary balance from the plan's last year, as a share of
+ * GDP, with the drift counted from that year on: where that year gives a debt ratio, the plan's
+ * balance plus the model's interest of that year, not the primary balance the debt ratio implies,
+ * whose stock-flow residual would be a poor thing to hold for ever; where it gives none, the plan's
+ * primary balance of that year, which the path took in it, and the plan's revenue of that year if it
+ * took that too. Before the plan's first year, if the plan starts later, it runs as without a plan.
  *
  * Measures act as they do without a plan: each path's primary balance is that of the path without
  * measures plus the measures' change of the base year's primary balance as a share of GDP, in every
- * year. Only the path without measures meets the plan's debt; the others move off it.
+ * year, and where the path takes the plan's revenue, so is its revenue. Only the path without
+ * measures meets the plan's debt; the others move off it.
  *
  * The calculation runs at least to the plan's last year, so the balance held afterwards is defined
  * even if the horizon ends earlier; the paths are cut to the horizon.
@@ -374,13 +463,21 @@ function followPaths(
   setup: Setup,
   plan: Followed,
   base: { totals: Totals; interest: number },
-  scenarios: { totals: Totals; interest: number; at?: (t: number) => YearEffect }[],
+  scenarios: { totals: Totals; interest: number; at?: (t: number) => YearEffect; lasting?: YearEffect }[],
 ): { paths: Omit<DebtPath, "longRun">[]; held: number[] } {
   const { baseYear, share, market, drift, horizon } = setup;
   const steps = Math.max(horizon, plan.last);
   const gdp = [setup.gdp];
   for (let t = 1; t <= steps; t++) gdp.push(gdp[t - 1] * (1 + (plan.growth.get(t) ?? setup.growth)));
   const baseShare = (base.totals.balance + base.interest) / setup.gdp;
+  const baseRevenueShare = base.totals.revenue / setup.gdp;
+  // The plan's revenue share in year t where the path takes it: in its years without a debt ratio
+  // that give it, and after the plan if its last year is one of them. Undefined elsewhere.
+  const heldRevenue = plan.revenueRatio.get(plan.last);
+  const planRevenue =
+    plan.revenueRatio.size === 0
+      ? undefined
+      : (t: number): number | undefined => (t < plan.first ? undefined : t <= plan.last ? plan.revenueRatio.get(t) : heldRevenue);
 
   /** One path, given the primary balance of each year from the year, the debt before it and the interest due. */
   const run = (
@@ -420,14 +517,29 @@ function followPaths(
   // The path without measures: it meets the plan's debt, and in the plan's last year it fixes the
   // primary balance held afterwards, the plan's balance plus the interest of that year.
   let heldShare = NaN;
-  const settled = run(base.totals, base.interest, (t, debt, due) => {
-    if (t < plan.first) return (baseShare + drift * t) * gdp[t];
-    if (t <= plan.last) {
-      if (t === plan.last) heldShare = plan.balanceRatio + due / gdp[t];
-      return debt + due - (plan.debtRatio.get(t) ?? NaN) * gdp[t];
-    }
-    return (heldShare + drift * (t - plan.last)) * gdp[t];
-  });
+  const settled = run(
+    base.totals,
+    base.interest,
+    (t, debt, due) => {
+      if (t < plan.first) return (baseShare + drift * t) * gdp[t];
+      if (t <= plan.last) {
+        if (t === plan.last) heldShare = plan.primaryRatio.get(t) ?? plan.balanceRatio + due / gdp[t];
+        const ratio = plan.debtRatio.get(t);
+        if (ratio !== undefined) return debt + due - ratio * gdp[t];
+        return (plan.primaryRatio.get(t) ?? NaN) * gdp[t];
+      }
+      return (heldShare + drift * (t - plan.last)) * gdp[t];
+    },
+    planRevenue && ((t) => planRevenue(t) ?? baseRevenueShare),
+  );
+  /** A path's revenue share in year t: its own, or where the path takes the plan's, that plus the measures' change. */
+  const revenueWith = (own: (t: number) => number): ((t: number) => number) =>
+    planRevenue
+      ? (t) => {
+          const share = planRevenue(t);
+          return share === undefined ? own(t) : share + (own(t) - baseRevenueShare);
+        }
+      : own;
 
   const paths: Omit<DebtPath, "longRun">[] = [];
   const held: number[] = [];
@@ -435,6 +547,7 @@ function followPaths(
     // The change once every measure is in full; with timing, each year has its own.
     const change = (scenario.totals.balance + scenario.interest) / setup.gdp - baseShare;
     const at = scenario.at;
+    const own = scenario.totals.revenue / setup.gdp;
     const path = at
       ? run(
           scenario.totals,
@@ -443,11 +556,12 @@ function followPaths(
             const effect = at(t);
             return settled.primary[t] + ((effect.totals.balance + effect.interest) / setup.gdp - baseShare) * gdp[t];
           },
-          (t) => at(t).totals.revenue / setup.gdp,
+          revenueWith((t) => at(t).totals.revenue / setup.gdp),
         )
-      : run(scenario.totals, scenario.interest, (t) => settled.primary[t] + change * gdp[t]);
+      : run(scenario.totals, scenario.interest, (t) => settled.primary[t] + change * gdp[t], planRevenue && revenueWith(() => own));
     paths.push({ start: path.start, years: path.years });
-    held.push(heldShare + change);
+    const lasting = scenario.lasting;
+    held.push(heldShare + (lasting ? (lasting.totals.balance + lasting.interest) / setup.gdp - baseShare : change));
   }
   return { paths, held };
 }
@@ -470,13 +584,24 @@ interface YearEffect {
  * example a later measure that scales an item works on what an earlier, half-built-up one left.
  * Years with the same shares are simulated once. Low and high end come from the same simulation,
  * with the measures' linked ranges as in full.
+ *
+ * A share can fall back to 0: a measure that ends (MeasurePhase.last) has none after its last year,
+ * and what it added to the debt or took from it stays there with its interest. Where some measure
+ * ends, `lasting` is the effect that remains for good, every measure that does not end in full and
+ * none that ends, which the long run holds; without one the long run holds `result` itself.
  */
 function timedEffects(
   pack: CountryPack,
   result: SimulationResult,
   phases: readonly MeasurePhase[],
   interestOf: (result: SimulationResult, path: "reform" | "baseline") => number,
-): { at: Record<"reform" | "reformLow" | "reformHigh", (t: number) => YearEffect>; observedStart: boolean } | undefined {
+):
+  | {
+      at: Record<"reform" | "reformLow" | "reformHigh", (t: number) => YearEffect>;
+      lasting?: Record<"reform" | "reformLow" | "reformHigh", YearEffect>;
+      observedStart: boolean;
+    }
+  | undefined {
   const baseYear = pack.country.baseYear;
   const earliest = measuresFrom(pack);
   if (result.policies.length === 0 || (earliest <= baseYear + 1 && phases.every((phase) => phase.immediate))) return undefined;
@@ -486,8 +611,7 @@ function timedEffects(
   };
   const none = { result: undefined, interest: interestOf(result, "baseline") };
   const cache = new Map<string, { result: SimulationResult | undefined; interest: number }>();
-  const yearOf = (t: number): { result: SimulationResult | undefined; interest: number } => {
-    const shares = phases.map((phase) => shareInYear(phase, baseYear + t));
+  const withShares = (shares: number[]): { result: SimulationResult | undefined; interest: number } => {
     if (shares.every((share) => share === 0)) return none;
     if (shares.every((share) => share === 1)) return { result, interest: interestOf(result, "reform") };
     const key = shares.join(",");
@@ -499,11 +623,21 @@ function timedEffects(
     }
     return entry;
   };
-  const pick = (key: "reform" | "reformLow" | "reformHigh") => (t: number): YearEffect => {
-    const year = yearOf(t);
-    return { totals: year.result ? year.result[key] : result.baseline, interest: year.interest };
+  const effect = (entry: { result: SimulationResult | undefined; interest: number }, key: "reform" | "reformLow" | "reformHigh"): YearEffect => ({
+    totals: entry.result ? entry.result[key] : result.baseline,
+    interest: entry.interest,
+  });
+  const pick = (key: "reform" | "reformLow" | "reformHigh") => (t: number): YearEffect =>
+    effect(withShares(phases.map((phase) => shareInYear(phase, baseYear + t))), key);
+  const timed: NonNullable<ReturnType<typeof timedEffects>> = {
+    at: { reform: pick("reform"), reformLow: pick("reformLow"), reformHigh: pick("reformHigh") },
+    observedStart: earliest > baseYear + 1,
   };
-  return { at: { reform: pick("reform"), reformLow: pick("reformLow"), reformHigh: pick("reformHigh") }, observedStart: earliest > baseYear + 1 };
+  if (phases.some((phase) => phase.last !== undefined)) {
+    const lasting = withShares(phases.map((phase) => (phase.last === undefined ? 1 : 0)));
+    timed.lasting = { reform: effect(lasting, "reform"), reformLow: effect(lasting, "reformLow"), reformHigh: effect(lasting, "reformHigh") };
+  }
+  return timed;
 }
 
 /**
@@ -591,9 +725,9 @@ export function projectDebt(pack: CountryPack, result: SimulationResult, given?:
     const base = { totals: result.baseline, interest: baseInterest };
     const { paths, held } = followPaths(setup, followed, base, [
       base,
-      { totals: result.reform, interest: scenarioInterest, at: timed?.at.reform },
-      { totals: result.reformLow, interest: scenarioInterest, at: timed?.at.reformLow },
-      { totals: result.reformHigh, interest: scenarioInterest, at: timed?.at.reformHigh },
+      { totals: result.reform, interest: scenarioInterest, at: timed?.at.reform, lasting: timed?.lasting?.reform },
+      { totals: result.reformLow, interest: scenarioInterest, at: timed?.at.reformLow, lasting: timed?.lasting?.reformLow },
+      { totals: result.reformHigh, interest: scenarioInterest, at: timed?.at.reformHigh, lasting: timed?.lasting?.reformHigh },
     ]);
     const projection: DebtProjection = {
       ...common,
@@ -603,8 +737,11 @@ export function projectDebt(pack: CountryPack, result: SimulationResult, given?:
       reformHigh: { ...paths[3], longRun: { kind: "drifts" } },
       followed: { plan: followed.id, until: setup.baseYear + Math.min(followed.last, setup.horizon) },
     };
+    const balanceYears = [...followed.primaryRatio.keys()].filter((t) => t <= setup.horizon).map((t) => setup.baseYear + t);
+    if (balanceYears.length > 0) projection.followed!.balanceYears = balanceYears;
     // In the long run each path holds the balance it continues with after the plan, with every
-    // measure in full, even where the horizon ends inside the plan or a build-up.
+    // measure in full and none that ends, even where the horizon ends inside the plan, a build-up or
+    // before a measure ends.
     keys.forEach((key, i) => (projection[key].longRun = longRunDebtRatio(projection, projection[key], held[i])));
     return observed(projection);
   }
@@ -619,8 +756,15 @@ export function projectDebt(pack: CountryPack, result: SimulationResult, given?:
     reformHigh: { ...reformPath("reformHigh"), longRun: { kind: "drifts" } },
   };
   for (const key of keys) {
-    // With timing, the long run holds every measure in full, also where the horizon ends during a build-up.
-    const full = key !== "baseline" && timed ? (result[key].balance + scenarioInterest) / setup.gdp : undefined;
+    // With timing, the long run holds every measure in full, also where the horizon ends during a
+    // build-up, and none that ends, also where the horizon ends before it does.
+    const lasting = key !== "baseline" ? timed?.lasting?.[key] : undefined;
+    const full =
+      key === "baseline" || !timed
+        ? undefined
+        : lasting
+          ? (lasting.totals.balance + lasting.interest) / setup.gdp
+          : (result[key].balance + scenarioInterest) / setup.gdp;
     projection[key].longRun = longRunDebtRatio(projection, projection[key], full);
   }
   return observed(projection);

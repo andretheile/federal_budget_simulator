@@ -8,13 +8,11 @@
  */
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { Simulator } from "../App.tsx";
 import { testland } from "../engine/__fixtures__/testland.ts";
 import type { CountryPack } from "../engine/index.ts";
 import { loadPack } from "../packs.ts";
-
-vi.setConfig({ testTimeout: 30_000 });
 
 let us: CountryPack;
 let container: HTMLDivElement;
@@ -27,7 +25,7 @@ beforeAll(async () => {
   const result = await loadPack("us");
   if (!result.ok) throw new Error(`countries/us does not validate: ${JSON.stringify(result.errors.slice(0, 3))}`);
   us = result.pack;
-}, 60_000);
+});
 
 beforeEach(() => {
   container = document.createElement("div");

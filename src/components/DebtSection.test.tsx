@@ -96,7 +96,7 @@ describe("before its code has arrived", () => {
   // import whose timing is the module loader's; each attempt here is held back by hand instead.
   beforeAll(async () => {
     await debtModule.load();
-  }, 30_000);
+  });
   afterEach(() => {
     vi.restoreAllMocks();
   });
@@ -148,7 +148,7 @@ describe("before its code has arrived", () => {
 describe("when measures act (Testland with timing)", () => {
   beforeAll(async () => {
     await debtModule.load();
-  }, 30_000);
+  });
   const timed = testlandTimed();
   const later = (): string[] => all("#debt .debt__later li").map((item) => plain(item.textContent));
 
@@ -209,7 +209,7 @@ describe("when measures act (Testland with timing)", () => {
 describe("the section on Testland", () => {
   beforeAll(async () => {
     await debtModule.load();
-  }, 30_000);
+  });
 
   it("opens with a sentence that states the result for the last year, against the base year", () => {
     mount();
@@ -509,7 +509,7 @@ describe("the section on Testland", () => {
 describe("the official plans", () => {
   beforeAll(async () => {
     await debtModule.load();
-  }, 30_000);
+  });
 
   it("draws the comparable plan in every chart it has figures for, and never the cash plan", () => {
     mount();
@@ -555,9 +555,10 @@ describe("the official plans", () => {
     expect(plain(plans[0].querySelector(".debt__note")?.textContent)).toBe("Drawn in the charts as a dashed line, with diamonds at the years it gives figures for.");
     const rows = (plan: HTMLElement): string[][] =>
       [...plan.querySelectorAll("tr")].map((row) => [...row.children].map((cell) => plain(cell.textContent)));
+    // Each column with as many decimals as its most precise figure needs: "−4.0%" beside "−3.5%".
     expect(rows(plans[0])).toEqual([
       ["Year", "Debt, share of GDP", "Balance, share of GDP", "Interest, share of GDP", "Interest, share of all revenue"],
-      ["2025", "52%", "−4%", "–", "–"],
+      ["2025", "52%", "−4.0%", "–", "–"],
       ["2026", "55%", "−3.5%", "1.2%", "3%"],
     ]);
     expect(plain(plans[1].querySelector(".dplan__scope")?.textContent)).toBe(
@@ -605,7 +606,7 @@ describe("the official plans", () => {
     expect(container.querySelector(".dchart__marker")).toBeNull();
   });
 
-  it("opens from a link that follows the plan; links without one, or with one that cannot be followed, start from 2024", { timeout: 30_000 }, () => {
+  it("opens from a link that follows the plan; links without one, or with one that cannot be followed, start from 2024", () => {
     mount("#lang=en&d=fministry_projection");
     expect(radios()[0]).toEqual(["Official plan to 2026", true]);
     mount2("#lang=en&d=r8");
@@ -625,9 +626,9 @@ describe("a pack that starts from its official plan", () => {
   };
   beforeAll(async () => {
     await debtModule.load();
-  }, 30_000);
+  });
 
-  it("follows it by default, everywhere debt figures are shown, with nothing in the address", { timeout: 30_000 }, () => {
+  it("follows it by default, everywhere debt figures are shown, with nothing in the address", () => {
     mount("#lang=en", following());
     expect(window.location.hash).toBe("#lang=en");
     expect(text("#debt .debt__intro")).toBe(
@@ -669,7 +670,7 @@ describe("a pack that starts from its official plan", () => {
     expect(window.location.hash).toBe("#lang=en");
   });
 
-  it("keeps the starting point when a preset or a slider changes the assumptions, on either path", { timeout: 30_000 }, () => {
+  it("keeps the starting point when a preset or a slider changes the assumptions, on either path", () => {
     mount("#lang=en", following());
     const high = button("High rates");
     click(high);
@@ -701,7 +702,7 @@ describe("a pack that starts from its official plan", () => {
     expect(text("#debt")).not.toContain("vom ersten Jahr an von der Planung");
   });
 
-  it("reads every form of the address", { timeout: 30_000 }, () => {
+  it("reads every form of the address", () => {
     const opened = (hash: string): { path: boolean[]; hash: string } => {
       mount(hash, following());
       const state = { path: radios().map(([, checked]) => checked), hash: window.location.hash };

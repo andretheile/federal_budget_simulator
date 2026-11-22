@@ -1,11 +1,13 @@
 /**
  * The official plans of a pack's debt.json (`plans`) beside the projection: which can be drawn
- * against it (the whole state in national accounts) and which are figures of their own, their
- * values year by year, and how a comparable plan differs from the calculation at its defaults.
- * Used by the body of the debt section only, so it loads with it.
+ * against it (the pack's whole budget in the projection's accounts, isComparablePlanIn) and which
+ * are figures of their own, their values year by year, how a plan is followed, and how a comparable
+ * plan differs from the calculation at its defaults. Used by the body of the debt section only, so
+ * it loads with it.
  */
+import type { PlanFollowing } from "../i18n/debt/messages.ts";
 import {
-  isComparablePlan,
+  isComparablePlanIn,
   projectDebt,
   type CountryPack,
   type DebtAssumptions,
@@ -21,12 +23,25 @@ export type PlanMeasure = "debtRatio" | "interestRatio" | "interestToRevenue";
 
 /** The pack's official plans that describe what the projection describes, and can be drawn against it. */
 export function comparablePlans(pack: CountryPack): DebtPlan[] {
-  return (pack.debt?.plans ?? []).filter(isComparablePlan);
+  const debt = pack.debt;
+  return debt ? (debt.plans ?? []).filter((plan) => isComparablePlanIn(debt, plan)) : [];
 }
 
 /** The pack's other official plans: another scope or other accounts, figures of their own. */
 export function otherPlans(pack: CountryPack): DebtPlan[] {
-  return (pack.debt?.plans ?? []).filter((plan) => !isComparablePlan(plan));
+  const debt = pack.debt;
+  return debt ? (debt.plans ?? []).filter((plan) => !isComparablePlanIn(debt, plan)) : [];
+}
+
+/**
+ * What following a plan takes from it in its years after the base year: its debt where every such
+ * point gives one, its budget before interest where none does (a budget that projects deficits but
+ * no debt), and either in its years where some do.
+ */
+export function planFollowingOf(plan: DebtPlan, baseYear: number): PlanFollowing {
+  const points = plan.points.filter((point) => point.year > baseYear);
+  const withDebt = points.filter((point) => point.debtRatio !== undefined).length;
+  return withDebt === points.length ? "debt" : withDebt === 0 ? "balance" : "mixed";
 }
 
 /** A plan's values of one figure, year by year, where it gives one, within the years from `first` to `last`. */

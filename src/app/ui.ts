@@ -3,7 +3,7 @@
  * pack, for the active language. Built once per (pack, language) and passed down by context.
  */
 import { createContext, useContext } from "react";
-import type { CountryPack, LevelId, LocalizedText } from "../engine/index.ts";
+import { calendarYears, yearShort, type CountryPack, type LevelId, type LocalizedText } from "../engine/index.ts";
 import { createFormatters, type Formatters } from "../i18n/format.ts";
 import { localize, localeFor, messagesFor, type Messages } from "../i18n/index.ts";
 import { enUS } from "../i18n/en-us.ts";
@@ -23,6 +23,13 @@ export interface Ui {
    * bare number would mislead, such as a fiscal year ("FY 2025"; country.json `baseYearShort`).
    */
   period: YearName;
+  /**
+   * A year of the pack as running text and labels name it: the number in a pack of calendar years;
+   * where the pack's years are not calendar years, its short name for that year ("FY 2030",
+   * "Haushaltsjahr 2030"; country.json `baseYearShort` with the number replaced), or the number if
+   * it has none.
+   */
+  yearName(year: number): YearName;
 }
 
 export function createUi(pack: CountryPack, language: string): Ui {
@@ -40,6 +47,7 @@ export function createUi(pack: CountryPack, language: string): Ui {
     text: (value) => localize(value, language),
     levelName: (level) => localize(pack.country.levels[level]?.name, language) || t.levelFallback[level],
     period: localize(pack.country.baseYearShort, language) || pack.country.baseYear,
+    yearName: calendarYears(pack) ? (year) => year : (year) => localize(yearShort(pack, year), language) || year,
   };
 }
 

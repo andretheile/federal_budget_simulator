@@ -50,7 +50,7 @@
             "omb_hist_fy2027"
           ],
           "note": {
-            "en": "Cut times outlays in fiscal year 2025 for international development and humanitarian assistance (OMB subfunction 151): $30.0 billion. The lower bound assumes that only 60% of the cut can be realized within the year, because outlays follow commitments made in earlier years (own judgment).",
+            "en": "Cut times outlays in fiscal year 2025 for international development and humanitarian assistance (OMB subfunction 151): $30.0B. The lower bound assumes that only 60% of the cut can be realized within the year, because outlays follow commitments made in earlier years (own judgment).",
             "de": "Kürzung mal Ausgaben im Haushaltsjahr 2025 für internationale Entwicklungs- und humanitäre Hilfe (Teilfunktion 151 der OMB): 30,0 Mrd. Dollar. Die untere Grenze nimmt an, dass sich innerhalb des Jahres nur 60 % der Kürzung verwirklichen lassen, weil die Ausgaben Zusagen aus früheren Jahren folgen (eigene Einschätzung)."
           }
         }
@@ -60,7 +60,7 @@
           "kind": "legal",
           "severity": "major",
           "text": {
-            "en": "Money Congress has appropriated can only be withdrawn by law. In July 2025, Congress canceled $7.9 billion of unspent funds for foreign aid and international organizations that the President had proposed to rescind (Rescissions Act of 2025, Public Law 119-28). Deeper cuts need new appropriations acts or further rescissions.",
+            "en": "Money Congress has appropriated can only be withdrawn by law. In July 2025, Congress canceled $7.9B of unspent funds for foreign aid and international organizations that the President had proposed to rescind (Rescissions Act of 2025, Public Law 119-28). Deeper cuts need new appropriations acts or further rescissions.",
             "de": "Vom Kongress bewilligtes Geld kann nur per Gesetz zurückgenommen werden. Im Juli 2025 strich der Kongress auf Vorschlag des Präsidenten 7,9 Mrd. Dollar noch nicht ausgegebener Mittel für Auslandshilfe und internationale Organisationen (Rescissions Act of 2025, Public Law 119-28). Weitere Kürzungen brauchen neue Haushaltsgesetze oder weitere Streichungsgesetze."
           },
           "sources": [
@@ -71,8 +71,8 @@
           "kind": "practical",
           "severity": "major",
           "text": {
-            "en": "The largest items are health and emergency aid: global health programs $7.5 billion (among them HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health), international disaster assistance $5.8 billion, migration and refugee assistance $2.9 billion (outlays in 2025).",
-            "de": "Die größten Posten sind Gesundheits- und Nothilfe: globale Gesundheitsprogramme 7,5 Mrd. Dollar (darunter HIV/Aids, Tuberkulose, Malaria, Ernährung sowie Mütter- und Kindergesundheit), internationale Katastrophenhilfe 5,8 Mrd. Dollar, Migrations- und Flüchtlingshilfe 2,9 Mrd. Dollar (Ausgaben 2025)."
+            "en": "The largest items are health and emergency aid: global health programs $7.5B (among them HIV/AIDS, tuberculosis, malaria, nutrition and maternal and child health), international disaster assistance $5.8B, migration and refugee assistance $2.9B (outlays in FY 2025).",
+            "de": "Die größten Posten sind Gesundheits- und Nothilfe: globale Gesundheitsprogramme 7,5 Mrd. Dollar (darunter HIV/Aids, Tuberkulose, Malaria, Ernährung sowie Mütter- und Kindergesundheit), internationale Katastrophenhilfe 5,8 Mrd. Dollar, Migrations- und Flüchtlingshilfe 2,9 Mrd. Dollar (Ausgaben im Haushaltsjahr 2025)."
           },
           "sources": [
             "omb_pbd_outlays_fy2027",
@@ -83,8 +83,8 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "en": "Development and humanitarian aid was 0.4% of federal outlays in 2025 ($30.0 billion of $7,011.1 billion). The President's Budget for 2027 estimates $37.9 billion for 2026 and $22.8 billion for 2027.",
-            "de": "Entwicklungs- und humanitäre Hilfe machte 2025 0,4 % der Bundesausgaben aus (30,0 von 7.011,1 Mrd. Dollar). Der Haushaltsentwurf des Präsidenten für 2027 schätzt 37,9 Mrd. Dollar für 2026 und 22,8 Mrd. Dollar für 2027."
+            "en": "Development and humanitarian aid was 0.4% of federal outlays in FY 2025 ($30.0B of $7.01T). The President's Budget for FY 2027 estimates $37.9B for FY 2026 and $22.8B for FY 2027.",
+            "de": "Entwicklungs- und humanitäre Hilfe machte im Haushaltsjahr 2025 0,4 % der Bundesausgaben aus (30,0 von 7.011,1 Mrd. Dollar). Der Haushaltsentwurf des Präsidenten für das Haushaltsjahr 2027 schätzt 37,9 Mrd. Dollar für 2026 und 22,8 Mrd. Dollar für 2027."
           },
           "sources": [
             "omb_hist_fy2027"
@@ -104,7 +104,7 @@
         "de": "Verteidigungsausgaben festlegen"
       },
       "summary": {
-        "en": "Sets defense spending under NATO's definition to a share of GDP; NATO estimates 3.22% ($980 billion) for 2025. The default shows NATO's target of 3.5% for core defense.",
+        "en": "Sets defense spending under NATO's definition to a share of GDP; NATO estimates 3.22% ($980B) for 2025. The default shows NATO's target of 3.5% for core defense.",
         "de": "Setzt die Verteidigungsausgaben nach NATO-Definition auf einen Anteil am BIP; die NATO schätzt sie 2025 auf 3,22 % (980 Mrd. Dollar). Die Grundeinstellung zeigt das NATO-Ziel von 3,5 %."
       },
       "explanation": {
@@ -148,7 +148,7 @@
             "omb_hist_fy2027"
           ],
           "note": {
-            "en": "Difference between the target and the 3.22% NATO estimates for the United States in 2025, times GDP in fiscal year 2025 ($30,322.8 billion, OMB): $303.2 billion per percentage point. The amount is added to the defense function of the budget (OMB function 050: $916.1 billion, 3.02% of GDP), which is narrower than NATO's definition. The range of ±10% reflects that NATO counts calendar years and more items (own judgment).",
+            "en": "Difference between the target and the 3.22% NATO estimates for the United States in 2025, times GDP in fiscal year 2025 ($30.32T, OMB): $303.2B per percentage point. The amount is added to the defense function of the budget (OMB function 050: $916.1B, 3.02% of GDP), which is narrower than NATO's definition. The range of ±10% reflects that NATO counts calendar years and more items (own judgment).",
             "de": "Differenz zwischen Zielwert und den 3,22 %, die die NATO für die Vereinigten Staaten 2025 schätzt, mal Bruttoinlandsprodukt im Haushaltsjahr 2025 (30.322,8 Mrd. Dollar, OMB): 303,2 Mrd. Dollar je Prozentpunkt. Der Betrag wird auf die Verteidigungsfunktion des Haushalts aufgeschlagen (Funktion 050 der OMB: 916,1 Mrd. Dollar, 3,02 % des BIP), die enger abgegrenzt ist als die NATO-Definition. Die Spanne von ±10 % trägt dem Rechnung, dass die NATO Kalenderjahre und mehr Posten zählt (eigene Einschätzung)."
           }
         }
@@ -169,7 +169,7 @@
           "kind": "political",
           "severity": "minor",
           "text": {
-            "en": "As of November 2026, the President's Budget for 2027 estimates national defense outlays of $1,205.0 billion for fiscal year 2027, about 3.6% of the GDP it projects, after $966.4 billion in 2026. Congress has not yet passed the appropriations for 2027: the government runs on a continuing resolution until December 11, 2026 (Public Law 119-103).",
+            "en": "As of November 2026, the President's Budget for 2027 estimates national defense outlays of $1.21T for fiscal year 2027, about 3.6% of the GDP it projects, after $966.4B in 2026. Congress has not yet passed the appropriations for 2027: the government runs on a continuing resolution until December 11, 2026 (Public Law 119-103).",
             "de": "Stand November 2026 schätzt der Haushaltsentwurf des Präsidenten für 2027 Verteidigungsausgaben von 1.205,0 Mrd. Dollar im Haushaltsjahr 2027, etwa 3,6 % des erwarteten BIP, nach 966,4 Mrd. Dollar 2026. Der Kongress hat die Mittel für 2027 noch nicht bewilligt: Bis zum 11. Dezember 2026 gilt ein Übergangshaushalt (Public Law 119-103)."
           },
           "sources": [
@@ -189,7 +189,7 @@
       "limits": [
         {
           "text": {
-            "en": "NATO's definition is wider than the defense budget: among other things it counts pensions paid to retired military personnel. NATO puts U.S. defense spending in calendar year 2025 at $980 billion, while the budget's defense function was $916.1 billion in fiscal year 2025.",
+            "en": "NATO's definition is wider than the defense budget: among other things it counts pensions paid to retired military personnel. NATO puts U.S. defense spending in calendar year 2025 at $980B, while the budget's defense function was $916.1B in fiscal year 2025.",
             "de": "Die NATO-Definition ist weiter als der Verteidigungshaushalt: Sie zählt unter anderem Pensionen ehemaliger Soldaten. Die NATO beziffert die US-Verteidigungsausgaben im Kalenderjahr 2025 auf 980 Mrd. Dollar, die Verteidigungsfunktion des Haushalts lag im Haushaltsjahr 2025 bei 916,1 Mrd. Dollar."
           },
           "sources": [
@@ -212,8 +212,8 @@
         "de": "Ausgaben für Grenzschutz und Einwanderungsbehörde ändern"
       },
       "summary": {
-        "en": "Changes the spending of CBP and ICE compared with 2025, up or down. The default of +60% is how much their outlays actually rose from fiscal year 2025 to 2026.",
-        "de": "Ändert die Ausgaben von CBP und ICE gegenüber 2025, nach oben oder unten. Die Grundeinstellung von +60 % ist der tatsächliche Anstieg ihrer Ausgaben vom Haushaltsjahr 2025 auf 2026."
+        "en": "Changes the spending of CBP and ICE compared with FY 2025, up or down. The default of +60% is how much their outlays actually rose from FY 2025 to FY 2026.",
+        "de": "Ändert die Ausgaben von CBP und ICE gegenüber dem Haushaltsjahr 2025, nach oben oder unten. Die Grundeinstellung von +60 % ist der tatsächliche Anstieg ihrer Ausgaben vom Haushaltsjahr 2025 auf 2026."
       },
       "explanation": {
         "en": "The two agencies are U.S. Customs and Border Protection (CBP) and U.S. Immigration and Customs Enforcement (ICE). The slider gives the change as a percentage of their 2025 level: −100% ends both agencies' spending, +100% doubles it.",
@@ -255,7 +255,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Change times CBP's outlays in fiscal year 2025 for law enforcement (OMB subfunction 751): $21.0 billion. The lower bound assumes that only 80% of a change takes effect within the year, because hiring, building and contracts take time and many tasks are required by law (own judgment).",
+            "en": "Change times CBP's outlays in fiscal year 2025 for law enforcement (OMB subfunction 751): $21.0B. The lower bound assumes that only 80% of a change takes effect within the year, because hiring, building and contracts take time and many tasks are required by law (own judgment).",
             "de": "Änderung mal Ausgaben der CBP im Haushaltsjahr 2025 für Strafverfolgung (Teilfunktion 751 der OMB): 21,0 Mrd. Dollar. Die untere Grenze nimmt an, dass innerhalb des Jahres nur 80 % einer Änderung wirken, weil Einstellungen, Bauten und Verträge Zeit brauchen und viele Aufgaben gesetzlich vorgeschrieben sind (eigene Einschätzung)."
           }
         },
@@ -277,7 +277,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Change times ICE's outlays in fiscal year 2025 (OMB subfunction 751): $10.7 billion. Range as for CBP.",
+            "en": "Change times ICE's outlays in fiscal year 2025 (OMB subfunction 751): $10.7B. Range as for CBP.",
             "de": "Änderung mal Ausgaben der ICE im Haushaltsjahr 2025 (Teilfunktion 751 der OMB): 10,7 Mrd. Dollar. Spanne wie bei der CBP."
           }
         }
@@ -287,13 +287,15 @@
           "kind": "political",
           "severity": "major",
           "text": {
-            "en": "Congress has already added large multi-year funds: the reconciliation act of July 4, 2025 (Public Law 119-21) gave among other things $46.55 billion for the border wall, $45.0 billion for ICE detention capacity and $29.85 billion for ICE, and the Secure America Act of June 10, 2026 (Public Law 119-98) another $69.5 billion for CBP, ICE and the Department of Homeland Security, all available until September 30, 2029. Outlays in fiscal year 2026: ICE $22.4 billion and CBP $28.9 billion, after $10.7 billion and $21.2 billion in 2025 (Treasury).",
-            "de": "Der Kongress hat bereits große mehrjährige Mittel bereitgestellt: das Haushaltsgesetz vom 4. Juli 2025 (Public Law 119-21) unter anderem 46,55 Mrd. Dollar für die Grenzmauer, 45,0 Mrd. Dollar für Haftplätze der ICE und 29,85 Mrd. Dollar für die ICE, der Secure America Act vom 10. Juni 2026 (Public Law 119-98) weitere 69,5 Mrd. Dollar für CBP, ICE und das Heimatschutzministerium, alles verfügbar bis 30. September 2029. Ausgaben im Haushaltsjahr 2026: ICE 22,4 Mrd. Dollar und CBP 28,9 Mrd. Dollar, nach 10,7 und 21,2 Mrd. Dollar 2025 (Finanzministerium)."
+            "en": "Congress has already added large multi-year funds: the reconciliation act of July 4, 2025 (Public Law 119-21) gave among other things $46.55B for the border wall, $45.0B for ICE detention capacity and $29.85B for ICE, and the Secure America Act of June 10, 2026 (Public Law 119-98) another $69.5B for CBP, ICE and the Department of Homeland Security, all available until September 30, 2029. Outlays in fiscal year 2026: ICE $22.4B and CBP $28.9B, after $10.7B and $21.2B in 2025 (Treasury). Two Democratic bills would take part of it back: H.R. 7975 (Rep. Shontel Brown, March 2026) would repeal the $45.0B for detention and the $29.85B for ICE and rescind what is unspent, H.R. 10494 (Rep. Foushee, September 2026) would rescind unspent money for the wall and for detention; neither has moved.",
+            "de": "Der Kongress hat bereits große mehrjährige Mittel bereitgestellt: das Haushaltsgesetz vom 4. Juli 2025 (Public Law 119-21) unter anderem 46,55 Mrd. Dollar für die Grenzmauer, 45,0 Mrd. Dollar für Haftplätze der ICE und 29,85 Mrd. Dollar für die ICE, der Secure America Act vom 10. Juni 2026 (Public Law 119-98) weitere 69,5 Mrd. Dollar für CBP, ICE und das Heimatschutzministerium, alles verfügbar bis 30. September 2029. Ausgaben im Haushaltsjahr 2026: ICE 22,4 Mrd. Dollar und CBP 28,9 Mrd. Dollar, nach 10,7 und 21,2 Mrd. Dollar 2025 (Finanzministerium). Zwei Entwürfe von Demokraten würden einen Teil davon zurücknehmen: H.R. 7975 (Abgeordnete Shontel Brown, März 2026) würde die 45,0 Mrd. Dollar für Haftplätze und die 29,85 Mrd. Dollar für die ICE aufheben und streichen, was nicht ausgegeben ist, H.R. 10494 (Abgeordnete Foushee, September 2026) nicht gebundene Mittel für die Grenzmauer und für Haftplätze; keiner wurde beraten."
           },
           "sources": [
             "plaw_119_21",
             "plaw_119_98",
-            "treasury_mts_2026_09"
+            "treasury_mts_2026_09",
+            "hr_7975_2026",
+            "hr_10494_2026"
           ]
         },
         {
@@ -331,7 +333,9 @@
         "plaw_119_21",
         "plaw_119_98",
         "plaw_119_1",
-        "treasury_mts_2026_09"
+        "treasury_mts_2026_09",
+        "hr_7975_2026",
+        "hr_10494_2026"
       ]
     },
     {
@@ -535,7 +539,7 @@
             "omb_pbd_receipts_fy2027"
           ],
           "note": {
-            "en": "The 2025 rule and the new rule are applied to the wages of 146.7 million workers (IRS Form W-2 statistics for 2023, adjusted to 2025 by the growth of the wage cap). Without a cap, taxable wages would be 17.9% higher; the relative change is applied to Social Security payroll taxes in 2025 ($1,283.7 billion, old-age and disability insurance), including the self-employment tax, as if self-employment income were spread like wages. The 2025 rule yields $1,132.6 billion on the distribution, 88% of those receipts. Static: wages and employment do not change. The low end assumes that a quarter of the extra base is lost because high earners take more of their pay in forms not subject to the tax (own judgment). The Social Security actuaries' own estimates of such changes are published on ssa.gov, which could not be retrieved.",
+            "en": "The 2025 rule and the new rule are applied to the wages of 146.7 million workers (IRS Form W-2 statistics for 2023, adjusted to 2025 by the growth of the wage cap). Without a cap, taxable wages would be 17.9% higher; the relative change is applied to Social Security payroll taxes in 2025 ($1.28T, old-age and disability insurance), including the self-employment tax, as if self-employment income were spread like wages. The 2025 rule yields $1.13T on the distribution, 88% of those receipts. Static: wages and employment do not change. The low end assumes that a quarter of the extra base is lost because high earners take more of their pay in forms not subject to the tax (own judgment). The Social Security actuaries' own estimates of such changes are published on ssa.gov, which could not be retrieved.",
             "de": "Die Regel von 2025 und die neue Regel werden auf die Löhne von 146,7 Mio. Beschäftigten angewendet (Lohnbescheinigungs-Statistik der IRS für 2023, mit der Beitragsgrenze auf 2025 fortgeschrieben). Ohne Grenze wären die beitragspflichtigen Löhne um 17,9 % höher; die relative Änderung wird auf die Social-Security-Beiträge 2025 übertragen (1.283,7 Mrd. Dollar, Alters- und Erwerbsminderungsversicherung), einschließlich der Beiträge der Selbständigen, als wären deren Einkommen wie Löhne verteilt. Die Regel von 2025 ergibt auf der Verteilung 1.132,6 Mrd. Dollar, 88 % dieser Einnahmen. Statisch gerechnet: Löhne und Beschäftigung ändern sich nicht. Die untere Grenze nimmt an, dass ein Viertel der zusätzlichen Bemessungsgrundlage verloren geht, weil Spitzenverdiener mehr ihres Einkommens in beitragsfreier Form beziehen (eigene Einschätzung). Die Schätzungen der Versicherungsmathematiker der Social Security zu solchen Änderungen stehen auf ssa.gov, das nicht abrufbar war."
           }
         }
@@ -589,7 +593,17 @@
         "ssa_trustees_2026",
         "hr_9519_2026",
         "irs_pub15_2025"
-      ]
+      ],
+      "timing": {
+        "from": "2027-01-01",
+        "note": {
+          "en": "As for every tax change in this pack, the start is the date the bill or proposal names if it has not passed, otherwise the first January 1 in FY 2028, the first year in which measures act. H.R. 9519 ends the cap for wages paid in calendar years after 2026 and for self-employment income of taxable years beginning after December 31, 2026 (section 201(d)): January 1, 2027. That day lies before FY 2028, so the change counts in full from FY 2028.",
+          "de": "Wie bei jeder Steueränderung in diesem Paket ist der Beginn der Tag, den der Entwurf oder Vorschlag nennt, wenn er noch nicht vorbei ist, sonst der erste 1. Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. H.R. 9519 hebt die Grenze für Löhne auf, die in Kalenderjahren nach 2026 gezahlt werden, und für Einkommen aus selbständiger Arbeit in Steuerjahren, die nach dem 31. Dezember 2026 beginnen (Abschnitt 201(d)): 1. Januar 2027. Dieser Tag liegt vor dem Haushaltsjahr 2028; die Änderung zählt deshalb ab dem Haushaltsjahr 2028 voll."
+        },
+        "sources": [
+          "hr_9519_2026"
+        ]
+      }
     },
     {
       "id": "corporate_tax_rate",
@@ -599,7 +613,7 @@
       },
       "summary": {
         "en": "Sets the federal tax rate on corporate profits, 21% since 2017. The default shows 28%, which the Treasury proposed in March 2024 with the Budget for fiscal year 2025.",
-        "de": "Legt den Bundessteuersatz auf Unternehmensgewinne fest, seit 2017 21 %. Die Grundeinstellung zeigt 28 %, wie es das Finanzministerium im März 2024 mit dem Haushaltsentwurf für 2025 vorschlug."
+        "de": "Legt den Bundessteuersatz auf Unternehmensgewinne fest, seit 2017 21 %. Die Grundeinstellung zeigt 28 %, vom Finanzministerium im März 2024 mit dem Entwurf für das Haushaltsjahr 2025 vorgeschlagen."
       },
       "explanation": {
         "en": "The rate applies to corporations taxed as such (C corporations). Lower rates can be set as well.",
@@ -641,7 +655,7 @@
             "omb_pbd_receipts_fy2027"
           ],
           "note": {
-            "en": "Corporation income taxes in fiscal year 2025: $452.1 billion. With profits unchanged, 28% instead of 21% would raise them by a third, $150.7 billion. The Treasury estimated $122.5 billion for fiscal year 2025, 81% of that, because firms shift and reduce taxable profits. That share is applied to every point of rate change, up or down: $17.5 billion per percentage point. The range runs from 70% to 110% of this (own judgment): the Treasury's estimate dates from March 2024 and refers to the profits it then expected, and the estimates of the Congressional Budget Office and the Joint Committee on Taxation could not be retrieved.",
+            "en": "Corporation income taxes in fiscal year 2025: $452.1B. With profits unchanged, 28% instead of 21% would raise them by a third, $150.7B. The Treasury estimated $122.5B for fiscal year 2025, 81% of that, because firms shift and reduce taxable profits. That share is applied to every point of rate change, up or down: $17.5B per percentage point. The range runs from 70% to 110% of this (own judgment): the Treasury's estimate dates from March 2024 and refers to the profits it then expected, and the estimates of the Congressional Budget Office and the Joint Committee on Taxation could not be retrieved.",
             "de": "Körperschaftsteuer im Haushaltsjahr 2025: 452,1 Mrd. Dollar. Bei unveränderten Gewinnen brächte ein Satz von 28 statt 21 % ein Drittel mehr, 150,7 Mrd. Dollar. Das Finanzministerium schätzte 122,5 Mrd. Dollar für 2025, 81 % davon, weil Unternehmen steuerpflichtige Gewinne verlagern und verringern. Dieser Anteil gilt für jeden Prozentpunkt Änderung, nach oben wie nach unten: 17,5 Mrd. Dollar je Prozentpunkt. Die Spanne reicht von 70 % bis 110 % davon (eigene Einschätzung): Die Schätzung des Finanzministeriums stammt vom März 2024 und bezieht sich auf die damals erwarteten Gewinne, und die Schätzungen des Congressional Budget Office und des Joint Committee on Taxation waren nicht abrufbar."
           }
         }
@@ -674,7 +688,7 @@
           "kind": "economic",
           "severity": "minor",
           "text": {
-            "en": "The base is shrinking: corporate receipts fell from $529.9 billion in 2024 to $452.1 billion in 2025 and $381.4 billion in 2026 (Treasury). A rate change acts on a smaller base than the Treasury expected in 2024.",
+            "en": "The base is shrinking: corporate receipts fell from $529.9B in 2024 to $452.1B in 2025 and $381.4B in 2026 (Treasury). A rate change acts on a smaller base than the Treasury expected in 2024.",
             "de": "Die Bemessungsgrundlage schrumpft: Die Körperschaftsteuer sank von 529,9 Mrd. Dollar 2024 auf 452,1 Mrd. Dollar 2025 und 381,4 Mrd. Dollar 2026 (Finanzministerium). Eine Satzänderung wirkt auf eine kleinere Grundlage, als das Finanzministerium 2024 erwartete."
           },
           "sources": [
@@ -688,7 +702,17 @@
         "omb_pbd_receipts_fy2027",
         "plaw_119_21",
         "treasury_mts_2026_09"
-      ]
+      ],
+      "timing": {
+        "from": "2028-01-01",
+        "note": {
+          "en": "As for every tax change in this pack, the start is the date the bill or proposal names if it has not passed, otherwise the first January 1 in FY 2028, the first year in which measures act. The Treasury's proposal of March 2024 applied to taxable years beginning after December 31, 2023; that date has passed, so the rate changes on January 1, 2028. The calculation counts days: FY 2028 has three quarters of the yearly amount (274 of its 366 days). The Treasury's own estimate put less into the first fiscal year, 61% ($74.6B in FY 2024 against $122.5B in FY 2025), because payments lag behind the tax year: corporations pay in installments during the year and settle after it ends. The calculation therefore overstates FY 2028.",
+          "de": "Wie bei jeder Steueränderung in diesem Paket ist der Beginn der Tag, den der Entwurf oder Vorschlag nennt, wenn er noch nicht vorbei ist, sonst der erste 1. Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. Der Vorschlag des Finanzministeriums vom März 2024 galt für Steuerjahre, die nach dem 31. Dezember 2023 beginnen; dieser Tag ist vorbei, der Satz wechselt also am 1. Januar 2028. Die Rechnung zählt Tage: Das Haushaltsjahr 2028 hat drei Viertel des Jahresbetrags (274 seiner 366 Tage). Die eigene Schätzung des Finanzministeriums setzte im ersten Haushaltsjahr weniger an, 61 % (74,6 Mrd. Dollar im Haushaltsjahr 2024 gegenüber 122,5 Mrd. Dollar 2025), weil die Zahlungen dem Steuerjahr nachlaufen: Unternehmen zahlen im Jahr Vorauszahlungen und rechnen nach seinem Ende ab. Die Rechnung überschätzt das Haushaltsjahr 2028 deshalb."
+        },
+        "sources": [
+          "treasury_greenbook_fy2025"
+        ]
+      }
     },
     {
       "id": "tariff_all_imports",
@@ -739,8 +763,8 @@
             "omb_pbd_receipts_fy2027"
           ],
           "note": {
-            "en": "Rate times goods imports in fiscal year 2025 ($3,482.1 billion, Census Bureau, balance-of-payments basis), less a fifth for imports that fall away, shift to other suppliers or are exempted (own assumption; the low end assumes 40%, the high end 10%): $27.9 billion per percentage point. At 10%: $348.2 billion before and $278.6 billion after that deduction. Customs duties in 2025 were $194.9 billion, 5.6% of the import value. Static: prices, the exchange rate and growth do not change.",
-            "de": "Satz mal Wareneinfuhren im Haushaltsjahr 2025 (3.482,1 Mrd. Dollar, Census Bureau, Zahlungsbilanzabgrenzung), abzüglich eines Fünftels für Einfuhren, die wegfallen, zu anderen Lieferanten wandern oder ausgenommen werden (eigene Annahme; die untere Grenze nimmt 40 % an, die obere 10 %): 27,9 Mrd. Dollar je Prozentpunkt. Bei 10 %: 348,2 Mrd. Dollar vor und 278,6 Mrd. Dollar nach diesem Abzug. Die Zölle brachten 2025 194,9 Mrd. Dollar, 5,6 % des Einfuhrwerts. Statisch gerechnet: Preise, Wechselkurs und Wachstum ändern sich nicht."
+            "en": "Rate times goods imports in fiscal year 2025 ($3.48T, Census Bureau, balance-of-payments basis), less a fifth for imports that fall away, shift to other suppliers or are exempted (own assumption; the low end assumes 40%, the high end 10%): $27.9B per percentage point. At 10%: $348.2B before and $278.6B after that deduction. Customs duties in FY 2025 were $194.9B, 5.6% of the import value. Static: prices, the exchange rate and growth do not change.",
+            "de": "Satz mal Wareneinfuhren im Haushaltsjahr 2025 (3.482,1 Mrd. Dollar, Census Bureau, Zahlungsbilanzabgrenzung), abzüglich eines Fünftels für Einfuhren, die wegfallen, zu anderen Lieferanten wandern oder ausgenommen werden (eigene Annahme; die untere Grenze nimmt 40 % an, die obere 10 %): 27,9 Mrd. Dollar je Prozentpunkt. Bei 10 %: 348,2 Mrd. Dollar vor und 278,6 Mrd. Dollar nach diesem Abzug. Die Zölle brachten im Haushaltsjahr 2025 194,9 Mrd. Dollar, 5,6 % des Einfuhrwerts. Statisch gerechnet: Preise, Wechselkurs und Wachstum ändern sich nicht."
           },
           "shift": {
             "to": "rev.individual_income",
@@ -801,7 +825,7 @@
       "limits": [
         {
           "text": {
-            "en": "The duties of 2025 in the base include duties under the emergency powers act (IEEPA), which the President ended on February 20, 2026, the day of the ruling (Executive Order 14389). In fiscal year 2026, $144.6 billion of the $317.8 billion of customs duties collected was refunded (Treasury).",
+            "en": "The duties of 2025 in the base include duties under the emergency powers act (IEEPA), which the President ended on February 20, 2026, the day of the ruling (Executive Order 14389). In fiscal year 2026, $144.6B of the $317.8B of customs duties collected was refunded (Treasury).",
             "de": "Die Zölle von 2025 in der Ausgangslage enthalten Zölle nach dem Notstandsgesetz IEEPA, die der Präsident am 20. Februar 2026, dem Tag des Urteils, beendete (Executive Order 14389). Im Haushaltsjahr 2026 wurden von 317,8 Mrd. Dollar erhobenen Zöllen 144,6 Mrd. Dollar erstattet (Finanzministerium)."
           },
           "sources": [
@@ -832,7 +856,7 @@
         "de": "Streicht zivile Stellen in der Exekutive des Bundes, getrennt für vier Teile der Regierung. Die Grundeinstellung streicht überall 12 %, etwa den Rückgang, den die Personalbehörde bis März 2026 zählt."
       },
       "explanation": {
-        "en": "A slider at 0 exempts its part. Pay and benefits of the civilian staff came to $383.3 billion in fiscal year 2025: Department of Defense $113.8 billion, health care at Veterans Affairs $66.4 billion, the Departments of Homeland Security and Justice $64.8 billion, all other agencies $138.3 billion. Military personnel, the Postal Service, Congress and the courts are not included.\n\nEach cut lands in the budget items where the staff work, according to OMB's data on obligations by object class; 12.8% of it reappears in the item for federal retirement, where the agencies' contributions to the retirement funds are netted out. The amount is the annual saving once the staff are gone, in 2025 values.\n\nThe Office of Personnel Management (OPM) counts a reduction of the federal workforce of over 12% from December 2024 to March 2026. The 2025 figures still contain most of these staff, because many stayed on the payroll, some on paid leave, until they left: federal employment outside the Postal Service averaged 2.374 million in fiscal year 2025 and was 2.075 million in October 2026, 12.6% less (BLS).",
+        "en": "A slider at 0 exempts its part. Pay and benefits of the civilian staff came to $383.3B in fiscal year 2025: Department of Defense $113.8B, health care at Veterans Affairs $66.4B, the Departments of Homeland Security and Justice $64.8B, all other agencies $138.3B. Military personnel, the Postal Service, Congress and the courts are not included.\n\nEach cut lands in the budget items where the staff work, according to OMB's data on obligations by object class; 12.8% of it reappears in the item for federal retirement, where the agencies' contributions to the retirement funds are netted out. The amount is the annual saving once the staff are gone, in 2025 values.\n\nThe Office of Personnel Management (OPM) counts a reduction of the federal workforce of over 12% from December 2024 to March 2026. The 2025 figures still contain most of these staff, because many stayed on the payroll, some on paid leave, until they left: federal employment outside the Postal Service averaged 2.374 million in fiscal year 2025 and was 2.075 million in October 2026, 12.6% less (BLS).",
         "de": "Ein Regler auf 0 nimmt seinen Teil aus. Die Gehälter und Nebenleistungen der zivilen Beschäftigten kosteten im Haushaltsjahr 2025 383,3 Mrd. Dollar: Verteidigungsministerium 113,8 Mrd. Dollar, Gesundheitsversorgung im Veteranenministerium 66,4 Mrd. Dollar, Heimatschutz- und Justizministerium 64,8 Mrd. Dollar, alle übrigen Behörden 138,3 Mrd. Dollar. Nicht enthalten sind Soldaten, die Post, der Kongress und die Gerichte.\n\nJede Kürzung trifft die Haushaltsposten, in denen die Beschäftigten arbeiten, nach den Daten der OMB zu den Mittelbindungen nach Ausgabearten; 12,8 % davon fallen beim Posten für die Pensionen der Bundesbediensteten wieder an, wo die Beiträge der Behörden an die Pensionsfonds verrechnet werden. Der Betrag ist die jährliche Ersparnis, sobald die Stellen weg sind, in Werten von 2025.\n\nDie Personalbehörde des Bundes (Office of Personnel Management, OPM) zählt von Dezember 2024 bis März 2026 einen Rückgang der Bundesbeschäftigten um mehr als 12 %. Die Zahlen von 2025 enthalten die meisten dieser Beschäftigten noch, weil viele bis zu ihrem Ausscheiden bezahlt wurden, manche in bezahlter Freistellung: Ohne die Post arbeiteten im Haushaltsjahr 2025 im Schnitt 2,374 Mio. Menschen für den Bund, im Oktober 2026 2,075 Mio., 12,6 % weniger (BLS)."
       },
       "topic": "state",
@@ -914,7 +938,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $105.3 billion. Allocated by this calculation: $29.6 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.3 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $105.3B. Allocated by this calculation: $29.6B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.3B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Verteidigungsministeriums in diesem Posten im Haushaltsjahr 2025: 105,3 Mrd. Dollar. Von dieser Rechnung zugeordnet: 29,6 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,3 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -937,7 +961,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $7.2 billion. Allocated by this calculation: $2.0 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $7.2B. Allocated by this calculation: $2.0B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Verteidigungsministeriums in diesem Posten im Haushaltsjahr 2025: 7,2 Mrd. Dollar. Von dieser Rechnung zugeordnet: 2,0 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -960,7 +984,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $1.3 billion. Allocated by this calculation: $0.4 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Department of Defense in this item in fiscal year 2025: $1.3B. Allocated by this calculation: $0.4B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Verteidigungsministeriums in diesem Posten im Haushaltsjahr 2025: 1,3 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,4 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -983,7 +1007,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the health care staff of the Department of Veterans Affairs in this item in fiscal year 2025: $66.4 billion. Allocated by this calculation: $11.7 billion from accounts spread over several items, split by their outlays. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the health care staff of the Department of Veterans Affairs in this item in fiscal year 2025: $66.4B. Allocated by this calculation: $11.7B from accounts spread over several items, split by their outlays. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Gesundheitspersonals des Veteranenministeriums in diesem Posten im Haushaltsjahr 2025: 66,4 Mrd. Dollar. Von dieser Rechnung zugeordnet: 11,7 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1006,7 +1030,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $15.1 billion. Allocated by this calculation: $1.1 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.1 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $15.1B. Allocated by this calculation: $1.1B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.1B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 15,1 Mrd. Dollar. Von dieser Rechnung zugeordnet: 1,1 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,1 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1029,7 +1053,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $14.8 billion. Allocated by this calculation: $3.0 billion from accounts spread over several items, split by their outlays; $0.9 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $14.8B. Allocated by this calculation: $3.0B from accounts spread over several items, split by their outlays; $0.9B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 14,8 Mrd. Dollar. Von dieser Rechnung zugeordnet: 3,0 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,9 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1052,7 +1076,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $8.7 billion. Allocated by this calculation: $8.0 billion from accounts spread over several items, split by their outlays; $0.6 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.1 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $8.7B. Allocated by this calculation: $8.0B from accounts spread over several items, split by their outlays; $0.6B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.1B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 8,7 Mrd. Dollar. Von dieser Rechnung zugeordnet: 8,0 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,6 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,1 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1075,7 +1099,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $6.1 billion. Allocated by this calculation: $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $6.1B. Allocated by this calculation: $0.3B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 6,1 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1098,7 +1122,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $5.7 billion. Allocated by this calculation: $5.4 billion from accounts spread over several items, split by their outlays; $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $5.7B. Allocated by this calculation: $5.4B from accounts spread over several items, split by their outlays; $0.3B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 5,7 Mrd. Dollar. Von dieser Rechnung zugeordnet: 5,4 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1121,7 +1145,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $5.1 billion. Allocated by this calculation: $0.4 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $5.1B. Allocated by this calculation: $0.4B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 5,1 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,4 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1144,7 +1168,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $4.5 billion. Allocated by this calculation: $0.8 billion from accounts spread over several items, split by their outlays; $0.2 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $4.5B. Allocated by this calculation: $0.8B from accounts spread over several items, split by their outlays; $0.2B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 4,5 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,8 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,2 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1167,7 +1191,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $3.3 billion. Allocated by this calculation: $0.2 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.9 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $3.3B. Allocated by this calculation: $0.2B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.9B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 3,3 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,2 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,9 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1190,7 +1214,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $1.4 billion. Allocated by this calculation: $1.3 billion from accounts spread over several items, split by their outlays; $0.1 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the Departments of Homeland Security and Justice in this item in fiscal year 2025: $1.4B. Allocated by this calculation: $1.3B from accounts spread over several items, split by their outlays; $0.1B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten des Heimatschutz- und des Justizministeriums in diesem Posten im Haushaltsjahr 2025: 1,4 Mrd. Dollar. Von dieser Rechnung zugeordnet: 1,3 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,1 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1213,7 +1237,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $14.4 billion. Allocated by this calculation: $5.4 billion from accounts spread over several items, split by their outlays; $1.7 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.5 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $14.4B. Allocated by this calculation: $5.4B from accounts spread over several items, split by their outlays; $1.7B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.5B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 14,4 Mrd. Dollar. Von dieser Rechnung zugeordnet: 5,4 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 1,7 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,5 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1236,7 +1260,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $13.3 billion. Includes $2.1 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $13.3B. Includes $2.1B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 13,3 Mrd. Dollar. Enthält 2,1 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1259,7 +1283,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $11.2 billion. Allocated by this calculation: $2.0 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $11.2B. Allocated by this calculation: $2.0B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 11,2 Mrd. Dollar. Von dieser Rechnung zugeordnet: 2,0 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1282,7 +1306,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $10.5 billion. Allocated by this calculation: $2.9 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $10.5B. Allocated by this calculation: $2.9B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 10,5 Mrd. Dollar. Von dieser Rechnung zugeordnet: 2,9 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1305,7 +1329,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $8.4 billion. Allocated by this calculation: $1.0 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.8 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $8.4B. Allocated by this calculation: $1.0B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.8B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 8,4 Mrd. Dollar. Von dieser Rechnung zugeordnet: 1,0 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,8 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1328,7 +1352,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.9 billion. Allocated by this calculation: $0.7 billion from accounts spread over several items, split by their outlays. Includes $0.1 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.9B. Allocated by this calculation: $0.7B from accounts spread over several items, split by their outlays. Includes $0.1B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 6,9 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,7 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt. Enthält 0,1 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1351,7 +1375,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.8 billion. Allocated by this calculation: $2.8 billion from accounts spread over several items, split by their outlays; $1.5 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.8B. Allocated by this calculation: $2.8B from accounts spread over several items, split by their outlays; $1.5B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 6,8 Mrd. Dollar. Von dieser Rechnung zugeordnet: 2,8 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 1,5 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1374,7 +1398,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.7 billion. Allocated by this calculation: $1.4 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $6.7B. Allocated by this calculation: $1.4B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 6,7 Mrd. Dollar. Von dieser Rechnung zugeordnet: 1,4 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1397,7 +1421,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $5.8 billion. Allocated by this calculation: $2.5 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $5.8B. Allocated by this calculation: $2.5B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 5,8 Mrd. Dollar. Von dieser Rechnung zugeordnet: 2,5 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1420,7 +1444,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.6 billion. Allocated by this calculation: $2.6 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.6B. Allocated by this calculation: $2.6B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,6 Mrd. Dollar. Von dieser Rechnung zugeordnet: 2,6 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1444,7 +1468,7 @@
             "treasury_mts_2025_09"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.5 billion. Allocated by this calculation: $4.5 billion from Social Security's administrative account, split between the two trust funds by their administrative expenses. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.5B. Allocated by this calculation: $4.5B from Social Security's administrative account, split between the two trust funds by their administrative expenses. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,5 Mrd. Dollar. Von dieser Rechnung zugeordnet: 4,5 Mrd. Dollar aus dem Verwaltungskonto der Social Security, auf die beiden Fonds nach deren Verwaltungsausgaben aufgeteilt. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1467,7 +1491,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.4 billion. Allocated by this calculation: $0.6 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.4B. Allocated by this calculation: $0.6B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,4 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,6 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1490,7 +1514,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.3 billion. Allocated by this calculation: $1.0 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.3B. Allocated by this calculation: $1.0B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,3 Mrd. Dollar. Von dieser Rechnung zugeordnet: 1,0 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1513,7 +1537,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.1 billion. Includes $0.6 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $4.1B. Includes $0.6B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 4,1 Mrd. Dollar. Enthält 0,6 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1536,7 +1560,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.9 billion. Allocated by this calculation: $0.5 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.7 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.9B. Allocated by this calculation: $0.5B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.7B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 3,9 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,5 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,7 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1560,7 +1584,7 @@
             "treasury_mts_2025_09"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.4 billion. Allocated by this calculation: $3.4 billion from Social Security's administrative account, split between the two trust funds by their administrative expenses. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.4B. Allocated by this calculation: $3.4B from Social Security's administrative account, split between the two trust funds by their administrative expenses. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 3,4 Mrd. Dollar. Von dieser Rechnung zugeordnet: 3,4 Mrd. Dollar aus dem Verwaltungskonto der Social Security, auf die beiden Fonds nach deren Verwaltungsausgaben aufgeteilt. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1583,7 +1607,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.2 billion. Allocated by this calculation: $2.5 billion from accounts spread over several items, split by their outlays; $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.2B. Allocated by this calculation: $2.5B from accounts spread over several items, split by their outlays; $0.3B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 3,2 Mrd. Dollar. Von dieser Rechnung zugeordnet: 2,5 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1606,7 +1630,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.1 billion. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $3.1B. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 3,1 Mrd. Dollar. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1629,7 +1653,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.9 billion. Allocated by this calculation: $0.7 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.9B. Allocated by this calculation: $0.7B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,9 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,7 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1652,7 +1676,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.8 billion. Allocated by this calculation: $1.2 billion from accounts spread over several items, split by their outlays. Includes $1.2 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.8B. Allocated by this calculation: $1.2B from accounts spread over several items, split by their outlays. Includes $1.2B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,8 Mrd. Dollar. Von dieser Rechnung zugeordnet: 1,2 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt. Enthält 1,2 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1675,7 +1699,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.5 billion. Allocated by this calculation: $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.5 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.5B. Allocated by this calculation: $0.3B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.5B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,5 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,5 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1698,7 +1722,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.2 billion. Allocated by this calculation: $0.5 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.4 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.2B. Allocated by this calculation: $0.5B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.4B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,2 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,5 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,4 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1721,7 +1745,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.0 billion. Allocated by this calculation: $1.0 billion from accounts spread over several items, split by their outlays; $0.1 billion from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.2 billion of the same group in smaller items, added here. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $2.0B. Allocated by this calculation: $1.0B from accounts spread over several items, split by their outlays; $0.1B from work done for other accounts of the agency, spread like its direct personnel costs. Includes $0.2B of the same group in smaller items, added here. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 2,0 Mrd. Dollar. Von dieser Rechnung zugeordnet: 1,0 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,1 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Enthält 0,2 Mrd. Dollar derselben Gruppe aus kleineren Posten, hier zugeschlagen. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1744,7 +1768,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.8 billion. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.8B. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 1,8 Mrd. Dollar. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1767,7 +1791,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.8 billion. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.8B. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 1,8 Mrd. Dollar. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1790,7 +1814,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.5 billion. Allocated by this calculation: $0.3 billion from work done for other accounts of the agency, spread like its direct personnel costs; $0.1 billion from accounts spread over several items, split by their outlays. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.5B. Allocated by this calculation: $0.3B from work done for other accounts of the agency, spread like its direct personnel costs; $0.1B from accounts spread over several items, split by their outlays. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 1,5 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,3 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten; 0,1 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1813,7 +1837,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.3 billion. Allocated by this calculation: $0.6 billion from accounts spread over several items, split by their outlays; $0.2 billion from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
+            "en": "Civilian pay and benefits of the other agencies in this item in fiscal year 2025: $1.3B. Allocated by this calculation: $0.6B from accounts spread over several items, split by their outlays; $0.2B from work done for other accounts of the agency, spread like its direct personnel costs. The cut saves the chosen share of it.",
             "de": "Zivile Personalkosten der übrigen Behörden in diesem Posten im Haushaltsjahr 2025: 1,3 Mrd. Dollar. Von dieser Rechnung zugeordnet: 0,6 Mrd. Dollar aus Konten, die sich auf mehrere Posten verteilen, nach ihren Ausgaben aufgeteilt; 0,2 Mrd. Dollar aus Arbeit für andere Konten der Behörde, verteilt wie deren direkte Personalkosten. Die Kürzung spart davon den eingestellten Anteil."
           }
         },
@@ -1836,7 +1860,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Less netted out: about 12.8% of the pay and benefits of the Department of Defense ($113.8 billion) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 divided by the base, with the executive branch's part taken by its share of civilian pay.",
+            "en": "Less netted out: about 12.8% of the pay and benefits of the Department of Defense ($113.8B) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 divided by the base, with the executive branch's part taken by its share of civilian pay.",
             "de": "Weniger Verrechnung: etwa 12,8 % der Personalkosten des Verteidigungsministeriums (113,8 Mrd. Dollar) sind Beiträge der Behörden an die Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger abgezogen. Eigene Schätzung: die Behördenbeiträge an die Fonds 2025 im Verhältnis zur Basis, der Anteil der Exekutive nach ihrem Anteil an den zivilen Gehältern."
           }
         },
@@ -1859,7 +1883,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Less netted out: about 12.8% of the pay and benefits of the health care staff of the Department of Veterans Affairs ($66.4 billion) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 divided by the base, with the executive branch's part taken by its share of civilian pay.",
+            "en": "Less netted out: about 12.8% of the pay and benefits of the health care staff of the Department of Veterans Affairs ($66.4B) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 divided by the base, with the executive branch's part taken by its share of civilian pay.",
             "de": "Weniger Verrechnung: etwa 12,8 % der Personalkosten des Gesundheitspersonals des Veteranenministeriums (66,4 Mrd. Dollar) sind Beiträge der Behörden an die Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger abgezogen. Eigene Schätzung: die Behördenbeiträge an die Fonds 2025 im Verhältnis zur Basis, der Anteil der Exekutive nach ihrem Anteil an den zivilen Gehältern."
           }
         },
@@ -1882,7 +1906,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Less netted out: about 12.8% of the pay and benefits of the Departments of Homeland Security and Justice ($64.8 billion) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 divided by the base, with the executive branch's part taken by its share of civilian pay.",
+            "en": "Less netted out: about 12.8% of the pay and benefits of the Departments of Homeland Security and Justice ($64.8B) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 divided by the base, with the executive branch's part taken by its share of civilian pay.",
             "de": "Weniger Verrechnung: etwa 12,8 % der Personalkosten des Heimatschutz- und des Justizministeriums (64,8 Mrd. Dollar) sind Beiträge der Behörden an die Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger abgezogen. Eigene Schätzung: die Behördenbeiträge an die Fonds 2025 im Verhältnis zur Basis, der Anteil der Exekutive nach ihrem Anteil an den zivilen Gehältern."
           }
         },
@@ -1905,7 +1929,7 @@
             "omb_pbd_outlays_fy2027"
           ],
           "note": {
-            "en": "Less netted out: about 12.8% of the pay and benefits of the other agencies ($138.3 billion) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 divided by the base, with the executive branch's part taken by its share of civilian pay.",
+            "en": "Less netted out: about 12.8% of the pay and benefits of the other agencies ($138.3B) are agency contributions to the civil service and Foreign Service retirement funds. They stay within the government, and the budget subtracts them from this item; with fewer employees, less is subtracted. Own estimate: the funds' agency contributions in 2025 divided by the base, with the executive branch's part taken by its share of civilian pay.",
             "de": "Weniger Verrechnung: etwa 12,8 % der Personalkosten der übrigen Behörden (138,3 Mrd. Dollar) sind Beiträge der Behörden an die Pensionsfonds des öffentlichen und des auswärtigen Dienstes. Sie bleiben innerhalb des Staates, und der Haushalt zieht sie von diesem Posten ab; mit weniger Beschäftigten wird weniger abgezogen. Eigene Schätzung: die Behördenbeiträge an die Fonds 2025 im Verhältnis zur Basis, der Anteil der Exekutive nach ihrem Anteil an den zivilen Gehältern."
           }
         }
@@ -1915,7 +1939,7 @@
           "kind": "political",
           "severity": "major",
           "text": {
-            "en": "As of November 2026, a cut of this size has largely happened. A hiring freeze from January 20, 2025, then a limit of one hire for every four departures and an order to prepare large-scale reductions in force (Executive Order 14210, February 11, 2025), and a deferred resignation program reduced the workforce; OMB counts about 300,000 employees who left in 2025. Since October 2025, a vacancy may be filled only with the approval of the agency's strategic hiring committee and under an annual staffing plan (Executive Order 14356 of October 15, 2025). The President's Budget for 2027 counts 2,266,000 full-time equivalents in 2025 and estimates 2,143,000 for 2026 and 2,146,000 for 2027, with cuts of 17% to 24% at Agriculture, Education, Labor and NASA in 2027. It puts the executive branch's civilian pay and benefits at $371.9 billion in 2026, 3.0% less than in 2025: pay falls by 6.4%, benefits rise by 7.5%.",
+            "en": "As of November 2026, a cut of this size has largely happened. A hiring freeze from January 20, 2025, then a limit of one hire for every four departures and an order to prepare large-scale reductions in force (Executive Order 14210, February 11, 2025), and a deferred resignation program reduced the workforce; OMB counts about 300,000 employees who left in 2025. Since October 2025, a vacancy may be filled only with the approval of the agency's strategic hiring committee and under an annual staffing plan (Executive Order 14356 of October 15, 2025). The President's Budget for 2027 counts 2,266,000 full-time equivalents in 2025 and estimates 2,143,000 for 2026 and 2,146,000 for 2027, with cuts of 17% to 24% at Agriculture, Education, Labor and NASA in 2027. It puts the executive branch's civilian pay and benefits at $371.9B in 2026, 3.0% less than in 2025: pay falls by 6.4%, benefits rise by 7.5%.",
             "de": "Stand November 2026 ist ein Abbau dieser Größe weitgehend geschehen. Ein Einstellungsstopp ab dem 20. Januar 2025, danach höchstens eine Einstellung je vier Abgänge und der Auftrag, umfangreiche Personalabbauverfahren vorzubereiten (Executive Order 14210 vom 11. Februar 2025), sowie ein Programm, bei dem Beschäftigte ihren Austritt erklärten und bis dahin freigestellt blieben (deferred resignation), verkleinerten das Personal; die OMB zählt rund 300.000 Beschäftigte, die 2025 gingen. Seit Oktober 2025 darf eine freie Stelle nur mit Zustimmung des Einstellungsausschusses der Behörde und nach einem jährlichen Personalplan besetzt werden (Executive Order 14356 vom 15. Oktober 2025). Der Haushaltsentwurf des Präsidenten für 2027 zählt 2.266.000 Vollzeitäquivalente im Jahr 2025 und schätzt 2.143.000 für 2026 und 2.146.000 für 2027, mit Kürzungen von 17 % bis 24 % in den Ministerien für Landwirtschaft, Bildung und Arbeit und bei der NASA im Jahr 2027. Die zivilen Personalkosten der Exekutive setzt er für 2026 mit 371,9 Mrd. Dollar an, 3,0 % weniger als 2025: Die Gehälter sinken um 6,4 %, die Nebenleistungen steigen um 7,5 %."
           },
           "sources": [
@@ -1930,7 +1954,7 @@
           "kind": "practical",
           "severity": "major",
           "text": {
-            "en": "The orders of 2025 spared positions by function, not by agency: immigration enforcement, law enforcement, national security and public safety; the hiring freeze was also not to harm Social Security, Medicare or veterans' benefits. Such work is done in the other agencies too, for example at the Federal Aviation Administration, which runs air traffic control ($10.7 billion of staff costs in 2025), and the Social Security Administration ($8.1 billion); here they can only be cut along with the rest. The real cuts were uneven: from 2025 to 2026, OMB's full-time equivalents fall by 4.5% at Defense, 3.4% at Veterans Affairs, 0.9% at Justice and 25.0% at the Treasury, and by 11.2% in all agencies other than Defense, Veterans Affairs, Homeland Security and Justice together; at Homeland Security they rise by 3.5%. Fewer staff with the same tasks means longer waits unless work is dropped or done differently.",
+            "en": "The orders of 2025 spared positions by function, not by agency: immigration enforcement, law enforcement, national security and public safety; the hiring freeze was also not to harm Social Security, Medicare or veterans' benefits. Such work is done in the other agencies too, for example at the Federal Aviation Administration, which runs air traffic control ($10.7B of staff costs in 2025), and the Social Security Administration ($8.1B); here they can only be cut along with the rest. The real cuts were uneven: from 2025 to 2026, OMB's full-time equivalents fall by 4.5% at Defense, 3.4% at Veterans Affairs, 0.9% at Justice and 25.0% at the Treasury, and by 11.2% in all agencies other than Defense, Veterans Affairs, Homeland Security and Justice together; at Homeland Security they rise by 3.5%. Fewer staff with the same tasks means longer waits unless work is dropped or done differently.",
             "de": "Die Anordnungen von 2025 nahmen Stellen nach Aufgaben aus, nicht nach Behörden: Einwanderungsdurchsetzung, Strafverfolgung, nationale Sicherheit und öffentliche Sicherheit; der Einstellungsstopp sollte zudem Social Security, Medicare und die Leistungen für Veteranen nicht beeinträchtigen. Solche Arbeit leisten auch die übrigen Behörden, etwa die Luftfahrtbehörde FAA, die die Flugsicherung betreibt (10,7 Mrd. Dollar Personalkosten 2025), und die Sozialversicherungsbehörde (8,1 Mrd. Dollar); hier lassen sie sich nur zusammen mit den anderen kürzen. Der tatsächliche Abbau war ungleich: Von 2025 auf 2026 sinken die Vollzeitäquivalente der OMB im Verteidigungsministerium um 4,5 %, im Veteranenministerium um 3,4 %, im Justizministerium um 0,9 % und im Finanzministerium um 25,0 %, in allen Behörden außer dem Verteidigungs-, Veteranen-, Heimatschutz- und Justizministerium zusammen um 11,2 %; im Heimatschutzministerium steigen sie um 3,5 %. Weniger Personal bei gleichen Aufgaben heißt längere Wartezeiten, wenn nicht Aufgaben wegfallen oder anders erledigt werden."
           },
           "sources": [
@@ -1945,7 +1969,7 @@
           "kind": "practical",
           "severity": "major",
           "text": {
-            "en": "Part of the work can come back as contracts, overtime or rehired staff. In 2025 the agencies obligated $460.8 billion for advisory and other services from outside the government, more than the $383.3 billion they paid their civilian staff. The hiring freeze and Executive Order 14356 forbid contracting to get around them, and the Defense appropriations for 2026 let work of Defense civilians go to a contractor only after a public-private competition in which the contractor is cheaper by at least 10% of the personnel costs or $10 million (Public Law 119-75, section 8045).",
+            "en": "Part of the work can come back as contracts, overtime or rehired staff. In 2025 the agencies obligated $460.8B for advisory and other services from outside the government, more than the $383.3B they paid their civilian staff. The hiring freeze and Executive Order 14356 forbid contracting to get around them, and the Defense appropriations for 2026 let work of Defense civilians go to a contractor only after a public-private competition in which the contractor is cheaper by at least 10% of the personnel costs or $10M (Public Law 119-75, section 8045).",
             "de": "Ein Teil der Arbeit kann als Auftrag, Überstunden oder Wiedereinstellung zurückkommen. 2025 banden die Behörden 460,8 Mrd. Dollar für Beratung und andere Dienstleistungen von außerhalb des Staates, mehr als die 383,3 Mrd. Dollar, die sie ihrem zivilen Personal zahlten. Der Einstellungsstopp und die Executive Order 14356 verbieten, sie mit Aufträgen zu umgehen, und das Verteidigungshaushaltsgesetz für 2026 erlaubt, Arbeit von Zivilbeschäftigten des Verteidigungsministeriums an einen Auftragnehmer zu geben, nur nach einem öffentlich-privaten Wettbewerb, in dem der Auftragnehmer um mindestens 10 % der Personalkosten oder 10 Mio. Dollar günstiger ist (Public Law 119-75, Section 8045)."
           },
           "sources": [
@@ -1959,7 +1983,7 @@
           "kind": "economic",
           "severity": "major",
           "text": {
-            "en": "Cutting tax collectors costs revenue, which the calculation does not book. In tax years 2020 and 2021, IRS enforcement brought in about $63 billion a year (IRS); the IRS's staff cost $13.2 billion in 2025. If that revenue fell in step with the staff, a 12% cut at the IRS would save about $1.6 billion a year and lose $7.6 billion. How much is actually lost depends on which work is dropped; the IRS can only be cut together with all other agencies.",
+            "en": "Cutting tax collectors costs revenue, which the calculation does not book. In tax years 2020 and 2021, IRS enforcement brought in about $63B a year (IRS); the IRS's staff cost $13.2B in 2025. If that revenue fell in step with the staff, a 12% cut at the IRS would save about $1.6B a year and lose $7.6B. How much is actually lost depends on which work is dropped; the IRS can only be cut together with all other agencies.",
             "de": "Weniger Steuerprüfer kosten Einnahmen, die die Rechnung nicht bucht. In den Steuerjahren 2020 und 2021 brachte die Durchsetzung der Steuerbehörde IRS rund 63 Mrd. Dollar im Jahr ein (IRS); ihr Personal kostete 2025 13,2 Mrd. Dollar. Fielen diese Einnahmen im gleichen Verhältnis wie das Personal, sparte ein Abbau um 12 % bei der IRS rund 1,6 Mrd. Dollar im Jahr und kostete 7,6 Mrd. Dollar. Wie viel tatsächlich verloren geht, hängt davon ab, welche Arbeit wegfällt; die IRS lässt sich nur zusammen mit allen übrigen Behörden kürzen."
           },
           "sources": [
@@ -2007,6 +2031,764 @@
         "fr_2026_21320",
         "bls_ces_federal"
       ]
+    },
+    {
+      "id": "social_security_benefit_tax",
+      "label": {
+        "en": "End income tax on Social Security benefits",
+        "de": "Einkommensteuer auf Social-Security-Renten abschaffen"
+      },
+      "summary": {
+        "en": "Ends federal income tax on Social Security benefits, $100.5B in fiscal year 2025. The default ends it fully, as H.R. 1040 (Rep. Massie, R) and S. 458 (Sen. Tuberville, R) propose.",
+        "de": "Streicht die Einkommensteuer auf Social-Security-Renten: 100,5 Mrd. Dollar im Haushaltsjahr 2025. Die Grundeinstellung streicht sie ganz, wie H.R. 1040 und S. 458 (Massie, Tuberville, Republikaner)."
+      },
+      "explanation": {
+        "en": "The tax on benefits is income tax, but its yield goes to the trust funds: in fiscal year 2025, $59.4B to Social Security and $41.1B to Medicare's Hospital Insurance fund. The slider sets the share of it that is dropped.\n\nSen. Gallego (D) proposes the same and would also hold the trust funds harmless from the general fund (S. 2716, September 2025); separately, his bill would apply Social Security tax to wages above $250,000, which is not part of this measure.",
+        "de": "Die Steuer auf die Renten ist Einkommensteuer, ihr Ertrag fließt aber an die Treuhandfonds: im Haushaltsjahr 2025 59,4 Mrd. Dollar an die Social Security und 41,1 Mrd. Dollar an den Krankenhausfonds von Medicare. Der Regler legt fest, welcher Anteil davon entfällt.\n\nSenator Gallego (Demokrat) schlägt dasselbe vor und würde die Fonds ebenfalls aus dem allgemeinen Haushalt entschädigen (S. 2716, September 2025); daneben würde sein Entwurf Social-Security-Beiträge auf Löhne über 250.000 Dollar erheben, was nicht Teil dieser Maßnahme ist."
+      },
+      "topic": "pensions",
+      "params": [
+        {
+          "id": "share",
+          "type": "number",
+          "label": {
+            "en": "Share of the tax on benefits dropped",
+            "de": "Anteil der Steuer auf Renten, der entfällt"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 100,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.individual_income",
+          "amount": {
+            "param": "share",
+            "scale": -1004670000
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0
+          },
+          "sources": [
+            "ssa_trustees_2026",
+            "cms_medicare_trustees_2026"
+          ],
+          "note": {
+            "en": "Income from the taxation of benefits under section 86 in fiscal year 2025: $59.4B for Social Security's two trust funds and $41.1B for Medicare's Hospital Insurance fund, together $100.5B (Trustees Reports 2026, Tables VI.C3 and V.H1). Not included are the $335M withheld from the benefits of nonresident aliens, a separate tax (section 871(a)(3)) that H.R. 1040 does not end. The measure takes the chosen share. The range runs down to 85% (own judgment): the trust funds are credited with Treasury's estimate of the tax, which is corrected later, and the new deduction for people 65 and over lowers the tax on benefits from tax year 2025 on.",
+            "de": "Einnahmen aus der Besteuerung der Renten nach Abschnitt 86 im Haushaltsjahr 2025: 59,4 Mrd. Dollar für die beiden Treuhandfonds der Social Security und 41,1 Mrd. Dollar für den Krankenhausfonds von Medicare, zusammen 100,5 Mrd. Dollar (Berichte der Treuhänder 2026, Tabellen VI.C3 und V.H1). Nicht enthalten sind die 335 Mio. Dollar, die von den Renten von Ausländern ohne Wohnsitz in den USA einbehalten werden, eine eigene Steuer (Abschnitt 871(a)(3)), die H.R. 1040 nicht abschafft. Die Maßnahme nimmt davon den eingestellten Anteil. Die Spanne reicht bis 85 % (eigene Einschätzung): Den Fonds wird die Steuer nach einer Schätzung des Finanzministeriums gutgeschrieben, die später berichtigt wird, und der neue Freibetrag für Menschen ab 65 senkt die Steuer auf Renten ab dem Steuerjahr 2025."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "en": "The tax is income of the trust funds. H.R. 1040 would replace it from the general fund, so the trust funds lose nothing and the deficit grows by the full amount; without that transfer, Social Security would lose $59.4B a year and Medicare's Hospital Insurance fund $41.1B.",
+            "de": "Die Steuer ist eine Einnahme der Treuhandfonds. H.R. 1040 würde sie aus dem allgemeinen Haushalt ersetzen, sodass die Fonds nichts verlieren und das Defizit um den vollen Betrag wächst; ohne diesen Ausgleich verlöre die Social Security 59,4 Mrd. Dollar im Jahr und der Krankenhausfonds von Medicare 41,1 Mrd. Dollar."
+          },
+          "sources": [
+            "hr_1040_2025",
+            "ssa_trustees_2026",
+            "cms_medicare_trustees_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "Only beneficiaries whose income, counted as their other income plus half their benefits and their tax-exempt interest, exceeds $25,000 ($32,000 for couples) pay the tax; these thresholds have never been changed. Ending the tax gives nothing to beneficiaries below them; only those above them gain.",
+            "de": "Die Steuer zahlen nur Rentner, deren Einkommen, gerechnet als ihr übriges Einkommen plus die Hälfte der Rente und ihre steuerfreien Zinsen, 25.000 Dollar übersteigt (32.000 Dollar für Paare); diese Schwellen wurden nie geändert. Ihre Abschaffung bringt Rentnern darunter nichts; gewinnen können nur die darüber."
+          },
+          "sources": [
+            "ssa_trustees_2026"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "As of November 2026 the tax applies; no law has changed it. The July 2025 law (Public Law 119-21, section 70103) instead gives people 65 and over an extra deduction of $6,000 for tax years 2025 to 2028, reduced by 6% of income above $75,000 ($150,000 for couples). H.R. 1040 and S. 458 were referred to committee in February 2025 and have not moved.",
+            "de": "Stand November 2026 gilt die Steuer; kein Gesetz hat sie geändert. Das Gesetz vom Juli 2025 (Public Law 119-21, Abschnitt 70103) gibt Menschen ab 65 stattdessen für die Steuerjahre 2025 bis 2028 einen zusätzlichen Freibetrag von 6.000 Dollar, gekürzt um 6 % des Einkommens über 75.000 Dollar (150.000 für Paare). H.R. 1040 und S. 458 wurden im Februar 2025 an die Ausschüsse überwiesen und seither nicht beraten."
+          },
+          "sources": [
+            "plaw_119_21",
+            "hr_1040_2025"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "en": "The measure removes the tax as it was in fiscal year 2025. The tax on Tier 1 Railroad Retirement benefits, which H.R. 1040 would end too, is not included.",
+            "de": "Die Maßnahme streicht die Steuer, wie sie im Haushaltsjahr 2025 anfiel. Die Steuer auf Renten der Railroad Retirement (Tier 1), die H.R. 1040 ebenfalls abschaffen würde, ist nicht enthalten."
+          },
+          "sources": [
+            "hr_1040_2025",
+            "ssa_trustees_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "ssa_trustees_2026",
+        "cms_medicare_trustees_2026",
+        "hr_1040_2025",
+        "s_2716_2025",
+        "plaw_119_21"
+      ],
+      "timing": {
+        "from": "2028-01-01",
+        "note": {
+          "en": "As for every tax change in this pack, the start is the date the bill or proposal names if it has not passed, otherwise the first January 1 in FY 2028, the first year in which measures act. H.R. 1040 ends the tax for taxable years beginning after the day it is enacted (section 2(a)); without a law, that day is not known, so the tax ends on January 1, 2028. FY 2028 then has three quarters of the yearly amount (274 of its 366 days).",
+          "de": "Wie bei jeder Steueränderung in diesem Paket ist der Beginn der Tag, den der Entwurf oder Vorschlag nennt, wenn er noch nicht vorbei ist, sonst der erste 1. Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. H.R. 1040 streicht die Steuer für Steuerjahre, die nach dem Tag des Inkrafttretens beginnen (Abschnitt 2(a)); ohne Gesetz ist dieser Tag nicht bekannt, die Steuer endet also am 1. Januar 2028. Das Haushaltsjahr 2028 hat dann drei Viertel des Jahresbetrags (274 seiner 366 Tage)."
+        },
+        "sources": [
+          "hr_1040_2025"
+        ]
+      }
+    },
+    {
+      "id": "tariff_rebate_checks",
+      "label": {
+        "en": "Tariff rebate checks",
+        "de": "Zollrückzahlung an die Bürger"
+      },
+      "summary": {
+        "en": "Pays every adult and child under 17 a one-time tariff rebate, reduced at higher incomes, as bills of both parties propose. The default shows $600, as in Sen. Hawley's (R) S. 2475.",
+        "de": "Zahlt Erwachsenen und Kindern unter 17 einmalig eine Zollrückzahlung, gekürzt bei hohem Einkommen, wie Entwürfe beider Parteien. Die Grundeinstellung zeigt 600 Dollar wie S. 2475 (Senator Hawley, R)."
+      },
+      "explanation": {
+        "en": "One payment: S. 2475 (July 2025) pays $600 per adult, twice on a joint return, and per child under 17, or more if the tariff revenue received in 2025 from duties imposed after January 20, 2025, divided by the eligible people, comes to more; it reduces the payment by 5% of income above $75,000 ($112,500 for heads of household, $150,000 for couples). The slider sets the amount per person and keeps this design at every amount.\n\nDemocrats have bills of their own: S. 4093 (Sen. Heinrich, March 2026) would pay $600 per adult and child for tax year 2026, but nothing above incomes of $90,000 ($120,000 for heads of household, $180,000 for couples); H.R. 10494 (Rep. Foushee, September 2026) would pay $2,000 per adult ($4,000 for couples) and $600 per dependent for tax year 2026, phased out between $75,000 and $80,000 of income ($150,000 and $160,000 for couples).\n\nThe President spoke of a dividend of \"about $2,000\" on November 10, 2025, and in September and October 2026 of $5,000 for every adult citizen, which he put at \"approximately $1 trillion\". No bill carries out the $5,000, and the Federal Register has no presidential document that carries out either amount. The slider does not reproduce that proposal, which names adult citizens only and no reduction at higher incomes: at $5,000 it pays children too and phases out as S. 2475 does.",
+        "de": "Eine einmalige Zahlung: S. 2475 (Juli 2025) zahlt 600 Dollar je Erwachsenem, bei gemeinsamer Veranlagung doppelt, und je Kind unter 17, oder mehr, wenn die 2025 eingenommenen Zölle, die nach dem 20. Januar 2025 verhängt wurden, geteilt durch die Berechtigten mehr ergeben; er kürzt die Zahlung um 5 % des Einkommens über 75.000 Dollar (112.500 für Alleinerziehende, 150.000 für Paare). Der Regler legt den Betrag je Person fest und behält diese Gestaltung bei jedem Betrag bei.\n\nDie Demokraten haben eigene Entwürfe: S. 4093 (Senator Heinrich, März 2026) würde für das Steuerjahr 2026 je Erwachsenem und Kind 600 Dollar zahlen, aber nichts bei Einkommen über 90.000 Dollar (120.000 für Alleinerziehende, 180.000 für Paare); H.R. 10494 (Abgeordnete Foushee, September 2026) würde für das Steuerjahr 2026 je Erwachsenem 2.000 Dollar zahlen (Paare 4.000) und je Angehörigem 600 Dollar, abgeschmolzen zwischen 75.000 und 80.000 Dollar Einkommen (150.000 und 160.000 für Paare).\n\nDer Präsident sprach am 10. November 2025 von einer Dividende von „about $2,000“ und im September und Oktober 2026 von 5.000 Dollar für jeden erwachsenen Bürger, die er mit „approximately $1 trillion“ bezifferte. Kein Entwurf setzt die 5.000 Dollar um, und im Federal Register steht kein Dokument des Präsidenten, das einen der Beträge umsetzt. Der Regler bildet diesen Vorschlag nicht ab, der nur erwachsene Bürger und keine Kürzung bei höheren Einkommen nennt: Bei 5.000 Dollar zahlt er auch für Kinder und kürzt wie S. 2475."
+      },
+      "topic": "social",
+      "params": [
+        {
+          "id": "amount",
+          "type": "number",
+          "label": {
+            "en": "Rebate per adult and child under 17",
+            "de": "Rückzahlung je Erwachsenem und Kind unter 17"
+          },
+          "unit": "currency",
+          "min": 0,
+          "max": 5000,
+          "step": 100,
+          "default": 600,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.income_security.other.rest",
+          "amount": {
+            "param": "amount",
+            "scale": 273293855
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.05
+          },
+          "sources": [
+            "census_popest_age_v2025",
+            "irs_soi_2023_t12",
+            "s_2475_2025"
+          ],
+          "note": {
+            "en": "341.8 million residents on July 1, 2025: 269.8 million adults and 67.5 million children under 17, the children the bill counts; the 4.5 million aged 17 can be claimed as dependents and are not eligible. At $600 each, $202.4B. The phase-out takes $38.4B of it, leaving $164.0B, or $273.3M per dollar of rebate. Own estimate from the IRS income statistics for tax year 2023, with incomes taken as evenly spread within each income class and children counted in proportion to adults. The figure is that amount per dollar, exact at $600 and an approximation elsewhere: the phase-out takes a smaller share of larger payments (19% at $600, 14% at $2,000, 10% at $5,000), so the figure is 6% too low at $2,000 and 10% too low at $5,000. The range runs from 85% to 105% (own judgment): people without a Social Security number, nonresidents and adults claimed as dependents are not eligible, and incomes have grown since 2023.",
+            "de": "341,8 Mio. Einwohner am 1. Juli 2025: 269,8 Mio. Erwachsene und 67,5 Mio. Kinder unter 17, die Kinder, die der Entwurf zählt; die 4,5 Mio. 17-Jährigen können als Angehörige geltend gemacht werden und sind nicht berechtigt. Bei je 600 Dollar 202,4 Mrd. Dollar. Die Kürzung bei höheren Einkommen nimmt davon 38,4 Mrd. Dollar, es bleiben 164,0 Mrd. Dollar oder 273,3 Mio. Dollar je Dollar Rückzahlung. Eigene Schätzung aus der Einkommensstatistik der IRS für das Steuerjahr 2023; die Einkommen gelten innerhalb jeder Einkommensklasse als gleich verteilt, Kinder werden im Verhältnis zu den Erwachsenen gezählt. Die Rechnung nimmt diesen Betrag je Dollar, genau bei 600 Dollar und sonst eine Näherung: Bei höheren Zahlungen nimmt die Kürzung einen kleineren Anteil (19 % bei 600, 14 % bei 2.000, 10 % bei 5.000 Dollar), sodass die Rechnung bei 2.000 Dollar um 6 % und bei 5.000 Dollar um 10 % zu niedrig liegt. Die Spanne reicht von 85 bis 105 % (eigene Einschätzung): Menschen ohne Sozialversicherungsnummer, Ausländer ohne Wohnsitz und als Angehörige geltend gemachte Erwachsene sind nicht berechtigt, und die Einkommen sind seit 2023 gestiegen."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "The tariff revenue is already in the budget: customs duties of $194.9B in fiscal year 2025 reduced the deficit, so a rebate paid from them raises it again. Of the $317.8B collected in fiscal year 2026, $144.6B was refunded to importers, $138.1B of it from March 2026 on, after the Supreme Court found the emergency tariffs unlawful on February 20, 2026; refunds were $7.5B in fiscal year 2025 (Treasury).",
+            "de": "Die Zolleinnahmen stehen schon im Haushalt: Zölle von 194,9 Mrd. Dollar im Haushaltsjahr 2025 haben das Defizit gesenkt, eine Rückzahlung daraus erhöht es wieder. Von den 317,8 Mrd. Dollar des Haushaltsjahres 2026 wurden 144,6 Mrd. Dollar an Importeure erstattet, 138,1 Mrd. Dollar davon ab März 2026, nachdem der Supreme Court die Notstandszölle am 20. Februar 2026 für rechtswidrig erklärt hatte; im Haushaltsjahr 2025 wurden 7,5 Mrd. Dollar erstattet (Finanzministerium)."
+          },
+          "sources": [
+            "omb_pbd_receipts_fy2027",
+            "treasury_mts_2026_09",
+            "scotus_24_1287",
+            "treasury_mts_2026_02",
+            "treasury_mts_2025_09"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "S. 2475 was referred to the Finance Committee in July 2025 and has not moved, nor have S. 4093 and H.R. 10494. The President announced the $5,000 \"Trump dividend\" for the case that Republicans win the House and the Senate (October 7, 2026). The election of November 3, 2026 decides that, but as of November 21, 2026 no official source states the new majorities: the states are still certifying their results (California by December 11, 2026), and the Clerk of the House lists only the nominees for the 120th Congress.",
+            "de": "S. 2475 wurde im Juli 2025 an den Finanzausschuss überwiesen und seither nicht beraten, ebenso wenig S. 4093 und H.R. 10494. Die „Trump-Dividende“ von 5.000 Dollar kündigte der Präsident für den Fall an, dass die Republikaner Repräsentantenhaus und Senat gewinnen (7. Oktober 2026). Darüber entscheidet die Wahl vom 3. November 2026; eine amtliche Quelle nennt die neuen Mehrheiten aber am 21. November 2026 noch nicht: Die Bundesstaaten bestätigen ihre Ergebnisse noch (Kalifornien bis zum 11. Dezember 2026), und der Clerk des Repräsentantenhauses führt für den 120. Kongress nur die Kandidaten auf."
+          },
+          "sources": [
+            "s_2475_2025",
+            "s_4093_2026",
+            "hr_10494_2026",
+            "dcpd_202600688",
+            "dcpd_202600590",
+            "clerk_house_election_2026",
+            "ca_sos_general_2026"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "en": "The calculation models the single payment of S. 2475. The President's remarks name a dividend of about $2,000 and of $5,000 for every adult citizen, but not how often it would be paid.",
+            "de": "Die Rechnung bildet die einmalige Zahlung von S. 2475 ab. Die Äußerungen des Präsidenten nennen eine Dividende von etwa 2.000 und von 5.000 Dollar für jeden erwachsenen Bürger, aber nicht, wie oft sie gezahlt würde."
+          },
+          "sources": [
+            "dcpd_202501109",
+            "dcpd_202600688"
+          ]
+        }
+      ],
+      "sources": [
+        "s_2475_2025",
+        "census_popest_age_v2025",
+        "irs_soi_2023_t12",
+        "s_4093_2026",
+        "hr_10494_2026",
+        "dcpd_202501109",
+        "dcpd_202600590",
+        "dcpd_202600688"
+      ],
+      "timing": {
+        "once": true,
+        "note": {
+          "en": "S. 2475 pays once, for tax year 2025, and makes no payment after December 31, 2026. The calculation lets the one payment fall in FY 2028, the first year in which measures act; that is its assumption, not the bill's.",
+          "de": "S. 2475 zahlt einmal, für das Steuerjahr 2025, und zahlt nach dem 31. Dezember 2026 nichts mehr. Die Rechnung lässt die eine Zahlung ins Haushaltsjahr 2028 fallen, das erste Jahr, in dem Maßnahmen wirken; das ist ihre Annahme, nicht die des Entwurfs."
+        },
+        "sources": [
+          "s_2475_2025"
+        ]
+      }
+    },
+    {
+      "id": "aca_enhanced_credits",
+      "label": {
+        "en": "End the enhanced ACA premium tax credits",
+        "de": "Erhöhte ACA-Prämienzuschüsse beenden"
+      },
+      "summary": {
+        "en": "Ends the larger marketplace subsidies of 2021 to 2025, as the law has since January 2026; the FY 2025 budget still has them. Democrats and some Republicans want them back (H.R. 1834, S. 3385).",
+        "de": "Beendet die höheren ACA-Zuschüsse von 2021 bis 2025 wie das Gesetz seit Januar 2026; im Haushaltsjahr 2025 gab es sie noch. Demokraten und einige Republikaner wollen sie zurück (H.R. 1834, S. 3385)."
+      },
+      "explanation": {
+        "en": "Switched on at its default, the card shows the law as it has stood since January 1, 2026: the enhanced credits have ended. The FY 2025 budget still contains them, so against it their end lowers spending and raises income tax. The slider sets how much of the enhancement ends; at 0% it is kept: through 2028 in H.R. 1834 and S. 3385, for good in H.R. 247.\n\nFrom 2021 the enhancement lowered the share of income a household pays for a benchmark plan, to at most 8.5%, and opened the credit to people above four times the poverty line.\n\nIn open enrollment, marketplace plan selections fell from 24.3 million for 2025 to 23.1 million for 2026 and consumers with a tax credit from 22.4 to 20.0 million, while the average premium before credits rose from $619 to $741 a month (CMS).",
+        "de": "Eingeschaltet zeigt die Karte in der Grundeinstellung das Recht, wie es seit dem 1. Januar 2026 gilt: Die erhöhten Zuschüsse sind beendet. Der Haushalt des Haushaltsjahres 2025 enthält sie noch; gegenüber ihm senkt ihr Ende die Ausgaben und erhöht die Einkommensteuer. Der Regler legt fest, wie viel der Erhöhung wegfällt; bei 0 % bleibt sie: bis 2028 in H.R. 1834 und S. 3385, dauerhaft in H.R. 247.\n\nAb 2021 senkte die Erhöhung den Anteil des Einkommens, den ein Haushalt für einen Referenztarif zahlt, auf höchstens 8,5 %, und öffnete den Zuschuss für Menschen über dem Vierfachen der Armutsgrenze.\n\nIn der Einschreibeperiode sank die Zahl der gewählten Marktplatz-Tarife von 24,3 Mio. für 2025 auf 23,1 Mio. für 2026 und die der Versicherten mit Zuschuss von 22,4 auf 20,0 Mio., während die durchschnittliche Prämie vor Zuschuss von 619 auf 741 Dollar im Monat stieg (CMS)."
+      },
+      "topic": "social",
+      "params": [
+        {
+          "id": "ended",
+          "type": "number",
+          "label": {
+            "en": "Share of the 2021 to 2025 enhancement that ends",
+            "de": "Anteil der Erhöhung von 2021 bis 2025, der wegfällt"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 100,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.health.aca_credits",
+          "amount": {
+            "param": "ended",
+            "scale": -137740000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.9,
+            "high": 1.5,
+            "basis": "enhancement"
+          },
+          "sources": [
+            "treasury_greenbook_fy2025",
+            "cms_oep_2025_2026"
+          ],
+          "note": {
+            "en": "The Treasury estimated in March 2024 that keeping the enhancement would cost $21.8B in fiscal year 2027, the first full year after its end: $13.8B of outlays for the refundable part of the credit and $8.0B of lower income tax. Its end saves the outlay part here, the rest in income tax. The range runs from 90% to 150% (own judgment): premiums before credits rose by 19.7% for 2026 (CMS), which raises what the enhancement is worth, and the estimates of the Congressional Budget Office could not be retrieved.",
+            "de": "Das Finanzministerium schätzte im März 2024, dass die Erhöhung im Haushaltsjahr 2027, dem ersten vollen Jahr nach ihrem Ende, 21,8 Mrd. Dollar kosten würde: 13,8 Mrd. Dollar Ausgaben für den erstattungsfähigen Teil und 8,0 Mrd. Dollar weniger Einkommensteuer. Ihr Ende spart hier den Ausgabenteil, den Rest bei der Einkommensteuer. Die Spanne reicht von 90 bis 150 % (eigene Einschätzung): Die Prämien vor Zuschuss stiegen für 2026 um 19,7 % (CMS), was den Wert der Erhöhung steigert, und die Schätzungen des Congressional Budget Office waren nicht abrufbar."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.individual_income",
+          "amount": {
+            "param": "ended",
+            "scale": 79770000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.9,
+            "high": 1.5,
+            "basis": "enhancement"
+          },
+          "sources": [
+            "treasury_greenbook_fy2025"
+          ],
+          "note": {
+            "en": "The part of the credit that reduces income tax: $8.0B in fiscal year 2027 by the Treasury's estimate ($21.8B in all, less $13.8B of outlays).",
+            "de": "Der Teil des Zuschusses, der die Einkommensteuer mindert: 8,0 Mrd. Dollar im Haushaltsjahr 2027 nach der Schätzung des Finanzministeriums (insgesamt 21,8 Mrd. Dollar, abzüglich 13,8 Mrd. Dollar Ausgaben)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "en": "The saving is paid by the insured: the average premium after credits rose from $113 a month in 2025 to $178 in 2026, and 2.3 million fewer consumers had a tax credit (CMS, open enrollment).",
+            "de": "Die Ersparnis zahlen die Versicherten: Die durchschnittliche Prämie nach Zuschuss stieg von 113 Dollar im Monat 2025 auf 178 Dollar 2026, und 2,3 Mio. Versicherte weniger hatten einen Zuschuss (CMS, Einschreibeperiode)."
+          },
+          "sources": [
+            "cms_oep_2025_2026"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "en": "The House passed an extension through 2028 on January 8, 2026 (H.R. 1834, 230 to 196; Democrats 213 to 0, Republicans 17 to 196); it has been on the Senate calendar since February 10, 2026, without a vote. The Senate's own bill, S. 3385 (Sen. Schumer), had failed cloture in December 2025, 51 to 48. A one-year extension by Rep. Kiggans (R), H.R. 5145, has 14 Republican and 16 Democratic cosponsors; H.R. 247 (Rep. Underwood) and S. 46 would make the enhancement permanent. As of November 2026 no law has restored it.",
+            "de": "Das Repräsentantenhaus beschloss am 8. Januar 2026 eine Verlängerung bis 2028 (H.R. 1834, 230 zu 196 Stimmen; Demokraten 213 zu 0, Republikaner 17 zu 196); seit dem 10. Februar 2026 steht sie auf der Tagesordnung des Senats, ohne Abstimmung. Der eigene Entwurf des Senats, S. 3385 (Senator Schumer), war im Dezember 2025 mit 51 zu 48 Stimmen an der Hürde für das Ende der Debatte gescheitert. Eine Verlängerung um ein Jahr der Abgeordneten Kiggans (Republikanerin), H.R. 5145, hat 14 republikanische und 16 demokratische Mitunterzeichner; H.R. 247 (Abgeordnete Underwood) und S. 46 würden die Erhöhung dauerhaft machen. Stand November 2026 hat kein Gesetz sie wiederhergestellt."
+          },
+          "sources": [
+            "hr_1834_2026",
+            "house_roll_2026_011",
+            "s_3385_2025",
+            "hr_5145_2025",
+            "hr_247_2025",
+            "plaw_117_169"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "minor",
+          "text": {
+            "en": "The July 2025 law also narrowed the credit, apart from this measure: from 2026 no cap on repaying excess advance credits, from 2027 only some lawfully present immigrants eligible, from 2028 checks before enrollment (Public Law 119-21, sections 71301 to 71305).",
+            "de": "Das Gesetz vom Juli 2025 hat den Zuschuss außerdem eingeschränkt, unabhängig von dieser Maßnahme: ab 2026 keine Obergrenze für die Rückzahlung zu hoher Vorauszahlungen, ab 2027 nur noch bestimmte Einwanderer berechtigt, ab 2028 Prüfungen vor der Einschreibung (Public Law 119-21, Abschnitte 71301 bis 71305)."
+          },
+          "sources": [
+            "plaw_119_21"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "en": "The Treasury's estimate dates from March 2024, before the 2025 law and the 2026 premiums; it is applied to the FY 2025 budget unchanged, as the amount of one full year.",
+            "de": "Die Schätzung des Finanzministeriums stammt vom März 2024, vor dem Gesetz von 2025 und den Prämien für 2026; sie wird unverändert als Betrag eines vollen Jahres auf den Haushalt des Haushaltsjahres 2025 angewandt."
+          }
+        },
+        {
+          "text": {
+            "en": "In the debt projection the end of the enhancement counts from FY 2028, the first year in which measures act, although it has been the law since January 1, 2026 (the Inflation Reduction Act extended it only to years before 2026). FY 2026 and FY 2027 therefore still have the enhanced credits of the FY 2025 budget, with this measure as without it.",
+            "de": "In der Schuldenprojektion zählt das Ende der Erhöhung ab dem Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken, obwohl es seit dem 1. Januar 2026 geltendes Recht ist (der Inflation Reduction Act verlängerte sie nur für die Jahre vor 2026). Die Haushaltsjahre 2026 und 2027 enthalten deshalb noch die erhöhten Zuschüsse des Haushalts des Haushaltsjahres 2025, mit dieser Maßnahme wie ohne sie."
+          },
+          "sources": [
+            "plaw_117_169"
+          ]
+        }
+      ],
+      "sources": [
+        "treasury_greenbook_fy2025",
+        "cms_oep_2025_2026",
+        "hr_1834_2026",
+        "house_roll_2026_011",
+        "s_3385_2025",
+        "hr_5145_2025",
+        "hr_247_2025",
+        "plaw_117_169",
+        "plaw_119_21"
+      ]
+    },
+    {
+      "id": "wealth_tax",
+      "label": {
+        "en": "Annual tax on the largest fortunes",
+        "de": "Jährliche Steuer auf die größten Vermögen"
+      },
+      "summary": {
+        "en": "Taxes net worth above $50M every year. The default shows Sen. Warren's Ultra-Millionaire Tax Act (S. 4246, March 2026): 2% above $50M and 3% above $1B.",
+        "de": "Besteuert Vermögen über 50 Mio. Dollar jedes Jahr. Die Grundeinstellung zeigt den Entwurf von Senatorin Warren (S. 4246, März 2026): 2 % über 50 Mio. und 3 % über 1 Mrd. Dollar."
+      },
+      "explanation": {
+        "en": "The bill taxes a household's net worth, married couples together, from 2027; the House version is H.R. 8085 (Rep. Jayapal). The two sliders set the rates of the two brackets. The revenue appears on a line of its own, empty in the FY 2025 budget.",
+        "de": "Der Entwurf besteuert das Nettovermögen eines Haushalts, Ehepaare gemeinsam, ab 2027; die Fassung im Repräsentantenhaus ist H.R. 8085 (Abgeordnete Jayapal). Die beiden Regler legen die Sätze der beiden Stufen fest. Die Einnahmen stehen in einer eigenen Zeile, die im Haushaltsjahr 2025 leer ist."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate_low",
+          "type": "number",
+          "label": {
+            "en": "Rate on net worth from $50M to $1B",
+            "de": "Satz auf Vermögen von 50 Mio. bis 1 Mrd. Dollar"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "default": 2,
+          "baseline": 0
+        },
+        {
+          "id": "rate_high",
+          "type": "number",
+          "label": {
+            "en": "Rate on net worth above $1B",
+            "de": "Satz auf Vermögen über 1 Mrd. Dollar"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 8,
+          "step": 0.5,
+          "default": 3,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.wealth_tax",
+          "amount": {
+            "param": "rate_low",
+            "scale": 142661752472
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.0,
+            "basis": "wealth"
+          },
+          "sources": [
+            "fed_dfa",
+            "s_4246_2026"
+          ],
+          "note": {
+            "en": "Mechanical, before avoidance. At the end of September 2025 the top 1% of households held $53.94T, the top 0.1% $24.66T (Federal Reserve, Distributional Financial Accounts). A Pareto distribution through both groups (own assumption) puts 188,000 households above $50M, with $14.27T of net worth between $50M and $1B above the threshold: 1% of it is $142.7B. The range runs down to half (own judgment): valuing private businesses, avoidance and moving assets lower the yield, and no official estimate could be retrieved.",
+            "de": "Rein rechnerisch, vor Ausweichen. Ende September 2025 besaß das oberste 1 % der Haushalte 53,94 Bio. Dollar, die obersten 0,1 % 24,66 Bio. Dollar (Federal Reserve, Distributional Financial Accounts). Eine Pareto-Verteilung durch beide Gruppen (eigene Annahme) ergibt 188.000 Haushalte über 50 Mio. Dollar mit 14,27 Bio. Dollar Vermögen zwischen 50 Mio. und 1 Mrd. Dollar oberhalb der Schwelle: 1 % davon sind 142,7 Mrd. Dollar. Die Spanne reicht bis zur Hälfte (eigene Einschätzung): Bewertung privater Unternehmen, Ausweichen und Verlagerung senken den Ertrag, und eine amtliche Schätzung war nicht abrufbar."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.wealth_tax",
+          "amount": {
+            "param": "rate_high",
+            "scale": 38187823896
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.0,
+            "basis": "wealth"
+          },
+          "sources": [
+            "fed_dfa",
+            "s_4246_2026"
+          ],
+          "note": {
+            "en": "The same distribution puts about 2,000 households above $1B, with $3.82T above that line: 1% of it is $38.2B. The Federal Reserve does not publish the number of households above $1B, so this part rests most on the assumption.",
+            "de": "Dieselbe Verteilung ergibt rund 2.000 Haushalte über 1 Mrd. Dollar mit 3,82 Bio. Dollar oberhalb dieser Grenze: 1 % davon sind 38,2 Mrd. Dollar. Die Federal Reserve veröffentlicht die Zahl der Haushalte über 1 Mrd. Dollar nicht; dieser Teil hängt daher am stärksten von der Annahme ab."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "en": "Whether a federal tax on wealth is a direct tax that the Constitution requires to be apportioned among the states by population is disputed, and the Supreme Court has not decided it: in Moore v. United States (2024) it said its analysis did not address taxes on holdings, wealth or net worth.",
+            "de": "Ob eine Bundessteuer auf Vermögen eine direkte Steuer ist, die nach der Verfassung nach der Bevölkerung auf die Bundesstaaten aufgeteilt werden muss, ist umstritten; der Supreme Court hat es nicht entschieden: In Moore v. United States (2024) schrieb er, seine Prüfung betreffe Steuern auf Bestände, Vermögen oder Nettovermögen nicht."
+          },
+          "sources": [
+            "scotus_22_800"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "en": "The tax needs a yearly valuation of assets that are not traded, such as private companies, real estate and art; disputes over values and moving assets abroad lower the yield by an amount no official estimate puts a figure on.",
+            "de": "Die Steuer braucht jedes Jahr eine Bewertung von Vermögen, das nicht gehandelt wird, etwa private Unternehmen, Immobilien und Kunst; Streit über Werte und Verlagerung ins Ausland senken den Ertrag um einen Betrag, den keine amtliche Schätzung beziffert."
+          }
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "As of November 2026 the bill has 10 cosponsors in the Senate and has not been taken up. Sen. Sanders proposes a tax of 5% a year on the entire net worth of anyone worth more than $1B (S. 3956, March 2026).",
+            "de": "Stand November 2026 hat der Entwurf im Senat 10 Mitunterzeichner und wurde nicht beraten. Senator Sanders schlägt eine jährliche Steuer von 5 % auf das gesamte Vermögen aller vor, die mehr als 1 Mrd. Dollar besitzen (S. 3956, März 2026)."
+          },
+          "sources": [
+            "s_4246_2026",
+            "s_3956_2026"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "en": "The rates are applied to net worth at the end of September 2025, without growth to 2027, when the bill would start.",
+            "de": "Die Sätze werden auf das Vermögen Ende September 2025 angewandt, ohne Wachstum bis 2027, wenn der Entwurf beginnen würde."
+          }
+        }
+      ],
+      "sources": [
+        "s_4246_2026",
+        "fed_dfa",
+        "s_3956_2026",
+        "scotus_22_800"
+      ],
+      "timing": {
+        "from": "2027-01-01",
+        "note": {
+          "en": "As for every tax change in this pack, the start is the date the bill or proposal names if it has not passed, otherwise the first January 1 in FY 2028, the first year in which measures act. S. 4246 applies to calendar years beginning after December 31, 2026 (section 2(f)): January 1, 2027. That day lies before FY 2028, so the change counts in full from FY 2028.",
+          "de": "Wie bei jeder Steueränderung in diesem Paket ist der Beginn der Tag, den der Entwurf oder Vorschlag nennt, wenn er noch nicht vorbei ist, sonst der erste 1. Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. S. 4246 gilt für Kalenderjahre, die nach dem 31. Dezember 2026 beginnen (Abschnitt 2(f)): 1. Januar 2027. Dieser Tag liegt vor dem Haushaltsjahr 2028; die Änderung zählt deshalb ab dem Haushaltsjahr 2028 voll."
+        },
+        "sources": [
+          "s_4246_2026"
+        ]
+      }
+    },
+    {
+      "id": "top_income_tax_rate",
+      "label": {
+        "en": "Higher income tax rate on millionaires",
+        "de": "Höherer Einkommensteuersatz für Millionäre"
+      },
+      "summary": {
+        "en": "Sets the rate above $1M of taxable income ($2M for couples) in 2018 dollars, indexed: $1.16M ($2.31M) in 2023; now 37%. The default shows 39.6%, as in H.R. 4280 (Fitzpatrick, R, and Golden, D).",
+        "de": "Legt den Satz über 1 Mio. Dollar (Paare 2 Mio.) in Dollar von 2018 fest, indexiert: 2023 1,16 (2,31) Mio.; heute 37 %. Die Grundeinstellung zeigt 39,6 % wie H.R. 4280 (Fitzpatrick, R, und Golden, D)."
+      },
+      "explanation": {
+        "en": "39.6% was the top rate before the 2017 tax law; the July 2025 law (Public Law 119-21, section 70101) made 37% permanent. The bill keeps 37% below its thresholds. Its rate tables are those of 2018, and like every bracket amount its thresholds rise with inflation each year (section 2(f)): in tax year 2023, the year of the income data used here, they would have been $1,156,250 for single filers ($1,156,200 for heads of household) and $2,312,500 for couples. Capital gains and dividends taxed at their own lower rates are not affected. The slider sets the rate above the thresholds.",
+        "de": "39,6 % war der Spitzensatz vor dem Steuergesetz von 2017; das Gesetz vom Juli 2025 (Public Law 119-21, Abschnitt 70101) hat 37 % dauerhaft gemacht. Der Entwurf behält 37 % unterhalb seiner Schwellen. Seine Tariftabellen sind die von 2018, und wie alle Tarifgrenzen steigen seine Schwellen jedes Jahr mit der Inflation (Abschnitt 2(f)): Im Steuerjahr 2023, dem Jahr der hier verwendeten Einkommensdaten, hätten sie bei 1.156.250 Dollar für Alleinstehende (1.156.200 für Alleinerziehende) und 2.312.500 Dollar für Paare gelegen. Veräußerungsgewinne und Dividenden, die eigenen, niedrigeren Sätzen unterliegen, sind nicht betroffen. Der Regler legt den Satz oberhalb der Schwellen fest."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "en": "Rate above $1M ($2M for couples) in 2018 dollars, indexed",
+            "de": "Satz über 1 Mio. Dollar (2 Mio. für Paare) in Dollar von 2018, indexiert"
+          },
+          "unit": "percent",
+          "min": 30,
+          "max": 50,
+          "step": 0.1,
+          "default": 39.6,
+          "baseline": 37
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.individual_income",
+          "amount": {
+            "param": "rate",
+            "scale": 5504349940,
+            "offset": -203660947780
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.0
+          },
+          "sources": [
+            "irs_soi_2023_t35_t36",
+            "irs_rp_2022_38",
+            "hr_4280_2025",
+            "irs_soi_2023_t12"
+          ],
+          "note": {
+            "en": "Ordinary taxable income above the bill's thresholds: $550.4B in tax year 2023, own estimate from the IRS statistics. Income taxed at 37% on returns with AGI of $1M or more was $1,111.9B; for each return taxed at 37%, the income between the 37% threshold of 2023 and the bill's threshold for 2023 is taken off, $1.45M on average, weighted by the filing statuses of all returns in each income class (84% of the returns with AGI of $1M or more are joint returns). Each point of rate brings $5.5B; 39.6% brings $14.3B. Mechanical: people with the highest incomes can shift income in time and form; the range runs down to 60% (own judgment), because the estimate of the Joint Committee on Taxation could not be retrieved.",
+            "de": "Gewöhnliches zu versteuerndes Einkommen über den Schwellen des Entwurfs: 550,4 Mrd. Dollar im Steuerjahr 2023, eigene Schätzung aus der IRS-Statistik. Zu 37 % besteuertes Einkommen in Erklärungen mit mindestens 1 Mio. Dollar Einkommen: 1.111,9 Mrd. Dollar; für jede zu 37 % besteuerte Erklärung wird das Einkommen zwischen der 37-%-Schwelle von 2023 und der Schwelle des Entwurfs für 2023 abgezogen, im Mittel 1,45 Mio. Dollar, gewichtet nach der Veranlagungsart aller Erklärungen jeder Einkommensklasse (84 % der Erklärungen mit mindestens 1 Mio. Dollar Einkommen sind gemeinsame). Jeder Prozentpunkt bringt 5,5 Mrd. Dollar, 39,6 % bringen 14,3 Mrd. Dollar. Rein rechnerisch: Menschen mit den höchsten Einkommen können Einkommen zeitlich und in der Form verschieben; die Spanne reicht bis 60 % (eigene Einschätzung), weil die Schätzung des Joint Committee on Taxation nicht abrufbar war."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "en": "Top incomes respond to rates more than others: business owners can retain profits in corporations, and pay can be turned into capital gains, which this rate does not reach.",
+            "de": "Spitzeneinkommen reagieren stärker auf Steuersätze als andere: Unternehmer können Gewinne in Kapitalgesellschaften belassen, und Bezüge lassen sich in Veräußerungsgewinne umwandeln, die dieser Satz nicht erfasst."
+          }
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "As of November 2026 the bill has not been taken up. It was introduced two days before the July 2025 law made the 37% rate permanent.",
+            "de": "Stand November 2026 wurde der Entwurf nicht beraten. Er wurde zwei Tage vor dem Gesetz vom Juli 2025 eingebracht, das den Satz von 37 % dauerhaft machte."
+          },
+          "sources": [
+            "hr_4280_2025",
+            "plaw_119_21"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "en": "The base is tax year 2023 and is not grown to 2025; the bill's thresholds are indexed to 2023, like the incomes. The filing statuses weighted are those of all returns in each income class, as the IRS does not give them for the returns with AGI of $1M or more that are taxed at 37%.",
+            "de": "Die Grundlage ist das Steuerjahr 2023 und wird nicht auf 2025 fortgeschrieben; die Schwellen des Entwurfs sind wie die Einkommen auf 2023 indexiert. Gewichtet wird mit den Veranlagungsarten aller Erklärungen jeder Einkommensklasse, weil die IRS sie für die zu 37 % besteuerten Erklärungen mit mindestens 1 Mio. Dollar Einkommen nicht ausweist."
+          },
+          "sources": [
+            "irs_soi_2023_t12",
+            "irs_soi_2023_t35_t36",
+            "hr_4280_2025"
+          ]
+        }
+      ],
+      "sources": [
+        "hr_4280_2025",
+        "irs_soi_2023_t35_t36",
+        "irs_rp_2022_38",
+        "plaw_119_21",
+        "irs_soi_2023_t12"
+      ],
+      "timing": {
+        "from": "2028-01-01",
+        "note": {
+          "en": "As for every tax change in this pack, the start is the date the bill or proposal names if it has not passed, otherwise the first January 1 in FY 2028, the first year in which measures act. H.R. 4280 applies to taxable years beginning after December 31, 2025 (section 2(h)); that date has passed, so the rate changes on January 1, 2028. FY 2028 then has three quarters of the yearly amount (274 of its 366 days).",
+          "de": "Wie bei jeder Steueränderung in diesem Paket ist der Beginn der Tag, den der Entwurf oder Vorschlag nennt, wenn er noch nicht vorbei ist, sonst der erste 1. Januar im Haushaltsjahr 2028, dem ersten Jahr, in dem Maßnahmen wirken. H.R. 4280 gilt für Steuerjahre, die nach dem 31. Dezember 2025 beginnen (Abschnitt 2(h)); dieser Tag ist vorbei, der Satz wechselt also am 1. Januar 2028. Das Haushaltsjahr 2028 hat dann drei Viertel des Jahresbetrags (274 seiner 366 Tage)."
+        },
+        "sources": [
+          "hr_4280_2025"
+        ]
+      }
+    },
+    {
+      "id": "snap_state_cost_share",
+      "label": {
+        "en": "States pay part of SNAP benefits",
+        "de": "Bundesstaaten zahlen einen Teil der SNAP-Leistungen"
+      },
+      "summary": {
+        "en": "Makes states pay up to 15% of SNAP food benefits, depending on their error rate, as the July 2025 law does from fiscal year 2028. The default shows that law; H.R. 7975 (D) would repeal it.",
+        "de": "Bundesstaaten zahlen je nach Fehlerquote bis zu 15 % der SNAP-Leistungen, wie nach dem Gesetz vom Juli 2025 ab dem Haushaltsjahr 2028. Die Grundeinstellung zeigt das; H.R. 7975 (D) will es aufheben."
+      },
+      "explanation": {
+        "en": "Under Public Law 119-21, section 10105, a state with a payment error rate below 6% pays nothing, from 6% 5% of the benefits, from 8% 10% and from 10% 15%; states with a rate of 13.34% or more start a year or two later. The slider sets the share in the top tier; the lower tiers stay at one third and two thirds of it. The FY 2025 budget still has the whole cost federal.\n\nThe Senate farm bill (S. 5526, reported in September 2026) would start in fiscal year 2029, delay only states whose rates meet the test in both 2025 and 2026, then to fiscal year 2030, and raise the top tier to 20% from 2031.",
+        "de": "Nach Public Law 119-21, Abschnitt 10105, zahlt ein Bundesstaat mit einer Fehlerquote unter 6 % nichts, ab 6 % 5 % der Leistungen, ab 8 % 10 % und ab 10 % 15 %; Bundesstaaten mit 13,34 % oder mehr beginnen ein oder zwei Jahre später. Der Regler legt den Anteil der obersten Stufe fest; die unteren bleiben bei einem und zwei Dritteln davon. Im Haushaltsjahr 2025 trägt der Bund die Kosten noch ganz.\n\nDer Agrarentwurf des Senats (S. 5526, im September 2026 vom Ausschuss vorgelegt) würde 2029 beginnen, nur Bundesstaaten später beginnen lassen, deren Quoten 2025 und 2026 die Schwelle erreichen, dann ab 2030, und die oberste Stufe ab 2031 auf 20 % anheben."
+      },
+      "topic": "social",
+      "params": [
+        {
+          "id": "top_share",
+          "type": "number",
+          "label": {
+            "en": "State share at an error rate of 10% or more",
+            "de": "Anteil der Bundesstaaten bei einer Fehlerquote ab 10 %"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "default": 15,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.income_security.nutrition.snap",
+          "amount": {
+            "param": "top_share",
+            "scale": -740630007
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.0
+          },
+          "sources": [
+            "fns_snap_fy2025",
+            "fns_snap_per_fy2025",
+            "plaw_119_21"
+          ],
+          "note": {
+            "en": "SNAP benefits in fiscal year 2025: $95.8B. With each state's error rate of 2025, states with $51.8B of benefits would pay 15%, with $27.6B 10%, with $11.8B 5%, and those with $4.7B nothing: together $11.1B, $741M per point of the top share. The benefit-weighted error rate of the states, 10.63%, matches the national 10.62%. The range runs down to 50% (own judgment): states are likely to lower their error rates to reach a lower tier.",
+            "de": "SNAP-Leistungen im Haushaltsjahr 2025: 95,8 Mrd. Dollar. Mit der Fehlerquote jedes Bundesstaates von 2025 zahlten Staaten mit 51,8 Mrd. Dollar Leistungen 15 %, mit 27,6 Mrd. Dollar 10 %, mit 11,8 Mrd. Dollar 5 % und die mit 4,7 Mrd. Dollar nichts: zusammen 11,1 Mrd. Dollar, 741 Mio. Dollar je Prozentpunkt der obersten Stufe. Die nach Leistungen gewichtete Fehlerquote der Staaten, 10,63 %, entspricht der bundesweiten von 10,62 %. Die Spanne reicht bis 50 % (eigene Einschätzung): Die Staaten dürften ihre Fehlerquoten senken, um eine niedrigere Stufe zu erreichen."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "en": "The federal saving is a cost for the states: they pay it, or cut what their own budgets add, or lower their error rates; 21 of the 53 state agencies had a rate of 10% or more in 2025 (19 states, DC and Guam) and 10 a rate below 6% (9 states and the Virgin Islands). Since October 2026 the states also pay 75% instead of 50% of the costs of running the program (section 10106), which this measure does not include.",
+            "de": "Die Ersparnis des Bundes ist eine Last der Bundesstaaten: Sie zahlen sie, kürzen eigene Ausgaben oder senken ihre Fehlerquoten; 21 der 53 zuständigen Verwaltungen hatten 2025 eine Quote von 10 % oder mehr (19 Bundesstaaten, der District of Columbia und Guam) und 10 eine unter 6 % (9 Bundesstaaten und die Amerikanischen Jungferninseln). Seit Oktober 2026 tragen die Staaten außerdem 75 statt 50 % der Verwaltungskosten (Abschnitt 10106), was diese Maßnahme nicht enthält."
+          },
+          "sources": [
+            "fns_snap_per_fy2025",
+            "plaw_119_21"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "en": "H.R. 7975 (Rep. Shontel Brown, D, March 2026) would repeal the SNAP changes of the July 2025 law; the farm bill the House passed on April 30, 2026 (H.R. 7567, 224 to 200) leaves them in place.",
+            "de": "H.R. 7975 (Abgeordnete Shontel Brown, Demokratin, März 2026) würde die SNAP-Änderungen des Gesetzes vom Juli 2025 aufheben; der Agrarentwurf, den das Repräsentantenhaus am 30. April 2026 beschloss (H.R. 7567, 224 zu 200 Stimmen), lässt sie bestehen."
+          },
+          "sources": [
+            "hr_7975_2026",
+            "hr_7567_2026"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "en": "The shares use the error rates of fiscal year 2025, which states may choose for 2028; later years use the rate of the third year before.",
+            "de": "Die Anteile verwenden die Fehlerquoten des Haushaltsjahres 2025, die die Bundesstaaten für 2028 wählen können; spätere Jahre verwenden die Quote des drittletzten Jahres."
+          }
+        }
+      ],
+      "sources": [
+        "plaw_119_21",
+        "fns_snap_fy2025",
+        "fns_snap_per_fy2025",
+        "hr_7975_2026",
+        "s_5526_2026",
+        "hr_7567_2026"
+      ],
+      "timing": {
+        "from": "2027-10-01",
+        "note": {
+          "en": "The states' share applies from FY 2028 (Public Law 119-21, section 10105), the first year in which measures act. States whose payment error rate times 1.5 was 20% or more in FY 2025 start in FY 2029: Alaska, Delaware, the District of Columbia, Georgia, Illinois, New Mexico and Oregon, with $11.5B of the $95.8B of benefits and $1.7B of the $11.1B that the law's shares save. States that meet the same test with their FY 2026 rate start in FY 2030. The calculation counts the share in full from FY 2028, so it overstates FY 2028 by about 15%; a start in steps cannot be set here.",
+          "de": "Der Anteil der Bundesstaaten gilt ab dem Haushaltsjahr 2028 (Public Law 119-21, Abschnitt 10105), dem ersten Jahr, in dem Maßnahmen wirken. Bundesstaaten, deren Fehlerquote im Haushaltsjahr 2025 mal 1,5 mindestens 20 % ergab, beginnen im Haushaltsjahr 2029: Alaska, Delaware, der District of Columbia, Georgia, Illinois, New Mexico und Oregon, mit 11,5 Mrd. Dollar der 95,8 Mrd. Dollar an Leistungen und 1,7 Mrd. Dollar der 11,1 Mrd. Dollar, die die Anteile des Gesetzes einsparen. Wer diese Schwelle mit der Quote von 2026 erreicht, beginnt im Haushaltsjahr 2030. Die Rechnung zählt den Anteil ab dem Haushaltsjahr 2028 voll und überschätzt dieses Jahr deshalb um rund 15 %; ein Beginn in Stufen lässt sich hier nicht abbilden."
+        },
+        "sources": [
+          "plaw_119_21",
+          "fns_snap_per_fy2025",
+          "fns_snap_fy2025"
+        ]
+      }
     }
   ]
 }

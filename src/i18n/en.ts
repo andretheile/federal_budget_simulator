@@ -138,8 +138,11 @@ export const en: Messages = {
         level ? (opposite === "worsen" ? "burden" : "relieve") : opposite === "worsen" ? "worsen" : "improve"
       } ${level ? "this level" : "the balance"}.`,
     timingLine: (when) => `The figure is the full effect; in the projection of debt and interest ${when}.`,
+    timingLineOnce: (when) => `The figure is a one-off amount; in the projection of debt and interest it counts ${when}.`,
+    once: "once",
     timingTitle: "When it takes effect",
     timingDetail: (when, setting) => `In the projection of debt and interest the measure acts${setting ? ", at this setting," : ""} ${when}.`,
+    timingDetailOnce: (when, setting) => `In the projection of debt and interest the measure counts${setting ? ", at this setting," : ""} ${when}.`,
     ofAll: (side, share) => `${share} of all ${side === "revenue" ? "revenue" : "spending"}`,
     ofLevel: (side, share) => `${share} of this level’s ${side === "revenue" ? "revenue" : "spending"}`,
     perInhabitant: (amount) => `${amount} per inhabitant`,

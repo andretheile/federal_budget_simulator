@@ -210,8 +210,11 @@ def _bn(thousands):
 
 
 def en(thousands):
+    """As the interface writes US dollars in American English: "$12.4B", and from a trillion up "$7.01T"."""
+    if abs(thousands) >= 999.5e6:
+        return "$%.2fT" % (abs(thousands) / 1e9)
     whole, tenth = _bn(thousands)
-    return "$%s.%d billion" % (_group(whole, ","), tenth)
+    return "$%s.%dB" % (_group(whole, ","), tenth)
 
 
 def de(thousands):
@@ -576,6 +579,9 @@ REV = [
              "Net of refunds: %s collected, %s refunded (Monthly Treasury Statement, September 2025, Table 4). In fiscal year 2026, %s was collected, %s refunded and %s kept (Monthly Treasury Statement, September 2026)." % (
           en(MTS_CUSTOMS[0] * K), en(MTS_CUSTOMS[1] * K), en(MTS26_CUSTOMS[0] * K), en(MTS26_CUSTOMS[1] * K), en(MTS26_CUSTOMS[2] * K)))),
     L("rev.estate_gift", "Estate and gift taxes", "Erbschaft- und Schenkungsteuer", take=[dict(cat="935")], sources=REC_SRC, code="935"),
+    L("rev.wealth_tax", "Wealth tax (not levied)", "Vermögensteuer (nicht erhoben)", sources=REC_SRC,
+      desc=T("Der Bund erhebt keine Steuer auf das Nettovermögen. Die Zeile ist leer; sie nimmt die Einnahmen von Maßnahmen auf, die eine solche Steuer einführen würden.",
+             "The federal government levies no tax on net worth. The line is empty; it holds the revenue of measures that would introduce one.")),
     G("rev.miscellaneous", "Miscellaneous receipts", "Sonstige Einnahmen", code="937", children=[
         L("rev.miscellaneous.federal_reserve", "Earnings of the Federal Reserve", "Gewinnabführung der Federal Reserve", take=[dict(cat="937", account="065000")], sources=REC_SRC + ["treasury_mts_2026_09"], code="065000",
           note=T("Im Haushaltsjahr 2026: %s (Monatsausweis September 2026)." % de(MTS26_FED * K), "Fiscal year 2026: %s (Monthly Treasury Statement, September 2026)." % en(MTS26_FED * K))),

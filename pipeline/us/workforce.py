@@ -267,7 +267,7 @@ def _bn(dollars, lang):
     whole, tenth = tenths // 10, tenths % 10
     if lang == "de":
         return "%s,%d Mrd. Dollar" % (bb._group(whole, "."), tenth)
-    return "$%s.%d billion" % (bb._group(whole, ","), tenth)
+    return "$%s.%dB" % (bb._group(whole, ","), tenth)   # as the interface writes US dollars (en-US)
 
 
 def _pct(x, lang):

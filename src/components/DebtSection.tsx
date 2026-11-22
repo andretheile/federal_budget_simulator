@@ -12,13 +12,14 @@
  */
 import { useEffect, useRef, useState, type MouseEvent, type RefObject } from "react";
 import { defaultDebtAssumptions, sameDebtAssumptions } from "../app/debtLink.ts";
-import { debtHeadline, interestComparisons, type DebtHeadline, type DebtView } from "../app/debtModel.ts";
+import { coversState, debtHeadline, interestComparisons, planFollowing, type DebtHeadline, type DebtView } from "../app/debtModel.ts";
 import { lazyModule } from "../app/lazy.ts";
 import { useUi, type Ui } from "../app/ui.ts";
 import type { DebtAssumptions, LevelFilter } from "../engine/index.ts";
 import { decimalsIn } from "../i18n/format.ts";
 import type { DebtLeadText } from "../i18n/debt/messages.ts";
-import { laterPhases, notInFullBy, phaseWords } from "../app/phaseModel.ts";
+import { blocks } from "../app/paragraphs.ts";
+import { allEndedBy, anyEnding, endedBy, laterPhases, notInFullBy, phaseWords } from "../app/phaseModel.ts";
 import "../styles/debt.css";
 import { ArrowDown, ResetIcon } from "./icons.tsx";
 import { SourceList } from "./primitives.tsx";
@@ -42,8 +43,9 @@ export function leadText(ui: Ui, headline: DebtHeadline): DebtLeadText {
   const rangeLow = headline.interestRange ? share(headline.interestRange[0]) : "";
   const rangeHigh = headline.interestRange ? share(headline.interestRange[1]) : "";
   return {
-    year: headline.year,
-    baseYear: headline.baseYear,
+    year: ui.yearName(headline.year),
+    baseYear: ui.yearName(headline.baseYear),
+    state: coversState(ui.pack),
     rate: fmt.percent(headline.marketRate / 100, { digits: decimalsIn(headline.marketRate, 2) }),
     interest: share(Math.abs(headline.interest)),
     negative: headline.interest < 0 && share(headline.interest) !== share(0),
@@ -53,8 +55,12 @@ export function leadText(ui: Ui, headline: DebtHeadline): DebtLeadText {
     debt: ratio(headline.debt),
     debtWithout: headline.debtWithout === undefined ? undefined : ratio(headline.debtWithout),
     debtToday: ratio(headline.debtToday),
-    paidOff: headline.paidOff,
-    overtakes: headline.overtakes && { label: ui.text(headline.overtakes.label), since: headline.overtakes.since },
+    paidOff: headline.paidOff === undefined ? undefined : ui.yearName(headline.paidOff),
+    overtakes: headline.overtakes && {
+      label: ui.text(headline.overtakes.label),
+      since: ui.yearName(headline.overtakes.since),
+      already: headline.overtakes.since === headline.baseYear,
+    },
   };
 }
 
@@ -67,12 +73,30 @@ export function leadText(ui: Ui, headline: DebtHeadline): DebtLeadText {
  * Interest received instead of paid, or the debt paid off, are said in the sentence only: there is
  * then no figure that would read the same way, and the sentence stands alone at its larger size.
  */
-export function DebtFigures({ facts, measuresOn, partial = false }: { facts: DebtLeadText; measuresOn: boolean; partial?: boolean }) {
+export function DebtFigures({
+  facts,
+  measuresOn,
+  partial = false,
+  ended = false,
+}: {
+  facts: DebtLeadText;
+  measuresOn: boolean;
+  /** A switched-on measure has not started, or is not yet in full, in the last year. */
+  partial?: boolean;
+  /** A switched-on measure has ended before the last year (a one-off, or one that acts for a number of years); "all": every one has. */
+  ended?: boolean | "all";
+}) {
   const { t } = useUi();
   const f = t.debt.figures;
   if (facts.paidOff !== undefined) return null;
   // A measure that starts later or builds up may not be in full by the last year: the label says so.
-  const measures = !measuresOn ? f.noMeasures : partial ? f.withMeasuresBy(facts.year) : f.withMeasures;
+  const measures = !measuresOn
+    ? f.noMeasures
+    : ended
+      ? f.withMeasuresEnded(facts.year, partial, ended === "all")
+      : partial
+        ? f.withMeasuresBy(facts.year)
+        : f.withMeasures;
   const condition = `${measures}, ${f.rate(facts.rate)}`;
   const tile = (key: string, what: string, value: string, unit: string, notes: (string | false | undefined)[]) => (
     <div key={key} className={`dfig dfig--${key}`}>
@@ -113,10 +137,10 @@ export function DebtFigures({ facts, measuresOn, partial = false }: { facts: Deb
  * and, for switched-on measures that start later or build up, which and when. A pack's year and
  * dates are the measures' own; nothing is written here.
  */
-export function DebtTiming({ view, last }: { view: DebtView; last: number }) {
+export function DebtTiming({ view, horizonEnd }: { view: DebtView; horizonEnd: number }) {
   const ui = useUi();
-  const { t, pack, language } = ui;
-  const year = view.projection.measuresFrom;
+  const { t, pack } = ui;
+  const year = ui.yearName(view.projection.measuresFrom);
   const reason = pack.debt?.measuresFrom;
   const later = laterPhases(view.projection.phases);
   return (
@@ -125,20 +149,22 @@ export function DebtTiming({ view, last }: { view: DebtView; last: number }) {
       {reason && (
         <details className="debt__why">
           <summary>{t.debt.timing.why(year)}</summary>
-          <p>{ui.text(reason.note)}</p>
+          {blocks(ui.text(reason.note)).map((block, index) => (
+            <p key={index}>{block}</p>
+          ))}
           {reason.sources && reason.sources.length > 0 && <SourceList ids={reason.sources} />}
         </details>
       )}
       {later.length > 0 && (
         <>
-          <p className="debt__later-title">{t.debt.timing.laterTitle}</p>
+          <p className="debt__later-title">{t.debt.timing.laterTitle(anyEnding(later))}</p>
           <ul className="debt__later">
             {later.map((phase) => {
               const policy = pack.policies.find((candidate) => candidate.id === phase.policy);
               return (
                 <li key={phase.policy}>
                   <span className="debt__later-name">{ui.text(policy?.label) || phase.policy}:</span>{" "}
-                  {t.debt.timing.when(phaseWords(phase, language, last))}
+                  {t.debt.timing.when(phaseWords(phase, ui, horizonEnd))}
                 </li>
               );
             })}
@@ -169,15 +195,15 @@ export function DebtTeaser({ view }: { view: DebtView | undefined }) {
   return (
     <p className="debt-teaser">
       <a href="#debt" onClick={jumpToSection} onPointerEnter={preloadDebt} onFocus={preloadDebt}>
-        <span>{t.debt.teaserLink(headline.year)}</span>
+        <span>{t.debt.teaserLink(ui.yearName(headline.year))}</span>
         <ArrowDown size={14} />
       </a>{" "}
       <span className="debt-teaser__figure">
         {t.debt.teaserFigure(
-          headline.year,
+          ui.yearName(headline.year),
           share(headline.interest),
           headline.interestWithout === undefined ? undefined : share(headline.interestWithout),
-          headline.baseYear,
+          ui.yearName(headline.baseYear),
           share(headline.interestToday),
         )}
       </span>
@@ -189,7 +215,7 @@ export interface DebtSectionProps {
   view: DebtView;
   assumptions: DebtAssumptions;
   onAssumptions(next: DebtAssumptions): void;
-  /** The level the budget view is filtered to; the projection is for the whole state all the same. */
+  /** The level the budget view is filtered to; the projection is for the whole budget all the same. */
   level: LevelFilter;
   /** Load the body at once, e.g. because the address carries assumptions. */
   eager?: boolean;
@@ -250,16 +276,19 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
   const facts = leadText(ui, headline);
   const lead = t.debt.lead(facts);
   const figures = facts.paidOff === undefined;
-  // Where the calculation starts from: an official plan it follows in its years, or the base year's budget.
+  // Where the calculation starts from: an official plan it follows in its years (its debt, or its
+  // budget before interest where it gives no debt), or the base year's budget.
   const plan = view.projection.followed && ui.pack.debt?.plans?.find((candidate) => candidate.id === view.projection.followed?.plan);
-  const followed = plan && view.projection.followed ? { label: ui.text(plan.label), until: view.projection.followed.until } : undefined;
-  const intro = t.debt.intro({ baseYear: headline.baseYear, plan: followed });
+  const by = planFollowing(view.projection, ui.pack);
+  const followed =
+    plan && view.projection.followed && by ? { label: ui.text(plan.label), until: ui.yearName(view.projection.followed.until), by } : undefined;
+  const intro = t.debt.intro({ baseYear: ui.yearName(headline.baseYear), plan: followed });
 
   // After the visitor changes an assumption, screen readers hear the new result once the slider rests.
   const [announced, setAnnounced] = useState("");
   const share = (fraction: number): string => fmt.percent(fraction, { digits: 1 });
   const announcement = t.debt.announce(
-    headline.year,
+    ui.yearName(headline.year),
     share(headline.interest),
     headline.interestWithout === undefined ? undefined : share(headline.interestWithout),
   );
@@ -285,9 +314,14 @@ export function DebtSection({ view, assumptions, onAssumptions, level, eager = f
       </header>
       {/* The result, as two figures with their labels, then the sentence that says it in full. Where
           the calculation starts from follows under the charts. */}
-      <DebtFigures facts={facts} measuresOn={view.measuresOn} partial={notInFullBy(view.projection.phases, headline.year)} />
+      <DebtFigures
+        facts={facts}
+        measuresOn={view.measuresOn}
+        partial={notInFullBy(view.projection.phases, headline.year)}
+        ended={allEndedBy(view.projection.phases, headline.year) ? "all" : endedBy(view.projection.phases, headline.year)}
+      />
       <p className={`debt__lead${figures ? "" : " debt__lead--alone"}`}>{lead}</p>
-      <DebtTiming view={view} last={headline.year} />
+      <DebtTiming view={view} horizonEnd={headline.year} />
       {level !== "all" && <p className="debt__level">{t.debt.wholeState(ui.levelName(level))}</p>}
       <p className="visually-hidden" aria-live="polite">
         {announced}

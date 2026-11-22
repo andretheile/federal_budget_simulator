@@ -8,8 +8,9 @@
  */
 import type { z } from "zod";
 import { bracketsToCurve, curveAffected, curveTotal } from "./curve.ts";
-import { isComparablePlan, isFollowablePlan } from "./debt.ts";
+import { isComparablePlanIn, isFollowablePlanIn, projectionAccounts } from "./debt.ts";
 import { scheduleTotal, totalUnits } from "./distribution.ts";
+import { yearOfDate } from "./years.ts";
 import {
   budgetSchema,
   countrySchema,
@@ -267,6 +268,32 @@ function check(
     text(COUNTRY, ["name"], country.name);
     text(COUNTRY, ["baseYearLabel"], country.baseYearLabel);
     text(COUNTRY, ["baseYearShort"], country.baseYearShort);
+    // The base year's first day, where the pack's years are not calendar years: in the base year or the year before.
+    if (country.baseYearStart !== undefined) {
+      const [year, month, day] = country.baseYearStart.split("-").map(Number);
+      if (year !== country.baseYear && year !== country.baseYear - 1) {
+        error(
+          COUNTRY,
+          ["baseYearStart"],
+          `${country.baseYearStart} lies in neither the base year ${country.baseYear} nor the year before; give the first day of the base year, such as "${country.baseYear - 1}-10-01" for a year from October to September named after the year it ends in`,
+        );
+      } else if (month === 2 && day === 29) {
+        error(COUNTRY, ["baseYearStart"], "29 February is not a day every year has; years must start on a day that exists in each of them");
+      } else if (year === country.baseYear && month === 1 && day === 1) {
+        warn(COUNTRY, ["baseYearStart"], "1 January of the base year is a calendar year; leave baseYearStart out");
+      } else if (country.baseYearShort) {
+        // Later years are named after the base year's short name, with its number replaced (yearShort).
+        for (const [locale, name] of Object.entries(country.baseYearShort)) {
+          if (!name.includes(String(country.baseYear))) {
+            warn(
+              COUNTRY,
+              ["baseYearShort", locale],
+              `"${name}" does not contain the base year ${country.baseYear}, so later years cannot be named after it ("FY 2030" after "FY 2025") and are named by their number`,
+            );
+          }
+        }
+      }
+    }
     text(COUNTRY, ["methodology"], country.methodology);
     for (const [level, entry] of Object.entries(country.levels)) text(COUNTRY, ["levels", level, "name"], entry.name);
     for (const [key, indicator] of Object.entries(country.indicators)) {
@@ -806,12 +833,25 @@ function check(
         error(POLICIES, [...at, "below", "yearsPerUnit"], '"yearsPerUnit" needs "param": the distance of which param?');
       }
       const phases = [timing, ...(timing.below ? [timing.below] : [])];
-      if (!timing.below && phases.every((phase) => phase.from === undefined && !phase.years && !phase.yearsPerUnit)) {
-        warn(POLICIES, at, "the timing has no start date and no build-up, so the measure acts in full from the first year measures can act, as without timing");
+      if (!timing.below && phases.every((phase) => phase.from === undefined && !phase.years && !phase.yearsPerUnit && !phase.once && phase.lasts === undefined)) {
+        warn(POLICIES, at, "the timing has no start date, no build-up and no end, so the measure acts in full from the first year measures can act, as without timing");
+      }
+      // An end: a one-off or a number of years, either, and without a build-up (each phase on its own).
+      for (const [phase, path] of [[timing, at], [timing.below, [...at, "below"]]] as const) {
+        if (!phase) continue;
+        if (phase.once && phase.lasts !== undefined) {
+          error(POLICIES, [...path, "lasts"], 'a one-off ("once") counts in one year: leave out "lasts", or leave out "once" for a measure that acts for a number of years');
+        }
+        const end = phase.once ? '"once"' : phase.lasts !== undefined ? '"lasts"' : undefined;
+        const buildUp = phase.years ? "years" : phase.yearsPerUnit ? "yearsPerUnit" : undefined;
+        if (end && buildUp) {
+          error(POLICIES, [...path, buildUp], `a measure that ends (${end}) acts in full from its start: leave out "years" and "yearsPerUnit", or the end`);
+        }
       }
       if (country) {
         for (const [phase, path] of [[timing, at], [timing.below, [...at, "below"]]] as const) {
-          if (phase?.from !== undefined && Number(phase.from.slice(0, 4)) <= country.baseYear) {
+          // In the pack's years: a date in October 2025 lies in the US fiscal year 2026.
+          if (phase?.from !== undefined && yearOfDate({ country }, phase.from) <= country.baseYear) {
             warn(POLICIES, [...path, "from"], `${phase.from} lies in the base year ${country.baseYear} or before it; measures act in the projection only after the base year`);
           }
         }
@@ -854,6 +894,7 @@ function check(
       refs(DEBT, [key, "sources"], debt[key].sources);
     }
     text(DEBT, ["note"], debt.note);
+    text(DEBT, ["covers"], debt.covers);
     if (debt.measuresFrom) {
       text(DEBT, ["measuresFrom", "note"], debt.measuresFrom.note);
       refs(DEBT, ["measuresFrom", "sources"], debt.measuresFrom.sources);
@@ -944,14 +985,14 @@ function check(
       const at = ["follow"];
       if (!plan) {
         error(DEBT, at, `unknown plan "${debt.follow}"`);
-      } else if (!isComparablePlan(plan)) {
+      } else if (!isComparablePlanIn(debt, plan)) {
         error(
           DEBT,
           at,
-          `plan "${plan.id}" is for ${plan.scope === "all" ? "the whole state" : `level "${plan.scope}"`} in ${plan.accounts} accounts; only a plan for the whole state in national_accounts can be followed`,
+          `plan "${plan.id}" is for ${plan.scope === "all" ? "the whole budget" : `level "${plan.scope}"`} in ${plan.accounts} accounts; only a plan for the whole budget ("scope": "all") in the accounts of the pack's budget (${projectionAccounts(debt)}) can be followed${debt.accounts === undefined ? '; a pack whose budget is in other accounts says so in "accounts"' : ""}`,
         );
-      } else if (!isFollowablePlan(plan)) {
-        error(DEBT, at, `plan "${plan.id}" cannot be followed: it needs a "debtRatio" in every point, one point for every year without gaps, and a "balanceRatio" in its last point`);
+      } else if (!isFollowablePlanIn(debt, plan)) {
+        error(DEBT, at, `plan "${plan.id}" cannot be followed: it needs in every point a "debtRatio", or else a "balanceRatio" and an "interestRatio", one point for every year without gaps, and a "balanceRatio" in its last point`);
       } else if (country && !plan.points.some((point) => point.year > country.baseYear)) {
         warn(DEBT, at, `plan "${plan.id}" has no year after the base year ${country.baseYear}, so following it changes nothing`);
       }
@@ -1013,6 +1054,24 @@ function check(
       refs(DEBT, [...path, "sources"], plan.sources);
       if (plan.scope !== "all" && country && !country.levels[plan.scope]) {
         error(DEBT, [...path, "scope"], `level "${plan.scope}" is not defined in country.json`);
+      } else if (plan.scope !== "all" && country && Object.keys(country.levels).length === 1 && plan.accounts === projectionAccounts(debt)) {
+        // In a pack with one level, that level is the whole budget.
+        warn(
+          DEBT,
+          [...path, "scope"],
+          `"${plan.scope}" is the pack's only level, so the plan covers its whole budget: give "scope": "all" so that it is drawn against the projection and can be followed`,
+        );
+      }
+      // Revenue goes with the primary balance in the years a followed plan gives no debt ratio: all of them, or none.
+      const balanceYears = plan.points.filter((point) => point.debtRatio === undefined && point.balanceRatio !== undefined && point.interestRatio !== undefined);
+      const withRevenue = balanceYears.filter((point) => point.interestToRevenue !== undefined && point.interestToRevenue > 0);
+      if (withRevenue.length > 0 && withRevenue.length < balanceYears.length) {
+        const missing = balanceYears.filter((point) => !withRevenue.includes(point)).map((point) => point.year);
+        warn(
+          DEBT,
+          [...path, "points"],
+          `the plan gives "interestToRevenue" in some of its years without a debt ratio but not in ${missing.join(", ")}: a projection that follows it takes the plan's revenue only where it is given and the base year's share of GDP elsewhere`,
+        );
       }
       plan.points.forEach((point, k) => {
         const at = [...path, "points", k];

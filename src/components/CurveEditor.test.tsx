@@ -14,10 +14,6 @@ import { simulate, type CurvePoint } from "../engine/index.ts";
 import { createFormatters } from "../i18n/format.ts";
 import { editorModule } from "./CurveEditor.tsx";
 
-// Every test here renders the whole page with the editor open, and again on every key or pointer
-// event: a fraction of a second on a quiet machine, but past vitest's 5 s when it is busy.
-vi.setConfig({ testTimeout: 20_000 });
-
 let container: HTMLDivElement;
 let root: Root;
 const CARD = "#policy-redraw_income_tax";
@@ -39,7 +35,7 @@ beforeAll(() => {
 // How the sheet behaves while that part is on its way, or missing, is tested further below.
 beforeAll(async () => {
   await editorModule.load();
-}, 30_000);
+});
 
 beforeEach(() => {
   window.history.replaceState(null, "", "/");
