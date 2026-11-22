@@ -3587,6 +3587,159 @@
       ]
     },
     {
+      "id": "ukraine_military_aid",
+      "label": {
+        "de": "Militärhilfe für die Ukraine beenden, kürzen oder erhöhen",
+        "en": "End, cut or raise military aid to Ukraine"
+      },
+      "summary": {
+        "de": "Ändert die Militärhilfe für andere Staaten, 2024 vor allem für die Ukraine (11,8 Mrd. Euro). Die Grundeinstellung beendet sie, wie AfD und BSW es fordern; Koalition und Grüne wollen sie stärken.",
+        "en": "Changes military aid to other countries, in 2024 mainly to Ukraine (€11.8bn). The default ends it, as the AfD and the BSW demand; the coalition and the Greens want to strengthen it."
+      },
+      "explanation": {
+        "de": "Die AfD-Fraktion forderte im Januar 2026, außer humanitärer Hilfe alle Unterstützung der Ukraine einzustellen, vor allem Waffen- und Rüstungslieferungen; der Auswärtige Ausschuss empfahl im April 2026 mit den Stimmen aller anderen Fraktionen die Ablehnung. Im September 2026 beantragte sie, die Hilfe abzubauen, bis die Ukraine an ernsthaften Friedensverhandlungen teilnimmt. Das BSW, das nicht im Bundestag sitzt, will „kein weiteres deutsches Steuergeld“ für den Krieg bereitstellen. CDU/CSU und SPD wollen die Ukraine weiter militärisch stärken (Antrag vom Februar 2026), die Grünen die Hilfe am Bedarf ausrichten und ausbauen, auch mit Taurus-Marschflugkörpern (Antrag vom Juli 2026). Der Regler reicht deshalb von einem Ende bis zur Verdopplung.\n\nDer Posten ist die Militärhilfe für andere Staaten in der Staatsausgabenstatistik: 2024 waren das 11,8 Mrd. Euro, davon 8,1 Mrd. Euro Zuschüsse, vor allem die Ertüchtigungshilfe, mit der der Bund Waffen und Ausrüstung aus der Industrie für die Ukraine bezahlt (im Bundeshaushalt 2024: 8,0 Mrd. Euro), 2,4 Mrd. Euro Käufe von Gütern und Diensten, 0,7 Mrd. Euro laufende Übertragungen und 0,3 Mrd. Euro Personal. Im Entwurf des Haushalts 2027 stehen 11,6 Mrd. Euro für die Ukraine; die Schlussabstimmung im Bundestag ist für den 27. November 2026 angesetzt. Weniger Hilfe heißt weniger Waffen und Ausrüstung für die Ukraine und weniger Aufträge für die Rüstungsfirmen, die liefern; mehr Hilfe umgekehrt.\n\nZusammen mit „Verteidigungsausgaben festlegen“: Der Bund rechnet die Hilfe zu den Verteidigungsausgaben nach NATO-Kriterien (Haushaltsvermerk im Entwurf für 2027), also zu dem, was jene Maßnahme als Anteil am BIP einstellt. Diese Maßnahme wird zuerst angewendet und ändert nur die Militärhilfe; die andere schlägt ihren festen Betrag danach auf die übrigen Posten der Verteidigung auf. Kein Euro zählt doppelt, die Wirkungen addieren sich: Wer die Hilfe beendet und das Ziel von 3,5 % einstellt, landet bei rund 3,2 % des BIP. Soll das Geld stattdessen der Bundeswehr zugutekommen, ist das Ziel um rund 0,3 Prozentpunkte höher einzustellen.",
+        "en": "In January 2026 the AfD parliamentary group called for an immediate end to all support for Ukraine apart from humanitarian aid, above all deliveries of weapons and military equipment; in April 2026 the foreign affairs committee recommended rejection with the votes of all other groups. In September 2026 it moved to reduce the aid until Ukraine takes part in serious peace negotiations. The BSW, which has no seats in the Bundestag, wants 'no further German tax money' for the war. The CDU/CSU and SPD want to keep strengthening Ukraine militarily (motion of February 2026), the Greens to expand aid according to need, including Taurus cruise missiles (motion of July 2026). The slider therefore runs from an end to a doubling.\n\nThe item is military aid to other countries in government expenditure statistics: €11.8bn in 2024, of which €8.1bn grants, mainly the capacity-building aid with which the federal government pays industry for weapons and equipment for Ukraine (€8.0bn in the 2024 federal budget), €2.4bn purchases of goods and services, €0.7bn current transfers and €0.3bn staff. The draft budget for 2027 contains €11.6bn for Ukraine; the final vote in the Bundestag is scheduled for 27 November 2026. Less aid means fewer weapons and less equipment for Ukraine and fewer orders for the arms companies that deliver them; more aid the reverse.\n\nTogether with 'Set defence spending': the federal government counts the aid as defence spending under NATO criteria (budget note in the 2027 draft), that is, as part of what that measure sets as a share of GDP. This measure is applied first and changes only military aid; the other then adds its fixed amount across the remaining defence items. No euro counts twice, and the effects add up: ending the aid and setting the 3.5% target gives about 3.2% of GDP. To let the money go to the armed forces instead, set the target about 0.3 percentage points higher."
+      },
+      "topic": "defense",
+      "params": [
+        {
+          "id": "change",
+          "type": "number",
+          "label": {
+            "de": "Änderung der Militärhilfe",
+            "en": "Change in military aid"
+          },
+          "unit": "percent",
+          "min": -100,
+          "max": 100,
+          "step": 5,
+          "default": -100,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.defence.foreign_military_aid",
+          "factor": {
+            "param": "change",
+            "scale": 0.01,
+            "offset": 1
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0
+          },
+          "sources": [
+            "eurostat_gov_10a_exp",
+            "bundeshaushalt_2024",
+            "bh_epl60_2027_entwurf"
+          ],
+          "note": {
+            "de": "Änderung mal Militärhilfe für andere Staaten 2024 laut Staatsausgabenstatistik (11,77 Mrd. Euro). Die untere Grenze nimmt an, dass ein Teil bliebe: Im Entwurf für 2027 sind 1,15 Mrd. Euro der 11,6 Mrd. Euro Wiederbeschaffung, also Ersatz für Material, das die Bundeswehr abgegeben hat und selbst weiter braucht, und Personal für die Ausbildung (2024: 0,3 Mrd. Euro) bliebe zum Teil in der Bundeswehr.",
+            "en": "Change times military aid to other countries in 2024 according to government expenditure statistics (€11.77bn). The lower bound assumes that part would remain: in the 2027 draft €1.15bn of the €11.6bn are replacement procurement, that is, replacing material the armed forces handed over and still need themselves, and staff for training (2024: €0.3bn) would partly stay with the armed forces."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Verträge binden über Jahre: Der Entwurf für 2027 erlaubt dem Bund, für die Ukraine Zahlungen von 8,7 Mrd. Euro in den Jahren 2028 bis 2031 zuzusagen, zusätzlich zu Zusagen aus früheren Haushalten. Bestellte Waffen wären zu bezahlen oder Verträge mit Kosten aufzulösen; die volle Ersparnis käme erst nach einigen Jahren.",
+            "en": "Contracts bind for years: the 2027 draft allows the federal government to commit €8.7bn of payments for Ukraine in 2028 to 2031, on top of commitments from earlier budgets. Weapons ordered would have to be paid for or contracts cancelled at a cost; the full saving would come only after several years."
+          },
+          "sources": [
+            "bh_epl60_2027_entwurf"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Deutschland hat der Ukraine im Februar 2024 in einer Sicherheitsvereinbarung für zehn Jahre zugesagt, sie für deren Geltungsdauer weiter zu unterstützen. Die Vereinbarung steht unter dem Vorbehalt des Haushaltsrechts und kann von jeder Seite jederzeit beendet werden, mit sechs Monaten Vorankündigung; ein Ende der Hilfe bräche diese Zusage.",
+            "en": "In a security agreement of February 2024 Germany promised Ukraine to keep supporting it for the ten years the agreement runs. The agreement is subject to budget law and can be ended by either side at any time with six months' notice; ending the aid would break this promise."
+          },
+          "sources": [
+            "breg_sicherheitsvereinbarung_ukraine_2024"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Seit März 2025 nimmt das Grundgesetz Hilfe für völkerrechtswidrig angegriffene Staaten wie Verteidigungsausgaben oberhalb von 1 % des BIP von der Schuldenregel aus (Art. 115 Abs. 2). Eine Kürzung senkt deshalb vor allem die Kreditaufnahme; Spielraum für andere Ausgaben im Kernhaushalt schafft sie nicht.",
+            "en": "Since March 2025 the Basic Law exempts aid to states attacked in breach of international law, like defence spending, from the debt brake above 1% of GDP (Article 115(2)). A cut therefore mainly lowers borrowing; it creates no room for other spending in the core budget."
+          },
+          "sources": [
+            "gg_art_115",
+            "bundestag_drs_21_7301"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Deutschland ist nach Angaben der Bundesregierung seit 2022 der größte militärische Unterstützer der Ukraine in Europa; bis September 2026 hat es militärische Hilfe von rund 57,8 Mrd. Euro geleistet oder für die Folgejahre eingeplant. Fiele sie weg, müssten andere Staaten die Lücke schließen oder die Ukraine sie tragen. Der Europäische Rat hat im Dezember 2025 zusätzlich einen zinslosen Kredit der EU von 90 Mrd. Euro für 2026 und 2027 vereinbart, vor allem für militärische Beschaffungen.",
+            "en": "According to the federal government, Germany has been the largest military supporter of Ukraine in Europe since 2022; by September 2026 it had provided or earmarked for later years military aid of about €57.8bn. If it fell away, other states would have to fill the gap or Ukraine would bear it. In December 2025 the European Council also agreed an interest-free EU loan of €90bn for 2026 and 2027, mainly for military procurement."
+          },
+          "sources": [
+            "breg_ukraine_unterstuetzung_2026",
+            "bt_drs_21_4267"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Rechnung verwendet den Betrag von 2024. Im Bundeshaushalt stieg die Ertüchtigungshilfe von 8,0 Mrd. Euro (2024, damals ein Titel für alle Partnerstaaten) auf 8,4 Mrd. Euro für die Ukraine im Jahr 2025 und 11,5 Mrd. Euro im Soll 2026; der Entwurf für 2027 sieht 11,6 Mrd. Euro vor. Hilfe über die EU, zu der Deutschland mit seinem Beitrag beiträgt, ist nicht enthalten.",
+            "en": "The calculation uses the 2024 amount. In the federal budget, capacity-building aid rose from €8.0bn (2024, then one title for all partner states) to €8.4bn for Ukraine in 2025 and €11.5bn in the 2026 budget; the 2027 draft provides €11.6bn. Aid through the EU, to which Germany contributes through its contribution, is not included."
+          },
+          "sources": [
+            "bundeshaushalt_2023_2027",
+            "bh_epl60_2027_entwurf"
+          ]
+        },
+        {
+          "text": {
+            "de": "Die Bundesregierung rechnet zu ihrer Militärhilfe auch den Wert von Material aus Beständen der Bundeswehr und die Kosten der Ausbildung ukrainischer Soldaten; ihre Summe ist deshalb anders abgegrenzt als dieser Posten.",
+            "en": "The federal government also counts the value of material from Bundeswehr stocks and the cost of training Ukrainian soldiers as military aid; its total is therefore defined differently from this item."
+          },
+          "sources": [
+            "breg_ukraine_unterstuetzung_2026"
+          ]
+        }
+      ],
+      "sources": [
+        "eurostat_gov_10a_exp",
+        "bundeshaushalt_2024",
+        "bh_epl60_2027_entwurf",
+        "bt_drs_21_3839",
+        "bt_drs_21_5380",
+        "bt_drs_21_8124",
+        "bsw_wahlprogramm_2025",
+        "bt_drs_21_4267",
+        "bt_drs_21_6912",
+        "breg_sicherheitsvereinbarung_ukraine_2024",
+        "breg_ukraine_unterstuetzung_2026"
+      ],
+      "timing": {
+        "param": "change",
+        "below": {
+          "from": "2028-01-01",
+          "years": 4
+        },
+        "note": {
+          "de": "Eine Erhöhung kann mit dem nächsten Haushalt wirken. Eine Kürzung trifft auf Verträge: Die Schlussabstimmung über den Haushalt 2027 ist für den 27. November 2026 angesetzt, eine Kürzung greift deshalb erst ab 2028 und baut sich über vier Jahre auf, so lange, wie der Entwurf für 2027 Zahlungen aus neuen Zusagen vorsieht (bis 2031).",
+          "en": "An increase can take effect with the next budget. A cut runs into contracts: the final vote on the 2027 budget is scheduled for 27 November 2026, so a cut takes effect from 2028 and builds up over four years, as long as the 2027 draft provides for payments from new commitments (to 2031)."
+        },
+        "sources": [
+          "bh_epl60_2027_entwurf"
+        ]
+      }
+    },
+    {
       "id": "defence_spending_target",
       "label": {
         "de": "Verteidigungsausgaben festlegen",
@@ -3680,6 +3833,633 @@
         "nato_5_percent",
         "gg_art_115"
       ]
+    },
+    {
+      "id": "conscription",
+      "label": {
+        "de": "Wehrpflicht wieder einsetzen",
+        "en": "Reinstate compulsory military service"
+      },
+      "summary": {
+        "de": "Beruft Wehrpflichtige ein; seit 2026 sind nur Fragebogen und Musterung Pflicht. Die Grundeinstellung zieht 40.000 Männer im Jahr für zwölf Monate ein, rund 13 % eines Jahrgangs.",
+        "en": "Calls up conscripts; since 2026 only the questionnaire and the medical screening are compulsory. The default drafts 40,000 men a year for twelve months, about 13% of a birth cohort."
+      },
+      "explanation": {
+        "de": "Seit dem 1. Januar 2026 gilt das Wehrdienst-Modernisierungsgesetz: Männer, die ab 2008 geboren sind, müssen einen Fragebogen beantworten und sich mustern lassen; der Dienst selbst ist freiwillig. Eine Pflicht zum Dienst, die „Bedarfswehrpflicht“, kann nur der Bundestag mit einem weiteren Gesetz einsetzen, wenn die Lage oder die Personallage der Streitkräfte es erfordert; gibt es mehr Geeignete als Bedarf, darf er eine Auswahl per Los vorsehen (§ 2a Wehrpflichtgesetz).\n\nDie AfD will die Wehrpflicht wieder einsetzen (Wahlprogramm 2025) und stimmte gegen das Gesetz. CDU und CSU traten zur Wahl 2025 mit einer „aufwachsenden Wehrpflicht“ an: Aus den Gemusterten sollten so viele Taugliche einberufen werden, wie die Streitkräfte brauchen. Im Koalitionsvertrag einigten sie sich mit der SPD auf einen zunächst freiwilligen Dienst nach schwedischem Vorbild. Grüne und Linke stimmten ebenfalls gegen das Gesetz; das BSW lehnt eine Wehrpflicht ab.\n\nDer Regler gibt an, wie viele Wehrpflichtige im Jahr für zwölf Monate einberufen werden. 40.000 sind rund 13 % der etwa 300.000 Männer eines Jahrgangs; ungefähr so viele (39.000, 5 % eines ganzen Jahrgangs von Männern und Frauen) setzt das ifo-Institut für ein Modell wie in Schweden an. Von den Jahrgängen 1981 bis 1985 leisteten im Schnitt rund 85.000 Männer je Jahrgang Wehrdienst. Zum Vergleich: 2026 sollen 20.000 Freiwillige gewonnen werden.\n\nGerechnet sind 12.000 Euro je Wehrpflichtigem und Jahr wie in der Studie des ifo-Instituts für das Finanzministerium: Sold, Entlassungsgeld, Unterkunft und Verpflegung, etwas weniger, als der Gesetzentwurf von 2025 vorsah (850 bis 968 Euro Sold im Monat, dazu freie Unterkunft und Verpflegung). Bekämen sie wie Freiwillige mindestens 2.600 Euro brutto im Monat, wäre es gut das Zweieinhalbfache (obere Grenze). Die Kosten fallen bei der Bundeswehr an. Mit „Verteidigungsausgaben festlegen“ zusammen kommen sie zu dem Betrag hinzu, den jene Maßnahme aufschlägt; die Verteidigungsausgaben liegen dann um sie über dem eingestellten Ziel, bei 40.000 Wehrpflichtigen um rund 0,01 % des BIP.",
+        "en": "Since 1 January 2026 the Military Service Modernisation Act has been in force: men born from 2008 on must answer a questionnaire and undergo a medical screening; the service itself is voluntary. Compulsory service as needed ('Bedarfswehrpflicht') can only be introduced by the Bundestag with a further act, if the security situation or the staffing of the armed forces requires it; if more suitable men are available than needed, it may provide for selection by lot (section 2a of the Compulsory Military Service Act).\n\nThe AfD wants to reinstate conscription (2025 election programme) and voted against the act. For the 2025 election the CDU and CSU proposed conscription that grows step by step: as many fit men as the armed forces need were to be called up from those screened. In the coalition agreement they agreed with the SPD on a service that is voluntary at first, modelled on Sweden. The Greens and Die Linke also voted against the act; the BSW rejects conscription.\n\nThe slider sets how many conscripts are called up each year for twelve months. 40,000 are about 13% of the roughly 300,000 men of a birth cohort; the ifo institute assumes about as many (39,000, 5% of a whole cohort of men and women) for a model like Sweden's. Of the cohorts born 1981 to 1985, about 85,000 men per cohort did military service on average. For comparison: 20,000 volunteers are to be recruited in 2026.\n\nThe calculation uses €12,000 per conscript and year, as in the ifo institute's study for the finance ministry: pay, discharge pay, accommodation and meals, somewhat less than the 2025 bill provided (pay of €850 to €968 a month plus free accommodation and meals). If they received at least €2,600 gross a month like volunteers, it would be a good two and a half times as much (upper bound). The cost falls on the armed forces. Together with 'Set defence spending' it comes on top of the amount that measure adds; defence spending then exceeds the target set by this cost, by about 0.01% of GDP for 40,000 conscripts."
+      },
+      "topic": "defense",
+      "params": [
+        {
+          "id": "conscripts",
+          "type": "number",
+          "label": {
+            "de": "Wehrpflichtige, die im Jahr für zwölf Monate einberufen werden",
+            "en": "Conscripts called up per year for twelve months"
+          },
+          "unit": "count",
+          "unitLabel": {
+            "de": "Personen",
+            "en": "people"
+          },
+          "min": 0,
+          "max": 300000,
+          "step": 5000,
+          "default": 40000,
+          "baseline": 0,
+          "baselineLabel": {
+            "de": "Geltendes Recht: freiwillig",
+            "en": "Current law: voluntary"
+          }
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "exp.defence.military",
+          "amount": {
+            "param": "conscripts",
+            "scale": 12000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 1.0,
+            "high": 2.6
+          },
+          "sources": [
+            "ifo_fb_144_2024",
+            "bt_drs_21_1853",
+            "bt_drs_21_3076"
+          ],
+          "note": {
+            "de": "Zahl der Wehrpflichtigen mal 12.000 Euro im Jahr: Das ifo-Institut setzt 1.000 Euro im Monat an, den damaligen Wehrsold mit Entlassungsgeld und die amtlichen Sachbezugswerte für Verpflegung (313 Euro) und Unterkunft (97 Euro). Der Gesetzentwurf von 2025 sah einen steuerfreien Wehrpflichtsold von 850 bis 968 Euro im Monat, 100 Euro Entlassungsgeld je Monat und freie Unterkunft und Verpflegung vor; der Bundestag hat diese Regelung gestrichen. Die obere Grenze (2,6-fach) entspricht dem Mindestsold Freiwilliger von 2.600 Euro brutto im Monat, rund 31.200 Euro im Jahr. Ausbilder, Kasernen, Ausrüstung und Verwaltung sind nicht enthalten.",
+            "en": "Number of conscripts times €12,000 a year: the ifo institute assumes €1,000 a month, the former pay with discharge pay plus the official values of meals (€313) and accommodation (€97). The 2025 bill provided for tax-free conscripts' pay of €850 to €968 a month, €100 discharge pay per month and free accommodation and meals; the Bundestag dropped this rule. The upper bound (2.6 times) corresponds to volunteers' minimum pay of €2,600 gross a month, about €31,200 a year. Instructors, barracks, equipment and administration are not included."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Die Strukturen fehlen: Mit der Aussetzung 2011 fielen Erfassung, Musterung und Einberufung samt den 52 Kreiswehrersatzämtern weg. Für zusätzliche Wehrdienstleistende im niedrigen fünfstelligen Bereich reichen die Unterkünfte nach Angaben der Bundesregierung nur vorübergehend; Ausbilder, Kasernen und Ausrüstung kosten zusätzlich und sind hier nicht gerechnet.",
+            "en": "The structures are missing: with the suspension in 2011 registration, screening and call-up were dissolved together with the 52 district recruiting offices. According to the federal government, accommodation suffices only temporarily for additional conscripts in the low five-digit range; instructors, barracks and equipment cost extra and are not included here."
+          },
+          "sources": [
+            "bt_drs_21_1853",
+            "bt_drs_20_14972",
+            "ifo_fb_144_2024"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Wer ein Jahr dient, beginnt später mit Ausbildung, Studium und Beruf. Das ifo-Institut schätzt im Auftrag des Finanzministeriums, dass das Nationaleinkommen bei einer Wehrpflicht für 5 % eines Jahrgangs um 3,4 Mrd. Euro im Jahr sinkt, für ein Viertel um 17,1 Mrd. Euro. Die Last tragen vor allem die Wehrpflichtigen, die weniger bekommen, als sie am Arbeitsmarkt verdienen würden. Eine gleich große, gut bezahlte Freiwilligentruppe kostete den Staat mehr, die Volkswirtschaft aber nur gut halb so viel.",
+            "en": "A year of service delays training, study and work. The ifo institute estimates for the finance ministry that national income falls by €3.4bn a year with conscription of 5% of a birth cohort, by €17.1bn for a quarter. The burden falls mainly on the conscripts, who receive less than they would earn in the labour market. An equally large, well-paid volunteer force would cost the state more but the economy only a little over half as much."
+          },
+          "sources": [
+            "ifo_fb_144_2024"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Das Grundgesetz erlaubt nur, Männer zum Dienst in den Streitkräften zu verpflichten (Art. 12a); eine solche Pflicht für Frauen erforderte eine Verfassungsänderung. Wer aus Gewissensgründen verweigert, kann zu einem Ersatzdienst verpflichtet werden; von den Jahrgängen 1981 bis 1985 leisteten mehr Männer Zivil- oder Ersatzdienst (rund 110.000 je Jahrgang) als Wehrdienst (85.000), und auch diese Plätze kosten Geld. Wird nur ein Teil eines Jahrgangs gebraucht, muss die Auswahl gerecht sein; ein Losverfahren müsste ein weiteres Gesetz regeln.",
+            "en": "The Basic Law allows only men to be obliged to serve in the armed forces (Article 12a); such an obligation for women would require a constitutional amendment. Conscientious objectors can be obliged to do alternative service; of the cohorts born 1981 to 1985 more men did civilian or alternative service (about 110,000 per cohort) than military service (85,000), and these places cost money too. If only part of a cohort is needed, the selection must be fair; a lottery would have to be regulated by a further act."
+          },
+          "sources": [
+            "gg_art_12a",
+            "ifo_fb_144_2024",
+            "wpflg_2a"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Stand November 2026 setzt das Gesetz auf Freiwillige: Es legt einen Aufwuchs auf mindestens 260.000 aktive Soldatinnen und Soldaten und 200.000 Reservisten bis 2035 fest, und das Verteidigungsministerium muss dem Bundestag halbjährlich über die Personalentwicklung berichten. Eine Pflicht kommt nicht automatisch, wenn die Ziele verfehlt werden.",
+            "en": "As of November 2026 the act relies on volunteers: it sets growth to at least 260,000 active soldiers and 200,000 reservists by 2035, and the defence ministry must report to the Bundestag on staffing every six months. Compulsory service does not follow automatically if the targets are missed."
+          },
+          "sources": [
+            "bt_drs_21_3076",
+            "wpflg_2a"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Gerechnet sind nur Sold, Unterkunft und Verpflegung. Ausbilder, Kasernen, Ausrüstung, Sicherheitsüberprüfung und Verwaltung kommen hinzu; ihre Kosten hängen von der Ausgestaltung ab und lassen sich nach dem ifo-Institut und der Bundesregierung noch nicht beziffern. Die Musterung ist schon geltendes Recht (laufend rund 54 Mio. Euro im Jahr) und hier nicht eingerechnet.",
+            "en": "Only pay, accommodation and meals are included. Instructors, barracks, equipment, security vetting and administration come on top; their cost depends on the design and, according to the ifo institute and the federal government, cannot yet be quantified. Medical screening is already current law (about €54m a year) and is not included here."
+          },
+          "sources": [
+            "ifo_fb_144_2024",
+            "bt_drs_21_1853"
+          ]
+        },
+        {
+          "text": {
+            "de": "Wie viel Wehrpflichtige bekämen, ist offen: Der Bundestag hat den Wehrpflichtsold aus dem Gesetzentwurf gestrichen und die Regelung einem späteren Gesetz überlassen. Steuern und Beiträge, die Wehrpflichtige in einem Jahr Arbeit gezahlt hätten, fehlen den Kassen; sie sind nicht abgezogen.",
+            "en": "What conscripts would be paid is open: the Bundestag dropped conscripts' pay from the bill and left it to a later act. The taxes and contributions conscripts would have paid in a year of work are lost to the public purse; they are not deducted."
+          },
+          "sources": [
+            "bt_drs_21_3076",
+            "ifo_fb_144_2024"
+          ]
+        }
+      ],
+      "sources": [
+        "bt_drs_21_1853",
+        "bt_drs_21_3076",
+        "bt_drs_21_3077",
+        "wpflg_2a",
+        "gg_art_12a",
+        "ifo_fb_144_2024",
+        "bt_drs_20_14972",
+        "afd_wahlprogramm_2025",
+        "cdu_wahlprogramm_2025",
+        "koalitionsvertrag_2025",
+        "bsw_wahlprogramm_2025"
+      ],
+      "timing": {
+        "param": "conscripts",
+        "from": "2028-01-01",
+        "yearsPerUnit": 0.0001,
+        "note": {
+          "de": "Eine Wehrpflicht braucht ein weiteres Gesetz, Plätze und Ausbilder. Die Rechnung beginnt 2028 und nimmt an, dass die Bundeswehr jedes Jahr 10.000 Wehrpflichtige mehr aufnehmen kann (eigene Annahme): Für zusätzliche Wehrdienstleistende im niedrigen fünfstelligen Bereich reichen die Unterkünfte vorerst, und die Zahl kurz dienender Soldaten soll nach dem Gesetzentwurf von 20.000 (2026) auf 38.000 (2030) steigen, um rund 4.500 im Jahr. 40.000 sind nach vier Jahren erreicht.",
+          "en": "Conscription needs a further act, places and instructors. The calculation starts in 2028 and assumes the armed forces can take in 10,000 more conscripts each year (own assumption): accommodation suffices for now for additional conscripts in the low five-digit range, and under the bill the number of short-service soldiers is to rise from 20,000 (2026) to 38,000 (2030), by about 4,500 a year. 40,000 are reached after four years."
+        },
+        "sources": [
+          "bt_drs_20_14972",
+          "bt_drs_21_1853"
+        ]
+      }
+    },
+    {
+      "id": "civil_service_pensions",
+      "label": {
+        "de": "Höchstsatz der Beamtenpensionen senken",
+        "en": "Lower the maximum rate of civil servants' pensions"
+      },
+      "summary": {
+        "de": "Senkt den Höchstsatz der Pensionen von 71,75 % und mit ihm alle Pensionen im gleichen Verhältnis. Die Grundeinstellung wiederholt den Schritt von 2001 und setzt ihn auf 68,5 %.",
+        "en": "Lowers the maximum pension rate from 71.75% and all civil servants' pensions in the same proportion. The default repeats the 2001 step and sets it to 68.5%."
+      },
+      "explanation": {
+        "de": "Beamte, Richter und Soldaten erhalten für jedes Dienstjahr 1,79375 % ihrer letzten Bezüge als Pension, höchstens 71,75 % nach 40 Jahren. 2001 senkte der Gesetzgeber den Höchstsatz in acht Schritten von 75 auf 71,75 %, um die Rentenreform jenes Jahres auf die Beamten zu übertragen; das Bundesverfassungsgericht billigte das 2005. Die Alterssicherungskommission der Bundesregierung empfahl im Juni 2026, Reformen der gesetzlichen Rente, die erfolgt sind oder noch kommen, wirkungsgleich auf die Beamtenversorgung zu übertragen; für die gesetzliche Rente empfahl sie zugleich, den Nachhaltigkeitsfaktor nach 2031 wieder anzuwenden und zu verstärken. Der Sachverständigenrat schrieb 2023, ob das bisher geschehen ist, lasse sich mangels Daten kaum beurteilen. Eine Partei, die einen bestimmten niedrigeren Höchstsatz fordert, ist nicht bekannt.\n\nDer Regler senkt wie 2001 den Satz je Dienstjahr im gleichen Verhältnis wie den Höchstsatz, also jede Pension um denselben Anteil, auch die laufenden. Die Grundeinstellung wiederholt den Schritt von 2001 einmal: 68,5 % sind 4,5 % weniger, im Schnitt rund 155 Euro brutto im Monat. Ein Satz von 48 % sähe aus wie das Rentenniveau, ist damit aber nicht vergleichbar: Das Rentenniveau misst eine Standardrente nach 45 Beitragsjahren am Durchschnittslohn, netto vor Steuern, der Pensionssatz die letzten Bruttobezüge; die Pension ersetzt zugleich gesetzliche Rente und Betriebsrente.\n\nGerechnet ist mit den Ausgaben 2024 für Pensionen (56,9 Mrd. Euro) und Hinterbliebenenversorgung (9,0 Mrd. Euro) von 1,42 Millionen Pensionären und 382.000 Hinterbliebenen. 62 % zahlen die Länder, 28 % der Bund einschließlich der früheren Beamten von Bahn und Post, 8,5 % die Gemeinden. Pensionen sind steuerpflichtig, ein Teil der Ersparnis geht über die Lohnsteuer wieder verloren.\n\n„Alle zahlen in die gesetzliche Rente ein“ betrifft die aktiven Beamten und ihre Beiträge, diese Maßnahme die Pensionen; beide lassen sich verbinden und ändern verschiedene Posten. „Rentenniveau ändern“ wirkt nur auf die gesetzlichen Renten; wer eine Änderung des Rentenniveaus auf die Beamten übertragen will, stellt hier den Höchstsatz im gleichen Verhältnis ein.",
+        "en": "Civil servants, judges and soldiers receive 1.79375% of their final pay as a pension for each year of service, at most 71.75% after 40 years. In 2001 the legislature lowered the maximum rate in eight steps from 75 to 71.75% to transfer that year's pension reform to civil servants; the Federal Constitutional Court upheld this in 2005. In June 2026 the federal government's pensions commission recommended transferring reforms of the statutory pension, past and future, with equal effect to civil servants' pensions; for the statutory pension it also recommended applying the sustainability factor again after 2031 and strengthening it. In 2023 the German Council of Economic Experts wrote that, for lack of data, it can hardly be judged whether this has happened so far. No party is known to demand a specific lower maximum rate.\n\nAs in 2001, the slider lowers the rate per year of service in the same proportion as the maximum rate, so every pension falls by the same share, including those already paid. The default repeats the 2001 step once: 68.5% is 4.5% less, on average about €155 gross a month. A rate of 48% would look like the statutory pension level but is not comparable: the pension level measures a standard pension after 45 years of contributions against the average wage, net before taxes, the pension rate the final gross pay; a civil servant's pension replaces both the statutory pension and an occupational pension.\n\nThe calculation uses 2024 spending on pensions (€56.9bn) and survivors' benefits (€9.0bn) for 1.42 million pensioners and 382,000 survivors. The states pay 62%, the federal government 28% including the former officials of the railways and the Post, the municipalities 8.5%. Pensions are taxable, so part of the saving is lost again through wage tax.\n\n'Everyone pays into the statutory pension insurance' concerns active civil servants and their contributions, this measure their pensions; the two can be combined and change different items. 'Change the pension level' acts only on statutory pensions; to transfer a change in the pension level to civil servants, set the maximum rate here in the same proportion."
+      },
+      "topic": "pensions",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "de": "Höchstsatz der Pension (Prozent der letzten Dienstbezüge)",
+            "en": "Maximum pension rate (percent of final pay)"
+          },
+          "unit": "percent",
+          "min": 48,
+          "max": 75,
+          "step": 0.25,
+          "default": 68.5,
+          "baseline": 71.75
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.social.old_age.civil_service_pensions",
+          "factor": {
+            "param": "rate",
+            "scale": 0.013937282229965157
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0,
+            "basis": "pensions"
+          },
+          "sources": [
+            "destatis_pm_2025_455",
+            "beamtvg_14",
+            "bverfg_2005_versorgung"
+          ],
+          "note": {
+            "de": "Höchstsatz geteilt durch 71,75 mal Pensionen 2024 (56,9 Mrd. Euro). Angenommen ist, dass alle Pensionen im gleichen Verhältnis sinken, wie 2001. Die untere Grenze berücksichtigt, dass die Mindestversorgung kleine Pensionen schützt und Übergangsregeln Teile ausnehmen dürften (eigene Einschätzung).",
+            "en": "Maximum rate divided by 71.75 times 2024 pensions (€56.9bn). All pensions are assumed to fall in the same proportion, as in 2001. The lower bound allows for the minimum pension protecting small pensions and for transitional rules likely exempting some (own judgement)."
+          }
+        },
+        {
+          "type": "scale",
+          "target": "exp.social.survivors.civil_service",
+          "factor": {
+            "param": "rate",
+            "scale": 0.013937282229965157
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.85,
+            "high": 1.0,
+            "basis": "pensions"
+          },
+          "sources": [
+            "destatis_pm_2025_455",
+            "beamtvg_14"
+          ],
+          "note": {
+            "de": "Witwen- und Waisengeld bemessen sich nach dem Ruhegehalt und sinken im gleichen Verhältnis: Höchstsatz geteilt durch 71,75 mal 9,0 Mrd. Euro (2024).",
+            "en": "Widows' and orphans' benefits are based on the pension and fall in the same proportion: maximum rate divided by 71.75 times €9.0bn (2024)."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.income.personal.wage_tax",
+          "amount": {
+            "param": "rate",
+            "scale": 247986062.71777004,
+            "offset": -17793000000.0
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.74,
+            "high": 1.19
+          },
+          "sources": [
+            "estg_19",
+            "estg_32a",
+            "destatis_pm_2025_455"
+          ],
+          "note": {
+            "de": "Pensionen werden wie Löhne versteuert (§ 19 EStG). Angenommen ist ein Grenzsteuersatz von 27 %: Die durchschnittliche Pension lag im Januar 2025 bei 3.416 Euro brutto im Monat, rund 41.000 Euro im Jahr; Ledige zahlen darauf um 30 %, Verheiratete wegen des Splittings oft weniger, Hinterbliebene mit kleineren Bezügen ebenfalls. Den Solidaritätszuschlag zahlen bei diesen Einkommen die wenigsten. Spanne 20 bis 32 % (eigene Einschätzung). Die Lohnsteuer teilen sich Bund, Länder und Gemeinden.",
+            "en": "Pensions are taxed like wages (section 19 of the Income Tax Act). A marginal tax rate of 27% is assumed: the average pension in January 2025 was €3,416 gross a month, about €41,000 a year; single people pay about 30% at the margin, married couples often less because of income splitting, survivors with smaller benefits as well. Few pay the solidarity surcharge at these incomes. Range 20 to 32% (own judgement). Wage tax is shared by the federal, state and municipal levels."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Das Bundesverfassungsgericht hat 2005 die Senkung auf 71,75 % gebilligt, aber Grenzen gezogen: Finanzielle Erwägungen allein rechtfertigen keine Kürzung der Altersversorgung; Änderungen der gesetzlichen Rente können sie rechtfertigen, soweit das mit den Unterschieden der Systeme vereinbar ist, und die Versorgung muss amtsangemessen bleiben (Art. 33 Abs. 5 GG). Je tiefer der Satz, desto weniger trüge diese Begründung.",
+            "en": "In 2005 the Federal Constitutional Court upheld the cut to 71.75% but set limits: financial considerations alone do not justify cutting old-age provision; changes in the statutory pension can justify it insofar as this is compatible with the differences between the systems, and provision must remain adequate to the office (Article 33(5) of the Basic Law). The lower the rate, the less this justification would carry."
+          },
+          "sources": [
+            "bverfg_2005_versorgung",
+            "gg_art_33"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Der Bund regelt nur die Versorgung seiner eigenen Beamten und Soldaten und der früheren Beamten von Bahn und Post, rund 28 % der Ausgaben. Über die Pensionen der Beamten von Ländern und Gemeinden, rund 70 %, entscheiden seit 2006 die Länder (Art. 74 Abs. 1 Nr. 27 GG). Was sie sparen, entlastet ihre Haushalte, nicht den des Bundes.",
+            "en": "The federal government regulates only the pensions of its own civil servants and soldiers and of the former officials of the railways and the Post, about 28% of spending. The pensions of state and municipal civil servants, about 70%, have been decided by the states since 2006 (Article 74(1) no. 27 of the Basic Law). What they save relieves their budgets, not the federal budget."
+          },
+          "sources": [
+            "gg_art_74",
+            "destatis_versorgungsausgaben_2024"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Bund und Länder konkurrieren um Lehrkräfte, Polizisten und Richter. Die Alterssicherungskommission hält es deshalb für möglich, dass eine einheitliche Reform der Beamtenversorgung lange dauert oder ganz unterbleibt; sie weist zudem darauf hin, dass die Pension Regel- und Zusatzsicherung zugleich ist.",
+            "en": "The federal government and the states compete for teachers, police officers and judges. The pensions commission therefore considers it possible that a uniform reform of civil servants' pensions takes long or does not happen at all; it also points out that the pension is basic and supplementary provision at once."
+          },
+          "sources": [
+            "ask_bericht_2026"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Beihilfe im Krankheitsfall ändert sich nicht. Der Posten ist eine Kassenzahl der Versorgungsempfängerstatistik; Pensionen wegen Dienstunfähigkeit stehen in den Volkswirtschaftlichen Gesamtrechnungen womöglich zum Teil unter Krankheit und Behinderung. Die Hinterbliebenenversorgung ist nach den Anteilen aller Versorgungsausgaben auf die Ebenen verteilt; der Bund trägt dort eher mehr.",
+            "en": "Medical allowances (Beihilfe) do not change. The item is a cash figure from the statistics of pension recipients; pensions for incapacity may partly be booked under sickness and disability in national accounts. Survivors' benefits are split across levels by the shares of all pension spending; the federal share there is probably higher."
+          },
+          "sources": [
+            "destatis_pm_2025_455",
+            "destatis_versorgungsempfaenger_2025"
+          ]
+        }
+      ],
+      "sources": [
+        "destatis_pm_2025_455",
+        "destatis_versorgungsausgaben_2024",
+        "destatis_versorgungsempfaenger_2025",
+        "beamtvg_14",
+        "bverfg_2005_versorgung",
+        "ask_bericht_2026",
+        "svr_jg_2023_24",
+        "gg_art_33",
+        "gg_art_74",
+        "estg_19"
+      ],
+      "timing": {
+        "param": "rate",
+        "from": "2028-01-01",
+        "below": {
+          "from": "2028-01-01",
+          "yearsPerUnit": 2.5
+        },
+        "note": {
+          "de": "Bund und Länder müssten ihre Versorgungsgesetze ändern; vor 2028 ist das kaum möglich (eigene Annahme). Eine Senkung folgt dem Tempo von 2001, als der Höchstsatz in acht Schritten bei den folgenden Anpassungen um 3,25 Prozentpunkte sank: bei einer Anpassung im Jahr rund 2½ Jahre je Prozentpunkt. Die Grundeinstellung ist nach gut acht Jahren erreicht, 60 % erst nach knapp 30. So trifft die Senkung auch laufende Pensionen, aber nicht auf einmal; träfe sie nur neue Pensionen, wüchse die Ersparnis über Jahrzehnte noch langsamer.",
+          "en": "The federal government and the states would have to amend their pension acts; that is hardly possible before 2028 (own assumption). A cut follows the pace of 2001, when the maximum rate fell by 3.25 percentage points in eight steps at the following adjustments: with one adjustment a year, about 2.5 years per percentage point. The default is reached after a little over eight years, 60% only after almost 30. The cut thus also reaches pensions already paid, but not at once; if it reached only new pensions, the saving would grow even more slowly, over decades."
+        },
+        "sources": [
+          "bverfg_2005_versorgung",
+          "gg_art_74"
+        ]
+      }
+    },
+    {
+      "id": "bundestag_size",
+      "label": {
+        "de": "Bundestag verkleinern",
+        "en": "Make the Bundestag smaller"
+      },
+      "summary": {
+        "de": "Ändert die Zahl der Sitze im Bundestag, seit 2025 gesetzlich 630. Die Grundeinstellung zeigt die Forderung des Bundes der Steuerzahler nach 500 Sitzen; sie spart rund 95 Mio. Euro im Jahr.",
+        "en": "Changes the number of seats in the Bundestag, set at 630 by law since 2025. The default shows the Taxpayers' Association's demand for 500 seats; it saves about €95m a year."
+      },
+      "explanation": {
+        "de": "Die Wahlrechtsreform von 2023 hat die Zahl der Abgeordneten auf 630 festgelegt; 2024 waren es 735 bis April und 733 ab Mai, im Jahresmittel 734. Der Bund der Steuerzahler hält 500 Sitze für ausreichend. Die AfD wollte 2023 eine feste Größe von 598 Sitzen. CDU und CSU stehen nach ihrem Wahlprogramm zur Verkleinerung, nicht aber zur Schwächung des Direktmandats; die Koalition will, dass jeder Wahlkreissieger einzieht und der Bundestag grundsätzlich bei der heutigen Größe bleibt, und hat dafür eine Kommission vorgesehen. Der Regler erlaubt deshalb auch mehr Sitze.\n\nGerechnet ist mit den Kosten je Sitz im Haushalt des Bundestages 2024: Diät und Amtszulagen rund 126.000 Euro, Mitarbeiter 381.000 Euro, Kostenpauschale 59.000 Euro, Zuschüsse bei Krankheit, Reisen und Informationstechnik 40.000 Euro und der Betrag, den die Fraktionen je Mitglied erhalten, 128.000 Euro, zusammen rund 734.000 Euro im Jahr. Verwaltung, Gebäude und die Pensionen früherer Abgeordneter ändern sich nicht sofort. 500 statt 630 Sitze sparen rund 0,004 % der Staatsausgaben.\n\nZusammen mit „Diäten der Bundestagsabgeordneten kürzen“: Beide Maßnahmen wirken als Faktor auf die Diäten, die Wirkungen multiplizieren sich; weniger Sitze und eine niedrigere Diät zählen also nicht doppelt.",
+        "en": "The 2023 electoral reform set the number of members at 630; in 2024 there were 735 until April and 733 from May, 734 on average over the year. The Taxpayers' Association (Bund der Steuerzahler) considers 500 seats sufficient. In 2023 the AfD wanted a fixed size of 598 seats. According to their election programme the CDU and CSU stand by the reduction but not by weakening the direct mandate; the coalition wants every constituency winner to take a seat while the Bundestag in principle keeps its present size, and has provided for a commission on this. The slider therefore also allows more seats.\n\nThe calculation uses the cost per seat in the Bundestag's 2024 budget: salary and office allowances about €126,000, staff €381,000, expense allowance €59,000, subsidies for illness, travel and IT €40,000, and the amount the parliamentary groups receive per member, €128,000, together about €734,000 a year. Administration, buildings and the pensions of former members do not change at once. 500 instead of 630 seats save about 0.004% of government spending.\n\nTogether with 'Cut the pay of members of the Bundestag': both measures act as a factor on MPs' pay, so their effects multiply; fewer seats and lower pay do not count twice."
+      },
+      "topic": "state",
+      "params": [
+        {
+          "id": "seats",
+          "type": "number",
+          "label": {
+            "de": "Sitze im Bundestag",
+            "en": "Seats in the Bundestag"
+          },
+          "unit": "count",
+          "unitLabel": {
+            "de": "Sitze",
+            "en": "seats"
+          },
+          "min": 400,
+          "max": 800,
+          "step": 10,
+          "default": 500,
+          "baseline": 630,
+          "baselineLabel": {
+            "de": "Geltendes Recht",
+            "en": "Current law"
+          }
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.general.executive.bundestag_mp_pay",
+          "factor": {
+            "param": "seats",
+            "scale": 0.0013623978201634877,
+            "offset": 0.1416893732970027
+          },
+          "quality": "derived",
+          "sources": [
+            "bundeshaushalt_2024",
+            "bundestag_glossar_ueberhang",
+            "bwahlg_1"
+          ],
+          "note": {
+            "de": "Je Sitz mehr oder weniger als 630 ein 734stel der Diäten und Amtszulagen 2024 (92,6 Mio. Euro bei 734 Abgeordneten im Jahresmittel: 735 bis April, 733 ab Mai), rund 126.000 Euro.",
+            "en": "For each seat above or below 630, one 734th of 2024 spending on MPs' pay and office allowances (€92.6m for 734 members on average over the year: 735 until April, 733 from May), about €126,000."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.general.executive.bundestag_other",
+          "amount": {
+            "param": "seats",
+            "scale": 607494,
+            "offset": -382721220
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.8,
+            "high": 1.2
+          },
+          "sources": [
+            "bundeshaushalt_2024",
+            "bt_drs_20_9050",
+            "bundestag_glossar_ueberhang"
+          ],
+          "note": {
+            "de": "Je Sitz 607.000 Euro: Ausgaben 2024 für Mitarbeiter der Abgeordneten (279,7 Mio. Euro, Titel 0212 411 03), Kostenpauschale (43,4 Mio., 411 02), Zuschüsse bei Krankheit und Pflege (10,8 Mio., 411 04), Reisen (10,6 Mio., 411 16 und 411 17) und Informationstechnik der Abgeordneten (7,7 Mio., 411 19), geteilt durch 734, dazu der Betrag je Mitglied an die Fraktionen (10.632 Euro im Monat, für Mitglieder der Opposition 10 % mehr). Die Spanne von 80 bis 120 % ist eine eigene Einschätzung: Fraktionen und Büros haben Kosten, die nicht mit jedem Sitz sinken; auf Dauer könnten mit weniger Abgeordneten aber auch Büroflächen und Verwaltung schrumpfen.",
+            "en": "Per seat €607,000: 2024 spending on MPs' staff (€279.7m, title 0212 411 03), expense allowance (€43.4m, 411 02), subsidies for illness and care (€10.8m, 411 04), travel (€10.6m, 411 16 and 411 17) and MPs' IT (€7.7m, 411 19), divided by 734, plus the amount per member paid to the parliamentary groups (€10,632 a month, 10% more for opposition members). The range of 80 to 120% is an own judgement: parliamentary groups and offices have costs that do not fall with every seat; in the long run, however, fewer members could also mean less office space and administration."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Bei 299 Wahlkreisen und 500 Sitzen bekämen nach dem Wahlrecht von 2023 noch mehr Wahlkreissieger keinen Sitz, wenn ihre Partei nicht genug Zweitstimmen hat. Wer das vermeiden will, muss die Wahlkreise neu zuschneiden und ihre Zahl verringern.",
+            "en": "With 299 constituencies and 500 seats, under the 2023 electoral law even more constituency winners would get no seat if their party has too few second votes. Avoiding that means redrawing the constituencies and reducing their number."
+          },
+          "sources": [
+            "bwahlg_1",
+            "koalitionsvertrag_2025"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Weniger Abgeordnete vertreten jeweils mehr Bürger: bei 500 Sitzen rund 167.000 Einwohner je Abgeordnetem statt 133.000. Die Koalition will dagegen die heutige Größe grundsätzlich halten.",
+            "en": "Fewer members each represent more citizens: about 167,000 inhabitants per member at 500 seats instead of 133,000. The coalition, by contrast, wants to keep the present size in principle."
+          },
+          "sources": [
+            "eurostat_demo_gind",
+            "koalitionsvertrag_2025"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "minor",
+          "text": {
+            "de": "Gespart wird erst ab dem nächsten Bundestag, also ab dem Frühjahr 2029. Die Altersentschädigung früherer Abgeordneter (2024: 53,9 Mio. Euro) sinkt erst über Jahrzehnte.",
+            "en": "Savings start only with the next Bundestag, that is from spring 2029. Pensions of former members (2024: €53.9m) fall only over decades."
+          },
+          "sources": [
+            "gg_art_39",
+            "bundeshaushalt_2024"
+          ]
+        }
+      ],
+      "sources": [
+        "bwahlg_1",
+        "bundeshaushalt_2024",
+        "bt_drs_20_9050",
+        "bundestag_glossar_ueberhang",
+        "bdst_wahlrecht",
+        "bt_drs_20_5360",
+        "koalitionsvertrag_2025",
+        "cdu_wahlprogramm_2025",
+        "gg_art_39"
+      ],
+      "timing": {
+        "from": "2029-04-01",
+        "note": {
+          "de": "Die neue Größe gilt ab dem nächsten Bundestag. Die Wahl findet 46 bis 48 Monate nach dem Beginn der Wahlperiode am 25. März 2025 statt, also zwischen Ende Januar und Ende März 2029; der neue Bundestag tritt spätestens 30 Tage danach zusammen (Art. 39 GG).",
+          "en": "The new size applies from the next Bundestag. The election takes place 46 to 48 months after the start of the term on 25 March 2025, that is between late January and late March 2029; the new Bundestag meets no later than 30 days afterwards (Article 39 of the Basic Law)."
+        },
+        "sources": [
+          "gg_art_39"
+        ]
+      }
+    },
+    {
+      "id": "demokratie_leben",
+      "label": {
+        "de": "Bundesprogramm „Demokratie leben!“ beenden",
+        "en": "End the federal programme “Demokratie leben!”"
+      },
+      "summary": {
+        "de": "Kürzt das Bundesprogramm „Demokratie leben!“ (2024: rund 166 Mio. Euro) um den eingestellten Anteil. Die Grundeinstellung beendet es, wie die AfD es im Bundestag beantragt hat.",
+        "en": "Cuts the federal programme “Demokratie leben!” (2024: about €166m) by the chosen share. The default ends it, as the AfD moved in the Bundestag."
+      },
+      "explanation": {
+        "de": "Das Familienministerium fördert mit „Demokratie leben!“ seit 2015 Partnerschaften für Demokratie in Kommunen, Landes-Demokratiezentren, bundesweite Träger und Projekte der Demokratieförderung, Vielfaltgestaltung und Extremismusprävention. Die AfD beantragte im Juli 2026, das Programm einzustellen; der Bundestag lehnte das am 9. Juli 2026 mit den Stimmen aller anderen Fraktionen ab. In ihrem Wahlprogramm will sie Zuwendungen an Nichtregierungsorganisationen prüfen und kürzen. Die CDU/CSU-Fraktion hatte im Februar 2025, damals in der Opposition, mit 551 Fragen nach der politischen Neutralität geförderter Organisationen gefragt; im Koalitionsvertrag vereinbarten CDU, CSU und SPD, das Programm fortzusetzen und unabhängig auf Zielerreichung und Wirkung überprüfen zu lassen.\n\nAb 2027 baut das Ministerium das Programm um, mit neuen Förderaufrufen für die Zeit ab 2027. Der Entwurf des Haushalts 2027 sieht 167,4 Mio. Euro vor, nach 186,5 Mio. Euro im Soll 2026; die Schlussabstimmung ist für den 27. November 2026 angesetzt.\n\nDer Posten ist der Haushaltstitel 1702 684 04 (Ist 2024: 182,9 Mio. Euro), aus dem auch das Patenschaftsprogramm „Menschen stärken Menschen“ bezahlt wird; auf „Demokratie leben!“ entfielen nach dem Plan für 2024 91 %. Die Kürzung wirkt auf diesen Anteil. Ein Teil der Mittel geht über Kommunen und Länder an Träger vor Ort; gezählt wird alles beim Bund, der es bezahlt. Es verlieren die geförderten Vereine, Kommunen und Länder, es spart der Bund.",
+        "en": "With “Demokratie leben!” the family ministry has since 2015 funded local partnerships for democracy, state democracy centres, national organisations and projects for democracy promotion, diversity and the prevention of extremism. In July 2026 the AfD moved to end the programme; on 9 July 2026 the Bundestag rejected this with the votes of all other parliamentary groups. In its election programme the AfD wants grants to non-governmental organisations reviewed and cut. In February 2025 the CDU/CSU group, then in opposition, asked 551 questions about the political neutrality of funded organisations; in the coalition agreement the CDU, CSU and SPD agreed to continue the programme and have it reviewed independently for goals achieved and effect.\n\nFrom 2027 the ministry is restructuring the programme, with new calls for proposals for the period from 2027. The draft budget for 2027 provides €167.4m, after €186.5m in the 2026 budget; the final vote is scheduled for 27 November 2026.\n\nThe item is budget title 1702 684 04 (2024 actuals: €182.9m), which also pays for the mentoring programme “Menschen stärken Menschen”; according to the 2024 plan 91% went to “Demokratie leben!”. The cut acts on this share. Part of the money flows through municipalities and states to local organisations; all of it is counted with the federal government, which pays for it. The funded associations, municipalities and states lose; the federal government saves."
+      },
+      "topic": "state",
+      "params": [
+        {
+          "id": "cut",
+          "type": "number",
+          "label": {
+            "de": "Kürzung",
+            "en": "Cut"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 100,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "exp.general.democracy_programmes",
+          "factor": {
+            "param": "cut",
+            "scale": -0.0091,
+            "offset": 1
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.9,
+            "high": 1.0
+          },
+          "sources": [
+            "bundeshaushalt_2024",
+            "bh_epl17_2024"
+          ],
+          "note": {
+            "de": "Kürzung mal 91 % des Titels 1702 684 04 im Ist 2024 (182,9 Mio. Euro), bis zu 166,4 Mio. Euro. Wie sich das Ist auf die beiden Programme verteilte, weist der Haushalt nicht aus; angesetzt ist ihr Verhältnis im Plan (182 zu 18 Mio. Euro). Die untere Grenze berücksichtigt Kosten der Abwicklung.",
+            "en": "Cut times 91% of title 1702 684 04 in the 2024 actuals (€182.9m), up to €166.4m. The budget does not show how the actuals were split between the two programmes; their ratio in the plan is used (182 to 18 million euros). The lower bound allows for the cost of winding down."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Zusagen binden: Für die neue Förderperiode ab 2027 laufen die Bewerbungen seit August 2026, und der Entwurf für 2027 erlaubt Zusagen von 208 Mio. Euro für die Jahre 2028 bis 2030. Bewilligte Projekte müssten ausfinanziert oder mit Kosten beendet werden; die volle Ersparnis käme erst nach Ablauf der Zusagen.",
+            "en": "Commitments bind: applications for the new funding period from 2027 have been running since August 2026, and the 2027 draft allows commitments of €208m for 2028 to 2030. Approved projects would have to be funded to the end or stopped at a cost; the full saving would come only after the commitments run out."
+          },
+          "sources": [
+            "bh_epl17_2027_entwurf",
+            "bt_drs_21_7825"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Kommunen und Länder sind Teil des Programms: Partnerschaften für Demokratie werden von Kommunen getragen, manche mit Geld ihres Landes, und die Landes-Demokratiezentren sind ein eigener Programmbereich. Fällt der Bund weg, müssten sie und die Träger vor Ort die Arbeit selbst bezahlen oder aufgeben.",
+            "en": "Municipalities and states are part of the programme: local partnerships for democracy are run by municipalities, some with money from their state, and the state democracy centres are a programme area of their own. If the federal government withdrew, they and the local organisations would have to pay for the work themselves or give it up."
+          },
+          "sources": [
+            "bh_epl17_2026",
+            "bt_drs_21_7825"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Die vom Ministerium beauftragte Evaluation der Förderperiode 2020 bis 2024 bescheinigt dem Programm Wirkungen: gestärkte demokratische Strukturen, mehr Widerstandskraft gegen extremistische Tendenzen, gestaltete Vielfalt. Die Kurzfassung beschreibt diese Wirkungen in Worten, Zahlen dazu nennt sie nicht.",
+            "en": "The evaluation of the 2020 to 2024 funding period commissioned by the ministry credits the programme with effects: stronger democratic structures, more resilience against extremist tendencies, diversity shaped. Its summary describes these effects in words and gives no figures for them."
+          },
+          "sources": [
+            "dl_evaluation_fp2_2024",
+            "koalitionsvertrag_2025"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Andere Förderungen von Vereinen und Stiftungen sind nicht enthalten, etwa durch die Bundeszentrale für politische Bildung, deren Haushalt die AfD auf höchstens 15 Mio. Euro senken will. Eine Liste von Programmen mit Beträgen, die eine Forderung abgrenzt, liegt nicht vor.",
+            "en": "Other funding of associations and foundations is not included, for example by the Federal Agency for Civic Education, whose budget the AfD wants to cut to at most €15m. No list of programmes with amounts that defines a demand exists."
+          },
+          "sources": [
+            "bt_drs_21_9082"
+          ]
+        },
+        {
+          "text": {
+            "de": "Wo die Volkswirtschaftlichen Gesamtrechnungen das Programm buchen, wird nicht veröffentlicht; der Bundeshaushalt ordnet den Titel der Forschung zu, deshalb steht der Posten unter der Grundlagenforschung. An Betrag und Ebene ändert das nichts.",
+            "en": "Where national accounts book the programme is not published; the federal budget assigns the title to research, so the item sits under basic research. This changes neither the amount nor the level."
+          },
+          "sources": [
+            "bundeshaushalt_2023_2027"
+          ]
+        }
+      ],
+      "sources": [
+        "bundeshaushalt_2024",
+        "bh_epl17_2024",
+        "bh_epl17_2026",
+        "bh_epl17_2027_entwurf",
+        "bt_drs_21_6925",
+        "bundestag_kw28_2026_demokratie",
+        "afd_wahlprogramm_2025",
+        "bt_drs_20_15035",
+        "bt_drs_20_15101",
+        "koalitionsvertrag_2025",
+        "bt_drs_21_7825",
+        "dl_evaluation_fp2_2024",
+        "demokratie_leben_programm"
+      ],
+      "timing": {
+        "param": "cut",
+        "from": "2028-01-01",
+        "years": 3,
+        "note": {
+          "de": "Der Haushalt 2027 ist aufgestellt und die Förderperiode ab 2027 ausgeschrieben; eine Kürzung greift deshalb ab 2028 und baut sich über drei Jahre auf, so lange, wie der Entwurf für 2027 Zahlungen aus Zusagen vorsieht (bis 2030).",
+          "en": "The 2027 budget has been drawn up and the funding period from 2027 has been advertised; a cut therefore takes effect from 2028 and builds up over three years, as long as the 2027 draft provides for payments from commitments (to 2030)."
+        },
+        "sources": [
+          "bh_epl17_2027_entwurf",
+          "bt_drs_21_7825"
+        ]
+      }
     },
     {
       "id": "pension_level",

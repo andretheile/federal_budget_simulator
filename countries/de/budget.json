@@ -1607,18 +1607,42 @@
             "en": "Basic research"
           },
           "code": "GF0104",
-          "amount": 43152000000,
+          "amount": 42969088000,
           "levels": {
-            "central": 0.4803,
-            "state": 0.5197
+            "central": 0.4781,
+            "state": 0.5219
           },
           "quality": "derived",
           "sources": [
             "eurostat_gov_10a_exp"
           ],
           "note": {
-            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik.",
-            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology."
+            "de": "Betrag amtlich (Eurostat). Die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt; siehe Methodik. Ohne die Bundesprogramme „Demokratie leben!“ und „Menschen stärken Menschen“ (182,9 Mio. Euro), die als eigener Posten ausgewiesen sind.",
+            "en": "Official amount (Eurostat). The split across levels is derived from Eurostat data per division and estimated within the division; see methodology. Without the federal programmes “Demokratie leben!” and “Menschen stärken Menschen” (€182.9m), shown as an item of their own."
+          }
+        },
+        {
+          "id": "exp.general.democracy_programmes",
+          "label": {
+            "de": "Bundesprogramme „Demokratie leben!“ und „Menschen stärken Menschen“",
+            "en": "Federal programmes “Demokratie leben!” and “Menschen stärken Menschen”"
+          },
+          "description": {
+            "de": "Zuschüsse des Familienministeriums für Demokratieförderung, Vielfalt und Extremismusprävention („Demokratie leben!“) und für Patenschaften („Menschen stärken Menschen“), Titel 1702 684 04. Gefördert werden Partnerschaften für Demokratie in Kommunen, Landes-Demokratiezentren, bundesweite Träger und Modellprojekte.",
+            "en": "Grants of the family ministry for democracy promotion, diversity and the prevention of extremism (“Demokratie leben!”) and for mentoring (“Menschen stärken Menschen”), title 1702 684 04. They fund local partnerships for democracy, state democracy centres, national organisations and pilot projects."
+          },
+          "amount": 182912000,
+          "levels": {
+            "central": 1.0
+          },
+          "quality": "derived",
+          "sources": [
+            "bundeshaushalt_2024",
+            "bh_epl17_2024"
+          ],
+          "note": {
+            "de": "Kassenwert aus dem Bundeshaushalt (Titel 1702 684 04, Ist 2024: 182,9 Mio. Euro); geplant waren 182,0 Mio. Euro für „Demokratie leben!“ und 18,0 Mio. Euro für „Menschen stärken Menschen“. Der Bundeshaushalt ordnet den Titel der Funktion 165 zu, Forschung und experimentelle Entwicklung außerhalb der Hochschulen; wo die Volkswirtschaftlichen Gesamtrechnungen ihn buchen, wird nicht veröffentlicht. Er ist deshalb aus der Grundlagenforschung herausgelöst. Ganz dem Bund zugeordnet, der das Programm bezahlt, auch wo Kommunen und Länder die Mittel weitergeben.",
+            "en": "Cash figure from the federal budget (title 1702 684 04, 2024 actuals: €182.9m); €182.0m were planned for “Demokratie leben!” and €18.0m for “Menschen stärken Menschen”. The federal budget assigns the title to function 165, research and experimental development outside universities; where national accounts book it is not published. It is therefore taken out of basic research. Attributed entirely to the federal level, which pays for the programme, also where municipalities and states pass the money on."
           }
         },
         {
@@ -3004,25 +3028,55 @@
             {
               "id": "exp.social.old_age.other",
               "label": {
-                "de": "Beamtenpensionen, Kranken- und Pflegeleistungen für Ältere und weitere Altersleistungen",
-                "en": "Civil servants' pensions, health and care benefits for the elderly and other old-age benefits"
+                "de": "Kranken- und Pflegeleistungen für Ältere und weitere Altersleistungen",
+                "en": "Health and care benefits for the elderly and other old-age benefits"
               },
-              "amount": 139472944000,
+              "amount": 82572944000,
               "levels": {
-                "central": 0.2112,
-                "state": 0.3125,
-                "local": 0.0962,
-                "social_security": 0.3801
+                "central": 0.1639,
+                "state": 0.1014,
+                "local": 0.1038,
+                "social_security": 0.6309
               },
               "quality": "estimate",
               "sources": [
                 "eurostat_gov_10a_exp",
                 "drv_rv_in_zahlen_2026",
-                "bundeshaushalt_2024"
+                "bundeshaushalt_2024",
+                "destatis_pm_2025_455"
               ],
               "note": {
-                "de": "Rest der Gruppe „Alter“ nach Abzug der gesetzlichen Altersrenten; Aufteilung auf die Ebenen geschätzt. Dem Bund zugerechnet: der Teil der Bundesmittel für die Rentenversicherung, der nicht auf Renten entfällt (u. a. Krankenversicherung der Rentner), und die Zuschüsse zur Alterssicherung der Landwirte.",
-                "en": "Remainder of the old-age group after deducting statutory old-age pensions; split across levels estimated. Attributed to the federal level: the part of federal funding of the pension insurance not related to pensions (e.g. pensioners' health insurance) and the subsidies to farmers' old-age insurance."
+                "de": "Rest der Gruppe „Alter“ nach Abzug der gesetzlichen Altersrenten und der Pensionen der Beamten, Richter und Soldaten; Aufteilung auf die Ebenen geschätzt. Dem Bund zugerechnet: der Teil der Bundesmittel für die Rentenversicherung, der nicht auf Renten entfällt (u. a. Krankenversicherung der Rentner), und die Zuschüsse zur Alterssicherung der Landwirte.",
+                "en": "Remainder of the old-age group after deducting statutory old-age pensions and the pensions of civil servants, judges and soldiers; split across levels estimated. Attributed to the federal level: the part of federal funding of the pension insurance not related to pensions (e.g. pensioners' health insurance) and the subsidies to farmers' old-age insurance."
+              }
+            },
+            {
+              "id": "exp.social.old_age.civil_service_pensions",
+              "label": {
+                "de": "Pensionen der Beamten, Richter und Soldaten",
+                "en": "Pensions of civil servants, judges and soldiers"
+              },
+              "description": {
+                "de": "Ruhegehälter nach dem Beamten- und Soldatenversorgungsrecht von Bund, Ländern und Gemeinden, einschließlich der ehemaligen Beamten von Bahn und Post: 1,42 Millionen Empfänger am 1. Januar 2025, im Schnitt 3.416 Euro brutto im Monat. Ohne Beihilfe im Krankheitsfall.",
+                "en": "Pensions under the civil-service and military pension law of the federal government, the states and the municipalities, including former officials of the railways and the Post: 1.42 million recipients on 1 January 2025, on average €3,416 gross a month. Without medical allowances (Beihilfe)."
+              },
+              "amount": 56900000000,
+              "levels": {
+                "central": 0.28,
+                "state": 0.619,
+                "local": 0.085,
+                "social_security": 0.016
+              },
+              "quality": "derived",
+              "sources": [
+                "destatis_pm_2025_455",
+                "destatis_versorgungsausgaben_2024",
+                "destatis_versorgungsempfaenger_2025",
+                "eurostat_gov_10a_exp"
+              ],
+              "note": {
+                "de": "Ausgaben 2024 laut Versorgungsempfängerstatistik (56,9 Mrd. Euro), aus dem Rest der Gruppe „Alter“ herausgelöst. Kassenzahl; ein Teil der Pensionen wegen Dienstunfähigkeit könnte in den Volkswirtschaftlichen Gesamtrechnungen unter Krankheit und Behinderung stehen. Aufteilung auf die Ebenen nach den Anteilen der Dienstherren an den Versorgungsausgaben 2024: Länder 61,9 %, Bund mit Bundeseisenbahnvermögen und Postnachfolgeunternehmen 27,5 %, Gemeinden 8,5 %, übrige 2,1 % (Sozialversicherung und Einrichtungen des Bundes, nach der Zahl der Empfänger geteilt).",
+                "en": "Spending 2024 according to the statistics of pension recipients (€56.9bn), taken out of the remainder of the old-age group. Cash figure; part of the pensions paid for incapacity may be booked under sickness and disability in national accounts. Split across levels by the employers' shares of pension spending in 2024: states 61.9%, federal government with the railway fund and the Post successor companies 27.5%, municipalities 8.5%, other 2.1% (social insurance and federal bodies, split by the number of recipients)."
               }
             }
           ]
@@ -3060,24 +3114,54 @@
             {
               "id": "exp.social.survivors.other",
               "label": {
-                "de": "Hinterbliebenenversorgung der Beamten und weitere Leistungen",
-                "en": "Survivors' benefits for civil servants and other benefits"
+                "de": "Weitere Leistungen an Hinterbliebene",
+                "en": "Other benefits for survivors"
               },
-              "amount": 32224560000,
+              "amount": 23224560000,
               "levels": {
-                "central": 0.2072,
-                "state": 0.4696,
-                "local": 0.1324,
-                "social_security": 0.1908
+                "central": 0.179,
+                "state": 0.4117,
+                "local": 0.1508,
+                "social_security": 0.2585
               },
               "quality": "estimate",
               "sources": [
                 "eurostat_gov_10a_exp",
-                "drv_rv_in_zahlen_2026"
+                "drv_rv_in_zahlen_2026",
+                "destatis_pm_2025_455"
               ],
               "note": {
-                "de": "Rest der Gruppe nach Abzug der gesetzlichen Hinterbliebenenrenten; Aufteilung geschätzt.",
-                "en": "Remainder of the group after deducting statutory survivors' pensions; split estimated."
+                "de": "Rest der Gruppe nach Abzug der gesetzlichen Hinterbliebenenrenten und der Hinterbliebenenversorgung der Beamten, Richter und Soldaten; was er im Einzelnen enthält, weist die Statistik nicht aus. Aufteilung geschätzt.",
+                "en": "Remainder of the group after deducting statutory survivors' pensions and the survivors' benefits of civil servants, judges and soldiers; the statistics do not show what it contains in detail. Split estimated."
+              }
+            },
+            {
+              "id": "exp.social.survivors.civil_service",
+              "label": {
+                "de": "Hinterbliebenenversorgung der Beamten, Richter und Soldaten",
+                "en": "Survivors' benefits of civil servants, judges and soldiers"
+              },
+              "description": {
+                "de": "Witwen-, Witwer- und Waisengeld nach dem Beamten- und Soldatenversorgungsrecht: 382.100 Empfänger am 1. Januar 2025.",
+                "en": "Widows', widowers' and orphans' benefits under the civil-service and military pension law: 382,100 recipients on 1 January 2025."
+              },
+              "amount": 9000000000,
+              "levels": {
+                "central": 0.28,
+                "state": 0.619,
+                "local": 0.085,
+                "social_security": 0.016
+              },
+              "quality": "derived",
+              "sources": [
+                "destatis_pm_2025_455",
+                "destatis_versorgungsausgaben_2024",
+                "destatis_versorgungsempfaenger_2025",
+                "eurostat_gov_10a_exp"
+              ],
+              "note": {
+                "de": "Ausgaben 2024 laut Versorgungsempfängerstatistik (9,0 Mrd. Euro), aus dem Rest der Gruppe „Hinterbliebene“ herausgelöst. Aufteilung auf die Ebenen nach den Anteilen der Dienstherren an den Versorgungsausgaben 2024: Länder 61,9 %, Bund mit Bundeseisenbahnvermögen und Postnachfolgeunternehmen 27,5 %, Gemeinden 8,5 %, übrige 2,1 % (Sozialversicherung und Einrichtungen des Bundes, nach der Zahl der Empfänger geteilt). Hinterbliebene beziehen ihre Versorgung häufiger vom Bund als Pensionäre (41,5 % gegenüber 31,5 % der Empfänger); der Bundesanteil ist hier deshalb eher zu niedrig.",
+                "en": "Spending 2024 according to the statistics of pension recipients (€9.0bn), taken out of the remainder of the survivors' group. Split across levels by the employers' shares of pension spending in 2024: states 61.9%, federal government with the railway fund and the Post successor companies 27.5%, municipalities 8.5%, other 2.1% (social insurance and federal bodies, split by the number of recipients). Survivors receive their benefits from the federal level more often than pensioners do (41.5% against 31.5% of recipients), so the federal share here is rather too low."
               }
             }
           ]

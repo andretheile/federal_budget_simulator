@@ -61,6 +61,8 @@ download will usually not reproduce the pack. The cache also contains the docume
 | `drv/rv_in_zeitreihen.pdf` | pension insurance time series | contribution revenue 2022 and 2024; average earnings 2022 and 2024 (uprating factor) |
 | `gkv/kj1_2024.pdf` | health insurance, final accounts 2024 (KJ 1) | contributions of compulsory and other members |
 | `ecb/dwa_de.csv` | ECB Distributional Wealth Accounts, Germany | wealth distribution |
+| `destatis/pd25_455_742.html`, `destatis/versorgungsempfaenger-ausgaben.csv`, `destatis/versorgungsempfaenger.html` | Destatis, statistics of pension recipients (press release of 17 December 2025, chart data, table) | civil servants' pensions and survivors' benefits 2024 and their split across levels |
+| `bh_pdf/epl17_2024.pdf` | federal budget 2024, section 17 | split of title 1702 684 04 between the two programmes |
 
 Figures from PDFs, from the federal budget and from the tax list were read by hand and typed into
 `build_budget.py`. Only the three files named at the top of `fetch_inputs.py` are parsed by the scripts.
@@ -140,7 +142,15 @@ Arithmetic on published figures:
   full-time equivalents. The leaves are taken out of 01.1 (the rest of the inside share), 01.3 and 01.6 (all
   of their D.1), whose leaves shrink by the same amounts. Each leaf belongs wholly to its level, so that a
   staff cut lands on the level that decides it; the group above carries the level shares as a breakdown that
-  a measure can offer for choice, and each leaf carries the same groups with its own level at 1.
+  a measure can offer for choice, and each leaf carries the same groups with its own level at 1;
+- three items carved out of a fitted leaf after the fit (`carve()` in `build_budget.py`): the item gets its
+  own level shares, the leaf keeps what is left at each level, and no other leaf changes. Civil servants'
+  pensions (56.9 bn) and their survivors' benefits (9.0 bn) in 2024, from the statistics of pension
+  recipients, are taken out of the remainders of old age (10.2) and survivors (10.3); their level shares are
+  the employers' shares of pension spending in 2024 (states 61.9 %, federal government with the railway fund
+  and the Post successor companies 27.5 %, municipalities 8.5 %, other 2.1 %, split between social insurance
+  and federal bodies by recipients). Title 1702 684 04 of the federal budget ("Demokratie leben!" and
+  "Menschen stärken Menschen", 182.9 m actuals) is taken out of basic research (01.4) and is federal.
 
 Judgement, to be reviewed by whoever updates the data:
 
@@ -176,6 +186,13 @@ Judgement, to be reviewed by whoever updates the data:
   published shares of 2018 and 2026. Because the leaf and the federal reimbursement of basic security in old age
   are fixed leaves, the fit of the other leaves of social protection changed slightly when they were added (for
   example asylum seekers' benefits: states 34.4 % instead of 36.6 %); the division totals by level did not.
+- **Where the carved-out items sit in COFOG.** Civil servants' pensions are a cash figure; pensions paid for
+  incapacity before the retirement age may in part be booked under sickness and disability (10.1) rather
+  than old age. Survivors' benefits get the level shares of all pension spending, although survivors are
+  more often federal (41.5 % of recipients against 31.5 % of pensioners). The federal budget assigns title
+  1702 684 04 to function 165, research and experimental development outside universities; where national
+  accounts book it is not published, and basic research is an assumption. A different place would move
+  the amount between groups, not between levels.
 - **Merging COFOG 10.5, 10.6 and 10.7** into one group, because cash benefits cannot be assigned to
   one of them: housing costs under Bürgergeld alone exceed the cash benefits recorded under 10.6.
 - **Levels of capital-transfer revenue** and of the revision leaf.

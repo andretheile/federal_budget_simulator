@@ -134,6 +134,24 @@ REPLACEMENT = "exp.social.basic_security.replacement_benefits"
 # (eurostat_gov_10a_main: D61REC minus actual contributions, 2024): central, state, local, social security funds.
 CIVIL_SERVICE_LEVELS = (8779.0, 31948.0, 4950.0, 711072.0 - 302350.0 - 406246.0)
 
+# ---- items carved out of a fitted leaf after the fit (see carve() below) ---------------------------------------
+# Civil servants' pensions. destatis_pm_2025_455: spending 2024 on pensions (Ruhegehalt) of former public servants
+# 56.9 bn, on survivors' benefits 9.0 bn (Versorgungsempfängerstatistik). destatis_versorgungsausgaben_2024: shares of
+# the employers in Versorgungsausgaben 2024: Länder 61.9, Bund 11.2, Post successor companies 11.0, municipalities 8.5,
+# Bundeseisenbahnvermögen 5.3, other 2.1 %. "Other" is the social insurance (28.4 thousand recipients on 1 January
+# 2025) and legally independent federal bodies (8.8 thousand; destatis_versorgungsempfaenger_2025), split by
+# recipients. Post and railway pensions are paid by federal bodies. JUDGEMENT: survivors' benefits get the shares of
+# all spending, although survivors are more often federal (41.5 % of recipients against 31.5 % of pensioners).
+CS_PENSIONS, CS_SURVIVORS = 56900.0, 9000.0
+_CS_OTHER_SS = 2.1 * 28.4 / (28.4 + 8.8)
+CS_LEVELS = ((11.2 + 11.0 + 5.3 + 2.1 - _CS_OTHER_SS) / 100, 61.9 / 100, 8.5 / 100, _CS_OTHER_SS / 100)
+# Federal programmes for democracy. bundeshaushalt_2024: title 1702 684 04 "Maßnahmen zur Stärkung von Vielfalt,
+# Toleranz und Demokratie", actuals 2024, which funds "Demokratie leben!" and "Menschen stärken Menschen"
+# (bh_epl17_2024: 182.0 and 18.0 of 200.0 m planned). The federal budget books the title under function 165, research
+# and experimental development outside universities; national accounts do not publish where it lands. JUDGEMENT: it is
+# taken out of basic research (COFOG 01.4), where research funding of the federal government not tied to a field is.
+DEMOCRACY_PROGRAMMES = 182.912
+
 
 def L(id, de, en, amount=None, code=None, seed=None, fixed=None, quality=None, sources=None, note=None, desc=None, year=None):
     return dict(id=id, de=de, en=en, amount=amount, code=code, seed=seed, fixed=fixed, quality=quality,
@@ -324,17 +342,17 @@ EXP = [
                     "Civil servants are not in the statutory pension insurance; the state pays no contributions for them but pays their pension later. The item is empty and receives the employer contributions that would arise if civil servants were included."),
               note=("Aufteilung auf die Ebenen nach den unterstellten Sozialbeiträgen für Beamte laut Eurostat (Bund 18 %, Länder 66 %, Gemeinden 10 %, Sozialversicherung 5 %) als Näherung dafür, wo Beamte beschäftigt sind.",
                     "Split across levels by the imputed social contributions for civil servants according to Eurostat (federal 18%, states 66%, municipalities 10%, social insurance 5%) as an approximation of where civil servants are employed.")),
-            L("exp.social.old_age.other", "Beamtenpensionen, Kranken- und Pflegeleistungen für Ältere und weitere Altersleistungen", "Civil servants' pensions, health and care benefits for the elderly and other old-age benefits",
-              amount=cof("GF1002") - P_OLD, seed=(0.17, 0.33, 0.08, 0.42), quality="estimate", sources=SRC_EXP + ["drv_rv_in_zahlen_2026", "bundeshaushalt_2024"],
-              note=("Rest der Gruppe „Alter“ nach Abzug der gesetzlichen Altersrenten; Aufteilung auf die Ebenen geschätzt.", "Remainder of the old-age group after deducting statutory old-age pensions; split across levels estimated.")),
+            L("exp.social.old_age.other", "Kranken- und Pflegeleistungen für Ältere und weitere Altersleistungen", "Health and care benefits for the elderly and other old-age benefits",
+              amount=cof("GF1002") - P_OLD, seed=(0.17, 0.33, 0.08, 0.42), quality="estimate", sources=SRC_EXP + ["drv_rv_in_zahlen_2026", "bundeshaushalt_2024", "destatis_pm_2025_455"],
+              note=("Rest der Gruppe „Alter“ nach Abzug der gesetzlichen Altersrenten und der Pensionen der Beamten, Richter und Soldaten; Aufteilung auf die Ebenen geschätzt.", "Remainder of the old-age group after deducting statutory old-age pensions and the pensions of civil servants, judges and soldiers; split across levels estimated.")),
         ]),
         G("exp.social.survivors", "Hinterbliebene: Witwen- und Waisenrenten", "Survivors: widows' and orphans' pensions", code="GF1003", children=[
             L("exp.social.survivors.statutory_pensions", "Hinterbliebenenrenten der gesetzlichen Rentenversicherung", "Survivors' pensions of the statutory pension insurance",
               amount=P_SURV, fixed=SS, quality="derived", sources=["drv_rv_in_zahlen_2026", "sozialpolitik_aktuell_viii51", "bundeshaushalt_2024"],
               note=("Rentenausgaben 2024 mal Anteil der Hinterbliebenenrenten (13,5 %); Bundesanteil wie bei den Altersrenten.", "Pension expenditure 2024 times the share of survivors' pensions (13.5%); federal share as for old-age pensions.")),
-            L("exp.social.survivors.other", "Hinterbliebenenversorgung der Beamten und weitere Leistungen", "Survivors' benefits for civil servants and other benefits",
-              amount=cof("GF1003") - P_SURV, seed=(0.3, 0.45, 0.1, 0.15), quality="estimate", sources=SRC_EXP + ["drv_rv_in_zahlen_2026"],
-              note=("Rest der Gruppe nach Abzug der gesetzlichen Hinterbliebenenrenten; Aufteilung geschätzt.", "Remainder of the group after deducting statutory survivors' pensions; split estimated.")),
+            L("exp.social.survivors.other", "Weitere Leistungen an Hinterbliebene", "Other benefits for survivors",
+              amount=cof("GF1003") - P_SURV, seed=(0.3, 0.45, 0.1, 0.15), quality="estimate", sources=SRC_EXP + ["drv_rv_in_zahlen_2026", "destatis_pm_2025_455"],
+              note=("Rest der Gruppe nach Abzug der gesetzlichen Hinterbliebenenrenten und der Hinterbliebenenversorgung der Beamten, Richter und Soldaten; was er im Einzelnen enthält, weist die Statistik nicht aus. Aufteilung geschätzt.", "Remainder of the group after deducting statutory survivors' pensions and the survivors' benefits of civil servants, judges and soldiers; the statistics do not show what it contains in detail. Split estimated.")),
         ]),
         G("exp.social.sickness_disability", "Krankheit, Pflege und Behinderung", "Sickness, long-term care and disability", code="GF1001", children=[
             L("exp.social.sickness_disability.em_pensions", "Erwerbsminderungsrenten der gesetzlichen Rentenversicherung", "Disability pensions of the statutory pension insurance",
@@ -635,6 +653,62 @@ find(EXP, "exp.general.admin_staff")["breakdowns"] = admin_levels(
     ("Arbeitnehmerentgelt 2024, eigene Schätzung (siehe die Posten).", "Compensation of employees 2024, own estimate (see the items)."))
 for _i, _leaf in enumerate(("federal", "states", "municipal")):
     find(EXP, "exp.general.admin_staff." + _leaf)["breakdowns"] = admin_levels([1.0 if j == _i else 0.0 for j in range(3)], "derived")
+
+
+# =====================================================================================================
+# Items carved out of a fitted leaf after the fit and after the earmarked transfers were moved. The item bears its
+# own level shares, the leaf keeps what is left at each level, and no other leaf changes. (The carve-outs further up,
+# such as the staff of the general administration, enter the fit instead and so move the shares of their division.)
+# =====================================================================================================
+def carve(parent_id, leaf, levels):
+    """Takes `leaf` (made with L, amount in million euros) out of the fitted leaf `parent_id` and puts it right after it."""
+    part = [leaf["amount"] * w for w in levels]
+    rest = [x - y for x, y in zip(ALLOC[parent_id], part)]
+    assert min(rest) > -1e-6, (parent_id, leaf["id"], [round(x) for x in rest])
+    ALLOC[parent_id] = [max(0.0, x) for x in rest]
+    ALLOC[leaf["id"]] = part
+    find(EXP, parent_id)["amount"] -= leaf["amount"]
+
+    def place(nodes):
+        for i, n in enumerate(nodes):
+            if n["id"] == parent_id:
+                nodes.insert(i + 1, leaf)
+                return True
+            if "children" in n and place(n["children"]):
+                return True
+        return False
+    assert place(EXP), parent_id
+
+
+CS_SRC = ["destatis_pm_2025_455", "destatis_versorgungsausgaben_2024", "destatis_versorgungsempfaenger_2025", "eurostat_gov_10a_exp"]
+CS_LEVEL_NOTE = ("Aufteilung auf die Ebenen nach den Anteilen der Dienstherren an den Versorgungsausgaben 2024: Länder 61,9 %, Bund mit Bundeseisenbahnvermögen und Postnachfolgeunternehmen 27,5 %, Gemeinden 8,5 %, übrige 2,1 % (Sozialversicherung und Einrichtungen des Bundes, nach der Zahl der Empfänger geteilt).",
+                 "Split across levels by the employers' shares of pension spending in 2024: states 61.9%, federal government with the railway fund and the Post successor companies 27.5%, municipalities 8.5%, other 2.1% (social insurance and federal bodies, split by the number of recipients).")
+carve("exp.social.old_age.other",
+      L("exp.social.old_age.civil_service_pensions", "Pensionen der Beamten, Richter und Soldaten", "Pensions of civil servants, judges and soldiers",
+        amount=CS_PENSIONS, fixed=CS_LEVELS, quality="derived", sources=CS_SRC,
+        desc=("Ruhegehälter nach dem Beamten- und Soldatenversorgungsrecht von Bund, Ländern und Gemeinden, einschließlich der ehemaligen Beamten von Bahn und Post: 1,42 Millionen Empfänger am 1. Januar 2025, im Schnitt 3.416 Euro brutto im Monat. Ohne Beihilfe im Krankheitsfall.",
+              "Pensions under the civil-service and military pension law of the federal government, the states and the municipalities, including former officials of the railways and the Post: 1.42 million recipients on 1 January 2025, on average €3,416 gross a month. Without medical allowances (Beihilfe)."),
+        note=("Ausgaben 2024 laut Versorgungsempfängerstatistik (56,9 Mrd. Euro), aus dem Rest der Gruppe „Alter“ herausgelöst. Kassenzahl; ein Teil der Pensionen wegen Dienstunfähigkeit könnte in den Volkswirtschaftlichen Gesamtrechnungen unter Krankheit und Behinderung stehen. " + CS_LEVEL_NOTE[0],
+              "Spending 2024 according to the statistics of pension recipients (€56.9bn), taken out of the remainder of the old-age group. Cash figure; part of the pensions paid for incapacity may be booked under sickness and disability in national accounts. " + CS_LEVEL_NOTE[1])),
+      CS_LEVELS)
+carve("exp.social.survivors.other",
+      L("exp.social.survivors.civil_service", "Hinterbliebenenversorgung der Beamten, Richter und Soldaten", "Survivors' benefits of civil servants, judges and soldiers",
+        amount=CS_SURVIVORS, fixed=CS_LEVELS, quality="derived", sources=CS_SRC,
+        desc=("Witwen-, Witwer- und Waisengeld nach dem Beamten- und Soldatenversorgungsrecht: 382.100 Empfänger am 1. Januar 2025.",
+              "Widows', widowers' and orphans' benefits under the civil-service and military pension law: 382,100 recipients on 1 January 2025."),
+        note=("Ausgaben 2024 laut Versorgungsempfängerstatistik (9,0 Mrd. Euro), aus dem Rest der Gruppe „Hinterbliebene“ herausgelöst. " + CS_LEVEL_NOTE[0] + " Hinterbliebene beziehen ihre Versorgung häufiger vom Bund als Pensionäre (41,5 % gegenüber 31,5 % der Empfänger); der Bundesanteil ist hier deshalb eher zu niedrig.",
+              "Spending 2024 according to the statistics of pension recipients (€9.0bn), taken out of the remainder of the survivors' group. " + CS_LEVEL_NOTE[1] + " Survivors receive their benefits from the federal level more often than pensioners do (41.5% against 31.5% of recipients), so the federal share here is rather too low.")),
+      CS_LEVELS)
+carve("exp.general.basic_research",
+      L("exp.general.democracy_programmes", "Bundesprogramme „Demokratie leben!“ und „Menschen stärken Menschen“", "Federal programmes “Demokratie leben!” and “Menschen stärken Menschen”",
+        amount=DEMOCRACY_PROGRAMMES, fixed=C, quality="derived", sources=["bundeshaushalt_2024", "bh_epl17_2024"],
+        desc=("Zuschüsse des Familienministeriums für Demokratieförderung, Vielfalt und Extremismusprävention („Demokratie leben!“) und für Patenschaften („Menschen stärken Menschen“), Titel 1702 684 04. Gefördert werden Partnerschaften für Demokratie in Kommunen, Landes-Demokratiezentren, bundesweite Träger und Modellprojekte.",
+              "Grants of the family ministry for democracy promotion, diversity and the prevention of extremism (“Demokratie leben!”) and for mentoring (“Menschen stärken Menschen”), title 1702 684 04. They fund local partnerships for democracy, state democracy centres, national organisations and pilot projects."),
+        note=("Kassenwert aus dem Bundeshaushalt (Titel 1702 684 04, Ist 2024: 182,9 Mio. Euro); geplant waren 182,0 Mio. Euro für „Demokratie leben!“ und 18,0 Mio. Euro für „Menschen stärken Menschen“. Der Bundeshaushalt ordnet den Titel der Funktion 165 zu, Forschung und experimentelle Entwicklung außerhalb der Hochschulen; wo die Volkswirtschaftlichen Gesamtrechnungen ihn buchen, wird nicht veröffentlicht. Er ist deshalb aus der Grundlagenforschung herausgelöst. Ganz dem Bund zugeordnet, der das Programm bezahlt, auch wo Kommunen und Länder die Mittel weitergeben.",
+              "Cash figure from the federal budget (title 1702 684 04, 2024 actuals: €182.9m); €182.0m were planned for “Demokratie leben!” and €18.0m for “Menschen stärken Menschen”. The federal budget assigns the title to function 165, research and experimental development outside universities; where national accounts book it is not published. It is therefore taken out of basic research. Attributed entirely to the federal level, which pays for the programme, also where municipalities and states pass the money on.")),
+      C)
+EXTRA_NOTES["exp.general.basic_research"] = ("Ohne die Bundesprogramme „Demokratie leben!“ und „Menschen stärken Menschen“ (182,9 Mio. Euro), die als eigener Posten ausgewiesen sind.",
+                                              "Without the federal programmes “Demokratie leben!” and “Menschen stärken Menschen” (€182.9m), shown as an item of their own.")
 
 # =====================================================================================================
 # Revision leaf (difference between the COFOG vintage and the latest total)
