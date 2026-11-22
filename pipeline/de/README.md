@@ -84,8 +84,8 @@ Data, taken as published:
 
 Arithmetic on published figures:
 
-- remainder leaves: a group total minus the named cash items. Group totals are national accounts, the
-  named items are cash, so a remainder is only approximately right;
+- remainder leaves: a group total minus the named items. Group totals are national accounts, the named
+  items are mostly cash (the exceptions are named below), so a remainder is only approximately right;
 - the revision leaf: Eurostat's latest total expenditure minus the sum of the older COFOG table;
 - statutory pensions by type: pension expenditure times the published shares;
 - the solidarity surcharge: federal cash receipts, deducted from the national-accounts tax lines;
@@ -100,16 +100,6 @@ Arithmetic on published figures:
 - the zero-amount leaf "replacement benefits for people excluded from citizen's income": it receives the
   benefits that states and municipalities would pay if groups lost citizen's income; its level shares are
   copied from asylum seekers' benefits;
-- basic income support in old age and for reduced earning capacity (SGB XII, chapter 4) as a leaf of its own: the
-  federal reimbursement of the net expenditure (cash, budget title 1102 632 01). Like the housing costs it is
-  assigned to the municipalities, which pay it out, when the shares are fitted, and then moved to the federal level;
-  it used to be a part of the remainder leaf of the basic security group, which shrinks by the same amount;
-- the support component of child benefit (`KG_SPENDING`): national accounts book as spending only the part of child
-  benefit that goes beyond the tax exemption of the children's subsistence minimum, and gross up the taxes by the
-  same amount (Destatis, WISTA 5/2019). That part is not published for 2024; the leaf is child benefit under the
-  Income Tax Act paid in 2024 times the mean of its share in 2018 (Destatis) and 2026 (federal government), 45.5 %.
-  It is taken out of the remainder of the family group, and its level shares are the statutory cost shares of child
-  benefit (federal government and states 42.5 % each, municipalities 15 %);
 - the zero-amount leaves "tax on sugar-sweetened drinks" and "tax on plastic packaging": neither tax was
   levied in 2024; both were debated with the 2027 federal budget. They exist so that a measure can book
   them, like the wealth tax; as excise duties they are federal (Article 106(1) of the Basic Law);
@@ -133,6 +123,16 @@ Arithmetic on published figures:
   administration relieves the funds and not, through a node's shares, the federal, state or municipal
   budgets. Unlike the health benefit items, they carry no pro-rata share of the federal subsidy to health
   insurance, which is a fixed amount; the other health items carry correspondingly more of it;
+- basic income support in old age and for reduced earning capacity (SGB XII, chapter 4) as a leaf of its own: the
+  federal reimbursement of the net expenditure (cash, budget title 1102 632 01). Like the housing costs it is
+  assigned to the municipalities, which pay it out, when the shares are fitted, and then moved to the federal level;
+  it used to be a part of the remainder leaf of the basic security group, which shrinks by the same amount;
+- the support component of child benefit (`KG_SPENDING`): national accounts book as spending only the part of child
+  benefit that goes beyond the tax exemption of the children's subsistence minimum, and gross up the taxes by the
+  same amount (Destatis, WISTA 5/2019). That part is not published for 2024; the leaf is child benefit under the
+  Income Tax Act paid in 2024 times the mean of its share in 2018 (Destatis) and 2026 (federal government), 45.5 %.
+  It is taken out of the remainder of the family group, and its level shares are the statutory cost shares of child
+  benefit (federal government and states 42.5 % each, municipalities 15 %);
 - five items carved out of COFOG groups for measures, each a fixed leaf beside a fitted remainder of its group:
   the federal payments to the EEG account (cash 2024, Subsidy Report) out of fuel and energy (04.3); the federal
   funding for efficient buildings (BEG, cash 2024, Climate and Transformation Fund title 893 10) out of general
@@ -204,10 +204,18 @@ Judgement, to be reviewed by whoever updates the data:
   sickness and disability and the rest together -1.3, -0.9, +1.5, +0.7. Asylum seekers' benefits, and the
   replacement benefits that copy their shares, went from 36.6 to 34.4 % states. A measure on these leaves
   therefore shows somewhat different burdens by level than before the two leaves were added.
-- **Where the carved-out items sit in COFOG.** Civil servants' pensions are a cash figure; pensions paid for
-  incapacity before the retirement age may in part be booked under sickness and disability (10.1) rather
-  than old age. Survivors' benefits get the level shares of all pension spending, although survivors are
-  more often in the federal area (40.1 % of recipients against 29.9 % of pensioners on 1 January 2025).
+- **Where the items carved out of COFOG groups sit in national accounts.** Eurostat does not publish them. The
+  EEG payments are subsidies and fit in fuel and energy (04.3, subsidies EUR 26.3 billion). The building grants
+  (EUR 14.1 billion) are filed under housing in the federal budget, but housing development (06.1) has only EUR
+  3.3 billion of capital transfers at all levels; general economic affairs (04.1, EUR 21.5 billion) is the only
+  group with room for them. The broadcasters' spending in national accounts is taken as the KEF's figure; the
+  payments to the churches as the states' budgeted amounts, which fit in the current transfers of 08.4 (EUR 845
+  million).
+- **Where civil servants' pensions and survivors' benefits sit in COFOG.** Civil servants' pensions are a cash
+  figure; pensions paid for incapacity before the retirement age may in part be booked under sickness and
+  disability (10.1) rather than old age. Survivors' benefits get the level shares of all pension spending,
+  although survivors are more often in the federal area (40.1 % of recipients against 29.9 % of pensioners on
+  1 January 2025).
 - **What the two remainders of old age and survivors contain.** They are what national accounts book
   under 10.2 and 10.3 minus two cash figures each (statutory pensions and civil servants' benefits);
   their content is not published, and national accounts may define benefits for civil servants and their
@@ -220,15 +228,9 @@ Judgement, to be reviewed by whoever updates the data:
   division 10 but change other leaves of the division, which the carve-out avoids; the choice is kept.
   A measure that cuts civil servants' pensions acts on the cash figures only.
 - **Where title 1702 684 04 sits.** The federal budget assigns it to function 165, research and
-  experimental development outside universities; where national
-  accounts book it is not published, and basic research is an assumption. A different place would move
-  the amount between groups, not between levels.
-- **Where the carved-out items sit in national accounts.** Eurostat does not publish them. The EEG payments are
-  subsidies and fit in fuel and energy (04.3, subsidies EUR 26.3 billion). The building grants (EUR 14.1
-  billion) are filed under housing in the federal budget, but housing development (06.1) has only EUR 3.3 billion
-  of capital transfers at all levels; general economic affairs (04.1, EUR 21.5 billion) is the only group with
-  room for them. The broadcasters' spending in national accounts is taken as the KEF's figure; the payments to
-  the churches as the states' budgeted amounts, which fit in the current transfers of 08.4 (EUR 845 million).
+  experimental development outside universities; where national accounts book it is not published, and
+  basic research is an assumption. A different place would move the amount between groups, not between
+  levels.
 - **Merging COFOG 10.5, 10.6 and 10.7** into one group, because cash benefits cannot be assigned to
   one of them: housing costs under Bürgergeld alone exceed the cash benefits recorded under 10.6.
 - **Levels of capital-transfer revenue** and of the revision leaf.

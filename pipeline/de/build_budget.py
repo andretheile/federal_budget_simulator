@@ -642,12 +642,14 @@ def _health_desc():
     de = lambda x: f"{x:.1f}".replace(".", ",") + " Mrd. Euro"
     en = lambda x: f"€{x:.1f}bn"
     ss, fed, te, gkv = by["social_security"], by["central"], M[("GF07", "S1314")]["TE"] / 1e3, GKV / 1e3
-    return (f"Gegliedert nach dem, wofür das Geld ausgegeben wird; Krankengeld und Pflegeversicherung stehen unter „Soziale Sicherung“, die Beiträge auf der Einnahmenseite unter „Sozialbeiträge“. "
-            f"Nach Ebenen entfallen hier {de(ss)} auf die Sozialversicherung und {de(fed)} auf den Bund. "
-            f"Dass die Sozialversicherungsträger selbst mehr ausgaben, {de(te)} (Eurostat), liegt vor allem daran, dass die Rechnung die Zahlungen des Bundes an den Gesundheitsfonds und an die landwirtschaftliche Krankenversicherung, zusammen {de(gkv)}, dem Bund zurechnet, der sie finanziert.",
-            f"Sorted by what the money is spent on; sick pay and long-term care insurance are under 'Social protection', and the contributions on the revenue side under 'Social contributions'. "
-            f"By level, {en(ss)} falls to the social insurance funds here and {en(fed)} to the federal level. "
-            f"That the social insurance funds themselves spent more, {en(te)} (Eurostat), is mainly because the calculation attributes the federal payments to the health fund and to the farmers' health insurance, together {en(gkv)}, to the federal level, which funds them.")
+    return (f"Hier stehen die Ausgaben der gesetzlichen Krankenkassen und die übrigen Gesundheitsausgaben des Staates, sortiert danach, wofür das Geld ausgegeben wird. "
+            f"Krankengeld und Pflegeversicherung stehen unter „Soziale Sicherung“, die Beiträge bei den Einnahmen unter „Sozialbeiträge“. "
+            f"Nach Staatsebene zeigt die Seite hier {de(ss)} für die Sozialversicherung und {de(fed)} für den Bund; die Sozialversicherung selbst gab mit {de(te)} mehr für Gesundheit aus, "
+            f"vor allem weil die {de(gkv)}, die der Bund in die Krankenversicherung zahlte, hier als Ausgaben des Bundes zählen.",
+            f"This area holds the spending of the statutory health insurers and the rest of public spending on health, sorted by what the money pays for. "
+            f"Sick pay and long-term care insurance are under 'Social protection', and the contributions under 'Social contributions' on the revenue side. "
+            f"By level of government, the page shows {en(ss)} here for social insurance and {en(fed)} for the federal government; social insurance itself spent more on health, {en(te)}, "
+            f"mainly because the {en(gkv)} that the federal government paid into health insurance counts here as federal spending.")
 
 
 next(n for n in EXP if n["id"] == "exp.health")["desc"] = _health_desc()
