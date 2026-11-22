@@ -461,10 +461,21 @@
     "publisher": "Deutscher Bundestag",
     "url": "https://dserver.bundestag.de/btd/21/082/2108235.pdf",
     "accessed": "2026-11-22",
-    "year": 2027,
+    "year": 2026,
     "note": {
-      "de": "Kindergeld 267 Euro ab 2027 und 272 Euro ab 2028 (§ 66 EStG). S. 17: 8 Euro mehr kosten in voller Jahreswirkung 1.245 Mio. Euro. S. 25: Minderausgaben im SGB II 176 Mio. Euro im Jahr. S. 31 f.: Kindergeld und Freibeträge für Kinder steigen nach § 66 Abs. 3 EStG gleichzeitig und prozentual gleichmäßig.",
-      "en": "Child benefit €267 from 2027 and €272 from 2028 (section 66 of the Income Tax Act). P. 17: €8 more costs €1,245m in a full year. P. 25: savings under Social Code Book II of €176m a year. Pp. 31 f.: child benefit and the allowances for children rise at the same time and by the same percentage under section 66(3) of the Income Tax Act."
+      "de": "Kindergeld 267 Euro ab 2027 und 272 Euro ab 2028 (§ 66 EStG). S. 17: 8 Euro mehr kosten in voller Jahreswirkung 1.245 Mio. Euro. S. 25: Minderausgaben im SGB II 176 Mio. Euro im Jahr. S. 31 f.: Kindergeld und Freibeträge für Kinder steigen nach § 66 Abs. 3 EStG gleichzeitig und prozentual gleichmäßig. § 32a Abs. 1 EStG ab 2027: 42 % von 70.601 Euro, 45 % von 250.000 Euro und 47 % von 280.000 Euro an; Grundfreibetrag 12.564 Euro. Dem Bundesrat am 4. September 2026 als besonders eilbedürftig zugeleitet (Drucksache 507/26).",
+      "en": "Child benefit €267 from 2027 and €272 from 2028 (section 66 of the Income Tax Act). P. 17: €8 more costs €1,245m in a full year. P. 25: savings under Social Code Book II of €176m a year. Pp. 31 f.: child benefit and the allowances for children rise at the same time and by the same percentage under section 66(3) of the Income Tax Act. Section 32a(1) of the Income Tax Act from 2027: 42% from €70,601, 45% from €250,000 and 47% from €280,000; basic allowance €12,564. Sent to the Bundesrat on 4 September 2026 as especially urgent (document 507/26)."
+    }
+  },
+  "bt_textarchiv_kw45_2026_est_anhoerung": {
+    "title": "Sachverständige kritisieren die Einkommensteuerreform (Textarchiv, Anhörung des Finanzausschusses am 4. November 2026)",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://www.bundestag.de/dokumente/textarchiv/2026/kw45-pa-finanzen-est-1225814",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Öffentliche Anhörung zum Entwurf 21/8235. Erste Lesung am 8. Oktober 2026, Überweisung an den Finanzausschuss (federführend).",
+      "en": "Public hearing on bill 21/8235. First reading on 8 October 2026, referred to the finance committee (lead)."
     }
   },
   "bt_textarchiv_2026_kw41_est": {
@@ -1061,8 +1072,8 @@
     }
   },
   "klingbeil_rede_2026_03_25": {
-    "title": "Rede Bundesfinanzminister und Vizekanzler Lars Klingbeil am 25. März 2026: Reformen für ein starkes Land. Kernaussagen aus der Rede (es gilt das gesprochene Wort)",
-    "publisher": "Bundesministerium der Finanzen, veröffentlicht von Table.Briefings",
+    "title": "Rede Bundesfinanzminister und Vizekanzler Lars Klingbeil am 25. März 2026: Reformen für ein starkes Land. Kernaussagen aus der Rede (vorab mit Sperrfrist 14 Uhr; es gilt das gesprochene Wort)",
+    "publisher": "Table.Briefings",
     "url": "https://table.media/assets/berlin/klingbeil.pdf",
     "accessed": "2026-11-22",
     "year": 2026,
@@ -1155,8 +1166,8 @@
     "accessed": "2026-11-22",
     "year": 2026,
     "note": {
-      "de": "Die Autoren schlagen ein Realsplitting für neue Ehen vor und halten eine Reform ohne Abschaffung der Minijobs und der beitragsfreien Mitversicherung für wenig wirksam.",
-      "en": "The authors propose maintenance-based splitting for new marriages and consider a reform of little effect without abolishing mini-jobs and contribution-free coverage of spouses."
+      "de": "Die Autoren schlagen ein Realsplitting bis zur Höhe des Grundfreibetrags vor und verlangen, zugleich die Minijobs abzuschaffen; Bestandsschutz für bestehende Ehen sieht der Vorschlag des Finanzministers vor. „Aus rechtlichen und praktischen Gründen kann man das Ehegattensplitting allerdings nicht vollständig abschaffen, sondern nur einschränken“.",
+      "en": "The authors propose maintenance-based splitting up to the basic allowance and call for abolishing mini-jobs at the same time; protection for existing marriages is part of the finance minister's proposal. \"Aus rechtlichen und praktischen Gründen kann man das Ehegattensplitting allerdings nicht vollständig abschaffen, sondern nur einschränken\"."
     }
   },
   "bt_drs_21_323": {
@@ -1166,8 +1177,8 @@
     "accessed": "2026-11-22",
     "year": 2025,
     "note": {
-      "de": "Finanztableau (S. 14, lfd. Nr. 5, § 23 KStG), volle Jahreswirkung: Körperschaftsteuer −4.295 Mio. Euro (2028) und −8.860 Mio. Euro (2029), Solidaritätszuschlag −235 und −485 Mio. Euro. Begründung zu § 23 Abs. 1 KStG (S. 23): Unternehmensteuerbelastung knapp 30 % (15 % Körperschaftsteuer, 0,825 % Solidaritätszuschlag, 14 % Gewerbesteuer bei einem Hebesatz von 400 %).",
-      "en": "Financial table (p. 14, no. 5, section 23 of the Corporate Income Tax Act), full-year effect: corporate income tax −€4,295m (2028) and −€8,860m (2029), solidarity surcharge −€235m and −€485m. Reasoning on section 23(1) (p. 23): corporate tax burden just under 30% (15% corporate income tax, 0.825% solidarity surcharge, 14% trade tax at a multiplier of 400%)."
+      "de": "Finanztableau (S. 14, lfd. Nr. 5, § 23 KStG), volle Jahreswirkung: Körperschaftsteuer −4.295 Mio. Euro (2028) und −8.860 Mio. Euro (2029), Solidaritätszuschlag −235 und −485 Mio. Euro; Fußnote 3 (S. 17): Mindereinnahmen der Senkung auf 10 % ab 2032 „jährlich über 25 Mrd. Euro“. Begründung zu § 23 Abs. 1 KStG (S. 23): Unternehmensteuerbelastung knapp 30 % (15 % Körperschaftsteuer, 0,825 % Solidaritätszuschlag, 14 % Gewerbesteuer bei einem Hebesatz von 400 %).",
+      "en": "Financial table (p. 14, no. 5, section 23 of the Corporate Income Tax Act), full-year effect: corporate income tax −€4,295m (2028) and −€8,860m (2029), solidarity surcharge −€235m and −€485m; footnote 3 (p. 17): revenue losses of the cut to 10% from 2032 of \"jährlich über 25 Mrd. Euro\". Reasoning on section 23(1) (p. 23): corporate tax burden just under 30% (15% corporate income tax, 0.825% solidarity surcharge, 14% trade tax at a multiplier of 400%)."
     }
   },
   "kstg_23": {
@@ -1221,8 +1232,8 @@
     "accessed": "2026-11-22",
     "year": 2025,
     "note": {
-      "de": "Tabelle 2: Körperschaftsteuer (Kasse) 2024 39.758, geschätzt 40.650 (2028) und 41.800 Mio. Euro (2029). Tabelle 8.2: Solidaritätszuschlag zur Körperschaftsteuer 2.209 (2024), 2.310 und 2.375 Mio. Euro.",
-      "en": "Table 2: corporate income tax (cash) 2024 €39,758m, estimated €40,650m (2028) and €41,800m (2029). Table 8.2: solidarity surcharge on corporate income tax €2,209m (2024), €2,310m and €2,375m."
+      "de": "Tabelle 1: nominales BIP 4.305,3 Mrd. Euro (2024), 4.798,6 (2028), 4.941,1 (2029). Tabelle 2: Körperschaftsteuer (Kasse) 2024 39.758, geschätzt 40.650 (2028) und 41.800 Mio. Euro (2029); Gewerbesteuer 2024 75.294 Mio. Euro. Tabelle 8.2: Solidaritätszuschlag zur Körperschaftsteuer 2.209 (2024), 2.310 und 2.375 Mio. Euro.",
+      "en": "Table 1: nominal GDP €4,305.3bn (2024), 4,798.6 (2028), 4,941.1 (2029). Table 2: corporate income tax (cash) 2024 €39,758m, estimated €40,650m (2028) and €41,800m (2029); trade tax 2024 €75,294m. Table 8.2: solidarity surcharge on corporate income tax €2,209m (2024), €2,310m and €2,375m."
     }
   },
   "diw_stellungnahme_investitionsbooster_2025": {
@@ -1232,8 +1243,8 @@
     "accessed": "2026-11-22",
     "year": 2025,
     "note": {
-      "de": "S. 4 f.: 86 % der Entlastungen an die einkommensstärksten 10 %, 69 % an das oberste 1 %; Elastizität der Bemessungsgrundlage −0,2 bis −0,4, Selbstfinanzierung 17 bis 33 %, mit Wachstumswirkungen bis gut die Hälfte; mäßige Wirkungen auf Investitionen, unter anderem Link, Menkhoff, Peichl und Schüle (2024) zu Gewerbesteuererhöhungen.",
-      "en": "Pp. 4 f.: 86% of the relief to the top 10% by income, 69% to the top 1%; elasticity of the tax base −0.2 to −0.4, self-financing 17 to 33%, up to just over half with growth effects; moderate effects on investment, among others Link, Menkhoff, Peichl and Schüle (2024) on trade tax increases."
+      "de": "Tabelle (S. 4), langfristige Wirkungen geschätzt für 2025: Senkung des Körperschaftsteuersatzes auf 10 % −23,4 Mrd. Euro (−0,53 % des BIP). S. 4 f.: 86 % der Entlastungen an die einkommensstärksten 10 %, 69 % an das oberste 1 %; Elastizität der Bemessungsgrundlage −0,2 bis −0,4, Selbstfinanzierung 17 bis 33 %, mit Wachstumswirkungen bis gut die Hälfte; mäßige Wirkungen auf Investitionen.",
+      "en": "Table (p. 4), long-run effects estimated for 2025: cut of the corporate income tax rate to 10% −€23.4bn (−0.53% of GDP). Pp. 4 f.: 86% of the relief to the top 10% by income, 69% to the top 1%; elasticity of the tax base −0.2 to −0.4, self-financing 17 to 33%, up to just over half with growth effects; moderate effects on investment."
     }
   },
   "bt_drs_21_2538": {
@@ -1254,8 +1265,8 @@
     "accessed": "2026-11-22",
     "year": 2020,
     "note": {
-      "de": "Kurzfassung und Kapitel 4: Vermögen zum 1. Januar 2020, Freibeträge 1 oder 2 Mio. Euro je Person und 2 oder 5 Mio. Euro für Unternehmensvermögen, Satz von 10 bis 30 %; Aufkommen 338 bis 560 Mrd. Euro mit dem Spitzensatz ab 30 Mio. Euro, 15 bis 18 % weniger ab 100 Mio. Euro; 20 Jahresraten mit 2 % Zinsen, 6,06 % der Schuld im Jahr; 300.000 bis 400.000 Pflichtige bei 2 Mio. Euro Freibetrag; Erhebungskosten 2 bis 3,5 %; Konfidenzintervall etwa ±25 %.",
-      "en": "Summary and chapter 4: wealth on 1 January 2020, allowances of €1m or €2m per person and €2m or €5m for business assets, rate 10 to 30%; revenue €338bn to €560bn with the top rate from €30m, 15 to 18% less from €100m; 20 yearly instalments with 2% interest, 6.06% of the debt a year; 300,000 to 400,000 payers with a €2m allowance; collection costs 2 to 3.5%; confidence interval about ±25%."
+      "de": "Kapitel 2.4 (S. 17): 20 Jahresraten, Zins Basiszinssatz plus 2 Punkte, mindestens 2 %; 2020 galt der Mindestzins, Jahresrate 6,06 % (Mittelwert aus vor- und nachschüssiger Zahlung). Kapitel 3.3 (S. 37): Vermögenswerte von 2017, für den Stichtag 1. Januar 2020 nicht fortgeschrieben. Tabelle 4-7 (S. 54): Spitzensatz ab 100 Mio. Euro, linear-progressiv; Freibeträge 2 Mio. Euro je Person und 5 Mio. Euro für Betriebsvermögen 310 Mrd. Euro (95-%-Intervall 230 bis 390), ohne Freibetrag für Betriebsvermögen 391 Mrd. Euro; 19 Mrd. Euro im Jahr; Erhebungskosten 2,4 %, davon 1,9 % Minderaufkommen durch Wertgutachten. Kurzfassung: 300.000 bis 400.000 Pflichtige bei 2 Mio. Euro Freibetrag, reichstes Prozent 32 %, reichste 0,1 % 16 % des Vermögens; kein Ausweichen bei zurückliegendem Stichtag.",
+      "en": "Chapter 2.4 (p. 17): 20 yearly instalments, interest at the base rate plus 2 points, at least 2%; in 2020 the minimum applied, instalment 6.06% (mean of payment at the start and the end of the year). Chapter 3.3 (p. 37): wealth values of 2017, not carried forward to the reference date of 1 January 2020. Table 4-7 (p. 54): top rate from €100m, linear-progressive; allowances of €2m per person and €5m for business assets €310bn (95% interval 230 to 390), without the business allowance €391bn; €19bn a year; collection costs 2.4%, of which 1.9% revenue lost through valuation reports. Summary: 300,000 to 400,000 payers with a €2m allowance, richest 1% own 32%, richest 0.1% 16% of wealth; no avoidance with a reference date in the past."
     }
   },
   "rosalux_vermoegensabgabe_2020": {
@@ -1326,13 +1337,13 @@
   },
   "dolls_et_al_2025": {
     "title": "Who Bears the Burden of Real Estate Transfer Taxes? Evidence from the German Housing Market. CESifo Working Paper 8839 (2021); Journal of Urban Economics 145 (2025), 103717",
-    "publisher": "Mathias Dolls, Clemens Fuest, Carla Krolage, Florian Neumeier (ifo Institut)",
-    "url": "https://www.cesifo.org/DocDL/cesifo1_wp8839.pdf",
+    "publisher": "Mathias Dolls, Clemens Fuest, Carla Krolage, Florian Neumeier (ifo Institut); Nachweis im Publikationsserver der Universität Regensburg",
+    "url": "https://pred.uni-regensburg.de/id/eprint/64245/",
     "accessed": "2026-11-22",
     "year": 2019,
     "note": {
-      "de": "Daten zu rund 17 Mio. Immobilien 2005 bis 2019: Ein um einen Prozentpunkt höherer Satz senkt die Preise nach zwölf Monaten um durchschnittlich rund 3 %, stärker bei Wohnungen und in wachsenden Regionen.",
-      "en": "Data on about 17 million properties 2005 to 2019: a rate higher by one percentage point lowers prices after twelve months by about 3% on average, more for flats and in growing regions."
+      "de": "Zusammenfassung: Daten zu rund 17 Mio. Immobilien 2005 bis 2019; zwölf Monate nach einer Reform senkt ein um einen Prozentpunkt höherer Satz die Preise um durchschnittlich 3 %, bei Wohnungen um 4 %, bei Einfamilienhäusern um 2 %.",
+      "en": "Abstract: data on about 17 million properties 2005 to 2019; twelve months after a reform, a rate higher by one percentage point lowers prices by 3% on average, by 4% for flats and 2% for single-family houses."
     }
   },
   "wirtschaftsdienst_2023_grunderwerbsteuer": {
@@ -1353,8 +1364,8 @@
     "accessed": "2026-11-22",
     "year": 2026,
     "note": {
-      "de": "Antrag der Grünen zu Share Deals (21/6646) in namentlicher Abstimmung abgelehnt (132 Ja, 445 Nein, 3 Enthaltungen); die Grünen beziffern die Mehreinnahmen auf etwa 1 Mrd. Euro. Die AfD will die Grunderwerbsteuer für selbst genutztes Eigentum abschaffen.",
-      "en": "Greens motion on share deals (21/6646) rejected in a recorded vote (132 yes, 445 no, 3 abstentions); the Greens put the additional revenue at about €1bn. The AfD wants to abolish the transfer tax on owner-occupied property."
+      "de": "Antrag der Grünen zu Share Deals (21/6646) in namentlicher Abstimmung abgelehnt: Für die Beschlussempfehlung 21/7081 Buchstabe b, den Antrag abzulehnen, stimmten 443 Abgeordnete, 132 dagegen, 3 enthielten sich. Die Grünen beziffern die Mehreinnahmen auf etwa 1 Mrd. Euro. Die AfD will die Grunderwerbsteuer für selbst genutztes Eigentum abschaffen.",
+      "en": "Greens motion on share deals (21/6646) rejected in a recorded vote: 443 members voted for committee recommendation 21/7081 letter b to reject it, 132 against, 3 abstained. The Greens put the additional revenue at about €1bn. The AfD wants to abolish the transfer tax on owner-occupied property."
     }
   },
   "grestg": {
@@ -1379,15 +1390,125 @@
       "en": "For the first purchase of a home to live in since 1 March 2024: €10,000 per buyer (at most €20,000) and €5,000 per child, at most the transfer tax paid, paid out in ten yearly instalments."
     }
   },
-  "hessengeld_bilanz_2025": {
-    "title": "Überzeugend: ein Jahr Hessengeld (Präsentation zur Pressekonferenz am 19. September 2025)",
-    "publisher": "Hessisches Ministerium der Finanzen",
-    "url": "https://finanzen.hessen.de/sites/finanzen.hessen.de/files/2025-09/pm2025-117_anlage_ueberzeugend-ein_jahr_hessengeld-praesentation_pressekonferenz_am_19-september_0.pdf",
+  "spd_regierungsprogramm_2025": {
+    "title": "Mehr für Dich. Besser für Deutschland. Regierungsprogramm der SPD für die Bundestagswahl 2025",
+    "publisher": "SPD",
+    "url": "https://www.spd.de/fileadmin/Dokumente/Beschluesse/Programm/2025_SPD_Regierungsprogramm.pdf",
     "accessed": "2026-11-22",
     "year": 2025,
     "note": {
-      "de": "Über 14.500 zugelassene Hauptanträge, über 10.500 Bewilligungen, über 160 Mio. Euro bewilligt.",
-      "en": "Over 14,500 admitted main applications, over 10,500 approvals, over €160m approved."
+      "de": "S. 18 f.: „Die ausgesetzte Vermögensteuer wollen wir für sehr hohe Vermögen revitalisieren.“ Erbschaftsteuer mit Mindestbesteuerung großer Betriebsvermögen; Solidaritätszuschlag für die höchsten Einkommen beibehalten. Eine einmalige Vermögensabgabe fordert das Programm nicht.",
+      "en": "Pp. 18 f.: \"Die ausgesetzte Vermögensteuer wollen wir für sehr hohe Vermögen revitalisieren.\" Inheritance tax with minimum taxation of large business assets; keep the solidarity surcharge for the highest incomes. The programme does not demand a one-off wealth levy."
+    }
+  },
+  "destatis_kst_2021": {
+    "title": "Statistischer Bericht – Körperschaftsteuerstatistik 2021 (Tabelle 73211-b04)",
+    "publisher": "Statistisches Bundesamt (Destatis)",
+    "url": "https://www.destatis.de/DE/Themen/Staat/Steuern/Unternehmenssteuern/Publikationen/Downloads-Koerperschaftsteuern/statistischer-bericht-koerperschaftsteuerstatistik-2140720217005.xlsx?__blob=publicationFile&v=2",
+    "accessed": "2026-11-22",
+    "year": 2021,
+    "note": {
+      "de": "Tabelle 73211-b04: mit 15 % zu versteuernde Einkommensteile 334,754 Mrd. Euro, Steuerschuld darauf 50,213 Mrd. Euro, festgesetzte Körperschaftsteuer 49,094 Mrd. Euro, anzurechnende Beträge und Steuerabzug 8,660 Mrd. Euro.",
+      "en": "Table 73211-b04: income taxed at 15% €334.754bn, tax on it €50.213bn, assessed corporate income tax €49.094bn, credited amounts and withheld tax €8.660bn."
+    }
+  },
+  "fuest_peichl_siegloch_2018": {
+    "title": "Do Higher Corporate Taxes Reduce Wages? Micro Evidence from Germany. American Economic Review 108 (2), 2018, S. 393–418",
+    "publisher": "Clemens Fuest, Andreas Peichl, Sebastian Siegloch (American Economic Association)",
+    "url": "https://www.aeaweb.org/articles?id=10.1257/aer.20130570",
+    "accessed": "2026-11-22",
+    "year": 2018,
+    "note": {
+      "de": "Zusammenfassung: 20 Jahre Daten deutscher Gemeinden mit 6.800 Steueränderungen; Beschäftigte tragen etwa die Hälfte der gesamten Steuerlast, geringer Qualifizierte, Jüngere und Frauen einen größeren Teil.",
+      "en": "Abstract: 20 years of data on German municipalities with 6,800 tax changes; workers bear about one-half of the total tax burden, low-skilled, young and female employees a larger share."
+    }
+  },
+  "link_et_al_2024": {
+    "title": "Downward Revision of Investment Decisions after Corporate Tax Hikes. American Economic Journal: Economic Policy 16 (4), 2024, S. 194–222",
+    "publisher": "Sebastian Link, Manuel Menkhoff, Andreas Peichl, Paul Schüle (American Economic Association)",
+    "url": "https://www.aeaweb.org/articles?id=10.1257/pol.20220530",
+    "accessed": "2026-11-22",
+    "year": 2024,
+    "note": {
+      "de": "Zusammenfassung: über 1.400 örtliche Steueränderungen, Industrieunternehmen in Deutschland; nach einer Erhöhung steigt der Anteil der Unternehmen, die weniger investieren als geplant, um 3 Prozentpunkte, in Rezessionen doppelt so stark.",
+      "en": "Abstract: more than 1,400 local tax changes, manufacturing firms in Germany; after a tax hike the share of firms that invest less than planned rises by 3 percentage points, twice as much in recessions."
+    }
+  },
+  "bundesbank_basiszinssatz": {
+    "title": "Basiszinssatz nach § 247 BGB",
+    "publisher": "Deutsche Bundesbank",
+    "url": "https://www.bundesbank.de/de/bundesbank/organisation/agb-und-regelungen/basiszinssatz-607820",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "1,52 % seit dem 1. Juli 2026; 2020 lag er bei −0,88 %.",
+      "en": "1.52% since 1 July 2026; in 2020 it was −0.88%."
+    }
+  },
+  "gg_art_105": {
+    "title": "Grundgesetz, Artikel 105",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/gg/art_105.html",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Abs. 3: Bundesgesetze über Steuern, deren Aufkommen den Ländern oder den Gemeinden ganz oder zum Teil zufließt, bedürfen der Zustimmung des Bundesrates. Abs. 2a: Die Länder bestimmen den Steuersatz der Grunderwerbsteuer.",
+      "en": "Subsection 3: federal laws on taxes whose revenue accrues wholly or partly to the states or municipalities require the consent of the Bundesrat. Subsection 2a: the states set the rate of the real estate transfer tax."
+    }
+  },
+  "bt_drs_20_14904": {
+    "title": "Antwort der Bundesregierung auf die Kleine Anfrage der Gruppe Die Linke: Entwicklung und Verteilung des Grunderwerbsteueraufkommens, Drucksache 20/14904 vom 05.02.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/20/149/2014904.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Antwort zu Frage 1: „Eine Untergliederung der Daten lässt die DAME-Statistik im Übrigen nicht zu.“ Zu den Merkmalen der Käufer, auch Ersterwerb und Zweck des Erwerbs (Fragen 4 und 5), liegen der Bundesregierung keine Erkenntnisse vor.",
+      "en": "Answer to question 1: \"Eine Untergliederung der Daten lässt die DAME-Statistik im Übrigen nicht zu.\" On the characteristics of buyers, including first purchase and purpose (questions 4 and 5), the federal government has no information."
+    }
+  },
+  "bt_drs_21_5776": {
+    "title": "Antwort der Bundesregierung auf die Kleine Anfrage der Fraktion Die Linke: Grunderwerbsteuer und steuerliche Ungleichbehandlung ehelicher und nichtehelicher Lebensgemeinschaften, Drucksache 21/5776 vom 06.05.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/057/2105776.pdf",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Antwort zu Frage 6 c (Freibetrag für selbst genutztes Wohneigentum): „Der Koalitionsvertrag ... enthält keine Aussagen zur Grunderwerbsteuer. Zu Kosten liegen keine Informationen vor“.",
+      "en": "Answer to question 6 c (allowance for owner-occupied housing): \"Der Koalitionsvertrag ... enthält keine Aussagen zur Grunderwerbsteuer. Zu Kosten liegen keine Informationen vor\"."
+    }
+  },
+  "akoga_immobilienmarktbericht_2025": {
+    "title": "Immobilienmarktbericht Deutschland 2025 (Dezember 2025)",
+    "publisher": "Arbeitskreis der Oberen Gutachterausschüsse, Zentralen Geschäftsstellen und Gutachterausschüsse in der Bundesrepublik Deutschland (AK OGA) mit dem BBSR",
+    "url": "https://redaktion-akoga.niedersachsen.de/download/224020",
+    "accessed": "2026-11-22",
+    "year": 2024,
+    "note": {
+      "de": "Abb. 4-21 (S. 37): Geldumsatz mit Wohnimmobilien 2024 182,9 Mrd. Euro, davon Eigenheime 84,3, Eigentumswohnungen 62,9 und Bauplätze für Eigenheime 9,1 Mrd. Euro; Geldumsatz aller Immobilien 247 Mrd. Euro (Pressemitteilung vom 15. Dezember 2025).",
+      "en": "Fig. 4-21 (p. 37): residential turnover 2024 €182.9bn, of which houses €84.3bn, flats €62.9bn and plots for houses €9.1bn; turnover of all property €247bn (press release of 15 December 2025)."
+    }
+  },
+  "hessen_pm_hessengeld_2026_05": {
+    "title": "Mehr als 277 Millionen Euro bewilligt (Pressemitteilung vom 26. Mai 2026)",
+    "publisher": "Hessisches Ministerium der Finanzen",
+    "url": "https://finanzen.hessen.de/presse/mehr-als-277-millionen-euro-bewilligt",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "„Es wurden für über 17.900 Anträge bereits mehr als 277 Millionen Euro Hessengeld bewilligt.“ Im Durchschnitt rund 15.600 Euro je Antrag für zehn Jahre; 10.000 Euro je Käufer (höchstens 20.000 Euro) und 5.000 Euro je Kind, höchstens die gezahlte Grunderwerbsteuer.",
+      "en": "\"Es wurden für über 17.900 Anträge bereits mehr als 277 Millionen Euro Hessengeld bewilligt.\" On average about €15,600 per application over ten years; €10,000 per buyer (at most €20,000) and €5,000 per child, at most the transfer tax paid."
+    }
+  },
+  "ofd_frankfurt_jahresbericht_2024": {
+    "title": "Jahresbericht 2024 der Oberfinanzdirektion Frankfurt am Main",
+    "publisher": "Oberfinanzdirektion Frankfurt am Main",
+    "url": "https://ofd.hessen.de/sites/ofd.hessen.de/files/2025-05/jahresbericht_2024.pdf",
+    "accessed": "2026-11-22",
+    "year": 2024,
+    "note": {
+      "de": "S. 11: Grunderwerbsteuer in Hessen 2024 1.156.638.645,76 Euro (2023: 1.066.797.322,00 Euro). S. 13: 124.214 bearbeitete Erwerbsvorgänge.",
+      "en": "P. 11: real estate transfer tax in Hesse in 2024 €1,156,638,645.76 (2023: €1,066,797,322.00). P. 13: 124,214 acquisitions processed."
     }
   },
   "bt_drs_20_12783": {
