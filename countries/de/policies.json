@@ -828,12 +828,12 @@
         "en": "Raise or cut the standard rate of basic income support"
       },
       "summary": {
-        "de": "Ändert den Regelsatz im Grundsicherungsgeld, in der Sozialhilfe und in der Grundsicherung im Alter (2024: 563 Euro im Monat). Voreingestellt sind 813 Euro, wie die Linke sie nennt.",
-        "en": "Changes the standard rate of Grundsicherungsgeld, social assistance and basic income support in old age (2024: €563 a month). The default is €813, the figure the Left cites."
+        "de": "Ändert den Regelsatz im Grundsicherungsgeld, in der Sozialhilfe und in der Grundsicherung im Alter (seit 2024: 563 Euro im Monat). Voreingestellt sind 813 Euro, auf die sich die Linke beruft.",
+        "en": "Changes the standard rate of Grundsicherungsgeld, social assistance and basic income support in old age (€563 a month since 2024). The default is €813, the figure the Left cites."
       },
       "explanation": {
-        "de": "Das Bürgergeld heißt seit 1. Juli 2026 Grundsicherungsgeld. Es ist die Geldleistung der Grundsicherung für Arbeitsuchende nach dem Zweiten Buch Sozialgesetzbuch; die Reform ließ die Regelsätze unverändert. Dieselben Sätze gelten in der Sozialhilfe und in der Grundsicherung im Alter und bei Erwerbsminderung, und die Maßnahme ändert sie überall. Der Regler zeigt den Satz für Alleinstehende (Regelbedarfsstufe 1, 2024 bis 2026: 563 Euro); Partner (506 Euro) und Kinder (357 bis 471 Euro) ändern sich im selben Verhältnis, ebenso die Mehrbedarfe, die als Anteil des Regelsatzes bemessen sind.\n\nDie Linke hält den Regelsatz für kleingerechnet: Nach einer Berechnung des Paritätischen Wohlfahrtsverbands müsse er bei mindestens 813 Euro liegen (Wahlprogramm 2025). In die andere Richtung will die AfD die Sätze nur noch nach der tatsächlichen Preisentwicklung fortschreiben, und Bundesinnenminister Dobrindt (CSU) nannte den Satz im Juni 2026 zu hoch. Ohne die Regel, die Kürzungen bei der jährlichen Anpassung verhindert, hätte die Formel 2025 539 Euro und 2026 557 Euro ergeben.\n\nSchließen „Kein Bürgergeld für Ausländer“ oder „Ukrainer: Asylbewerberleistungen statt Bürgergeld“ Gruppen aus, gilt der neue Satz nur noch für die übrigen Bezieher; die Ersatzleistungen jener Maßnahmen bleiben auf dem Stand von 2024. Mit „Kindergeld erhöhen oder senken“ ändert sich das Grundsicherungsgeld zusätzlich, weil das Kindergeld dort als Einkommen angerechnet wird.",
-        "en": "Citizen's income (Bürgergeld) has been called Grundsicherungsgeld since 1 July 2026. It is the cash benefit of basic income support for jobseekers under Social Code Book II; the reform left the standard rates unchanged. The same rates apply in social assistance and in basic income support in old age and for reduced earning capacity, and the measure changes them everywhere. The slider shows the rate for a single adult (standard rate level 1, 2024 to 2026: €563); partners (€506) and children (€357 to €471) change in the same proportion, as do the supplements set as a share of the standard rate.\n\nThe Left considers the standard rate calculated too low: according to a calculation by the Paritätischer Wohlfahrtsverband it would have to be at least €813 (2025 election programme). In the other direction, the AfD wants to update the rates only with actual price developments, and the federal interior minister Dobrindt (CSU) called the rate too high in June 2026. Without the rule that prevents cuts in the annual update, the formula would have given €539 in 2025 and €557 in 2026.\n\nIf \"No citizen's income for non-citizens\" or \"Ukrainians: asylum seekers' benefits instead of citizen's income\" excludes groups, the new rate applies only to the remaining recipients; the replacement benefits of those measures stay at the 2024 level. With \"Raise or cut child benefit\", Grundsicherungsgeld changes as well, because child benefit counts as income there."
+        "de": "Das Bürgergeld heißt seit 1. Juli 2026 Grundsicherungsgeld. Es ist die Geldleistung der Grundsicherung für Arbeitsuchende nach dem Zweiten Buch Sozialgesetzbuch; die Reform ließ die Regelsätze unverändert. Dieselben Sätze gelten in der Sozialhilfe und in der Grundsicherung im Alter und bei Erwerbsminderung, und die Maßnahme ändert sie überall. Der Regler zeigt den Satz für Alleinstehende (Regelbedarfsstufe 1, 2024 bis 2026: 563 Euro); Partner (506 Euro) und Kinder (357 bis 471 Euro) ändern sich im selben Verhältnis, ebenso die Mehrbedarfe, die als Anteil des Regelsatzes bemessen sind. Angenommen ist, dass sich die Leistungen für Asylbewerber im selben Verhältnis ändern wie bei der jährlichen Fortschreibung.\n\nDie Linke hält den Regelsatz für kleingerechnet: Nach einer Berechnung des Paritätischen Wohlfahrtsverbands müsse er bei mindestens 813 Euro liegen (Wahlprogramm 2025). In die andere Richtung will die AfD die Sätze nur noch nach der tatsächlichen Preisentwicklung fortschreiben, und Bundesinnenminister Dobrindt (CSU) nannte den Satz im Juni 2026 zu hoch. Ohne die Regel, die Kürzungen bei der jährlichen Anpassung verhindert, hätte die Formel 2025 539 Euro und 2026 557 Euro ergeben.\n\nSchließen „Kein Bürgergeld für Ausländer“ oder „Ukrainer: Asylbewerberleistungen statt Bürgergeld“ Gruppen aus, gilt der neue Satz nur noch für die übrigen Bezieher; die Ersatzleistungen jener Maßnahmen bleiben auf dem Stand von 2024. Mit „Kindergeld erhöhen oder senken“ ändert sich das Grundsicherungsgeld zusätzlich, weil das Kindergeld dort als Einkommen angerechnet wird.",
+        "en": "Citizen's income (Bürgergeld) has been called Grundsicherungsgeld since 1 July 2026. It is the cash benefit of basic income support for jobseekers under Social Code Book II; the reform left the standard rates unchanged. The same rates apply in social assistance and in basic income support in old age and for reduced earning capacity, and the measure changes them everywhere. The slider shows the rate for a single adult (standard rate level 1, 2024 to 2026: €563); partners (€506) and children (€357 to €471) change in the same proportion, as do the supplements set as a share of the standard rate. Benefits for asylum seekers are assumed to change in the same proportion, as in the annual update.\n\nThe Left considers the standard rate calculated too low: according to a calculation by the Paritätischer Wohlfahrtsverband it would have to be at least €813 (2025 election programme). In the other direction, the AfD wants to update the rates only with actual price developments, and the federal interior minister Dobrindt (CSU) called the rate too high in June 2026. Without the rule that prevents cuts in the annual update, the formula would have given €539 in 2025 and €557 in 2026.\n\nIf \"No citizen's income for non-citizens\" or \"Ukrainians: asylum seekers' benefits instead of citizen's income\" excludes groups, the new rate applies only to the remaining recipients; the replacement benefits of those measures stay at the 2024 level. With \"Raise or cut child benefit\", Grundsicherungsgeld changes as well, because child benefit counts as income there."
       },
       "topic": "social",
       "params": [
@@ -868,7 +868,7 @@
           "quality": "derived",
           "uncertainty": {
             "low": 0.8,
-            "high": 1.2,
+            "high": 1.5,
             "basis": "rate_cost"
           },
           "sources": [
@@ -877,8 +877,8 @@
             "ba_sgb2_zeitreihe"
           ],
           "note": {
-            "de": "Kosten je Euro nach der amtlichen Schätzung für 2024: Die Erhöhung um 61 Euro (Regelbedarfsstufe 1 von 502 auf 563 Euro, alle Stufen um rund 12 %) kostete den Bund im Grundsicherungsgeld rund 3,41 Mrd. Euro, also 55,9 Mio. Euro je Euro im Monat oder 0,19 % der Ausgaben von 2024 (29,15 Mrd. Euro). Die Schätzung hält Einkommen und Fallzahlen fest, rechnet also ohne Haushalte, die bei einem höheren Satz neu anspruchsberechtigt werden oder bei einem niedrigeren herausfallen. Die Spanne (80 bis 120 %) ist eine Annahme: Die Zahlungsansprüche für Regelbedarf und Mehrbedarfe stiegen von 2023 auf 2024 tatsächlich nur um 2,9 Mrd. Euro, auch weil Einkommen stiegen; neue Anspruchsberechtigte bei einer Erhöhung und wegfallende bei einer Kürzung vergrößern die Wirkung.",
-            "en": "Cost per euro from the official estimate for 2024: the increase by €61 (standard rate level 1 from €502 to €563, all levels by about 12%) cost the federal government about €3.41bn in Grundsicherungsgeld, that is €55.9m per euro a month or 0.19% of 2024 spending (€29.15bn). The estimate holds incomes and caseloads fixed, so it leaves out households that become entitled at a higher rate or drop out at a lower one. The range (80 to 120%) is an assumption: payment entitlements for standard rates and supplements actually rose by only €2.9bn from 2023 to 2024, partly because incomes rose; new claimants with an increase and households dropping out with a cut enlarge the effect."
+            "de": "Kosten je Euro nach der amtlichen Schätzung für 2024: Die Erhöhung um 61 Euro (Regelbedarfsstufe 1 von 502 auf 563 Euro, alle Stufen um rund 12 %) kostete den Bund im Grundsicherungsgeld rund 3,41 Mrd. Euro, also 55,9 Mio. Euro je Euro im Monat oder 0,19 % der Ausgaben von 2024 (29,15 Mrd. Euro). Die Schätzung berücksichtigt nach eigener Angabe keine gestiegenen Einkommen erwerbstätiger Leistungsberechtigter; Haushalte, die bei einem höheren Satz neu anspruchsberechtigt werden oder bei einem niedrigeren herausfallen, nennt sie nicht. Die Spanne (80 bis 150 %) ist eine Annahme. Nach unten: Die Zahlungsansprüche für Regelbedarf und Mehrbedarfe stiegen von 2023 auf 2024 tatsächlich nur um 2,9 Mrd. Euro, auch weil Einkommen stiegen. Nach oben reicht sie weiter, weil die Kosten je Euro aus einer Erhöhung um 12 % stammen: Bei 813 Euro, 44 % über dem Satz von 2024, stiege das Einkommen, bis zu dem ein Haushalt Anspruch hat, je Erwachsenem um 3.000 Euro im Jahr, und Geringverdiener, Haushalte mit Wohngeld oder Kinderzuschlag und Rentner mit niedrigem Einkommen kämen hinzu; eine amtliche Schätzung dieser Zahl gibt es nicht. Bei einer Kürzung fielen entsprechend Haushalte heraus.",
+            "en": "Cost per euro from the official estimate for 2024: the increase by €61 (standard rate level 1 from €502 to €563, all levels by about 12%) cost the federal government about €3.41bn in Grundsicherungsgeld, that is €55.9m per euro a month or 0.19% of 2024 spending (€29.15bn). By its own account the estimate does not allow for higher incomes of recipients in work; it does not mention households that become entitled at a higher rate or drop out at a lower one. The range (80 to 150%) is an assumption. Downwards: payment entitlements for standard rates and supplements actually rose by only €2.9bn from 2023 to 2024, partly because incomes rose. Upwards it reaches further, because the cost per euro comes from a rise of 12%: at €813, 44% above the 2024 rate, the income up to which a household is entitled would rise by €3,000 a year per adult, and low earners, households on housing benefit or the child supplement and pensioners with low incomes would join; there is no official estimate of their number. With a cut, households would drop out accordingly."
           }
         },
         {
@@ -892,7 +892,7 @@
           "quality": "derived",
           "uncertainty": {
             "low": 0.8,
-            "high": 1.2,
+            "high": 1.5,
             "basis": "rate_cost"
           },
           "sources": [
@@ -915,15 +915,15 @@
           "quality": "derived",
           "uncertainty": {
             "low": 0.8,
-            "high": 1.2,
+            "high": 1.5,
             "basis": "rate_cost"
           },
           "sources": [
             "brd_454_23"
           ],
           "note": {
-            "de": "Hilfe zum Lebensunterhalt der Sozialhilfe: 110 Mio. Euro für die Erhöhung 2024, 1,8 Mio. Euro je Euro; sie tragen Länder und Kommunen. Gebucht auf dem Sammelposten, dessen Ebenenanteile auch den Bund einschließen.",
-            "en": "Subsistence assistance under social assistance: €110m for the 2024 increase, €1.8m per euro; borne by states and municipalities. Booked on the collective item, whose level shares include the federal level as well."
+            "de": "Hilfe zum Lebensunterhalt der Sozialhilfe: 110 Mio. Euro für die Erhöhung 2024, 1,8 Mio. Euro je Euro; sie tragen Länder und Kommunen. Gebucht auf dem Sammelposten der Grundsicherung, dessen Ebenenanteile auch Bund und Sozialversicherung einschließen, zusammen gut die Hälfte; einen Posten nur für die Sozialhilfe gibt es nicht.",
+            "en": "Subsistence assistance under social assistance: €110m for the 2024 increase, €1.8m per euro; borne by states and municipalities. Booked on the collective item of basic security, whose level shares include the federal level and the social insurance funds as well, together just over half; there is no item for social assistance alone."
           }
         },
         {
@@ -937,15 +937,38 @@
           "quality": "derived",
           "uncertainty": {
             "low": 0.8,
-            "high": 1.2,
+            "high": 1.5,
             "basis": "rate_cost"
           },
           "sources": [
             "brd_454_23"
           ],
           "note": {
-            "de": "Leistungen nach § 2 AsylbLG folgen den Sätzen der Sozialhilfe: 140 Mio. Euro für die Erhöhung 2024, 2,3 Mio. Euro je Euro, getragen von Ländern und Kommunen. Die Geldleistungssätze nach § 3a AsylbLG legt das Gesetz eigens fest; sie ändern sich hier nicht.",
-            "en": "Benefits under section 2 of the Asylum Seekers' Benefits Act follow the social assistance rates: €140m for the 2024 increase, €2.3m per euro, borne by states and municipalities. The cash rates under section 3a of that act are set separately in the act; they do not change here."
+            "de": "Leistungen nach § 2 AsylbLG folgen den Sätzen der Sozialhilfe: 140 Mio. Euro für die Erhöhung 2024, 2,3 Mio. Euro je Euro, getragen von Ländern und Kommunen.",
+            "en": "Benefits under section 2 of the Asylum Seekers' Benefits Act follow the social assistance rates: €140m for the 2024 increase, €2.3m per euro, borne by states and municipalities."
+          }
+        },
+        {
+          "type": "add",
+          "target": "exp.social.basic_security.asylum_benefits",
+          "amount": {
+            "param": "rate",
+            "scale": 2081967,
+            "offset": -1172147421
+          },
+          "quality": "derived",
+          "uncertainty": {
+            "low": 0.8,
+            "high": 1.5,
+            "basis": "rate_cost"
+          },
+          "sources": [
+            "brd_454_23",
+            "asylblg_3a"
+          ],
+          "note": {
+            "de": "Die Geldleistungssätze nach § 3a AsylbLG stehen im Gesetz selbst, werden aber jedes Jahr mit derselben Rate fortgeschrieben wie die Regelsätze; die Fortschreibung 2024 kostete die Kommunen 127 Mio. Euro, 2,1 Mio. Euro je Euro. Angenommen ist, dass sie im selben Verhältnis mitgehen. Von selbst tun sie das nur bei der jährlichen Fortschreibung; nach einer neuen Einkommens- und Verbrauchsstichprobe werden sie eigens neu festgesetzt (§ 3a Abs. 4 und 5 AsylbLG). Gebucht auf den Asylbewerberleistungen, die Länder und Kommunen tragen.",
+            "en": "The cash rates under section 3a of the Asylum Seekers' Benefits Act are written into the act itself but are updated every year by the same rate as the standard rates; the 2024 update cost the municipalities €127m, €2.1m per euro. They are assumed to move in the same proportion. They do so by themselves only in the annual update; after a new income and consumption survey they are set anew separately (section 3a(4) and (5) of that act). Booked on asylum seekers' benefits, which states and municipalities bear."
           }
         }
       ],
@@ -967,8 +990,8 @@
           "kind": "legal",
           "severity": "major",
           "text": {
-            "de": "Das steuerfreie Existenzminimum darf den Mindestbedarf des Sozialrechts nicht unterschreiten (Bundesverfassungsgericht). Ein höherer Regelsatz zwingt deshalb zu einem höheren Grundfreibetrag und Kinderfreibetrag, und mit dem Kinderfreibetrag steigt nach § 66 Abs. 3 EStG auch das Kindergeld. Nach der Erhöhung der Regelsätze 2024 kosteten 180 Euro mehr Grundfreibetrag 1,56 Mrd. Euro und 228 Euro mehr Kinderfreibetrag 0,39 Mrd. Euro im Jahr. Bei 813 Euro müsste der Grundfreibetrag um bis zu 3.000 Euro steigen; linear hochgerechnet kostete allein das rund 26 Mrd. Euro (eigene Rechnung). Diese Folgen sind nicht eingerechnet.",
-            "en": "The tax-free subsistence minimum may not fall below the minimum need under social law (Federal Constitutional Court). A higher standard rate therefore forces a higher basic allowance and child allowance in income tax, and with the child allowance child benefit rises too under section 66(3) of the Income Tax Act. After the 2024 increase of the standard rates, €180 more basic allowance cost €1.56bn and €228 more child allowance €0.39bn a year. At €813 the basic allowance would have to rise by up to €3,000; extrapolated linearly, that alone would cost about €26bn (own calculation). These consequences are not included."
+            "de": "Das steuerfreie Existenzminimum darf den Mindestbedarf des Sozialrechts nicht unterschreiten (Bundesverfassungsgericht). Ein höherer Regelsatz zwingt deshalb zu einem höheren Grundfreibetrag und Kinderfreibetrag, und mit dem Kinderfreibetrag steigt nach § 66 Abs. 3 EStG auch das Kindergeld. Nach der Erhöhung der Regelsätze 2024 kosteten 180 Euro mehr Grundfreibetrag 1,56 Mrd. Euro und 228 Euro mehr Kinderfreibetrag 0,39 Mrd. Euro im Jahr. Bei 813 Euro müsste der Grundfreibetrag um bis zu 3.000 Euro steigen. Allein das würde rund 25 Mrd. Euro kosten, wenn wie 2024 nur der Grundfreibetrag steigt, und rund 38 Mrd. Euro, wenn sich der ganze Tarif um 3.000 Euro verschiebt (eigene Rechnung auf der Einkommensverteilung dieser Seite, an der amtlichen Schätzung für die 180 Euro ausgerichtet). Diese Folgen sind nicht eingerechnet.",
+            "en": "The tax-free subsistence minimum may not fall below the minimum need under social law (Federal Constitutional Court). A higher standard rate therefore forces a higher basic allowance and child allowance in income tax, and with the child allowance child benefit rises too under section 66(3) of the Income Tax Act. After the 2024 increase of the standard rates, €180 more basic allowance cost €1.56bn and €228 more child allowance €0.39bn a year. At €813 the basic allowance would have to rise by up to €3,000. That alone would cost about €25bn if, as in 2024, only the basic allowance rises, and about €38bn if the whole schedule shifts by €3,000 (own calculation on the income distribution of this page, aligned with the official estimate for the €180). These consequences are not included."
           },
           "sources": [
             "bt_drs_20_12783",
@@ -1004,8 +1027,8 @@
           "kind": "cost_shift",
           "severity": "minor",
           "text": {
-            "de": "Den größten Teil trägt der Bund: das Grundsicherungsgeld und die Erstattung der Grundsicherung im Alter, zusammen 71 Mio. Euro je Euro im Monat. Länder und Kommunen tragen die Hilfe zum Lebensunterhalt und die Leistungen nach § 2 AsylbLG, zusammen 4 Mio. Euro je Euro.",
-            "en": "Most of it falls on the federal government: Grundsicherungsgeld and the reimbursement of basic income support in old age, together €71m per euro a month. States and municipalities bear subsistence assistance and benefits under section 2 of the Asylum Seekers' Benefits Act, together €4m per euro."
+            "de": "Den größten Teil trägt der Bund: das Grundsicherungsgeld und die Erstattung der Grundsicherung im Alter, zusammen 71 Mio. Euro je Euro im Monat. Länder und Kommunen tragen die Hilfe zum Lebensunterhalt und die Asylbewerberleistungen, zusammen 6 Mio. Euro je Euro.",
+            "en": "Most of it falls on the federal government: Grundsicherungsgeld and the reimbursement of basic income support in old age, together €71m per euro a month. States and municipalities bear subsistence assistance and asylum seekers' benefits, together €6m per euro."
           },
           "sources": [
             "brd_454_23"
@@ -1015,8 +1038,8 @@
       "limits": [
         {
           "text": {
-            "de": "Die Kosten je Euro stammen aus der amtlichen Schätzung für die Erhöhung 2024 und sind linear fortgeschrieben; für große Änderungen ist das grob. Wohnkosten, Beiträge zur Kranken- und Pflegeversicherung und die Geldleistungssätze nach § 3a AsylbLG ändern sich nicht.",
-            "en": "The cost per euro comes from the official estimate for the 2024 increase and is extrapolated linearly; for large changes this is rough. Housing costs, health and long-term care contributions and the cash rates under section 3a of the Asylum Seekers' Benefits Act do not change."
+            "de": "Die Kosten je Euro stammen aus der amtlichen Schätzung für die Erhöhung 2024 und sind linear fortgeschrieben; für große Änderungen ist das grob, deshalb reicht die Spanne bis 150 %. Wohnkosten und Beiträge zur Kranken- und Pflegeversicherung ändern sich nicht. Nicht eingerechnet ist der Anteil der Kommunen an den Mehrausgaben im SGB II (2024: 80 Mio. Euro, 1,3 Mio. Euro je Euro).",
+            "en": "The cost per euro comes from the official estimate for the 2024 increase and is extrapolated linearly; for large changes this is rough, which is why the range reaches 150%. Housing costs and health and long-term care contributions do not change. The municipalities' share of the extra spending under Social Code Book II (2024: €80m, €1.3m per euro) is not included."
           },
           "sources": [
             "brd_454_23"
@@ -1024,8 +1047,17 @@
         },
         {
           "text": {
-            "de": "Nicht eingerechnet sind die höheren Freibeträge im Einkommensteuerrecht und das höhere Kindergeld, die einer Erhöhung folgen müssten, sowie Minderausgaben beim Kinderzuschlag und beim Wohngeld, die amtlich nicht beziffert sind. Den Grundfreibetrag kann man mit „Einkommensteuertarif ändern“ dazu einstellen.",
-            "en": "Not included are the higher allowances in income tax and the higher child benefit that would have to follow an increase, and savings on the child supplement and housing benefit, which are not quantified officially. The basic allowance can be set alongside with \"Change the income tax schedule\"."
+            "de": "Die Hilfe zum Lebensunterhalt, die Länder und Kommunen tragen, ist auf dem Sammelposten der Grundsicherung gebucht, weil es für die Sozialhilfe keinen eigenen Posten gibt. In der Ansicht nach Ebenen erscheint deshalb gut die Hälfte davon, bei 813 Euro rund 0,25 Mrd. Euro, bei Bund und Sozialversicherung.",
+            "en": "Subsistence assistance, which states and municipalities bear, is booked on the collective item of basic security, because there is no item for social assistance alone. In the view by level, just over half of it, about €0.25bn at €813, therefore shows at the federal level and the social insurance funds."
+          },
+          "sources": [
+            "brd_454_23"
+          ]
+        },
+        {
+          "text": {
+            "de": "Nicht eingerechnet sind die höheren Freibeträge im Einkommensteuerrecht und das höhere Kindergeld, die einer Erhöhung folgen müssten, sowie Minderausgaben beim Kinderzuschlag und beim Wohngeld, die amtlich nicht beziffert sind. Den Grundfreibetrag kann man mit „Einkommensteuertarif ändern“ dazu einstellen; jene Maßnahme zeigt dafür rund ein Sechstel weniger als die Rechnung oben (rund 20 und 32 statt 25 und 38 Mrd. Euro), weil sie nur die relative Änderung der tariflichen Steuer auf das Aufkommen überträgt.",
+            "en": "Not included are the higher allowances in income tax and the higher child benefit that would have to follow an increase, and savings on the child supplement and housing benefit, which are not quantified officially. The basic allowance can be set alongside with \"Change the income tax schedule\"; that measure shows about a sixth less for it than the calculation above (about €20bn and €32bn instead of €25bn and €38bn), because it transfers only the relative change of the tariff tax to the revenue."
           },
           "sources": [
             "bt_drs_20_12783",
@@ -1046,7 +1078,8 @@
         "bverfg_2014_regelbedarf",
         "bverfg_2019_sanktionen",
         "bt_drs_20_12783",
-        "ba_sgb2_zeitreihe"
+        "ba_sgb2_zeitreihe",
+        "asylblg_3a"
       ]
     },
     {
@@ -1060,8 +1093,8 @@
         "en": "Changes child benefit per child and month (current law since 2026: €259). The default is €350, the Left's demand."
       },
       "explanation": {
-        "de": "2024 betrug das Kindergeld 250 Euro, seit 2026 sind es 259 Euro. Bezugspunkt ist das geltende Recht; die Kosten je Euro stammen aus den amtlichen Schätzungen. Der Kinderfreibetrag bleibt, wie er ist: Er muss das Existenzminimum des Kindes steuerfrei stellen, und nach § 66 Abs. 3 EStG folgt das Kindergeld ihm, nicht umgekehrt. Wer viel verdient, für den ist der Freibetrag günstiger; das Finanzamt verrechnet dann das Kindergeld, und ein höheres bringt nichts, solange der Freibetrag günstiger bleibt.\n\nDie Linke fordert 350 Euro für jedes Kind, ohne Anrechnung auf das Bürgergeld, als Teil einer Kindergrundsicherung (Wahlprogramm 2025). Die Bundesregierung will das Kindergeld 2027 auf 267 und 2028 auf 272 Euro anheben. Ein Vorschlag einer Partei oder Fraktion, das Kindergeld zu kürzen oder einzufrieren, war bis November 2026 nicht zu finden.\n\nIst „Kindergeld für Kinder im EU-Ausland an die Lebenshaltungskosten anpassen“ eingeschaltet, wirkt jene Maßnahme danach auf denselben Posten, und ihre Einsparung wächst mit dem Kindergeld ungefähr mit.",
-        "en": "Child benefit was €250 in 2024 and has been €259 since 2026. The reference is current law; the cost per euro comes from the official estimates. The child allowance in income tax stays as it is: it must exempt the child's subsistence minimum from tax, and under section 66(3) of the Income Tax Act child benefit follows it, not the other way round. For high earners the allowance is worth more; the tax office then offsets the child benefit, and a higher one gives nothing as long as the allowance remains worth more.\n\nThe Left demands €350 for every child, not counted against citizen's income, as part of a basic child allowance (2025 election programme). The federal government wants to raise child benefit to €267 in 2027 and to €272 in 2028. No proposal by a party or parliamentary group to cut or freeze child benefit could be found up to November 2026.\n\nIf \"Index child benefit for children living elsewhere in the EU to local living costs\" is switched on, that measure acts afterwards on the same item, and its saving grows roughly with child benefit."
+        "de": "2024 betrug das Kindergeld 250 Euro, seit 2026 sind es 259 Euro. Bezugspunkt ist das geltende Recht; die Kosten je Euro stammen aus den amtlichen Schätzungen. Der Kinderfreibetrag bleibt, wie er ist: Er muss das Existenzminimum des Kindes steuerfrei stellen, und nach § 66 Abs. 3 EStG folgt das Kindergeld ihm, nicht umgekehrt. Wer viel verdient, für den ist der Freibetrag günstiger; das Finanzamt verrechnet dann das Kindergeld, und ein höheres bringt nichts, solange der Freibetrag günstiger bleibt.\n\nDie Linke fordert 350 Euro für jedes Kind, ohne Anrechnung auf das Bürgergeld, als Teil einer Kindergrundsicherung (Wahlprogramm 2025). Die Bundesregierung will das Kindergeld 2027 auf 267 und 2028 auf 272 Euro anheben. Die Grünen verlangen in einem Antrag vom Oktober 2026, das Kindergeld stärker anzuheben als im Regierungsentwurf vorgesehen, damit sich der Abstand zur Entlastung durch die Freibeträge schrittweise schließt; einen Betrag nennen sie nicht. Ein Vorschlag einer Partei oder Fraktion, das Kindergeld zu kürzen oder einzufrieren, war bis November 2026 nicht zu finden.\n\nIst „Kindergeld für Kinder im EU-Ausland an die Lebenshaltungskosten anpassen“ eingeschaltet, wirkt jene Maßnahme danach auf denselben Posten, und ihre Einsparung wächst mit dem Kindergeld ungefähr mit.",
+        "en": "Child benefit was €250 in 2024 and has been €259 since 2026. The reference is current law; the cost per euro comes from the official estimates. The child allowance in income tax stays as it is: it must exempt the child's subsistence minimum from tax, and under section 66(3) of the Income Tax Act child benefit follows it, not the other way round. For high earners the allowance is worth more; the tax office then offsets the child benefit, and a higher one gives nothing as long as the allowance remains worth more.\n\nThe Left demands €350 for every child, not counted against citizen's income, as part of a basic income for children (Kindergrundsicherung; 2025 election programme). The federal government wants to raise child benefit to €267 in 2027 and to €272 in 2028. The Greens call in a motion of October 2026 for a larger rise in child benefit than the government bill provides, so that the gap to the relief from the allowances closes step by step; they name no amount. No proposal by a party or parliamentary group to cut or freeze child benefit could be found up to November 2026.\n\nIf \"Index child benefit for children living elsewhere in the EU to local living costs\" is switched on, that measure acts afterwards on the same item, and its saving grows roughly with child benefit."
       },
       "topic": "social",
       "params": [
@@ -1191,12 +1224,13 @@
       "limits": [
         {
           "text": {
-            "de": "Die Kosten je Euro stammen aus der amtlichen Schätzung für 5 Euro und sind linear fortgeschrieben. Der Förderanteil, auf dem die Änderung gebucht ist, ist für 2024 geschätzt (siehe Posten). Gemessen am Finanzplan, der schon mit 272 Euro rechnet, kostet ein höheres Kindergeld bis zu 2,1 Mrd. Euro weniger als gezeigt.",
-            "en": "The cost per euro comes from the official estimate for €5 and is extrapolated linearly. The support component on which the change is booked is estimated for 2024 (see the item). Measured against the financial plan, which already counts on €272, a higher child benefit costs up to €2.1bn less than shown."
+            "de": "Die Kosten je Euro stammen aus der amtlichen Schätzung für 5 Euro und sind linear fortgeschrieben. Der Förderanteil, auf dem die Änderung gebucht ist, ist für 2024 geschätzt (siehe Posten). Gemessen am Finanzplan, der mit der Einkommensteuerreform rechnet (der Regierungsentwurf sieht 272 Euro ab 2028 vor), kostet ein höheres Kindergeld bis zu 2,1 Mrd. Euro weniger als gezeigt.",
+            "en": "The cost per euro comes from the official estimate for €5 and is extrapolated linearly. The support component on which the change is booked is estimated for 2024 (see the item). Measured against the financial plan, which counts on the income tax reform (the government bill provides for €272 from 2028), a higher child benefit costs up to €2.1bn less than shown."
           },
           "sources": [
             "bt_drs_20_12778",
-            "bundestag_drs_21_7301"
+            "bundestag_drs_21_7301",
+            "bt_drs_21_8235"
           ]
         },
         {
@@ -1215,7 +1249,8 @@
         "estg_66",
         "linke_wahlprogramm_2025",
         "csu_seeon_2025",
-        "bundestag_drs_21_7301"
+        "bundestag_drs_21_7301",
+        "bt_drs_21_8378"
       ]
     },
     {
@@ -1225,12 +1260,12 @@
         "en": "Index child benefit for children living elsewhere in the EU to local living costs"
       },
       "summary": {
-        "de": "Zahlt Kindergeld für Kinder in anderen EU-Staaten nach den Lebenshaltungskosten dort, wie es ein Gesetzentwurf der AfD vorsah. Gezeigt ist deren Schätzung: 190 Mio. Euro im Jahr.",
-        "en": "Pays child benefit for children in other EU states according to living costs there, as an AfD bill proposed. The figure is the AfD's own estimate: €190m a year."
+        "de": "Zahlt Kindergeld für Kinder in anderen EU-Staaten nach den Lebenshaltungskosten dort, wie es ein Gesetzentwurf der AfD vorsah. Mit den Sätzen von 2024 spart das höchstens rund 183 Mio. Euro im Jahr.",
+        "en": "Pays child benefit for children in other EU states according to living costs there, as an AfD bill proposed. At 2024 rates this saves at most about €183m a year."
       },
       "explanation": {
-        "de": "Maßstab ist die Ländergruppeneinteilung des Finanzministeriums, nach der im Einkommensteuerrecht schon heute Freibeträge für Kinder im Ausland gekürzt werden: Je nach Einkommensniveau des Wohnstaats gäbe es das volle Kindergeld, drei Viertel, die Hälfte oder ein Viertel. Die AfD legte dazu im Mai 2026 einen Gesetzentwurf vor; die CSU hatte im Januar 2025 verlangt, dass eine solche Anpassung möglich wird. Für Kinder außerhalb von EU und EWR gibt es schon heute kein Kindergeld, außer zu niedrigen Sätzen nach Abkommen.\n\nIst „Kindergeld erhöhen oder senken“ eingeschaltet, wächst die Einsparung ungefähr mit dem Kindergeld mit.",
-        "en": "The yardstick is the finance ministry's country groups, which already reduce the allowances for children abroad in income tax: depending on the income level of the state of residence there would be full child benefit, three quarters, half or a quarter. The AfD tabled a bill to this effect in May 2026; in January 2025 the CSU had called for such an adjustment to be made possible. For children outside the EU and the EEA there is no child benefit already, except at low rates under agreements.\n\nIf \"Raise or cut child benefit\" is switched on, the saving grows roughly with child benefit."
+        "de": "Maßstab ist die Ländergruppeneinteilung des Finanzministeriums, nach der das Einkommensteuerrecht Freibeträge für Kinder im Ausland kürzt; für Kinder in EU- und EWR-Staaten gewährt das Finanzministerium sie unter Berufung auf das Urteil des Europäischen Gerichtshofs zu Österreich ungekürzt. Für EU-Staaten hieße das: volles Kindergeld etwa für Frankreich, Österreich oder Spanien, drei Viertel unter anderem für Polen, Tschechien, Rumänien und Kroatien, die Hälfte für Bulgarien. Die AfD legte dazu im Mai 2026 einen Gesetzentwurf vor; die CSU hatte im Januar 2025 verlangt, dass eine solche Anpassung möglich wird. Für Kinder außerhalb von EU und EWR gibt es schon heute kein Kindergeld, außer zu niedrigen Sätzen nach Abkommen.\n\nIst „Kindergeld erhöhen oder senken“ eingeschaltet, wächst die Einsparung mit dem Kindergeld mit, bei 350 Euro um gut ein Zehntel stärker, als es dem Verhältnis der Beträge entspräche.",
+        "en": "The yardstick is the finance ministry's country groups, by which income tax law reduces the allowances for children abroad; for children in EU and EEA states the finance ministry grants them in full, citing the Court of Justice's ruling on Austria. For EU states this would mean full child benefit for France, Austria or Spain, for example, three quarters for Poland, Czechia, Romania and Croatia among others, and half for Bulgaria. The AfD tabled a bill to this effect in May 2026; in January 2025 the CSU had called for such an adjustment to be made possible. For children outside the EU and the EEA there is no child benefit already, except at low rates under agreements.\n\nIf \"Raise or cut child benefit\" is switched on, the saving grows with child benefit, at €350 by just over a tenth more than the ratio of the amounts would give."
       },
       "topic": "social",
       "params": [],
@@ -1238,20 +1273,21 @@
         {
           "type": "scale",
           "target": "exp.social.family.child_benefit",
-          "factor": 0.9923096,
+          "factor": 0.99257684,
           "quality": "estimate",
           "uncertainty": {
             "low": 0.6,
-            "high": 1.2
+            "high": 1.0
           },
           "sources": [
+            "ba_famka_2024",
+            "bmf_laendergruppen_2025",
             "bt_drs_21_6003",
-            "brd_171_18",
-            "ba_famka_2024"
+            "brd_171_18"
           ],
           "note": {
-            "de": "Schätzung der AfD in ihrem Gesetzentwurf: rund 190 Mio. Euro im Jahr; wie sie berechnet ist, legt der Entwurf nicht offen. Ein Gesetzesantrag Bayerns mit demselben Mechanismus nannte 2018 rund 160 Mio. Euro, als das Kindergeld für die ersten beiden Kinder 194 Euro betrug. Die Rechnung mindert den Förderanteil des Kindergelds um diesen Betrag als Anteil (0,77 %), sodass die Einsparung mit einem höheren oder niedrigeren Kindergeld mitwächst. Die Spanne ist eine Annahme: Für viele dieser Kinder zahlt Deutschland nur den Unterschied zur Familienleistung des Wohnstaats, und Eltern, die in Deutschland Steuern zahlen, können statt des Kindergelds den nach Ländergruppen gekürzten Kinderfreibetrag geltend machen.",
-            "en": "The AfD's estimate in its bill: about €190m a year; the bill does not disclose how it was calculated. A Bavarian bill with the same mechanism gave about €160m in 2018, when child benefit for the first two children was €194. The calculation reduces the support component of child benefit by this amount as a share (0.77%), so that the saving grows with a higher or lower child benefit. The range is an assumption: for many of these children Germany pays only the difference to the family benefit of the state of residence, and parents who pay tax in Germany can claim the child allowance, reduced by country group, instead of child benefit."
+            "de": "Obergrenze aus der Statistik der Familienkasse: Im Dezember 2024 lebten 227.840 Kinder von Berechtigten aus EU-Staaten der Ländergruppe 2 (drei Viertel) im Ausland, darunter 119.227 Kinder polnischer und 35.314 tschechischer Berechtigter, dazu 8.345 Kinder bulgarischer Berechtigter (Ländergruppe 3, die Hälfte). Angenommen ist, dass sie im Staat ihrer Eltern leben, das volle Kindergeld von 250 Euro (2024) erhalten und die ganze Kürzung gespart wird; das ergibt 183,4 Mio. Euro im Jahr. Mit 259 Euro (2026) ergibt dieselbe Rechnung 190 Mio. Euro, genau die Schätzung im Gesetzentwurf der AfD, die also keine Minderung annimmt. Darunter liegt die Einsparung, weil Eltern, die in Deutschland Steuern zahlen, in der Veranlagung mindestens die Wirkung des Kinderfreibetrags erhalten, der für Kinder in EU- und EWR-Staaten ungekürzt gewährt wird; wie viel das ausmacht, zeigt keine Statistik (Spanne 60 bis 100 %). Wo Deutschland nur den Unterschied zur Familienleistung des Wohnstaats zahlt, ändert das die Einsparung kaum, solange diese Leistung unter dem gekürzten Kindergeld liegt. Nicht eingerechnet sind 36.609 Kinder deutscher Berechtigter im Ausland, deren Wohnstaat die Statistik nicht nennt. Ein Gesetzesantrag Bayerns mit demselben Mechanismus nannte 2018 rund 160 Mio. Euro. Die Rechnung mindert den Förderanteil des Kindergelds um diesen Betrag als Anteil (0,74 %), sodass die Einsparung mit einem höheren oder niedrigeren Kindergeld mitwächst.",
+            "en": "Upper bound from the family benefits office's statistics: in December 2024, 227,840 children of claimants from EU states in country group 2 (three quarters) lived abroad, among them 119,227 children of Polish and 35,314 of Czech claimants, plus 8,345 children of Bulgarian claimants (country group 3, half). It is assumed that they live in their parents' state, receive the full child benefit of €250 (2024) and that the whole cut is saved; that gives €183.4m a year. At €259 (2026) the same calculation gives €190m, exactly the estimate in the AfD bill, which thus assumes no reduction. The saving is lower, because parents who pay tax in Germany get at least the effect of the child allowance in their assessment, which is granted in full for children in EU and EEA states; no statistic shows how much this amounts to (range 60 to 100%). Where Germany pays only the difference to the family benefit of the state of residence, this hardly changes the saving as long as that benefit is below the reduced child benefit. Not included are 36,609 children of German claimants abroad, whose state of residence the statistics do not show. A Bavarian bill with the same mechanism gave about €160m in 2018. The calculation reduces the support component of child benefit by this amount as a share (0.74%), so that the saving grows with a higher or lower child benefit."
           }
         }
       ],
@@ -1260,13 +1296,14 @@
           "kind": "legal",
           "severity": "blocker",
           "text": {
-            "de": "Der Europäische Gerichtshof hat 2022 die Indexierung der Familienleistungen in Österreich (C-328/20) und am 16. April 2026 die des Bayerischen Familiengelds (C-642/24, Kommission gegen Deutschland) für unionsrechtswidrig erklärt: Pauschale Familienleistungen dürfen nicht vom Wohnstaat der Kinder abhängen, und unterschiedliche Lebenshaltungskosten rechtfertigen das nicht. Die Bundesregierung hat 2024 selbst gefolgert, dass dies auch die Kürzung der Freibeträge für Kinder im EU-Ausland betrifft.",
-            "en": "The Court of Justice of the EU declared the indexation of family benefits in Austria unlawful in 2022 (C-328/20) and that of the Bavarian family allowance on 16 April 2026 (C-642/24, Commission v Germany): lump-sum family benefits may not depend on the children's state of residence, and differences in living costs do not justify it. In 2024 the federal government itself concluded that this also applies to reducing the allowances for children elsewhere in the EU."
+            "de": "Der Europäische Gerichtshof hat 2022 die Indexierung der Familienleistungen in Österreich (C-328/20) und am 16. April 2026 die des Bayerischen Familiengelds (C-642/24, Kommission gegen Deutschland) für unionsrechtswidrig erklärt: Pauschale Familienleistungen dürfen nicht vom Wohnstaat der Kinder abhängen, und unterschiedliche Lebenshaltungskosten rechtfertigen das nicht. Die Bundesregierung hat 2024 selbst gefolgert, dass dies auch die Kürzung der Freibeträge für Kinder im EU-Ausland betrifft, und das Finanzministerium gewährt sie für Kinder in EU- und EWR-Staaten ungekürzt.",
+            "en": "The Court of Justice of the EU declared the indexation of family benefits in Austria unlawful in 2022 (C-328/20) and that of the Bavarian family allowance on 16 April 2026 (C-642/24, Commission v Germany): lump-sum family benefits may not depend on the children's state of residence, and differences in living costs do not justify it. In 2024 the federal government itself concluded that this also applies to reducing the allowances for children elsewhere in the EU, and the finance ministry grants them in full for children in EU and EEA states."
           },
           "sources": [
             "eugh_c328_20",
             "eugh_c642_24",
-            "bt_drs_20_12778"
+            "bt_drs_20_12778",
+            "bmf_laendergruppen_2025"
           ]
         },
         {
@@ -1326,7 +1363,8 @@
         "eugh_c642_24",
         "bt_drs_20_12778",
         "bt_textarchiv_2026_kw28_kindergeld",
-        "csu_seeon_2025"
+        "csu_seeon_2025",
+        "bmf_laendergruppen_2025"
       ]
     },
     {
@@ -1336,7 +1374,7 @@
         "en": "Introduce a fee per doctor visit (contact fee)"
       },
       "summary": {
-        "de": "Erhebt bei jedem Arztkontakt eine Gebühr, die den Krankenkassen zufließt. Voreingestellt sind 3 Euro, das untere Ende des Vorschlags des Chefs der Kassenärztlichen Bundesvereinigung.",
+        "de": "Erhebt bei jedem Arztkontakt eine Gebühr, die den Krankenkassen zufließt. Voreingestellt sind 3 Euro, das untere Ende des Vorschlags des Vorsitzenden der Kassenärztlichen Bundesvereinigung.",
         "en": "Charges a fee at every doctor contact, paid to the health insurers. The default is €3, the lower end of a proposal by the head of the association of statutory health insurance doctors."
       },
       "explanation": {
@@ -1375,16 +1413,17 @@
           "quality": "estimate",
           "uncertainty": {
             "low": 0.6,
-            "high": 1.1
+            "high": 1.05
           },
           "sources": [
+            "zi_versorgungskontakte_2024",
             "kbv_zahlen_fakten",
             "fkg_bericht_2026",
             "bda_gesundheitsreform_2026"
           ],
           "note": {
-            "de": "Eigene Rechnung: rund 1 Mrd. Kontakte zwischen Patienten und niedergelassenen Ärzten im Jahr (Kassenärztliche Bundesvereinigung), davon 70 % gebührenpflichtig angenommen; ausgenommen sind Kinder und Jugendliche und Versicherte, die die Belastungsgrenze erreicht haben (2024 waren 4,8 Mio. Versicherte von Zuzahlungen befreit). Das ergibt 0,7 Mrd. Euro je Euro Gebühr. Zum Vergleich: Nach dem Ende der Praxisgebühr von 10 Euro je Quartal sanken die Zuzahlungen um rund 2 Mrd. Euro. Die Gebühr mindert die Ausgaben der Krankenkassen für die ambulante Versorgung. Die Spanne ist eine Annahme: Eine Gebühr je Kontakt dürfte mehr Besuche verhindern als die Quartalsgebühr, und das Einziehen kostet Geld (untere Grenze 60 %).",
-            "en": "Own calculation: about 1 billion contacts between patients and office-based doctors a year (National Association of Statutory Health Insurance Physicians), of which 70% are assumed to be liable; exempt are children and young people and insured persons who have reached the burden limit (in 2024, 4.8 million insured persons were exempt from co-payments). That gives €0.7bn per euro of fee. For comparison: after the end of the practice fee of €10 per quarter, co-payments fell by about €2bn. The fee reduces the health insurers' spending on outpatient care. The range is an assumption: a fee per contact is likely to deter more visits than the quarterly fee, and collecting it costs money (lower bound 60%)."
+            "de": "Eigene Rechnung: In den Abrechnungsdaten der Kassenärztlichen Vereinigungen hatten die 73,95 Mio. gesetzlich Versicherten 2024 im Schnitt 14,2 Tage mit abgerechneten ambulanten ärztlichen Leistungen, zusammen rund 1,05 Mrd. Behandlungstage (Zentralinstitut für die kassenärztliche Versorgung); die Kassenärztliche Bundesvereinigung nennt rund 1 Milliarde Kontakte im Jahr. Privatversicherte sind darin nicht enthalten. Zwei Drittel davon sind als gebührenpflichtig angenommen: Ausgenommen sind Kinder und Jugendliche und Versicherte, die die Belastungsgrenze erreicht haben (2024 waren 4,8 Mio. Versicherte von Zuzahlungen befreit, 4,6 Mio. davon als chronisch Kranke, die oft zum Arzt gehen), und einige Besuche fallen weg. Das ergibt 0,7 Mrd. Euro je Euro Gebühr. Zum Vergleich: Nach dem Ende der Praxisgebühr von 10 Euro je Quartal sanken die Zuzahlungen um rund 2 Mrd. Euro. Die Gebühr mindert die Ausgaben der Krankenkassen für die ambulante Versorgung. Die Spanne ist eine Annahme: Eine Gebühr je Kontakt dürfte mehr Besuche verhindern als die Quartalsgebühr, und das Einziehen kostet Geld (untere Grenze 60 %); die obere Grenze entspricht 70 % gebührenpflichtigen Behandlungstagen ohne jede Verhaltensänderung.",
+            "en": "Own calculation: in the billing data of the associations of statutory health insurance doctors, the 73.95 million statutorily insured had on average 14.2 days with billed outpatient medical services in 2024, together about 1.05 billion treatment days (Central Research Institute of Ambulatory Health Care); the National Association of Statutory Health Insurance Physicians names about 1 billion contacts a year. Privately insured persons are not included. Two thirds of them are assumed to be liable: exempt are children and young people and insured persons who have reached the burden limit (in 2024, 4.8 million insured persons were exempt from co-payments, 4.6 million of them as chronically ill, who see doctors often), and some visits do not take place. That gives €0.7bn per euro of fee. For comparison: after the end of the practice fee of €10 per quarter, co-payments fell by about €2bn. The fee reduces the health insurers' spending on outpatient care. The range is an assumption: a fee per contact is likely to deter more visits than the quarterly fee, and collecting it costs money (lower bound 60%); the upper bound corresponds to 70% of treatment days being liable without any change in behaviour."
           }
         }
       ],
@@ -1418,13 +1457,14 @@
           "kind": "practical",
           "severity": "minor",
           "text": {
-            "de": "Jemand muss die Gebühr einziehen. Die Kassenärztliche Bundesvereinigung nannte eine Gebühr je Arztbesuch sehr bürokratisch, ihr Vorsitzender will sie von den Krankenkassen einziehen lassen. Die Erhebung der früheren Praxisgebühr kostete nach Angabe des damaligen Gesundheitsministers 360 Mio. Euro im Jahr.",
-            "en": "Someone has to collect the fee. The National Association of Statutory Health Insurance Physicians called a fee per visit very bureaucratic; its chair wants the health insurers to collect it. According to the health minister of the time, collecting the former practice fee cost €360m a year."
+            "de": "Jemand muss die Gebühr einziehen. Die Kassenärztliche Bundesvereinigung nannte eine Gebühr je Arztbesuch sehr bürokratisch, ihr Vorsitzender will sie von den Krankenkassen einziehen lassen. Die Erhebung der früheren Praxisgebühr kostete nach Angabe des damaligen Gesundheitsministers 360 Mio. Euro im Jahr. Die FinanzKommission Gesundheit hält die Erhebung in den Praxen dagegen für grundsätzlich praktikabel, auch die Praxisgebühr habe keine grundsätzlichen Probleme bereitet; Praktiker verweisen aber auf Probleme beim Inkasso im Alltag, etwa in der Infektsaison und bei Hausbesuchen.",
+            "en": "Someone has to collect the fee. The National Association of Statutory Health Insurance Physicians called a fee per visit very bureaucratic; its chair wants the health insurers to collect it. According to the health minister of the time, collecting the former practice fee cost €360m a year. The Health Finance Commission, by contrast, considers collection in the practices practicable in principle, and says the practice fee caused no fundamental problems either; practitioners, however, point to problems with collection in everyday practice, for example in the season of colds and flu and on home visits."
           },
           "sources": [
             "kbv_pm_bda_2025",
             "aerzteblatt_kontaktgebuehr_2025",
-            "bt_textarchiv_2012_praxisgebuehr"
+            "bt_textarchiv_2012_praxisgebuehr",
+            "fkg_bericht_2026"
           ]
         },
         {
@@ -1461,6 +1501,7 @@
         "bda_gesundheitsreform_2026",
         "kbv_pm_bda_2025",
         "aerzteblatt_kontaktgebuehr_2025",
+        "zi_versorgungskontakte_2024",
         "kbv_zahlen_fakten",
         "fkg_bericht_2026",
         "bt_textarchiv_2012_praxisgebuehr",

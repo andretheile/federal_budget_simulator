@@ -329,8 +329,8 @@
     "accessed": "2026-11-22",
     "year": 2024,
     "note": {
-      "de": "Abschnitt D (S. 1 f.): Die Fortschreibung zum 1. Januar 2024 (Regelbedarfsstufe 1 von 502 auf 563 Euro, alle Stufen um rund 12 %) kostet 2024 im SGB II rund 3,49 Mrd. Euro, davon 3,41 Mrd. Euro beim Bund, ohne Berücksichtigung gestiegener Einkommen; im SGB XII rund 1,03 Mrd. Euro (Hilfe zum Lebensunterhalt 110 Mio. Euro, Grundsicherung im Alter und bei Erwerbsminderung 920 Mio. Euro); Leistungen nach § 2 AsylbLG 140 Mio. Euro. Beim Kinderzuschlag und beim Wohngeld nicht bezifferte Minderausgaben, weil Hilfebedürftigkeit seltener überwunden werden kann. S. 15: Beträge der Regelbedarfsstufen 2023 und 2024.",
-      "en": "Section D (pp. 1 f.): the update on 1 January 2024 (standard rate level 1 from €502 to €563, all levels by about 12%) costs about €3.49bn in 2024 under Social Code Book II, of which €3.41bn federal, without allowing for higher incomes; about €1.03bn under Social Code Book XII (subsistence assistance €110m, basic income support in old age and for reduced earning capacity €920m); benefits under section 2 of the Asylum Seekers' Benefits Act €140m. Unquantified savings on the child supplement and housing benefit, because need can less often be overcome. P. 15: amounts of the standard rate levels in 2023 and 2024."
+      "de": "Abschnitt D (S. 1 f.): Die Fortschreibung zum 1. Januar 2024 (Regelbedarfsstufe 1 von 502 auf 563 Euro, alle Stufen um rund 12 %) kostet 2024 im SGB II rund 3,49 Mrd. Euro, davon 3,41 Mrd. Euro beim Bund und 80 Mio. Euro bei den Kommunen, ohne Berücksichtigung gestiegener Einkommen erwerbstätiger Leistungsberechtigter; im SGB XII rund 1,03 Mrd. Euro (Hilfe zum Lebensunterhalt 110 Mio. Euro, Grundsicherung im Alter und bei Erwerbsminderung 920 Mio. Euro); Leistungen nach § 2 AsylbLG 140 Mio. Euro (Länder und Kommunen), Geldleistungssätze nach § 3a AsylbLG 127 Mio. Euro (Kommunen). Beim Kinderzuschlag und beim Wohngeld nicht bezifferte Minderausgaben, weil Hilfebedürftigkeit seltener überwunden werden kann. S. 15: Beträge der Regelbedarfsstufen 2023 und 2024.",
+      "en": "Section D (pp. 1 f.): the update on 1 January 2024 (standard rate level 1 from €502 to €563, all levels by about 12%) costs about €3.49bn in 2024 under Social Code Book II, of which €3.41bn federal and €80m municipal, without allowing for higher incomes of recipients in work; about €1.03bn under Social Code Book XII (subsistence assistance €110m, basic income support in old age and for reduced earning capacity €920m); benefits under section 2 of the Asylum Seekers' Benefits Act €140m (states and municipalities), cash rates under section 3a of that act €127m (municipalities). Unquantified savings on the child supplement and housing benefit, because need can less often be overcome. P. 15: amounts of the standard rate levels in 2023 and 2024."
     }
   },
   "brd_453_24": {
@@ -437,8 +437,8 @@
     "accessed": "2026-11-22",
     "year": 2024,
     "note": {
-      "de": "Tabelle 1.1 und 1.1.2: 2024 ausgezahlt 54,54 Mrd. Euro Kindergeld, davon 54,31 Mrd. Euro nach dem Einkommensteuergesetz, und 2,96 Mrd. Euro Kinderzuschlag; im Dezember 2024 Kindergeld für 17.624.077 Kinder, davon 296.725 mit Wohnsitz in einem anderen EU-Staat und 6.818 in übrigen Staaten.",
-      "en": "Tables 1.1 and 1.1.2: in 2024 €54.54bn of child benefit paid out, of which €54.31bn under the Income Tax Act, and €2.96bn of child supplement; in December 2024 child benefit for 17,624,077 children, of whom 296,725 resident in another EU state and 6,818 in other states."
+      "de": "Tabelle 1.1 und 1.1.2: 2024 ausgezahlt 54,54 Mrd. Euro Kindergeld, davon 54,31 Mrd. Euro nach dem Einkommensteuergesetz, und 2,96 Mrd. Euro Kinderzuschlag; im Dezember 2024 Kindergeld für 17.624.077 Kinder, davon 296.725 mit Wohnsitz in einem anderen EU-Staat und 6.818 in übrigen Staaten. Tabelle 1.2 (S. 8): Kinder mit Wohnsitz im Ausland nach Staatsangehörigkeit der Berechtigten, Dezember 2024, darunter Polen 119.227, Tschechien 35.314, Rumänien 32.243, Kroatien 15.906, Ungarn 9.088, Bulgarien 8.345, Slowakei 6.971; Deutsche 36.609.",
+      "en": "Tables 1.1 and 1.1.2: in 2024 €54.54bn of child benefit paid out, of which €54.31bn under the Income Tax Act, and €2.96bn of child supplement; in December 2024 child benefit for 17,624,077 children, of whom 296,725 resident in another EU state and 6,818 in other states. Table 1.2 (p. 8): children resident abroad by the claimant's nationality, December 2024, among them Poland 119,227, Czechia 35,314, Romania 32,243, Croatia 15,906, Hungary 9,088, Bulgaria 8,345, Slovakia 6,971; Germany 36,609."
     }
   },
   "bt_drs_20_12778": {
@@ -470,8 +470,8 @@
     "accessed": "2026-11-22",
     "year": 2026,
     "note": {
-      "de": "Der Regierungsentwurf wurde nach der ersten Lesung an den Finanzausschuss überwiesen.",
-      "en": "After the first reading the government bill was referred to the finance committee."
+      "de": "Der Regierungsentwurf wurde nach der ersten Lesung zusammen mit dem Antrag der Grünen auf Drucksache 21/8378 an die Ausschüsse überwiesen, federführend an den Finanzausschuss.",
+      "en": "After the first reading the government bill was referred to committees together with the Greens' motion on document 21/8378, with the finance committee in the lead."
     }
   },
   "csu_seeon_2025": {
@@ -550,8 +550,8 @@
     "accessed": "2026-11-22",
     "year": 2026,
     "note": {
-      "de": "Rund 1 Milliarde Kontakte zwischen Patienten und niedergelassenen Haus- oder Fachärzten im Jahr, 578 Mio. Behandlungsfälle; ohne Angabe des Bezugsjahres.",
-      "en": "About 1 billion contacts between patients and office-based family doctors or specialists a year, 578 million treatment cases; reference year not stated."
+      "de": "Rund 1 Milliarde Kontakte zwischen Patienten und niedergelassenen Haus- oder Fachärzten im Jahr, 578 Mio. Behandlungsfälle; ohne Angabe des Bezugsjahres und ohne Angabe, ob nur gesetzlich Versicherte gezählt sind.",
+      "en": "About 1 billion contacts between patients and office-based family doctors or specialists a year, 578 million treatment cases; neither the reference year nor whether only the statutorily insured are counted is stated."
     }
   },
   "bda_gesundheitsreform_2026": {
@@ -607,6 +607,49 @@
     "note": {
       "de": "Der damalige Gesundheitsminister: Die Praxisgebühr „hat ihren eigentlichen Zweck, die Zahl der Arztbesuche zu reduzieren, nicht erfüllt“.",
       "en": "The health minister of the time: the practice fee \"hat ihren eigentlichen Zweck, die Zahl der Arztbesuche zu reduzieren, nicht erfüllt\"."
+    }
+  },
+  "bmf_laendergruppen_2025": {
+    "title": "Berücksichtigung ausländischer Verhältnisse; Ländergruppeneinteilung ab 1. Januar 2025 (BMF-Schreiben vom 2. Dezember 2025, IV C 3 - S 2285/00019/007/068)",
+    "publisher": "Bundesministerium der Finanzen",
+    "url": "https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Steuerarten/Einkommensteuer/2025-12-02-beruecks-auslaendischer-verhaeltnisse.pdf?__blob=publicationFile",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "S. 2 f.: Ländergruppen 1 bis 4 (Beträge in voller Höhe, mit drei Vierteln, mit der Hälfte, mit einem Viertel). EU-Staaten in Gruppe 2: Estland, Griechenland, Kroatien, Lettland, Litauen, Polen, Portugal, Rumänien, Slowakei, Slowenien, Tschechien, Ungarn; in Gruppe 3: Bulgarien; keiner in Gruppe 4. Fußnote 1: Unter Beachtung des Urteils C-328/20 sind die Freibeträge für Kinder nach § 32 Abs. 6 Satz 4 EStG ungekürzt zu gewähren, wenn das Kind in einem anderen EU- oder EWR-Staat wohnt.",
+      "en": "Pp. 2 f.: country groups 1 to 4 (amounts in full, at three quarters, at half, at a quarter). EU states in group 2: Estonia, Greece, Croatia, Latvia, Lithuania, Poland, Portugal, Romania, Slovakia, Slovenia, Czechia, Hungary; in group 3: Bulgaria; none in group 4. Footnote 1: in view of ruling C-328/20, the allowances for children under section 32(6) sentence 4 of the Income Tax Act are to be granted in full if the child lives in another EU or EEA state."
+    }
+  },
+  "bt_drs_21_8378": {
+    "title": "Antrag der Fraktion BÜNDNIS 90/DIE GRÜNEN: Kindergeld stärken, Entlastungsschere schließen – Familienleistungsausgleich gerechter gestalten, Drucksache 21/8378 vom 06.10.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/083/2108378.pdf",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Abschnitt II.1 und 3 (S. 1 f.): die Schere zwischen dem Kindergeld und der höchsten Entlastung durch die Freibeträge für Kinder in Euro schrittweise schließen, „insbesondere das Kindergeld stärker anzuheben“, und den Regierungsentwurf des Einkommensteuerreformgesetzes 2027 entsprechend anpassen; ohne Betrag.",
+      "en": "Section II.1 and 3 (pp. 1 f.): close the gap in euros between child benefit and the largest relief from the allowances for children step by step, \"insbesondere das Kindergeld stärker anzuheben\", and adapt the government bill for the Income Tax Reform Act 2027 accordingly; no amount."
+    }
+  },
+  "zi_versorgungskontakte_2024": {
+    "title": "Regionaler Vergleich von selbstberichteten mit in Abrechnungsdaten erfassten ambulant-ärztlichen Versorgungskontakten im Jahr 2024 (Versorgungsatlas-Bericht Nr. 26/02, 1. Juli 2026)",
+    "publisher": "Zentralinstitut für die kassenärztliche Versorgung in Deutschland (Zi)",
+    "url": "https://www.zi.de/fileadmin/Downloads/Service/Medien/MI/VA-26-02-Versorgungskontakte.pdf",
+    "accessed": "2026-11-22",
+    "year": 2024,
+    "note": {
+      "de": "S. 6 f.: vertragsärztliche Abrechnungsdaten aller gesetzlich Krankenversicherten 2024, 73.952.185 Personen; im Mittel 8,0 Behandlungsfälle, 9,5 Arztfälle und 14,2 Behandlungstage je Person (Tage mit abgerechneten Leistungen, ohne Laborgemeinschaften).",
+      "en": "Pp. 6 f.: billing data of office-based care for all statutorily insured persons in 2024, 73,952,185 persons; on average 8.0 treatment cases, 9.5 doctor cases and 14.2 treatment days per person (days with billed services, without laboratory groups)."
+    }
+  },
+  "asylblg_3a": {
+    "title": "Asylbewerberleistungsgesetz, § 3a Bedarfssätze der Grundleistungen",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/asylblg/__3a.html",
+    "accessed": "2026-11-22",
+    "note": {
+      "de": "Abs. 4: Die Beträge werden jeweils zum 1. Januar mit der Veränderungsrate nach § 28a SGB XII fortgeschrieben. Abs. 5: Liegen die Ergebnisse einer neuen Einkommens- und Verbrauchsstichprobe vor, werden sie neu festgesetzt.",
+      "en": "Subsection 4: the amounts are updated each 1 January by the rate of change under section 28a of Social Code Book XII. Subsection 5: once the results of a new income and consumption survey are available, they are set anew."
     }
   },
   "bmg_pm_bstabg_2026": {
@@ -2458,8 +2501,8 @@
     "accessed": "2026-11-20",
     "year": 2025,
     "note": {
-      "de": "S. 15: „Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.“ S. 15: Rentenniveau von 53 %; eine Versicherung für alle Erwerbstätigen einschließlich der Beamten. S. 6 und 42: Mehrwertsteuer auf Grundnahrungsmittel abschaffen.",
-      "en": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\" Page 15: 53% pension level; insurance for all people in work including civil servants. Pages 6 and 42: abolish VAT on basic food."
+      "de": "S. 15: „Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.“ S. 15: Rentenniveau von 53 %; eine Versicherung für alle Erwerbstätigen einschließlich der Beamten. S. 6 und 42: Mehrwertsteuer auf Grundnahrungsmittel abschaffen. S. 15: „Der Regelsatz im Bürgergeld ist kleingerechnet: Der Paritätische Wohlfahrtsverband zeigt, dass der Regelsatz bei mindestens 813 Euro liegen müsste.“ S. 16: Kindergeld für alle Kinder in Höhe von 350 Euro monatlich, das nicht mehr auf das Bürgergeld angerechnet wird.",
+      "en": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\" Page 15: 53% pension level; insurance for all people in work including civil servants. Pages 6 and 42: abolish VAT on basic food. Page 15: \"Der Regelsatz im Bürgergeld ist kleingerechnet: Der Paritätische Wohlfahrtsverband zeigt, dass der Regelsatz bei mindestens 813 Euro liegen müsste.\" Page 16: child benefit of €350 a month for all children, no longer counted against citizen's income."
     }
   },
   "bt_drs_21_3115": {
@@ -2524,8 +2567,8 @@
     "accessed": "2026-11-20",
     "year": 2025,
     "note": {
-      "de": "Beschlossen in Riesa am 11. und 12. Januar 2025. S. 57: „Wir fordern eine ersatzlose Abschaffung der CO₂-Abgaben.“ S. 25: Ausländer sollen Bürgergeld erst nach zehn Jahren sozialversicherungspflichtiger Beschäftigung ohne aufstockende Leistungen erhalten, und höchstens ein Jahr lang; ukrainische Geflüchtete sollen in die Asylbewerberleistungen wechseln. S. 18: Beamtenstatus nur für hoheitliche Aufgaben, Politiker in die gesetzliche Rentenversicherung. S. 88: „Daher wollen wir die Wehrpflicht wieder einsetzen.“ S. 55: Zuwendungen an Nichtregierungsorganisationen reduzieren; Organisationen und Projekte sollen geprüft werden, „mit dem Ziel, unnötige und ideologiebasierte Ausgaben einzusparen“.",
-      "en": "Adopted in Riesa on 11 and 12 January 2025. Page 57: 'Wir fordern eine ersatzlose Abschaffung der CO₂-Abgaben.' Page 25: foreign nationals to get Bürgergeld only after ten years of employment subject to social insurance without top-up benefits, and for one year at most; Ukrainian refugees moved to asylum seekers' benefits. Page 18: civil-servant status only for sovereign tasks, politicians into the statutory pension insurance. Page 88: 'We therefore want to reinstate compulsory military service.' Page 55: reduce grants to non-governmental organisations; organisations and projects are to be reviewed with the aim of saving unnecessary and ideology-based spending."
+      "de": "Beschlossen in Riesa am 11. und 12. Januar 2025. S. 57: „Wir fordern eine ersatzlose Abschaffung der CO₂-Abgaben.“ S. 25: Ausländer sollen Bürgergeld erst nach zehn Jahren sozialversicherungspflichtiger Beschäftigung ohne aufstockende Leistungen erhalten, und höchstens ein Jahr lang; ukrainische Geflüchtete sollen in die Asylbewerberleistungen wechseln. S. 18: Beamtenstatus nur für hoheitliche Aufgaben, Politiker in die gesetzliche Rentenversicherung. S. 88: „Daher wollen wir die Wehrpflicht wieder einsetzen.“ S. 55: Zuwendungen an Nichtregierungsorganisationen reduzieren; Organisationen und Projekte sollen geprüft werden, „mit dem Ziel, unnötige und ideologiebasierte Ausgaben einzusparen“. S. 23: Die höheren Regelbedarfssätze des Bürgergeldes hätten dazu geführt, dass sich für viele eine Erwerbstätigkeit nicht mehr lohne. S. 26: „die Regelbedarfssätze an die tatsächliche Inflationsentwicklung des Bürgergeld-Warenkorbs anpassen“.",
+      "en": "Adopted in Riesa on 11 and 12 January 2025. Page 57: 'Wir fordern eine ersatzlose Abschaffung der CO₂-Abgaben.' Page 25: foreign nationals to get Bürgergeld only after ten years of employment subject to social insurance without top-up benefits, and for one year at most; Ukrainian refugees moved to asylum seekers' benefits. Page 18: civil-servant status only for sovereign tasks, politicians into the statutory pension insurance. Page 88: 'We therefore want to reinstate compulsory military service.' Page 55: reduce grants to non-governmental organisations; organisations and projects are to be reviewed with the aim of saving unnecessary and ideology-based spending. Page 23: the higher standard rates of citizen's income have led to work no longer paying for many. Page 26: 'die Regelbedarfssätze an die tatsächliche Inflationsentwicklung des Bürgergeld-Warenkorbs anpassen'."
     }
   },
   "bsw_wahlprogramm_2025": {

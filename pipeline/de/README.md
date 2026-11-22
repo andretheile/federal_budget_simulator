@@ -194,8 +194,15 @@ Judgement, to be reviewed by whoever updates the data:
   the leaves may also include some staff that the personnel statistics assign to other functions.
 - **The share of child benefit booked as spending in 2024** (`KG_SHARE` in `build_budget.py`): the mean of the
   published shares of 2018 and 2026. Because the leaf and the federal reimbursement of basic security in old age
-  are fixed leaves, the fit of the other leaves of social protection changed slightly when they were added (for
-  example asylum seekers' benefits: states 34.4 % instead of 36.6 %); the division totals by level did not.
+  are fixed leaves, adding them moved several billion euros between groups and levels of social protection; the
+  division totals by level did not change, and no data behind the other leaves changed. With the child benefit
+  leaf at 42.5 / 42.5 / 15 %, the family group (10.4) now has EUR 6.1 billion more at the federal level, 3.9
+  billion more at the states and 10.0 billion less at the municipalities than in the fit before. The fit moves
+  the same amounts back in the other groups (federal, states, municipalities, social insurance funds, EUR
+  billion): basic security (10.5 to 10.7) -2.9, -1.7, +7.7, -3.1; old age -1.9, -1.3, +0.9, +2.4; survivors,
+  sickness and disability and the rest together -1.3, -0.9, +1.5, +0.7. Asylum seekers' benefits, and the
+  replacement benefits that copy their shares, went from 36.6 to 34.4 % states. A measure on these leaves
+  therefore shows somewhat different burdens by level than before the two leaves were added.
 - **Where the carved-out items sit in COFOG.** Civil servants' pensions are a cash figure; pensions paid for
   incapacity before the retirement age may in part be booked under sickness and disability (10.1) rather
   than old age. Survivors' benefits get the level shares of all pension spending, although survivors are

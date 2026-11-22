@@ -341,11 +341,7 @@ EXP = [
         CL("exp.housing.other", "GF0606", "Sonstige kommunale Infrastruktur", "Other community amenities", (0.05, 0.35, 0.6, 0)),
     ]),
     G("exp.health", "Gesundheit", "Health", code="GF07",
-      # eurostat_gov_10a_exp: GF07 total expenditure 2024, S1314 (social security funds) 301,832 of S13 329,254 million euros.
-      desc=("Gegliedert nach dem, wofür das Geld ausgegeben wird. Gut 90 % davon (301,8 Mrd. Euro) gibt die Sozialversicherung aus, ganz überwiegend die gesetzlichen Krankenkassen; Krankengeld und Pflegeversicherung stehen unter „Soziale Sicherung“ (vor allem „Krankheit, Pflege und Behinderung“), die Beiträge auf der Einnahmenseite unter „Sozialbeiträge“. "
-            "Der Bundeszuschuss an die Krankenversicherung (2024: 14,5 Mrd. Euro) hat keinen eigenen Posten, weil sich Zahlungen zwischen den staatlichen Ebenen in der Rechnung für den Staat aufheben; er steckt im Anteil, den der Bund an den Leistungsposten trägt.",
-            "Sorted by what the money is spent on. Over 90% of it (€301.8bn) is spent by the social insurance funds, overwhelmingly the statutory health insurers; sick pay and long-term care insurance are under 'Social protection' (mainly 'Sickness, long-term care and disability'), and the contributions are on the revenue side under 'Social contributions'. "
-            "The federal subsidy to health insurance (2024: €14.5bn) has no item of its own, because payments between levels of government cancel out in the accounts of the state as a whole; it is contained in the share of the benefit items that the federal level bears."),
+      # The description is set below shares(), once the level shares are known (_health_desc).
       children=[
         CL("exp.health.medical_products", "GF0701", "Arzneimittel, Heil- und Hilfsmittel", "Medicines, medical products and appliances", (0.005, 0.01, 0.005, 0.98)),
         CL("exp.health.outpatient", "GF0702", "Ärzte, Zahnärzte und ambulante Behandlung", "Doctors, dentists and outpatient care", (0.01, 0.02, 0.01, 0.96)),
@@ -625,6 +621,31 @@ def shares(vec):
     i = s.index(max(s))
     s[i] = round(s[i] + d, 4)
     return {k: v for k, v in zip(LV, s) if v > 0}
+
+
+def _health_desc():
+    """Description of the health division: what the page shows for the social insurance funds and the federal level
+    (from the level shares as written to budget.json), and why the funds themselves spent more. eurostat_gov_10a_exp:
+    total expenditure of the social security funds (S1314) in GF07, 2024, 301,832 million euros. The page shows less
+    mainly because the federal payments to health insurance (GKV above, 16.09 bn) are attributed to the federal level;
+    the rest of the gap (2.4 bn) is the funds' current transfers (D.7, 2,497 million) and the fit to the division total."""
+    top = next(n for n in EXP if n["id"] == "exp.health")
+    by = {k: 0.0 for k in LV}
+    for leaf in leaves(top):
+        for k, w in shares(ALLOC[leaf["id"]]).items():
+            by[k] += round(leaf["amount"] * 1e6) * w / 1e9
+    de = lambda x: f"{x:.1f}".replace(".", ",") + " Mrd. Euro"
+    en = lambda x: f"€{x:.1f}bn"
+    ss, fed, te, gkv = by["social_security"], by["central"], M[("GF07", "S1314")]["TE"] / 1e3, GKV / 1e3
+    return (f"Gegliedert nach dem, wofür das Geld ausgegeben wird; Krankengeld und Pflegeversicherung stehen unter „Soziale Sicherung“, die Beiträge auf der Einnahmenseite unter „Sozialbeiträge“. "
+            f"Nach Ebenen entfallen hier {de(ss)} auf die Sozialversicherung und {de(fed)} auf den Bund. "
+            f"Dass die Sozialversicherungsträger selbst mehr ausgaben, {de(te)} (Eurostat), liegt vor allem daran, dass die Rechnung die Zahlungen des Bundes an den Gesundheitsfonds und an die landwirtschaftliche Krankenversicherung, zusammen {de(gkv)}, dem Bund zurechnet, der sie finanziert.",
+            f"Sorted by what the money is spent on; sick pay and long-term care insurance are under 'Social protection', and the contributions on the revenue side under 'Social contributions'. "
+            f"By level, {en(ss)} falls to the social insurance funds here and {en(fed)} to the federal level. "
+            f"That the social insurance funds themselves spent more, {en(te)} (Eurostat), is mainly because the calculation attributes the federal payments to the health fund and to the farmers' health insurance, together {en(gkv)}, to the federal level, which funds them.")
+
+
+next(n for n in EXP if n["id"] == "exp.health")["desc"] = _health_desc()
 
 
 def T(pair):
