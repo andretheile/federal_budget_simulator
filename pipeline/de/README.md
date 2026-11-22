@@ -160,7 +160,8 @@ Arithmetic on published figures:
   the employers' shares of pension spending in 2024 (states 61.9 %, federal government with the railway fund
   and the Post successor companies 27.5 %, municipalities 8.5 %, other 2.1 %, split between social insurance
   and federal bodies by recipients). Title 1702 684 04 of the federal budget ("Demokratie leben!" and
-  "Menschen stärken Menschen", 182.9 m actuals) is taken out of basic research (01.4) and is federal.
+  "Menschen stärken Menschen", 182.9 m actuals) is taken out of basic research (01.4) and is federal. The
+  two remainders are labelled as remainders of their groups, since what is left in them is not published.
 
 Judgement, to be reviewed by whoever updates the data:
 
@@ -206,8 +207,20 @@ Judgement, to be reviewed by whoever updates the data:
 - **Where the carved-out items sit in COFOG.** Civil servants' pensions are a cash figure; pensions paid for
   incapacity before the retirement age may in part be booked under sickness and disability (10.1) rather
   than old age. Survivors' benefits get the level shares of all pension spending, although survivors are
-  more often federal (41.5 % of recipients against 31.5 % of pensioners). The federal budget assigns title
-  1702 684 04 to function 165, research and experimental development outside universities; where national
+  more often in the federal area (40.1 % of recipients against 29.9 % of pensioners on 1 January 2025).
+- **What the two remainders of old age and survivors contain.** They are what national accounts book
+  under 10.2 and 10.3 minus two cash figures each (statutory pensions and civil servants' benefits);
+  their content is not published, and national accounts may define benefits for civil servants and their
+  survivors more widely than the cash statistics, so the remainders may still contain such benefits. Their
+  level shares are not data: Eurostat publishes levels only for the ten divisions, so they are the fit's
+  share minus the carved shares. Before the carve-out the fit put 15.2 bn of state spending into the
+  survivors' leaf, and the remainder still holds 9.6 bn of it, more than the states' 5.6 bn of the cash
+  figure; either national accounts book more under 10.3 than the cash statistics or the seeds put too much
+  there. Fixing the carved leaves before the fit would let the fit place the states' residue elsewhere in
+  division 10 but change other leaves of the division, which the carve-out avoids; the choice is kept.
+  A measure that cuts civil servants' pensions acts on the cash figures only.
+- **Where title 1702 684 04 sits.** The federal budget assigns it to function 165, research and
+  experimental development outside universities; where national
   accounts book it is not published, and basic research is an assumption. A different place would move
   the amount between groups, not between levels.
 - **Where the carved-out items sit in national accounts.** Eurostat does not publish them. The EEG payments are

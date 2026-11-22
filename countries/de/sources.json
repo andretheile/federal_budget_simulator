@@ -86,8 +86,8 @@
     "accessed": "2026-11-17",
     "year": 2024,
     "note": {
-      "de": "Einnahmen und Ausgaben 2024 und 2025 (S. 20), Faustdaten zu den Rentenfinanzen (S. 10), Zeitreihe zum Rentenniveau (S. 27).",
-      "en": "Revenue and expenditure 2024 and 2025 (p. 20), rules of thumb on pension finances (p. 10), pension level time series (p. 27)."
+      "de": "Einnahmen und Ausgaben 2024 und 2025 (S. 20), Faustdaten zu den Rentenfinanzen (S. 10), Zeitreihe zum Rentenniveau (S. 27). S. 12: Bezugsgröße 2024 3.535 Euro im Monat (alte Länder), 3.465 Euro (neue Länder). S. 15: Beitragssatz der allgemeinen Rentenversicherung 18,6 %.",
+      "en": "Revenue and expenditure 2024 and 2025 (p. 20), rules of thumb on pension finances (p. 10), pension level time series (p. 27). Page 12: reference value 2024 €3,535 a month (western states), €3,465 (eastern states). Page 15: contribution rate of the general pension insurance 18.6%."
     }
   },
   "sozialpolitik_aktuell_viii51": {
@@ -264,7 +264,11 @@
     "title": "Bundeswahlgesetz, § 1",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/bwahlg/__1.html",
-    "accessed": "2026-11-18"
+    "accessed": "2026-11-18",
+    "note": {
+      "de": "Abs. 1: 630 Abgeordnete. Abs. 3: 299 Wahlkreise; ein Wahlkreissieger erhält einen Sitz nur, soweit die Zweitstimmen seiner Partei ihn decken (Zweitstimmendeckung). Fußnote: Abs. 3 ist mit dem Grundgesetz vereinbar laut Urteil des Bundesverfassungsgerichts vom 30. Juli 2024 (2 BvF 1/23 u. a.).",
+      "en": "Paragraph 1: 630 members. Paragraph 3: 299 constituencies; a constituency winner receives a seat only insofar as the party's second votes cover it. Footnote: paragraph 3 is compatible with the Basic Law according to the Constitutional Court's judgment of 30 July 2024 (2 BvF 1/23 and others)."
+    }
   },
   "aeuv_311": {
     "title": "Vertrag über die Arbeitsweise der Europäischen Union, Artikel 311",
@@ -729,7 +733,11 @@
     "publisher": "NATO",
     "url": "https://www.nato.int/en/what-we-do/introduction-to-nato/defence-expenditures-and-natos-5-commitment",
     "accessed": "2026-11-18",
-    "year": 2026
+    "year": 2026,
+    "note": {
+      "de": "Definition: Ausgaben für die eigenen Streitkräfte, die anderer Bündnispartner oder die Bedürfnisse des Bündnisses. Bei militärischer und finanzieller Hilfe für Partnerländer zählen Beiträge zu NATO-Treuhandfonds; Geld über andere internationale Organisationen oder als direkte Militärhilfe ist nach dieser Definition nicht anrechenbar („not eligible“). Für die Ukraine gilt seit 2025 die Gipfelerklärung von Den Haag (Nr. 3).",
+      "en": "Definition: spending on the ally's own forces, those of other allies or the needs of the Alliance. For military and financial assistance to partner countries, contributions to NATO-managed trust funds count; money through other international organisations or as direct military aid is 'not eligible' under this definition. For Ukraine, the 2025 Hague Summit Declaration (para. 3) applies."
+    }
   },
   "bundesregierung_rentenpaket_2025": {
     "title": "Rentenpaket 2025: Damit die Rente stabil, verlässlich und gerecht bleibt",
@@ -1788,8 +1796,8 @@
     "accessed": "2026-11-19",
     "year": 2026,
     "note": {
-      "de": "Vom Bundeskabinett am 6. Juli 2026 zusammen mit dem Regierungsentwurf für den Haushalt 2027 beschlossen. „Handlungsbedarf“ (noch nicht durch Maßnahmen gedeckte Lücke, als Globale Minderausgabe im Einzelplan 60 verbucht): rund 22 Mrd. Euro 2028, 39 Mrd. Euro 2029 und 48 Mrd. Euro 2030; die Lücke von 34 Mrd. Euro für 2027 aus dem vorigen Finanzplan ist geschlossen (Abschnitt 3.3, S. 19; auch S. 9). Zinsausgaben des Bundes, Kapitel 3205: 41,9 Mrd. Euro 2027, 55,2 Mrd. Euro 2028, 68,1 Mrd. Euro 2029, 80,7 Mrd. Euro 2030 (Abschnitt 4.4.1, S. 40); in der Gliederung nach Ausgabearten 29,9 (Ist 2025), 30,2, 41,8, 55,1, 68,0, 80,6 (Tabelle 9, S. 25). Ausgaben 2027: 555,4 Mrd. Euro (Tabelle 3, S. 8). Ausnahme von der Schuldenbremse nach Art. 115 Abs. 2 Satz 4 GG, geschaffen durch die Grundgesetzänderung vom 24. März 2025 (BGBl. 2025 I Nr. 94), und die davon erfassten Ausgaben: Abschnitt 4.2, Tabelle 10, S. 26 bis 27 (2028: Verteidigung 153,2 Mrd. Euro, Bevölkerungsschutz 2,7, Nachrichtendienste 2,8, Schutz der informationstechnischen Systeme 4,0, Hilfe für völkerrechtswidrig angegriffene Staaten 8,5, abzüglich 1 % des BIP 46,0).",
-      "en": "Adopted by the federal cabinet on 6 July 2026 together with the draft budget 2027. 'Handlungsbedarf' (gap not yet covered by measures, booked as a global spending cut in budget section 60): about €22bn in 2028, €39bn in 2029 and €48bn in 2030; the 2027 gap of €34bn in the previous plan is closed (section 3.3, page 19; also page 9). Federal interest spending, chapter 3205: €41.9bn in 2027, 55.2 in 2028, 68.1 in 2029, 80.7 in 2030 (section 4.4.1, page 40); by type of spending 29.9 (2025 outturn), 30.2, 41.8, 55.1, 68.0, 80.6 (table 9, page 25). Spending €555.4bn in 2027 (table 3, page 8). Exemption from the debt brake under Art. 115 (2) sentence 4 GG, created by the amendment of 24 March 2025 (BGBl. 2025 I Nr. 94), and the spending it covers: section 4.2, table 10, pages 26 to 27 (2028: defence €153.2bn, civil protection 2.7, intelligence services 2.8, IT protection 4.0, aid to states attacked in breach of international law 8.5, less 1% of GDP 46.0)."
+      "de": "Vom Bundeskabinett am 6. Juli 2026 zusammen mit dem Regierungsentwurf für den Haushalt 2027 beschlossen. „Handlungsbedarf“ (noch nicht durch Maßnahmen gedeckte Lücke, als Globale Minderausgabe im Einzelplan 60 verbucht): rund 22 Mrd. Euro 2028, 39 Mrd. Euro 2029 und 48 Mrd. Euro 2030; die Lücke von 34 Mrd. Euro für 2027 aus dem vorigen Finanzplan ist geschlossen (Abschnitt 3.3, S. 19; auch S. 9). Zinsausgaben des Bundes, Kapitel 3205: 41,9 Mrd. Euro 2027, 55,2 Mrd. Euro 2028, 68,1 Mrd. Euro 2029, 80,7 Mrd. Euro 2030 (Abschnitt 4.4.1, S. 40); in der Gliederung nach Ausgabearten 29,9 (Ist 2025), 30,2, 41,8, 55,1, 68,0, 80,6 (Tabelle 9, S. 25). Ausgaben 2027: 555,4 Mrd. Euro (Tabelle 3, S. 8). Ausnahme von der Schuldenbremse nach Art. 115 Abs. 2 Satz 4 GG, geschaffen durch die Grundgesetzänderung vom 24. März 2025 (BGBl. 2025 I Nr. 94), und die davon erfassten Ausgaben: Abschnitt 4.2, Tabelle 10, S. 26 bis 27 (2028: Verteidigung 153,2 Mrd. Euro, Bevölkerungsschutz 2,7, Nachrichtendienste 2,8, Schutz der informationstechnischen Systeme 4,0, Hilfe für völkerrechtswidrig angegriffene Staaten 8,5, abzüglich 1 % des BIP 46,0). Tabelle 10, Zeile „Hilfe für völkerrechtswidrig angegriffene Staaten“: 11,5 (Soll 2026), 11,6 (Entwurf 2027) und je 8,5 Mrd. Euro in den Jahren 2028 bis 2030.",
+      "en": "Adopted by the federal cabinet on 6 July 2026 together with the draft budget 2027. 'Handlungsbedarf' (gap not yet covered by measures, booked as a global spending cut in budget section 60): about €22bn in 2028, €39bn in 2029 and €48bn in 2030; the 2027 gap of €34bn in the previous plan is closed (section 3.3, page 19; also page 9). Federal interest spending, chapter 3205: €41.9bn in 2027, 55.2 in 2028, 68.1 in 2029, 80.7 in 2030 (section 4.4.1, page 40); by type of spending 29.9 (2025 outturn), 30.2, 41.8, 55.1, 68.0, 80.6 (table 9, page 25). Spending €555.4bn in 2027 (table 3, page 8). Exemption from the debt brake under Art. 115 (2) sentence 4 GG, created by the amendment of 24 March 2025 (BGBl. 2025 I Nr. 94), and the spending it covers: section 4.2, table 10, pages 26 to 27 (2028: defence €153.2bn, civil protection 2.7, intelligence services 2.8, IT protection 4.0, aid to states attacked in breach of international law 8.5, less 1% of GDP 46.0). Table 10, row 'aid to states attacked in breach of international law': 11.5 (2026 budget), 11.6 (2027 draft) and 8.5 each in 2028 to 2030 (€bn)."
     }
   },
   "bh_epl60_2027_entwurf": {
@@ -1799,8 +1807,8 @@
     "accessed": "2026-11-22",
     "year": 2026,
     "note": {
-      "de": "Kapitel 6002, Titel 687 06 „Ertüchtigung von völkerrechtswidrig angegriffenen Staaten im Bereich Sicherheit, Verteidigung und Stabilisierung“ (S. 36 bis 37): Soll 2027 11.612,0 Mio. Euro, Soll 2026 11.546,8 Mio. Euro, Ist 2025 8.430,6 Mio. Euro. Verpflichtungsermächtigung 8.696,6 Mio. Euro, davon fällig 2028 bis zu 1.577,5, 2029 bis zu 3.264,0, 2030 bis zu 2.214,5 und 2031 bis zu 1.640,6 Mio. Euro. Erläuterungen: Unterstützung Ukraine (Verteidigungsministerium) 9.047,0 Mio. Euro, Ertüchtigungsinitiative Ukraine 538,1 (Verteidigungsministerium) und 180,0 Mio. Euro (Auswärtiges Amt), Wiederbeschaffung (Verteidigungsministerium) 1.148,3 Mio. Euro, Europäische Friedensfazilität Ukraine 648,6 Mio. Euro, Behandlung ukrainischer Soldaten 25,0 Mio. Euro, Transport und Containermiete 25,0 Mio. Euro. Haushaltsvermerk 7: „Die Ausgaben müssen vollständig als Verteidigungsausgaben nach NATO-Kriterien anrechenbar sein.“ Titel 687 03 (Ertüchtigung von Partnerstaaten): Soll 2027 470,0 Mio. Euro.",
-      "en": "Chapter 6002, title 687 06 'Ertüchtigung von völkerrechtswidrig angegriffenen Staaten im Bereich Sicherheit, Verteidigung und Stabilisierung' (capacity building for states attacked in breach of international law, pages 36 to 37): 2027 draft €11,612.0m, 2026 budget €11,546.8m, 2025 actuals €8,430.6m. Commitment appropriation €8,696.6m, falling due up to €1,577.5m in 2028, €3,264.0m in 2029, €2,214.5m in 2030 and €1,640.6m in 2031. Breakdown: support for Ukraine (defence ministry) €9,047.0m, capacity-building initiative for Ukraine €538.1m (defence ministry) and €180.0m (foreign office), replacement procurement (defence ministry) €1,148.3m, European Peace Facility for Ukraine €648.6m, treatment of Ukrainian soldiers €25.0m, transport and container rent €25.0m. Budget note 7: the spending must count in full as defence expenditure under NATO criteria. Title 687 03 (partner states): 2027 draft €470.0m."
+      "de": "Kapitel 6002, Titel 687 06 „Ertüchtigung von völkerrechtswidrig angegriffenen Staaten im Bereich Sicherheit, Verteidigung und Stabilisierung“ (S. 36 bis 37): Soll 2027 11.612,0 Mio. Euro, Soll 2026 11.546,8 Mio. Euro, Ist 2025 8.430,6 Mio. Euro. Verpflichtungsermächtigung 8.696,6 Mio. Euro, davon fällig 2028 bis zu 1.577,5, 2029 bis zu 3.264,0, 2030 bis zu 2.214,5 und 2031 bis zu 1.640,6 Mio. Euro. Erläuterungen: Unterstützung Ukraine (Verteidigungsministerium) 9.047,0 Mio. Euro, Ertüchtigungsinitiative Ukraine 538,1 (Verteidigungsministerium) und 180,0 Mio. Euro (Auswärtiges Amt), Wiederbeschaffung (Verteidigungsministerium) 1.148,3 Mio. Euro, Europäische Friedensfazilität Ukraine 648,6 Mio. Euro, Behandlung ukrainischer Soldaten 25,0 Mio. Euro, Transport und Containermiete 25,0 Mio. Euro. Haushaltsvermerk 7: „Die Ausgaben müssen vollständig als Verteidigungsausgaben nach NATO-Kriterien anrechenbar sein.“ Titel 687 03 (Ertüchtigung von Partnerstaaten): Soll 2027 470,0 Mio. Euro. Übersicht der Verpflichtungsermächtigungen (S. 160), Titel 687 06: bis Ende 2025 eingegangene Verpflichtungen, fällig ab 2027, 10.063,4 Mio. Euro (davon 2028: 2.840,5); Verpflichtungsermächtigung 2026 11.957,7 Mio. Euro (2028: 3.700,0); Verpflichtungsermächtigung 2027 8.696,6 Mio. Euro (2028: 1.577,5).",
+      "en": "Chapter 6002, title 687 06 'Ertüchtigung von völkerrechtswidrig angegriffenen Staaten im Bereich Sicherheit, Verteidigung und Stabilisierung' (capacity building for states attacked in breach of international law, pages 36 to 37): 2027 draft €11,612.0m, 2026 budget €11,546.8m, 2025 actuals €8,430.6m. Commitment appropriation €8,696.6m, falling due up to €1,577.5m in 2028, €3,264.0m in 2029, €2,214.5m in 2030 and €1,640.6m in 2031. Breakdown: support for Ukraine (defence ministry) €9,047.0m, capacity-building initiative for Ukraine €538.1m (defence ministry) and €180.0m (foreign office), replacement procurement (defence ministry) €1,148.3m, European Peace Facility for Ukraine €648.6m, treatment of Ukrainian soldiers €25.0m, transport and container rent €25.0m. Budget note 7: the spending must count in full as defence expenditure under NATO criteria. Title 687 03 (partner states): 2027 draft €470.0m. Overview of commitment appropriations (page 160), title 687 06: commitments entered by the end of 2025 and falling due from 2027 €10,063.4m (of which 2028: 2,840.5); commitment appropriation 2026 €11,957.7m (2028: 3,700.0); commitment appropriation 2027 €8,696.6m (2028: 1,577.5)."
     }
   },
   "bundeshaushalt_2023_2027": {
@@ -1859,14 +1867,14 @@
     }
   },
   "bt_drs_21_8124": {
-    "title": "Antrag der Fraktion der AfD, Drucksache 21/8124 vom 22.09.2026",
+    "title": "Antrag der Fraktion der AfD: Keine EU-Mitgliedschaft und keine militärischen Beistandsgarantien für die Ukraine, Drucksache 21/8124 vom 22.09.2026",
     "publisher": "Deutscher Bundestag",
     "url": "https://dserver.bundestag.de/btd/21/081/2108124.pdf",
     "accessed": "2026-11-22",
     "year": 2026,
     "note": {
-      "de": "Die finanzielle und militärische Unterstützung der Ukraine, auch im Rahmen der Europäischen Friedensfazilität, soll abgebaut werden, bis die Ukraine an ernsthaften Friedensverhandlungen mit Russland teilnimmt; humanitäre Mittel sind ausgenommen.",
-      "en": "Financial and military support for Ukraine, including through the European Peace Facility, is to be reduced until Ukraine takes part in serious peace negotiations with Russia; humanitarian funds are exempted."
+      "de": "Abschnitt II Nr. 4: Die finanzielle und militärische Unterstützung der Ukraine, auch im Rahmen der Europäischen Friedensfazilität, soll abgebaut werden, bis die Ukraine an ernsthaften Friedensverhandlungen mit Russland teilnimmt; humanitäre Mittel sind ausgenommen.",
+      "en": "Section II no. 4: financial and military support for Ukraine, including through the European Peace Facility, is to be reduced until Ukraine takes part in serious peace negotiations with Russia; humanitarian funds are exempted."
     }
   },
   "bt_drs_21_4267": {
@@ -1909,8 +1917,8 @@
     "accessed": "2026-11-22",
     "year": 2025,
     "note": {
-      "de": "Vom Bundestag in dieser Fassung beschlossen (Gesetz vom 22. Dezember 2025, BGBl. 2025 I Nr. 370, in Kraft seit 1. Januar 2026). § 2a Wehrpflichtgesetz (S. 10 bis 11): Der Bundestag entscheidet durch Gesetz über eine Bedarfswehrpflicht; übersteigt die Zahl der Geeigneten den Bedarf, kann ein Zufallsverfahren vorgesehen werden. Begründung (S. 95 bis 96): verpflichtende Musterung der ab 1. Januar 2008 geborenen Männer ab Inkrafttreten, schrittweise auf den ganzen Jahrgang ausgeweitet; freiwilliger Wehrdienst von sechs bis elf Monaten mit mindestens 2.600 Euro brutto im Monat; Aufwuchs auf mindestens 260.000 aktive Soldatinnen und Soldaten und 200.000 Reservisten bis 2035; halbjährlicher Bericht an den Bundestag; auf das Wehrpflichtsoldgesetz „kann mit Blick auf die Änderung in § 2a des Wehrpflichtgesetzes derzeit verzichtet werden“. Abstimmung im Ausschuss: CDU/CSU und SPD dafür, AfD, Grüne und Linke dagegen.",
-      "en": "Adopted by the Bundestag in this version (act of 22 December 2025, BGBl. 2025 I no. 370, in force since 1 January 2026). Section 2a of the Compulsory Military Service Act (pages 10 to 11): the Bundestag decides by law on conscription as needed ('Bedarfswehrpflicht'); if more suitable men are available than needed, a random selection may be provided for. Reasons (pages 95 to 96): compulsory medical screening of men born from 1 January 2008 from entry into force, extended step by step to the whole cohort; voluntary service of six to eleven months with at least €2,600 gross a month; growth to at least 260,000 active soldiers and 200,000 reservists by 2035; a report to the Bundestag every six months; the conscripts' pay act 'can be dispensed with for now in view of the change in section 2a'. Committee vote: CDU/CSU and SPD in favour, AfD, Greens and Die Linke against."
+      "de": "Vom Bundestag in dieser Fassung am 5. Dezember 2025 beschlossen (namentliche Abstimmung), verkündet als Gesetz vom 22. Dezember 2025 (BGBl. 2025 I Nr. 370), in Kraft seit 1. Januar 2026. § 2a Wehrpflichtgesetz (S. 10 bis 11): Der Bundestag entscheidet durch Gesetz über eine Bedarfswehrpflicht, insbesondere wenn die verteidigungspolitische Lage oder die Personallage der Streitkräfte es erfordert; übersteigt die Zahl der Geeigneten den Bedarf, kann ein Zufallsverfahren vorgesehen werden. Begründung (S. 95 bis 96): verpflichtende Musterung der ab 1. Januar 2008 geborenen Männer ab Inkrafttreten, schrittweise auf den ganzen Jahrgang ausgeweitet (nach S. 92 ab 1. Juli 2027, sobald die Strukturen aufgebaut sind); freiwilliger Wehrdienst von sechs bis elf Monaten mit mindestens 2.600 Euro brutto im Monat; § 91 Soldatengesetz legt einen Aufwuchspfad fest, die NATO-Ziele erfordern laut Begründung mindestens 260.000 aktive Soldaten und 200.000 Reservisten; halbjährlicher Bericht an den Bundestag; auf das Wehrpflichtsoldgesetz „kann mit Blick auf die Änderung in § 2a des Wehrpflichtgesetzes derzeit verzichtet werden“. S. 94: Abstimmung im Ausschuss, CDU/CSU und SPD dafür, AfD, Grüne und Linke dagegen; die AfD hielt die Aufwuchspläne für unzureichend, die Grünen hielten flächendeckende Musterungen für notwendig und kritisierten, dass die Musterungslücke seit 2011 nicht geschlossen werde, die Linke sah mit der Musterung und der Verpflichtung „bereits zwei Zwangselemente“.",
+      "en": "Adopted by the Bundestag in this version on 5 December 2025 (roll-call vote), promulgated as the act of 22 December 2025 (BGBl. 2025 I no. 370), in force since 1 January 2026. Section 2a of the Compulsory Military Service Act (pages 10 to 11): the Bundestag decides by law on conscription as needed ('Bedarfswehrpflicht'), in particular if the security situation or the staffing of the armed forces requires it; if more suitable men are available than needed, random selection may be provided for. Reasons (pages 95 to 96): compulsory medical screening of men born from 1 January 2008 from entry into force, extended step by step to the whole cohort (from 1 July 2027 once the structures are in place, page 92); voluntary service of six to eleven months with at least €2,600 gross a month; section 91 of the Soldiers Act sets a growth path, and according to the reasons the NATO targets require at least 260,000 active soldiers and 200,000 reservists; a report to the Bundestag every six months; the conscripts' pay act 'can be dispensed with for now in view of the change in section 2a'. Page 94: committee vote, CDU/CSU and SPD in favour, AfD, Greens and Die Linke against; the AfD found the growth plans insufficient, the Greens held screening of all to be necessary and criticised that the screening gap since 2011 is not closed, Die Linke saw 'already two elements of compulsion' in the screening and the obligation."
     }
   },
   "bt_drs_21_3077": {
@@ -1928,7 +1936,11 @@
     "title": "Wehrpflichtgesetz, § 2a Anordnung der Bedarfswehrpflicht durch Gesetz",
     "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
     "url": "https://www.gesetze-im-internet.de/wehrpflg/__2a.html",
-    "accessed": "2026-11-22"
+    "accessed": "2026-11-22",
+    "note": {
+      "de": "In der Fassung des Gesetzes vom 22. Dezember 2025 (BGBl. 2025 I Nr. 370), laut Stand der Seite die letzte Änderung des Wehrpflichtgesetzes.",
+      "en": "As worded by the act of 22 December 2025 (BGBl. 2025 I no. 370), according to the page the latest amendment of the Compulsory Military Service Act."
+    }
   },
   "gg_art_12a": {
     "title": "Grundgesetz, Artikel 12a",
@@ -1938,13 +1950,13 @@
   },
   "ifo_fb_144_2024": {
     "title": "Volkswirtschaftliche Kosten einer Wiedereinführung der Wehrpflicht oder eines sozialen Pflichtjahres (ifo Forschungsberichte 144)",
-    "publisher": "ifo Institut im Auftrag des Bundesministeriums der Finanzen",
+    "publisher": "ifo Institut",
     "url": "https://www.ifo.de/DocDL/ifo_Forschungsbericht_144_Wiedereinfuehrung-Wehrpflicht.pdf",
     "accessed": "2026-11-22",
     "year": 2024,
     "note": {
-      "de": "Adema, Poutvaara, Schlepper, Taghiyev, Wochner, Juli 2024. S. 17 bis 19: zwölf Monate Dienst, Nettogehalt 1.000 Euro im Monat einschließlich Wehrsold, Entlassungsgeld und der Sachbezugswerte für Verpflegung (313 Euro) und Unterkunft (97 Euro); Szenarien 5 % (39.000), 25 % (195.000) und 100 % (780.000) eines Jahrgangs von Männern und Frauen; von den Jahrgängen 1981 bis 1985 leisteten im Schnitt rund 85.000 Wehrdienst und 110.000 Zivil- oder Ersatzdienst. Tabelle 2 (S. 31), jährlich in Mrd. Euro, Wehrpflicht und Marktlösung: Bruttonationaleinkommen −3,4 und −1,9 (5 %), −17,1 und −9,4 (25 %), −69,7 und −37,4 (100 %); Staatsausgaben +0,6 und +1,5, +3,2 und +7,7, +12,8 und +30,5. S. 37: Direkt aus Nettogehalt mal Zahl der Wehrpflichtigen gerechnet sind die Staatsausgaben um ein Viertel niedriger als im Modell. S. 38 bis 40: Kosten für Auswahl, Verwaltung, Unterbringung, Ausbildung und Ausstattung lassen sich noch nicht seriös beziffern. Die ifo-Website lässt keine automatischen Abrufe zu; gelesen wurde eine unveränderte Kopie des Berichts (augengeradeaus.net).",
-      "en": "Adema, Poutvaara, Schlepper, Taghiyev, Wochner, July 2024. Pages 17 to 19: twelve months of service, net pay of €1,000 a month including pay, discharge pay and the official values of meals (€313) and accommodation (€97); scenarios of 5% (39,000), 25% (195,000) and 100% (780,000) of a birth cohort of men and women; of the cohorts born 1981 to 1985 about 85,000 did military service and 110,000 civilian or alternative service on average. Table 2 (page 31), per year in €bn, conscription and market solution: gross national income −3.4 and −1.9 (5%), −17.1 and −9.4 (25%), −69.7 and −37.4 (100%); government spending +0.6 and +1.5, +3.2 and +7.7, +12.8 and +30.5. Page 37: computed directly as net pay times the number of conscripts, government spending is a quarter lower than in the model. Pages 38 to 40: the costs of selection, administration, accommodation, training and equipment cannot yet be seriously quantified. The ifo website refuses automated downloads; an unchanged copy of the report was read (augengeradeaus.net)."
+      "de": "Adema, Poutvaara, Schlepper, Taghiyev, Wochner, Juni 2024; Kurzexpertise im Rahmen des Forschungsauftrags fe 7/22, nach der Pressemitteilung vom 10. Juli 2024 für das Bundesministerium der Finanzen. S. 17 bis 19: zwölf Monate Dienst, Nettogehalt 1.000 Euro im Monat: der Wehrsold von 2015 (376 Euro im Monat), auf Preise von 2024 hochgerechnet (485 Euro), 100 Euro Entlassungsgeld und die Sachbezugswerte für Verpflegung (313 Euro) und Unterkunft im Mehrbettzimmer (97 Euro), zusammen 995 Euro; im Durchschnitt eines Jahres drei Monate als Schütze, drei als Gefreiter und sechs als Obergefreiter (Fußnote 11). Szenarien 5 % (39.000), 25 % (195.000) und 100 % (780.000) eines Jahrgangs von Männern und Frauen; von den Jahrgängen 1981 bis 1985 leisteten im Schnitt rund 85.000 Wehrdienst, 110.000 leisteten Zivil- oder Ersatzdienst oder waren für den Zivilschutz freigestellt. Tabelle 2 (S. 31), jährlich in Mrd. Euro, Wehrpflicht und Marktlösung: Bruttonationaleinkommen −3,4 und −1,9 (5 %), −17,1 und −9,4 (25 %), −69,7 und −37,4 (100 %); privater Konsum −3,9 und −2,9, −19,5 und −14,1, −78,7 und −56,0; Staatsausgaben +0,6 und +1,5, +3,2 und +7,7, +12,8 und +30,5. Tabelle 3 (S. 32): Wohlfahrt −0,22 und −0,14 % (5 %). S. 37, Fußnote 28: Direkt aus Nettogehalt mal Zahl der Wehrpflichtigen gerechnet sind die Staatsausgaben um ein Viertel niedriger als im Modell, dessen Jahrgänge alle gleich groß sind. S. 38 bis 40: Kosten für Auswahl, Verwaltung, Unterbringung, Ausbildung und Ausstattung lassen sich noch nicht seriös beziffern.",
+      "en": "Adema, Poutvaara, Schlepper, Taghiyev, Wochner, June 2024; short report under research contract fe 7/22, according to the press release of 10 July 2024 for the Federal Ministry of Finance. Pages 17 to 19: twelve months of service, net pay of €1,000 a month: the 2015 conscripts' pay (€376 a month) adjusted to 2024 prices (€485), €100 discharge pay and the official values of meals (€313) and accommodation in a shared room (€97), together €995; on average three months as private, three as lance corporal and six as corporal over a year (footnote 11). Scenarios of 5% (39,000), 25% (195,000) and 100% (780,000) of a birth cohort of men and women; of the cohorts born 1981 to 1985 about 85,000 did military service on average, and 110,000 did civilian or alternative service or were exempted for civil protection. Table 2 (page 31), per year in €bn, conscription and market solution: gross national income −3.4 and −1.9 (5%), −17.1 and −9.4 (25%), −69.7 and −37.4 (100%); private consumption −3.9 and −2.9, −19.5 and −14.1, −78.7 and −56.0; government spending +0.6 and +1.5, +3.2 and +7.7, +12.8 and +30.5. Table 3 (page 32): welfare −0.22 and −0.14% (5%). Page 37, footnote 28: computed directly as net pay times the number of conscripts, government spending is a quarter lower than in the model, whose cohorts are all the same size. Pages 38 to 40: the costs of selection, administration, accommodation, training and equipment cannot yet be seriously quantified."
     }
   },
   "bt_drs_20_14972": {
@@ -2019,8 +2031,8 @@
     "accessed": "2026-11-22",
     "year": 2005,
     "note": {
-      "de": "Die Absenkung des Höchstruhegehaltssatzes von 75 auf 71,75 % in acht Schritten (§ 69e Beamtenversorgungsgesetz) ist verfassungsgemäß. Leitsätze: Kein hergebrachter Grundsatz des Berufsbeamtentums verlangt einen Höchstsatz von mindestens 75 %; finanzielle Erwägungen allein sind keine ausreichende Legitimation für eine Kürzung der Altersversorgung; Änderungen in der gesetzlichen Rentenversicherung können eine Kürzung rechtfertigen, soweit das mit den strukturellen Unterschieden der Versorgungssysteme vereinbar ist. Rn. 120: im Hinblick auf die Entwicklung der Alterseinkommen der Rentner gerechtfertigt; Rn. 111 bis 115: die amtsangemessene Alimentation bleibt die Grenze.",
-      "en": "Lowering the maximum pension rate from 75 to 71.75% in eight steps (section 69e of the Civil Servants' Pensions Act) is constitutional. Headnotes: no traditional principle of the professional civil service requires a maximum rate of at least 75%; financial considerations alone do not suffice to justify a cut in old-age provision; changes in the statutory pension insurance can justify a cut insofar as this is compatible with the structural differences between the systems. Para. 120: justified in view of the development of pensioners' old-age incomes; paras. 111 to 115: adequate maintenance (Alimentation) remains the limit."
+      "de": "Die Absenkung des Höchstruhegehaltssatzes von 75 auf 71,75 % in acht Schritten (§ 69e Beamtenversorgungsgesetz) ist verfassungsgemäß. Leitsatz 1: Kein hergebrachter Grundsatz verpflichtet zu strikter Parallelität von Besoldungs- und Versorgungsentwicklung. Leitsatz 2: „Im Beamtenrecht ist das Bemühen, Ausgaben zu sparen, in aller Regel für sich genommen keine ausreichende Legitimation für eine Kürzung der Altersversorgung.“ Leitsatz 3: Änderungen in der gesetzlichen Rentenversicherung können eine Absenkung nur rechtfertigen, soweit dies mit den strukturellen Unterschieden der Versorgungssysteme vereinbar ist. Rn. 105: kein hergebrachter Grundsatz, wonach der Höchstversorgungssatz mindestens 75 % beträgt; Rn. 120: im Hinblick auf die Entwicklung der Alterseinkommen der Rentner gerechtfertigt; Rn. 111 bis 115: die amtsangemessene Alimentation bleibt die Grenze.",
+      "en": "Lowering the maximum pension rate from 75 to 71.75% in eight steps (section 69e of the Civil Servants' Pensions Act) is constitutional. Headnote 1: no traditional principle requires pay and pensions to develop in strict parallel. Headnote 2: in civil-service law, the aim of saving money is as a rule not on its own a sufficient justification for cutting old-age provision. Headnote 3: changes in the statutory pension insurance can justify a cut only insofar as this is compatible with the structural differences between the systems. Para. 105: no traditional principle requires a maximum rate of at least 75%; para. 120: justified in view of the development of pensioners' old-age incomes; paras. 111 to 115: adequate maintenance (Alimentation) remains the limit."
     }
   },
   "gg_art_74": {
@@ -2171,8 +2183,8 @@
     "accessed": "2026-11-22",
     "year": 2026,
     "note": {
-      "de": "Förderaufrufe für den Förderzeitraum ab 2027 sind veröffentlicht, die Einreichung begann am 3. August 2026 (Vorbemerkung der Fragesteller); die Höhe der Mittel 2027 steht erst mit dem Haushalt 2027 fest (Antwort zu Frage 2); die Laufzeit ergibt sich aus der Förderrichtlinie, laut Frage 4 vier Jahre statt bis 2032. Antwort zu Frage 1: Partnerschaften für Demokratie brauchen einen kommunalen Beschluss, außer wenn die Kommune eine Kofinanzierung vom Land oder einer anderen Körperschaft erhält.",
-      "en": "Calls for proposals for the funding period from 2027 have been published, submissions began on 3 August 2026 (preliminary remarks of the questioners); the amount for 2027 is fixed only with the 2027 budget (answer to question 2); the term follows from the funding guideline, four years instead of until 2032 according to question 4. Answer to question 1: local partnerships for democracy need a decision of the municipal council, unless the municipality receives co-funding from its state or another public body."
+      "de": "Antwort zu Frage 1: Partnerschaften für Demokratie brauchen einen kommunalen Beschluss, außer wenn die Kommune eine Kofinanzierung vom Land oder einer anderen Körperschaft erhält oder es die örtlichen Gegebenheiten nicht erlauben. Antwort zu Frage 2: Die Höhe der Mittel 2027 steht erst mit dem Haushalt 2027 fest. Zu Frage 4: Die Laufzeit ergibt sich aus der Förderrichtlinie; die Fragesteller schreiben von einer auf vier Jahre begrenzten Laufzeit statt bis 2032.",
+      "en": "Answer to question 1: local partnerships for democracy need a decision of the municipal council, unless the municipality receives co-funding from its state or another public body or local conditions do not allow it. Answer to question 2: the amount for 2027 is fixed only with the 2027 budget. On question 4: the term follows from the funding guideline; the questioners write of a term limited to four years instead of until 2032."
     }
   },
   "dl_evaluation_fp2_2024": {
@@ -2189,22 +2201,22 @@
   "demokratie_leben_programm": {
     "title": "Über „Demokratie leben!“",
     "publisher": "Bundesamt für Familie und zivilgesellschaftliche Aufgaben, Regiestelle „Demokratie leben!“",
-    "url": "https://www.demokratie-leben.de/das-programm/ueber-demokratie-leben",
+    "url": "https://www.demokratie-leben.de/dl/programm/ueber-demokratie-leben",
     "accessed": "2026-11-22",
     "note": {
-      "de": "Förderperioden 2015 bis 2019, 2020 bis 2024 und ab 2025; Förderrichtlinie seit 1. Januar 2025; fünf Programmbereiche und Sondervorhaben.",
-      "en": "Funding periods 2015 to 2019, 2020 to 2024 and from 2025; funding guideline since 1 January 2025; five programme areas and special projects."
+      "de": "Dritte Förderperiode 2025 bis 2032, nach den Förderperioden 2015 bis 2019 und 2020 bis 2024; Förderrichtlinie seit 1. Januar 2025; fünf Programmbereiche und Sondervorhaben.",
+      "en": "Third funding period 2025 to 2032, after the periods 2015 to 2019 and 2020 to 2024; funding guideline since 1 January 2025; five programme areas and special projects."
     }
   },
   "bt_drs_21_9082": {
-    "title": "Antrag der Fraktion der AfD, Drucksache 21/9082 vom 10.11.2026",
+    "title": "Antrag der Fraktion der AfD: Die Bundeszentrale für politische Bildung auf ihren ursprünglichen Zweck zurückführen, ihre finanziellen Mittel strikt begrenzen, Inhalte und Förderpraxis politisch ausgewogen gestalten und perspektivisch abwickeln, Drucksache 21/9082 vom 10.11.2026",
     "publisher": "Deutscher Bundestag",
     "url": "https://dserver.bundestag.de/btd/21/090/2109082.pdf",
     "accessed": "2026-11-22",
     "year": 2026,
     "note": {
-      "de": "Abschnitt II Nr. 1: das Haushaltsvolumen der Bundeszentrale für politische Bildung schrittweise auf höchstens 15 Mio. Euro abschmelzen; die Förderung von Nichtregierungsorganisationen durch die Bundeszentrale, „Demokratie leben!“ und andere Bundesprogramme offenlegen und Mehrfachfinanzierung beenden.",
-      "en": "Section II no. 1: reduce the budget of the Federal Agency for Civic Education step by step to at most €15m; disclose the funding of non-governmental organisations by the agency, “Demokratie leben!” and other federal programmes and end multiple funding."
+      "de": "Abschnitt II Nr. 1: das Haushaltsvolumen der Bundeszentrale für politische Bildung schrittweise auf höchstens 15 Mio. Euro abschmelzen; die Bundeszentrale perspektivisch abwickeln; die Förderung von Nichtregierungsorganisationen durch die Bundeszentrale, „Demokratie leben!“ und andere Bundesprogramme offenlegen und Mehrfachfinanzierung beenden.",
+      "en": "Section II no. 1: reduce the budget of the Federal Agency for Civic Education step by step to at most €15m; eventually wind the agency down; disclose the funding of non-governmental organisations by the agency, “Demokratie leben!” and other federal programmes and end multiple funding."
     }
   },
   "estg_32a": {
@@ -2215,6 +2227,155 @@
     "note": {
       "de": "Tarif 2024 für Ledige: Grundfreibetrag 11.784 Euro, Grenzsteuersatz von 24 % ab 17.006 Euro zu versteuerndem Einkommen steigend bis 42 % ab 66.761 Euro; bei 38.000 Euro rund 31,6 % (eigene Rechnung). Die Seite zeigt den jeweils geltenden Tarif.",
       "en": "2024 schedule for single people: basic allowance €11,784, marginal rate rising from 24% at €17,006 of taxable income to 42% from €66,761; about 31.6% at €38,000 (own calculation). The page shows the schedule currently in force."
+    }
+  },
+  "sg_91": {
+    "title": "Soldatengesetz, §§ 91 und 91a (Aufwuchs des aktiven militärischen Personals und der Reserve; Bericht)",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/sg/__91.html",
+    "accessed": "2026-11-22",
+    "note": {
+      "de": "§ 91 Abs. 1: „Bis 2035 ist der Aufwuchs der Streitkräfte auf 460 000 Soldatinnen und Soldaten, davon bis zu 260 000 aktive Soldatinnen und Soldaten und mindestens 200 000 Reservistinnen und Reservisten …, vorgesehen“; der Aufwuchspfad nennt für 2035 zwischen 255.000 und 270.000 Aktive. Abs. 2: Die Festlegung der Stärke der Streitkräfte durch den Haushaltsplan bleibt unberührt. § 91a (https://www.gesetze-im-internet.de/sg/__91a.html): halbjährlicher Bericht an den Bundestag, beginnend ab dem 1. Januar 2027.",
+      "en": "Section 91(1): growth of the armed forces to 460,000 soldiers by 2035, of whom up to 260,000 active soldiers and at least 200,000 reservists, is 'provided for'; the growth path gives 255,000 to 270,000 active soldiers for 2035. Paragraph 2: the strength of the forces is still set by the budget. Section 91a (https://www.gesetze-im-internet.de/sg/__91a.html): report to the Bundestag every six months, starting from 1 January 2027."
+    }
+  },
+  "wpflg_2": {
+    "title": "Wehrpflichtgesetz, § 2 Anwendung dieses Gesetzes",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/wehrpflg/__2.html",
+    "accessed": "2026-11-22",
+    "note": {
+      "de": "Abs. 2: Die §§ 3 bis 52 gelten im Spannungs- oder Verteidigungsfall. Abs. 3: Außerhalb davon gelten nur einzelne Vorschriften, darunter Erfassung und Musterung. Abs. 4: Bereitschaftserklärung und Musterung (§§ 15a, 16) betreffen nur nach dem 31. Dezember 2007 Geborene.",
+      "en": "Paragraph 2: sections 3 to 52 apply in a state of tension or defence. Paragraph 3: outside these, only some provisions apply, among them registration and screening. Paragraph 4: the declaration of readiness and screening (sections 15a, 16) concern only those born after 31 December 2007."
+    }
+  },
+  "sgb6_3": {
+    "title": "Sozialgesetzbuch Sechstes Buch, § 3 Sonstige Versicherte",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/sgb_6/__3.html",
+    "accessed": "2026-11-22",
+    "note": {
+      "de": "Nr. 2: Versicherungspflichtig sind Personen in der Zeit, in der sie aufgrund gesetzlicher Pflicht Wehrdienst oder Zivildienst leisten.",
+      "en": "No. 2: persons are compulsorily insured while they perform military or civilian service under a legal obligation."
+    }
+  },
+  "sgb6_166": {
+    "title": "Sozialgesetzbuch Sechstes Buch, § 166 Beitragspflichtige Einnahmen sonstiger Versicherter",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/sgb_6/__166.html",
+    "accessed": "2026-11-22",
+    "note": {
+      "de": "Abs. 1 Nr. 1: Bei Wehr- oder Zivildienstleistenden sind beitragspflichtige Einnahmen 80 Prozent der Bezugsgröße.",
+      "en": "Paragraph 1 no. 1: for persons in military or civilian service, contributions are assessed on 80 percent of the reference value."
+    }
+  },
+  "sgb6_170": {
+    "title": "Sozialgesetzbuch Sechstes Buch, § 170 Beitragstragung bei sonstigen Versicherten",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/sgb_6/__170.html",
+    "accessed": "2026-11-22",
+    "note": {
+      "de": "Abs. 1 Nr. 1: Bei Wehr- oder Zivildienstleistenden trägt der Bund die Beiträge.",
+      "en": "Paragraph 1 no. 1: for persons in military or civilian service, the federal government bears the contributions."
+    }
+  },
+  "nato_hague_declaration_2025": {
+    "title": "The Hague Summit Declaration (25 June 2025)",
+    "publisher": "NATO",
+    "url": "https://www.nato.int/en/about-us/official-texts-and-resources/official-texts/2025/06/25/the-hague-summit-declaration",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Nr. 3: 5 % des BIP bis 2035, davon mindestens 3,5 % nach der vereinbarten Definition für Verteidigung im engeren Sinn und bis zu 1,5 % für verteidigungs- und sicherheitsrelevante Ausgaben; Überprüfung 2029. Die Bündnispartner „will include direct contributions towards Ukraine’s defence and its defence industry when calculating Allies’ defence spending“.",
+      "en": "Para. 3: 5% of GDP by 2035, of which at least 3.5% under the agreed definition for core defence and up to 1.5% for defence- and security-related spending; review in 2029. Allies 'will include direct contributions towards Ukraine’s defence and its defence industry when calculating Allies’ defence spending'."
+    }
+  },
+  "breg_faq_rentenreform_2026": {
+    "title": "Fragen und Antworten: 33 Empfehlungen für eine große Rentenreform",
+    "publisher": "Die Bundesregierung",
+    "url": "https://www.bundesregierung.de/breg-de/aktuelles/faq-rentenreform-2444534",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Die Alterssicherungskommission hat ihre Vorschläge am 23. Juni 2026 übergeben. „Der Koalitionsausschuss hat am 2. Juli 2026 den Bericht der Alterssicherungskommission gewürdigt und will die Empfehlungen der Alterssicherungskommission zügig umsetzen.“",
+      "en": "The pensions commission handed over its proposals on 23 June 2026. 'On 2 July 2026 the coalition committee acknowledged the report of the pensions commission and wants to implement its recommendations swiftly.'"
+    }
+  },
+  "bundestag_abstimmung_984": {
+    "title": "Namentliche Abstimmung: Gesetzentwurf zur Modernisierung des Wehrdienstes (Wehrdienst-Modernisierungsgesetz, WDModG), 5. Dezember 2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://www.bundestag.de/parlament/plenum/abstimmung/abstimmung?id=984",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Abstimmung über den Gesetzentwurf in der Fassung der Beschlussempfehlung 21/3076: 323 Ja, 272 Nein, 1 Enthaltung; CDU/CSU 206 Ja, SPD 117 Ja und 1 Nein, AfD 138 Nein, Grüne 77 Nein und 1 Enthaltung, Linke 55 Nein. Angenommen.",
+      "en": "Vote on the bill in the version of committee recommendation 21/3076: 323 yes, 272 no, 1 abstention; CDU/CSU 206 yes, SPD 117 yes and 1 no, AfD 138 no, Greens 77 no and 1 abstention, Die Linke 55 no. Adopted."
+    }
+  },
+  "ifo_pm_2024_07_10": {
+    "title": "Wiedereinführung der Wehrpflicht könnte die Volkswirtschaft bis zu 70 Milliarden Euro kosten (Pressemitteilung vom 10. Juli 2024)",
+    "publisher": "ifo Institut",
+    "url": "https://www.ifo.de/pressemitteilung/2024-07-10/wiedereinfuehrung-der-wehrpflicht",
+    "accessed": "2026-11-22",
+    "year": 2024,
+    "note": {
+      "de": "„Zu dem Ergebnis kommt eine Studie des ifo Instituts für das Bundesministerium der Finanzen.“",
+      "en": "'This is the result of a study by the ifo Institute for the Federal Ministry of Finance.'"
+    }
+  },
+  "euco_2025_12_18": {
+    "title": "Tagung des Europäischen Rates (18. Dezember 2025) – Schlussfolgerungen, EUCO 24/25",
+    "publisher": "Europäischer Rat",
+    "url": "https://data.consilium.europa.eu/doc/document/ST-24-2025-INIT/de/pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Abschnitt I Nr. 4: Der Europäische Rat kommt überein, der Ukraine ein Darlehen von 90 Mrd. Euro für die Jahre 2026 und 2027 auf der Grundlage von EU-Anleihen zu gewähren, abgesichert durch den Spielraum des EU-Haushalts; Tschechien, Ungarn und die Slowakei sind finanziell nicht verpflichtet. Nr. 5: Der Wortlaut in EUCO 26/25 wurde von 25 Staats- und Regierungschefs nachdrücklich unterstützt.",
+      "en": "Section I no. 4: the European Council agrees to grant Ukraine a loan of €90bn for 2026 and 2027 based on EU borrowing, backed by the headroom of the EU budget; the Czech Republic, Hungary and Slovakia bear no financial obligation. No. 5: the text in EUCO 26/25 was firmly supported by 25 heads of state or government."
+    }
+  },
+  "euco_26_25": {
+    "title": "Ukraine, Vermerk des Präsidenten des Europäischen Rates, EUCO 26/25 (18. Dezember 2025)",
+    "publisher": "Europäischer Rat",
+    "url": "https://data.consilium.europa.eu/doc/document/ST-26-2025-INIT/de/pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Das Darlehen von 90 Mrd. Euro soll die erforderliche finanzielle Unterstützung der Ukraine „einschließlich für ihren militärischen Bedarf“ ab dem zweiten Quartal 2026 sicherstellen; die Ukraine würde es erst zurückzahlen, wenn sie Reparationszahlungen erhalten hat.",
+      "en": "The €90bn loan is to ensure the necessary financial support for Ukraine 'including for its military needs' from the second quarter of 2026; Ukraine would repay it only once it has received reparations."
+    }
+  },
+  "bt_drs_21_2501": {
+    "title": "Antwort der Bundesregierung auf die Kleine Anfrage der Fraktion der AfD: Einsetzung einer Wahlrechtskommission zur Änderung des Bundestagswahlrechts, Drucksache 21/2501 vom 31.10.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/025/2102501.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Antwort zu Frage 2: Nach der Auftaktsitzung sind Sitzungen am 5. und 22. November 2025 terminiert; zu Frage 3: Die Kommission tagt im Innenministerium; zu den Fragen 6 bis 7b: „Die Wahlrechtskommission beschäftigt sich – wie im Koalitionsvertrag vorgesehen – mit diesen Fragen.“ Nach der Vorbemerkung der Fragesteller haben die Koalitionsfraktionen Ende September 2025 die Mitglieder benannt, die Opposition ist nicht vertreten.",
+      "en": "Answer to question 2: after the opening session, meetings are scheduled for 5 and 22 November 2025; to question 3: the commission meets at the interior ministry; to questions 6 to 7b: the commission deals with these questions as the coalition agreement provides. According to the questioners' preliminary remark, the coalition groups named its members at the end of September 2025 and the opposition is not represented."
+    }
+  },
+  "bundestag_kw09_2025_wahlkreise": {
+    "title": "23 Wahlkreisbewerber ziehen nicht in den Bundestag ein (Textarchiv, 24. Februar 2025)",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://www.bundestag.de/dokumente/textarchiv/2025/kw09-wahlkreis-unbesetzt-1055568",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "„23 Bewerberinnen und Bewerber für ein Abgeordnetenmandat ziehen nicht in den 21. Deutschen Bundestag ein“: Sie gewannen ihren Wahlkreis, aber die Zweitstimmen ihrer Partei deckten den Sitz nicht.",
+      "en": "23 candidates who won their constituency do not enter the 21st Bundestag because their party's second votes did not cover the seat."
+    }
+  },
+  "dl_foerderaufrufe_2027": {
+    "title": "Förderaufrufe für Projekte im Rahmen von „Demokratie leben!“ ab 2027 (Meldung vom 30. Juni 2026)",
+    "publisher": "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend (demokratie-leben.de)",
+    "url": "https://www.demokratie-leben.de/dl/service/aktuelles/foerderaufrufe-fuer-projekte-im-rahmen-von-demokratie-leben-ab-2027-286922",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Interessenbekundungen für die Förderung ab 2027 waren vom 3. August bis 4. September 2026 im Förderportal einzureichen.",
+      "en": "Expressions of interest for funding from 2027 had to be submitted in the funding portal from 3 August to 4 September 2026."
     }
   },
   "bundestag_drs_21_9010": {
@@ -2443,8 +2604,8 @@
     "accessed": "2026-11-20",
     "year": 2026,
     "note": {
-      "de": "Empfehlung 5 (S. 22 bis 23): die Regelaltersgrenze nach 2031 im Verhältnis 2:1 an die Lebenserwartung koppeln, nach den mittleren Annahmen von Destatis rund 67,5 Jahre bis 2041 und ein halbes Jahr je Jahrzehnt, Vorlauf von mindestens fünf Jahren, wirksam ab 2032; ein um ein halbes Jahr späterer Renteneintritt entlastet den Beitragssatz um 0,35 bis 0,5 Punkte und hebt das Rentenniveau um 0,3 bis 0,5 Punkte; Übertragung auf Beamte. Empfehlung 6 (S. 24 bis 25): 6,5 Mrd. Euro je Zugangsjahrgang, wenn besonders langjährig Versicherte ein Jahr später in Rente gingen; keine Hinzuverdienstgrenze neben der Rente. Empfehlung 8 (S. 27): die Altersgrenze für langjährig Versicherte von 63 auf 64 anheben und danach alle Altersgrenzen parallel verschieben. S. 11: Beitragssatz 2040 nach geltendem Recht 21,1 % (Frühjahrsschätzung der DRV 2026). Empfehlung 14 (S. 36 bis 38): Beitragssatz- und Nachhaltigkeitsfaktor der Rentenanpassung nach 2031 wieder in Kraft setzen, Parameter alpha auf 0,33. Empfehlung 23 (S. 53 bis 54): Reformen der gesetzlichen Rente „wirkungsgleich auf die Beamtenversorgung“ übertragen, weniger verbeamten, ausreichende Rücklagen; der Höchstsatz von 71,75 % wird nach 40 Jahren erreicht; die Beamtenversorgung ist Regel- und Zusatzsicherung zugleich; außer für Bundesbeamte ist das Beamtenrecht Sache der Länder, eine Vereinheitlichung könnte wegen des Wettbewerbs um Personal lange dauern oder unterbleiben.",
-      "en": "Recommendation 5 (pp. 22 to 23): link the standard retirement age to life expectancy after 2031 in a ratio of 2:1, about 67.5 years by 2041 and half a year per decade under Destatis' medium assumptions, lead time of at least five years, effective from 2032; retiring six months later relieves the contribution rate by 0.35 to 0.5 points and raises the pension level by 0.3 to 0.5 points; transfer to civil servants. Recommendation 6 (pp. 24 to 25): €6.5bn per entry cohort if people with especially long insurance records retired one year later; no limit on earnings alongside a pension. Recommendation 8 (p. 27): raise the limit for people with long insurance records from 63 to 64 and then move all age limits in parallel. Page 11: contribution rate 21.1% in 2040 under current law (DRV spring estimate 2026). Recommendation 14 (pages 36 to 38): restore the contribution-rate and sustainability factors of pension indexation after 2031, raising the parameter alpha to 0.33. Recommendation 23 (pages 53 to 54): transfer reforms of the statutory pension 'with equal effect' to civil servants' pensions, appoint fewer civil servants, build sufficient reserves; the maximum rate of 71.75% is reached after 40 years; civil servants' pensions are basic and supplementary provision at once; except for federal civil servants, civil-service law is a matter for the states, and harmonisation could take long or not happen because of competition for staff."
+      "de": "Empfehlung 5 (S. 22 bis 23): die Regelaltersgrenze nach 2031 im Verhältnis 2:1 an die Lebenserwartung koppeln, nach den mittleren Annahmen von Destatis rund 67,5 Jahre bis 2041 und ein halbes Jahr je Jahrzehnt, Vorlauf von mindestens fünf Jahren, wirksam ab 2032; ein um ein halbes Jahr späterer Renteneintritt entlastet den Beitragssatz um 0,35 bis 0,5 Punkte und hebt das Rentenniveau um 0,3 bis 0,5 Punkte; Übertragung auf Beamte. Empfehlung 6 (S. 24 bis 25): 6,5 Mrd. Euro je Zugangsjahrgang, wenn besonders langjährig Versicherte ein Jahr später in Rente gingen; keine Hinzuverdienstgrenze neben der Rente. Empfehlung 8 (S. 27): die Altersgrenze für langjährig Versicherte von 63 auf 64 anheben und danach alle Altersgrenzen parallel verschieben. S. 11: Beitragssatz 2040 nach geltendem Recht 21,1 % (Frühjahrsschätzung der DRV 2026). Empfehlung 14 (S. 36 bis 38): Beitragssatz- und Nachhaltigkeitsfaktor der Rentenanpassung nach 2031 wieder in Kraft setzen, Parameter alpha auf 0,33. Empfehlung 23 (S. 53 bis 54): Reformen der gesetzlichen Rente „wirkungsgleich auf die Beamtenversorgung“ übertragen, weniger verbeamten, ausreichende Rücklagen; der Höchstsatz von 71,75 % wird nach 40 Jahren erreicht; die Beamtenversorgung ist Regel- und Zusatzsicherung zugleich; außer für Bundesbeamte ist das Beamtenrecht Sache der Länder, eine Vereinheitlichung könnte wegen des Wettbewerbs um Personal lange dauern oder unterbleiben. Empfehlung 23, S. 54: „So wurde das Rentenniveau seit dem Jahr 2000 durch Änderungen der Rentenanpassungsformel um rund zehn Prozent reduziert, der für Beamtenpensionen maßgebliche Ruhegehaltshöchstsatz lediglich um fünf Prozent. Dieser Unterschied sollte ausgeglichen werden.“ S. 55: Die Vorschläge betreffen neue wie bereits ernannte Beamte; ein Prozess, den Nachholbedarf „ggf. schrittweise“ einzulösen, könnte zeitnah eingeleitet werden.",
+      "en": "Recommendation 5 (pp. 22 to 23): link the standard retirement age to life expectancy after 2031 in a ratio of 2:1, about 67.5 years by 2041 and half a year per decade under Destatis' medium assumptions, lead time of at least five years, effective from 2032; retiring six months later relieves the contribution rate by 0.35 to 0.5 points and raises the pension level by 0.3 to 0.5 points; transfer to civil servants. Recommendation 6 (pp. 24 to 25): €6.5bn per entry cohort if people with especially long insurance records retired one year later; no limit on earnings alongside a pension. Recommendation 8 (p. 27): raise the limit for people with long insurance records from 63 to 64 and then move all age limits in parallel. Page 11: contribution rate 21.1% in 2040 under current law (DRV spring estimate 2026). Recommendation 14 (pages 36 to 38): restore the contribution-rate and sustainability factors of pension indexation after 2031, raising the parameter alpha to 0.33. Recommendation 23 (pages 53 to 54): transfer reforms of the statutory pension 'with equal effect' to civil servants' pensions, appoint fewer civil servants, build sufficient reserves; the maximum rate of 71.75% is reached after 40 years; civil servants' pensions are basic and supplementary provision at once; except for federal civil servants, civil-service law is a matter for the states, and harmonisation could take long or not happen because of competition for staff. Recommendation 23, page 54: since 2000 the pension level has been reduced by about ten percent through changes to the indexation formula, the maximum rate of civil servants' pensions by only five percent; 'this difference should be closed'. Page 55: the proposals concern new civil servants as well as those already appointed; a process to make up the backlog 'step by step if need be' could be started soon."
     }
   },
   "diw_bertelsmann_fruehrente_64_2026": {
@@ -2501,8 +2662,8 @@
     "accessed": "2026-11-20",
     "year": 2025,
     "note": {
-      "de": "S. 15: „Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.“ S. 15: Rentenniveau von 53 %; eine Versicherung für alle Erwerbstätigen einschließlich der Beamten. S. 6 und 42: Mehrwertsteuer auf Grundnahrungsmittel abschaffen. S. 15: „Der Regelsatz im Bürgergeld ist kleingerechnet: Der Paritätische Wohlfahrtsverband zeigt, dass der Regelsatz bei mindestens 813 Euro liegen müsste.“ S. 16: Kindergeld für alle Kinder in Höhe von 350 Euro monatlich, das nicht mehr auf das Bürgergeld angerechnet wird.",
-      "en": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\" Page 15: 53% pension level; insurance for all people in work including civil servants. Pages 6 and 42: abolish VAT on basic food. Page 15: \"Der Regelsatz im Bürgergeld ist kleingerechnet: Der Paritätische Wohlfahrtsverband zeigt, dass der Regelsatz bei mindestens 813 Euro liegen müsste.\" Page 16: child benefit of €350 a month for all children, no longer counted against citizen's income."
+      "de": "S. 15: „Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.“ S. 15: Rentenniveau von 53 %; eine Versicherung für alle Erwerbstätigen einschließlich der Beamten. S. 6 und 42: Mehrwertsteuer auf Grundnahrungsmittel abschaffen. S. 15: „Der Regelsatz im Bürgergeld ist kleingerechnet: Der Paritätische Wohlfahrtsverband zeigt, dass der Regelsatz bei mindestens 813 Euro liegen müsste.“ S. 16: Kindergeld für alle Kinder in Höhe von 350 Euro monatlich, das nicht mehr auf das Bürgergeld angerechnet wird. S. 21: „Statt immer mehr Waffenlieferungen braucht es endlich eine gemeinsame Initiative der Bundesregierung und der EU mit China, Brasilien und anderen Staaten des Globalen Südens“; Die Linke achtet das Selbstverteidigungsrecht der Ukraine und tritt für massive humanitäre Hilfe ein. S. 23: „Wir lehnen Waffenlieferungen in Kriegs- und Krisengebiete ab“; Rüstungsexporte vollständig verbieten; „keine Wiedereinführung der Wehrpflicht“.",
+      "en": "Page 15: \"Wir fordern eine Regelaltersgrenze von 65 Jahren. Wer 40 Jahre lang gearbeitet und selbst Beiträge gezahlt hat, soll ab 60 abschlagsfrei in Rente gehen können.\" Page 15: 53% pension level; insurance for all people in work including civil servants. Pages 6 and 42: abolish VAT on basic food. Page 15: \"Der Regelsatz im Bürgergeld ist kleingerechnet: Der Paritätische Wohlfahrtsverband zeigt, dass der Regelsatz bei mindestens 813 Euro liegen müsste.\" Page 16: child benefit of €350 a month for all children, no longer counted against citizen's income. Page 21: instead of ever more arms deliveries, a joint initiative of the federal government and the EU with China, Brazil and other states of the Global South is needed; Die Linke respects Ukraine's right of self-defence and calls for massive humanitarian aid. Page 23: 'We reject arms deliveries to war and crisis zones'; ban arms exports entirely; 'no reintroduction of conscription'."
     }
   },
   "bt_drs_21_3115": {
@@ -3348,8 +3509,8 @@
     "accessed": "2026-11-20",
     "year": 2026,
     "note": {
-      "de": "Nr. 31 (S. 11 f.): Ziel einer Personaleinsparung von 8 % bei fast allen Bundesbehörden und in der mittelbaren Bundesverwaltung, soweit der Bund auf den Haushalt Einfluss nimmt oder Mittel bereitstellt; Ausnahmen nur in sehr begrenztem Umfang, etwa für kritische Infrastruktur und Sicherheitsbehörden, die im Overhead sparen sollen; verbunden mit der Bündelung von Aufgaben, gemeinsam genutzten Diensten (Shared Services) und dem Zusammenlegen oder Auflösen von Behörden.",
-      "en": "Item 31 (pages 11 f.): target of an 8% staff saving at almost all federal authorities and the indirect federal administration where the federal government influences the budget or provides funds; exceptions only to a very limited extent, e.g. critical infrastructure and security authorities, which are to save on overhead; combined with centralising tasks, shared services and merging or abolishing agencies."
+      "de": "Nr. 31 (S. 11 f.): Ziel einer Personaleinsparung von 8 % bei fast allen Bundesbehörden und in der mittelbaren Bundesverwaltung, soweit der Bund auf den Haushalt Einfluss nimmt oder Mittel bereitstellt; Ausnahmen nur in sehr begrenztem Umfang, etwa für kritische Infrastruktur und Sicherheitsbehörden, die im Overhead sparen sollen; verbunden mit der Bündelung von Aufgaben, gemeinsam genutzten Diensten (Shared Services) und dem Zusammenlegen oder Auflösen von Behörden. Nr. 1 (S. 3): Die Koalition wird die Empfehlungen der Alterssicherungskommission „in einem Gesetzespaket umsetzen. Dieses wird bis Ende 2026 im Deutschen Bundestag verabschiedet.“",
+      "en": "Item 31 (pages 11 f.): target of an 8% staff saving at almost all federal authorities and the indirect federal administration where the federal government influences the budget or provides funds; exceptions only to a very limited extent, e.g. critical infrastructure and security authorities, which are to save on overhead; combined with centralising tasks, shared services and merging or abolishing agencies. Item 1 (page 3): the coalition will implement the pensions commission's recommendations in a legislative package to be passed by the Bundestag by the end of 2026."
     }
   },
   "bmf_eckwerte_2027": {

@@ -165,7 +165,10 @@ CIVIL_SERVICE_LEVELS = (8779.0, 31948.0, 4950.0, 711072.0 - 302350.0 - 406246.0)
 # Bundeseisenbahnvermögen 5.3, other 2.1 %. "Other" is the social insurance (28.4 thousand recipients on 1 January
 # 2025) and legally independent federal bodies (8.8 thousand; destatis_versorgungsempfaenger_2025), split by
 # recipients. Post and railway pensions are paid by federal bodies. JUDGEMENT: survivors' benefits get the shares of
-# all spending, although survivors are more often federal (41.5 % of recipients against 31.5 % of pensioners).
+# all spending, although survivors are more often federal (Bundesbereich: 153.2 of 382.1 thousand survivors, 40.1 %,
+# against 424.4 of 1,418.8 thousand pensioners, 29.9 %).
+# JUDGEMENT: the carve-out runs after the fit, so the remainders keep what the fit gave their division at each level
+# minus the carved shares (see pipeline/de/README.md).
 CS_PENSIONS, CS_SURVIVORS = 56900.0, 9000.0
 _CS_OTHER_SS = 2.1 * 28.4 / (28.4 + 8.8)
 CS_LEVELS = ((11.2 + 11.0 + 5.3 + 2.1 - _CS_OTHER_SS) / 100, 61.9 / 100, 8.5 / 100, _CS_OTHER_SS / 100)
@@ -422,17 +425,19 @@ EXP = [
                     "Civil servants are not in the statutory pension insurance; the state pays no contributions for them but pays their pension later. The item is empty and receives the employer contributions that would arise if civil servants were included."),
               note=("Aufteilung auf die Ebenen nach den unterstellten Sozialbeiträgen für Beamte laut Eurostat (Bund 18 %, Länder 66 %, Gemeinden 10 %, Sozialversicherung 5 %) als Näherung dafür, wo Beamte beschäftigt sind.",
                     "Split across levels by the imputed social contributions for civil servants according to Eurostat (federal 18%, states 66%, municipalities 10%, social insurance 5%) as an approximation of where civil servants are employed.")),
-            L("exp.social.old_age.other", "Kranken- und Pflegeleistungen für Ältere und weitere Altersleistungen", "Health and care benefits for the elderly and other old-age benefits",
+            L("exp.social.old_age.other", "Übrige Leistungen bei Alter (Rest der Gruppe)", "Other old-age benefits (remainder of the group)",
               amount=cof("GF1002") - P_OLD, seed=(0.17, 0.33, 0.08, 0.42), quality="estimate", sources=SRC_EXP + ["drv_rv_in_zahlen_2026", "bundeshaushalt_2024", "destatis_pm_2025_455"],
-              note=("Rest der Gruppe „Alter“ nach Abzug der gesetzlichen Altersrenten und der Pensionen der Beamten, Richter und Soldaten; Aufteilung auf die Ebenen geschätzt.", "Remainder of the old-age group after deducting statutory old-age pensions and the pensions of civil servants, judges and soldiers; split across levels estimated.")),
+              note=("Rest der Gruppe „Alter“ in den Volkswirtschaftlichen Gesamtrechnungen nach Abzug zweier Kassenzahlen: der gesetzlichen Altersrenten und der Pensionen der Beamten, Richter und Soldaten laut Versorgungsempfängerstatistik. Was der Rest enthält, ist nicht veröffentlicht; die ganze Gruppe besteht laut Staatsausgabenstatistik aus 390,3 Mrd. Euro Geldleistungen, 31,8 Mrd. Euro Sachleistungen und 5,2 Mrd. Euro übrigen Ausgaben. Die Volkswirtschaftlichen Gesamtrechnungen können Leistungen an frühere Beamte weiter abgrenzen als die Kassenstatistik, der Rest kann also auch solche enthalten. Die Aufteilung auf die Ebenen ist der Rest einer Schätzung, nicht belegt.",
+                    "Remainder of the old-age group in national accounts after deducting two cash figures: statutory old-age pensions and the pensions of civil servants, judges and soldiers according to the statistics of pension recipients. What the remainder contains is not published; according to government expenditure statistics the whole group consists of €390.3bn of cash benefits, €31.8bn of benefits in kind and €5.2bn of other spending. National accounts may define benefits for former civil servants more widely than the cash statistics, so the remainder may contain such benefits too. The split across levels is the residue of an estimate, not documented.")),
         ]),
         G("exp.social.survivors", "Hinterbliebene: Witwen- und Waisenrenten", "Survivors: widows' and orphans' pensions", code="GF1003", children=[
             L("exp.social.survivors.statutory_pensions", "Hinterbliebenenrenten der gesetzlichen Rentenversicherung", "Survivors' pensions of the statutory pension insurance",
               amount=P_SURV, fixed=SS, quality="derived", sources=["drv_rv_in_zahlen_2026", "sozialpolitik_aktuell_viii51", "bundeshaushalt_2024"],
               note=("Rentenausgaben 2024 mal Anteil der Hinterbliebenenrenten (13,5 %); Bundesanteil wie bei den Altersrenten.", "Pension expenditure 2024 times the share of survivors' pensions (13.5%); federal share as for old-age pensions.")),
-            L("exp.social.survivors.other", "Weitere Leistungen an Hinterbliebene", "Other benefits for survivors",
+            L("exp.social.survivors.other", "Übrige Leistungen an Hinterbliebene (Rest der Gruppe)", "Other survivors' benefits (remainder of the group)",
               amount=cof("GF1003") - P_SURV, seed=(0.3, 0.45, 0.1, 0.15), quality="estimate", sources=SRC_EXP + ["drv_rv_in_zahlen_2026", "destatis_pm_2025_455"],
-              note=("Rest der Gruppe nach Abzug der gesetzlichen Hinterbliebenenrenten und der Hinterbliebenenversorgung der Beamten, Richter und Soldaten; was er im Einzelnen enthält, weist die Statistik nicht aus. Aufteilung geschätzt.", "Remainder of the group after deducting statutory survivors' pensions and the survivors' benefits of civil servants, judges and soldiers; the statistics do not show what it contains in detail. Split estimated.")),
+              note=("Rest der Gruppe „Hinterbliebene“ in den Volkswirtschaftlichen Gesamtrechnungen nach Abzug zweier Kassenzahlen: der gesetzlichen Hinterbliebenenrenten und der Hinterbliebenenversorgung der Beamten, Richter und Soldaten laut Versorgungsempfängerstatistik. Was der Rest enthält, ist nicht veröffentlicht; die Volkswirtschaftlichen Gesamtrechnungen können die Hinterbliebenenversorgung weiter abgrenzen als die Kassenstatistik, der Rest kann also auch Leistungen an Hinterbliebene von Beamten enthalten. Die Aufteilung auf die Ebenen ist der Rest einer Schätzung, nicht belegt.",
+                    "Remainder of the survivors' group in national accounts after deducting two cash figures: statutory survivors' pensions and the survivors' benefits of civil servants, judges and soldiers according to the statistics of pension recipients. What the remainder contains is not published; national accounts may define survivors' benefits more widely than the cash statistics, so the remainder may also contain benefits for survivors of civil servants. The split across levels is the residue of an estimate, not documented.")),
         ]),
         G("exp.social.sickness_disability", "Krankheit, Pflege und Behinderung", "Sickness, long-term care and disability", code="GF1001", children=[
             L("exp.social.sickness_disability.em_pensions", "Erwerbsminderungsrenten der gesetzlichen Rentenversicherung", "Disability pensions of the statutory pension insurance",
@@ -804,8 +809,8 @@ carve("exp.social.survivors.other",
         amount=CS_SURVIVORS, fixed=CS_LEVELS, quality="derived", sources=CS_SRC,
         desc=("Witwen-, Witwer- und Waisengeld nach dem Beamten- und Soldatenversorgungsrecht: 382.100 Empfänger am 1. Januar 2025.",
               "Widows', widowers' and orphans' benefits under the civil-service and military pension law: 382,100 recipients on 1 January 2025."),
-        note=("Ausgaben 2024 laut Versorgungsempfängerstatistik (9,0 Mrd. Euro), aus dem Rest der Gruppe „Hinterbliebene“ herausgelöst. " + CS_LEVEL_NOTE[0] + " Hinterbliebene beziehen ihre Versorgung häufiger vom Bund als Pensionäre (41,5 % gegenüber 31,5 % der Empfänger); der Bundesanteil ist hier deshalb eher zu niedrig.",
-              "Spending 2024 according to the statistics of pension recipients (€9.0bn), taken out of the remainder of the survivors' group. " + CS_LEVEL_NOTE[1] + " Survivors receive their benefits from the federal level more often than pensioners do (41.5% against 31.5% of recipients), so the federal share here is rather too low.")),
+        note=("Ausgaben 2024 laut Versorgungsempfängerstatistik (9,0 Mrd. Euro), aus dem Rest der Gruppe „Hinterbliebene“ herausgelöst. " + CS_LEVEL_NOTE[0] + " Hinterbliebene beziehen ihre Versorgung häufiger aus dem Bundesbereich als Pensionäre (40,1 % gegenüber 29,9 % der Empfänger am 1. Januar 2025); der Bundesanteil ist hier deshalb eher zu niedrig.",
+              "Spending 2024 according to the statistics of pension recipients (€9.0bn), taken out of the remainder of the survivors' group. " + CS_LEVEL_NOTE[1] + " Survivors receive their benefits from the federal area more often than pensioners do (40.1% against 29.9% of recipients on 1 January 2025), so the federal share here is rather too low.")),
       CS_LEVELS)
 carve("exp.general.basic_research",
       L("exp.general.democracy_programmes", "Bundesprogramme „Demokratie leben!“ und „Menschen stärken Menschen“", "Federal programmes “Demokratie leben!” and “Menschen stärken Menschen”",
