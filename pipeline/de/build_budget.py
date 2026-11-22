@@ -130,6 +130,30 @@ KG_LEVELS = (0.425, 0.425, 0.15, 0)
 # Zero-amount leaf for benefits that would replace citizen's income for excluded groups; its level shares are
 # copied from asylum seekers' benefits after the fit (see below).
 REPLACEMENT = "exp.social.basic_security.replacement_benefits"
+# ---- items carved out of COFOG groups for measures (million euros) ---------------------------------------------
+# bt_drs_21_1600, annex 2, finance aid no. 37 (p. 176): federal payments to the EEG account ("Zuschüsse zur
+# Entlastung beim Strompreis", KTF chapter 6092 title 683 07, since 2025 chapter 6002), actuals 2024. In national
+# accounts a subsidy (D.3) on fuel and energy (COFOG 04.3, subsidies 26,286 in 2024).
+EEG_2024 = 18488.9
+# bh_haushalt_2026_epl60, annex 3 (KTF), title 893 10 (function 411), actuals 2024: the federal funding for
+# efficient buildings (BEG). JUDGEMENT: where national accounts book these grants is not published. The federal
+# budget files them under housing, but housing development (COFOG 06.1) has capital transfers of only 3,267 in 2024
+# at all levels; general economic affairs (04.1) is the only group with room for them (capital transfers 21,541).
+BEG_2024 = 14116.820
+# bt_drs_21_4498 and § 9(2) RegG: 1,500 a year from the federal government for the Deutschlandticket, and at least
+# as much from the states. The federal part is paid with the regionalisation funds (6001 031 05) moved below.
+DTICKET_FED = 1500.0
+DTICKET = 2 * DTICKET_FED
+# kef_25_bericht, table 6 (p. 32): spending of ARD, ZDF and Deutschlandradio relevant to their funding need, actuals
+# 2021 to 2024, 38,504.7 in four years. JUDGEMENT: the yearly average stands for their spending in 2024.
+BROADCASTERS = 38504.7 / 4
+# hu_staatsleistungen_2024 (= fowid_staatsleistungen, row 2024): payments of the 14 paying states to the Protestant
+# and Catholic churches under Article 140 GG / Article 138(1) WRV, budgeted amounts 2024 (618,361,500 euros).
+STAATSLEISTUNGEN = 618.3615
+# Each item is a fixed leaf; the rest of its group stays a fitted leaf. The seeds of those remainders are chosen so
+# that the fit leaves every other leaf of the division as it was before the split: the group's earlier allocation by
+# level, minus the item, divided by the division's column factors of the fit (read off an untouched leaf: GF04
+# 1 : 0.8925 : 1.297 : 0.686, GF08 1 : 1.39 : 1.795). The other leaves' shares then move by at most 0.0002.
 # Where civil servants are employed, approximated by the imputed social contributions of each level
 # (eurostat_gov_10a_main: D61REC minus actual contributions, 2024): central, state, local, social security funds.
 CIVIL_SERVICE_LEVELS = (8779.0, 31948.0, 4950.0, 711072.0 - 302350.0 - 406246.0)
@@ -254,11 +278,46 @@ EXP = [
         CL("exp.safety.other", "GF0306", "Sonstige Sicherheit und Ordnung", "Other public order and safety", (0.3, 0.3, 0.4, 0)),
     ]),
     G("exp.economy", "Wirtschaft, Verkehr und Energie", "Economy, transport and energy", code="GF04", children=[
-        CL("exp.economy.general_labour", "GF0401", "Wirtschafts- und Arbeitsmarktförderung", "Business and labour market support", (0.45, 0.2, 0.1, 0.25)),
+        G("exp.economy.general_labour", "Wirtschafts- und Arbeitsmarktförderung", "Business and labour market support", code="GF0401", children=[
+            L("exp.economy.general_labour.beg", "Gebäudeförderung des Bundes (BEG): Sanierung, Heizungstausch, effiziente Neubauten", "Federal funding for efficient buildings (BEG): renovation, heating replacement, efficient new buildings",
+              amount=BEG_2024, fixed=C, quality="derived", sources=["bh_haushalt_2026_epl60", "bundestag_drs_21_7301", "eurostat_gov_10a_exp"],
+              desc=("Zuschüsse und Tilgungszuschüsse der Bundesförderung für effiziente Gebäude über KfW und BAFA: Einzelmaßnahmen wie der Tausch der Heizung oder die Dämmung, Sanierung zum Effizienzhaus, effiziente Nichtwohngebäude. Bezahlt aus dem Klima- und Transformationsfonds.",
+                    "Grants and repayment grants of the federal funding for efficient buildings through KfW and BAFA: individual measures such as replacing the heating or insulation, renovation to an efficiency house standard, efficient non-residential buildings. Paid from the Climate and Transformation Fund."),
+              note=("Kassenwert: Ausgaben des Klima- und Transformationsfonds für Energieeffizienz und erneuerbare Energien im Gebäudebereich 2024 (Kapitel 6092 Titel 893 10, 14,12 Mrd. Euro). Wo die Volkswirtschaftlichen Gesamtrechnungen diese Zuschüsse buchen, ist nicht veröffentlicht. Der Bundeshaushalt ordnet sie dem Wohnungswesen zu, doch die Wohnungsbauförderung (COFOG 06.1) weist 2024 auf allen Ebenen zusammen nur 3,3 Mrd. Euro Vermögenstransfers aus. Angenommen ist deshalb die allgemeine Wirtschaftsförderung (COFOG 04.1) mit 21,5 Mrd. Euro Vermögenstransfers; aus ihr ist der Posten herausgelöst. Ganz dem Bund zugeordnet.",
+                    "Cash figure: spending of the Climate and Transformation Fund on energy efficiency and renewable energy in buildings in 2024 (chapter 6092 title 893 10, €14.12bn). Where national accounts book these grants is not published. The federal budget files them under housing, but housing development (COFOG 06.1) shows only €3.3bn of capital transfers in 2024 at all levels together. General economic affairs (COFOG 04.1), with €21.5bn of capital transfers, is therefore assumed; the item is taken out of it. Attributed entirely to the federal level.")),
+            L("exp.economy.general_labour.other", "Übrige Wirtschafts- und Arbeitsmarktförderung", "Other business and labour market support",
+              amount=cof("GF0401") - BEG_2024, seed=(0.1436, 0.3113, 0.1555, 0.3896), quality="estimate", sources=SRC_EXP + ["bh_haushalt_2026_epl60"],
+              desc=("Unter anderem Arbeitsmarktpolitik der Bundesagentur für Arbeit, regionale Wirtschaftsförderung und Förderprogramme von Bund und Ländern.",
+                    "Among other things the Federal Employment Agency's labour market policy, regional economic development and support programmes of the federal government and the states."),
+              note=("Rest der Gruppe (COFOG 04.1) nach Abzug der Gebäudeförderung des Bundes; Aufteilung auf die Ebenen geschätzt.",
+                    "Remainder of the group (COFOG 04.1) after deducting the federal funding for efficient buildings; split across levels estimated.")),
+        ]),
         CL("exp.economy.agriculture", "GF0402", "Land- und Forstwirtschaft, Fischerei", "Agriculture, forestry and fishing", (0.4, 0.5, 0.1, 0)),
-        CL("exp.economy.energy", "GF0403", "Energie (u. a. Förderung erneuerbarer Energien, Preisbremsen)", "Energy (incl. support for renewables, price brakes)", (0.92, 0.05, 0.03, 0)),
+        G("exp.economy.energy", "Energie (u. a. Förderung erneuerbarer Energien, Preisbremsen)", "Energy (incl. support for renewables, price brakes)", code="GF0403", children=[
+            L("exp.economy.energy.eeg", "Förderung erneuerbarer Energien nach dem EEG (Zahlungen des Bundes an das EEG-Konto)", "Support for renewable energy under the EEG (federal payments to the EEG account)",
+              amount=EEG_2024, fixed=C, quality="official", sources=["bt_drs_21_1600", "bh_haushalt_2027_epl60", "eurostat_gov_10a_exp"],
+              desc=("Seit 2023 zahlt der Bund den Übertragungsnetzbetreibern, was die Förderung nach dem Erneuerbare-Energien-Gesetz kostet: die Differenz zwischen den garantierten Vergütungen und Marktprämien der Anlagen und dem Erlös ihres Stroms an der Börse. Vorher trugen das die Stromkunden über die EEG-Umlage.",
+                    "Since 2023 the federal government pays the transmission system operators what support under the Renewable Energy Sources Act (EEG) costs: the difference between the plants' guaranteed feed-in payments and market premiums and what their power fetches on the exchange. Before, electricity customers bore this through the EEG surcharge."),
+              note=("Kassenwert laut Subventionsbericht (Finanzhilfe Nr. 37): 18,49 Mrd. Euro im Jahr 2024, damals aus dem Klima- und Transformationsfonds (Kapitel 6092 Titel 683 07); seit 2025 im Kernhaushalt (Kapitel 6002 Titel 683 07: Ist 2025 16,49 Mrd. Euro, Soll 2026 16,16 Mrd. Euro, Entwurf 2027 16,5 Mrd. Euro). In den Volkswirtschaftlichen Gesamtrechnungen eine Subvention im Bereich Energie (COFOG 04.3), dessen Subventionen 2024 26,3 Mrd. Euro betrugen; aus ihm ist der Posten herausgelöst. Ganz dem Bund zugeordnet.",
+                    "Cash figure according to the Subsidy Report (finance aid no. 37): €18.49bn in 2024, then from the Climate and Transformation Fund (chapter 6092 title 683 07); since 2025 in the core budget (chapter 6002 title 683 07: 2025 actuals €16.49bn, 2026 target €16.16bn, 2027 draft €16.5bn). In national accounts a subsidy in fuel and energy (COFOG 04.3), whose subsidies came to €26.3bn in 2024; the item is taken out of it. Attributed entirely to the federal level.")),
+            L("exp.economy.energy.other", "Übrige Ausgaben für Energie (u. a. Strompreiskompensation, Abwicklung der Preisbremsen)", "Other energy spending (incl. electricity price compensation, settlement of the price brakes)",
+              amount=cof("GF0403") - EEG_2024, seed=(0.7999, 0.1251, 0.0750, 0), quality="estimate", sources=SRC_EXP + ["bt_drs_21_1600", "bh_haushalt_2026_epl60"],
+              note=("Rest der Gruppe (COFOG 04.3) nach Abzug der EEG-Zahlungen. Darunter die Strompreiskompensation für stromintensive Unternehmen (2024: 2,40 Mrd. Euro aus dem Klima- und Transformationsfonds). Aufteilung auf die Ebenen geschätzt.",
+                    "Remainder of the group (COFOG 04.3) after deducting the EEG payments. It includes the electricity price compensation for electricity-intensive companies (2024: €2.40bn from the Climate and Transformation Fund). Split across levels estimated.")),
+        ]),
         CL("exp.economy.industry", "GF0404", "Bergbau, Industrie und Bau", "Mining, manufacturing and construction", (0.5, 0.4, 0.1, 0)),
-        CL("exp.economy.transport", "GF0405", "Verkehr (Straßen, Schiene, Nahverkehr)", "Transport (roads, rail, local public transport)", (0.40, 0.25, 0.35, 0)),
+        G("exp.economy.transport", "Verkehr (Straßen, Schiene, Nahverkehr)", "Transport (roads, rail, local public transport)", code="GF0405", children=[
+            L("exp.economy.transport.deutschlandticket", "Deutschlandticket: Ausgleich der Mindereinnahmen durch Bund und Länder", "Deutschlandticket: compensation of the revenue loss by the federal government and the states",
+              amount=DTICKET, fixed=ST, quality="derived", sources=["bt_drs_21_4498", "bt_drs_21_2639", "stmb_dt_prognose_2024", "bundeshaushalt_2024"],
+              desc=("Bund und Länder gleichen den Verkehrsunternehmen aus, was sie durch das Deutschlandticket weniger einnehmen als mit den früheren Tarifen; Bund und Länder zahlen je 1,5 Mrd. Euro im Jahr. Im Basisjahr 2024 kostete das Ticket 49 Euro im Monat.",
+                    "The federal government and the states compensate transport companies for what they earn less with the Deutschlandticket than with the earlier fares; each pays €1.5bn a year. In the base year 2024 the ticket cost €49 a month."),
+              note=("Gesetzlicher Betrag (§ 9 Regionalisierungsgesetz): je 1,5 Mrd. Euro von Bund und Ländern. Den Ausgleichsbedarf für 2024 schätzte eine Arbeitsgruppe der Länder auf rund 3,46 Mrd. Euro; der Rest kam aus nicht verbrauchten Mitteln von 2023. Die Länder zahlen aus, der Bundesanteil ist dem Bund zugerechnet. Aus dem Bereich Verkehr (COFOG 04.5) herausgelöst.",
+                    "Statutory amount (section 9 of the Regionalisation Act): €1.5bn each from the federal government and the states. A working group of the states estimated the compensation needed for 2024 at about €3.46bn; the rest came from unspent funds of 2023. The states pay out; the federal share is attributed to the federal level. Taken out of transport (COFOG 04.5).")),
+            L("exp.economy.transport.other", "Straßen, Schiene, Nahverkehr und übriger Verkehr", "Roads, rail, local public transport and other transport",
+              amount=cof("GF0405") - DTICKET, seed=(0.4128, 0.2259, 0.3612, 0), quality="derived", sources=SRC_EXP + ["bundeshaushalt_2024"],
+              note=("Rest der Gruppe (COFOG 04.5) nach Abzug des Ausgleichs für das Deutschlandticket. Betrag amtlich (Eurostat); die Aufteilung auf die Ebenen ist aus den Eurostat-Daten je Aufgabenbereich abgeleitet und innerhalb des Bereichs geschätzt.",
+                    "Remainder of the group (COFOG 04.5) after deducting the compensation for the Deutschlandticket. Official amount (Eurostat); the split across levels is derived from Eurostat data per division and estimated within the division.")),
+        ]),
         CL("exp.economy.communication", "GF0406", "Telekommunikation und Breitband", "Telecommunications and broadband", (0.8, 0.15, 0.05, 0)),
         CL("exp.economy.other_industries", "GF0407", "Handel, Tourismus und sonstige Branchen", "Trade, tourism and other industries", (0.5, 0.3, 0.2, 0)),
         CL("exp.economy.rd", "GF0408", "Angewandte Forschung für die Wirtschaft", "Applied research for the economy", (0.7, 0.3, 0, 0)),
@@ -313,10 +372,35 @@ EXP = [
     G("exp.culture", "Kultur, Sport, Rundfunk und Religion", "Culture, sport, broadcasting and religion", code="GF08", children=[
         CL("exp.culture.sport", "GF0801", "Sport und Erholung (Bäder, Sportstätten, Parks)", "Sport and recreation (pools, sports facilities, parks)", (0.03, 0.12, 0.85, 0)),
         CL("exp.culture.culture", "GF0802", "Kultur (Theater, Museen, Bibliotheken)", "Culture (theatres, museums, libraries)", (0.15, 0.40, 0.45, 0)),
-        CL("exp.culture.broadcasting", "GF0803", "Öffentlich-rechtlicher Rundfunk und Medien", "Public broadcasting and media", (0.05, 0.95, 0, 0),
-           desc=("ARD, ZDF und Deutschlandradio zählen in der Statistik zum Staat (Länderebene), der Rundfunkbeitrag entsprechend zu den Steuern.",
-                 "The public broadcasters ARD, ZDF and Deutschlandradio count as part of government (state level) in the statistics, and the broadcasting fee accordingly counts as a tax.")),
-        CL("exp.culture.religion", "GF0804", "Kirchen und Religionsgemeinschaften (Staatsleistungen u. a.)", "Churches and religious communities (state payments etc.)", (0.05, 0.75, 0.2, 0)),
+        G("exp.culture.broadcasting", "Öffentlich-rechtlicher Rundfunk und Medien", "Public broadcasting and media", code="GF0803",
+          desc=("ARD, ZDF und Deutschlandradio zählen in der Statistik zum Staat (Länderebene), der Rundfunkbeitrag entsprechend zu den Steuern.",
+                "The public broadcasters ARD, ZDF and Deutschlandradio count as part of government (state level) in the statistics, and the broadcasting fee accordingly counts as a tax."),
+          children=[
+            L("exp.culture.broadcasting.public_broadcasters", "ARD, ZDF und Deutschlandradio", "ARD, ZDF and Deutschlandradio",
+              amount=BROADCASTERS, fixed=ST, quality="estimate", sources=["kef_25_bericht", "eurostat_gov_10a_exp"],
+              desc=("Aufwand der öffentlich-rechtlichen Rundfunkanstalten für Programm, Verbreitung, Personal einschließlich Altersversorgung, Sachmittel, Investitionen und den deutschen Anteil an ARTE.",
+                    "Spending of the public broadcasters on programmes, distribution, staff including pensions, materials, investment and the German share of ARTE."),
+              note=("Eigene Schätzung: Die Finanzkommission KEF weist für 2021 bis 2024 einen finanzbedarfswirksamen Aufwand von ARD, ZDF und Deutschlandradio von 38,50 Mrd. Euro aus; der Posten setzt den Durchschnitt von 9,63 Mrd. Euro im Jahr an. Wie die Volkswirtschaftlichen Gesamtrechnungen die Anstalten abgrenzen, ist nicht im Einzelnen veröffentlicht. Aus dem Bereich Rundfunk und Verlagswesen (COFOG 08.3) herausgelöst; ganz den Ländern zugeordnet.",
+                    "Own estimate: the funding commission KEF reports spending relevant to the funding need of ARD, ZDF and Deutschlandradio of €38.50bn for 2021 to 2024; the item takes the average of €9.63bn a year. How national accounts delimit the broadcasters is not published in detail. Taken out of broadcasting and publishing services (COFOG 08.3); attributed entirely to the states.")),
+            L("exp.culture.broadcasting.other", "Deutsche Welle, Landesmedienanstalten und übrige Medien", "Deutsche Welle, state media authorities and other media",
+              amount=cof("GF0803") - BROADCASTERS, seed=(0.2866, 0.7134, 0, 0), quality="estimate", sources=SRC_EXP + ["kef_25_bericht"],
+              note=("Rest der Gruppe (COFOG 08.3) nach Abzug von ARD, ZDF und Deutschlandradio, darunter die Deutsche Welle des Bundes und die Landesmedienanstalten; Aufteilung auf die Ebenen geschätzt.",
+                    "Remainder of the group (COFOG 08.3) after deducting ARD, ZDF and Deutschlandradio, including the federal Deutsche Welle and the state media authorities; split across levels estimated.")),
+          ]),
+        G("exp.culture.religion", "Kirchen und Religionsgemeinschaften (Staatsleistungen u. a.)", "Churches and religious communities (state payments etc.)", code="GF0804", children=[
+            L("exp.culture.religion.state_payments", "Staatsleistungen der Länder an die evangelische und katholische Kirche", "State payments of the Länder to the Protestant and Catholic churches",
+              amount=STAATSLEISTUNGEN, fixed=ST, quality="estimate", sources=["hu_staatsleistungen_2024", "fowid_staatsleistungen", "eurostat_gov_10a_exp"],
+              desc=("Jährliche Zahlungen von 14 Ländern an die Kirchen aufgrund alter Rechtstitel, vor allem als Ausgleich für die Enteignung von Kirchengut um 1803. Seit 1919 verlangt die Verfassung, sie abzulösen (heute Art. 140 GG mit Art. 138 Abs. 1 WRV). Hamburg und Bremen zahlen keine.",
+                    "Annual payments by 14 Länder to the churches based on old legal titles, mainly as compensation for the expropriation of church property around 1803. Since 1919 the constitution has required that they be redeemed (Article 140 of the Basic Law with Article 138(1) of the Weimar constitution). Hamburg and Bremen pay none."),
+              note=("Summe der Haushaltsansätze der Länder für 2024 nach der Zusammenstellung der Humanistischen Union (618,4 Mio. Euro, davon 364,1 an die evangelische und 254,3 an die katholische Kirche); amtliche Gesamtzahlen gibt es nicht. 2025: 656,9 Mio. Euro, 2026: 666,3 Mio. Euro. Ohne Kirchenbaulasten und Steuerbefreiungen. Aus dem Bereich Religion (COFOG 08.4, laufende Übertragungen 845 Mio. Euro) herausgelöst; ganz den Ländern zugeordnet.",
+                    "Sum of the Länder's budgeted amounts for 2024 as compiled by the Humanistische Union (€618.4m, of which 364.1 to the Protestant and 254.3 to the Catholic church); there are no official totals. 2025: €656.9m, 2026: €666.3m. Excluding obligations to maintain church buildings and tax exemptions. Taken out of religious services (COFOG 08.4, current transfers €845m); attributed entirely to the states.")),
+            L("exp.culture.religion.other", "Übrige Ausgaben für Kirchen und Religionsgemeinschaften", "Other spending on churches and religious communities",
+              amount=cof("GF0804") - STAATSLEISTUNGEN, seed=(0.1553, 0.2243, 0.6205, 0), quality="estimate", sources=SRC_EXP + ["hu_staatsleistungen_2024"],
+              desc=("Unter anderem Leistungen von Gemeinden an Kirchengemeinden, Zahlungen an jüdische Gemeinden und andere Religionsgemeinschaften und Baulasten für Kirchengebäude.",
+                    "Among other things payments by municipalities to parishes, payments to Jewish communities and other religious communities, and obligations to maintain church buildings."),
+              note=("Rest der Gruppe (COFOG 08.4) nach Abzug der Staatsleistungen der Länder; Aufteilung auf die Ebenen geschätzt.",
+                    "Remainder of the group (COFOG 08.4) after deducting the Länder's state payments; split across levels estimated.")),
+        ]),
         CL("exp.culture.rd", "GF0805", "Forschung zu Kultur und Medien", "Research on culture and media", (0.5, 0.5, 0, 0)),
         CL("exp.culture.other", "GF0806", "Sonstige Kultur und Freizeit", "Other culture and recreation", (0.2, 0.4, 0.4, 0)),
     ]),
@@ -506,7 +590,10 @@ hl = ["exp.health.medical_products", "exp.health.outpatient", "exp.health.hospit
 sstot = sum(ALLOC[h][3] for h in hl)
 for h in hl:
     move(h, "social_security", "central", GKV * ALLOC[h][3] / sstot)
-move("exp.economy.transport", "state", "central", 12724.535)            # 6001 031 05 (revenue side): regionalisation funds
+# 6001 031 05 (revenue side): regionalisation funds, 12,724.535 in 2024, of which the federal 1,500 for the
+# Deutschlandticket (bt_drs_21_4498), which goes to its own leaf
+move("exp.economy.transport.other", "state", "central", 12724.535 - DTICKET_FED)
+move("exp.economy.transport.deutschlandticket", "state", "central", DTICKET_FED)
 move("exp.education.tertiary", "state", "central", 1301.740)            # 3002 632 51: student grants (BAföG)
 move("exp.education.secondary", "state", "central", 508.475)            # 3002 632 50: grants for school pupils (BAföG)
 move("exp.housing.housing_development", "state", "central", 1656.001)   # 2501 882 06: social housing
@@ -516,8 +603,8 @@ EXTRA_NOTES = {
                                  "Attributed to the federal level: the part of federal funding of the pension insurance not related to pensions (e.g. pensioners' health insurance) and the subsidies to farmers' old-age insurance."),
     "exp.social.basic_security.other": ("Dem Bund zugerechnet: der Bundesanteil am Wohngeld (2,3 Mrd. Euro). Die Grundsicherung im Alter und bei Erwerbsminderung ist ein eigener Posten.",
                                         "Attributed to the federal level: the federal share of housing benefit (€2.3bn). Basic income support in old age and for reduced earning capacity is an item of its own."),
-    "exp.economy.transport": ("Die Regionalisierungsmittel des Bundes für den Schienennahverkehr der Länder (12,7 Mrd. Euro) sind dem Bund zugerechnet.",
-                              "The federal regionalisation funds for the states' regional rail services (€12.7bn) are attributed to the federal level."),
+    "exp.economy.transport.other": ("Die Regionalisierungsmittel des Bundes für den Schienennahverkehr der Länder (11,2 Mrd. Euro, ohne die 1,5 Mrd. Euro für das Deutschlandticket) sind dem Bund zugerechnet.",
+                                    "The federal regionalisation funds for the states' regional rail services (€11.2bn, without the €1.5bn for the Deutschlandticket) are attributed to the federal level."),
     "exp.education.tertiary": ("Das BAföG für Studierende (1,3 Mrd. Euro) ist dem Bund zugerechnet.", "Federal student grants (BAföG, €1.3bn) are attributed to the federal level."),
     "exp.education.secondary": ("Das BAföG für Schülerinnen und Schüler (0,5 Mrd. Euro) ist dem Bund zugerechnet.", "Federal grants for school pupils (BAföG, €0.5bn) are attributed to the federal level."),
     "exp.housing.housing_development": ("Die Finanzhilfen des Bundes für den sozialen Wohnungsbau (1,7 Mrd. Euro) sind dem Bund zugerechnet.", "Federal grants for social housing (€1.7bn) are attributed to the federal level."),

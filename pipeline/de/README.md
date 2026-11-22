@@ -133,6 +133,16 @@ Arithmetic on published figures:
   administration relieves the funds and not, through a node's shares, the federal, state or municipal
   budgets. Unlike the health benefit items, they carry no pro-rata share of the federal subsidy to health
   insurance, which is a fixed amount; the other health items carry correspondingly more of it;
+- five items carved out of COFOG groups for measures, each a fixed leaf beside a fitted remainder of its group:
+  the federal payments to the EEG account (cash 2024, Subsidy Report) out of fuel and energy (04.3); the federal
+  funding for efficient buildings (BEG, cash 2024, Climate and Transformation Fund title 893 10) out of general
+  economic affairs (04.1); the compensation for the Deutschlandticket (EUR 1.5 billion each from the federal
+  government and the states, Regionalisation Act) out of transport (04.5), whose federal half is moved to the
+  federal level with the rest of the regionalisation funds; the spending of ARD, ZDF and Deutschlandradio (KEF,
+  average of 2021 to 2024) out of broadcasting (08.3); the states' payments to the churches (budgeted amounts
+  2024, as compiled by the Humanistische Union) out of religious services (08.4). The remainders' seeds are set
+  so that the fit leaves every other leaf of the division as it was (see the comment at `EEG_2024` in
+  `build_budget.py`);
 - the staff of the general administration as three leaves, one per level (`ADMIN_STAFF` in
   `build_budget.py`): compensation of employees (D.1) in general public services by level without research
   and foreign aid, split by full-time equivalents of the personnel statistics (Destatis, 30 June 2024)
@@ -193,6 +203,12 @@ Judgement, to be reviewed by whoever updates the data:
   1702 684 04 to function 165, research and experimental development outside universities; where national
   accounts book it is not published, and basic research is an assumption. A different place would move
   the amount between groups, not between levels.
+- **Where the carved-out items sit in national accounts.** Eurostat does not publish them. The EEG payments are
+  subsidies and fit in fuel and energy (04.3, subsidies EUR 26.3 billion). The building grants (EUR 14.1
+  billion) are filed under housing in the federal budget, but housing development (06.1) has only EUR 3.3 billion
+  of capital transfers at all levels; general economic affairs (04.1, EUR 21.5 billion) is the only group with
+  room for them. The broadcasters' spending in national accounts is taken as the KEF's figure; the payments to
+  the churches as the states' budgeted amounts, which fit in the current transfers of 08.4 (EUR 845 million).
 - **Merging COFOG 10.5, 10.6 and 10.7** into one group, because cash benefits cannot be assigned to
   one of them: housing costs under Bürgergeld alone exceed the cash benefits recorded under 10.6.
 - **Levels of capital-transfer revenue** and of the revision leaf.
