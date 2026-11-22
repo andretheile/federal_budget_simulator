@@ -1083,16 +1083,49 @@
             "en": "For example the truck toll, day-care and sewage charges, admission fees, administrative fees."
           },
           "code": "P11+P12+P131",
-          "amount": 187119000000,
-          "levels": {
-            "central": 0.3225,
-            "state": 0.304,
-            "local": 0.3459,
-            "social_security": 0.0276
-          },
-          "quality": "official",
-          "sources": [
-            "eurostat_gov_10a_main"
+          "children": [
+            {
+              "id": "rev.other.sales.public_broadcasters",
+              "label": {
+                "de": "Werbung, Sponsoring und übrige Markterlöse von ARD, ZDF und Deutschlandradio",
+                "en": "Advertising, sponsorship and other market income of ARD, ZDF and Deutschlandradio"
+              },
+              "amount": 1024150000,
+              "levels": {
+                "state": 1.0
+              },
+              "quality": "estimate",
+              "sources": [
+                "kef_25_bericht",
+                "eurostat_gov_10a_main"
+              ],
+              "note": {
+                "de": "Eigene Schätzung: Die Finanzkommission KEF erkennt für 2025 bis 2028 Erträge aus Werbung (1.037,9 Mio. Euro), Sponsoring (159,1), Kostenerstattungen (418,8), sonstigen betrieblichen Erträgen wie Programmverwertung, Mieten und Mahngebühren (2.241,1) und Sonstiges (239,7) an, im Jahr rund 1,02 Mrd. Euro. Nicht eingerechnet sind Finanzerträge, die größtenteils aus den Anlagen für die Pensionen stammen, Beteiligungserträge und Rückflüsse der Landesmedienanstalten. Ein Teil der Summe, etwa Erträge aus aufgelösten Rückstellungen und Erstattungen anderer öffentlich-rechtlicher Sender, ist in den Volkswirtschaftlichen Gesamtrechnungen keine Einnahme; der Posten ist deshalb eher zu hoch. Aus den Verkäufen der Länderebene herausgelöst.",
+                "en": "Own estimate: for 2025 to 2028 the funding commission KEF recognises income from advertising (€1,037.9m), sponsorship (159.1), reimbursements (418.8), other operating income such as programme sales, rents and dunning fees (2,241.1) and other income (239.7), about €1.02bn a year. Not included are financial income, most of which comes from the assets that cover the pensions, income from holdings and returns from the state media authorities. Part of the sum, such as income from released provisions and reimbursements by other public broadcasters, is not revenue in national accounts; the item is therefore rather too high. Taken out of the state level's sales."
+              }
+            },
+            {
+              "id": "rev.other.sales.other",
+              "label": {
+                "de": "Übrige Gebühren, Entgelte und Verkäufe",
+                "en": "Other fees, charges and sales"
+              },
+              "amount": 186094850000,
+              "levels": {
+                "central": 0.3243,
+                "state": 0.3002,
+                "local": 0.3477,
+                "social_security": 0.0278
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_gov_10a_main"
+              ],
+              "note": {
+                "de": "Rest der Gruppe nach Abzug der Markterlöse der öffentlich-rechtlichen Rundfunkanstalten; die Länderebene ist um diese gemindert.",
+                "en": "Remainder of the group after deducting the market income of the public broadcasters; the state level is reduced by it."
+              }
+            }
           ]
         },
         {
@@ -1957,20 +1990,20 @@
         {
           "id": "exp.economy.general_labour",
           "label": {
-            "de": "Wirtschafts- und Arbeitsmarktförderung",
-            "en": "Business and labour market support"
+            "de": "Wirtschafts- und Arbeitsmarktförderung (u. a. Gebäudeförderung des Bundes)",
+            "en": "Business and labour market support (incl. federal building grants)"
           },
           "code": "GF0401",
           "children": [
             {
               "id": "exp.economy.general_labour.beg",
               "label": {
-                "de": "Gebäudeförderung des Bundes (BEG): Sanierung, Heizungstausch, effiziente Neubauten",
-                "en": "Federal funding for efficient buildings (BEG): renovation, heating replacement, efficient new buildings"
+                "de": "Gebäudeförderung des Bundes (BEG): Sanierung und Heizungstausch",
+                "en": "Federal funding for efficient buildings (BEG): renovation and heating replacement"
               },
               "description": {
-                "de": "Zuschüsse und Tilgungszuschüsse der Bundesförderung für effiziente Gebäude über KfW und BAFA: Einzelmaßnahmen wie der Tausch der Heizung oder die Dämmung, Sanierung zum Effizienzhaus, effiziente Nichtwohngebäude. Bezahlt aus dem Klima- und Transformationsfonds.",
-                "en": "Grants and repayment grants of the federal funding for efficient buildings through KfW and BAFA: individual measures such as replacing the heating or insulation, renovation to an efficiency house standard, efficient non-residential buildings. Paid from the Climate and Transformation Fund."
+                "de": "Zuschüsse und Tilgungszuschüsse der Bundesförderung für effiziente Gebäude über KfW und BAFA: Einzelmaßnahmen wie der Tausch der Heizung oder die Dämmung und die Sanierung von Wohn- und Nichtwohngebäuden zum Effizienzhaus. Neue Gebäude fördert inzwischen ein eigenes Programm (Klimafreundlicher Neubau). Bezahlt aus dem Klima- und Transformationsfonds.",
+                "en": "Grants and repayment grants of the federal funding for efficient buildings through KfW and BAFA: individual measures such as replacing the heating or insulation, and renovating residential and non-residential buildings to an efficiency house standard. New buildings are now funded by a programme of their own (climate-friendly new construction). Paid from the Climate and Transformation Fund."
               },
               "amount": 14116820000,
               "levels": {

@@ -28,6 +28,24 @@
           "sources": ["gg_art_115", "bundestag_drs_21_7301"]
         },
         {
+          "node": "exp.economy.general_labour.beg",
+          "reason": {
+            "de": "Die Gebäudeförderung wird aus dem Klima- und Transformationsfonds bezahlt, einem Sondervermögen, dem der Kernhaushalt derzeit nichts zuweist; die Lücke bezieht sich auf den Kernhaushalt. Eine Kürzung verkleinert sie nur, wenn der Fonds dafür Ausgaben des Kernhaushalts übernimmt, etwa den Zuschuss für das EEG.",
+            "en": "The building programme is paid from the Climate and Transformation Fund, a special fund to which the core budget currently allocates nothing; the gap refers to the core budget. A cut narrows it only if the fund takes over core-budget spending in return, such as the EEG subsidy."
+          },
+          "reasonShort": { "de": "Aus dem Klimafonds bezahlt; die Lücke betrifft den Kernhaushalt.", "en": "Paid from the climate fund; the gap concerns the core budget." },
+          "sources": ["bh_haushalt_2027_epl60", "bundestag_drs_21_7301", "bt_drs_21_8276"]
+        },
+        {
+          "node": "rev.taxes.consumption.co2.national",
+          "reason": {
+            "de": "Die Einnahmen aus dem nationalen CO2-Preis fließen nach dem Gesetz über den Klima- und Transformationsfonds dem Fonds zu, nicht dem Kernhaushalt, auf den sich die Lücke bezieht. Mehr oder weniger Einnahmen ändern die Lücke erst, wenn der Kernhaushalt dem Fonds deshalb Geld zuweist oder Ausgaben abnimmt, oder umgekehrt.",
+            "en": "Under the law on the Climate and Transformation Fund, the revenue of the national carbon price flows to the fund, not to the core budget to which the gap refers. More or less revenue changes the gap only if the core budget allocates money to the fund or takes over its spending in return, or the other way round."
+          },
+          "reasonShort": { "de": "Fließt in den Klimafonds; die Lücke betrifft den Kernhaushalt.", "en": "Flows into the climate fund; the gap concerns the core budget." },
+          "sources": ["ktfg_4", "bh_haushalt_2027_epl60", "bundestag_drs_21_7301"]
+        },
+        {
           "policy": "plastic_packaging_tax",
           "reason": {
             "de": "Der Finanzplan rechnet bereits mit der Steuer auf Kunststoffverpackungen (in Höhe der EU-Plastikabgabe, rund 1,6 Mrd. Euro im Jahr); seit die Koalition sie im November 2026 fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer.",
@@ -110,6 +128,24 @@
           "sources": ["gg_art_115", "bundestag_drs_21_7301"]
         },
         {
+          "node": "exp.economy.general_labour.beg",
+          "reason": {
+            "de": "Die Gebäudeförderung wird aus dem Klima- und Transformationsfonds bezahlt, einem Sondervermögen, dem der Kernhaushalt derzeit nichts zuweist; die Lücke bezieht sich auf den Kernhaushalt. Eine Kürzung verkleinert sie nur, wenn der Fonds dafür Ausgaben des Kernhaushalts übernimmt, etwa den Zuschuss für das EEG.",
+            "en": "The building programme is paid from the Climate and Transformation Fund, a special fund to which the core budget currently allocates nothing; the gap refers to the core budget. A cut narrows it only if the fund takes over core-budget spending in return, such as the EEG subsidy."
+          },
+          "reasonShort": { "de": "Aus dem Klimafonds bezahlt; die Lücke betrifft den Kernhaushalt.", "en": "Paid from the climate fund; the gap concerns the core budget." },
+          "sources": ["bh_haushalt_2027_epl60", "bundestag_drs_21_7301", "bt_drs_21_8276"]
+        },
+        {
+          "node": "rev.taxes.consumption.co2.national",
+          "reason": {
+            "de": "Die Einnahmen aus dem nationalen CO2-Preis fließen nach dem Gesetz über den Klima- und Transformationsfonds dem Fonds zu, nicht dem Kernhaushalt, auf den sich die Lücke bezieht. Mehr oder weniger Einnahmen ändern die Lücke erst, wenn der Kernhaushalt dem Fonds deshalb Geld zuweist oder Ausgaben abnimmt, oder umgekehrt.",
+            "en": "Under the law on the Climate and Transformation Fund, the revenue of the national carbon price flows to the fund, not to the core budget to which the gap refers. More or less revenue changes the gap only if the core budget allocates money to the fund or takes over its spending in return, or the other way round."
+          },
+          "reasonShort": { "de": "Fließt in den Klimafonds; die Lücke betrifft den Kernhaushalt.", "en": "Flows into the climate fund; the gap concerns the core budget." },
+          "sources": ["ktfg_4", "bh_haushalt_2027_epl60", "bundestag_drs_21_7301"]
+        },
+        {
           "policy": "plastic_packaging_tax",
           "reason": {
             "de": "Der Finanzplan rechnet bereits mit der Steuer auf Kunststoffverpackungen (in Höhe der EU-Plastikabgabe, rund 1,6 Mrd. Euro im Jahr); seit die Koalition sie im November 2026 fallen gelassen hat, ist die tatsächliche Lücke um diesen Betrag größer.",
@@ -190,6 +226,24 @@
           },
           "reasonShort": { "de": "Verteidigungsausgaben über 1 % des BIP sind seit 2025 von der Schuldenregel ausgenommen.", "en": "Defence spending above 1% of GDP has been exempt from the debt brake since 2025." },
           "sources": ["gg_art_115", "bundestag_drs_21_7301"]
+        },
+        {
+          "node": "exp.economy.general_labour.beg",
+          "reason": {
+            "de": "Die Gebäudeförderung wird aus dem Klima- und Transformationsfonds bezahlt, einem Sondervermögen, dem der Kernhaushalt derzeit nichts zuweist; die Lücke bezieht sich auf den Kernhaushalt. Eine Kürzung verkleinert sie nur, wenn der Fonds dafür Ausgaben des Kernhaushalts übernimmt, etwa den Zuschuss für das EEG.",
+            "en": "The building programme is paid from the Climate and Transformation Fund, a special fund to which the core budget currently allocates nothing; the gap refers to the core budget. A cut narrows it only if the fund takes over core-budget spending in return, such as the EEG subsidy."
+          },
+          "reasonShort": { "de": "Aus dem Klimafonds bezahlt; die Lücke betrifft den Kernhaushalt.", "en": "Paid from the climate fund; the gap concerns the core budget." },
+          "sources": ["bh_haushalt_2027_epl60", "bundestag_drs_21_7301", "bt_drs_21_8276"]
+        },
+        {
+          "node": "rev.taxes.consumption.co2.national",
+          "reason": {
+            "de": "Die Einnahmen aus dem nationalen CO2-Preis fließen nach dem Gesetz über den Klima- und Transformationsfonds dem Fonds zu, nicht dem Kernhaushalt, auf den sich die Lücke bezieht. Mehr oder weniger Einnahmen ändern die Lücke erst, wenn der Kernhaushalt dem Fonds deshalb Geld zuweist oder Ausgaben abnimmt, oder umgekehrt.",
+            "en": "Under the law on the Climate and Transformation Fund, the revenue of the national carbon price flows to the fund, not to the core budget to which the gap refers. More or less revenue changes the gap only if the core budget allocates money to the fund or takes over its spending in return, or the other way round."
+          },
+          "reasonShort": { "de": "Fließt in den Klimafonds; die Lücke betrifft den Kernhaushalt.", "en": "Flows into the climate fund; the gap concerns the core budget." },
+          "sources": ["ktfg_4", "bh_haushalt_2027_epl60", "bundestag_drs_21_7301"]
         },
         {
           "policy": "plastic_packaging_tax",

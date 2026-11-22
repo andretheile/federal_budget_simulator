@@ -143,6 +143,9 @@ Arithmetic on published figures:
   2024, as compiled by the Humanistische Union) out of religious services (08.4). The remainders' seeds are set
   so that the fit leaves every other leaf of the division as it was (see the comment at `EEG_2024` in
   `build_budget.py`);
+- on the revenue side, the broadcasters' market income (advertising, sponsorship, reimbursements, other operating
+  income; KEF, yearly average of 2025 to 2028) as a state-level leaf out of fees, charges and sales; the remainder
+  keeps the other levels' amounts and the state level less this item;
 - the staff of the general administration as three leaves, one per level (`ADMIN_STAFF` in
   `build_budget.py`): compensation of employees (D.1) in general public services by level without research
   and foreign aid, split by full-time equivalents of the personnel statistics (Destatis, 30 June 2024)
@@ -205,12 +208,14 @@ Judgement, to be reviewed by whoever updates the data:
   replacement benefits that copy their shares, went from 36.6 to 34.4 % states. A measure on these leaves
   therefore shows somewhat different burdens by level than before the two leaves were added.
 - **Where the items carved out of COFOG groups sit in national accounts.** Eurostat does not publish them. The
-  EEG payments are subsidies and fit in fuel and energy (04.3, subsidies EUR 26.3 billion). The building grants
-  (EUR 14.1 billion) are filed under housing in the federal budget, but housing development (06.1) has only EUR
-  3.3 billion of capital transfers at all levels; general economic affairs (04.1, EUR 21.5 billion) is the only
-  group with room for them. The broadcasters' spending in national accounts is taken as the KEF's figure; the
-  payments to the churches as the states' budgeted amounts, which fit in the current transfers of 08.4 (EUR 845
-  million).
+  EEG payments are subsidies and fit in fuel and energy (04.3, subsidies EUR 26.3 billion). The building
+  grants (EUR 14.1 billion) are filed under housing in the federal budget, but housing development (06.1) has
+  only EUR 3.3 billion of capital transfers at all levels; general economic affairs (04.1, EUR 21.5 billion)
+  is the only group with room for them. The broadcasters' spending in national accounts is taken as the KEF's
+  figure, and their market income as the KEF's recognised income without financial income, income from
+  holdings and returns from the state media authorities (part of the rest, such as released provisions, is not
+  revenue in national accounts, so the item is rather too high); the payments to the churches as the states'
+  budgeted amounts, which fit in the current transfers of 08.4 (EUR 845 million).
 - **Where civil servants' pensions and survivors' benefits sit in COFOG.** Civil servants' pensions are a cash
   figure; pensions paid for incapacity before the retirement age may in part be booked under sickness and
   disability (10.1) rather than old age. Survivors' benefits get the level shares of all pension spending,

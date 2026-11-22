@@ -5069,12 +5069,12 @@
         "en": "End EEG support for new plants"
       },
       "summary": {
-        "de": "Beendet die Förderung neuer Wind-, Solar- und Biomasseanlagen nach dem EEG. Die Grundeinstellung zeigt die Forderung von AfD und FDP; ihren vollen Wert erreicht die Einsparung erst 2032.",
-        "en": "Ends support under the EEG for new wind, solar and biomass plants. The default shows the demand of the AfD and the FDP; the saving reaches its full value only in 2032."
+        "de": "Beendet die EEG-Förderung neuer Wind-, Solar- und Biomasseanlagen, wie es die AfD in ihrem Wahlprogramm und die FDP fordern; der Gesetzentwurf der AfD von 2026 ginge weiter. Voll wirkt das erst 2032.",
+        "en": "Ends EEG support for new wind, solar and biomass plants, as the AfD's election programme and the FDP demand; the AfD's 2026 bill goes further. The full saving comes only in 2032."
       },
       "explanation": {
-        "de": "Nach dem Erneuerbare-Energien-Gesetz (EEG) erhalten Anlagen 20 Jahre lang feste Vergütungen oder Marktprämien. Seit 2023 zahlt der Bund die Differenz zum Erlös an der Strombörse (2024: 18,5 Mrd. Euro, damals aus dem Klima- und Transformationsfonds, seit 2025 aus dem Kernhaushalt). Die Maßnahme beendet nur die Förderung neuer Anlagen; was bestehende Anlagen erhalten, bleibt. Deshalb spart sie anfangs fast nichts: Nach den Schätzungen der Bundesregierung kosten neue Anlagen 2028 rund 0,4, 2030 rund 2,7 und 2032 rund 4,6 Mrd. Euro. Die Karte zeigt den Wert für 2032, umgerechnet auf die Wirtschaftsleistung des Basisjahres 2024: 3,6 Mrd. Euro. In der Schuldenprojektion wächst die Einsparung von 2028 an über vier Jahre auf ihn an.\n\nDie AfD will das EEG mit einem Gesetzentwurf vom September 2026 ganz aufheben, ohne Übergangsregel für bestehende Anlagen; in ihrem Wahlprogramm 2025 heißt es dagegen, vertraglich zugesagte Subventionen für bestehende Anlagen blieben bestehen. Das Präsidium der FDP forderte im Januar 2025, die staatlich garantierten Vergütungen in den nächsten Jahren auf null zu senken. Die Bundesregierung will die Förderung mit dem EEG 2027 umbauen und verringern, unter anderem ohne feste Einspeisevergütung für neue Anlagen; ihr Entwurf war am 22. November 2026 noch nicht beschlossen. Er ist der Vergleichsmaßstab der Rechnung.\n\nDie Koalition will die Senkung der Stromsteuer 2027 aus Spielräumen im EEG-Titel des Bundeshaushalts bezahlen, also aus Mitteln, die dort voraussichtlich nicht gebraucht werden (siehe „Stromsteuer für alle senken“). Diese Maßnahme spart 2027 so gut wie nichts; beide überschneiden sich nicht. Mit dem CO2-Preis hängt sie seit 2025 nicht mehr zusammen, weil der Kernhaushalt die EEG-Kosten trägt und nicht mehr der Fonds, in den der CO2-Preis fließt.",
-        "en": "Under the Renewable Energy Sources Act (EEG) plants receive fixed feed-in payments or market premiums for 20 years. Since 2023 the federal government has paid the difference to what their power fetches on the exchange (2024: €18.5bn, then from the Climate and Transformation Fund, since 2025 from the core budget). The measure ends support only for new plants; what existing plants receive stays. It therefore saves almost nothing at first: according to the federal government's estimates, new plants cost about €0.4bn in 2028, €2.7bn in 2030 and €4.6bn in 2032. The card shows the value for 2032, converted to the size of the economy in the base year 2024: €3.6bn. In the debt projection the saving grows to it over four years from 2028.\n\nIn a bill of September 2026 the AfD wants to repeal the EEG altogether, without a transitional rule for existing plants; its 2025 election programme, by contrast, says that subsidies contractually promised to existing plants remain. In January 2025 the FDP's executive called for lowering the state-guaranteed payments to zero over the next years. The federal government wants to restructure and reduce support with the EEG 2027, among other things without fixed feed-in payments for new plants; its bill had not been passed as of 22 November 2026. It is the benchmark of the calculation.\n\nThe coalition wants to pay for the 2027 electricity tax cut from leeway in the EEG line of the federal budget, that is, from funds that are probably not needed there (see \"Lower the electricity tax for everyone\"). This measure saves next to nothing in 2027; the two do not overlap. Since 2025 it is no longer connected with the carbon price, because the core budget bears the EEG costs rather than the fund into which the carbon price flows."
+        "de": "Nach dem Erneuerbare-Energien-Gesetz (EEG) erhalten Anlagen 20 Jahre lang feste Vergütungen oder Marktprämien. Seit 2023 zahlt der Bund die Differenz zum Erlös an der Strombörse (2024: 18,5 Mrd. Euro, damals aus dem Klima- und Transformationsfonds, seit 2025 aus dem Kernhaushalt); vorher trugen das die Stromkunden über die EEG-Umlage. Die Maßnahme beendet nur die Förderung neuer Anlagen; was bestehende Anlagen erhalten, bleibt. Deshalb spart sie anfangs fast nichts: Nach den Schätzungen der Bundesregierung kosten neue Anlagen 2028 rund 0,4, 2030 rund 2,7 und 2032 rund 4,6 Mrd. Euro. Die Karte zeigt den Wert für 2032, umgerechnet auf die Wirtschaftsleistung des Basisjahres 2024: 3,6 Mrd. Euro. In der Schuldenprojektion erreicht die Einsparung diesen Wert, von 2028 an gleichmäßig steigend, binnen vier Jahren.\n\nDie AfD will mit einem Gesetzentwurf vom September 2026 das EEG ganz aufheben, ohne Übergangsregel für bestehende Anlagen; in ihrem Wahlprogramm 2025 heißt es dagegen, vertraglich zugesagte Subventionen für bestehende Anlagen blieben bestehen. Das Präsidium der FDP forderte im Januar 2025, die staatlich garantierten Vergütungen in den nächsten Jahren auf null zu senken. Die Bundesregierung will die Förderung mit dem EEG 2027 umbauen und verringern, unter anderem ohne feste Einspeisevergütung für neue Anlagen. Ihr Entwurf ist der Vergleichsmaßstab der Rechnung. Der Bundestag hat ihn am 24. September 2026 in erster Lesung beraten; verabschiedet war er am 22. November 2026 noch nicht. Am 12. November 2026 sagte die energiepolitische Sprecherin der SPD-Fraktion, Nina Scheer, im Bundestag: „Wir haben bereits eine Einigung zum EEG.“ Die vereinbarten Änderungen waren nicht veröffentlicht; die Zahlen der Karte stammen aus dem Regierungsentwurf und können sich deshalb noch ändern.\n\nDie Koalition will die Senkung der Stromsteuer 2027 aus Spielräumen im EEG-Titel des Bundeshaushalts bezahlen, also aus Mitteln, die dort voraussichtlich nicht gebraucht werden (siehe „Stromsteuer für alle senken“). Diese Maßnahme spart 2027 so gut wie nichts; beide überschneiden sich nicht. Mit dem CO2-Preis hängt sie seit 2025 nicht mehr zusammen, weil der Kernhaushalt die EEG-Kosten trägt und nicht mehr der Fonds, in den der CO2-Preis fließt. Der Sachverständigenrat schlägt im November 2026 vor, den Zuschuss wieder aus diesem Fonds zu bezahlen: Das entlaste den Kernhaushalt um 17,2 Mrd. Euro, verlange aber Einsparungen im Fonds.",
+        "en": "Under the Renewable Energy Sources Act (EEG) plants receive fixed feed-in payments or market premiums for 20 years. Since 2023 the federal government has paid the difference to what their power fetches on the exchange (2024: €18.5bn, then from the Climate and Transformation Fund, since 2025 from the core budget); before that, electricity customers bore it through the EEG surcharge. The measure ends support only for new plants; what existing plants receive stays. It therefore saves almost nothing at first: according to the federal government's estimates, new plants cost about €0.4bn in 2028, €2.7bn in 2030 and €4.6bn in 2032. The card shows the value for 2032, converted to the size of the economy in the base year 2024: €3.6bn. In the debt projection the saving reaches this value within four years, rising evenly from 2028.\n\nIn a bill of September 2026 the AfD wants to repeal the EEG altogether, without a transitional rule for existing plants; its 2025 election programme, by contrast, says that subsidies contractually promised to existing plants remain. In January 2025 the FDP's executive called for lowering the state-guaranteed payments to zero over the next years. The federal government wants to restructure and reduce support with the EEG 2027, among other things without fixed feed-in payments for new plants. Its bill is the benchmark of the calculation. The Bundestag held its first reading on 24 September 2026; it had not been passed as of 22 November 2026. On 12 November 2026 the SPD group's energy spokesperson, Nina Scheer, said in the Bundestag: \"We already have an agreement on the EEG.\" The agreed amendments had not been published; the card's figures come from the government bill and may therefore still change.\n\nThe coalition wants to pay for the 2027 electricity tax cut from leeway in the EEG line of the federal budget, that is, from funds that are probably not needed there (see \"Lower the electricity tax for everyone\"). This measure saves next to nothing in 2027; the two do not overlap. Since 2025 it is no longer connected with the carbon price, because the core budget bears the EEG costs rather than the fund into which the carbon price flows. In November 2026 the Council of Economic Experts proposes to pay the subsidy from that fund again: that would relieve the core budget by €17.2bn but require savings in the fund."
       },
       "topic": "climate",
       "params": [
@@ -5118,46 +5118,31 @@
       ],
       "catches": [
         {
-          "kind": "legal",
-          "severity": "major",
-          "text": {
-            "de": "Bestehende Anlagen haben Anspruch auf ihre Vergütung, in der Regel für 20 Jahre; der Zuschuss des Bundes sichert diese Ansprüche ab. Der Gesetzentwurf der AfD würde das EEG ohne Übergangsregel aufheben und damit auch diese Zahlungen beenden (2024: 18,5 Mrd. Euro). Nach einer Ausarbeitung der Wissenschaftlichen Dienste des Bundestags von 2011 sind erhebliche nachträgliche Kürzungen für Anlagen, die Vertrauensschutz genießen, rechtlich ausgeschlossen, solange sich ihre Wirtschaftlichkeit nicht völlig anders entwickelt als bei der Förderung angenommen. Die Maßnahme lässt bestehende Anlagen deshalb unberührt.",
-            "en": "Existing plants have a claim to their payments, as a rule for 20 years; the federal subsidy secures these claims. The AfD's bill would repeal the EEG without a transitional rule and so end these payments too (2024: €18.5bn). According to a 2011 paper by the Bundestag's research services, substantial subsequent cuts for plants protected by legitimate expectations are legally excluded unless their economics develop entirely differently from what was assumed when support was granted. The measure therefore leaves existing plants untouched."
-          },
-          "sources": [
-            "bt_drs_21_8108",
-            "bt_wd_5_041_11",
-            "svr_jg_2026_27",
-            "afd_wahlprogramm_2025"
-          ]
-        },
-        {
           "kind": "economic",
           "severity": "major",
           "text": {
-            "de": "Das EEG soll den Anteil erneuerbarer Energien am Stromverbrauch bis 2030 auf 80 % steigern; der Entwurf der Bundesregierung hält an diesem Ziel fest. Ohne Förderung würden nur Anlagen gebaut, die sich allein am Markt rechnen. Der Sachverständigenrat verweist darauf, dass schon die geringeren Kürzungen des Regierungsentwurfs den Ausbau verlangsamen können. Nach dem Subventionsbericht der Bundesregierung senkt der Ausbau erneuerbarer Energien die Strompreise an der Börse.",
-            "en": "The EEG aims to raise the share of renewable energy in electricity consumption to 80% by 2030; the government's bill keeps this target. Without support only plants that pay off on the market alone would be built. The Council of Economic Experts points out that even the smaller cuts in the government's bill may slow expansion. According to the government's Subsidy Report, the expansion of renewable energy lowers power prices on the exchange."
+            "de": "Das EEG soll den Anteil erneuerbarer Energien am Stromverbrauch bis 2030 auf 80 % steigern; der Entwurf der Bundesregierung hält an diesem Ziel fest. Ohne Förderung würden nur Anlagen gebaut, die sich allein am Markt rechnen. Der Sachverständigenrat verweist mit dem Bundesverband Erneuerbare Energie darauf, dass schon die geringeren Kürzungen des Regierungsentwurfs den Ausbau verlangsamen können. Nach dem Subventionsbericht der Bundesregierung senkt der Ausbau erneuerbarer Energien die Strompreise an der Börse.",
+            "en": "The EEG aims to raise the share of renewable energy in electricity consumption to 80% by 2030; the government's bill keeps this target. Without support only plants that pay off on the market alone would be built. The Council of Economic Experts, citing the renewable energy industry association BEE, points out that even the smaller cuts in the government's bill may slow expansion. According to the government's Subsidy Report, the expansion of renewable energy lowers power prices on the exchange."
           },
           "sources": [
             "bt_drs_21_7867",
             "svr_jg_2026_27",
             "bt_drs_21_1600"
           ]
-        },
-        {
-          "kind": "political",
-          "severity": "minor",
-          "text": {
-            "de": "Seit 2023 tragen die Steuerzahler die Förderung, vorher die Stromkunden über die EEG-Umlage. Der Sachverständigenrat schlägt im November 2026 vor, den Zuschuss wieder aus dem Klima- und Transformationsfonds zu bezahlen: Das entlaste den Kernhaushalt um 17,2 Mrd. Euro, verlange aber Einsparungen im Fonds.",
-            "en": "Since 2023 taxpayers have borne the support, before that electricity customers through the EEG surcharge. In November 2026 the Council of Economic Experts proposes to pay the subsidy from the Climate and Transformation Fund again: that would relieve the core budget by €17.2bn but require savings in the fund."
-          },
-          "sources": [
-            "bt_drs_21_1600",
-            "svr_jg_2026_27"
-          ]
         }
       ],
       "limits": [
+        {
+          "text": {
+            "de": "Bestehende Anlagen bleiben unberührt: Sie haben Anspruch auf ihre Vergütung, in der Regel für 20 Jahre, und der Zuschuss des Bundes sichert diese Ansprüche ab. Der Gesetzentwurf der AfD würde das EEG ohne Übergangsregel aufheben und damit auch diese Zahlungen beenden (2024: 18,5 Mrd. Euro); das bildet die Rechnung nicht ab. Nach einer Ausarbeitung der Wissenschaftlichen Dienste des Bundestags von 2011 sind nachträgliche Kürzungen der Vergütung „in gewissen Grenzen“ zulässig, je nach Marktentwicklung und gesetzlicher Begründung; erhebliche Kürzungen für Anlagen mit Vertrauensschutz schieden aber aus, solange sich deren Wirtschaftlichkeit nicht gänzlich anders entwickle als bei der Förderung angenommen. Die Ausarbeitung betraf alte Biogasanlagen.",
+            "en": "Existing plants are left untouched: they have a claim to their payments, as a rule for 20 years, and the federal subsidy secures these claims. The AfD's bill would repeal the EEG without a transitional rule and so end these payments too (2024: €18.5bn); the calculation does not show that. According to a 2011 paper by the Bundestag's research services, subsequent cuts in the payments are permissible \"within certain limits\", depending on market developments and the legislature's reasons; substantial cuts for plants protected by legitimate expectations would, however, be excluded unless their economics develop entirely differently from what was assumed when support was granted. The paper concerned old biogas plants."
+          },
+          "sources": [
+            "bt_drs_21_8108",
+            "bt_wd_5_041_11",
+            "svr_jg_2026_27"
+          ]
+        },
         {
           "text": {
             "de": "Die Bundesregierung schätzt die Kosten neuer Anlagen nur bis 2032. Weil jedes Jahr weitere Anlagen hinzukämen, würde die Einsparung danach wohl weiter wachsen; die Rechnung hält sie beim Anteil an der Wirtschaftsleistung von 2032. Wie hoch sie ausfällt, hängt vor allem vom Börsenstrompreis ab.",
@@ -5178,12 +5163,13 @@
         },
         {
           "text": {
-            "de": "Vergleichsmaßstab ist der Entwurf der Bundesregierung für das EEG 2027, der die Förderung neuer Anlagen schon verringert. Das geltende EEG ist von der EU-Kommission nur bis 31. Dezember 2026 genehmigt; das neue Gesetz soll am 1. Januar 2027 in Kraft treten. Gegenüber einer unveränderten Förderung wäre die Einsparung größer.",
-            "en": "The benchmark is the federal government's bill for the EEG 2027, which already reduces support for new plants. The current EEG is approved by the European Commission only until 31 December 2026; the new law is to enter into force on 1 January 2027. Against unchanged support the saving would be larger."
+            "de": "Vergleichsmaßstab ist der Entwurf der Bundesregierung für das EEG 2027, der die Förderung neuer Anlagen schon verringert. Das geltende EEG ist von der EU-Kommission nur bis 31. Dezember 2026 genehmigt; das neue Gesetz soll am 1. Januar 2027 in Kraft treten. Der Entwurf soll die Kosten neuer Förderzusagen senken, nach dem Sachverständigenrat unter anderem mit niedrigeren Fördersätzen und kürzeren Laufzeiten; gegenüber dem geltenden EEG wäre die Einsparung je Anlage deshalb größer.",
+            "en": "The benchmark is the federal government's bill for the EEG 2027, which already reduces support for new plants. The current EEG is approved by the European Commission only until 31 December 2026; the new law is to enter into force on 1 January 2027. The bill is meant to lower the cost of new commitments, according to the Council of Economic Experts among other things through lower support rates and shorter support periods; against the current EEG the saving per plant would therefore be larger."
           },
           "sources": [
             "bt_drs_21_7867",
-            "bt_kw46_2026_eeg"
+            "bt_kw46_2026_eeg",
+            "svr_jg_2026_27"
           ]
         }
       ],
@@ -5196,6 +5182,7 @@
         "fdp_sofortprogramm_2025",
         "bt_wd_5_041_11",
         "svr_jg_2026_27",
+        "bt_kw39_2026_eeg",
         "bt_kw46_2026_eeg"
       ],
       "timing": {
@@ -5217,12 +5204,12 @@
         "en": "Cut federal subsidies for building renovation and heating"
       },
       "summary": {
-        "de": "Kürzt die Bundesförderung für effiziente Gebäude (BEG), aus der auch der Tausch alter Heizungen bezahlt wird. Die Grundeinstellung beendet sie ganz, wie es die AfD fordert.",
-        "en": "Cuts the federal funding for efficient buildings (BEG), which also pays for replacing old heating systems. The default ends it completely, as the AfD demands."
+        "de": "Kürzt die Gebäudeförderung (BEG), die auch den Heizungstausch bezahlt. Die Grundeinstellung beendet sie; die AfD will den Klimafonds, der sie bezahlt, auflösen und seine Ausgaben großteils streichen.",
+        "en": "Cuts the federal building grants (BEG), which also pay for replacing heating systems. The default ends them; the AfD wants to dissolve the climate fund that pays for them and cut most of its spending."
       },
       "explanation": {
-        "de": "Die Förderung zahlt Zuschüsse für Einzelmaßnahmen wie eine Wärmepumpe oder eine Dämmung und für die Sanierung oder den Bau effizienter Gebäude. 2024 flossen 14,1 Mrd. Euro, im Entwurf für 2027 sind 12,6 Mrd. Euro vorgesehen, zwei Drittel davon für Einzelmaßnahmen, zu denen der Heizungstausch gehört. Bezahlt wird sie aus dem Klima- und Transformationsfonds, der vor allem aus dem CO2-Preis gespeist wird.\n\nDie AfD forderte im September 2025, den Fonds aufzulösen und seine Ausgaben „zumindest weit überwiegend“ abzuschaffen, und nannte die Heizungen als Beispiel. Der Sachverständigenrat hält im November 2026 eine zielgenauere Förderung für möglich, die rund 4,8 Mrd. Euro weniger kostet, gut ein Drittel der für 2027 geplanten Mittel; das lässt sich mit dem Regler einstellen. Die Koalition aus CDU, CSU und SPD will die Förderung fortsetzen und hat sie im Juli 2026 umgebaut. Zugleich hat sie das Gebäudeenergiegesetz, das sogenannte Heizungsgesetz, durch das Gebäudemodernisierungsgesetz ersetzt, das keinen Mindestanteil erneuerbarer Energien mehr vorschreibt.\n\nWer zugleich den CO2-Preis abschafft, nimmt dem Fonds Einnahmen und Ausgaben; die Rechnung zeigt beides als Änderung des Bundeshaushalts.",
-        "en": "The programme pays grants for individual measures such as a heat pump or insulation and for renovating or building efficient buildings. €14.1bn was paid out in 2024; the draft for 2027 provides €12.6bn, two thirds of it for individual measures, which include heating replacement. It is paid from the Climate and Transformation Fund, which is fed mainly by the carbon price.\n\nIn September 2025 the AfD called for dissolving the fund and abolishing its spending \"at least for the most part\", naming heating as an example. In November 2026 the Council of Economic Experts considers a better targeted programme possible that would cost about €4.8bn less, a good third of the funds planned for 2027; the slider can be set to that. The coalition of CDU, CSU and SPD wants to continue the programme and restructured it in July 2026. At the same time it replaced the Buildings Energy Act, the so-called heating law, with the Buildings Modernisation Act, which no longer prescribes a minimum share of renewable energy.\n\nAnyone who also abolishes the carbon price takes revenue and spending away from the fund; the calculation shows both as changes to the federal budget."
+        "de": "Die Förderung zahlt Zuschüsse für Einzelmaßnahmen wie eine Wärmepumpe oder eine Dämmung und für die Sanierung von Wohn- und Nichtwohngebäuden zum Effizienzhaus; neue Gebäude fördert inzwischen ein eigenes Programm (Klimafreundlicher Neubau). 2024 flossen 14,1 Mrd. Euro, 2025 12,9 Mrd. Euro; im Entwurf für 2027 sind 12,6 Mrd. Euro vorgesehen, zwei Drittel davon für Einzelmaßnahmen, zu denen der Heizungstausch gehört. Bezahlt wird sie aus dem Klima- und Transformationsfonds, der vor allem aus dem CO2-Preis gespeist wird.\n\nDie AfD verlangte im September 2025 in einem Entschließungsantrag zum Haushalt, den Fonds aufzulösen; seine Ausgaben müssten „zumindest weit überwiegend abgeschafft werden“, als Beispiel nannte sie die energetischen Vorgaben für Gebäude, insbesondere für Heizungen. Der Sachverständigenrat verweist im November 2026 auf eine Studie des Dezernats Zukunft, nach der eine zielgenauere Förderung rund 4,8 Mrd. Euro weniger kosten könnte, gut ein Drittel der für 2027 geplanten Mittel; das lässt sich mit dem Regler einstellen. Die Koalition aus CDU, CSU und SPD will die Förderung fortsetzen und hat sie im Juli 2026 umgebaut. Zugleich hat sie das Gebäudeenergiegesetz, das sogenannte Heizungsgesetz, durch das Gebäudemodernisierungsgesetz ersetzt: Die einheitliche Vorgabe von mindestens 65 % erneuerbarer Energien für neue Heizungen entfällt; dafür soll Gas und Heizöl ab 2029 schrittweise ein verbindlicher Bioanteil beigemischt werden, und ab 2028 soll eine Grüngasquote gelten, deren Einzelheiten ein eigenes Gesetz regeln soll.\n\nWer zugleich den CO2-Preis abschafft, nimmt dem Fonds auch Einnahmen; die Rechnung zeigt Kürzung und Einnahmeausfall als Änderung des Bundeshaushalts. Die Ziele des Finanzplans zählen beides nicht, weil sie sich auf den Kernhaushalt beziehen.",
+        "en": "The programme pays grants for individual measures such as a heat pump or insulation and for renovating residential and non-residential buildings to an efficiency house standard; new buildings are now funded by a programme of their own (climate-friendly new construction). €14.1bn was paid out in 2024 and €12.9bn in 2025; the draft for 2027 provides €12.6bn, two thirds of it for individual measures, which include heating replacement. It is paid from the Climate and Transformation Fund, which is fed mainly by the carbon price.\n\nIn a resolution motion on the budget in September 2025 the AfD called for dissolving the fund; its spending should be \"abolished at least for the most part\", and it named the energy rules for buildings, especially for heating, as an example. In November 2026 the Council of Economic Experts cites a study by the Dezernat Zukunft according to which a better targeted programme could cost about €4.8bn less, a good third of the funds planned for 2027; the slider can be set to that. The coalition of CDU, CSU and SPD wants to continue the programme and restructured it in July 2026. At the same time it replaced the Buildings Energy Act, the so-called heating law, with the Buildings Modernisation Act: the uniform requirement of at least 65% renewable energy for new heating systems is dropped; instead, a binding share of bio-based fuel is to be mixed into gas and heating oil step by step from 2029, and a green gas quota is to apply from 2028, its details to be set by a separate law.\n\nAnyone who also abolishes the carbon price takes revenue away from the fund as well; the calculation shows both the cut and the revenue loss as changes to the federal budget. The financial plan's goals count neither, because they refer to the core budget."
       },
       "topic": "climate",
       "params": [
@@ -5261,8 +5248,8 @@
             "bundestag_drs_21_7301"
           ],
           "note": {
-            "de": "Kürzung mal Ausgaben 2024 (14,12 Mrd. Euro). Die Mittel sinken nach den Plänen der Bundesregierung ohnehin: 12,6 Mrd. Euro im Entwurf für 2027; für den gesamten Klimaschutz im Gebäudebereich sieht der Finanzplan 13,0 Mrd. Euro im Jahr 2027 und 10,2 Mrd. Euro im Jahr 2030 vor. Die untere Grenze der Spanne entspricht dem Stand von 2030, umgerechnet auf die Wirtschaftsleistung von 2024 (8,5 Mrd. Euro).",
-            "en": "Cut times spending in 2024 (€14.12bn). Funds are falling under the federal government's plans anyway: €12.6bn in the 2027 draft; for climate protection in buildings as a whole the financial plan provides €13.0bn in 2027 and €10.2bn in 2030. The lower end of the range corresponds to the 2030 level, converted to the size of the economy in 2024 (€8.5bn)."
+            "de": "Kürzung mal Ausgaben 2024 (14,12 Mrd. Euro), wie es das Basisjahr verlangt. Die Mittel sinken nach den Plänen der Bundesregierung ohnehin: 2025 flossen 12,86 Mrd. Euro, der Entwurf für 2027 sieht 12,56 Mrd. Euro vor, umgerechnet auf die Wirtschaftsleistung von 2024 11,39 Mrd. Euro; für den gesamten Klimaschutz im Gebäudebereich nennt der Finanzplan 13,0 Mrd. Euro im Jahr 2027 und 10,2 Mrd. Euro im Jahr 2030. Die untere Grenze der Spanne entspricht dem Stand von 2030, umgerechnet auf 2024 (8,5 Mrd. Euro); der Plan für 2027 liegt innerhalb der Spanne.",
+            "en": "Cut times spending in 2024 (€14.12bn), as the base year requires. Funds are falling under the federal government's plans anyway: €12.86bn was paid out in 2025, and the 2027 draft provides €12.56bn, €11.39bn converted to the size of the economy in 2024; for climate protection in buildings as a whole the financial plan gives €13.0bn in 2027 and €10.2bn in 2030. The lower end of the range corresponds to the 2030 level, converted to 2024 (€8.5bn); the plan for 2027 lies within the range."
           }
         }
       ],
@@ -5295,11 +5282,11 @@
           "kind": "practical",
           "severity": "minor",
           "text": {
-            "de": "Bewilligte Zuschüsse müssen ausgezahlt werden. Endet die Förderung für neue Anträge, sinken die Ausgaben deshalb erst nach und nach: Von den Mitteln, die 2027 neu bewilligt werden dürfen (8,0 Mrd. Euro), werden 52 % erst 2028 fällig und 28 % 2029.",
-            "en": "Approved grants have to be paid. If the programme ends for new applications, spending therefore falls only gradually: of the funds that may newly be committed in 2027 (€8.0bn), 52% fall due only in 2028 and 28% in 2029."
+            "de": "Bewilligte Zuschüsse müssen ausgezahlt werden. Endet die Förderung für neue Anträge, sinken die Ausgaben deshalb erst nach und nach: Von den Zusagen, die der Haushalt 2026 erlaubt (8,17 Mrd. Euro), werden 4,06 Mrd. Euro erst 2027 fällig, 1,69 Mrd. Euro 2028 und der Rest bis 2036.",
+            "en": "Approved grants have to be paid. If the programme ends for new applications, spending therefore falls only gradually: of the commitments the 2026 budget allows (€8.17bn), €4.06bn fall due only in 2027, €1.69bn in 2028 and the rest by 2036."
           },
           "sources": [
-            "bh_haushalt_2027_epl60"
+            "bh_haushalt_2026_epl60"
           ]
         },
         {
@@ -5316,6 +5303,16 @@
         }
       ],
       "limits": [
+        {
+          "text": {
+            "de": "Der Betrag der Karte sind die Ausgaben von 2024; 2025 waren sie mit 12,86 Mrd. Euro schon niedriger. Für 2027, das erste Jahr, in dem die Maßnahme wirkt, plant die Bundesregierung 12,56 Mrd. Euro, umgerechnet auf die Wirtschaftsleistung von 2024 11,39 Mrd. Euro, ein Fünftel weniger als auf der Karte; bis 2030 sollen die Mittel weiter sinken. Die untere Grenze der Spanne berücksichtigt das.",
+            "en": "The card's amount is the spending of 2024; at €12.86bn, 2025 was already lower. For 2027, the first year in which the measure acts, the federal government plans €12.56bn, €11.39bn converted to the size of the economy in 2024, a fifth less than on the card; funds are to fall further by 2030. The lower end of the range takes this into account."
+          },
+          "sources": [
+            "bh_haushalt_2027_epl60",
+            "bundestag_drs_21_7301"
+          ]
+        },
         {
           "text": {
             "de": "Wo die Volkswirtschaftlichen Gesamtrechnungen die Zuschüsse buchen, ist nicht veröffentlicht; die Rechnung nimmt die allgemeine Wirtschaftsförderung an (siehe den Posten). Auf den Saldo wirkt sich das nicht aus.",
@@ -5347,10 +5344,11 @@
         "from": "2027-01-01",
         "years": 2,
         "note": {
-          "de": "Bereits bewilligte Zuschüsse werden noch ausgezahlt, teils Jahre später: Von den Mitteln, die 2027 neu bewilligt werden dürfen (8,0 Mrd. Euro), werden 52 % 2028 fällig, 28 % 2029 und der Rest bis 2037. Die Rechnung nimmt an, dass ab 2027 keine neuen Zuschüsse bewilligt werden, und lässt die Einsparung über zwei Jahre linear anwachsen.",
-          "en": "Grants already approved are still paid out, partly years later: of the funds that may newly be committed in 2027 (€8.0bn), 52% fall due in 2028, 28% in 2029 and the rest by 2037. The calculation assumes that no new grants are approved from 2027 and lets the saving grow linearly over two years."
+          "de": "Bereits bewilligte Zuschüsse werden noch ausgezahlt, teils Jahre später. Die Rechnung nimmt an, dass ab 2027 keine neuen Zuschüsse bewilligt werden, und lässt die Einsparung über zwei Jahre linear anwachsen, im Jahr 2027 also auf durchschnittlich ein Viertel. Für 2027 ist das vorsichtig: Aus den Zusagen des Haushalts 2026 werden 4,06 Mrd. Euro im Jahr 2027 fällig, dazu kommen Zusagen früherer Jahre, deren Fälligkeit nicht veröffentlicht ist. Gemessen an den für 2027 geplanten 12,56 Mrd. Euro könnte die Einsparung 2027 deshalb bis zu rund zwei Drittel betragen.",
+          "en": "Grants already approved are still paid out, partly years later. The calculation assumes that no new grants are approved from 2027 and lets the saving grow linearly over two years, to a quarter on average in 2027. For 2027 that is cautious: of the commitments of the 2026 budget, €4.06bn fall due in 2027, plus commitments of earlier years whose due dates are not published. Measured against the €12.56bn planned for 2027, the saving in 2027 could therefore be up to about two thirds."
         },
         "sources": [
+          "bh_haushalt_2026_epl60",
           "bh_haushalt_2027_epl60"
         ]
       }
@@ -5362,12 +5360,12 @@
         "en": "Deutschlandticket: a €9 ticket or an end to the subsidies"
       },
       "summary": {
-        "de": "Senkt den Preis des Deutschlandtickets oder beendet die Zuschüsse von Bund und Ländern. Die Grundeinstellung zeigt die Forderung der Linken nach einem 9-Euro-Ticket.",
-        "en": "Lowers the price of the Deutschlandticket or ends the federal and state subsidies. The default shows Die Linke's demand for a €9 ticket."
+        "de": "Senkt den Preis des Deutschlandtickets oder beendet die Zuschüsse von Bund und Ländern. Die Grundeinstellung zeigt das 9-Euro-Ticket der Linken, ohne das Null-Euro-Ticket, das sie zusätzlich fordert.",
+        "en": "Lowers the price of the Deutschlandticket or ends the federal and state subsidies. The default shows Die Linke's €9 ticket, without the €0 ticket it also demands."
       },
       "explanation": {
-        "de": "Im Basisjahr 2024 kostete das Ticket 49 Euro im Monat, 2026 kostet es 63 Euro, ab 2027 66,80 Euro. Bund und Länder zahlen bis 2030 je 1,5 Mrd. Euro im Jahr. Der erste Regler senkt den Preis gegenüber 2024. Was ein 9-Euro-Ticket kostet, hat niemand amtlich berechnet; die Rechnung schätzt rund 9,2 Mrd. Euro im Jahr mehr als 2024, mit einer weiten Spanne (siehe die Wirkung), je zur Hälfte bei Bund und Ländern. Die Linke beantragte im Januar 2026, das 9-Euro-Ticket dauerhaft einzuführen; der Bund solle mindestens die Hälfte der Mehrkosten tragen. Der Verkehrsausschuss empfahl im Juni 2026, den Antrag abzulehnen. Beim 9-Euro-Ticket von 2022 ersetzten nach dem Branchenverband VDV 10 % der Fahrten eine Autofahrt.\n\nDer zweite Regler beendet die Zuschüsse. Das Ticket müsste dann so viel kosten, dass die Verkehrsunternehmen ohne öffentliches Geld auskommen, oder es entfiele. Die AfD fordert in ihrem Wahlprogramm 2025 einen „ehrlichen Preis“ ohne Subventionen; das Geld soll stattdessen in ein besseres Angebot und das Schienennetz fließen, dann bliebe der Haushalt unverändert. Die Koalition aus CDU, CSU und SPD will den Anteil der Nutzer an der Finanzierung ab 2029 schrittweise erhöhen. Beide Regler zugleich zu verwenden, ergibt keinen Sinn.",
-        "en": "In the base year 2024 the ticket cost €49 a month; in 2026 it costs €63, from 2027 €66.80. The federal government and the states each pay €1.5bn a year until 2030. The first slider lowers the price compared with 2024. Nobody has officially calculated what a €9 ticket would cost; the calculation estimates about €9.2bn a year more than in 2024, with a wide range (see the effect), half each for the federal government and the states. In January 2026 Die Linke moved to reintroduce the €9 ticket permanently, with the federal government bearing at least half of the extra cost. In June 2026 the transport committee recommended rejecting the motion. With the €9 ticket of 2022, according to the industry association VDV, 10% of trips replaced a car trip.\n\nThe second slider ends the subsidies. The ticket would then have to cost enough for transport companies to manage without public money, or it would be dropped. In its 2025 election programme the AfD calls for an \"honest price\" without subsidies; the money is to go into better services and the rail network instead, in which case the budget would stay unchanged. The coalition of CDU, CSU and SPD wants to raise the users' share of the financing step by step from 2029. Using both sliders at once makes no sense."
+        "de": "Im Basisjahr 2024 kostete das Ticket 49 Euro im Monat, 2026 kostet es 63 Euro, ab 2027 66,80 Euro. Bund und Länder zahlen bis 2030 je 1,5 Mrd. Euro im Jahr. Der erste Regler senkt den Preis gegenüber 2024. Was ein 9-Euro-Ticket kostet, hat niemand amtlich berechnet; die Rechnung schätzt rund 9,3 Mrd. Euro im Jahr mehr als 2024, mit einer weiten Spanne (siehe die Wirkung), je zur Hälfte bei Bund und Ländern. Die Linke beantragte im Januar 2026, das 9-Euro-Ticket dauerhaft einzuführen, dazu ein Null-Euro-Ticket für Schüler, Auszubildende, Studierende und Senioren; der Bund solle mindestens die Hälfte der Mehrkosten tragen. Das Null-Euro-Ticket enthält die Rechnung nicht. Der Verkehrsausschuss empfahl im Juni 2026, den Antrag abzulehnen. Beim 9-Euro-Ticket von 2022 ersetzten nach dem Branchenverband VDV 10 % der Fahrten eine Autofahrt.\n\nDer zweite Regler beendet die Zuschüsse. Das Ticket müsste dann so viel kosten, dass die Verkehrsunternehmen ohne öffentliches Geld auskommen, oder es entfiele. Die AfD fordert in ihrem Wahlprogramm 2025 einen „ehrlichen Preis“ ohne Subventionen; das Geld soll stattdessen in ein besseres Angebot und das Schienennetz fließen, dann bliebe der Haushalt unverändert. Die Koalition aus CDU, CSU und SPD will den Anteil der Nutzer an der Finanzierung ab 2029 schrittweise erhöhen. Beide Regler zugleich zu verwenden, ergibt keinen Sinn.",
+        "en": "In the base year 2024 the ticket cost €49 a month; in 2026 it costs €63, from 2027 €66.80. The federal government and the states each pay €1.5bn a year until 2030. The first slider lowers the price compared with 2024. Nobody has officially calculated what a €9 ticket would cost; the calculation estimates about €9.3bn a year more than in 2024, with a wide range (see the effect), half each for the federal government and the states. In January 2026 Die Linke moved to reintroduce the €9 ticket permanently, together with a €0 ticket for pupils, trainees, students and seniors, with the federal government bearing at least half of the extra cost. The calculation does not include the €0 ticket. In June 2026 the transport committee recommended rejecting the motion. With the €9 ticket of 2022, according to the industry association VDV, 10% of trips replaced a car trip.\n\nThe second slider ends the subsidies. The ticket would then have to cost enough for transport companies to manage without public money, or it would be dropped. In its 2025 election programme the AfD calls for an \"honest price\" without subsidies; the money is to go into better services and the rail network instead, in which case the budget would stay unchanged. The coalition of CDU, CSU and SPD wants to raise the users' share of the financing step by step from 2029. Using both sliders at once makes no sense."
       },
       "topic": "climate",
       "params": [
@@ -5410,13 +5408,13 @@
           "target": "exp.economy.transport.deutschlandticket",
           "amount": {
             "param": "price",
-            "scale": -230000000,
-            "offset": 11270000000
+            "scale": -233500000,
+            "offset": 11441500000
           },
           "quality": "estimate",
           "uncertainty": {
-            "low": 0.8,
-            "high": 1.3
+            "low": 0.82,
+            "high": 1.12
           },
           "sources": [
             "stmb_dt_prognose_2024",
@@ -5425,8 +5423,8 @@
             "bt_drs_21_6633"
           ],
           "note": {
-            "de": "Eigene Schätzung. Nach Berechnungen der Länder hätten die Verkehrsunternehmen 2024 ohne Deutschlandticket rund 16,4 Mrd. Euro eingenommen, mit dem Ticket zu 49 Euro 12,9 Mrd. Euro; auszugleichen waren rund 3,46 Mrd. Euro. Beim 9-Euro-Ticket 2022 waren im Monat rund 27 Mio. Tickets im Umlauf (52 Mio. verkaufte in drei Monaten, dazu mehr als 10 Mio. Abonnenten). So viele Tickets zu 9 Euro brächten im Jahr 2,9 Mrd. Euro, mit den übrigen Fahrscheinen gut 3 Mrd. Euro; der Ausgleich stiege um rund 9,5 Mrd. Euro. Zum Vergleich: Für die drei Monate 2022 stellte der Bund 2,5 Mrd. Euro bereit, aufs Jahr 10 Mrd. Euro gegenüber den damaligen Fahrpreisen; die CDU/CSU-Fraktion nannte im Verkehrsausschuss mindestens 10 Mrd. Euro. Die Rechnung setzt 9,2 Mrd. Euro an und verteilt sie gleichmäßig auf die Preise zwischen 9 und 49 Euro, 230 Mio. Euro je Euro Preissenkung. Die Spanne von 7,4 bis 12 Mrd. Euro deckt mehr oder weniger Nutzer ab und zusätzliche Züge und Busse, die die Schätzung nicht enthält.",
-            "en": "Own estimate. According to calculations by the states, transport companies would have earned about €16.4bn in 2024 without the Deutschlandticket and €12.9bn with the ticket at €49; about €3.46bn had to be compensated. With the €9 ticket of 2022 about 27 million tickets a month were in use (52 million sold in three months, plus more than 10 million subscribers). That many tickets at €9 would bring in €2.9bn a year, a little over €3bn with the other fares; the compensation would rise by about €9.5bn. For comparison: for the three months of 2022 the federal government provided €2.5bn, €10bn a year against the fares of the time; in the transport committee the CDU/CSU group cited at least €10bn. The calculation takes €9.2bn and spreads it evenly over prices between €9 and €49, €230m per euro of price cut. The range of €7.4bn to €12bn covers more or fewer users and additional trains and buses, which the estimate does not include."
+            "de": "Eigene Schätzung, gerechnet gegenüber 2024. Nach Berechnungen der Länder hätten die Verkehrsunternehmen 2024 mit den früheren Tarifen rund 16,3 Mrd. Euro eingenommen, mit dem Ticket zu 49 Euro 12,94 Mrd. Euro; mit einer Vertriebspauschale von 0,1 Mrd. Euro waren rund 3,45 Mrd. Euro auszugleichen. Bei einem billigeren Ticket stiege der Ausgleich um das, was gegenüber den 12,94 Mrd. Euro an Fahrgeld fehlt. Beim 9-Euro-Ticket 2022 waren im Monat rund 27 Mio. Tickets im Umlauf (52 Mio. verkaufte in drei Monaten, dazu mehr als 10 Mio. Abonnenten). So viele Tickets zu 9 Euro brächten im Jahr 2,95 Mrd. Euro. Was die übrigen Fahrscheine neben einem so billigen Ticket einbrächten, ist nicht bekannt; angenommen sind 0,3 bis 1,0 Mrd. Euro, in der Mitte 0,65 Mrd. Euro. Der Ausgleich stiege damit um rund 9,3 Mrd. Euro; die Rechnung verteilt das gleichmäßig auf die Preise zwischen 9 und 49 Euro, 233,5 Mio. Euro je Euro Preissenkung. Die Spanne von 7,6 bis 10,5 Mrd. Euro reicht von 40 Mio. Tickets im Monat und 1,0 Mrd. Euro aus übrigen Fahrscheinen bis zu 20 Mio. Tickets und 0,3 Mrd. Euro; zusätzliche Züge und Busse enthält sie nicht. Zum Vergleich: Für die drei Monate 2022 stellte der Bund 2,5 Mrd. Euro bereit, aufs Jahr 10 Mrd. Euro, gerechnet gegen die damaligen Tarife. Darin steckt auch, was schon das 49-Euro-Ticket kostet (2024: 3,45 Mrd. Euro); mit den 9,3 Mrd. Euro Mehrkosten gegenüber 2024 ist die Zahl deshalb nicht direkt vergleichbar. Die CDU/CSU-Fraktion nannte im Juni 2026 im Verkehrsausschuss für ein 9-Euro-Ticket oder kostenlosen Nahverkehr „mindestens zehn Milliarden Euro“ weitere Kosten; damals kostete das Ticket 63 Euro, und wie sie gerechnet hat, ist nicht veröffentlicht.",
+            "en": "Own estimate, against 2024. According to calculations by the states, transport companies would have earned about €16.3bn in 2024 with the earlier fares and €12.94bn with the ticket at €49; with a sales allowance of €0.1bn, about €3.45bn had to be compensated. With a cheaper ticket the compensation would rise by what is missing in fare revenue against the €12.94bn. With the €9 ticket of 2022 about 27 million tickets a month were in use (52 million sold in three months, plus more than 10 million subscribers). That many tickets at €9 would bring in €2.95bn a year. What the other fares would bring in beside such a cheap ticket is not known; €0.3bn to €1.0bn is assumed, €0.65bn in the middle. The compensation would thus rise by about €9.3bn; the calculation spreads that evenly over prices between €9 and €49, €233.5m per euro of price cut. The range of €7.6bn to €10.5bn runs from 40 million tickets a month and €1.0bn from other fares to 20 million tickets and €0.3bn; it does not include additional trains and buses. For comparison: for the three months of 2022 the federal government provided €2.5bn, €10bn a year, reckoned against the fares of the time. That figure also contains what the €49 ticket already costs (2024: €3.45bn), so it is not directly comparable with the €9.3bn of extra cost over 2024. In June 2026 the CDU/CSU group in the transport committee cited \"at least ten billion euros\" of further costs for a €9 ticket or free local transport; at the time the ticket cost €63, and how the group calculated is not published."
           }
         },
         {
@@ -5439,11 +5437,13 @@
           "quality": "official",
           "sources": [
             "bt_drs_21_4498",
-            "bt_drs_21_2639"
+            "bt_drs_21_2639",
+            "infas_evaluation_dt_2026",
+            "stmb_dt_prognose_2024"
           ],
           "note": {
-            "de": "Anteil mal den gesetzlichen Zuschüssen von je 1,5 Mrd. Euro von Bund und Ländern (Regionalisierungsgesetz, bis 2030).",
-            "en": "Share times the statutory subsidies of €1.5bn each from the federal government and the states (Regionalisation Act, until 2030)."
+            "de": "Anteil mal den gesetzlichen Zuschüssen von je 1,5 Mrd. Euro von Bund und Ländern (Regionalisierungsgesetz, bis 2030). Welcher Preis die Zuschüsse ersetzen würde, ist eine eigene Rechnung mit konstanter Preiselastizität, angesetzt mit den gemessenen Werten von -0,11 (Erhöhung 2025) und -0,25 (Erhöhung 2026): 2024 brachte das Ticket 7,25 Mrd. Euro. Um den gesamten Ausgleichsbedarf von 2024 (3,45 Mrd. Euro) zu ersetzen, müsste es in Preisen von 2024 76 bis 82 Euro kosten, für die gesetzlichen 3,0 Mrd. Euro 72 bis 78 Euro. Auf dem Stand von 2026 (Jahresumsatz rund 10,1 Mrd. Euro bei 63 Euro, Zuschuss 3,0 Mrd. Euro) wären es 84 bis 89 Euro. Was Kunden, die das Ticket aufgeben, für andere Fahrscheine ausgeben, ist nicht eingerechnet; nimmt die Preissensibilität weiter zu, wie es die Evaluation nahelegt, läge der Preis höher.",
+            "en": "Share times the statutory subsidies of €1.5bn each from the federal government and the states (Regionalisation Act, until 2030). The price that would replace the subsidies is an own calculation with a constant price elasticity, set at the measured values of -0.11 (increase of 2025) and -0.25 (increase of 2026): in 2024 the ticket brought in €7.25bn. To replace the full compensation needed in 2024 (€3.45bn) it would have to cost €76 to €82 in 2024 prices, for the statutory €3.0bn €72 to €78. At the 2026 level (annual sales of about €10.1bn at €63, subsidy €3.0bn) it would be €84 to €89. What customers who give up the ticket spend on other fares is not included; if price sensitivity keeps rising, as the evaluation suggests, the price would be higher."
           }
         }
       ],
@@ -5452,8 +5452,8 @@
           "kind": "economic",
           "severity": "major",
           "text": {
-            "de": "Ohne Zuschüsse müsste der Preis so weit steigen, dass die Mehreinnahmen den Ausgleich ersetzen. Mit den gemessenen Reaktionen der Kunden auf die Erhöhungen 2025 und 2026 wären das grob 75 Euro in Preisen von 2024 (eigene Rechnung). Die Evaluation im Auftrag des Bundesverkehrsministeriums sieht aber keinen Spielraum für Preise über etwa 60 bis 70 Euro. Entfiele das Ticket, gälten wieder die Tarife der Verbünde; Monatskarten kosteten vorher nach Angaben der SPD-Fraktion im Verkehrsausschuss teils über 200 Euro.",
-            "en": "Without subsidies the price would have to rise until the extra revenue replaces the compensation. With the customer reactions measured for the increases of 2025 and 2026 that would be roughly €75 in 2024 prices (own calculation). The evaluation commissioned by the federal transport ministry, however, sees no room for prices above about €60 to €70. If the ticket were dropped, the transport associations' fares would apply again; according to the SPD group in the transport committee, monthly passes previously cost over €200 in some cases."
+            "de": "Ohne Zuschüsse müsste der Preis so weit steigen, dass die Mehreinnahmen den Ausgleich ersetzen. Mit den gemessenen Reaktionen der Kunden auf die Erhöhungen 2025 und 2026 wären das in Preisen von 2024 rund 76 bis 82 Euro, um den gesamten Ausgleichsbedarf von 2024 zu ersetzen, und 72 bis 78 Euro für die gesetzlichen 3,0 Mrd. Euro, auf dem Stand von 2026 rund 84 bis 89 Euro (eigene Rechnung, siehe die Wirkung). Die Evaluation im Auftrag des Bundesverkehrsministeriums sieht aber keinen Spielraum für Preise über etwa 60 bis 70 Euro und warnt: Je früher die psychologische Preisschwelle von 69 Euro überschritten werde, desto wahrscheinlicher brächten Erhöhungen unter dem Strich keine oder nur sehr geringe Mehreinnahmen. Ein Preis ohne Zuschuss wäre dann womöglich gar nicht erreichbar. Entfiele das Ticket, gälten wieder die Tarife der Verbünde; Monatskarten kosteten vorher nach Angaben der SPD-Fraktion im Verkehrsausschuss teils über 200 Euro.",
+            "en": "Without subsidies the price would have to rise until the extra revenue replaces the compensation. With the customer reactions measured for the increases of 2025 and 2026 that would be about €76 to €82 in 2024 prices to replace the full compensation needed in 2024, and €72 to €78 for the statutory €3.0bn, or about €84 to €89 at the 2026 level (own calculation, see the effect). The evaluation commissioned by the federal transport ministry, however, sees no room for prices above about €60 to €70 and warns that the sooner the psychological price threshold of €69 is crossed, the more likely increases are to bring little or no extra revenue on balance. A price without subsidy might then not be reachable at all. If the ticket were dropped, the transport associations' fares would apply again; according to the SPD group in the transport committee, monthly passes previously cost over €200 in some cases."
           },
           "sources": [
             "infas_evaluation_dt_2026",
@@ -5509,6 +5509,17 @@
             "de": "Die Mehrwertsteuer auf Fahrscheine (7 %) und Wirkungen auf den Autoverkehr, etwa auf die Energiesteuer, sind nicht eingerechnet.",
             "en": "VAT on tickets (7%) and effects on car traffic, for example on energy tax, are not included."
           }
+        },
+        {
+          "text": {
+            "de": "Das Null-Euro-Ticket für Schüler, Auszubildende, Studierende und Senioren, das Die Linke zusätzlich fordert, ist nicht eingerechnet. Die SPD-Fraktion lehnte im Verkehrsausschuss ein Null-Euro-Ticket für große Bevölkerungsgruppen wegen einer Belastung „im zweistelligen Milliardenbereich“ ab.",
+            "en": "The €0 ticket for pupils, trainees, students and seniors that Die Linke also demands is not included. In the transport committee the SPD group rejected a €0 ticket for large groups of the population because of a burden \"in the double-digit billions\"."
+          },
+          "sources": [
+            "bt_drs_21_3658",
+            "linke_wahlprogramm_2025",
+            "bt_drs_21_6633"
+          ]
         }
       ],
       "sources": [
@@ -5533,12 +5544,12 @@
         "en": "Abolish the broadcasting fee and shrink ARD, ZDF and Deutschlandradio"
       },
       "summary": {
-        "de": "Schafft den Rundfunkbeitrag ab und kürzt die Ausgaben von ARD, ZDF und Deutschlandradio. Die Grundeinstellung zeigt die Forderung der AfD: kein Beitrag, ein Rundfunk mit einem Zehntel der Mittel.",
-        "en": "Abolishes the broadcasting fee and cuts the spending of ARD, ZDF and Deutschlandradio. The default shows the AfD's demand: no fee and a broadcaster with a tenth of the funds."
+        "de": "Schafft den Rundfunkbeitrag ab, wie es die AfD fordert, und kürzt die Ausgaben der Anstalten. Die Grundeinstellung lässt ein Zehntel, wie es ein Mitglied des AfD-Bundesvorstands 2022 vorschlug.",
+        "en": "Abolishes the broadcasting fee, as the AfD demands, and cuts the broadcasters' spending. The default keeps a tenth, as a member of the AfD's federal executive proposed in 2022."
       },
       "explanation": {
-        "de": "Der Beitrag beträgt seit 2021 18,36 Euro im Monat je Wohnung, 220,32 Euro im Jahr; 2,4 Millionen Menschen sind aus sozialen Gründen befreit. In den Volkswirtschaftlichen Gesamtrechnungen zählen die Anstalten zum Staat und der Beitrag als Steuer, deshalb wirkt die Maßnahme auf beiden Seiten des Haushalts: Fällt nur der Beitrag weg, verschlechtert sich der Saldo um 9,1 Mrd. Euro; fallen Beitrag und Ausgaben weg, gleicht sich das weitgehend aus. In der Grundeinstellung bleibt ein Rundfunk mit einem Zehntel der Mittel, rund 1 Mrd. Euro, der aus anderen Mitteln bezahlt werden müsste.\n\nDie AfD will den Beitrag nach ihrem Wahlprogramm 2025 aufheben und den Rundfunk auf eine „gebührenfreie Grundversorgung“ beschränken; wie groß diese sein soll, sagt das Programm nicht. Die Grundeinstellung folgt einer Erklärung des Bundesvorstandsmitglieds Joachim Paul von 2022, der Rundfunk solle auf ein Zehntel verkleinert und über eine Umlage der großen privaten Medien bezahlt werden. Andere wollen den Beitrag senken, nicht abschaffen: die FDP durch weniger Kanäle, das BSW mit einem schlankeren Rundfunk. Solche kleineren Schritte lassen sich mit den Reglern einstellen.",
-        "en": "Since 2021 the fee has been €18.36 a month per dwelling, €220.32 a year; 2.4 million people are exempt for social reasons. In national accounts the broadcasters count as part of government and the fee as a tax, so the measure acts on both sides of the budget: if only the fee goes, the balance worsens by €9.1bn; if the fee and the spending go, the two largely offset each other. At the default setting a broadcaster with a tenth of the funds remains, about €1bn, which would have to be paid for from other money.\n\nAccording to its 2025 election programme the AfD wants to abolish the fee and restrict public broadcasting to a \"fee-free basic service\"; the programme does not say how large it should be. The default follows a 2022 statement by federal executive member Joachim Paul that the broadcaster should be cut to a tenth and paid for by a levy on the large private media. Others want to lower the fee, not abolish it: the FDP through fewer channels, the BSW with a leaner broadcaster. Such smaller steps can be set with the sliders."
+        "de": "Der Beitrag beträgt seit 2021 18,36 Euro im Monat je Wohnung, 220,32 Euro im Jahr; 2,4 Millionen Menschen sind aus sozialen Gründen befreit. In den Volkswirtschaftlichen Gesamtrechnungen zählen die Anstalten zum Staat und der Beitrag als Steuer, deshalb wirkt die Maßnahme auf beiden Seiten des Haushalts: Fällt nur der Beitrag weg, verschlechtert sich der Saldo um 9,1 Mrd. Euro. In der Grundeinstellung fallen der Beitrag (9,10 Mrd. Euro) und neun Zehntel der Ausgaben der Anstalten (8,66 Mrd. Euro) weg, mit dem kleineren Rundfunk aber auch neun Zehntel seiner Werbe-, Sponsoring- und übrigen Markterlöse (0,92 Mrd. Euro). Der Saldo verschlechtert sich deshalb um 1,36 Mrd. Euro. Aus anderen Mitteln zu bezahlen wären vor allem der verbleibende Rundfunk mit rund 1 Mrd. Euro Ausgaben im Jahr und die Landesmedienanstalten, die 2024 0,16 Mrd. Euro aus dem Beitrag erhielten. Lässt sich die Altersversorgung nicht kürzen, wäre es mehr (siehe die Spanne).\n\nDie AfD will den Beitrag nach ihrem Wahlprogramm 2025 aufheben und den Rundfunk auf eine „gebührenfreie Grundversorgung“ beschränken; wie groß diese sein soll, sagt das Programm nicht. Auch die AfD-Fraktion im Bundestag verlangte im Mai 2026 einen „erheblich verschlankten“ Grundfunk, ohne eine Größe zu nennen. Die Grundeinstellung folgt deshalb einer Erklärung des Bundesvorstandsmitglieds Joachim Paul von 2022, der Rundfunk solle auf ein Zehntel verkleinert und über eine Umlage der großen privaten Medien bezahlt werden. Andere wollen den Beitrag senken, nicht abschaffen: die FDP durch weniger Kanäle, das BSW mit einem schlankeren Rundfunk. Solche kleineren Schritte lassen sich mit den Reglern einstellen.",
+        "en": "Since 2021 the fee has been €18.36 a month per dwelling, €220.32 a year; 2.4 million people are exempt for social reasons. In national accounts the broadcasters count as part of government and the fee as a tax, so the measure acts on both sides of the budget: if only the fee goes, the balance worsens by €9.1bn. At the default setting the fee (€9.10bn) and nine tenths of the broadcasters' spending (€8.66bn) go, but with the smaller broadcaster so do nine tenths of its advertising, sponsorship and other market income (€0.92bn). The balance therefore worsens by €1.36bn. What would have to be paid from other money is above all the remaining broadcaster, with about €1bn of spending a year, and the state media authorities, which received €0.16bn from the fee in 2024. If the pensions cannot be cut, it would be more (see the range).\n\nAccording to its 2025 election programme the AfD wants to abolish the fee and restrict public broadcasting to a \"fee-free basic service\"; the programme does not say how large it should be. In May 2026 the AfD group in the Bundestag also called for a \"considerably slimmed-down\" basic broadcaster without naming a size. The default therefore follows a 2022 statement by federal executive member Joachim Paul that the broadcaster should be cut to a tenth and paid for by a levy on the large private media. Others want to lower the fee, not abolish it: the FDP through fewer channels, the BSW with a leaner broadcaster. Such smaller steps can be set with the sliders."
       },
       "topic": "state",
       "params": [
@@ -5600,25 +5611,46 @@
           },
           "quality": "estimate",
           "uncertainty": {
-            "low": 0.85,
+            "low": 0.92,
             "high": 1.0
           },
           "sources": [
             "kef_25_bericht"
           ],
           "note": {
-            "de": "Kürzung mal geschätzte Ausgaben der Anstalten im Jahr 2024 (9,63 Mrd. Euro, Durchschnitt 2021 bis 2024 laut KEF). Die untere Grenze berücksichtigt, dass mit einem kleineren Rundfunk auch Werbe-, Sponsoring- und andere Erträge wegfielen; die KEF rechnet für 2025 bis 2028 mit 1,27 Mrd. Euro im Jahr aus solchen Erträgen.",
-            "en": "Cut times the broadcasters' estimated spending in 2024 (€9.63bn, average of 2021 to 2024 according to the KEF). The lower end reflects that a smaller broadcaster would also lose advertising, sponsorship and other income; the KEF expects €1.27bn a year from such income in 2025 to 2028."
+            "de": "Kürzung mal geschätzte Ausgaben der Anstalten im Jahr 2024 (9,63 Mrd. Euro, Durchschnitt 2021 bis 2024 laut KEF). Die untere Grenze nimmt an, dass sich die betriebliche Altersversorgung (laut KEF 2025 bis 2028 rund 0,73 Mrd. Euro im Jahr) nicht kürzen lässt; dann träfe die Kürzung nur die übrigen 8,90 Mrd. Euro.",
+            "en": "Cut times the broadcasters' estimated spending in 2024 (€9.63bn, average of 2021 to 2024 according to the KEF). The lower end assumes that occupational pensions (about €0.73bn a year in 2025 to 2028 according to the KEF) cannot be cut; the cut would then fall only on the other €8.90bn."
+          }
+        },
+        {
+          "type": "scale",
+          "target": "rev.other.sales.public_broadcasters",
+          "factor": {
+            "param": "spending_cut",
+            "scale": -0.01,
+            "offset": 1
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.7,
+            "high": 1.0
+          },
+          "sources": [
+            "kef_25_bericht"
+          ],
+          "note": {
+            "de": "Mit dem Rundfunk schrumpften auch seine Werbe-, Sponsoring- und übrigen Markterlöse, rund 1,02 Mrd. Euro im Jahr (siehe den Posten); die Rechnung lässt sie im selben Verhältnis sinken wie die Ausgaben. In den Volkswirtschaftlichen Gesamtrechnungen sind sie Verkäufe der Länderebene. Die Spanne nimmt an, dass bis zu 30 % davon dort keine Einnahmen sind, etwa aufgelöste Rückstellungen und Erstattungen anderer öffentlich-rechtlicher Sender. Finanzerträge stammen größtenteils aus den Anlagen für die Pensionen und bleiben mit diesen.",
+            "en": "With the broadcaster its advertising, sponsorship and other market income would shrink too, about €1.02bn a year (see the item); the calculation lets it fall in the same proportion as the spending. In national accounts it is sales of the state level. The range assumes that up to 30% of it is not revenue there, such as released provisions and reimbursements by other public broadcasters. Financial income comes mostly from the assets that cover the pensions and stays with them."
           }
         }
       ],
       "catches": [
         {
           "kind": "legal",
-          "severity": "blocker",
+          "severity": "major",
           "text": {
-            "de": "Das Bundesverfassungsgericht leitet aus der Rundfunkfreiheit (Art. 5 Abs. 1 Satz 2 GG) eine Pflicht der Länder ab, den öffentlich-rechtlichen Rundfunk funktionsgerecht zu finanzieren; dem entspricht ein grundrechtlicher Anspruch der Anstalten. Vom Bedarf, den die Finanzkommission KEF feststellt, dürfen die Länder nur mit nachprüfbaren Gründen und nur gemeinsam abweichen (Beschluss von 2021). Den Beitrag selbst hat das Gericht 2018 im Wesentlichen für verfassungsgemäß erklärt. Eine Kürzung um neun Zehntel ließe sich deshalb nur über einen viel engeren Auftrag erreichen, den die Länder festlegen.",
-            "en": "The Federal Constitutional Court derives from the freedom of broadcasting (Article 5(1), second sentence, of the Basic Law) a duty of the states to fund public broadcasting appropriately to its function; it corresponds to a fundamental-rights claim of the broadcasters. The states may depart from the need assessed by the funding commission KEF only for verifiable reasons and only jointly (order of 2021). The court held the fee itself essentially constitutional in 2018. A cut by nine tenths could therefore only be reached through a much narrower remit, which the states set."
+            "de": "Das Bundesverfassungsgericht leitet aus der Rundfunkfreiheit (Art. 5 Abs. 1 Satz 2 GG) eine Pflicht der Länder ab, den öffentlich-rechtlichen Rundfunk funktionsgerecht zu finanzieren; dem entspricht ein grundrechtlicher Anspruch der Anstalten. Vom Bedarf, den die Finanzkommission KEF feststellt, dürfen die Länder im heutigen System nur mit nachprüfbaren Gründen und nur gemeinsam abweichen; programmliche und medienpolitische Zwecke scheiden dabei aus (Beschluss von 2021). Den Beitrag selbst hat das Gericht 2018 im Wesentlichen für verfassungsgemäß erklärt. Eine Kürzung um neun Zehntel ließe sich deshalb nur über einen viel engeren Auftrag erreichen, den die Länder per Staatsvertrag festlegen; ob ein so enger Auftrag mit der Rundfunkfreiheit vereinbar wäre, hat das Gericht nicht entschieden.",
+            "en": "The Federal Constitutional Court derives from the freedom of broadcasting (Article 5(1), second sentence, of the Basic Law) a duty of the states to fund public broadcasting appropriately to its function; it corresponds to a fundamental-rights claim of the broadcasters. Under the current system the states may depart from the need assessed by the funding commission KEF only for verifiable reasons and only jointly; programme and media-policy purposes are excluded as reasons (order of 2021). The court held the fee itself essentially constitutional in 2018. A cut by nine tenths could therefore only be reached through a much narrower remit, which the states set by treaty; whether so narrow a remit would be compatible with the freedom of broadcasting the court has not decided."
           },
           "sources": [
             "bverfg_2021_rundfunk",
@@ -5641,8 +5673,8 @@
           "kind": "cost_shift",
           "severity": "major",
           "text": {
-            "de": "Die Anstalten haben Pensionszusagen an frühere und heutige Beschäftigte; die KEF erkennt für 2025 bis 2028 2,92 Mrd. Euro für die betriebliche Altersversorgung an, rund 730 Mio. Euro im Jahr. Diese Pflichten blieben auch bei einem kleineren Rundfunk und müssten weiter bezahlt werden. Das BSW will sie nicht mehr aus dem Beitrag finanzieren.",
-            "en": "The broadcasters have pension commitments to former and current staff; for 2025 to 2028 the KEF recognises €2.92bn for occupational pensions, about €730m a year. These obligations would remain with a smaller broadcaster and would still have to be paid. The BSW wants them no longer to be financed from the fee."
+            "de": "Die Anstalten haben Pensionszusagen an frühere und heutige Beschäftigte; die KEF erkennt für 2025 bis 2028 2,92 Mrd. Euro für die betriebliche Altersversorgung an, rund 730 Mio. Euro im Jahr. Diese Pflichten blieben auch bei einem kleineren Rundfunk und müssten weiter bezahlt werden; die Spanne berücksichtigt das. Das BSW will sie nicht mehr aus dem Beitrag finanzieren.",
+            "en": "The broadcasters have pension commitments to former and current staff; for 2025 to 2028 the KEF recognises €2.92bn for occupational pensions, about €730m a year. These obligations would remain with a smaller broadcaster and would still have to be paid; the range takes this into account. The BSW wants them no longer to be financed from the fee."
           },
           "sources": [
             "kef_25_bericht",
@@ -5692,6 +5724,15 @@
             "de": "Die Rechnung zeigt den Endzustand. Einen Rundfunk auf ein Zehntel zu verkleinern, bräuchte Zeit; wie viel davon in den ersten Jahren gelänge, ist nicht abgebildet.",
             "en": "The calculation shows the end state. Shrinking a broadcaster to a tenth would take time; how much of it could be achieved in the first years is not shown."
           }
+        },
+        {
+          "text": {
+            "de": "In den Volkswirtschaftlichen Gesamtrechnungen betrug der Beitrag 2025 8,61 Mrd. Euro, 0,49 Mrd. Euro weniger als im Basisjahr 2024; mit dem Wert von 2025 verschlechterte sich der Saldo entsprechend weniger.",
+            "en": "In national accounts the fee came to €8.61bn in 2025, €0.49bn less than in the base year 2024; with the 2025 value the balance would worsen correspondingly less."
+          },
+          "sources": [
+            "eurostat_ntl"
+          ]
         }
       ],
       "sources": [
@@ -5768,8 +5809,8 @@
           "kind": "legal",
           "severity": "blocker",
           "text": {
-            "de": "Die Zahlungen ohne Entschädigung zu beenden, widerspräche nach den Wissenschaftlichen Diensten des Bundestags dem Ablösungsgebot des Grundgesetzes (Art. 140 GG mit Art. 138 Abs. 1 der Weimarer Reichsverfassung). Zuerst müsste der Bund die Grundsätze der Ablösung festlegen, dann jedes Land ein Ablösegesetz beschließen. Nach beiden Gesetzentwürfen laufen die Zahlungen bis zur vollständigen Ablösung weiter.",
-            "en": "According to the Bundestag's research services, ending the payments without compensation would contradict the constitution's requirement of redemption (Article 140 of the Basic Law with Article 138(1) of the Weimar constitution). First the federation would have to lay down the principles of redemption, then each Land would have to pass a redemption law. Under both bills the payments continue until redemption is complete."
+            "de": "Die Zahlungen ohne Entschädigung zu beenden, widerspräche nach den Wissenschaftlichen Diensten des Bundestags dem Ablösungsgebot des Grundgesetzes (Art. 140 GG mit Art. 138 Abs. 1 der Weimarer Reichsverfassung). Zuerst müsste sich der Bund mit dem Heiligen Stuhl und, aus Gründen der Gleichbehandlung, mit den anderen Religionsgemeinschaften verständigen und die Grundsätze der Ablösung festlegen, dann jedes Land ein Ablösegesetz beschließen. Nach beiden Gesetzentwürfen laufen die Zahlungen bis zur vollständigen Ablösung weiter.",
+            "en": "According to the Bundestag's research services, ending the payments without compensation would contradict the constitution's requirement of redemption (Article 140 of the Basic Law with Article 138(1) of the Weimar constitution). First the federation would have to reach an understanding with the Holy See and, for equal treatment, with the other religious communities, and lay down the principles of redemption; then each Land would have to pass a redemption law. Under both bills the payments continue until redemption is complete."
           },
           "sources": [
             "bt_wd_3_110_10",
@@ -5844,8 +5885,8 @@
         "en": "Pay the churches a redemption sum"
       },
       "summary": {
-        "de": "Zahlt den Kirchen einmalig ein Vielfaches der jährlichen Staatsleistungen als Ablösung. Die Grundeinstellung zeigt das 18,6-fache aus den Gesetzentwürfen von 2020 und 2026: 11,5 Mrd. Euro.",
-        "en": "Pays the churches a one-off multiple of the annual state payments as redemption. The default shows the 18.6 times of the bills of 2020 and 2026: €11.5bn."
+        "de": "Zahlt den Kirchen einmalig das 18,6-fache der Staatsleistungen von 2024 (11,5 Mrd. Euro). Die jährlichen Zahlungen laufen weiter, solange die Karte zu ihrem Ende aus ist; 2027 ist der früheste Termin.",
+        "en": "Pays the churches a one-off 18.6 times the 2024 state payments (€11.5bn). The annual payments continue while the card that ends them is off; 2027 is the earliest possible date."
       },
       "explanation": {
         "de": "Die Karte gehört zu „Staatsleistungen an die Kirchen beenden“: Erst beide zusammen bilden eine Ablösung ab. Das 18,6-fache leiten beide Entwürfe aus dem Bewertungsgesetz ab. Im Entwurf von FDP, Linken und Grünen von 2020 ist es die Obergrenze, von der in Verhandlungen Abschläge möglich sind; der Entwurf der AfD von 2026 erlaubt bis zum 20-fachen. Die Rechnung nimmt die Summe als Einmalzahlung im Jahr 2027 an; beide Entwürfe erlauben auch Raten, über höchstens fünf Jahre (AfD) oder bis zu zwanzig Jahre (2020).",
@@ -5911,15 +5952,29 @@
           ]
         },
         {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Eine Einmalzahlung schon 2027 ist der früheste denkbare Fall: Erst müsste der Bund die Grundsätze festlegen, dann müssten die Länder Gesetze beschließen und mit den Kirchen Verträge schließen. Nach den Wissenschaftlichen Diensten des Bundestags würde eine einmalige Zahlung den Ländern „Unmögliches abverlangen“; überwiegend gilt deshalb auch eine Ablösung durch eine Geldrente als zulässig. Die Entwürfe erlauben Raten über bis zu fünf (AfD, 2026) oder bis zu zwanzig Jahre (2020).",
+            "en": "A one-off payment as early as 2027 is the earliest conceivable case: first the federation would have to lay down the principles, then the Länder would have to pass laws and conclude contracts with the churches. According to the Bundestag's research services a one-off payment would ask the impossible of the Länder; most commentators therefore also consider redemption by an annuity permissible. The bills allow instalments over up to five (AfD, 2026) or up to twenty years (2020)."
+          },
+          "sources": [
+            "bt_wd_3_110_10",
+            "bt_drs_19_19273",
+            "bt_drs_21_5212"
+          ]
+        },
+        {
           "kind": "economic",
           "severity": "minor",
           "text": {
-            "de": "Erst nach rund 19 Jahren wiegen die eingesparten Zahlungen die Summe auf, ohne Zinsen gerechnet; muss die Summe mit Krediten bezahlt werden, dauert es länger.",
-            "en": "Only after about 19 years do the payments saved make up for the sum, without counting interest; if the sum has to be paid with borrowing, it takes longer."
+            "de": "Bei gleichbleibenden Zahlungen und ohne Zinsen wiegen die eingesparten Zahlungen die Summe nach rund 19 Jahren auf. Weil die Staatsleistungen von 2020 bis 2026 um gut 2½ % im Jahr gestiegen sind, ginge es ohne Zinsen schneller, nach rund 15 Jahren; muss die Summe mit Krediten zu 3 % bezahlt werden, dauert es rund 20 Jahre (eigene Rechnung).",
+            "en": "With constant payments and without interest, the payments saved make up for the sum after about 19 years. Because the state payments rose by a good 2½% a year from 2020 to 2026, it would be quicker without interest, about 15 years; if the sum has to be paid with borrowing at 3%, it takes about 20 years (own calculation)."
           },
           "sources": [
             "bt_drs_19_19273",
-            "hu_staatsleistungen_2024"
+            "hu_staatsleistungen_2024",
+            "fowid_staatsleistungen"
           ]
         },
         {
@@ -5950,8 +6005,8 @@
       "limits": [
         {
           "text": {
-            "de": "Ablösung durch Sachleistungen wie Grundstücke, die der Entwurf von 2026 erlaubt, und Abschläge aus Verhandlungen sind nicht abgebildet.",
-            "en": "Redemption through payments in kind such as land, which the 2026 bill allows, and reductions from negotiations are not shown."
+            "de": "Ablösung durch Sachleistungen wie Grundstücke, die beide Entwürfe erlauben, und Abschläge aus Verhandlungen sind nicht abgebildet.",
+            "en": "Redemption through payments in kind such as land, which both bills allow, and reductions from negotiations are not shown."
           },
           "sources": [
             "bt_drs_21_5212",

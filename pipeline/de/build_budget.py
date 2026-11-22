@@ -147,6 +147,12 @@ DTICKET = 2 * DTICKET_FED
 # kef_25_bericht, table 6 (p. 32): spending of ARD, ZDF and Deutschlandradio relevant to their funding need, actuals
 # 2021 to 2024, 38,504.7 in four years. JUDGEMENT: the yearly average stands for their spending in 2024.
 BROADCASTERS = 38504.7 / 4
+# kef_25_bericht, table 5 (p. 31): the broadcasters' market income recognised for 2025 to 2028, in four years:
+# advertising 1,037.9, sponsorship 159.1, reimbursements 418.8, other operating income 2,241.1, other 239.7. Left out:
+# financial income (685.1; most of it from the funds that cover the pensions, Tz. 537), income from holdings (103.0) and
+# returns from the state media authorities (178.1, a transfer within the state). JUDGEMENT: the yearly average stands for
+# the market output (P.11) of 2024 that national accounts book in the state level's sales; carved out of rev.other.sales.
+BROADCASTERS_SALES = (1037.9 + 159.1 + 418.8 + 2241.1 + 239.7) / 4
 # hu_staatsleistungen_2024 (= fowid_staatsleistungen, row 2024): payments of the 14 paying states to the Protestant
 # and Catholic churches under Article 140 GG / Article 138(1) WRV, budgeted amounts 2024 (618,361,500 euros).
 STAATSLEISTUNGEN = 618.3615
@@ -281,11 +287,11 @@ EXP = [
         CL("exp.safety.other", "GF0306", "Sonstige Sicherheit und Ordnung", "Other public order and safety", (0.3, 0.3, 0.4, 0)),
     ]),
     G("exp.economy", "Wirtschaft, Verkehr und Energie", "Economy, transport and energy", code="GF04", children=[
-        G("exp.economy.general_labour", "Wirtschafts- und Arbeitsmarktförderung", "Business and labour market support", code="GF0401", children=[
-            L("exp.economy.general_labour.beg", "Gebäudeförderung des Bundes (BEG): Sanierung, Heizungstausch, effiziente Neubauten", "Federal funding for efficient buildings (BEG): renovation, heating replacement, efficient new buildings",
+        G("exp.economy.general_labour", "Wirtschafts- und Arbeitsmarktförderung (u. a. Gebäudeförderung des Bundes)", "Business and labour market support (incl. federal building grants)", code="GF0401", children=[
+            L("exp.economy.general_labour.beg", "Gebäudeförderung des Bundes (BEG): Sanierung und Heizungstausch", "Federal funding for efficient buildings (BEG): renovation and heating replacement",
               amount=BEG_2024, fixed=C, quality="derived", sources=["bh_haushalt_2026_epl60", "bundestag_drs_21_7301", "eurostat_gov_10a_exp"],
-              desc=("Zuschüsse und Tilgungszuschüsse der Bundesförderung für effiziente Gebäude über KfW und BAFA: Einzelmaßnahmen wie der Tausch der Heizung oder die Dämmung, Sanierung zum Effizienzhaus, effiziente Nichtwohngebäude. Bezahlt aus dem Klima- und Transformationsfonds.",
-                    "Grants and repayment grants of the federal funding for efficient buildings through KfW and BAFA: individual measures such as replacing the heating or insulation, renovation to an efficiency house standard, efficient non-residential buildings. Paid from the Climate and Transformation Fund."),
+              desc=("Zuschüsse und Tilgungszuschüsse der Bundesförderung für effiziente Gebäude über KfW und BAFA: Einzelmaßnahmen wie der Tausch der Heizung oder die Dämmung und die Sanierung von Wohn- und Nichtwohngebäuden zum Effizienzhaus. Neue Gebäude fördert inzwischen ein eigenes Programm (Klimafreundlicher Neubau). Bezahlt aus dem Klima- und Transformationsfonds.",
+                    "Grants and repayment grants of the federal funding for efficient buildings through KfW and BAFA: individual measures such as replacing the heating or insulation, and renovating residential and non-residential buildings to an efficiency house standard. New buildings are now funded by a programme of their own (climate-friendly new construction). Paid from the Climate and Transformation Fund."),
               note=("Kassenwert: Ausgaben des Klima- und Transformationsfonds für Energieeffizienz und erneuerbare Energien im Gebäudebereich 2024 (Kapitel 6092 Titel 893 10, 14,12 Mrd. Euro). Wo die Volkswirtschaftlichen Gesamtrechnungen diese Zuschüsse buchen, ist nicht veröffentlicht. Der Bundeshaushalt ordnet sie dem Wohnungswesen zu, doch die Wohnungsbauförderung (COFOG 06.1) weist 2024 auf allen Ebenen zusammen nur 3,3 Mrd. Euro Vermögenstransfers aus. Angenommen ist deshalb die allgemeine Wirtschaftsförderung (COFOG 04.1) mit 21,5 Mrd. Euro Vermögenstransfers; aus ihr ist der Posten herausgelöst. Ganz dem Bund zugeordnet.",
                     "Cash figure: spending of the Climate and Transformation Fund on energy efficiency and renewable energy in buildings in 2024 (chapter 6092 title 893 10, €14.12bn). Where national accounts book these grants is not published. The federal budget files them under housing, but housing development (COFOG 06.1) shows only €3.3bn of capital transfers in 2024 at all levels together. General economic affairs (COFOG 04.1), with €21.5bn of capital transfers, is therefore assumed; the item is taken out of it. Attributed entirely to the federal level.")),
             L("exp.economy.general_labour.other", "Übrige Wirtschafts- und Arbeitsmarktförderung", "Other business and labour market support",
@@ -1107,8 +1113,18 @@ REV = [
            desc=("Rechnerische Gegenbuchung für Pensionen und Beihilfen, die der Staat seinen Beamten ohne Beitragszahlung gewährt; kein tatsächlicher Geldfluss.", "Bookkeeping counterpart of pensions and health benefits that government grants its civil servants without contributions; not an actual cash flow.")),
     ]),
     G("rev.other", "Sonstige Einnahmen", "Other revenue", children=[
-        RL("rev.other.sales", "Gebühren, Entgelte und Verkäufe", "Fees, charges and sales", 187119.0, (60346.0, 56882.0, 64722.0, 5169.0), sources=["eurostat_gov_10a_main"], code="P11+P12+P131",
-           desc=("Zum Beispiel Lkw-Maut, Kita- und Abwassergebühren, Eintrittsgelder, Verwaltungsgebühren.", "For example the truck toll, day-care and sewage charges, admission fees, administrative fees.")),
+        G("rev.other.sales", "Gebühren, Entgelte und Verkäufe", "Fees, charges and sales", code="P11+P12+P131",
+          desc=("Zum Beispiel Lkw-Maut, Kita- und Abwassergebühren, Eintrittsgelder, Verwaltungsgebühren.", "For example the truck toll, day-care and sewage charges, admission fees, administrative fees."),
+          children=[
+            RL("rev.other.sales.public_broadcasters", "Werbung, Sponsoring und übrige Markterlöse von ARD, ZDF und Deutschlandradio", "Advertising, sponsorship and other market income of ARD, ZDF and Deutschlandradio",
+               BROADCASTERS_SALES, (0, BROADCASTERS_SALES, 0, 0), quality="estimate", sources=["kef_25_bericht", "eurostat_gov_10a_main"],
+               note=("Eigene Schätzung: Die Finanzkommission KEF erkennt für 2025 bis 2028 Erträge aus Werbung (1.037,9 Mio. Euro), Sponsoring (159,1), Kostenerstattungen (418,8), sonstigen betrieblichen Erträgen wie Programmverwertung, Mieten und Mahngebühren (2.241,1) und Sonstiges (239,7) an, im Jahr rund 1,02 Mrd. Euro. Nicht eingerechnet sind Finanzerträge, die größtenteils aus den Anlagen für die Pensionen stammen, Beteiligungserträge und Rückflüsse der Landesmedienanstalten. Ein Teil der Summe, etwa Erträge aus aufgelösten Rückstellungen und Erstattungen anderer öffentlich-rechtlicher Sender, ist in den Volkswirtschaftlichen Gesamtrechnungen keine Einnahme; der Posten ist deshalb eher zu hoch. Aus den Verkäufen der Länderebene herausgelöst.",
+                     "Own estimate: for 2025 to 2028 the funding commission KEF recognises income from advertising (€1,037.9m), sponsorship (159.1), reimbursements (418.8), other operating income such as programme sales, rents and dunning fees (2,241.1) and other income (239.7), about €1.02bn a year. Not included are financial income, most of which comes from the assets that cover the pensions, income from holdings and returns from the state media authorities. Part of the sum, such as income from released provisions and reimbursements by other public broadcasters, is not revenue in national accounts; the item is therefore rather too high. Taken out of the state level's sales.")),
+            RL("rev.other.sales.other", "Übrige Gebühren, Entgelte und Verkäufe", "Other fees, charges and sales", 187119.0 - BROADCASTERS_SALES,
+               (60346.0, 56882.0 - BROADCASTERS_SALES, 64722.0, 5169.0), sources=["eurostat_gov_10a_main"],
+               note=("Rest der Gruppe nach Abzug der Markterlöse der öffentlich-rechtlichen Rundfunkanstalten; die Länderebene ist um diese gemindert.",
+                     "Remainder of the group after deducting the market income of the public broadcasters; the state level is reduced by it.")),
+          ]),
         RL("rev.other.property_income", "Zinsen, Dividenden und Pachten", "Interest, dividends and rents", 33652.0, (14825.0, 7192.0, 7210.0, 4483.0), sources=["eurostat_gov_10a_main"], code="D4"),
         RL("rev.other.transfers", "Sonstige laufende Übertragungen (u. a. EU-Mittel, Bußgelder)", "Other current transfers (incl. EU funds, fines)", 31463.0, (1966.0 + 2097, 603.0 + 13299, 521.0 + 9671, 3306.0), sources=["eurostat_gov_10a_main"], code="D7"),
         RL("rev.other.capital_transfers", "Vermögensübertragungen (u. a. EU-Investitionszuschüsse)", "Capital transfers (incl. EU investment grants)", 11979.0, (0.55, 0.20, 0.25, 0), quality="estimate", sources=["eurostat_gov_10a_main"], code="D92+D99",
