@@ -112,6 +112,21 @@ KDU_FED = 12359.620     # bundeshaushalt_2024: title 1101 632 11, federal share 
 ALG1 = 22160.0          # ba_geschaeftsbericht_2024: unemployment benefit 2024
 ASYL = 6718.465         # destatis_asylblg_ausgaben: gross expenditure 2024 (revised 24 April 2026)
 ELTERNGELD = 7172.430   # bundeshaushalt_2024: title 1701 681 02, parental allowance
+GRUSI = 11059.914       # bundeshaushalt_2024: 1102 632 01, reimbursement of basic security in old age and for reduced
+                        # earning capacity (SGB XII chapter 4); the federal government reimburses the net expenditure in full
+# Child benefit (Kindergeld) under the Income Tax Act. National accounts book as spending only the part of it that goes
+# beyond the tax exemption of the child's subsistence minimum (the "Förderkomponente"); the rest reduces taxes, and the
+# taxes are grossed up by the spending part (destatis_wista_2019_05, p. 5, table 1). That part is not published for 2024.
+# Its share of child benefit paid: 2018 18.7 of 41.6 bn (destatis_wista_2019_05), 2026 25.5 of 55.4 bn (bt_drs_21_8480,
+# p. 2). JUDGEMENT: 2024 takes the mean of the two shares (45.5 %), applied to child benefit under the Income Tax Act paid
+# in 2024 (ba_famka_2024, table 1.1.2: 54,310.6 million euros; child benefit under the Federal Child Benefit Act, 229.5
+# million, is a social benefit in full and stays in the remainder of the family group).
+KG_ESTG = 54310.637
+KG_SHARE = (18.7 / 41.6 + 25.5 / 55.4) / 2
+KG_SPENDING = KG_ESTG * KG_SHARE
+# Who bears child benefit: federal government, states and municipalities by their shares of wage tax, 42.5 / 42.5 / 15 %
+# (bt_drs_20_12778, p. 37 f.: the cost of a higher child benefit split 335 / 336 / 119 million euros).
+KG_LEVELS = (0.425, 0.425, 0.15, 0)
 # Zero-amount leaf for benefits that would replace citizen's income for excluded groups; its level shares are
 # copied from asylum seekers' benefits after the fit (see below).
 REPLACEMENT = "exp.social.basic_security.replacement_benefits"
@@ -248,7 +263,13 @@ EXP = [
         CL("exp.housing.rd", "GF0605", "Forschung zu Wohnen und Stadtentwicklung", "Research on housing and urban development", (0.3, 0.6, 0.1, 0)),
         CL("exp.housing.other", "GF0606", "Sonstige kommunale Infrastruktur", "Other community amenities", (0.05, 0.35, 0.6, 0)),
     ]),
-    G("exp.health", "Gesundheit", "Health", code="GF07", children=[
+    G("exp.health", "Gesundheit", "Health", code="GF07",
+      # eurostat_gov_10a_exp: GF07 total expenditure 2024, S1314 (social security funds) 301,832 of S13 329,254 million euros.
+      desc=("Gegliedert nach dem, wofür das Geld ausgegeben wird. Gut 90 % davon (301,8 Mrd. Euro) gibt die Sozialversicherung aus, ganz überwiegend die gesetzlichen Krankenkassen; Krankengeld und Pflegeversicherung stehen unter „Soziale Sicherung“ (vor allem „Krankheit, Pflege und Behinderung“), die Beiträge auf der Einnahmenseite unter „Sozialbeiträge“. "
+            "Der Bundeszuschuss an die Krankenversicherung (2024: 14,5 Mrd. Euro) hat keinen eigenen Posten, weil sich Zahlungen zwischen den staatlichen Ebenen in der Rechnung für den Staat aufheben; er steckt im Anteil, den der Bund an den Leistungsposten trägt.",
+            "Sorted by what the money is spent on. Over 90% of it (€301.8bn) is spent by the social insurance funds, overwhelmingly the statutory health insurers; sick pay and long-term care insurance are under 'Social protection' (mainly 'Sickness, long-term care and disability'), and the contributions are on the revenue side under 'Social contributions'. "
+            "The federal subsidy to health insurance (2024: €14.5bn) has no item of its own, because payments between levels of government cancel out in the accounts of the state as a whole; it is contained in the share of the benefit items that the federal level bears."),
+      children=[
         CL("exp.health.medical_products", "GF0701", "Arzneimittel, Heil- und Hilfsmittel", "Medicines, medical products and appliances", (0.005, 0.01, 0.005, 0.98)),
         CL("exp.health.outpatient", "GF0702", "Ärzte, Zahnärzte und ambulante Behandlung", "Doctors, dentists and outpatient care", (0.01, 0.02, 0.01, 0.96)),
         CL("exp.health.hospitals", "GF0703", "Krankenhäuser", "Hospitals", (0.01, 0.08, 0.03, 0.88)),
@@ -327,10 +348,16 @@ EXP = [
           children=[
             L("exp.social.family.parental_allowance", "Elterngeld", "Parental allowance", amount=ELTERNGELD, fixed=C, quality="official", sources=["bundeshaushalt_2024"],
               note=("Kassenwert aus dem Bundeshaushalt (Titel 1701 681 02, Ist 2024).", "Cash figure from the federal budget (title 1701 681 02, 2024 actuals).")),
-            L("exp.social.family.other", "Kindergeld (soweit als Ausgabe gebucht), Kinder- und Jugendhilfe, Unterhaltsvorschuss", "Child benefit (as far as recorded as spending), child and youth welfare, maintenance advances",
-              amount=cof("GF1004") - ELTERNGELD, seed=(0.2, 0.25, 0.55, 0), quality="estimate", sources=SRC_EXP + ["bundeshaushalt_2024", "ba_kindergeld_2024"],
-              note=("Rest der Gruppe nach Abzug des Elterngelds; Aufteilung geschätzt. Die Geldleistungen der gesamten Gruppe betragen laut Eurostat 38,6 Mrd. Euro, die Familienkasse zahlte 2024 aber 54,5 Mrd. Euro Kindergeld aus: Die Volkswirtschaftlichen Gesamtrechnungen buchen demnach nur einen Teil des Kindergelds als Ausgabe, der Rest wird dort offenbar mit der Lohnsteuer verrechnet.",
-                    "Remainder of the group after deducting parental allowance; split estimated. Cash benefits of the whole group amount to €38.6bn according to Eurostat, whereas the family benefits office paid out €54.5bn in child benefit in 2024: national accounts thus record only part of child benefit as spending, the rest is evidently netted against wage tax there.")),
+            L("exp.social.family.child_benefit", "Kindergeld: Förderanteil (als Ausgabe gebucht)", "Child benefit: support component (recorded as spending)",
+              amount=KG_SPENDING, fixed=KG_LEVELS, quality="estimate", sources=["destatis_wista_2019_05", "bt_drs_21_8480", "ba_famka_2024", "bt_drs_20_12778"],
+              desc=("Der Teil des Kindergelds, der über die Steuerfreistellung des Existenzminimums der Kinder hinausgeht. Nur ihn buchen die Volkswirtschaftlichen Gesamtrechnungen als Sozialleistung; der Rest des Kindergelds mindert dort die Lohn- und Einkommensteuer. 2024 zahlte die Familienkasse 54,3 Mrd. Euro Kindergeld nach dem Einkommensteuergesetz aus.",
+                    "The part of child benefit that goes beyond exempting the children's subsistence minimum from tax. Only this part is recorded as a social benefit in national accounts; the rest of child benefit reduces wage and income tax there. In 2024 the family benefits office paid out €54.3bn of child benefit under the Income Tax Act."),
+              note=("Eigene Schätzung: Kindergeld nach dem Einkommensteuergesetz 2024 (54,31 Mrd. Euro) mal dem Anteil des Förderanteils. Dieser Anteil ist für 2024 nicht veröffentlicht; angesetzt ist der Mittelwert aus 2018 (18,7 von 41,6 Mrd. Euro, Statistisches Bundesamt) und 2026 (25,5 von 55,4 Mrd. Euro, Bundesregierung), 45,5 %. Aufteilung auf die Ebenen wie die Kosten des Kindergelds: Bund und Länder je 42,5 %, Gemeinden 15 %, nach ihren Anteilen an der Lohnsteuer.",
+                    "Own estimate: child benefit under the Income Tax Act in 2024 (€54.31bn) times the share of the support component. That share is not published for 2024; the mean of 2018 (€18.7bn of €41.6bn, Federal Statistical Office) and 2026 (€25.5bn of €55.4bn, federal government) is used, 45.5%. Split across levels as the cost of child benefit: federal government and states 42.5% each, municipalities 15%, by their shares of wage tax.")),
+            L("exp.social.family.other", "Kinder- und Jugendhilfe, Kinderzuschlag, Unterhaltsvorschuss und übrige Familienleistungen", "Child and youth welfare, child supplement, maintenance advances and other family benefits",
+              amount=cof("GF1004") - ELTERNGELD - KG_SPENDING, seed=(0.2, 0.25, 0.55, 0), quality="estimate", sources=SRC_EXP + ["bundeshaushalt_2024", "ba_kindergeld_2024", "destatis_wista_2019_05"],
+              note=("Rest der Gruppe nach Abzug des Elterngelds und des als Ausgabe gebuchten Förderanteils des Kindergelds; Aufteilung geschätzt. Die Geldleistungen der gesamten Gruppe betragen laut Eurostat 38,6 Mrd. Euro, darunter Elterngeld, Förderanteil, Kinderzuschlag (2024: 3,0 Mrd. Euro) und Unterhaltsvorschuss.",
+                    "Remainder of the group after deducting parental allowance and the support component of child benefit recorded as spending; split estimated. Cash benefits of the whole group amount to €38.6bn according to Eurostat, among them parental allowance, the support component, the child supplement (2024: €3.0bn) and maintenance advances.")),
         ]),
         G("exp.social.basic_security", "Arbeitslosigkeit, Grundsicherung, Wohnen und Asyl", "Unemployment, basic income support, housing and asylum", code="GF1005+GF1006+GF1007",
           desc=("Fasst drei Gruppen der Statistik zusammen (Arbeitslosigkeit, Wohnen, soziale Hilfen), weil sich die einzelnen Leistungen den Gruppen nicht eindeutig zuordnen lassen.",
@@ -359,8 +386,14 @@ EXP = [
               desc=("Der Posten ist leer. Er nimmt die Leistungen auf, die Länder und Kommunen zahlen müssten, wenn Gruppen vom Bürgergeld ausgeschlossen würden: Das Existenzminimum muss auch dann gesichert sein, über Sozialhilfe oder Asylbewerberleistungen.",
                     "The item is empty. It receives the benefits that states and municipalities would have to pay if groups were excluded from citizen's income: the subsistence minimum must be secured even then, through social assistance or asylum seekers' benefits."),
               note=("Aufteilung auf die Ebenen wie bei den Asylbewerberleistungen.", "Split across levels as for asylum seekers' benefits.")),
-            L("exp.social.basic_security.other", "Arbeitsförderung, Jobcenter-Verwaltung, Sozialhilfe, Grundsicherung im Alter, Wohngeld", "Employment promotion, job centre administration, social assistance, basic security in old age, housing benefit",
-              amount=cof("GF1005") + cof("GF1006") + cof("GF1007") - ALG1 - BG_CASH - KDU - ASYL, seed=(0.27, 0.13, 0.33, 0.27), quality="estimate",
+            L("exp.social.basic_security.old_age_basic_income", "Grundsicherung im Alter und bei Erwerbsminderung", "Basic income support in old age and for reduced earning capacity",
+              amount=GRUSI, fixed=LO, quality="derived", sources=["bundeshaushalt_2024"],
+              desc=("Leistungen der Sozialhilfe für Menschen ab der Altersgrenze und für dauerhaft voll Erwerbsgeminderte (Viertes Kapitel SGB XII), mit denselben Regelsätzen wie das Grundsicherungsgeld. Die Kommunen zahlen aus, der Bund erstattet die Nettoausgaben vollständig.",
+                    "Social assistance for people above the retirement age and for people permanently unable to work (chapter 4 of Social Code Book XII), with the same standard rates as Grundsicherungsgeld. Municipalities pay out, the federal government reimburses the net expenditure in full."),
+              note=("Kassenwert: Erstattung des Bundes 2024 (Titel 1102 632 01, Ist 2024), die den Nettoausgaben entspricht. Ganz dem Bund zugerechnet.",
+                    "Cash figure: federal reimbursement in 2024 (title 1102 632 01, 2024 actuals), which equals the net expenditure. Attributed entirely to the federal level.")),
+            L("exp.social.basic_security.other", "Arbeitsförderung, Jobcenter-Verwaltung, Sozialhilfe, Wohngeld", "Employment promotion, job centre administration, social assistance, housing benefit",
+              amount=cof("GF1005") + cof("GF1006") + cof("GF1007") - ALG1 - BG_CASH - KDU - ASYL - GRUSI, seed=(0.27, 0.13, 0.33, 0.27), quality="estimate",
               sources=SRC_EXP + ["bundeshaushalt_2024", "ba_geschaeftsbericht_2024", "ba_sgb2_zeitreihe", "destatis_asylblg_ausgaben"],
               note=("Rest der drei Gruppen nach Abzug der einzeln ausgewiesenen Leistungen. Die Einzelwerte sind Kassenzahlen, die Gruppensumme stammt aus den Volkswirtschaftlichen Gesamtrechnungen; der Rest ist deshalb nur näherungsweise richtig.",
                     "Remainder of the three groups after deducting the benefits shown separately. The individual items are cash figures, the group total comes from national accounts; the remainder is therefore only approximately right.")),
@@ -447,9 +480,8 @@ LSV_PENSION = 2272.231 + 32.998 + 4.648 + 0.399           # chapter 1001: farmer
 move("exp.social.old_age.other", "social_security", "central", rest_rv + LSV_PENSION)
 move("exp.social.sickness_disability.other", "social_security", "central", 99.779)   # 1001 636 02: farmers' accident insurance
 move("exp.social.basic_security.housing_costs", "local", "central", KDU_FED)
-GRUSI = 11059.914          # 1102 632 01: reimbursement of basic security in old age and for reduced earning capacity
 WOHNGELD_FED = 2347.167    # 2501 632 01: federal half of housing benefit
-move("exp.social.basic_security.other", "local", "central", GRUSI)
+move("exp.social.basic_security.old_age_basic_income", "local", "central", GRUSI)   # GRUSI: see the named items above
 move("exp.social.basic_security.other", "state", "central", WOHNGELD_FED)
 GKV = 14500.0 + 70.802 + 1518.092   # 1501 636 06 and 636 03: health fund; 1001 636 04: farmers' health insurance
 hl = ["exp.health.medical_products", "exp.health.outpatient", "exp.health.hospitals", "exp.health.other"]
@@ -464,8 +496,8 @@ move("exp.housing.housing_development", "state", "central", 1656.001)   # 2501 8
 EXTRA_NOTES = {
     "exp.social.old_age.other": ("Dem Bund zugerechnet: der Teil der Bundesmittel für die Rentenversicherung, der nicht auf Renten entfällt (u. a. Krankenversicherung der Rentner), und die Zuschüsse zur Alterssicherung der Landwirte.",
                                  "Attributed to the federal level: the part of federal funding of the pension insurance not related to pensions (e.g. pensioners' health insurance) and the subsidies to farmers' old-age insurance."),
-    "exp.social.basic_security.other": ("Dem Bund zugerechnet: Erstattung der Grundsicherung im Alter (11,1 Mrd. Euro) und der Bundesanteil am Wohngeld (2,3 Mrd. Euro).",
-                                        "Attributed to the federal level: reimbursement of basic security in old age (€11.1bn) and the federal share of housing benefit (€2.3bn)."),
+    "exp.social.basic_security.other": ("Dem Bund zugerechnet: der Bundesanteil am Wohngeld (2,3 Mrd. Euro). Die Grundsicherung im Alter und bei Erwerbsminderung ist ein eigener Posten.",
+                                        "Attributed to the federal level: the federal share of housing benefit (€2.3bn). Basic income support in old age and for reduced earning capacity is an item of its own."),
     "exp.economy.transport": ("Die Regionalisierungsmittel des Bundes für den Schienennahverkehr der Länder (12,7 Mrd. Euro) sind dem Bund zugerechnet.",
                               "The federal regionalisation funds for the states' regional rail services (€12.7bn) are attributed to the federal level."),
     "exp.education.tertiary": ("Das BAföG für Studierende (1,3 Mrd. Euro) ist dem Bund zugerechnet.", "Federal student grants (BAföG, €1.3bn) are attributed to the federal level."),

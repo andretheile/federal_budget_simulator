@@ -98,6 +98,16 @@ Arithmetic on published figures:
 - the zero-amount leaf "replacement benefits for people excluded from citizen's income": it receives the
   benefits that states and municipalities would pay if groups lost citizen's income; its level shares are
   copied from asylum seekers' benefits;
+- basic income support in old age and for reduced earning capacity (SGB XII, chapter 4) as a leaf of its own: the
+  federal reimbursement of the net expenditure (cash, budget title 1102 632 01). Like the housing costs it is
+  assigned to the municipalities, which pay it out, when the shares are fitted, and then moved to the federal level;
+  it used to be a part of the remainder leaf of the basic security group, which shrinks by the same amount;
+- the support component of child benefit (`KG_SPENDING`): national accounts book as spending only the part of child
+  benefit that goes beyond the tax exemption of the children's subsistence minimum, and gross up the taxes by the
+  same amount (Destatis, WISTA 5/2019). That part is not published for 2024; the leaf is child benefit under the
+  Income Tax Act paid in 2024 times the mean of its share in 2018 (Destatis) and 2026 (federal government), 45.5 %.
+  It is taken out of the remainder of the family group, and its level shares are the statutory cost shares of child
+  benefit (federal government and states 42.5 % each, municipalities 15 %);
 - the zero-amount leaves "tax on sugar-sweetened drinks" and "tax on plastic packaging": neither tax was
   levied in 2024; both were debated with the 2027 federal budget. They exist so that a measure can book
   them, like the wealth tax; as excise duties they are federal (Article 106(1) of the Basic Law);
@@ -162,6 +172,10 @@ Judgement, to be reviewed by whoever updates the data:
   pay of all municipal staff in June 2024, with annual bonus, employer contributions and supplementary
   pensions, a rough count gives about EUR 71,000. Central administrations pay somewhat above the average, but
   the leaves may also include some staff that the personnel statistics assign to other functions.
+- **The share of child benefit booked as spending in 2024** (`KG_SHARE` in `build_budget.py`): the mean of the
+  published shares of 2018 and 2026. Because the leaf and the federal reimbursement of basic security in old age
+  are fixed leaves, the fit of the other leaves of social protection changed slightly when they were added (for
+  example asylum seekers' benefits: states 34.4 % instead of 36.6 %); the division totals by level did not.
 - **Merging COFOG 10.5, 10.6 and 10.7** into one group, because cash benefits cannot be assigned to
   one of them: housing costs under Bürgergeld alone exceed the cash benefits recorded under 10.6.
 - **Levels of capital-transfer revenue** and of the revision leaf.

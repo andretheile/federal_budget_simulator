@@ -2417,6 +2417,10 @@
         "de": "Gesundheit",
         "en": "Health"
       },
+      "description": {
+        "de": "Gegliedert nach dem, wofür das Geld ausgegeben wird. Gut 90 % davon (301,8 Mrd. Euro) gibt die Sozialversicherung aus, ganz überwiegend die gesetzlichen Krankenkassen; Krankengeld und Pflegeversicherung stehen unter „Soziale Sicherung“ (vor allem „Krankheit, Pflege und Behinderung“), die Beiträge auf der Einnahmenseite unter „Sozialbeiträge“. Der Bundeszuschuss an die Krankenversicherung (2024: 14,5 Mrd. Euro) hat keinen eigenen Posten, weil sich Zahlungen zwischen den staatlichen Ebenen in der Rechnung für den Staat aufheben; er steckt im Anteil, den der Bund an den Leistungsposten trägt.",
+        "en": "Sorted by what the money is spent on. Over 90% of it (€301.8bn) is spent by the social insurance funds, overwhelmingly the statutory health insurers; sick pay and long-term care insurance are under 'Social protection' (mainly 'Sickness, long-term care and disability'), and the contributions are on the revenue side under 'Social contributions'. The federal subsidy to health insurance (2024: €14.5bn) has no item of its own, because payments between levels of government cancel out in the accounts of the state as a whole; it is contained in the share of the benefit items that the federal level bears."
+      },
       "code": "GF07",
       "children": [
         {
@@ -3005,10 +3009,10 @@
               },
               "amount": 139472944000,
               "levels": {
-                "central": 0.2251,
-                "state": 0.3219,
-                "local": 0.0901,
-                "social_security": 0.3629
+                "central": 0.2112,
+                "state": 0.3125,
+                "local": 0.0962,
+                "social_security": 0.3801
               },
               "quality": "estimate",
               "sources": [
@@ -3061,10 +3065,10 @@
               },
               "amount": 32224560000,
               "levels": {
-                "central": 0.2282,
-                "state": 0.4714,
-                "local": 0.121,
-                "social_security": 0.1794
+                "central": 0.2072,
+                "state": 0.4696,
+                "local": 0.1324,
+                "social_security": 0.1908
               },
               "quality": "estimate",
               "sources": [
@@ -3116,10 +3120,10 @@
               },
               "amount": 120157496000,
               "levels": {
-                "central": 0.027,
-                "state": 0.108,
-                "local": 0.2287,
-                "social_security": 0.6363
+                "central": 0.0232,
+                "state": 0.1016,
+                "local": 0.2364,
+                "social_security": 0.6388
               },
               "quality": "estimate",
               "sources": [
@@ -3161,26 +3165,55 @@
               }
             },
             {
+              "id": "exp.social.family.child_benefit",
+              "label": {
+                "de": "Kindergeld: Förderanteil (als Ausgabe gebucht)",
+                "en": "Child benefit: support component (recorded as spending)"
+              },
+              "description": {
+                "de": "Der Teil des Kindergelds, der über die Steuerfreistellung des Existenzminimums der Kinder hinausgeht. Nur ihn buchen die Volkswirtschaftlichen Gesamtrechnungen als Sozialleistung; der Rest des Kindergelds mindert dort die Lohn- und Einkommensteuer. 2024 zahlte die Familienkasse 54,3 Mrd. Euro Kindergeld nach dem Einkommensteuergesetz aus.",
+                "en": "The part of child benefit that goes beyond exempting the children's subsistence minimum from tax. Only this part is recorded as a social benefit in national accounts; the rest of child benefit reduces wage and income tax there. In 2024 the family benefits office paid out €54.3bn of child benefit under the Income Tax Act."
+              },
+              "amount": 24706127085,
+              "levels": {
+                "central": 0.425,
+                "state": 0.425,
+                "local": 0.15
+              },
+              "quality": "estimate",
+              "sources": [
+                "destatis_wista_2019_05",
+                "bt_drs_21_8480",
+                "ba_famka_2024",
+                "bt_drs_20_12778"
+              ],
+              "note": {
+                "de": "Eigene Schätzung: Kindergeld nach dem Einkommensteuergesetz 2024 (54,31 Mrd. Euro) mal dem Anteil des Förderanteils. Dieser Anteil ist für 2024 nicht veröffentlicht; angesetzt ist der Mittelwert aus 2018 (18,7 von 41,6 Mrd. Euro, Statistisches Bundesamt) und 2026 (25,5 von 55,4 Mrd. Euro, Bundesregierung), 45,5 %. Aufteilung auf die Ebenen wie die Kosten des Kindergelds: Bund und Länder je 42,5 %, Gemeinden 15 %, nach ihren Anteilen an der Lohnsteuer.",
+                "en": "Own estimate: child benefit under the Income Tax Act in 2024 (€54.31bn) times the share of the support component. That share is not published for 2024; the mean of 2018 (€18.7bn of €41.6bn, Federal Statistical Office) and 2026 (€25.5bn of €55.4bn, federal government) is used, 45.5%. Split across levels as the cost of child benefit: federal government and states 42.5% each, municipalities 15%, by their shares of wage tax."
+              }
+            },
+            {
               "id": "exp.social.family.other",
               "label": {
-                "de": "Kindergeld (soweit als Ausgabe gebucht), Kinder- und Jugendhilfe, Unterhaltsvorschuss",
-                "en": "Child benefit (as far as recorded as spending), child and youth welfare, maintenance advances"
+                "de": "Kinder- und Jugendhilfe, Kinderzuschlag, Unterhaltsvorschuss und übrige Familienleistungen",
+                "en": "Child and youth welfare, child supplement, maintenance advances and other family benefits"
               },
-              "amount": 76590570000,
+              "amount": 51884442915,
               "levels": {
-                "central": 0.1409,
-                "state": 0.2426,
-                "local": 0.6165
+                "central": 0.1225,
+                "state": 0.2314,
+                "local": 0.6461
               },
               "quality": "estimate",
               "sources": [
                 "eurostat_gov_10a_exp",
                 "bundeshaushalt_2024",
-                "ba_kindergeld_2024"
+                "ba_kindergeld_2024",
+                "destatis_wista_2019_05"
               ],
               "note": {
-                "de": "Rest der Gruppe nach Abzug des Elterngelds; Aufteilung geschätzt. Die Geldleistungen der gesamten Gruppe betragen laut Eurostat 38,6 Mrd. Euro, die Familienkasse zahlte 2024 aber 54,5 Mrd. Euro Kindergeld aus: Die Volkswirtschaftlichen Gesamtrechnungen buchen demnach nur einen Teil des Kindergelds als Ausgabe, der Rest wird dort offenbar mit der Lohnsteuer verrechnet.",
-                "en": "Remainder of the group after deducting parental allowance; split estimated. Cash benefits of the whole group amount to €38.6bn according to Eurostat, whereas the family benefits office paid out €54.5bn in child benefit in 2024: national accounts thus record only part of child benefit as spending, the rest is evidently netted against wage tax there."
+                "de": "Rest der Gruppe nach Abzug des Elterngelds und des als Ausgabe gebuchten Förderanteils des Kindergelds; Aufteilung geschätzt. Die Geldleistungen der gesamten Gruppe betragen laut Eurostat 38,6 Mrd. Euro, darunter Elterngeld, Förderanteil, Kinderzuschlag (2024: 3,0 Mrd. Euro) und Unterhaltsvorschuss.",
+                "en": "Remainder of the group after deducting parental allowance and the support component of child benefit recorded as spending; split estimated. Cash benefits of the whole group amount to €38.6bn according to Eurostat, among them parental allowance, the support component, the child supplement (2024: €3.0bn) and maintenance advances."
               }
             }
           ]
@@ -3396,8 +3429,8 @@
               },
               "amount": 6718465000,
               "levels": {
-                "state": 0.366,
-                "local": 0.634
+                "state": 0.3444,
+                "local": 0.6556
               },
               "quality": "derived",
               "sources": [
@@ -3420,8 +3453,8 @@
               },
               "amount": 0,
               "levels": {
-                "state": 0.366,
-                "local": 0.634
+                "state": 0.3444,
+                "local": 0.6556
               },
               "quality": "derived",
               "sources": [
@@ -3434,17 +3467,40 @@
               }
             },
             {
+              "id": "exp.social.basic_security.old_age_basic_income",
+              "label": {
+                "de": "Grundsicherung im Alter und bei Erwerbsminderung",
+                "en": "Basic income support in old age and for reduced earning capacity"
+              },
+              "description": {
+                "de": "Leistungen der Sozialhilfe für Menschen ab der Altersgrenze und für dauerhaft voll Erwerbsgeminderte (Viertes Kapitel SGB XII), mit denselben Regelsätzen wie das Grundsicherungsgeld. Die Kommunen zahlen aus, der Bund erstattet die Nettoausgaben vollständig.",
+                "en": "Social assistance for people above the retirement age and for people permanently unable to work (chapter 4 of Social Code Book XII), with the same standard rates as Grundsicherungsgeld. Municipalities pay out, the federal government reimburses the net expenditure in full."
+              },
+              "amount": 11059914000,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "derived",
+              "sources": [
+                "bundeshaushalt_2024"
+              ],
+              "note": {
+                "de": "Kassenwert: Erstattung des Bundes 2024 (Titel 1102 632 01, Ist 2024), die den Nettoausgaben entspricht. Ganz dem Bund zugerechnet.",
+                "en": "Cash figure: federal reimbursement in 2024 (title 1102 632 01, 2024 actuals), which equals the net expenditure. Attributed entirely to the federal level."
+              }
+            },
+            {
               "id": "exp.social.basic_security.other",
               "label": {
-                "de": "Arbeitsförderung, Jobcenter-Verwaltung, Sozialhilfe, Grundsicherung im Alter, Wohngeld",
-                "en": "Employment promotion, job centre administration, social assistance, basic security in old age, housing benefit"
+                "de": "Arbeitsförderung, Jobcenter-Verwaltung, Sozialhilfe, Wohngeld",
+                "en": "Employment promotion, job centre administration, social assistance, housing benefit"
               },
-              "amount": 42043785000,
+              "amount": 30983871000,
               "levels": {
-                "central": 0.512,
-                "state": 0.0722,
-                "local": 0.1123,
-                "social_security": 0.3035
+                "central": 0.2449,
+                "state": 0.0473,
+                "local": 0.3964,
+                "social_security": 0.3114
               },
               "quality": "estimate",
               "sources": [
@@ -3455,8 +3511,8 @@
                 "destatis_asylblg_ausgaben"
               ],
               "note": {
-                "de": "Rest der drei Gruppen nach Abzug der einzeln ausgewiesenen Leistungen. Die Einzelwerte sind Kassenzahlen, die Gruppensumme stammt aus den Volkswirtschaftlichen Gesamtrechnungen; der Rest ist deshalb nur näherungsweise richtig. Dem Bund zugerechnet: Erstattung der Grundsicherung im Alter (11,1 Mrd. Euro) und der Bundesanteil am Wohngeld (2,3 Mrd. Euro).",
-                "en": "Remainder of the three groups after deducting the benefits shown separately. The individual items are cash figures, the group total comes from national accounts; the remainder is therefore only approximately right. Attributed to the federal level: reimbursement of basic security in old age (€11.1bn) and the federal share of housing benefit (€2.3bn)."
+                "de": "Rest der drei Gruppen nach Abzug der einzeln ausgewiesenen Leistungen. Die Einzelwerte sind Kassenzahlen, die Gruppensumme stammt aus den Volkswirtschaftlichen Gesamtrechnungen; der Rest ist deshalb nur näherungsweise richtig. Dem Bund zugerechnet: der Bundesanteil am Wohngeld (2,3 Mrd. Euro). Die Grundsicherung im Alter und bei Erwerbsminderung ist ein eigener Posten.",
+                "en": "Remainder of the three groups after deducting the benefits shown separately. The individual items are cash figures, the group total comes from national accounts; the remainder is therefore only approximately right. Attributed to the federal level: the federal share of housing benefit (€2.3bn). Basic income support in old age and for reduced earning capacity is an item of its own."
               }
             }
           ]
@@ -3470,8 +3526,8 @@
           "code": "GF1008",
           "amount": 218000000,
           "levels": {
-            "central": 0.4206,
-            "state": 0.5794
+            "central": 0.3983,
+            "state": 0.6017
           },
           "quality": "derived",
           "sources": [
@@ -3491,10 +3547,10 @@
           "code": "GF1009",
           "amount": 14037000000,
           "levels": {
-            "central": 0.0666,
-            "state": 0.0918,
-            "local": 0.3179,
-            "social_security": 0.5237
+            "central": 0.0572,
+            "state": 0.0865,
+            "local": 0.3293,
+            "social_security": 0.527
           },
           "quality": "estimate",
           "sources": [
