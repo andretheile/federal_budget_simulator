@@ -838,6 +838,12 @@ REV = [
             RL("rev.taxes.property.wealth_tax", "Vermögensteuer (wird seit 1997 nicht erhoben)", "Wealth tax (not levied since 1997)", 0.0, ST, sources=RSRC + ["gg_art_106"], code="D59A",
                desc=("Das Vermögensteuergesetz besteht fort, wird aber seit 1997 nicht mehr angewendet. Das Aufkommen stünde den Ländern zu (Art. 106 Abs. 2 Grundgesetz).",
                      "The Wealth Tax Act still exists but has not been applied since 1997. The revenue would go to the states (Article 106(2) of the Basic Law).")),
+            # Zero-amount leaf for a one-off levy on large fortunes, paid in instalments, as Die Linke proposes; the last
+            # such levy was the Lastenausgleich of 1952. Federal by Article 106(1) no. 5 of the Basic Law, unlike the
+            # wealth tax above. In national accounts a capital levy is a capital tax (D.91).
+            RL("rev.taxes.property.wealth_levy", "Einmalige Vermögensabgabe (2024 nicht erhoben)", "One-off wealth levy (not levied in 2024)", 0.0, C, sources=RSRC + ["gg_art_106"], code="D91B",
+               desc=("Einmalige Abgabe auf große Vermögen, die in Raten über mehrere Jahre gezahlt werden darf; in der Bundesrepublik zuletzt mit dem Lastenausgleich von 1952 erhoben. Das Aufkommen stünde allein dem Bund zu (Art. 106 Abs. 1 Nr. 5 Grundgesetz).",
+                     "One-off levy on large fortunes that may be paid in instalments over several years; in the Federal Republic last levied with the burden-sharing law of 1952. The revenue would go to the federal level alone (Article 106(1) no. 5 of the Basic Law).")),
         ]),
     ]),
     G("rev.contributions", "Sozialbeiträge", "Social contributions", code="D61",

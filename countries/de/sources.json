@@ -656,6 +656,391 @@
     },
     "accessed": "2026-11-18"
   },
+  "bmf_datensammlung_steuerpolitik_2025": {
+    "title": "Datensammlung zur Steuerpolitik, Ausgabe 2025",
+    "publisher": "Bundesministerium der Finanzen",
+    "url": "https://www.bundesfinanzministerium.de/Content/DE/Downloads/Oeffentliche-Finanzen/Datensammlungen-zur-Steuerpolitik/datensammlung-zur-steuerpolitik-2025.pdf?__blob=publicationFile&v=11",
+    "accessed": "2026-11-22",
+    "year": 2024,
+    "note": {
+      "de": "Tabelle 2.7.5 (S. 44): Effekte des Splittingverfahrens 2018 bis 2025, berechnet vom Fraunhofer-Institut FIT, für 2024: Splittingeffekt 24.304 Mio. Euro, davon Grundfreibetragswirkung 11.760 und Progressionswirkung 12.544 Mio. Euro, Einverdienerehen 9.069 Mio. Euro (2,30 Mio. Paare), Doppelverdienerehen 15.235 Mio. Euro (11,20 Mio. Paare), 13,50 Mio. Zusammenveranlagungen. Tabelle 1.4.1 (S. 10): kassenmäßige Steuereinnahmen; die Körperschaftsteuer nach Abzug der Erstattungen des Bundeszentralamts für Steuern.",
+      "en": "Table 2.7.5 (p. 44): effects of income splitting 2018 to 2025, computed by the Fraunhofer Institute FIT, for 2024: splitting effect €24,304m, of which basic-allowance effect €11,760m and progression effect €12,544m, single-earner marriages €9,069m (2.30 million couples), dual-earner marriages €15,235m (11.20 million couples), 13.50 million joint assessments. Table 1.4.1 (p. 10): cash tax receipts; corporate income tax after deducting the refunds of the Federal Central Tax Office."
+    }
+  },
+  "bt_drs_21_4710": {
+    "title": "Antwort der Bundesregierung auf die Kleine Anfrage der Fraktion Die Linke: Wirtschafts- und gleichstellungspolitische Auswirkungen des Ehegattensplittings, Drucksache 21/4710 vom 11.03.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/047/2104710.pdf",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Antwort zu den Fragen 5 und 6: Splitting und Art. 6 Abs. 1 Grundgesetz; zu 11 bis 14: Eine Reform ist nicht Gegenstand des Koalitionsvertrags; zu 15: keine Berechnungen zu Individualbesteuerung, übertragbarem Grundfreibetrag oder Deckelung, bei einer Individualbesteuerung wäre wegen gezielter Zuordnung von Einkünften und Abzügen wahrscheinlich mit einem niedrigeren Mehraufkommen zu rechnen als der rechnerische Splittingeffekt.",
+      "en": "Answer to questions 5 and 6: splitting and Article 6(1) of the Basic Law; to 11 to 14: a reform is not part of the coalition agreement; to 15: no calculations of individual taxation, a transferable basic allowance or a cap; with individual taxation, deliberate allocation of income and deductions would probably yield less than the arithmetic splitting effect."
+    }
+  },
+  "bt_drs_21_6645": {
+    "title": "Antrag der Fraktion Die Linke: Steuern auf kleine und mittlere Einkommen senken – Spitzen- und Kapitaleinkommen gerecht besteuern – Ehegattensplitting reformieren, Drucksache 21/6645 vom 23.06.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/066/2106645.pdf",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Abschnitt II Nr. 3: das Ehegattensplitting durch die Möglichkeit ersetzen, den Grundfreibetrag zwischen Ehepartnern und eingetragenen Lebenspartnern zu übertragen.",
+      "en": "Section II no. 3: replace income splitting by the option to transfer the basic allowance between spouses and registered partners."
+    }
+  },
+  "bt_drs_21_7081": {
+    "title": "Beschlussempfehlung und Bericht des Finanzausschusses zu Anträgen der Fraktionen BÜNDNIS 90/DIE GRÜNEN und Die Linke, Drucksache 21/7081 vom 10.07.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/070/2107081.pdf",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Buchstabe d: Antrag der Grünen (21/6644), unter anderem den Splittingvorteil perspektivisch auf die Übertragbarkeit des Grundfreibetrags zu begrenzen; Buchstabe e: Der Ausschuss empfiehlt in seiner Sitzung vom 8. Juli 2026 mit den Stimmen von CDU/CSU, AfD, SPD und Grünen gegen die Linke, den Antrag 21/6645 abzulehnen.",
+      "en": "Letter d: Greens motion (21/6644), among other things to limit the splitting advantage, in the longer run, to transferring the basic allowance; letter e: at its meeting of 8 July 2026 the committee recommends with the votes of CDU/CSU, AfD, SPD and the Greens against Die Linke that motion 21/6645 be rejected."
+    }
+  },
+  "fit_realsplitting_2026": {
+    "title": "Analysen zum fiktiven Realsplitting. Forschungsbericht im Auftrag des Netzwerk Steuergerechtigkeit (Juni 2026)",
+    "publisher": "Fraunhofer-Institut für Angewandte Informationstechnik FIT (Sven Stöwhase)",
+    "url": "https://www.netzwerk-steuergerechtigkeit.de/wp-content/uploads/2026/06/FIT_Analysen_zum_fiktiven_Realsplitting_062026.pdf",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Statische Mikrosimulation (Steuerstatistik 2020, fortgeschrieben auf 2026): fiktives Realsplitting mit einem Höchstbetrag von 13.805 Euro 6,3 Mrd. Euro Mehreinnahmen, mit 20.000 Euro 3,9 und mit 30.000 Euro 2,0 Mrd. Euro; Progressionswirkung 13,8 Mrd. Euro (Finanzministerium 2026: 14,486), gesamter Splittingeffekt 25,4 Mrd. Euro (25,253). 13.805 Euro gelten als Untergrenze, weil Geschiedene ihren Unterhalt bis zu diesem Betrag absetzen dürfen.",
+      "en": "Static microsimulation (tax statistics 2020, carried forward to 2026): notional maintenance-based splitting with a cap of €13,805 raises €6.3bn, with €20,000 €3.9bn and with €30,000 €2.0bn; progression effect €13.8bn (finance ministry 2026: 14.486), total splitting effect €25.4bn (25.253). €13,805 is seen as a lower limit, because divorced people may deduct maintenance up to this amount."
+    }
+  },
+  "klingbeil_rede_2026_03_25": {
+    "title": "Rede Bundesfinanzminister und Vizekanzler Lars Klingbeil am 25. März 2026: Reformen für ein starkes Land. Kernaussagen aus der Rede (es gilt das gesprochene Wort)",
+    "publisher": "Bundesministerium der Finanzen, veröffentlicht von Table.Briefings",
+    "url": "https://table.media/assets/berlin/klingbeil.pdf",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "„Ich will das Ehegattensplitting in seiner heutigen Form für zukünftige Ehen abschaffen. Eine Reform könnte zur Besetzung von zehntausenden Vollzeitstellen führen.“",
+      "en": "\"Ich will das Ehegattensplitting in seiner heutigen Form für zukünftige Ehen abschaffen. Eine Reform könnte zur Besetzung von zehntausenden Vollzeitstellen führen.\""
+    }
+  },
+  "tagesspiegel_realsplitting_2026": {
+    "title": "Reformdebatte: Finanzministerium schlägt Ersatz für Ehegattensplitting vor (2. April 2026)",
+    "publisher": "Der Tagesspiegel",
+    "url": "https://www.tagesspiegel.de/politik/reformdebatte-finanzministerium-schlagt-ersatz-fur-ehegattensplitting-vor-15432196.html",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Presseartikel. Nach einem Bericht des Spiegel sieht ein Papier des Finanzministeriums vor, das Splitting künftig durch ein fiktives Realsplitting mit bis zu 13.805 Euro zu ersetzen. Das Papier selbst ist nicht veröffentlicht.",
+      "en": "Press article. According to a report by Der Spiegel, a paper of the finance ministry provides for replacing splitting in future by a notional maintenance-based splitting of up to €13,805. The paper itself has not been published."
+    }
+  },
+  "gruene_wahlprogramm_2025": {
+    "title": "Zusammen wachsen. Regierungsprogramm 2025",
+    "publisher": "BÜNDNIS 90/DIE GRÜNEN",
+    "url": "https://cms.gruene.de/uploads/assets/20250205_Regierungsprogramm_DIGITAL_DINA5.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "S. 20: Für Neuehen eine individuelle Besteuerung mit übertragbarem Grundfreibetrag; für bereits verheiratete Paare ändert sich nichts, außer sie wählen freiwillig das neue Modell.",
+      "en": "Page 20: individual taxation with a transferable basic allowance for new marriages; nothing changes for couples already married unless they choose the new model voluntarily."
+    }
+  },
+  "cdu_csu_wahlprogramm_2025": {
+    "title": "Politikwechsel für Deutschland. Wahlprogramm von CDU und CSU",
+    "publisher": "CDU und CSU",
+    "url": "https://www.cdu.de/app/uploads/2025/01/km_btw_2025_wahlprogramm_langfassung_ansicht.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "„Länder sollen einen Freibetrag bei der Grunderwerbsteuer von 250.000 Euro pro Erwachsenen und 150.000 Euro für jedes Kind beim erstmaligen Erwerb selbstgenutzten Wohneigentums gewähren können.“ „Eine Vermögensteuer lehnen wir ab.“ „Deshalb halten wir am Ehegattensplitting fest und wollen Kinder künftig stärker berücksichtigen.“",
+      "en": "\"Länder sollen einen Freibetrag bei der Grunderwerbsteuer von 250.000 Euro pro Erwachsenen und 150.000 Euro für jedes Kind beim erstmaligen Erwerb selbstgenutzten Wohneigentums gewähren können.\" \"Eine Vermögensteuer lehnen wir ab.\" \"Deshalb halten wir am Ehegattensplitting fest und wollen Kinder künftig stärker berücksichtigen.\""
+    }
+  },
+  "bverfge_6_55": {
+    "title": "Bundesverfassungsgericht, Beschluss vom 17. Januar 1957, 1 BvL 4/54, BVerfGE 6, 55 (Steuersplitting)",
+    "publisher": "Bundesverfassungsgericht (Text: Deutschsprachiges Fallrecht, Universität Bern)",
+    "url": "https://www.servat.unibe.ch/dfr/bv006055.html",
+    "accessed": "2026-11-22",
+    "year": 1957,
+    "note": {
+      "de": "Die Zusammenveranlagung von Ehegatten ohne Splitting war mit Art. 6 Abs. 1 Grundgesetz unvereinbar, weil sie Ehepaare durch den progressiven Tarif stärker belastete als Unverheiratete.",
+      "en": "Joint assessment of spouses without splitting was incompatible with Article 6(1) of the Basic Law, because under the progressive schedule it burdened married couples more heavily than unmarried ones."
+    }
+  },
+  "bverfge_61_319": {
+    "title": "Bundesverfassungsgericht, Urteil vom 3. November 1982, 1 BvR 620/78 u. a., BVerfGE 61, 319 (Ehegattensplitting)",
+    "publisher": "Bundesverfassungsgericht (Text: Deutschsprachiges Fallrecht, Universität Bern)",
+    "url": "https://www.servat.unibe.ch/dfr/bv061319.html",
+    "accessed": "2026-11-22",
+    "year": 1982,
+    "note": {
+      "de": "„Das Splittingverfahren entspricht dem Grundsatz der Besteuerung nach der Leistungsfähigkeit. Es geht davon aus, daß zusammenlebende Eheleute eine Gemeinschaft des Erwerbs und Verbrauchs bilden …“",
+      "en": "\"Das Splittingverfahren entspricht dem Grundsatz der Besteuerung nach der Leistungsfähigkeit. Es geht davon aus, daß zusammenlebende Eheleute eine Gemeinschaft des Erwerbs und Verbrauchs bilden …\""
+    }
+  },
+  "destatis_eheschliessungen_2024": {
+    "title": "Zahl der Eheschließungen auf niedrigstem Stand seit 1950 (Pressemitteilung N010 vom 5. Februar 2026)",
+    "publisher": "Statistisches Bundesamt (Destatis)",
+    "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/02/PD26_N010_126.html",
+    "accessed": "2026-11-22",
+    "year": 2024,
+    "note": {
+      "de": "2024 wurden in Deutschland 349.200 Ehen geschlossen.",
+      "en": "349,200 marriages were concluded in Germany in 2024."
+    }
+  },
+  "wirtschaftsdienst_2026_ehegatten": {
+    "title": "Besteuerung von Ehegatten: fiskalische und distributive Wirkungen aktueller Reformoptionen. Wirtschaftsdienst 106 (2026), Heft 9, S. 692–699",
+    "publisher": "Philipp Toussaint, Sebastian Schultis (Universität Freiburg)",
+    "url": "https://www.wirtschaftsdienst.eu/inhalt/jahr/2026/heft/9/beitrag/besteuerung-von-ehegatten-fiskalische-und-distributive-wirkungen-aktueller-reformoptionen.html",
+    "accessed": "2026-11-22",
+    "year": 2018,
+    "note": {
+      "de": "Statische Mikrosimulation mit EVS und Steuerstatistik 2018, Rechtsstand 2018: Individualbesteuerung brächte 22,7 Mrd. Euro; die Einkommensteuer stiege nach Fünfteln der Einkommen um 25, 33, 21, 12 und 8 %.",
+      "en": "Static microsimulation with the household budget survey and tax statistics 2018, law of 2018: individual taxation would raise €22.7bn; income tax would rise by 25, 33, 21, 12 and 8% by fifths of income."
+    }
+  },
+  "diw_wb_18_2026_splitting": {
+    "title": "Ehegattensplitting – Reform bitte nicht ohne Minijob-Reform. Kommentar, DIW Wochenbericht 18/2026, S. 272",
+    "publisher": "Deutsches Institut für Wirtschaftsforschung (Stefan Bach, Peter Haan, Katharina Wrohlich)",
+    "url": "https://www.diw.de/de/diw_01.c.1006375.de/publikationen/wochenberichte/2026_18_3/ehegattensplitting_-_reform_bitte_nicht_ohne_minijob-reform__kommentar.html",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Die Autoren schlagen ein Realsplitting für neue Ehen vor und halten eine Reform ohne Abschaffung der Minijobs und der beitragsfreien Mitversicherung für wenig wirksam.",
+      "en": "The authors propose maintenance-based splitting for new marriages and consider a reform of little effect without abolishing mini-jobs and contribution-free coverage of spouses."
+    }
+  },
+  "bt_drs_21_323": {
+    "title": "Gesetzentwurf der Fraktionen der CDU/CSU und SPD: Entwurf eines Gesetzes für ein steuerliches Investitionssofortprogramm zur Stärkung des Wirtschaftsstandorts Deutschland, Drucksache 21/323 vom 03.06.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/003/2100323.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Finanztableau (S. 14, lfd. Nr. 5, § 23 KStG), volle Jahreswirkung: Körperschaftsteuer −4.295 Mio. Euro (2028) und −8.860 Mio. Euro (2029), Solidaritätszuschlag −235 und −485 Mio. Euro. Begründung zu § 23 Abs. 1 KStG (S. 23): Unternehmensteuerbelastung knapp 30 % (15 % Körperschaftsteuer, 0,825 % Solidaritätszuschlag, 14 % Gewerbesteuer bei einem Hebesatz von 400 %).",
+      "en": "Financial table (p. 14, no. 5, section 23 of the Corporate Income Tax Act), full-year effect: corporate income tax −€4,295m (2028) and −€8,860m (2029), solidarity surcharge −€235m and −€485m. Reasoning on section 23(1) (p. 23): corporate tax burden just under 30% (15% corporate income tax, 0.825% solidarity surcharge, 14% trade tax at a multiplier of 400%)."
+    }
+  },
+  "kstg_23": {
+    "title": "Körperschaftsteuergesetz, § 23 Steuersatz",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/kstg_1977/__23.html",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Steuersatz bis 2027 15 %, 2028 14 %, 2029 13 %, 2030 12 %, 2031 11 %, ab 2032 10 %.",
+      "en": "Rate 15% to 2027, 14% in 2028, 13% in 2029, 12% in 2030, 11% in 2031, 10% from 2032."
+    }
+  },
+  "minstg_54": {
+    "title": "Mindeststeuergesetz (MinStG), §§ 1 und 54",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/minstg/",
+    "accessed": "2026-11-22",
+    "year": 2024,
+    "note": {
+      "de": "§ 54 Abs. 1: „Der Mindeststeuersatz beträgt 15 Prozent.“ § 1 Abs. 1: Das Gesetz gilt für Unternehmensgruppen mit mindestens 750 Mio. Euro Umsatz.",
+      "en": "Section 54(1): \"Der Mindeststeuersatz beträgt 15 Prozent.\" Section 1(1): the Act applies to groups with revenue of at least €750m."
+    }
+  },
+  "bt_textarchiv_kw26_2025_investitionsprogramm": {
+    "title": "Bundestag stimmt für Investitionssofortprogramm der Koalition (Textarchiv, 26. Juni 2025)",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://www.bundestag.de/dokumente/textarchiv/2025/kw26-de-investitionssofortprogramm-1084772",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Angenommen mit den Stimmen von CDU/CSU und SPD gegen Grüne und Linke bei Enthaltung der AfD, auf Grundlage der Beschlussempfehlung 21/629.",
+      "en": "Passed with the votes of CDU/CSU and SPD against the Greens and Die Linke, with the AfD abstaining, on the basis of committee recommendation 21/629."
+    }
+  },
+  "br_drs_281_25_b": {
+    "title": "Beschluss des Bundesrates: Gesetz für ein steuerliches Investitionssofortprogramm zur Stärkung des Wirtschaftsstandorts Deutschland, Drucksache 281/25 (Beschluss) vom 11.07.2025",
+    "publisher": "Bundesrat",
+    "url": "https://dserver.bundestag.de/brd/2025/0281-25B.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Zustimmung nach Art. 105 Abs. 3 Grundgesetz in der 1056. Sitzung am 11. Juli 2025.",
+      "en": "Consent under Article 105(3) of the Basic Law at the 1056th session on 11 July 2025."
+    }
+  },
+  "bmf_steuerschaetzung_2025_05": {
+    "title": "Ergebnisse der 168. Sitzung des Arbeitskreises „Steuerschätzungen“ vom 13. bis 15. Mai 2025 (Tabellen)",
+    "publisher": "Bundesministerium der Finanzen",
+    "url": "https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/Steuerschaetzungen_und_Steuereinnahmen/Steuerschaetzung/2025-05-15-ergebnisse-168-steuerschaetzung-dl-xlsx.xlsx?__blob=publicationFile&v=2",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Tabelle 2: Körperschaftsteuer (Kasse) 2024 39.758, geschätzt 40.650 (2028) und 41.800 Mio. Euro (2029). Tabelle 8.2: Solidaritätszuschlag zur Körperschaftsteuer 2.209 (2024), 2.310 und 2.375 Mio. Euro.",
+      "en": "Table 2: corporate income tax (cash) 2024 €39,758m, estimated €40,650m (2028) and €41,800m (2029). Table 8.2: solidarity surcharge on corporate income tax €2,209m (2024), €2,310m and €2,375m."
+    }
+  },
+  "diw_stellungnahme_investitionsbooster_2025": {
+    "title": "Investitionsbooster: Signal für den Wirtschaftsstandort, aber soziale Schieflage und unsichere Wachstumswirkungen. Stellungnahme zur Anhörung im Finanzausschuss am 23. Juni 2025",
+    "publisher": "Deutsches Institut für Wirtschaftsforschung (Stefan Bach)",
+    "url": "https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.960813.de/bachdiw_stellungnahme_2025_06_23ba.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "S. 4 f.: 86 % der Entlastungen an die einkommensstärksten 10 %, 69 % an das oberste 1 %; Elastizität der Bemessungsgrundlage −0,2 bis −0,4, Selbstfinanzierung 17 bis 33 %, mit Wachstumswirkungen bis gut die Hälfte; mäßige Wirkungen auf Investitionen, unter anderem Link, Menkhoff, Peichl und Schüle (2024) zu Gewerbesteuererhöhungen.",
+      "en": "Pp. 4 f.: 86% of the relief to the top 10% by income, 69% to the top 1%; elasticity of the tax base −0.2 to −0.4, self-financing 17 to 33%, up to just over half with growth effects; moderate effects on investment, among others Link, Menkhoff, Peichl and Schüle (2024) on trade tax increases."
+    }
+  },
+  "bt_drs_21_2538": {
+    "title": "Antrag der Fraktion Die Linke: Den zweiten UN-Weltgipfel für soziale Entwicklung stark machen – Mehr globale Gerechtigkeit durch Milliardärssteuern, Drucksache 21/2538 vom 04.11.2025",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/025/2102538.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Abschnitt II Nr. 2: eine Vermögensteuer und „einer einmaligen Vermögensabgabe (Lastenausgleich) für die reichsten 0,7 Prozent im Land“ einführen.",
+      "en": "Section II no. 2: introduce a wealth tax and \"einer einmaligen Vermögensabgabe (Lastenausgleich) für die reichsten 0,7 Prozent im Land\"."
+    }
+  },
+  "diw_kompakt_157": {
+    "title": "Vermögensabgabe DIE LINKE. Aufkommen und Verteilungswirkungen. DIW Politikberatung kompakt 157 (30. Oktober 2020)",
+    "publisher": "Deutsches Institut für Wirtschaftsforschung (Stefan Bach), im Auftrag der Fraktion DIE LINKE. im Bundestag und der Rosa-Luxemburg-Stiftung",
+    "url": "https://www.diw.de/documents/publikationen/73/diw_01.c.801975.de/diwkompakt_2020-157.pdf",
+    "accessed": "2026-11-22",
+    "year": 2020,
+    "note": {
+      "de": "Kurzfassung und Kapitel 4: Vermögen zum 1. Januar 2020, Freibeträge 1 oder 2 Mio. Euro je Person und 2 oder 5 Mio. Euro für Unternehmensvermögen, Satz von 10 bis 30 %; Aufkommen 338 bis 560 Mrd. Euro mit dem Spitzensatz ab 30 Mio. Euro, 15 bis 18 % weniger ab 100 Mio. Euro; 20 Jahresraten mit 2 % Zinsen, 6,06 % der Schuld im Jahr; 300.000 bis 400.000 Pflichtige bei 2 Mio. Euro Freibetrag; Erhebungskosten 2 bis 3,5 %; Konfidenzintervall etwa ±25 %.",
+      "en": "Summary and chapter 4: wealth on 1 January 2020, allowances of €1m or €2m per person and €2m or €5m for business assets, rate 10 to 30%; revenue €338bn to €560bn with the top rate from €30m, 15 to 18% less from €100m; 20 yearly instalments with 2% interest, 6.06% of the debt a year; 300,000 to 400,000 payers with a €2m allowance; collection costs 2 to 3.5%; confidence interval about ±25%."
+    }
+  },
+  "rosalux_vermoegensabgabe_2020": {
+    "title": "Vermögensabgabe für das oberste Prozent (Pressemitteilung vom 4. November 2020)",
+    "publisher": "Rosa-Luxemburg-Stiftung",
+    "url": "https://www.rosalux.de/news/id/43289/vermoegensabgabe-fuer-das-oberste-prozent",
+    "accessed": "2026-11-22",
+    "year": 2020,
+    "note": {
+      "de": "Von der Linken bevorzugtes Modell: Freibetrag 2 Mio. Euro, für Betriebsvermögen 5 Mio. Euro, Satz linear-progressiv bis 30 % ab 100 Mio. Euro, Tilgung über 20 Jahre mit 2 % Zinsen, rund 310 Mrd. Euro; rückwirkender Stichtag; Aufkommen an den Bund.",
+      "en": "Model preferred by Die Linke: allowance €2m, for business assets €5m, rate rising linearly to 30% from €100m, repayment over 20 years with 2% interest, about €310bn; retroactive reference date; revenue to the federal government."
+    }
+  },
+  "wd_4_090_22": {
+    "title": "Kompetenz des Bundes zur Erhebung einer einmaligen Vermögensabgabe in Krisenlagen (Ausarbeitung WD 4 - 3000 - 090/22, 29. September 2022)",
+    "publisher": "Wissenschaftliche Dienste des Deutschen Bundestages",
+    "url": "https://www.bundestag.de/resource/blob/915096/ab0545a6337cf229410d6e5c50fc196d/WD-4-090-22-pdf.pdf",
+    "accessed": "2026-11-22",
+    "year": 2022,
+    "note": {
+      "de": "Abschnitte 2, 3 und 5: Kompetenz des Bundes, Einspruchsgesetz; Streit um Anlass und Finanzbedarf, mit den Positionen von Wieland (2012), dem Wissenschaftlichen Beirat beim BMF (2021) und Di Fabio (2022); keine Klärung durch das Bundesverfassungsgericht; die Abgabe darf nicht missbräuchlich zulasten der Vermögensteuer erhoben werden.",
+      "en": "Sections 2, 3 and 5: federal competence, no Bundesrat consent; dispute about occasion and financing need, with the positions of Wieland (2012), the Academic Advisory Board at the finance ministry (2021) and Di Fabio (2022); no ruling by the Constitutional Court; the levy may not be raised abusively at the expense of the wealth tax."
+    }
+  },
+  "wd_4_041_20": {
+    "title": "Verfassungsmäßigkeit einer Vermögensabgabe zur Bekämpfung der wirtschaftlichen Folgen der Corona-Pandemie (Sachstand WD 4 - 3000 - 041/20, 9. April 2020)",
+    "publisher": "Wissenschaftliche Dienste des Deutschen Bundestages",
+    "url": "https://www.bundestag.de/resource/blob/691376/2feb28d7057bf918bd18254ab06d95ad/WD-4-041-20-pdf.pdf",
+    "accessed": "2026-11-22",
+    "year": 2020,
+    "note": {
+      "de": "Abschnitt 3.1: Die Abgabe muss einmalig bleiben, darf aber über mehrere Jahre verteilt werden wie beim Lastenausgleich von 1952; eine wiederholte Erhebung wäre eine falsch etikettierte Vermögensteuer und umginge die Zustimmung des Bundesrates.",
+      "en": "Section 3.1: the levy must remain a one-off but may be spread over several years as with the Lastenausgleich of 1952; repeated collection would be a mislabelled wealth tax and would bypass the consent of the Bundesrat."
+    }
+  },
+  "iw_grest_2017": {
+    "title": "Reform der Grunderwerbsteuer. Gutachten für die FDP-Fraktionsvorsitzendenkonferenz (6. Februar 2017)",
+    "publisher": "Institut der deutschen Wirtschaft Köln (Tobias Hentze, Björn Seipelt, Michael Voigtländer)",
+    "url": "https://www.iwkoeln.de/fileadmin/publikationen/2017/325128/IW-Gutachten_2017_Grunderwerbssteuer.pdf",
+    "accessed": "2026-11-22",
+    "year": 2015,
+    "note": {
+      "de": "Abschnitt 5.2 und Tabelle 5-1: Für Nordrhein-Westfalen 2015 senkt ein Freibetrag von 500.000 Euro für Ersterwerber von Wohneigentum das Aufkommen um 41 % (1,048 von 2,534 Mrd. Euro), Gegenprobe mit den Steuerbescheiden 43 %; Annahmen: Käufe von Häusern und Wohnungen durch Privatleute, 70 % Ersterwerber (SOEP). Die Studie warnt, Länder könnten ihre Sätze erhöhen.",
+      "en": "Section 5.2 and table 5-1: for North Rhine-Westphalia in 2015 an allowance of €500,000 for first-time buyers of owner-occupied homes lowers revenue by 41% (€1.048bn of €2.534bn), 43% in a check against tax assessments; assumptions: purchases of houses and flats by private persons, 70% first-time buyers (SOEP). The study warns that states could raise their rates."
+    }
+  },
+  "bt_drs_21_8382": {
+    "title": "Antrag der Fraktion der AfD: Vom Mieter zum Eigentümer – Wohneigentum wieder bezahlbar machen, Drucksache 21/8382 vom 06.10.2026",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://dserver.bundestag.de/btd/21/083/2108382.pdf",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Abschnitt II Nr. 4: einen Gesetzentwurf vorlegen, der die Grunderwerbsteuer beim Erwerb von Immobilien zu eigenen Wohnzwecken komplett abschafft.",
+      "en": "Section II no. 4: present a bill that abolishes the real estate transfer tax entirely on purchases of property for one's own residential use."
+    }
+  },
+  "wd_4_072_19": {
+    "title": "Einzelfrage zur Grunderwerbsteuer (Sachstand WD 4 - 3000 - 072/19, 24. Mai 2019)",
+    "publisher": "Wissenschaftliche Dienste des Deutschen Bundestages",
+    "url": "https://www.bundestag.de/resource/blob/649012/ebbd2492b68a4f1cb2594ad57ce56cb4/WD-4-072-19-pdf.pdf",
+    "accessed": "2026-11-22",
+    "year": 2019,
+    "note": {
+      "de": "Gesetzgebung beim Bund (zustimmungspflichtig), Satz und Ertrag bei den Ländern; im Finanzausgleich zählt eine fiktive Steuerkraft aus dem Anteil am bundesweiten Umsatz mal dem durchschnittlichen Satz; ein Freibetrag könnte Länder mit niedrigerem Satz schlechter stellen.",
+      "en": "Legislation lies with the federal level (with Bundesrat consent), the rate and the revenue with the states; fiscal equalisation counts a notional tax capacity from the share of nationwide transactions times the average rate; an allowance could put states with a lower rate at a disadvantage."
+    }
+  },
+  "dolls_et_al_2025": {
+    "title": "Who Bears the Burden of Real Estate Transfer Taxes? Evidence from the German Housing Market. CESifo Working Paper 8839 (2021); Journal of Urban Economics 145 (2025), 103717",
+    "publisher": "Mathias Dolls, Clemens Fuest, Carla Krolage, Florian Neumeier (ifo Institut)",
+    "url": "https://www.cesifo.org/DocDL/cesifo1_wp8839.pdf",
+    "accessed": "2026-11-22",
+    "year": 2019,
+    "note": {
+      "de": "Daten zu rund 17 Mio. Immobilien 2005 bis 2019: Ein um einen Prozentpunkt höherer Satz senkt die Preise nach zwölf Monaten um durchschnittlich rund 3 %, stärker bei Wohnungen und in wachsenden Regionen.",
+      "en": "Data on about 17 million properties 2005 to 2019: a rate higher by one percentage point lowers prices after twelve months by about 3% on average, more for flats and in growing regions."
+    }
+  },
+  "wirtschaftsdienst_2023_grunderwerbsteuer": {
+    "title": "Grunderwerbsteuer: Finanzministerium plant Möglichkeit zur Abschaffung. Wirtschaftsdienst 103 (2023), Heft 8",
+    "publisher": "Christian Rasquin (TU Bergakademie Freiberg)",
+    "url": "https://www.wirtschaftsdienst.eu/inhalt/jahr/2023/heft/8/beitrag/grunderwerbsteuer-finanzministerium-plant-moeglichkeit-zur-abschaffung.html",
+    "accessed": "2026-11-22",
+    "year": 2023,
+    "note": {
+      "de": "Ein Entwurf des Finanzministeriums von 2023 sollte den Ländern erlauben, die Steuer für selbst genutztes Wohneigentum bis auf null zu senken, gegenfinanziert durch strengere Regeln für Share Deals; eine Befreiung nur des Ersterwerbs ließe den hemmenden Effekt auf Umzüge bestehen.",
+      "en": "A finance ministry draft of 2023 was to allow the states to lower the tax on owner-occupied housing down to zero, financed by stricter rules on share deals; exempting only the first purchase would leave the effect that discourages moving."
+    }
+  },
+  "bt_textarchiv_kw41_2026_steuersystem": {
+    "title": "Gesetzentwürfe und Anträge zum Steuersystem abgelehnt (Textarchiv, 8. Oktober 2026)",
+    "publisher": "Deutscher Bundestag",
+    "url": "https://www.bundestag.de/dokumente/textarchiv/2026/kw41-de-steuersystem-1217522",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "Antrag der Grünen zu Share Deals (21/6646) in namentlicher Abstimmung abgelehnt (132 Ja, 445 Nein, 3 Enthaltungen); die Grünen beziffern die Mehreinnahmen auf etwa 1 Mrd. Euro. Die AfD will die Grunderwerbsteuer für selbst genutztes Eigentum abschaffen.",
+      "en": "Greens motion on share deals (21/6646) rejected in a recorded vote (132 yes, 445 no, 3 abstentions); the Greens put the additional revenue at about €1bn. The AfD wants to abolish the transfer tax on owner-occupied property."
+    }
+  },
+  "grestg": {
+    "title": "Grunderwerbsteuergesetz (GrEStG)",
+    "publisher": "Bundesministerium der Justiz (gesetze-im-internet.de)",
+    "url": "https://www.gesetze-im-internet.de/grestg_1983/",
+    "accessed": "2026-11-22",
+    "year": 2026,
+    "note": {
+      "de": "§ 1 Abs. 2a, 2b und 3: Anteilsübertragungen sind steuerpflichtig, wenn mindestens 90 % der Anteile übergehen. Einen Freibetrag für den Erwerb selbst genutzten Wohneigentums kennt das Gesetz nicht.",
+      "en": "Section 1(2a), (2b) and (3): transfers of shares are taxable if at least 90% of the shares change hands. The Act has no allowance for the purchase of owner-occupied housing."
+    }
+  },
+  "hessengeld_faq_2025": {
+    "title": "Hessengeld: Fragen und Antworten (Stand August 2025)",
+    "publisher": "Hessisches Ministerium der Finanzen",
+    "url": "https://finanzen.hessen.de/sites/finanzen.hessen.de/files/2025-08/hessengeld-fragen_und_antworten_barrierefrei-stand_august_2025.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Für den erstmaligen Kauf einer selbst genutzten Wohnimmobilie seit 1. März 2024: 10.000 Euro je Erwerber (höchstens 20.000 Euro) und 5.000 Euro je Kind, höchstens die gezahlte Grunderwerbsteuer, ausgezahlt in zehn Jahresraten.",
+      "en": "For the first purchase of a home to live in since 1 March 2024: €10,000 per buyer (at most €20,000) and €5,000 per child, at most the transfer tax paid, paid out in ten yearly instalments."
+    }
+  },
+  "hessengeld_bilanz_2025": {
+    "title": "Überzeugend: ein Jahr Hessengeld (Präsentation zur Pressekonferenz am 19. September 2025)",
+    "publisher": "Hessisches Ministerium der Finanzen",
+    "url": "https://finanzen.hessen.de/sites/finanzen.hessen.de/files/2025-09/pm2025-117_anlage_ueberzeugend-ein_jahr_hessengeld-praesentation_pressekonferenz_am_19-september_0.pdf",
+    "accessed": "2026-11-22",
+    "year": 2025,
+    "note": {
+      "de": "Über 14.500 zugelassene Hauptanträge, über 10.500 Bewilligungen, über 160 Mio. Euro bewilligt.",
+      "en": "Over 14,500 admitted main applications, over 10,500 approvals, over €160m approved."
+    }
+  },
   "bt_drs_20_12783": {
     "title": "Gesetzentwurf der Bundesregierung: Entwurf eines Gesetzes zur steuerlichen Freistellung des Existenzminimums 2024, Drucksache 20/12783 vom 09.09.2024",
     "publisher": "Deutscher Bundestag",

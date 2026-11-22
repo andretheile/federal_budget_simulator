@@ -830,6 +830,27 @@
                 "eurostat_ntl",
                 "gg_art_106"
               ]
+            },
+            {
+              "id": "rev.taxes.property.wealth_levy",
+              "label": {
+                "de": "Einmalige Vermögensabgabe (2024 nicht erhoben)",
+                "en": "One-off wealth levy (not levied in 2024)"
+              },
+              "description": {
+                "de": "Einmalige Abgabe auf große Vermögen, die in Raten über mehrere Jahre gezahlt werden darf; in der Bundesrepublik zuletzt mit dem Lastenausgleich von 1952 erhoben. Das Aufkommen stünde allein dem Bund zu (Art. 106 Abs. 1 Nr. 5 Grundgesetz).",
+                "en": "One-off levy on large fortunes that may be paid in instalments over several years; in the Federal Republic last levied with the burden-sharing law of 1952. The revenue would go to the federal level alone (Article 106(1) no. 5 of the Basic Law)."
+              },
+              "code": "D91B",
+              "amount": 0,
+              "levels": {
+                "central": 1.0
+              },
+              "quality": "official",
+              "sources": [
+                "eurostat_ntl",
+                "gg_art_106"
+              ]
             }
           ]
         }

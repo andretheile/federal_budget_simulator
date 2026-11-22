@@ -1952,6 +1952,994 @@
       ]
     },
     {
+      "id": "spouse_splitting",
+      "label": {
+        "de": "Ehegattensplitting abschaffen oder begrenzen",
+        "en": "Abolish or limit income splitting for married couples"
+      },
+      "summary": {
+        "de": "Streicht den Splittingvorteil von Ehepaaren ganz oder teilweise. Die Grundeinstellung zeigt den Antrag der Linken von 2026: Individualbesteuerung mit übertragbarem Grundfreibetrag.",
+        "en": "Removes all or part of the tax advantage married couples get from income splitting. The default shows Die Linke's motion of 2026: individual taxation with a transferable basic allowance."
+      },
+      "explanation": {
+        "de": "Ehepaare, die zusammen veranlagt werden, zahlen das Doppelte der Steuer auf die Hälfte ihres gemeinsamen Einkommens. Weil der Steuersatz mit dem Einkommen steigt, zahlen sie so weniger als zwei Alleinstehende mit denselben Einkommen, und zwar umso weniger, je ungleicher die beiden verdienen. Das Finanzministerium beziffert diesen Splittingeffekt für 2024 auf 24,3 Mrd. Euro bei 13,5 Mio. Ehepaaren. 11,8 Mrd. Euro davon entstehen, weil der Partner mit dem höheren Einkommen den Grundfreibetrag mitnutzt, den der andere nicht ausschöpft; 12,5 Mrd. Euro, weil das halbierte Einkommen niedriger besteuert wird als das ganze (Progression).\n\nDie beiden Regler streichen diese Teile getrennt. Beide auf 100 %: reine Individualbesteuerung, jeder Partner zahlt wie ein Alleinstehender. Nur der erste auf 100 %: Individualbesteuerung mit übertragbarem Grundfreibetrag, wie Die Linke sie im Juni 2026 beantragt hat und die Grünen sie in ihrem Wahlprogramm 2025 für neue Ehen fordern. Ein fiktives Realsplitting, bei dem der besser verdienende Partner bis zu 13.805 Euro Einkommen auf den anderen übertragen darf, sieht nach Presseberichten ein Papier aus dem Finanzministerium vom Frühjahr 2026 vor; es entspricht nach einer Studie des Fraunhofer-Instituts FIT ungefähr dem ersten Regler auf 45 %.\n\nDie Rechnung wendet die Änderung ab 2027 auf alle Ehen an, wie es der Antrag der Linken vorsieht. Die Grünen und Finanzminister Lars Klingbeil (SPD) wollen bestehende Ehen ausnehmen; dann wüchse die Wirkung erst über Jahrzehnte auf den Betrag der Karte.\n\nDie Rechnung geht vom Tarif 2024 aus und wirkt unabhängig von der Maßnahme zum Einkommensteuertarif.",
+        "en": "Married couples who are assessed jointly pay twice the tax on half their joint income. Because the tax rate rises with income, they pay less than two single people with the same incomes, and the less, the more unequal their earnings. The finance ministry puts this splitting effect at €24.3bn for 2024, across 13.5 million couples. €11.8bn of it arises because the partner with the higher income also uses the basic allowance that the other does not exhaust; €12.5bn because half the income is taxed at a lower rate than the whole would be (progression).\n\nThe two sliders remove these parts separately. Both at 100%: pure individual taxation, each partner pays like a single person. Only the first at 100%: individual taxation with a transferable basic allowance, as Die Linke moved in June 2026 and as the Greens demand for new marriages in their 2025 election programme. A notional maintenance-based splitting (fiktives Realsplitting), under which the higher earner may transfer up to €13,805 of income to the other partner, is proposed according to press reports in a paper from the finance ministry of spring 2026; according to a study by the Fraunhofer Institute FIT it corresponds roughly to the first slider at 45%.\n\nThe calculation applies the change to all marriages from 2027, as Die Linke's motion provides. The Greens and Finance Minister Lars Klingbeil (SPD) want to exempt existing marriages; the effect would then take decades to grow to the amount on the card.\n\nThe calculation starts from the 2024 schedule and acts independently of the income tax schedule measure."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "progression",
+          "type": "number",
+          "label": {
+            "de": "Vorteil aus dem halbierten Einkommen (Progression): Anteil, der wegfällt",
+            "en": "Advantage from halving the joint income (progression): share removed"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 100,
+          "baseline": 0
+        },
+        {
+          "id": "allowance",
+          "type": "number",
+          "label": {
+            "de": "Übertragung des Grundfreibetrags auf den Partner: Anteil, der wegfällt",
+            "en": "Transfer of the basic allowance to the partner: share removed"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 0,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.income.personal",
+          "amount": {
+            "param": "progression",
+            "scale": 125440000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.7,
+            "high": 1.1,
+            "basis": "splitting"
+          },
+          "sources": [
+            "bmf_datensammlung_steuerpolitik_2025",
+            "bt_drs_21_4710",
+            "fit_realsplitting_2026"
+          ],
+          "note": {
+            "de": "Datensammlung zur Steuerpolitik 2025 des Finanzministeriums, Tabelle 2.7.5: Progressionswirkung des Splittings 2024 12,544 Mrd. Euro, 52 % des Splittingeffekts von 24,304 Mrd. Euro, einschließlich Solidaritätszuschlag; berechnet vom Fraunhofer-Institut FIT aus den fortgeschriebenen Steuerstatistiken. Je Prozentpunkt 125,4 Mio. Euro. Die Zahl ist rechnerisch: Das gemeinsame Einkommen wird im Verhältnis der Einkünfte aufgeteilt und nach dem Grundtarif besteuert. Die Bundesregierung erwartet bei einer Individualbesteuerung weniger, weil Paare Einkünfte, Abzüge und Einkunftsquellen gezielt zuordnen würden (Antwort vom März 2026); daher die untere Grenze von 70 %. Die obere Grenze (110 %) lässt Raum dafür, dass Partner mit dem geringeren Einkommen mehr arbeiten. Für 2026 kommt das FIT auf 13,8 Mrd. Euro Progressionswirkung, das Finanzministerium auf 14,5 Mrd. Euro.",
+            "en": "Finance ministry's Datensammlung zur Steuerpolitik 2025, table 2.7.5: progression effect of splitting in 2024 €12.544bn, 52% of the splitting effect of €24.304bn, including the solidarity surcharge; computed by the Fraunhofer Institute FIT from the tax statistics carried forward. €125.4m per percentage point. The figure is arithmetic: the joint income is divided in proportion to each partner's income and taxed under the basic schedule. The federal government expects less from individual taxation, because couples would allocate income, deductions and sources of income deliberately (answer of March 2026); hence the lower bound of 70%. The upper bound (110%) allows for partners with the lower income working more. For 2026 FIT arrives at a progression effect of €13.8bn, the finance ministry at €14.5bn."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.income.personal",
+          "amount": {
+            "param": "allowance",
+            "scale": 117600000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.7,
+            "high": 1.1,
+            "basis": "splitting"
+          },
+          "sources": [
+            "bmf_datensammlung_steuerpolitik_2025",
+            "bt_drs_21_4710"
+          ],
+          "note": {
+            "de": "Tabelle 2.7.5: Grundfreibetragswirkung 2024 11,760 Mrd. Euro, 48 % des Splittingeffekts: Der Partner mit dem höheren Einkommen nutzt den Teil des Grundfreibetrags mit, den der andere mit eigenen Einkünften nicht ausschöpft. Je Prozentpunkt 117,6 Mio. Euro. Spanne wie beim Vorteil aus der Progression, mit dem dieser Betrag zusammen am oberen oder unteren Ende liegt.",
+            "en": "Table 2.7.5: basic-allowance effect in 2024 €11.760bn, 48% of the splitting effect: the partner with the higher income also uses the part of the basic allowance that the other does not exhaust with own income. €117.6m per percentage point. Range as for the progression advantage, with which this amount lies at the upper or lower end."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Ehe und Familie stehen unter dem besonderen Schutz des Grundgesetzes (Art. 6 Abs. 1). Das Bundesverfassungsgericht hat 1957 die damalige Zusammenveranlagung ohne Splitting verworfen, weil sie Ehepaare wegen des progressiven Tarifs schlechter stellte als Unverheiratete. 1982 nannte es das Splitting eine Besteuerung nach der Leistungsfähigkeit, weil Eheleute eine Gemeinschaft des Erwerbs und Verbrauchs bilden. Ob der Gesetzgeber es abschaffen darf, hat das Gericht nicht entschieden. Die Bundesregierung begründet das Splitting im März 2026 mit Art. 6 Abs. 1 und der gemeinsamen Leistungsfähigkeit der Ehe. Eine Übertragung unter den 13.805 Euro, die Geschiedene als Unterhalt absetzen dürfen, könnte Verheiratete schlechter stellen als Geschiedene.",
+            "en": "Marriage and the family enjoy the special protection of the Basic Law (Article 6(1)). In 1957 the Federal Constitutional Court struck down the joint assessment without splitting of the time, because under the progressive schedule it put married couples in a worse position than unmarried ones. In 1982 it called splitting taxation according to ability to pay, because spouses form a community of earning and spending. Whether the legislature may abolish it, the court has not decided. In March 2026 the federal government justified splitting with Article 6(1) and the joint ability to pay of a marriage. A transfer below the €13,805 that divorced people may deduct as maintenance could put married couples in a worse position than divorced ones."
+          },
+          "sources": [
+            "bverfge_6_55",
+            "bverfge_61_319",
+            "bt_drs_21_4710",
+            "fit_realsplitting_2026"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Mehr zahlen vor allem Paare, die sehr ungleich verdienen. Vom Splittingeffekt 2024 entfallen 9,1 Mrd. Euro auf 2,3 Mio. Ehen mit einem Verdiener und 15,2 Mrd. Euro auf 11,2 Mio. Ehen mit zwei Einkommen; 54 % auf Eltern mit Kindern, die steuerlich berücksichtigt werden, 37 % auf Eltern, deren Kinder es nicht mehr werden, 9 % auf Paare ohne Kinder. Gemessen an der Steuer, die sie heute zahlen, träfe eine reine Individualbesteuerung aber kleinere Einkommen stärker: In einer Mikrosimulation zum Recht von 2018 steigt die Einkommensteuer im untersten Fünftel der Einkommen um 25 %, im zweiten um 33 %, im obersten um 8 %.",
+            "en": "Those who pay more are above all couples with very unequal earnings. Of the 2024 splitting effect, €9.1bn falls to 2.3 million single-earner marriages and €15.2bn to 11.2 million marriages with two incomes; 54% to parents with children counted for tax purposes, 37% to parents whose children no longer count, 9% to couples without children. Measured against the tax they pay today, however, pure individual taxation would hit smaller incomes harder: in a microsimulation of 2018 law, income tax rises by 25% in the bottom fifth of incomes, by 33% in the second and by 8% in the top fifth."
+          },
+          "sources": [
+            "bmf_datensammlung_steuerpolitik_2025",
+            "wirtschaftsdienst_2026_ehegatten"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "CDU und CSU wollen am Ehegattensplitting festhalten (Wahlprogramm 2025); im Koalitionsvertrag steht keine Reform. Finanzminister Lars Klingbeil (SPD) will es nach seiner Rede vom 25. März 2026 „in seiner heutigen Form für zukünftige Ehen abschaffen“. Den Antrag der Linken empfahl der Finanzausschuss am 8. Juli 2026 abzulehnen, mit den Stimmen von CDU/CSU, AfD, SPD und Grünen; die Grünen fordern in einem eigenen Antrag, den Vorteil perspektivisch auf die Übertragbarkeit des Grundfreibetrags zu begrenzen. Die AfD will das Splitting zu einem Familiensplitting ausweiten, das auch Kinder einrechnet.",
+            "en": "CDU and CSU want to keep income splitting (2025 election programme); the coalition agreement contains no reform. Finance Minister Lars Klingbeil (SPD) said in his speech of 25 March 2026 that he wants to abolish it \"in its current form for future marriages\". The finance committee recommended on 8 July 2026 that Die Linke's motion be rejected, with the votes of CDU/CSU, AfD, SPD and the Greens; the Greens demand in a motion of their own to limit the advantage, in the longer run, to transferring the basic allowance. The AfD wants to extend splitting to a family splitting that also counts children."
+          },
+          "sources": [
+            "cdu_csu_wahlprogramm_2025",
+            "bt_drs_21_4710",
+            "klingbeil_rede_2026_03_25",
+            "bt_drs_21_7081",
+            "afd_wahlprogramm_2025"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Die Reform soll Partnern mit dem geringeren Einkommen, meist Frauen, mehr Anreiz geben, mehr zu arbeiten; Klingbeil erwartet „zehntausende Vollzeitstellen“. Das DIW mahnt, dass das wenig bewirkt, solange Minijobs und die beitragsfreie Mitversicherung von Ehepartnern in der Krankenversicherung bleiben.",
+            "en": "The reform is meant to give partners with the lower income, mostly women, more incentive to work more; Klingbeil expects \"tens of thousands of full-time jobs\". DIW warns that this achieves little as long as mini-jobs and the contribution-free coverage of spouses in health insurance remain."
+          },
+          "sources": [
+            "klingbeil_rede_2026_03_25",
+            "diw_wb_18_2026_splitting"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Einkommensteuer teilen sich Bund (42,5 %), Länder und Gemeinden; nur gut zwei Fünftel der Mehreinnahmen erreichen den Bundeshaushalt.",
+            "en": "Income tax is shared between the federal government (42.5%), the states and the municipalities; only just over two-fifths of the additional revenue reaches the federal budget."
+          },
+          "sources": [
+            "gg_art_106",
+            "gemfinrefg_1"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Beträge sind eine rechnerische Aufteilung des Finanzministeriums für 2024 nach dem Tarif 2024. Wird zugleich der Tarif mit der Maßnahme zum Einkommensteuertarif geändert, änderte sich auch der Splittingeffekt; das ist nicht mitgerechnet. Die Beträge enthalten den Solidaritätszuschlag, der hier mit der Einkommensteuer auf Bund, Länder und Gemeinden verteilt wird, obwohl er allein dem Bund zusteht.",
+            "en": "The amounts are an arithmetic breakdown by the finance ministry for 2024 under the 2024 schedule. If the schedule is changed at the same time with the income tax schedule measure, the splitting effect would change too; this is not included. The amounts include the solidarity surcharge, which is spread here across the federal, state and municipal levels with income tax, although it goes to the federal level alone."
+          },
+          "sources": [
+            "bmf_datensammlung_steuerpolitik_2025",
+            "solzg_1995"
+          ]
+        },
+        {
+          "text": {
+            "de": "Mit Bestandsschutz für bestehende Ehen, wie ihn die Grünen (Wahlprogramm 2025) und Klingbeil (März 2026) vorsehen, gälte die Änderung nur für Paare, die danach heiraten. 2024 wurden 349.200 Ehen geschlossen, zusammen veranlagt wurden 13,5 Mio. Paare; rechnerisch erneuert sich der Bestand also in knapp 40 Jahren, und so lange bräuchte die Wirkung, bis sie den Betrag der Karte erreicht. Die Schuldenprojektion rechnet dagegen ab 2027 mit der vollen Wirkung; ein Bestandsschutz lässt sich hier nicht einstellen.",
+            "en": "With protection for existing marriages, as the Greens (2025 election programme) and Klingbeil (March 2026) envisage, the change would apply only to couples who marry afterwards. In 2024, 349,200 marriages were concluded and 13.5 million couples were assessed jointly; arithmetically the stock renews itself in just under 40 years, and the effect would take that long to reach the amount on the card. The debt projection, by contrast, counts the full effect from 2027; protection for existing marriages cannot be set here."
+          },
+          "sources": [
+            "destatis_eheschliessungen_2024",
+            "bmf_datensammlung_steuerpolitik_2025",
+            "gruene_wahlprogramm_2025",
+            "klingbeil_rede_2026_03_25"
+          ]
+        },
+        {
+          "text": {
+            "de": "Das fiktive Realsplitting mit 13.805 Euro brächte nach dem FIT für 2026 rund 6,3 Mrd. Euro, mit 20.000 Euro 3,9 und mit 30.000 Euro 2,0 Mrd. Euro; gemessen an der Progressionswirkung von 13,8 Mrd. Euro im selben Modell sind das 46, 28 und 14 %. Eine Obergrenze für den Splittingvorteil lässt sich nicht einstellen; Berechnungen dazu hat die Bundesregierung nach ihrer Antwort vom März 2026 nicht.",
+            "en": "According to FIT, the notional maintenance-based splitting with €13,805 would raise about €6.3bn for 2026, with €20,000 €3.9bn and with €30,000 €2.0bn; measured against the progression effect of €13.8bn in the same model, that is 46, 28 and 14%. A cap on the splitting advantage cannot be set; according to its answer of March 2026, the federal government has no calculations of one."
+          },
+          "sources": [
+            "fit_realsplitting_2026",
+            "bt_drs_21_4710"
+          ]
+        },
+        {
+          "text": {
+            "de": "Kindergeld und Kinderfreibeträge bleiben unverändert. Viele Vorschläge wollen die Mehreinnahmen ganz oder teilweise für Familien mit Kindern verwenden; das ist nicht enthalten.",
+            "en": "Child benefit and child allowances remain unchanged. Many proposals would use all or part of the additional revenue for families with children; this is not included."
+          },
+          "sources": [
+            "fit_realsplitting_2026",
+            "diw_wb_18_2026_splitting"
+          ]
+        }
+      ],
+      "sources": [
+        "bmf_datensammlung_steuerpolitik_2025",
+        "bt_drs_21_6645",
+        "bt_drs_21_4710",
+        "bt_drs_21_7081",
+        "fit_realsplitting_2026",
+        "klingbeil_rede_2026_03_25",
+        "tagesspiegel_realsplitting_2026",
+        "gruene_wahlprogramm_2025",
+        "linke_wahlprogramm_2025",
+        "bverfge_6_55",
+        "bverfge_61_319"
+      ]
+    },
+    {
+      "id": "corporate_tax_rate",
+      "label": {
+        "de": "Körperschaftsteuersatz ändern",
+        "en": "Change the corporate income tax rate"
+      },
+      "summary": {
+        "de": "Legt den Steuersatz auf die Gewinne von Kapitalgesellschaften fest, 2024 15 %. Die Grundeinstellung zeigt die Forderung der Linken: 25 %. Nach geltendem Recht sinkt er ab 2028 bis 2032 auf 10 %.",
+        "en": "Sets the tax rate on the profits of corporations, 15% in 2024. The default shows Die Linke's demand: 25%. Under current law it falls from 2028 to 10% in 2032."
+      },
+      "explanation": {
+        "de": "Körperschaftsteuer zahlen Kapitalgesellschaften wie GmbH und AG auf ihren Gewinn, dazu 5,5 % Solidaritätszuschlag auf die Steuer und die Gewerbesteuer der Gemeinde. Zusammen sind das nach der Begründung des Gesetzentwurfs von 2025 knapp 30 %: 15 % Körperschaftsteuer, 0,825 % Solidaritätszuschlag und 14 % Gewerbesteuer bei einem durchschnittlichen Hebesatz von 400 %.\n\nDas Gesetz für ein steuerliches Investitionssofortprogramm vom Juli 2025 senkt den Satz um einen Punkt im Jahr: 14 % 2028, 13 % 2029, 12 % 2030, 11 % 2031 und 10 % ab 2032. Einstellungen unter 15 % zeigen, was diese Senkung gemessen am Haushalt 2024 kostet, und folgen in der Schuldenprojektion diesem Fahrplan. Die Projektion der Bundesregierung, von der die Schuldenrechnung ausgeht, und der Finanzplan enthalten die Senkung schon; dort zählt sie dann doppelt, auch für das Ziel „Lücke im Finanzplan“. Die Linke fordert dagegen 25 % (Wahlprogramm 2025). Gegenüber dem geltenden Recht wären das ab 2032 15 Punkte mehr; die Rechnung misst wie alle Maßnahmen am Jahr 2024 und zeigt deshalb 10 Punkte.\n\nMit dem Satz ändert sich der Solidaritätszuschlag auf die Körperschaftsteuer. Die Maßnahme zum Solidaritätszuschlag rechnet unabhängig davon: Ist dort der Zuschlag auf die Körperschaftsteuer abgeschafft, rechnet diese Maßnahme ihn trotzdem mit.",
+        "en": "Corporations such as limited companies (GmbH) and stock corporations (AG) pay corporate income tax on their profits, plus a 5.5% solidarity surcharge on the tax and the municipal trade tax. Together, according to the reasoning of the 2025 bill, that is just under 30%: 15% corporate income tax, 0.825% solidarity surcharge and 14% trade tax at an average municipal multiplier of 400%.\n\nThe Act on a tax investment programme of July 2025 lowers the rate by one point a year: 14% in 2028, 13% in 2029, 12% in 2030, 11% in 2031 and 10% from 2032. Settings below 15% show what this cut costs measured against the 2024 budget, and follow this schedule in the debt projection. The government's projection, from which the debt calculation starts, and the financial plan already contain the cut; there it then counts twice, also for the goal \"gap in the financial plan\". Die Linke, by contrast, demands 25% (2025 election programme). Compared with current law that would be 15 points more from 2032; like every measure, the calculation measures against 2024 and therefore shows 10 points.\n\nThe solidarity surcharge on corporate income tax changes with the rate. The solidarity surcharge measure calculates independently: if the surcharge on corporate income tax is abolished there, this measure still includes it."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "rate",
+          "type": "number",
+          "label": {
+            "de": "Körperschaftsteuersatz",
+            "en": "Corporate income tax rate"
+          },
+          "unit": "percent",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "default": 25,
+          "baseline": 15,
+          "baselineLabel": {
+            "de": "2024, gilt bis 2027",
+            "en": "2024, in force to 2027"
+          }
+        }
+      ],
+      "effects": [
+        {
+          "type": "scale",
+          "target": "rev.taxes.income.corporate",
+          "factor": {
+            "param": "rate",
+            "scale": 0.105819,
+            "offset": -0.587285
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.05,
+            "basis": "profits"
+          },
+          "sources": [
+            "bt_drs_21_323",
+            "bmf_steuerschaetzung_2025_05",
+            "bmf_datensammlung_steuerpolitik_2025",
+            "eurostat_ntl",
+            "diw_stellungnahme_investitionsbooster_2025"
+          ],
+          "note": {
+            "de": "Je Prozentpunkt 4,28 Mrd. Euro Körperschaftsteuer, 10,6 % des Aufkommens von 2024 (40,48 Mrd. Euro ohne Solidaritätszuschlag). Das Verhältnis stammt aus dem Gesetzentwurf von 2025: Den ersten Punkt der Senkung (2028) beziffert der Gesetzentwurf der Koalitionsfraktionen auf 4,30 Mrd. Euro, die ersten zwei (2029) auf 8,86 Mrd. Euro in voller Jahreswirkung, bei einem in der Steuerschätzung vom Mai 2025 erwarteten Kassenaufkommen von 40,65 und 41,80 Mrd. Euro; das sind je Punkt 10,57 und 10,60 %. Ein Fünfzehntel wären 6,7 %. Den Unterschied erklärt der Entwurf nicht; das Kassenaufkommen ist nach Abzug der Erstattungen des Bundeszentralamts für Steuern gebucht. Statisch, ohne Verhaltensreaktionen. Die untere Grenze (50 %) folgt dem DIW: Nach der Literatur wächst die Bemessungsgrundlage um 0,2 bis 0,4 %, wenn der Satz um 1 % sinkt; das brächte bei der heutigen Belastung 17 bis 33 % einer Senkung zurück, mit Wachstumswirkungen bis gut die Hälfte. Bei einer Erhöhung gilt das umgekehrt. Ein Fünfzehntel des Aufkommens je Punkt (2,70 Mrd. Euro, 63 %) liegt ebenfalls in der Spanne.",
+            "en": "€4.28bn of corporate income tax per percentage point, 10.6% of the 2024 revenue (€40.48bn without the solidarity surcharge). The ratio comes from the 2025 bill: the bill of the coalition groups puts the first point of the cut (2028) at €4.30bn and the first two (2029) at €8.86bn as full-year effects, with cash revenue of €40.65bn and €41.80bn expected in the tax estimate of May 2025; that is 10.57% and 10.60% per point. One fifteenth would be 6.7%. The bill does not explain the difference; cash revenue is recorded after deducting the refunds of the Federal Central Tax Office. Static, without behavioural responses. The lower bound (50%) follows DIW: according to the literature the tax base grows by 0.2 to 0.4% when the rate falls by 1%; at today's burden that would bring back 17 to 33% of a cut, and up to just over half with growth effects. For an increase it works the other way round. One fifteenth of revenue per point (€2.70bn, 63%) also lies within the range."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.income.soli",
+          "amount": {
+            "param": "rate",
+            "scale": 233783544,
+            "offset": -3506753160
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.5,
+            "high": 1.05,
+            "basis": "profits"
+          },
+          "sources": [
+            "bt_drs_21_323",
+            "bundeshaushalt_2024",
+            "solzg_1995"
+          ],
+          "note": {
+            "de": "Solidaritätszuschlag auf die Körperschaftsteuer 2024: 2,21 Mrd. Euro (Kasse). Er ändert sich im selben Verhältnis wie die Körperschaftsteuer, 0,23 Mrd. Euro je Prozentpunkt. Der Gesetzentwurf setzt ihn mit 5,5 % der Körperschaftsteuer an (2028: 0,235 zu 4,295 Mrd. Euro).",
+            "en": "Solidarity surcharge on corporate income tax in 2024: €2.21bn (cash). It changes in the same proportion as corporate income tax, €0.23bn per percentage point. The bill puts it at 5.5% of corporate income tax (2028: €0.235bn against €4.295bn)."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "political",
+          "severity": "major",
+          "text": {
+            "de": "Die Senkung auf 10 % ist beschlossen (§ 23 KStG). Der Bundestag stimmte am 26. Juni 2025 mit CDU/CSU und SPD gegen Grüne und Linke bei Enthaltung der AfD zu, der Bundesrat am 11. Juli 2025. Der Gesetzentwurf rechnete mit Mindereinnahmen von 4,5 Mrd. Euro im Jahr 2028 und 9,3 Mrd. Euro 2029, jeweils einschließlich Solidaritätszuschlag, je zur Hälfte bei Bund und Ländern, den Zuschlag allein beim Bund. Wer 25 % will, müsste dieses Gesetz zurücknehmen und den Satz darüber hinaus erhöhen.",
+            "en": "The cut to 10% has been enacted (section 23 of the Corporate Income Tax Act). The Bundestag passed it on 26 June 2025 with CDU/CSU and SPD against the Greens and Die Linke, with the AfD abstaining, and the Bundesrat on 11 July 2025. The bill expected revenue losses of €4.5bn in 2028 and €9.3bn in 2029, each including the solidarity surcharge, half each for the federal government and the states, the surcharge for the federal government alone. Anyone who wants 25% would have to reverse this law and raise the rate beyond it."
+          },
+          "sources": [
+            "kstg_23",
+            "bt_textarchiv_kw26_2025_investitionsprogramm",
+            "br_drs_281_25_b",
+            "bt_drs_21_323"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Die Gewerbesteuer bleibt. Mit ihr und dem Solidaritätszuschlag belastet die Körperschaftsteuer Gewinne heute mit knapp 30 %, bei 10 % mit knapp 25 %, bei 25 % mit rund 40 %. Hohe Sätze verleiten Konzerne, Gewinne ins Ausland zu verlagern; die globale Mindeststeuer von 15 % für Konzerne ab 750 Mio. Euro Umsatz begrenzt das nur, soweit Gewinne in Länder mit niedrigerer Steuer wandern. Zur Wirkung auf Investitionen findet die Literatur nach dem DIW mäßige Effekte; eine Studie zu Gewerbesteuererhöhungen in deutschen Gemeinden findet, dass Unternehmen danach weniger investieren.",
+            "en": "The trade tax stays. Together with it and the solidarity surcharge, corporate income tax today burdens profits with just under 30%, at 10% with just under 25% and at 25% with about 40%. High rates tempt groups to shift profits abroad; the global minimum tax of 15% for groups with revenue of €750m or more limits this only where profits move to countries with lower taxes. On investment, according to DIW, the literature finds moderate effects; a study of trade tax increases in German municipalities finds that firms invest less afterwards."
+          },
+          "sources": [
+            "bt_drs_21_323",
+            "minstg_54",
+            "diw_stellungnahme_investitionsbooster_2025"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Eine Senkung entlastet und eine Erhöhung belastet zunächst vor allem die Haushalte, denen Unternehmen gehören. Von den Entlastungen des Investitionssofortprogramms, zum größten Teil die Senkung der Körperschaftsteuer, gehen nach Schätzung des DIW 86 % an die einkommensstärksten 10 % der Bevölkerung und 69 % an das oberste 1 %.",
+            "en": "A cut relieves, and an increase burdens, first of all the households that own businesses. Of the relief from the tax investment programme, most of it the cut in corporate income tax, DIW estimates that 86% goes to the top 10% of the population by income and 69% to the top 1%."
+          },
+          "sources": [
+            "diw_stellungnahme_investitionsbooster_2025"
+          ]
+        },
+        {
+          "kind": "cost_shift",
+          "severity": "minor",
+          "text": {
+            "de": "Die Körperschaftsteuer teilen sich Bund und Länder je zur Hälfte; den Solidaritätszuschlag erhält der Bund allein. Die Gemeinden sind nicht direkt beteiligt.",
+            "en": "Corporate income tax is shared half and half between the federal government and the states; the solidarity surcharge goes to the federal government alone. The municipalities have no direct share."
+          },
+          "sources": [
+            "gg_art_106",
+            "bt_drs_21_323"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Schuldenrechnung folgt der Projektion der Bundesregierung, die die beschlossene Senkung enthält. Eine Erhöhung über 15 % setzt dort auf dem schon gesenkten Satz auf und ist deshalb zu klein angesetzt; eine Einstellung unter 15 % zählt die Senkung ein zweites Mal.",
+            "en": "The debt calculation follows the government's projection, which contains the enacted cut. An increase above 15% therefore builds on the already lowered rate there and is understated; a setting below 15% counts the cut a second time."
+          },
+          "sources": [
+            "bt_drs_21_323"
+          ]
+        },
+        {
+          "text": {
+            "de": "Der Betrag je Punkt beruht auf dem Verhältnis, das der Gesetzentwurf für 2028 und 2029 ansetzt, übertragen auf 2024. Gewinne ändern sich von Jahr zu Jahr stark: Das Kassenaufkommen sank von 46,3 Mrd. Euro (2022) auf 39,8 Mrd. Euro (2024).",
+            "en": "The amount per point rests on the ratio the bill uses for 2028 and 2029, carried over to 2024. Profits change a great deal from year to year: cash revenue fell from €46.3bn (2022) to €39.8bn (2024)."
+          },
+          "sources": [
+            "bt_drs_21_323",
+            "bmf_steuerschaetzung_2025_05",
+            "bmf_datensammlung_steuerpolitik_2025"
+          ]
+        }
+      ],
+      "sources": [
+        "kstg_23",
+        "bt_drs_21_323",
+        "bt_textarchiv_kw26_2025_investitionsprogramm",
+        "bmf_steuerschaetzung_2025_05",
+        "linke_wahlprogramm_2025",
+        "diw_stellungnahme_investitionsbooster_2025"
+      ],
+      "timing": {
+        "param": "rate",
+        "below": {
+          "from": "2027-07-01",
+          "yearsPerUnit": 1
+        },
+        "note": {
+          "de": "Über 15 % wirkt der neue Satz ab 2027 in vollem Umfang, wie jede Maßnahme ohne eigenen Fahrplan. Unter 15 % folgt die Rechnung dem geltenden Recht: ein Punkt weniger je Jahr ab 2028 (§ 23 KStG). Damit die Jahresmittel den gesetzlichen Stufen entsprechen (2028 ein Punkt, 2029 zwei, ab 2032 fünf), beginnt der gleichmäßige Rückgang rechnerisch am 1. Juli 2027; 2027 enthält dadurch ein Achtel Punkt.",
+          "en": "Above 15% the new rate acts in full from 2027, like every measure without a schedule of its own. Below 15% the calculation follows current law: one point less per year from 2028 (section 23 of the Corporate Income Tax Act). So that the yearly averages match the legal steps (one point in 2028, two in 2029, five from 2032), the even decline starts arithmetically on 1 July 2027; 2027 therefore contains an eighth of a point."
+        },
+        "sources": [
+          "kstg_23",
+          "bt_drs_21_323"
+        ]
+      }
+    },
+    {
+      "id": "wealth_levy",
+      "label": {
+        "de": "Einmalige Vermögensabgabe erheben",
+        "en": "Levy a one-off charge on large fortunes"
+      },
+      "summary": {
+        "de": "Erhebt einmal eine Abgabe auf große Vermögen, zahlbar in 20 Jahresraten. Die Grundeinstellung zeigt das Konzept der Linken: 10 bis 30 % auf Vermögen über 2 Mio. Euro.",
+        "en": "Levies a one-off charge on large fortunes, payable in 20 yearly instalments. The default shows Die Linke's concept: 10 to 30% on wealth above €2m."
+      },
+      "explanation": {
+        "de": "Die Abgabe wird einmal auf das Nettovermögen zu einem Stichtag festgesetzt. Der Satz steigt gleichmäßig von einem Drittel des Spitzensatzes auf den Teil knapp über dem Freibetrag bis zum Spitzensatz auf den Teil, der mehr als 100 Mio. Euro über dem Freibetrag liegt; in der Grundeinstellung von 10 auf 30 %. Die Schuld darf in 20 gleichen Jahresraten mit 2 % Zinsen gezahlt werden, das sind 6,06 % der Schuld im Jahr. Die Karte zeigt eine solche Jahresrate; in der Schuldenprojektion wirkt sie 20 Jahre lang und endet dann.\n\nDie Linke fordert die Abgabe in ihrem Wahlprogramm 2025 für die reichsten 0,7 % und nennt mindestens 310 Mrd. Euro; im November 2025 hat sie im Bundestag beantragt, eine Vermögensteuer und eine solche Abgabe einzuführen. Ihr Konzept, das das DIW 2020 für sie durchgerechnet hat, sieht Freibeträge von 2 Mio. Euro je Person und 5 Mio. Euro für Betriebsvermögen vor und den Spitzensatz ab 100 Mio. Euro. Die Rechnung kennt nur Vermögen je Haushalt ohne Vermögensarten; der Regler für den Aufkommensverlust steht deshalb auch für diese Freibeträge. Mit 35 % liegt die Grundeinstellung nahe an der Schätzung des DIW für das Konzept, auf das Vermögen von 2024 hochgerechnet.\n\nZusammen mit der Maßnahme zur Vermögensteuer: Die Linke fordert beides. Beide rechnen auf denselben Vermögen, jede für sich. Wird die Abgabeschuld wie andere Schulden vom Vermögen abgezogen, brächte die Vermögensteuer weniger, als ihre Karte zeigt, bei den größten Vermögen anfangs bis zu knapp 30 % weniger. Die Abgabe ginge an den Bund, die Vermögensteuer an die Länder.",
+        "en": "The levy is assessed once on net wealth at a reference date. The rate rises evenly from a third of the top rate on the part just above the allowance to the top rate on the part more than €100m above the allowance; at the default from 10 to 30%. The debt may be paid in 20 equal yearly instalments with 2% interest, which is 6.06% of the debt a year. The card shows one such instalment; in the debt projection it acts for 20 years and then ends.\n\nDie Linke demands the levy in its 2025 election programme for the richest 0.7% and cites at least €310bn; in November 2025 it moved in the Bundestag to introduce a wealth tax and such a levy. Its concept, which DIW calculated for it in 2020, provides for allowances of €2m per person and €5m for business assets and the top rate from €100m. The calculation knows only wealth per household, without types of assets; the slider for lost revenue therefore also stands for these allowances. At 35% the default comes close to DIW's estimate for the concept, scaled up to the wealth of 2024.\n\nTogether with the wealth tax measure: Die Linke demands both. Both calculate on the same fortunes, each on its own. If the levy owed is deducted from wealth like other debts, the wealth tax would raise less than its card shows, initially up to just under 30% less on the largest fortunes. The levy would go to the federal government, the wealth tax to the states."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "allowance",
+          "type": "number",
+          "label": {
+            "de": "Freibetrag je Haushalt",
+            "en": "Allowance per household"
+          },
+          "unit": "currency",
+          "min": 1000000,
+          "max": 20000000,
+          "step": 500000,
+          "default": 2000000
+        },
+        {
+          "id": "top",
+          "type": "number",
+          "label": {
+            "de": "Spitzensatz ab 100 Mio. Euro über dem Freibetrag (der Satz beginnt bei einem Drittel davon)",
+            "en": "Top rate from €100m above the allowance (the rate starts at a third of it)"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 45,
+          "step": 1,
+          "default": 30,
+          "baseline": 0
+        },
+        {
+          "id": "loss",
+          "type": "number",
+          "label": {
+            "de": "Aufkommensverlust durch Freibeträge je Person und für Betriebsvermögen, Bewertung und Ausweichen",
+            "en": "Revenue lost to allowances per person and for business assets, valuation and avoidance"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 70,
+          "step": 5,
+          "default": 35,
+          "role": "assumption"
+        }
+      ],
+      "effects": [
+        {
+          "type": "schedule",
+          "target": "rev.taxes.property.wealth_levy",
+          "distribution": "net_wealth",
+          "reform": {
+            "brackets": [
+              {
+                "from": {
+                  "param": "allowance"
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.0035
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 5000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00383333
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 10000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00416667
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 15000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.0045
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 20000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00483333
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 25000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00516667
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 30000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.0055
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 35000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00583333
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 40000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00616667
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 45000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.0065
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 50000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00683333
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 55000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00716667
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 60000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.0075
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 65000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00783333
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 70000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00816667
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 75000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.0085
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 80000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00883333
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 85000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00916667
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 90000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.0095
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 95000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.00983333
+                }
+              },
+              {
+                "from": {
+                  "param": "allowance",
+                  "offset": 100000000
+                },
+                "rate": {
+                  "param": "top",
+                  "scale": 0.01
+                }
+              }
+            ]
+          },
+          "yield": {
+            "param": "loss",
+            "scale": -0.000606,
+            "offset": 0.0606
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.6,
+            "high": 1.25
+          },
+          "sources": [
+            "ecb_dwa",
+            "diw_kompakt_157",
+            "linke_wahlprogramm_2025",
+            "rosalux_vermoegensabgabe_2020"
+          ],
+          "note": {
+            "de": "Abgabe nach dem eingestellten Satz auf das Vermögen oberhalb des Freibetrags laut Vermögensverteilung 2024 (Haushalte), mal 6,06 % für eine Jahresrate, abzüglich des eingestellten Aufkommensverlusts. Der gleichmäßig steigende Satz ist in 20 Stufen zu je 5 Mio. Euro angenähert. Mit der Grundeinstellung ergibt die Verteilung eine Abgabeschuld von 668 Mrd. Euro, nach 35 % Verlust 434 Mrd. Euro, im Jahr 26,3 Mrd. Euro. Zum Vergleich: Das DIW schätzte 2020 für das Konzept der Linken 338 bis 560 Mrd. Euro mit dem Spitzensatz ab 30 Mio. Euro und 15 bis 18 % weniger mit dem Spitzensatz ab 100 Mio. Euro; für die Variante, die sie fordert, nennt Die Linke 310 Mrd. Euro. Das galt für das Vermögen am 1. Januar 2020. Das Vermögen der reichsten 5 % ist nach der Vermögensbilanz der EZB von Ende 2019 bis Ende 2024 um 41 % gewachsen; hochgerechnet sind das rund 437 Mrd. Euro oder 26,5 Mrd. Euro im Jahr. Die Spanne folgt dem Konfidenzintervall des DIW von etwa ±25 % und der Unsicherheit über die Spitze der Verteilung.",
+            "en": "Levy at the chosen rate on wealth above the allowance according to the 2024 wealth distribution (households), times 6.06% for one yearly instalment, minus the chosen revenue loss. The evenly rising rate is approximated in 20 steps of €5m each. At the default the distribution gives a levy of €668bn, €434bn after a 35% loss, €26.3bn a year. For comparison: in 2020 DIW estimated €338bn to €560bn for Die Linke's concept with the top rate from €30m, and 15 to 18% less with the top rate from €100m; for the variant it demands, Die Linke cites €310bn. That applied to wealth on 1 January 2020. According to the ECB's distributional wealth accounts the wealth of the richest 5% grew by 41% from the end of 2019 to the end of 2024; scaled up, that is about €437bn, or €26.5bn a year. The range follows DIW's confidence interval of about ±25% and the uncertainty about the top of the distribution."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Eine einmalige Vermögensabgabe darf der Bund erheben; das Aufkommen steht ihm allein zu, und der Bundesrat muss nicht zustimmen (Art. 106 Abs. 1 Nr. 5 Grundgesetz). Umstritten ist, ob sie einen außergewöhnlichen Anlass oder Finanzbedarf voraussetzt. Das Bundesverfassungsgericht hat das nie entschieden; seit dem Lastenausgleich von 1952 gab es keine solche Abgabe. Die Wissenschaftlichen Dienste des Bundestags finden 2022 in der Auslegung des Grundgesetzes keine zwingende Grundlage für diese Voraussetzung, weisen aber darauf hin, dass große Teile des Schrifttums strenger urteilen und die Abgabe deshalb mit erheblicher Rechtsunsicherheit verbunden wäre. Ein Gutachten für die Hans-Böckler-Stiftung und ver.di (Wieland, 2012) hält sie für zulässig; der Wissenschaftliche Beirat beim Finanzministerium sieht 2021 in den Ausnahmen der Schuldenbremse ein Argument dagegen, ein Gutachten für die Stiftung Familienunternehmen (Di Fabio, 2022) leitet aus dem Schutz des Eigentums enge Grenzen ab.",
+            "en": "The federal government may levy a one-off charge on wealth; the revenue goes to it alone, and the Bundesrat need not consent (Article 106(1) no. 5 of the Basic Law). It is disputed whether such a levy requires an exceptional occasion or financing need. The Federal Constitutional Court has never decided this; there has been no such levy since the Lastenausgleich of 1952. In 2022 the Bundestag's research services found no compelling basis for such a requirement in the interpretation of the Basic Law, but pointed out that much of the legal literature takes a stricter view and that the levy would therefore involve considerable legal uncertainty. An opinion for the Hans Böckler Foundation and the ver.di union (Wieland, 2012) considers it permissible; the Academic Advisory Board at the finance ministry saw in 2021 the exceptions of the debt brake as an argument against it, and an opinion for the Stiftung Familienunternehmen (Di Fabio, 2022) derives narrow limits from the protection of property."
+          },
+          "sources": [
+            "wd_4_090_22",
+            "gg_art_106"
+          ]
+        },
+        {
+          "kind": "legal",
+          "severity": "major",
+          "text": {
+            "de": "Die Abgabe muss einmalig bleiben. In Raten über viele Jahre darf sie gezahlt werden, wie beim Lastenausgleich ab 1952; wiederholt erhoben wäre sie eine verkappte Vermögensteuer, die der Zustimmung des Bundesrates bedürfte. Nach den Wissenschaftlichen Diensten darf der Bund die Abgabe außerdem nicht missbräuchlich zulasten einer Vermögensteuer der Länder einsetzen; solange keine erhoben wird, stellt sich die Frage nicht.",
+            "en": "The levy must remain a one-off. It may be paid in instalments over many years, as with the Lastenausgleich from 1952; levied repeatedly, it would be a wealth tax in disguise that would need the consent of the Bundesrat. According to the research services, the federal government also may not use the levy abusively at the expense of a wealth tax of the states; as long as none is levied, the question does not arise."
+          },
+          "sources": [
+            "wd_4_041_20",
+            "wd_4_090_22"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Zahlen müssten nach dem DIW 300.000 bis 400.000 Personen, die reichsten 0,5 % der Bevölkerung; über 90 % des Aufkommens kämen von den reichsten 0,1 %. Gut zwei Drittel der Bemessungsgrundlage gehören Haushalten, deren Haushaltsvorstand 65 oder älter ist. Weil Unternehmens- und Immobilienvermögen überwiegen, kann eine Jahresrate die laufenden Erträge übersteigen; das DIW schlägt Erleichterungen in Verlustphasen und die Möglichkeit vor, die Schuld in staatliche Beteiligungen umzuwandeln.",
+            "en": "According to DIW, 300,000 to 400,000 people would have to pay, the richest 0.5% of the population; over 90% of the revenue would come from the richest 0.1%. Just over two-thirds of the tax base belongs to households whose head is 65 or older. Because business and real estate assets dominate, a yearly instalment can exceed the current income from the assets; DIW proposes relief in loss-making years and the option to convert the debt into state shareholdings."
+          },
+          "sources": [
+            "diw_kompakt_157"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Alle großen Vermögen müssten einmal zum Stichtag bewertet werden, Immobilien und nicht börsennotierte Unternehmen eingeschlossen. Das DIW schätzt die Erhebungskosten auf 2 bis 3,5 % des Aufkommens, einschließlich der Mindereinnahmen durch Wertgutachten. Ein zurückliegender Stichtag soll verhindern, dass Betroffene vorher umschichten oder wegziehen.",
+            "en": "All large fortunes would have to be valued once at the reference date, including real estate and unlisted businesses. DIW estimates the collection costs at 2 to 3.5% of the revenue, including the revenue lost through valuation reports. A reference date in the past is meant to prevent those affected from restructuring or moving away beforehand."
+          },
+          "sources": [
+            "diw_kompakt_157"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Die Linke hat ihre Forderung im November 2025 in einem Antrag zum Weltsozialgipfel der Vereinten Nationen erneuert. CDU und CSU lehnen eine Vermögensteuer ab (Wahlprogramm 2025), und die Koalition will sie nach ihren Steuerplänen vom Sommer 2026 nicht wieder einführen.",
+            "en": "Die Linke renewed its demand in November 2025 in a motion on the UN World Summit for Social Development. CDU and CSU reject a wealth tax (2025 election programme), and according to its tax plans of summer 2026 the coalition does not intend to reintroduce it."
+          },
+          "sources": [
+            "bt_drs_21_2538",
+            "cdu_csu_wahlprogramm_2025",
+            "test_de_steuerreform_2026"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Verteilung ist die der Haushalte, nicht der Personen: Ein Paar hat hier einen Freibetrag, im Konzept der Linken zwei. Freibeträge für Betriebsvermögen sind nicht abgebildet. Beides senkt das Aufkommen und steckt im Regler für den Aufkommensverlust.",
+            "en": "The distribution is that of households, not of persons: a couple has one allowance here, two in Die Linke's concept. Allowances for business assets are not modelled. Both lower the revenue and are contained in the slider for lost revenue."
+          },
+          "sources": [
+            "ecb_dwa",
+            "diw_kompakt_157"
+          ]
+        },
+        {
+          "text": {
+            "de": "Fast das ganze Aufkommen stammt von der Spitze der Vermögensverteilung, und wie sich das Vermögen dort verteilt, ist eine Modellannahme (Pareto-Verteilung oberhalb des 90. Perzentils).",
+            "en": "Almost all of the revenue comes from the top of the wealth distribution, and how wealth is spread there is a modelling assumption (a Pareto distribution above the 90th percentile)."
+          },
+          "sources": [
+            "ecb_dwa"
+          ]
+        }
+      ],
+      "sources": [
+        "diw_kompakt_157",
+        "linke_wahlprogramm_2025",
+        "bt_drs_21_2538",
+        "rosalux_vermoegensabgabe_2020",
+        "wd_4_090_22",
+        "wd_4_041_20",
+        "ecb_dwa",
+        "gg_art_106"
+      ],
+      "timing": {
+        "lasts": 20,
+        "note": {
+          "de": "Die Abgabeschuld wird einmal festgesetzt und in 20 Jahresraten gezahlt (Konzept der Linken, DIW-Studie). Die Rechnung lässt die Raten 2027 beginnen, im ersten Jahr, in dem Maßnahmen wirken, und Ende 2046 enden; ein Gesetzentwurf mit einem Datum liegt nicht vor.",
+          "en": "The levy is assessed once and paid in 20 yearly instalments (Die Linke's concept, DIW study). The calculation lets the instalments begin in 2027, the first year in which measures act, and end at the close of 2046; there is no bill with a date."
+        },
+        "sources": [
+          "diw_kompakt_157",
+          "linke_wahlprogramm_2025"
+        ]
+      }
+    },
+    {
+      "id": "first_home_transfer_tax",
+      "label": {
+        "de": "Keine Grunderwerbsteuer beim ersten Eigenheim",
+        "en": "No real estate transfer tax on a first home"
+      },
+      "summary": {
+        "de": "Befreit den ersten Kauf eines selbst bewohnten Hauses oder einer Wohnung ganz oder teilweise von der Grunderwerbsteuer der Länder. Die Grundeinstellung befreit ihn ganz.",
+        "en": "Exempts the first purchase of a house or flat to live in from the states' real estate transfer tax, in full or in part. The default exempts it in full."
+      },
+      "explanation": {
+        "de": "Die Grunderwerbsteuer zahlen Käufer auf den Kaufpreis eines Grundstücks oder einer Wohnung, je nach Land 3,5 bis 6,5 %. Die Länder legen den Satz fest; einen Freibetrag kann nur der Bund mit Zustimmung des Bundesrates einführen.\n\nCDU und CSU wollen den Ländern erlauben, beim ersten Kauf eines selbst genutzten Hauses oder einer Wohnung 250.000 Euro je Erwachsenem und 150.000 Euro je Kind freizustellen (Wahlprogramm 2025); für die meisten Familien bliebe der erste Kauf damit steuerfrei. Die Grundeinstellung nimmt an, dass alle Länder das ganz nutzen. Die AfD hat im Oktober 2026 beantragt, die Steuer bei jedem Kauf zu eigenen Wohnzwecken abzuschaffen; dafür auch den zweiten Regler auf 100 % stellen.\n\nDer Betrag beruht auf einer Schätzung des IW für Nordrhein-Westfalen von 2017, übertragen auf ganz Deutschland und 2024.",
+        "en": "Buyers pay the real estate transfer tax on the price of a plot or a flat, 3.5 to 6.5% depending on the state. The states set the rate; an allowance can only be introduced by the federal government with the consent of the Bundesrat.\n\nCDU and CSU want to allow the states to exempt €250,000 per adult and €150,000 per child on the first purchase of a home to live in (2025 election programme); for most families the first purchase would then be tax-free. The default assumes that all states use this in full. In October 2026 the AfD moved to abolish the tax on every purchase of a home to live in; for that, set the second slider to 100% as well.\n\nThe amount rests on an IW estimate for North Rhine-Westphalia from 2017, carried over to Germany as a whole and to 2024."
+      },
+      "topic": "taxes",
+      "params": [
+        {
+          "id": "first",
+          "type": "number",
+          "label": {
+            "de": "Erster Kauf eines selbst genutzten Hauses oder einer Wohnung: Anteil der Steuer, der entfällt",
+            "en": "First purchase of a house or flat to live in: share of the tax removed"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 100,
+          "baseline": 0
+        },
+        {
+          "id": "further",
+          "type": "number",
+          "label": {
+            "de": "Jeder weitere Kauf zu eigenen Wohnzwecken: Anteil der Steuer, der entfällt",
+            "en": "Every further purchase of a home to live in: share of the tax removed"
+          },
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "default": 0,
+          "baseline": 0
+        }
+      ],
+      "effects": [
+        {
+          "type": "add",
+          "target": "rev.taxes.property.real_estate_transfer",
+          "amount": {
+            "param": "first",
+            "scale": -52275000
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.55,
+            "high": 1.1,
+            "basis": "transactions"
+          },
+          "sources": [
+            "iw_grest_2017",
+            "eurostat_ntl"
+          ],
+          "note": {
+            "de": "Das IW schätzte 2017 für Nordrhein-Westfalen, dass ein Freibetrag von 500.000 Euro für Ersterwerber von Wohneigentum das Aufkommen um 41 % senkt (Gegenprobe mit den Steuerbescheiden: 43 %), auf Grundlage der Käufe von 2015. Es nahm an, dass alle Käufe von Häusern und Wohnungen durch Privatleute selbst genutzt werden und 70 % der Käufer zum ersten Mal kaufen (Sozio-oekonomisches Panel). Die Rechnung überträgt die 41 % auf das Aufkommen in Deutschland 2024 (12,75 Mrd. Euro): 5,23 Mrd. Euro bei voller Befreiung, 52,3 Mio. Euro je Prozentpunkt. Weil die Studie auch Käufe zum Vermieten mitzählt, liegt die Schätzung eher hoch; die untere Grenze von 55 % trägt dem Rechnung.",
+            "en": "In 2017 IW estimated for North Rhine-Westphalia that an allowance of €500,000 for first-time buyers of owner-occupied homes lowers revenue by 41% (check against the tax assessments: 43%), based on the purchases of 2015. It assumed that all purchases of houses and flats by private persons are owner-occupied and that 70% of buyers buy for the first time (Socio-Economic Panel). The calculation carries the 41% over to revenue in Germany in 2024 (€12.75bn): €5.23bn with a full exemption, €52.3m per percentage point. Because the study also counts purchases for letting, the estimate tends to be high; the lower bound of 55% allows for that."
+          }
+        },
+        {
+          "type": "add",
+          "target": "rev.taxes.property.real_estate_transfer",
+          "amount": {
+            "param": "further",
+            "scale": -22403571
+          },
+          "quality": "estimate",
+          "uncertainty": {
+            "low": 0.55,
+            "high": 1.1,
+            "basis": "transactions"
+          },
+          "sources": [
+            "iw_grest_2017",
+            "eurostat_ntl"
+          ],
+          "note": {
+            "de": "Weitere Käufe zu eigenen Wohnzwecken: Nach der Annahme des IW kaufen 70 % der Käufer selbst genutzter Wohnungen und Häuser zum ersten Mal, 30 % nicht. Die Rechnung setzt ihren Anteil am Aufkommen mit 30/70 der 41 % an, 17,6 %: 2,24 Mrd. Euro bei voller Befreiung. Wer nicht zum ersten Mal kauft, kauft oft teurer; der Anteil kann deshalb höher liegen.",
+            "en": "Further purchases of a home to live in: by IW's assumption, 70% of buyers of owner-occupied flats and houses buy for the first time and 30% do not. The calculation puts their share of revenue at 30/70 of the 41%, 17.6%: €2.24bn with a full exemption. Those who do not buy for the first time often buy more expensive homes; the share may therefore be higher."
+          }
+        }
+      ],
+      "catches": [
+        {
+          "kind": "cost_shift",
+          "severity": "major",
+          "text": {
+            "de": "Das Aufkommen steht allein den Ländern zu (Art. 106 Abs. 2 Nr. 3 Grundgesetz); der Bundeshaushalt verliert nichts und gewinnt nichts. Im Finanzausgleich zählt die Grunderwerbsteuer nicht mit dem tatsächlichen Aufkommen, sondern mit dem Anteil eines Landes am bundesweiten Umsatz mal dem durchschnittlichen Satz. Die Wissenschaftlichen Dienste des Bundestags weisen darauf hin, dass ein Freibetrag Länder mit unterdurchschnittlichem Satz zusätzlich schlechter stellen könnte, weil ihnen mehr Finanzkraft angerechnet wird, als sie einnehmen. Das IW warnt, dass Länder ihre Sätze erhöhen könnten, um den Ausfall auszugleichen.",
+            "en": "The revenue goes to the states alone (Article 106(2) no. 3 of the Basic Law); the federal budget neither loses nor gains. In the fiscal equalisation among the states, the transfer tax counts not with actual revenue but with each state's share of nationwide transactions times the average rate. The Bundestag's research services point out that an allowance could put states with a below-average rate at a further disadvantage, because more fiscal capacity is attributed to them than they collect. IW warns that states could raise their rates to make up for the loss."
+          },
+          "sources": [
+            "gg_art_106",
+            "wd_4_072_19",
+            "iw_grest_2017"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "major",
+          "text": {
+            "de": "Wer am Ende profitiert, ist offen. Nach einer Studie des ifo-Instituts mit Daten zu rund 17 Mio. Immobilien senkt ein um einen Prozentpunkt höherer Satz die Preise nach zwölf Monaten um rund 3 %, mehr als die Steuer selbst; die Last tragen also vor allem die Verkäufer. Umgekehrt kann eine Entlastung zu einem guten Teil in höhere Preise fließen. Die Studie misst Änderungen des Satzes für alle Käufer, nicht eine Befreiung nur für Ersterwerber.",
+            "en": "Who benefits in the end is open. According to an ifo Institute study with data on about 17 million properties, a rate higher by one percentage point lowers prices by about 3% after twelve months, more than the tax itself; the burden thus falls mainly on sellers. Conversely, much of a relief may flow into higher prices. The study measures changes in the rate for all buyers, not an exemption for first-time buyers only."
+          },
+          "sources": [
+            "dolls_et_al_2025"
+          ]
+        },
+        {
+          "kind": "practical",
+          "severity": "major",
+          "text": {
+            "de": "Große Käufer zahlen die Steuer teils gar nicht: Wer weniger als 90 % der Anteile an einer Gesellschaft mit Grundbesitz übernimmt (Share Deal), bleibt steuerfrei. Einen Antrag der Grünen, solche Käufe anteilig zu besteuern, lehnte der Bundestag am 8. Oktober 2026 ab; die Grünen beziffern den Ausfall auf rund 1 Mrd. Euro im Jahr. Die Koalition von SPD, Grünen und FDP wollte Freibeträge für den Erwerb selbst genutzter Wohnungen mit dem Schließen dieser Lücke gegenfinanzieren; ein Entwurf des Finanzministeriums von 2023 sah das vor, Gesetz wurde daraus nicht.",
+            "en": "Large buyers sometimes pay no tax at all: whoever takes over less than 90% of the shares in a company that owns property (a share deal) stays tax-free. On 8 October 2026 the Bundestag rejected a Greens motion to tax such purchases in proportion to the stake; the Greens put the loss at about €1bn a year. The coalition of SPD, Greens and FDP wanted to finance allowances for buying homes to live in by closing this loophole; a draft by the finance ministry of 2023 provided for this, but it did not become law."
+          },
+          "sources": [
+            "grestg",
+            "bt_textarchiv_kw41_2026_steuersystem",
+            "wirtschaftsdienst_2023_grunderwerbsteuer"
+          ]
+        },
+        {
+          "kind": "political",
+          "severity": "minor",
+          "text": {
+            "de": "Der Koalitionsvertrag von CDU, CSU und SPD verspricht Familien eine „Starthilfe Wohneigentum“ mit steuerlichen und eigenkapitalersetzenden Maßnahmen, einen Freibetrag bei der Grunderwerbsteuer nennt er nicht. Länder können schon heute selbst helfen: Hessen zahlt Erstkäufern seit März 2024 10.000 Euro je Erwerber und 5.000 Euro je Kind, höchstens die gezahlte Steuer, verteilt auf zehn Jahre („Hessengeld“); bis September 2025 bewilligte es gut 10.500 Anträge.",
+            "en": "The coalition agreement of CDU, CSU and SPD promises families a \"start-up aid for home ownership\" with tax measures and measures that substitute for equity; it does not mention an allowance in the transfer tax. States can already help on their own: since March 2024 Hesse has paid first-time buyers €10,000 per buyer and €5,000 per child, at most the tax paid, spread over ten years (\"Hessengeld\"); by September 2025 it had approved just over 10,500 applications."
+          },
+          "sources": [
+            "koalitionsvertrag_2025",
+            "hessengeld_faq_2025",
+            "hessengeld_bilanz_2025"
+          ]
+        },
+        {
+          "kind": "economic",
+          "severity": "minor",
+          "text": {
+            "de": "Eine Befreiung nur des ersten Kaufs lässt die Steuer beim späteren Umzug bestehen, die Eigentümer davon abhält, in eine passendere Wohnung zu ziehen.",
+            "en": "Exempting only the first purchase leaves the tax on a later move, which keeps owners from moving to a more suitable home."
+          },
+          "sources": [
+            "wirtschaftsdienst_2023_grunderwerbsteuer"
+          ]
+        }
+      ],
+      "limits": [
+        {
+          "text": {
+            "de": "Die Schätzung stammt aus Nordrhein-Westfalen mit den Käufen und Preisen von 2015 und einem Satz von 6,5 %. Anteile der Ersterwerber und Preise können sich seitdem und zwischen den Ländern unterscheiden; Länder mit niedrigerem Satz verlieren entsprechend weniger.",
+            "en": "The estimate comes from North Rhine-Westphalia with the purchases and prices of 2015 and a rate of 6.5%. The share of first-time buyers and prices may differ since then and between the states; states with a lower rate lose correspondingly less."
+          },
+          "sources": [
+            "iw_grest_2017"
+          ]
+        },
+        {
+          "text": {
+            "de": "Zusätzliche Käufe, die eine Befreiung auslösen könnte, sind nicht eingerechnet.",
+            "en": "Additional purchases that an exemption might trigger are not included."
+          },
+          "sources": [
+            "iw_grest_2017"
+          ]
+        }
+      ],
+      "sources": [
+        "cdu_csu_wahlprogramm_2025",
+        "bt_drs_21_8382",
+        "afd_wahlprogramm_2025",
+        "iw_grest_2017",
+        "wd_4_072_19",
+        "dolls_et_al_2025",
+        "gg_art_106"
+      ]
+    },
+    {
       "id": "defence_spending_target",
       "label": {
         "de": "Verteidigungsausgaben festlegen",

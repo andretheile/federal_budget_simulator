@@ -101,6 +101,10 @@ Arithmetic on published figures:
 - the zero-amount leaves "tax on sugar-sweetened drinks" and "tax on plastic packaging": neither tax was
   levied in 2024; both were debated with the 2027 federal budget. They exist so that a measure can book
   them, like the wealth tax; as excise duties they are federal (Article 106(1) of the Basic Law);
+- the zero-amount leaf "one-off wealth levy": no such levy has been raised since the Lastenausgleich of 1952; Die
+  Linke demands one. It exists so that a measure can book the yearly instalments. Unlike the wealth tax, which
+  goes to the states, a one-off levy goes to the federal level alone (Article 106(1) no. 5 of the Basic Law); in
+  national accounts it would be a capital tax (D.91);
 - VAT by rate: the revenue at the reduced rate is not published. It is derived from the government's
   estimates of revenue forgone at 7 instead of 19 % (all reduced rates, food, accommodation, culture, local
   transport, and restaurant meals, which were at the standard rate in 2024): revenue forgone / 12 * 7, or
