@@ -207,8 +207,8 @@ Judgement, to be reviewed by whoever updates the data:
   sickness and disability and the rest together -1.3, -0.9, +1.5, +0.7. Asylum seekers' benefits, and the
   replacement benefits that copy their shares, went from 36.6 to 34.4 % states. A measure on these leaves
   therefore shows somewhat different burdens by level than before the two leaves were added.
-- **Where the items carved out of COFOG groups sit in national accounts.** Eurostat does not publish them. The
-  EEG payments are subsidies and fit in fuel and energy (04.3, subsidies EUR 26.3 billion). The building
+- **Where the items carved out of COFOG groups and of sales sit in national accounts.** Eurostat does not
+  publish them. The EEG payments are subsidies and fit in fuel and energy (04.3, subsidies EUR 26.3 billion). The building
   grants (EUR 14.1 billion) are filed under housing in the federal budget, but housing development (06.1) has
   only EUR 3.3 billion of capital transfers at all levels; general economic affairs (04.1, EUR 21.5 billion)
   is the only group with room for them. The broadcasters' spending in national accounts is taken as the KEF's
