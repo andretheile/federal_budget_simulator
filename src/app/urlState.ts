@@ -9,7 +9,8 @@
  *   d     assumptions of the debt projection that differ from their defaults (see app/debtLink.ts)
  *   g     the goal the bar under the scoreboard measures against, when it is not the pack's default
  *   f     the collection of measures the list is narrowed to, when one is chosen
- *   v     the form of the budget overview ("bars" or "flow"), when it is not the default
+ *   v     the form of the budget overview ("flow" or "bars"), when it is not DEFAULT_BUDGET_FORM; with
+ *         the flow as the default, that is "bars"
  *   e     the curve editor that is open: measure id and curve parameter id, joined by a dot
  *   p     a legal page that replaces the simulator: "imprint" or "privacy"; while it is set, e is ignored
  *

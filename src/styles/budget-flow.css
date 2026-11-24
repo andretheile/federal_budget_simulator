@@ -1,6 +1,6 @@
 /*
- * The flow of money (BudgetFlow.tsx), loaded with its code, not with the first page; budget.css has
- * the switch, the placeholder and how the flow stays beside the measures on a wide screen.
+ * The flow of money (BudgetFlow.tsx), the form the budget overview opens with; budget.css has the
+ * switch and how the flow stays beside the measures on a wide screen.
  *
  * Three columns: where the money comes from, the budget, where it goes. Heads
  * on the first row; on the second the drawing (an SVG for the eye) and over it one button per node,

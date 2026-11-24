@@ -1,5 +1,5 @@
 /*
- * Budget view. Two stacked bars on one scale, a legend under each, or the flow of money, then the breakdown list.
+ * Budget view. The flow of money, or two stacked bars on one scale with a legend under each, then the breakdown list.
  * Marks follow the house rules: 2px gaps in the page colour between blocks, no outlines, labels
  * inside a block only where they were measured to fit, text in ink and never in a series colour.
  */
@@ -281,7 +281,7 @@
 }
 
 /*
- * The switch between the two forms of the overview: bars, or the flow of money. One segmented
+ * The switch between the two forms of the overview: the flow of money, or bars. One segmented
  * row, like the other choices of the page that show one of two pictures.
  */
 .budget__forms {
@@ -319,55 +319,6 @@
   .budget__forms button {
     min-height: 44px;
   }
-}
-
-/*
- * Where the flow of money will stand while its code arrives (its own styles are in budget-flow.css):
- * about its height, so the list below does not jump.
- */
-.flow--pending {
-  min-height: 340px;
-  font-size: 14px;
-  color: var(--ink-2);
-}
-
-/* Said only if the wait is noticeable. */
-.flow__loading {
-  animation: flow-loading 0.2s ease 0.4s both;
-}
-
-@keyframes flow-loading {
-  from {
-    opacity: 0;
-  }
-}
-
-.flow--pending.is-failed {
-  display: grid;
-  justify-items: start;
-  align-content: start;
-  gap: 14px;
-}
-
-.flow--pending.is-failed p {
-  max-width: 60ch;
-  padding: 9px 12px;
-  border-left: 3px solid var(--worsen);
-  background: var(--sunken);
-  color: var(--ink);
-}
-
-.flow__retry {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 36px;
-  padding: 0 14px;
-  border: 1px solid var(--ink);
-  border-radius: 4px;
-  background: none;
-  font-size: 14px;
-  font-weight: 600;
 }
 
 /* The breakdown list. */

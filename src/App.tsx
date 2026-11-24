@@ -33,7 +33,8 @@ import { sameDebtAssumptions } from "./app/debtLink.ts";
 import { useDebtView } from "./app/debtModel.ts";
 import { useLegalPage } from "./app/legalPage.ts";
 import { About } from "./components/About.tsx";
-import { BudgetView, preloadFlow } from "./components/BudgetView.tsx";
+import { FLOW_FONTS } from "./components/BudgetFlow.tsx";
+import { BudgetView } from "./components/BudgetView.tsx";
 import { DebtSection, DebtTeaser, preloadDebt } from "./components/DebtSection.tsx";
 import { CurveEditor, editableCurve, preloadEditor } from "./components/CurveEditor.tsx";
 import { GoalBar } from "./components/GoalBar.tsx";
@@ -56,6 +57,7 @@ import {
   type Side,
   type ValidationIssue,
 } from "./engine/index.ts";
+import { fontsReady } from "./hooks/useFontsLoaded.ts";
 import { useMediaQuery } from "./hooks/useMediaQuery.ts";
 import { languagesOf, messagesFor, pickLanguage } from "./i18n/index.ts";
 import { isPreviewPack, listPackIds, loadPack } from "./packs.ts";
@@ -64,6 +66,8 @@ import { currentSite } from "./site/current.ts";
 import { REPOSITORY_URL } from "./site/project.ts";
 
 const LANGUAGE_KEY = "budget-simulator:language";
+/** How long the first picture waits at most for the fonts of the flow's labels, in milliseconds. */
+const FONT_WAIT = 1500;
 
 /** Below this the page has one column (base.css, .workspace): the measures then come before the budget. */
 export const ONE_COLUMN = "(max-width: 1079px)";
@@ -121,10 +125,13 @@ async function load(id: string | undefined): Promise<Loaded> {
   if (parseHash(currentHash()).editor) preloadEditor();
   // A link with assumptions of the debt projection: that section's code too.
   if (parseHash(currentHash()).debt) preloadDebt();
-  // A link to the flow of money (or a page that opens on it): the flow's code.
-  if (formFromHash(currentHash()) === "flow") preloadFlow();
+  // The flow of money lays its labels out from their measured widths: its fonts are fetched beside
+  // the country's data, so that the first picture is the final one and nothing below it moves when
+  // the font arrives. Not for longer than the wait, though; the flow then measures again.
+  const fonts = formFromHash(currentHash()) === "flow" ? fontsReady(FLOW_FONTS, FONT_WAIT) : Promise.resolve();
   const requested = fixtureRequested();
   const result = id === undefined || requested ? undefined : await loadPack(id);
+  await fonts;
   if (result?.ok) return { pack: result.pack };
   // Development fallback: a made-up country, announced by a notice nobody can miss.
   const { testland } = await import("./engine/__fixtures__/testland.ts");
@@ -206,7 +213,7 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
   const goal = chosenGoal(pack, goalId);
   /** The collection the list of measures is narrowed to, if any. In the link as well. */
   const [collection, setCollection] = useState(() => collectionFromHash(currentHash(), pack));
-  /** The form of the budget overview: bars or the flow of money. In the link when it is not the default. */
+  /** The form of the budget overview: the flow of money or the bars. In the link when it is not the default (v=bars). */
   const [budgetForm, setBudgetForm] = useState<BudgetForm>(() => formFromHash(currentHash()));
   /** Which categories the flow folds, as it last reported; the bars fold as the layout says. */
   const [flowFolds, setFlowFolds] = useState<Record<Side, string[]>>();

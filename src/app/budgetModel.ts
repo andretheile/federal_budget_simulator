@@ -84,13 +84,14 @@ export function layoutBudget(pack: CountryPack): BudgetLayout {
 }
 
 /**
- * The two forms of the overview: two stacked bars, or the flow of the money from the revenue areas
- * through the budget to the spending areas. Both show the same amounts and share the selection.
+ * The two forms of the overview: the flow of the money from the revenue areas through the budget
+ * to the spending areas, or two stacked bars. Both show the same amounts and share the selection.
+ * The switch offers them in this order.
  */
-export type BudgetForm = "bars" | "flow";
-export const BUDGET_FORMS: readonly BudgetForm[] = ["bars", "flow"];
-/** The form the page opens with. A link names the form only when it is not this one. */
-export const DEFAULT_BUDGET_FORM: BudgetForm = "bars";
+export type BudgetForm = "flow" | "bars";
+export const BUDGET_FORMS: readonly BudgetForm[] = ["flow", "bars"];
+/** The form the page opens with. A link names the form only when it is not this one (`v=bars`). */
+export const DEFAULT_BUDGET_FORM: BudgetForm = "flow";
 
 /**
  * The same layout with other categories folded into "other". The flow has more room for labels

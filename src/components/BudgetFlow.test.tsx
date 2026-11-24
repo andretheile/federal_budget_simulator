@@ -9,18 +9,16 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { Simulator } from "../App.tsx";
 import { testland, testlandCopy } from "../engine/__fixtures__/testland.ts";
 import type { CountryPack } from "../engine/index.ts";
-import { flowModule } from "./BudgetView.tsx";
 
 let container: HTMLDivElement;
 let root: Root;
 
-beforeAll(async () => {
+beforeAll(() => {
   (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
-  // jsdom has no canvas: labels break after every word, which changes nothing tested here.
+  // jsdom has no canvas and no layout: labels break after every word and the flow takes a usual
+  // width, the same on every run, which changes nothing tested here.
   HTMLCanvasElement.prototype.getContext = (() => null) as typeof HTMLCanvasElement.prototype.getContext;
   window.scrollTo = (() => {}) as typeof window.scrollTo;
-  // The flow is a chunk of its own; here it is there from the start, as after a preload.
-  await flowModule.load();
 });
 
 beforeEach(() => {
@@ -61,37 +59,51 @@ const node = (name: string): HTMLButtonElement => {
   return button;
 };
 
-describe("the switch between bars and the flow of money", () => {
-  it("shows the bars by default and puts the flow in the address only when it is chosen", () => {
+describe("the switch between the flow of money and the bars", () => {
+  it("opens on the flow at once, and puts the bars in the address only when they are chosen", () => {
     mount("#lang=en");
-    expect(container.querySelector(".bars")).not.toBeNull();
-    expect(container.querySelector(".flow")).toBeNull();
+    // The flow is part of the page from the first render: no placeholder, nothing loading.
+    expect(container.querySelector(".flow__grid")).not.toBeNull();
+    expect(container.querySelector(".bars")).toBeNull();
+    expect(container.querySelector('.budget [role="status"]')).toBeNull();
     expect(query(".budget__forms").getAttribute("role")).toBe("group");
     expect(query(".budget__forms").getAttribute("aria-label")).toBe("View");
-    expect(formButton("Bars").getAttribute("aria-pressed")).toBe("true");
-    expect(formButton("Money flow").getAttribute("aria-pressed")).toBe("false");
-
-    act(() => formButton("Money flow").click());
-    expect(container.querySelector(".bars")).toBeNull();
-    expect(container.querySelector(".flow__grid")).not.toBeNull();
+    // The form the page opens with comes first.
+    expect([...container.querySelectorAll(".budget__forms button")].map((button) => button.textContent)).toEqual([
+      "Money flow",
+      "Bars",
+    ]);
     expect(formButton("Money flow").getAttribute("aria-pressed")).toBe("true");
-    expect(window.location.hash).toBe("#lang=en&v=flow");
+    expect(formButton("Bars").getAttribute("aria-pressed")).toBe("false");
     expect(clean(query(".budget .section-head p").textContent)).toMatch(/^Where the money comes from \(left\)/);
     expect(clean(query(".flow__note").textContent)).toBe(
       "The bands show amounts, not which revenue pays for which spending.",
     );
 
     act(() => formButton("Bars").click());
+    expect(container.querySelector(".flow")).toBeNull();
     expect(container.querySelector(".bars")).not.toBeNull();
+    expect(formButton("Bars").getAttribute("aria-pressed")).toBe("true");
+    expect(window.location.hash).toBe("#lang=en&v=bars");
+    expect(clean(query(".budget .section-head p").textContent)).toMatch(/^Revenue and spending on one scale\./);
+
+    act(() => formButton("Money flow").click());
+    expect(container.querySelector(".flow__grid")).not.toBeNull();
     expect(window.location.hash).toBe("#lang=en");
   });
 
-  it("opens on the flow from a link, and follows the address back and forth", () => {
-    mount("#lang=de&v=flow");
+  it("opens on the bars from a link, and follows the address back and forth", () => {
+    mount("#lang=de&v=bars");
+    expect(container.querySelector(".bars")).not.toBeNull();
+    expect(formButton("Balken").getAttribute("aria-pressed")).toBe("true");
+    act(() => {
+      window.history.replaceState(null, "", "#lang=de");
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    });
     expect(container.querySelector(".flow__grid")).not.toBeNull();
     expect(formButton("Geldfluss").getAttribute("aria-pressed")).toBe("true");
     act(() => {
-      window.history.replaceState(null, "", "#lang=de");
+      window.history.replaceState(null, "", "#lang=de&v=bars");
       window.dispatchEvent(new HashChangeEvent("hashchange"));
     });
     expect(container.querySelector(".bars")).not.toBeNull();
@@ -100,7 +112,7 @@ describe("the switch between bars and the flow of money", () => {
 
 describe("the flow of money", () => {
   it("has a name, and buttons for the nodes in keyboard order: the heads, the left column, then the right", () => {
-    mount("#lang=en&v=flow");
+    mount("#lang=en");
     const grid = query(".flow__grid");
     expect(grid.getAttribute("role")).toBe("group");
     expect(grid.getAttribute("aria-label")).toBe("Money flow: where the money comes from and where it goes");
@@ -130,7 +142,7 @@ describe("the flow of money", () => {
   });
 
   it("selects an area as the bars do, and keeps the selection when the form changes", () => {
-    mount("#lang=en&v=flow");
+    mount("#lang=en");
     // The page starts on the largest spending area.
     expect(node("Social protection").getAttribute("aria-pressed")).toBe("true");
     expect(clean(query(".detail__title").textContent)).toBe("Social protection");
@@ -171,7 +183,7 @@ describe("the flow of money", () => {
   });
 
   it("shows the scenario and its changes as the legend of the bars does", () => {
-    mount("#lang=en&s=family_bonus&v=flow");
+    mount("#lang=en&s=family_bonus");
     const social = node("Social protection");
     expect(clean(social.getAttribute("aria-label"))).toBe(
       "Social protection, XTS 2,300, 51.1% of spending, +XTS 100 compared with 2024",
@@ -182,7 +194,7 @@ describe("the flow of money", () => {
   });
 
   it("calls the gap of a single level a difference, not a balance", () => {
-    mount("#lang=en&s=L.central&v=flow");
+    mount("#lang=en&s=L.central");
     expect(container.querySelector(".flow__balance--deficit")).toBeNull();
     expect(clean(query(".flow__balance--difference").textContent)).toMatch(/^Difference/);
     expect(clean(query(".budget .section-head p").textContent)).toMatch(
@@ -201,7 +213,8 @@ describe("the flow of money", () => {
       quality: "official",
       sources: ["finance_ministry"],
     });
-    mount("#lang=en", pack);
+    // This starts in the bars, which fold them.
+    mount("#lang=en&v=bars", pack);
     const fold = [...container.querySelectorAll<HTMLButtonElement>(".legend__item")].find((item) =>
       item.textContent?.includes("Other areas (2)"),
     );

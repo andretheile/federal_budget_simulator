@@ -27,3 +27,18 @@ export function useFontsLoaded(fonts: readonly string[]): number {
   }, [key]);
   return version;
 }
+
+/**
+ * Resolves once the given CSS fonts have loaded, or after `wait` milliseconds, whichever comes
+ * first; never rejects. Where labels are laid out from measured widths, waiting for the font
+ * before the first paint keeps the layout from changing when it arrives.
+ */
+export function fontsReady(fonts: readonly string[], wait: number): Promise<void> {
+  const faces = typeof document === "undefined" ? undefined : document.fonts;
+  if (!faces || typeof faces.load !== "function") return Promise.resolve();
+  const loaded = Promise.all(fonts.map((font) => faces.load(font))).then(
+    () => undefined,
+    () => undefined,
+  );
+  return Promise.race([loaded, new Promise<void>((resolve) => setTimeout(resolve, wait))]);
+}

@@ -1,8 +1,8 @@
 /**
- * The budget: revenue and spending as two stacked bars on one scale, so the gap between them is
- * the balance, and below them a list that breaks the selected category down into its items.
- * A switch above shows the same amounts as a flow of money instead (BudgetFlow.tsx); the list and
- * the selection are the same in both forms.
+ * The budget: revenue and spending as a flow of money (BudgetFlow.tsx), or as two stacked bars on
+ * one scale, so the gap between them is the balance; below them a list that breaks the selected
+ * category down into its items. A switch above chooses the form; the list and the selection are
+ * the same in both.
  *
  * Every mark shows the simulated value; today's value stays visible as a vertical line wherever
  * a measure has changed something.
@@ -41,8 +41,8 @@ import { findNode, type LeafNode, type LevelId, type Side, type SimulationResult
 import { reducedMotion } from "../hooks/useAnimatedNumber.ts";
 import { textWidth, useElementWidth } from "../hooks/useElementWidth.ts";
 import { useFontsLoaded } from "../hooks/useFontsLoaded.ts";
-import { lazyModule } from "../app/lazy.ts";
-import { ArrowLeft, BarsIcon, ChevronRight, FlowIcon, MinusIcon, PlusIcon, ResetIcon } from "./icons.tsx";
+import { BudgetFlow } from "./BudgetFlow.tsx";
+import { ArrowLeft, BarsIcon, ChevronRight, FlowIcon, MinusIcon, PlusIcon } from "./icons.tsx";
 import { Delta, QualityBadge, SourceList } from "./primitives.tsx";
 
 /** Must match `.seg__name` and `.seg__value` in the stylesheet: labels are measured before they are drawn. */
@@ -58,44 +58,6 @@ const SEGMENT_GAP = 2;
 /** The space between a bar and the explanation floating above it. */
 const TIP_GAP = 9;
 const SIDES: readonly Side[] = ["revenue", "expenditure"];
-
-/** The flow of money, a part of the app of its own: the bars are what the page opens with. */
-export const flowModule = lazyModule(() => import("./BudgetFlow.tsx"));
-
-/** Starts loading the flow, so that it is there when it is chosen. */
-export function preloadFlow(): void {
-  flowModule.preload();
-}
-
-/** The flow's code: there at once if it has been loaded before, otherwise once it is wanted and has arrived. */
-function useFlow(wanted: boolean) {
-  const [module, setModule] = useState(() => flowModule.current());
-  const [failed, setFailed] = useState(false);
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    if (module || !wanted) return;
-    let alive = true;
-    flowModule.load().then(
-      (loaded) => {
-        if (alive) setModule(loaded);
-      },
-      () => {
-        if (alive) setFailed(true);
-      },
-    );
-    return () => {
-      alive = false;
-    };
-  }, [module, wanted, attempt]);
-  return {
-    module,
-    failed,
-    retry: () => {
-      setFailed(false);
-      setAttempt((count) => count + 1);
-    },
-  };
-}
 
 const percentOf = (value: number, max: number): string => `${Math.max(0, Math.min(100, (value / max) * 100))}%`;
 
@@ -125,8 +87,6 @@ export function BudgetView({ result, selection, onSelect, highlight, form, onFor
   // The list shows "other areas" as the form on screen folds them: the flow folds fewer than the bars.
   const view = useMemo(() => (form === "flow" && folds ? withFolded(layout, folds) : layout), [form, folds, layout]);
   const shown = selectionIn(view, selection);
-  const flow = useFlow(form === "flow");
-  const Flow = flow.module?.BudgetFlow;
   const noise = noiseLevel(result.baseline);
   const max =
     Math.max(result.reform.revenue, result.reform.expenditure, result.baseline.revenue, result.baseline.expenditure) ||
@@ -159,46 +119,21 @@ export function BudgetView({ result, selection, onSelect, highlight, form, onFor
       <div className="budget__pin">
         <div className="budget__forms" role="group" aria-label={t.budget.forms}>
           {BUDGET_FORMS.map((option) => (
-            <button
-              key={option}
-              type="button"
-              aria-pressed={form === option}
-              onClick={() => onForm(option)}
-              // The flow's code is fetched as soon as it is likely to be wanted.
-              onPointerEnter={option === "flow" ? preloadFlow : undefined}
-              onPointerDown={option === "flow" ? preloadFlow : undefined}
-              onFocus={option === "flow" ? preloadFlow : undefined}
-            >
+            <button key={option} type="button" aria-pressed={form === option} onClick={() => onForm(option)}>
               {option === "bars" ? <BarsIcon size={14} /> : <FlowIcon size={14} />}
               {option === "bars" ? t.budget.formBars : t.budget.formFlow}
             </button>
           ))}
         </div>
         {form === "flow" ? (
-          Flow ? (
-            <Flow
-              layout={layout}
-              result={result}
-              noise={noise}
-              selection={selection}
-              onSelect={onSelect}
-              onFolds={onFolds}
-            />
-          ) : (
-            <div className={`flow flow--pending${flow.failed ? " is-failed" : ""}`} role="status">
-              {flow.failed ? (
-                <>
-                  <p>{t.debt.loadFailed}</p>
-                  <button type="button" className="flow__retry" onClick={flow.retry}>
-                    <ResetIcon size={14} />
-                    <span>{t.debt.retry}</span>
-                  </button>
-                </>
-              ) : (
-                <p className="flow__loading">{t.debt.loading}</p>
-              )}
-            </div>
-          )
+          <BudgetFlow
+            layout={layout}
+            result={result}
+            noise={noise}
+            selection={selection}
+            onSelect={onSelect}
+            onFolds={onFolds}
+          />
         ) : (
           <div className="bars">
             {SIDES.map((side) => {

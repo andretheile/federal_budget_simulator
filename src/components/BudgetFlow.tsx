@@ -33,7 +33,8 @@ const FONTS: Record<FlowTextStyle, string> = {
   value: `400 12.5px ${FAMILY}`,
   delta: `650 12px ${FAMILY}`,
 };
-const FONT_LIST = Object.values(FONTS);
+/** The fonts of the labels: the page waits for them before it first shows the flow (App.tsx, load). */
+export const FLOW_FONTS: readonly string[] = Object.values(FONTS);
 /** The triangle of a change and the gap after it (`.delta`). */
 const TRIANGLE = 15;
 
@@ -88,7 +89,7 @@ export function BudgetFlow({ layout, result, noise, selection, onSelect, onFolds
   const box = useRef<HTMLDivElement>(null);
   // Until the box has been measured (and in a test without layout), a usual width.
   const width = useElementWidth(box) || 640;
-  const fonts = useFontsLoaded(FONT_LIST);
+  const fonts = useFontsLoaded(FLOW_FONTS);
   const coarse = useMediaQuery("(pointer: coarse)");
   const pinned = useMediaQuery(PINNED);
   const windowHeight = useWindowHeight();
