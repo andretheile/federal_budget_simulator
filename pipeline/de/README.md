@@ -61,6 +61,8 @@ download will usually not reproduce the pack. The cache also contains the docume
 | `drv/rv_in_zeitreihen.pdf` | pension insurance time series | contribution revenue 2022 and 2024; average earnings 2022 and 2024 (uprating factor) |
 | `gkv/kj1_2024.pdf` | health insurance, final accounts 2024 (KJ 1) | contributions of compulsory and other members |
 | `ecb/dwa_de.csv` | ECB Distributional Wealth Accounts, Germany | wealth distribution |
+| `destatis/pd25_455_742.html`, `destatis/versorgungsempfaenger-ausgaben.csv`, `destatis/versorgungsempfaenger.html` | Destatis, statistics of pension recipients (press release of 17 December 2025, chart data, table) | civil servants' pensions and survivors' benefits 2024 and their split across levels |
+| `bh_pdf/epl17_2024.pdf` | federal budget 2024, section 17 | split of title 1702 684 04 between the two programmes |
 
 Figures from PDFs, from the federal budget and from the tax list were read by hand and typed into
 `build_budget.py`. Only the three files named at the top of `fetch_inputs.py` are parsed by the scripts.
@@ -82,8 +84,8 @@ Data, taken as published:
 
 Arithmetic on published figures:
 
-- remainder leaves: a group total minus the named cash items. Group totals are national accounts, the
-  named items are cash, so a remainder is only approximately right;
+- remainder leaves: a group total minus the named items. Group totals are national accounts, the named
+  items are mostly cash (the exceptions are named below), so a remainder is only approximately right;
 - the revision leaf: Eurostat's latest total expenditure minus the sum of the older COFOG table;
 - statutory pensions by type: pension expenditure times the published shares;
 - the solidarity surcharge: federal cash receipts, deducted from the national-accounts tax lines;
@@ -101,6 +103,10 @@ Arithmetic on published figures:
 - the zero-amount leaves "tax on sugar-sweetened drinks" and "tax on plastic packaging": neither tax was
   levied in 2024; both were debated with the 2027 federal budget. They exist so that a measure can book
   them, like the wealth tax; as excise duties they are federal (Article 106(1) of the Basic Law);
+- the zero-amount leaf "one-off wealth levy": no such levy has been raised since the Lastenausgleich of 1952; Die
+  Linke demands one. It exists so that a measure can book the yearly instalments. Unlike the wealth tax, which
+  goes to the states, a one-off levy goes to the federal level alone (Article 106(1) no. 5 of the Basic Law); in
+  national accounts it would be a capital tax (D.91);
 - VAT by rate: the revenue at the reduced rate is not published. It is derived from the government's
   estimates of revenue forgone at 7 instead of 19 % (all reduced rates, food, accommodation, culture, local
   transport, and restaurant meals, which were at the standard rate in 2024): revenue forgone / 12 * 7, or
@@ -117,6 +123,29 @@ Arithmetic on published figures:
   administration relieves the funds and not, through a node's shares, the federal, state or municipal
   budgets. Unlike the health benefit items, they carry no pro-rata share of the federal subsidy to health
   insurance, which is a fixed amount; the other health items carry correspondingly more of it;
+- basic income support in old age and for reduced earning capacity (SGB XII, chapter 4) as a leaf of its own: the
+  federal reimbursement of the net expenditure (cash, budget title 1102 632 01). Like the housing costs it is
+  assigned to the municipalities, which pay it out, when the shares are fitted, and then moved to the federal level;
+  it used to be a part of the remainder leaf of the basic security group, which shrinks by the same amount;
+- the support component of child benefit (`KG_SPENDING`): national accounts book as spending only the part of child
+  benefit that goes beyond the tax exemption of the children's subsistence minimum, and gross up the taxes by the
+  same amount (Destatis, WISTA 5/2019). That part is not published for 2024; the leaf is child benefit under the
+  Income Tax Act paid in 2024 times the mean of its share in 2018 (Destatis) and 2026 (federal government), 45.5 %.
+  It is taken out of the remainder of the family group, and its level shares are the statutory cost shares of child
+  benefit (federal government and states 42.5 % each, municipalities 15 %);
+- five items carved out of COFOG groups for measures, each a fixed leaf beside a fitted remainder of its group:
+  the federal payments to the EEG account (cash 2024, Subsidy Report) out of fuel and energy (04.3); the federal
+  funding for efficient buildings (BEG, cash 2024, Climate and Transformation Fund title 893 10) out of general
+  economic affairs (04.1); the compensation for the Deutschlandticket (EUR 1.5 billion each from the federal
+  government and the states, Regionalisation Act) out of transport (04.5), whose federal half is moved to the
+  federal level with the rest of the regionalisation funds; the spending of ARD, ZDF and Deutschlandradio (KEF,
+  average of 2021 to 2024) out of broadcasting (08.3); the states' payments to the churches (budgeted amounts
+  2024, as compiled by the Humanistische Union) out of religious services (08.4). The remainders' seeds are set
+  so that the fit leaves every other leaf of the division as it was (see the comment at `EEG_2024` in
+  `build_budget.py`);
+- on the revenue side, the broadcasters' market income (advertising, sponsorship, reimbursements, other operating
+  income; KEF, yearly average of 2025 to 2028) as a state-level leaf out of fees, charges and sales; the remainder
+  keeps the other levels' amounts and the state level less this item;
 - the staff of the general administration as three leaves, one per level (`ADMIN_STAFF` in
   `build_budget.py`): compensation of employees (D.1) in general public services by level without research
   and foreign aid, split by full-time equivalents of the personnel statistics (Destatis, 30 June 2024)
@@ -126,7 +155,16 @@ Arithmetic on published figures:
   full-time equivalents. The leaves are taken out of 01.1 (the rest of the inside share), 01.3 and 01.6 (all
   of their D.1), whose leaves shrink by the same amounts. Each leaf belongs wholly to its level, so that a
   staff cut lands on the level that decides it; the group above carries the level shares as a breakdown that
-  a measure can offer for choice, and each leaf carries the same groups with its own level at 1.
+  a measure can offer for choice, and each leaf carries the same groups with its own level at 1;
+- three items carved out of a fitted leaf after the fit (`carve()` in `build_budget.py`): the item gets its
+  own level shares, the leaf keeps what is left at each level, and no other leaf changes. Civil servants'
+  pensions (56.9 bn) and their survivors' benefits (9.0 bn) in 2024, from the statistics of pension
+  recipients, are taken out of the remainders of old age (10.2) and survivors (10.3); their level shares are
+  the employers' shares of pension spending in 2024 (states 61.9 %, federal government with the railway fund
+  and the Post successor companies 27.5 %, municipalities 8.5 %, other 2.1 %, split between social insurance
+  and federal bodies by recipients). Title 1702 684 04 of the federal budget ("Demokratie leben!" and
+  "Menschen stärken Menschen", 182.9 m actuals) is taken out of basic research (01.4) and is federal. The
+  two remainders are labelled as remainders of their groups, since what is left in them is not published.
 
 Judgement, to be reviewed by whoever updates the data:
 
@@ -158,6 +196,46 @@ Judgement, to be reviewed by whoever updates the data:
   pay of all municipal staff in June 2024, with annual bonus, employer contributions and supplementary
   pensions, a rough count gives about EUR 71,000. Central administrations pay somewhat above the average, but
   the leaves may also include some staff that the personnel statistics assign to other functions.
+- **The share of child benefit booked as spending in 2024** (`KG_SHARE` in `build_budget.py`): the mean of the
+  published shares of 2018 and 2026. Because the leaf and the federal reimbursement of basic security in old age
+  are fixed leaves, adding them moved several billion euros between groups and levels of social protection; the
+  division totals by level did not change, and no data behind the other leaves changed. With the child benefit
+  leaf at 42.5 / 42.5 / 15 %, the family group (10.4) now has EUR 6.1 billion more at the federal level, 3.9
+  billion more at the states and 10.0 billion less at the municipalities than in the fit before. The fit moves
+  the same amounts back in the other groups (federal, states, municipalities, social insurance funds, EUR
+  billion): basic security (10.5 to 10.7) -2.9, -1.7, +7.7, -3.1; old age -1.9, -1.3, +0.9, +2.4; survivors,
+  sickness and disability and the rest together -1.3, -0.9, +1.5, +0.7. Asylum seekers' benefits, and the
+  replacement benefits that copy their shares, went from 36.6 to 34.4 % states. A measure on these leaves
+  therefore shows somewhat different burdens by level than before the two leaves were added.
+- **Where the items carved out of COFOG groups and of sales sit in national accounts.** Eurostat does not
+  publish them. The EEG payments are subsidies and fit in fuel and energy (04.3, subsidies EUR 26.3 billion). The building
+  grants (EUR 14.1 billion) are filed under housing in the federal budget, but housing development (06.1) has
+  only EUR 3.3 billion of capital transfers at all levels; general economic affairs (04.1, EUR 21.5 billion)
+  is the only group with room for them. The broadcasters' spending in national accounts is taken as the KEF's
+  figure, and their market income as the KEF's recognised income without financial income, income from
+  holdings and returns from the state media authorities (part of the rest, such as released provisions, is not
+  revenue in national accounts, so the item is rather too high); the payments to the churches as the states'
+  budgeted amounts, which fit in the current transfers of 08.4 (EUR 845 million).
+- **Where civil servants' pensions and survivors' benefits sit in COFOG.** Civil servants' pensions are a cash
+  figure; pensions paid for incapacity before the retirement age may in part be booked under sickness and
+  disability (10.1) rather than old age. Survivors' benefits get the level shares of all pension spending,
+  although survivors are more often in the federal area (40.1 % of recipients against 29.9 % of pensioners on
+  1 January 2025).
+- **What the two remainders of old age and survivors contain.** They are what national accounts book
+  under 10.2 and 10.3 minus two cash figures each (statutory pensions and civil servants' benefits);
+  their content is not published, and national accounts may define benefits for civil servants and their
+  survivors more widely than the cash statistics, so the remainders may still contain such benefits. Their
+  level shares are not data: Eurostat publishes levels only for the ten divisions, so they are the fit's
+  share minus the carved shares. Before the carve-out the fit put 15.2 bn of state spending into the
+  survivors' leaf, and the remainder still holds 9.6 bn of it, more than the states' 5.6 bn of the cash
+  figure; either national accounts book more under 10.3 than the cash statistics or the seeds put too much
+  there. Fixing the carved leaves before the fit would let the fit place the states' residue elsewhere in
+  division 10 but change other leaves of the division, which the carve-out avoids; the choice is kept.
+  A measure that cuts civil servants' pensions acts on the cash figures only.
+- **Where title 1702 684 04 sits.** The federal budget assigns it to function 165, research and
+  experimental development outside universities; where national accounts book it is not published, and
+  basic research is an assumption. A different place would move the amount between groups, not between
+  levels.
 - **Merging COFOG 10.5, 10.6 and 10.7** into one group, because cash benefits cannot be assigned to
   one of them: housing costs under Bürgergeld alone exceed the cash benefits recorded under 10.6.
 - **Levels of capital-transfer revenue** and of the revision leaf.
