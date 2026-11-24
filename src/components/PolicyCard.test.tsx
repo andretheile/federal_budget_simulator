@@ -128,8 +128,9 @@ describe("an effect of nothing", () => {
     const figure = query("#policy-halve_mp_pay .policy__figure");
     expect(plain(figure.querySelector(".policy__amount")?.textContent)).toBe("XTS 0");
     expect(figure.querySelector(".icon")).toBeNull();
-    expect(plain(figure.textContent)).toContain("no effect on the balance");
+    expect(plain(figure.textContent)).toContain("changes neither revenue nor spending");
     expect(plain(figure.textContent)).not.toContain("improves");
+    expect(plain(figure.textContent)).not.toContain("spends");
     expand("#policy-halve_mp_pay");
     expect(all("#policy-halve_mp_pay .effect > .effect__line")[0]).toMatch(/^XTS 0 /);
   });
@@ -189,7 +190,7 @@ describe("a measure that acts later in the debt projection (Testland with timing
     mount("#lang=de", timed);
     expand("#policy-wealth_tax");
     const section = [...document.querySelectorAll("#policy-wealth_tax .policy__section")].find(
-      (element) => plain(element.querySelector("h4")?.textContent) === "Wann sie wirkt",
+      (element) => plain(element.querySelector("h5")?.textContent) === "Wann sie wirkt",
     );
     expect(section).toBeDefined();
     expect(plain(section!.querySelector(".policy__timing-detail")?.textContent)).toBe(
@@ -239,7 +240,7 @@ describe("the timing line at a setting that changes nothing", () => {
 describe("the card's texts in their places", () => {
   const BASIC = "#policy-no_basic_income_non_citizens";
   /** The headings of the opened card's sections, in order. */
-  const headings = (card: string): string[] => all(`${card} .policy__section > h4`);
+  const headings = (card: string): string[] => all(`${card} .policy__section > h5`);
   /** Testland with a summary of `length` characters on halving MPs' pay, in both languages. */
   function withSummary(length: number): CountryPack {
     const pack = testlandCopy();
@@ -286,7 +287,7 @@ describe("the card's texts in their places", () => {
     // A measure without one opens with its settings, as before.
     expand("#policy-cut_admin");
     expect(container.querySelector("#policy-cut_admin .policy__explanation")).toBeNull();
-    expect(query("#policy-cut_admin .policy__panel").firstElementChild?.querySelector("h4")?.textContent).toBe("Einstellungen");
+    expect(query("#policy-cut_admin .policy__panel").firstElementChild?.querySelector("h5")?.textContent).toBe("Einstellungen");
   });
 
   it("lists the limits of the calculation under their own heading after the catches, with their sources", () => {
@@ -441,5 +442,111 @@ describe("a measure with many effects", () => {
     expand(INSURE);
     expect(container.querySelector(`${INSURE} .effect-group`)).toBeNull();
     expect(container.querySelector(`${INSURE} .effects__more`)).toBeNull();
+  });
+});
+
+/**
+ * Which side of the budget a measure acts on, and what it does there: in words on the card, not by
+ * colour. Testland's revenue is 4,000, its spending 4,400, its population 100.
+ */
+describe("the two sides of the budget on the card", () => {
+  const what = (card: string): string => text(`${card} .policy__what`);
+  const tags = (card: string): string => text(`${card} .policy__topic`);
+  const proportion = (card: string): string | null => {
+    const line = container.querySelector(`${card} .policy__proportion`);
+    return line ? plain(line.textContent) : null;
+  };
+
+  it("names the side after the topic, from the pack: revenue, spending, or both", () => {
+    mount("#lang=en");
+    // The dot is only for the eye; screen readers hear a comma.
+    expect(tags("#policy-wealth_tax")).toBe("Taxes · , Revenue");
+    expect(tags("#policy-family_bonus")).toBe("Social policy · , Spending");
+    expect(tags(INSURE)).toBe("Pensions · , Revenue, spending");
+    // Bound to the topic by a no-break space: where the line breaks, the side goes whole onto the next one.
+    expect(query(`#policy-wealth_tax .policy__topic [aria-hidden="true"]`).textContent).toBe(" ·");
+    expect(query(`#policy-wealth_tax .policy__side`).textContent).toBe("Revenue");
+    act(() => root?.unmount());
+    mount("#lang=de");
+    expect(tags("#policy-wealth_tax")).toBe("Steuern · , Einnahmen");
+    expect(tags("#policy-cut_admin")).toBe("Staat und Verwaltung · , Ausgaben");
+    expect(tags(INSURE)).toBe("Rente · , Einnahmen, Ausgaben");
+  });
+
+  it("says under the figure which way the balance moves and what comes in or goes out", () => {
+    const pack = testlandCopy();
+    // A top rate below today's 40 %, so that the state takes in less.
+    const top = pack.policies.find((candidate) => candidate.id === "raise_top_tax_rate")!.params[0] as { min: number };
+    top.min = 30;
+    mount("#lang=en&s=raise_top_tax_rate.top_rate.30", pack);
+    expect(what("#policy-wealth_tax")).toBe("improves the balance: the state takes in more.");
+    expect(what("#policy-raise_top_tax_rate")).toBe("worsens the balance: the state takes in less.");
+    expect(what("#policy-cut_admin")).toBe("improves the balance: the state spends less.");
+    expect(what("#policy-family_bonus")).toBe("worsens the balance: the state spends more.");
+    // The direction keeps its colour class; the sentence is plain text after it.
+    expect(query("#policy-cut_admin .policy__direction").className).toContain("policy__direction--improve");
+    expect(text("#policy-cut_admin .policy__direction")).toBe("improves the balance");
+    act(() => root?.unmount());
+    mount("#lang=de&s=raise_top_tax_rate.top_rate.30", pack);
+    expect(what("#policy-wealth_tax")).toBe("verbessert den Saldo: Der Staat nimmt mehr ein.");
+    expect(what("#policy-raise_top_tax_rate")).toBe("verschlechtert den Saldo: Der Staat nimmt weniger ein.");
+    expect(what("#policy-cut_admin")).toBe("verbessert den Saldo: Der Staat gibt weniger aus.");
+    expect(what("#policy-family_bonus")).toBe("verschlechtert den Saldo: Der Staat gibt mehr aus.");
+  });
+
+  it("gives both amounts where both sides change, and no share of either side", () => {
+    // Contributions of 100 in, 15 less income tax, the employer's part of 50 out: +35 for the balance.
+    mount("#lang=en");
+    expect(text(`${INSURE} .policy__amount`)).toBe("+XTS 35");
+    expect(what(INSURE)).toBe("improves the balance: the state takes in XTS 85 more and spends XTS 50 more.");
+    expect(proportion(INSURE)).not.toContain("of all");
+    expect(proportion(INSURE)).toContain("per inhabitant");
+    // A measure on one side keeps its share of that side.
+    expect(proportion("#policy-cut_admin")).toMatch(/^[\d.]+% of all spending · /);
+    act(() => root?.unmount());
+    mount("#lang=de");
+    expect(what(INSURE)).toBe("verbessert den Saldo: Der Staat nimmt 85 XTS mehr ein und gibt 50 XTS mehr aus.");
+  });
+
+  it("names only the side that changes, for a measure on both sides whose other side is zero at these settings", () => {
+    const pack = testlandCopy();
+    const insure = pack.policies.find((candidate) => candidate.id === "insure_civil_servants")!;
+    // The employer's part, at nothing.
+    (insure.effects[1] as { amount: unknown }).amount = 0;
+    mount("#lang=en", pack);
+    expect(tags(INSURE)).toBe("Pensions · , Revenue, spending");
+    expect(what(INSURE)).toBe("improves the balance: the state takes in more.");
+    expect(proportion(INSURE)).toMatch(/^[\d.]+% of all revenue · /);
+  });
+
+  it("speaks of the level shown, where one is: what it takes in and spends there", () => {
+    // Pensions: three quarters social insurance, a quarter central; the part that falls back on basic
+    // income is the centre's. A cut of 160 relieves social insurance by 120; at the centre 40 less
+    // pension and 40 more basic income cancel out.
+    mount("#lang=en&s=L.social_security");
+    expect(what("#policy-cut_pensions")).toBe("relieves this level: it spends less.");
+    act(() => root?.unmount());
+    mount("#lang=en&s=L.central");
+    expect(what("#policy-cut_pensions")).toBe("changes neither revenue nor spending at this level");
+    // The provinces: half of the lower income tax, four fifths of the employer's part.
+    act(() => root?.unmount());
+    mount("#lang=de&s=L.state");
+    expect(what(INSURE)).toMatch(/^belastet diese Ebene: Sie nimmt 7,5 XTS weniger ein und gibt 40 XTS mehr aus\.$/);
+    // At one level both sides changing leave no share of either.
+    expect(proportion(INSURE)).toBeNull();
+    expect(what("#policy-cut_admin")).toBe("entlastet diese Ebene: Sie gibt weniger aus.");
+  });
+
+  it("says that neither total changes where a measure only moves money between items", () => {
+    // All of the cut falls back on basic income: 160 less pension, 160 more basic income.
+    mount("#lang=en&s=cut_pensions.fallback.100");
+    expect(text("#policy-cut_pensions .policy__amount")).toBe("XTS 0");
+    expect(what("#policy-cut_pensions")).toBe("changes neither revenue nor spending");
+    expect(query("#policy-cut_pensions .policy__direction").className).toContain("policy__direction--neutral");
+    // The cost shift says where the money went.
+    expect(text("#policy-cut_pensions .policy__shift")).toContain("XTS 160 reappear as spending on “Basic income support”");
+    act(() => root?.unmount());
+    mount("#lang=de&s=cut_pensions.fallback.100");
+    expect(what("#policy-cut_pensions")).toBe("ändert weder Einnahmen noch Ausgaben");
   });
 });

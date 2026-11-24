@@ -1,6 +1,6 @@
 import { legalDe } from "./legal/de.ts";
 import { debtDe } from "./debt/de.ts";
-import type { Messages, YearName } from "./messages.ts";
+import type { Messages, SideMove, YearName } from "./messages.ts";
 
 const plural = (count: number, one: string, many: string): string => `${count} ${count === 1 ? one : many}`;
 
@@ -246,6 +246,26 @@ export const de: Messages = {
         ? "1 eingeschaltete Maßnahme ist ausgeblendet und zählt trotzdem mit."
         : `${count} eingeschaltete Maßnahmen sind ausgeblendet und zählen trotzdem mit.`,
     showAll: "Alle zeigen",
+    sideTitle: { revenue: "Einnahmen", expenditure: "Ausgaben", both: "Einnahmen und Ausgaben" },
+    sideTag: { revenue: "Einnahmen", expenditure: "Ausgaben", both: "Einnahmen, Ausgaben" },
+    sideCount: (count, on) => `${plural(count, "Maßnahme", "Maßnahmen")}${on > 0 ? ` · ${on} eingeschaltet` : ""}`,
+    sideIntro: (side, holder) => {
+      const who = holder === "central" ? "der Bund" : "der Staat";
+      if (side === "revenue") return `Maßnahmen, die ändern, was ${who} einnimmt: Steuern, Abgaben, Beiträge.`;
+      if (side === "expenditure") return `Maßnahmen, die ändern, was ${who} ausgibt: Sozialleistungen, Personal, Zuschüsse.`;
+      return `Maßnahmen, die ändern, was ${who} einnimmt und was er ausgibt.`;
+    },
+    sideLinks: "Abschnitte der Liste",
+    sideChange: (revenue, expenditure, who) => {
+      const subject = who === "level" ? "Sie" : who === "central" ? "Der Bund" : "Der Staat";
+      const takesIn = (move: SideMove, amount: boolean): string => `nimmt ${amount ? `${move.amount} ` : ""}${move.up ? "mehr" : "weniger"} ein`;
+      const spends = (move: SideMove, amount: boolean): string => `gibt ${amount ? `${move.amount} ` : ""}${move.up ? "mehr" : "weniger"} aus`;
+      if (revenue && expenditure) return `${subject} ${takesIn(revenue, true)} und ${spends(expenditure, true)}.`;
+      if (revenue) return `${subject} ${takesIn(revenue, false)}.`;
+      if (expenditure) return `${subject} ${spends(expenditure, false)}.`;
+      return "";
+    },
+    neitherSide: (level) => (level ? "ändert weder Einnahmen noch Ausgaben dieser Ebene" : "ändert weder Einnahmen noch Ausgaben"),
   },
   goal: {
     label: "Ziel",

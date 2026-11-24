@@ -3,18 +3,39 @@
  * measures, such as those of one year's budget debate) and one by topic. A measure that belongs to
  * a collection carries a badge with its name. Measures that are switched on keep counting when a
  * filter hides them; the list says how many that are and shows them all again with one click.
+ *
+ * The cards stand in sections by the side of the budget their measures act on: revenue, spending,
+ * both (app/sideModel.ts), each with a heading, how many measures it has and how many are on, and
+ * a line on what they change. Where there is more than one, a line of links above them leads to
+ * each, so a phone reaches the spending without scrolling past every tax.
  */
-import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent, type RefObject } from "react";
 import { curveChanged, curveSettings } from "../app/curveModel.ts";
 import { collectionsByPolicy, listView } from "../app/listModel.ts";
+import { budgetHolder, type PolicySide } from "../app/sideModel.ts";
 import { useUi } from "../app/ui.ts";
 import type { CurvePoint, Goal, ParamValue, Policy, PolicyTopic, Scenario, SimulationResult } from "../engine/index.ts";
 import { reducedMotion } from "../hooks/useAnimatedNumber.ts";
 import { preloadEditor } from "./CurveEditor.tsx";
 import { asSentence, exclusionsOf, shortReason } from "./GoalBar.tsx";
-import { ChevronRight, InfoIcon } from "./icons.tsx";
+import { ArrowDown, ChevronRight, InfoIcon } from "./icons.tsx";
 import { PolicyCard, type GoalHint } from "./PolicyCard.tsx";
 import { SourceList } from "./primitives.tsx";
+import { jumpToSection } from "./SectionNav.tsx";
+
+/** The element id of a section of the list. */
+function sideSectionId(side: PolicySide): string {
+  return `measures-${side}`;
+}
+
+/**
+ * Leads to a section of the list: its heading just below the floating band, the focus on the
+ * section. The address holds the state of the page, so the link does not follow its href.
+ */
+function followSide(event: MouseEvent<HTMLAnchorElement>, side: PolicySide): void {
+  event.preventDefault();
+  jumpToSection(sideSectionId(side));
+}
 
 export interface PolicyListProps {
   scenario: Scenario;
@@ -86,7 +107,8 @@ export function PolicyList({
     [ui, t],
   );
   const view = listView(pack, scenario, collectionId, topic, order);
-  const { topics, topic: active, shown, hidden, collection } = view;
+  const { topics, topic: active, shown, sections, hidden, collection } = view;
+  const holder = budgetHolder(pack);
   const collections = pack.collections ?? [];
   // Per measure, the names of its collections: the same arrays on every render, so cards stay memoized.
   const badges = useMemo(() => collectionsByPolicy(pack, (entry) => ui.text(entry.label)), [pack, ui]);
@@ -272,27 +294,63 @@ export function PolicyList({
       {shown.length === 0 ? (
         <p className="muted">{pack.policies.length === 0 ? t.policies.noneInPack : t.policies.none}</p>
       ) : (
-        <ul className="policy-list">
-          {shown.map((policy) => (
-            <PolicyCard
-              key={policy.id}
-              enabledBefore={enabledBefore.get(policy.id) ?? ""}
-              policy={policy}
-              state={scenario.policies[policy.id]}
-              inScenario={results.get(policy.id)}
-              level={result.level}
-              baseline={baseline}
-              expanded={expanded.has(policy.id)}
-              onToggle={onToggle}
-              onParam={onParam}
-              onExpand={onExpand}
-              onShowNode={onShowNode}
-              onEditCurve={onEditCurve}
-              collections={badges.get(policy.id)}
-              goalHint={goalHints.get(policy.id)}
-            />
-          ))}
-        </ul>
+        <>
+          {/* Where there is more than one section: to each with one tap, with how many measures it has. */}
+          {sections.length > 1 && (
+            <nav className="sidelinks" aria-label={t.policies.sideLinks}>
+              <ul>
+                {sections.map((section) => (
+                  <li key={section.side}>
+                    <a href={`#${sideSectionId(section.side)}`} className="sidelinks__link" onClick={(event) => followSide(event, section.side)}>
+                      <span>{t.policies.sideTitle[section.side]}</span>
+                      <span className="sidelinks__count" aria-hidden="true">
+                        {section.policies.length}
+                      </span>
+                      <span className="visually-hidden">, {t.policies.sideCount(section.policies.length, 0)}</span>
+                      <ArrowDown size={13} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+          {sections.map((section) => {
+            const id = sideSectionId(section.side);
+            return (
+              <section key={section.side} className="policy-side" id={id} aria-labelledby={`${id}-title`} tabIndex={-1}>
+                <header className="policy-side__head">
+                  <h3 className="policy-side__title" id={`${id}-title`}>
+                    <span>{t.policies.sideTitle[section.side]}</span>
+                    <span className="visually-hidden">, </span>
+                    <span className="policy-side__count">{t.policies.sideCount(section.policies.length, section.on)}</span>
+                  </h3>
+                  <p className="policy-side__intro">{t.policies.sideIntro(section.side, holder)}</p>
+                </header>
+                <ul className="policy-list">
+                  {section.policies.map((policy) => (
+                    <PolicyCard
+                      key={policy.id}
+                      enabledBefore={enabledBefore.get(policy.id) ?? ""}
+                      policy={policy}
+                      state={scenario.policies[policy.id]}
+                      inScenario={results.get(policy.id)}
+                      level={result.level}
+                      baseline={baseline}
+                      expanded={expanded.has(policy.id)}
+                      onToggle={onToggle}
+                      onParam={onParam}
+                      onExpand={onExpand}
+                      onShowNode={onShowNode}
+                      onEditCurve={onEditCurve}
+                      collections={badges.get(policy.id)}
+                      goalHint={goalHints.get(policy.id)}
+                    />
+                  ))}
+                </ul>
+              </section>
+            );
+          })}
+        </>
       )}
     </section>
   );
