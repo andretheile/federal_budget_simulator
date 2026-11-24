@@ -137,6 +137,21 @@ export interface Messages {
     levels: string;
     figureFor(year: number): string;
     listCaption(label: string): string;
+    /** The switch between the two forms of the overview: its name for screen readers, then the two choices. */
+    forms: string;
+    formBars: string;
+    formFlow: string;
+    /** The intro of the flow form, in place of `intro` and `introLevel`. */
+    introFlow: string;
+    introFlowLevel(level: string): string;
+    /** The name of the flow diagram, for screen readers. */
+    flowLabel: string;
+    /** The node in the middle of the flow: the budget as a whole. */
+    flowMiddle: string;
+    /** The node that makes both sides of the flow equal; for a single level only their difference, not a balance. */
+    flowBalance(kind: "deficit" | "surplus" | "difference"): string;
+    /** The line under the flow: what its bands do not show. */
+    flowNote: string;
   };
   policies: {
     title: string;

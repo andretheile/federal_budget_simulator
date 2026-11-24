@@ -9,7 +9,9 @@ import {
   rowsOf,
   segmentKeyOf,
   segmentsOf,
+  selectionIn,
   selectionShowing,
+  withFolded,
 } from "./budgetModel.ts";
 
 describe("budget layout", () => {
@@ -121,5 +123,52 @@ describe("budget layout", () => {
     expect(
       rowsOf(pack, folded, result, { side: "expenditure", nodeId: null, fold: true }).rows.map((row) => row.id),
     ).toEqual(["exp.interest", "exp.culture"]);
+  });
+
+  it("folds fewer where the flow has room, keeping colours, and lists and paths follow", () => {
+    const pack = testlandCopy();
+    for (const id of ["culture", "sport"]) {
+      pack.budget.expenditure.push({
+        id: `exp.${id}`,
+        label: { en: id, de: id },
+        amount: id === "culture" ? 20 : 10,
+        levels: { state: 1 },
+        quality: "official",
+        sources: ["finance_ministry"],
+      });
+    }
+    const bars = layoutBudget(pack);
+    const result = simulate(pack);
+    expect(bars.sides.expenditure.folded).toEqual(["exp.interest", "exp.culture", "exp.sport"]);
+    // The same folds give the same layout back; the flow's smaller fold a copy with the same colours.
+    expect(withFolded(bars, { revenue: [], expenditure: ["exp.interest", "exp.culture", "exp.sport"] })).toBe(bars);
+    const flow = withFolded(bars, { revenue: [], expenditure: ["exp.culture", "exp.sport"] });
+    expect(flow.colors).toBe(bars.colors);
+    expect(segmentsOf(flow, result, "expenditure").map((segment) => segment.key)).toEqual([
+      "exp.social",
+      "exp.education",
+      "exp.health",
+      "exp.admin",
+      "exp.defense",
+      "exp.interest",
+      "other:expenditure",
+    ]);
+    expect(rowsOf(pack, flow, result, { side: "expenditure", nodeId: null, fold: true }).rows.map((row) => row.id)).toEqual([
+      "exp.culture",
+      "exp.sport",
+    ]);
+    // Shown on its own in the flow, an area is found in the list of its side, without the fold in its path.
+    expect(selectionShowing(flow, result, "exp.interest")).toEqual({ side: "expenditure", nodeId: null, fold: false });
+    expect(selectionShowing(flow, result, "exp.sport")).toEqual({ side: "expenditure", nodeId: null, fold: true });
+    // Where a form folds nothing, "other areas" becomes the list of the whole side.
+    const none = withFolded(bars, { revenue: [], expenditure: [] });
+    const fold = { side: "expenditure" as const, nodeId: null, fold: true };
+    expect(selectionIn(none, fold)).toEqual({ side: "expenditure", nodeId: null, fold: false });
+    expect(selectionIn(flow, fold)).toBe(fold);
+    expect(selectionIn(none, { side: "expenditure", nodeId: "exp.social", fold: false })).toEqual({
+      side: "expenditure",
+      nodeId: "exp.social",
+      fold: false,
+    });
   });
 });

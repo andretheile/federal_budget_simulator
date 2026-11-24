@@ -1,5 +1,5 @@
 /*
- * Budget view. Two stacked bars on one scale, a legend under each, then the breakdown list.
+ * Budget view. Two stacked bars on one scale, a legend under each, or the flow of money, then the breakdown list.
  * Marks follow the house rules: 2px gaps in the page colour between blocks, no outlines, labels
  * inside a block only where they were measured to fit, text in ink and never in a series colour.
  */
@@ -280,6 +280,96 @@
   font-size: 12px;
 }
 
+/*
+ * The switch between the two forms of the overview: bars, or the flow of money. One segmented
+ * row, like the other choices of the page that show one of two pictures.
+ */
+.budget__forms {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-bottom: 16px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+}
+
+.budget__forms button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 12px 0 10px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.budget__forms button:hover {
+  color: var(--ink);
+}
+
+.budget__forms button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+@media (pointer: coarse) {
+  .budget__forms button {
+    min-height: 44px;
+  }
+}
+
+/*
+ * Where the flow of money will stand while its code arrives (its own styles are in budget-flow.css):
+ * about its height, so the list below does not jump.
+ */
+.flow--pending {
+  min-height: 340px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+/* Said only if the wait is noticeable. */
+.flow__loading {
+  animation: flow-loading 0.2s ease 0.4s both;
+}
+
+@keyframes flow-loading {
+  from {
+    opacity: 0;
+  }
+}
+
+.flow--pending.is-failed {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 14px;
+}
+
+.flow--pending.is-failed p {
+  max-width: 60ch;
+  padding: 9px 12px;
+  border-left: 3px solid var(--worsen);
+  background: var(--sunken);
+  color: var(--ink);
+}
+
+.flow__retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 /* The breakdown list. */
 .detail {
   margin-top: 22px;
@@ -545,8 +635,9 @@
     max-height: calc(100dvh - var(--scoreboard-height) - 24px);
   }
 
-  /* The rule between the bars and the list belongs to the bars here, so the list scrolls away under it. */
-  .bars {
+  /* The rule between the overview and the list belongs to the overview here, so the list scrolls away under it. */
+  .bars,
+  .flow {
     flex: none;
     padding-bottom: 22px;
     border-bottom: 1px solid var(--rule-strong);
@@ -598,6 +689,14 @@
   .bars {
     gap: 10px;
     padding-bottom: 10px;
+  }
+
+  .flow {
+    padding-bottom: 10px;
+  }
+
+  .budget__forms {
+    margin-bottom: 10px;
   }
 
   .bar__head {

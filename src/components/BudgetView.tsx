@@ -1,6 +1,8 @@
 /**
  * The budget: revenue and spending as two stacked bars on one scale, so the gap between them is
  * the balance, and below them a list that breaks the selected category down into its items.
+ * A switch above shows the same amounts as a flow of money instead (BudgetFlow.tsx); the list and
+ * the selection are the same in both forms.
  *
  * Every mark shows the simulated value; today's value stays visible as a vertical line wherever
  * a measure has changed something.
@@ -18,12 +20,16 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import {
+  BUDGET_FORMS,
   crumbsOf,
   layoutBudget,
   rowsOf,
   segmentKeyOf,
   segmentsOf,
+  selectionIn,
   selectionOfSegment,
+  withFolded,
+  type BudgetForm,
   type BudgetLayout,
   type Row,
   type Segment,
@@ -33,14 +39,17 @@ import { directionOfNode, noiseLevel } from "../app/policyModel.ts";
 import { useUi, type Ui } from "../app/ui.ts";
 import { findNode, type LeafNode, type LevelId, type Side, type SimulationResult } from "../engine/index.ts";
 import { reducedMotion } from "../hooks/useAnimatedNumber.ts";
-import { clearTextWidths, textWidth, useElementWidth } from "../hooks/useElementWidth.ts";
-import { ArrowLeft, ChevronRight, MinusIcon, PlusIcon } from "./icons.tsx";
+import { textWidth, useElementWidth } from "../hooks/useElementWidth.ts";
+import { useFontsLoaded } from "../hooks/useFontsLoaded.ts";
+import { lazyModule } from "../app/lazy.ts";
+import { ArrowLeft, BarsIcon, ChevronRight, FlowIcon, MinusIcon, PlusIcon, ResetIcon } from "./icons.tsx";
 import { Delta, QualityBadge, SourceList } from "./primitives.tsx";
 
 /** Must match `.seg__name` and `.seg__value` in the stylesheet: labels are measured before they are drawn. */
 const SEGMENT_FONT_FAMILY = '"Public Sans Variable", system-ui, -apple-system, "Segoe UI", sans-serif';
 const SEGMENT_NAME_FONT = `600 12.5px ${SEGMENT_FONT_FAMILY}`;
 const SEGMENT_VALUE_FONT = `400 12.5px ${SEGMENT_FONT_FAMILY}`;
+const SEGMENT_FONTS = [SEGMENT_NAME_FONT, SEGMENT_VALUE_FONT];
 const SEGMENT_PADDING = 16;
 /** Kept free besides the padding, so a label never touches the edge of its block. */
 const SEGMENT_SLACK = 4;
@@ -50,37 +59,49 @@ const SEGMENT_GAP = 2;
 const TIP_GAP = 9;
 const SIDES: readonly Side[] = ["revenue", "expenditure"];
 
+/** The flow of money, a part of the app of its own: the bars are what the page opens with. */
+export const flowModule = lazyModule(() => import("./BudgetFlow.tsx"));
+
+/** Starts loading the flow, so that it is there when it is chosen. */
+export function preloadFlow(): void {
+  flowModule.preload();
+}
+
+/** The flow's code: there at once if it has been loaded before, otherwise once it is wanted and has arrived. */
+function useFlow(wanted: boolean) {
+  const [module, setModule] = useState(() => flowModule.current());
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    if (module || !wanted) return;
+    let alive = true;
+    flowModule.load().then(
+      (loaded) => {
+        if (alive) setModule(loaded);
+      },
+      () => {
+        if (alive) setFailed(true);
+      },
+    );
+    return () => {
+      alive = false;
+    };
+  }, [module, wanted, attempt]);
+  return {
+    module,
+    failed,
+    retry: () => {
+      setFailed(false);
+      setAttempt((count) => count + 1);
+    },
+  };
+}
+
 const percentOf = (value: number, max: number): string => `${Math.max(0, Math.min(100, (value / max) * 100))}%`;
 
 function segmentLabel(ui: Ui, segment: Segment): string {
   if (segment.isFold) return ui.t.budget.other(segment.nodeIds.length);
   return ui.text(findNode(ui.pack, segment.nodeIds[0])?.label);
-}
-
-/**
- * Counts up whenever a web font has finished loading. Label widths are measured on a canvas, and
- * until the font is there the canvas measures with the fallback font, so they must be redone.
- */
-function useFontsLoaded(): number {
-  const [version, setVersion] = useState(0);
-  useEffect(() => {
-    const fonts = typeof document === "undefined" ? undefined : document.fonts;
-    if (!fonts || typeof fonts.load !== "function") return;
-    let alive = true;
-    const remeasure = (): void => {
-      if (!alive) return;
-      clearTextWidths();
-      setVersion((v) => v + 1);
-    };
-    // Ask for exactly the fonts the labels use; the page may not have needed them yet.
-    void Promise.all([fonts.load(SEGMENT_NAME_FONT), fonts.load(SEGMENT_VALUE_FONT)]).then(remeasure, () => undefined);
-    fonts.addEventListener?.("loadingdone", remeasure);
-    return () => {
-      alive = false;
-      fonts.removeEventListener?.("loadingdone", remeasure);
-    };
-  }, []);
-  return version;
 }
 
 export interface BudgetViewProps {
@@ -89,12 +110,23 @@ export interface BudgetViewProps {
   onSelect(selection: Selection): void;
   /** A row to point out, e.g. after "show in the budget" on a policy card. */
   highlight?: string;
+  /** The form of the overview: bars or the flow of money. */
+  form: BudgetForm;
+  onForm(form: BudgetForm): void;
+  /** Which categories the flow folds into "other areas"; the list follows the form shown. */
+  folds?: Record<Side, string[]>;
+  onFolds(folded: Record<Side, string[]>): void;
 }
 
-export function BudgetView({ result, selection, onSelect, highlight }: BudgetViewProps) {
+export function BudgetView({ result, selection, onSelect, highlight, form, onForm, folds, onFolds }: BudgetViewProps) {
   const ui = useUi();
   const { pack, t } = ui;
   const layout = useMemo(() => layoutBudget(pack), [pack]);
+  // The list shows "other areas" as the form on screen folds them: the flow folds fewer than the bars.
+  const view = useMemo(() => (form === "flow" && folds ? withFolded(layout, folds) : layout), [form, folds, layout]);
+  const shown = selectionIn(view, selection);
+  const flow = useFlow(form === "flow");
+  const Flow = flow.module?.BudgetFlow;
   const noise = noiseLevel(result.baseline);
   const max =
     Math.max(result.reform.revenue, result.reform.expenditure, result.baseline.revenue, result.baseline.expenditure) ||
@@ -105,47 +137,99 @@ export function BudgetView({ result, selection, onSelect, highlight }: BudgetVie
   const singleLevel = result.level !== "all";
   const gapKind = singleLevel ? null : balance < -noise ? "deficit" : balance > noise ? "surplus" : null;
   const selectedKey = segmentKeyOf(layout, selection);
+  const intro =
+    form === "flow"
+      ? result.level === "all"
+        ? t.budget.introFlow
+        : t.budget.introFlowLevel(ui.levelName(result.level))
+      : result.level === "all"
+        ? t.budget.intro
+        : t.budget.introLevel(ui.levelName(result.level));
 
   return (
     <section className="budget" id="budget" aria-labelledby="budget-title" tabIndex={-1}>
       <header className="section-head">
         <h2 id="budget-title">{t.budget.title(ui.period)}</h2>
         <p>
-          {result.level === "all" ? t.budget.intro : t.budget.introLevel(ui.levelName(result.level))} {t.budget.hint}
+          {intro} {t.budget.hint}
         </p>
       </header>
 
-      {/* The bars and the list below them: on a wide screen this part stays next to the measures. */}
+      {/* The overview and the list below it: on a wide screen this part stays next to the measures. */}
       <div className="budget__pin">
-        <div className="bars">
-          {SIDES.map((side) => {
-            const shorter = gapKind === "deficit" ? "revenue" : "expenditure";
-            const other = side === "revenue" ? "expenditure" : "revenue";
-            return (
-              <StackedBar
-                key={side}
-                side={side}
-                layout={layout}
-                result={result}
-                max={max}
-                noise={noise}
-                selectedKey={selection.side === side ? selectedKey : undefined}
-                wholeSideSelected={selection.side === side && !selection.nodeId && !selection.fold}
-                gap={
-                  gapKind && side === shorter
-                    ? { kind: gapKind, to: result.reform[other], amount: Math.abs(balance) }
-                    : undefined
-                }
-                onSelect={onSelect}
-              />
-            );
-          })}
+        <div className="budget__forms" role="group" aria-label={t.budget.forms}>
+          {BUDGET_FORMS.map((option) => (
+            <button
+              key={option}
+              type="button"
+              aria-pressed={form === option}
+              onClick={() => onForm(option)}
+              // The flow's code is fetched as soon as it is likely to be wanted.
+              onPointerEnter={option === "flow" ? preloadFlow : undefined}
+              onPointerDown={option === "flow" ? preloadFlow : undefined}
+              onFocus={option === "flow" ? preloadFlow : undefined}
+            >
+              {option === "bars" ? <BarsIcon size={14} /> : <FlowIcon size={14} />}
+              {option === "bars" ? t.budget.formBars : t.budget.formFlow}
+            </button>
+          ))}
         </div>
+        {form === "flow" ? (
+          Flow ? (
+            <Flow
+              layout={layout}
+              result={result}
+              noise={noise}
+              selection={selection}
+              onSelect={onSelect}
+              onFolds={onFolds}
+            />
+          ) : (
+            <div className={`flow flow--pending${flow.failed ? " is-failed" : ""}`} role="status">
+              {flow.failed ? (
+                <>
+                  <p>{t.debt.loadFailed}</p>
+                  <button type="button" className="flow__retry" onClick={flow.retry}>
+                    <ResetIcon size={14} />
+                    <span>{t.debt.retry}</span>
+                  </button>
+                </>
+              ) : (
+                <p className="flow__loading">{t.debt.loading}</p>
+              )}
+            </div>
+          )
+        ) : (
+          <div className="bars">
+            {SIDES.map((side) => {
+              const shorter = gapKind === "deficit" ? "revenue" : "expenditure";
+              const other = side === "revenue" ? "expenditure" : "revenue";
+              return (
+                <StackedBar
+                  key={side}
+                  side={side}
+                  layout={layout}
+                  result={result}
+                  max={max}
+                  noise={noise}
+                  selectedKey={selection.side === side ? selectedKey : undefined}
+                  wholeSideSelected={selection.side === side && !selection.nodeId && !selection.fold}
+                  gap={
+                    gapKind && side === shorter
+                      ? { kind: gapKind, to: result.reform[other], amount: Math.abs(balance) }
+                      : undefined
+                  }
+                  onSelect={onSelect}
+                />
+              );
+            })}
+          </div>
+        )}
 
         <DetailList
-          layout={layout}
+          layout={view}
           result={result}
-          selection={selection}
+          selection={shown}
           onSelect={onSelect}
           highlight={highlight}
           noise={noise}
@@ -184,7 +268,7 @@ function StackedBar({
   const { pack, t, fmt } = ui;
   const plot = useRef<HTMLDivElement>(null);
   const plotWidth = useElementWidth(plot);
-  const fonts = useFontsLoaded();
+  const fonts = useFontsLoaded(SEGMENT_FONTS);
   /**
    * The block whose explanation is shown. `held` means a tap opened it: a finger cannot hover, so
    * the explanation then stays until the next press somewhere else instead of until a pointer leaves.

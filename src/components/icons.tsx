@@ -174,3 +174,21 @@ export function ShiftIcon(props: IconProps) {
     </Icon>
   );
 }
+
+/** Two bars, one shorter than the other: the overview as stacked bars. */
+export function BarsIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M2.5 5h11M2.5 11h8" strokeWidth="3" strokeLinecap="butt" />
+    </Icon>
+  );
+}
+
+/** Streams that meet in the middle and part again: the overview as a flow of money. */
+export function FlowIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M1.5 4C5 4 5 8 8 8M1.5 12C5 12 5 8 8 8M8 8c3 0 3-5 6.5-5M8 8h6.5M8 8c3 0 3 5 6.5 5" strokeWidth="1.4" />
+    </Icon>
+  );
+}
