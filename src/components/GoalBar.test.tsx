@@ -324,19 +324,19 @@ describe("what a goal leaves out", () => {
     expect(more.getAttribute("aria-controls")).toBe(query(`${card} .policy__panel`).id);
     click(more);
     expect(query(`${card} .policy__panel`).hidden).toBe(false);
-    const section = [...container.querySelectorAll(`${card} .policy__section`)].find((element) => plain(element.querySelector("h4")?.textContent) === "The goal");
+    const section = [...container.querySelectorAll(`${card} .policy__section`)].find((element) => plain(element.querySelector("h5")?.textContent) === "The goal");
     expect(section).toBeDefined();
     expect(plain(section!.querySelector(".policy__goal-detail")?.textContent)).toBe(
       "Does not count towards the goal “Close the deficit”. The plan already counts on it: the bonus was passed with the last budget, and the plan's figures for 2026 include it in full.",
     );
-    expect(document.activeElement).toBe(section!.querySelector("h4"));
+    expect(document.activeElement).toBe(section!.querySelector("h5"));
     // What stands against the measure comes first, after the estimate; the goal's section follows the catches.
-    const headings = [...container.querySelectorAll(`${card} .policy__section > h4`)].map((heading) => plain(heading.textContent));
+    const headings = [...container.querySelectorAll(`${card} .policy__section > h5`)].map((heading) => plain(heading.textContent));
     expect(headings.slice(0, 4)).toEqual(["Settings", "The estimate", "The catch", "The goal"]);
     // Clicked again on the open card, the focus goes there once more; closed, the section is gone.
     act(() => (document.activeElement as HTMLElement).blur());
     click(more);
-    expect(document.activeElement).toBe(section!.querySelector("h4"));
+    expect(document.activeElement).toBe(section!.querySelector("h5"));
     click(query(`${card} .policy__more`));
     expect(container.querySelector(`${card} .policy__goal-detail`)).toBeNull();
   });

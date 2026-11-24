@@ -135,6 +135,24 @@ describe("the US pack", () => {
     expect(shift).not.toContain("(Federal government)");
   });
 
+  it("names the federal government as the one that takes in and spends, in the list and on the cards", () => {
+    mount("#lang=en", us);
+    const intros = (): string[] => [...container.querySelectorAll(".policy-side__intro")].map((line) => plain(line.textContent));
+    expect(intros()[0]).toBe("Measures that change what the federal government takes in: taxes, levies, contributions.");
+    expect(intros().join(" ")).not.toContain("the state");
+    // Ending the enhanced premium credits: less spending on the credits, more income tax.
+    expect(text("#policy-aca_enhanced_credits .policy__topic")).toMatch(/ · , Revenue, spending$/);
+    expect(text("#policy-aca_enhanced_credits .policy__what")).toMatch(
+      /^improves the balance: the federal government takes in \$[\d.]+B more and spends \$[\d.]+B less\.$/,
+    );
+    expect(text("#policy-tariff_all_imports .policy__what")).toBe("improves the balance: the federal government takes in more.");
+    mount("#lang=de", us);
+    expect(intros()[1]).toBe("Maßnahmen, die ändern, was der Bund ausgibt: Sozialleistungen, Personal, Zuschüsse.");
+    expect(text("#policy-aca_enhanced_credits .policy__what")).toMatch(
+      /^verbessert den Saldo: Der Bund nimmt [\d,]+ Mrd\. \$ mehr ein und gibt [\d,]+ Mrd\. \$ weniger aus\.$/,
+    );
+  });
+
   it("without measures yet: the budget first on one column, and no row of one section", () => {
     if (us.policies.length > 0) return; // The pack has gained measures meanwhile: nothing to check here.
     widthOf(390);

@@ -206,6 +206,88 @@
   }
 }
 
+/*
+ * The line of links to the sections of the list (revenue, spending, both): quiet, under the
+ * filters, so that a phone reaches the spending without scrolling past every tax.
+ */
+.sidelinks ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+  margin-bottom: 16px;
+  padding: 0;
+  list-style: none;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.sidelinks__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.sidelinks__link:hover {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+.sidelinks__count {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/*
+ * A section of the list: a rule of ink, the side as its heading with how many measures it has, and
+ * one line on what they change. The side is said in words, never by colour: colour says which way
+ * the balance moves.
+ */
+.policy-side + .policy-side {
+  margin-top: 36px;
+}
+
+/* The section takes the focus when a link leads here; it is not a control. */
+.policy-side:focus {
+  outline: none;
+}
+
+.policy-side__head {
+  margin-bottom: 14px;
+  padding-top: 10px;
+  border-top: 2px solid var(--ink);
+}
+
+.policy-side__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.policy-side__count {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.policy-side__intro {
+  margin-top: 3px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
 .policy-list {
   display: grid;
   gap: 14px;
@@ -233,6 +315,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+/* The side of the budget after the topic: whole, on the next line if the topic leaves too little room. */
+.policy__side {
+  white-space: nowrap;
 }
 
 /* The topic, and a badge for each collection of the pack the measure belongs to. */
@@ -356,9 +443,21 @@
   color: var(--ink-2);
 }
 
+/* Under the figure, on a line of its own: which way the balance moves, then in plain words what comes
+   in and what goes out. */
+.policy__what {
+  flex-basis: 100%;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
 .policy__direction {
   font-size: 13.5px;
   font-weight: 600;
+}
+
+.policy__sides {
+  color: var(--ink-2);
 }
 
 .policy__direction--improve {
@@ -617,12 +716,12 @@
   border-top: 1px solid var(--rule);
 }
 
-.policy__section h4 {
+.policy__section h5 {
   margin-bottom: 10px;
 }
 
 /* The face's "Why?" brings the focus to a heading: it is not a control, so no ring. */
-.policy__section h4:focus {
+.policy__section h5:focus {
   outline: none;
 }
 

@@ -75,7 +75,8 @@ describe("the filter by collection", () => {
     mount("#lang=en&s=halve_mp_pay");
     click(chip("Budget debate"));
     expect(chip("Budget debate").getAttribute("aria-pressed")).toBe("true");
-    expect(cards()).toEqual(["cut_admin", "defense_target", "wealth_tax"]);
+    // Revenue first, then spending; alphabetical within each.
+    expect(cards()).toEqual(["wealth_tax", "cut_admin", "defense_target"]);
     expect(plain(query(".collection-note p").textContent)).toBe("Measures proposed in the debate on next year's budget.");
     expect(plain(query(".collection-note summary").textContent)).toBe("Sources (1)");
     expect(window.location.hash).toBe("#lang=en&s=halve_mp_pay&f=budget_debate");
@@ -124,7 +125,7 @@ describe("the filter by collection", () => {
       window.history.replaceState(null, "", "#lang=en&f=budget_debate");
       window.dispatchEvent(new HashChangeEvent("hashchange"));
     });
-    expect(cards()).toEqual(["cut_admin", "defense_target", "wealth_tax"]);
+    expect(cards()).toEqual(["wealth_tax", "cut_admin", "defense_target"]);
     mount("#lang=en&f=no_such_collection");
     expect(chip("All measures").getAttribute("aria-pressed")).toBe("true");
     expect(window.location.hash).toBe("#lang=en");
@@ -241,8 +242,104 @@ describe("the badges", () => {
     expect(badges("cut_admin")).toEqual(["Budget debate", "Savings"]);
     expect(badges("wealth_tax")).toEqual(["Budget debate"]);
     expect(badges("family_bonus")).toEqual([]);
-    // For screen readers the badges are introduced.
-    expect(plain(query("#policy-cut_admin .policy__tags").textContent)).toBe("State and administration. Part of: Budget debateSavings");
+    // For screen readers the badges are introduced; the dot before the side is only for the eye.
+    expect(plain(query("#policy-cut_admin .policy__tags").textContent)).toBe("State and administration · , Spending. Part of: Budget debateSavings");
+  });
+});
+
+describe("the sections of the list, by the side of the budget", () => {
+  const sections = (): string[] => all(".policy-side").map((section) => section.id);
+  const headings = (): string[] => all(".policy-side__title").map((heading) => plain(heading.textContent));
+  const cardsIn = (side: string): string[] => all(`#measures-${side} .policy`).map((card) => card.id.replace(/^policy-/, ""));
+  const links = (): string[] => all(".sidelinks__link").map((link) => plain(link.textContent));
+
+  it("puts revenue first, then spending, then both, each with a heading, its count and a line on what it holds", () => {
+    mount("#lang=en&s=wealth_tax~cut_admin~halve_mp_pay");
+    expect(sections()).toEqual(["measures-revenue", "measures-expenditure", "measures-both"]);
+    // For screen readers a comma between the side and the count.
+    expect(headings()).toEqual(["Revenue, 3 measures · 1 switched on", "Spending, 6 measures · 2 switched on", "Revenue and spending, 1 measure"]);
+    expect(all(".policy-side__intro").map((line) => plain(line.textContent))).toEqual([
+      "Measures that change what the state takes in: taxes, levies, contributions.",
+      "Measures that change what the state spends: benefits, staff, subsidies.",
+      "Measures that change both what the state takes in and what it spends.",
+    ]);
+    // Alphabetical within each.
+    expect(cardsIn("revenue")).toEqual(["raise_top_tax_rate", "redraw_income_tax", "wealth_tax"]);
+    expect(cardsIn("expenditure")).toEqual(["cut_admin", "cut_pensions", "defense_target", "family_bonus", "halve_mp_pay", "no_basic_income_non_citizens"]);
+    expect(cardsIn("both")).toEqual(["insure_civil_servants"]);
+    // Each section is named by its heading.
+    for (const section of all(".policy-side")) expect(section.getAttribute("aria-labelledby")).toBe(section.querySelector("h3")?.id);
+  });
+
+  it("keeps the outline: the list's heading, the sections', then the cards'", () => {
+    mount();
+    const levels = all("#measures :is(h2, h3, h4)").map((heading) => heading.tagName);
+    expect(levels[0]).toBe("H2");
+    expect(levels[1]).toBe("H3");
+    expect(levels.filter((tag) => tag === "H3")).toHaveLength(3);
+    expect(levels.filter((tag) => tag === "H4")).toHaveLength(10);
+    // Every card title stands below the heading of its section; the ids and classes the page relies on stay.
+    for (const title of all(".policy__title")) {
+      expect(title.tagName).toBe("H4");
+      expect(title.closest(".policy-side")?.querySelector("h3")).not.toBeNull();
+      expect(title.closest(".policy")?.id).toMatch(/^policy-/);
+    }
+  });
+
+  it("speaks German", () => {
+    mount("#lang=de&s=wealth_tax");
+    expect(headings()).toEqual(["Einnahmen, 3 Maßnahmen · 1 eingeschaltet", "Ausgaben, 6 Maßnahmen", "Einnahmen und Ausgaben, 1 Maßnahme"]);
+    expect(all(".policy-side__intro").map((line) => plain(line.textContent))).toEqual([
+      "Maßnahmen, die ändern, was der Staat einnimmt: Steuern, Abgaben, Beiträge.",
+      "Maßnahmen, die ändern, was der Staat ausgibt: Sozialleistungen, Personal, Zuschüsse.",
+      "Maßnahmen, die ändern, was der Staat einnimmt und was er ausgibt.",
+    ]);
+    expect(query(".sidelinks").getAttribute("aria-label")).toBe("Abschnitte der Liste");
+    expect(links()).toEqual(["Einnahmen3, 3 Maßnahmen", "Ausgaben6, 6 Maßnahmen", "Einnahmen und Ausgaben1, 1 Maßnahme"]);
+  });
+
+  it("leads to each section from a line of links, without changing the address", () => {
+    const calls: ScrollToOptions[] = [];
+    const before = window.scrollTo;
+    window.scrollTo = ((options: ScrollToOptions) => void calls.push(options)) as typeof window.scrollTo;
+    try {
+      mount("#lang=en&s=wealth_tax");
+      expect(query(".sidelinks").tagName).toBe("NAV");
+      expect(query(".sidelinks").getAttribute("aria-label")).toBe("Sections of the list");
+      // The count is for the eye; screen readers hear it in words.
+      expect(links()).toEqual(["Revenue3, 3 measures", "Spending6, 6 measures", "Revenue and spending1, 1 measure"]);
+      const spending = all(".sidelinks__link")[1] as HTMLAnchorElement;
+      expect(spending.getAttribute("href")).toBe("#measures-expenditure");
+      const hash = window.location.hash;
+      click(spending);
+      expect(window.location.hash).toBe(hash);
+      expect(calls).toHaveLength(1);
+      expect(document.activeElement).toBe(query("#measures-expenditure"));
+    } finally {
+      window.scrollTo = before;
+    }
+  });
+
+  it("leaves out a section without a measure, keeps the heading of a single one, and then has no links", () => {
+    mount("#lang=en&f=budget_debate");
+    expect(sections()).toEqual(["measures-revenue", "measures-expenditure"]);
+    expect(links()).toHaveLength(2);
+    const taxes = all(".filter__item").find((item) => plain(item.textContent).startsWith("Taxes"))!;
+    click(taxes);
+    expect(sections()).toEqual(["measures-revenue"]);
+    expect(headings()).toEqual(["Revenue, 1 measure"]);
+    expect(container.querySelector(".sidelinks")).toBeNull();
+  });
+
+  it("says that the filter hides measures switched on, and a card brought into view from the waterfall stands in its section", () => {
+    mount("#lang=en&s=halve_mp_pay&f=budget_debate");
+    expect(plain(query(".hidden-on span").textContent)).toBe("1 measure switched on is hidden by the filter and still counts.");
+    expect(container.querySelector("#policy-halve_mp_pay")).toBeNull();
+    const link = all(".wf__link").find((candidate) => plain(candidate.textContent).includes("MPs"));
+    if (!link) throw new Error("no link in the waterfall");
+    click(link);
+    expect(cardsIn("expenditure")).toContain("halve_mp_pay");
+    expect(headings()[1]).toBe("Spending, 6 measures · 1 switched on");
   });
 });
 
