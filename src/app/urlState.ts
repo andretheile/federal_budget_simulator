@@ -9,6 +9,8 @@
  *   d     assumptions of the debt projection that differ from their defaults (see app/debtLink.ts)
  *   g     the goal the bar under the scoreboard measures against, when it is not the pack's default
  *   f     the collection of measures the list is narrowed to, when one is chosen
+ *   v     the form of the budget overview ("flow" or "bars"), when it is not DEFAULT_BUDGET_FORM; with
+ *         the flow as the default, that is "bars"
  *   e     the curve editor that is open: measure id and curve parameter id, joined by a dot
  *   p     a legal page that replaces the simulator: "imprint" or "privacy"; while it is set, e is ignored
  *
@@ -25,6 +27,7 @@ import {
   type PolicyCollection,
   type Scenario,
 } from "../engine/index.ts";
+import { BUDGET_FORMS, DEFAULT_BUDGET_FORM, type BudgetForm } from "./budgetModel.ts";
 import { decodeDebtAssumptions, encodeDebtAssumptions } from "./debtLink.ts";
 import { LEGAL_PAGES, type LegalPage } from "../site/config.ts";
 
@@ -39,13 +42,26 @@ export interface HashFields {
   goal?: string;
   /** Id of the collection the list of measures is narrowed to. */
   collection?: string;
+  /** The form of the budget overview. */
+  form?: BudgetForm;
   /** The open curve editor as "measure.param". */
   editor?: string;
   /** The legal page that is shown instead of the simulator. */
   page?: LegalPage;
 }
 
-const KEYS = { country: "c", language: "lang", scenario: "s", debt: "d", goal: "g", collection: "f", editor: "e", page: "p" } as const;
+const KEYS = {
+  country: "c",
+  language: "lang",
+  scenario: "s",
+  debt: "d",
+  goal: "g",
+  collection: "f",
+  form: "v",
+  editor: "e",
+  page: "p",
+} as const;
+const isBudgetForm = (value: string): value is BudgetForm => (BUDGET_FORMS as readonly string[]).includes(value);
 const isLegalPage = (value: string): value is LegalPage => (LEGAL_PAGES as readonly string[]).includes(value);
 const SAFE_TOKEN = /^[A-Za-z0-9_-]{1,35}$/;
 const EDITOR = /^[a-z0-9_]{1,80}\.[a-z0-9_]{1,80}$/;
@@ -77,6 +93,7 @@ export function parseHash(hash: string): HashFields {
     else if (key === KEYS.debt && DEBT.test(value)) out.debt = value;
     else if (key === KEYS.goal && ID.test(value)) out.goal = value;
     else if (key === KEYS.collection && ID.test(value)) out.collection = value;
+    else if (key === KEYS.form && isBudgetForm(value)) out.form = value;
     else if (key === KEYS.editor && EDITOR.test(value)) out.editor = value;
     else if (key === KEYS.page && isLegalPage(value)) out.page = value;
   }
@@ -92,6 +109,7 @@ export function buildHash(fields: HashFields): string {
   if (fields.debt) pairs.push(`${KEYS.debt}=${fields.debt}`);
   if (fields.goal) pairs.push(`${KEYS.goal}=${fields.goal}`);
   if (fields.collection) pairs.push(`${KEYS.collection}=${fields.collection}`);
+  if (fields.form) pairs.push(`${KEYS.form}=${fields.form}`);
   if (fields.editor) pairs.push(`${KEYS.editor}=${fields.editor}`);
   if (fields.page) pairs.push(`${KEYS.page}=${fields.page}`);
   return pairs.length > 0 ? `#${pairs.join("&")}` : "";
@@ -105,6 +123,8 @@ export interface LinkState {
   goal?: string;
   /** The collection the list is narrowed to; written only if the pack has it. */
   collection?: string;
+  /** The form of the budget overview; written only when it is not the default. */
+  form?: BudgetForm;
   language: string;
   /** Only needed when the site offers several countries. */
   country?: string;
@@ -123,6 +143,7 @@ export function stateToHash(state: LinkState, pack: CountryPack): string {
     debt: state.debt && pack.debt ? encodeDebtAssumptions(pack.debt, state.debt) : undefined,
     goal: state.goal !== undefined && state.goal !== pack.goals?.default && findGoal(pack, state.goal) ? state.goal : undefined,
     collection: state.collection !== undefined && findCollection(pack, state.collection) ? state.collection : undefined,
+    form: state.form !== undefined && state.form !== DEFAULT_BUDGET_FORM ? state.form : undefined,
     editor: state.editor && !state.page ? `${state.editor.policy}.${state.editor.param}` : undefined,
     page: state.page,
   });
@@ -164,6 +185,11 @@ export function findCollection(pack: CountryPack, id: string): PolicyCollection 
 export function collectionFromHash(hash: string, pack: CountryPack): string | undefined {
   const id = parseHash(hash).collection;
   return id !== undefined && findCollection(pack, id) ? id : undefined;
+}
+
+/** The form of the budget overview a fragment asks for; the default where it names none. */
+export function formFromHash(hash: string): BudgetForm {
+  return parseHash(hash).form ?? DEFAULT_BUDGET_FORM;
 }
 
 /** The scenario a fragment describes for this pack; whatever the pack does not know is dropped. */

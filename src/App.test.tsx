@@ -161,6 +161,12 @@ describe("the simulator on Testland", () => {
     expect(text('[data-testid="balance-state"]')).toBe("Burden");
     expect(text(".scoreboard__change")).toContain("No balance is shown for a single level");
     expect(container.querySelector(".scoreboard__ratios")).toBeNull();
+    // The budget does not call the gap between the two sides a deficit either: in the flow it is a
+    // difference, and the bars leave it unlabelled.
+    expect(container.querySelector(".flow__balance--deficit, .flow__balance--surplus")).toBeNull();
+    expect(text(".flow__balance--difference .visually-hidden")).toMatch(/^Difference /);
+    click('.budget__forms button:not([aria-pressed="true"])');
+    expect(container.querySelector(".bars")).not.toBeNull();
     expect(container.querySelector(".bar__gap-label")).toBeNull();
   });
 
@@ -176,7 +182,7 @@ describe("the simulator on Testland", () => {
     expect(window.localStorage.getItem("budget-simulator:language")).toBe("de");
   });
 
-  it("drills from a block of the bar into its items and marks what a measure changed", () => {
+  it("drills from an area of the overview into its items and marks what a measure changed", () => {
     mount("#lang=en&s=family_bonus");
     // The list starts on the largest spending category.
     expect(text(".detail__title")).toBe("Social protection");
@@ -190,9 +196,9 @@ describe("the simulator on Testland", () => {
     expect((rows[2].textContent ?? "").replace(/[  ]/g, " ")).toContain("+XTS 100");
     expect(rows[0].classList.contains("is-changed")).toBe(false);
 
-    // Another category through its legend entry, which is the keyboard path.
-    const admin = [...container.querySelectorAll<HTMLButtonElement>(".legend__item")].find((item) =>
-      item.textContent?.includes("Administration"),
+    // Another category through its node in the flow the page opens with: a button, the keyboard path.
+    const admin = [...container.querySelectorAll<HTMLButtonElement>("button.flow__node")].find((item) =>
+      item.getAttribute("aria-label")?.startsWith("Administration,"),
     );
     act(() => admin!.click());
     expect(text(".detail__title")).toBe("Administration");
@@ -520,6 +526,8 @@ describe("sharing the link", () => {
 });
 
 describe("the explanation of a block in the budget bars", () => {
+  /** The bars, which are one tap away from the flow the page opens with. */
+  const bars = "#lang=en&v=bars";
   /** The floating explanation; it is drawn in a layer of its own, outside the app's container. */
   const tip = (): string | null => document.querySelector(".tip")?.textContent?.replace(/[  ]/g, " ") ?? null;
   const pointer = (target: Element, type: string, pointerType: string): void =>
@@ -533,7 +541,7 @@ describe("the explanation of a block in the budget bars", () => {
     container.querySelectorAll<HTMLElement>(`.bar--${side} .seg`)[index];
 
   it("opens on a tap and stays until the next tap elsewhere", () => {
-    mount("#lang=en");
+    mount(bars);
     expect(tip()).toBeNull();
     const first = block("expenditure", 0);
     tap(first);
@@ -560,7 +568,7 @@ describe("the explanation of a block in the budget bars", () => {
   });
 
   it("follows the mouse without staying after a click", () => {
-    mount("#lang=en");
+    mount(bars);
     const first = block("expenditure", 0);
     pointer(first, "pointerover", "mouse");
     expect(tip()).toContain("Social protection");
@@ -572,7 +580,7 @@ describe("the explanation of a block in the budget bars", () => {
   });
 
   it("opens on keyboard focus of a legend entry and closes on Escape", () => {
-    mount("#lang=en");
+    mount(bars);
     const entry = query<HTMLButtonElement>(".bar--revenue .legend__item");
     act(() => entry.focus());
     expect(tip()).toContain("of revenue");

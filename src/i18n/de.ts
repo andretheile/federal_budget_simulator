@@ -114,6 +114,17 @@ export const de: Messages = {
     levels: "Getragen von",
     figureFor: (year) => `Wert für ${year}`,
     listCaption: (label) => `Posten in ${label}`,
+    forms: "Darstellung",
+    formBars: "Balken",
+    formFlow: "Geldfluss",
+    introFlow:
+      "Woher das Geld kommt (links) und wohin es geht (rechts), auf einer gemeinsamen Skala. Der schraffierte Block ist der Saldo: Ein Defizit steht links, ein Überschuss rechts.",
+    introFlowLevel: (level) =>
+      `Einnahmen (links) und Ausgaben (rechts) dieser Ebene (${level}) auf einer gemeinsamen Skala. Der schraffierte Block ist nur der Unterschied der beiden Seiten und kein Saldo, weil Zahlungen zwischen den Ebenen herausgerechnet sind.`,
+    flowLabel: "Geldfluss: woher das Geld kommt und wohin es geht",
+    flowMiddle: "Haushalt",
+    flowBalance: (kind) => (kind === "deficit" ? "Defizit" : kind === "surplus" ? "Überschuss" : "Unterschied"),
+    flowNote: "Die Bänder zeigen Beträge, nicht welche Einnahme welche Ausgabe bezahlt.",
   },
   policies: {
     title: "Maßnahmen",

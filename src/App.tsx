@@ -6,13 +6,22 @@
  * from VITE_DEFAULT_COUNTRY, or is simply the first pack in /countries.
  */
 import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
-import { defaultSelection, layoutBudget, sameSelection, selectionShowing, type Selection } from "./app/budgetModel.ts";
+import {
+  defaultSelection,
+  layoutBudget,
+  sameSelection,
+  selectionShowing,
+  withFolded,
+  type BudgetForm,
+  type Selection,
+} from "./app/budgetModel.ts";
 import { addressWriter, type AddressWriter } from "./app/addressWriter.ts";
 import { createUi, UiContext } from "./app/ui.ts";
 import {
   collectionFromHash,
   debtFromHash,
   editorFromHash,
+  formFromHash,
   goalFromHash,
   parseHash,
   sameScenario,
@@ -24,6 +33,7 @@ import { sameDebtAssumptions } from "./app/debtLink.ts";
 import { useDebtView } from "./app/debtModel.ts";
 import { useLegalPage } from "./app/legalPage.ts";
 import { About } from "./components/About.tsx";
+import { FLOW_FONTS } from "./components/BudgetFlow.tsx";
 import { BudgetView } from "./components/BudgetView.tsx";
 import { DebtSection, DebtTeaser, preloadDebt } from "./components/DebtSection.tsx";
 import { CurveEditor, editableCurve, preloadEditor } from "./components/CurveEditor.tsx";
@@ -44,8 +54,10 @@ import {
   type LevelFilter,
   type ParamValue,
   type Scenario,
+  type Side,
   type ValidationIssue,
 } from "./engine/index.ts";
+import { fontsReady } from "./hooks/useFontsLoaded.ts";
 import { useMediaQuery } from "./hooks/useMediaQuery.ts";
 import { languagesOf, messagesFor, pickLanguage } from "./i18n/index.ts";
 import { isPreviewPack, listPackIds, loadPack } from "./packs.ts";
@@ -54,6 +66,8 @@ import { currentSite } from "./site/current.ts";
 import { REPOSITORY_URL } from "./site/project.ts";
 
 const LANGUAGE_KEY = "budget-simulator:language";
+/** How long the first picture waits at most for the fonts of the flow's labels, in milliseconds. */
+const FONT_WAIT = 1500;
 
 /** Below this the page has one column (base.css, .workspace): the measures then come before the budget. */
 export const ONE_COLUMN = "(max-width: 1079px)";
@@ -111,8 +125,13 @@ async function load(id: string | undefined): Promise<Loaded> {
   if (parseHash(currentHash()).editor) preloadEditor();
   // A link with assumptions of the debt projection: that section's code too.
   if (parseHash(currentHash()).debt) preloadDebt();
+  // The flow of money lays its labels out from their measured widths: its fonts are fetched beside
+  // the country's data, so that the first picture is the final one and nothing below it moves when
+  // the font arrives. Not for longer than the wait, though; the flow then measures again.
+  const fonts = formFromHash(currentHash()) === "flow" ? fontsReady(FLOW_FONTS, FONT_WAIT) : Promise.resolve();
   const requested = fixtureRequested();
   const result = id === undefined || requested ? undefined : await loadPack(id);
+  await fonts;
   if (result?.ok) return { pack: result.pack };
   // Development fallback: a made-up country, announced by a notice nobody can miss.
   const { testland } = await import("./engine/__fixtures__/testland.ts");
@@ -194,6 +213,10 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
   const goal = chosenGoal(pack, goalId);
   /** The collection the list of measures is narrowed to, if any. In the link as well. */
   const [collection, setCollection] = useState(() => collectionFromHash(currentHash(), pack));
+  /** The form of the budget overview: the flow of money or the bars. In the link when it is not the default (v=bars). */
+  const [budgetForm, setBudgetForm] = useState<BudgetForm>(() => formFromHash(currentHash()));
+  /** Which categories the flow folds, as it last reported; the bars fold as the layout says. */
+  const [flowFolds, setFlowFolds] = useState<Record<Side, string[]>>();
   const ui = useMemo(() => createUi(pack, language), [pack, language]);
   const { t } = ui;
   const result = useMemo(() => simulate(pack, scenario), [pack, scenario]);
@@ -222,6 +245,7 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
       debt: debtAssumptions,
       goal: goalId,
       collection,
+      form: budgetForm,
       language,
       country: showsCountry ? pack.country.id : undefined,
       editor,
@@ -232,7 +256,16 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
   /** The address of a legal page, or of the simulator, with this scenario. */
   const legalHref = (page: LegalPage | undefined): string =>
     stateToHash(
-      { scenario, debt: debtAssumptions, goal: goalId, collection, language, country: showsCountry ? pack.country.id : undefined, page },
+      {
+        scenario,
+        debt: debtAssumptions,
+        goal: goalId,
+        collection,
+        form: budgetForm,
+        language,
+        country: showsCountry ? pack.country.id : undefined,
+        page,
+      },
       pack,
     ) || "#";
   const hashRef = useRef(hash);
@@ -282,6 +315,7 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
         fields.debt === undefined &&
         fields.goal === undefined &&
         fields.collection === undefined &&
+        fields.form === undefined &&
         fields.page === undefined
       ) {
         if (window.location.hash !== "" && dirty.current) {
@@ -308,6 +342,7 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
       setDebtAssumptions((current) => (sameDebtAssumptions(current, wantedDebt) ? current : wantedDebt));
       setGoalId(goalFromHash(window.location.hash, pack));
       setCollection(collectionFromHash(window.location.hash, pack));
+      setBudgetForm(formFromHash(window.location.hash));
       followLegal(fields.page);
     };
     window.addEventListener("hashchange", onHashChange);
@@ -425,17 +460,18 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
   useEffect(() => () => clearTimeout(highlightTimer.current), []);
   const resultRef = useRef(result);
   resultRef.current = result;
-  const onShowNode = useCallback(
-    (nodeId: string) => {
-      const next = selectionShowing(layout, resultRef.current, nodeId);
-      if (!next) return;
-      setSelection((current) => (sameSelection(current, next) ? current : next));
-      setHighlight(nodeId);
-      clearTimeout(highlightTimer.current);
-      highlightTimer.current = setTimeout(() => setHighlight(undefined), 2600);
-    },
-    [layout],
-  );
+  /** The layout as the form on screen folds it: the list that shows an item depends on it. */
+  const viewLayout = budgetForm === "flow" && flowFolds ? withFolded(layout, flowFolds) : layout;
+  const viewLayoutRef = useRef(viewLayout);
+  viewLayoutRef.current = viewLayout;
+  const onShowNode = useCallback((nodeId: string) => {
+    const next = selectionShowing(viewLayoutRef.current, resultRef.current, nodeId);
+    if (!next) return;
+    setSelection((current) => (sameSelection(current, next) ? current : next));
+    setHighlight(nodeId);
+    clearTimeout(highlightTimer.current);
+    highlightTimer.current = setTimeout(() => setHighlight(undefined), 2600);
+  }, []);
 
   const onSelect = useCallback((next: Selection) => {
     setHighlight(undefined);
@@ -463,7 +499,17 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
   const debt = useDebtView(pack, pageScenario, pageResult, debtAssumptions);
 
   const budget = (
-    <BudgetView key="budget" result={pageResult} selection={selection} onSelect={onSelect} highlight={highlight} />
+    <BudgetView
+      key="budget"
+      result={pageResult}
+      selection={selection}
+      onSelect={onSelect}
+      highlight={highlight}
+      form={budgetForm}
+      onForm={setBudgetForm}
+      folds={flowFolds}
+      onFolds={setFlowFolds}
+    />
   );
   const policies = (
     <PolicyList

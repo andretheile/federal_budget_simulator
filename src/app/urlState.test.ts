@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { testland } from "../engine/__fixtures__/testland.ts";
 import { emptyScenario, simulate, type Scenario } from "../engine/index.ts";
+import { DEFAULT_BUDGET_FORM } from "./budgetModel.ts";
 import {
   buildHash,
   collectionFromHash,
   debtFromHash,
   editorFromHash,
+  formFromHash,
   goalFromHash,
   parseHash,
   sameScenario,
@@ -211,6 +213,29 @@ describe("the goal field g and the collection field f", () => {
     expect(stateToHash({ scenario, language: "de", goal: "close_deficit", collection: "savings" }, bare)).toBe("#lang=de&s=halve_mp_pay");
     expect(goalFromHash("#g=close_deficit", bare)).toBeUndefined();
     expect(collectionFromHash("#f=savings", bare)).toBeUndefined();
+  });
+});
+
+describe("the form of the budget overview in the field v", () => {
+  const scenario = scenarioFromHash("#s=halve_mp_pay", testland);
+  const other = DEFAULT_BUDGET_FORM === "bars" ? "flow" : "bars";
+
+  it("is written only when it is not the default, after the collection", () => {
+    expect(stateToHash({ scenario, language: "de", form: DEFAULT_BUDGET_FORM }, testland)).toBe("#lang=de&s=halve_mp_pay");
+    expect(stateToHash({ scenario, language: "de", collection: "savings", form: other, page: "imprint" }, testland)).toBe(
+      `#lang=de&s=halve_mp_pay&f=savings&v=${other}&p=imprint`,
+    );
+  });
+
+  it("is read back, and anything that is not a form reads as the default", () => {
+    expect(formFromHash(`#lang=en&v=${other}`)).toBe(other);
+    expect(formFromHash("#lang=en&v=flow")).toBe("flow");
+    expect(formFromHash("#lang=en&v=bars")).toBe("bars");
+    for (const bad of ["", "Flow", "pie", "<b>"]) {
+      expect(parseHash(`#v=${bad}`)).toEqual({});
+      expect(formFromHash(`#v=${bad}`)).toBe(DEFAULT_BUDGET_FORM);
+    }
+    expect(formFromHash("")).toBe(DEFAULT_BUDGET_FORM);
   });
 });
 

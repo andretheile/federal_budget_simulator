@@ -132,6 +132,17 @@ export const en: Messages = {
     levels: "Borne by",
     figureFor: (year) => `Figure for ${year}`,
     listCaption: (label) => `Items in ${label}`,
+    forms: "View",
+    formBars: "Bars",
+    formFlow: "Money flow",
+    introFlow:
+      "Where the money comes from (left) and where it goes (right), on one scale. The hatched block is the balance: a deficit stands on the left, a surplus on the right.",
+    introFlowLevel: (level) =>
+      `Revenue (left) and spending (right) of this level (${level}) on one scale. The hatched block is only the difference between the two sides and not a balance, because payments between levels are netted out.`,
+    flowLabel: "Money flow: where the money comes from and where it goes",
+    flowMiddle: "Budget",
+    flowBalance: (kind) => (kind === "deficit" ? "Deficit" : kind === "surplus" ? "Surplus" : "Difference"),
+    flowNote: "The bands show amounts, not which revenue pays for which spending.",
   },
   policies: {
     title: "Measures",

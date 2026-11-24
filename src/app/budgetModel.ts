@@ -83,6 +83,35 @@ export function layoutBudget(pack: CountryPack): BudgetLayout {
   return layout;
 }
 
+/**
+ * The two forms of the overview: the flow of the money from the revenue areas through the budget
+ * to the spending areas, or two stacked bars. Both show the same amounts and share the selection.
+ * The switch offers them in this order.
+ */
+export type BudgetForm = "flow" | "bars";
+export const BUDGET_FORMS: readonly BudgetForm[] = ["flow", "bars"];
+/** The form the page opens with. A link names the form only when it is not this one (`v=bars`). */
+export const DEFAULT_BUDGET_FORM: BudgetForm = "flow";
+
+/**
+ * The same layout with other categories folded into "other". The flow has more room for labels
+ * than a bar and folds fewer of them: a suffix of `order`, never more than the bars fold. Colours
+ * stay as they are, so a category shown on its own beside the bars' fold keeps the neutral grey.
+ */
+export function withFolded(layout: BudgetLayout, folded: Record<Side, readonly string[]>): BudgetLayout {
+  const same = (side: Side): boolean =>
+    folded[side].length === layout.sides[side].folded.length &&
+    folded[side].every((id, index) => layout.sides[side].folded[index] === id);
+  if (same("revenue") && same("expenditure")) return layout;
+  return {
+    ...layout,
+    sides: {
+      revenue: { order: layout.sides.revenue.order, folded: [...folded.revenue] },
+      expenditure: { order: layout.sides.expenditure.order, folded: [...folded.expenditure] },
+    },
+  };
+}
+
 /** The top-level category a node belongs to. */
 export function topLevelOf(layout: BudgetLayout, id: string): string {
   return layout.top.get(id) ?? id;
@@ -141,6 +170,16 @@ export interface Selection {
 
 export function sameSelection(a: Selection, b: Selection): boolean {
   return a.side === b.side && a.nodeId === b.nodeId && a.fold === b.fold;
+}
+
+/**
+ * The selection as a layout can show it. "Other areas" exists only where at least two categories
+ * are folded; in a form that shows them all on their own (the flow, where its labels have room)
+ * the list of the whole side, which holds them all, takes its place.
+ */
+export function selectionIn(layout: BudgetLayout, selection: Selection): Selection {
+  if (!selection.fold || layout.sides[selection.side].folded.length > 1) return selection;
+  return { side: selection.side, nodeId: null, fold: false };
 }
 
 function childrenOf(pack: CountryPack, id: string): BudgetNode[] {
