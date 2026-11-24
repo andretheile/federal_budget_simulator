@@ -1,8 +1,32 @@
 import { legalEn } from "./legal/en.ts";
 import { debtEn } from "./debt/en.ts";
-import type { Messages } from "./messages.ts";
+import type { Messages, SideMove } from "./messages.ts";
 
 const plural = (count: number, one: string, many: string): string => `${count} ${count === 1 ? one : many}`;
+
+/**
+ * The texts that name who takes in and spends, with the name of a central government whose budget
+ * a pack shows alone: "the central government" here, "the federal government" in American English.
+ */
+export function sideTexts(central: string): Pick<Messages["policies"], "sideIntro" | "sideChange"> {
+  return {
+    sideIntro: (side, holder) => {
+      const who = holder === "central" ? central : "the state";
+      if (side === "revenue") return `Measures that change what ${who} takes in: taxes, levies, contributions.`;
+      if (side === "expenditure") return `Measures that change what ${who} spends: benefits, staff, subsidies.`;
+      return `Measures that change both what ${who} takes in and what it spends.`;
+    },
+    sideChange: (revenue, expenditure, who) => {
+      const subject = who === "level" ? "it" : who === "central" ? central : "the state";
+      const takesIn = (move: SideMove, amount: boolean): string => `takes in ${amount ? `${move.amount} ` : ""}${move.up ? "more" : "less"}`;
+      const spends = (move: SideMove, amount: boolean): string => `spends ${amount ? `${move.amount} ` : ""}${move.up ? "more" : "less"}`;
+      if (revenue && expenditure) return `${subject} ${takesIn(revenue, true)} and ${spends(expenditure, true)}.`;
+      if (revenue) return `${subject} ${takesIn(revenue, false)}.`;
+      if (expenditure) return `${subject} ${spends(expenditure, false)}.`;
+      return "";
+    },
+  };
+}
 
 export const en: Messages = {
   app: {
@@ -226,6 +250,12 @@ export const en: Messages = {
         ? "1 measure switched on is hidden by the filter and still counts."
         : `${count} measures switched on are hidden by the filter and still count.`,
     showAll: "Show all",
+    sideTitle: { revenue: "Revenue", expenditure: "Spending", both: "Revenue and spending" },
+    sideTag: { revenue: "Revenue", expenditure: "Spending", both: "Revenue, spending" },
+    sideCount: (count, on) => `${plural(count, "measure", "measures")}${on > 0 ? ` · ${on} switched on` : ""}`,
+    ...sideTexts("the central government"),
+    sideLinks: "Sections of the list",
+    neitherSide: (level) => (level ? "changes neither revenue nor spending at this level" : "changes neither revenue nor spending"),
   },
   goal: {
     label: "Goal",

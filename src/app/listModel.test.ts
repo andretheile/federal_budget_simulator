@@ -117,3 +117,69 @@ describe("the list in alphabetical order (as the page shows it)", () => {
     expect(topics.slice(0, -1)).toEqual([...topics.slice(0, -1)].sort());
   });
 });
+
+describe("the list in sections by the side of the budget", () => {
+  const order = {
+    language: "en",
+    label: (policy: { label: { en: string } }) => policy.label.en,
+    topic: (topic: string) => topic,
+  };
+  const sections = (view: ReturnType<typeof listView>): [string, string[], number][] =>
+    view.sections.map((section) => [section.side, ids(section.policies), section.on]);
+
+  it("puts revenue first, then spending, then both, alphabetical within each", () => {
+    expect(sections(listView(testland, none, undefined, null, order))).toEqual([
+      ["revenue", ["raise_top_tax_rate", "redraw_income_tax", "wealth_tax"], 0],
+      ["expenditure", ["cut_admin", "cut_pensions", "defense_target", "family_bonus", "halve_mp_pay", "no_basic_income_non_citizens"], 0],
+      ["both", ["insure_civil_servants"], 0],
+    ]);
+  });
+
+  it("holds the same measures as are shown, each once", () => {
+    const view = listView(testland, none, "budget_debate", null, order);
+    expect(view.sections.flatMap((section) => ids(section.policies)).sort()).toEqual(ids(view.shown).sort());
+  });
+
+  it("counts the measures switched on in each section", () => {
+    const scenario: Scenario = {
+      policies: { wealth_tax: { enabled: true }, cut_admin: { enabled: true }, halve_mp_pay: { enabled: true }, cut_pensions: { enabled: false } },
+    };
+    expect(listView(testland, scenario, undefined, null, order).sections.map((section) => [section.side, section.on])).toEqual([
+      ["revenue", 1],
+      ["expenditure", 2],
+      ["both", 0],
+    ]);
+  });
+
+  it("leaves out a section without a measure under the filters, and keeps a single one", () => {
+    // The debate's measures: a tax, a cut and the defence target; nothing on both sides.
+    expect(sections(listView(testland, none, "budget_debate", null, order))).toEqual([
+      ["revenue", ["wealth_tax"], 0],
+      ["expenditure", ["cut_admin", "defense_target"], 0],
+    ]);
+    // Pensions: a cut (spending) and the insurance of civil servants (both).
+    expect(sections(listView(testland, none, undefined, "pensions", order)).map(([side, policies]) => [side, policies])).toEqual([
+      ["expenditure", ["cut_pensions"]],
+      ["both", ["insure_civil_servants"]],
+    ]);
+    expect(sections(listView(testland, none, undefined, "taxes", order)).map(([side]) => side)).toEqual(["revenue"]);
+  });
+
+  it("does not change with the settings or the level shown: a card keeps its place", () => {
+    const before = sections(listView(testland, none, undefined, null, order));
+    const moved: Scenario = {
+      level: "state",
+      policies: {
+        cut_pensions: { enabled: false, params: { cut: 0, fallback: 0 } },
+        insure_civil_servants: { enabled: false, params: { employer_share: 100 } },
+      },
+    };
+    expect(sections(listView(testland, moved, undefined, null, order))).toEqual(before);
+  });
+
+  it("are none where no measure is shown", () => {
+    const pack = testlandCopy();
+    pack.policies = [];
+    expect(listView(pack, none, undefined, null, order).sections).toEqual([]);
+  });
+});

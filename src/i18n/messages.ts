@@ -23,6 +23,18 @@ export type YearName = number | string;
  */
 export type SliderBase = YearName | { named: string };
 
+/** The side of the budget a measure acts on: what comes in, what goes out, or both (app/sideModel.ts). */
+export type BudgetSide = "revenue" | "expenditure" | "both";
+
+/** Whose budget the pack shows: the whole state's, or the central government's alone, such as the US federal budget. */
+export type Holder = "state" | "central";
+
+/** How one side of the budget changes: up or down, and by how much (formatted, without a sign). */
+export interface SideMove {
+  up: boolean;
+  amount: string;
+}
+
 export interface Messages {
   app: {
     name: string;
@@ -267,6 +279,31 @@ export interface Messages {
     /** Switched-on measures that the filters hide; they count all the same. */
     hiddenOn(count: number): string;
     showAll: string;
+    /** The heading of a section of the list, by the side the measures act on, and the link to it. */
+    sideTitle: Record<BudgetSide, string>;
+    /** The same on a card's top line, after the topic, where room is short: in capitals there. */
+    sideTag: Record<BudgetSide, string>;
+    /** Beside a section's heading: how many measures it has, and how many of them are switched on if any are. */
+    sideCount(count: number, on: number): string;
+    /** The one line under a section's heading: what its measures change, with examples. */
+    sideIntro(side: BudgetSide, holder: Holder): string;
+    /** Name of the line of links to the sections, for screen readers. */
+    sideLinks: string;
+    /**
+     * Under a card's figure, after the direction ("verbessert den Saldo") and a colon: what the
+     * measure does to what the state takes in and to what it spends, at the current settings. A side
+     * that does not change is null. Where both change, the sentence gives both amounts; where one
+     * does, the figure is its amount and the sentence gives none. `who`: the state as a whole, the
+     * central government where the pack is its budget alone, or the level of government shown,
+     * which the direction has just named ("diese Ebene").
+     */
+    sideChange(revenue: SideMove | null, expenditure: SideMove | null, who: Holder | "level"): string;
+    /**
+     * In place of direction and sentence where the measure changes neither what comes in nor what
+     * goes out, in total: at its current settings, or at the level shown (`level`), or because it
+     * only moves money between items. Follows the figure, as the direction does.
+     */
+    neitherSide(level: boolean): string;
   };
   /**
    * The goal bar under the scoreboard: how far the measures switched on go towards a goal of the

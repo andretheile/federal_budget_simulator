@@ -4,12 +4,15 @@
  * switched on stay in the scenario whether they are shown or not, so the list says how many of them
  * a filter hides.
  *
- * The list is in alphabetical order of the measures' labels in the language shown, and the topics
- * are too, with "other" last. That is the order for reading only: the engine applies the measures in
- * the pack's order, which the waterfall shows, and nothing here changes it.
+ * The measures shown stand in up to three sections by the side of the budget they act on (sideModel.ts):
+ * revenue, spending, both; a section without a measure under the filters is left out. Within a
+ * section the list is in alphabetical order of the measures' labels in the language shown, and the
+ * topics are too, with "other" last. That is the order for reading only: the engine applies the
+ * measures in the pack's order, which the waterfall shows, and nothing here changes it.
  */
 import type { CountryPack, Policy, PolicyCollection, PolicyTopic, Scenario } from "../engine/index.ts";
 import { alphabetical } from "./collation.ts";
+import { POLICY_SIDES, policySides, type PolicySide } from "./sideModel.ts";
 
 /** How the list names what it sorts: in the language shown. */
 export interface ListOrder {
@@ -32,10 +35,24 @@ export interface ListView {
   topics: [PolicyTopic, number][];
   /** The topic that applies: null for all, or one that the pool has. */
   topic: PolicyTopic | null;
-  /** The measures shown. */
+  /** The measures shown, in the order of the pool. */
   shown: Policy[];
+  /**
+   * The same by the side they act on, as the list shows them: revenue, spending, both, each in the
+   * order of the pool; only sides that have a measure shown.
+   */
+  sections: ListSection[];
   /** Measures that are switched on but not shown. */
   hidden: Policy[];
+}
+
+/** One section of the list: the measures shown that act on one side of the budget. */
+export interface ListSection {
+  side: PolicySide;
+  /** In the list's order. */
+  policies: Policy[];
+  /** How many of them are switched on. */
+  on: number;
 }
 
 export function listView(
@@ -63,8 +80,14 @@ export function listView(
   const active = topic !== null && counts.has(topic) ? topic : null;
   const shown = pool.filter((policy) => active === null || policy.topic === active);
   const visible = new Set(shown.map((policy) => policy.id));
-  const hidden = pack.policies.filter((policy) => scenario.policies[policy.id]?.enabled === true && !visible.has(policy.id));
-  return { collection, pool, topics, topic: active, shown, hidden };
+  const isOn = (policy: Policy): boolean => scenario.policies[policy.id]?.enabled === true;
+  const hidden = pack.policies.filter((policy) => isOn(policy) && !visible.has(policy.id));
+  const sides = policySides(pack);
+  const sections = POLICY_SIDES.flatMap((side): ListSection[] => {
+    const policies = shown.filter((policy) => sides.get(policy.id) === side);
+    return policies.length > 0 ? [{ side, policies, on: policies.filter(isOn).length }] : [];
+  });
+  return { collection, pool, topics, topic: active, shown, sections, hidden };
 }
 
 /** For each measure, the labels of the collections it belongs to, in the pack's order of collections. */

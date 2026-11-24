@@ -28,8 +28,10 @@ import {
 } from "../app/policyModel.ts";
 import { paragraphs } from "../app/paragraphs.ts";
 import { phaseWords } from "../app/phaseModel.ts";
+import { budgetHolder, policySides } from "../app/sideModel.ts";
 import { sliderDirection } from "../app/sliderModel.ts";
 import { useUi, type Ui } from "../app/ui.ts";
+import type { SideMove } from "../i18n/messages.ts";
 import {
   findNode,
   measurePhase,
@@ -144,6 +146,33 @@ function directionWord(ui: Ui, direction: Direction, level: LevelFilter): string
   return direction === "improve" ? common.relieves : direction === "worsen" ? common.burdens : common.noEffectLevel;
 }
 
+/**
+ * What the measure does, on its own at the current settings, to what comes in and what goes out:
+ * "Der Staat nimmt mehr ein." With both sides changing, both amounts; with one, none, as the figure
+ * is its amount. Who: the level shown, else the state, or the central government where the pack is
+ * its budget alone. Empty where neither side changes.
+ */
+function sideSentence(ui: Ui, insight: PolicyInsight, level: LevelFilter): string {
+  const move = (amount: number): SideMove | null => (amount === 0 ? null : { up: amount > 0, amount: ui.fmt.money(Math.abs(amount)) });
+  const revenue = move(insight.revenue);
+  const expenditure = move(insight.expenditure);
+  if (!revenue && !expenditure) return "";
+  return ui.t.policies.sideChange(revenue, expenditure, level === "all" ? budgetHolder(ui.pack) : "level");
+}
+
+/**
+ * The figure in proportion: as a share of all revenue or all spending, where the measure changes
+ * only that side, so the share is that side's change; and per inhabitant, for the whole state.
+ * Empty for a single level where both sides change.
+ */
+function proportionText(ui: Ui, insight: PolicyInsight, level: LevelFilter): string {
+  const { t, fmt } = ui;
+  const share = insight.shareOfSide === null ? undefined : fmt.share(insight.shareOfSide);
+  if (level !== "all") return share === undefined ? "" : t.policies.ofLevel(insight.side, share);
+  const perInhabitant = t.policies.perInhabitant(fmt.money(insight.perInhabitant));
+  return share === undefined ? perInhabitant : `${t.policies.ofAll(insight.side, share)} · ${perInhabitant}`;
+}
+
 function listOf(ui: Ui, items: string[]): string {
   try {
     return new Intl.ListFormat(ui.language, { style: "long", type: "conjunction" }).format(items);
@@ -200,6 +229,11 @@ export const PolicyCard = memo(function PolicyCard({
   const insight = insightOf(pack, alone, baseline);
   // Within floating-point noise an effect is zero, and is written as a plain zero.
   const balanceShown = insight.direction === "neutral" ? 0 : insight.balance;
+  // The side the measure acts on, from the pack: the same at every setting, as is its place in the list.
+  const side = policySides(pack).get(policy.id) ?? "expenditure";
+  // What it does at the current settings to each side, in words.
+  const sentence = sideSentence(ui, insight, level);
+  const proportion = proportionText(ui, insight, level);
   const label = ui.text(policy.label);
   const summary = ui.text(policy.summary);
   const titleId = `policy-${policy.id}-title`;
@@ -238,7 +272,15 @@ export const PolicyCard = memo(function PolicyCard({
       <article aria-labelledby={titleId}>
         <div className="policy__top">
           <p className="policy__tags">
-            <span className="policy__topic">{t.policies.topics[policy.topic]}</span>
+            {/* The topic, and in words which side of the budget the measure acts on: not by colour,
+                which says which way the balance moves. Where the line is too short for both, the
+                side goes whole onto the next line and the dot stays with the topic. */}
+            <span className="policy__topic">
+              {t.policies.topics[policy.topic]}
+              <span aria-hidden="true">{" ·"}</span>{" "}
+              <span className="visually-hidden">, </span>
+              <span className="policy__side">{t.policies.sideTag[side]}</span>
+            </span>
             {collections && collections.length > 0 && (
               <>
                 <span className="visually-hidden">. {t.policies.partOf}: </span>
@@ -252,9 +294,10 @@ export const PolicyCard = memo(function PolicyCard({
           </p>
           <Switch checked={enabled} label={t.policies.switchOn(label)} onChange={(next) => onToggle(policy.id, next)} />
         </div>
-        <h3 className="policy__title" id={titleId} onClick={() => onExpand(policy.id, !expanded)}>
+        {/* Below the list's heading (h2) and the heading of its section (h3). */}
+        <h4 className="policy__title" id={titleId} onClick={() => onExpand(policy.id, !expanded)}>
           {label}
-        </h3>
+        </h4>
         {/* Whole when it is short, as a face should be; a longer one is cut to two lines until the card is opened. */}
         <p className={`policy__summary${!expanded && summaryIsLong(summary) ? " is-clamped" : ""}`}>{summary}</p>
 
@@ -271,8 +314,19 @@ export const PolicyCard = memo(function PolicyCard({
             />
             {/* A one-off is an amount, not an effect of every year. */}
             <span className="policy__per">{phase?.once ? t.policies.once : t.common.perYear}</span>
-            <span className={`policy__direction policy__direction--${insight.direction}`}>
-              {directionWord(ui, insight.direction, level)}
+            {/* On a line of its own: which way the balance moves, and in words what comes in and what
+                goes out. Where neither total changes, that is what it says. */}
+            <span className="policy__what">
+              {insight.direction === "neutral" && !sentence ? (
+                <span className="policy__direction policy__direction--neutral">{t.policies.neitherSide(level !== "all")}</span>
+              ) : (
+                <>
+                  <span className={`policy__direction policy__direction--${insight.direction}`}>
+                    {directionWord(ui, insight.direction, level)}
+                  </span>
+                  {sentence && <span className="policy__sides">: {sentence}</span>}
+                </>
+              )}
             </span>
           </p>
           {/* The figure is the full effect; the debt projection has it later or step by step. The
@@ -302,13 +356,7 @@ export const PolicyCard = memo(function PolicyCard({
           {level === "all" && insight.shareOfDeficit !== null && insight.direction !== "neutral" && (
             <Meter insight={insight} share={insight.shareOfDeficit} />
           )}
-          {insight.direction !== "neutral" && (
-            <p className="policy__proportion">
-              {level === "all"
-                ? `${t.policies.ofAll(insight.side, fmt.share(insight.shareOfSide))} · ${t.policies.perInhabitant(fmt.money(insight.perInhabitant))}`
-                : t.policies.ofLevel(insight.side, fmt.share(insight.shareOfSide))}
-            </p>
-          )}
+          {insight.direction !== "neutral" && proportion && <p className="policy__proportion">{proportion}</p>}
           {goalHint && (
             <p className="policy__goal">
               <InfoIcon size={13} />
@@ -771,7 +819,7 @@ function PolicyDetails({
 
       {settingsOf(policy).length > 0 && (
         <section className="policy__section">
-          <h4>{t.policies.settings}</h4>
+          <h5>{t.policies.settings}</h5>
           {!enabled && <p className="policy__hint">{t.policies.previewHint}</p>}
           {/* A kind of parameter without a control here is left at its default and shows nothing. */}
           {policy.params.map((param) =>
@@ -797,7 +845,7 @@ function PolicyDetails({
       )}
 
       <section className="policy__section">
-        <h4>{t.policies.facts}</h4>
+        <h5>{t.policies.facts}</h5>
         <dl className="facts">
           <div>
             <dt>{t.policies.rangeFact}</dt>
@@ -840,7 +888,7 @@ function PolicyDetails({
       </section>
 
       <section className="policy__section">
-        <h4>{t.policies.catches}</h4>
+        <h5>{t.policies.catches}</h5>
         {catches.length === 0 ? (
           <p className="muted">{t.policies.noCatches}</p>
         ) : (
@@ -868,7 +916,7 @@ function PolicyDetails({
       {/* What the figure leaves out and what the model assumes: apart from the catches, which are about the measure. */}
       {policy.limits && policy.limits.length > 0 && (
         <section className="policy__section">
-          <h4>{t.policies.limits}</h4>
+          <h5>{t.policies.limits}</h5>
           <ul className="limits">
             {policy.limits.map((item, index) => (
               <li key={index} className="limit">
@@ -882,9 +930,9 @@ function PolicyDetails({
 
       {goalHint && (
         <section className="policy__section">
-          <h4 ref={goalHeading} tabIndex={-1}>
+          <h5 ref={goalHeading} tabIndex={-1}>
             {t.policies.goalTitle}
-          </h4>
+          </h5>
           <p className="policy__goal-detail">
             {goalHint.statement} {goalHint.full}
           </p>
@@ -894,7 +942,7 @@ function PolicyDetails({
 
       {policy.timing && phase && (
         <section className="policy__section">
-          <h4>{t.policies.timingTitle}</h4>
+          <h5>{t.policies.timingTitle}</h5>
           <p className="policy__timing-detail">
             {(phase.once ? t.policies.timingDetailOnce : t.policies.timingDetail)(t.debt.timing.when(phaseWords(phase, ui)), policy.timing.param !== undefined)}
           </p>
@@ -904,7 +952,7 @@ function PolicyDetails({
       )}
 
       <section className="policy__section">
-        <h4>{t.policies.effects}</h4>
+        <h5>{t.policies.effects}</h5>
         {groups ? (
           groups.map((group) => {
             const open = opened.has(group.key);
@@ -956,7 +1004,7 @@ function PolicyDetails({
 
       {sources.length > 0 && (
         <section className="policy__section">
-          <h4>{t.common.sources}</h4>
+          <h5>{t.common.sources}</h5>
           <SourceList ids={sources} />
         </section>
       )}

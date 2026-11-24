@@ -72,10 +72,18 @@ export interface PolicyInsight {
   high: number;
   hasRange: boolean;
   direction: Direction;
-  /** The side of the budget the measure mainly changes. */
+  /** Change in revenue per year, on its own; zero within floating-point noise. */
+  revenue: number;
+  /** Change in spending per year, on its own; zero within floating-point noise. */
+  expenditure: number;
+  /** The side of the budget the measure changes; where it changes both, the one it changes more. */
   side: Side;
-  /** |balance| as a share of that side's base-year total. */
-  shareOfSide: number;
+  /**
+   * |balance| as a share of that side's base-year total, where the measure changes only that side:
+   * then the balance is that side's change. Null where it changes both, as the balance is then the
+   * change of neither.
+   */
+  shareOfSide: number | null;
   /** |balance| per inhabitant. */
   perInhabitant: number;
   /** |balance| as a share of today's deficit; null if today's balance is not a deficit. */
@@ -87,6 +95,9 @@ export function insightOf(pack: CountryPack, alone: PolicyResult, baseline: Tota
   const noise = noiseLevel(baseline);
   const balance = alone.delta.balance;
   const size = Math.abs(balance);
+  const zeroed = (amount: number): number => (Math.abs(amount) <= noise ? 0 : amount);
+  const revenue = zeroed(alone.delta.revenue);
+  const expenditure = zeroed(alone.delta.expenditure);
   const side: Side = Math.abs(alone.delta.revenue) > Math.abs(alone.delta.expenditure) ? "revenue" : "expenditure";
   const total = baseline[side];
   return {
@@ -95,8 +106,10 @@ export function insightOf(pack: CountryPack, alone: PolicyResult, baseline: Tota
     high: alone.high.balance,
     hasRange: Math.abs(alone.high.balance - alone.low.balance) > noise,
     direction: directionOf(balance, noise),
+    revenue,
+    expenditure,
     side,
-    shareOfSide: total > 0 ? size / total : 0,
+    shareOfSide: revenue !== 0 && expenditure !== 0 ? null : total > 0 ? size / total : 0,
     perInhabitant: perCapita(pack, size),
     shareOfDeficit: baseline.balance < -noise ? size / -baseline.balance : null,
     quality: weakestQuality(alone.effects.map((effect) => effect.quality)),
