@@ -1170,3 +1170,108 @@ export function testlandManyEffects(): { pack: CountryPack; policy: Policy } {
   pack.policies.push(policy);
   return { pack, policy };
 }
+
+/**
+ * Testland with incidence.json, for the view of who pays. The main fixture has none, so that its
+ * pages show no such section; this adds one, with every optional field of incidence.json.
+ *
+ * Three groups of the 100 inhabitants: the bottom half, the next 40 % (from an income of 15) and
+ * the top 10 % (from 40). They have 20, 50 and 30 % of the income, 1000 in all.
+ *   rev.taxes.income 1500   income_tax 5 / 45 / 50 %
+ *   rev.taxes.vat    1000   80 % by vat 40 / 40 / 20 %, 20 % paid by companies
+ *   rev.taxes.wealth    0   all on the top 10 %
+ *   rev.social_contributions 1200   contributions 30 / 50 / 20 %
+ *   rev.other         300   not a tax
+ * Today the groups pay 75 + 320 = 395, 675 + 320 = 995 and 750 + 160 = 910 of the taxes (2300 of
+ * 2500; companies 200): shares 17.17, 43.26 and 39.57 %.
+ *
+ * The distribution "income" stands for the population: its 50 taxpayers are cut at 15 (half of
+ * them below) and 40 (nine tenths below). raise_top_tax_rate (top rate 40 -> 50 % from 30) raises
+ * the model by 10: 2.5 from the five taxpayers between 30 and 40, 7.5 from the five above 40, none
+ * from the bottom half. Calibrated to 1500 / 120 it is +125: 0 / 31.25 / 93.75.
+ * The knock-on of insure_civil_servants on income tax lands on companies, with a sentence; the
+ * fixture's measure "vat_on_everything" raises all taxes by 10 % through their group, so the leaves
+ * keep their own spreads.
+ */
+export function testlandWhoPays(): CountryPack {
+  const pack = testlandCopy();
+  pack.incidence = {
+    population: {
+      unit: t("people", "Menschen"),
+      perUnit: t("per person", "je Person"),
+      count: 100,
+      ranking: t("ranked by income per person", "geordnet nach dem Einkommen je Person"),
+      year: 2022,
+      quality: "estimate",
+      sources: ["tax_statistics"],
+      note: t("Invented.", "Erfunden."),
+    },
+    groups: [
+      { id: "bottom_50", label: t("Bottom half", "Untere Hälfte"), share: 0.5 },
+      { id: "next_40", label: t("Next 40%", "Nächste 40 %"), share: 0.4, from: 15 },
+      { id: "top_10", label: t("Top 10%", "Oberste 10 %"), share: 0.1, from: 40 },
+    ],
+    income: {
+      shares: [0.2, 0.5, 0.3],
+      total: 1000,
+      concept: t("income", "Einkommen"),
+      quality: "estimate",
+      sources: ["tax_statistics"],
+      note: t("Invented.", "Erfunden."),
+    },
+    profiles: {
+      income_tax: { label: t("Income tax", "Einkommensteuer"), shares: [0.05, 0.45, 0.5], quality: "derived", sources: ["tax_statistics"], note: t("From the distribution.", "Aus der Verteilung.") },
+      vat: { shares: [0.4, 0.4, 0.2], quality: "estimate", sources: ["finance_ministry"] },
+      top: { shares: [0, 0, 1], quality: "estimate", sources: ["wealth_survey"] },
+      contributions: { shares: [0.3, 0.5, 0.2], quality: "estimate", sources: ["finance_ministry"] },
+      half_companies: { shares: [0, 0.25, 0.25], payers: { companies: 0.5 }, quality: "estimate", sources: ["finance_ministry"] },
+    },
+    payers: [
+      { id: "companies", label: t("Companies", "Unternehmen"), note: t("Taxes on profits.", "Steuern auf Gewinne."), sources: ["finance_ministry"] },
+      { id: "not_a_tax", label: t("Not taxes", "Keine Steuern") },
+    ],
+    nodes: {
+      "rev.taxes.income": { profile: "income_tax" },
+      "rev.taxes.vat": { profile: "vat", coverage: 0.8, payer: "companies", note: t("A fifth is paid by firms.", "Ein Fünftel zahlen Firmen.") },
+      "rev.taxes.wealth": { profile: "top" },
+      "rev.social_contributions": { profile: "contributions" },
+      "rev.other": { payer: "not_a_tax" },
+    },
+    distributions: { income: { note: t("Taxpayers stand for everybody.", "Steuerpflichtige stehen für alle.") } },
+    scopes: [
+      { id: "taxes", label: t("Taxes", "Steuern"), nodes: ["rev.taxes"], note: t("All taxes.", "Alle Steuern.") },
+      { id: "all", label: t("Taxes and contributions", "Steuern und Beiträge"), nodes: ["rev.taxes", "rev.social_contributions"] },
+    ],
+    note: t("Invented.", "Erfunden."),
+  };
+  const shift = pack.policies.find((policy) => policy.id === "insure_civil_servants")!.effects[0].shift!;
+  shift.incidence = "companies";
+  shift.incidenceNote = t("Firms that employ civil servants pay less.", "Firmen mit Beamten zahlen weniger.");
+  pack.policies.push({
+    id: "vat_on_everything",
+    label: t("All taxes up 10 %", "Alle Steuern 10 % höher"),
+    summary: t("Raises every tax by a tenth.", "Erhöht jede Steuer um ein Zehntel."),
+    topic: "taxes",
+    params: [],
+    effects: [{ type: "scale", target: "rev.taxes", factor: 1.1, quality: "estimate" }],
+    catches: [],
+    sources: [],
+  });
+  return pack;
+}
+
+/** testlandWhoPays as the raw content of its JSON files. */
+export function testlandWhoPaysFiles(): RawPackFiles {
+  const copy = JSON.parse(JSON.stringify(testlandWhoPays())) as CountryPack;
+  return {
+    id: copy.country.id,
+    country: copy.country,
+    budget: copy.budget,
+    policies: copy.collections ? { policies: copy.policies, collections: copy.collections } : { policies: copy.policies },
+    sources: copy.sources,
+    distributions: copy.distributions,
+    debt: copy.debt,
+    goals: copy.goals,
+    incidence: copy.incidence,
+  };
+}

@@ -8,8 +8,10 @@ calculated on. `debt.py` produces `countries/us/debt.json`, the projection of de
 `build_budget.py --check` also compares the GDP and population in `country.json` with the cached sources, and
 `measures.py --check` recomputes the constants that the measures in `policies.json` take from sources. One measure's
 effects are generated: `workforce.py` derives what each spending leaf pays its civilian staff, and
-`measures.py --write` turns that into the effects of `federal_workforce_cut`. The source ids used in the scripts are
-the keys of `countries/us/sources.json`.
+`measures.py --write` turns that into the effects of `federal_workforce_cut`. `who_pays.py` computes the numbers of
+`countries/us/incidence.json`, who pays the federal taxes by income group, whose texts are maintained by hand;
+`who-pays.md` explains every figure of it. The source ids used in the scripts are the keys of
+`countries/us/sources.json`.
 
 ## Run it
 
@@ -27,6 +29,8 @@ python3 pipeline/us/households.py             # diagnostics: the figures of the 
 python3 pipeline/us/measures.py --write        # rewrite the generated effects and the computed constants
 python3 pipeline/us/debt.py                    # diagnostics: the figures behind debt.json, the refinancing fit
 python3 pipeline/us/debt.py --check            # rebuild debt.json in memory and compare (--write to replace it)
+python3 pipeline/us/who_pays.py               # diagnostics: who pays the federal taxes, by income group
+python3 pipeline/us/who_pays.py --check       # compare the numbers of incidence.json (--write to replace them)
 npm run validate                               # then check the whole pack
 ```
 
@@ -75,6 +79,7 @@ is replaced with every NIPA release, which can change the one BEA figure quoted 
 | `mts/mts_table_4_2026-02-28.csv` | Monthly Treasury Statement for February 2026, Table 4 | `measures.py`, `debt.py`: customs refunds before and after the Supreme Court's ruling of February 20, 2026 |
 | `govinfo/PLAW-119publ98.xml`, `omb/ap_5_tables_1-3_fy2027.xlsx` | the Secure America Act; Analytical Perspectives, Table 5-1 | `debt.py`: the act's appropriations added up, civilian employment in 2025 and 2026 (baseline note) |
 | `govinfo/PLAW-119-public.zip` | all public laws of the 119th Congress (the address always holds the latest) | `debt.py`: no law after P.L. 119-103 appropriates for FY 2027 |
+| `cbo/62761-supp-data.xlsx`, `cbo/*.pdf`, `treasury/Distribution-of-Tax-Burden-Current-Law-2025.pdf`, `pwbm/*.html` | CBO, The Distribution of Household Income, 2023 (September 2026), supplemental data and report, and the 2021 report's methods; CBO's tariff letters; Treasury OTA's distribution table for 2025; Penn Wharton Budget Model on taxing Social Security benefits. cbo.gov refuses automated downloads: CBO's files come from the Internet Archive's copies (see `fetch_inputs.py`) | `who_pays.py`: `countries/us/incidence.json` (see `who-pays.md`) |
 | `govinfo/`, `house/`, `scotus/`, `fr/`, `nato/`, `treasury/`, `irs/p5901.pdf`, `omb/ap_5_management_fy2027.pdf` | laws, bills and their status, a House roll call, the Trustees Report, presidential remarks, Supreme Court decisions and orders, Federal Register documents, NATO, Treasury, IRS and OMB documents (list in `fetch_inputs.py`) | read by hand for the measures' notes and catches |
 
 ## How the tree is built

@@ -24,6 +24,8 @@ import type {
   Goal,
   GoalsFile,
   GroupNode,
+  IncidenceFile,
+  IncidenceProfile,
   LeafNode,
   LocalizedText,
   NumberParam,
@@ -332,6 +334,8 @@ export const shiftSchema = z.strictObject({
   quality: qualitySchema.optional(),
   sources: sourceIds.optional(),
   note: localizedTextSchema.optional(),
+  incidence: z.string().optional(),
+  incidenceNote: localizedTextSchema.optional(),
 });
 
 const effectBase = {
@@ -341,6 +345,9 @@ const effectBase = {
   sources: sourceIds.optional(),
   note: localizedTextSchema.optional(),
   shift: shiftSchema.optional(),
+  incidence: z.string().optional(),
+  incidenceShare: z.strictObject({ share: valueSchema, incidence: z.string() }).optional(),
+  incidenceNote: localizedTextSchema.optional(),
 };
 
 export const bracketScheduleSchema = z.strictObject({
@@ -390,6 +397,7 @@ export const effectSchema = z.discriminatedUnion("type", [
     reform: scheduleSchema,
     baseline: constScheduleSchema.optional(),
     yield: valueSchema.optional(),
+    incidenceAbove: z.strictObject({ from: z.number().min(0), incidence: z.string() }).optional(),
   }),
 ]);
 
@@ -568,6 +576,74 @@ export const goalsFileSchema = z.strictObject({
   goals: z.array(goalSchema).min(1),
 });
 
+// --- incidence.json -----------------------------------------------------------------------------
+
+export const incidenceProfileSchema = z.strictObject({
+  label: localizedTextSchema.optional(),
+  shares: z.array(z.number().min(0)).min(1),
+  payers: z.record(z.string(), z.number().min(0)).optional(),
+  quality: qualitySchema,
+  sources: sourceIds.min(1),
+  note: localizedTextSchema.optional(),
+});
+
+export const incidenceFileSchema = z.strictObject({
+  population: z.strictObject({
+    unit: localizedTextSchema,
+    perUnit: localizedTextSchema.optional(),
+    count: z.number().positive(),
+    ranking: localizedTextSchema,
+    year,
+    quality: qualitySchema,
+    sources: sourceIds.min(1),
+    note: localizedTextSchema.optional(),
+  }),
+  groups: z
+    .array(
+      z.strictObject({
+        id: idSchema,
+        label: localizedTextSchema,
+        share: z.number().gt(0).max(1),
+        from: z.number().optional(),
+      }),
+    )
+    .min(2)
+    .max(12),
+  income: z.strictObject({
+    shares: z.array(z.number().min(0)).min(1),
+    total: z.number().positive().optional(),
+    concept: localizedTextSchema,
+    quality: qualitySchema,
+    sources: sourceIds.min(1),
+    note: localizedTextSchema.optional(),
+  }),
+  profiles: z.record(idSchema, incidenceProfileSchema),
+  payers: z
+    .array(z.strictObject({ id: idSchema, label: localizedTextSchema, note: localizedTextSchema.optional(), sources: sourceIds.optional() }))
+    .optional(),
+  nodes: z.record(
+    z.string(),
+    z.strictObject({
+      profile: z.string().optional(),
+      coverage: share.optional(),
+      payer: z.string().optional(),
+      note: localizedTextSchema.optional(),
+    }),
+  ),
+  distributions: z.record(z.string(), z.strictObject({ note: localizedTextSchema })).optional(),
+  scopes: z
+    .array(
+      z.strictObject({
+        id: idSchema,
+        label: localizedTextSchema,
+        nodes: z.array(z.string()).min(1),
+        note: localizedTextSchema.optional(),
+      }),
+    )
+    .min(1),
+  note: localizedTextSchema,
+});
+
 // Compile-time check that the schemas and the contract types describe the same data. Mutual
 // assignability catches missing required fields, wrong types and enum members that differ. It
 // cannot see an optional field that is missing from a schema; the Testland fixture uses every
@@ -603,4 +679,6 @@ export type SchemaMatchesTypes = [
   Assert<Same<Out<typeof debtFileSchema>, DebtFile>>,
   Assert<Same<Out<typeof goalSchema>, Goal>>,
   Assert<Same<Out<typeof goalsFileSchema>, GoalsFile>>,
+  Assert<Same<Out<typeof incidenceProfileSchema>, IncidenceProfile>>,
+  Assert<Same<Out<typeof incidenceFileSchema>, IncidenceFile>>,
 ];

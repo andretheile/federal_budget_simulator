@@ -26,7 +26,9 @@ import {
   yearEnd,
   yearStart,
   measurePhase,
+  measureWhoPays,
   measuresFrom,
+  whoPays,
   projectScenario,
   resolveDebtAssumptions,
   shareOfGdp,
@@ -298,6 +300,37 @@ function printGoals(pack: CountryPack): void {
   }
 }
 
+/**
+ * Who pays (incidence.json): each scope's shares by income group today, the statement of all
+ * revenue by line, and for each measure that changes revenue on its own at default parameters what
+ * it changes for the groups and the payers.
+ */
+function printWhoPays(pack: CountryPack): void {
+  const file = pack.incidence;
+  if (!file) return;
+  const today = whoPays(pack, simulate(pack))!;
+  const groups = file.groups.map((group) => group.id);
+  console.log(`  who pays, by ${groups.join(" / ")} (incidence.json):`);
+  console.log(`    income shares  ${file.income.shares.map((share) => percent(share)).join(" / ")}`);
+  for (const scope of today.scopes) {
+    const outside = scope.payers.map((payer) => `${payer.id} ${amount(payer.today)}`).join(", ");
+    console.log(`    ${scope.id}: ${amount(scope.total.today)}, of it ${amount(scope.groupsTotal.today)} on the groups: ${scope.groups.map((group) => percent(group.shareToday)).join(" / ")}`);
+    console.log(`      outside the groups: ${outside}`);
+  }
+  const lines = today.statement.lines.map((line) => `${line.payer ?? "groups"} ${amount(line.today)}`).join(", ");
+  console.log(`    all revenue ${amount(today.statement.today)}: ${lines}`);
+  console.log("    each measure on its own, change for the groups; and for the payers:");
+  const width = Math.max(...pack.policies.map((policy) => policy.id.length));
+  for (const policy of pack.policies) {
+    const result = simulatePolicy(pack, policy.id);
+    if (!result) continue;
+    const measure = measureWhoPays(pack, result)!;
+    if (measure.groups.every((change) => change === 0) && Object.keys(measure.payers).length === 0) continue;
+    const payers = Object.entries(measure.payers).map(([id, change]) => `${id} ${amount(change, true)}`).join(", ");
+    console.log(`      ${policy.id.padEnd(width)}  ${measure.groups.map((change) => amount(change, true)).join(" / ")}${payers ? `; ${payers}` : ""}`);
+  }
+}
+
 function main(): number {
   if (!existsSync(root)) {
     console.log(`${label}/ does not exist: no country packs to validate.`);
@@ -329,6 +362,7 @@ function main(): number {
       printTiming(result.pack);
       printGoals(result.pack);
       printDebtSummary(result.pack);
+      printWhoPays(result.pack);
     } else {
       invalid++;
       console.log(`${label}/${id}: INVALID, ${result.errors.length} error(s)`);

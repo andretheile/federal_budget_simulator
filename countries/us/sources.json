@@ -922,5 +922,93 @@
       "en": "County elections officials certify their results by December 3, 2026; the Secretary of State certifies the Statement of Vote on December 11, 2026.",
       "de": "Die Wahlbehörden der Countys bestätigen ihre Ergebnisse bis zum 3. Dezember 2026; die Secretary of State bestätigt das Gesamtergebnis (Statement of Vote) am 11. Dezember 2026."
     }
+  },
+  "cbo_household_income_2023": {
+    "title": "The Distribution of Household Income, 2023 (September 2026)",
+    "publisher": "Congressional Budget Office",
+    "url": "https://www.cbo.gov/system/files/2026-09/62761-Household-Income-2023.pdf",
+    "accessed": "2026-11-26",
+    "year": 2023,
+    "note": {
+      "en": "Federal taxes are individual income, payroll, corporate income and excise taxes (p. 3); about 134 million households received about $20 trillion of income in 2023 (p. 4); the top 1% paid 26% of federal taxes and the highest quintile 70% (p. 26). For the methods the report refers to CBO's report on 2021, Appendix A. cbo.gov refuses automated downloads: the file is the Internet Archive's copy of September 26, 2026 (https://web.archive.org/web/20260926151937/https://www.cbo.gov/system/files/2026-09/62761-Household-Income-2023.pdf), whose SHA-1 matches the archive's record of CBO's file.",
+      "de": "Bundessteuern sind Einkommen-, Lohn-, Körperschaft- und Verbrauchsteuern (S. 3); rund 134 Mio. Haushalte hatten 2023 rund 20 Billionen Dollar Einkommen (S. 4); das oberste 1 % zahlte 26 % der Bundessteuern, das oberste Fünftel 70 % (S. 26). Für die Methoden verweist der Bericht auf den Bericht des CBO zu 2021, Anhang A. cbo.gov verweigert automatische Abrufe: Die Datei ist die Kopie des Internet Archive vom 26. September 2026 (https://web.archive.org/web/20260926151937/https://www.cbo.gov/system/files/2026-09/62761-Household-Income-2023.pdf); ihre SHA-1-Prüfsumme stimmt mit dem Eintrag des Archivs für die Datei des CBO überein."
+    }
+  },
+  "cbo_household_income_2023_data": {
+    "title": "The Distribution of Household Income, 2023: supplemental data (62761-supp-data.xlsx)",
+    "publisher": "Congressional Budget Office",
+    "url": "https://www.cbo.gov/system/files/2026-09/62761-supp-data.xlsx",
+    "accessed": "2026-11-26",
+    "year": 2023,
+    "note": {
+      "en": "Rows for 2023, all households, ranked by income before transfers and taxes adjusted for household size. Table 1: households in millions, 26.1, 27.1, 27.0 and 26.6 in the lowest four quintiles, 13.2, 6.6, 5.2 and 1.3 in the 81st to 90th, 91st to 95th, 96th to 99th percentiles and the top 1%, 133.7 in all. Table 2: group minimums by household size (one person: $31,800 to $549,000). Table 3: average income before transfers and taxes, $147,300 for all households. Table 7: average federal taxes by type. Table 10: shares of income before transfers and taxes. Table 12: shares of federal taxes by type, top 1%: 26.1% of all, 38.8% of individual income tax, 4.6% of payroll, 45.4% of corporate income and 5.3% of excise taxes. Retrieved from the Internet Archive's copy of September 25, 2026 (cbo.gov refuses automated downloads); SHA-1 matches the archive's record.",
+      "de": "Zeilen für 2023, alle Haushalte, geordnet nach dem um die Haushaltsgröße bereinigten Einkommen vor Transfers und Steuern. Tabelle 1: Haushalte in Mio., 26,1, 27,1, 27,0 und 26,6 in den unteren vier Fünfteln, 13,2, 6,6, 5,2 und 1,3 im 81. bis 90., 91. bis 95., 96. bis 99. Perzentil und im obersten 1 %, zusammen 133,7. Tabelle 2: Untergrenzen der Gruppen nach Haushaltsgröße (eine Person: 31.800 bis 549.000 Dollar). Tabelle 3: durchschnittliches Einkommen vor Transfers und Steuern, 147.300 Dollar über alle Haushalte. Tabelle 7: durchschnittliche Bundessteuern nach Art. Tabelle 10: Anteile am Einkommen vor Transfers und Steuern. Tabelle 12: Anteile an den Bundessteuern nach Art, oberstes 1 %: 26,1 % aller, 38,8 % der Einkommensteuer, 4,6 % der Lohnabgaben, 45,4 % der Körperschaftsteuer und 5,3 % der Verbrauchsteuern. Abgerufen als Kopie des Internet Archive vom 25. September 2026 (cbo.gov verweigert automatische Abrufe); die SHA-1-Prüfsumme stimmt mit dem Eintrag des Archivs überein."
+    }
+  },
+  "cbo_household_income_2021": {
+    "title": "The Distribution of Household Income in 2021 (September 2024): Appendix A, data and methods, and Appendix D, terms",
+    "publisher": "Congressional Budget Office",
+    "url": "https://www.cbo.gov/system/files/2024-09/60341-income.pdf",
+    "accessed": "2026-11-26",
+    "year": 2021,
+    "note": {
+      "en": "The methods the 2023 report refers to. Individual income taxes and the employee's share of payroll taxes fall on the households that pay them, the employer's share of payroll taxes on the employees; excise taxes by households' consumption of the taxed goods, those on intermediate goods by overall consumption; 75% of corporate income taxes to owners of capital, 25% to workers (p. 27). Households are ranked by income divided by the square root of household size (p. 28). Payroll taxes are those of Social Security, Medicare and unemployment insurance, without the states' unemployment taxes (p. 38); the states' deposits for unemployment insurance, estate and gift taxes, Federal Reserve earnings, customs duties and fees are not allocated (p. 21, note 9). Retrieved from the Internet Archive's copy of September 12, 2024; SHA-1 matches the archive's record.",
+      "de": "Die Methoden, auf die der Bericht zu 2023 verweist. Einkommensteuer und Arbeitnehmeranteil der Lohnabgaben tragen die Haushalte, die sie zahlen, den Arbeitgeberanteil die Beschäftigten; Verbrauchsteuern nach dem Verbrauch der besteuerten Güter, solche auf Vorleistungen nach dem gesamten Verbrauch; 75 % der Körperschaftsteuer die Eigentümer von Kapital, 25 % die Beschäftigten (S. 27). Die Haushalte werden nach dem Einkommen geteilt durch die Wurzel der Haushaltsgröße geordnet (S. 28). Lohnabgaben sind die für Social Security, Medicare und Arbeitslosenversicherung, ohne die Arbeitslosenabgaben der Bundesstaaten (S. 38); deren Einzahlungen, Erbschaft- und Schenkungsteuer, Gewinne der Notenbank, Zölle und Gebühren werden nicht verteilt (S. 21, Anm. 9). Abgerufen als Kopie des Internet Archive vom 12. September 2024; die SHA-1-Prüfsumme stimmt mit dem Eintrag des Archivs überein."
+    }
+  },
+  "cbo_tariffs_2025_06": {
+    "title": "Budgetary and Economic Effects of Increases in Tariffs Implemented Between January 6 and May 13, 2025 (letter of June 4, 2025)",
+    "publisher": "Congressional Budget Office",
+    "url": "https://www.cbo.gov/system/files/2025-06/61389-Tariff-Effects.pdf",
+    "accessed": "2026-11-26",
+    "year": 2025,
+    "note": {
+      "en": "Distributional effects (pp. 6 and 7): CBO is still evaluating how the tariffs affect households across the income and wealth distributions; they raise the prices of goods more than of services, and households at the lower end spend a greater share of their income on goods, but the largest increases are for durable goods such as household appliances and motor vehicles, which account for a larger share of consumption at the higher end. No figures by income group. Retrieved from the Internet Archive's copy of June 4, 2025; SHA-1 matches the archive's record.",
+      "de": "Verteilungswirkungen (S. 6 und 7): Das CBO prüft noch, wie die Zölle Haushalte über die Einkommens- und Vermögensverteilung treffen; sie verteuern Waren stärker als Dienstleistungen, und Haushalte am unteren Ende geben einen größeren Teil ihres Einkommens für Waren aus, die größten Preissteigerungen betreffen aber langlebige Güter wie Haushaltsgeräte und Autos, die am oberen Ende einen größeren Teil des Verbrauchs ausmachen. Keine Zahlen nach Einkommensgruppen. Abgerufen als Kopie des Internet Archive vom 4. Juni 2025; die SHA-1-Prüfsumme stimmt mit dem Eintrag des Archivs überein."
+    }
+  },
+  "treasury_ota_distribution_2025": {
+    "title": "Distribution Table 2025 001: Distribution of Families, Cash Income, and Federal Taxes under 2025 Current Law (June 12, 2024)",
+    "publisher": "U.S. Department of the Treasury, Office of Tax Analysis",
+    "url": "https://home.treasury.gov/system/files/131/Distribution-of-Tax-Burden-Current-Law-2025.pdf",
+    "accessed": "2026-11-26",
+    "year": 2025,
+    "note": {
+      "en": "Families ranked by cash income adjusted for family size, equal numbers of families per decile. Percent distribution of estate and gift taxes: top 0.1% 91.8, 99th to 99.9th percentile 6.7, 95th to 99th 0.1, every other group 0.0; families with negative income are in the total only and pay a significant share of the estate tax. Excises and customs duties together: top 1% 16.7%. Footnote 2: estate and gift taxes are borne by decedents; excises on purchases by individuals in proportion to relative consumption of the taxed good and proportionately by labor and capital income, excises on business purchases and customs duties proportionately by labor and capital income.",
+      "de": "Familien, geordnet nach dem um die Familiengröße bereinigten Bareinkommen, gleich viele Familien je Dezil. Prozentuale Verteilung der Erbschaft- und Schenkungsteuer: oberste 0,1 % 91,8, 99. bis 99,9. Perzentil 6,7, 95. bis 99. 0,1, alle übrigen Gruppen 0,0; Familien mit negativem Einkommen stehen nur in der Summe und zahlen einen erheblichen Teil der Erbschaftsteuer. Verbrauchsteuern und Zölle zusammen: oberstes 1 % 16,7 %. Fußnote 2: Erbschaft- und Schenkungsteuer tragen die Verstorbenen; Verbrauchsteuern auf Käufe von Privatpersonen im Verhältnis zum Verbrauch des Gutes und anteilig nach Arbeits- und Kapitaleinkommen, Verbrauchsteuern auf Käufe von Unternehmen und Zölle anteilig nach Arbeits- und Kapitaleinkommen."
+    }
+  },
+  "pwbm_ss_benefits_2025": {
+    "title": "Eliminating Income Taxes on Social Security Benefits (February 7, 2025)",
+    "publisher": "Penn Wharton Budget Model, University of Pennsylvania",
+    "url": "https://budgetmodel.wharton.upenn.edu/p/2025-02-07-eliminating-income-taxes-on-social-security-benefits/",
+    "accessed": "2026-11-26",
+    "year": 2026,
+    "note": {
+      "en": "Table 3, conventional distributional effects in 2026, average tax change per household in dollars: first quintile 0, second -15, middle -340, fourth -1,135, 80-90% -1,625, 90-95% -1,590, 95-99% -2,020, 99-99.9% -2,205, top 0.1% -2,450. Table 1: revenue -116 billion dollars in 2026. Estimated under the law before July 2025.",
+      "de": "Tabelle 3, herkömmliche Verteilungswirkung 2026, durchschnittliche Steueränderung je Haushalt in Dollar: erstes Fünftel 0, zweites −15, mittleres −340, viertes −1.135, 80–90 % −1.625, 90–95 % −1.590, 95–99 % −2.020, 99–99,9 % −2.205, oberste 0,1 % −2.450. Tabelle 1: Mindereinnahmen von 116 Mrd. Dollar 2026. Geschätzt nach dem Recht vor Juli 2025."
+    }
+  },
+  "cbo_household_income_2023_figures": {
+    "title": "The Distribution of Household Income, 2023: data underlying the figures (62761-data.xlsx)",
+    "publisher": "Congressional Budget Office",
+    "url": "https://www.cbo.gov/system/files/2026-09/62761-data.xlsx",
+    "accessed": "2026-11-26",
+    "year": 2023,
+    "note": {
+      "en": "Figure 13, average refundable tax credits as a percentage of income before transfers and taxes, 2023: lowest quintile 12.5, second 4.1, middle 1.9. Retrieved from the Internet Archive's copy of September 26, 2026 (cbo.gov refuses automated downloads); SHA-1 matches the archive's record.",
+      "de": "Abbildung 13, durchschnittliche erstattbare Steuergutschriften in Prozent des Einkommens vor Transfers und Steuern, 2023: unterstes Fünftel 12,5, zweites 4,1, mittleres 1,9. Abgerufen als Kopie des Internet Archive vom 26. September 2026 (cbo.gov verweigert automatische Abrufe); die SHA-1-Prüfsumme stimmt mit dem Eintrag des Archivs überein."
+    }
+  },
+  "tpc_t24_0048": {
+    "title": "Table T24-0048: Exclude Social Security Benefits from Gross Income; Distribution of Federal Tax Change by Expanded Cash Income Percentile, 2025 (preliminary, August 1, 2024)",
+    "publisher": "Urban-Brookings Tax Policy Center",
+    "url": "https://www.taxpolicycenter.org/model-estimates/taxation-social-security-benefits-august-2024/t24-0048-exclude-social-security",
+    "accessed": "2026-11-26",
+    "year": 2025,
+    "note": {
+      "en": "Share of total federal tax change: lowest quintile 0.0, second 3.7, middle 23.9, fourth 36.5, top quintile 35.8, of it 80-90 17.1, 90-95 8.6, 95-99 7.7, top 1 percent 2.4 (top 0.1 percent 0.3). Baseline: the law as of July 31, 2024; the percentiles contain an equal number of people, not tax units (note 3). taxpolicycenter.org refuses automated requests: the table was read in the Internet Archive's copy of its image of August 3, 2024 (sites/default/files/model-estimates/images/t24-0048.gif).",
+      "de": "Anteil an der gesamten Änderung der Bundessteuern: unterstes Fünftel 0,0, zweites 3,7, mittleres 23,9, viertes 36,5, oberstes Fünftel 35,8, davon 80–90 17,1, 90–95 8,6, 95–99 7,7, oberstes Prozent 2,4 (oberste 0,1 % 0,3). Ausgangslage: das Recht vom 31. Juli 2024; die Perzentile umfassen gleich viele Menschen, nicht Steuereinheiten (Anm. 3). taxpolicycenter.org verweigert automatische Abrufe: Die Tabelle wurde in der Kopie ihres Bildes im Internet Archive vom 3. August 2024 gelesen (sites/default/files/model-estimates/images/t24-0048.gif)."
+    }
   }
 }

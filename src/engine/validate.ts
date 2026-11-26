@@ -18,6 +18,7 @@ import {
   distributionSchema,
   flattenIssues,
   goalsFileSchema,
+  incidenceFileSchema,
   policiesFileSchema,
   sourcesFileSchema,
 } from "./schema.ts";
@@ -60,6 +61,8 @@ export interface RawPackFiles {
   debt?: unknown;
   /** goals.json, which is optional: undefined means the pack has none. */
   goals?: unknown;
+  /** incidence.json, which is optional: undefined means the pack has none. */
+  incidence?: unknown;
 }
 
 export interface ValidationIssue {
@@ -76,6 +79,9 @@ export type ValidationResult =
 
 /** Allowed deviation from 1 for sums of shares. */
 export const SHARE_TOLERANCE = 0.001;
+
+/** Allowed deviation from 1 for the shares of incidence.json: they decide who pays how much of every euro. */
+export const INCIDENCE_TOLERANCE = 1e-6;
 
 /** A stand-in for comparing two curves where the effect's own distribution is not usable. */
 const ONE_UNIT: Distribution = {
@@ -95,6 +101,7 @@ const POLICIES = "policies.json";
 const SOURCES = "sources.json";
 const DEBT = "debt.json";
 const GOALS = "goals.json";
+const INCIDENCE = "incidence.json";
 const distributionFile = (id: string): string => `distributions/${id}.json`;
 
 type Path = readonly PropertyKey[];
@@ -130,13 +137,14 @@ export function validatePackFiles(texts: Record<string, string>, id?: string): V
   const errors: ValidationIssue[] = [];
   const warnings: ValidationIssue[] = [];
   const unreadable = new Set<string>();
-  const slots: Record<string, "country" | "budget" | "policies" | "sources" | "debt" | "goals"> = {
+  const slots: Record<string, "country" | "budget" | "policies" | "sources" | "debt" | "goals" | "incidence"> = {
     [COUNTRY]: "country",
     [BUDGET]: "budget",
     [POLICIES]: "policies",
     [SOURCES]: "sources",
     [DEBT]: "debt",
     [GOALS]: "goals",
+    [INCIDENCE]: "incidence",
   };
   for (const [file, text] of Object.entries(texts)) {
     const slot = Object.hasOwn(slots, file) ? slots[file] : undefined;
@@ -224,6 +232,7 @@ function check(
   const sources = parse(SOURCES, sourcesFileSchema, files.sources);
   const debt = files.debt === undefined ? undefined : parse(DEBT, debtFileSchema, files.debt);
   const goals = files.goals === undefined ? undefined : parse(GOALS, goalsFileSchema, files.goals);
+  const incidence = files.incidence === undefined ? undefined : parse(INCIDENCE, incidenceFileSchema, files.incidence);
   const distributions: Record<string, Distribution> = {};
   /** Every distribution that has a file, readable or not, so a broken file is not also reported as a missing reference. */
   const distributionNames = new Set<string>();
@@ -1185,6 +1194,174 @@ function check(
     if (!goalIds.has(goals.default)) error(GOALS, ["default"], `unknown goal "${goals.default}"`);
   }
 
+  // --- incidence.json -------------------------------------------------------------------------
+
+  if (incidence) {
+    const file = incidence;
+    const groupCount = file.groups.length;
+    const sumsToOneTightly = (values: readonly number[]): boolean => Math.abs(values.reduce((a, b) => a + b, 0) - 1) <= INCIDENCE_TOLERANCE;
+    const isRevenue = (id: string): boolean => id.startsWith("rev.");
+    // Sums are checked to 1e-6, so they are reported to more digits than elsewhere.
+    const precise = (n: number): number => Number(n.toPrecision(10));
+
+    text(INCIDENCE, ["population", "unit"], file.population.unit);
+    text(INCIDENCE, ["population", "perUnit"], file.population.perUnit);
+    text(INCIDENCE, ["population", "ranking"], file.population.ranking);
+    text(INCIDENCE, ["population", "note"], file.population.note);
+    refs(INCIDENCE, ["population", "sources"], file.population.sources);
+
+    const groupIds = new Set<string>();
+    file.groups.forEach((group, i) => {
+      if (groupIds.has(group.id)) error(INCIDENCE, ["groups", i, "id"], `duplicate group id "${group.id}"`);
+      groupIds.add(group.id);
+      text(INCIDENCE, ["groups", i, "label"], group.label);
+      const previous = file.groups.slice(0, i).findLast((other) => other.from !== undefined)?.from;
+      if (group.from !== undefined && previous !== undefined && !(group.from > previous)) {
+        error(INCIDENCE, ["groups", i, "from"], `${group.from} is not above the lower bound of an earlier group (${previous}); groups go from the lowest incomes to the highest`);
+      }
+    });
+    if (!sumsToOneTightly(file.groups.map((group) => group.share))) {
+      error(INCIDENCE, ["groups"], `shares sum to ${precise(file.groups.reduce((sum, group) => sum + group.share, 0))}, expected 1`);
+    }
+
+    const checkShares = (shares: readonly number[], path: Path): void => {
+      if (shares.length !== groupCount) error(INCIDENCE, path, `${shares.length} share(s) for ${groupCount} groups; give one per group, in group order`);
+      else if (!sumsToOneTightly(shares)) error(INCIDENCE, path, `shares sum to ${precise(shares.reduce((a, b) => a + b, 0))}, expected 1`);
+    };
+    checkShares(file.income.shares, ["income", "shares"]);
+    text(INCIDENCE, ["income", "concept"], file.income.concept);
+    text(INCIDENCE, ["income", "note"], file.income.note);
+    refs(INCIDENCE, ["income", "sources"], file.income.sources);
+
+    const payerIds = new Set<string>();
+    file.payers?.forEach((payer, i) => {
+      if (payerIds.has(payer.id)) error(INCIDENCE, ["payers", i, "id"], `duplicate payer id "${payer.id}"`);
+      else if (Object.hasOwn(file.profiles, payer.id)) error(INCIDENCE, ["payers", i, "id"], `"${payer.id}" is also a profile id; an effect's "incidence" could not tell them apart`);
+      payerIds.add(payer.id);
+      text(INCIDENCE, ["payers", i, "label"], payer.label);
+      text(INCIDENCE, ["payers", i, "note"], payer.note);
+      refs(INCIDENCE, ["payers", i, "sources"], payer.sources);
+    });
+    for (const [id, profile] of Object.entries(file.profiles)) {
+      const onPayers = Object.entries(profile.payers ?? {});
+      for (const [payer] of onPayers) {
+        if (!payerIds.has(payer)) error(INCIDENCE, ["profiles", id, "payers", payer], `unknown payer "${payer}"`);
+      }
+      if (profile.shares.length !== groupCount) {
+        error(INCIDENCE, ["profiles", id, "shares"], `${profile.shares.length} share(s) for ${groupCount} groups; give one per group, in group order`);
+      } else if (!sumsToOneTightly([...profile.shares, ...onPayers.map(([, part]) => part)])) {
+        const sum = [...profile.shares, ...onPayers.map(([, part]) => part)].reduce((a, b) => a + b, 0);
+        error(INCIDENCE, ["profiles", id, "shares"], `shares${onPayers.length > 0 ? " and payers" : ""} sum to ${precise(sum)}, expected 1`);
+      }
+      text(INCIDENCE, ["profiles", id, "label"], profile.label);
+      text(INCIDENCE, ["profiles", id, "note"], profile.note);
+      refs(INCIDENCE, ["profiles", id, "sources"], profile.sources);
+    }
+
+    for (const [id, entry] of Object.entries(file.nodes)) {
+      const at = ["nodes", id];
+      text(INCIDENCE, [...at, "note"], entry.note);
+      if (budget && !nodes.has(id)) error(INCIDENCE, at, `unknown budget node "${id}"`);
+      else if (!isRevenue(id)) error(INCIDENCE, at, `"${id}" is not a revenue node; spending is never spread over who pays`);
+      if (entry.profile !== undefined && !Object.hasOwn(file.profiles, entry.profile)) error(INCIDENCE, [...at, "profile"], `unknown profile "${entry.profile}"`);
+      if (entry.payer !== undefined && !payerIds.has(entry.payer)) error(INCIDENCE, [...at, "payer"], `unknown payer "${entry.payer}"`);
+      const coverage = entry.coverage ?? (entry.profile !== undefined ? 1 : 0);
+      if (entry.profile === undefined && entry.payer === undefined) {
+        error(INCIDENCE, at, 'an entry needs a "profile", a "payer" or both');
+      } else if (coverage > 0 && entry.profile === undefined) {
+        error(INCIDENCE, [...at, "coverage"], `${coverage} of the amount would go to the groups, but the entry has no "profile" to spread it by`);
+      } else if (coverage < 1 && entry.payer === undefined) {
+        error(INCIDENCE, [...at, "payer"], `${round(1 - coverage)} of the amount is not spread over the groups and needs a "payer"`);
+      }
+    }
+    // Every revenue leaf ends up with the groups or a named payer, so the lines add up to the revenue.
+    if (budget) {
+      const unnamed = [...nodes.values()].filter(
+        (info) => info.isLeaf && isRevenue(info.node.id) && !Object.hasOwn(file.nodes, info.node.id) && !info.ancestors.some((id) => Object.hasOwn(file.nodes, id)),
+      );
+      if (unnamed.length > 0) {
+        error(
+          INCIDENCE,
+          ["nodes"],
+          `no entry for revenue node(s) ${unnamed.map((info) => `"${info.node.id}"`).join(", ")}, nor for a group above them; every revenue leaf needs a profile or a payer, so that the lines add up to the budget's revenue`,
+        );
+      }
+    }
+
+    for (const [id, entry] of Object.entries(file.distributions ?? {})) {
+      if (!distributionNames.has(id)) error(INCIDENCE, ["distributions", id], `unknown distribution "${id}"`);
+      text(INCIDENCE, ["distributions", id, "note"], entry.note);
+    }
+
+    const scopeIds = new Set<string>();
+    file.scopes.forEach((scope, i) => {
+      const at = ["scopes", i];
+      if (scopeIds.has(scope.id)) error(INCIDENCE, [...at, "id"], `duplicate scope id "${scope.id}"`);
+      scopeIds.add(scope.id);
+      text(INCIDENCE, [...at, "label"], scope.label);
+      text(INCIDENCE, [...at, "note"], scope.note);
+      scope.nodes.forEach((id, k) => {
+        const info = nodes.get(id);
+        if (scope.nodes.indexOf(id) !== k) error(INCIDENCE, [...at, "nodes", k], `"${id}" is listed twice`);
+        else if (budget && !info) error(INCIDENCE, [...at, "nodes", k], `unknown budget node "${id}"`);
+        else if (!isRevenue(id)) error(INCIDENCE, [...at, "nodes", k], `"${id}" is not a revenue node`);
+        else if (info) {
+          const outer = info.ancestors.find((ancestor) => scope.nodes.includes(ancestor));
+          if (outer !== undefined) error(INCIDENCE, [...at, "nodes", k], `"${id}" lies inside "${outer}", which the scope lists already`);
+        }
+      });
+    });
+    text(INCIDENCE, ["note"], file.note);
+  }
+
+  // An effect's or a shift's own `incidence` names a profile or a payer of incidence.json, at a
+  // revenue node; `incidenceNote` says who pays in words, also only at a revenue node.
+  policiesFile?.policies.forEach((policy, i) => {
+    policy.effects.forEach((effect, e) => {
+      const base: Path = ["policies", i, "effects", e];
+      const above = effect.type === "schedule" ? effect.incidenceAbove : undefined;
+      const parts: [string | undefined, LocalizedText | undefined, string, Path][] = [
+        [effect.incidence, effect.incidenceNote, effect.target, base],
+        [effect.shift?.incidence, effect.shift?.incidenceNote, effect.shift?.to ?? "", [...base, "shift"]],
+        [above?.incidence, undefined, effect.target, [...base, "incidenceAbove"]],
+        [effect.incidenceShare?.incidence, undefined, effect.target, [...base, "incidenceShare"]],
+      ];
+      // The share of incidenceShare: a number between 0 and 1, or a number param of the policy that gives one at its default.
+      const share = effect.incidenceShare?.share;
+      if (share !== undefined) {
+        const at = [...base, "incidenceShare", "share"];
+        const param = typeof share === "number" ? undefined : policy.params.find((candidate) => candidate.id === share.param);
+        if (typeof share !== "number" && !param) error(POLICIES, [...at, "param"], `unknown param "${share.param}" in policy "${policy.id}"`);
+        else if (param && param.type !== "number") error(POLICIES, [...at, "param"], `param "${param.id}" is a ${param.type} param; a number param is needed here`);
+        else if (country) {
+          const value = evaluateValue(share, param?.type === "number" ? { [param.id]: param.default } : {}, country.indicators);
+          if (!(value >= 0 && value <= 1)) error(POLICIES, at, `${round(value)} at default parameter values is not a share between 0 and 1`);
+        }
+      }
+      // The threshold of incidenceAbove lies inside the range of the curve the reform is drawn on.
+      if (above && effect.type === "schedule" && "curve" in effect.reform) {
+        const curveId = effect.reform.curve.param;
+        const param = policy.params.find((candidate) => candidate.id === curveId);
+        if (param?.type === "curve" && (above.from < param.x.min || above.from > param.x.max)) {
+          error(POLICIES, [...base, "incidenceAbove", "from"], `${above.from} lies outside the range of curve "${param.id}", [${param.x.min}, ${param.x.max}]`);
+        }
+      }
+      for (const [id, note, node, path] of parts) {
+        if (note !== undefined) {
+          text(POLICIES, [...path, "incidenceNote"], note);
+          if (!node.startsWith("rev.")) error(POLICIES, [...path, "incidenceNote"], `the change lands on "${node}", which is spending; only changes of revenue have a payer`);
+        }
+        if (id === undefined) continue;
+        const at = [...path, "incidence"];
+        if (files.incidence === undefined) error(POLICIES, at, `names "${id}" of incidence.json, but the pack has no incidence.json`);
+        else if (!node.startsWith("rev.")) error(POLICIES, at, `the change lands on "${node}", which is spending; only changes of revenue are spread over who pays`);
+        else if (incidence && !Object.hasOwn(incidence.profiles, id) && !incidence.payers?.some((payer) => payer.id === id)) {
+          error(POLICIES, at, `"${id}" is neither a profile nor a payer of incidence.json`);
+        }
+      }
+    });
+  });
+
   // --- sources.json ---------------------------------------------------------------------------
 
   if (sources) {
@@ -1207,7 +1384,8 @@ function check(
     sources &&
     Object.keys(distributions).length === distributionNames.size &&
     (files.debt === undefined || debt !== undefined) &&
-    (files.goals === undefined || goals !== undefined);
+    (files.goals === undefined || goals !== undefined) &&
+    (files.incidence === undefined || incidence !== undefined);
   if (sources && complete) {
     for (const id of Object.keys(sources)) {
       if (!usedSources.has(id)) warn(SOURCES, [id], `source "${id}" is never referenced`);
@@ -1219,6 +1397,7 @@ function check(
   if (policiesFile.collections) pack.collections = policiesFile.collections;
   if (debt) pack.debt = debt;
   if (goals) pack.goals = goals;
+  if (incidence) pack.incidence = incidence;
   for (const issue of nonZeroAtBaseline(pack, warnings)) warnings.push(issue);
   return { ok: true, pack, warnings: sortByFile([...warnings, ...long]) };
 }

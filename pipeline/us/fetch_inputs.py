@@ -80,6 +80,24 @@ Read by debt.py (countries/us/debt.json, the debt and interest projection):
   govinfo/PLAW-119publ98.xml    the Secure America Act: its appropriations, added up
   omb/ap_5_tables_1-3_fy2027.xlsx  Analytical Perspectives, Table 5-1: civilian employment in 2025 and 2026
   mts/mts_table_4_2026-02-28.csv  customs refunds of fiscal year 2026 through February 2026
+Read by who_pays.py (countries/us/incidence.json, who pays the federal taxes by income group; see who-pays.md):
+  cbo/62761-supp-data.xlsx      CBO, The Distribution of Household Income, 2023 (September 2026), supplemental data
+                                -> groups, households, income shares, shares of each tax
+  cbo/62761-data.xlsx           the report's figure data, Figure 13 -> the income tax before refundable credits
+  irs/23in01w2all.xlsx, irs/23in12ms.xls  IRS Tables 1.H and 1.2 (above)  -> wages above the Social Security wage cap
+  omb/receipts_fy2027.xlsx      (above)                                      -> FUTA and the states' unemployment deposits
+  bea/NipaDataA.txt             (above), series A191RC                        -> GDP of calendar year 2023
+Read by hand for who_pays.py (constants marked HAND there) or quoted in incidence.json:
+  cbo/62761-Household-Income-2023.pdf  the report itself
+  cbo/60341-income.pdf          CBO, The Distribution of Household Income in 2021, Appendix A: who bears which tax
+  cbo/61389-Tariff-Effects.pdf, cbo/61112-Tariffs.pdf  CBO's tariff letters of June 2025 and December 2024: no table
+                                of the tariffs' burden by income group
+  treasury/Distribution-of-Tax-Burden-Current-Law-2025.pdf  Treasury OTA, Distribution Table 2025 001 -> estate tax
+  tpc/t24-0048.gif              Tax Policy Center, Table T24-0048 (image) -> the tax on Social Security benefits
+  pwbm/2025-02-07-eliminating-income-taxes-on-social-security-benefits.html  Penn Wharton Budget Model, Table 3
+                                (compared with TPC's table)
+  treasury/Distribution-Premium-Tax-Credit.pdf  Treasury OTA, premium tax credit by family income, 2018 (not used)
+  govinfo/GOVPUB-Y10-PURL-LPS107729.pdf  CBO, the 25 percent revenue offset (above), pp. 2-3: the tariff's offset
 Read by hand for debt.py (constants marked HAND there):
   omb/ap_12_current_services_fy2027.pdf  Analytical Perspectives, chapter 12: Tables 12-2 (GDP) and 12-4 (receipts)
                                          in the baseline for 2032-2036, which the workbook does not hold
@@ -234,6 +252,31 @@ DOWNLOADS["fed/fomcprojtabl20260916.htm"] = "https://www.federalreserve.gov/mone
 # Federal Reserve, H.4.1 of October 2, 2025 (data of Wednesday, October 1, 2025): the deferred asset in "Earnings
 # remittances due to the U.S. Treasury" (interest note).
 DOWNLOADS["fed/h41_20251002.htm"] = "https://www.federalreserve.gov/releases/h41/20251002/"
+# --- who pays (who_pays.py) ---
+# cbo.gov refuses automated downloads. CBO's files come from the Internet Archive's copies, as raw bytes (the "id_"
+# form of the address); on November 26, 2026 the SHA-1 of each file matched the archive's record of what cbo.gov
+# served at that time.
+WAYBACK_CBO = "https://web.archive.org/web/%sid_/https://www.cbo.gov/system/files/%s"
+for rel, stamp, path in (("cbo/62761-supp-data.xlsx", "20260925230707", "2026-09/62761-supp-data.xlsx"),
+                         ("cbo/62761-Household-Income-2023.pdf", "20260926151937",
+                          "2026-09/62761-Household-Income-2023.pdf"),
+                         ("cbo/60341-income.pdf", "20240912141604", "2024-09/60341-income.pdf"),
+                         ("cbo/61389-Tariff-Effects.pdf", "20250604162655", "2025-06/61389-Tariff-Effects.pdf"),
+                         ("cbo/61112-Tariffs.pdf", "20241219104836", "2024-12/61112-Tariffs.pdf"),
+                         ("cbo/62761-data.xlsx", "20260926155322", "2026-09/62761-data.xlsx")):
+    DOWNLOADS[rel] = WAYBACK_CBO % (stamp, path)
+# The Tax Policy Center's pages refuse automated requests; its table T24-0048 is an image, kept by the Internet
+# Archive (capture of August 3, 2024, SHA-1 matching the archive's record). Read by hand.
+DOWNLOADS["tpc/t24-0048.gif"] = ("https://web.archive.org/web/20240803100708id_/https://www.taxpolicycenter.org/"
+                                 "sites/default/files/model-estimates/images/t24-0048.gif")
+# Treasury OTA, Distribution of Premium Tax Credit by Family Income Percentile, 2018: read by hand and not used (see
+# who-pays.md, the measure aca_enhanced_credits).
+DOWNLOADS["treasury/Distribution-Premium-Tax-Credit.pdf"] = (
+    "https://home.treasury.gov/system/files/131/Distribution-Premium-Tax-Credit.pdf")
+DOWNLOADS["treasury/Distribution-of-Tax-Burden-Current-Law-2025.pdf"] = (
+    "https://home.treasury.gov/system/files/131/Distribution-of-Tax-Burden-Current-Law-2025.pdf")
+DOWNLOADS["pwbm/2025-02-07-eliminating-income-taxes-on-social-security-benefits.html"] = (
+    "https://budgetmodel.wharton.upenn.edu/p/2025-02-07-eliminating-income-taxes-on-social-security-benefits/")
 
 
 def main():

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { testland, testlandFiles, testlandTimed, testlandTimedFiles } from "./__fixtures__/testland.ts";
+import { testland, testlandFiles, testlandTimed, testlandTimedFiles, testlandWhoPays, testlandWhoPaysFiles } from "./__fixtures__/testland.ts";
 import { formatIssue, formatPath, validatePack, validatePackFiles, type ValidationIssue } from "./validate.ts";
 
 /**
@@ -1730,5 +1730,101 @@ describe("texts in their places: explanation, limits, short reasons, source note
       },
     ]);
     expect(warningsAfter((f) => (f.goals.goals[0].excluded[1].reasonShort.en = "y".repeat(90)))).toEqual([]);
+  });
+});
+
+describe("incidence.json", () => {
+  /** Testland with incidence.json (testlandWhoPays): groups bottom_50, next_40, top_10; payers companies, not_a_tax. */
+  const errorsWith = (mutate: (files: Files & { incidence: Loose }) => void): ValidationIssue[] => {
+    const files = testlandWhoPaysFiles() as Files & { incidence: Loose };
+    mutate(files);
+    const result = validatePack(files);
+    return result.ok ? [] : result.errors;
+  };
+  const expectIncidence = (mutate: (files: Files & { incidence: Loose }) => void, file: string, path: string, message: RegExp): void => {
+    expect(errorsWith(mutate)).toContainEqual({ file, path, message: expect.stringMatching(message) });
+  };
+
+  it("a valid file becomes the pack's incidence; a pack without one has none", () => {
+    const result = validatePack(testlandWhoPaysFiles());
+    expect(result).toEqual({ ok: true, pack: testlandWhoPays(), warnings: [] });
+    expect(validatePack(testlandFiles()).ok && "incidence" in testland).toBe(false);
+  });
+
+  it("checks that shares sum to 1 and that a profile has one share per group", () => {
+    expectIncidence((f) => (f.incidence.groups[0].share = 0.49), "incidence.json", "$.groups", /shares sum to 0.99, expected 1/);
+    expectIncidence((f) => (f.incidence.income.shares = [0.2, 0.5, 0.3000011]), "incidence.json", "$.income.shares", /shares sum to 1.0000011, expected 1/);
+    expectIncidence((f) => (f.incidence.profiles.vat.shares = [0.5, 0.5]), "incidence.json", "$.profiles.vat.shares", /2 share\(s\) for 3 groups/);
+    expectIncidence((f) => (f.incidence.profiles.half_companies.payers.companies = 0.4), "incidence.json", "$.profiles.half_companies.shares", /shares and payers sum to 0.9/);
+    expectIncidence((f) => (f.incidence.profiles.half_companies.payers = { abroad: 0.5 }), "incidence.json", "$.profiles.half_companies.payers.abroad", /unknown payer "abroad"/);
+    expectIncidence((f) => (f.incidence.groups[2].from = 10), "incidence.json", "$.groups[2].from", /not above the lower bound/);
+  });
+
+  it("checks the nodes: revenue nodes that exist, profiles and payers that exist, coverage with somebody for the rest", () => {
+    expectIncidence((f) => (f.incidence.nodes["rev.taxes.nope"] = { payer: "companies" }), "incidence.json", '$.nodes["rev.taxes.nope"]', /unknown budget node/);
+    expectIncidence((f) => (f.incidence.nodes["exp.defense"] = { payer: "companies" }), "incidence.json", '$.nodes["exp.defense"]', /not a revenue node/);
+    expectIncidence((f) => (f.incidence.nodes["rev.taxes.income"].profile = "nope"), "incidence.json", '$.nodes["rev.taxes.income"].profile', /unknown profile "nope"/);
+    expectIncidence((f) => (f.incidence.nodes["rev.other"].payer = "nope"), "incidence.json", '$.nodes["rev.other"].payer', /unknown payer "nope"/);
+    expectIncidence((f) => (f.incidence.nodes["rev.taxes.vat"] = { profile: "vat", coverage: 0.8 }), "incidence.json", '$.nodes["rev.taxes.vat"].payer', /needs a "payer"/);
+    expectIncidence((f) => (f.incidence.nodes["rev.other"] = { payer: "not_a_tax", coverage: 0.5 }), "incidence.json", '$.nodes["rev.other"].coverage', /no "profile"/);
+    expectIncidence((f) => (f.incidence.nodes["rev.other"] = {}), "incidence.json", '$.nodes["rev.other"]', /needs a "profile", a "payer" or both/);
+  });
+
+  it("every revenue leaf ends up with the groups or a named payer", () => {
+    expectIncidence((f) => delete f.incidence.nodes["rev.other"], "incidence.json", "$.nodes", /no entry for revenue node\(s\) "rev.other"/);
+    // An entry on a group covers its leaves; a leaf's own entry overrides it.
+    const errors = errorsWith((f) => {
+      delete f.incidence.nodes["rev.taxes.income"];
+      delete f.incidence.nodes["rev.taxes.wealth"];
+      f.incidence.nodes["rev.taxes"] = { profile: "vat" };
+    });
+    expect(errors).toEqual([]);
+  });
+
+  it("checks scopes, distributions, payers and texts", () => {
+    expectIncidence((f) => (f.incidence.scopes[1].nodes = ["rev.taxes", "rev.taxes.vat"]), "incidence.json", "$.scopes[1].nodes[1]", /lies inside "rev.taxes"/);
+    expectIncidence((f) => (f.incidence.scopes[0].nodes = ["exp.defense"]), "incidence.json", "$.scopes[0].nodes[0]", /not a revenue node/);
+    expectIncidence((f) => (f.incidence.scopes[1].id = "taxes"), "incidence.json", "$.scopes[1].id", /duplicate scope id/);
+    expectIncidence((f) => (f.incidence.distributions = { nope: { note: { en: "x", de: "x" } } }), "incidence.json", "$.distributions.nope", /unknown distribution/);
+    expectIncidence((f) => f.incidence.payers.push({ id: "vat", label: { en: "x", de: "x" } }), "incidence.json", "$.payers[2].id", /also a profile id/);
+    expectIncidence((f) => delete f.incidence.groups[1].label.de, "incidence.json", "$.groups[1].label", /locale "de" is missing/);
+    expectIncidence((f) => (f.incidence.profiles.vat.sources = ["nope"]), "incidence.json", "$.profiles.vat.sources[0]", /unknown source "nope"/);
+    expectIncidence((f) => (f.incidence.groups = [f.incidence.groups[0]]), "incidence.json", "$.groups", /at least 2|>=2/);
+  });
+
+  it("checks an effect's or a shift's incidence and its sentence", () => {
+    // policies [4] raise_top_tax_rate (schedule on rev.taxes.income), [1] cut_admin (spending)
+    expectIncidence((f) => (f.policies.policies[4].effects[0].incidence = "nope"), "policies.json", "$.policies[4].effects[0].incidence", /neither a profile nor a payer/);
+    expectIncidence((f) => (f.policies.policies[1].effects[0].incidence = "companies"), "policies.json", "$.policies[1].effects[0].incidence", /spending/);
+    expectIncidence((f) => (f.policies.policies[1].effects[0].incidenceNote = { en: "x", de: "x" }), "policies.json", "$.policies[1].effects[0].incidenceNote", /spending/);
+    expectIncidence((f) => (f.policies.policies[4].effects[0].incidenceNote = { en: "x" }), "policies.json", "$.policies[4].effects[0].incidenceNote", /locale "de" is missing/);
+    // Without incidence.json an effect cannot name one of its profiles.
+    expectError((f) => (f.policies.policies[4].effects[0].incidence = "top"), "policies.json", "$.policies[4].effects[0].incidence", /no incidence.json/);
+  });
+
+  it("checks incidenceShare: a share between 0 and 1 or a number param, a profile or payer", () => {
+    // insure_civil_servants: effect 0 adds contributions, effect 1 the employer's half to spending; param employer_share.
+    const civil = (f: Files & { incidence: Loose }) => f.policies.policies.find((policy: Loose) => policy.id === "insure_civil_servants");
+    const at = (f: Files & { incidence: Loose }) => f.policies.policies.indexOf(civil(f));
+    let index = -1;
+    expect(
+      errorsWith((f) => {
+        index = at(f);
+        civil(f).effects[0].incidenceShare = { share: { param: "employer_share", scale: 0.01 }, incidence: "companies" };
+      }),
+    ).toEqual([]);
+    expectIncidence((f) => (civil(f).effects[0].incidenceShare = { share: 1.5, incidence: "companies" }), "policies.json", `$.policies[${index}].effects[0].incidenceShare.share`, /not a share between 0 and 1/);
+    expectIncidence((f) => (civil(f).effects[0].incidenceShare = { share: { param: "nope" }, incidence: "companies" }), "policies.json", `$.policies[${index}].effects[0].incidenceShare.share.param`, /unknown param "nope"/);
+    expectIncidence((f) => (civil(f).effects[0].incidenceShare = { share: 0.5, incidence: "nope" }), "policies.json", `$.policies[${index}].effects[0].incidenceShare.incidence`, /neither a profile nor a payer/);
+    expectIncidence((f) => (civil(f).effects[1].incidenceShare = { share: 0.5, incidence: "companies" }), "policies.json", `$.policies[${index}].effects[1].incidenceShare.incidence`, /spending/);
+  });
+
+  it("checks incidenceAbove: only on schedules, a profile or payer, a threshold inside the curve's range", () => {
+    expect(errorsWith((f) => (f.policies.policies[4].effects[0].incidenceAbove = { from: 30, incidence: "companies" }))).toEqual([]);
+    expectIncidence((f) => (f.policies.policies[4].effects[0].incidenceAbove = { from: 30, incidence: "nope" }), "policies.json", "$.policies[4].effects[0].incidenceAbove.incidence", /neither a profile nor a payer/);
+    expectIncidence((f) => (f.policies.policies[4].effects[0].incidenceAbove = { from: -1, incidence: "top" }), "policies.json", "$.policies[4].effects[0].incidenceAbove.from", />=0/);
+    expectIncidence((f) => (f.policies.policies[1].effects[0].incidenceAbove = { from: 30, incidence: "top" }), "policies.json", "$.policies[1].effects[0]", /incidenceAbove/);
+    // redraw_income_tax [8]: its curve runs from 0 to 60.
+    expectIncidence((f) => (f.policies.policies[8].effects[0].incidenceAbove = { from: 500, incidence: "top" }), "policies.json", "$.policies[8].effects[0].incidenceAbove.from", /outside the range of curve "tariff"/);
   });
 });

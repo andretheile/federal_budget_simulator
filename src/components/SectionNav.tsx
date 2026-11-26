@@ -8,7 +8,7 @@
  * will be once it floats, smoothly unless the visitor asks for less motion, and move the focus to
  * the section, so keyboard and screen reader users arrive there too.
  *
- * The budget includes the waterfall below it ("What changes"); the debt section only exists for a
+ * The budget includes the section on who pays and the waterfall below it ("What changes"); the debt section only exists for a
  * pack with debt data.
  */
 import { useEffect, useState, type MouseEvent } from "react";
@@ -19,7 +19,7 @@ import { preloadDebt } from "./DebtSection.tsx";
 /** The destinations: the section to jump to, and the parts of the page that count as being in it. */
 export const SECTION_TARGETS = {
   measures: { id: "measures", parts: ["measures"] },
-  budget: { id: "budget", parts: ["budget", "what-changed"] },
+  budget: { id: "budget", parts: ["budget", "who-pays", "what-changed"] },
   debt: { id: "debt", parts: ["debt"] },
 } as const;
 export type SectionKey = keyof typeof SECTION_TARGETS;

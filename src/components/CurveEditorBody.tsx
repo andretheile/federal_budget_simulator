@@ -59,6 +59,8 @@ import type { CurveEditorProps } from "./CurveEditor.tsx";
 import { MinusIcon, PlusIcon, ResetIcon } from "./icons.tsx";
 import { GroupsControl, NumberControl } from "./ParamControls.tsx";
 import { Delta, SourceList } from "./primitives.tsx";
+import { stripFor, WhoPaysStrip } from "./WhoPays.tsx";
+import { spreadable } from "../app/whoPaysModel.ts";
 
 // The editor's styles travel with its code: they arrive together, or fail together and come with
 // the next attempt. A stylesheet of its own would not: the bundler's loader asks for a failed
@@ -115,6 +117,10 @@ export function EditorBody({
     () => (level === "all" ? alone : simulatePolicy(pack, policy.id, params, "all")),
     [pack, policy.id, params, level, alone],
   );
+  // Who pays the change, by income group, for a pack with incidence.json: live while a point is
+  // dragged, and there from the start, so the panel keeps its height.
+  const strip = useMemo(() => stripFor(pack, whole, noiseLevel(baseline), true), [pack, whole, baseline]);
+  const groupTable = useMemo(() => spreadable(pack, policy.id), [pack, policy.id]);
   // view.reform wraps `points`; view.baseline is the same object for as long as the pack is.
   const reform = view.reform;
   const todayCurve = view.baseline;
@@ -340,6 +346,13 @@ export function EditorBody({
             </dl>
             <p className="editor__note">{t.curve.counted(unit, fmt.smallMoney(tolerance))}</p>
           </section>
+
+          {strip && (
+            <section className="editor__block">
+              <h3 className="editor__label">{t.whoPays.detailTitle}</h3>
+              <WhoPaysStrip strip={strip} table={groupTable} />
+            </section>
+          )}
 
           {top && (
             <section className="editor__block">

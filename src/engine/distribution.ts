@@ -290,6 +290,29 @@ export function lastAtOrBelow(xs: ArrayLike<number>, t: number): number {
   return found;
 }
 
+/**
+ * The value below which a share of the distribution's units lies: the inverse of unitsAbove, for
+ * 0 < shareBelow < 1. Where units sit at one value (a bin whose mean lies on an edge), the value
+ * there is returned for every share it spans. 0 gives the lowest value, 1 or more Infinity.
+ */
+export function valueAtShare(dist: Distribution, shareBelow: number): number {
+  const shape = distributionShape(dist);
+  const { xs, nStart, nEnd } = shape;
+  if (!(shareBelow > 0)) return xs[0];
+  if (shareBelow >= 1) return Infinity;
+  const above = shape.total * (1 - shareBelow);
+  const tail = shape.tail;
+  if (tail && above <= tail.count) return tail.from * Math.pow(tail.count / above, 1 / tail.alpha);
+  for (let i = 0; i < xs.length - 1; i++) {
+    if (above > nStart[i]) return xs[i]; // between the end of the piece before and this one: units at xs[i]
+    if (above >= nEnd[i]) {
+      const drop = nStart[i] - nEnd[i];
+      return drop > 0 ? xs[i] + ((nStart[i] - above) / drop) * (xs[i + 1] - xs[i]) : xs[i];
+    }
+  }
+  return shape.top;
+}
+
 /** unitsAbove through the prepared shape: O(log bins) instead of O(bins). */
 export function shapeAbove(shape: DistributionShape, t: number): number {
   const { xs } = shape;

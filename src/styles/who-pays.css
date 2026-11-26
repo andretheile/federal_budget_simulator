@@ -1,0 +1,544 @@
+/*
+ * Who pays: the section under the budget, the strip on a card and in the curve editor, the line near
+ * the top. Colour on this page means the direction of the balance, and a group paying more is
+ * neither good nor bad: everything here is neutral ink, in steps. Text is in text colours, never in
+ * a bar's. "Less" is an outline where "more" is a fill, so the two differ without colour.
+ */
+:root {
+  /* The share of a group: a mid grey that holds 3:1 against the paper, light enough beside the ink of the marks. */
+  --wp-fill: #8a877f;
+  --wp-track: #ebe9e2;
+  --wp-mark: var(--ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Darker than the ink, so the marks for today and for income stand out on it; 4:1 against the paper. */
+    --wp-fill: #7d7b74;
+    --wp-track: #222220;
+    --wp-mark: #f1efe9;
+  }
+}
+
+/* --- The section ------------------------------------------------------------------------------ */
+.whopays {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 2px solid var(--ink);
+  scroll-margin-top: calc(var(--scoreboard-height) + 16px);
+}
+
+.whopays:focus {
+  outline: none;
+}
+
+.whopays__scopes {
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+}
+
+.whopays__scopes button {
+  min-height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.whopays__scopes button:hover {
+  color: var(--ink);
+}
+
+.whopays__scopes button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+@media (pointer: coarse) {
+  .whopays__scopes button {
+    min-height: 44px;
+  }
+}
+
+.whopays__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 36px;
+}
+
+@media (min-width: 1080px) {
+  .whopays__body {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+}
+
+.whopays__headline {
+  max-width: 62ch;
+  margin-bottom: 18px;
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 1.6vw, 21px);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+/* The quality mark after the opening sentence, in the type of the other marks. */
+.whopays__quality {
+  display: inline-block;
+  font-family: var(--font-sans);
+  vertical-align: 2px;
+}
+
+/* One row per group: its name, the bar with its marks, the figures in words. */
+.wp-rows {
+  display: grid;
+  gap: 16px;
+  list-style: none;
+}
+
+.wp-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 5px;
+}
+
+.wp-row__name {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.wp-row__from {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.wp-row__plot {
+  position: relative;
+  height: 14px;
+  margin-block: 2px;
+  background: var(--wp-track);
+  border-radius: 2px;
+}
+
+.wp-row__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--wp-fill);
+  border-radius: 2px 0 0 2px;
+  transition: width 0.35s ease;
+}
+
+/* Today's share, where the measures moved it: the vertical line of the budget's bars. */
+.wp-row__today {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--wp-mark);
+  box-shadow: 0 0 0 1px var(--paper);
+  transition: left 0.35s ease;
+}
+
+/* The group's share of income: an open diamond on the same scale. */
+.wp-row__income {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border: 2px solid var(--wp-mark);
+  background: var(--paper);
+  transform: rotate(45deg);
+}
+
+.wp-row__text,
+.wp-row__change {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.wp-row__change {
+  color: var(--ink);
+}
+
+.wp-row__points {
+  font-weight: 650;
+}
+
+@media (min-width: 720px) {
+  .wp-row {
+    grid-template-columns: 11.5rem minmax(0, 1fr);
+    column-gap: 18px;
+    align-items: center;
+  }
+
+  .wp-row__name {
+    grid-row: 1 / span 3;
+    align-self: start;
+  }
+
+  .wp-row__from {
+    display: block;
+  }
+
+  .wp-row__plot,
+  .wp-row__text,
+  .wp-row__change {
+    grid-column: 2;
+  }
+}
+
+.wp-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 720px) {
+  .wp-axis {
+    margin-left: calc(11.5rem + 18px);
+  }
+}
+
+.whopays__key,
+.whopays__ranking,
+.whopays__outside {
+  max-width: 70ch;
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.whopays__measures {
+  max-width: 70ch;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.whopays__measures p + p,
+.whopays__measures ul {
+  margin-top: 6px;
+}
+
+.whopays__measures ul {
+  padding-left: 18px;
+}
+
+.whopays__measures li + li {
+  margin-top: 4px;
+}
+
+.whopays__note {
+  color: var(--ink-2);
+}
+
+/* --- The statement of all revenue ------------------------------------------------------------- */
+.whopays__statement h3 {
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.whopays__statement-intro {
+  margin-top: 4px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.wp-lines {
+  margin-top: 12px;
+  list-style: none;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.wp-line {
+  border-bottom: 1px solid var(--rule);
+}
+
+.wp-line summary,
+.wp-line--total {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 12px;
+  align-items: baseline;
+  min-height: 44px;
+  padding: 10px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.wp-line summary::-webkit-details-marker {
+  display: none;
+}
+
+.wp-line summary {
+  list-style: none;
+}
+
+.wp-line summary .wp-line__name::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-right: 8px;
+  border-block: 4px solid transparent;
+  border-left: 6px solid var(--ink-3);
+  vertical-align: 1px;
+  transition: transform 0.15s ease;
+}
+
+.wp-line details[open] summary .wp-line__name::before {
+  transform: rotate(90deg);
+}
+
+.wp-line summary:hover .wp-line__name {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.wp-line__amount {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.wp-line__today {
+  grid-column: 2;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.wp-line--groups summary {
+  font-weight: 650;
+}
+
+.wp-line--total {
+  border-bottom: 0;
+  border-top: 2px solid var(--ink);
+  font-weight: 650;
+  cursor: default;
+}
+
+.wp-line__covers {
+  margin: -4px 0 10px 14px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.wp-items {
+  margin: 0 0 10px 14px;
+  list-style: none;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.wp-items li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  padding: 3px 0;
+}
+
+.wp-items__amount {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Today's amount under the one with the measures, so a long name keeps its room on a phone. */
+.wp-items__amount .muted {
+  display: block;
+  font-size: 12px;
+}
+
+.wp-line__note {
+  margin: 0 0 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+/* --- How it is calculated --------------------------------------------------------------------- */
+.whopays__method {
+  max-width: 78ch;
+  margin-top: 28px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.whopays__method summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 650;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.whopays__method p + p,
+.whopays__method p {
+  margin-top: 8px;
+}
+
+.whopays__sources-title {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+/* --- The line near the top -------------------------------------------------------------------- */
+.debt-teaser + .whopays-teaser {
+  margin-top: -18px;
+}
+
+/* --- The strip of a measure ------------------------------------------------------------------- */
+.wp-strip {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.wp-strip--compact {
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+
+.wp-strip__title {
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+/* One column per group, from the smallest incomes to the largest; up for more, down for less. */
+.wp-strip__cols {
+  display: flex;
+  gap: 3px;
+  height: 30px;
+  margin-top: 6px;
+  background: linear-gradient(var(--rule-strong), var(--rule-strong)) center / 100% 1px no-repeat;
+}
+
+.wp-strip__col {
+  position: relative;
+  flex: 1;
+  background: color-mix(in srgb, var(--wp-track) 60%, transparent);
+}
+
+.wp-strip__fill {
+  position: absolute;
+  inset: auto 0 50% 0;
+  max-height: 50%;
+  background: var(--wp-fill);
+}
+
+.wp-strip__fill.is-less {
+  inset: 50% 0 auto 0;
+  border: 1.5px solid var(--wp-fill);
+  background: transparent;
+}
+
+.wp-strip__line,
+.wp-strip__payers,
+.wp-strip__note {
+  margin-top: 6px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.wp-strip__note {
+  color: var(--ink-3);
+}
+
+.wp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.wp-table caption {
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  text-align: left;
+}
+
+.wp-table th,
+.wp-table td {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  font-weight: 400;
+  vertical-align: baseline;
+}
+
+.wp-table thead th {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.wp-table td {
+  padding-left: 10px;
+}
+
+.wp-table__bar {
+  display: block;
+  height: 6px;
+  margin-bottom: 3px;
+}
+
+.wp-table__bar span {
+  display: block;
+  height: 100%;
+  min-width: 0;
+  background: var(--wp-fill);
+}
+
+.wp-table__bar span.is-less {
+  border: 1.5px solid var(--wp-fill);
+  background: transparent;
+}
+
+.wp-table__value {
+  color: var(--ink);
+}
+
+.wp-table__total {
+  text-align: right;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+
+@media (forced-colors: active) {
+  .wp-row__bar,
+  .wp-strip__fill,
+  .wp-table__bar span {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+
+  .wp-strip__fill.is-less,
+  .wp-table__bar span.is-less {
+    border-color: CanvasText;
+    background: transparent;
+  }
+}

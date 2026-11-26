@@ -11,6 +11,7 @@
  *   f     the collection of measures the list is narrowed to, when one is chosen
  *   v     the form of the budget overview ("flow" or "bars"), when it is not DEFAULT_BUDGET_FORM; with
  *         the flow as the default, that is "bars"
+ *   w     what the chart of who pays adds up (a scope id of incidence.json), when it is not the pack's first
  *   e     the curve editor that is open: measure id and curve parameter id, joined by a dot
  *   p     a legal page that replaces the simulator: "imprint" or "privacy"; while it is set, e is ignored
  *
@@ -44,6 +45,8 @@ export interface HashFields {
   collection?: string;
   /** The form of the budget overview. */
   form?: BudgetForm;
+  /** The scope of who pays. */
+  scope?: string;
   /** The open curve editor as "measure.param". */
   editor?: string;
   /** The legal page that is shown instead of the simulator. */
@@ -58,6 +61,7 @@ const KEYS = {
   goal: "g",
   collection: "f",
   form: "v",
+  scope: "w",
   editor: "e",
   page: "p",
 } as const;
@@ -94,6 +98,7 @@ export function parseHash(hash: string): HashFields {
     else if (key === KEYS.goal && ID.test(value)) out.goal = value;
     else if (key === KEYS.collection && ID.test(value)) out.collection = value;
     else if (key === KEYS.form && isBudgetForm(value)) out.form = value;
+    else if (key === KEYS.scope && ID.test(value)) out.scope = value;
     else if (key === KEYS.editor && EDITOR.test(value)) out.editor = value;
     else if (key === KEYS.page && isLegalPage(value)) out.page = value;
   }
@@ -110,6 +115,7 @@ export function buildHash(fields: HashFields): string {
   if (fields.goal) pairs.push(`${KEYS.goal}=${fields.goal}`);
   if (fields.collection) pairs.push(`${KEYS.collection}=${fields.collection}`);
   if (fields.form) pairs.push(`${KEYS.form}=${fields.form}`);
+  if (fields.scope) pairs.push(`${KEYS.scope}=${fields.scope}`);
   if (fields.editor) pairs.push(`${KEYS.editor}=${fields.editor}`);
   if (fields.page) pairs.push(`${KEYS.page}=${fields.page}`);
   return pairs.length > 0 ? `#${pairs.join("&")}` : "";
@@ -125,6 +131,8 @@ export interface LinkState {
   collection?: string;
   /** The form of the budget overview; written only when it is not the default. */
   form?: BudgetForm;
+  /** The scope of who pays; written only if the pack has it and it is not the pack's first. */
+  scope?: string;
   language: string;
   /** Only needed when the site offers several countries. */
   country?: string;
@@ -144,6 +152,7 @@ export function stateToHash(state: LinkState, pack: CountryPack): string {
     goal: state.goal !== undefined && state.goal !== pack.goals?.default && findGoal(pack, state.goal) ? state.goal : undefined,
     collection: state.collection !== undefined && findCollection(pack, state.collection) ? state.collection : undefined,
     form: state.form !== undefined && state.form !== DEFAULT_BUDGET_FORM ? state.form : undefined,
+    scope: state.scope !== undefined && isOtherScope(pack, state.scope) ? state.scope : undefined,
     editor: state.editor && !state.page ? `${state.editor.policy}.${state.editor.param}` : undefined,
     page: state.page,
   });
@@ -185,6 +194,18 @@ export function findCollection(pack: CountryPack, id: string): PolicyCollection 
 export function collectionFromHash(hash: string, pack: CountryPack): string | undefined {
   const id = parseHash(hash).collection;
   return id !== undefined && findCollection(pack, id) ? id : undefined;
+}
+
+/** Whether the pack's incidence.json has this scope, and it is not the first, which needs no key. */
+function isOtherScope(pack: CountryPack, id: string): boolean {
+  const scopes = pack.incidence?.scopes ?? [];
+  return scopes.findIndex((scope) => scope.id === id) > 0;
+}
+
+/** The scope of who pays a fragment asks for, if the pack has it; undefined for the pack's first. */
+export function scopeFromHash(hash: string, pack: CountryPack): string | undefined {
+  const id = parseHash(hash).scope;
+  return id !== undefined && isOtherScope(pack, id) ? id : undefined;
 }
 
 /** The form of the budget overview a fragment asks for; the default where it names none. */

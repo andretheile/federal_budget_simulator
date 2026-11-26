@@ -541,6 +541,10 @@
           "note": {
             "en": "The 2025 rule and the new rule are applied to the wages of 146.7 million workers (IRS Form W-2 statistics for 2023, adjusted to 2025 by the growth of the wage cap). Without a cap, taxable wages would be 17.9% higher; the relative change is applied to Social Security payroll taxes in 2025 ($1.28T, old-age and disability insurance), including the self-employment tax, as if self-employment income were spread like wages. The 2025 rule yields $1.13T on the distribution, 88% of those receipts. Static: wages and employment do not change. The low end assumes that a quarter of the extra base is lost because high earners take more of their pay in forms not subject to the tax (own judgment). The Social Security actuaries' own estimates of such changes are published on ssa.gov, which could not be retrieved.",
             "de": "Die Regel von 2025 und die neue Regel werden auf die Löhne von 146,7 Mio. Beschäftigten angewendet (Lohnbescheinigungs-Statistik der IRS für 2023, mit der Beitragsgrenze auf 2025 fortgeschrieben). Ohne Grenze wären die beitragspflichtigen Löhne um 17,9 % höher; die relative Änderung wird auf die Social-Security-Beiträge 2025 übertragen (1.283,7 Mrd. Dollar, Alters- und Erwerbsminderungsversicherung), einschließlich der Beiträge der Selbständigen, als wären deren Einkommen wie Löhne verteilt. Die Regel von 2025 ergibt auf der Verteilung 1.132,6 Mrd. Dollar, 88 % dieser Einnahmen. Statisch gerechnet: Löhne und Beschäftigung ändern sich nicht. Die untere Grenze nimmt an, dass ein Viertel der zusätzlichen Bemessungsgrundlage verloren geht, weil Spitzenverdiener mehr ihres Einkommens in beitragsfreier Form beziehen (eigene Einschätzung). Die Schätzungen der Versicherungsmathematiker der Social Security zu solchen Änderungen stehen auf ssa.gov, das nicht abrufbar war."
+          },
+          "incidenceAbove": {
+            "from": 176100,
+            "incidence": "wages_above_cap"
           }
         }
       ],
@@ -657,7 +661,8 @@
           "note": {
             "en": "Corporation income taxes in fiscal year 2025: $452.1B. With profits unchanged, 28% instead of 21% would raise them by a third, $150.7B. The Treasury estimated $122.5B for fiscal year 2025, 81% of that, because firms shift and reduce taxable profits. That share is applied to every point of rate change, up or down: $17.5B per percentage point. The range runs from 70% to 110% of this (own judgment): the Treasury's estimate dates from March 2024 and refers to the profits it then expected, and the estimates of the Congressional Budget Office and the Joint Committee on Taxation could not be retrieved.",
             "de": "Körperschaftsteuer im Haushaltsjahr 2025: 452,1 Mrd. Dollar. Bei unveränderten Gewinnen brächte ein Satz von 28 statt 21 % ein Drittel mehr, 150,7 Mrd. Dollar. Das Finanzministerium schätzte 122,5 Mrd. Dollar für 2025, 81 % davon, weil Unternehmen steuerpflichtige Gewinne verlagern und verringern. Dieser Anteil gilt für jeden Prozentpunkt Änderung, nach oben wie nach unten: 17,5 Mrd. Dollar je Prozentpunkt. Die Spanne reicht von 70 % bis 110 % davon (eigene Einschätzung): Die Schätzung des Finanzministeriums stammt vom März 2024 und bezieht sich auf die damals erwarteten Gewinne, und die Schätzungen des Congressional Budget Office und des Joint Committee on Taxation waren nicht abrufbar."
-          }
+          },
+          "incidence": "companies"
         }
       ],
       "catches": [
@@ -785,7 +790,8 @@
             "note": {
               "en": "Customs duties and excise taxes take money out of incomes that would otherwise be taxed. The Congressional Budget Office, the Joint Committee on Taxation and the Treasury's Office of Tax Analysis therefore count only about three-quarters of their yield (CBO, 2009); the Joint Committee's offset for 2025 is 22.1% (JCX-11-21). The range runs from 20% to 25%, the long-standing standard figure. The offset falls on income, payroll and corporate taxes; for simplicity it is booked here against individual income taxes.",
               "de": "Zölle und Verbrauchsteuern entziehen Einkommen, die sonst besteuert würden. Das Congressional Budget Office, das Joint Committee on Taxation und die Steuerabteilung des Finanzministeriums rechnen deshalb nur etwa drei Viertel ihres Ertrags an (CBO, 2009); der Abschlag des Joint Committee für 2025 beträgt 22,1 % (JCX-11-21). Die Spanne reicht von 20 % bis 25 %, dem langjährigen Standardwert. Der Abschlag trifft Einkommensteuer, Sozialversicherungsbeiträge und Körperschaftsteuer; vereinfachend ist er hier bei der Einkommensteuer gebucht."
-            }
+            },
+            "incidence": "customs_duties"
           }
         }
       ],
@@ -2083,7 +2089,8 @@
           "note": {
             "en": "Income from the taxation of benefits under section 86 in fiscal year 2025: $59.4B for Social Security's two trust funds and $41.1B for Medicare's Hospital Insurance fund, together $100.5B (Trustees Reports 2026, Tables VI.C3 and V.H1). Not included are the $335M withheld from the benefits of nonresident aliens, a separate tax (section 871(a)(3)) that H.R. 1040 does not end. The measure takes the chosen share. The range runs down to 85% (own judgment): the trust funds are credited with Treasury's estimate of the tax, which is corrected later, and the new deduction for people 65 and over lowers the tax on benefits from tax year 2025 on.",
             "de": "Einnahmen aus der Besteuerung der Renten nach Abschnitt 86 im Haushaltsjahr 2025: 59,4 Mrd. Dollar für die beiden Treuhandfonds der Social Security und 41,1 Mrd. Dollar für den Krankenhausfonds von Medicare, zusammen 100,5 Mrd. Dollar (Berichte der Treuhänder 2026, Tabellen VI.C3 und V.H1). Nicht enthalten sind die 335 Mio. Dollar, die von den Renten von Ausländern ohne Wohnsitz in den USA einbehalten werden, eine eigene Steuer (Abschnitt 871(a)(3)), die H.R. 1040 nicht abschafft. Die Maßnahme nimmt davon den eingestellten Anteil. Die Spanne reicht bis 85 % (eigene Einschätzung): Den Fonds wird die Steuer nach einer Schätzung des Finanzministeriums gutgeschrieben, die später berichtigt wird, und der neue Freibetrag für Menschen ab 65 senkt die Steuer auf Renten ab dem Steuerjahr 2025."
-          }
+          },
+          "incidence": "social_security_benefit_tax"
         }
       ],
       "catches": [
@@ -2349,6 +2356,11 @@
           "note": {
             "en": "The part of the credit that reduces income tax: $8.0B in fiscal year 2027 by the Treasury's estimate ($21.8B in all, less $13.8B of outlays).",
             "de": "Der Teil des Zuschusses, der die Einkommensteuer mindert: 8,0 Mrd. Dollar im Haushaltsjahr 2027 nach der Schätzung des Finanzministeriums (insgesamt 21,8 Mrd. Dollar, abzüglich 13,8 Mrd. Dollar Ausgaben)."
+          },
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "en": "Paid by people with marketplace coverage whose premium tax credit shrinks or ends with the enhancement, which had lowered the share of income they pay for a benchmark plan and opened the credit to people above four times the poverty line; no table splits it by income group.",
+            "de": "Zahlen Versicherte im Marktplatz, deren Zuschuss mit der Erhöhung kleiner wird oder entfällt; sie hatte den Anteil des Einkommens für einen Referenztarif gesenkt und den Zuschuss für Menschen über dem Vierfachen der Armutsgrenze geöffnet. Keine Tabelle teilt das nach Einkommensgruppen auf."
           }
         }
       ],
@@ -2487,7 +2499,8 @@
           "note": {
             "en": "Mechanical, before avoidance. At the end of September 2025 the top 1% of households held $53.94T, the top 0.1% $24.66T (Federal Reserve, Distributional Financial Accounts). A Pareto distribution through both groups (own assumption) puts 188,000 households above $50M, with $14.27T of net worth between $50M and $1B above the threshold: 1% of it is $142.7B. The range runs down to half (own judgment): valuing private businesses, avoidance and moving assets lower the yield, and no official estimate could be retrieved.",
             "de": "Rein rechnerisch, vor Ausweichen. Ende September 2025 besaß das oberste 1 % der Haushalte 53,94 Bio. Dollar, die obersten 0,1 % 24,66 Bio. Dollar (Federal Reserve, Distributional Financial Accounts). Eine Pareto-Verteilung durch beide Gruppen (eigene Annahme) ergibt 188.000 Haushalte über 50 Mio. Dollar mit 14,27 Bio. Dollar Vermögen zwischen 50 Mio. und 1 Mrd. Dollar oberhalb der Schwelle: 1 % davon sind 142,7 Mrd. Dollar. Die Spanne reicht bis zur Hälfte (eigene Einschätzung): Bewertung privater Unternehmen, Ausweichen und Verlagerung senken den Ertrag, und eine amtliche Schätzung war nicht abrufbar."
-          }
+          },
+          "incidence": "wealth_holders"
         },
         {
           "type": "add",
@@ -2509,7 +2522,8 @@
           "note": {
             "en": "The same distribution puts about 2,000 households above $1B, with $3.82T above that line: 1% of it is $38.2B. The Federal Reserve does not publish the number of households above $1B, so this part rests most on the assumption.",
             "de": "Dieselbe Verteilung ergibt rund 2.000 Haushalte über 1 Mrd. Dollar mit 3,82 Bio. Dollar oberhalb dieser Grenze: 1 % davon sind 38,2 Mrd. Dollar. Die Federal Reserve veröffentlicht die Zahl der Haushalte über 1 Mrd. Dollar nicht; dieser Teil hängt daher am stärksten von der Annahme ab."
-          }
+          },
+          "incidence": "wealth_holders"
         }
       ],
       "catches": [
@@ -2624,7 +2638,8 @@
           "note": {
             "en": "Ordinary taxable income above the bill's thresholds: $550.4B in tax year 2023, own estimate from the IRS statistics. Income taxed at 37% on returns with AGI of $1M or more was $1,111.9B; for each return taxed at 37%, the income between the 37% threshold of 2023 and the bill's threshold for 2023 is taken off, $1.45M on average, weighted by the filing statuses of all returns in each income class (84% of the returns with AGI of $1M or more are joint returns). Each point of rate brings $5.5B; 39.6% brings $14.3B. Mechanical: people with the highest incomes can shift income in time and form; the range runs down to 60% (own judgment), because the estimate of the Joint Committee on Taxation could not be retrieved.",
             "de": "Gewöhnliches zu versteuerndes Einkommen über den Schwellen des Entwurfs: 550,4 Mrd. Dollar im Steuerjahr 2023, eigene Schätzung aus der IRS-Statistik. Zu 37 % besteuertes Einkommen in Erklärungen mit mindestens 1 Mio. Dollar Einkommen: 1.111,9 Mrd. Dollar; für jede zu 37 % besteuerte Erklärung wird das Einkommen zwischen der 37-%-Schwelle von 2023 und der Schwelle des Entwurfs für 2023 abgezogen, im Mittel 1,45 Mio. Dollar, gewichtet nach der Veranlagungsart aller Erklärungen jeder Einkommensklasse (84 % der Erklärungen mit mindestens 1 Mio. Dollar Einkommen sind gemeinsame). Jeder Prozentpunkt bringt 5,5 Mrd. Dollar, 39,6 % bringen 14,3 Mrd. Dollar. Rein rechnerisch: Menschen mit den höchsten Einkommen können Einkommen zeitlich und in der Form verschieben; die Spanne reicht bis 60 % (eigene Einschätzung), weil die Schätzung des Joint Committee on Taxation nicht abrufbar war."
-          }
+          },
+          "incidence": "top_1_percent"
         }
       ],
       "catches": [
