@@ -1,5 +1,6 @@
 import { legalDe } from "./legal/de.ts";
 import { debtDe } from "./debt/de.ts";
+import { whoPaysDe } from "./whoPays/de.ts";
 import type { Messages, SideMove, YearName } from "./messages.ts";
 
 const plural = (count: number, one: string, many: string): string => `${count} ${count === 1 ? one : many}`;
@@ -442,4 +443,5 @@ export const de: Messages = {
   },
   legal: legalDe,
   debt: debtDe,
+  whoPays: whoPaysDe,
 };

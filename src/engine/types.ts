@@ -9,6 +9,7 @@
  *   distributions/<id>.json -> Distribution (the file name is the id)
  *   debt.json               -> DebtFile (optional: the debt and interest projection)
  *   goals.json              -> GoalsFile (optional: how far a level's balance has to improve)
+ *   incidence.json          -> IncidenceFile (optional: who pays the revenue, by income group)
  *
  * Conventions
  * - Money is in plain currency units per year (euros, not millions).
@@ -416,6 +417,27 @@ export interface EffectBase {
   note?: LocalizedText;
   /** Part of the change at the target that is passed on to another node; see EffectShift. */
   shift?: EffectShift;
+  /**
+   * Who pays this effect's change at a revenue node (incidence.json): the id of a profile, for a
+   * change that does not fall on everybody who pays the tax in proportion, or of a payer outside
+   * the income groups. Absent: computed from the distribution for a `schedule` effect on one that
+   * incidence.json names, otherwise spread like the node's amount. Not on spending.
+   */
+  incidence?: string;
+  /**
+   * A part of the change that goes by a profile or payer of its own, set by a value between 0 and 1
+   * that may follow a param: the employer's part of new contributions that the state pays as the
+   * employer, say. The rest is spread as without it (by `incidence`, `incidenceAbove` or the usual
+   * rule). Only on a revenue node.
+   */
+  incidenceShare?: { share: Value; incidence: string };
+  /**
+   * Who pays this change, in a sentence: where it is not spread over the income groups ("Heirs of
+   * firms pay more; no source places them in income groups"), or what a spread assumes ("Counted as
+   * if guests got the whole cut"). Shown with the strip of who pays, on the card's face only where
+   * nothing is spread, and under the chart of who pays. Only on a revenue node.
+   */
+  incidenceNote?: LocalizedText;
 }
 
 /**
@@ -446,6 +468,10 @@ export interface EffectShift {
   quality?: Quality;
   sources?: SourceId[];
   note?: LocalizedText;
+  /** Who pays the passed-on part at a revenue node, as EffectBase.incidence; absent: like the node's amount. */
+  incidence?: string;
+  /** Who pays the passed-on part, in a sentence, as EffectBase.incidenceNote. */
+  incidenceNote?: LocalizedText;
 }
 
 /** new = old * factor */
@@ -495,6 +521,16 @@ export interface ScheduleEffect extends EffectBase {
   reform: Schedule;
   baseline?: ConstSchedule;
   yield?: Value;
+  /**
+   * Who pays the part of the change that comes from the rates at or above `from` on the
+   * distribution's variable (incidence.json): a profile or a payer, for a schedule whose upper part
+   * falls on other people than the rest, such as wages above a contribution ceiling. The part is the
+   * model's change on the slice of every unit's value at or above `from` (the schedule with a rate of
+   * zero below it); the rest is the change on the slice below. Both are scaled to the effect's
+   * actual change like the whole. The rest follows the effect's own `incidence`, or without one the
+   * usual rule (computed from a named distribution, else the node's profile). `from` >= 0.
+   */
+  incidenceAbove?: { from: number; incidence: string };
 }
 
 export type Effect = ScaleEffect | AddEffect | SetEffect | ExcludeGroupsEffect | ScheduleEffect;
@@ -584,6 +620,8 @@ export interface CountryPack {
   debt?: DebtFile;
   /** Content of goals.json. Absent if the pack has none. */
   goals?: GoalsFile;
+  /** Content of incidence.json. Absent if the pack has none: then there is no view of who pays. */
+  incidence?: IncidenceFile;
 }
 
 export const LEVEL_IDS: readonly LevelId[] = ["central", "state", "local", "social_security"];
@@ -919,4 +957,120 @@ export interface GoalsFile {
   default: string;
   /** At least one, in the order the interface lists them. */
   goals: Goal[];
+}
+
+// ---------------------------------------------------------------------------------------------
+// incidence.json: who pays the revenue, by income group (optional)
+// ---------------------------------------------------------------------------------------------
+
+/** One income group. Groups are listed from the lowest incomes to the highest. */
+export interface IncidenceGroup {
+  id: string;
+  label: LocalizedText;
+  /** Share of the population's units in the group, above 0; all groups sum to 1. */
+  share: number;
+  /**
+   * Lowest income of the group in the ranking's income concept, per year and in the prices of
+   * `population.year`, where a source gives one. Absent for the first group and where none is known.
+   */
+  from?: number;
+}
+
+/** How a burden, or a change of one, is spread over the groups. */
+export interface IncidenceProfile {
+  label?: LocalizedText;
+  /** One number per group, in group order, each >= 0; with `payers` they sum to 1. */
+  shares: number[];
+  /**
+   * Parts that land on payers outside the groups, by payer id, for a change that falls partly on
+   * them: the surcharge on capital income and on company profits, say. Absent: all on the groups.
+   */
+  payers?: Record<string, number>;
+  quality: Quality;
+  /** At least one. */
+  sources: SourceId[];
+  /** Year of the data, unit of the source, what was assumed. */
+  note?: LocalizedText;
+}
+
+/**
+ * Somebody who pays outside the income groups (companies, employers, people abroad, the state
+ * itself), or revenue that nobody pays as a tax (fees, sales, interest).
+ */
+export interface IncidencePayer {
+  id: string;
+  label: LocalizedText;
+  note?: LocalizedText;
+  /** Where the note's figures come from. */
+  sources?: SourceId[];
+}
+
+/**
+ * How a revenue node's amount is spread. `coverage` of it (0 to 1; default 1 with a profile, 0
+ * without) is spread over the groups by `profile`, the rest goes to `payer`. A node without an
+ * entry takes the entry of its nearest ancestor; every revenue leaf must have one, so that nothing
+ * stays unnamed and the lines add up to the budget's revenue.
+ */
+export interface IncidenceNode {
+  profile?: string;
+  coverage?: number;
+  payer?: string;
+  note?: LocalizedText;
+}
+
+/** What the chart of the income groups adds up: for example taxes alone, or taxes with social contributions. */
+export interface IncidenceScope {
+  id: string;
+  label: LocalizedText;
+  /** Revenue nodes of budget.json, at least one, none inside another. */
+  nodes: string[];
+  note?: LocalizedText;
+}
+
+/** Content of incidence.json. */
+export interface IncidenceFile {
+  population: {
+    /** What the units are, in the plural: "Menschen", "households". */
+    unit: LocalizedText;
+    /** How an amount per unit is written after it: "je Person", "per household". Absent: a generic "per unit". */
+    perUnit?: LocalizedText;
+    /** Number of units, for amounts per unit. */
+    count: number;
+    /** What the units are ranked by, in words a visitor understands. */
+    ranking: LocalizedText;
+    /** Year of the ranking and of the groups' income bounds. */
+    year: number;
+    quality: Quality;
+    sources: SourceId[];
+    note?: LocalizedText;
+  };
+  /** 2 to 12, from the lowest incomes to the highest. */
+  groups: IncidenceGroup[];
+  /** Each group's share of all income, in the ranking's income concept. */
+  income: {
+    /** Per group, summing to 1. */
+    shares: number[];
+    /** Total income of the population per year in currency units, if known: gives "x % of their income". */
+    total?: number;
+    concept: LocalizedText;
+    quality: Quality;
+    sources: SourceId[];
+    note?: LocalizedText;
+  };
+  /** Keyed by profile id. */
+  profiles: Record<string, IncidenceProfile>;
+  /** Payers outside the income groups, in the order the page lists them. Ids differ from the profiles' ids. */
+  payers?: IncidencePayer[];
+  /** Revenue node id -> how the node's amount is spread. */
+  nodes: Record<string, IncidenceNode>;
+  /**
+   * Distributions of the pack whose units, ranked by the distribution's variable, may stand for the
+   * population ranked by income. For a `schedule` effect on such a distribution the engine works out
+   * itself which group pays how much of the change.
+   */
+  distributions?: Record<string, { note: LocalizedText }>;
+  /** At least one; the first is what the page opens with. */
+  scopes: IncidenceScope[];
+  /** What the view shows, what it leaves out and what it assumes, in plain words. */
+  note: LocalizedText;
 }

@@ -1,0 +1,55 @@
+import type { WhoPaysMessages } from "./messages.ts";
+
+const imJahr = (year: number | string): string => (typeof year === "number" ? `${year}` : `im ${year}`);
+
+export const whoPaysDe: WhoPaysMessages = {
+  title: "Wer zahlt",
+  intro:
+    "Wie sich Steuern und Abgaben auf die Menschen im Land verteilen, von den kleinsten Einkommen zu den größten, und was die eingeschalteten Maßnahmen daran ändern.",
+  scopes: "Was die Balken zusammenzählen",
+  headline: (scope, spread, total, top, topPays, topHas, bottom, bottomPays, bottomHas) =>
+    `${scope}: ${spread} von ${total} lassen sich auf Einkommensgruppen verteilen. ${top}: zahlt ${topPays} davon, hat ${topHas} der Einkommen. ${bottom}: zahlt ${bottomPays}, hat ${bottomHas}.`,
+  listLabel: (scope) => `Anteile nach Einkommensgruppen (${scope})`,
+  from: (amount) => `ab ${amount} im Jahr`,
+  pays: (share) => `zahlt ${share}`,
+  has: (share) => `hat ${share} der Einkommen`,
+  ofIncome: (share) => `das sind ${share} ihres Einkommens`,
+  paysChanged: (now, today) => `zahlt ${now} statt ${today}`,
+  instead: (now, today) => `${now} statt ${today}`,
+  points: (signed) => `${signed} Punkte`,
+  perUnitChange: (amount, more, perUnit) => `zahlt im Schnitt ${amount} ${more ? "mehr" : "weniger"} ${perUnit} und Jahr`,
+  same: "zahlt so viel wie vorher",
+  key: (year) =>
+    `Balken: Anteil an dem Teil, der sich auf Einkommensgruppen verteilen lässt. Senkrechter Strich: Anteil ${imJahr(year)}, wo die Maßnahmen ihn ändern. Raute: Anteil an den Einkommen.`,
+  ranking: (text) => `Wer zu welcher Gruppe gehört: ${text}`,
+  outside: (amount) => `Nicht in den Balken: ${amount}, die sich nicht auf die Einkommensgruppen verteilen lassen; die Aufstellung unten sagt, wer sie zahlt.`,
+  statementTitle: "Woher alle Einnahmen kommen",
+  statementIntro: (total) => `Die Einnahmen von ${total}, die oben in der Anzeige stehen, nach denen, die sie zahlen.`,
+  groupsLine: "Menschen, nach Einkommen verteilt",
+  chartCovers: (scope, amount) => `Davon in den Balken oben (${scope}): ${amount}.`,
+  today: (amount, year) => `${year}: ${amount}`,
+  total: "Einnahmen insgesamt",
+  itemsOf: (label) => `${label} aufschlüsseln`,
+  counted: (list) => `Ganz oder teilweise auf die Einkommensgruppen verteilt sind die Änderungen von: ${list}.`,
+  notCounted: "Nicht auf die Einkommensgruppen verteilt:",
+  outsideMeasure: (measure, payers) => `${measure} (${payers})`,
+  payerChange: (payer, amount, more) => `${payer} ${amount} ${more ? "mehr" : "weniger"}`,
+  methodTitle: "Wie gerechnet wird",
+  computed: (text) => text,
+  quality: "Datenqualität",
+  sources: "Quellen",
+  stripTitle: (perUnit) => `Wer mehr oder weniger zahlt, im Schnitt ${perUnit} und Jahr`,
+  stripLine: (first, firstChange, last, lastChange) => `${first}: ${firstChange} · ${last}: ${lastChange}`,
+  stripMore: "mehr",
+  stripLess: "weniger",
+  stripOutside: "Nicht auf die Einkommensgruppen verteilt:",
+  stripNone: "Nichts davon lässt sich auf Einkommensgruppen verteilen.",
+  detailTitle: "Nach Einkommensgruppen",
+  columnGroup: "Gruppe",
+  columnPerUnit: (perUnit) => `Im Schnitt ${perUnit} und Jahr`,
+  columnTotal: "Zusammen",
+  teaserLink: "Wer zahlt",
+  teaserToday: (group, share, scope) => `${group}: ${share} des Teils, der sich auf Gruppen verteilen lässt (${scope})`,
+  teaserChanged: (group, now, today, scope) =>
+    `${group}: mit den Maßnahmen ${now} statt ${today} des Teils, der sich auf Gruppen verteilen lässt (${scope})`,
+};

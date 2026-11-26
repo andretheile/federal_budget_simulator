@@ -1,5 +1,6 @@
 import { legalEn } from "./legal/en.ts";
 import { debtEn } from "./debt/en.ts";
+import { whoPaysEn } from "./whoPays/en.ts";
 import type { Messages, SideMove } from "./messages.ts";
 
 const plural = (count: number, one: string, many: string): string => `${count} ${count === 1 ? one : many}`;
@@ -442,4 +443,5 @@ export const en: Messages = {
   },
   legal: legalEn,
   debt: debtEn,
+  whoPays: whoPaysEn,
 };

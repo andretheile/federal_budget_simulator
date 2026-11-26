@@ -26,6 +26,7 @@ import {
   parseHash,
   sameScenario,
   scenarioFromHash,
+  scopeFromHash,
   stateToHash,
 } from "./app/urlState.ts";
 import { chosenGoal } from "./app/goalModel.ts";
@@ -45,11 +46,13 @@ import { PolicyList } from "./components/PolicyList.tsx";
 import { Scoreboard } from "./components/Scoreboard.tsx";
 import { SectionNav } from "./components/SectionNav.tsx";
 import { Waterfall } from "./components/Waterfall.tsx";
+import { WhoPaysSection, WhoPaysTeaser } from "./components/WhoPays.tsx";
 import {
   emptyScenario,
   encodeScenario,
   formatIssue,
   simulate,
+  whoPays,
   type CountryPack,
   type LevelFilter,
   type ParamValue,
@@ -215,6 +218,8 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
   const [collection, setCollection] = useState(() => collectionFromHash(currentHash(), pack));
   /** The form of the budget overview: the flow of money or the bars. In the link when it is not the default (v=bars). */
   const [budgetForm, setBudgetForm] = useState<BudgetForm>(() => formFromHash(currentHash()));
+  /** What the chart of who pays adds up: a scope of incidence.json, undefined for the first. In the link when it is not the first (w=...). */
+  const [whoScope, setWhoScope] = useState(() => scopeFromHash(currentHash(), pack));
   /** Which categories the flow folds, as it last reported; the bars fold as the layout says. */
   const [flowFolds, setFlowFolds] = useState<Record<Side, string[]>>();
   const ui = useMemo(() => createUi(pack, language), [pack, language]);
@@ -246,6 +251,7 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
       goal: goalId,
       collection,
       form: budgetForm,
+      scope: whoScope,
       language,
       country: showsCountry ? pack.country.id : undefined,
       editor,
@@ -262,6 +268,7 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
         goal: goalId,
         collection,
         form: budgetForm,
+        scope: whoScope,
         language,
         country: showsCountry ? pack.country.id : undefined,
         page,
@@ -316,6 +323,7 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
         fields.goal === undefined &&
         fields.collection === undefined &&
         fields.form === undefined &&
+        fields.scope === undefined &&
         fields.page === undefined
       ) {
         if (window.location.hash !== "" && dirty.current) {
@@ -343,6 +351,7 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
       setGoalId(goalFromHash(window.location.hash, pack));
       setCollection(collectionFromHash(window.location.hash, pack));
       setBudgetForm(formFromHash(window.location.hash));
+      setWhoScope(scopeFromHash(window.location.hash, pack));
       followLegal(fields.page);
     };
     window.addEventListener("hashchange", onHashChange);
@@ -497,6 +506,12 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
   const pageScenario = editing ? deferredScenario : scenario;
   /** Where the scenario leads over the coming decades; for the whole state, whatever the level shown. */
   const debt = useDebtView(pack, pageScenario, pageResult, debtAssumptions);
+  /** Who pays, for a pack with incidence.json: always of the whole budget, whatever the level shown. */
+  const wholeResult = useMemo(
+    () => (!pack.incidence ? undefined : pageResult.level === "all" ? pageResult : simulate(pack, { ...pageScenario, level: "all" })),
+    [pack, pageResult, pageScenario],
+  );
+  const who = useMemo(() => (wholeResult ? whoPays(pack, wholeResult) : undefined), [pack, wholeResult]);
 
   const budget = (
     <BudgetView
@@ -627,9 +642,11 @@ export function Simulator({ pack, fallback, countries = [], previews = [], onCou
                 line that leads to the debt section is only needed beside the two columns. The order in
                 the document follows the order on screen, so keyboard and screen reader agree with the eye. */}
             {!oneColumn && <DebtTeaser view={debt} />}
+            {!oneColumn && who && <WhoPaysTeaser who={who} scope={whoScope} />}
             {/* A pack without measures yet: the budget is what there is, so it comes first on one column too. */}
             <div className="workspace">{oneColumn && pack.policies.length > 0 ? [policies, budget] : [budget, policies]}</div>
             {/* A pack without measures has nothing to switch on, so there is no change to show. */}
+            {who && wholeResult && <WhoPaysSection who={who} whole={wholeResult} scope={whoScope} onScope={setWhoScope} />}
             {pack.policies.length > 0 && <Waterfall result={pageResult} onShowPolicy={onShowPolicy} />}
             {debt && debtAssumptions && (
               <DebtSection view={debt} assumptions={debtAssumptions} onAssumptions={setDebtAssumptions} level={pageResult.level} />

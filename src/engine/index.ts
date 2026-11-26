@@ -53,6 +53,19 @@ export { calendarYears, yearStart, yearEnd, yearOfDate, yearBeginningOn, yearSho
 export { goalProgress, measureGoal, goalLevel, findGoal, defaultGoal, type GoalProgress } from "./goals.ts";
 
 export {
+  whoPays,
+  measureWhoPays,
+  type Amounts,
+  type MeasureWhoPays,
+  type WhoPays,
+  type WhoPaysGroup,
+  type WhoPaysItem,
+  type WhoPaysLine,
+  type WhoPaysPayer,
+  type WhoPaysScope,
+} from "./incidence.ts";
+
+export {
   projectDebt,
   projectScenario,
   resolveDebtAssumptions,
@@ -87,6 +100,7 @@ export {
   marginalRate,
   orderBrackets,
   affectedUnits,
+  valueAtShare,
   type AffectedUnits,
   type Bracket,
 } from "./distribution.ts";

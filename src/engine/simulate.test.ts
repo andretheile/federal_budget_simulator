@@ -791,7 +791,7 @@ describe("curve params and curve schedules", () => {
       [tariff],
     );
     expect(result.nodes["rev.taxes.wealth"].reform).toBeCloseTo(130, 9);
-    expect(p.effects[0].model).toEqual({ reform: expect.closeTo(130, 9) });
+    expect(p.effects[0].model).toEqual({ reform: expect.closeTo(130, 9), scale: 1 });
     // Without a baseline everyone with a positive rate is affected.
     expect(p.effects[0].affected).toEqual({ threshold: 10, units: 30, share: 0.6 });
   });
@@ -826,9 +826,10 @@ describe("curve params and curve schedules", () => {
     expect(simulate(testland, enable({ raise_top_tax_rate: true })).policies[0].effects[0].model).toEqual({
       reform: expect.closeTo(130, 10),
       baseline: expect.closeTo(120, 10),
+      scale: expect.closeTo(1500 / 120, 10),
     });
     // 1 % above 1000 on the wealth tail: 50, before the yield of 0.8.
-    expect(simulate(testland, enable({ wealth_tax: true })).policies[0].effects[0].model).toEqual({ reform: expect.closeTo(50, 10) });
+    expect(simulate(testland, enable({ wealth_tax: true })).policies[0].effects[0].model).toEqual({ reform: expect.closeTo(50, 10), scale: 0.8 });
     expect(simulate(testland, enable({ halve_mp_pay: true })).policies[0].effects[0].model).toBeUndefined();
   });
 
@@ -895,7 +896,7 @@ describe("curve params and curve schedules", () => {
       (pack.policies.find((p) => p.id === "redraw_income_tax")!.params[0] as CurveParam).minPoints = 0;
       const result = simulate(pack, enable({ redraw_income_tax: { tariff: [] } }));
       expect(result.nodes["rev.taxes.income"].reform).toBeCloseTo(0, 9);
-      expect(result.policies[0].effects[0].model).toEqual({ reform: 0, baseline: expect.closeTo(120, 10) });
+      expect(result.policies[0].effects[0].model).toEqual({ reform: 0, baseline: expect.closeTo(120, 10), scale: expect.closeTo(12.5, 10) });
       expect(result.policies[0].effects[0].affected?.threshold).toBe(10);
     });
   });

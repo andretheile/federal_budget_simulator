@@ -1,0 +1,488 @@
+{
+  "population": {
+    "unit": {
+      "en": "households",
+      "de": "Haushalte"
+    },
+    "perUnit": {
+      "en": "per household",
+      "de": "je Haushalt"
+    },
+    "count": 133100000,
+    "ranking": {
+      "en": "Households ranked by their income before taxes and means-tested benefits, adjusted for household size, as the Congressional Budget Office ranks them. Each group holds about the same share of the people: a fifth, a tenth, a twentieth, four hundredths, one hundredth. The lower bounds are incomes of 2023 for a person living alone; for a household of two multiply by 1.41, of three by 1.73, of four by 2.",
+      "de": "Haushalte, geordnet nach ihrem Einkommen vor Steuern und vor bedürftigkeitsabhängigen Leistungen, bereinigt um die Haushaltsgröße, wie das Haushaltsbüro des Kongresses (Congressional Budget Office, CBO) sie ordnet. Jede Gruppe umfasst ungefähr denselben Anteil der Menschen: ein Fünftel, ein Zehntel, ein Zwanzigstel, vier Hundertstel, ein Hundertstel. Die Untergrenzen sind Einkommen von 2023 für eine alleinlebende Person; für einen Haushalt mit zwei Personen mal 1,41, mit drei mal 1,73, mit vier mal 2."
+    },
+    "year": 2023,
+    "quality": "derived",
+    "sources": [
+      "cbo_household_income_2023_data",
+      "cbo_household_income_2023",
+      "cbo_household_income_2021"
+    ],
+    "note": {
+      "en": "CBO counts 133.7 million households in 2023; about 0.6 million whose losses exceed their other income are in no group, so the groups hold 133.1 million (Table 1, rounded by CBO to 0.1 million: the top 1% has 1.3 million). The groups' shares of the taxes are those of 2023, applied to the taxes of fiscal year 2025.",
+      "de": "Das CBO zählt 2023 133,7 Mio. Haushalte; etwa 0,6 Mio., deren Verluste ihre übrigen Einkünfte übersteigen, gehören zu keiner Gruppe, die Gruppen umfassen also 133,1 Mio. (Tabelle 1, vom CBO auf 0,1 Mio. gerundet: Das oberste 1 % hat 1,3 Mio.). Die Anteile der Gruppen an den Steuern sind die von 2023, angewandt auf die Steuern des Haushaltsjahres 2025."
+    }
+  },
+  "groups": [
+    {
+      "id": "q1",
+      "label": {
+        "en": "Lowest fifth",
+        "de": "Unterstes Fünftel"
+      },
+      "share": 0.196093
+    },
+    {
+      "id": "q2",
+      "label": {
+        "en": "Second fifth",
+        "de": "Zweites Fünftel"
+      },
+      "share": 0.203606,
+      "from": 31800
+    },
+    {
+      "id": "q3",
+      "label": {
+        "en": "Middle fifth",
+        "de": "Mittleres Fünftel"
+      },
+      "share": 0.202855,
+      "from": 53700
+    },
+    {
+      "id": "q4",
+      "label": {
+        "en": "Fourth fifth",
+        "de": "Viertes Fünftel"
+      },
+      "share": 0.19985,
+      "from": 79800
+    },
+    {
+      "id": "p81_90",
+      "label": {
+        "en": "Top 11 to 20%",
+        "de": "Obere 11 bis 20 %"
+      },
+      "share": 0.099174,
+      "from": 122200
+    },
+    {
+      "id": "p91_95",
+      "label": {
+        "en": "Top 6 to 10%",
+        "de": "Obere 6 bis 10 %"
+      },
+      "share": 0.049587,
+      "from": 172100
+    },
+    {
+      "id": "p96_99",
+      "label": {
+        "en": "Top 2 to 5%",
+        "de": "Obere 2 bis 5 %"
+      },
+      "share": 0.039068,
+      "from": 240800
+    },
+    {
+      "id": "top_1",
+      "label": {
+        "en": "Top 1%",
+        "de": "Oberstes 1 %"
+      },
+      "share": 0.009767,
+      "from": 549000
+    }
+  ],
+  "income": {
+    "shares": [
+      0.037736,
+      0.086395,
+      0.134062,
+      0.199602,
+      0.144985,
+      0.101291,
+      0.133069,
+      0.16286
+    ],
+    "concept": {
+      "en": "Income before transfers and taxes: wages and other pay, including the employer's payroll taxes and health insurance contributions, business and capital income including realized capital gains, the part of the corporation income tax that CBO allocates to workers and owners of capital, Social Security and Medicare benefits, unemployment insurance and workers' compensation; before means-tested benefits such as Medicaid and SNAP, and before federal taxes.",
+      "de": "Einkommen vor Transfers und Steuern: Löhne und andere Bezüge, einschließlich der Arbeitgeberbeiträge zu den Sozialabgaben und zur Krankenversicherung, Unternehmens- und Kapitaleinkommen einschließlich realisierter Kursgewinne, der Teil der Körperschaftsteuer, den das CBO Beschäftigten und Kapitaleigentümern zurechnet, Renten der Social Security, Leistungen von Medicare, Arbeitslosengeld und Unfallrenten; vor bedürftigkeitsabhängigen Leistungen wie Medicaid und SNAP und vor den Bundessteuern."
+    },
+    "quality": "derived",
+    "sources": [
+      "cbo_household_income_2023_data",
+      "cbo_household_income_2021"
+    ],
+    "note": {
+      "en": "CBO's shares of income for 2023 (Table 10), taken over the households in the groups: the households in no group have negative income, so the published shares add up to 100.7%. The income of fiscal year 2025 is not known by group, so the view gives no share of their income that the groups pay.",
+      "de": "Die Anteile des CBO am Einkommen für 2023 (Tabelle 10), bezogen auf die Haushalte in den Gruppen: Die Haushalte ohne Gruppe haben negatives Einkommen, die veröffentlichten Anteile ergeben daher 100,7 %. Das Einkommen des Haushaltsjahres 2025 ist nach Gruppen nicht bekannt; die Ansicht nennt daher keinen Anteil ihres Einkommens, den die Gruppen zahlen."
+    }
+  },
+  "profiles": {
+    "individual_income_tax": {
+      "label": {
+        "en": "Individual income tax",
+        "de": "Einkommensteuer"
+      },
+      "shares": [
+        0.0,
+        0.0,
+        0.038095,
+        0.124762,
+        0.134286,
+        0.119048,
+        0.214286,
+        0.369523
+      ],
+      "quality": "estimate",
+      "sources": [
+        "cbo_household_income_2023_data",
+        "cbo_household_income_2023_figures",
+        "cbo_household_income_2021"
+      ],
+      "note": {
+        "en": "CBO's shares of individual income taxes in 2023 (Table 12). CBO counts refundable credits, such as the earned income, child and premium tax credits, as negative income tax, so the two lowest fifths pay less than nothing on balance: -4.2% and -0.9%. The budget books the part of those credits that exceeds a household's tax as spending, and this item holds only the receipts. Before refundable credits the two groups owed 1.4% and 3.1% of their income, $10.4B and $53.0B of CBO's $1,978.8B (refundable credits of 12.5% and 4.1% of income, report figure 13, with Table 9's net rates of -11.1% and -1.0%); their receipts lie between zero and these amounts. Here they count with zero, the lower bound, and the other groups' shares are scaled to add up to 100%: upper bounds, the top 1% at 37.0% at most and about 35.9% at least (38.8% of the net tax in CBO's figures).",
+        "de": "Die Anteile des CBO an der Einkommensteuer 2023 (Tabelle 12). Das CBO zählt erstattbare Steuergutschriften wie den Earned Income Tax Credit, die Kindergutschrift und den Zuschuss zur Krankenversicherung als negative Einkommensteuer; die beiden untersten Fünftel zahlen deshalb per Saldo weniger als nichts: −4,2 % und −0,9 %. Der Haushalt bucht den Teil dieser Gutschriften, der die Steuer eines Haushalts übersteigt, als Ausgabe, und dieser Posten enthält nur die Einnahmen. Vor den erstattbaren Gutschriften schuldeten die beiden Gruppen 1,4 % und 3,1 % ihres Einkommens, 10,4 und 53,0 Mrd. Dollar von 1.978,8 Mrd. Dollar beim CBO (Gutschriften von 12,5 % und 4,1 % des Einkommens, Abbildung 13 des Berichts, mit den Nettosätzen von −11,1 % und −1,0 % aus Tabelle 9); ihre Einnahmen liegen zwischen null und diesen Beträgen. Hier zählen sie mit null, der Untergrenze, und die Anteile der übrigen Gruppen sind auf 100 % hochgerechnet: Obergrenzen, das oberste 1 % mit höchstens 37,0 % und mindestens etwa 35,9 % (38,8 % der Nettosteuer beim CBO)."
+      }
+    },
+    "payroll_taxes": {
+      "label": {
+        "en": "Payroll taxes",
+        "de": "Sozialabgaben auf Löhne"
+      },
+      "shares": [
+        0.047094,
+        0.102204,
+        0.157315,
+        0.241484,
+        0.175351,
+        0.116232,
+        0.114228,
+        0.046092
+      ],
+      "quality": "derived",
+      "sources": [
+        "cbo_household_income_2023_data",
+        "cbo_household_income_2021"
+      ],
+      "note": {
+        "en": "CBO's shares of payroll taxes in 2023 (Table 12): Social Security, Medicare and the federal unemployment tax, employer's share included. CBO counts the employer's share as paid by the workers, because employers pay correspondingly lower wages. Social Security's tax stops at the wage cap and Medicare's does not; CBO gives one split for all payroll taxes together. Scaled from 99.8% to 100% (rounding, and households with negative income in no group).",
+        "de": "Die Anteile des CBO an den Sozialabgaben auf Löhne 2023 (Tabelle 12): Social Security, Medicare und die Arbeitslosenabgabe des Bundes, einschließlich des Arbeitgeberanteils. Das CBO rechnet den Arbeitgeberanteil den Beschäftigten zu, weil die Arbeitgeber entsprechend weniger Lohn zahlen. Die Abgabe für die Social Security endet an der Beitragsbemessungsgrenze, die für Medicare nicht; das CBO gibt eine Aufteilung für alle Lohnabgaben zusammen an. Von 99,8 % auf 100 % hochgerechnet (Rundung und Haushalte mit negativem Einkommen, die zu keiner Gruppe gehören)."
+      }
+    },
+    "excise_taxes": {
+      "label": {
+        "en": "Excise taxes",
+        "de": "Verbrauchsteuern"
+      },
+      "shares": [
+        0.106319,
+        0.142427,
+        0.181545,
+        0.21665,
+        0.1334,
+        0.082247,
+        0.084253,
+        0.053159
+      ],
+      "quality": "derived",
+      "sources": [
+        "cbo_household_income_2023_data",
+        "cbo_household_income_2021"
+      ],
+      "note": {
+        "en": "CBO's shares of excise taxes in 2023 (Table 12). CBO spreads excise taxes by what households consume of the taxed goods and services, mostly motor fuel, tobacco, alcohol and air travel, and excise taxes that businesses pay on what they buy by households' overall consumption.",
+        "de": "Die Anteile des CBO an den Verbrauchsteuern 2023 (Tabelle 12). Das CBO verteilt die Verbrauchsteuern danach, wie viel die Haushalte von den besteuerten Gütern und Leistungen verbrauchen, vor allem Kraftstoff, Tabak, Alkohol und Flugreisen, und Verbrauchsteuern, die Unternehmen auf ihre Vorleistungen zahlen, nach dem gesamten Verbrauch der Haushalte."
+      }
+    },
+    "customs_duties": {
+      "label": {
+        "en": "Customs duties",
+        "de": "Zölle"
+      },
+      "shares": [
+        0.106319,
+        0.142427,
+        0.181545,
+        0.21665,
+        0.1334,
+        0.082247,
+        0.084253,
+        0.053159
+      ],
+      "quality": "estimate",
+      "sources": [
+        "cbo_household_income_2023_data",
+        "cbo_household_income_2021",
+        "cbo_tariffs_2025_06",
+        "treasury_ota_distribution_2025",
+        "cbo_offset_2009"
+      ],
+      "note": {
+        "en": "No official table spreads customs duties over CBO's groups. Here they are spread like CBO's excise taxes, that is like the consumption of motor fuel, tobacco, alcohol and air travel (own assumption); imported goods are a broader basket. CBO notes that tariffs raise the prices of goods more than of services and that low-income households spend a larger share of their income on goods, but that the largest price increases are for durable goods such as household appliances and motor vehicles, which make up a larger share of consumption at the higher end (June 2025). The Treasury's Office of Tax Analysis spreads customs duties by labor and capital income instead: its excise taxes and customs duties together put 16.7% on the top 1%, against 5.3% here. A new tariff is spread net of the income and payroll taxes it displaces: CBO explains that offset by the lower incomes of those who bear the tariff (January 2009, pp. 2-3).",
+        "de": "Keine amtliche Tabelle verteilt die Zölle auf die Gruppen des CBO. Hier sind sie wie die Verbrauchsteuern des CBO verteilt, also wie der Verbrauch von Kraftstoff, Tabak, Alkohol und Flugreisen (eigene Annahme); eingeführte Waren sind ein breiterer Korb. Das CBO weist darauf hin, dass Zölle Waren stärker verteuern als Dienstleistungen und Haushalte mit niedrigem Einkommen einen größeren Teil ihres Einkommens für Waren ausgeben, die größten Preissteigerungen aber langlebige Güter wie Haushaltsgeräte und Autos treffen, die am oberen Ende einen größeren Teil des Verbrauchs ausmachen (Juni 2025). Das Büro für Steueranalyse des Finanzministeriums verteilt Zölle dagegen nach Arbeits- und Kapitaleinkommen: Seine Verbrauchsteuern und Zölle zusammen legen 16,7 % auf das oberste 1 %, hier sind es 5,3 %. Ein neuer Zoll wird abzüglich der Einkommen- und Lohnabgaben verteilt, die er verdrängt: Das CBO erklärt diesen Abzug mit den geringeren Einkommen derer, die den Zoll tragen (Januar 2009, S. 2–3)."
+      }
+    },
+    "estate_gift_taxes": {
+      "label": {
+        "en": "Estate and gift taxes",
+        "de": "Erbschaft- und Schenkungsteuer"
+      },
+      "shares": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.001014,
+        0.998986
+      ],
+      "quality": "estimate",
+      "sources": [
+        "treasury_ota_distribution_2025"
+      ],
+      "note": {
+        "en": "Treasury's Office of Tax Analysis, taxes of 2025 under the law as of June 2024 (Distribution Table 2025 001): it counts estate and gift taxes as borne by the deceased, ranked with their family's cash income, which includes gains not yet realized at death. Top 0.1%: 91.8%, 99th to 99.9th percentile: 6.7%, 95th to 99th: 0.1%, every other group nothing; families with negative income pay the remaining 1.3% and are left out here. Its bands have the same percentile bounds as CBO's groups but hold equal numbers of families, ranked by another income: cash income adjusted for family size.",
+        "de": "Büro für Steueranalyse des Finanzministeriums, Steuern 2025 nach dem Recht vom Juni 2024 (Verteilungstabelle 2025 001): Es rechnet Erbschaft- und Schenkungsteuer den Verstorbenen zu, eingeordnet nach dem Bareinkommen ihrer Familie, das beim Tod noch nicht realisierte Kursgewinne einschließt. Oberste 0,1 %: 91,8 %, 99. bis 99,9. Perzentil: 6,7 %, 95. bis 99.: 0,1 %, alle übrigen Gruppen nichts; Familien mit negativem Einkommen zahlen die übrigen 1,3 % und sind hier weggelassen. Seine Gruppen haben dieselben Perzentilgrenzen wie die des CBO, umfassen aber gleich viele Familien und sind nach einem anderen Einkommen geordnet: dem um die Familiengröße bereinigten Bareinkommen."
+      }
+    },
+    "top_1_percent": {
+      "label": {
+        "en": "Only the top 1%",
+        "de": "Nur das oberste 1 %"
+      },
+      "shares": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "quality": "derived",
+      "sources": [
+        "cbo_household_income_2023_data",
+        "hr_4280_2025"
+      ],
+      "note": {
+        "en": "For a tax on taxable income above $1,000,000 for single filers, heads of household and married people filing separately and $2,000,000 for couples filing jointly, in 2018 dollars (H.R. 4280, section 2(a) to (d)); indexed to 2023: about $1.16 million and $2.31 million. CBO's lowest income of the top 1% in 2023 is $549,000 for one person, $776,300 for two, $950,800 for three and $1,097,900 for four (Table 2), and taxable income is part of the income CBO ranks by: every return above the thresholds belongs to a household in the top 1%, except a return other than a joint return in a household of five or more.",
+        "de": "Für eine Steuer auf zu versteuerndes Einkommen über 1.000.000 Dollar bei Alleinveranlagten, Alleinerziehenden und getrennt veranlagten Ehepartnern und über 2.000.000 Dollar bei gemeinsam veranlagten Paaren, in Dollar von 2018 (H.R. 4280, Abschnitt 2(a) bis (d)); auf 2023 fortgeschrieben rund 1,16 und 2,31 Mio. Dollar. Die Untergrenze des obersten 1 % liegt beim CBO 2023 bei 549.000 Dollar für eine Person, 776.300 für zwei, 950.800 für drei und 1.097.900 für vier (Tabelle 2), und das zu versteuernde Einkommen ist Teil des Einkommens, nach dem das CBO ordnet: Jede Steuererklärung über den Schwellen gehört zu einem Haushalt im obersten 1 %, außer einer nicht gemeinsamen Erklärung in einem Haushalt mit fünf oder mehr Personen."
+      }
+    },
+    "wages_above_cap": {
+      "label": {
+        "en": "Wages above the Social Security wage cap",
+        "de": "Löhne über der Beitragsbemessungsgrenze der Social Security"
+      },
+      "shares": [
+        0.000135,
+        0.000117,
+        0.000436,
+        0.000864,
+        0.01214,
+        0.113283,
+        0.343888,
+        0.529137
+      ],
+      "quality": "estimate",
+      "sources": [
+        "irs_soi_w2_2023",
+        "irs_soi_2023_t12"
+      ],
+      "note": {
+        "en": "The split of wages above the cap of 2023 ($160,200), $1.49T, applied to the change from rates on wages above the pack's cap of $176,100; a change of the rate below the cap is spread like payroll taxes. The wages are taken by the adjusted gross income of the return they are on (IRS, Form W-2 statistics, Table 1.H). The income classes are cut where the same share of returns lies above as the group holds of households (IRS Table 1.2): the top 1% from $676,000 of AGI, the top 2 to 5% from $272,000, the top 6 to 10% from $183,000; within a class, the wages above the cap are assumed to follow AGI. Returns are not households and AGI is not adjusted for household size: a high earner in a large family sits lower in CBO's ranking, so the split is probably somewhat too concentrated at the top. A curve that taxes only the highest wages falls even more on the top.",
+        "de": "Die Aufteilung der Löhne über der Grenze von 2023 (160.200 Dollar), 1,49 Billionen Dollar, angewandt auf die Änderung durch Sätze auf Löhne über der Grenze des Datensatzes von 176.100 Dollar; eine Änderung des Satzes unter der Grenze ist wie die Lohnabgaben verteilt. Die Löhne sind nach dem Einkommen (AGI) der Steuererklärung geordnet, zu der sie gehören (IRS, Statistik der Lohnbescheinigungen W-2, Tabelle 1.H). Die Einkommensklassen werden dort geteilt, wo derselbe Anteil der Erklärungen darüber liegt, wie die Gruppe an den Haushalten hat (IRS, Tabelle 1.2): das oberste 1 % ab 676.000 Dollar AGI, die oberen 2 bis 5 % ab 272.000, die oberen 6 bis 10 % ab 183.000; innerhalb einer Klasse folgen die Löhne über der Grenze annahmegemäß dem AGI. Steuererklärungen sind keine Haushalte, und das AGI ist nicht um die Haushaltsgröße bereinigt: Wer gut verdient und eine große Familie hat, steht in der Rangfolge des CBO weiter unten; die Aufteilung ist daher wohl etwas zu stark auf die Spitze konzentriert. Eine Kurve, die nur die höchsten Löhne belastet, trifft die Spitze noch stärker."
+      }
+    },
+    "social_security_benefit_tax": {
+      "label": {
+        "en": "Income tax on Social Security benefits",
+        "de": "Einkommensteuer auf Renten der Social Security"
+      },
+      "shares": [
+        0.0,
+        0.037037,
+        0.239239,
+        0.365366,
+        0.171171,
+        0.086086,
+        0.077077,
+        0.024024
+      ],
+      "quality": "estimate",
+      "sources": [
+        "tpc_t24_0048",
+        "pwbm_ss_benefits_2025"
+      ],
+      "note": {
+        "en": "Tax Policy Center, excluding Social Security benefits from gross income, 2025 (Table T24-0048, preliminary, August 1, 2024), share of the total federal tax change: lowest fifth 0.0%, second 3.7%, middle 23.9%, fourth 36.5%, top 11 to 20% 17.1%, top 6 to 10% 8.6%, top 2 to 5% 7.7%, top 1% 2.4%; scaled from 99.9% to 100%. Its groups hold equal numbers of people, as CBO's do, but are tax units ranked by expanded cash income, and the law is that of July 2024, without the deduction for people aged 65 and over of July 2025, which lowers the tax on benefits. The Penn Wharton Budget Model (February 2025) gives a split that differs strongly: weighted with the groups' sizes, its averages put 53.7% on the top fifth, against 35.8% here.",
+        "de": "Tax Policy Center, Herausnahme der Renten der Social Security aus dem steuerpflichtigen Einkommen, 2025 (Tabelle T24-0048, vorläufig, 1. August 2024), Anteil an der gesamten Änderung der Bundessteuern: unterstes Fünftel 0,0 %, zweites 3,7 %, mittleres 23,9 %, viertes 36,5 %, obere 11 bis 20 % 17,1 %, obere 6 bis 10 % 8,6 %, obere 2 bis 5 % 7,7 %, oberstes 1 % 2,4 %; von 99,9 % auf 100 % hochgerechnet. Seine Gruppen umfassen wie die des CBO gleich viele Menschen, sind aber Steuereinheiten, geordnet nach einem erweiterten Bareinkommen, und das Recht ist das vom Juli 2024, ohne den Freibetrag für Menschen ab 65 vom Juli 2025, der die Steuer auf Renten senkt. Das Penn Wharton Budget Model (Februar 2025) kommt zu einer deutlich anderen Aufteilung: Mit der Größe der Gruppen gewichtet, legen seine Durchschnitte 53,7 % auf das oberste Fünftel, hier sind es 35,8 %."
+      }
+    }
+  },
+  "payers": [
+    {
+      "id": "companies",
+      "label": {
+        "en": "Companies",
+        "de": "Unternehmen"
+      },
+      "note": {
+        "en": "Taxes on the profits of corporations: the corporation income tax and the excise tax on stock buybacks. In the end people bear them, as owners through smaller profits, as employees through lower wages or as customers through higher prices; studies differ on the split, so they stand on their own here. CBO spreads the corporation income tax over households, 75% to owners of capital and 25% to workers; counted that way, the shares of all federal taxes in 2023 were: lowest fifth 0.1%, second 4.1%, middle 8.9%, fourth 17.0%, top 11 to 20% 14.8%, top 6 to 10% 11.6%, top 2 to 5% 17.3%, top 1% 26.1% (CBO, Table 12). Without the corporation income tax, computed from CBO's figures, the top 1% paid about 23.6% of the other federal taxes; the view shows shares of that second kind.",
+        "de": "Steuern auf die Gewinne von Kapitalgesellschaften: die Körperschaftsteuer und die Steuer auf Aktienrückkäufe. Am Ende tragen sie Menschen, als Eigentümer über kleinere Gewinne, als Beschäftigte über niedrigere Löhne oder als Kunden über höhere Preise; wie sich die Last aufteilt, ist umstritten, deshalb stehen sie hier für sich. Das CBO verteilt die Körperschaftsteuer auf die Haushalte, 75 % auf die Eigentümer von Kapital und 25 % auf die Beschäftigten; so gerechnet trugen 2023 vom gesamten Aufkommen der Bundessteuern: das unterste Fünftel 0,1 %, das zweite 4,1 %, das mittlere 8,9 %, das vierte 17,0 %, die oberen 11 bis 20 % 14,8 %, die oberen 6 bis 10 % 11,6 %, die oberen 2 bis 5 % 17,3 %, das oberste 1 % 26,1 % (CBO, Tabelle 12). Ohne die Körperschaftsteuer, aus den Zahlen des CBO berechnet, zahlte das oberste 1 % etwa 23,6 % der übrigen Bundessteuern; die Ansicht zeigt Anteile dieser zweiten Art."
+      },
+      "sources": [
+        "cbo_household_income_2023_data",
+        "cbo_household_income_2021"
+      ]
+    },
+    {
+      "id": "employers",
+      "label": {
+        "en": "Employers",
+        "de": "Arbeitgeber"
+      },
+      "note": {
+        "en": "The states' unemployment taxes on employers, deposited in the federal Unemployment Trust Fund: $45.4B of the $54.0B of unemployment insurance receipts in fiscal year 2025 (OMB). CBO leaves them out of federal taxes and spreads them over no one, so they are shown as paid by employers. The federal payroll taxes, the employer's share and the federal unemployment tax included, are spread over the income groups as paid by the workers, as CBO does.",
+        "de": "Die Arbeitslosenabgaben der Bundesstaaten auf die Arbeitgeber, eingezahlt in den Arbeitslosenversicherungsfonds des Bundes: 45,4 der 54,0 Mrd. Dollar Einnahmen der Arbeitslosenversicherung im Haushaltsjahr 2025 (OMB). Das CBO zählt sie nicht zu den Bundessteuern und verteilt sie auf niemanden; sie erscheinen daher als von den Arbeitgebern gezahlt. Die Lohnabgaben des Bundes, einschließlich des Arbeitgeberanteils und der Arbeitslosenabgabe des Bundes, sind wie beim CBO als Last der Beschäftigten auf die Einkommensgruppen verteilt."
+      },
+      "sources": [
+        "omb_pbd_receipts_fy2027",
+        "cbo_household_income_2021"
+      ]
+    },
+    {
+      "id": "wealth_holders",
+      "label": {
+        "en": "Households worth more than $50 million",
+        "de": "Haushalte mit mehr als 50 Mio. Dollar Vermögen"
+      },
+      "note": {
+        "en": "A tax on net worth above $50 million is paid by the few households above that line. No source places them in CBO's income groups: the Federal Reserve's accounts of household wealth give wealth by wealth group and by income group, but not the households above $50 million by income. They are shown on a line of their own.",
+        "de": "Eine Steuer auf Vermögen über 50 Mio. Dollar zahlen die wenigen Haushalte über dieser Grenze. Keine Quelle ordnet sie den Einkommensgruppen des CBO zu: Die Vermögensrechnung der Notenbank gibt das Vermögen nach Vermögensgruppen und nach Einkommensgruppen an, aber nicht die Haushalte über 50 Mio. Dollar nach dem Einkommen. Sie erscheinen in einer eigenen Zeile."
+      },
+      "sources": [
+        "fed_dfa"
+      ]
+    },
+    {
+      "id": "unassigned",
+      "label": {
+        "en": "Households, no group assigned",
+        "de": "Haushalte, keiner Gruppe zugeordnet"
+      },
+      "note": {
+        "en": "Changes of measures that do not fall on all payers of a tax alike and for whose spread over the income groups there is no source. The measure says in a sentence who pays.",
+        "de": "Änderungen durch Maßnahmen, die nicht alle Zahler einer Steuer gleich treffen und für deren Verteilung auf die Einkommensgruppen keine Quelle vorliegt. Die Maßnahme sagt in einem Satz, wer zahlt."
+      }
+    },
+    {
+      "id": "not_a_tax",
+      "label": {
+        "en": "No taxes: Federal Reserve earnings, fees, fines",
+        "de": "Keine Steuern: Gewinn der Notenbank, Gebühren, Bußgelder"
+      },
+      "note": {
+        "en": "Miscellaneous receipts: what the Federal Reserve pays to the Treasury, and fees, fines and other receipts. Nobody pays them as a tax.",
+        "de": "Sonstige Einnahmen: was die Notenbank an das Finanzministerium abführt, dazu Gebühren, Bußgelder und übrige Einnahmen. Niemand zahlt sie als Steuer."
+      },
+      "sources": [
+        "omb_pbd_receipts_fy2027"
+      ]
+    }
+  ],
+  "nodes": {
+    "rev.individual_income": {
+      "profile": "individual_income_tax"
+    },
+    "rev.corporate_income": {
+      "payer": "companies"
+    },
+    "rev.social_insurance": {
+      "profile": "payroll_taxes",
+      "note": {
+        "en": "Social Security and Medicare taxes, railroad retirement taxes and federal employees' retirement contributions. CBO names Social Security, Medicare and unemployment insurance; railroad retirement taxes and federal employees' contributions ($15.2B in fiscal year 2025) are spread the same way (own assumption).",
+        "de": "Abgaben für Social Security und Medicare, Beiträge zur Eisenbahnerrente und Pensionsbeiträge der Bundesbediensteten. Das CBO nennt Social Security, Medicare und Arbeitslosenversicherung; Eisenbahnerrente und Pensionsbeiträge der Bundesbediensteten (15,2 Mrd. Dollar im Haushaltsjahr 2025) sind genauso verteilt (eigene Annahme)."
+      }
+    },
+    "rev.social_insurance.unemployment": {
+      "profile": "payroll_taxes",
+      "coverage": 0.160336,
+      "payer": "employers",
+      "note": {
+        "en": "The federal unemployment tax (FUTA, $8.6B) and the railroad unemployment deposits ($34M) are spread like payroll taxes; the states' deposits ($45.4B) go to employers.",
+        "de": "Die Arbeitslosenabgabe des Bundes (FUTA, 8,6 Mrd. Dollar) und die Einzahlungen der Eisenbahner-Arbeitslosenversicherung (34 Mio. Dollar) sind wie die Lohnabgaben verteilt; die Einzahlungen der Bundesstaaten (45,4 Mrd. Dollar) gehen an die Arbeitgeber."
+      }
+    },
+    "rev.excise": {
+      "profile": "excise_taxes"
+    },
+    "rev.excise.stock_buybacks": {
+      "payer": "companies",
+      "note": {
+        "en": "A tax that corporations pay on the repurchase of their own shares: it rests on what they do with their profits. CBO's rule for excise taxes, spreading them by what households consume, is not used here.",
+        "de": "Eine Steuer, die Kapitalgesellschaften auf den Rückkauf eigener Aktien zahlen: Sie hängt daran, was sie mit ihren Gewinnen tun. Die Regel des CBO für Verbrauchsteuern, die Verteilung nach dem Verbrauch der Haushalte, wird hier nicht angewandt."
+      }
+    },
+    "rev.customs": {
+      "profile": "customs_duties"
+    },
+    "rev.estate_gift": {
+      "profile": "estate_gift_taxes"
+    },
+    "rev.wealth_tax": {
+      "payer": "wealth_holders"
+    },
+    "rev.miscellaneous": {
+      "payer": "not_a_tax"
+    }
+  },
+  "scopes": [
+    {
+      "id": "taxes",
+      "label": {
+        "en": "All federal taxes",
+        "de": "Alle Bundessteuern"
+      },
+      "nodes": [
+        "rev.individual_income",
+        "rev.social_insurance",
+        "rev.excise",
+        "rev.customs",
+        "rev.estate_gift",
+        "rev.wealth_tax",
+        "rev.corporate_income"
+      ],
+      "note": {
+        "en": "Individual income tax, payroll taxes, excise taxes, customs duties, estate and gift taxes, and the taxes on company profits. Payroll taxes count as taxes, as in CBO's figures. The shares are of the part that households pay; what companies, employers through the states' unemployment taxes, and the largest fortunes pay is shown on lines of its own.",
+        "de": "Einkommensteuer, Lohnabgaben, Verbrauchsteuern, Zölle, Erbschaft- und Schenkungsteuer und die Steuern auf Unternehmensgewinne. Die Lohnabgaben zählen wie beim CBO als Steuern. Die Anteile beziehen sich auf den Teil, den die Haushalte zahlen; was Unternehmen, Arbeitgeber mit den Arbeitslosenabgaben der Bundesstaaten und die größten Vermögen zahlen, steht in eigenen Zeilen."
+      }
+    },
+    {
+      "id": "income_tax",
+      "label": {
+        "en": "Individual income tax",
+        "de": "Einkommensteuer"
+      },
+      "nodes": [
+        "rev.individual_income"
+      ],
+      "note": {
+        "en": "A figure often quoted. In CBO's figures for 2023 the top 1% paid 38.8% of the individual income tax after refundable credits; here 37.0% of the receipts, because the two lowest fifths, who receive more in credits than they pay, count with zero.",
+        "de": "Eine oft genannte Zahl. Nach den Zahlen des CBO für 2023 zahlte das oberste 1 % 38,8 % der Einkommensteuer nach erstattbaren Gutschriften; hier sind es 37,0 % der Einnahmen, weil die beiden untersten Fünftel, die mehr an Gutschriften erhalten, als sie zahlen, mit null zählen."
+      }
+    }
+  ],
+  "note": {
+    "en": "Who pays rests on the Congressional Budget Office's distribution of household income for 2023 (September 2026), applied to the taxes of fiscal year 2025. Its conventions decide the result: the individual income tax falls on those who owe it; the federal payroll taxes, the employer's share and the federal unemployment tax included, on the workers; excise taxes and, here, customs duties on households according to what they consume; estate and gift taxes on the deceased (Treasury). The states' unemployment taxes, which CBO leaves out of federal taxes, are shown as paid by employers, and taxes on company profits as paid by companies. Refundable credits above a household's tax are spending in the budget and not part of this view, and changes of spending are never counted. The shares are those of their sources' years, mostly 2023, and stay fixed; a measure's change is spread by a profile of its own where a source gives one, otherwise in proportion to who pays the tax today.",
+    "de": "Wer zahlt, beruht auf der Verteilung der Haushaltseinkommen 2023 durch das Haushaltsbüro des Kongresses (CBO, September 2026), angewandt auf die Steuern des Haushaltsjahres 2025. Seine Konventionen bestimmen das Ergebnis: Die Einkommensteuer trägt, wer sie schuldet; die Lohnabgaben des Bundes einschließlich des Arbeitgeberanteils und der Arbeitslosenabgabe des Bundes tragen die Beschäftigten; Verbrauchsteuern und hier auch Zölle tragen die Haushalte nach ihrem Verbrauch; Erbschaft- und Schenkungsteuer die Verstorbenen (Finanzministerium). Die Arbeitslosenabgaben der Bundesstaaten, die das CBO nicht zu den Bundessteuern zählt, erscheinen als von den Arbeitgebern gezahlt, Steuern auf Unternehmensgewinne als von Unternehmen gezahlt. Erstattbare Gutschriften über der Steuer eines Haushalts sind im Haushalt Ausgaben und nicht Teil dieser Ansicht; Änderungen der Ausgaben werden nie gezählt. Die Anteile sind die der Jahre ihrer Quellen, meist 2023, und bleiben fest; die Änderung einer Maßnahme wird nach einem eigenen Profil verteilt, wo eine Quelle eines liefert, sonst im Verhältnis dazu, wer die Steuer heute zahlt."
+  }
+}

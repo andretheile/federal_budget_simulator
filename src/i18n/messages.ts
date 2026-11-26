@@ -6,6 +6,7 @@
 import type { Catch, LevelId, PolicyTopic, Quality, WarningCode } from "../engine/index.ts";
 import type { LegalMessages } from "./legal/messages.ts";
 import type { DebtMessages } from "./debt/messages.ts";
+import type { WhoPaysMessages } from "./whoPays/messages.ts";
 
 export type IndicatorId = "gdp" | "population" | "households" | "grossDebt";
 
@@ -520,4 +521,6 @@ export interface Messages {
   legal: LegalMessages;
   /** The debt and interest projection (src/i18n/debt/). */
   debt: DebtMessages;
+  /** Who pays the revenue, by income group (src/i18n/whoPays/). */
+  whoPays: WhoPaysMessages;
 }

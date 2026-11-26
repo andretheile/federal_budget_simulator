@@ -39,6 +39,7 @@ import {
   simulatePolicy,
   SUMMARY_FACE_LENGTH,
   type Catch,
+  type CountryPack,
   type CurvePoint,
   type EffectResult,
   type LevelFilter,
@@ -60,6 +61,8 @@ import { BlockerIcon, ChevronDown, InfoIcon, ShiftIcon, WarningIcon } from "./ic
 import { GroupsControl, NumberControl } from "./ParamControls.tsx";
 import { Delta, QualityBadge, SourceList, Switch } from "./primitives.tsx";
 import { widest } from "./Scoreboard.tsx";
+import { stripFor, WhoPaysStrip } from "./WhoPays.tsx";
+import type { Strip } from "../app/whoPaysModel.ts";
 
 /**
  * The line under a card's figure on when the debt projection has the measure. For a one-off the
@@ -223,6 +226,8 @@ export const PolicyCard = memo(function PolicyCard({
     () => (level === "all" ? alone : simulatePolicy(pack, policy.id, params, "all")),
     [pack, policy.id, params, level, alone],
   );
+  // Who pays the measure's change of revenue, by income group: for a pack with incidence.json.
+  const strip = useMemo(() => stripFor(pack, whole, noiseLevel(baseline)), [pack, whole, baseline]);
   if (!alone || !whole) return null;
 
   const noise = noiseLevel(baseline);
@@ -392,6 +397,9 @@ export const PolicyCard = memo(function PolicyCard({
           )}
         </div>
 
+        {/* Switched on, the face says who pays the change: a line of columns, one per income group. */}
+        {enabled && strip && <WhoPaysStrip strip={strip} compact />}
+
         {curves.map((setting) => (
           <CurveEntry
             key={setting.param.id}
@@ -467,6 +475,7 @@ export const PolicyCard = memo(function PolicyCard({
               phase={phase}
               goalHint={goalHint}
               goalHeading={goalHeading}
+              strip={strip}
               onParam={onParam}
               onShowNode={onShowNode}
             />
@@ -660,6 +669,8 @@ interface PolicyDetailsProps {
   goalHint?: GoalHint;
   /** The heading of that section, which takes the focus when the face's "Why?" opened the details. */
   goalHeading: RefObject<HTMLHeadingElement | null>;
+  /** Who pays the measure's change of revenue, if the pack can say. */
+  strip?: Strip;
   onParam(id: string, param: string, value: ParamValue): void;
   onShowNode(nodeId: string): void;
 }
@@ -678,6 +689,7 @@ function PolicyDetails({
   phase,
   goalHint,
   goalHeading,
+  strip,
   onParam,
   onShowNode,
 }: PolicyDetailsProps) {
@@ -887,6 +899,14 @@ function PolicyDetails({
         {levels.length > 1 && <LevelSplit levels={levels} noise={noise} current={level} />}
       </section>
 
+      {strip && (
+        <section className="policy__section">
+          <h5>{t.whoPays.detailTitle}</h5>
+          <WhoPaysStrip strip={strip} />
+          <SourceList ids={incidenceSources(pack, policy)} />
+        </section>
+      )}
+
       <section className="policy__section">
         <h5>{t.policies.catches}</h5>
         {catches.length === 0 ? (
@@ -1010,6 +1030,13 @@ function PolicyDetails({
       )}
     </>
   );
+}
+
+/** The sources of the profiles a measure's effects name in `incidence`, each once. */
+function incidenceSources(pack: CountryPack, policy: Policy): string[] {
+  const profiles = pack.incidence?.profiles ?? {};
+  const ids = policy.effects.flatMap((effect) => [effect.incidence, effect.shift?.incidence]);
+  return [...new Set(ids.flatMap((id) => (id && Object.hasOwn(profiles, id) ? profiles[id].sources : [])))];
 }
 
 function capitalize(text: string, language: string): string {

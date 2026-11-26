@@ -2285,6 +2285,7 @@
         {
           "type": "add",
           "target": "rev.taxes.income.soli",
+          "incidence": "soli_income_tax",
           "amount": {
             "param": "earners",
             "scale": 1372051272.7272727,
@@ -2309,6 +2310,7 @@
         {
           "type": "add",
           "target": "rev.taxes.income.soli",
+          "incidence": "soli_exempt",
           "amount": {
             "param": "exempt",
             "scale": 2201818181.82
@@ -2330,6 +2332,7 @@
         {
           "type": "add",
           "target": "rev.taxes.income.soli",
+          "incidence": "soli_capital_corporate",
           "amount": {
             "param": "capital_corporate",
             "scale": 925093090.9090909,
@@ -2458,6 +2461,7 @@
         {
           "type": "add",
           "target": "rev.taxes.income.capital_income",
+          "incidence": "flat_tax_rise",
           "amount": {
             "param": "rate",
             "scale": 511000000,
@@ -2569,6 +2573,10 @@
         {
           "type": "add",
           "target": "rev.taxes.property.inheritance",
+          "incidenceNote": {
+            "de": "Mehr zahlt, wer Betriebe oder Unternehmensanteile erbt oder geschenkt bekommt: 2024 blieben in 26.508 Fällen 17,1 Mrd. Euro steuerfrei; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Those who inherit or are given firms or company shares pay more: in 2024, €17.1bn stayed tax-free in 26,508 cases; no source places them in income groups."
+          },
           "amount": {
             "param": "share",
             "scale": 88000000.0
@@ -2579,7 +2587,8 @@
             "high": 1.2
           },
           "sources": [
-            "bt_drs_21_1600"
+            "bt_drs_21_1600",
+            "bmf_datensammlung_steuerpolitik_2026"
           ],
           "note": {
             "de": "Die Bundesregierung beziffert die Steuermindereinnahmen im Subventionsbericht auf 8,8 Mrd. Euro pro Jahr (Schätzung für 2023 bis 2026). Statische Rechnung; die Spanne berücksichtigt Ausweichreaktionen wie vorgezogene oder gestaltete Übertragungen und die starken Schwankungen von Jahr zu Jahr.",
@@ -2690,6 +2699,7 @@
         {
           "type": "add",
           "target": "rev.taxes.income.personal",
+          "incidence": "splitting",
           "amount": {
             "param": "progression",
             "scale": 125440000
@@ -2713,6 +2723,7 @@
         {
           "type": "add",
           "target": "rev.taxes.income.personal",
+          "incidence": "splitting",
           "amount": {
             "param": "allowance",
             "scale": 117600000
@@ -2926,6 +2937,7 @@
         {
           "type": "add",
           "target": "rev.taxes.income.soli",
+          "incidence": "companies",
           "amount": {
             "param": "rate",
             "scale": 218286725,
@@ -3522,6 +3534,11 @@
         {
           "type": "add",
           "target": "rev.taxes.property.real_estate_transfer",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Weniger zahlen Menschen, die eine Wohnung oder ein Haus kaufen, um selbst darin zu wohnen; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "People who buy a flat or a house to live in pay less; no source places them in income groups."
+          },
           "amount": {
             "param": "first",
             "scale": -52275000
@@ -3548,6 +3565,11 @@
         {
           "type": "add",
           "target": "rev.taxes.property.real_estate_transfer",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Weniger zahlen Menschen, die eine Wohnung oder ein Haus kaufen, um selbst darin zu wohnen; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "People who buy a flat or a house to live in pay less; no source places them in income groups."
+          },
           "amount": {
             "param": "further",
             "scale": -22403571
@@ -4201,6 +4223,11 @@
         {
           "type": "add",
           "target": "rev.taxes.income.personal.wage_tax",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Weniger Lohnsteuer zahlen die Pensionäre, deren Pensionen sinken; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Retired civil servants, whose pensions fall, pay less wage tax; no source places them in income groups."
+          },
           "amount": {
             "param": "rate",
             "scale": 247986062.71777004,
@@ -4799,6 +4826,11 @@
         {
           "type": "add",
           "target": "rev.taxes.income.personal.wage_tax",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Mehr Lohnsteuer zahlen Beschäftigte, die einen Dienstwagen auch privat fahren, meist mit hohem Gehalt. Nach Agora Verkehrswende und Öko-Institut (2021) kommt rund die Hälfte des Vorteils dem reichsten Fünftel zugute; auf die Gruppen hier teilt ihn keine Quelle auf.",
+            "en": "Employees who also use a company car privately, mostly on high salaries, pay more wage tax. According to Agora Verkehrswende and Öko-Institut (2021), about half of the advantage goes to the richest fifth; no source splits it over the groups here."
+          },
           "amount": {
             "param": "company_car",
             "scale": 31000000.0
@@ -4809,7 +4841,8 @@
             "high": 1.7
           },
           "sources": [
-            "uba_umweltschaedliche_subventionen_2021"
+            "uba_umweltschaedliche_subventionen_2021",
+            "agora_dienstwagen_2021"
           ],
           "note": {
             "de": "Umweltbundesamt: mindestens 3,1 Mrd. Euro im Jahr 2018, gemessen an einer vollen Besteuerung des geldwerten Vorteils. Die dort zitierte Studie nennt je nach angenommenem privaten Nutzungsanteil 3,1 bis 5,3 Mrd. Euro; daran orientiert sich die obere Grenze.",
@@ -4819,6 +4852,11 @@
         {
           "type": "add",
           "target": "rev.taxes.consumption.energy",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Mehr zahlen Fluggesellschaften und, soweit sie die Steuer weitergeben, ihre Fluggäste, unter ihnen Reisende aus dem Ausland; keine Quelle ordnet das Einkommensgruppen zu.",
+            "en": "Airlines pay more, and their passengers as far as the airlines pass the tax on, among them travellers from abroad; no source places this in income groups."
+          },
           "amount": {
             "param": "kerosene_domestic",
             "scale": 4020000.0
@@ -4839,6 +4877,11 @@
         {
           "type": "add",
           "target": "rev.taxes.consumption.energy",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Mehr zahlen Fluggesellschaften und, soweit sie die Steuer weitergeben, ihre Fluggäste, unter ihnen Reisende aus dem Ausland; keine Quelle ordnet das Einkommensgruppen zu.",
+            "en": "Airlines pay more, and their passengers as far as the airlines pass the tax on, among them travellers from abroad; no source places this in income groups."
+          },
           "amount": {
             "param": "aviation_international",
             "scale": 77730000.0
@@ -4859,6 +4902,11 @@
         {
           "type": "add",
           "target": "rev.taxes.consumption.vat.standard.other",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Mehr zahlen Fluggesellschaften und, soweit sie die Steuer weitergeben, ihre Fluggäste, unter ihnen Reisende aus dem Ausland; keine Quelle ordnet das Einkommensgruppen zu.",
+            "en": "Airlines pay more, and their passengers as far as the airlines pass the tax on, among them travellers from abroad; no source places this in income groups."
+          },
           "amount": {
             "param": "aviation_international",
             "scale": 39970000.0
@@ -6101,6 +6149,11 @@
         {
           "type": "add",
           "target": "rev.taxes.income.personal",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Steuern ändern sich bei den langjährig Versicherten, die später in Rente gehen; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Taxes change for the long-insured who retire later; no source places them in income groups."
+          },
           "amount": {
             "param": "scope",
             "scale": -3756802
@@ -6123,6 +6176,10 @@
         {
           "type": "add",
           "target": "rev.contributions.non_employed",
+          "incidenceNote": {
+            "de": "Es ändern sich die Beiträge zur Kranken- und Pflegeversicherung, die Rentner auf ihre Rente zahlen; die Statistik führt sie in einer Zeile mit den Beiträgen, die Sozialkassen für Leistungsbezieher zahlen, und keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "The health and long-term care contributions that pensioners pay on their pension change; the statistics carry them in one line with the contributions that social insurance funds pay for benefit recipients, and no source places them in income groups."
+          },
           "amount": {
             "param": "scope",
             "scale": -3117346
@@ -6318,6 +6375,10 @@
         {
           "type": "add",
           "target": "rev.contributions.non_employed",
+          "incidenceNote": {
+            "de": "Es ändern sich die Beiträge zur Kranken- und Pflegeversicherung, die Rentner auf ihre Rente zahlen; die Statistik führt sie in einer Zeile mit den Beiträgen, die Sozialkassen für Leistungsbezieher zahlen, und keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "The health and long-term care contributions that pensioners pay on their pension change; the statistics carry them in one line with the contributions that social insurance funds pay for benefit recipients, and no source places them in income groups."
+          },
           "amount": {
             "param": "age",
             "scale": -1182000000,
@@ -6340,6 +6401,11 @@
         {
           "type": "add",
           "target": "rev.taxes.income.personal.assessed",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Steuern und Beiträge ändern sich bei den Älteren, die länger arbeiten oder später Rente beziehen; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Taxes and contributions change for older people who work longer or draw their pension later; no source places them in income groups."
+          },
           "amount": {
             "param": "age",
             "scale": -1998000000,
@@ -6362,6 +6428,11 @@
         {
           "type": "add",
           "target": "rev.contributions.wages.pension",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Steuern und Beiträge ändern sich bei den Älteren, die länger arbeiten oder später Rente beziehen; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Taxes and contributions change for older people who work longer or draw their pension later; no source places them in income groups."
+          },
           "amount": {
             "param": "age",
             "scale": 3306000000,
@@ -6386,6 +6457,11 @@
         {
           "type": "add",
           "target": "rev.contributions.wages.health.compulsory",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Steuern und Beiträge ändern sich bei den Älteren, die länger arbeiten oder später Rente beziehen; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Taxes and contributions change for older people who work longer or draw their pension later; no source places them in income groups."
+          },
           "amount": {
             "param": "age",
             "scale": 2892000000,
@@ -6408,6 +6484,11 @@
         {
           "type": "add",
           "target": "rev.contributions.wages.other",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Steuern und Beiträge ändern sich bei den Älteren, die länger arbeiten oder später Rente beziehen; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Taxes and contributions change for older people who work longer or draw their pension later; no source places them in income groups."
+          },
           "amount": {
             "param": "age",
             "scale": 1102000000,
@@ -6430,6 +6511,11 @@
         {
           "type": "add",
           "target": "rev.taxes.income.personal.wage_tax",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Steuern und Beiträge ändern sich bei den Älteren, die länger arbeiten oder später Rente beziehen; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Taxes and contributions change for older people who work longer or draw their pension later; no source places them in income groups."
+          },
           "amount": {
             "param": "age",
             "scale": 3910000000,
@@ -6829,6 +6915,10 @@
         {
           "type": "set",
           "target": "rev.taxes.consumption.vat.reduced.food",
+          "incidenceNote": {
+            "de": "Gerechnet ist, dass die Käufer die ganze Änderung tragen; bei der befristeten Senkung 2020 wurden bei Lebensmitteln 70 bis 90 % weitergegeben.",
+            "en": "Counted as if buyers bore the whole change; with the temporary cut of 2020, 70 to 90% was passed on for food."
+          },
           "amount": {
             "param": "rate",
             "scale": 2326666666.714286
@@ -6940,6 +7030,10 @@
         {
           "type": "set",
           "target": "rev.taxes.consumption.vat.standard.restaurants",
+          "incidenceNote": {
+            "de": "Gerechnet ist, dass die Gäste die ganze Änderung tragen; nach dem Finanzministerium kommt eine Senkung nur zu rund 20 % bei ihnen an, der Rest bleibt bei den Betrieben.",
+            "en": "Counted as if guests bore the whole change; by the finance ministry's assumption only about 20% of a cut reaches them, the rest stays with the restaurants."
+          },
           "amount": {
             "param": "restaurants",
             "scale": 283333333.31578946
@@ -7281,6 +7375,10 @@
         {
           "type": "add",
           "target": "rev.taxes.consumption.energy",
+          "incidenceNote": {
+            "de": "Gerechnet ist, dass die Käufer die ganze Änderung tragen; beim Tankrabatt 2026 kamen nach den Wissenschaftlichen Diensten des Bundestags im Schnitt etwa 78 bis 83 % an, nach DIW und ifo nur rund zwei Drittel. Verteilt ist die Steuer wie alle Energiesteuern, die auch Heizung und Strom enthalten und ärmere Haushalte stärker belasten; Sprit allein belastet untere und mittlere Einkommen nach dem DIW nahezu proportional, Diesel sogar leicht progressiv. Auch Unternehmen tanken: Von der Senkung 2022 gingen 0,9 von 3,2 Mrd. Euro an Wirtschaft und Verwaltung.",
+            "en": "Counted as if buyers bore the whole change; with the fuel tax cut of 2026, by the Bundestag's research service about 78 to 83% reached them on average, by DIW and ifo only about two thirds. The tax is spread like all energy taxes, which also hold heating and electricity and weigh more on poorer households; fuel alone burdens low and middle incomes nearly in proportion by the DIW, diesel even slightly progressively. Companies buy fuel too: of the 2022 cut, €0.9bn of €3.2bn went to business and administration."
+          },
           "amount": {
             "param": "petrol",
             "scale": 233300000.0,
@@ -7295,7 +7393,8 @@
             "destatis_energiesteuer",
             "energiestg_2",
             "bt_drs_20_1741",
-            "bt_wd_tankrabatt_2026"
+            "bt_wd_tankrabatt_2026",
+            "diw_wb_17_2022"
           ],
           "note": {
             "de": "Ein Cent je Liter Benzin entspricht 233 Mio. Euro im Jahr. Herleitung: Laut Statistischem Bundesamt wurde Benzin 2025 mit 15,5 Mrd. Euro versteuert, 1,5 % mehr als 2024; geteilt durch den Steuersatz von 65,45 Cent ergibt das für 2024 rund 23,3 Mrd. Liter. Statisch gerechnet. Die Spanne von 15 % nach beiden Seiten deckt Verbrauchsänderungen und Vorratskäufe ab: Für die Senkungen von 2022 und 2026 nannte die Bundesregierung Steuerausfälle, die 2 bis 14 % über dieser Rechnung liegen.",
@@ -7305,6 +7404,10 @@
         {
           "type": "add",
           "target": "rev.taxes.consumption.energy",
+          "incidenceNote": {
+            "de": "Gerechnet ist, dass die Käufer die ganze Änderung tragen; beim Tankrabatt 2026 kamen nach den Wissenschaftlichen Diensten des Bundestags im Schnitt etwa 78 bis 83 % an, nach DIW und ifo nur rund zwei Drittel. Verteilt ist die Steuer wie alle Energiesteuern, die auch Heizung und Strom enthalten und ärmere Haushalte stärker belasten; Sprit allein belastet untere und mittlere Einkommen nach dem DIW nahezu proportional, Diesel sogar leicht progressiv. Auch Unternehmen tanken: Von der Senkung 2022 gingen 0,9 von 3,2 Mrd. Euro an Wirtschaft und Verwaltung.",
+            "en": "Counted as if buyers bore the whole change; with the fuel tax cut of 2026, by the Bundestag's research service about 78 to 83% reached them on average, by DIW and ifo only about two thirds. The tax is spread like all energy taxes, which also hold heating and electricity and weigh more on poorer households; fuel alone burdens low and middle incomes nearly in proportion by the DIW, diesel even slightly progressively. Companies buy fuel too: of the 2022 cut, €0.9bn of €3.2bn went to business and administration."
+          },
           "amount": {
             "param": "diesel",
             "scale": 385300000.0,
@@ -7319,7 +7422,8 @@
             "destatis_energiesteuer",
             "energiestg_2",
             "bt_drs_20_1741",
-            "bt_wd_tankrabatt_2026"
+            "bt_wd_tankrabatt_2026",
+            "diw_wb_17_2022"
           ],
           "note": {
             "de": "Ein Cent je Liter Diesel entspricht 385 Mio. Euro im Jahr. Herleitung: Laut Statistischem Bundesamt wurde Diesel 2025 mit 17,8 Mrd. Euro versteuert, 1,8 % weniger als 2024; geteilt durch den Steuersatz von 47,04 Cent ergibt das für 2024 rund 38,5 Mrd. Liter. Statisch gerechnet, Spanne wie beim Benzin.",
@@ -8519,6 +8623,11 @@
         {
           "type": "schedule",
           "target": "rev.contributions.wages.pension",
+          "incidenceAbove": { "from": 90600, "incidence": "unassigned" },
+          "incidenceNote": {
+            "de": "Was eine höhere Grenze auf Löhne über der heutigen Grenze bringt, ist keiner Gruppe zugeordnet; keine Quelle ordnet diese Löhne Einkommensgruppen zu. Ein anderer Satz bis zur heutigen Grenze ist wie die Beiträge auf Löhne verteilt.",
+            "en": "What a higher ceiling raises on wages above today's ceiling is placed in no group; no source places those wages in income groups. A different rate up to today's ceiling is spread like the contributions on wages."
+          },
           "distribution": "gross_earnings",
           "baseline": {
             "points": [
@@ -8560,6 +8669,7 @@
           },
           "shift": {
             "to": "rev.taxes.income.personal.wage_tax",
+            "incidence": "unassigned",
             "ratio": 0.2,
             "uncertainty": {
               "low": 0.5,
@@ -8689,6 +8799,12 @@
         {
           "type": "add",
           "target": "rev.contributions.wages.pension",
+          "incidence": "unassigned",
+          "incidenceShare": { "share": { "param": "employer_share", "scale": 0.01 }, "incidence": "state" },
+          "incidenceNote": {
+            "de": "Den Arbeitgeberanteil zahlt der Staat selbst (Grundeinstellung: die Hälfte). Mehr zahlen die Beamten und die anderen bisher nicht rentenversicherten Beschäftigten mit ihrem eigenen Anteil; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "The state pays the employer's part itself (by default half). Civil servants and the other employees not covered by statutory pension insurance so far pay more with their own part; no source places them in income groups."
+          },
           "amount": 21854519900,
           "quality": "estimate",
           "uncertainty": {
@@ -8707,6 +8823,7 @@
           },
           "shift": {
             "to": "rev.taxes.income.personal.wage_tax",
+            "incidence": "unassigned",
             "ratio": {
               "param": "employer_share",
               "scale": -0.003,
@@ -8987,6 +9104,11 @@
         {
           "type": "schedule",
           "target": "rev.contributions.wages.health",
+          "incidenceAbove": { "from": 62100, "incidence": "unassigned" },
+          "incidenceNote": {
+            "de": "Was eine höhere Grenze auf Löhne über der heutigen Grenze bringt, ist keiner Gruppe zugeordnet; keine Quelle ordnet diese Löhne Einkommensgruppen zu. Ein anderer Satz bis zur heutigen Grenze ist wie die Beiträge auf Löhne verteilt.",
+            "en": "What a higher ceiling raises on wages above today's ceiling is placed in no group; no source places those wages in income groups. A different rate up to today's ceiling is spread like the contributions on wages."
+          },
           "distribution": "gross_earnings",
           "baseline": {
             "points": [
@@ -9030,6 +9152,7 @@
           "yield": 0.8,
           "shift": {
             "to": "rev.taxes.income.personal.wage_tax",
+            "incidence": "unassigned",
             "ratio": 0.192,
             "uncertainty": {
               "low": 0.5,
@@ -9144,6 +9267,11 @@
         {
           "type": "add",
           "target": "rev.contributions.wages.health",
+          "incidence": "unassigned",
+          "incidenceNote": {
+            "de": "Mehr zahlen die bisher privat Versicherten, unter ihnen Beamte, Selbständige und Gutverdienende; keine Quelle ordnet sie Einkommensgruppen zu.",
+            "en": "Those insured privately so far pay more, among them civil servants, the self-employed and high earners; no source places them in income groups."
+          },
           "amount": {
             "param": "fee_compensation",
             "scale": -60206897,

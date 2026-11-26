@@ -39,6 +39,7 @@ totals, the bins. With the cache as delivered, `--check` reports all four files 
 | `es.py` | Eurostat fetcher and table printer, for looking up figures by hand. |
 | `bh.py` | Drill-down through the federal budget on bundeshaushalt.de, for looking up budget titles by hand. |
 | `xlsx.py` | Minimal reader for `.xlsx` files (no dependencies). |
+| `build_incidence.py` | The shares of `countries/de/incidence.json` (who pays), derived from published tables typed in with table and page; `--check` compares them with the file. The derivations, the comparison of the computed income tax shares with the ministry's and every choice are in `who-pays.md`. |
 
 ## Sources and the cache
 

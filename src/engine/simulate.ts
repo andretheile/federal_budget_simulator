@@ -114,6 +114,8 @@ export interface ShiftResult {
   high: number;
   /** True if the receiving node was cut off at zero. */
   clamped: boolean;
+  /** Where the receiving node is a revenue group: the change of each leaf below it that changed, as `delta`. */
+  leaves?: Record<string, number>;
 }
 
 export interface EffectResult {
@@ -146,8 +148,13 @@ export interface EffectResult {
    * `schedule` effects: what the schedules yield on the distribution, before `yield` and before
    * calibration to the target. Comparing `baseline` with the target's base amount shows how well
    * the model reproduces the official figure. `baseline` is absent for an effect without one.
+   * `scale` turns a change on the model into the change at the target, before the level filter and
+   * before cutting off at zero: target / model(baseline) times the yield for a calibrated effect,
+   * the yield alone for one without a baseline (times the share of simulateWeighted).
    */
-  model?: { reform: number; baseline?: number };
+  model?: { reform: number; baseline?: number; scale: number };
+  /** Where the target is a revenue group: the change of each leaf below it that changed, as `delta`. */
+  leaves?: Record<string, number>;
   /**
    * `excludeGroups` effects: the share of the node's current amount that the selected groups
    * stood for before this effect. It is smaller than their share in the breakdown if an earlier
@@ -735,6 +742,20 @@ interface Change {
   clamped: boolean;
   /** The node was a group with nothing in it, so the amount was distributed by base proportions. */
   emptyGroup: boolean;
+  /** On a revenue group: the filtered change of each leaf that changed, by leaf id. */
+  leaves?: Record<string, number>;
+}
+
+/**
+ * Where `node` is a revenue group, an empty record for the change of its leaves: the view of who
+ * pays (incidence.ts) spreads a change leaf by leaf, as the leaves may be paid by different people.
+ */
+function leafRecord(prep: Prepared, node: number): Record<string, number> | undefined {
+  return prep.sides[node] === "revenue" && prep.leafEnd[node] - prep.leafStart[node] > 1 ? {} : undefined;
+}
+
+function recordLeaf(prep: Prepared, leaves: Record<string, number> | undefined, leaf: number, delta: number): void {
+  if (leaves && delta !== 0) leaves[prep.nodes[prep.leafNode[leaf]].id] = delta;
 }
 
 function totalOf(run: Run, node: number): number {
@@ -750,14 +771,16 @@ function scaleNode(run: Run, node: number, factor: number): Change {
   if (clamped) factor = 0;
   let amount = 0;
   let delta = 0;
+  const leaves = leafRecord(prep, node);
   for (let i = prep.leafStart[node]; i < prep.leafEnd[node]; i++) {
     const old = state[i];
     const next = old * factor;
     state[i] = next;
     amount += next - old;
     delta += (next - old) * weights[i];
+    recordLeaf(prep, leaves, i, (next - old) * weights[i]);
   }
-  return { amount, delta, clamped, emptyGroup: false };
+  return leaves ? { amount, delta, clamped, emptyGroup: false, leaves } : { amount, delta, clamped, emptyGroup: false };
 }
 
 /**
@@ -773,6 +796,7 @@ function moveNode(run: Run, node: number, current: number, wanted: number): Chan
   let amount = 0;
   let delta = 0;
   let emptyGroup = false;
+  const leaves = leafRecord(prep, node);
   if (end - start === 1) {
     amount = wanted - state[start];
     delta = amount * weights[start];
@@ -785,6 +809,7 @@ function moveNode(run: Run, node: number, current: number, wanted: number): Chan
       state[i] = next;
       amount += next - old;
       delta += (next - old) * weights[i];
+      recordLeaf(prep, leaves, i, (next - old) * weights[i]);
     }
   } else if (wanted > 0) {
     // Every leaf below the group is zero, so there are no current proportions to follow.
@@ -798,9 +823,10 @@ function moveNode(run: Run, node: number, current: number, wanted: number): Chan
       state[i] = next;
       amount += next;
       delta += next * weights[i];
+      recordLeaf(prep, leaves, i, next * weights[i]);
     }
   }
-  return { amount, delta, clamped, emptyGroup };
+  return leaves ? { amount, delta, clamped, emptyGroup, leaves } : { amount, delta, clamped, emptyGroup };
 }
 
 /**
@@ -927,16 +953,23 @@ function applyEffect(
         );
       }
       let raw: number;
+      const yieldShare = effect.yield === undefined ? 1 : evaluateValue(effect.yield, params, indicators);
+      // What one unit of change on the model is at the target (EffectResult.model.scale).
+      let scale: number;
       if (basis === undefined) {
         raw = reform;
+        scale = yieldShare;
       } else if (basis > 0) {
         raw = current * (reform / basis - 1);
+        scale = (current / basis) * yieldShare;
       } else {
         raw = 0;
+        scale = 0;
         warn("baseline_yields_nothing", "The baseline schedule yields nothing on this distribution, so the effect cannot be calibrated.");
       }
-      wanted = current + raw * (effect.yield === undefined ? 1 : evaluateValue(effect.yield, params, indicators));
-      model = basis === undefined ? { reform } : { reform, baseline: basis };
+      wanted = current + raw * yieldShare;
+      if (weight !== 1) scale *= weight;
+      model = basis === undefined ? { reform, scale } : { reform, baseline: basis, scale };
       break;
     }
   }
@@ -970,6 +1003,7 @@ function applyEffect(
   if (model) result.model = model;
   if (excludedShare !== undefined) result.excludedShare = excludedShare;
   if (excludedGroups) result.excludedGroups = excludedGroups;
+  if (change.leaves) result.leaves = change.leaves;
 
   // A share of the target's change is passed on to another node, with the opposite sign.
   const shift = effect.shift;
@@ -995,6 +1029,7 @@ function applyEffect(
       high: moved.delta,
       clamped: moved.clamped,
     };
+    if (moved.leaves) result.shift.leaves = moved.leaves;
     wholeShift = moved.amount;
   }
   return { result, whole: change.amount, wholeShift };

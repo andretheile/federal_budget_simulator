@@ -1,0 +1,412 @@
+{
+  "population": {
+    "unit": { "de": "Menschen", "en": "people" },
+    "perUnit": { "de": "je Person", "en": "per person" },
+    "count": 83516593,
+    "ranking": {
+      "de": "Alle Menschen im Land, geordnet nach dem Einkommen ihres Haushalts je Erwachsenem: das Bruttoeinkommen einschließlich der Beiträge, die Arbeitgeber zahlen, und der Sozialleistungen, geteilt durch 1 für den ersten Erwachsenen, 0,5 für jede weitere Person ab 14 und 0,3 für jedes jüngere Kind. Die Grenzen der Gruppen sind die von 2015.",
+      "en": "Everybody in the country, ranked by their household's income per adult: gross income including the contributions employers pay and social benefits, divided by 1 for the first adult, 0.5 for every further person aged 14 or over and 0.3 for each younger child. The groups' bounds are those of 2015."
+    },
+    "year": 2015,
+    "quality": "estimate",
+    "sources": ["diw_kompakt_114", "diw_wb_51_2016", "eurostat_demo_gind"],
+    "note": {
+      "de": "Die Gruppen und ihre Anteile am Einkommen stammen aus der Studie des DIW für 2015, der jüngsten, die auch die Unternehmensteuern bis zum obersten Prozent aufteilt und die höchsten Einkommen aus der Steuerstatistik ergänzt; ihre Anteile werden auf die Einnahmen von 2024 angewendet. Gezählt sind die 83,5 Millionen Einwohner von 2024; die Studie zählt die Menschen in Privathaushalten. Zur unteren Hälfte gehörte 2015, wer weniger als 2.400 Euro im Monat hatte, zum obersten Zehntel, wer mindestens 5.300 Euro hatte. Eine Grenze für das oberste Prozent nennt die Studie für 2015 nicht; 2008 lag sie bei 11.116 Euro im Monat.",
+      "en": "The groups and their shares of income come from the DIW study for 2015, the most recent one that also splits company taxes up to the top 1% and adds the highest incomes from the tax statistics; its shares are applied to the revenue of 2024. The count is the 83.5 million inhabitants of 2024; the study counts people in private households. In 2015 the bottom half had less than €2,400 a month, the top tenth at least €5,300. The study gives no bound for the top 1% in 2015; in 2008 it was €11,116 a month."
+    }
+  },
+  "groups": [
+    { "id": "bottom_50", "label": { "de": "Untere Hälfte", "en": "Bottom half" }, "share": 0.5 },
+    { "id": "next_40", "label": { "de": "Die 40 % darüber", "en": "The next 40%" }, "share": 0.4, "from": 28800 },
+    { "id": "next_9", "label": { "de": "Die 9 % darüber", "en": "The next 9%" }, "share": 0.09, "from": 63600 },
+    { "id": "top_1", "label": { "de": "Oberstes 1 %", "en": "Top 1%" }, "share": 0.01 }
+  ],
+  "income": {
+    "shares": [0.239239, 0.43944, 0.222222, 0.099099],
+    "concept": {
+      "de": "Bruttoeinkommen der Haushalte, einschließlich der Beiträge, die Arbeitgeber zahlen, und der Sozialleistungen",
+      "en": "household gross income, including the contributions employers pay and social benefits"
+    },
+    "quality": "estimate",
+    "sources": ["diw_kompakt_114"],
+    "note": {
+      "de": "DIW 2016, Tabelle 4-12 (S. 61), Jahr 2015: untere Hälfte 23,9 %, Dezile 6 bis 9 43,9 %, oberstes Zehntel 32,1 %, davon das oberste Prozent 9,9 %; zusammen 99,9 %, auf 100 % umgerechnet.",
+      "en": "DIW 2016, Table 4-12 (p. 61), year 2015: bottom half 23.9%, deciles 6 to 9 43.9%, top tenth 32.1%, of which the top 1% 9.9%; 99.9% in all, scaled to 100%."
+    }
+  },
+  "profiles": {
+    "income_tax": {
+      "label": { "de": "Lohn- und Einkommensteuer", "en": "Wage and income tax" },
+      "shares": [0.048778, 0.37223, 0.322928, 0.256064],
+      "quality": "estimate",
+      "sources": ["destatis_lest_2022", "bmf_datensammlung_steuerpolitik_2026", "diw_kompakt_114"],
+      "note": {
+        "de": "Vom Rechner selbst ermittelt: der Tarif 2024 auf die Verteilung der zu versteuernden Einkommen (Lohn- und Einkommensteuerstatistik 2022, auf 2024 fortgeschrieben), geteilt an den Einkommen, unter denen 50, 90 und 99 % der Steuerpflichtigen liegen; zusammen veranlagte Paare zählen als zwei Personen mit je halbem Einkommen. Damit sind die Anteile dieselben, mit denen der Rechner Änderungen des Tarifs verteilt. Zum Vergleich das Finanzministerium für 2026, Paare als ein Steuerpflichtiger, geordnet nach dem Gesamtbetrag der Einkünfte (Datensammlung zur Steuerpolitik 2026, Tabelle 2.2): untere Hälfte 6,5 %, oberstes Zehntel 56,9 %, oberstes Prozent 24,6 % der Lohn- und Einkommensteuer; hier 4,9 %, 57,9 % und 25,6 %. Die Studie des DIW, nach der die Gruppen gebildet sind, weist die Lohn- und Einkommensteuer allein nur für 2008 aus (Tabelle 4-9): untere Hälfte 4,3 %, oberstes Zehntel 57,9 %, oberstes Prozent 23,1 %; für 2015 nur mit Soli und Unternehmensteuern (Tabelle 4-12): 3,8 %, 59,1 %, 25,8 %. Gezählt sind hier Steuerpflichtige, nicht alle Menschen, geordnet nach dem zu versteuernden Einkommen je Person.",
+        "en": "Worked out by the calculator itself: the 2024 schedule on the distribution of taxable income (wage and income tax statistics 2022, projected to 2024), split at the incomes below which 50, 90 and 99% of taxpayers lie; jointly assessed couples count as two persons with half the income each. So the shares are the same ones the calculator spreads changes of the schedule by. For comparison the finance ministry for 2026, couples as one taxpayer, ranked by total income (Datensammlung zur Steuerpolitik 2026, Table 2.2): bottom half 6.5%, top tenth 56.9%, top 1% 24.6% of wage and income tax; here 4.9%, 57.9% and 25.6%. The DIW study the groups follow gives wage and income tax on its own only for 2008 (Table 4-9): bottom half 4.3%, top tenth 57.9%, top 1% 23.1%; for 2015 only together with the surcharge and company taxes (Table 4-12): 3.8%, 59.1%, 25.8%. Counted here are taxpayers, not everybody, ranked by taxable income per person."
+      }
+    },
+    "soli_households": {
+      "label": { "de": "Solidaritätszuschlag der Einwohner", "en": "Solidarity surcharge paid by residents" },
+      "shares": [0.028926, 0.077196, 0.302497, 0.591381],
+      "quality": "estimate",
+      "sources": ["bmf_datensammlung_steuerpolitik_2026", "diw_kompakt_114", "bundeshaushalt_2024", "eurostat_ntl"],
+      "note": {
+        "de": "Der Zuschlag auf Lohn- und Einkommensteuer 2024 (7,55 Mrd. Euro) verteilt wie in Tabelle 2.2 der Datensammlung zur Steuerpolitik 2026 (untere Hälfte 0,1 %, oberstes Zehntel 96,7 %, oberstes Prozent 64,7 %), der Zuschlag auf die Kapitalertragsteuer der Haushalte (65 % von 2,88 Mrd. Euro, wie bei der Steuer selbst) wie die Gewinn- und Kapitaleinkommen; zusammen gewichtet. Der Zuschlag auf die Körperschaftsteuer (2,21 Mrd. Euro) und auf die Kapitalertragsteuer der Kapitalgesellschaften (1,01 Mrd. Euro) steht bei den Unternehmen.",
+        "en": "The surcharge on wage and income tax in 2024 (€7.55bn) spread as in Table 2.2 of the Datensammlung zur Steuerpolitik 2026 (bottom half 0.1%, top tenth 96.7%, top 1% 64.7%), the surcharge on households' withholding tax on capital income (65% of €2.88bn, as for the tax itself) like profit and capital income; weighted together. The surcharge on corporate tax (€2.21bn) and on corporations' withholding tax (€1.01bn) is with companies."
+      }
+    },
+    "soli_income_tax": {
+      "label": { "de": "Solidaritätszuschlag auf die Lohn- und Einkommensteuer", "en": "Solidarity surcharge on wage and income tax" },
+      "shares": [0.001, 0.032, 0.32, 0.647],
+      "quality": "estimate",
+      "sources": ["bmf_datensammlung_steuerpolitik_2026"],
+      "note": {
+        "de": "Datensammlung zur Steuerpolitik 2026, Tabelle 2.2 (S. 20), Jahr 2026: Steuerpflichtige nach dem Gesamtbetrag der Einkünfte, zusammen veranlagte Paare als einer; untere Hälfte 0,1 %, oberstes Zehntel 96,7 %, oberstes Prozent 64,7 % des Zuschlags.",
+        "en": "Datensammlung zur Steuerpolitik 2026, Table 2.2 (p. 20), year 2026: taxpayers ranked by total income, jointly assessed couples as one; bottom half 0.1%, top tenth 96.7%, top 1% 64.7% of the surcharge."
+      }
+    },
+    "soli_exempt": {
+      "label": { "de": "Solidaritätszuschlag für die seit 2021 Befreiten", "en": "Solidarity surcharge for those exempt since 2021" },
+      "shares": [0.105568, 0.577081, 0.317351, 0],
+      "quality": "estimate",
+      "sources": ["bmf_datensammlung_steuerpolitik_2026"],
+      "note": {
+        "de": "Was der volle Zuschlag von 5,5 % auf die ganze Lohn- und Einkommensteuer brächte, verteilt wie die Steuer, abzüglich dessen, was der Zuschlag heute bringt, verteilt wie heute (beides Tabelle 2.2 der Datensammlung 2026). Für das oberste Prozent ergibt die Rechnung wegen der unterschiedlichen Abgrenzung etwas weniger als null; da es den Zuschlag schon voll zahlt, steht dort null.",
+        "en": "What the full surcharge of 5.5% on all wage and income tax would raise, spread like the tax, less what the surcharge raises today, spread as today (both from Table 2.2 of the Datensammlung 2026). For the top 1% the arithmetic gives slightly less than zero because of the different definitions; as they pay the surcharge in full already, it is set to zero there."
+      }
+    },
+    "soli_capital_corporate": {
+      "label": { "de": "Solidaritätszuschlag auf Kapitalerträge und Körperschaftsteuer", "en": "Solidarity surcharge on capital income and corporate tax" },
+      "shares": [0.052056, 0.095421, 0.085281, 0.134983],
+      "payers": { "companies": 0.632259 },
+      "quality": "estimate",
+      "sources": ["diw_kompakt_114", "bundeshaushalt_2024", "eurostat_ntl"],
+      "note": {
+        "de": "Von den 5,09 Mrd. Euro dieser beiden Zuschläge 2024 entfallen 2,21 Mrd. Euro auf die Körperschaftsteuer und 1,01 Mrd. Euro auf die Kapitalertragsteuer der Kapitalgesellschaften; sie stehen bei den Unternehmen. Der Rest, 1,87 Mrd. Euro auf Kapitalerträge der Haushalte, ist verteilt wie die Gewinn- und Kapitaleinkommen.",
+        "en": "Of the €5.09bn these two surcharges raised in 2024, €2.21bn are on corporate tax and €1.01bn on corporations' withholding tax; they are with companies. The rest, €1.87bn on households' capital income, is spread like profit and capital income."
+      }
+    },
+    "capital_income": {
+      "label": { "de": "Gewinn- und Kapitaleinkommen", "en": "Profit and capital income" },
+      "shares": [0.141556, 0.259478, 0.231905, 0.367061],
+      "quality": "estimate",
+      "sources": ["diw_kompakt_114"],
+      "note": {
+        "de": "DIW 2016, Tabelle 3-7 (S. 38), Jahr 2008: Gewinn- und Kapitaleinkommen 406,2 Mrd. Euro, davon die untere Hälfte 57,5, die 40 % darüber 105,4, das oberste Zehntel 243,3 und darin das oberste Prozent 149,1 Mrd. Euro. Die Reihe enthält nicht nur Zinsen, Dividenden und Kursgewinne, sondern auch die Gewinne der Selbständigen, den Mietwert selbst genutzter Wohnungen (S. 30) und auf ausgeschüttete Gewinne die hinzugerechnete Körperschaft- und Gewerbesteuer (S. 37); die unteren Gruppen sind für die Kapitalertragsteuer damit wohl zu groß.",
+        "en": "DIW 2016, Table 3-7 (p. 38), year 2008: profit and capital income €406.2bn, of which the bottom half €57.5bn, the next 40% €105.4bn, the top tenth €243.3bn and within it the top 1% €149.1bn. The series holds not only interest, dividends and capital gains but also the profits of the self-employed, the rental value of owner-occupied homes (p. 30) and, on distributed profits, the corporate and trade tax added back (p. 37); for withholding tax on capital income the lower groups are probably too large."
+      }
+    },
+    "flat_tax_rise": {
+      "label": { "de": "Höhere Abgeltungsteuer", "en": "Higher flat-rate tax on capital income" },
+      "shares": [0, 0.083791, 0.179945, 0.736264],
+      "quality": "estimate",
+      "sources": ["diw_kompakt_124", "diw_wb_45_2017"],
+      "note": {
+        "de": "DIW Politikberatung kompakt 124 (Bach, Buslei 2017), Tabelle 4-5 (S. 39): Mehraufkommen eines Satzes von 30 % im Jahr 2017, fortgeschrieben aus der Einkommensteuerstatistik 2008, nach Dezilen des bedarfsgewichteten Gesamtbetrags der Einkünfte der Steuerpflichtigen (Paare als einer; Dezile von je 10 % der Bevölkerung): Dezile 1 bis 5 nichts, 6 bis 9 zusammen 122, das 91. bis 99. Perzentil 262, das oberste Prozent 1.072 von 1.456 Mio. Euro. Gilt für die Variante mit 30 %, die Grundeinstellung der Maßnahme. Nach dem Wochenbericht 45/2017 (S. 1024) fällt das Mehraufkommen zu mehr als 90 % auf das oberste Zehntel und zu 73 bis 75 % auf das oberste Prozent.",
+        "en": "DIW Politikberatung kompakt 124 (Bach, Buslei 2017), Table 4-5 (p. 39): additional revenue of a 30% rate in 2017, projected from the income tax statistics of 2008, by decile of taxpayers' total income per equivalent adult (couples as one; deciles of 10% of the population each): deciles 1 to 5 nothing, 6 to 9 together 122, the 91st to 99th percentile 262, the top 1% 1,072 of €1,456m. Holds for the 30% variant, the measure's default. By Wochenbericht 45/2017 (p. 1024), more than 90% of the additional revenue falls on the top tenth and 73 to 75% on the top 1%."
+      }
+    },
+    "vat_standard": {
+      "label": { "de": "Mehrwertsteuer und Versicherungsteuer", "en": "VAT and insurance tax" },
+      "shares": [0.355921, 0.435211, 0.159788, 0.04908],
+      "quality": "estimate",
+      "sources": ["diw_kompakt_114"],
+      "note": {
+        "de": "DIW 2016, Tabelle 4-11 (S. 60), Jahr 2015: Mehrwertsteuer und Versicherungsteuer in Prozent des Einkommens, mal dem Anteil der Gruppe am Einkommen (Tabelle 4-12). Die Steuer tragen die Haushalte, die kaufen.",
+        "en": "DIW 2016, Table 4-11 (p. 60), year 2015: VAT and insurance tax as a percentage of income, times the group's share of income (Table 4-12). The tax is borne by the households that buy."
+      }
+    },
+    "vat_food_transport": {
+      "label": { "de": "Ermäßigte Mehrwertsteuer auf Lebensmittel und Nahverkehr", "en": "Reduced VAT on food and local transport" },
+      "shares": [0.455545, 0.417582, 0.09706, 0.029813],
+      "quality": "estimate",
+      "sources": ["diw_wb_31_2017", "diw_kompakt_114"],
+      "note": {
+        "de": "DIW Wochenbericht 31/2017, Tabelle 3 (S. 632), EVS 2013: Anteile der Dezile an einer Senkung des ermäßigten Satzes für Nahrungsmittel und Nahverkehr. Die Studie ordnet nach dem Nettoeinkommen und nennt kein oberstes Prozent; dem obersten Prozent ist derselbe Teil des obersten Zehntels zugerechnet wie bei der ganzen Mehrwertsteuer im DIW 2016 (23,5 %). Die EVS befragt keine Haushalte mit mehr als 18.000 Euro Nettoeinkommen im Monat (DIW 2016, S. 23), und die Tabelle korrigiert das nicht; das oberste Zehntel ist damit wohl zu klein.",
+        "en": "DIW Wochenbericht 31/2017, Table 3 (p. 632), EVS 2013: the deciles' shares of a cut of the reduced rate on food and local transport. The study ranks by net income and gives no top 1%; the top 1% is given the same part of the top tenth as for all VAT in DIW 2016 (23.5%). The EVS does not survey households with more than €18,000 of net income a month (DIW 2016, p. 23), and the table does not correct for it; the top tenth is probably too small."
+      }
+    },
+    "vat_other_reduced": {
+      "label": { "de": "Übrige ermäßigte Mehrwertsteuer", "en": "Other reduced-rate VAT" },
+      "shares": [0.316, 0.461, 0.170599, 0.052401],
+      "quality": "estimate",
+      "sources": ["diw_wb_31_2017", "diw_kompakt_114"],
+      "note": {
+        "de": "DIW Wochenbericht 31/2017, Tabelle 3 (S. 632), EVS 2013: Anteile der Dezile an der Abschaffung aller Ermäßigungen außer für Nahrungsmittel und Nahverkehr (Hotels, Kultur, Bücher und Zeitungen und anderes). Oberstes Prozent wie bei den Lebensmitteln geschätzt. Die EVS befragt keine Haushalte mit mehr als 18.000 Euro Nettoeinkommen im Monat (DIW 2016, S. 23), und die Tabelle korrigiert das nicht; das oberste Zehntel ist damit wohl zu klein.",
+        "en": "DIW Wochenbericht 31/2017, Table 3 (p. 632), EVS 2013: the deciles' shares of abolishing all reductions except for food and local transport (hotels, culture, books and newspapers and more). Top 1% estimated as for food. The EVS does not survey households with more than €18,000 of net income a month (DIW 2016, p. 23), and the table does not correct for it; the top tenth is probably too small."
+      }
+    },
+    "energy": {
+      "label": { "de": "Energiesteuern", "en": "Energy taxes" },
+      "shares": [0.399886, 0.462729, 0.123261, 0.014124],
+      "quality": "estimate",
+      "sources": ["diw_kompakt_114"],
+      "note": {
+        "de": "DIW 2016, Tabelle 4-11 (S. 60), Jahr 2015: Energiesteuern und EEG-Umlage in Prozent des Einkommens, mal dem Anteil der Gruppe am Einkommen. Gilt hier für Energie- und Stromsteuer und beide CO2-Preise. Auch was Unternehmen an diesen Steuern zahlen, tragen nach der Annahme der Studie am Ende die Käufer; verteilt ist es hier wie das, was Haushalte selbst für Energie zahlen.",
+        "en": "DIW 2016, Table 4-11 (p. 60), year 2015: energy taxes and the renewables levy as a percentage of income, times the group's share of income. Used here for energy and electricity tax and both CO2 prices. What companies pay of these taxes is, as the study assumes, borne in the end by buyers; here it is spread like what households pay for energy themselves."
+      }
+    },
+    "tobacco_alcohol": {
+      "label": { "de": "Tabak-, Alkohol- und Wettsteuern", "en": "Tobacco, alcohol and betting taxes" },
+      "shares": [0.416799, 0.425983, 0.145096, 0.012122],
+      "quality": "estimate",
+      "sources": ["diw_kompakt_114"],
+      "note": {
+        "de": "DIW 2016, Tabelle 4-11 (S. 60), Jahr 2015: Tabak- und Alkoholsteuern und Wettsteuer in Prozent des Einkommens, mal dem Anteil der Gruppe am Einkommen.",
+        "en": "DIW 2016, Table 4-11 (p. 60), year 2015: tobacco, alcohol and betting taxes as a percentage of income, times the group's share of income."
+      }
+    },
+    "property_motor": {
+      "label": { "de": "Grund-, Grunderwerb- und Kfz-Steuer", "en": "Property, real estate transfer and motor vehicle tax" },
+      "shares": [0.299166, 0.444063, 0.166267, 0.090504],
+      "quality": "estimate",
+      "sources": ["diw_kompakt_114"],
+      "note": {
+        "de": "DIW 2016, Tabelle 4-11 (S. 60), Jahr 2015: Grund-, Kfz- und sonstige Steuern in Prozent des Einkommens, mal dem Anteil der Gruppe am Einkommen. Die Studie rechnet Grundsteuer und Grunderwerbsteuer auf Wohnungen je zur Hälfte den Eigentümern und den Bewohnern zu; auf Gewerbeimmobilien gehen sie in die Preise ein (S. 17).",
+        "en": "DIW 2016, Table 4-11 (p. 60), year 2015: property, motor vehicle and other taxes as a percentage of income, times the group's share of income. The study puts property tax and real estate transfer tax on homes half on owners and half on occupants; on commercial property they pass into prices (p. 17)."
+      }
+    },
+    "contributions": {
+      "label": { "de": "Sozialbeiträge", "en": "Social contributions" },
+      "shares": [0.210592, 0.561686, 0.211225, 0.016497],
+      "quality": "estimate",
+      "sources": ["diw_kompakt_114"],
+      "note": {
+        "de": "DIW 2016, Tabelle 4-11 (S. 60), Jahr 2015: Sozialbeiträge in Prozent des Einkommens, mal dem Anteil der Gruppe am Einkommen. Wie in der Studie tragen die Beschäftigten auch die Beiträge, die ihre Arbeitgeber zahlen (S. 16). Die Spalte enthält auch die Beiträge der Rentner (S. 48) und die unterstellten Beiträge der Beamten (S. 26), die hier nicht mit diesem Profil verteilt sind. Weil das oberste Prozent vor allem Gewinn- und Vermögenseinkommen bezieht, auf die keine Beiträge anfallen (S. 54), und Löhne nur bis zur Beitragsbemessungsgrenze belastet werden (S. 48), zahlt es nur 1,6 %.",
+        "en": "DIW 2016, Table 4-11 (p. 60), year 2015: social contributions as a percentage of income, times the group's share of income. As in the study, employees also bear the contributions their employers pay (p. 16). The column also holds pensioners' contributions (p. 48) and the imputed contributions of civil servants (p. 26), which are not spread by this profile here. Because the top 1% live mainly on profit and capital income, which carries no contributions (p. 54), and wages carry contributions only up to the ceiling (p. 48), they pay only 1.6%."
+      }
+    },
+    "splitting": {
+      "label": { "de": "Abschaffung des Ehegattensplittings", "en": "Abolishing spouse splitting" },
+      "shares": [0.089752, 0.658397, 0.226666, 0.025185],
+      "quality": "estimate",
+      "sources": ["diw_wb_13_2017"],
+      "note": {
+        "de": "DIW Wochenbericht 13/2017, Tabelle 1 (S. 251): Mehreinnahmen einer Individualbesteuerung mit übertragbarem Grundfreibetrag 2017 nach Dezilen, zusammen 15,4 Mrd. Euro. Gilt für den ersten Regler; die Streichung der Übertragung des Grundfreibetrags ist ebenso verteilt, dafür nennt die Studie keine Zahlen. Ein oberstes Prozent nennt die Studie nicht; angenommen ist, dass das oberste Prozent je Person so viel zahlt wie das oberste Zehntel im Schnitt.",
+        "en": "DIW Wochenbericht 13/2017, Table 1 (p. 251): additional revenue of individual taxation with a transferable basic allowance in 2017 by decile, €15.4bn in all. Holds for the first slider; ending the transfer of the basic allowance is spread the same way, for which the study gives no figures. The study gives no top 1%; it is assumed that the top 1% pay per person as much as the top tenth on average."
+      }
+    },
+    "wealth_tax": {
+      "label": { "de": "Vermögensteuer", "en": "Wealth tax" },
+      "shares": [0, 0, 0, 0.825],
+      "payers": { "unassigned": 0.175 },
+      "quality": "estimate",
+      "sources": ["diw_kompakt_211", "diw_kompakt_108"],
+      "note": {
+        "de": "DIW Politikberatung kompakt 211 (2026), Tabelle 5-4 (S. 108): Bei 1 % Steuersatz und 2 Mio. Euro Freibetrag je Person, ohne Freibetrag für Betriebsvermögen, zahlt das oberste Prozent nach dem bedarfsgewichteten Bruttoeinkommen 82,5 % der Steuer, die Menschen bis zum 99. Perzentil 17,5 %; wie sich diese 17,5 % auf die Gruppen darunter verteilen, sagt die Tabelle nicht, sie stehen deshalb bei keiner Gruppe. Mit 1 Mio. Euro Freibetrag sind es 28,0 %. Die Studie zählt Erwachsene und besteuert jede Person für sich (SOEP 2019 und Reichenliste 2024, auf 2026 fortgeschrieben); die Maßnahme hier gewährt den Freibetrag je Haushalt, so dass unterhalb des obersten Prozents eher mehr gezahlt wird. Die Studien warnen, dass die Rangfolge nach dem Einkommen den Zusammenhang von hohen Vermögen und hohen Einkommen überzeichnet (kompakt 108, S. 51 f.).",
+        "en": "DIW Politikberatung kompakt 211 (2026), Table 5-4 (p. 108): at a 1% rate and a €2m allowance per person without a business allowance, the top 1% by gross income per equivalent adult pay 82.5% of the tax, the people up to the 99th percentile 17.5%; the table does not say how those 17.5% are spread over the groups below, so they are with no group. With a €1m allowance it is 28.0%. The study counts adults and taxes each person on their own (SOEP 2019 and a rich list of 2024, projected to 2026); the measure here grants the allowance per household, so below the top 1% rather more is paid. The studies warn that the ranking by income overstates the link between high wealth and high income (kompakt 108, pp. 51 f.)."
+      }
+    },
+    "wealth_levy": {
+      "label": { "de": "Vermögensabgabe", "en": "Wealth levy" },
+      "shares": [0, 0, 0, 0.997],
+      "payers": { "unassigned": 0.003 },
+      "quality": "estimate",
+      "sources": ["diw_kompakt_157"],
+      "note": {
+        "de": "DIW Politikberatung kompakt 157, Tabelle 4-7 (S. 54): Bei 2 Mio. Euro Freibetrag je Person und 5 Mio. Euro für Betriebsvermögen zahlt das oberste Prozent nach dem bedarfsgewichteten Bruttoeinkommen 99,7 % der Abgabe, die Menschen bis zum 99. Perzentil 0,3 %, die bei keiner Gruppe stehen. Erwachsene, Vermögen 2017. Die Studie warnt, dass die Rangfolge nach dem Einkommen den Zusammenhang von hohen Vermögen und hohen Einkommen überzeichnet (S. 47 f.).",
+        "en": "DIW Politikberatung kompakt 157, Table 4-7 (p. 54): with a €2m allowance per person and €5m for business assets, the top 1% by gross income per equivalent adult pay 99.7% of the levy, the people up to the 99th percentile 0.3%, which are with no group. Adults, wealth of 2017. The study warns that the ranking by income overstates the link between high wealth and high income (pp. 47 f.)."
+      }
+    },
+    "abroad_and_companies": {
+      "label": { "de": "Einkommensteuer der übrigen Welt und EU-Energiekrisenbeitrag", "en": "Income tax of non-residents and the EU energy crisis contribution" },
+      "shares": [0, 0, 0, 0],
+      "payers": { "abroad": 0.88685, "companies": 0.11315 },
+      "quality": "official",
+      "sources": ["eurostat_ntl"],
+      "note": {
+        "de": "Eurostat, Steuerliste 2024: Einkommensteuer der übrigen Welt 15.174 Mio. Euro, EU-Energiekrisenbeitrag von Energieunternehmen 1.936 Mio. Euro.",
+        "en": "Eurostat, tax list 2024: income tax of the rest of the world €15,174m, EU energy crisis contribution of energy companies €1,936m."
+      }
+    },
+    "broadcasting_fee": {
+      "label": { "de": "Rundfunkbeitrag", "en": "Broadcasting fee" },
+      "shares": [0, 0, 0, 0],
+      "payers": { "unassigned": 0.908032, "companies": 0.091968 },
+      "quality": "official",
+      "sources": ["eurostat_ntl"],
+      "note": {
+        "de": "Eurostat, Steuerliste 2024: Rundfunkbeitrag der Haushalte 8.264 Mio. Euro, der Unternehmen 837 Mio. Euro. Wie sich der Beitrag der Haushalte auf die Einkommensgruppen verteilt, sagt keine Quelle.",
+        "en": "Eurostat, tax list 2024: broadcasting fee of households €8,264m, of enterprises €837m. No source says how the households' fee is spread over the income groups."
+      }
+    },
+    "other_levies": {
+      "label": { "de": "Sonstige Abgaben", "en": "Other levies" },
+      "shares": [0, 0, 0, 0],
+      "payers": { "unassigned": 0.846063, "companies": 0.153937 },
+      "quality": "official",
+      "sources": ["eurostat_ntl"],
+      "note": {
+        "de": "Eurostat, Steuerliste 2024, die übrigen Posten (9.270 Mio. Euro): Bankenabgaben und Einlagensicherung (1.209 Mio. Euro) und Verwaltungsgebühren von Unternehmen (218 Mio. Euro) zahlen Unternehmen; die übrigen keiner Gruppe zugeordnet, unter ihnen Umlagen auf jeden Stromverbrauch, die auch Unternehmen zahlen.",
+        "en": "Eurostat, tax list 2024, the remaining items (€9,270m): bank levies and deposit guarantee contributions (€1,209m) and administrative fees of enterprises (€218m) are paid by companies; the rest is placed in no group, among it levies on all electricity use that companies pay too."
+      }
+    }
+  },
+  "payers": [
+    {
+      "id": "companies",
+      "label": { "de": "Unternehmen", "en": "Companies" },
+      "note": {
+        "de": "Steuern auf die Gewinne von Unternehmen: Körperschaftsteuer, Gewerbesteuer, die Kapitalertragsteuer, die Kapitalgesellschaften zahlen (35 % dieser Steuer), die Solidaritätszuschläge darauf und der EU-Energiekrisenbeitrag von Energieunternehmen (1,9 Mrd. Euro); dazu, was Unternehmen an Rundfunkbeitrag (0,84 Mrd. Euro), Bankenabgaben und Einlagensicherung (1,21 Mrd. Euro) und Verwaltungsgebühren (0,22 Mrd. Euro) zahlen. Am Ende tragen Menschen die Steuern auf Gewinne, als Eigentümer über kleinere Gewinne, als Beschäftigte über niedrigere Löhne oder als Kunden über höhere Preise; wie sich die Last aufteilt, ist in der Forschung umstritten, deshalb stehen sie hier für sich. Das DIW rechnet die Körperschaft- und Gewerbesteuer der Kapitalgesellschaften den Dividendenempfängern zu, die Gewerbesteuer der Personenunternehmen deren Inhabern, jeweils nur auf ausgeschüttete Gewinne; so gerechnet zahlte das oberste Prozent 2015 16,3 % der Steuern, die die Studie erfasst (rund 80 % aller Steuern, ohne Steuern auf einbehaltene Gewinne und ohne Erbschaftsteuer). Die Gewerbesteuer von Einzelunternehmern und Personengesellschaften wird zum großen Teil auf ihre Einkommensteuer angerechnet (§ 35 EStG); für sie ersetzt sie also Einkommensteuer, die sonst bei den Gruppen stünde.",
+        "en": "Taxes on the profits of companies: corporate tax, trade tax, the withholding tax on capital income that corporations pay (35% of that tax), the solidarity surcharges on them and the EU energy crisis contribution of energy companies (€1.9bn); and what companies pay as broadcasting fee (€0.84bn), bank levies and deposit guarantee contributions (€1.21bn) and administrative fees (€0.22bn). In the end people bear the taxes on profits, as owners through smaller profits, as employees through lower wages or as customers through higher prices; how the burden is shared is disputed in research, so they stand on their own here. The DIW puts the corporate tax and trade tax of corporations on the recipients of dividends and the trade tax of sole traders and partnerships on their owners, in each case only on distributed profits; counted that way, the top 1% paid 16.3% of the taxes the study covers in 2015 (about 80% of all taxes, without taxes on retained profits and without inheritance tax). The trade tax of sole traders and partnerships is largely credited against their income tax (section 35 of the Income Tax Act); for them it replaces income tax that would otherwise be with the groups."
+      },
+      "sources": ["diw_kompakt_114", "diw_wb_51_2016", "estg_35", "eurostat_ntl"]
+    },
+    {
+      "id": "abroad",
+      "label": { "de": "Ausland", "en": "Abroad" },
+      "note": {
+        "de": "Einkommensteuer, die Menschen und Unternehmen mit Wohnsitz oder Sitz im Ausland in Deutschland zahlen (15,2 Mrd. Euro).",
+        "en": "Income tax that people and companies resident abroad pay in Germany (€15.2bn)."
+      },
+      "sources": ["eurostat_ntl"]
+    },
+    {
+      "id": "state",
+      "label": { "de": "Der Staat selbst", "en": "The state itself" },
+      "note": {
+        "de": "Mehrwertsteuer, die Behörden und Sozialversicherungen auf ihre Käufe und Investitionen zahlen (2017 43,0 von 208,5 Mrd. Euro der Mehrwertsteuer zum Regelsatz, DIW Wochenbericht 31/2017, Tabelle 1), und die rechnerischen Beiträge für Beamte, bei denen kein Geld fließt. Dazu, mit einer Maßnahme, die Beamte in die Rentenversicherung einbezieht, der Arbeitgeberanteil, den der Staat für sie zahlen würde.",
+        "en": "VAT that public authorities and social insurance pay on their purchases and investment (in 2017 €43.0bn of €208.5bn of standard-rate VAT, DIW Wochenbericht 31/2017, Table 1), and the imputed contributions for civil servants, for which no money flows. With a measure that brings civil servants into the pension insurance, also the employer's part the state would pay for them."
+      },
+      "sources": ["diw_wb_31_2017", "eurostat_ntl"]
+    },
+    {
+      "id": "pensioners_and_funds",
+      "label": { "de": "Rentner und Sozialkassen, nicht trennbar", "en": "Pensioners and social insurance funds, not separable" },
+      "note": {
+        "de": "Die Beiträge der Nichterwerbstätigen (106,1 Mrd. Euro): Kranken- und Pflegeversicherungsbeiträge, die Rentner auf ihre Rente zahlen, samt dem Anteil, den die Rentenversicherung für sie an die Krankenkassen zahlt, und Beiträge, die Sozialkassen und Bund für Bezieher von Leistungen zahlen. Die Statistik führt sie in einer Zeile, und keine Quelle trennt sie. Das DIW rechnet die Beiträge der Rentner den Haushalten zu.",
+        "en": "The contributions of the non-employed (€106.1bn): health and long-term care contributions that pensioners pay on their pension, with the part the pension insurance pays for them to the health insurance funds, and contributions that social insurance funds and the federal government pay for benefit recipients. The statistics carry them in one line, and no source separates them. The DIW counts pensioners' contributions as a burden of households."
+      },
+      "sources": ["eurostat_ntl", "diw_kompakt_114"]
+    },
+    {
+      "id": "unassigned",
+      "label": { "de": "Keiner Gruppe zugeordnet", "en": "Not placed in a group" },
+      "note": {
+        "de": "Einnahmen, für die keine Quelle sagt, wie sie sich auf die Einkommensgruppen verteilen: die Erbschaftsteuer, der Rundfunkbeitrag der Haushalte, die Luftverkehrsteuer und aus den übrigen Abgaben die Umlagen nach dem Kraft-Wärme-Kopplungsgesetz und für Offshore-Netze auf jeden Stromverbrauch (2,81 Mrd. Euro), steuerähnliche Einnahmen (1,92 Mrd. Euro), Vergnügung-, Hunde- und andere Gemeindesteuern (1,91 Mrd. Euro), Verwaltungsgebühren der Haushalte (0,62 Mrd. Euro), die Unterkompensation der Umsatzsteuer (0,32 Mrd. Euro) und der Beitrag zur Erdölbevorratung (0,25 Mrd. Euro); manches davon zahlen auch Unternehmen. Hierher kommen auch der Teil einer Vermögensteuer, den die Menschen unterhalb des obersten Prozents zahlen, und die Änderungen von Maßnahmen, die nicht alle Zahler einer Steuer gleich treffen und für deren Verteilung keine Quelle vorliegt.",
+        "en": "Revenue for which no source says how it is spread over the income groups: inheritance tax, households' broadcasting fee, air passenger tax and, among the remaining levies, the surcharges under the combined heat and power act and for offshore grids on all electricity use (€2.81bn), tax-like revenue (€1.92bn), entertainment, dog and other local taxes (€1.91bn), households' administrative fees (€0.62bn), the VAT under-compensation (€0.32bn) and the oil stockholding contribution (€0.25bn); some of it is paid by companies too. Here also go the part of a wealth tax that people below the top 1% pay, and the changes of measures that do not hit all payers of a tax alike and for whose spread there is no source."
+      },
+      "sources": ["eurostat_ntl", "diw_wb_51_2016"]
+    },
+    {
+      "id": "not_a_tax",
+      "label": { "de": "Keine Steuern: Entgelte, Zinsen, Zuweisungen", "en": "Not taxes: sales, interest, transfers" },
+      "note": {
+        "de": "Einnahmen, die niemand als Steuer zahlt: Entgelte und Gebühren für Leistungen des Staates, Zinsen und Gewinne öffentlicher Unternehmen, Zuweisungen der EU und anderer, Vermögensübertragungen.",
+        "en": "Revenue nobody pays as a tax: charges and fees for services of the state, interest and profits of public enterprises, transfers from the EU and others, capital transfers."
+      },
+      "sources": ["eurostat_gov_10a_main"]
+    }
+  ],
+  "nodes": {
+    "rev.taxes.income.personal": { "profile": "income_tax" },
+    "rev.taxes.income.capital_income": {
+      "profile": "capital_income",
+      "coverage": 0.649961,
+      "payer": "companies",
+      "note": {
+        "de": "35 % der Kapitalertragsteuer zahlen Kapitalgesellschaften (Eurostat, Steuerliste 2024: 18,66 von 53,31 Mrd. Euro); dieser Teil steht bei den Unternehmen.",
+        "en": "35% of the withholding tax on capital income is paid by corporations (Eurostat, tax list 2024: €18.66bn of €53.31bn); that part is with companies."
+      }
+    },
+    "rev.taxes.income.corporate": { "payer": "companies" },
+    "rev.taxes.income.trade_tax": { "payer": "companies" },
+    "rev.taxes.income.soli": {
+      "profile": "soli_households",
+      "coverage": 0.74538,
+      "payer": "companies",
+      "note": {
+        "de": "Von 12,63 Mrd. Euro 2024 entfallen 2,21 Mrd. Euro auf die Körperschaftsteuer und 1,01 Mrd. Euro auf die Kapitalertragsteuer der Kapitalgesellschaften: Sie stehen bei den Unternehmen.",
+        "en": "Of €12.63bn in 2024, €2.21bn are on corporate tax and €1.01bn on corporations' withholding tax: they are with companies."
+      }
+    },
+    "rev.taxes.income.other": { "profile": "abroad_and_companies" },
+    "rev.taxes.consumption.vat.standard.restaurants": { "profile": "vat_standard" },
+    "rev.taxes.consumption.vat.standard.other": {
+      "profile": "vat_standard",
+      "coverage": 0.793765,
+      "payer": "state",
+      "note": {
+        "de": "Ein Fünftel der Mehrwertsteuer zum Regelsatz zahlt der Staat auf seine eigenen Käufe (2017 43,0 von 208,5 Mrd. Euro).",
+        "en": "A fifth of standard-rate VAT is paid by the state on its own purchases (in 2017 €43.0bn of €208.5bn)."
+      }
+    },
+    "rev.taxes.consumption.vat.reduced.food": { "profile": "vat_food_transport" },
+    "rev.taxes.consumption.vat.reduced.hotels": { "profile": "vat_other_reduced" },
+    "rev.taxes.consumption.vat.reduced.culture": { "profile": "vat_other_reduced" },
+    "rev.taxes.consumption.vat.reduced.transport": { "profile": "vat_food_transport" },
+    "rev.taxes.consumption.vat.reduced.other": { "profile": "vat_other_reduced" },
+    "rev.taxes.consumption.energy": { "profile": "energy" },
+    "rev.taxes.consumption.electricity": { "profile": "energy" },
+    "rev.taxes.consumption.tobacco": { "profile": "tobacco_alcohol" },
+    "rev.taxes.consumption.alcohol_coffee": { "profile": "tobacco_alcohol" },
+    "rev.taxes.consumption.sugar_drinks": { "payer": "unassigned" },
+    "rev.taxes.consumption.plastic_packaging": { "payer": "unassigned" },
+    "rev.taxes.consumption.insurance": { "profile": "vat_standard" },
+    "rev.taxes.consumption.motor_vehicle": { "profile": "property_motor" },
+    "rev.taxes.consumption.air_travel": { "payer": "unassigned" },
+    "rev.taxes.consumption.co2": {
+      "profile": "energy",
+      "note": {
+        "de": "Den europäischen CO2-Preis zahlen Kraftwerke, Industrie und Luftverkehr; angenommen ist, dass er wie die Energiesteuern in die Preise eingeht.",
+        "en": "The European CO2 price is paid by power plants, industry and aviation; it is assumed to pass into prices like the energy taxes."
+      }
+    },
+    "rev.taxes.consumption.gambling": { "profile": "tobacco_alcohol" },
+    "rev.taxes.consumption.broadcasting_fee": { "profile": "broadcasting_fee" },
+    "rev.taxes.consumption.other": { "profile": "other_levies" },
+    "rev.taxes.property.property_tax": { "profile": "property_motor" },
+    "rev.taxes.property.real_estate_transfer": { "profile": "property_motor" },
+    "rev.taxes.property.inheritance": {
+      "payer": "unassigned",
+      "note": {
+        "de": "Erben und Beschenkte; keine Quelle verteilt sie auf Einkommensgruppen, auch die Studie des DIW lässt sie aus.",
+        "en": "Heirs and recipients of gifts; no source spreads them over income groups, and the DIW study leaves them out too."
+      }
+    },
+    "rev.taxes.property.wealth_tax": { "profile": "wealth_tax" },
+    "rev.taxes.property.wealth_levy": { "profile": "wealth_levy" },
+    "rev.contributions.wages": { "profile": "contributions" },
+    "rev.contributions.self_employed": { "profile": "contributions" },
+    "rev.contributions.voluntary": { "profile": "contributions" },
+    "rev.contributions.non_employed": { "payer": "pensioners_and_funds" },
+    "rev.contributions.imputed": { "payer": "state" },
+    "rev.other.sales": { "payer": "not_a_tax" },
+    "rev.other.property_income": { "payer": "not_a_tax" },
+    "rev.other.transfers": { "payer": "not_a_tax" },
+    "rev.other.capital_transfers": { "payer": "not_a_tax" },
+    "rev.other.subsidies": { "payer": "not_a_tax" }
+  },
+  "distributions": {
+    "taxable_income": {
+      "note": {
+        "de": "Ändert jemand den Einkommensteuertarif, rechnet der Rechner auf der Verteilung der zu versteuernden Einkommen aus, wer wie viel mehr oder weniger zahlt: Die untere Hälfte der Steuerpflichtigen steht für die untere Hälfte aller Menschen, die nächsten 40 % für die nächsten 40 % und so fort. Das ist eine Näherung. Steuerpflichtige sind nicht alle Menschen (Kinder und Menschen ohne Einkommen fehlen), und Paare zählen als zwei Personen mit je halbem Einkommen; die Beträge je Person rechnen mit den Gruppen der ganzen Bevölkerung.",
+        "en": "When somebody changes the income tax schedule, the calculator works out on the distribution of taxable income who pays how much more or less: the bottom half of taxpayers stands for the bottom half of all people, the next 40% for the next 40% and so on. That is an approximation. Taxpayers are not everybody (children and people without income are missing), and couples count as two persons with half the income each; the amounts per person use the groups of the whole population."
+      }
+    }
+  },
+  "scopes": [
+    {
+      "id": "taxes",
+      "label": { "de": "Steuern", "en": "Taxes" },
+      "nodes": ["rev.taxes"],
+      "note": {
+        "de": "Alle Steuern von Bund, Ländern und Gemeinden 2024, einschließlich des Rundfunkbeitrags, den die Volkswirtschaftlichen Gesamtrechnungen als Steuer zählen. Die Balken zeigen den Teil, der sich auf Einkommensgruppen verteilen lässt.",
+        "en": "All taxes of the federal government, the states and the municipalities in 2024, including the broadcasting fee, which the national accounts count as a tax. The bars show the part that can be spread over income groups."
+      }
+    },
+    {
+      "id": "taxes_and_contributions",
+      "label": { "de": "Steuern und Sozialbeiträge", "en": "Taxes and social contributions" },
+      "nodes": ["rev.taxes", "rev.contributions"],
+      "note": {
+        "de": "Dazu die Beiträge zur Renten-, Kranken-, Pflege- und Arbeitslosenversicherung. Wie in der Studie des DIW tragen die Beschäftigten auch die Beiträge, die ihre Arbeitgeber zahlen; sie sind Teil der Lohnkosten. Anders als das DIW, das die Beiträge der Rentner und die unterstellten Beiträge der Beamten den Haushalten zurechnet, stehen hier die Beiträge der Rentner mit denen, die Sozialkassen für Leistungsbezieher zahlen, in einer eigenen Zeile, weil die Statistik sie nicht trennt, und die unterstellten Beiträge für Beamte, bei denen kein Geld fließt, beim Staat.",
+        "en": "Adds the contributions to pension, health, long-term care and unemployment insurance. As in the DIW study, employees also bear the contributions their employers pay; they are part of the cost of labour. Unlike the DIW, which counts pensioners' contributions and the imputed contributions of civil servants as a burden of households, pensioners' contributions stand here in a line of their own together with those social insurance funds pay for benefit recipients, as the statistics do not separate them, and the imputed contributions for civil servants, for which no money flows, are with the state."
+      }
+    }
+  ],
+  "note": {
+    "de": "Die Einnahmen von 2024, verteilt nach den Anteilen, die Studien für frühere Jahre geschätzt haben, vor allem das DIW für 2015. Steuern auf den Verbrauch tragen die Haushalte, die kaufen; Steuern auf Unternehmensgewinne stehen bei den Unternehmen. Nicht gerechnet ist, wie Menschen auf eine Steuer reagieren, außer wo eine Maßnahme es selbst einrechnet, und was der Staat ihnen zurückgibt: Es geht nur ums Zahlen.",
+    "en": "The revenue of 2024, spread by the shares that studies estimated for earlier years, above all the DIW for 2015. Taxes on consumption are borne by the households that buy; taxes on company profits are with companies. Not counted is how people react to a tax, except where a measure includes it itself, and what the state gives back to them: this is only about paying."
+  }
+}
