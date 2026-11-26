@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { testland, testlandWhoPays } from "../engine/__fixtures__/testland.ts";
 import { measureWhoPays, simulate, simulatePolicy, whoPays, type Scenario } from "../engine/index.ts";
-import { chartOf, largestChange, measuresOf, scopeOf, sourcesOf, spreadable, statementOf, stripOf } from "./whoPaysModel.ts";
+import { chartOf, largestChange, measuresOf, notesOf, scopeOf, sourcesOf, spreadable, statementOf, stripOf } from "./whoPaysModel.ts";
 
 const pack = testlandWhoPays();
 const on = (...ids: string[]): Scenario => ({ policies: Object.fromEntries(ids.map((id) => [id, { enabled: true }])) });
@@ -73,6 +73,21 @@ describe("the strip of a measure", () => {
     const payerOnly = testlandWhoPays();
     payerOnly.policies.find((policy) => policy.id === "raise_top_tax_rate")!.effects[0].incidence = "companies";
     expect(spreadable(payerOnly, "raise_top_tax_rate")).toBe(false);
+  });
+});
+
+describe("the sentences of a measure", () => {
+  it("under a scope's chart only those of the parts the scope shows; on the card all", () => {
+    // insure_civil_servants: effect 0 on rev.social_contributions (not in "taxes"), its shift on rev.taxes.income.
+    const copy = testlandWhoPays();
+    const effect = copy.policies.find((policy) => policy.id === "insure_civil_servants")!.effects[0];
+    effect.incidenceNote = { en: "Civil servants pay contributions.", de: "Beamte zahlen Beiträge." };
+    const result = simulatePolicy(copy, "insure_civil_servants")!;
+    const shift = { en: "Firms that employ civil servants pay less.", de: "Firmen mit Beamten zahlen weniger." };
+    expect(notesOf(copy, result, 1e-9, false, "taxes")).toEqual([shift]);
+    expect(notesOf(copy, result, 1e-9, false, "all")).toEqual([effect.incidenceNote, shift]);
+    expect(notesOf(copy, result, 1e-9)).toEqual([effect.incidenceNote, shift]);
+    expect(stripOf(copy, measureWhoPays(copy, result), result, 1e-9)!.notes).toEqual([effect.incidenceNote, shift]);
   });
 });
 

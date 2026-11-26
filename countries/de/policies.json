@@ -8670,6 +8670,10 @@
           "shift": {
             "to": "rev.taxes.income.personal.wage_tax",
             "incidence": "unassigned",
+            "incidenceNote": {
+              "de": "Die Lohnsteuer der Beschäftigten ändert sich in die Gegenrichtung, weil sie ihren Teil der Beiträge vom zu versteuernden Einkommen absetzen: Wer mehr Beiträge zahlt, zahlt weniger Lohnsteuer, und umgekehrt. Keine Quelle ordnet das Einkommensgruppen zu.",
+              "en": "Employees' wage tax moves the other way, as they deduct their part of the contributions from taxable income: whoever pays more in contributions pays less wage tax, and the other way round. No source places this in income groups."
+            },
             "ratio": 0.2,
             "uncertainty": {
               "low": 0.5,
@@ -8824,6 +8828,10 @@
           "shift": {
             "to": "rev.taxes.income.personal.wage_tax",
             "incidence": "unassigned",
+            "incidenceNote": {
+              "de": "Weniger Lohnsteuer zahlen dieselben Beamten und anderen neu Versicherten, weil sie ihren eigenen Beitrag vom zu versteuernden Einkommen absetzen; keine Quelle ordnet sie Einkommensgruppen zu.",
+              "en": "The same civil servants and other newly insured pay less wage tax, as they deduct their own contribution from taxable income; no source places them in income groups."
+            },
             "ratio": {
               "param": "employer_share",
               "scale": -0.003,
@@ -9153,6 +9161,10 @@
           "shift": {
             "to": "rev.taxes.income.personal.wage_tax",
             "incidence": "unassigned",
+            "incidenceNote": {
+              "de": "Die Lohnsteuer der Beschäftigten ändert sich in die Gegenrichtung, weil sie ihren Teil der Beiträge vom zu versteuernden Einkommen absetzen: Wer mehr Beiträge zahlt, zahlt weniger Lohnsteuer, und umgekehrt. Keine Quelle ordnet das Einkommensgruppen zu.",
+              "en": "Employees' wage tax moves the other way, as they deduct their part of the contributions from taxable income: whoever pays more in contributions pays less wage tax, and the other way round. No source places this in income groups."
+            },
             "ratio": 0.192,
             "uncertainty": {
               "low": 0.5,

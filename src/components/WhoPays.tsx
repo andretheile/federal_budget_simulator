@@ -12,6 +12,7 @@ import { useUi, type Ui } from "../app/ui.ts";
 import {
   chartOf,
   measuresOf,
+  notesOf,
   sourcesOf,
   statementOf,
   stripOf,
@@ -192,7 +193,8 @@ export function WhoPaysSection({ who, whole, scope: scopeId, onScope }: WhoPaysS
                   <ul>
                     {measures.outside.map((entry) => {
                       const result = whole.policies.find((policy) => policy.id === entry.policy);
-                      const notes = result ? (stripOf(pack, measureWhoPays(pack, result), result, noise)?.notes ?? []) : [];
+                      // Only the sentences of the parts this scope shows.
+                      const notes = result ? notesOf(pack, result, noise, false, chart.scope.id) : [];
                       return (
                         <li key={entry.policy}>
                           {t.whoPays.outsideMeasure(label(entry.policy), payerList(ui, entry.payers))}

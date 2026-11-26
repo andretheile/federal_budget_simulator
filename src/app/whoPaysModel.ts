@@ -147,29 +147,42 @@ export function stripOf(
   const payers = payerChanges(file, measure.payers, noise);
   const spread = groups.some((group) => group.change !== 0);
   if (!spread && payers.length === 0 && !always) return undefined;
-  const policy = pack.policies.find((entry) => entry.id === result.id);
-  const notes: LocalizedText[] = [];
-  const seen = new Set<string>();
-  for (const effect of result.effects) {
-    const definition = policy?.effects[effect.index];
-    const candidates: [LocalizedText | undefined, boolean][] = [
-      [definition?.incidenceNote, always || (effect.side === "revenue" && Math.abs(effect.delta) > noise)],
-      [definition?.shift?.incidenceNote, always || (effect.shift?.side === "revenue" && Math.abs(effect.shift.delta) > noise)],
-    ];
-    for (const [note, changed] of candidates) {
-      if (!note || !changed) continue;
-      const key = JSON.stringify(note);
-      if (!seen.has(key)) notes.push(note);
-      seen.add(key);
-    }
-  }
   return {
     groups,
     payers,
     maxPerUnit: Math.max(...groups.map((group) => Math.abs(group.perUnit)), 0),
     spread,
-    notes,
+    notes: notesOf(pack, result, noise, always),
   };
+}
+
+/**
+ * A measure's sentences on who pays (incidenceNote), each once: of every effect and shift whose
+ * change at a revenue node is more than noise, or of all of them with `always`. With a scope, only
+ * those whose node lies in it, so that the list under a scope's chart says nothing about a part the
+ * chart does not show; the card and the curve editor, which show all revenue, give none.
+ */
+export function notesOf(pack: CountryPack, result: PolicyResult, noise: number, always = false, scopeId?: string): LocalizedText[] {
+  const scope = scopeId === undefined ? undefined : scopeOf(pack, scopeId);
+  const inside = (node: string | undefined): boolean =>
+    node !== undefined && (!scope || scope.nodes.some((root) => node === root || node.startsWith(`${root}.`)));
+  const policy = pack.policies.find((entry) => entry.id === result.id);
+  const notes: LocalizedText[] = [];
+  const seen = new Set<string>();
+  for (const effect of result.effects) {
+    const definition = policy?.effects[effect.index];
+    const candidates: [LocalizedText | undefined, boolean, string | undefined][] = [
+      [definition?.incidenceNote, always || (effect.side === "revenue" && Math.abs(effect.delta) > noise), effect.target],
+      [definition?.shift?.incidenceNote, always || (effect.shift?.side === "revenue" && Math.abs(effect.shift.delta) > noise), effect.shift?.target],
+    ];
+    for (const [note, changed, node] of candidates) {
+      if (!note || !changed || !inside(node)) continue;
+      const key = JSON.stringify(note);
+      if (!seen.has(key)) notes.push(note);
+      seen.add(key);
+    }
+  }
+  return notes;
 }
 
 /**
